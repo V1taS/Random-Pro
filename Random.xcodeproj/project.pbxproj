@@ -12,6 +12,37 @@
 		1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F667925D0856300933AD6 /* Assets.xcassets */; };
 		1B7F667D25D0856300933AD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F667B25D0856300933AD6 /* LaunchScreen.storyboard */; };
 		1B7F668825D0860600933AD6 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F668725D0860600933AD6 /* PageView.swift */; };
+		1B7F669925D0876F00933AD6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F669825D0876F00933AD6 /* AppState.swift */; };
+		1B7F669C25D0881300933AD6 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F669B25D0881300933AD6 /* Main.swift */; };
+		1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F669E25D0883C00933AD6 /* NumberRandom.swift */; };
+		1B7F66A225D0884F00933AD6 /* TextRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66A125D0884F00933AD6 /* TextRandom.swift */; };
+		1B7F66A525D0889100933AD6 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66A425D0889100933AD6 /* AppActions.swift */; };
+		1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66A825D0892900933AD6 /* MainActions.swift */; };
+		1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66AD25D0898000933AD6 /* NumberActions.swift */; };
+		1B7F66B325D089AF00933AD6 /* TextActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66B225D089AF00933AD6 /* TextActions.swift */; };
+		1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66B625D089F600933AD6 /* MainInteractor.swift */; };
+		1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66B925D08A4600933AD6 /* NumberInteractor.swift */; };
+		1B7F66BD25D08A7100933AD6 /* TextInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66BC25D08A7100933AD6 /* TextInteractor.swift */; };
+		1B7F66C025D08AD500933AD6 /* InteractorsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66BF25D08AD500933AD6 /* InteractorsContainer.swift */; };
+		1B7F66C325D08AF000933AD6 /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66C225D08AF000933AD6 /* DependencyInjector.swift */; };
+		1B7F66C725D08B1700933AD6 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66C625D08B1700933AD6 /* Store.swift */; };
+		1B7F66D125D08C1000933AD6 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CA25D08C1000933AD6 /* Roboto-Medium.ttf */; };
+		1B7F66D225D08C1000933AD6 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CB25D08C1000933AD6 /* Roboto-Bold.ttf */; };
+		1B7F66D325D08C1000933AD6 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CC25D08C1000933AD6 /* Roboto-Regular.ttf */; };
+		1B7F66D425D08C1000933AD6 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CD25D08C1000933AD6 /* Roboto-Thin.ttf */; };
+		1B7F66D525D08C1000933AD6 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CE25D08C1000933AD6 /* SFProDisplay-Medium.ttf */; };
+		1B7F66D625D08C1000933AD6 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CF25D08C1000933AD6 /* Roboto-Light.ttf */; };
+		1B7F66D725D08C1000933AD6 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66D025D08C1000933AD6 /* Roboto-Black.ttf */; };
+		1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */; };
+		1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66DE25D08D1300933AD6 /* Size.swift */; };
+		1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */; };
+		1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66E425D08D5A00933AD6 /* Font.swift */; };
+		1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66E725D08D7E00933AD6 /* UIScreen.swift */; };
+		1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66EA25D08D9100933AD6 /* KeyboardListener.swift */; };
+		1B7F66EE25D08DA600933AD6 /* KeyboardAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66ED25D08DA600933AD6 /* KeyboardAware.swift */; };
+		1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */; };
+		1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66F325D08DE800933AD6 /* StringProtocol.swift */; };
+		1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +53,37 @@
 		1B7F667C25D0856300933AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B7F667E25D0856300933AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B7F668725D0860600933AD6 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		1B7F669825D0876F00933AD6 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1B7F669B25D0881300933AD6 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		1B7F669E25D0883C00933AD6 /* NumberRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberRandom.swift; sourceTree = "<group>"; };
+		1B7F66A125D0884F00933AD6 /* TextRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRandom.swift; sourceTree = "<group>"; };
+		1B7F66A425D0889100933AD6 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		1B7F66A825D0892900933AD6 /* MainActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainActions.swift; sourceTree = "<group>"; };
+		1B7F66AD25D0898000933AD6 /* NumberActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberActions.swift; sourceTree = "<group>"; };
+		1B7F66B225D089AF00933AD6 /* TextActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextActions.swift; sourceTree = "<group>"; };
+		1B7F66B625D089F600933AD6 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
+		1B7F66B925D08A4600933AD6 /* NumberInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInteractor.swift; sourceTree = "<group>"; };
+		1B7F66BC25D08A7100933AD6 /* TextInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInteractor.swift; sourceTree = "<group>"; };
+		1B7F66BF25D08AD500933AD6 /* InteractorsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorsContainer.swift; sourceTree = "<group>"; };
+		1B7F66C225D08AF000933AD6 /* DependencyInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
+		1B7F66C625D08B1700933AD6 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		1B7F66CA25D08C1000933AD6 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		1B7F66CB25D08C1000933AD6 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		1B7F66CC25D08C1000933AD6 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		1B7F66CD25D08C1000933AD6 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		1B7F66CE25D08C1000933AD6 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		1B7F66CF25D08C1000933AD6 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		1B7F66D025D08C1000933AD6 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		1B7F66DE25D08D1300933AD6 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedColorEdge.swift; sourceTree = "<group>"; };
+		1B7F66E425D08D5A00933AD6 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		1B7F66E725D08D7E00933AD6 /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
+		1B7F66EA25D08D9100933AD6 /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
+		1B7F66ED25D08DA600933AD6 /* KeyboardAware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAware.swift; sourceTree = "<group>"; };
+		1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		1B7F66F325D08DE800933AD6 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
+		1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUIKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +116,189 @@
 		1B7F666F25D0856300933AD6 /* Random */ = {
 			isa = PBXGroup;
 			children = (
-				1B7F667025D0856300933AD6 /* AppDelegate.swift */,
-				1B7F667225D0856300933AD6 /* SceneDelegate.swift */,
-				1B7F668725D0860600933AD6 /* PageView.swift */,
-				1B7F667925D0856300933AD6 /* Assets.xcassets */,
-				1B7F667B25D0856300933AD6 /* LaunchScreen.storyboard */,
-				1B7F667E25D0856300933AD6 /* Info.plist */,
+				1B7F668A25D0866700933AD6 /* Injected */,
+				1B7F668B25D0867700933AD6 /* Interactors */,
+				1B7F668C25D0868400933AD6 /* Models */,
+				1B7F668D25D0869700933AD6 /* Persistence */,
+				1B7F668E25D086A300933AD6 /* Repositories */,
+				1B7F668F25D086AD00933AD6 /* Resources */,
+				1B7F669025D086BC00933AD6 /* System */,
+				1B7F669125D086C800933AD6 /* UI */,
+				1B7F669525D0870E00933AD6 /* Utilities */,
 			);
 			path = Random;
+			sourceTree = "<group>";
+		};
+		1B7F668A25D0866700933AD6 /* Injected */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F669825D0876F00933AD6 /* AppState.swift */,
+				1B7F66BF25D08AD500933AD6 /* InteractorsContainer.swift */,
+				1B7F66C225D08AF000933AD6 /* DependencyInjector.swift */,
+				1B7F669B25D0881300933AD6 /* Main.swift */,
+				1B7F669E25D0883C00933AD6 /* NumberRandom.swift */,
+				1B7F66A125D0884F00933AD6 /* TextRandom.swift */,
+			);
+			path = Injected;
+			sourceTree = "<group>";
+		};
+		1B7F668B25D0867700933AD6 /* Interactors */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66A425D0889100933AD6 /* AppActions.swift */,
+				1B7F66A725D0890C00933AD6 /* MainActions */,
+				1B7F66AC25D0896400933AD6 /* NumberActions */,
+				1B7F66B125D0899A00933AD6 /* TextActions */,
+			);
+			path = Interactors;
+			sourceTree = "<group>";
+		};
+		1B7F668C25D0868400933AD6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1B7F668D25D0869700933AD6 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		1B7F668E25D086A300933AD6 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1B7F668F25D086AD00933AD6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66C925D08BF600933AD6 /* Fonts */,
+				1B7F667925D0856300933AD6 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1B7F669025D086BC00933AD6 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F667025D0856300933AD6 /* AppDelegate.swift */,
+				1B7F667225D0856300933AD6 /* SceneDelegate.swift */,
+				1B7F667E25D0856300933AD6 /* Info.plist */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		1B7F669125D086C800933AD6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F669225D086D500933AD6 /* Components */,
+				1B7F669325D086DE00933AD6 /* Screens */,
+				1B7F669425D086EA00933AD6 /* Storyboards */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		1B7F669225D086D500933AD6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		1B7F669325D086DE00933AD6 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F668725D0860600933AD6 /* PageView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		1B7F669425D086EA00933AD6 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F667B25D0856300933AD6 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		1B7F669525D0870E00933AD6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66F625D08E2A00933AD6 /* UIKit */,
+				1B7F66D925D08CBB00933AD6 /* Extensions */,
+				1B7F66C625D08B1700933AD6 /* Store.swift */,
+				1B7F66DE25D08D1300933AD6 /* Size.swift */,
+				1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		1B7F66A725D0890C00933AD6 /* MainActions */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66A825D0892900933AD6 /* MainActions.swift */,
+				1B7F66B625D089F600933AD6 /* MainInteractor.swift */,
+			);
+			path = MainActions;
+			sourceTree = "<group>";
+		};
+		1B7F66AC25D0896400933AD6 /* NumberActions */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66AD25D0898000933AD6 /* NumberActions.swift */,
+				1B7F66B925D08A4600933AD6 /* NumberInteractor.swift */,
+			);
+			path = NumberActions;
+			sourceTree = "<group>";
+		};
+		1B7F66B125D0899A00933AD6 /* TextActions */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66B225D089AF00933AD6 /* TextActions.swift */,
+				1B7F66BC25D08A7100933AD6 /* TextInteractor.swift */,
+			);
+			path = TextActions;
+			sourceTree = "<group>";
+		};
+		1B7F66C925D08BF600933AD6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66D025D08C1000933AD6 /* Roboto-Black.ttf */,
+				1B7F66CB25D08C1000933AD6 /* Roboto-Bold.ttf */,
+				1B7F66CF25D08C1000933AD6 /* Roboto-Light.ttf */,
+				1B7F66CA25D08C1000933AD6 /* Roboto-Medium.ttf */,
+				1B7F66CC25D08C1000933AD6 /* Roboto-Regular.ttf */,
+				1B7F66CD25D08C1000933AD6 /* Roboto-Thin.ttf */,
+				1B7F66CE25D08C1000933AD6 /* SFProDisplay-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		1B7F66D925D08CBB00933AD6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66E425D08D5A00933AD6 /* Font.swift */,
+				1B7F66E725D08D7E00933AD6 /* UIScreen.swift */,
+				1B7F66EA25D08D9100933AD6 /* KeyboardListener.swift */,
+				1B7F66ED25D08DA600933AD6 /* KeyboardAware.swift */,
+				1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */,
+				1B7F66F325D08DE800933AD6 /* StringProtocol.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1B7F66F625D08E2A00933AD6 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,8 +359,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B7F66D525D08C1000933AD6 /* SFProDisplay-Medium.ttf in Resources */,
 				1B7F667D25D0856300933AD6 /* LaunchScreen.storyboard in Resources */,
 				1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */,
+				1B7F66D425D08C1000933AD6 /* Roboto-Thin.ttf in Resources */,
+				1B7F66D325D08C1000933AD6 /* Roboto-Regular.ttf in Resources */,
+				1B7F66D725D08C1000933AD6 /* Roboto-Black.ttf in Resources */,
+				1B7F66D225D08C1000933AD6 /* Roboto-Bold.ttf in Resources */,
+				1B7F66D625D08C1000933AD6 /* Roboto-Light.ttf in Resources */,
+				1B7F66D125D08C1000933AD6 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,9 +378,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B7F66C325D08AF000933AD6 /* DependencyInjector.swift in Sources */,
+				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
+				1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */,
+				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
+				1B7F66A225D0884F00933AD6 /* TextRandom.swift in Sources */,
+				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
+				1B7F66BD25D08A7100933AD6 /* TextInteractor.swift in Sources */,
 				1B7F668825D0860600933AD6 /* PageView.swift in Sources */,
+				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
+				1B7F66C025D08AD500933AD6 /* InteractorsContainer.swift in Sources */,
+				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
 				1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */,
+				1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */,
+				1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */,
+				1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */,
+				1B7F66A525D0889100933AD6 /* AppActions.swift in Sources */,
+				1B7F66EE25D08DA600933AD6 /* KeyboardAware.swift in Sources */,
+				1B7F66C725D08B1700933AD6 /* Store.swift in Sources */,
+				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
+				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
+				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
+				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
+				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
+				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
+				1B7F66B325D089AF00933AD6 /* TextActions.swift in Sources */,
+				1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +545,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
-				INFOPLIST_FILE = Random/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -297,7 +565,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
-				INFOPLIST_FILE = Random/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

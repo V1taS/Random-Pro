@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */; };
+		1B3D19F225D1C3980027A83B /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19F125D1C3980027A83B /* ShareSheet.swift */; };
 		1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667025D0856300933AD6 /* AppDelegate.swift */; };
 		1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667225D0856300933AD6 /* SceneDelegate.swift */; };
 		1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F667925D0856300933AD6 /* Assets.xcassets */; };
@@ -85,6 +87,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberResultsView.swift; sourceTree = "<group>"; };
+		1B3D19F125D1C3980027A83B /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		1B7F666D25D0856300933AD6 /* Random.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Random.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B7F667025D0856300933AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B7F667225D0856300933AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */,
+				1B3D19F125D1C3980027A83B /* ShareSheet.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 			children = (
 				1B7F670A25D0A27D00933AD6 /* NumberView.swift */,
 				1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */,
+				1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */,
 			);
 			path = Number;
 			sourceTree = "<group>";
@@ -643,8 +649,10 @@
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
+				1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
+				1B3D19F225D1C3980027A83B /* ShareSheet.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,

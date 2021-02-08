@@ -49,6 +49,16 @@ struct NumberSettingsView: View {
                     }
                     
                     HStack {
+                        NavigationLink(
+                            destination: NumberResultsView(appBinding: appBinding)) {
+                            Text("Список чисел")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack {
                         Spacer()
                         Button(action: {
                             cleanNumber(state: appBinding)

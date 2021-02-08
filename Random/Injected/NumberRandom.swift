@@ -14,7 +14,10 @@ extension AppState.AppData {
         var secondNumber: String = "10"
         var result: String = "?"
         var listResult: [String] = []
+        
         var showSettings = false
         var noRepetitions = true
+        var showShareSheet = false
+        var listRandomNumber: [String] = []
     }
 }

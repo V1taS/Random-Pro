@@ -23,8 +23,8 @@ struct YesOrNotView: View {
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
             Spacer()
+            listResults
             generateButton
-            
         }
         .navigationBarTitle(Text("Да или Нет"), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
@@ -41,7 +41,7 @@ struct YesOrNotView: View {
 private extension YesOrNotView {
     var generateButton: some View {
         Button(action: {
-            
+            generateNumber(state: appBinding)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -51,6 +51,30 @@ private extension YesOrNotView {
                        image: "")
         }
         .padding(16)
+    }
+}
+
+private extension YesOrNotView {
+    var listResults: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(appBinding.yesOrNo.listResult.wrappedValue, id: \.self) { number in
+                    
+                    Text("\(number)")
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+            }
+            .padding(.leading, 16)
+            .padding(.vertical, 16)
+        }
+    }
+}
+
+// MARK: Actions
+private extension YesOrNotView {
+    private func generateNumber(state: Binding<AppState.AppData>) {
+        injected.interactors.yesOrNoInteractor.generateYesOrNo(state: state)
     }
 }
 

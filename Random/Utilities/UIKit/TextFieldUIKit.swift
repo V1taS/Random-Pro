@@ -90,13 +90,22 @@ struct TextFieldUIKit: UIViewRepresentable {
             textField.resignFirstResponder()
             return true
         }
+        
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+            let currentCharacterCount = textField.text?.count ?? 0
+            if range.length + range.location > currentCharacterCount {
+                return false
+            }
+            let newLength = currentCharacterCount + string.count - range.length
+            return newLength <= 4
+        }
     }
 }
 
-extension  UITextField{
+extension  UITextField {
     @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
         self.endEditing(true)
     }
-    
 }
 

@@ -33,7 +33,7 @@ struct YesOrNotSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последняя буква:")
+                        Text("Последнее слово:")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -46,7 +46,7 @@ struct YesOrNotSettingsView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            
+                            cleanNumber(state: appBinding)
                         }) {
                             Text("Очистить")
                         }
@@ -61,8 +61,16 @@ struct YesOrNotSettingsView: View {
                 Image(systemName: "xmark.circle.fill")
                     .imageScale(.large)
                     .foregroundColor(Color.primaryGray())
-        })
+            })
         }
+    }
+}
+
+// MARK: Actions
+private extension YesOrNotSettingsView {
+    private func cleanNumber(state: Binding<AppState.AppData>) {
+        injected.interactors.yesOrNoInteractor
+            .cleanNumber(state: state)
     }
 }
 

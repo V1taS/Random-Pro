@@ -17,7 +17,6 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            
             ScrollView(.vertical, showsIndicators: false) {
                 
                 VStack(alignment: .center, spacing: 16) {
@@ -43,8 +42,6 @@ struct MainView: View {
                             destination: ListWordsView(appBinding: appBinding)) {
                             CellMainView(image: "rectangle.and.pencil.and.ellipsis", title: "Список")
                         }
-                        
-                        
                     }
                     
                     HStack {
@@ -57,8 +54,6 @@ struct MainView: View {
                             destination: CubeView(appBinding: appBinding)) {
                             CellMainView(image: "cube", title: "Кубики")
                         }
-                        
-                        
                     }
                     
                     Spacer()

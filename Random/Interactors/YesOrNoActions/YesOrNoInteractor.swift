@@ -10,8 +10,20 @@ import Combine
 import SwiftUI
 
 protocol YesOrNoInteractor {
-
+    func generateYesOrNo(state: Binding<AppState.AppData>)
+    func cleanNumber(state: Binding<AppState.AppData>)
 }
 
 struct YesOrNoInteractorImpl: YesOrNoInteractor {
+    
+    func generateYesOrNo(state: Binding<AppState.AppData>) {
+        let randomElement = state.yesOrNo.listYesOrNo.wrappedValue.randomElement()
+        state.yesOrNo.listResult.wrappedValue.append(randomElement!)
+        state.yesOrNo.result.wrappedValue = randomElement!
+    }
+    
+    func cleanNumber(state: Binding<AppState.AppData>) {
+        state.yesOrNo.result.wrappedValue = "?"
+        state.yesOrNo.listResult.wrappedValue = []
+    }
 }

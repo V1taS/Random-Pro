@@ -34,6 +34,7 @@ struct CharactersView: View {
             
             Spacer()
             
+            listResults
             generateButton
         }
         .padding(.horizontal, 16)
@@ -63,6 +64,23 @@ private extension CharactersView {
                        image: "")
         }
         .padding(16)
+    }
+}
+
+private extension CharactersView {
+    var listResults: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(appBinding.yesOrNo.listResult.wrappedValue, id: \.self) { number in
+                    
+                    Text("\(number)")
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+            }
+            .padding(.leading, 16)
+            .padding(.vertical, 16)
+        }
     }
 }
 

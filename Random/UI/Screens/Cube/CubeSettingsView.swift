@@ -26,7 +26,7 @@ struct CubeSettingsView: View {
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.coin.listResult.wrappedValue.count)")
+                        Text("\(appBinding.cube.listResult.wrappedValue.count)")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -37,7 +37,7 @@ struct CubeSettingsView: View {
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.coin.listResult.wrappedValue.last ?? "нет")")
+                        Text("\(appBinding.cube.listResult.wrappedValue.last ?? "нет")")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -55,7 +55,7 @@ struct CubeSettingsView: View {
             }
             .navigationBarTitle(Text("Настройки"), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
-                appBinding.coin.showSettings.wrappedValue = false
+                appBinding.cube.showSettings.wrappedValue = false
             }) {
                 Image(systemName: "xmark.circle.fill")
                     .imageScale(.large)

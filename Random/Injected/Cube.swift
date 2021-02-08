@@ -13,6 +13,7 @@ extension AppState.AppData {
         var listResult: [String] = []
         var result: String = "?"
         var showSettings = false
-        var listImage = ["eagle", "tails"]
+        var countCube = ["1", "2", "3", "4", "5", "6"]
+        var selectedCube = 0
     }
 }

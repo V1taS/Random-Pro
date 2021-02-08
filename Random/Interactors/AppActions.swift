@@ -14,6 +14,7 @@ struct AppActions {
     var listWordsApp: ListWordsActions
     var yesOrNoApp: YesOrNoActions
     var charactersApp: CharactersActions
-    var coinActions: CoinActions
-    var cubeActions: CubeActions
+    var coinApp: CoinActions
+    var cubeApp: CubeActions
+    var settingsApp: SettingsActions
 }

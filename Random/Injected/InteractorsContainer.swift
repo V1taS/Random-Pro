@@ -15,6 +15,7 @@ extension DIContainer {
         let charactersInteractor: CharactersInteractor
         let coinInteractor: CoinInteractor
         let cubeInterator: CubeInterator
+        let settingsInterator: SettingsInterator
 
         init(mainInteractor: MainInteractor,
              numberInteractor: NumberInteractor,
@@ -22,7 +23,8 @@ extension DIContainer {
              yesOrNoInteractor: YesOrNoInteractor,
              charactersInteractor: CharactersInteractor,
              coinInteractor: CoinInteractor,
-             cubeInterator: CubeInterator) {
+             cubeInterator: CubeInterator,
+             settingsInterator: SettingsInterator) {
             self.mainInteractor = mainInteractor
             self.numberInteractor = numberInteractor
             self.textInteractor = textInteractor
@@ -30,6 +32,7 @@ extension DIContainer {
             self.charactersInteractor = charactersInteractor
             self.coinInteractor = coinInteractor
             self.cubeInterator = cubeInterator
+            self.settingsInterator = settingsInterator
         }
 
         static var stub: Self {
@@ -39,7 +42,8 @@ extension DIContainer {
                   yesOrNoInteractor: YesOrNoInteractorImpl(),
                   charactersInteractor: CharactersInteractorImpl(),
                   coinInteractor: CoinInteractorImpl(),
-                  cubeInterator: CubeInteratorImpl())
+                  cubeInterator: CubeInteratorImpl(),
+                  settingsInterator: SettingsInteratorImpl())
         }
     }
 }

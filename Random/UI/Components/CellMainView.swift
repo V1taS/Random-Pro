@@ -21,7 +21,7 @@ struct CellMainView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 170),
+                .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 160),
                        height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 100))
                 .background(LinearGradient(gradient: Gradient(colors: [Color.primaryTertiary(), Color.primaryGreen()]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(8)
@@ -55,8 +55,6 @@ struct CellMainView: View {
                 .padding(.horizontal, 16)
             }
         }
-        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 170),
-               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 100))
     }
 }
 

@@ -25,7 +25,7 @@ struct TabBarView: View {
                     Text("Генератор")
                 }
             
-            MainView(appBinding: appBinding)
+            SettingsView(appBinding: appBinding)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Настройки")

@@ -18,7 +18,25 @@ struct CubeView: View {
     
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            VStack {
+                Text("Количество кубиков")
+                    .font(.robotoMedium20())
+                    .foregroundColor(.primaryGray())
+                
+                Picker(selection: appBinding.cube.selectedCube,
+                       label: Text("Picker")) {
+                    ForEach(0..<appBinding.cube.countCube.wrappedValue.count) {
+                        Text("\(appBinding.cube.countCube.wrappedValue[$0])")
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.top, 16)
+                .padding(.horizontal, 16)
+            }
+            .padding(.top, 16)
+            
+            
+            Spacer()
         }
         .navigationBarTitle(Text("Кубики"), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
@@ -26,8 +44,8 @@ struct CubeView: View {
         }) {
             Image(systemName: "gear")
         })
-        .sheet(isPresented: appBinding.coin.showSettings, content: {
-            CoinSettingsView(appBinding: appBinding)
+        .sheet(isPresented: appBinding.cube.showSettings, content: {
+            CubeSettingsView(appBinding: appBinding)
         })
     }
 }

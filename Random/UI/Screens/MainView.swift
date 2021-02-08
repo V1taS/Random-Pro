@@ -53,7 +53,12 @@ struct MainView: View {
                             CellMainView(image: "bitcoinsign.circle", title: "Монета")
                         }
                         
-                        CellMainView(image: "cube", title: "Кубики")
+                        NavigationLink(
+                            destination: CubeView(appBinding: appBinding)) {
+                            CellMainView(image: "cube", title: "Кубики")
+                        }
+                        
+                        
                     }
                     
                     Spacer()

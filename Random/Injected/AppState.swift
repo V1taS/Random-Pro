@@ -23,6 +23,7 @@ extension AppState {
         var characters = Characters()
         var coin = Coin()
         var cube = Cube()
+        var settings = Settings()
     }
 }
 

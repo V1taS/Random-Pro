@@ -1,5 +1,5 @@
 //
-//  CellCubeView.swift
+//  CellCubeOneView.swift
 //  Random
 //
 //  Created by Vitalii Sosin on 08.02.2021.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CellCubeView: View {
+struct CellCubeOneView: View {
     var body: some View {
         ZStack {
             Rectangle()
@@ -21,16 +21,9 @@ struct CellCubeView: View {
                 .foregroundColor(.clear)
             
             VStack(alignment: .leading, spacing: 0) {
-                
-                Spacer()
-                
-                HStack {
+                    Circle()
+                        .frame(width: 20, height: 20)
 
-                    Spacer()
-
-                }
-                .padding(.bottom, 8)
-                .padding(.horizontal, 16)
             }
         }
         .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 100),
@@ -40,6 +33,6 @@ struct CellCubeView: View {
 
 struct CellCubeView_Previews: PreviewProvider {
     static var previews: some View {
-        CellCubeView()
+        CellCubeOneView()
     }
 }

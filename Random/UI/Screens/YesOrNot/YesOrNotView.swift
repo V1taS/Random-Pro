@@ -27,9 +27,16 @@ struct YesOrNotView: View {
             
         }
         .navigationBarTitle(Text("Да или Нет"), displayMode: .inline)
+        .navigationBarItems(trailing: Button(action: {
+            appBinding.yesOrNo.showSettings.wrappedValue.toggle()
+        }) {
+            Image(systemName: "gear")
+        })
+        .sheet(isPresented: appBinding.yesOrNo.showSettings, content: {
+            YesOrNotSettingsView(appBinding: appBinding)
+        })
     }
 }
-
 
 private extension YesOrNotView {
     var generateButton: some View {

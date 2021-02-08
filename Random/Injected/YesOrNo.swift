@@ -12,5 +12,7 @@ extension AppState.AppData {
     struct YesOrNo: Equatable {
         var result: String = "?"
         var listYesOrNo = ["Да", "Нет"]
+        var listResult: [String] = []
+        var showSettings = false
     }
 }

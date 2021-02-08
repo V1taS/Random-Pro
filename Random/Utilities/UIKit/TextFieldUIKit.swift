@@ -18,19 +18,22 @@ struct TextFieldUIKit: UIViewRepresentable {
     var foregroundColor: UIColor
     var keyType: UIKeyboardType
     var isSecureText: Bool
+    var textAlignment: NSTextAlignment
     
     init(placeholder: String,
          text: Binding<String>,
          font: UIFont,
          foregroundColor: UIColor,
          keyType: UIKeyboardType,
-         isSecureText: Bool) {
+         isSecureText: Bool,
+         textAlignment: NSTextAlignment) {
         self.placeholder = placeholder
         self._text = text
         self.font = font
         self.foregroundColor = foregroundColor
         self.keyType = keyType
         self.isSecureText = isSecureText
+        self.textAlignment = textAlignment
     }
     
     func makeUIView(context: Context) -> UITextField {
@@ -43,6 +46,7 @@ struct TextFieldUIKit: UIViewRepresentable {
         textField.keyboardType = keyType
         textField.textColor = foregroundColor
         textField.font = font
+        textField.textAlignment = textAlignment
         textField.attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [NSAttributedString.Key.foregroundColor : color]

@@ -43,6 +43,14 @@
 		1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */; };
 		1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66F325D08DE800933AD6 /* StringProtocol.swift */; };
 		1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */; };
+		1B7F66FC25D0930600933AD6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66FB25D0930600933AD6 /* MainView.swift */; };
+		1B7F66FF25D0937100933AD6 /* CellMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66FE25D0937100933AD6 /* CellMainView.swift */; };
+		1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F670525D09A9B00933AD6 /* TabBarView.swift */; };
+		1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F670A25D0A27D00933AD6 /* NumberView.swift */; };
+		1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */; };
+		1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */; };
+		1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */; };
+		1BEC8EBA25D0CA6700FE3A3F /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB925D0CA6700FE3A3F /* IntExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +92,14 @@
 		1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		1B7F66F325D08DE800933AD6 /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
 		1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUIKit.swift; sourceTree = "<group>"; };
+		1B7F66FB25D0930600933AD6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1B7F66FE25D0937100933AD6 /* CellMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMainView.swift; sourceTree = "<group>"; };
+		1B7F670525D09A9B00933AD6 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		1B7F670A25D0A27D00933AD6 /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
+		1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNumberView.swift; sourceTree = "<group>"; };
+		1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSettingsView.swift; sourceTree = "<group>"; };
+		1BEC8EB925D0CA6700FE3A3F /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +223,9 @@
 			isa = PBXGroup;
 			children = (
 				1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */,
+				1B7F66FE25D0937100933AD6 /* CellMainView.swift */,
+				1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */,
+				1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -215,6 +234,9 @@
 			isa = PBXGroup;
 			children = (
 				1B7F668725D0860600933AD6 /* PageView.swift */,
+				1B7F670525D09A9B00933AD6 /* TabBarView.swift */,
+				1B7F66FB25D0930600933AD6 /* MainView.swift */,
+				1B7F670825D0A25A00933AD6 /* NumberView */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -289,6 +311,7 @@
 				1B7F66ED25D08DA600933AD6 /* KeyboardAware.swift */,
 				1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */,
 				1B7F66F325D08DE800933AD6 /* StringProtocol.swift */,
+				1BEC8EB925D0CA6700FE3A3F /* IntExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,6 +322,15 @@
 				1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		1B7F670825D0A25A00933AD6 /* NumberView */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F670A25D0A27D00933AD6 /* NumberView.swift */,
+				1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */,
+			);
+			path = NumberView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +411,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B7F66C325D08AF000933AD6 /* DependencyInjector.swift in Sources */,
+				1B7F66FC25D0930600933AD6 /* MainView.swift in Sources */,
+				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
 				1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
@@ -387,6 +421,7 @@
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* TextInteractor.swift in Sources */,
 				1B7F668825D0860600933AD6 /* PageView.swift in Sources */,
+				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
 				1B7F66C025D08AD500933AD6 /* InteractorsContainer.swift in Sources */,
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
@@ -394,16 +429,21 @@
 				1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */,
 				1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */,
 				1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */,
+				1B7F66FF25D0937100933AD6 /* CellMainView.swift in Sources */,
 				1B7F66A525D0889100933AD6 /* AppActions.swift in Sources */,
 				1B7F66EE25D08DA600933AD6 /* KeyboardAware.swift in Sources */,
 				1B7F66C725D08B1700933AD6 /* Store.swift in Sources */,
+				1BEC8EBA25D0CA6700FE3A3F /* IntExtension.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
+				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
+				1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* TextActions.swift in Sources */,
+				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
 				1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

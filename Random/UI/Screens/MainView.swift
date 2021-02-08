@@ -42,9 +42,9 @@ struct MainView: View {
                     
                     Spacer()
                 }
+                .padding(.horizontal, 16)
                 
             }
-            .padding(.horizontal ,16)
             .navigationBarTitle(Text("Random"))
         }
     }

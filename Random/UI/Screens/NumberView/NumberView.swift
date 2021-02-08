@@ -18,7 +18,7 @@ struct NumberView: View {
     
     var body: some View {
         ZStack {
-            Color(.primarySky())
+            Color(.clear)
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
@@ -29,7 +29,7 @@ struct NumberView: View {
                 Spacer()
                 Text("\(appBinding.numberRandom.result.wrappedValue)")
                     .font(.robotoBold70())
-                    .foregroundColor(.primaryPale())
+                    .foregroundColor(.primaryGray())
                 Spacer()
                 
                 listResults
@@ -97,11 +97,9 @@ private extension NumberView {
             HStack(spacing: 8) {
                 ForEach(appBinding.numberRandom.listResult.wrappedValue, id: \.self) { number in
                     
-                    CellNumberView(value: "\(number)",
-                                   backgroundStart: .primarySky(),
-                                   backgroundFinish: .primaryBlue(),
-                                   borderColor: .primaryGray(),
-                                   radius: 8)
+                    Text("\(number)")
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
                 }
             }
             .padding(.leading, 16)
@@ -115,8 +113,8 @@ private extension NumberView {
         Button(action: {
             generateNumber(state: appBinding)
         }) {
-            ButtonView(background: .primaryPale(),
-                       textColor: .primaryGray(),
+            ButtonView(background: .primaryTertiary(),
+                       textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: "Сгенерировать",
                        switchImage: false,

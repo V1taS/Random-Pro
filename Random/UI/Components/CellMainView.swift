@@ -21,11 +21,12 @@ struct CellMainView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: 170, height: 100)
+                .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 170),
+                       height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 100))
                 .background(LinearGradient(gradient: Gradient(colors: [Color.primaryTertiary(), Color.primaryGreen()]), startPoint: .top, endPoint: .bottom))
                 .cornerRadius(8)
                 .overlay(RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color(.primaryPink())))
+                            .stroke(Color(.clear)))
                 .foregroundColor(.clear)
             
             VStack(alignment: .leading, spacing: 0) {
@@ -54,7 +55,8 @@ struct CellMainView: View {
                 .padding(.horizontal, 16)
             }
         }
-        .frame(width: 170, height: 100)
+        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 170),
+               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 100))
     }
 }
 

@@ -18,7 +18,11 @@ extension AppState {
     struct AppData: Equatable {
         var main = Main()
         var numberRandom = NumberRandom()
-        var textRandom = TextRandom()
+        var listWords = ListWords()
+        var yesOrNo = YesOrNo()
+        var characters = Characters()
+        var coin = Coin()
+        var cube = Cube()
     }
 }
 

@@ -11,5 +11,9 @@ import Foundation
 struct AppActions {
     var mainApp: MainActions
     var numberApp: NumberActions
-    var textApp: TextActions
+    var listWordsApp: ListWordsActions
+    var yesOrNoApp: YesOrNoActions
+    var charactersApp: CharactersActions
+    var coinActions: CoinActions
+    var cubeActions: CubeActions
 }

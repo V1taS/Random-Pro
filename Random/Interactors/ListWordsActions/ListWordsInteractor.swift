@@ -9,9 +9,9 @@
 import Combine
 import SwiftUI
 
-protocol TextInteractor {
+protocol ListWordsInteractor {
 
 }
 
-struct TextInteractorImpl: TextInteractor {
+struct ListWordsInteractorImpl: ListWordsInteractor {
 }

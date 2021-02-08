@@ -27,17 +27,33 @@ struct MainView: View {
                             CellMainView(image: "number", title: "Число")
                         }
                         
-                        CellMainView(image: "questionmark.square.dashed", title: "Да или Нет")
+                        NavigationLink(
+                            destination: YesOrNotView(appBinding: appBinding)) {
+                            CellMainView(image: "questionmark.square.dashed", title: "Да или Нет")
+                        }
                     }
                     
                     HStack {
-                        CellMainView(image: "textbox", title: "Буква")
-                        CellMainView(image: "rectangle.and.pencil.and.ellipsis", title: "Список")
+                        NavigationLink(
+                            destination: CharactersView(appBinding: appBinding)) {
+                            CellMainView(image: "textbox", title: "Буква")
+                        }
+                        
+                        NavigationLink(
+                            destination: ListWordsView(appBinding: appBinding)) {
+                            CellMainView(image: "rectangle.and.pencil.and.ellipsis", title: "Список")
+                        }
+                        
+                        
                     }
                     
                     HStack {
-                        CellMainView(image: "bitcoinsign.circle", title: "Монета")
-                        CellMainView(image: "rectangle.and.pencil.and.ellipsis", title: "Кубики")
+                        NavigationLink(
+                            destination: CoinView(appBinding: appBinding)) {
+                            CellMainView(image: "bitcoinsign.circle", title: "Монета")
+                        }
+                        
+                        CellMainView(image: "cube", title: "Кубики")
                     }
                     
                     Spacer()

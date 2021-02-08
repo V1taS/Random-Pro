@@ -10,20 +10,36 @@ extension DIContainer {
     struct Interactors {
         let mainInteractor: MainInteractor
         let numberInteractor: NumberInteractor
-        let textInteractor: TextInteractor
+        let textInteractor: ListWordsInteractor
+        let yesOrNoInteractor: YesOrNoInteractor
+        let charactersInteractor: CharactersInteractor
+        let coinInteractor: CoinInteractor
+        let cubeInterator: CubeInterator
 
         init(mainInteractor: MainInteractor,
              numberInteractor: NumberInteractor,
-             textInteractor: TextInteractor) {
+             textInteractor: ListWordsInteractor,
+             yesOrNoInteractor: YesOrNoInteractor,
+             charactersInteractor: CharactersInteractor,
+             coinInteractor: CoinInteractor,
+             cubeInterator: CubeInterator) {
             self.mainInteractor = mainInteractor
             self.numberInteractor = numberInteractor
             self.textInteractor = textInteractor
+            self.yesOrNoInteractor = yesOrNoInteractor
+            self.charactersInteractor = charactersInteractor
+            self.coinInteractor = coinInteractor
+            self.cubeInterator = cubeInterator
         }
 
         static var stub: Self {
             .init(mainInteractor: MainInteractorImpl(),
                   numberInteractor: NumberInteractorImpl(),
-                  textInteractor: TextInteractorImpl())
+                  textInteractor: ListWordsInteractorImpl(),
+                  yesOrNoInteractor: YesOrNoInteractorImpl(),
+                  charactersInteractor: CharactersInteractorImpl(),
+                  coinInteractor: CoinInteractorImpl(),
+                  cubeInterator: CubeInteratorImpl())
         }
     }
 }

@@ -59,6 +59,8 @@ private extension SettingsView {
         
         injected.interactors.cubeInterator
             .cleanCube(state: state)
+        
+        state.listWords.listData.wrappedValue = []
     }
 }
 

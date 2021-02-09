@@ -101,7 +101,7 @@
 		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
-		1B7F666D25D0856300933AD6 /* Random.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Random.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B7F666D25D0856300933AD6 /* Random Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B7F667025D0856300933AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B7F667225D0856300933AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1B7F667925D0856300933AD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		1B7F666E25D0856300933AD6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1B7F666D25D0856300933AD6 /* Random.app */,
+				1B7F666D25D0856300933AD6 /* Random Pro.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -541,9 +541,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1B7F666C25D0856300933AD6 /* Random */ = {
+		1B7F666C25D0856300933AD6 /* Random Pro */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random" */;
+			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
@@ -553,9 +553,9 @@
 			);
 			dependencies = (
 			);
-			name = Random;
+			name = "Random Pro";
 			productName = Random;
-			productReference = 1B7F666D25D0856300933AD6 /* Random.app */;
+			productReference = 1B7F666D25D0856300933AD6 /* Random Pro.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -573,7 +573,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1B7F666825D0856300933AD6 /* Build configuration list for PBXProject "Random" */;
+			buildConfigurationList = 1B7F666825D0856300933AD6 /* Build configuration list for PBXProject "Random Pro" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -586,7 +586,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1B7F666C25D0856300933AD6 /* Random */,
+				1B7F666C25D0856300933AD6 /* Random Pro */,
 			);
 		};
 /* End PBXProject section */
@@ -865,7 +865,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1B7F666825D0856300933AD6 /* Build configuration list for PBXProject "Random" */ = {
+		1B7F666825D0856300933AD6 /* Build configuration list for PBXProject "Random Pro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B7F667F25D0856300933AD6 /* Debug */,
@@ -874,7 +874,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random" */ = {
+		1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B7F668225D0856300933AD6 /* Debug */,

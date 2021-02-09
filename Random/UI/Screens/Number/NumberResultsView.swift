@@ -22,7 +22,7 @@ struct NumberResultsView: View {
                     ShareSheet(activityItems: [generateSend])
                 }
         }
-        .navigationBarTitle(Text("Список чисел"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Список чисел", comment: "")), displayMode: .inline)
 //        .navigationBarItems(trailing: showShareSheetButton)
         
     }

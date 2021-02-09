@@ -33,6 +33,7 @@ struct CharactersView: View {
                 .foregroundColor(.primaryGray())
                 .onTapGesture {
                     generateYesOrNo(state: appBinding)
+                    Feedback.shared.impactHeavy(.medium)
                 }
             
             Spacer()
@@ -42,7 +43,7 @@ struct CharactersView: View {
         }
         .padding(.horizontal, 16)
         
-        .navigationBarTitle(Text("Буква"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Буква", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.characters.showSettings.wrappedValue.toggle()
         }) {
@@ -58,11 +59,12 @@ private extension CharactersView {
     var generateButton: some View {
         Button(action: {
             generateYesOrNo(state: appBinding)
+            Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: "Сгенерировать букву",
+                       text: NSLocalizedString("Сгенерировать букву", comment: ""),
                        switchImage: false,
                        image: "")
         }

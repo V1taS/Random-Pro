@@ -24,12 +24,13 @@ struct YesOrNotView: View {
                 .foregroundColor(.primaryGray())
                 .onTapGesture {
                     generateYesOrNo(state: appBinding)
+                    Feedback.shared.impactHeavy(.medium)
                 }
             Spacer()
             listResults
             generateButton
         }
-        .navigationBarTitle(Text("Да или Нет"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Да или Нет", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.yesOrNo.showSettings.wrappedValue.toggle()
         }) {
@@ -45,11 +46,12 @@ private extension YesOrNotView {
     var generateButton: some View {
         Button(action: {
             generateYesOrNo(state: appBinding)
+            Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: "Да или Нет?",
+                       text: NSLocalizedString("Да или Нет?", comment: ""),
                        switchImage: false,
                        image: "")
         }

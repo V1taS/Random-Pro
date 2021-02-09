@@ -31,7 +31,7 @@ struct CustomListWordsView: View {
         }
         .keyboardAware()
         .dismissingKeyboard()
-        .navigationBarTitle(Text("Список"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Список", comment: "")), displayMode: .inline)
     }
 }
 
@@ -59,7 +59,7 @@ private extension CustomListWordsView {
 private extension CustomListWordsView {
     var TextField: some View {
         HStack {
-            TextFieldUIKit(placeholder: "Напишите слово или фразу",
+            TextFieldUIKit(placeholder: NSLocalizedString("Напишите слово или фразу", comment: ""),
                            text: appBinding.listWords.textField,
                            font: UIFont.robotoMedium16()!,
                            foregroundColor: UIColor.primaryGray(),
@@ -84,11 +84,12 @@ private extension CustomListWordsView {
             appBinding.listWords.listData.wrappedValue.append(appBinding.listWords.textField.wrappedValue)
             listResult.append(appBinding.listWords.textField.wrappedValue)
             appBinding.listWords.textField.wrappedValue = ""
+            Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: "Добавить",
+                       text: NSLocalizedString("Добавить", comment: ""),
                        switchImage: false,
                        image: "")
         }

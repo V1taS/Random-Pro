@@ -21,7 +21,7 @@ struct CubeSettingsView: View {
             VStack {
                 Form {
                     HStack {
-                        Text("Кол-во раз сгенерировано:")
+                        Text(NSLocalizedString("Cгенерировано:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -32,12 +32,12 @@ struct CubeSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последняя сумма:")
+                        Text(NSLocalizedString("Последняя сумма:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.cube.listResult.wrappedValue.last ?? "нет")")
+                        Text("\(appBinding.cube.listResult.wrappedValue.last ?? NSLocalizedString("нет", comment: ""))")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -45,7 +45,7 @@ struct CubeSettingsView: View {
                     HStack {
                         NavigationLink(
                             destination: CubeResultsView(appBinding: appBinding)) {
-                            Text("Список кубиков")
+                            Text(NSLocalizedString("Список кубиков", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
                         }
@@ -56,14 +56,15 @@ struct CubeSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanCube(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
                         }) {
-                            Text("Очистить")
+                            Text(NSLocalizedString("Очистить", comment: ""))
                         }
                         Spacer()
                     }
                 }
             }
-            .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 appBinding.cube.showSettings.wrappedValue = false
             }) {

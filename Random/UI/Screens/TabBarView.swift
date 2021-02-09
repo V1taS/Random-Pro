@@ -22,13 +22,13 @@ struct TabBarView: View {
             MainView(appBinding: appBinding)
                 .tabItem {
                     Image(systemName: "slider.horizontal.3")
-                    Text("Генератор")
+                    Text(NSLocalizedString("Генераторы", comment: ""))
                 }
             
             SettingsView(appBinding: appBinding)
                 .tabItem {
                     Image(systemName: "gear")
-                    Text("Настройки")
+                    Text(NSLocalizedString("Настройки", comment: ""))
                 }
         }
         .accentColor(Color.primaryGray())

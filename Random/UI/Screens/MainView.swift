@@ -23,36 +23,42 @@ struct MainView: View {
                     HStack {
                         NavigationLink(
                             destination: NumberView(appBinding: appBinding)) {
-                            CellMainView(image: "number", title: "Число")
+                            CellMainView(image: "number",
+                                         title: NSLocalizedString("Число", comment: ""))
                         }
                         
                         NavigationLink(
                             destination: YesOrNotView(appBinding: appBinding)) {
-                            CellMainView(image: "questionmark.square.dashed", title: "Да или Нет")
+                            CellMainView(image: "questionmark.square.dashed",
+                                         title: NSLocalizedString("Да или Нет", comment: ""))
                         }
                     }
                     
                     HStack {
                         NavigationLink(
                             destination: CharactersView(appBinding: appBinding)) {
-                            CellMainView(image: "textbox", title: "Буква")
+                            CellMainView(image: "textbox",
+                                         title: NSLocalizedString("Буква", comment: ""))
                         }
                         
                         NavigationLink(
                             destination: ListWordsView(appBinding: appBinding)) {
-                            CellMainView(image: "rectangle.and.pencil.and.ellipsis", title: "Список")
+                            CellMainView(image: "rectangle.and.pencil.and.ellipsis",
+                                         title: NSLocalizedString("Список", comment: ""))
                         }
                     }
                     
                     HStack {
                         NavigationLink(
                             destination: CoinView(appBinding: appBinding)) {
-                            CellMainView(image: "bitcoinsign.circle", title: "Монета")
+                            CellMainView(image: "bitcoinsign.circle",
+                                         title: NSLocalizedString("Монета", comment: ""))
                         }
                         
                         NavigationLink(
                             destination: CubeView(appBinding: appBinding)) {
-                            CellMainView(image: "cube", title: "Кубики")
+                            CellMainView(image: "cube",
+                                         title: NSLocalizedString("Кубики", comment: ""))
                         }
                     }
                     

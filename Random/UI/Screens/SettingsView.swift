@@ -20,13 +20,14 @@ struct SettingsView: View {
         NavigationView {
             VStack {
                 Form {
-                    Section(header: Text("ОСНОВНЫЕ")) {
+                    Section(header: Text(NSLocalizedString("ОСНОВНЫЕ", comment: ""))) {
                         HStack {
                             Spacer()
                             Button(action: {
                                 cleanApp(state: appBinding)
+                                Feedback.shared.impactHeavy(.medium)
                             }) {
-                                Text("Очистить кэш")
+                                Text(NSLocalizedString("Очистить кэш", comment: ""))
                                     .foregroundColor(.primaryError())
                             }
                             Spacer()
@@ -34,7 +35,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Настройки"), displayMode: .automatic)
+            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .automatic)
         }
     }
 }

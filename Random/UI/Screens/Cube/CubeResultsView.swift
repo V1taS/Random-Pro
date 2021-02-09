@@ -18,7 +18,7 @@ struct CubeResultsView: View {
         VStack {
             listResults
         }
-        .navigationBarTitle(Text("Список кубиков"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Список кубиков", comment: "")), displayMode: .inline)
     }
 }
 

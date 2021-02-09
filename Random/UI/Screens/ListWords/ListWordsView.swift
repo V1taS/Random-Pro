@@ -24,6 +24,7 @@ struct ListWordsView: View {
                 .foregroundColor(.primaryGray())
                 .onTapGesture {
                     generateWords(state: appBinding)
+                    Feedback.shared.impactHeavy(.medium)
                 }
             
             Spacer()
@@ -32,7 +33,7 @@ struct ListWordsView: View {
             generateButton
         }
         .padding(.top, 16)
-        .navigationBarTitle(Text("Список"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Список", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.listWords.showSettings.wrappedValue.toggle()
         }) {
@@ -48,11 +49,12 @@ private extension ListWordsView {
     var generateButton: some View {
         Button(action: {
             generateWords(state: appBinding)
+            Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: "Сгенерировать",
+                       text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,
                        image: "")
         }

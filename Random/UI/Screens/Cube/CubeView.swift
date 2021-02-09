@@ -19,7 +19,7 @@ struct CubeView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("Количество кубиков")
+                Text(NSLocalizedString("Количество кубиков", comment: ""))
                     .font(.robotoMedium20())
                     .foregroundColor(.primaryGray())
                 
@@ -41,6 +41,7 @@ struct CubeView: View {
                 content
                     .onTapGesture {
                         generateCube(state: appBinding)
+                        Feedback.shared.impactHeavy(.medium)
                     }
             } else {
                 Text("?")
@@ -55,7 +56,7 @@ struct CubeView: View {
             listResults
             generateButton
         }
-        .navigationBarTitle(Text("Кубики"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Кубики", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.cube.showSettings.wrappedValue.toggle()
         }) {
@@ -186,11 +187,12 @@ private extension CubeView {
     var generateButton: some View {
         Button(action: {
             generateCube(state: appBinding)
+            Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: "Бросить кубик(и)",
+                       text: NSLocalizedString("Бросить кубик(и)", comment: ""),
                        switchImage: false,
                        image: "")
         }

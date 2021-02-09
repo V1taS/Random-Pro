@@ -24,6 +24,7 @@ struct CoinView: View {
                 .padding(.top, 16)
                 .onTapGesture {
                     generateCoins(state: appBinding)
+                    Feedback.shared.impactHeavy(.medium)
                 }
             
             Spacer()
@@ -35,7 +36,7 @@ struct CoinView: View {
             generateButton
         }
         
-        .navigationBarTitle(Text("Орел или Решка"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Орел или Решка", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.coin.showSettings.wrappedValue.toggle()
         }) {
@@ -59,6 +60,7 @@ private extension CoinView {
                     .animation(.easeOut(duration: 0.7))
                     .onTapGesture {
                         generateCoins(state: appBinding)
+                        Feedback.shared.impactHeavy(.medium)
                     }
             }
         }
@@ -69,11 +71,12 @@ private extension CoinView {
     var generateButton: some View {
         Button(action: {
             generateCoins(state: appBinding)
+            Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: "Сгенерировать",
+                       text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,
                        image: "")
         }

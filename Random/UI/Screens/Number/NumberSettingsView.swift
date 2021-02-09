@@ -21,13 +21,13 @@ struct NumberSettingsView: View {
             VStack {
                 Form {
                     Toggle(isOn: appBinding.numberRandom.noRepetitions) {
-                        Text("Без повторений")
+                        Text(NSLocalizedString("Без повторений", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
                     
                     HStack {
-                        Text("Чисел Сгенерировано:")
+                        Text(NSLocalizedString("Чисел Сгенерировано:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -38,12 +38,12 @@ struct NumberSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последнее число:")
+                        Text(NSLocalizedString("Последнее число:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.numberRandom.listResult.wrappedValue.last ?? "нет")")
+                        Text("\(appBinding.numberRandom.listResult.wrappedValue.last ?? NSLocalizedString("нет", comment: ""))")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -51,7 +51,7 @@ struct NumberSettingsView: View {
                     HStack {
                         NavigationLink(
                             destination: NumberResultsView(appBinding: appBinding)) {
-                            Text("Список чисел")
+                            Text(NSLocalizedString("Список чисел", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
                         }
@@ -63,13 +63,13 @@ struct NumberSettingsView: View {
                         Button(action: {
                             cleanNumber(state: appBinding)
                         }) {
-                            Text("Очистить")
+                            Text(NSLocalizedString("Очистить", comment: ""))
                         }
                         Spacer()
                     }
                 }
             }
-            .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 appBinding.numberRandom.showSettings.wrappedValue = false
             }) {

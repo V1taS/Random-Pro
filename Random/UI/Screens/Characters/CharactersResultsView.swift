@@ -18,7 +18,7 @@ struct CharactersResultsView: View {
         VStack {
             listResults
         }
-        .navigationBarTitle(Text("Список символов"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Список букв", comment: "")), displayMode: .inline)
     }
 }
 

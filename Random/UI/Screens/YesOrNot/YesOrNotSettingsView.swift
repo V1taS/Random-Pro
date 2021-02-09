@@ -22,7 +22,7 @@ struct YesOrNotSettingsView: View {
                 Form {
                     
                     HStack {
-                        Text("Cгенерировано:")
+                        Text(NSLocalizedString("Cгенерировано:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -33,12 +33,12 @@ struct YesOrNotSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последнее слово:")
+                        Text(NSLocalizedString("Последнее слово:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.yesOrNo.listResult.wrappedValue.last ?? "нет")")
+                        Text("\(appBinding.yesOrNo.listResult.wrappedValue.last ?? NSLocalizedString("нет", comment: ""))")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -46,7 +46,7 @@ struct YesOrNotSettingsView: View {
                     HStack {
                         NavigationLink(
                             destination: YesOrNotResultsView(appBinding: appBinding)) {
-                            Text("Список ответов")
+                            Text(NSLocalizedString("Список ответов", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
                         }
@@ -57,14 +57,15 @@ struct YesOrNotSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanNumber(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
                         }) {
-                            Text("Очистить")
+                            Text(NSLocalizedString("Очистить", comment: ""))
                         }
                         Spacer()
                     }
                 }
             }
-            .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 appBinding.yesOrNo.showSettings.wrappedValue = false
             }) {

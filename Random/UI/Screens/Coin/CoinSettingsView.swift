@@ -21,7 +21,7 @@ struct CoinSettingsView: View {
             VStack {
                 Form {
                     HStack {
-                        Text("Монет сгенерировано:")
+                        Text(NSLocalizedString("Cгенерировано:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -32,12 +32,12 @@ struct CoinSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последняя монета:")
+                        Text(NSLocalizedString("Последняя монета:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.coin.listResult.wrappedValue.last ?? "нет")")
+                        Text("\(appBinding.coin.listResult.wrappedValue.last ?? NSLocalizedString("нет", comment: ""))")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -45,7 +45,7 @@ struct CoinSettingsView: View {
                     HStack {
                         NavigationLink(
                             destination: CoinResultsView(appBinding: appBinding)) {
-                            Text("Список монет")
+                            Text(NSLocalizedString("Список монет", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
                         }
@@ -56,14 +56,15 @@ struct CoinSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanCoins(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
                         }) {
-                            Text("Очистить")
+                            Text(NSLocalizedString("Очистить", comment: ""))
                         }
                         Spacer()
                     }
                 }
             }
-            .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 appBinding.coin.showSettings.wrappedValue = false
             }) {

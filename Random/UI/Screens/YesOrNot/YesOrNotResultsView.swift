@@ -19,7 +19,7 @@ struct YesOrNotResultsView: View {
         VStack {
             listResults
         }
-        .navigationBarTitle(Text("Список ответов"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Список ответов", comment: "")), displayMode: .inline)
     }
 }
 

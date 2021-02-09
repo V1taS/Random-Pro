@@ -32,8 +32,9 @@ struct NumberView: View {
                     .foregroundColor(.primaryGray())
                     .onTapGesture {
                         generateNumber(state: appBinding)
+                        Feedback.shared.impactHeavy(.medium)
                     }   
-            
+                
                 Spacer()
                 
                 listResults
@@ -41,7 +42,7 @@ struct NumberView: View {
             }
             .padding(.top, 16)
             
-            .navigationBarTitle(Text("Число"), displayMode: .inline)
+            .navigationBarTitle(Text(NSLocalizedString("Число", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 appBinding.numberRandom.showSettings.wrappedValue.toggle()
             }) {
@@ -118,11 +119,12 @@ private extension NumberView {
     var generateButton: some View {
         Button(action: {
             generateNumber(state: appBinding)
+            Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: "Сгенерировать",
+                       text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,
                        image: "")
         }

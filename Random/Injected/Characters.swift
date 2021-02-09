@@ -10,7 +10,7 @@ import Foundation
 
 extension AppState.AppData {
     struct Characters: Equatable {
-        var lang = ["Русские буквы", "Английские буквы"]
+        var lang = [NSLocalizedString("Русские буквы", comment: ""), NSLocalizedString("Английские буквы", comment: "")]
         var result: String = "?"
         
         var showSettings = false

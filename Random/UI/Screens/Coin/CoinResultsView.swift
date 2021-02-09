@@ -19,7 +19,7 @@ struct CoinResultsView: View {
         VStack {
             listResults
         }
-        .navigationBarTitle(Text("Список монет"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("Список монет", comment: "")), displayMode: .inline)
     }
 }
 

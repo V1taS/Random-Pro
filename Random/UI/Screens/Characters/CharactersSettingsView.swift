@@ -21,13 +21,13 @@ struct CharactersSettingsView: View {
             VStack {
                 Form {
                     Toggle(isOn: appBinding.characters.noRepetitions) {
-                        Text("Без повторений")
+                        Text(NSLocalizedString("Без повторений", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
                     
                     HStack {
-                        Text("Букв сгенерировано:")
+                        Text(NSLocalizedString("Cгенерировано:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -38,12 +38,12 @@ struct CharactersSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последняя буква:")
+                        Text(NSLocalizedString("Последняя буква:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.characters.listResult.wrappedValue.last ?? "нет")")
+                        Text("\(appBinding.characters.listResult.wrappedValue.last ?? NSLocalizedString("нет", comment: ""))")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -51,7 +51,7 @@ struct CharactersSettingsView: View {
                     HStack {
                         NavigationLink(
                             destination: CharactersResultsView(appBinding: appBinding)) {
-                            Text("Список символов")
+                            Text(NSLocalizedString("Список букв", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
                         }
@@ -62,14 +62,15 @@ struct CharactersSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanCharacters(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
                         }) {
-                            Text("Очистить")
+                            Text(NSLocalizedString("Очистить", comment: ""))
                         }
                         Spacer()
                     }
                 }
             }
-            .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 appBinding.characters.showSettings.wrappedValue = false
             }) {

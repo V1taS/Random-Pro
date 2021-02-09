@@ -21,13 +21,13 @@ struct ListWordsSettingsView: View {
             VStack {
                 Form {
                     Toggle(isOn: appBinding.listWords.noRepetitions) {
-                        Text("Без повторений")
+                        Text(NSLocalizedString("Без повторений", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
                     
                     HStack {
-                        Text("Слов сгенерировано:")
+                        Text(NSLocalizedString("Слов сгенерировано:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -38,12 +38,12 @@ struct ListWordsSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последнее слово:")
+                        Text(NSLocalizedString("Последнее слово:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.listWords.listResult.wrappedValue.last ?? "нет")")
+                        Text("\(appBinding.listWords.listResult.wrappedValue.last ?? NSLocalizedString("нет", comment: ""))")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -51,7 +51,7 @@ struct ListWordsSettingsView: View {
                     HStack {
                         NavigationLink(
                             destination: CustomListWordsView(appBinding: appBinding)) {
-                            Text("Список")
+                            Text(NSLocalizedString("Список", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
                         }
@@ -62,14 +62,15 @@ struct ListWordsSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanWords(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
                         }) {
-                            Text("Очистить")
+                            Text(NSLocalizedString("Очистить", comment: ""))
                         }
                         Spacer()
                     }
                 }
             }
-            .navigationBarTitle(Text("Настройки"), displayMode: .inline)
+            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
                 appBinding.listWords.showSettings.wrappedValue = false
             }) {

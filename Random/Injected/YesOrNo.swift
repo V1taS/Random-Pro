@@ -11,7 +11,7 @@ import Foundation
 extension AppState.AppData {
     struct YesOrNo: Equatable {
         var result: String = "?"
-        var listYesOrNo = ["Да", "Нет"]
+        var listYesOrNo = [NSLocalizedString("Да", comment: ""), NSLocalizedString("Нет", comment: "")]
         var listResult: [String] = []
         var showSettings = false
     }

@@ -22,6 +22,9 @@ struct YesOrNotView: View {
             Text("\(appBinding.yesOrNo.result.wrappedValue)")
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
+                .onTapGesture {
+                    generateYesOrNo(state: appBinding)
+                }
             Spacer()
             listResults
             generateButton
@@ -41,7 +44,7 @@ struct YesOrNotView: View {
 private extension YesOrNotView {
     var generateButton: some View {
         Button(action: {
-            generateNumber(state: appBinding)
+            generateYesOrNo(state: appBinding)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -58,9 +61,9 @@ private extension YesOrNotView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.yesOrNo.listResult.wrappedValue, id: \.self) { number in
+                ForEach(appBinding.yesOrNo.listResult.wrappedValue, id: \.self) { element in
                     
-                    Text("\(number)")
+                    Text("\(element)")
                         .foregroundColor(.primaryGray())
                         .font(.robotoMedium18())
                 }
@@ -73,7 +76,7 @@ private extension YesOrNotView {
 
 // MARK: Actions
 private extension YesOrNotView {
-    private func generateNumber(state: Binding<AppState.AppData>) {
+    private func generateYesOrNo(state: Binding<AppState.AppData>) {
         injected.interactors.yesOrNoInteractor.generateYesOrNo(state: state)
     }
 }

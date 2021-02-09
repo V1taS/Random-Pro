@@ -10,9 +10,13 @@ import Foundation
 
 extension AppActions {
     struct CoinActions {
-        enum RegularNum: String {
-            case yes = "yes"
-            case no = "no"
+        enum Selected {
+            case one
+            case two
+            case three
+            case four
+            case five
+            case six
         }
     }
 }

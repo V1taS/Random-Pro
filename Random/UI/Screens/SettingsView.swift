@@ -22,37 +22,12 @@ struct SettingsView: View {
                 Form {
                     Section(header: Text("ОСНОВНЫЕ")) {
                         HStack {
-                            Text("Монет сгенерировано:")
-                                .foregroundColor(.primaryGray())
-                                .font(.robotoMedium18())
-                            Spacer()
-                            
-                            Text("\(appBinding.cube.listResult.wrappedValue.count)")
-                                .foregroundColor(.primaryGray())
-                                .font(.robotoMedium18())
-                        }
-                    }
-                    
-                    Section(header: Text("ДРУГИЕ")) {
-                        HStack {
-                            Text("Последняя монета:")
-                                .foregroundColor(.primaryGray())
-                                .font(.robotoMedium18())
-                            Spacer()
-                            
-                            Text("\(appBinding.cube.listResult.wrappedValue.last ?? "нет")")
-                                .foregroundColor(.primaryGray())
-                                .font(.robotoMedium18())
-                        }
-                    }
-                    
-                    Section(header: Text("МОИ ПРИЛОЖЕНИЯ")) {
-                        HStack {
                             Spacer()
                             Button(action: {
-                                
+                                cleanApp(state: appBinding)
                             }) {
-                                Text("Очистить")
+                                Text("Очистить кэш")
+                                    .foregroundColor(.primaryError())
                             }
                             Spacer()
                         }
@@ -61,6 +36,29 @@ struct SettingsView: View {
             }
             .navigationBarTitle(Text("Настройки"), displayMode: .automatic)
         }
+    }
+}
+
+// MARK: Actions
+private extension SettingsView {
+    private func cleanApp(state: Binding<AppState.AppData>) {
+        injected.interactors.numberInteractor
+            .cleanNumber(state: state)
+        
+        injected.interactors.yesOrNoInteractor
+            .cleanNumber(state: state)
+        
+        injected.interactors.charactersInteractor
+            .cleanCharacters(state: state)
+        
+        injected.interactors.listWordsInteractor
+            .cleanWords(state: state)
+        
+        injected.interactors.coinInteractor
+            .cleanCoins(state: state)
+        
+        injected.interactors.cubeInterator
+            .cleanCube(state: state)
     }
 }
 

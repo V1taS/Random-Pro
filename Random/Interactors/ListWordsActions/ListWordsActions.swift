@@ -10,9 +10,9 @@ import Foundation
 
 extension AppActions {
     struct ListWordsActions {
-        enum RegularNum: String {
-            case yes = "yes"
-            case no = "no"
+        enum CopyDataListWords: String {
+            case full = "full"
+            case empty = "empty"
         }
     }
 }

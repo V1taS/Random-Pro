@@ -22,9 +22,13 @@ struct ListWordsView: View {
             Text("\(appBinding.listWords.result.wrappedValue)")
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
+                .onTapGesture {
+                    generateWords(state: appBinding)
+                }
             
             Spacer()
             
+            listResults
             generateButton
         }
         .padding(.top, 16)
@@ -43,7 +47,7 @@ struct ListWordsView: View {
 private extension ListWordsView {
     var generateButton: some View {
         Button(action: {
-            
+            generateWords(state: appBinding)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -53,6 +57,30 @@ private extension ListWordsView {
                        image: "")
         }
         .padding(16)
+    }
+}
+
+private extension ListWordsView {
+    var listResults: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(appBinding.listWords.listResult.wrappedValue, id: \.self) { word in
+                    Text("\(word)")
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+            }
+            .padding(.leading, 16)
+            .padding(.vertical, 16)
+        }
+    }
+}
+
+// MARK: Actions
+private extension ListWordsView {
+    private func generateWords(state: Binding<AppState.AppData>) {
+        injected.interactors.listWordsInteractor
+            .generateWords(state: state)
     }
 }
 

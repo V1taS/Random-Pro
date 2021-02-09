@@ -44,6 +44,16 @@ struct YesOrNotSettingsView: View {
                     }
                     
                     HStack {
+                        NavigationLink(
+                            destination: YesOrNotResultsView(appBinding: appBinding)) {
+                            Text("Список ответов")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack {
                         Spacer()
                         Button(action: {
                             cleanNumber(state: appBinding)

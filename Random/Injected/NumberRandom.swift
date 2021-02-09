@@ -11,7 +11,7 @@ import Foundation
 extension AppState.AppData {
     struct NumberRandom: Equatable {
         var firstNumber: String = "1"
-        var secondNumber: String = "10"
+        var secondNumber: String = "100"
         var result: String = "?"
         var listResult: [String] = []
         

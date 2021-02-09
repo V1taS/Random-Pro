@@ -49,9 +49,19 @@ struct ListWordsSettingsView: View {
                     }
                     
                     HStack {
+                        NavigationLink(
+                            destination: CustomListWordsView(appBinding: appBinding)) {
+                            Text("Список")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack {
                         Spacer()
                         Button(action: {
-                            
+                            cleanWords(state: appBinding)
                         }) {
                             Text("Очистить")
                         }
@@ -68,6 +78,14 @@ struct ListWordsSettingsView: View {
                     .foregroundColor(Color.primaryGray())
         })
         }
+    }
+}
+
+// MARK: Actions
+private extension ListWordsSettingsView {
+    private func cleanWords(state: Binding<AppState.AppData>) {
+        injected.interactors.listWordsInteractor
+            .cleanWords(state: state)
     }
 }
 

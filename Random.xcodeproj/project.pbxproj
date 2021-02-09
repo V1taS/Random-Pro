@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */; };
 		1B3D19F225D1C3980027A83B /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19F125D1C3980027A83B /* ShareSheet.swift */; };
+		1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19F425D1EAE00027A83B /* CustomListWordsView.swift */; };
+		1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19F725D20DA90027A83B /* BoxCellCubeOneView.swift */; };
+		1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FB25D21C8D0027A83B /* YesOrNotResultsView.swift */; };
+		1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */; };
+		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
+		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
 		1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667025D0856300933AD6 /* AppDelegate.swift */; };
 		1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667225D0856300933AD6 /* SceneDelegate.swift */; };
 		1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F667925D0856300933AD6 /* Assets.xcassets */; };
@@ -89,6 +95,12 @@
 /* Begin PBXFileReference section */
 		1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberResultsView.swift; sourceTree = "<group>"; };
 		1B3D19F125D1C3980027A83B /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		1B3D19F425D1EAE00027A83B /* CustomListWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListWordsView.swift; sourceTree = "<group>"; };
+		1B3D19F725D20DA90027A83B /* BoxCellCubeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxCellCubeOneView.swift; sourceTree = "<group>"; };
+		1B3D19FB25D21C8D0027A83B /* YesOrNotResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotResultsView.swift; sourceTree = "<group>"; };
+		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
+		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
+		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
 		1B7F666D25D0856300933AD6 /* Random.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Random.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B7F667025D0856300933AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B7F667225D0856300933AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -422,6 +434,7 @@
 			children = (
 				1B9202F825D16CE90094D2BE /* YesOrNotView.swift */,
 				1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */,
+				1B3D19FB25D21C8D0027A83B /* YesOrNotResultsView.swift */,
 			);
 			path = YesOrNot;
 			sourceTree = "<group>";
@@ -440,6 +453,7 @@
 			children = (
 				1B92030925D1703E0094D2BE /* CharactersView.swift */,
 				1B92031B25D1755B0094D2BE /* CharactersSettingsView.swift */,
+				1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -458,6 +472,7 @@
 			children = (
 				1B92031F25D177510094D2BE /* ListWordsView.swift */,
 				1B92032625D179330094D2BE /* ListWordsSettingsView.swift */,
+				1B3D19F425D1EAE00027A83B /* CustomListWordsView.swift */,
 			);
 			path = ListWords;
 			sourceTree = "<group>";
@@ -467,6 +482,7 @@
 			children = (
 				1B92032B25D17D3A0094D2BE /* CoinView.swift */,
 				1B92033C25D17EDE0094D2BE /* CoinSettingsView.swift */,
+				1B3D1A0125D21E920027A83B /* CoinResultsView.swift */,
 			);
 			path = Coin;
 			sourceTree = "<group>";
@@ -485,6 +501,7 @@
 			children = (
 				1B92034025D1885C0094D2BE /* CubeView.swift */,
 				1B92035225D189890094D2BE /* CubeSettingsView.swift */,
+				1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */,
 			);
 			path = Cube;
 			sourceTree = "<group>";
@@ -501,6 +518,7 @@
 		1BF30DD025D196BB00DCE62B /* CellCube */ = {
 			isa = PBXGroup;
 			children = (
+				1B3D19F725D20DA90027A83B /* BoxCellCubeOneView.swift */,
 				1B92035525D18EF10094D2BE /* CellCubeOneView.swift */,
 				1BF30DC125D194A300DCE62B /* CellCubeTwoView.swift */,
 				1BF30DC425D195A900DCE62B /* CellCubeThreeView.swift */,
@@ -616,6 +634,7 @@
 				1BF30DC825D195EC00DCE62B /* CellCubeFourView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
+				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
 				1B7F668825D0860600933AD6 /* PageView.swift in Sources */,
 				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
@@ -628,8 +647,10 @@
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
 				1B92032725D179330094D2BE /* ListWordsSettingsView.swift in Sources */,
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
+				1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
 				1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */,
+				1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */,
 				1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */,
 				1B92034125D1885C0094D2BE /* CubeView.swift in Sources */,
 				1BF30DC225D194A300DCE62B /* CellCubeTwoView.swift in Sources */,
@@ -646,10 +667,13 @@
 				1BF30DCB25D1963400DCE62B /* CellCubeFiveView.swift in Sources */,
 				1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */,
 				1B7F66C725D08B1700933AD6 /* Store.swift in Sources */,
+				1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
+				1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */,
 				1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */,
+				1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				1B3D19F225D1C3980027A83B /* ShareSheet.swift in Sources */,

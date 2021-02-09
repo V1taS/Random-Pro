@@ -21,7 +21,7 @@ struct CubeSettingsView: View {
             VStack {
                 Form {
                     HStack {
-                        Text("Монет сгенерировано:")
+                        Text("Кол-во раз сгенерировано:")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -32,7 +32,7 @@ struct CubeSettingsView: View {
                     }
                     
                     HStack {
-                        Text("Последняя монета:")
+                        Text("Последняя сумма:")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
@@ -43,9 +43,19 @@ struct CubeSettingsView: View {
                     }
                     
                     HStack {
+                        NavigationLink(
+                            destination: CubeResultsView(appBinding: appBinding)) {
+                            Text("Список кубиков")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack {
                         Spacer()
                         Button(action: {
-                            
+                            cleanCube(state: appBinding)
                         }) {
                             Text("Очистить")
                         }
@@ -60,8 +70,16 @@ struct CubeSettingsView: View {
                 Image(systemName: "xmark.circle.fill")
                     .imageScale(.large)
                     .foregroundColor(Color.primaryGray())
-        })
+            })
         }
+    }
+}
+
+// MARK: Actions
+private extension CubeSettingsView {
+    private func cleanCube(state: Binding<AppState.AppData>) {
+        injected.interactors.cubeInterator
+            .cleanCube(state: state)
     }
 }
 

@@ -30,6 +30,10 @@ struct NumberView: View {
                 Text("\(appBinding.numberRandom.result.wrappedValue)")
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())
+                    .onTapGesture {
+                        generateNumber(state: appBinding)
+                    }   
+            
                 Spacer()
                 
                 listResults
@@ -54,13 +58,14 @@ struct NumberView: View {
 private extension NumberView {
     var firstTF: some View {
         HStack {
-            TextFieldUIKit(placeholder: "",
+            TextFieldUIKit(placeholder: "1",
                            text: appBinding.numberRandom.firstNumber,
                            font: UIFont.robotoMedium16()!,
                            foregroundColor: UIColor.primaryGray(),
                            keyType: .numberPad,
                            isSecureText: false,
-                           textAlignment: .center)
+                           textAlignment: .center,
+                           limitLength: 4)
                 .frame(width: 130, height: 30, alignment: .center)
                 .background(Color.primaryPale())
                 .cornerRadius(4)
@@ -74,13 +79,14 @@ private extension NumberView {
 private extension NumberView {
     var secondTF: some View {
         HStack {
-            TextFieldUIKit(placeholder: "",
+            TextFieldUIKit(placeholder: "100",
                            text: appBinding.numberRandom.secondNumber,
                            font: UIFont.robotoMedium16()!,
                            foregroundColor: UIColor.primaryGray(),
                            keyType: .numberPad,
                            isSecureText: false,
-                           textAlignment: .center)
+                           textAlignment: .center,
+                           limitLength: 4)
                 .frame(width: 130, height: 30, alignment: .center)
                 .background(Color.primaryPale())
                 .cornerRadius(4)

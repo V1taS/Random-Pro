@@ -10,7 +10,7 @@ extension DIContainer {
     struct Interactors {
         let mainInteractor: MainInteractor
         let numberInteractor: NumberInteractor
-        let textInteractor: ListWordsInteractor
+        let listWordsInteractor: ListWordsInteractor
         let yesOrNoInteractor: YesOrNoInteractor
         let charactersInteractor: CharactersInteractor
         let coinInteractor: CoinInteractor
@@ -19,7 +19,7 @@ extension DIContainer {
 
         init(mainInteractor: MainInteractor,
              numberInteractor: NumberInteractor,
-             textInteractor: ListWordsInteractor,
+             listWordsInteractor: ListWordsInteractor,
              yesOrNoInteractor: YesOrNoInteractor,
              charactersInteractor: CharactersInteractor,
              coinInteractor: CoinInteractor,
@@ -27,7 +27,7 @@ extension DIContainer {
              settingsInterator: SettingsInterator) {
             self.mainInteractor = mainInteractor
             self.numberInteractor = numberInteractor
-            self.textInteractor = textInteractor
+            self.listWordsInteractor = listWordsInteractor
             self.yesOrNoInteractor = yesOrNoInteractor
             self.charactersInteractor = charactersInteractor
             self.coinInteractor = coinInteractor
@@ -38,7 +38,7 @@ extension DIContainer {
         static var stub: Self {
             .init(mainInteractor: MainInteractorImpl(),
                   numberInteractor: NumberInteractorImpl(),
-                  textInteractor: ListWordsInteractorImpl(),
+                  listWordsInteractor: ListWordsInteractorImpl(),
                   yesOrNoInteractor: YesOrNoInteractorImpl(),
                   charactersInteractor: CharactersInteractorImpl(),
                   coinInteractor: CoinInteractorImpl(),

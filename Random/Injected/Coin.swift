@@ -12,7 +12,9 @@ extension AppState.AppData {
     struct Coin: Equatable {
         var listResult: [String] = []
         var result: String = "?"
+        var resultImage: String = ""
         var showSettings = false
         var listImage = ["eagle", "tails"]
+        var listName = ["Орел", "Решка"]
     }
 }

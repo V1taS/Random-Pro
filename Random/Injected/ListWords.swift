@@ -11,8 +11,12 @@ import Foundation
 extension AppState.AppData {
     struct ListWords: Equatable {
         var listResult: [String] = []
+        var listTemp: [String] = []
+        var listData: [String] = []
+        var textField = ""
         var result: String = "?"
         var showSettings = false
         var noRepetitions = false
+        var copyDataTemp: AppActions.ListWordsActions.CopyDataListWords = .empty
     }
 }

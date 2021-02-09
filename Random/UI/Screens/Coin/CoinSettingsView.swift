@@ -43,9 +43,19 @@ struct CoinSettingsView: View {
                     }
                     
                     HStack {
+                        NavigationLink(
+                            destination: CoinResultsView(appBinding: appBinding)) {
+                            Text("Список монет")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack {
                         Spacer()
                         Button(action: {
-                            
+                            cleanCoins(state: appBinding)
                         }) {
                             Text("Очистить")
                         }
@@ -60,8 +70,16 @@ struct CoinSettingsView: View {
                 Image(systemName: "xmark.circle.fill")
                     .imageScale(.large)
                     .foregroundColor(Color.primaryGray())
-        })
+            })
         }
+    }
+}
+
+// MARK: Actions
+private extension CoinSettingsView {
+    private func cleanCoins(state: Binding<AppState.AppData>) {
+        injected.interactors.coinInteractor
+            .cleanCoins(state: state)
     }
 }
 

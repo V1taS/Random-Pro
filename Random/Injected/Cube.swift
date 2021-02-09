@@ -11,9 +11,17 @@ import Foundation
 extension AppState.AppData {
     struct Cube: Equatable {
         var listResult: [String] = []
-        var result: String = "?"
-        var showSettings = false
+        
         var countCube = ["1", "2", "3", "4", "5", "6"]
         var selectedCube = 0
+        
+        var cubeOne = 0
+        var cubeTwo = 0
+        var cubeThree = 0
+        var cubeFour = 0
+        var cubeFive = 0
+        var cubeSix = 0
+        
+        var showSettings = false
     }
 }

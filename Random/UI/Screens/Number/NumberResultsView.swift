@@ -25,7 +25,6 @@ struct NumberResultsView: View {
         .navigationBarTitle(Text("Список чисел"), displayMode: .inline)
 //        .navigationBarItems(trailing: showShareSheetButton)
         
-        
     }
 }
 

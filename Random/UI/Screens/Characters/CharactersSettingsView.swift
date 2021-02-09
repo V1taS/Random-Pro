@@ -49,9 +49,19 @@ struct CharactersSettingsView: View {
                     }
                     
                     HStack {
+                        NavigationLink(
+                            destination: CharactersResultsView(appBinding: appBinding)) {
+                            Text("Список символов")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack {
                         Spacer()
                         Button(action: {
-                            
+                            cleanCharacters(state: appBinding)
                         }) {
                             Text("Очистить")
                         }
@@ -66,8 +76,16 @@ struct CharactersSettingsView: View {
                 Image(systemName: "xmark.circle.fill")
                     .imageScale(.large)
                     .foregroundColor(Color.primaryGray())
-        })
+            })
         }
+    }
+}
+
+// MARK: Actions
+private extension CharactersSettingsView {
+    private func cleanCharacters(state: Binding<AppState.AppData>) {
+        injected.interactors.charactersInteractor
+            .cleanCharacters(state: state)
     }
 }
 

@@ -10,109 +10,102 @@ import Combine
 import SwiftUI
 
 protocol CharactersInteractor {
-
+    func generateCharacters(state: Binding<AppState.AppData>)
+    func cleanCharacters(state: Binding<AppState.AppData>)
 }
 
 struct CharactersInteractorImpl: CharactersInteractor {
     
-    func generateNumber(state: Binding<AppState.AppData>) {
+    func generateCharacters(state: Binding<AppState.AppData>) {
         if state.characters.selectedLang.wrappedValue == 0 {
-            if takefromNumberInt(state: state) < taketoNumberInt(state: state) {
-                switch state.numberRandom.noRepetitions.wrappedValue {
-                case true:
-                    noRepetitionsNumbers(state: state)
-                case false:
-                    repetitionsNumbers(state: state)
-                }
+            switch state.numberRandom.noRepetitions.wrappedValue {
+            case true:
+                noRepetitionsArrRU(state: state)
+            case false:
+                repetitionsArrRU(state: state)
             }
-            
-        } else {
-            
         }
-        
-        
-        
-        
-        
+        else {
+            switch state.numberRandom.noRepetitions.wrappedValue {
+            case true:
+                noRepetitionsArrEN(state: state)
+            case false:
+                repetitionsArrEN(state: state)
+            }
+        }
     }
     
-    func cleanNumber(state: Binding<AppState.AppData>) {
-        state.yesOrNo.result.wrappedValue = "?"
-        state.yesOrNo.listResult.wrappedValue = []
+    func cleanCharacters(state: Binding<AppState.AppData>) {
+        state.characters.result.wrappedValue = "?"
+        state.characters.listResult.wrappedValue = []
+        state.characters.arrRU.wrappedValue = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ь", "Ы", "Ъ", "Э", "Ю", "Я"]
+        state.characters.arrEN.wrappedValue = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     }
 }
 
 extension CharactersInteractorImpl {
-    func takefromNumberInt(state: Binding<AppState.AppData>) -> Int {
-        var fromNumberInt: Int = 0
-        if let fromNumber = Int(state.numberRandom.firstNumber.wrappedValue) {
-            fromNumberInt = fromNumber
-        }
-        return fromNumberInt
+    private func shuffledistRandomArrRU(state: Binding<AppState.AppData>) {
+        state.characters.arrRU.wrappedValue.shuffle()
     }
 }
 
 extension CharactersInteractorImpl {
-    func taketoNumberInt(state: Binding<AppState.AppData>) -> Int {
-        var toNumberInt: Int = 0
-        if let toNumber = Int(state.numberRandom.secondNumber.wrappedValue) {
-            toNumberInt = toNumber
-        }
-        return toNumberInt
+    private func shuffledistRandomArrEN(state: Binding<AppState.AppData>) {
+        state.characters.arrEN.wrappedValue.shuffle()
     }
 }
 
 extension CharactersInteractorImpl {
-    func generateListRandomNumber(from fromNumberInt: Int,
-                                  to toNumberInt: Int,
-                                  state: Binding<AppState.AppData>) {
-        
-        for num in fromNumberInt...toNumberInt {
-            let numStr = "\(num)"
-            state.numberRandom.listRandomNumber.wrappedValue.append(numStr)
+    private func takeElementRuFromList(state: Binding<AppState.AppData>) {
+        if state.characters.arrRU.wrappedValue.count != 0 {
+            state.characters.result.wrappedValue = "\(state.characters.arrRU.wrappedValue.first!)"
+            state.characters.listResult.wrappedValue.append("\(state.characters.arrRU.wrappedValue.first!)")
+            state.characters.arrRU.wrappedValue.removeFirst()
         }
     }
 }
 
 extension CharactersInteractorImpl {
-    func shuffledistRandomNumber(state: Binding<AppState.AppData>) {
-        state.numberRandom.listRandomNumber.wrappedValue.shuffle()
-    }
-}
-
-extension CharactersInteractorImpl {
-    func takeNumberFromList(state: Binding<AppState.AppData>) {
-        if state.numberRandom.listRandomNumber.wrappedValue.count != 0 {
-            state.numberRandom.result.wrappedValue = "\(state.numberRandom.listRandomNumber.wrappedValue.first!)"
-            state.numberRandom.listResult.wrappedValue.append("\(state.numberRandom.listRandomNumber.wrappedValue.first!)")
-            state.numberRandom.listRandomNumber.wrappedValue.removeFirst()
+    private func takeElementEnFromList(state: Binding<AppState.AppData>) {
+        if state.characters.arrEN.wrappedValue.count != 0 {
+            state.characters.result.wrappedValue = "\(state.characters.arrEN.wrappedValue.first!)"
+            state.characters.listResult.wrappedValue.append("\(state.characters.arrEN.wrappedValue.first!)")
+            state.characters.arrEN.wrappedValue.removeFirst()
         }
     }
 }
 
 extension CharactersInteractorImpl {
-    func noRepetitionsNumbers(state: Binding<AppState.AppData>) {
-        if state.numberRandom.result.wrappedValue == "?" {
-            generateListRandomNumber(from: takefromNumberInt(state: state),
-                                     to: taketoNumberInt(state: state),
-                                     state: state)
-            shuffledistRandomNumber(state: state)
-            takeNumberFromList(state: state)
-        } else {
-            takeNumberFromList(state: state)
+    private func noRepetitionsArrRU(state: Binding<AppState.AppData>) {
+        shuffledistRandomArrRU(state: state)
+        takeElementRuFromList(state: state)
+    }
+}
+
+
+extension CharactersInteractorImpl {
+    private func noRepetitionsArrEN(state: Binding<AppState.AppData>) {
+        shuffledistRandomArrEN(state: state)
+        takeElementEnFromList(state: state)
+    }
+}
+
+extension CharactersInteractorImpl {
+    private func repetitionsArrRU(state: Binding<AppState.AppData>) {
+        if state.characters.listResult.wrappedValue.count < state.characters.arrRU.wrappedValue.count {
+            let randomInt = state.characters.arrRU.wrappedValue.randomElement()
+            state.characters.listResult.wrappedValue.append("\(randomInt ?? "")")
+            state.characters.result.wrappedValue = "\(randomInt ?? "")"
         }
     }
 }
 
 extension CharactersInteractorImpl {
-    func repetitionsNumbers(state: Binding<AppState.AppData>) {
-        let fromNumberInt = takefromNumberInt(state: state)
-        let toNumberInt = taketoNumberInt(state: state)
-        let randomInt = Int.random(in: fromNumberInt...toNumberInt)
-        
-        if state.numberRandom.listResult.wrappedValue.count < toNumberInt {
-            state.numberRandom.listResult.wrappedValue.append("\(randomInt)")
-            state.numberRandom.result.wrappedValue = "\(randomInt)"
+    private func repetitionsArrEN(state: Binding<AppState.AppData>) {
+        if state.characters.listResult.wrappedValue.count < state.characters.arrEN.wrappedValue.count {
+            let randomInt = state.characters.arrEN.wrappedValue.randomElement()
+            state.characters.listResult.wrappedValue.append("\(randomInt ?? "")")
+            state.characters.result.wrappedValue = "\(randomInt ?? "")"
         }
     }
 }

@@ -22,16 +22,16 @@ struct CoinView: View {
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
                 .padding(.top, 16)
+                .onTapGesture {
+                    generateCoins(state: appBinding)
+                }
             
             Spacer()
-            Image("\(appBinding.coin.listImage.wrappedValue[1])")
-                .resizable()
-                .frame(width: 200, height: 200)
-                .shadow(radius: 10)
-                .transition(.move(edge: .bottom))
-                .animation(.easeOut(duration: 0.7))
-            Spacer()
             
+            imageCoin
+            
+            Spacer()
+            listResults
             generateButton
         }
         
@@ -48,9 +48,27 @@ struct CoinView: View {
 }
 
 private extension CoinView {
+    var imageCoin: some View {
+        VStack {
+            if !appBinding.coin.resultImage.wrappedValue.isEmpty {
+                Image("\(appBinding.coin.resultImage.wrappedValue)")
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .shadow(radius: 10)
+                    .transition(.move(edge: .bottom))
+                    .animation(.easeOut(duration: 0.7))
+                    .onTapGesture {
+                        generateCoins(state: appBinding)
+                    }
+            }
+        }
+    }
+}
+
+private extension CoinView {
     var generateButton: some View {
         Button(action: {
-            
+            generateCoins(state: appBinding)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -60,6 +78,30 @@ private extension CoinView {
                        image: "")
         }
         .padding(16)
+    }
+}
+
+private extension CoinView {
+    var listResults: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(appBinding.coin.listResult.wrappedValue, id: \.self) { word in
+                    Text("\(word)")
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+            }
+            .padding(.leading, 16)
+            .padding(.vertical, 16)
+        }
+    }
+}
+
+// MARK: Actions
+private extension CoinView {
+    private func generateCoins(state: Binding<AppState.AppData>) {
+        injected.interactors.coinInteractor
+            .generateCoins(state: state)
     }
 }
 

@@ -19,6 +19,7 @@ struct TextFieldUIKit: UIViewRepresentable {
     var keyType: UIKeyboardType
     var isSecureText: Bool
     var textAlignment: NSTextAlignment
+    var limitLength: Int
     
     init(placeholder: String,
          text: Binding<String>,
@@ -26,7 +27,8 @@ struct TextFieldUIKit: UIViewRepresentable {
          foregroundColor: UIColor,
          keyType: UIKeyboardType,
          isSecureText: Bool,
-         textAlignment: NSTextAlignment) {
+         textAlignment: NSTextAlignment,
+         limitLength: Int) {
         self.placeholder = placeholder
         self._text = text
         self.font = font
@@ -34,23 +36,19 @@ struct TextFieldUIKit: UIViewRepresentable {
         self.keyType = keyType
         self.isSecureText = isSecureText
         self.textAlignment = textAlignment
+        self.limitLength = limitLength
     }
     
     func makeUIView(context: Context) -> UITextField {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textField.frame.size.width, height: 44))
         let doneButton = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(textField.doneButtonTapped(button:)))
         let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let color = Color.primaryInactive()
-        
         textField.delegate = context.coordinator
         textField.keyboardType = keyType
         textField.textColor = foregroundColor
         textField.font = font
         textField.textAlignment = textAlignment
-        textField.attributedPlaceholder = NSAttributedString(
-            string: placeholder,
-            attributes: [NSAttributedString.Key.foregroundColor : color]
-        )
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder)
         textField.autocorrectionType = .no
         textField.isSecureTextEntry = isSecureText
         
@@ -66,15 +64,19 @@ struct TextFieldUIKit: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(textField: self.textField, text: self._text)
+        Coordinator(textField: self.textField, text: self._text, limitLength: limitLength)
     }
     
     class Coordinator: NSObject, UITextFieldDelegate {
         private var dispose = Set<AnyCancellable>()
+        private var limitLength: Int
         @Binding var text: String
         
-        init(textField: UITextField, text: Binding<String>) {
+        init(textField: UITextField,
+             text: Binding<String>,
+             limitLength: Int) {
             self._text = text
+            self.limitLength = limitLength
             super.init()
             
             NotificationCenter.default
@@ -98,7 +100,7 @@ struct TextFieldUIKit: UIViewRepresentable {
                 return false
             }
             let newLength = currentCharacterCount + string.count - range.length
-            return newLength <= 4
+            return newLength <= limitLength
         }
     }
 }

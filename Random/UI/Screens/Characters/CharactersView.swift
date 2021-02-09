@@ -31,6 +31,9 @@ struct CharactersView: View {
             Text("\(appBinding.characters.result.wrappedValue)")
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
+                .onTapGesture {
+                    generateYesOrNo(state: appBinding)
+                }
             
             Spacer()
             
@@ -54,7 +57,7 @@ struct CharactersView: View {
 private extension CharactersView {
     var generateButton: some View {
         Button(action: {
-            
+            generateYesOrNo(state: appBinding)
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -71,9 +74,9 @@ private extension CharactersView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.yesOrNo.listResult.wrappedValue, id: \.self) { number in
+                ForEach(appBinding.characters.listResult.wrappedValue, id: \.self) { character in
                     
-                    Text("\(number)")
+                    Text("\(character)")
                         .foregroundColor(.primaryGray())
                         .font(.robotoMedium18())
                 }
@@ -81,6 +84,13 @@ private extension CharactersView {
             .padding(.leading, 16)
             .padding(.vertical, 16)
         }
+    }
+}
+
+// MARK: Actions
+private extension CharactersView {
+    private func generateYesOrNo(state: Binding<AppState.AppData>) {
+        injected.interactors.charactersInteractor.generateCharacters(state: state)
     }
 }
 

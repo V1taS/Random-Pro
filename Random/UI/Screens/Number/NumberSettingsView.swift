@@ -62,6 +62,7 @@ struct NumberSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanNumber(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
                         }

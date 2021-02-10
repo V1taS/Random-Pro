@@ -17,21 +17,25 @@ protocol MainInteractor {
 struct MainInteractorImpl: MainInteractor {
     
     func userDefaultsGet(state: Binding<AppState.AppData>) {
-        userDefaultsGetNumbers(state: state)
-        userDefaultsGetYesOrNot(state: state)
-        userDefaultsCharacters(state: state)
-        userDefaultsListWords(state: state)
-        userDefaultsCoin(state: state)
-        userDefaultsCube(state: state)
+        DispatchQueue.main.async {
+            userDefaultsGetNumbers(state: state)
+            userDefaultsGetYesOrNot(state: state)
+            userDefaultsCharacters(state: state)
+            userDefaultsListWords(state: state)
+            userDefaultsCoin(state: state)
+            userDefaultsCube(state: state)
+        }
     }
     
     func cleanAll(state: Binding<AppState.AppData>) {
-        cleanNumberView()
-        cleanYesOrNot()
-        cleanCharacters()
-        cleanListWords()
-        cleanCoin()
-        cleanCube()
+        DispatchQueue.main.async {
+            cleanNumberView()
+            cleanYesOrNot()
+            cleanCharacters()
+            cleanListWords()
+            cleanCoin()
+            cleanCube()
+        }
     }
 }
 

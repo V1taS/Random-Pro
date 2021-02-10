@@ -18,15 +18,16 @@ protocol ListWordsInteractor {
 struct ListWordsInteractorImpl: ListWordsInteractor {
     
     func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
-        saveListResult(state: state)
-        saveListTemp(state: state)
-        saveListData(state: state)
-        saveNoRepetitions(state: state)
-        saveResult(state: state)
+        DispatchQueue.main.async {
+            saveListResult(state: state)
+            saveListTemp(state: state)
+            saveListData(state: state)
+            saveNoRepetitions(state: state)
+            saveResult(state: state)
+        }
     }
     
     func generateWords(state: Binding<AppState.AppData>) {
-        copyDataTemp(state: state)
         switch state.listWords.noRepetitions.wrappedValue {
         case true:
             noRepetitionsWords(state: state)
@@ -38,7 +39,7 @@ struct ListWordsInteractorImpl: ListWordsInteractor {
     func cleanWords(state: Binding<AppState.AppData>) {
         state.listWords.result.wrappedValue = "?"
         state.listWords.listResult.wrappedValue = []
-        state.listWords.listTemp.wrappedValue = []
+        state.listWords.listTemp.wrappedValue = state.listWords.listData.wrappedValue
         state.listWords.copyDataTemp.wrappedValue = .empty
         
     }
@@ -73,15 +74,6 @@ extension ListWordsInteractorImpl {
             let randomInt = state.listWords.listTemp.wrappedValue.randomElement()
             state.listWords.listResult.wrappedValue.append("\(randomInt ?? "")")
             state.listWords.result.wrappedValue = "\(randomInt ?? "")"
-        }
-    }
-}
-
-extension ListWordsInteractorImpl {
-    private func copyDataTemp(state: Binding<AppState.AppData>) {
-        if state.listWords.copyDataTemp.wrappedValue == .empty {
-            state.listWords.listTemp.wrappedValue = state.listWords.listData.wrappedValue
-            state.listWords.copyDataTemp.wrappedValue = .full
         }
     }
 }

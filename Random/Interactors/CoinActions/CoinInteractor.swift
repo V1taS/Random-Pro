@@ -18,9 +18,11 @@ protocol CoinInteractor {
 struct CoinInteractorImpl: CoinInteractor {
     
     func saveCoinIToUserDefaults(state: Binding<AppState.AppData>) {
-        saveListResult(state: state)
-        saveListResultImage(state: state)
-        saveResult(state: state)
+        DispatchQueue.main.async {
+            saveListResult(state: state)
+            saveListResultImage(state: state)
+            saveResult(state: state)
+        }
     }
     
     func generateCoins(state: Binding<AppState.AppData>) {

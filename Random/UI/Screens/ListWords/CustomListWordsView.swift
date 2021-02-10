@@ -82,9 +82,8 @@ private extension CustomListWordsView {
     var generateButton: some View {
         Button(action: {
             if !appBinding.listWords.textField.wrappedValue.isEmpty {
-                appBinding.listWords.listData.wrappedValue.append(appBinding.listWords.textField.wrappedValue)
-                listResult.append(appBinding.listWords.textField.wrappedValue)
-                appBinding.listWords.textField.wrappedValue = ""
+                appendWord(state: appBinding)
+                clearTF(state: appBinding)
                 saveListWordsToUserDefaults(state: appBinding)
                 Feedback.shared.impactHeavy(.medium)
             }
@@ -97,6 +96,22 @@ private extension CustomListWordsView {
                        image: "")
         }
         .padding(.horizontal, 16)
+    }
+}
+
+private extension CustomListWordsView {
+    private func appendWord(state: Binding<AppState.AppData>) {
+        appBinding.listWords.listData.wrappedValue
+            .append(appBinding.listWords.textField.wrappedValue)
+        appBinding.listWords.listTemp.wrappedValue
+            .append(appBinding.listWords.textField.wrappedValue)
+        listResult.append(appBinding.listWords.textField.wrappedValue)
+    }
+}
+
+private extension CustomListWordsView {
+    private func clearTF(state: Binding<AppState.AppData>) {
+        appBinding.listWords.textField.wrappedValue = ""
     }
 }
 

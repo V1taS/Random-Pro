@@ -18,12 +18,14 @@ protocol NumberInteractor {
 struct NumberInteractorImpl: NumberInteractor {
     
     func saveNumberToUserDefaults(state: Binding<AppState.AppData>) {
-        saveListResult(state: state)
-        saveListRandomNumber(state: state)
-        saveNoRepetitions(state: state)
-        saveFirstNumber(state: state)
-        saveSecondNumber(state: state)
-        saveResult(state: state)
+        DispatchQueue.main.async {
+            saveListResult(state: state)
+            saveListRandomNumber(state: state)
+            saveNoRepetitions(state: state)
+            saveFirstNumber(state: state)
+            saveSecondNumber(state: state)
+            saveResult(state: state)
+        }
     }
     
     func generateNumber(state: Binding<AppState.AppData>) {

@@ -18,14 +18,16 @@ protocol CubeInterator {
 struct CubeInteratorImpl: CubeInterator {
     
     func saveCubeToUserDefaults(state: Binding<AppState.AppData>) {
-        saveListResult(state: state)
-        saveSelectedCube(state: state)
-        saveCubeOne(state: state)
-        saveCubeTwo(state: state)
-        saveCubeThree(state: state)
-        saveCubeFour(state: state)
-        saveCubeFive(state: state)
-        saveCubeSix(state: state)
+        DispatchQueue.main.async {
+            saveListResult(state: state)
+            saveSelectedCube(state: state)
+            saveCubeOne(state: state)
+            saveCubeTwo(state: state)
+            saveCubeThree(state: state)
+            saveCubeFour(state: state)
+            saveCubeFive(state: state)
+            saveCubeSix(state: state)
+        }
     }
     
     func generateCube(state: Binding<AppState.AppData>) {

@@ -18,10 +18,12 @@ protocol CharactersInteractor {
 struct CharactersInteractorImpl: CharactersInteractor {
     
     func saveCharactersToUserDefaults(state: Binding<AppState.AppData>) {
-        saveListResult(state: state)
-        saveNoRepetitions(state: state)
-        saveResult(state: state)
-        saveSelectedLang(state: state)
+        DispatchQueue.main.async {
+            saveListResult(state: state)
+            saveNoRepetitions(state: state)
+            saveResult(state: state)
+            saveSelectedLang(state: state)
+        }
     }
     
     func generateCharacters(state: Binding<AppState.AppData>) {

@@ -18,8 +18,10 @@ protocol YesOrNoInteractor {
 struct YesOrNoInteractorImpl: YesOrNoInteractor {
     
     func saveYesOrNoToUserDefaults(state: Binding<AppState.AppData>) {
-        saveListResult(state: state)
-        saveResult(state: state)
+        DispatchQueue.main.async {
+            saveListResult(state: state)
+            saveResult(state: state)
+        }
     }
     
     func generateYesOrNo(state: Binding<AppState.AppData>) {

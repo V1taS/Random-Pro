@@ -57,6 +57,7 @@ struct CoinSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanCoins(state: appBinding)
+                            saveCoinIToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -82,6 +83,13 @@ private extension CoinSettingsView {
     private func cleanCoins(state: Binding<AppState.AppData>) {
         injected.interactors.coinInteractor
             .cleanCoins(state: state)
+    }
+}
+
+private extension CoinSettingsView {
+    private func saveCoinIToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.coinInteractor
+            .saveCoinIToUserDefaults(state: state)
     }
 }
 

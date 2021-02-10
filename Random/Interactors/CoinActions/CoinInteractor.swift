@@ -12,9 +12,16 @@ import SwiftUI
 protocol CoinInteractor {
     func generateCoins(state: Binding<AppState.AppData>)
     func cleanCoins(state: Binding<AppState.AppData>)
+    func saveCoinIToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct CoinInteractorImpl: CoinInteractor {
+    
+    func saveCoinIToUserDefaults(state: Binding<AppState.AppData>) {
+        saveListResult(state: state)
+        saveListResultImage(state: state)
+        saveResult(state: state)
+    }
     
     func generateCoins(state: Binding<AppState.AppData>) {
         shuffledistRandomCoins(state: state)
@@ -33,5 +40,25 @@ extension CoinInteractorImpl {
         state.coin.result.wrappedValue = state.coin.listName.wrappedValue[randomCoin]
         state.coin.listResult.wrappedValue.append(state.coin.listName.wrappedValue[randomCoin])
         state.coin.resultImage.wrappedValue = state.coin.listImage.wrappedValue[randomCoin]
+    }
+}
+
+extension CoinInteractorImpl {
+    private func saveListResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.coin
+                                    .listResult.wrappedValue,
+                                  forKey: "CoinListResult")
+    }
+    
+    private func saveListResultImage(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.coin
+                                    .resultImage.wrappedValue,
+                                  forKey: "CoinListResultImage")
+    }
+    
+    private func saveResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.coin
+                                    .result.wrappedValue,
+                                  forKey: "CoinResult")
     }
 }

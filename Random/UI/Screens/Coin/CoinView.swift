@@ -24,6 +24,7 @@ struct CoinView: View {
                 .padding(.top, 16)
                 .onTapGesture {
                     generateCoins(state: appBinding)
+                    saveCoinIToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }
             
@@ -71,6 +72,7 @@ private extension CoinView {
     var generateButton: some View {
         Button(action: {
             generateCoins(state: appBinding)
+            saveCoinIToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
@@ -105,6 +107,13 @@ private extension CoinView {
     private func generateCoins(state: Binding<AppState.AppData>) {
         injected.interactors.coinInteractor
             .generateCoins(state: state)
+    }
+}
+
+private extension CoinView {
+    private func saveCoinIToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.coinInteractor
+            .saveCoinIToUserDefaults(state: state)
     }
 }
 

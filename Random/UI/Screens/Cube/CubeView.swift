@@ -41,6 +41,7 @@ struct CubeView: View {
                 content
                     .onTapGesture {
                         generateCube(state: appBinding)
+                        saveCubeToUserDefaults(state: appBinding)
                         Feedback.shared.impactHeavy(.medium)
                     }
             } else {
@@ -49,6 +50,8 @@ struct CubeView: View {
                     .foregroundColor(.primaryGray())
                     .onTapGesture {
                         generateCube(state: appBinding)
+                        saveCubeToUserDefaults(state: appBinding)
+                        Feedback.shared.impactHeavy(.medium)
                     }
             }
             
@@ -187,6 +190,7 @@ private extension CubeView {
     var generateButton: some View {
         Button(action: {
             generateCube(state: appBinding)
+            saveCubeToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
@@ -205,6 +209,13 @@ private extension CubeView {
     private func generateCube(state: Binding<AppState.AppData>) {
         injected.interactors.cubeInterator
             .generateCube(state: state)
+    }
+}
+
+private extension CubeView {
+    private func saveCubeToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.cubeInterator
+            .saveCubeToUserDefaults(state: state)
     }
 }
 

@@ -21,6 +21,8 @@ struct MainInteractorImpl: MainInteractor {
         userDefaultsGetYesOrNot(state: state)
         userDefaultsCharacters(state: state)
         userDefaultsListWords(state: state)
+        userDefaultsCoin(state: state)
+        userDefaultsCube(state: state)
     }
     
     func cleanAll(state: Binding<AppState.AppData>) {
@@ -28,6 +30,8 @@ struct MainInteractorImpl: MainInteractor {
         cleanYesOrNot()
         cleanCharacters()
         cleanListWords()
+        cleanCoin()
+        cleanCube()
     }
 }
 
@@ -64,6 +68,7 @@ extension MainInteractorImpl {
     
     private func userDefaultsListWords(state: Binding<AppState.AppData>) {
         if state.listWords.listResult.wrappedValue.isEmpty {
+            
             state.listWords.listResult.wrappedValue = UserDefaults.standard.array(forKey: "ListWordsListResult") as? [String] ?? []
             
             state.listWords.listTemp.wrappedValue = UserDefaults.standard.array(forKey: "ListWordsListTemp") as? [String] ?? []
@@ -73,6 +78,33 @@ extension MainInteractorImpl {
             state.listWords.noRepetitions.wrappedValue = UserDefaults.standard.bool(forKey: "ListWordsNoRepetitions")
             
             state.listWords.result.wrappedValue = UserDefaults.standard.object(forKey: "ListWordsResult") as? String ?? "?"
+        }
+    }
+    
+    private func userDefaultsCoin(state: Binding<AppState.AppData>) {
+        if state.coin.listResult.wrappedValue.isEmpty {
+            
+            state.coin.listResult.wrappedValue = UserDefaults.standard.array(forKey: "CoinListResult") as? [String] ?? []
+            
+            state.coin.resultImage.wrappedValue = UserDefaults.standard.object(forKey: "CoinListResultImage") as? String ?? ""
+            
+            state.coin.result.wrappedValue = UserDefaults.standard.object(forKey: "CoinResult") as? String ?? "?"
+        }
+    }
+    
+    private func userDefaultsCube(state: Binding<AppState.AppData>) {
+        if state.cube.listResult.wrappedValue.isEmpty {
+            
+            state.cube.listResult.wrappedValue = UserDefaults.standard.array(forKey: "CubeListResult") as? [String] ?? []
+            
+            state.cube.selectedCube.wrappedValue = UserDefaults.standard.object(forKey: "CubeSelectedCube") as? Int ?? 0
+            
+            state.cube.cubeOne.wrappedValue = UserDefaults.standard.object(forKey: "CubeCubeOne") as? Int ?? 0
+            state.cube.cubeTwo.wrappedValue = UserDefaults.standard.object(forKey: "CubeCubeTwo") as? Int ?? 0
+            state.cube.cubeThree.wrappedValue = UserDefaults.standard.object(forKey: "CubeCubeThree") as? Int ?? 0
+            state.cube.cubeFour.wrappedValue = UserDefaults.standard.object(forKey: "CubeCubeFour") as? Int ?? 0
+            state.cube.cubeFive.wrappedValue = UserDefaults.standard.object(forKey: "CubeCubeFive") as? Int ?? 0
+            state.cube.cubeSix.wrappedValue = UserDefaults.standard.object(forKey: "CubeCubeSix") as? Int ?? 0
         }
     }
 }
@@ -105,5 +137,22 @@ extension MainInteractorImpl {
         UserDefaults.standard.set([], forKey: "ListWordsListData")
         UserDefaults.standard.set(true, forKey: "ListWordsNoRepetitions")
         UserDefaults.standard.set("?", forKey: "ListWordsResult")
+    }
+    
+    private func cleanCoin() {
+        UserDefaults.standard.set([], forKey: "CoinListResult")
+        UserDefaults.standard.set("", forKey: "CoinListResultImage")
+        UserDefaults.standard.set("?", forKey: "CoinResult")
+    }
+    
+    private func cleanCube() {
+        UserDefaults.standard.set([], forKey: "CubeListResult")
+        UserDefaults.standard.set(0, forKey: "CubeSelectedCube")
+        UserDefaults.standard.set(0, forKey: "CubeCubeOne")
+        UserDefaults.standard.set(0, forKey: "CubeCubeTwo")
+        UserDefaults.standard.set(0, forKey: "CubeCubeThree")
+        UserDefaults.standard.set(0, forKey: "CubeCubeFour")
+        UserDefaults.standard.set(0, forKey: "CubeCubeFive")
+        UserDefaults.standard.set(0, forKey: "CubeCubeSix")
     }
 }

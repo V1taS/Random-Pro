@@ -13,6 +13,7 @@ extension AppState.AppData {
         var listResult: [String] = []
         var result: String = "?"
         var resultImage: String = ""
+        
         var showSettings = false
         var listImage = ["eagle", "tails"]
         var listName = [NSLocalizedString("Орел", comment: ""), NSLocalizedString("Решка", comment: "")]

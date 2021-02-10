@@ -12,9 +12,21 @@ import SwiftUI
 protocol CubeInterator {
     func generateCube(state: Binding<AppState.AppData>)
     func cleanCube(state: Binding<AppState.AppData>)
+    func saveCubeToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct CubeInteratorImpl: CubeInterator {
+    
+    func saveCubeToUserDefaults(state: Binding<AppState.AppData>) {
+        saveListResult(state: state)
+        saveSelectedCube(state: state)
+        saveCubeOne(state: state)
+        saveCubeTwo(state: state)
+        saveCubeThree(state: state)
+        saveCubeFour(state: state)
+        saveCubeFive(state: state)
+        saveCubeSix(state: state)
+    }
     
     func generateCube(state: Binding<AppState.AppData>) {
         switch state.cube.selectedCube.wrappedValue {
@@ -132,5 +144,55 @@ extension CubeInteratorImpl {
         state.cube.cubeSix.wrappedValue = randomCubeSix
         
         state.cube.listResult.wrappedValue.append(String(sumRandomCube))
+    }
+}
+
+extension CubeInteratorImpl {
+    private func saveListResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .listResult.wrappedValue,
+                                  forKey: "CubeListResult")
+    }
+    
+    private func saveSelectedCube(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .selectedCube.wrappedValue,
+                                  forKey: "CubeSelectedCube")
+    }
+    
+    private func saveCubeOne(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .cubeOne.wrappedValue,
+                                  forKey: "CubeCubeOne")
+    }
+    
+    private func saveCubeTwo(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .cubeTwo.wrappedValue,
+                                  forKey: "CubeCubeTwo")
+    }
+    
+    private func saveCubeThree(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .cubeThree.wrappedValue,
+                                  forKey: "CubeCubeThree")
+    }
+    
+    private func saveCubeFour(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .cubeFour.wrappedValue,
+                                  forKey: "CubeCubeFour")
+    }
+    
+    private func saveCubeFive(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .cubeFive.wrappedValue,
+                                  forKey: "CubeCubeFive")
+    }
+    
+    private func saveCubeSix(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.cube
+                                    .cubeSix.wrappedValue,
+                                  forKey: "CubeCubeSix")
     }
 }

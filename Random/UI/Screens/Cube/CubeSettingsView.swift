@@ -57,6 +57,7 @@ struct CubeSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanCube(state: appBinding)
+                            saveCubeToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -82,6 +83,13 @@ private extension CubeSettingsView {
     private func cleanCube(state: Binding<AppState.AppData>) {
         injected.interactors.cubeInterator
             .cleanCube(state: state)
+    }
+}
+
+private extension CubeSettingsView {
+    private func saveCubeToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.cubeInterator
+            .saveCubeToUserDefaults(state: state)
     }
 }
 

@@ -50,7 +50,8 @@ struct NumberSettingsView: View {
                     
                     HStack {
                         NavigationLink(
-                            destination: NumberResultsView(appBinding: appBinding)) {
+                            destination: NumberResultsView(appBinding: appBinding)
+                                .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Список чисел", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
@@ -62,6 +63,7 @@ struct NumberSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanNumber(state: appBinding)
+                            saveNumberToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -86,6 +88,13 @@ struct NumberSettingsView: View {
 private extension NumberSettingsView {
     private func cleanNumber(state: Binding<AppState.AppData>) {
         injected.interactors.numberInteractor.cleanNumber(state: state)
+    }
+}
+
+private extension NumberSettingsView {
+    private func saveNumberToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.numberInteractor
+            .saveNumberToUserDefaults(state: state)
     }
 }
 

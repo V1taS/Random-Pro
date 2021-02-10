@@ -12,9 +12,17 @@ import SwiftUI
 protocol CharactersInteractor {
     func generateCharacters(state: Binding<AppState.AppData>)
     func cleanCharacters(state: Binding<AppState.AppData>)
+    func saveCharactersToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct CharactersInteractorImpl: CharactersInteractor {
+    
+    func saveCharactersToUserDefaults(state: Binding<AppState.AppData>) {
+        saveListResult(state: state)
+        saveNoRepetitions(state: state)
+        saveResult(state: state)
+        saveSelectedLang(state: state)
+    }
     
     func generateCharacters(state: Binding<AppState.AppData>) {
         if state.characters.selectedLang.wrappedValue == 0 {
@@ -110,3 +118,28 @@ extension CharactersInteractorImpl {
     }
 }
 
+extension CharactersInteractorImpl {
+    private func saveListResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.characters
+                                    .listResult.wrappedValue,
+                                  forKey: "CharactersListResult")
+    }
+    
+    private func saveNoRepetitions(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.characters
+                                    .noRepetitions.wrappedValue,
+                                  forKey: "CharactersNoRepetitions")
+    }
+    
+    private func saveResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.characters
+                                    .result.wrappedValue,
+                                  forKey: "CharactersResult")
+    }
+    
+    private func saveSelectedLang(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.characters
+                                    .selectedLang.wrappedValue,
+                                  forKey: "CharactersSelectedLang")
+    }
+}

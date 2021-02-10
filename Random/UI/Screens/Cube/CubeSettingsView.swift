@@ -44,7 +44,8 @@ struct CubeSettingsView: View {
                     
                     HStack {
                         NavigationLink(
-                            destination: CubeResultsView(appBinding: appBinding)) {
+                            destination: CubeResultsView(appBinding: appBinding)
+                                .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Список кубиков", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())

@@ -33,6 +33,7 @@ struct CharactersView: View {
                 .foregroundColor(.primaryGray())
                 .onTapGesture {
                     generateYesOrNo(state: appBinding)
+                    saveCharactersToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }
             
@@ -59,6 +60,7 @@ private extension CharactersView {
     var generateButton: some View {
         Button(action: {
             generateYesOrNo(state: appBinding)
+            saveCharactersToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
@@ -93,6 +95,13 @@ private extension CharactersView {
 private extension CharactersView {
     private func generateYesOrNo(state: Binding<AppState.AppData>) {
         injected.interactors.charactersInteractor.generateCharacters(state: state)
+    }
+}
+
+private extension CharactersView {
+    private func saveCharactersToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.charactersInteractor
+            .saveCharactersToUserDefaults(state: state)
     }
 }
 

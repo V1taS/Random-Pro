@@ -14,6 +14,7 @@ struct MainView: View {
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
     }
+    @Environment(\.injected) private var injected: DIContainer
     
     var body: some View {
         NavigationView {
@@ -67,8 +68,18 @@ struct MainView: View {
                 .padding(.horizontal, 16)
                 
             }
+            .onAppear {
+                userDefaultsGet(state: appBinding)
+            }
             .navigationBarTitle(Text("Random"))
         }
+    }
+}
+
+// MARK: Actions
+private extension MainView {
+    private func userDefaultsGet(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.userDefaultsGet(state: state)
     }
 }
 

@@ -67,7 +67,7 @@ private extension CustomListWordsView {
                            isSecureText: false,
                            textAlignment: .center,
                            limitLength: 40)
-                .frame(height: 50, alignment: .center)
+                .frame(height: 40)
                 .background(Color.primaryPale())
                 .cornerRadius(4)
                 .overlay(RoundedRectangle(cornerRadius: 4)
@@ -81,10 +81,13 @@ private extension CustomListWordsView {
 private extension CustomListWordsView {
     var generateButton: some View {
         Button(action: {
-            appBinding.listWords.listData.wrappedValue.append(appBinding.listWords.textField.wrappedValue)
-            listResult.append(appBinding.listWords.textField.wrappedValue)
-            appBinding.listWords.textField.wrappedValue = ""
-            Feedback.shared.impactHeavy(.medium)
+            if !appBinding.listWords.textField.wrappedValue.isEmpty {
+                appBinding.listWords.listData.wrappedValue.append(appBinding.listWords.textField.wrappedValue)
+                listResult.append(appBinding.listWords.textField.wrappedValue)
+                appBinding.listWords.textField.wrappedValue = ""
+                saveListWordsToUserDefaults(state: appBinding)
+                Feedback.shared.impactHeavy(.medium)
+            }
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -94,6 +97,13 @@ private extension CustomListWordsView {
                        image: "")
         }
         .padding(.horizontal, 16)
+    }
+}
+
+private extension CustomListWordsView {
+    private func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.listWordsInteractor
+            .saveListWordsToUserDefaults(state: state)
     }
 }
 

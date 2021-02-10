@@ -12,9 +12,18 @@ import SwiftUI
 protocol ListWordsInteractor {
     func generateWords(state: Binding<AppState.AppData>)
     func cleanWords(state: Binding<AppState.AppData>)
+    func saveListWordsToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct ListWordsInteractorImpl: ListWordsInteractor {
+    
+    func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
+        saveListResult(state: state)
+        saveListTemp(state: state)
+        saveListData(state: state)
+        saveNoRepetitions(state: state)
+        saveResult(state: state)
+    }
     
     func generateWords(state: Binding<AppState.AppData>) {
         copyDataTemp(state: state)
@@ -75,4 +84,38 @@ extension ListWordsInteractorImpl {
             state.listWords.copyDataTemp.wrappedValue = .full
         }
     }
+}
+
+extension ListWordsInteractorImpl {
+    private func saveListResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.listWords
+                                    .listResult.wrappedValue,
+                                  forKey: "ListWordsListResult")
+    }
+    
+    private func saveListTemp(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.listWords
+                                    .listTemp.wrappedValue,
+                                  forKey: "ListWordsListTemp")
+    }
+    
+    private func saveListData(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.listWords
+                                    .listData.wrappedValue,
+                                  forKey: "ListWordsListData")
+    }
+    
+    private func saveNoRepetitions(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.listWords
+                                    .noRepetitions.wrappedValue,
+                                  forKey: "ListWordsNoRepetitions")
+    }
+    
+    private func saveResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.listWords
+                                    .result.wrappedValue,
+                                  forKey: "ListWordsResult")
+    }
+    
+    
 }

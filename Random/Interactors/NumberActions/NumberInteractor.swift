@@ -12,9 +12,19 @@ import SwiftUI
 protocol NumberInteractor {
     func generateNumber(state: Binding<AppState.AppData>)
     func cleanNumber(state: Binding<AppState.AppData>)
+    func saveNumberToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct NumberInteractorImpl: NumberInteractor {
+    
+    func saveNumberToUserDefaults(state: Binding<AppState.AppData>) {
+        saveListResult(state: state)
+        saveListRandomNumber(state: state)
+        saveNoRepetitions(state: state)
+        saveFirstNumber(state: state)
+        saveSecondNumber(state: state)
+        saveResult(state: state)
+    }
     
     func generateNumber(state: Binding<AppState.AppData>) {
         if takefromNumberInt(state: state) < taketoNumberInt(state: state) {
@@ -31,6 +41,42 @@ struct NumberInteractorImpl: NumberInteractor {
         state.numberRandom.result.wrappedValue = "?"
         state.numberRandom.listResult.wrappedValue = []
         state.numberRandom.listRandomNumber.wrappedValue = []
+    }
+}
+
+extension NumberInteractorImpl {
+    private func saveListResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.numberRandom
+                                    .listResult.wrappedValue,
+                                  forKey: "NumberViewListResult")
+    }
+    
+    private func saveListRandomNumber(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.numberRandom
+                                    .listRandomNumber.wrappedValue,
+                                  forKey: "NumberViewListRandomNumber")
+    }
+    
+    private func saveNoRepetitions(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.numberRandom
+                                    .noRepetitions.wrappedValue,
+                                  forKey: "NumberViewNoRepetitions")
+    }
+    
+    private func saveFirstNumber(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.numberRandom.firstNumber.wrappedValue,
+                                  forKey: "NumberViewFirstNumber")
+    }
+    
+    private func saveSecondNumber(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.numberRandom.secondNumber.wrappedValue,
+                                  forKey: "NumberViewSecondNumber")
+    }
+    
+    private func saveResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.numberRandom
+                                    .result.wrappedValue,
+                                  forKey: "NumberViewResult")
     }
 }
 

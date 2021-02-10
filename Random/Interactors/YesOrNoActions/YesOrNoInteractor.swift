@@ -12,9 +12,15 @@ import SwiftUI
 protocol YesOrNoInteractor {
     func generateYesOrNo(state: Binding<AppState.AppData>)
     func cleanNumber(state: Binding<AppState.AppData>)
+    func saveYesOrNoToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct YesOrNoInteractorImpl: YesOrNoInteractor {
+    
+    func saveYesOrNoToUserDefaults(state: Binding<AppState.AppData>) {
+        saveListResult(state: state)
+        saveResult(state: state)
+    }
     
     func generateYesOrNo(state: Binding<AppState.AppData>) {
         let randomElement = state.yesOrNo.listYesOrNo.wrappedValue.randomElement()
@@ -25,5 +31,19 @@ struct YesOrNoInteractorImpl: YesOrNoInteractor {
     func cleanNumber(state: Binding<AppState.AppData>) {
         state.yesOrNo.result.wrappedValue = "?"
         state.yesOrNo.listResult.wrappedValue = []
+    }
+}
+
+extension YesOrNoInteractorImpl {
+    private func saveListResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.yesOrNo
+                                    .listResult.wrappedValue,
+                                  forKey: "YesOrNoListResult")
+    }
+    
+    private func saveResult(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.yesOrNo
+                                    .result.wrappedValue,
+                                  forKey: "YesOrNoResult")
     }
 }

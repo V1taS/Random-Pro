@@ -24,6 +24,7 @@ struct YesOrNotView: View {
                 .foregroundColor(.primaryGray())
                 .onTapGesture {
                     generateYesOrNo(state: appBinding)
+                    saveYesOrNotToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }
             Spacer()
@@ -46,6 +47,7 @@ private extension YesOrNotView {
     var generateButton: some View {
         Button(action: {
             generateYesOrNo(state: appBinding)
+            saveYesOrNotToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
@@ -80,6 +82,13 @@ private extension YesOrNotView {
 private extension YesOrNotView {
     private func generateYesOrNo(state: Binding<AppState.AppData>) {
         injected.interactors.yesOrNoInteractor.generateYesOrNo(state: state)
+    }
+}
+
+private extension YesOrNotView {
+    private func saveYesOrNotToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.yesOrNoInteractor
+            .saveYesOrNoToUserDefaults(state: state)
     }
 }
 

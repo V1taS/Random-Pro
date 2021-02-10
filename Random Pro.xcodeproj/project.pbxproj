@@ -18,6 +18,8 @@
 		1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */; };
 		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
+		1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */; };
+		1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */; };
 		1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667025D0856300933AD6 /* AppDelegate.swift */; };
 		1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667225D0856300933AD6 /* SceneDelegate.swift */; };
 		1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F667925D0856300933AD6 /* Assets.xcassets */; };
@@ -107,6 +109,8 @@
 		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
+		1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbModalHackView.swift; sourceTree = "<group>"; };
+		1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWordsResultsView.swift; sourceTree = "<group>"; };
 		1B7F666D25D0856300933AD6 /* Random Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B7F667025D0856300933AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B7F667225D0856300933AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -422,6 +426,7 @@
 			children = (
 				1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */,
 				1B3D19F125D1C3980027A83B /* ShareSheet.swift */,
+				1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 				1B92031F25D177510094D2BE /* ListWordsView.swift */,
 				1B92032625D179330094D2BE /* ListWordsSettingsView.swift */,
 				1B3D19F425D1EAE00027A83B /* CustomListWordsView.swift */,
+				1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */,
 			);
 			path = ListWords;
 			sourceTree = "<group>";
@@ -645,6 +651,7 @@
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
 				1B7F668825D0860600933AD6 /* PageView.swift in Sources */,
+				1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */,
 				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
@@ -694,6 +701,7 @@
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
 				1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
+				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,

@@ -50,7 +50,8 @@ struct CharactersSettingsView: View {
                     
                     HStack {
                         NavigationLink(
-                            destination: CharactersResultsView(appBinding: appBinding)) {
+                            destination: CharactersResultsView(appBinding: appBinding)
+                                .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Список букв", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
@@ -62,6 +63,7 @@ struct CharactersSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanCharacters(state: appBinding)
+                            saveCharactersToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -87,6 +89,13 @@ private extension CharactersSettingsView {
     private func cleanCharacters(state: Binding<AppState.AppData>) {
         injected.interactors.charactersInteractor
             .cleanCharacters(state: state)
+    }
+}
+
+private extension CharactersSettingsView {
+    private func saveCharactersToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.charactersInteractor
+            .saveCharactersToUserDefaults(state: state)
     }
 }
 

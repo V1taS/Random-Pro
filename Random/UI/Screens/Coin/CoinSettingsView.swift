@@ -44,7 +44,8 @@ struct CoinSettingsView: View {
                     
                     HStack {
                         NavigationLink(
-                            destination: CoinResultsView(appBinding: appBinding)) {
+                            destination: CoinResultsView(appBinding: appBinding)
+                                .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Список монет", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())

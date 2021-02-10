@@ -50,7 +50,8 @@ struct ListWordsSettingsView: View {
                     
                     HStack {
                         NavigationLink(
-                            destination: CustomListWordsView(appBinding: appBinding)) {
+                            destination: CustomListWordsView(appBinding: appBinding)
+                                .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Список", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
@@ -58,10 +59,24 @@ struct ListWordsSettingsView: View {
                         Spacer()
                     }
                     
+                    if !appBinding.listWords.listResult.wrappedValue.isEmpty {
+                        HStack {
+                            NavigationLink(
+                                destination: ListWordsResultsView(appBinding: appBinding)
+                                    .allowAutoDismiss { false }) {
+                                Text(NSLocalizedString("Результат генерации", comment: ""))
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                            }
+                            Spacer()
+                        }
+                    }
+                    
                     HStack {
                         Spacer()
                         Button(action: {
                             cleanWords(state: appBinding)
+                            saveListWordsToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -87,6 +102,13 @@ private extension ListWordsSettingsView {
     private func cleanWords(state: Binding<AppState.AppData>) {
         injected.interactors.listWordsInteractor
             .cleanWords(state: state)
+    }
+}
+
+private extension ListWordsSettingsView {
+    private func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.listWordsInteractor
+            .saveListWordsToUserDefaults(state: state)
     }
 }
 

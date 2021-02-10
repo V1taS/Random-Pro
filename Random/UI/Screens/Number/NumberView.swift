@@ -32,6 +32,7 @@ struct NumberView: View {
                     .foregroundColor(.primaryGray())
                     .onTapGesture {
                         generateNumber(state: appBinding)
+                        saveNumberToUserDefaults(state: appBinding)
                         Feedback.shared.impactHeavy(.medium)
                     }   
                 
@@ -118,8 +119,12 @@ private extension NumberView {
 private extension NumberView {
     var generateButton: some View {
         Button(action: {
-            generateNumber(state: appBinding)
-            Feedback.shared.impactHeavy(.medium)
+            if !appBinding.numberRandom.firstNumber.wrappedValue.isEmpty &&
+                !appBinding.numberRandom.secondNumber.wrappedValue.isEmpty {
+                generateNumber(state: appBinding)
+                Feedback.shared.impactHeavy(.medium)
+                saveNumberToUserDefaults(state: appBinding)
+            }
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -136,6 +141,13 @@ private extension NumberView {
 private extension NumberView {
     private func generateNumber(state: Binding<AppState.AppData>) {
         injected.interactors.numberInteractor.generateNumber(state: state)
+    }
+}
+
+private extension NumberView {
+    private func saveNumberToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.numberInteractor
+            .saveNumberToUserDefaults(state: state)
     }
 }
 

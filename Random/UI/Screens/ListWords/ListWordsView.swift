@@ -24,6 +24,7 @@ struct ListWordsView: View {
                 .foregroundColor(.primaryGray())
                 .onTapGesture {
                     generateWords(state: appBinding)
+                    saveListWordsToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }
             
@@ -49,6 +50,7 @@ private extension ListWordsView {
     var generateButton: some View {
         Button(action: {
             generateWords(state: appBinding)
+            saveListWordsToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
@@ -83,6 +85,13 @@ private extension ListWordsView {
     private func generateWords(state: Binding<AppState.AppData>) {
         injected.interactors.listWordsInteractor
             .generateWords(state: state)
+    }
+}
+
+private extension ListWordsView {
+    private func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.listWordsInteractor
+            .saveListWordsToUserDefaults(state: state)
     }
 }
 

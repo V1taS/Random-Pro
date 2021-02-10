@@ -45,7 +45,8 @@ struct YesOrNotSettingsView: View {
                     
                     HStack {
                         NavigationLink(
-                            destination: YesOrNotResultsView(appBinding: appBinding)) {
+                            destination: YesOrNotResultsView(appBinding: appBinding)
+                                .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Список ответов", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
@@ -57,6 +58,7 @@ struct YesOrNotSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanNumber(state: appBinding)
+                            saveYesOrNotToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -82,6 +84,13 @@ private extension YesOrNotSettingsView {
     private func cleanNumber(state: Binding<AppState.AppData>) {
         injected.interactors.yesOrNoInteractor
             .cleanNumber(state: state)
+    }
+}
+
+private extension YesOrNotSettingsView {
+    private func saveYesOrNotToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.yesOrNoInteractor
+            .saveYesOrNoToUserDefaults(state: state)
     }
 }
 

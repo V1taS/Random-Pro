@@ -25,6 +25,7 @@ struct SettingsView: View {
                             Spacer()
                             Button(action: {
                                 cleanApp(state: appBinding)
+                                cleanAllUserDefualts(state: appBinding)
                                 Feedback.shared.impactHeavy(.medium)
                             }) {
                                 Text(NSLocalizedString("Очистить кэш", comment: ""))
@@ -62,6 +63,14 @@ private extension SettingsView {
             .cleanCube(state: state)
         
         state.listWords.listData.wrappedValue = []
+    }
+}
+
+private extension SettingsView {
+    private func cleanAllUserDefualts(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor
+            .cleanAll(state: state)
+
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SettingsView: View {
     
@@ -21,22 +22,108 @@ struct SettingsView: View {
             VStack {
                 Form {
                     Section(header: Text(NSLocalizedString("ОСНОВНЫЕ", comment: ""))) {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                cleanApp(state: appBinding)
-                                cleanAllUserDefualts(state: appBinding)
-                                Feedback.shared.impactHeavy(.medium)
-                            }) {
-                                Text(NSLocalizedString("Очистить кэш", comment: ""))
-                                    .foregroundColor(.primaryError())
-                            }
-                            Spacer()
-                        }
+                        idea
+                        rateOnAppStore
+                        share
+                        
+                        
+                    }
+                    
+                    Section(header: Text(NSLocalizedString("Другие", comment: ""))) {
+                        clearAppButton
                     }
                 }
             }
             .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .automatic)
+        }
+    }
+}
+
+private extension SettingsView {
+    var idea: some View {
+        HStack {
+            Image(systemName: "message")
+                .font(.title)
+                .frame(width: 50, alignment: .leading)
+                .foregroundColor(.primaryTertiary())
+            
+            HStack {
+                Button(action: {
+                    EmailHelper.shared.sendEmail(subject: NSLocalizedString("Идея для Random Pro", comment: ""),
+                                                 body: NSLocalizedString("Напишите здесь Вашу идею или предложение", comment: ""),
+                                                 to: "375693@mail.ru")
+                    Feedback.shared.impactHeavy(.medium)
+                }) {
+                    Text(NSLocalizedString("Предложить свою идею", comment: ""))
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+private extension SettingsView {
+    var rateOnAppStore: some View {
+        HStack {
+            Image(systemName: "hand.thumbsup")
+                .font(.title)
+                .frame(width: 50, alignment: .leading)
+                .foregroundColor(.primaryTertiary())
+            
+            
+            HStack {
+                Button(action: {
+                    SKStoreReviewController.requestReview()
+                    Feedback.shared.impactHeavy(.medium)
+                }) {
+                    Text(NSLocalizedString("Оценить в App Store", comment: ""))
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+private extension SettingsView {
+    var share: some View {
+        HStack {
+            Image(systemName: "square.and.arrow.up")
+                .font(.title)
+                .frame(width: 50, alignment: .leading)
+                .foregroundColor(.primaryTertiary())
+            
+            HStack {
+                Button(action: {
+                    actionSheet()
+                    Feedback.shared.impactHeavy(.medium)
+                }) {
+                    Text(NSLocalizedString("Поделиться", comment: ""))
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+private extension SettingsView {
+    var clearAppButton: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                cleanApp(state: appBinding)
+                cleanAllUserDefualts(state: appBinding)
+                Feedback.shared.impactHeavy(.medium)
+            }) {
+                Text(NSLocalizedString("Очистить кэш", comment: ""))
+                    .foregroundColor(.primaryError())
+            }
+            Spacer()
         }
     }
 }
@@ -62,6 +149,9 @@ private extension SettingsView {
         injected.interactors.cubeInterator
             .cleanCube(state: state)
         
+        injected.interactors.dateAndTimeInteractor
+            .cleanDay(state: state)
+        
         state.listWords.listData.wrappedValue = []
     }
 }
@@ -70,7 +160,15 @@ private extension SettingsView {
     private func cleanAllUserDefualts(state: Binding<AppState.AppData>) {
         injected.interactors.mainInteractor
             .cleanAll(state: state)
+        
+    }
+}
 
+private extension SettingsView {
+    private func actionSheet() {
+        guard let data = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956") else { return }
+        let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 

@@ -17,4 +17,5 @@ struct AppActions {
     var coinApp: CoinActions
     var cubeApp: CubeActions
     var settingsApp: SettingsActions
+    var dateAndTimeApp: DateAndTimeActions
 }

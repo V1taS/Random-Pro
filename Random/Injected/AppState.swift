@@ -24,6 +24,8 @@ extension AppState {
         var coin = Coin()
         var cube = Cube()
         var settings = Settings()
+        var dateAndTime = DateAndTime()
+        var lottery = Lottery()
     }
 }
 

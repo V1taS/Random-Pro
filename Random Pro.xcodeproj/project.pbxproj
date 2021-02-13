@@ -11,7 +11,6 @@
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
 		1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */; };
-		1B3D19F225D1C3980027A83B /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19F125D1C3980027A83B /* ShareSheet.swift */; };
 		1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19F425D1EAE00027A83B /* CustomListWordsView.swift */; };
 		1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19F725D20DA90027A83B /* BoxCellCubeOneView.swift */; };
 		1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FB25D21C8D0027A83B /* YesOrNotResultsView.swift */; };
@@ -81,6 +80,19 @@
 		1B92034F25D188DC0094D2BE /* CubeInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92034E25D188DC0094D2BE /* CubeInterator.swift */; };
 		1B92035325D189890094D2BE /* CubeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92035225D189890094D2BE /* CubeSettingsView.swift */; };
 		1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92035525D18EF10094D2BE /* CellCubeOneView.swift */; };
+		1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */; };
+		1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */; };
+		1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */; };
+		1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90325D7250D00A1C7A4 /* MailView.swift */; };
+		1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */; };
+		1BD1F90C25D7313000A1C7A4 /* DateAndTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90B25D7313000A1C7A4 /* DateAndTimeView.swift */; };
+		1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90F25D7324000A1C7A4 /* DateAndTime.swift */; };
+		1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F91325D7328A00A1C7A4 /* DateAndTimeActions.swift */; };
+		1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F91725D732E900A1C7A4 /* DateAndTimeInteractor.swift */; };
+		1BD1F91C25D7336D00A1C7A4 /* LotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F91B25D7336D00A1C7A4 /* LotteryView.swift */; };
+		1BD1F92025D7338700A1C7A4 /* Lottery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F91F25D7338700A1C7A4 /* Lottery.swift */; };
+		1BD1F92425D733AB00A1C7A4 /* LotteryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F92325D733AB00A1C7A4 /* LotteryActions.swift */; };
+		1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */; };
 		1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */; };
 		1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */; };
 		1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */; };
@@ -102,7 +114,6 @@
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1B325C1925D2D18300382F33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberResultsView.swift; sourceTree = "<group>"; };
-		1B3D19F125D1C3980027A83B /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		1B3D19F425D1EAE00027A83B /* CustomListWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomListWordsView.swift; sourceTree = "<group>"; };
 		1B3D19F725D20DA90027A83B /* BoxCellCubeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxCellCubeOneView.swift; sourceTree = "<group>"; };
 		1B3D19FB25D21C8D0027A83B /* YesOrNotResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotResultsView.swift; sourceTree = "<group>"; };
@@ -174,6 +185,19 @@
 		1B92034E25D188DC0094D2BE /* CubeInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeInterator.swift; sourceTree = "<group>"; };
 		1B92035225D189890094D2BE /* CubeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeSettingsView.swift; sourceTree = "<group>"; };
 		1B92035525D18EF10094D2BE /* CellCubeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeOneView.swift; sourceTree = "<group>"; };
+		1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDateAndTimeInteractor.swift; sourceTree = "<group>"; };
+		1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSettingsView.swift; sourceTree = "<group>"; };
+		1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeResultsView.swift; sourceTree = "<group>"; };
+		1BD1F90325D7250D00A1C7A4 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		1BD1F90B25D7313000A1C7A4 /* DateAndTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeView.swift; sourceTree = "<group>"; };
+		1BD1F90F25D7324000A1C7A4 /* DateAndTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTime.swift; sourceTree = "<group>"; };
+		1BD1F91325D7328A00A1C7A4 /* DateAndTimeActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeActions.swift; sourceTree = "<group>"; };
+		1BD1F91725D732E900A1C7A4 /* DateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeInteractor.swift; sourceTree = "<group>"; };
+		1BD1F91B25D7336D00A1C7A4 /* LotteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryView.swift; sourceTree = "<group>"; };
+		1BD1F91F25D7338700A1C7A4 /* Lottery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottery.swift; sourceTree = "<group>"; };
+		1BD1F92325D733AB00A1C7A4 /* LotteryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryActions.swift; sourceTree = "<group>"; };
+		1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryInteractor.swift; sourceTree = "<group>"; };
 		1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNumberView.swift; sourceTree = "<group>"; };
 		1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSettingsView.swift; sourceTree = "<group>"; };
@@ -246,6 +270,8 @@
 				1B7F66A125D0884F00933AD6 /* ListWords.swift */,
 				1B92032F25D17D5B0094D2BE /* Coin.swift */,
 				1B92034525D1888B0094D2BE /* Cube.swift */,
+				1BD1F90F25D7324000A1C7A4 /* DateAndTime.swift */,
+				1BD1F91F25D7338700A1C7A4 /* Lottery.swift */,
 			);
 			path = Injected;
 			sourceTree = "<group>";
@@ -262,6 +288,8 @@
 				1B7F66B125D0899A00933AD6 /* ListWordsActions */,
 				1B92033225D17D870094D2BE /* CoinActions */,
 				1B92034925D188B70094D2BE /* CubeActions */,
+				1BD1F91225D7327100A1C7A4 /* DateAndTimeActions */,
+				1BD1F92225D7339B00A1C7A4 /* LotteryActions */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -342,6 +370,8 @@
 				1B92031E25D1773C0094D2BE /* ListWords */,
 				1B92032A25D17AE90094D2BE /* Coin */,
 				1B92033F25D188360094D2BE /* Cube */,
+				1BD1F90A25D7310F00A1C7A4 /* Date and time */,
+				1BD1F91A25D7335A00A1C7A4 /* Lottery */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -425,8 +455,9 @@
 			isa = PBXGroup;
 			children = (
 				1B7F66F725D08E3300933AD6 /* TextFieldUIKit.swift */,
-				1B3D19F125D1C3980027A83B /* ShareSheet.swift */,
 				1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */,
+				1BD1F90325D7250D00A1C7A4 /* MailView.swift */,
+				1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -526,6 +557,43 @@
 				1B92034E25D188DC0094D2BE /* CubeInterator.swift */,
 			);
 			path = CubeActions;
+			sourceTree = "<group>";
+		};
+		1BD1F90A25D7310F00A1C7A4 /* Date and time */ = {
+			isa = PBXGroup;
+			children = (
+				1BD1F90B25D7313000A1C7A4 /* DateAndTimeView.swift */,
+				1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */,
+				1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */,
+			);
+			path = "Date and time";
+			sourceTree = "<group>";
+		};
+		1BD1F91225D7327100A1C7A4 /* DateAndTimeActions */ = {
+			isa = PBXGroup;
+			children = (
+				1BD1F91325D7328A00A1C7A4 /* DateAndTimeActions.swift */,
+				1BD1F91725D732E900A1C7A4 /* DateAndTimeInteractor.swift */,
+				1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */,
+			);
+			path = DateAndTimeActions;
+			sourceTree = "<group>";
+		};
+		1BD1F91A25D7335A00A1C7A4 /* Lottery */ = {
+			isa = PBXGroup;
+			children = (
+				1BD1F91B25D7336D00A1C7A4 /* LotteryView.swift */,
+			);
+			path = Lottery;
+			sourceTree = "<group>";
+		};
+		1BD1F92225D7339B00A1C7A4 /* LotteryActions */ = {
+			isa = PBXGroup;
+			children = (
+				1BD1F92325D733AB00A1C7A4 /* LotteryActions.swift */,
+				1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */,
+			);
+			path = LotteryActions;
 			sourceTree = "<group>";
 		};
 		1BF30DD025D196BB00DCE62B /* CellCube */ = {
@@ -635,30 +703,40 @@
 				1B92035325D189890094D2BE /* CubeSettingsView.swift in Sources */,
 				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
+				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
 				1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
 				1B92030A25D1703E0094D2BE /* CharactersView.swift in Sources */,
 				1B92032C25D17D3A0094D2BE /* CoinView.swift in Sources */,
+				1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */,
 				1B92034F25D188DC0094D2BE /* CubeInterator.swift in Sources */,
 				1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */,
 				1B7F66A225D0884F00933AD6 /* ListWords.swift in Sources */,
 				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
+				1BD1F91C25D7336D00A1C7A4 /* LotteryView.swift in Sources */,
 				1BF30DC825D195EC00DCE62B /* CellCubeFourView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
+				1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
 				1B7F668825D0860600933AD6 /* PageView.swift in Sources */,
 				1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */,
 				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
+				1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
+				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
+				1BD1F92425D733AB00A1C7A4 /* LotteryActions.swift in Sources */,
 				1B92034625D1888B0094D2BE /* Cube.swift in Sources */,
+				1BD1F92025D7338700A1C7A4 /* Lottery.swift in Sources */,
+				1BD1F90C25D7313000A1C7A4 /* DateAndTimeView.swift in Sources */,
 				1B7F66C025D08AD500933AD6 /* InteractorsContainer.swift in Sources */,
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
+				1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */,
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
 				1B92032725D179330094D2BE /* ListWordsSettingsView.swift in Sources */,
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
@@ -671,6 +749,7 @@
 				1BF30DC225D194A300DCE62B /* CellCubeTwoView.swift in Sources */,
 				1B92030625D16E1D0094D2BE /* YesOrNoInteractor.swift in Sources */,
 				1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */,
+				1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */,
 				1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */,
 				1B92034B25D188BE0094D2BE /* CubeActions.swift in Sources */,
 				1B7F66FF25D0937100933AD6 /* CellMainView.swift in Sources */,
@@ -684,14 +763,15 @@
 				1B7F66C725D08B1700933AD6 /* Store.swift in Sources */,
 				1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
+				1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
+				1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */,
 				1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */,
 				1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */,
 				1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
-				1B3D19F225D1C3980027A83B /* ShareSheet.swift in Sources */,
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
@@ -848,7 +928,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -856,7 +936,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -870,7 +950,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -878,7 +958,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

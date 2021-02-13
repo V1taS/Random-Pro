@@ -18,9 +18,6 @@ struct NumberResultsView: View {
     var body: some View {
         VStack {
             listResults
-                .sheet(isPresented: appBinding.numberRandom.showShareSheet) {
-                    ShareSheet(activityItems: [generateSend])
-                }
         }
         .navigationBarTitle(Text(NSLocalizedString("Список чисел", comment: "")), displayMode: .inline)
 //        .navigationBarItems(trailing: showShareSheetButton)
@@ -50,42 +47,12 @@ private extension NumberResultsView {
     private var showShareSheetButton: AnyView {
         AnyView(
             Button(action: {
-                sendInvite()
+                
             }) {
                 Image(systemName: "arrowshape.turn.up.right.circle")
                     .font(.title)
             }
         )
-    }
-}
-
-
-// MARK: Actions
-private extension NumberResultsView {
-    private func sendInvite() {
-        appBinding.numberRandom.showShareSheet.wrappedValue.toggle()
-    }
-}
-
-private extension NumberResultsView {
-    private func generateSend() -> String {
-        var send = ""
-        var count = 0
-        
-        for num in appBinding.numberRandom.listResult.wrappedValue {
-            count += 1
-            let numStr = "\(num)"
-            send += numStr
-            
-            if appBinding.numberRandom.listResult.wrappedValue.count == count {
-                send += "."
-            } else {
-                if !send.isEmpty {
-                    send += ", "
-                }
-            }
-        }
-        return send
     }
 }
 

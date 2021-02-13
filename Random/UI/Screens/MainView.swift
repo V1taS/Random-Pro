@@ -30,7 +30,7 @@ struct MainView: View {
                         
                         NavigationLink(
                             destination: YesOrNotView(appBinding: appBinding)) {
-                            CellMainView(image: "questionmark.square.dashed",
+                            CellMainView(image: "questionmark.square",
                                          title: NSLocalizedString("Да или Нет", comment: ""))
                         }
                     }
@@ -44,7 +44,7 @@ struct MainView: View {
                         
                         NavigationLink(
                             destination: ListWordsView(appBinding: appBinding)) {
-                            CellMainView(image: "rectangle.and.pencil.and.ellipsis",
+                            CellMainView(image: "list.bullet.below.rectangle",
                                          title: NSLocalizedString("Список", comment: ""))
                         }
                     }
@@ -60,6 +60,22 @@ struct MainView: View {
                             destination: CubeView(appBinding: appBinding)) {
                             CellMainView(image: "cube",
                                          title: NSLocalizedString("Кубики", comment: ""))
+                        }
+                    }
+                    
+                    HStack {
+                        NavigationLink(
+                            destination: DateAndTimeView(appBinding: appBinding)) {
+                            CellMainView(image: "calendar",
+                                         title: NSLocalizedString("Дата и время",
+                                                                  comment: ""))
+                        }
+                        
+                        NavigationLink(
+                            destination: CubeView(appBinding: appBinding)) {
+                            CellMainView(image: "tag",
+                                         title: NSLocalizedString("Лотерея",
+                                                                  comment: ""))
                         }
                     }
                     

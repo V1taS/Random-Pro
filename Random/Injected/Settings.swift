@@ -10,6 +10,6 @@ import Foundation
 
 extension AppState.AppData {
     struct Settings: Equatable {
-        
+
     }
 }

@@ -24,6 +24,7 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultsListWords(state: state)
             userDefaultsCoin(state: state)
             userDefaultsCube(state: state)
+            userDefaultsDay(state: state)
         }
     }
     
@@ -35,6 +36,7 @@ struct MainInteractorImpl: MainInteractor {
             cleanListWords()
             cleanCoin()
             cleanCube()
+            cleanDay()
         }
     }
 }
@@ -111,6 +113,14 @@ extension MainInteractorImpl {
             state.cube.cubeSix.wrappedValue = UserDefaults.standard.object(forKey: "CubeCubeSix") as? Int ?? 0
         }
     }
+    
+    private func userDefaultsDay(state: Binding<AppState.AppData>) {
+        if state.dateAndTime.listResult.wrappedValue.isEmpty {
+            
+            state.dateAndTime.listResult.wrappedValue = UserDefaults.standard.array(forKey: "DateAndTimelistResult") as? [String] ?? []
+            state.dateAndTime.noRepetitionsDay.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitions")
+        }
+    }
 }
 
 extension MainInteractorImpl {
@@ -158,5 +168,10 @@ extension MainInteractorImpl {
         UserDefaults.standard.set(0, forKey: "CubeCubeFour")
         UserDefaults.standard.set(0, forKey: "CubeCubeFive")
         UserDefaults.standard.set(0, forKey: "CubeCubeSix")
+    }
+    
+    private func cleanDay() {
+        UserDefaults.standard.set([], forKey: "DateAndTimelistResult")
+        UserDefaults.standard.set(true, forKey: "DateAndTimeNoRepetitions")
     }
 }

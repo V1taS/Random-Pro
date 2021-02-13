@@ -17,7 +17,6 @@ extension AppState.AppData {
         
         var showSettings = false
         var noRepetitions = true
-        var showShareSheet = false
         var listRandomNumber: [String] = []
     }
 }

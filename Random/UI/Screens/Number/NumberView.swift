@@ -31,9 +31,12 @@ struct NumberView: View {
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())
                     .onTapGesture {
-                        generateNumber(state: appBinding)
-                        saveNumberToUserDefaults(state: appBinding)
-                        Feedback.shared.impactHeavy(.medium)
+                        if !appBinding.numberRandom.firstNumber.wrappedValue.isEmpty &&
+                            !appBinding.numberRandom.secondNumber.wrappedValue.isEmpty {
+                            generateNumber(state: appBinding)
+                            saveNumberToUserDefaults(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
+                        }
                     }   
                 
                 Spacer()

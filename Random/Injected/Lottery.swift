@@ -12,6 +12,10 @@ extension AppState.AppData {
     struct Lottery: Equatable {
         var listResult: [String] = []
         var result: String = "?"
+        
+        var firstNumber: String = "7"
+        var secondNumber: String = "49"
+        
         var showSettings = false
     }
 }

@@ -56,8 +56,8 @@ private extension DateAndTimeView {
                 }
                 
                 Button(action: {
-        //            generateYesOrNo(state: appBinding)
-        //            saveYesOrNotToUserDefaults(state: appBinding)
+                    generateTime(state: appBinding)
+                    saveDayToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     ButtonView(background: .primaryTertiary(),
@@ -72,8 +72,8 @@ private extension DateAndTimeView {
             
             HStack {
                 Button(action: {
-        //            generateYesOrNo(state: appBinding)
-        //            saveYesOrNotToUserDefaults(state: appBinding)
+                    generateDate(state: appBinding)
+                    saveDayToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     ButtonView(background: .primaryTertiary(),
@@ -85,8 +85,8 @@ private extension DateAndTimeView {
                 }
                 
                 Button(action: {
-        //            generateYesOrNo(state: appBinding)
-        //            saveYesOrNotToUserDefaults(state: appBinding)
+                    generateMonth(state: appBinding)
+                    saveDayToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     ButtonView(background: .primaryTertiary(),
@@ -122,11 +122,35 @@ private extension DateAndTimeView {
     }
 }
 
-// MARK: Actions
+// MARK: Actions Day
 private extension DateAndTimeView {
     private func generateDay(state: Binding<AppState.AppData>) {
         injected.interactors.dateAndTimeInteractor
             .generateDay(state: state)
+    }
+}
+
+// MARK: Actions Date
+private extension DateAndTimeView {
+    private func generateDate(state: Binding<AppState.AppData>) {
+        injected.interactors.dateAndTimeInteractor
+            .generateDate(state: state)
+    }
+}
+
+// MARK: Actions Month
+private extension DateAndTimeView {
+    private func generateMonth(state: Binding<AppState.AppData>) {
+        injected.interactors.dateAndTimeInteractor
+            .generateMonth(state: state)
+    }
+}
+
+// MARK: Actions Time
+private extension DateAndTimeView {
+    private func generateTime(state: Binding<AppState.AppData>) {
+        injected.interactors.dateAndTimeInteractor
+            .generateTime(state: state)
     }
 }
 

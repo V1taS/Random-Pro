@@ -152,6 +152,15 @@ private extension SettingsView {
         injected.interactors.dateAndTimeInteractor
             .cleanDay(state: state)
         
+        injected.interactors.dateAndTimeInteractor
+            .cleanDate(state: state)
+        
+        injected.interactors.dateAndTimeInteractor
+            .cleanMonth(state: state)
+        
+        injected.interactors.lotteryInteractor
+            .cleanNumbers(state: state)
+        
         state.listWords.listData.wrappedValue = []
     }
 }

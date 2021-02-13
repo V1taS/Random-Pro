@@ -20,7 +20,19 @@ struct DateAndTimeSettingsView: View {
             VStack {
                 Form {
                     Toggle(isOn: appBinding.dateAndTime.noRepetitionsDay) {
-                        Text(NSLocalizedString("Без повторений (дни недели)", comment: ""))
+                        Text(NSLocalizedString("Без повторений (дни)", comment: ""))
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
+                    
+                    Toggle(isOn: appBinding.dateAndTime.noRepetitionsDate) {
+                        Text(NSLocalizedString("Без повторений (даты)", comment: ""))
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
+                    
+                    Toggle(isOn: appBinding.dateAndTime.noRepetitionsMonth) {
+                        Text(NSLocalizedString("Без повторений (месяцы)", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
@@ -62,6 +74,8 @@ struct DateAndTimeSettingsView: View {
                         Spacer()
                         Button(action: {
                             cleanDay(state: appBinding)
+                            cleanDate(state: appBinding)
+                            cleanMonth(state: appBinding)
                             saveDayToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
@@ -83,11 +97,27 @@ struct DateAndTimeSettingsView: View {
     }
 }
 
-// MARK: Actions
+// MARK: Actions clean Day
 private extension DateAndTimeSettingsView {
     private func cleanDay(state: Binding<AppState.AppData>) {
         injected.interactors.dateAndTimeInteractor
             .cleanDay(state: state)
+    }
+}
+
+// MARK: Actions clean Date
+private extension DateAndTimeSettingsView {
+    private func cleanDate(state: Binding<AppState.AppData>) {
+        injected.interactors.dateAndTimeInteractor
+            .cleanDate(state: state)
+    }
+}
+
+// MARK: Actions clean Month
+private extension DateAndTimeSettingsView {
+    private func cleanMonth(state: Binding<AppState.AppData>) {
+        injected.interactors.dateAndTimeInteractor
+            .cleanMonth(state: state)
     }
 }
 

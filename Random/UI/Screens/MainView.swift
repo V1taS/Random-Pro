@@ -72,7 +72,7 @@ struct MainView: View {
                         }
                         
                         NavigationLink(
-                            destination: CubeView(appBinding: appBinding)) {
+                            destination: LotteryView(appBinding: appBinding)) {
                             CellMainView(image: "tag",
                                          title: NSLocalizedString("Лотерея",
                                                                   comment: ""))

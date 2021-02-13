@@ -9,19 +9,11 @@
 import SwiftUI
 
 protocol DayDateAndTimeInteractor {
-    func saveDayToUserDefaults(state: Binding<AppState.AppData>)
     func generateDay(state: Binding<AppState.AppData>)
     func cleanDay(state: Binding<AppState.AppData>)
 }
 
 extension DateAndTimeInteractorImpl {
-    
-    func saveDayToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
-            savelistResult(state: state)
-            saveNoRepetitions(state: state)
-        }
-    }
     
     func generateDay(state: Binding<AppState.AppData>) {
         
@@ -34,8 +26,6 @@ extension DateAndTimeInteractorImpl {
     }
     
     func cleanDay(state: Binding<AppState.AppData>) {
-        state.dateAndTime.result.wrappedValue = "?"
-        state.dateAndTime.listResult.wrappedValue = []
         state.dateAndTime.listDay.wrappedValue = [NSLocalizedString("Понедельник", comment: ""), NSLocalizedString("Вторник", comment: ""), NSLocalizedString("Среда", comment: ""), NSLocalizedString("Четверг", comment: ""), NSLocalizedString("Пятница", comment: ""), NSLocalizedString("Суббота", comment: ""), NSLocalizedString("Воскресенье", comment: "")]
     }
 }
@@ -71,17 +61,4 @@ extension DateAndTimeInteractorImpl {
     }
 }
 
-extension DateAndTimeInteractorImpl {
-    
-    private func savelistResult(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.dateAndTime
-                                    .listResult.wrappedValue,
-                                  forKey: "DateAndTimelistResult")
-    }
-    
-    private func saveNoRepetitions(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.characters
-                                    .noRepetitions.wrappedValue,
-                                  forKey: "DateAndTimeNoRepetitions")
-    }
-}
+

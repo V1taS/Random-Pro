@@ -25,6 +25,8 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultsCoin(state: state)
             userDefaultsCube(state: state)
             userDefaultsDay(state: state)
+            userDefaultsDate(state: state)
+            userDefaultsLottery(state: state)
         }
     }
     
@@ -37,6 +39,8 @@ struct MainInteractorImpl: MainInteractor {
             cleanCoin()
             cleanCube()
             cleanDay()
+            cleanDate()
+            cleanLottery()
         }
     }
 }
@@ -116,9 +120,34 @@ extension MainInteractorImpl {
     
     private func userDefaultsDay(state: Binding<AppState.AppData>) {
         if state.dateAndTime.listResult.wrappedValue.isEmpty {
+            state.dateAndTime.noRepetitionsDay.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsDay")
+        }
+    }
+    
+    private func userDefaultsDate(state: Binding<AppState.AppData>) {
+        if state.dateAndTime.listResult.wrappedValue.isEmpty {
             
             state.dateAndTime.listResult.wrappedValue = UserDefaults.standard.array(forKey: "DateAndTimelistResult") as? [String] ?? []
-            state.dateAndTime.noRepetitionsDay.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitions")
+        
+            state.dateAndTime.result.wrappedValue = UserDefaults.standard.object(forKey: "DateAndTimResult") as? String ?? "?"
+            
+            state.dateAndTime.noRepetitionsDate.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsDate")
+            
+            state.dateAndTime.noRepetitionsDate.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsMonth")
+        } else {
+            state.dateAndTime.listDate.wrappedValue = UserDefaults.standard.array(forKey: "DateAndTimelistDate") as? [String] ?? []
+            
+            state.dateAndTime.listDay.wrappedValue = UserDefaults.standard.array(forKey: "DateAndTimelistDay") as? [String] ?? []
+            
+            state.dateAndTime.listMonth.wrappedValue = UserDefaults.standard.array(forKey: "DateAndTimelistMonth") as? [String] ?? []
+        }
+    }
+    
+    private func userDefaultsLottery(state: Binding<AppState.AppData>) {
+        if state.lottery.listResult.wrappedValue.isEmpty {
+            state.lottery.listResult.wrappedValue = UserDefaults.standard.array(forKey: "LotterylistResult") as? [String] ?? []
+        
+            state.lottery.result.wrappedValue = UserDefaults.standard.object(forKey: "LotteryResult") as? String ?? "?"
         }
     }
 }
@@ -171,7 +200,16 @@ extension MainInteractorImpl {
     }
     
     private func cleanDay() {
+        UserDefaults.standard.set(true, forKey: "DateAndTimeNoRepetitionsDay")
+    }
+    
+    private func cleanDate() {
         UserDefaults.standard.set([], forKey: "DateAndTimelistResult")
-        UserDefaults.standard.set(true, forKey: "DateAndTimeNoRepetitions")
+        UserDefaults.standard.set(true, forKey: "DateAndTimeNoRepetitionsDate")
+    }
+    
+    private func cleanLottery() {
+        UserDefaults.standard.set([], forKey: "LotterylistResult")
+        UserDefaults.standard.set("?", forKey: "LotteryResult")
     }
 }

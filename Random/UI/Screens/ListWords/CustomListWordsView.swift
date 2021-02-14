@@ -17,6 +17,7 @@ struct CustomListWordsView: View {
     @Environment(\.injected) private var injected: DIContainer
     
     @State var listResult: [String] = []
+    @State var textField = ""
     
     var body: some View {
         VStack {
@@ -60,7 +61,7 @@ private extension CustomListWordsView {
     var TextField: some View {
         HStack {
             TextFieldUIKit(placeholder: NSLocalizedString("Напишите слово или фразу", comment: ""),
-                           text: appBinding.listWords.textField,
+                           text: $textField,
                            font: UIFont.robotoMedium16()!,
                            foregroundColor: UIColor.primaryGray(),
                            keyType: .default,
@@ -81,7 +82,7 @@ private extension CustomListWordsView {
 private extension CustomListWordsView {
     var generateButton: some View {
         Button(action: {
-            if !appBinding.listWords.textField.wrappedValue.isEmpty {
+            if !textField.isEmpty {
                 appendWord(state: appBinding)
                 clearTF(state: appBinding)
                 saveListWordsToUserDefaults(state: appBinding)
@@ -102,16 +103,16 @@ private extension CustomListWordsView {
 private extension CustomListWordsView {
     private func appendWord(state: Binding<AppState.AppData>) {
         appBinding.listWords.listData.wrappedValue
-            .append(appBinding.listWords.textField.wrappedValue)
+            .append(textField)
         appBinding.listWords.listTemp.wrappedValue
-            .append(appBinding.listWords.textField.wrappedValue)
-        listResult.append(appBinding.listWords.textField.wrappedValue)
+            .append(textField)
+        listResult.append(textField)
     }
 }
 
 private extension CustomListWordsView {
     private func clearTF(state: Binding<AppState.AppData>) {
-        appBinding.listWords.textField.wrappedValue = ""
+        textField = ""
     }
 }
 

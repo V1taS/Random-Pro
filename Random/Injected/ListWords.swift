@@ -13,7 +13,6 @@ extension AppState.AppData {
         var listResult: [String] = []
         var listTemp: [String] = []
         var listData: [String] = []
-        var textField = ""
         var result: String = "?"
         var showSettings = false
         var noRepetitions = true

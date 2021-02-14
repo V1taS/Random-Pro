@@ -20,23 +20,20 @@ struct TeamSettingsView: View {
             VStack {
                 Form {
                     HStack {
-                        Text(NSLocalizedString("Количество команд:", comment: ""))
-                            .foregroundColor(.primaryGray())
-                            .font(.robotoMedium18())
-                        Spacer()
-                        
-                        Text("\(appBinding.team.selectedTeam.wrappedValue + 1)")
-                            .foregroundColor(.primaryGray())
-                            .font(.robotoMedium18())
-                    }
-                    
-                    HStack {
                         NavigationLink(
                             destination: TeamCustomListView(appBinding: appBinding)
                                 .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Список игроков", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
+                            
+                            Spacer()
+                            
+                            Text("\(appBinding.team.listPlayersData.wrappedValue.count)")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                            
+                            Color.clear.frame(width: 10)
                         }
                         Spacer()
                     }
@@ -49,6 +46,14 @@ struct TeamSettingsView: View {
                                 Text(NSLocalizedString("Результат генерации", comment: ""))
                                     .foregroundColor(.primaryGray())
                                     .font(.robotoMedium18())
+                                
+                                Spacer()
+                                
+                                Text("\(appBinding.team.listResult1.wrappedValue.count + appBinding.team.listResult2.wrappedValue.count + appBinding.team.listResult3.wrappedValue.count + appBinding.team.listResult4.wrappedValue.count + appBinding.team.listResult5.wrappedValue.count + appBinding.team.listResult6.wrappedValue.count)")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                                
+                                Color.clear.frame(width: 10)
                             }
                             Spacer()
                         }

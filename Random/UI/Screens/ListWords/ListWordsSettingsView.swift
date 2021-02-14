@@ -27,17 +27,6 @@ struct ListWordsSettingsView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("Слов сгенерировано:", comment: ""))
-                            .foregroundColor(.primaryGray())
-                            .font(.robotoMedium18())
-                        Spacer()
-                        
-                        Text("\(appBinding.listWords.listResult.wrappedValue.count)")
-                            .foregroundColor(.primaryGray())
-                            .font(.robotoMedium18())
-                    }
-                    
-                    HStack {
                         Text(NSLocalizedString("Последнее слово:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
@@ -55,6 +44,14 @@ struct ListWordsSettingsView: View {
                             Text(NSLocalizedString("Список", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
+                            
+                            Spacer()
+                            
+                            Text("\(appBinding.listWords.listData.wrappedValue.count)")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                            
+                            Color.clear.frame(width: 10)
                         }
                         Spacer()
                     }
@@ -67,6 +64,14 @@ struct ListWordsSettingsView: View {
                                 Text(NSLocalizedString("Результат генерации", comment: ""))
                                     .foregroundColor(.primaryGray())
                                     .font(.robotoMedium18())
+                                
+                                Spacer()
+                                
+                                Text("\(appBinding.listWords.listResult.wrappedValue.count)")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                                
+                                Color.clear.frame(width: 10)
                             }
                             Spacer()
                         }

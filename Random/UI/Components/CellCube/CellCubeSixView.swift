@@ -23,11 +23,13 @@ struct CellCubeSixView: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                     Spacer()
                     
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                 }
                 .padding(.top, 14)
                 .padding(.horizontal, 14)
@@ -36,11 +38,13 @@ struct CellCubeSixView: View {
                 
                 HStack {
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                     Spacer()
                     
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                 }
                 .padding(.horizontal, 14)
                 
@@ -48,11 +52,13 @@ struct CellCubeSixView: View {
                 
                 HStack {
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                     
                     Spacer()
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                 }
                 .padding(.bottom, 14)
                 .padding(.horizontal, 14)

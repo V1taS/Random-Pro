@@ -122,6 +122,7 @@ private extension SettingsView {
             }) {
                 Text(NSLocalizedString("Очистить кэш", comment: ""))
                     .foregroundColor(.primaryError())
+                    .font(.robotoRegular16())
             }
             Spacer()
         }

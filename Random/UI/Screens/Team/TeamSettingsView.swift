@@ -65,6 +65,7 @@ struct TeamSettingsView: View {
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
+                                .font(.robotoRegular16())
                         }
                         Spacer()
                     }
@@ -77,6 +78,7 @@ struct TeamSettingsView: View {
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Удалить добавленных игроков", comment: ""))
+                                .font(.robotoRegular16())
                                 .foregroundColor(.primaryError())
                         }
                         Spacer()

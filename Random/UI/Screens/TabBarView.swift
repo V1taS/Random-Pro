@@ -49,9 +49,6 @@ private extension TabBarView {
                 AddPlayerSheet(appBinding: appBinding)
                     .offset(y: 50)
             }
-            .transition(.move(edge: .bottom))
-            .animation(.easeOut(duration: 0.7))
-            .padding(.bottom, 0)
         )
     }
     
@@ -66,7 +63,7 @@ private extension TabBarView {
             appBinding.team.showAddPlayer.wrappedValue = false
         }
         .transition(.move(edge: .bottom))
-        .animation(.easeOut(duration: 0.7))
+        .animation(.easeOut(duration: 0.5))
     }
 }
 

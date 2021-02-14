@@ -74,7 +74,7 @@ struct AddPlayerSheet: View {
                             .opacity(self.viewState.height == 0 ? 0.2 : 0),
                         radius: 5)
                 .transition(.move(edge: .bottom))
-                .animation(.easeOut(duration: 0.7))
+                .animation(.easeOut(duration: 0.5))
             }
         }
         .offset(y: offset())

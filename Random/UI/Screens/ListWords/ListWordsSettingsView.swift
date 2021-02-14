@@ -80,6 +80,7 @@ struct ListWordsSettingsView: View {
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
+                                .font(.robotoRegular16())
                         }
                         Spacer()
                     }
@@ -93,6 +94,7 @@ struct ListWordsSettingsView: View {
                         }) {
                             Text(NSLocalizedString("Удалить элементы из списка", comment: ""))
                                 .foregroundColor(.primaryError())
+                                .font(.robotoRegular16())
                         }
                         Spacer()
                     }

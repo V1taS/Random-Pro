@@ -61,6 +61,7 @@ struct CubeSettingsView: View {
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
+                                .font(.robotoRegular16())
                         }
                         Spacer()
                     }

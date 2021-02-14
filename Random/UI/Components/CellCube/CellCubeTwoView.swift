@@ -23,7 +23,8 @@ struct CellCubeTwoView: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                     Spacer()
                 }
                 .padding(.top, 14)
@@ -34,7 +35,8 @@ struct CellCubeTwoView: View {
                 HStack {
                     Spacer()
                     Circle()
-                        .frame(width: 20, height: 20)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 20),
+                               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
                 }
                 .padding(.bottom, 14)
                 .padding(.trailing, 14)

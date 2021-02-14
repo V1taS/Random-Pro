@@ -42,6 +42,7 @@ struct CoinView: View {
             appBinding.coin.showSettings.wrappedValue.toggle()
         }) {
             Image(systemName: "gear")
+                .font(.system(size: 24))
         })
         .sheet(isPresented: appBinding.coin.showSettings, content: {
             CoinSettingsView(appBinding: appBinding)

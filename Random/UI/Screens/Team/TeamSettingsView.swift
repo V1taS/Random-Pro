@@ -61,10 +61,23 @@ struct TeamSettingsView: View {
                             
                             cleanTeams(state: appBinding)
                             appBinding.team.disabledPickerView.wrappedValue = false
-//                            saveTeamToUserDefaults(state: appBinding)
+                            saveTeamToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
+                        }
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            appBinding.team.listPlayersData.wrappedValue = []
+                            saveTeamToUserDefaults(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
+                        }) {
+                            Text(NSLocalizedString("Удалить добавленных игроков", comment: ""))
+                                .foregroundColor(.primaryError())
                         }
                         Spacer()
                     }

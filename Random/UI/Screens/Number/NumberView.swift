@@ -51,6 +51,7 @@ struct NumberView: View {
                 appBinding.numberRandom.showSettings.wrappedValue.toggle()
             }) {
                 Image(systemName: "gear")
+                    .font(.system(size: 24))
             })
             .sheet(isPresented: appBinding.numberRandom.showSettings, content: {
                 NumberSettingsView(appBinding: appBinding)

@@ -17,6 +17,5 @@ extension AppState.AppData {
         var result: String = "?"
         var showSettings = false
         var noRepetitions = true
-        var copyDataTemp: AppActions.ListWordsActions.CopyDataListWords = .empty
     }
 }

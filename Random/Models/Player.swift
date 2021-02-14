@@ -8,7 +8,15 @@
 
 import Foundation
 
-struct Player: Equatable {
+struct Player: Decodable, Encodable {
     let name: String
     let photo: String
+}
+
+extension Player: Equatable {
+    static func == (lhs: Player, rhs: Player) -> Bool {
+            return
+                lhs.name == rhs.name &&
+                lhs.photo == rhs.photo
+        }
 }

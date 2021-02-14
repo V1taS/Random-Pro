@@ -28,17 +28,19 @@ struct TeamView: View {
         }
         
         .navigationBarTitle(Text(NSLocalizedString("Команды", comment: "")), displayMode: .inline)
-        .navigationBarItems(trailing: HStack(spacing: 16) {
+        .navigationBarItems(trailing: HStack(spacing: 24) {
             Button(action: {
                 appBinding.team.showAddPlayer.wrappedValue.toggle()
             }) {
                 Image(systemName: "person.badge.plus")
+                    .font(.system(size: 24))
             }
             
             Button(action: {
                 appBinding.team.showSettings.wrappedValue.toggle()
             }) {
                 Image(systemName: "gear")
+                    .font(.system(size: 24))
             }
             .sheet(isPresented: appBinding.team.showSettings, content: {
                 TeamSettingsView(appBinding: appBinding)
@@ -54,7 +56,7 @@ private extension TeamView {
             Text(NSLocalizedString("Количество команд", comment: ""))
                 .font(.robotoMedium20())
                 .foregroundColor(.primaryGray())
-
+            
             Picker(selection: appBinding.team.selectedTeam,
                    label: Text("Picker")) {
                 ForEach(0..<appBinding.team.countTeam.wrappedValue.count) {
@@ -74,12 +76,18 @@ private extension TeamView {
     var what: some View {
         VStack {
             Spacer()
-            Text("?")
-                .font(.robotoBold70())
-                .foregroundColor(.primaryGray())
-                .onTapGesture {
+            
+            Button(action: {
+                if !appBinding.team.listTempPlayers.wrappedValue.isEmpty {
+                    generateListTeams(state: appBinding)
+                    appBinding.team.disabledPickerView.wrappedValue = true
                     Feedback.shared.impactHeavy(.medium)
                 }
+            }) {
+                Text("?")
+                    .font(.robotoBold70())
+                    .foregroundColor(.primaryGray())
+            }
             
             Spacer()
         }
@@ -220,7 +228,7 @@ private extension TeamView {
         Button(action: {
             if !appBinding.team.listTempPlayers.wrappedValue.isEmpty {
                 generateListTeams(state: appBinding)
-//                saveTeamToUserDefaults(state: appBinding)
+                saveTeamToUserDefaults(state: appBinding)
                 appBinding.team.disabledPickerView.wrappedValue = true
                 Feedback.shared.impactHeavy(.medium)
             }

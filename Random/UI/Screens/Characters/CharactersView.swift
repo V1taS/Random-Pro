@@ -49,6 +49,7 @@ struct CharactersView: View {
             appBinding.characters.showSettings.wrappedValue.toggle()
         }) {
             Image(systemName: "gear")
+                .font(.system(size: 24))
         })
         .sheet(isPresented: appBinding.characters.showSettings, content: {
             CharactersSettingsView(appBinding: appBinding)

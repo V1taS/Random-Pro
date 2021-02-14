@@ -46,6 +46,18 @@ struct MainInteractorImpl: MainInteractor {
 }
 
 extension MainInteractorImpl {
+    private func decoder(forKey: String) -> [Player]? {
+        if let items = UserDefaults.standard.data(forKey: forKey) {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Player].self, from: items) {
+                return decoded
+            }
+        }
+        return nil
+    }
+}
+
+extension MainInteractorImpl {
     private func userDefaultsGetNumbers(state: Binding<AppState.AppData>) {
         if state.numberRandom.listResult.wrappedValue.isEmpty {
             state.numberRandom.listResult.wrappedValue = UserDefaults.standard.array(forKey: "NumberViewListResult") as? [String] ?? []
@@ -149,21 +161,15 @@ extension MainInteractorImpl {
     
     private func userDefaultTeam(state: Binding<AppState.AppData>) {
         if state.team.listResult1.wrappedValue.isEmpty {
-            state.team.listResult1.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult1") as? [Player] ?? []
             
-            state.team.listResult2.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult2") as? [Player] ?? []
-            
-            state.team.listResult3.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult3") as? [Player] ?? []
-            
-            state.team.listResult4.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult4") as? [Player] ?? []
-            
-            state.team.listResult5.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult5") as? [Player] ?? []
-            
-            state.team.listResult6.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult6") as? [Player] ?? []
-            
-            state.team.listPlayersData.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistPlayersData") as? [Player] ?? []
-            
-            state.team.listTempPlayers.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistTempPlayers") as? [Player] ?? []
+            state.team.listResult1.wrappedValue = decoder(forKey: "TeamlistResult1") ?? []
+            state.team.listResult2.wrappedValue = decoder(forKey: "TeamlistResult2") ?? []
+            state.team.listResult3.wrappedValue = decoder(forKey: "TeamlistResult3") ?? []
+            state.team.listResult4.wrappedValue = decoder(forKey: "TeamlistResult4") ?? []
+            state.team.listResult5.wrappedValue = decoder(forKey: "TeamlistResult5") ?? []
+            state.team.listResult6.wrappedValue = decoder(forKey: "TeamlistResult6") ?? []
+            state.team.listPlayersData.wrappedValue = decoder(forKey: "TeamlistPlayersData") ?? []
+            state.team.listTempPlayers.wrappedValue = decoder(forKey: "TeamlistTempPlayers") ?? []
             
             state.team.currentNumber.wrappedValue = UserDefaults.standard.object(forKey: "TeamCurrentNumber") as? Int ?? 1
             

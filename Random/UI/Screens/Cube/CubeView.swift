@@ -64,6 +64,7 @@ struct CubeView: View {
             appBinding.cube.showSettings.wrappedValue.toggle()
         }) {
             Image(systemName: "gear")
+                .font(.system(size: 24))
         })
         .sheet(isPresented: appBinding.cube.showSettings, content: {
             CubeSettingsView(appBinding: appBinding)

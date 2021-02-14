@@ -18,7 +18,7 @@ protocol TeamInteractor {
 }
 
 struct TeamInteractorImpl: TeamInteractor {
-
+    
     func generateListTeams(state: Binding<AppState.AppData>) {
         if !state.team.listTempPlayers.wrappedValue.isEmpty {
             shuffledListTeams(state: state)
@@ -36,6 +36,7 @@ struct TeamInteractorImpl: TeamInteractor {
         state.team.listResult6.wrappedValue = []
         state.team.listTempPlayers.wrappedValue = state.team.listPlayersData.wrappedValue
         state.team.currentNumber.wrappedValue = 1
+        state.team.disabledPickerView.wrappedValue = false
     }
     
     func createPlayer(state: Binding<AppState.AppData>) {
@@ -66,55 +67,66 @@ struct TeamInteractorImpl: TeamInteractor {
             saveDisabledPickerView(state: state)
         }
     }
-    
 }
+
+extension TeamInteractorImpl {
+    private func encoder(players: [Player], forKey: String) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(players) {
+            UserDefaults.standard.set(encoded, forKey: forKey)
+        }
+    }
+}
+
 
 // MARK - Teams Save
 extension TeamInteractorImpl {
     private func savelistResult1(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team
-                                    .listResult1.wrappedValue,
-                                  forKey: "TeamlistResult1")
+        encoder(players: state.team
+                    .listResult1.wrappedValue,
+                forKey: "TeamlistResult1")
     }
     
     private func savelistResult2(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team
-                                    .listResult2.wrappedValue,
-                                  forKey: "TeamlistResult2")
+        encoder(players: state.team
+                    .listResult2.wrappedValue,
+                forKey: "TeamlistResult2")
     }
     
     private func savelistResult3(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team
-                                    .listResult3.wrappedValue,
-                                  forKey: "TeamlistResult3")
+        encoder(players: state.team
+                    .listResult3.wrappedValue,
+                forKey: "TeamlistResult3")
     }
     
     private func savelistResult4(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team
-                                    .listResult4.wrappedValue,
-                                  forKey: "TeamlistResult4")
+        encoder(players: state.team
+                    .listResult4.wrappedValue,
+                forKey: "TeamlistResult4")
     }
     
     private func savelistResult5(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team
-                                    .listResult5.wrappedValue,
-                                  forKey: "TeamlistResult5")
+        encoder(players: state.team
+                    .listResult5.wrappedValue,
+                forKey: "TeamlistResult5")
     }
     
     private func savelistResult6(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team
-                                    .listResult6.wrappedValue,
-                                  forKey: "TeamlistResult6")
+        encoder(players: state.team
+                    .listResult6.wrappedValue,
+                forKey: "TeamlistResult6")
     }
     
     private func savelistPlayersData(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team.listPlayersData.wrappedValue, forKey: "TeamlistPlayersData")
+        encoder(players: state.team
+                    .listPlayersData.wrappedValue,
+                forKey: "TeamlistPlayersData")
     }
     
     private func savelistTempPlayers(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.team
-                                    .listTempPlayers.wrappedValue,
-                                  forKey: "TeamlistTempPlayers")
+        encoder(players: state.team
+                    .listTempPlayers.wrappedValue,
+                forKey: "TeamlistTempPlayers")
     }
     
     private func saveCurrentNumber(state: Binding<AppState.AppData>) {
@@ -138,7 +150,7 @@ extension TeamInteractorImpl {
 
 extension TeamInteractorImpl {
     private func switchCurrentTeam(state: Binding<AppState.AppData>) {
-
+        
         for _ in 1..<state.team.selectedTeam.wrappedValue + 1 {
             if state.team.currentNumber.wrappedValue <= state.team.selectedTeam.wrappedValue {
                 state.team.currentNumber.wrappedValue += 1
@@ -178,7 +190,7 @@ extension TeamInteractorImpl {
             case 6:
                 state.team.listResult6.wrappedValue.append(state.team.listTempPlayers.wrappedValue.first!)
                 state.team.listTempPlayers.wrappedValue.removeFirst()
-         
+                
             default: break
             }
         }

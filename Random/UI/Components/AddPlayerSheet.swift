@@ -119,7 +119,7 @@ private extension AddPlayerSheet {
                 appBinding.team.playerNameTF.wrappedValue = ""
                 appBinding.team.showAddPlayer.wrappedValue = false
 
-//                    saveTeamToUserDefaults(state: appBinding)
+                    saveTeamToUserDefaults(state: appBinding)
                 
                 Feedback.shared.impactHeavy(.medium)
             }

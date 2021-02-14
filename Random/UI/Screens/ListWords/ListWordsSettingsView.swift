@@ -83,6 +83,19 @@ struct ListWordsSettingsView: View {
                         }
                         Spacer()
                     }
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            appBinding.listWords.listData.wrappedValue = []
+                            saveListWordsToUserDefaults(state: appBinding)
+                            Feedback.shared.impactHeavy(.medium)
+                        }) {
+                            Text(NSLocalizedString("Удалить элементы из списка", comment: ""))
+                                .foregroundColor(.primaryError())
+                        }
+                        Spacer()
+                    }
                 }
             }
             .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)

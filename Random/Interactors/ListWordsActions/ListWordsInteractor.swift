@@ -40,7 +40,6 @@ struct ListWordsInteractorImpl: ListWordsInteractor {
         state.listWords.result.wrappedValue = "?"
         state.listWords.listResult.wrappedValue = []
         state.listWords.listTemp.wrappedValue = state.listWords.listData.wrappedValue
-        state.listWords.copyDataTemp.wrappedValue = .empty
         
     }
 }

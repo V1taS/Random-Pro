@@ -52,6 +52,7 @@ struct LotteryView: View {
                 appBinding.lottery.showSettings.wrappedValue.toggle()
             }) {
                 Image(systemName: "gear")
+                    .font(.system(size: 24))
             })
             .sheet(isPresented: appBinding.lottery.showSettings, content: {
                 LotterySettingsView(appBinding: appBinding)

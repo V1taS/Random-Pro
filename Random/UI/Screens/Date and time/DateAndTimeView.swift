@@ -31,6 +31,7 @@ struct DateAndTimeView: View {
             appBinding.dateAndTime.showSettings.wrappedValue.toggle()
         }) {
             Image(systemName: "gear")
+                .font(.system(size: 24))
         })
         .sheet(isPresented: appBinding.dateAndTime.showSettings, content: {
             DateAndTimeSettingsView(appBinding: appBinding)

@@ -39,6 +39,7 @@ struct ListWordsView: View {
             appBinding.listWords.showSettings.wrappedValue.toggle()
         }) {
             Image(systemName: "gear")
+                .font(.system(size: 24))
         })
         .sheet(isPresented: appBinding.listWords.showSettings, content: {
             ListWordsSettingsView(appBinding: appBinding)

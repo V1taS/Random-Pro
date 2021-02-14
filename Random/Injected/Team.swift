@@ -9,8 +9,7 @@
 import Foundation
 
 extension AppState.AppData {
-    struct Team: Equatable {
-        
+    struct Team: Equatable, Decodable {
         var listResult1: [Player] = []
         var listResult2: [Player] = []
         var listResult3: [Player] = []

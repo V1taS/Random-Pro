@@ -36,6 +36,7 @@ struct YesOrNotView: View {
             appBinding.yesOrNo.showSettings.wrappedValue.toggle()
         }) {
             Image(systemName: "gear")
+                .font(.system(size: 24))
         })
         .sheet(isPresented: appBinding.yesOrNo.showSettings, content: {
             YesOrNotSettingsView(appBinding: appBinding)

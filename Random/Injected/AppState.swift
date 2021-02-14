@@ -43,12 +43,15 @@ extension AppState {
         state.system.isActive = true
         return state
     }
+    
+    
 }
 #endif
+
 
 func == (lhs: AppState, rhs: AppState) -> Bool {
     return lhs.appData == rhs.appData &&
         lhs.system == rhs.system &&
-        lhs.appData.main == rhs.appData.main
+        lhs.appData.main == rhs.appData.main &&
+        lhs.appData.team == rhs.appData.team
 }
-

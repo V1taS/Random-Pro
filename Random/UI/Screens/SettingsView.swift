@@ -161,7 +161,11 @@ private extension SettingsView {
         injected.interactors.lotteryInteractor
             .cleanNumbers(state: state)
         
+        injected.interactors.teamInteractor
+            .cleanTeams(state: state)
+        
         state.listWords.listData.wrappedValue = []
+        state.team.listPlayersData.wrappedValue = []
     }
 }
 

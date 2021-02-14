@@ -79,3 +79,10 @@
 "Ноябрь" = "November";
 "Декабрь" = "December";
 "Лотерея" = "Lottery";
+"Команды" = "Teams";
+"Количество команд" = "Number of teams";
+"Добавить игрока" = "Add Player";
+"Напишите имя" = "Write name";
+"Команда номер" = "Team number";
+"Количество команд:" = "Number of teams:";
+"Список игроков" = "Player List";

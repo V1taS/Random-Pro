@@ -48,6 +48,10 @@ extension Color {
     static func primarySky() -> Color {
         return Color(#colorLiteral(red: 0.4784313725, green: 0.6980392157, blue: 0.9215686275, alpha: 1))
     }
+    
+    static func primaryDivider() -> Color {
+        return Color(#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1))
+    }
 }
 
 extension UIColor {
@@ -90,5 +94,9 @@ extension UIColor {
     
     static func primarySky() -> UIColor {
         return #colorLiteral(red: 0.4784313725, green: 0.6980392157, blue: 0.9215686275, alpha: 1)
+    }
+    
+    static func primaryDivider() -> UIColor {
+        return #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
     }
 }

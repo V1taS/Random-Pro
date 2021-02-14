@@ -24,9 +24,9 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultsListWords(state: state)
             userDefaultsCoin(state: state)
             userDefaultsCube(state: state)
-            userDefaultsDay(state: state)
             userDefaultsDate(state: state)
             userDefaultsLottery(state: state)
+            userDefaultTeam(state: state)
         }
     }
     
@@ -38,9 +38,9 @@ struct MainInteractorImpl: MainInteractor {
             cleanListWords()
             cleanCoin()
             cleanCube()
-            cleanDay()
             cleanDate()
             cleanLottery()
+            cleanTeam()
         }
     }
 }
@@ -118,12 +118,6 @@ extension MainInteractorImpl {
         }
     }
     
-    private func userDefaultsDay(state: Binding<AppState.AppData>) {
-        if state.dateAndTime.listResult.wrappedValue.isEmpty {
-            state.dateAndTime.noRepetitionsDay.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsDay")
-        }
-    }
-    
     private func userDefaultsDate(state: Binding<AppState.AppData>) {
         if state.dateAndTime.listResult.wrappedValue.isEmpty {
             
@@ -134,6 +128,8 @@ extension MainInteractorImpl {
             state.dateAndTime.noRepetitionsDate.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsDate")
             
             state.dateAndTime.noRepetitionsDate.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsMonth")
+            
+            state.dateAndTime.noRepetitionsDay.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsDay")
         } else {
             state.dateAndTime.listDate.wrappedValue = UserDefaults.standard.array(forKey: "DateAndTimelistDate") as? [String] ?? []
             
@@ -148,6 +144,32 @@ extension MainInteractorImpl {
             state.lottery.listResult.wrappedValue = UserDefaults.standard.array(forKey: "LotterylistResult") as? [String] ?? []
         
             state.lottery.result.wrappedValue = UserDefaults.standard.object(forKey: "LotteryResult") as? String ?? "?"
+        }
+    }
+    
+    private func userDefaultTeam(state: Binding<AppState.AppData>) {
+        if state.team.listResult1.wrappedValue.isEmpty {
+            state.team.listResult1.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult1") as? [Player] ?? []
+            
+            state.team.listResult2.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult2") as? [Player] ?? []
+            
+            state.team.listResult3.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult3") as? [Player] ?? []
+            
+            state.team.listResult4.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult4") as? [Player] ?? []
+            
+            state.team.listResult5.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult5") as? [Player] ?? []
+            
+            state.team.listResult6.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistResult6") as? [Player] ?? []
+            
+            state.team.listPlayersData.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistPlayersData") as? [Player] ?? []
+            
+            state.team.listTempPlayers.wrappedValue = UserDefaults.standard.array(forKey: "TeamlistTempPlayers") as? [Player] ?? []
+            
+            state.team.currentNumber.wrappedValue = UserDefaults.standard.object(forKey: "TeamCurrentNumber") as? Int ?? 1
+            
+            state.team.selectedTeam.wrappedValue = UserDefaults.standard.object(forKey: "TeamSelectedTeam") as? Int ?? 1
+            
+            state.team.disabledPickerView.wrappedValue = UserDefaults.standard.bool(forKey: "TeamDisabledPickerView")
         }
     }
 }
@@ -199,17 +221,34 @@ extension MainInteractorImpl {
         UserDefaults.standard.set(0, forKey: "CubeCubeSix")
     }
     
-    private func cleanDay() {
-        UserDefaults.standard.set(true, forKey: "DateAndTimeNoRepetitionsDay")
-    }
-    
     private func cleanDate() {
         UserDefaults.standard.set([], forKey: "DateAndTimelistResult")
+        UserDefaults.standard.set([], forKey: "DateAndTimelistMonth")
+        UserDefaults.standard.set([], forKey: "DateAndTimelistDay")
+        UserDefaults.standard.set([], forKey: "DateAndTimelistDate")
         UserDefaults.standard.set(true, forKey: "DateAndTimeNoRepetitionsDate")
+        UserDefaults.standard.set(true, forKey: "DateAndTimeNoRepetitionsDay")
+        UserDefaults.standard.set("?", forKey: "DateAndTimResult")
     }
     
     private func cleanLottery() {
         UserDefaults.standard.set([], forKey: "LotterylistResult")
         UserDefaults.standard.set("?", forKey: "LotteryResult")
+    }
+    
+    private func cleanTeam() {
+        UserDefaults.standard.set([], forKey: "TeamlistResult1")
+        UserDefaults.standard.set([], forKey: "TeamlistResult2")
+        UserDefaults.standard.set([], forKey: "TeamlistResult3")
+        UserDefaults.standard.set([], forKey: "TeamlistResult4")
+        UserDefaults.standard.set([], forKey: "TeamlistResult5")
+        UserDefaults.standard.set([], forKey: "TeamlistResult6")
+        UserDefaults.standard.set([], forKey: "TeamlistPlayersData")
+        UserDefaults.standard.set([], forKey: "TeamlistTempPlayers")
+        
+        
+        UserDefaults.standard.set(1, forKey: "TeamCurrentNumber")
+        UserDefaults.standard.set(1, forKey: "TeamSelectedTeam")
+        UserDefaults.standard.set(false, forKey: "TeamDisabledPickerView")
     }
 }

@@ -18,4 +18,5 @@ struct AppActions {
     var cubeApp: CubeActions
     var settingsApp: SettingsActions
     var dateAndTimeApp: DateAndTimeActions
+    var teamApp: TeamActions
 }

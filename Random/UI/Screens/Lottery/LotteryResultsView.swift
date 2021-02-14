@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct LotteryViewResultsView: View {
+struct LotteryResultsView: View {
     private var appBinding: Binding<AppState.AppData>
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
@@ -22,7 +22,7 @@ struct LotteryViewResultsView: View {
     }
 }
 
-private extension LotteryViewResultsView {
+private extension LotteryResultsView {
     var listResults: some View {
         List {
             ForEach(appBinding.lottery.listResult.wrappedValue, id: \.self) { nombers in
@@ -42,6 +42,6 @@ private extension LotteryViewResultsView {
 
 struct LotteryViewResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        LotteryViewResultsView(appBinding: .constant(.init()))
+        LotteryResultsView(appBinding: .constant(.init()))
     }
 }

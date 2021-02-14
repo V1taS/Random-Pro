@@ -18,6 +18,7 @@ extension DIContainer {
         let settingsInterator: SettingsInterator
         let dateAndTimeInteractor: DateAndTimeInteractor
         let lotteryInteractor: LotteryInteractor
+        let teamInteractor: TeamInteractor
 
         init(mainInteractor: MainInteractor,
              numberInteractor: NumberInteractor,
@@ -28,7 +29,8 @@ extension DIContainer {
              cubeInterator: CubeInterator,
              settingsInterator: SettingsInterator,
              dateAndTimeInteractor: DateAndTimeInteractor,
-             lotteryInteractor: LotteryInteractor) {
+             lotteryInteractor: LotteryInteractor,
+             teamInteractor: TeamInteractor) {
             self.mainInteractor = mainInteractor
             self.numberInteractor = numberInteractor
             self.listWordsInteractor = listWordsInteractor
@@ -39,6 +41,7 @@ extension DIContainer {
             self.settingsInterator = settingsInterator
             self.dateAndTimeInteractor = dateAndTimeInteractor
             self.lotteryInteractor = lotteryInteractor
+            self.teamInteractor = teamInteractor
         }
 
         static var stub: Self {
@@ -51,7 +54,8 @@ extension DIContainer {
                   cubeInterator: CubeInteratorImpl(),
                   settingsInterator: SettingsInteratorImpl(),
                   dateAndTimeInteractor: DateAndTimeInteractorImpl(),
-                  lotteryInteractor: LotteryInteractorImpl())
+                  lotteryInteractor: LotteryInteractorImpl(),
+                  teamInteractor: TeamInteractorImpl())
         }
     }
 }

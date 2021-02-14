@@ -26,6 +26,7 @@ extension AppState {
         var settings = Settings()
         var dateAndTime = DateAndTime()
         var lottery = Lottery()
+        var team = Team()
     }
 }
 

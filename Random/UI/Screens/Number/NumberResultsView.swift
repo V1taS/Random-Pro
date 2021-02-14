@@ -47,7 +47,7 @@ private extension NumberResultsView {
     private var showShareSheetButton: AnyView {
         AnyView(
             Button(action: {
-                
+
             }) {
                 Image(systemName: "arrowshape.turn.up.right.circle")
                     .font(.title)

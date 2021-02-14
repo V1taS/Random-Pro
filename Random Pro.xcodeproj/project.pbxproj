@@ -10,7 +10,7 @@
 		1B10087E25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10087D25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift */; };
 		1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */; };
 		1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088A25D808180005A2D7 /* LotterySettingsView.swift */; };
-		1B10088E25D808C40005A2D7 /* LotteryViewResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088D25D808C40005A2D7 /* LotteryViewResultsView.swift */; };
+		1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088D25D808C40005A2D7 /* LotteryResultsView.swift */; };
 		1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B325C0525D2C9CA00382F33 /* Feedback.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
@@ -100,6 +100,18 @@
 		1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */; };
 		1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */; };
 		1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */; };
+		1BF22F1F25D8856000775368 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F1E25D8856000775368 /* TeamView.swift */; };
+		1BF22F2325D8857A00775368 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F2225D8857A00775368 /* Team.swift */; };
+		1BF22F2725D885C100775368 /* TeamActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F2625D885C100775368 /* TeamActions.swift */; };
+		1BF22F2B25D8860000775368 /* TeamInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F2A25D8860000775368 /* TeamInteractor.swift */; };
+		1BF22F2E25D88F1A00775368 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F2D25D88F1A00775368 /* PlayerView.swift */; };
+		1BF22F3225D88F3C00775368 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F3125D88F3C00775368 /* Player.swift */; };
+		1BF22F3825D89E4000775368 /* AddPlayerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F3725D89E4000775368 /* AddPlayerSheet.swift */; };
+		1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F3A25D8AD2600775368 /* ScrollTeamPlayers.swift */; };
+		1BF22F3E25D8B21A00775368 /* TeamSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F3D25D8B21A00775368 /* TeamSettingsView.swift */; };
+		1BF22F4225D8B23F00775368 /* TeamResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F4125D8B23F00775368 /* TeamResultsView.swift */; };
+		1BF22F4525D8D49E00775368 /* TeamCustomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F4425D8D49E00775368 /* TeamCustomListView.swift */; };
+		1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */; };
 		1BF30DC225D194A300DCE62B /* CellCubeTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DC125D194A300DCE62B /* CellCubeTwoView.swift */; };
 		1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DC425D195A900DCE62B /* CellCubeThreeView.swift */; };
 		1BF30DC825D195EC00DCE62B /* CellCubeFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DC725D195EC00DCE62B /* CellCubeFourView.swift */; };
@@ -116,7 +128,7 @@
 		1B10087D25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1B10088A25D808180005A2D7 /* LotterySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySettingsView.swift; sourceTree = "<group>"; };
-		1B10088D25D808C40005A2D7 /* LotteryViewResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewResultsView.swift; sourceTree = "<group>"; };
+		1B10088D25D808C40005A2D7 /* LotteryResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultsView.swift; sourceTree = "<group>"; };
 		1B325C0525D2C9CA00382F33 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -209,6 +221,18 @@
 		1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNumberView.swift; sourceTree = "<group>"; };
 		1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSettingsView.swift; sourceTree = "<group>"; };
+		1BF22F1E25D8856000775368 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
+		1BF22F2225D8857A00775368 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		1BF22F2625D885C100775368 /* TeamActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamActions.swift; sourceTree = "<group>"; };
+		1BF22F2A25D8860000775368 /* TeamInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamInteractor.swift; sourceTree = "<group>"; };
+		1BF22F2D25D88F1A00775368 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		1BF22F3125D88F3C00775368 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		1BF22F3725D89E4000775368 /* AddPlayerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerSheet.swift; sourceTree = "<group>"; };
+		1BF22F3A25D8AD2600775368 /* ScrollTeamPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollTeamPlayers.swift; sourceTree = "<group>"; };
+		1BF22F3D25D8B21A00775368 /* TeamSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSettingsView.swift; sourceTree = "<group>"; };
+		1BF22F4125D8B23F00775368 /* TeamResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamResultsView.swift; sourceTree = "<group>"; };
+		1BF22F4425D8D49E00775368 /* TeamCustomListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCustomListView.swift; sourceTree = "<group>"; };
+		1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPlugView.swift; sourceTree = "<group>"; };
 		1BF30DC125D194A300DCE62B /* CellCubeTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeTwoView.swift; sourceTree = "<group>"; };
 		1BF30DC425D195A900DCE62B /* CellCubeThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeThreeView.swift; sourceTree = "<group>"; };
 		1BF30DC725D195EC00DCE62B /* CellCubeFourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeFourView.swift; sourceTree = "<group>"; };
@@ -280,6 +304,7 @@
 				1B92034525D1888B0094D2BE /* Cube.swift */,
 				1BD1F90F25D7324000A1C7A4 /* DateAndTime.swift */,
 				1BD1F91F25D7338700A1C7A4 /* Lottery.swift */,
+				1BF22F2225D8857A00775368 /* Team.swift */,
 			);
 			path = Injected;
 			sourceTree = "<group>";
@@ -298,6 +323,7 @@
 				1B92034925D188B70094D2BE /* CubeActions */,
 				1BD1F91225D7327100A1C7A4 /* DateAndTimeActions */,
 				1BD1F92225D7339B00A1C7A4 /* LotteryActions */,
+				1BF22F2525D885A600775368 /* TeamActions */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -305,6 +331,7 @@
 		1B7F668C25D0868400933AD6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1BF22F3125D88F3C00775368 /* Player.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -361,6 +388,10 @@
 				1B7F66FE25D0937100933AD6 /* CellMainView.swift */,
 				1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */,
 				1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */,
+				1BF22F2D25D88F1A00775368 /* PlayerView.swift */,
+				1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */,
+				1BF22F3725D89E4000775368 /* AddPlayerSheet.swift */,
+				1BF22F3A25D8AD2600775368 /* ScrollTeamPlayers.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -380,6 +411,7 @@
 				1B92033F25D188360094D2BE /* Cube */,
 				1BD1F90A25D7310F00A1C7A4 /* Date and time */,
 				1BD1F91A25D7335A00A1C7A4 /* Lottery */,
+				1BF22F1D25D8853700775368 /* Team */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -594,7 +626,7 @@
 			children = (
 				1BD1F91B25D7336D00A1C7A4 /* LotteryView.swift */,
 				1B10088A25D808180005A2D7 /* LotterySettingsView.swift */,
-				1B10088D25D808C40005A2D7 /* LotteryViewResultsView.swift */,
+				1B10088D25D808C40005A2D7 /* LotteryResultsView.swift */,
 			);
 			path = Lottery;
 			sourceTree = "<group>";
@@ -606,6 +638,26 @@
 				1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */,
 			);
 			path = LotteryActions;
+			sourceTree = "<group>";
+		};
+		1BF22F1D25D8853700775368 /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				1BF22F1E25D8856000775368 /* TeamView.swift */,
+				1BF22F3D25D8B21A00775368 /* TeamSettingsView.swift */,
+				1BF22F4125D8B23F00775368 /* TeamResultsView.swift */,
+				1BF22F4425D8D49E00775368 /* TeamCustomListView.swift */,
+			);
+			path = Team;
+			sourceTree = "<group>";
+		};
+		1BF22F2525D885A600775368 /* TeamActions */ = {
+			isa = PBXGroup;
+			children = (
+				1BF22F2625D885C100775368 /* TeamActions.swift */,
+				1BF22F2A25D8860000775368 /* TeamInteractor.swift */,
+			);
+			path = TeamActions;
 			sourceTree = "<group>";
 		};
 		1BF30DD025D196BB00DCE62B /* CellCube */ = {
@@ -713,11 +765,13 @@
 				1B7F66FC25D0930600933AD6 /* MainView.swift in Sources */,
 				1B92030225D16DF20094D2BE /* YesOrNoActions.swift in Sources */,
 				1B92035325D189890094D2BE /* CubeSettingsView.swift in Sources */,
+				1BF22F2725D885C100775368 /* TeamActions.swift in Sources */,
 				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
 				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
 				1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
+				1BF22F1F25D8856000775368 /* TeamView.swift in Sources */,
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
 				1B92030A25D1703E0094D2BE /* CharactersView.swift in Sources */,
@@ -739,6 +793,7 @@
 				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
 				1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
+				1BF22F2E25D88F1A00775368 /* PlayerView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
@@ -750,6 +805,7 @@
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
 				1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */,
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
+				1BF22F4525D8D49E00775368 /* TeamCustomListView.swift in Sources */,
 				1B92032725D179330094D2BE /* ListWordsSettingsView.swift in Sources */,
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
 				1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */,
@@ -763,7 +819,9 @@
 				1B92030625D16E1D0094D2BE /* YesOrNoInteractor.swift in Sources */,
 				1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */,
 				1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */,
+				1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */,
 				1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */,
+				1BF22F3825D89E4000775368 /* AddPlayerSheet.swift in Sources */,
 				1B92034B25D188BE0094D2BE /* CubeActions.swift in Sources */,
 				1B7F66FF25D0937100933AD6 /* CellMainView.swift in Sources */,
 				1B7F66A525D0889100933AD6 /* AppActions.swift in Sources */,
@@ -773,31 +831,37 @@
 				1B10087E25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift in Sources */,
 				1B92031C25D1755B0094D2BE /* CharactersSettingsView.swift in Sources */,
 				1BF30DCB25D1963400DCE62B /* CellCubeFiveView.swift in Sources */,
+				1BF22F3E25D8B21A00775368 /* TeamSettingsView.swift in Sources */,
 				1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */,
+				1BF22F2B25D8860000775368 /* TeamInteractor.swift in Sources */,
 				1B7F66C725D08B1700933AD6 /* Store.swift in Sources */,
 				1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
 				1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */,
-				1B10088E25D808C40005A2D7 /* LotteryViewResultsView.swift in Sources */,
+				1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
 				1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */,
 				1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */,
+				1BF22F4225D8B23F00775368 /* TeamResultsView.swift in Sources */,
 				1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */,
 				1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */,
 				1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */,
+				1BF22F2325D8857A00775368 /* Team.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
+				1BF22F3225D88F3C00775368 /* Player.swift in Sources */,
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
 				1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
+				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
@@ -944,7 +1008,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -952,7 +1016,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -966,7 +1030,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -974,7 +1038,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

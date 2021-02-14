@@ -17,23 +17,60 @@ struct TabBarView: View {
     @Environment(\.injected) private var injected: DIContainer
     
     var body: some View {
-        TabView {
+        ZStack {
             
-            MainView(appBinding: appBinding)
-                .tabItem {
-                    Image(systemName: "slider.horizontal.3")
-                    Text(NSLocalizedString("Генераторы", comment: ""))
+            TabView {
+                MainView(appBinding: appBinding)
+                    .tabItem {
+                        Image(systemName: "slider.horizontal.3")
+                        Text(NSLocalizedString("Генераторы", comment: ""))
                 }
-            
-            SettingsView(appBinding: appBinding)
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text(NSLocalizedString("Настройки", comment: ""))
-                }
+                
+                SettingsView(appBinding: appBinding)
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text(NSLocalizedString("Настройки", comment: ""))
+                    }
+            }
+            .accentColor(Color.primaryGray())
+            backgroundColor
+            showAddPlayerView
         }
-        .accentColor(Color.primaryGray())
     }
 }
+
+
+// MARK: Sheet View
+private extension TabBarView {
+    private var showAddPlayerView: AnyView {
+        AnyView(
+            VStack {
+                Spacer()
+                AddPlayerSheet(appBinding: appBinding)
+                    .offset(y: 50)
+            }
+            .transition(.move(edge: .bottom))
+            .animation(.easeOut(duration: 0.7))
+            .padding(.bottom, 0)
+        )
+    }
+    
+    private var backgroundColor: some View {
+        ZStack {
+            if appBinding.team.showAddPlayer.wrappedValue {
+                Color.secondary
+                    .edgesIgnoringSafeArea(.all)
+            }
+        }
+        .onTapGesture {
+            appBinding.team.showAddPlayer.wrappedValue = false
+        }
+        .transition(.move(edge: .bottom))
+        .animation(.easeOut(duration: 0.7))
+    }
+}
+
+
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {

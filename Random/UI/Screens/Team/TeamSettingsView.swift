@@ -1,14 +1,14 @@
 //
-//  LotterySettingsView.swift
+//  TeamSettingsView.swift
 //  Random Pro
 //
-//  Created by Vitalii Sosin on 13.02.2021.
+//  Created by Vitalii Sosin on 14.02.2021.
 //  Copyright © 2021 Sosin.bet. All rights reserved.
 //
 
 import SwiftUI
 
-struct LotterySettingsView: View {
+struct TeamSettingsView: View {
     private var appBinding: Binding<AppState.AppData>
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
@@ -20,33 +20,48 @@ struct LotterySettingsView: View {
             VStack {
                 Form {
                     HStack {
-                        Text(NSLocalizedString("Чисел Сгенерировано:", comment: ""))
+                        Text(NSLocalizedString("Количество команд:", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        Text("\(appBinding.lottery.listResult.wrappedValue.count)")
+                        Text("\(appBinding.team.selectedTeam.wrappedValue + 1)")
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                     }
                     
                     HStack {
                         NavigationLink(
-                            destination: LotteryResultsView(appBinding: appBinding)
+                            destination: TeamCustomListView(appBinding: appBinding)
                                 .allowAutoDismiss { false }) {
-                            Text(NSLocalizedString("Результат генерации", comment: ""))
+                            Text(NSLocalizedString("Список игроков", comment: ""))
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoMedium18())
                         }
                         Spacer()
                     }
                     
+                    if !appBinding.team.listResult1.wrappedValue.isEmpty {
+                        HStack {
+                            NavigationLink(
+                                destination: TeamResultsView(appBinding: appBinding)
+                                    .allowAutoDismiss { false }) {
+                                Text(NSLocalizedString("Результат генерации", comment: ""))
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                            }
+                            Spacer()
+                        }
+                    }
+                    
+                    
                     HStack {
                         Spacer()
                         Button(action: {
-
-                            cleanNumbers(state: appBinding)
-                            saveLotteryToUserDefaults(state: appBinding)
+                            
+                            cleanTeams(state: appBinding)
+                            appBinding.team.disabledPickerView.wrappedValue = false
+//                            saveTeamToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -57,7 +72,7 @@ struct LotterySettingsView: View {
             }
             .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
-                appBinding.lottery.showSettings.wrappedValue = false
+                appBinding.team.showSettings.wrappedValue = false
             }) {
                 Image(systemName: "xmark.circle.fill")
                     .imageScale(.large)
@@ -68,22 +83,23 @@ struct LotterySettingsView: View {
 }
 
 // MARK: Actions clean Numbers
-private extension LotterySettingsView {
-    private func cleanNumbers(state: Binding<AppState.AppData>) {
-        injected.interactors.lotteryInteractor
-            .cleanNumbers(state: state)
+private extension TeamSettingsView {
+    private func cleanTeams(state: Binding<AppState.AppData>) {
+        injected.interactors.teamInteractor
+            .cleanTeams(state: state)
     }
 }
 
-private extension LotterySettingsView {
-    private func saveLotteryToUserDefaults(state: Binding<AppState.AppData>) {
-        injected.interactors.lotteryInteractor
-            .saveLotteryToUserDefaults(state: state)
+private extension TeamSettingsView {
+    private func saveTeamToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.teamInteractor
+            .saveTeamToUserDefaults(state: state)
     }
 }
 
-struct LotterySettingsView_Previews: PreviewProvider {
+struct TeamSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        LotterySettingsView(appBinding: .constant(.init()))
+        TeamSettingsView(appBinding: .constant(.init()))
     }
 }
+

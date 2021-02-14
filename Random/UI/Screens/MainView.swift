@@ -79,6 +79,23 @@ struct MainView: View {
                         }
                     }
                     
+                    HStack {
+                        NavigationLink(
+                            destination: TeamView(appBinding: appBinding)) {
+                            CellMainView(image: "person.3",
+                                         title: NSLocalizedString("Команды",
+                                                                  comment: ""))
+                        }
+                        
+                        HStack {
+                            CellMainView(image: "person.3",
+                                         title: NSLocalizedString("Команды",
+                                                                  comment: ""))
+                        }
+                        .opacity(0)
+                        
+                    }
+                    
                     Spacer()
                 }
                 .padding(.horizontal, 16)

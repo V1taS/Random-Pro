@@ -13,6 +13,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     
     @Published var myProducts = [SKProduct]()
     @Published var transactionState: SKPaymentTransactionState?
+    @Published var showActivityIndicator = false
     var request: SKProductsRequest!
     
     
@@ -51,12 +52,18 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
             case .purchasing:
                 transactionState = .purchasing
             case .purchased:
+                showActivityIndicator = false
+                queue.finishTransaction(transaction)
                 transactionState = .purchased
             case .restored:
+                showActivityIndicator = false
+                queue.finishTransaction(transaction)
                 transactionState = .restored
             case .failed, .deferred:
+                showActivityIndicator = false
                 transactionState = .failed
             default:
+                showActivityIndicator = false
                 queue.finishTransaction(transaction)
             }
         }

@@ -156,6 +156,9 @@ extension MainInteractorImpl {
             state.lottery.listResult.wrappedValue = UserDefaults.standard.array(forKey: "LotterylistResult") as? [String] ?? []
         
             state.lottery.result.wrappedValue = UserDefaults.standard.object(forKey: "LotteryResult") as? String ?? "?"
+            
+            state.lottery.firstNumber.wrappedValue = UserDefaults.standard.object(forKey: "LotteryViewFirstNumber") as? String ?? "7"
+            state.lottery.secondNumber.wrappedValue = UserDefaults.standard.object(forKey: "LotteryViewSecondNumber") as? String ?? "49"
         }
     }
     

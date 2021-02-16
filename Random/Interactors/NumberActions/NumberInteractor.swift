@@ -124,7 +124,7 @@ extension NumberInteractorImpl {
     private func takeNumberFromList(state: Binding<AppState.AppData>) {
         if state.numberRandom.listRandomNumber.wrappedValue.count != 0 {
             state.numberRandom.result.wrappedValue = "\(state.numberRandom.listRandomNumber.wrappedValue.first!)"
-            state.numberRandom.listResult.wrappedValue.append("\(state.numberRandom.listRandomNumber.wrappedValue.first!)")
+            state.numberRandom.listResult.wrappedValue.insert("\(state.numberRandom.listRandomNumber.wrappedValue.first!)", at: 0)
             state.numberRandom.listRandomNumber.wrappedValue.removeFirst()
         }
     }
@@ -151,7 +151,7 @@ extension NumberInteractorImpl {
         let randomInt = Int.random(in: fromNumberInt...toNumberInt)
         
         if state.numberRandom.listResult.wrappedValue.count < toNumberInt {
-            state.numberRandom.listResult.wrappedValue.append("\(randomInt)")
+            state.numberRandom.listResult.wrappedValue.insert("\(randomInt)", at: 0)
             state.numberRandom.result.wrappedValue = "\(randomInt)"
         }
     }

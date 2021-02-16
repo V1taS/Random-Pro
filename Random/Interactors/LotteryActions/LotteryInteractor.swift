@@ -21,6 +21,8 @@ struct LotteryInteractorImpl: LotteryInteractor {
         DispatchQueue.main.async {
             saveResult(state: state)
             savelistResult(state: state)
+            saveFirstTF(state: state)
+            saveSecondTF(state: state)
         }
     }
     
@@ -66,5 +68,15 @@ extension LotteryInteractorImpl {
         UserDefaults.standard.set(state.lottery
                                     .listResult.wrappedValue,
                                   forKey: "LotterylistResult")
+    }
+    
+    private func saveFirstTF(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.lottery.firstNumber.wrappedValue,
+                                  forKey: "LotteryViewFirstNumber")
+    }
+    
+    private func saveSecondTF(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.lottery.secondNumber.wrappedValue,
+                                  forKey: "LotteryViewSecondNumber")
     }
 }

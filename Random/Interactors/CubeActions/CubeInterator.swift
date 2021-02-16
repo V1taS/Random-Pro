@@ -65,7 +65,7 @@ extension CubeInteratorImpl {
     private func cubeOne(state: Binding<AppState.AppData>) {
         let randomCube = Int.random(in: 1...6)
         state.cube.cubeOne.wrappedValue = randomCube
-        state.cube.listResult.wrappedValue.append(String(randomCube))
+        state.cube.listResult.wrappedValue.insert(String(randomCube), at: 0)
     }
     
     private func cubeTwo(state: Binding<AppState.AppData>) {
@@ -76,7 +76,7 @@ extension CubeInteratorImpl {
         state.cube.cubeOne.wrappedValue = randomCubeOne
         state.cube.cubeTwo.wrappedValue = randomCubeTwo
         
-        state.cube.listResult.wrappedValue.append(String(sumRandomCube))
+        state.cube.listResult.wrappedValue.insert(String(sumRandomCube), at: 0)
     }
     
     private func cubeThree(state: Binding<AppState.AppData>) {
@@ -89,7 +89,7 @@ extension CubeInteratorImpl {
         state.cube.cubeTwo.wrappedValue = randomCubeTwo
         state.cube.cubeThree.wrappedValue = randomCubeThree
         
-        state.cube.listResult.wrappedValue.append(String(sumRandomCube))
+        state.cube.listResult.wrappedValue.insert(String(sumRandomCube), at: 0)
     }
     
     private func cubeFour(state: Binding<AppState.AppData>) {
@@ -105,7 +105,7 @@ extension CubeInteratorImpl {
         state.cube.cubeThree.wrappedValue = randomCubeThree
         state.cube.cubeFour.wrappedValue = randomCubeFour
         
-        state.cube.listResult.wrappedValue.append(String(sumRandomCube))
+        state.cube.listResult.wrappedValue.insert(String(sumRandomCube), at: 0)
     }
     
     private func cubeFive(state: Binding<AppState.AppData>) {
@@ -124,7 +124,7 @@ extension CubeInteratorImpl {
         state.cube.cubeFour.wrappedValue = randomCubeFour
         state.cube.cubeFive.wrappedValue = randomCubeFive
         
-        state.cube.listResult.wrappedValue.append(String(sumRandomCube))
+        state.cube.listResult.wrappedValue.insert(String(sumRandomCube), at: 0)
     }
     
     private func cubeSix(state: Binding<AppState.AppData>) {
@@ -145,7 +145,7 @@ extension CubeInteratorImpl {
         state.cube.cubeFive.wrappedValue = randomCubeFive
         state.cube.cubeSix.wrappedValue = randomCubeSix
         
-        state.cube.listResult.wrappedValue.append(String(sumRandomCube))
+        state.cube.listResult.wrappedValue.insert(String(sumRandomCube), at: 0)
     }
 }
 

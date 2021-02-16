@@ -173,22 +173,22 @@ extension TeamInteractorImpl {
             
             switch state.team.currentNumber.wrappedValue {
             case 1:
-                state.team.listResult1.wrappedValue.append(state.team.listTempPlayers.wrappedValue.first!)
+                state.team.listResult1.wrappedValue.insert(state.team.listTempPlayers.wrappedValue.first!, at: 0)
                 state.team.listTempPlayers.wrappedValue.removeFirst()
             case 2:
-                state.team.listResult2.wrappedValue.append(state.team.listTempPlayers.wrappedValue.first!)
+                state.team.listResult2.wrappedValue.insert(state.team.listTempPlayers.wrappedValue.first!, at: 0)
                 state.team.listTempPlayers.wrappedValue.removeFirst()
             case 3:
-                state.team.listResult3.wrappedValue.append(state.team.listTempPlayers.wrappedValue.first!)
+                state.team.listResult3.wrappedValue.insert(state.team.listTempPlayers.wrappedValue.first!, at: 0)
                 state.team.listTempPlayers.wrappedValue.removeFirst()
             case 4:
-                state.team.listResult4.wrappedValue.append(state.team.listTempPlayers.wrappedValue.first!)
+                state.team.listResult4.wrappedValue.insert(state.team.listTempPlayers.wrappedValue.first!, at: 0)
                 state.team.listTempPlayers.wrappedValue.removeFirst()
             case 5:
-                state.team.listResult5.wrappedValue.append(state.team.listTempPlayers.wrappedValue.first!)
+                state.team.listResult5.wrappedValue.insert(state.team.listTempPlayers.wrappedValue.first!, at: 0)
                 state.team.listTempPlayers.wrappedValue.removeFirst()
             case 6:
-                state.team.listResult6.wrappedValue.append(state.team.listTempPlayers.wrappedValue.first!)
+                state.team.listResult6.wrappedValue.insert(state.team.listTempPlayers.wrappedValue.first!, at: 0)
                 state.team.listTempPlayers.wrappedValue.removeFirst()
                 
             default: break

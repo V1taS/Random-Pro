@@ -61,7 +61,7 @@ extension ListWordsInteractorImpl {
     private func takeElementWordsFromList(state: Binding<AppState.AppData>) {
         if state.listWords.listTemp.wrappedValue.count != 0 {
             state.listWords.result.wrappedValue = "\(state.listWords.listTemp.wrappedValue.first!)"
-            state.listWords.listResult.wrappedValue.append("\(state.listWords.listTemp.wrappedValue.first!)")
+            state.listWords.listResult.wrappedValue.insert("\(state.listWords.listTemp.wrappedValue.first!)", at: 0)
             state.listWords.listTemp.wrappedValue.removeFirst()
         }
     }
@@ -71,7 +71,7 @@ extension ListWordsInteractorImpl {
     private func repetitionsWords(state: Binding<AppState.AppData>) {
         if state.listWords.listResult.wrappedValue.count < state.listWords.listTemp.wrappedValue.count {
             let randomInt = state.listWords.listTemp.wrappedValue.randomElement()
-            state.listWords.listResult.wrappedValue.append("\(randomInt ?? "")")
+            state.listWords.listResult.wrappedValue.insert("\(randomInt ?? "")", at: 0)
             state.listWords.result.wrappedValue = "\(randomInt ?? "")"
         }
     }

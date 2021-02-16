@@ -69,7 +69,7 @@ extension CharactersInteractorImpl {
     private func takeElementRuFromList(state: Binding<AppState.AppData>) {
         if state.characters.arrRU.wrappedValue.count != 0 {
             state.characters.result.wrappedValue = "\(state.characters.arrRU.wrappedValue.first!)"
-            state.characters.listResult.wrappedValue.append("\(state.characters.arrRU.wrappedValue.first!)")
+            state.characters.listResult.wrappedValue.insert("\(state.characters.arrRU.wrappedValue.first!)", at: 0)
             state.characters.arrRU.wrappedValue.removeFirst()
         }
     }
@@ -79,7 +79,7 @@ extension CharactersInteractorImpl {
     private func takeElementEnFromList(state: Binding<AppState.AppData>) {
         if state.characters.arrEN.wrappedValue.count != 0 {
             state.characters.result.wrappedValue = "\(state.characters.arrEN.wrappedValue.first!)"
-            state.characters.listResult.wrappedValue.append("\(state.characters.arrEN.wrappedValue.first!)")
+            state.characters.listResult.wrappedValue.insert("\(state.characters.arrEN.wrappedValue.first!)", at: 0)
             state.characters.arrEN.wrappedValue.removeFirst()
         }
     }
@@ -104,7 +104,7 @@ extension CharactersInteractorImpl {
     private func repetitionsArrRU(state: Binding<AppState.AppData>) {
         if state.characters.listResult.wrappedValue.count < state.characters.arrRU.wrappedValue.count {
             let randomInt = state.characters.arrRU.wrappedValue.randomElement()
-            state.characters.listResult.wrappedValue.append("\(randomInt ?? "")")
+            state.characters.listResult.wrappedValue.insert("\(randomInt ?? "")", at: 0)
             state.characters.result.wrappedValue = "\(randomInt ?? "")"
         }
     }
@@ -114,7 +114,7 @@ extension CharactersInteractorImpl {
     private func repetitionsArrEN(state: Binding<AppState.AppData>) {
         if state.characters.listResult.wrappedValue.count < state.characters.arrEN.wrappedValue.count {
             let randomInt = state.characters.arrEN.wrappedValue.randomElement()
-            state.characters.listResult.wrappedValue.append("\(randomInt ?? "")")
+            state.characters.listResult.wrappedValue.insert("\(randomInt ?? "")", at: 0)
             state.characters.result.wrappedValue = "\(randomInt ?? "")"
         }
     }

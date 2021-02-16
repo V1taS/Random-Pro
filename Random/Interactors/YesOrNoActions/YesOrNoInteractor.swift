@@ -26,7 +26,7 @@ struct YesOrNoInteractorImpl: YesOrNoInteractor {
     
     func generateYesOrNo(state: Binding<AppState.AppData>) {
         let randomElement = state.yesOrNo.listYesOrNo.wrappedValue.randomElement()
-        state.yesOrNo.listResult.wrappedValue.append(randomElement!)
+        state.yesOrNo.listResult.wrappedValue.insert(randomElement!, at: 0)
         state.yesOrNo.result.wrappedValue = randomElement!
     }
     

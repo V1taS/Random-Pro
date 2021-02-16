@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26825DC19A600C9D31D /* SKProduct.swift */; };
+		1B0DB26D25DC49F500C9D31D /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26C25DC49F500C9D31D /* ActivityIndicator.swift */; };
+		1B0DB27025DC4A4300C9D31D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */; };
 		1B10087E25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10087D25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift */; };
 		1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */; };
 		1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088A25D808180005A2D7 /* LotterySettingsView.swift */; };
@@ -128,6 +131,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B0DB26825DC19A600C9D31D /* SKProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProduct.swift; sourceTree = "<group>"; };
+		1B0DB26C25DC49F500C9D31D /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		1B10087D25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1B10088A25D808180005A2D7 /* LotterySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySettingsView.swift; sourceTree = "<group>"; };
@@ -416,6 +422,7 @@
 				1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */,
 				1BF22F3725D89E4000775368 /* AddPlayerSheet.swift */,
 				1BF22F3A25D8AD2600775368 /* ScrollTeamPlayers.swift */,
+				1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -513,6 +520,7 @@
 				1B7F66ED25D08DA600933AD6 /* KeyboardAware.swift */,
 				1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */,
 				1B7F66F325D08DE800933AD6 /* StringProtocol.swift */,
+				1B0DB26825DC19A600C9D31D /* SKProduct.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -524,6 +532,7 @@
 				1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */,
 				1BD1F90325D7250D00A1C7A4 /* MailView.swift */,
 				1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */,
+				1B0DB26C25DC49F500C9D31D /* ActivityIndicator.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -790,6 +799,7 @@
 				1B7F66C325D08AF000933AD6 /* DependencyInjector.swift in Sources */,
 				1B7F66FC25D0930600933AD6 /* MainView.swift in Sources */,
 				1B92030225D16DF20094D2BE /* YesOrNoActions.swift in Sources */,
+				1B0DB27025DC4A4300C9D31D /* LoadingView.swift in Sources */,
 				1B92035325D189890094D2BE /* CubeSettingsView.swift in Sources */,
 				1BF22F2725D885C100775368 /* TeamActions.swift in Sources */,
 				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
@@ -812,6 +822,7 @@
 				1BF30DC825D195EC00DCE62B /* CellCubeFourView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
+				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
@@ -861,6 +872,7 @@
 				1BF22F3E25D8B21A00775368 /* TeamSettingsView.swift in Sources */,
 				1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */,
 				1BF22F2B25D8860000775368 /* TeamInteractor.swift in Sources */,
+				1B0DB26D25DC49F500C9D31D /* ActivityIndicator.swift in Sources */,
 				1B7F66C725D08B1700933AD6 /* Store.swift in Sources */,
 				1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,

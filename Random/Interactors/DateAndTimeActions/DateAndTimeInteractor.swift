@@ -62,7 +62,7 @@ extension DateAndTimeInteractorImpl {
     private func takeDateFromList(state: Binding<AppState.AppData>) {
         if state.dateAndTime.listDate.wrappedValue.count != 0 {
             state.dateAndTime.result.wrappedValue = "\(state.dateAndTime.listDate.wrappedValue.first!)"
-            state.dateAndTime.listResult.wrappedValue.append("\(state.dateAndTime.listDate.wrappedValue.first!)")
+            state.dateAndTime.listResult.wrappedValue.insert("\(state.dateAndTime.listDate.wrappedValue.first!)", at: 0)
             state.dateAndTime.listDate.wrappedValue.removeFirst()
         }
     }
@@ -73,7 +73,7 @@ extension DateAndTimeInteractorImpl {
     private func repetitionsDate(state: Binding<AppState.AppData>) {
         if state.dateAndTime.listResult.wrappedValue.count < state.dateAndTime.listDate.wrappedValue.count {
             let randomElement = state.dateAndTime.listDate.wrappedValue.randomElement()
-            state.dateAndTime.listResult.wrappedValue.append("\(randomElement ?? "")")
+            state.dateAndTime.listResult.wrappedValue.insert("\(randomElement ?? "")", at: 0)
             state.dateAndTime.result.wrappedValue = "\(randomElement ?? "")"
         }
     }

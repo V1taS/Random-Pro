@@ -40,7 +40,7 @@ extension CoinInteractorImpl {
     private func shuffledistRandomCoins(state: Binding<AppState.AppData>) {
         let randomCoin = Int.random(in: 0...1)
         state.coin.result.wrappedValue = state.coin.listName.wrappedValue[randomCoin]
-        state.coin.listResult.wrappedValue.append(state.coin.listName.wrappedValue[randomCoin])
+        state.coin.listResult.wrappedValue.insert(state.coin.listName.wrappedValue[randomCoin], at: 0)
         state.coin.resultImage.wrappedValue = state.coin.listImage.wrappedValue[randomCoin]
     }
 }

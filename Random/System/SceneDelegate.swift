@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -27,8 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.overrideUserInterfaceStyle = .light
             window.rootViewController = UIHostingController( rootView: TabBarView(storeManager: storeManager)
                                                                 .onAppear(perform: { [self] in
+                                                                    SKPaymentQueue.default().add(storeManager)
                                                                     storeManager.getProducts(productIDs: productIDs)
-//                                                                    SKPaymentQueue.default().add(storeManager)
+                                                                    
                                                                 }))
             self.window = window
             window.makeKeyAndVisible()

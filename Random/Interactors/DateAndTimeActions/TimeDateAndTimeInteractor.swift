@@ -19,14 +19,14 @@ extension DateAndTimeInteractorImpl {
             let hours = generateRUHours()
             let result = "\(hours):\(minutes)"
             state.dateAndTime.result.wrappedValue = result
-            state.dateAndTime.listResult.wrappedValue.append(result)
+            state.dateAndTime.listResult.wrappedValue.insert(result, at: 0)
         } else if NSLocalizedString("домен", comment: "") == "us" {
             let hours = generateUSHours()
             let minutes = generateUSMinutes()
             let halfDay = ["AM", "PM"].randomElement()
             let result = "\(hours):\(minutes) \(halfDay ?? "")"
             state.dateAndTime.result.wrappedValue = result
-            state.dateAndTime.listResult.wrappedValue.append(result)
+            state.dateAndTime.listResult.wrappedValue.insert(result, at: 0)
         }
     }
 }

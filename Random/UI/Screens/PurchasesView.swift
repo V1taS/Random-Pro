@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct PurchasesView: View {
+    
+    @ObservedObject var storeManager: StoreManager
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
@@ -24,8 +27,8 @@ struct PurchasesView: View {
             }
             .padding(.top, 16)
             .padding(.horizontal, 24)
+            .navigationBarTitle(Text(NSLocalizedString("Чаевые разработчику", comment: "")), displayMode: .automatic)
         }
-        .navigationBarTitle(Text(NSLocalizedString("Чаевые разработчику", comment: "")), displayMode: .automatic)
     }
 }
 
@@ -44,7 +47,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        Text(NSLocalizedString("75,00 ₽", comment: ""))
+                        Text(NSLocalizedString("99,00 ₽", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16())
                     }
@@ -71,7 +74,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        Text(NSLocalizedString("149,00 ₽", comment: ""))
+                        Text(NSLocalizedString("179,00 ₽", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16())
                     }
@@ -98,7 +101,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        Text(NSLocalizedString("229,00 ₽", comment: ""))
+                        Text(NSLocalizedString("279,00 ₽", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16())
                     }
@@ -125,7 +128,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        Text(NSLocalizedString("399,00 ₽", comment: ""))
+                        Text(NSLocalizedString("449,00 ₽", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16())
                     }
@@ -152,7 +155,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        Text(NSLocalizedString("799,00 ₽", comment: ""))
+                        Text(NSLocalizedString("749,00 ₽", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16())
                     }
@@ -179,7 +182,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        Text(NSLocalizedString("1 550,00 ₽", comment: ""))
+                        Text(NSLocalizedString("1 590,00 ₽", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16())
                     }
@@ -206,7 +209,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        Text(NSLocalizedString("2 350,00 ₽", comment: ""))
+                        Text(NSLocalizedString("2 390,00 ₽", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16())
                     }
@@ -220,6 +223,6 @@ private extension PurchasesView {
 
 struct PurchasesView_Previews: PreviewProvider {
     static var previews: some View {
-        PurchasesView()
+        PurchasesView(storeManager: StoreManager())
     }
 }

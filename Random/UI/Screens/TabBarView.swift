@@ -15,6 +15,7 @@ struct TabBarView: View {
         $appState.dispatched(to: injected.appState, \.appData)
     }
     @Environment(\.injected) private var injected: DIContainer
+    @ObservedObject var storeManager: StoreManager
     
     var body: some View {
         ZStack {
@@ -26,7 +27,7 @@ struct TabBarView: View {
                         Text(NSLocalizedString("Генераторы", comment: ""))
                 }
                 
-                SettingsView(appBinding: appBinding)
+                SettingsView(appBinding: appBinding, storeManager: storeManager)
                     .tabItem {
                         Image(systemName: "gear")
                         Text(NSLocalizedString("Настройки", comment: ""))
@@ -71,6 +72,6 @@ private extension TabBarView {
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        TabBarView(storeManager: StoreManager())
     }
 }

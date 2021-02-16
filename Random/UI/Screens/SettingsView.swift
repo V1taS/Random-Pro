@@ -11,11 +11,9 @@ import StoreKit
 
 struct SettingsView: View {
     
-    private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
-        self.appBinding = appBinding
-    }
+    var appBinding: Binding<AppState.AppData>
     @Environment(\.injected) private var injected: DIContainer
+    @ObservedObject var storeManager: StoreManager
     
     var body: some View {
         NavigationView {
@@ -114,7 +112,7 @@ private extension SettingsView {
     var tipTheDeveloper: some View {
         HStack {
             NavigationLink(
-                destination: PurchasesView()
+                destination: PurchasesView(storeManager: storeManager)
                     .allowAutoDismiss { false }) {
                 HStack {
                     Image(systemName: "bitcoinsign.circle.fill")
@@ -209,6 +207,6 @@ private extension SettingsView {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(appBinding: .constant(.init()))
+        SettingsView(appBinding: .constant(.init()), storeManager: StoreManager())
     }
 }

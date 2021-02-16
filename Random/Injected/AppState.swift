@@ -12,6 +12,7 @@ import Combine
 struct AppState: Equatable {
     var appData = AppData()
     var system = System()
+    var storeManager = StoreManager()
 }
 
 extension AppState {

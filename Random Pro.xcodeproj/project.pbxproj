@@ -22,6 +22,8 @@
 		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
 		1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875A325DB307C006E82D4 /* PurchasesView.swift */; };
+		1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
+		1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875AA25DB620C006E82D4 /* StoreManager.swift */; };
 		1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */; };
 		1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */; };
 		1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667025D0856300933AD6 /* AppDelegate.swift */; };
@@ -142,6 +144,8 @@
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
 		1B6875A325DB307C006E82D4 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
+		1B6875A725DB614F006E82D4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1B6875AA25DB620C006E82D4 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbModalHackView.swift; sourceTree = "<group>"; };
 		1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWordsResultsView.swift; sourceTree = "<group>"; };
 		1B7F666D25D0856300933AD6 /* Random Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,17 +256,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B6875A625DB614F006E82D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1B6875A925DB6200006E82D4 /* Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				1B6875AA25DB620C006E82D4 /* StoreManager.swift */,
+			);
+			path = Purchases;
+			sourceTree = "<group>";
+		};
 		1B7F666425D0856300933AD6 = {
 			isa = PBXGroup;
 			children = (
 				1B7F666F25D0856300933AD6 /* Random */,
 				1B7F666E25D0856300933AD6 /* Products */,
+				1B6875A625DB614F006E82D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -430,6 +452,7 @@
 		1B7F669525D0870E00933AD6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1B6875A925DB6200006E82D4 /* Purchases */,
 				1B7F66F625D08E2A00933AD6 /* UIKit */,
 				1B7F66D925D08CBB00933AD6 /* Extensions */,
 				1B7F66C625D08B1700933AD6 /* Store.swift */,
@@ -784,6 +807,7 @@
 				1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */,
 				1B7F66A225D0884F00933AD6 /* ListWords.swift in Sources */,
 				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
+				1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */,
 				1BD1F91C25D7336D00A1C7A4 /* LotteryView.swift in Sources */,
 				1BF30DC825D195EC00DCE62B /* CellCubeFourView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,

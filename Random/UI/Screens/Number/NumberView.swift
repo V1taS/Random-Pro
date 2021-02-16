@@ -107,11 +107,16 @@ private extension NumberView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.numberRandom.listResult.wrappedValue, id: \.self) { number in
+                ForEach(Array(appBinding.numberRandom.listResult
+                                .wrappedValue.enumerated()), id: \.0) { (index, number) in
                     
-                    Text("\(number)")
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
+                    if index == 0 {
+                        TextRoundView(name: "\(number)")
+                    } else {
+                        Text("\(number)")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
                 }
             }
             .padding(.leading, 16)

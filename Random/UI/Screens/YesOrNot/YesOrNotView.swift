@@ -27,6 +27,7 @@ struct YesOrNotView: View {
                     saveYesOrNotToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }
+            
             Spacer()
             listResults
             generateButton
@@ -66,11 +67,15 @@ private extension YesOrNotView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.yesOrNo.listResult.wrappedValue, id: \.self) { element in
-                    
-                    Text("\(element)")
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
+                ForEach(Array(appBinding.yesOrNo.listResult
+                                .wrappedValue.enumerated()), id: \.0) { (index, element) in
+                    if index == 0 {
+                        TextRoundView(name: "\(element)")
+                    } else {
+                        Text("\(element)")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
                 }
             }
             .padding(.leading, 16)

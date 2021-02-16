@@ -110,11 +110,16 @@ private extension DateAndTimeView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.dateAndTime.listResult.wrappedValue, id: \.self) { element in
+                ForEach(Array(appBinding.dateAndTime.listResult
+                            .wrappedValue.enumerated()), id: \.0) { (index, element) in
                     
-                    Text("\(element)")
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
+                    if index == 0 {
+                        TextRoundView(name: "\(element)")
+                    } else {
+                        Text("\(element)")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
                 }
             }
             .padding(.leading, 16)

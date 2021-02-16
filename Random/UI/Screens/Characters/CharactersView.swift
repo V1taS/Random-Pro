@@ -84,11 +84,15 @@ private extension CharactersView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.characters.listResult.wrappedValue, id: \.self) { character in
-                    
-                    Text("\(character)")
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
+                ForEach(Array(appBinding.characters.listResult
+                            .wrappedValue.enumerated()), id: \.0) { (index, character) in
+                    if index == 0 {
+                        TextRoundView(name: "\(character)")
+                    } else {
+                        Text("\(character)")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
                 }
             }
             .padding(.leading, 16)

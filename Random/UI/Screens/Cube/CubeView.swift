@@ -179,10 +179,16 @@ private extension CubeView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.cube.listResult.wrappedValue, id: \.self) { sum in
-                    Text("\(sum)")
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
+                ForEach(Array(appBinding.cube.listResult
+                            .wrappedValue.enumerated()), id: \.0) { (index, sum) in
+                    
+                    if index == 0 {
+                        TextRoundView(name: "\(sum)")
+                    } else {
+                        Text("\(sum)")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
                 }
             }
             .padding(.leading, 16)

@@ -25,7 +25,9 @@ struct ListWordsView: View {
                 .onTapGesture {
                     generateWords(state: appBinding)
                     saveListWordsToUserDefaults(state: appBinding)
-                    Feedback.shared.impactHeavy(.medium)
+                    if !appBinding.listWords.listTemp.wrappedValue.isEmpty {
+                        Feedback.shared.impactHeavy(.medium)
+                    }
                 }
             
             Spacer()
@@ -52,7 +54,9 @@ private extension ListWordsView {
         Button(action: {
             generateWords(state: appBinding)
             saveListWordsToUserDefaults(state: appBinding)
-            Feedback.shared.impactHeavy(.medium)
+            if !appBinding.listWords.listTemp.wrappedValue.isEmpty {
+                Feedback.shared.impactHeavy(.medium)
+            }
         }) {
             ButtonView(background: .primaryTertiary(),
                        textColor: .primaryPale(),
@@ -69,10 +73,16 @@ private extension ListWordsView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.listWords.listResult.wrappedValue, id: \.self) { word in
-                    Text("\(word)")
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
+                ForEach(Array(appBinding.listWords.listResult
+                            .wrappedValue.enumerated()), id: \.0) { (index, word) in
+                    
+                    if index == 0 {
+                        TextRoundView(name: "\(word)")
+                    } else {
+                        Text("\(word)")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
                 }
             }
             .padding(.leading, 16)

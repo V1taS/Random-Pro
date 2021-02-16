@@ -91,10 +91,16 @@ private extension CoinView {
     var listResults: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(appBinding.coin.listResult.wrappedValue, id: \.self) { word in
-                    Text("\(word)")
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
+                ForEach(Array(appBinding.coin.listResult
+                            .wrappedValue.enumerated()), id: \.0) { (index, word) in
+                    
+                    if index == 0 {
+                        TextRoundView(name: "\(word)")
+                    } else {
+                        Text("\(word)")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                    }
                 }
             }
             .padding(.leading, 16)

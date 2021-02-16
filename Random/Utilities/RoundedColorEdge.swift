@@ -9,22 +9,21 @@
 import SwiftUI
 
 struct RoundedColorEdge: ViewModifier {
-    let backgroundColor: Color
-    let boarderColor: Color
-
+    
     func body(content: Content) -> some View {
         content
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(backgroundColor)
-            .cornerRadius(16)
-            .overlay(RoundedRectangle(cornerRadius: 16)
-                        .stroke(boarderColor))
+            .fixedSize(horizontal: true, vertical: true)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 3)
+            .background(LinearGradient(gradient: Gradient(colors: [Color.primaryTertiary(), Color.primaryGreen()]), startPoint: .top, endPoint: .bottom))
+            .cornerRadius(6)
+            .overlay(RoundedRectangle(cornerRadius: 6)
+                        .stroke(Color.clear))
     }
 }
 
 extension View {
-    func roundedEdge(backgroundColor: Color, boarderColor: Color) -> some View {
-        self.modifier(RoundedColorEdge(backgroundColor: backgroundColor, boarderColor: boarderColor))
+    func roundedEdge() -> some View {
+        self.modifier(RoundedColorEdge())
     }
 }

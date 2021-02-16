@@ -23,7 +23,6 @@ extension AppState.AppData {
         var listTempPlayers: [Player] = []
         var playerImageTemp = "player1"
         
-        var countTeam = ["1", "2", "3", "4", "5", "6"]
         var selectedTeam = 1
         
         var playerNameTF = ""

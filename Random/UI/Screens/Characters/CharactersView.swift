@@ -15,13 +15,16 @@ struct CharactersView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    @State var lang = [NSLocalizedString("Русские буквы", comment: ""),
+                       NSLocalizedString("Английские буквы", comment: "")]
+    @State var selectedLang = 0
     
     var body: some View {
         VStack {
-            Picker(selection: appBinding.characters.selectedLang,
+            Picker(selection: $selectedLang,
                    label: Text("Picker")) {
-                ForEach(0..<appBinding.characters.lang.wrappedValue.count) {
-                    Text("\(appBinding.characters.lang.wrappedValue[$0])")
+                ForEach(0..<lang.count) {
+                    Text("\(lang[$0])")
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
@@ -32,6 +35,7 @@ struct CharactersView: View {
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
                 .onTapGesture {
+                    appBinding.characters.selectedLang.wrappedValue = selectedLang
                     generateYesOrNo(state: appBinding)
                     saveCharactersToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
@@ -60,6 +64,7 @@ struct CharactersView: View {
 private extension CharactersView {
     var generateButton: some View {
         Button(action: {
+            appBinding.characters.selectedLang.wrappedValue = selectedLang
             generateYesOrNo(state: appBinding)
             saveCharactersToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)

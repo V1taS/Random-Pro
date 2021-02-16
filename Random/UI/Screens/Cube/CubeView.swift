@@ -15,6 +15,8 @@ struct CubeView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    @State var countCube = ["1", "2", "3", "4", "5", "6"]
+    @State var selectedCube = 0
     
     var body: some View {
         VStack {
@@ -23,10 +25,10 @@ struct CubeView: View {
                     .font(.robotoMedium20())
                     .foregroundColor(.primaryGray())
                 
-                Picker(selection: appBinding.cube.selectedCube,
+                Picker(selection: $selectedCube,
                        label: Text("Picker")) {
-                    ForEach(0..<appBinding.cube.countCube.wrappedValue.count) {
-                        Text("\(appBinding.cube.countCube.wrappedValue[$0])")
+                    ForEach(0..<countCube.count) {
+                        Text("\(countCube[$0])")
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -40,6 +42,7 @@ struct CubeView: View {
             if !appBinding.cube.listResult.wrappedValue.isEmpty {
                 content
                     .onTapGesture {
+                        appBinding.cube.selectedCube.wrappedValue = selectedCube
                         generateCube(state: appBinding)
                         saveCubeToUserDefaults(state: appBinding)
                         Feedback.shared.impactHeavy(.medium)
@@ -49,6 +52,7 @@ struct CubeView: View {
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())
                     .onTapGesture {
+                        appBinding.cube.selectedCube.wrappedValue = selectedCube
                         generateCube(state: appBinding)
                         saveCubeToUserDefaults(state: appBinding)
                         Feedback.shared.impactHeavy(.medium)
@@ -190,6 +194,7 @@ private extension CubeView {
 private extension CubeView {
     var generateButton: some View {
         Button(action: {
+            appBinding.cube.selectedCube.wrappedValue = selectedCube
             generateCube(state: appBinding)
             saveCubeToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)

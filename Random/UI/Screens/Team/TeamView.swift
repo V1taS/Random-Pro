@@ -14,6 +14,8 @@ struct TeamView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    @State var countTeam = ["1", "2", "3", "4", "5", "6"]
+    @State var selectedTeam = 1
     
     var body: some View {
         VStack {
@@ -57,10 +59,10 @@ private extension TeamView {
                 .font(.robotoMedium20())
                 .foregroundColor(.primaryGray())
             
-            Picker(selection: appBinding.team.selectedTeam,
+            Picker(selection: $selectedTeam,
                    label: Text("Picker")) {
-                ForEach(0..<appBinding.team.countTeam.wrappedValue.count) {
-                    Text("\(appBinding.team.countTeam.wrappedValue[$0])")
+                ForEach(0..<countTeam.count) {
+                    Text("\(countTeam[$0])")
                 }
             }
             .disabled(appBinding.team.disabledPickerView.wrappedValue)
@@ -79,6 +81,7 @@ private extension TeamView {
             
             Button(action: {
                 if !appBinding.team.listTempPlayers.wrappedValue.isEmpty {
+                    appBinding.team.selectedTeam.wrappedValue = selectedTeam
                     generateListTeams(state: appBinding)
                     appBinding.team.disabledPickerView.wrappedValue = true
                     Feedback.shared.impactHeavy(.medium)
@@ -227,6 +230,7 @@ private extension TeamView {
     var generateButton: some View {
         Button(action: {
             if !appBinding.team.listTempPlayers.wrappedValue.isEmpty {
+                appBinding.team.selectedTeam.wrappedValue = selectedTeam
                 generateListTeams(state: appBinding)
                 saveTeamToUserDefaults(state: appBinding)
                 appBinding.team.disabledPickerView.wrappedValue = true

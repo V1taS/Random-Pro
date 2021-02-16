@@ -25,8 +25,7 @@ struct SettingsView: View {
                         idea
                         rateOnAppStore
                         share
-                        
-                        
+                        tipTheDeveloper
                     }
                     
                     Section(header: Text(NSLocalizedString("Другие", comment: ""))) {
@@ -107,6 +106,28 @@ private extension SettingsView {
                 }
                 Spacer()
             }
+        }
+    }
+}
+
+private extension SettingsView {
+    var tipTheDeveloper: some View {
+        HStack {
+            NavigationLink(
+                destination: PurchasesView()
+                    .allowAutoDismiss { false }) {
+                HStack {
+                    Image(systemName: "bitcoinsign.circle.fill")
+                        .font(.title)
+                        .frame(width: 50, alignment: .leading)
+                        .foregroundColor(.primaryTertiary())
+                    
+                    Text(NSLocalizedString("Чаевые разработчику", comment: ""))
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+            }
+            Spacer()
         }
     }
 }

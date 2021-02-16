@@ -48,6 +48,8 @@ private extension TeamCustomListView {
             } .onDelete(perform: { indexSet in
                 listResult.remove(atOffsets: indexSet)
                 appBinding.team.listPlayersData.wrappedValue.remove(atOffsets: indexSet)
+                appBinding.team.listTempPlayers.wrappedValue = listResult
+                saveTeamToUserDefaults(state: appBinding)
             })
             
         }
@@ -56,9 +58,9 @@ private extension TeamCustomListView {
 
 
 private extension TeamCustomListView {
-    private func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
-        injected.interactors.listWordsInteractor
-            .saveListWordsToUserDefaults(state: state)
+    private func saveTeamToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.teamInteractor
+            .saveTeamToUserDefaults(state: state)
     }
 }
 

@@ -51,6 +51,8 @@ private extension CustomListWordsView {
             } .onDelete(perform: { indexSet in
                 listResult.remove(atOffsets: indexSet)
                 appBinding.listWords.listData.wrappedValue.remove(atOffsets: indexSet)
+                appBinding.listWords.listTemp.wrappedValue = appBinding.listWords.listData.wrappedValue
+                saveListWordsToUserDefaults(state: appBinding)
             })
             
         }

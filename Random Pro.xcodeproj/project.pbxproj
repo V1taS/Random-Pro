@@ -21,6 +21,7 @@
 		1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */; };
 		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
+		1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875A325DB307C006E82D4 /* PurchasesView.swift */; };
 		1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */; };
 		1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */; };
 		1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667025D0856300933AD6 /* AppDelegate.swift */; };
@@ -140,6 +141,7 @@
 		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
+		1B6875A325DB307C006E82D4 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
 		1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbModalHackView.swift; sourceTree = "<group>"; };
 		1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWordsResultsView.swift; sourceTree = "<group>"; };
 		1B7F666D25D0856300933AD6 /* Random Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,6 +405,7 @@
 				1B7F670525D09A9B00933AD6 /* TabBarView.swift */,
 				1B7F66FB25D0930600933AD6 /* MainView.swift */,
 				1BF30DD225D19B1600DCE62B /* SettingsView.swift */,
+				1B6875A325DB307C006E82D4 /* PurchasesView.swift */,
 				1B7F670825D0A25A00933AD6 /* Number */,
 				1B9202F725D16CD10094D2BE /* YesOrNot */,
 				1B92030825D170180094D2BE /* Characters */,
@@ -852,6 +855,7 @@
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
+				1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
 				1BF22F3225D88F3C00775368 /* Player.swift in Sources */,
@@ -1008,7 +1012,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1016,7 +1020,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1030,7 +1034,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1038,7 +1042,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

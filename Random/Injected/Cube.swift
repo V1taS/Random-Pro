@@ -11,8 +11,7 @@ import Foundation
 extension AppState.AppData {
     struct Cube: Equatable {
         var listResult: [String] = []
-        
-        var countCube = ["1", "2", "3", "4", "5", "6"]
+    
         var selectedCube = 0
         
         var cubeOne = 0

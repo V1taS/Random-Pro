@@ -19,19 +19,19 @@ struct SettingsView: View {
         NavigationView {
             VStack {
                 Form {
-                    Section(header: Text(NSLocalizedString("ОСНОВНЫЕ", comment: ""))) {
+                    Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
                         idea
                         rateOnAppStore
                         share
                         tipTheDeveloper
                     }
                     
-                    Section(header: Text(NSLocalizedString("Другие", comment: ""))) {
+                    Section(header: Text(LocalizedStringKey("Другие"))) {
                         clearAppButton
                     }
                 }
             }
-            .navigationBarTitle(Text(NSLocalizedString("Настройки", comment: "")), displayMode: .automatic)
+            .navigationBarTitle(Text(LocalizedStringKey("Настройки")), displayMode: .automatic)
         }
     }
 }

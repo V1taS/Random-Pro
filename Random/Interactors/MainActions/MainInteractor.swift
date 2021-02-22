@@ -27,6 +27,7 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultsDate(state: state)
             userDefaultsLottery(state: state)
             userDefaultTeam(state: state)
+            userDefaultContact(state: state)
         }
     }
     
@@ -41,15 +42,28 @@ struct MainInteractorImpl: MainInteractor {
             cleanDate()
             cleanLottery()
             cleanTeam()
+            cleanContact()
         }
     }
 }
 
 extension MainInteractorImpl {
-    private func decoder(forKey: String) -> [Player]? {
+    private func decoderPlayer(forKey: String) -> [Player]? {
         if let items = UserDefaults.standard.data(forKey: forKey) {
             let decoder = JSONDecoder()
             if let decoded = try? decoder.decode([Player].self, from: items) {
+                return decoded
+            }
+        }
+        return nil
+    }
+}
+
+extension MainInteractorImpl {
+    private func decoderContact(forKey: String) -> [FetchedContacts]? {
+        if let items = UserDefaults.standard.data(forKey: forKey) {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([FetchedContacts].self, from: items) {
                 return decoded
             }
         }
@@ -165,20 +179,31 @@ extension MainInteractorImpl {
     private func userDefaultTeam(state: Binding<AppState.AppData>) {
         if state.team.listResult1.wrappedValue.isEmpty {
             
-            state.team.listResult1.wrappedValue = decoder(forKey: "TeamlistResult1") ?? []
-            state.team.listResult2.wrappedValue = decoder(forKey: "TeamlistResult2") ?? []
-            state.team.listResult3.wrappedValue = decoder(forKey: "TeamlistResult3") ?? []
-            state.team.listResult4.wrappedValue = decoder(forKey: "TeamlistResult4") ?? []
-            state.team.listResult5.wrappedValue = decoder(forKey: "TeamlistResult5") ?? []
-            state.team.listResult6.wrappedValue = decoder(forKey: "TeamlistResult6") ?? []
-            state.team.listPlayersData.wrappedValue = decoder(forKey: "TeamlistPlayersData") ?? []
-            state.team.listTempPlayers.wrappedValue = decoder(forKey: "TeamlistTempPlayers") ?? []
+            state.team.listResult1.wrappedValue = decoderPlayer(forKey: "TeamlistResult1") ?? []
+            state.team.listResult2.wrappedValue = decoderPlayer(forKey: "TeamlistResult2") ?? []
+            state.team.listResult3.wrappedValue = decoderPlayer(forKey: "TeamlistResult3") ?? []
+            state.team.listResult4.wrappedValue = decoderPlayer(forKey: "TeamlistResult4") ?? []
+            state.team.listResult5.wrappedValue = decoderPlayer(forKey: "TeamlistResult5") ?? []
+            state.team.listResult6.wrappedValue = decoderPlayer(forKey: "TeamlistResult6") ?? []
+            state.team.listPlayersData.wrappedValue = decoderPlayer(forKey: "TeamlistPlayersData") ?? []
+            state.team.listTempPlayers.wrappedValue = decoderPlayer(forKey: "TeamlistTempPlayers") ?? []
             
             state.team.currentNumber.wrappedValue = UserDefaults.standard.object(forKey: "TeamCurrentNumber") as? Int ?? 1
             
             state.team.selectedTeam.wrappedValue = UserDefaults.standard.object(forKey: "TeamSelectedTeam") as? Int ?? 1
             
             state.team.disabledPickerView.wrappedValue = UserDefaults.standard.bool(forKey: "TeamDisabledPickerView")
+        }
+    }
+    
+    private func userDefaultContact(state: Binding<AppState.AppData>) {
+        if state.contact.listResults.wrappedValue.isEmpty {
+            
+            state.contact.listResults.wrappedValue = decoderContact(forKey: "ContactListResult") ?? []
+            
+            state.contact.resultFullName.wrappedValue = UserDefaults.standard.object(forKey: "ContactResultFullName") as? String ?? ""
+            
+            state.contact.resultPhone.wrappedValue = UserDefaults.standard.object(forKey: "ContactResultPhone") as? String ?? ""
         }
     }
 }
@@ -259,5 +284,11 @@ extension MainInteractorImpl {
         UserDefaults.standard.set(1, forKey: "TeamCurrentNumber")
         UserDefaults.standard.set(1, forKey: "TeamSelectedTeam")
         UserDefaults.standard.set(false, forKey: "TeamDisabledPickerView")
+    }
+    
+    private func cleanContact() {
+        UserDefaults.standard.set([], forKey: "ContactListResult")
+        UserDefaults.standard.set("", forKey: "ContactResultFullName")
+        UserDefaults.standard.set("", forKey: "ContactResultPhone")
     }
 }

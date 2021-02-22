@@ -31,6 +31,14 @@
 		1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875AA25DB620C006E82D4 /* StoreManager.swift */; };
 		1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */; };
 		1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */; };
+		1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F116725E3F5B200FF64A3 /* ContactView.swift */; };
+		1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F116B25E3F5CC00FF64A3 /* ContactSettingsView.swift */; };
+		1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F116E25E3F67000FF64A3 /* Contact.swift */; };
+		1B7F117425E3F70500FF64A3 /* ContactActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F117325E3F70500FF64A3 /* ContactActions.swift */; };
+		1B7F117825E3F74100FF64A3 /* ContactInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F117725E3F74100FF64A3 /* ContactInteractor.swift */; };
+		1B7F117B25E3F85600FF64A3 /* FetchedContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F117A25E3F85600FF64A3 /* FetchedContacts.swift */; };
+		1B7F118025E4046E00FF64A3 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F117F25E4046E00FF64A3 /* View.swift */; };
+		1B7F118325E4068000FF64A3 /* ContactResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F118225E4068000FF64A3 /* ContactResultsView.swift */; };
 		1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667025D0856300933AD6 /* AppDelegate.swift */; };
 		1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667225D0856300933AD6 /* SceneDelegate.swift */; };
 		1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F667925D0856300933AD6 /* Assets.xcassets */; };
@@ -158,6 +166,14 @@
 		1B6875AA25DB620C006E82D4 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		1B7B3C3925D3F0A1002ED8CD /* MbModalHackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbModalHackView.swift; sourceTree = "<group>"; };
 		1B7B3C3C25D3F410002ED8CD /* ListWordsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWordsResultsView.swift; sourceTree = "<group>"; };
+		1B7F116725E3F5B200FF64A3 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
+		1B7F116B25E3F5CC00FF64A3 /* ContactSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactSettingsView.swift; sourceTree = "<group>"; };
+		1B7F116E25E3F67000FF64A3 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		1B7F117325E3F70500FF64A3 /* ContactActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactActions.swift; sourceTree = "<group>"; };
+		1B7F117725E3F74100FF64A3 /* ContactInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInteractor.swift; sourceTree = "<group>"; };
+		1B7F117A25E3F85600FF64A3 /* FetchedContacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedContacts.swift; sourceTree = "<group>"; };
+		1B7F117F25E4046E00FF64A3 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		1B7F118225E4068000FF64A3 /* ContactResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactResultsView.swift; sourceTree = "<group>"; };
 		1B7F666D25D0856300933AD6 /* Random Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B7F667025D0856300933AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B7F667225D0856300933AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -289,6 +305,25 @@
 			path = Purchases;
 			sourceTree = "<group>";
 		};
+		1B7F116625E3F59500FF64A3 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F116725E3F5B200FF64A3 /* ContactView.swift */,
+				1B7F116B25E3F5CC00FF64A3 /* ContactSettingsView.swift */,
+				1B7F118225E4068000FF64A3 /* ContactResultsView.swift */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		1B7F117125E3F6CC00FF64A3 /* ContactActions */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F117325E3F70500FF64A3 /* ContactActions.swift */,
+				1B7F117725E3F74100FF64A3 /* ContactInteractor.swift */,
+			);
+			path = ContactActions;
+			sourceTree = "<group>";
+		};
 		1B7F666425D0856300933AD6 = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +374,7 @@
 				1BD1F90F25D7324000A1C7A4 /* DateAndTime.swift */,
 				1BD1F91F25D7338700A1C7A4 /* Lottery.swift */,
 				1BF22F2225D8857A00775368 /* Team.swift */,
+				1B7F116E25E3F67000FF64A3 /* Contact.swift */,
 			);
 			path = Injected;
 			sourceTree = "<group>";
@@ -358,6 +394,7 @@
 				1BD1F91225D7327100A1C7A4 /* DateAndTimeActions */,
 				1BD1F92225D7339B00A1C7A4 /* LotteryActions */,
 				1BF22F2525D885A600775368 /* TeamActions */,
+				1B7F117125E3F6CC00FF64A3 /* ContactActions */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -366,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				1BF22F3125D88F3C00775368 /* Player.swift */,
+				1B7F117A25E3F85600FF64A3 /* FetchedContacts.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,6 +488,7 @@
 				1BD1F90A25D7310F00A1C7A4 /* Date and time */,
 				1BD1F91A25D7335A00A1C7A4 /* Lottery */,
 				1BF22F1D25D8853700775368 /* Team */,
+				1B7F116625E3F59500FF64A3 /* Contact */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -527,6 +566,7 @@
 				1B7F66F025D08DC100933AD6 /* ColorExtensions.swift */,
 				1B7F66F325D08DE800933AD6 /* StringProtocol.swift */,
 				1B0DB26825DC19A600C9D31D /* SKProduct.swift */,
+				1B7F117F25E4046E00FF64A3 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -829,6 +869,8 @@
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
 				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
+				1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */,
+				1B7F118325E4068000FF64A3 /* ContactResultsView.swift in Sources */,
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
@@ -836,6 +878,7 @@
 				1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */,
 				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
 				1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */,
+				1B7F117825E3F74100FF64A3 /* ContactInteractor.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
 				1BF22F2E25D88F1A00775368 /* PlayerView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
@@ -888,6 +931,9 @@
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
 				1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */,
+				1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */,
+				1B7F118025E4046E00FF64A3 /* View.swift in Sources */,
+				1B7F117425E3F70500FF64A3 /* ContactActions.swift in Sources */,
 				1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */,
 				1BF22F4225D8B23F00775368 /* TeamResultsView.swift in Sources */,
 				1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */,
@@ -905,12 +951,14 @@
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
+				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
 				1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
+				1B7F117B25E3F85600FF64A3 /* FetchedContacts.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
 				1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */,

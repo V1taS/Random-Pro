@@ -19,4 +19,5 @@ struct AppActions {
     var settingsApp: SettingsActions
     var dateAndTimeApp: DateAndTimeActions
     var teamApp: TeamActions
+    var contactApp: ContactActions
 }

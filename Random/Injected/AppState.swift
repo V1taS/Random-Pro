@@ -28,6 +28,7 @@ extension AppState {
         var dateAndTime = DateAndTime()
         var lottery = Lottery()
         var team = Team()
+        var contact = Contact()
     }
 }
 

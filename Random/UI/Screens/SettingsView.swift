@@ -184,6 +184,9 @@ private extension SettingsView {
         injected.interactors.teamInteractor
             .cleanTeams(state: state)
         
+        injected.interactors.contactInteractor
+            .cleanContacts(state: state)
+        
         state.listWords.listData.wrappedValue = []
         state.team.listPlayersData.wrappedValue = []
     }

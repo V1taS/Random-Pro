@@ -13,6 +13,14 @@ extension Font {
         return Font.custom("Roboto-Bold", size: 70)
     }
     
+    static func robotoBold50() -> Font {
+        return Font.custom("Roboto-Bold", size: 50)
+    }
+    
+    static func robotoBold30() -> Font {
+        return Font.custom("Roboto-Bold", size: 30)
+    }
+    
     static func robotoBold25() -> Font {
         return Font.custom("Roboto-Bold", size: 20)
     }
@@ -93,6 +101,14 @@ extension Font {
 extension UIFont {
     static func robotoBold70() -> UIFont? {
         return UIFont.init(name: "Roboto-Bold", size: 70)
+    }
+    
+    static func robotoBold50() -> UIFont? {
+        return UIFont.init(name: "Roboto-Bold", size: 50)
+    }
+    
+    static func robotoBold30() -> UIFont? {
+        return UIFont.init(name: "Roboto-Bold", size: 30)
     }
     
     static func robotoBold20() -> UIFont? {

@@ -17,7 +17,7 @@ struct CellMainView: View {
         self.image = image
         self.title = title
     }
-
+    
     var body: some View {
         ZStack {
             Rectangle()

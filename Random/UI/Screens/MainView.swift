@@ -87,12 +87,12 @@ struct MainView: View {
                                                                   comment: ""))
                         }
                         
-                        HStack {
-                            CellMainView(image: "person.3",
-                                         title: NSLocalizedString("Команды",
+                        NavigationLink(
+                            destination: ContactView(appBinding: appBinding)) {
+                            CellMainView(image: "phone.circle",
+                                         title: NSLocalizedString("Контакт",
                                                                   comment: ""))
                         }
-                        .opacity(0)
                         
                     }
                     

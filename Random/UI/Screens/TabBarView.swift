@@ -37,6 +37,9 @@ struct TabBarView: View {
             backgroundColor
             showAddPlayerView
         }
+        .onAppear {
+            ReviewUtility.sharedInstance.recordLaunch()
+        }
     }
 }
 

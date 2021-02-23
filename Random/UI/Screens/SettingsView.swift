@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import StoreKit
 
 struct SettingsView: View {
     
@@ -21,7 +20,6 @@ struct SettingsView: View {
                 Form {
                     Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
                         idea
-                        rateOnAppStore
                         share
                         tipTheDeveloper
                     }
@@ -52,30 +50,6 @@ private extension SettingsView {
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     Text(NSLocalizedString("Предложить свою идею", comment: ""))
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
-                }
-                Spacer()
-            }
-        }
-    }
-}
-
-private extension SettingsView {
-    var rateOnAppStore: some View {
-        HStack {
-            Image(systemName: "hand.thumbsup")
-                .font(.title)
-                .frame(width: 50, alignment: .leading)
-                .foregroundColor(.primaryTertiary())
-            
-            
-            HStack {
-                Button(action: {
-                    SKStoreReviewController.requestReview()
-                    Feedback.shared.impactHeavy(.medium)
-                }) {
-                    Text(NSLocalizedString("Оценить в App Store", comment: ""))
                         .foregroundColor(.primaryGray())
                         .font(.robotoMedium18())
                 }

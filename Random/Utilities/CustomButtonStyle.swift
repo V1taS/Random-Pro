@@ -16,3 +16,12 @@ struct CustomButtonStyle: ButtonStyle {
             .animation(.easeInOut(duration: 0.2))
     }
 }
+
+
+//struct CustomButtonStyle<Content>: ButtonStyle where Content: View {
+//    var change: (Bool) -> Content
+//
+//    func makeBody(configuration: Self.Configuration) -> some View {
+//        return change(configuration.isPressed)
+//    }
+//}

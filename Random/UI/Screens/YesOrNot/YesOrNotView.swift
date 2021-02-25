@@ -16,17 +16,30 @@ struct YesOrNotView: View {
     }
     @Environment(\.injected) private var injected: DIContainer
     
+    @State private var isPressedButton = false
+    @State private var isPressedTouch = false
+    
     var body: some View {
         VStack {
             Spacer()
             Text("\(appBinding.yesOrNo.result.wrappedValue)")
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
-                .onTapGesture {
-                    generateYesOrNo(state: appBinding)
-                    saveYesOrNotToUserDefaults(state: appBinding)
-                    Feedback.shared.impactHeavy(.medium)
-                }
+                
+                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                            .onChanged { _ in
+                                isPressedTouch = true
+                                generateYesOrNo(state: appBinding)
+                                saveYesOrNotToUserDefaults(state: appBinding)
+                                Feedback.shared.impactHeavy(.medium)
+                            }
+                            .onEnded { _ in
+                                isPressedTouch = false
+                            }
+                )
             
             Spacer()
             listResults
@@ -59,6 +72,14 @@ private extension YesOrNotView {
                        switchImage: false,
                        image: "")
         }
+        .opacity(isPressedButton ? 0.8 : 1)
+        .scaleEffect(isPressedButton ? 0.9 : 1)
+        .animation(.easeInOut(duration: 0.1))
+        .pressAction {
+            isPressedButton = true
+        } onRelease: {
+            isPressedButton = false
+        }
         .padding(16)
     }
 }
@@ -71,6 +92,9 @@ private extension YesOrNotView {
                                 .wrappedValue.enumerated()), id: \.0) { (index, element) in
                     if index == 0 {
                         TextRoundView(name: "\(element)")
+                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
+                            .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
                     } else {
                         Text("\(element)")
                             .foregroundColor(.primaryGray())

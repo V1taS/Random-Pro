@@ -15,13 +15,28 @@ struct DateAndTimeView: View {
     }
     @Environment(\.injected) private var injected: DIContainer
     
+    @State private var isPressedButtonDay = false
+    @State private var isPressedButtonTime = false
+    @State private var isPressedButtonDate = false
+    @State private var isPressedButtonMonth = false
+    @State private var isPressedTouch = false
+    
     var body: some View {
         VStack {
             Spacer()
             Text("\(appBinding.dateAndTime.result.wrappedValue)")
-                .font(.robotoBold70())
+                .font(.robotoBold50())
                 .foregroundColor(.primaryGray())
-
+                .opacity(isPressedButtonMonth || isPressedButtonDate ||
+                            isPressedButtonTime || isPressedButtonDay ||
+                            isPressedTouch ? 0.8 : 1)
+                .scaleEffect(isPressedButtonMonth || isPressedButtonDate ||
+                                isPressedButtonTime || isPressedButtonDay ||
+                                isPressedTouch ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButtonMonth ||
+                            isPressedButtonDate || isPressedButtonTime ||
+                            isPressedButtonDay || isPressedTouch)
+            
             Spacer()
             listResults
             generateButton
@@ -55,6 +70,14 @@ private extension DateAndTimeView {
                                switchImage: false,
                                image: "")
                 }
+                .opacity(isPressedButtonDay ? 0.8 : 1)
+                .scaleEffect(isPressedButtonDay ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedButtonDay = true
+                } onRelease: {
+                    isPressedButtonDay = false
+                }
                 
                 Button(action: {
                     generateTime(state: appBinding)
@@ -67,6 +90,14 @@ private extension DateAndTimeView {
                                text: NSLocalizedString("Время", comment: ""),
                                switchImage: false,
                                image: "")
+                }
+                .opacity(isPressedButtonTime ? 0.8 : 1)
+                .scaleEffect(isPressedButtonTime ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedButtonTime = true
+                } onRelease: {
+                    isPressedButtonTime = false
                 }
                 
             }
@@ -84,6 +115,14 @@ private extension DateAndTimeView {
                                switchImage: false,
                                image: "")
                 }
+                .opacity(isPressedButtonDate ? 0.8 : 1)
+                .scaleEffect(isPressedButtonDate ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedButtonDate = true
+                } onRelease: {
+                    isPressedButtonDate = false
+                }
                 
                 Button(action: {
                     generateMonth(state: appBinding)
@@ -97,10 +136,15 @@ private extension DateAndTimeView {
                                switchImage: false,
                                image: "")
                 }
-                
+                .opacity(isPressedButtonMonth ? 0.8 : 1)
+                .scaleEffect(isPressedButtonMonth ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedButtonMonth = true
+                } onRelease: {
+                    isPressedButtonMonth = false
+                }
             }
-            
-            
         }
         .padding(16)
     }
@@ -111,10 +155,19 @@ private extension DateAndTimeView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 ForEach(Array(appBinding.dateAndTime.listResult
-                            .wrappedValue.enumerated()), id: \.0) { (index, element) in
+                                .wrappedValue.enumerated()), id: \.0) { (index, element) in
                     
                     if index == 0 {
                         TextRoundView(name: "\(element)")
+                            .opacity(isPressedButtonMonth || isPressedButtonDate ||
+                                        isPressedButtonTime || isPressedButtonDay ||
+                                        isPressedTouch ? 0.8 : 1)
+                            .scaleEffect(isPressedButtonMonth || isPressedButtonDate ||
+                                            isPressedButtonTime || isPressedButtonDay ||
+                                            isPressedTouch ? 0.9 : 1)
+                            .animation(.easeInOut(duration: 0.1), value: isPressedButtonMonth ||
+                                        isPressedButtonDate || isPressedButtonTime ||
+                                        isPressedButtonDay || isPressedTouch)
                     } else {
                         Text("\(element)")
                             .foregroundColor(.primaryGray())

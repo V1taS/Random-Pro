@@ -22,7 +22,7 @@ class ReviewUtility {
     var totalLaunches: Int = defaults.value(forKey: "requestReview") as! Int
     totalLaunches += 1
     UserDefaults.standard.set(totalLaunches, forKey: "requestReview")
-    if totalLaunches % 5 == 0 {
+    if totalLaunches % 10 == 0 {
       if #available(iOS 10.3, *) {
         SKStoreReviewController.requestReview()
       }

@@ -15,6 +15,8 @@ struct LotteryView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    @State private var isPressedButton = false
+    @State private var isPressedTouch = false
     
     var body: some View {
         ZStack {
@@ -28,17 +30,26 @@ struct LotteryView: View {
                 }
                 Spacer()
                 Text("\(appBinding.lottery.result.wrappedValue)")
-                    .font(.robotoBold70())
+                    .font(.robotoBold50())
                     .foregroundColor(.primaryGray())
                     .padding(.horizontal, 16)
-                    .onTapGesture {
-                        if !appBinding.lottery.firstNumber.wrappedValue.isEmpty &&
-                            !appBinding.lottery.secondNumber.wrappedValue.isEmpty {
-                            generateNumbers(state: appBinding)
-                            Feedback.shared.impactHeavy(.medium)
-                            saveLotteryToUserDefaults(state: appBinding)
-                        }
-                    }
+                    .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                    .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                                .onChanged { _ in
+                                    isPressedTouch = true
+                                    if !appBinding.lottery.firstNumber.wrappedValue.isEmpty &&
+                                        !appBinding.lottery.secondNumber.wrappedValue.isEmpty {
+                                        generateNumbers(state: appBinding)
+                                        Feedback.shared.impactHeavy(.medium)
+                                        saveLotteryToUserDefaults(state: appBinding)
+                                    }
+                                }
+                                .onEnded { _ in
+                                    isPressedTouch = false
+                                }
+                    )
                 
                 Spacer()
                 
@@ -113,6 +124,9 @@ private extension LotteryView {
                     Text("\(number)")
                         .foregroundColor(.primaryGray())
                         .font(.robotoMedium18())
+                        .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                        .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
+                        .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
                 }
             }
             .padding(.leading, 16)
@@ -137,6 +151,14 @@ private extension LotteryView {
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,
                        image: "")
+        }
+        .opacity(isPressedButton ? 0.8 : 1)
+        .scaleEffect(isPressedButton ? 0.9 : 1)
+        .animation(.easeInOut(duration: 0.1))
+        .pressAction {
+            isPressedButton = true
+        } onRelease: {
+            isPressedButton = false
         }
         .padding(16)
     }

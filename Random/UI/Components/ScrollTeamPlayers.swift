@@ -11,6 +11,7 @@ import SwiftUI
 struct ScrollTeamPlayers: View {
     
     @Binding var listPlayers: [Player]
+    @Binding var isPressedButton: Bool
     let teamNumber: Int
     
     var body: some View {
@@ -38,8 +39,14 @@ private extension ScrollTeamPlayers {
                 }
             } else {
                 HStack {
-                    ForEach(listPlayers, id: \.name) { player in
-                        PlayerView(name: player.name, image: player.photo)
+                    ForEach(Array(listPlayers.enumerated()), id: \.0) { (index, player) in
+                        if index == 0 {
+                            PlayerView(name: player.name, image: player.photo)
+                                .background(LinearGradient(gradient: Gradient(colors: [Color.primaryTertiary(), Color.primaryGreen()]), startPoint: .top, endPoint: .bottom).opacity(0.1))
+                                .cornerRadius(12)
+                        } else {
+                            PlayerView(name: player.name, image: player.photo)
+                        }
                     }
                     .padding(.leading, 16)
                 }
@@ -50,7 +57,7 @@ private extension ScrollTeamPlayers {
 
 struct ScrollTeamPlayers_Previews: PreviewProvider {
     static var previews: some View {
-        ScrollTeamPlayers(listPlayers: .constant([Player(name: "Сосин Виталий", photo: "player1"), Player(name: "Трифонов Дмитрий", photo: "player2")]),
+        ScrollTeamPlayers(listPlayers: .constant([Player(name: "Сосин Виталий", photo: "player1"), Player(name: "Трифонов Дмитрий", photo: "player2")]), isPressedButton: .constant(false),
                           teamNumber: 1)
     }
 }

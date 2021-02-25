@@ -28,6 +28,7 @@
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
 		1B446F2B25E517000060E163 /* ReviewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B446F2A25E517000060E163 /* ReviewUtility.swift */; };
 		1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */; };
+		1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */; };
 		1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875A325DB307C006E82D4 /* PurchasesView.swift */; };
 		1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
 		1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875AA25DB620C006E82D4 /* StoreManager.swift */; };
@@ -165,6 +166,7 @@
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
 		1B446F2A25E517000060E163 /* ReviewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUtility.swift; sourceTree = "<group>"; };
 		1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
+		1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressActions.swift; sourceTree = "<group>"; };
 		1B6875A325DB307C006E82D4 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
 		1B6875A725DB614F006E82D4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1B6875AA25DB620C006E82D4 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */,
 				1B446F2A25E517000060E163 /* ReviewUtility.swift */,
 				1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */,
+				1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
+				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
 				1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,

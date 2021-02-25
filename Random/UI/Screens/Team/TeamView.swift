@@ -16,6 +16,8 @@ struct TeamView: View {
     @Environment(\.injected) private var injected: DIContainer
     @State var countTeam = ["1", "2", "3", "4", "5", "6"]
     @State var selectedTeam = 1
+    @State private var isPressedButton = false
+    @State private var isPressedButtonWhat = false
     
     var body: some View {
         VStack {
@@ -90,6 +92,17 @@ private extension TeamView {
                 Text("?")
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())
+                    .opacity(isPressedButtonWhat ? 0.8 : 1)
+                    .scaleEffect(isPressedButtonWhat ? 0.8 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: isPressedButtonWhat)
+            }
+            .opacity(isPressedButtonWhat ? 0.8 : 1)
+            .scaleEffect(isPressedButtonWhat ? 0.9 : 1)
+            .animation(.easeInOut(duration: 0.1))
+            .pressAction {
+                isPressedButtonWhat = true
+            } onRelease: {
+                isPressedButtonWhat = false
             }
             
             Spacer()
@@ -123,6 +136,7 @@ private extension TeamView {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult1,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 1)
                 Spacer()
             }
@@ -136,8 +150,10 @@ private extension TeamView {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult1,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 1)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult2,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 2)
                 Spacer()
             }
@@ -151,10 +167,13 @@ private extension TeamView {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult1,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 1)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult2,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 2)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult3,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 3)
                 Spacer()
             }
@@ -168,12 +187,16 @@ private extension TeamView {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult1,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 1)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult2,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 2)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult3,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 3)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult4,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 4)
                 Spacer()
             }
@@ -187,14 +210,19 @@ private extension TeamView {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult1,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 1)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult2,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 2)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult3,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 3)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult4,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 4)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult5,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 5)
                 Spacer()
             }
@@ -208,16 +236,22 @@ private extension TeamView {
         ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult1,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 1)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult2,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 2)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult3,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 3)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult4,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 4)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult5,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 5)
                 ScrollTeamPlayers(listPlayers: appBinding.team.listResult6,
+                                  isPressedButton: $isPressedButton,
                                   teamNumber: 6)
                 Spacer()
             }
@@ -243,6 +277,14 @@ private extension TeamView {
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,
                        image: "")
+        }
+        .opacity(isPressedButton ? 0.8 : 1)
+        .scaleEffect(isPressedButton ? 0.9 : 1)
+        .animation(.easeInOut(duration: 0.1))
+        .pressAction {
+            isPressedButton = true
+        } onRelease: {
+            isPressedButton = false
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 16)

@@ -14,6 +14,8 @@ struct ContactView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    @State private var isPressedButton = false
+    @State private var isPressedTouch = false
     
     var body: some View {
         ZStack {
@@ -28,28 +30,52 @@ struct ContactView: View {
                         .font(.robotoBold70())
                         .foregroundColor(.primaryGray())
                         .padding(.horizontal, 16)
-                        .onTapGesture {
-                            generateContacts(state: appBinding)
-                            saveContactToUserDefaults(state: appBinding)
-                            Feedback.shared.impactHeavy(.medium)
-                        }
+                        .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                        .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                        .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                        
+                        .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                                    .onChanged { _ in
+                                        isPressedTouch = true
+                                        generateContacts(state: appBinding)
+                                        saveContactToUserDefaults(state: appBinding)
+                                        Feedback.shared.impactHeavy(.medium)
+                                    }
+                                    .onEnded { _ in
+                                        isPressedTouch = false
+                                    }
+                        )
+                    
                 } else {
                     VStack(spacing: 24) {
                         Text("\(appBinding.contact.resultFullName.wrappedValue)")
                             .font(.robotoBold30())
                             .foregroundColor(.primaryGray())
+                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
                             .padding(.horizontal, 16)
                         
                         Text("\(appBinding.contact.resultPhone.wrappedValue)")
                             .font(.robotoBold30())
                             .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
+                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
                             .padding(.horizontal, 16)
                     }
-                    .onTapGesture {
-                        generateContacts(state: appBinding)
-                        saveContactToUserDefaults(state: appBinding)
-                        Feedback.shared.impactHeavy(.medium)
-                    }
+                    
+                    .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                                .onChanged { _ in
+                                    isPressedTouch = true
+                                    generateContacts(state: appBinding)
+                                    saveContactToUserDefaults(state: appBinding)
+                                    Feedback.shared.impactHeavy(.medium)
+                                }
+                                .onEnded { _ in
+                                    isPressedTouch = false
+                                }
+                    )
                 }
                 Spacer()
                 
@@ -85,6 +111,14 @@ private extension ContactView {
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,
                        image: "")
+        }
+        .opacity(isPressedButton ? 0.8 : 1)
+        .scaleEffect(isPressedButton ? 0.9 : 1)
+        .animation(.easeInOut(duration: 0.1))
+        .pressAction {
+            isPressedButton = true
+        } onRelease: {
+            isPressedButton = false
         }
         .padding(16)
     }

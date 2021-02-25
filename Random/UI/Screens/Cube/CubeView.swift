@@ -18,6 +18,9 @@ struct CubeView: View {
     @State var countCube = ["1", "2", "3", "4", "5", "6"]
     @State var selectedCube = 0
     
+    @State private var isPressedButton = false
+    @State private var isPressedTouch = false
+    
     var body: some View {
         VStack {
             VStack {
@@ -41,22 +44,41 @@ struct CubeView: View {
             
             if !appBinding.cube.listResult.wrappedValue.isEmpty {
                 content
-                    .onTapGesture {
-                        appBinding.cube.selectedCube.wrappedValue = selectedCube
-                        generateCube(state: appBinding)
-                        saveCubeToUserDefaults(state: appBinding)
-                        Feedback.shared.impactHeavy(.medium)
-                    }
+                    .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                    .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                                .onChanged { _ in
+                                    isPressedTouch = true
+                                    appBinding.cube.selectedCube.wrappedValue = selectedCube
+                                    generateCube(state: appBinding)
+                                    saveCubeToUserDefaults(state: appBinding)
+                                    Feedback.shared.impactHeavy(.medium)
+                                }
+                                .onEnded { _ in
+                                    isPressedTouch = false
+                                }
+                    )
             } else {
                 Text("?")
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())
-                    .onTapGesture {
-                        appBinding.cube.selectedCube.wrappedValue = selectedCube
-                        generateCube(state: appBinding)
-                        saveCubeToUserDefaults(state: appBinding)
-                        Feedback.shared.impactHeavy(.medium)
-                    }
+                    .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                    
+                    .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                                .onChanged { _ in
+                                    isPressedTouch = true
+                                    appBinding.cube.selectedCube.wrappedValue = selectedCube
+                                    generateCube(state: appBinding)
+                                    saveCubeToUserDefaults(state: appBinding)
+                                    Feedback.shared.impactHeavy(.medium)
+                                }
+                                .onEnded { _ in
+                                    isPressedTouch = false
+                                }
+                    )
             }
             
             Spacer()
@@ -180,10 +202,13 @@ private extension CubeView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 ForEach(Array(appBinding.cube.listResult
-                            .wrappedValue.enumerated()), id: \.0) { (index, sum) in
+                                .wrappedValue.enumerated()), id: \.0) { (index, sum) in
                     
                     if index == 0 {
                         TextRoundView(name: "\(sum)")
+                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
+                            .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
                     } else {
                         Text("\(sum)")
                             .foregroundColor(.primaryGray())
@@ -211,6 +236,14 @@ private extension CubeView {
                        text: NSLocalizedString("Бросить кубик(и)", comment: ""),
                        switchImage: false,
                        image: "")
+        }
+        .opacity(isPressedButton ? 0.8 : 1)
+        .scaleEffect(isPressedButton ? 0.9 : 1)
+        .animation(.easeInOut(duration: 0.1))
+        .pressAction {
+            isPressedButton = true
+        } onRelease: {
+            isPressedButton = false
         }
         .padding(16)
     }

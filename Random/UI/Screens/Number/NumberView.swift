@@ -16,6 +16,9 @@ struct NumberView: View {
     }
     @Environment(\.injected) private var injected: DIContainer
     
+    @State private var isPressedButton = false
+    @State private var isPressedTouch = false
+    
     var body: some View {
         ZStack {
             Color(.clear)
@@ -30,15 +33,25 @@ struct NumberView: View {
                 Text("\(appBinding.numberRandom.result.wrappedValue)")
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())
-                    .onTapGesture {
-                        if !appBinding.numberRandom.firstNumber.wrappedValue.isEmpty &&
-                            !appBinding.numberRandom.secondNumber.wrappedValue.isEmpty {
-                            generateNumber(state: appBinding)
-                            saveNumberToUserDefaults(state: appBinding)
-                            Feedback.shared.impactHeavy(.medium)
-                        }
-                    }
-                    .buttonStyle(CustomButtonStyle())
+                    
+                    .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                    
+                    .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                                .onChanged { _ in
+                                    if !appBinding.numberRandom.firstNumber.wrappedValue.isEmpty &&
+                                        !appBinding.numberRandom.secondNumber.wrappedValue.isEmpty {
+                                        isPressedTouch = true
+                                        generateNumber(state: appBinding)
+                                        saveNumberToUserDefaults(state: appBinding)
+                                        Feedback.shared.impactHeavy(.medium)
+                                    }
+                                }
+                                .onEnded { _ in
+                                    isPressedTouch = false
+                                }
+                    )
                 
                 Spacer()
                 
@@ -113,6 +126,9 @@ private extension NumberView {
                     
                     if index == 0 {
                         TextRoundView(name: "\(number)")
+                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
+                            .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
                     } else {
                         Text("\(number)")
                             .foregroundColor(.primaryGray())
@@ -143,8 +159,15 @@ private extension NumberView {
                        switchImage: false,
                        image: "")
         }
+        .opacity(isPressedButton ? 0.8 : 1)
+        .scaleEffect(isPressedButton ? 0.9 : 1)
+        .animation(.easeInOut(duration: 0.1))
+        .pressAction {
+            isPressedButton = true
+        } onRelease: {
+            isPressedButton = false
+        }
         .padding(16)
-        .buttonStyle(CustomButtonStyle())
     }
 }
 

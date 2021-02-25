@@ -19,6 +19,9 @@ struct CharactersView: View {
                        NSLocalizedString("Английские буквы", comment: "")]
     @State var selectedLang = 0
     
+    @State private var isPressedButton = false
+    @State private var isPressedTouch = false
+    
     var body: some View {
         VStack {
             Picker(selection: $selectedLang,
@@ -34,12 +37,22 @@ struct CharactersView: View {
             Text("\(appBinding.characters.result.wrappedValue)")
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
-                .onTapGesture {
-                    appBinding.characters.selectedLang.wrappedValue = selectedLang
-                    generateYesOrNo(state: appBinding)
-                    saveCharactersToUserDefaults(state: appBinding)
-                    Feedback.shared.impactHeavy(.medium)
-                }
+                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                
+                .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                            .onChanged { _ in
+                                isPressedTouch = true
+                                appBinding.characters.selectedLang.wrappedValue = selectedLang
+                                generateYesOrNo(state: appBinding)
+                                saveCharactersToUserDefaults(state: appBinding)
+                                Feedback.shared.impactHeavy(.medium)
+                            }
+                            .onEnded { _ in
+                                isPressedTouch = false
+                            }
+                )
             
             Spacer()
             
@@ -76,7 +89,15 @@ private extension CharactersView {
                        switchImage: false,
                        image: "")
         }
-        .padding(16)
+        .opacity(isPressedButton ? 0.8 : 1)
+        .scaleEffect(isPressedButton ? 0.9 : 1)
+        .animation(.easeInOut(duration: 0.1))
+        .pressAction {
+            isPressedButton = true
+        } onRelease: {
+            isPressedButton = false
+        }
+        .padding(.vertical, 16)
     }
 }
 
@@ -85,9 +106,12 @@ private extension CharactersView {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 ForEach(Array(appBinding.characters.listResult
-                            .wrappedValue.enumerated()), id: \.0) { (index, character) in
+                                .wrappedValue.enumerated()), id: \.0) { (index, character) in
                     if index == 0 {
                         TextRoundView(name: "\(character)")
+                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                            .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
+                            .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
                     } else {
                         Text("\(character)")
                             .foregroundColor(.primaryGray())
@@ -95,8 +119,7 @@ private extension CharactersView {
                     }
                 }
             }
-            .padding(.leading, 16)
-            .padding(.vertical, 16)
+            .padding(.leading, 8)
         }
     }
 }

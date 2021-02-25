@@ -37,7 +37,8 @@ struct NumberView: View {
                             saveNumberToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }
-                    }   
+                    }
+                    .buttonStyle(CustomButtonStyle())
                 
                 Spacer()
                 
@@ -143,6 +144,7 @@ private extension NumberView {
                        image: "")
         }
         .padding(16)
+        .buttonStyle(CustomButtonStyle())
     }
 }
 

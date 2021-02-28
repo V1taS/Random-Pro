@@ -20,4 +20,5 @@ struct AppActions {
     var dateAndTimeApp: DateAndTimeActions
     var teamApp: TeamActions
     var contactApp: ContactActions
+    var FilmApp: FilmActions
 }

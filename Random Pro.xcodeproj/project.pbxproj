@@ -106,6 +106,16 @@
 		1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */; };
 		1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */; };
 		1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */; };
+		1BBADDF625EC00AA00AD38F4 /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADDF525EC00AA00AD38F4 /* GlobalVars.swift */; };
+		1BBADDFD25EC00FF00AD38F4 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADDFC25EC00FF00AD38F4 /* Films.swift */; };
+		1BBADE0025EC013500AD38F4 /* FilmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */; };
+		1BBADE0325EC015100AD38F4 /* FramesFilms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0225EC015100AD38F4 /* FramesFilms.swift */; };
+		1BBADE0625EC02CE00AD38F4 /* CellImageMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */; };
+		1BBADE0B25EC080500AD38F4 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0A25EC080500AD38F4 /* Film.swift */; };
+		1BBADE1025EC083800AD38F4 /* FilmActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0F25EC083800AD38F4 /* FilmActions.swift */; };
+		1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1325EC087800AD38F4 /* FilmInteractor.swift */; };
+		1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1725EC091100AD38F4 /* FilmView.swift */; };
+		1BBADE1B25EC0C5100AD38F4 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1A25EC0C5100AD38F4 /* Networking.swift */; };
 		1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90325D7250D00A1C7A4 /* MailView.swift */; };
 		1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */; };
 		1BD1F90C25D7313000A1C7A4 /* DateAndTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90B25D7313000A1C7A4 /* DateAndTimeView.swift */; };
@@ -246,6 +256,16 @@
 		1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSettingsView.swift; sourceTree = "<group>"; };
 		1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeResultsView.swift; sourceTree = "<group>"; };
+		1BBADDF525EC00AA00AD38F4 /* GlobalVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
+		1BBADDFC25EC00FF00AD38F4 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
+		1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfo.swift; sourceTree = "<group>"; };
+		1BBADE0225EC015100AD38F4 /* FramesFilms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FramesFilms.swift; sourceTree = "<group>"; };
+		1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CellImageMainView.swift; path = ../../../../../../../../../../Applications/CellImageMainView.swift; sourceTree = "<group>"; };
+		1BBADE0A25EC080500AD38F4 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
+		1BBADE0F25EC083800AD38F4 /* FilmActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmActions.swift; sourceTree = "<group>"; };
+		1BBADE1325EC087800AD38F4 /* FilmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInteractor.swift; sourceTree = "<group>"; };
+		1BBADE1725EC091100AD38F4 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
+		1BBADE1A25EC0C5100AD38F4 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		1BD1F90325D7250D00A1C7A4 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		1BD1F90B25D7313000A1C7A4 /* DateAndTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeView.swift; sourceTree = "<group>"; };
@@ -381,6 +401,7 @@
 				1BD1F91F25D7338700A1C7A4 /* Lottery.swift */,
 				1BF22F2225D8857A00775368 /* Team.swift */,
 				1B7F116E25E3F67000FF64A3 /* Contact.swift */,
+				1BBADE0A25EC080500AD38F4 /* Film.swift */,
 			);
 			path = Injected;
 			sourceTree = "<group>";
@@ -401,6 +422,7 @@
 				1BD1F92225D7339B00A1C7A4 /* LotteryActions */,
 				1BF22F2525D885A600775368 /* TeamActions */,
 				1B7F117125E3F6CC00FF64A3 /* ContactActions */,
+				1BBADE0E25EC082500AD38F4 /* FilmActions */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -410,6 +432,9 @@
 			children = (
 				1BF22F3125D88F3C00775368 /* Player.swift */,
 				1B7F117A25E3F85600FF64A3 /* FetchedContacts.swift */,
+				1BBADDFC25EC00FF00AD38F4 /* Films.swift */,
+				1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */,
+				1BBADE0225EC015100AD38F4 /* FramesFilms.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -464,6 +489,7 @@
 				1BF30DD025D196BB00DCE62B /* CellCube */,
 				1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */,
 				1B7F66FE25D0937100933AD6 /* CellMainView.swift */,
+				1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */,
 				1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */,
 				1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */,
 				1BF22F2D25D88F1A00775368 /* PlayerView.swift */,
@@ -495,6 +521,7 @@
 				1BD1F91A25D7335A00A1C7A4 /* Lottery */,
 				1BF22F1D25D8853700775368 /* Team */,
 				1B7F116625E3F59500FF64A3 /* Contact */,
+				1BBADE0925EC07DA00AD38F4 /* Film */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -510,6 +537,7 @@
 		1B7F669525D0870E00933AD6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1BBADDF425EC005D00AD38F4 /* Network service */,
 				1B6875A925DB6200006E82D4 /* Purchases */,
 				1B7F66F625D08E2A00933AD6 /* UIKit */,
 				1B7F66D925D08CBB00933AD6 /* Extensions */,
@@ -689,6 +717,32 @@
 			path = CubeActions;
 			sourceTree = "<group>";
 		};
+		1BBADDF425EC005D00AD38F4 /* Network service */ = {
+			isa = PBXGroup;
+			children = (
+				1BBADDF525EC00AA00AD38F4 /* GlobalVars.swift */,
+				1BBADE1A25EC0C5100AD38F4 /* Networking.swift */,
+			);
+			path = "Network service";
+			sourceTree = "<group>";
+		};
+		1BBADE0925EC07DA00AD38F4 /* Film */ = {
+			isa = PBXGroup;
+			children = (
+				1BBADE1725EC091100AD38F4 /* FilmView.swift */,
+			);
+			path = Film;
+			sourceTree = "<group>";
+		};
+		1BBADE0E25EC082500AD38F4 /* FilmActions */ = {
+			isa = PBXGroup;
+			children = (
+				1BBADE0F25EC083800AD38F4 /* FilmActions.swift */,
+				1BBADE1325EC087800AD38F4 /* FilmInteractor.swift */,
+			);
+			path = FilmActions;
+			sourceTree = "<group>";
+		};
 		1BD1F90A25D7310F00A1C7A4 /* Date and time */ = {
 			isa = PBXGroup;
 			children = (
@@ -860,6 +914,7 @@
 				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
 				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
+				1BBADE0625EC02CE00AD38F4 /* CellImageMainView.swift in Sources */,
 				1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
 				1BF22F1F25D8856000775368 /* TeamView.swift in Sources */,
@@ -867,6 +922,7 @@
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
 				1B92030A25D1703E0094D2BE /* CharactersView.swift in Sources */,
 				1B92032C25D17D3A0094D2BE /* CoinView.swift in Sources */,
+				1BBADDF625EC00AA00AD38F4 /* GlobalVars.swift in Sources */,
 				1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */,
 				1B92034F25D188DC0094D2BE /* CubeInterator.swift in Sources */,
 				1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */,
@@ -880,6 +936,7 @@
 				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
 				1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */,
 				1B7F118325E4068000FF64A3 /* ContactResultsView.swift in Sources */,
+				1BBADDFD25EC00FF00AD38F4 /* Films.swift in Sources */,
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
@@ -893,6 +950,7 @@
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
+				1BBADE0025EC013500AD38F4 /* FilmInfo.swift in Sources */,
 				1BD1F92425D733AB00A1C7A4 /* LotteryActions.swift in Sources */,
 				1B92034625D1888B0094D2BE /* Cube.swift in Sources */,
 				1BD1F92025D7338700A1C7A4 /* Lottery.swift in Sources */,
@@ -901,6 +959,7 @@
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
 				1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */,
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
+				1BBADE0B25EC080500AD38F4 /* Film.swift in Sources */,
 				1BF22F4525D8D49E00775368 /* TeamCustomListView.swift in Sources */,
 				1B92032725D179330094D2BE /* ListWordsSettingsView.swift in Sources */,
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
@@ -916,6 +975,7 @@
 				1B92030625D16E1D0094D2BE /* YesOrNoInteractor.swift in Sources */,
 				1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */,
 				1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */,
+				1BBADE0325EC015100AD38F4 /* FramesFilms.swift in Sources */,
 				1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */,
 				1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */,
 				1BF22F3825D89E4000775368 /* AddPlayerSheet.swift in Sources */,
@@ -941,10 +1001,12 @@
 				1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
+				1BBADE1B25EC0C5100AD38F4 /* Networking.swift in Sources */,
 				1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */,
 				1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */,
 				1B7F118025E4046E00FF64A3 /* View.swift in Sources */,
 				1B7F117425E3F70500FF64A3 /* ContactActions.swift in Sources */,
+				1BBADE1025EC083800AD38F4 /* FilmActions.swift in Sources */,
 				1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */,
 				1BF22F4225D8B23F00775368 /* TeamResultsView.swift in Sources */,
 				1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */,
@@ -969,10 +1031,12 @@
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
+				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1B7F117B25E3F85600FF64A3 /* FetchedContacts.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
+				1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */,
 				1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1116,7 +1180,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1124,7 +1188,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1138,7 +1202,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1146,7 +1210,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

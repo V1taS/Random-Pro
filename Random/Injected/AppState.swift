@@ -17,6 +17,7 @@ struct AppState: Equatable {
 
 extension AppState {
     struct AppData: Equatable {
+        
         var main = Main()
         var numberRandom = NumberRandom()
         var listWords = ListWords()
@@ -29,6 +30,7 @@ extension AppState {
         var lottery = Lottery()
         var team = Team()
         var contact = Contact()
+        var film = Film()
     }
 }
 

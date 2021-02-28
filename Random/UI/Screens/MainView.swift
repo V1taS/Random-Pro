@@ -21,6 +21,22 @@ struct MainView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 
                 VStack(alignment: .center, spacing: 16) {
+                    
+                    HStack {
+                        NavigationLink(
+                            destination: FilmView(appBinding: appBinding)) {
+                            CellMainView(image: "film",
+                                         title: NSLocalizedString("Фильмы", comment: ""))
+                        }
+                        
+                        NavigationLink(
+                            destination: TeamView(appBinding: appBinding)) {
+                            CellMainView(image: "person.3",
+                                         title: NSLocalizedString("Команды",
+                                                                  comment: ""))
+                        }
+                    }
+                    
                     HStack {
                         NavigationLink(
                             destination: NumberView(appBinding: appBinding)) {
@@ -81,9 +97,9 @@ struct MainView: View {
                     
                     HStack {
                         NavigationLink(
-                            destination: TeamView(appBinding: appBinding)) {
-                            CellMainView(image: "person.3",
-                                         title: NSLocalizedString("Команды",
+                            destination: ContactView(appBinding: appBinding)) {
+                            CellMainView(image: "phone.circle",
+                                         title: NSLocalizedString("Контакт",
                                                                   comment: ""))
                         }
                         
@@ -92,7 +108,7 @@ struct MainView: View {
                             CellMainView(image: "phone.circle",
                                          title: NSLocalizedString("Контакт",
                                                                   comment: ""))
-                        }
+                        }.opacity(0)
                         
                     }
                     

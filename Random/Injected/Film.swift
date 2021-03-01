@@ -13,11 +13,10 @@ extension AppState.AppData {
         
         var films: [Datum] = []
         var filmsVideoHistory: [Datum] = []
+        
         var filmsHistory: [FilmsInfo] = []
         var filmInfo = FilmsInfo.plug
-        
-        var urlToFilm = ""
-
+    
         var showSettings = false
         var showActivityIndicator = false
         

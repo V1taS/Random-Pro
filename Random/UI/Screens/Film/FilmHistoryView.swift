@@ -13,9 +13,6 @@ struct FilmHistoryView: View {
     private var appBinding: Binding<AppState.AppData>
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
-        
-        UITableView.appearance().backgroundColor = .clear
-        UITableViewCell.appearance().backgroundColor = .clear
     }
     
     var body: some View {

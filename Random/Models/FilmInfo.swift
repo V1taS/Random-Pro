@@ -119,7 +119,16 @@ extension DataClass: Equatable {
 }
 
 extension FilmsInfo {
-    static let plug = FilmsInfo(data: DataClass(filmId: nil, nameRu: nil, nameEn: nil, webUrl: nil, posterUrlPreview: nil, year: nil, filmLength: nil, slogan: nil, description: nil, ratingAgeLimits: nil),
-                                rating: Rating(ratingImdb: nil),
-                                review: Review(ratingGoodReview: nil))
+    static let plug = FilmsInfo(data: DataClass(filmId: 1,
+                                                nameRu: "",
+                                                nameEn: "",
+                                                webUrl: "",
+                                                posterUrlPreview: "",
+                                                year: "",
+                                                filmLength: "",
+                                                slogan: "",
+                                                description: "",
+                                                ratingAgeLimits: 1),
+                                rating: Rating(ratingImdb: 1),
+                                review: Review(ratingGoodReview: ""))
 }

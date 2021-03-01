@@ -28,6 +28,7 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultsLottery(state: state)
             userDefaultTeam(state: state)
             userDefaultContact(state: state)
+            userDefaultFilms(state: state)
         }
     }
     
@@ -43,7 +44,44 @@ struct MainInteractorImpl: MainInteractor {
             cleanLottery()
             cleanTeam()
             cleanContact()
+            cleanFilms()
         }
+    }
+}
+
+extension MainInteractorImpl {
+    private func decoderFilms(forKey: String) -> [Datum]? {
+        if let items = UserDefaults.standard.data(forKey: forKey) {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([Datum].self, from: items) {
+                return decoded
+            }
+        }
+        return nil
+    }
+}
+
+extension MainInteractorImpl {
+    private func decoderFilmsInfo(forKey: String) -> [FilmsInfo]? {
+        if let items = UserDefaults.standard.data(forKey: forKey) {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([FilmsInfo].self, from: items) {
+                return decoded
+            }
+        }
+        return nil
+    }
+}
+
+extension MainInteractorImpl {
+    private func decoderFilmInfo(forKey: String) -> FilmsInfo? {
+        if let items = UserDefaults.standard.data(forKey: forKey) {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode(FilmsInfo.self, from: items) {
+                return decoded
+            }
+        }
+        return nil
     }
 }
 
@@ -206,6 +244,15 @@ extension MainInteractorImpl {
             state.contact.resultPhone.wrappedValue = UserDefaults.standard.object(forKey: "ContactResultPhone") as? String ?? ""
         }
     }
+    
+    private func userDefaultFilms(state: Binding<AppState.AppData>) {
+        if state.film.films.wrappedValue.isEmpty {
+            state.film.films.wrappedValue = decoderFilms(forKey: "FilmsData") ?? []
+            state.film.filmsVideoHistory.wrappedValue = decoderFilms(forKey: "FilmsVideoHistory") ?? []
+            state.film.filmsHistory.wrappedValue = decoderFilmsInfo(forKey: "FilmsHistory") ?? []
+            state.film.filmInfo.wrappedValue = decoderFilmInfo(forKey: "FilmInfo") ?? FilmsInfo.plug
+        }
+    }
 }
 
 extension MainInteractorImpl {
@@ -290,5 +337,11 @@ extension MainInteractorImpl {
         UserDefaults.standard.set([], forKey: "ContactListResult")
         UserDefaults.standard.set("", forKey: "ContactResultFullName")
         UserDefaults.standard.set("", forKey: "ContactResultPhone")
+    }
+    
+    private func cleanFilms() {
+        UserDefaults.standard.set([], forKey: "FilmsData")
+        UserDefaults.standard.set([], forKey: "FilmsVideoHistory")
+        UserDefaults.standard.set([], forKey: "FilmsHistory")
     }
 }

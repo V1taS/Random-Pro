@@ -100,22 +100,9 @@ struct FilmView: View {
 private extension FilmView {
     var generateButton: some View {
         Button(action: {
-            
-            //            Networking.share.getInfoKinopoisk(films: appBinding.film.films.wrappedValue) { film in
-            //                rating = film.rating?.ratingImdb ?? 1
-            //                print("\(film)")
-            //            }
-            
-            
             getMovies(state: appBinding)
             getCurrentFilmInfo(state: appBinding)
-            
-            
-            //            print("films: \(appBinding.film.filmInfo.wrappedValue)")
-            
-            
-            
-            //            saveContactToUserDefaults(state: appBinding)
+            saveFilmsToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
@@ -152,12 +139,12 @@ private extension FilmView {
     }
 }
 
-//private extension FilmView {
-//    private func saveContactToUserDefaults(state: Binding<AppState.AppData>) {
-//        injected.interactors.contactInteractor
-//            .saveContactToUserDefaults(state: state)
-//    }
-//}
+private extension FilmView {
+    private func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .saveFilmsToUserDefaults(state: state)
+    }
+}
 
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {

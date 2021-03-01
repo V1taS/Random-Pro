@@ -161,8 +161,12 @@ private extension SettingsView {
         injected.interactors.contactInteractor
             .cleanContacts(state: state)
         
+        injected.interactors.filmInteractor
+            .cleanFilms(state: state)
+        
         state.listWords.listData.wrappedValue = []
         state.team.listPlayersData.wrappedValue = []
+        state.film.filmInfo.wrappedValue = FilmsInfo.plug
     }
 }
 

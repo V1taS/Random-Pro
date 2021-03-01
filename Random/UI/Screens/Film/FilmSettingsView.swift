@@ -70,8 +70,10 @@ struct FilmSettingsView: View {
                         HStack {
                             Spacer()
                             Button(action: {
-                                cleanContacts(state: appBinding)
-                                saveContactToUserDefaults(state: appBinding)
+                                cleanFilms(state: appBinding)
+                                appBinding.film.showSettings.wrappedValue = false
+                                getMovies(state: appBinding)
+                                saveFilmsToUserDefaults(state: appBinding)
                                 Feedback.shared.impactHeavy(.medium)
                             }) {
                                 Text(NSLocalizedString("Очистить", comment: ""))
@@ -96,16 +98,21 @@ struct FilmSettingsView: View {
 
 // MARK: Actions
 private extension FilmSettingsView {
-    private func cleanContacts(state: Binding<AppState.AppData>) {
-        injected.interactors.contactInteractor
-            .cleanContacts(state: state)
+    private func cleanFilms(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .cleanFilms(state: state)
+    }
+    
+    private func getMovies(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .getMovies(state: state)
     }
 }
 
 private extension FilmSettingsView {
-    private func saveContactToUserDefaults(state: Binding<AppState.AppData>) {
-        injected.interactors.contactInteractor
-            .saveContactToUserDefaults(state: state)
+    private func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .saveFilmsToUserDefaults(state: state)
     }
 }
 

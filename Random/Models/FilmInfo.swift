@@ -10,119 +10,116 @@ import Foundation
 
 // MARK: - FilmsInfo
 struct FilmsInfo: Codable {
-    let data: DataClass
-    let rating: Rating?
-    let budget: Budget?
-    let review: Review?
-    let externalId: ExternalId?
-    let images: Images?
-
-    enum CodingKeys: String, CodingKey {
-        case data, rating, budget, review
-        case externalId
-        case images
-    }
-}
-
-// MARK: - Budget
-struct Budget: Codable {
-    let grossRu, grossUsa, grossWorld: Int
-    let budget: String
-    let marketing: Int
+    var data: DataClass?
+    var rating: Rating?
+    var review: Review?
 }
 
 // MARK: - DataClass
 struct DataClass: Codable {
-    let filmId: Int?
-    let nameRu, nameEn: String?
-    let webUrl: String?
-    let posterUrl: String?
-    let posterUrlPreview: String?
-    let year, filmLength, slogan, description: String?
-    let type, ratingMpaa: String?
+    var filmId: Int?
+    var nameRu: String?
+    var nameEn: String?
+    var webUrl: String?
+    var posterUrlPreview: String?
+    var year, filmLength, slogan, description: String?
     let ratingAgeLimits: Int?
-    let premiereRu, distributors, premiereWorld, premiereDigital: String?
-    let premiereWorldCountry, premiereDvd, premiereBluRay, distributorRelease: String?
-    let countries, genres: [Country]
-    let facts: [String]?
-    let seasons: [Season]
-
-    enum CodingKeys: String, CodingKey {
-        case filmId
-        case nameRu, nameEn
-        case webUrl
-        case posterUrl
-        case posterUrlPreview
-        case year, filmLength, slogan, description
-        case type
-        case ratingMpaa
-        case ratingAgeLimits, premiereRu, distributors, premiereWorld, premiereDigital, premiereWorldCountry
-        case premiereDvd
-        case premiereBluRay, distributorRelease, countries, genres, facts, seasons
-    }
 }
 
 // MARK: - Country
 struct Country: Codable {
-    let name: String?
+    var name: String?
 }
 
 // MARK: - Season
 struct Season: Codable {
-    let number: Int?
-    let episodes: [Episode]
+    var number: Int?
+    var episodes: [Episode]?
 }
 
 // MARK: - Episode
 struct Episode: Codable {
-    let seasonNumber, episodeNumber: Int?
-    let nameRu, nameEn, synopsis, releaseDate: String?
-}
-
-// MARK: - ExternalID
-struct ExternalId: Codable {
-    let imdbId: String?
-
-    enum CodingKeys: String, CodingKey {
-        case imdbId
-    }
-}
-
-// MARK: - Images
-struct Images: Codable {
-    let posters, backdrops: [Backdrop]
-}
-
-// MARK: - Backdrop
-struct Backdrop: Codable {
-    let language: String?
-    let url: String?
-    let height, width: Int?
+    var seasonNumber, episodeNumber: Int?
+    var nameRu, nameEn, synopsis, releaseDate: String?
 }
 
 // MARK: - Rating
 struct Rating: Codable {
-    let rating: Double?
-    let ratingVoteCount: Int?
-    let ratingImdb: Double?
-    let ratingImdbVoteCount: Int?
-    let ratingFilmCritics: String?
-    let ratingFilmCriticsVoteCount: Int?
-    let ratingAwait: String?
-    let ratingAwaitCount: Int?
-    let ratingRFCritics: String?
-    let ratingRFCriticsVoteCount: Int?
+    var ratingImdb: Double?
+}
 
-    enum CodingKeys: String, CodingKey {
-        case rating, ratingVoteCount, ratingImdb, ratingImdbVoteCount, ratingFilmCritics, ratingFilmCriticsVoteCount, ratingAwait, ratingAwaitCount
-        case ratingRFCritics
-        case ratingRFCriticsVoteCount
-    }
+// MARK: - Budget
+struct Budget: Codable {
+    var grossRu: Int?
+    var grossUsa: Int?
+    var grossWorld: Int?
+    var budget: String?
+    var marketing: Int?
 }
 
 // MARK: - Review
 struct Review: Codable {
-    let reviewsCount: Int?
-    let ratingGoodReview: String?
-    let ratingGoodReviewVoteCount: Int?
+    var ratingGoodReview: String?
+}
+
+// MARK: - ExternalID
+struct ExternalId: Codable {
+    var imdbId: String?
+}
+
+// MARK: - Images
+struct Images: Codable {
+    var posters, backdrops: [Backdrop]?
+}
+
+// MARK: - Backdrop
+struct Backdrop: Codable {
+    var language: String?
+    var url: String?
+    var height, width: Int?
+}
+
+extension FilmsInfo: Equatable {
+    static func == (lhs: FilmsInfo, rhs: FilmsInfo) -> Bool {
+        return
+            lhs.data == rhs.data &&
+            lhs.rating == rhs.rating &&
+            lhs.review == rhs.review
+    }
+}
+
+extension Rating: Equatable {
+    static func == (lhs: Rating, rhs: Rating) -> Bool {
+        return
+            lhs.ratingImdb == rhs.ratingImdb
+    }
+}
+
+extension Review: Equatable {
+    static func == (lhs: Review, rhs: Review) -> Bool {
+        return
+            lhs.ratingGoodReview == rhs.ratingGoodReview
+    }
+}
+
+extension DataClass: Equatable {
+    static func == (lhs: DataClass, rhs: DataClass) -> Bool {
+        return
+            lhs.filmId == rhs.filmId &&
+            lhs.nameRu == rhs.nameRu &&
+            lhs.nameEn == rhs.nameEn &&
+            lhs.webUrl == rhs.webUrl &&
+            lhs.posterUrlPreview == rhs.posterUrlPreview &&
+            lhs.year == rhs.year &&
+            lhs.filmLength == rhs.filmLength &&
+            lhs.slogan == rhs.slogan &&
+            lhs.description == rhs.description &&
+            lhs.ratingAgeLimits == rhs.ratingAgeLimits
+    }
+}
+
+extension FilmsInfo {
+    static let plug = FilmsInfo(data: DataClass(filmId: nil, nameRu: nil, nameEn: nil, webUrl: nil, posterUrlPreview: nil, year: nil, filmLength: nil, slogan: nil, description: nil, ratingAgeLimits: nil),
+                                rating: Rating(ratingImdb: nil),
+                                review: Review(ratingGoodReview: nil))
 }

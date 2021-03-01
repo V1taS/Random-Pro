@@ -100,3 +100,12 @@
 "Контакт" = "Contact";
 "Список контактов" = "List of contacts";
 "Фильмы" = "Movies";
+"Информация по фильму" = "Information on the film";
+"История генерации" = "Generation history";
+"Последний фильм" = "Last movie";
+"Всего сгенерировано" = "Total generated";
+"Название фильма:" = "Movie title:";
+"Продолжительность фильма:" = "Film duration:";
+"Год:" = "Year:";
+"Описание:" = "Description:";
+"Возрастные ограничения:" = "Age restrictions:";

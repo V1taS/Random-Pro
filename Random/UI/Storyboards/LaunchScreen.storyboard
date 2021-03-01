@@ -35,9 +35,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" systemColor="labelColor"/>
                         <constraints>
-                            <constraint firstItem="lQv-ss-eeg" firstAttribute="centerX" secondItem="ekI-Dc-pGn" secondAttribute="centerX" id="6qB-ku-gGh"/>
+                            <constraint firstItem="lQv-ss-eeg" firstAttribute="top" secondItem="RSl-uE-bs5" secondAttribute="bottom" constant="19.5" id="Syh-42-VzR"/>
                             <constraint firstItem="RSl-uE-bs5" firstAttribute="top" secondItem="c5d-FA-hp1" secondAttribute="top" constant="236" id="U3E-Q1-J2E"/>
-                            <constraint firstItem="lQv-ss-eeg" firstAttribute="centerY" secondItem="ekI-Dc-pGn" secondAttribute="centerY" id="ebR-hR-2Wh"/>
+                            <constraint firstItem="lQv-ss-eeg" firstAttribute="centerX" secondItem="ekI-Dc-pGn" secondAttribute="centerX" id="vF3-Yo-01w"/>
                             <constraint firstItem="RSl-uE-bs5" firstAttribute="centerX" secondItem="ekI-Dc-pGn" secondAttribute="centerX" id="wSh-iD-WRx"/>
                         </constraints>
                     </view>

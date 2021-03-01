@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct FilmView: View {
     private var appBinding: Binding<AppState.AppData>
@@ -16,82 +17,105 @@ struct FilmView: View {
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
     @State private var isPressedTouch = false
-    @State private var name = "?"
-    @State private var image = UIImage(named: "filmIMG")
+    
+    @State private var rating: Double = 0.0
     
     var body: some View {
-        ZStack {
-            Color(.clear)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 0) {
-                Image(uiImage: image!)
-//                    .resizable()
-                    .cornerRadius(8)
-                    .overlay(RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color(.clear)))
-                    .frame(maxHeight: 300)
-                    .padding(.horizontal, 16)
-                    .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 320),
-                           height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 280))
+        LoadingView(isShowing: appBinding.film.showActivityIndicator) {
+            ZStack {
+                Color(.clear)
+                    .edgesIgnoringSafeArea(.all)
                 
-                Text(name)
-                    .font(.robotoBold70())
-                    .foregroundColor(.primaryGray())
-                    .padding(.horizontal, 16)
-                    .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                    .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                    .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                VStack(spacing: 0) {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(spacing: 0) {
+                            
+                            Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")")
+                                .font(.robotoBold40())
+                                .lineLimit(2)
+                                .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
+                                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 16)
+                                .padding(.top, 16)
+                        }
+                        
+                        
+                        WebImage(url: URL(string: (appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? "")))
+                            .resizable()
+                            .renderingMode(.original)
+                            .onSuccess { image, data, cacheType in }
+                            .placeholder(Image("no_image"))
+                            .indicator(.activity)
+                            .transition(.fade(duration: 0.5))
+                            .scaledToFill()
+                            .aspectRatio(contentMode: .fit)
+                        //                        .cornerRadius(8)
+                        Spacer()
+                    }
+                }
                 
-                Spacer()
+                VStack {
+                    Spacer()
+                    generateButton
+                }
                 
-                generateButton
             }
-            .padding(.top, 16)
+            .dismissingKeyboard()
+            .onAppear {
+                getMovies(state: appBinding)
+            }
             
-            .navigationBarTitle(Text(NSLocalizedString("Контакт", comment: "")), displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: {
-                appBinding.contact.showSettings.wrappedValue.toggle()
-            }) {
-                Image(systemName: "gear")
-                    .font(.system(size: 24))
+            .navigationBarTitle(Text(NSLocalizedString("Фильмы", comment: "")), displayMode: .inline)
+            .navigationBarItems(trailing: HStack(spacing: 24) {
+                
+                Button(action: {
+                    getLinkFromStringURL(strURL: appBinding.film.filmsVideoHistory.wrappedValue.last?.iframeSrc)
+                }) {
+                    if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
+                        Image(systemName: "play.rectangle")
+                            .font(.system(size: 24))
+                            .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+                    }
+                }
+                
+                Button(action: {
+                    appBinding.film.showSettings.wrappedValue.toggle()
+                }) {
+                    if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
+                        Image(systemName: "gear")
+                            .font(.system(size: 24))
+                    }
+                }
             })
-            .sheet(isPresented: appBinding.contact.showSettings, content: {
-                ContactSettingsView(appBinding: appBinding)
+            .sheet(isPresented: appBinding.film.showSettings, content: {
+                FilmSettingsView(appBinding: appBinding)
             })
         }
-        .dismissingKeyboard()
     }
 }
 
 private extension FilmView {
     var generateButton: some View {
         Button(action: {
-            Networking.share.getMovies { films in
-                let randomNum = Int.random(in: 0...films.data.count - 1)
-                name = "\(films.data.count)"
-                
-                var request = URLRequest(url: URL(string: "https://kinopoiskapiunofficial.tech/api/v2.1/films/\(String(describing: films.data[randomNum].kinopoiskID))/frames")!)
-                request.httpMethod = "GET"
-                request.setValue("f835989c-b489-4624-9209-6d93bfead535", forHTTPHeaderField: "X-API-KEY")
-                let session = URLSession(configuration: URLSessionConfiguration.default)
-                session.dataTask(with: request as URLRequest) { [self] (data, response, error) -> Void in
-                    do {
-                        let filmsInfo = try JSONDecoder().decode(FramesFilms.self, from: data!)
-                        if filmsInfo.frames?[0].preview != nil {
-                            let url = URL(string: filmsInfo.frames![0].preview!)
-                            Networking.share.downloadedImageFilm(from: url!) { uiImage in
-                                image = uiImage
-                            }
-                        }
-                    } catch {
-                        print("error: ", error)
-                    }
-                }.resume()
-                
-            }
-//            generateContacts(state: appBinding)
-//            saveContactToUserDefaults(state: appBinding)
+            
+            //            Networking.share.getInfoKinopoisk(films: appBinding.film.films.wrappedValue) { film in
+            //                rating = film.rating?.ratingImdb ?? 1
+            //                print("\(film)")
+            //            }
+            
+            
+            getMovies(state: appBinding)
+            getCurrentFilmInfo(state: appBinding)
+            
+            
+            //            print("films: \(appBinding.film.filmInfo.wrappedValue)")
+            
+            
+            
+            //            saveContactToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),
@@ -109,9 +133,31 @@ private extension FilmView {
         } onRelease: {
             isPressedButton = false
         }
-        .padding(16)
+        .padding(.horizontal ,16)
+        .padding(.bottom, 16)
+        .padding(.top, 2)
     }
 }
+
+// MARK: Actions
+private extension FilmView {
+    private func getCurrentFilmInfo(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .getCurrentFilmInfo(state: state)
+    }
+    
+    private func getMovies(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .getMovies(state: state)
+    }
+}
+
+//private extension FilmView {
+//    private func saveContactToUserDefaults(state: Binding<AppState.AppData>) {
+//        injected.interactors.contactInteractor
+//            .saveContactToUserDefaults(state: state)
+//    }
+//}
 
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {

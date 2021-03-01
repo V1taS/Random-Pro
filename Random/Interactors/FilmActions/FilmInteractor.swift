@@ -11,49 +11,48 @@ import SwiftUI
 
 protocol FilmInteractor {
     func getMovies(state: Binding<AppState.AppData>)
+    func getCurrentFilmInfo(state: Binding<AppState.AppData>)
 }
 
 struct FilmInteractorImpl: FilmInteractor {
     func getMovies(state: Binding<AppState.AppData>) {
         
-        Networking.share.getMovies { films in
-            let indexDataFilms = Int.random(in: 0...films.data.count - 1)
+        if state.film.steps.wrappedValue == .firstStart {
+            let page = Int.random(in: 1...2968)
             
-            if let framesFilms = getFramesFilms(indexDataFilms, films: films) {
-                state.film.dataTemp.wrappedValue = framesFilms
+            state.film.showActivityIndicator.wrappedValue = true
+            Networking.share.getMovies(page: page, limit: 10) { films in
+                let films = films.data.shuffled()
+                state.film.films.wrappedValue = films
+                state.film.showActivityIndicator.wrappedValue = false
+                state.film.steps.wrappedValue = .non
             }
-            
-            
+        }
+        
+        if state.film.films.wrappedValue.count == 2 && !state.film.filmsHistory.wrappedValue.isEmpty {
+            let page = Int.random(in: 1...2968)
+
+            state.film.showActivityIndicator.wrappedValue = true
+            Networking.share.getMovies(page: page, limit: 10) { films in
+                let films = films.data.shuffled()
+                state.film.films.wrappedValue.append(contentsOf: films)
+                state.film.showActivityIndicator.wrappedValue = false
+            }
         }
     }
     
-    func getCurrentFilm(indexData: Int, films: Films) {
+    func getCurrentFilmInfo(state: Binding<AppState.AppData>) {
+        if state.film.films.wrappedValue.first?.kinopoiskID == nil {
+            state.film.films.wrappedValue.removeFirst()
+        }
         
-    }
-    
-    
-    
-    
-    
-}
-
-extension FilmInteractorImpl {
-    private func getFramesFilms(_ indexDataFilms: Int, films: Films) -> FramesFilms? {
-        let urlKinopoisk = URL(string: "https://kinopoiskapiunofficial.tech/api/v2.1/films/\(String(describing: films.data[indexDataFilms].kinopoiskID))/frames")!
-        var request = URLRequest(url: urlKinopoisk)
-        var framesFilms: FramesFilms?
-        
-        request.httpMethod = "GET"
-        request.setValue("f835989c-b489-4624-9209-6d93bfead535", forHTTPHeaderField: "X-API-KEY")
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        session.dataTask(with: request as URLRequest) { (data, _, _) in
-            do {
-                let filmImage = try JSONDecoder().decode(FramesFilms.self, from: data!)
-                framesFilms = filmImage
-            } catch {
-                print("error: ", error)
+        Networking.share.getInfoKinopoisk(films: state.film.films.wrappedValue) { film in
+            state.film.filmInfo.wrappedValue = film
+            state.film.filmsHistory.wrappedValue.append(film)
+            state.film.filmsVideoHistory.wrappedValue.append(state.film.films.wrappedValue.first!)
+            if !state.film.films.wrappedValue.isEmpty {
+                state.film.films.wrappedValue.removeFirst()
             }
-        }.resume()
-        return framesFilms
+        }
     }
 }

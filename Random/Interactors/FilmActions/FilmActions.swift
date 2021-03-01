@@ -10,5 +10,10 @@ import Foundation
 
 extension AppActions {
     struct FilmActions {
+        enum GetDowloadFilms {
+            case firstStart
+            case ifNotEnough
+            case non
+        }
     }
 }

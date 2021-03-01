@@ -11,12 +11,16 @@ import Foundation
 extension AppState.AppData {
     struct Film: Equatable {
         
-        var dataTemp: FramesFilms = FramesFilms(frames: [])
+        var films: [Datum] = []
+        var filmsVideoHistory: [Datum] = []
+        var filmsHistory: [FilmsInfo] = []
+        var filmInfo = FilmsInfo.plug
         
-        var listResults: [String] = []
-        var resultFullName = ""
-        var resultPhone = ""
-        
+        var urlToFilm = ""
+
         var showSettings = false
+        var showActivityIndicator = false
+        
+        var steps: AppActions.FilmActions.GetDowloadFilms = .firstStart
     }
 }

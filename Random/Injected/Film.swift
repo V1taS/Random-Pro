@@ -20,6 +20,10 @@ extension AppState.AppData {
         var filmsBestHistory: [BestFilm] = []
         var filmsBestInfo = BestFilm.plug
         
+        var filmsPopular: [BestFilm] = []
+        var filmsPopularHistory: [BestFilm] = []
+        var filmsPopularInfo = BestFilm.plug
+        
         
         var selectedGenres = 0
         var showSettings = false

@@ -153,13 +153,35 @@ private extension FilmView {
                 if let rating = appBinding.film.filmsBestInfo.rating.wrappedValue {
                     ratingIsShow = true
                     let ratingDouble = Double(rating)
-                    ratingFilm = ratingDouble ?? 0.0
+                    if let ratingDouble = ratingDouble {
+                        ratingFilm = ratingDouble
+                    } else {
+                        ratingIsShow = false
+                    }
                 } else {
                     ratingIsShow = false
                 }
+                print("filmsBestInfo: \(appBinding.film.filmsBest.wrappedValue.count)")
 
             case 1:
-                print("")
+                nameFilm = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopularInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsPopularInfo.nameEn.wrappedValue ?? "")"
+                imageFilm = appBinding.film.filmsPopularInfo.posterUrlPreview.wrappedValue ?? ""
+                
+                if let rating = appBinding.film.filmsPopularInfo.rating.wrappedValue {
+                    ratingIsShow = true
+                    let ratingDouble = Double(rating)
+                    
+                    if let ratingDouble = ratingDouble {
+                        ratingFilm = ratingDouble
+                    } else {
+                        ratingIsShow = false
+                    }
+
+                } else {
+                    ratingIsShow = false
+                }
+                
+                print("filmsBestInfo: \(appBinding.film.filmsPopular.wrappedValue.count)")
             case 2:
                 nameFilm = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")"
                 imageFilm = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
@@ -170,6 +192,7 @@ private extension FilmView {
                 } else {
                     ratingIsShow = false
                 }
+                print("filmsBestInfo: \(appBinding.film.films.wrappedValue.count)")
                 
             default: break
             }

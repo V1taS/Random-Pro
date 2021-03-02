@@ -45,7 +45,11 @@ struct Episode: Codable {
 
 // MARK: - Rating
 struct Rating: Codable {
+    var rating: Double?
     var ratingImdb: Double?
+    var ratingFilmCritics: String?
+    var ratingAwait: String?
+    var ratingRFCritics: String?
 }
 
 // MARK: - Budget
@@ -91,7 +95,11 @@ extension FilmsInfo: Equatable {
 extension Rating: Equatable {
     static func == (lhs: Rating, rhs: Rating) -> Bool {
         return
-            lhs.ratingImdb == rhs.ratingImdb
+            lhs.rating == rhs.rating &&
+            lhs.ratingImdb == rhs.ratingImdb &&
+            lhs.ratingFilmCritics == rhs.ratingFilmCritics &&
+            lhs.ratingAwait == rhs.ratingAwait &&
+            lhs.ratingRFCritics == rhs.ratingRFCritics
     }
 }
 

@@ -13,16 +13,18 @@ class Networking {
     private let tokenVideocdn: String = "?api_token=VGstdXXDwaGDIM4Ec8ofDLcZnAaTsU0X"
     
     private let urlStringKinopoisk: String = "https://kinopoiskapiunofficial.tech/api/v2.1/films/"
-    private let urlStringKinopoiskBestFilms: String = "https://kinopoiskapiunofficial.tech/api/v2.2/films/top/"
     private let tokenKinopoisk: String = "f835989c-b489-4624-9209-6d93bfead535"
+    
+    private let urlStringKinopoiskBestFilms: String = "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS"
+    private let urlStringKinopoiskPopularFilms: String = "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS"
 
     static let share = Networking()
     
     private init() {}
     
-    func getMovies(page: Int, limit: Int, completion: @escaping (Films) -> Void) {
+    func getMovies(year: Int, limit: Int, completion: @escaping (Films) -> Void) {
         
-        var request = URLRequest(url: URL(string: urlStringVideocdn + "movies" + tokenVideocdn + "&limit=\(limit)&page=\(page)")!)
+        var request = URLRequest(url: URL(string: urlStringVideocdn + "movies" + tokenVideocdn + "&year=\(year)&limit=\(limit)")!)
         request.httpMethod = "GET"
         let session = URLSession(configuration: URLSessionConfiguration.default)
         session.dataTask(with: request as URLRequest) { (data, response, error) in
@@ -57,9 +59,28 @@ class Networking {
         }.resume()
     }
     
-    func getInfoKinopoiskBestFilms(completion: @escaping (WelcomeBestFilm) -> Void) {
+    func getInfoKinopoiskBestFilms(page: Int, completion: @escaping (WelcomeBestFilm) -> Void) {
         
-        guard let url = URL(string: "\(urlStringKinopoiskBestFilms)") else { return }
+        guard let url = URL(string: "\(urlStringKinopoiskBestFilms)" + "&page=\(page)") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("\(tokenKinopoisk)", forHTTPHeaderField: "X-API-KEY")
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        
+        session.dataTask(with: request as URLRequest) { (data, response, error) in
+            do {
+                let bestFilms = try JSONDecoder().decode(WelcomeBestFilm.self, from: data!)
+                completion(bestFilms)
+            } catch {
+                print("Decoding error:", error)
+            }
+        }.resume()
+    }
+    
+    func getInfoKinopoiskPopularFilms(page: Int, completion: @escaping (WelcomeBestFilm) -> Void) {
+        
+        guard let url = URL(string: "\(urlStringKinopoiskPopularFilms)" + "&page=\(page)") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

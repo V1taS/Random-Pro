@@ -110,6 +110,8 @@
 		1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */; };
 		1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */; };
 		1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */; };
+		1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8DFA025EE4485007C389D /* FilmCellView.swift */; };
+		1BB8DFA425EE5E86007C389D /* BestFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8DFA325EE5E86007C389D /* BestFilm.swift */; };
 		1BBADDFD25EC00FF00AD38F4 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADDFC25EC00FF00AD38F4 /* Films.swift */; };
 		1BBADE0025EC013500AD38F4 /* FilmInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */; };
 		1BBADE0625EC02CE00AD38F4 /* CellImageMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */; };
@@ -265,6 +267,8 @@
 		1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSettingsView.swift; sourceTree = "<group>"; };
 		1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeResultsView.swift; sourceTree = "<group>"; };
+		1BB8DFA025EE4485007C389D /* FilmCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCellView.swift; sourceTree = "<group>"; };
+		1BB8DFA325EE5E86007C389D /* BestFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestFilm.swift; sourceTree = "<group>"; };
 		1BBADDFC25EC00FF00AD38F4 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInfo.swift; sourceTree = "<group>"; };
 		1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CellImageMainView.swift; path = ../../../../../../../../../../Applications/CellImageMainView.swift; sourceTree = "<group>"; };
@@ -445,6 +449,7 @@
 				1B7F117A25E3F85600FF64A3 /* FetchedContacts.swift */,
 				1BBADDFC25EC00FF00AD38F4 /* Films.swift */,
 				1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */,
+				1BB8DFA325EE5E86007C389D /* BestFilm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -509,6 +514,7 @@
 				1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */,
 				1B0DB27325DC680A00C9D31D /* ReversingScale.swift */,
 				1B0DB27625DC776F00C9D31D /* TextRoundView.swift */,
+				1BB8DFA025EE4485007C389D /* FilmCellView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1003,6 +1009,7 @@
 				1B7F118325E4068000FF64A3 /* ContactResultsView.swift in Sources */,
 				1BBADDFD25EC00FF00AD38F4 /* Films.swift in Sources */,
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
+				1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */,
 				1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
 				1B7F668825D0860600933AD6 /* PageView.swift in Sources */,
@@ -1092,6 +1099,7 @@
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
+				1BB8DFA425EE5E86007C389D /* BestFilm.swift in Sources */,
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
 				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
@@ -1249,7 +1257,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1259,7 +1267,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1274,7 +1282,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -1284,7 +1292,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

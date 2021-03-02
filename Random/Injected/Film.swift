@@ -13,13 +13,17 @@ extension AppState.AppData {
         
         var films: [Datum] = []
         var filmsVideoHistory: [Datum] = []
-        
         var filmsHistory: [FilmsInfo] = []
         var filmInfo = FilmsInfo.plug
-    
+        
+        var filmsBest: [BestFilm] = []
+        var filmsBestHistory: [BestFilm] = []
+        var filmsBestInfo = BestFilm.plug
+        
+        
+        var selectedGenres = 0
         var showSettings = false
         var showActivityIndicator = false
         
-        var steps: AppActions.FilmActions.GetDowloadFilms = .firstStart
     }
 }

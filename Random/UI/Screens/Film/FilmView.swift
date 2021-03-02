@@ -18,7 +18,15 @@ struct FilmView: View {
     @State private var isPressedButton = false
     @State private var isPressedTouch = false
     
-    @State private var rating: Double = 0.0
+    @State var genres = [NSLocalizedString("250 Лучших", comment: ""),
+                       NSLocalizedString("100 Популярных", comment: ""),
+                       NSLocalizedString("Все", comment: "")
+    ]
+    
+    @State private var nameFilm = ""
+    @State private var imageFilm = ""
+    @State private var ratingFilm: Double = 0.0
+    @State private var ratingIsShow = false
     
     var body: some View {
         LoadingView(isShowing: appBinding.film.showActivityIndicator) {
@@ -26,42 +34,17 @@ struct FilmView: View {
                 Color(.clear)
                     .edgesIgnoringSafeArea(.all)
                 
-                VStack(spacing: 0) {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(spacing: 0) {
-                            
-                            Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")")
-                                .font(.robotoBold40())
-                                .lineLimit(2)
-                                .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
-                                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 16)
-                                .padding(.top, 16)
-                        }
-                        
-                        
-                        WebImage(url: URL(string: (appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? "")))
-                            .resizable()
-                            .renderingMode(.original)
-                            .onSuccess { image, data, cacheType in }
-                            .placeholder(Image("no_image"))
-                            .indicator(.activity)
-                            .transition(.fade(duration: 0.5))
-                            .scaledToFill()
-                            .aspectRatio(contentMode: .fit)
-                        //                        .cornerRadius(8)
-                        Spacer()
-                    }
+                VStack(spacing: 16) {
+                    pickerView
+                    filmImage
+                    filmText
+                    Spacer()
                 }
                 
                 VStack {
                     Spacer()
                     generateButton
                 }
-                
             }
             .dismissingKeyboard()
             .onAppear {
@@ -70,25 +53,8 @@ struct FilmView: View {
             
             .navigationBarTitle(Text(NSLocalizedString("Фильмы", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: HStack(spacing: 24) {
-                
-                Button(action: {
-                    getLinkFromStringURL(strURL: appBinding.film.filmsVideoHistory.wrappedValue.last?.iframeSrc)
-                }) {
-                    if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
-                        Image(systemName: "play.rectangle")
-                            .font(.system(size: 24))
-                            .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
-                    }
-                }
-                
-                Button(action: {
-                    appBinding.film.showSettings.wrappedValue.toggle()
-                }) {
-                    if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
-                        Image(systemName: "gear")
-                            .font(.system(size: 24))
-                    }
-                }
+                navigationButtonPlay
+                navigationButtonGear
             })
             .sheet(isPresented: appBinding.film.showSettings, content: {
                 FilmSettingsView(appBinding: appBinding)
@@ -98,11 +64,117 @@ struct FilmView: View {
 }
 
 private extension FilmView {
+    var pickerView: some View {
+        VStack {
+            Picker(selection: appBinding.film.selectedGenres,
+                   label: Text("Picker")) {
+                ForEach(0..<genres.count) {
+                    Text("\(genres[$0])")
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.top, 16)
+        }
+    }
+}
+
+private extension FilmView {
+    var filmImage: some View {
+        VStack {
+            FilmCellView(ratingIsSwitch: ratingIsShow,
+                         ratingCount: ratingFilm,
+                         imageStr: imageFilm)
+        }
+        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 330),
+               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 450))
+    }
+}
+
+private extension FilmView {
+    var filmText: some View {
+        Text(nameFilm)
+            .font(.robotoMedium20())
+            .lineLimit(2)
+            .foregroundColor(.black)
+            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+            .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+            .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+            .multilineTextAlignment(.center)
+            .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 330))
+    }
+}
+
+private extension FilmView {
+    var navigationButtonGear: some View {
+        Button(action: {
+            appBinding.film.showSettings.wrappedValue.toggle()
+        }) {
+            if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
+                Image(systemName: "gear")
+                    .font(.system(size: 24))
+            }
+        }
+    }
+}
+
+private extension FilmView {
+    var navigationButtonPlay: some View {
+        Button(action: {
+            getLinkFromStringURL(strURL: appBinding.film.filmsVideoHistory.wrappedValue.last?.iframeSrc)
+        }) {
+            if appBinding.film.selectedGenres.wrappedValue == 2 {
+                if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
+                    Image(systemName: "play.rectangle")
+                        .font(.system(size: 24))
+                        .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+                }
+            }
+        }
+    }
+}
+
+private extension FilmView {
     var generateButton: some View {
         Button(action: {
+            
+//            appBinding.film.selectedGenres.wrappedValue = selectedGenres
+//            print("\(selectedGenres)")
             getMovies(state: appBinding)
             getCurrentFilmInfo(state: appBinding)
             saveFilmsToUserDefaults(state: appBinding)
+            
+            
+            
+            switch appBinding.film.selectedGenres.wrappedValue {
+            case 0:
+                nameFilm = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? "")"
+                imageFilm = appBinding.film.filmsBestInfo.posterUrlPreview.wrappedValue ?? ""
+                
+                if let rating = appBinding.film.filmsBestInfo.rating.wrappedValue {
+                    ratingIsShow = true
+                    let ratingDouble = Double(rating)
+                    ratingFilm = ratingDouble ?? 0.0
+                } else {
+                    ratingIsShow = false
+                }
+
+            case 1:
+                print("")
+            case 2:
+                nameFilm = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")"
+                imageFilm = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
+                
+                if let rating = appBinding.film.filmInfo.rating.wrappedValue?.ratingImdb {
+                    ratingIsShow = true
+                    ratingFilm = rating
+                } else {
+                    ratingIsShow = false
+                }
+                
+            default: break
+            }
+            
+            
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(background: .primaryTertiary(),

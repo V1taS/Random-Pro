@@ -19,44 +19,60 @@ protocol FilmInteractor {
 struct FilmInteractorImpl: FilmInteractor {
     func getMovies(state: Binding<AppState.AppData>) {
         
-        if state.film.steps.wrappedValue == .firstStart {
-            let page = Int.random(in: 1...2968)
-            
-            state.film.showActivityIndicator.wrappedValue = true
-            Networking.share.getMovies(page: page, limit: 10) { films in
-                let films = films.data.shuffled()
-                state.film.films.wrappedValue = films
-                state.film.showActivityIndicator.wrappedValue = false
-                state.film.steps.wrappedValue = .non
+        switch state.film.selectedGenres.wrappedValue {
+        case 0:
+            if state.film.filmsBest.wrappedValue.count == 0 || state.film.filmsBest.wrappedValue.count == 2 {
+                state.film.showActivityIndicator.wrappedValue = true
+                Networking.share.getInfoKinopoiskBestFilms { films in
+                    let films = films.films?.shuffled()
+                    state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
+                    state.film.showActivityIndicator.wrappedValue = false
+                }
             }
-        }
-        
-        if state.film.films.wrappedValue.count == 2 && !state.film.filmsHistory.wrappedValue.isEmpty {
-            let page = Int.random(in: 1...2968)
-            
-            state.film.showActivityIndicator.wrappedValue = true
-            Networking.share.getMovies(page: page, limit: 10) { films in
-                let films = films.data.shuffled()
-                state.film.films.wrappedValue.append(contentsOf: films)
-                state.film.showActivityIndicator.wrappedValue = false
+        case 1:
+            print("")
+        case 2:
+            if state.film.films.wrappedValue.count == 0 || state.film.films.wrappedValue.count == 2 {
+                let page = Int.random(in: 1...2968)
+
+                state.film.showActivityIndicator.wrappedValue = true
+                Networking.share.getMovies(page: page, limit: 10) { films in
+                    let films = films.data.shuffled()
+                    state.film.films.wrappedValue.append(contentsOf: films)
+                    state.film.showActivityIndicator.wrappedValue = false
+                }
             }
+        default: break
         }
     }
     
     func getCurrentFilmInfo(state: Binding<AppState.AppData>) {
-        if !state.film.films.wrappedValue.isEmpty {
-            if state.film.films.wrappedValue.first?.kinopoiskID == nil {
-                state.film.films.wrappedValue.removeFirst()
-            }
-            
-            Networking.share.getInfoKinopoisk(films: state.film.films.wrappedValue) { film in
-                state.film.filmInfo.wrappedValue = film
-                state.film.filmsHistory.wrappedValue.append(film)
-                state.film.filmsVideoHistory.wrappedValue.append(state.film.films.wrappedValue.first!)
-                state.film.films.wrappedValue.removeFirst()
-            }
-        }
         
+        switch state.film.selectedGenres.wrappedValue {
+        case 0:
+            if !state.film.filmsBest.wrappedValue.isEmpty {
+                let film = state.film.filmsBest.wrappedValue.first
+                state.film.filmsBestInfo.wrappedValue = film!
+                state.film.filmsBestHistory.wrappedValue.append(film!)
+                state.film.filmsBest.wrappedValue.removeFirst()
+            }
+        case 1:
+            print("")
+        case 2:
+            if !state.film.films.wrappedValue.isEmpty {
+                if state.film.films.wrappedValue.first?.kinopoiskID == nil {
+                    state.film.films.wrappedValue.removeFirst()
+                }
+                
+                Networking.share.getInfoKinopoisk(films: state.film.films.wrappedValue) { film in
+                    state.film.filmInfo.wrappedValue = film
+                    state.film.filmsHistory.wrappedValue.append(film)
+                    state.film.filmsVideoHistory.wrappedValue.append(state.film.films.wrappedValue.first!)
+                    state.film.films.wrappedValue.removeFirst()
+                }
+            }
+        default: break
+        }
     }
     
     func cleanFilms(state: Binding<AppState.AppData>) {
@@ -64,7 +80,6 @@ struct FilmInteractorImpl: FilmInteractor {
         state.film.filmsHistory.wrappedValue = []
         state.film.filmsVideoHistory.wrappedValue = []
         state.film.filmInfo.wrappedValue = FilmsInfo.plug
-        state.film.steps.wrappedValue = .firstStart
     }
     
     func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {

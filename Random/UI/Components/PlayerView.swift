@@ -18,16 +18,17 @@ struct PlayerView: View {
             VStack(alignment: .center, spacing: 4) {
                 Image(image)
                     .resizable()
-                    .frame(width: 100, height: 100, alignment: .center)
+                    .frame(width: 70, height: 70, alignment: .center)
                 
                 Text(name)
                     .lineLimit(2)
-                    .font(.robotoMedium20())
+                    .font(.robotoMedium16())
                     .foregroundColor(.primaryGray())
-                    .frame(width: 100)
+                    .frame(width: 80)
             }
         }
-        .frame(width: 100, height: 160)
+        .frame(width: 80, height: 120)
+//        .background(Color.blue)
     }
 }
 

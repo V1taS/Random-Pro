@@ -57,9 +57,9 @@ struct TeamView: View {
 private extension TeamView {
     var header: some View {
         VStack {
-            Text(NSLocalizedString("Количество команд", comment: ""))
-                .font(.robotoMedium20())
-                .foregroundColor(.primaryGray())
+//            Text(NSLocalizedString("Количество команд", comment: ""))
+//                .font(.robotoMedium20())
+//                .foregroundColor(.primaryGray())
             
             Picker(selection: $selectedTeam,
                    label: Text("Picker")) {
@@ -69,7 +69,7 @@ private extension TeamView {
             }
             .disabled(appBinding.team.disabledPickerView.wrappedValue)
             .pickerStyle(SegmentedPickerStyle())
-            .padding(.top, 16)
+//            .padding(.top, 16)
             .padding(.horizontal, 16)
         }
         .padding(.top, 16)

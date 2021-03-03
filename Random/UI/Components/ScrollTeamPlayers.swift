@@ -19,7 +19,7 @@ struct ScrollTeamPlayers: View {
             HStack {
                 Text(NSLocalizedString("Команда номер", comment: "") + " \(teamNumber)")
                     .foregroundColor(.primaryGray())
-                    .font(.robotoMedium28())
+                    .font(.robotoMedium20())
                 Spacer()
             }
             .padding(.leading, 16)

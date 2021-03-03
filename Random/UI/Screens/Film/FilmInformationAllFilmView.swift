@@ -11,10 +11,12 @@ import SwiftUI
 struct FilmInformationAllFilmView: View {
     private var filmsInfo: FilmsInfo
     private var iframeSrc: String
+    private var appBinding: Binding<AppState.AppData>
     
-    init(filmsInfo: FilmsInfo, iframeSrc: String) {
+    init(filmsInfo: FilmsInfo, iframeSrc: String, appBinding: Binding<AppState.AppData>) {
         self.filmsInfo = filmsInfo
         self.iframeSrc = iframeSrc
+        self.appBinding = appBinding
     }
     
     var body: some View {
@@ -23,7 +25,8 @@ struct FilmInformationAllFilmView: View {
         }
         .navigationBarTitle(Text(NSLocalizedString("Информация по фильму", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
-            getLinkFromStringURL(strURL: iframeSrc)
+            let filterarr = appBinding.film.filmsVideoHistory.wrappedValue.filter { $0.ruTitle == appBinding.film.filmInfo.data.wrappedValue?.nameRu }
+            getLinkFromStringURL(strURL: filterarr.first?.iframeSrc)
         }) {
             Image(systemName: "play.rectangle")
                 .font(.system(size: 24))
@@ -102,6 +105,6 @@ private extension FilmInformationAllFilmView {
 
 struct FilmInformation_Previews: PreviewProvider {
     static var previews: some View {
-        FilmInformationAllFilmView(filmsInfo: .init(), iframeSrc: "")
+        FilmInformationAllFilmView(filmsInfo: .init(), iframeSrc: "", appBinding: .constant(.init()))
     }
 }

@@ -173,7 +173,7 @@ private extension FilmSettingsView {
         case 2:
             return AnyView(FilmInformationAllFilmView(
                             filmsInfo: appBinding.film.filmInfo.wrappedValue,
-                            iframeSrc: appBinding.film.filmsVideoHistory.wrappedValue.last?.iframeSrc ?? ""))
+                            iframeSrc: appBinding.film.filmsVideoHistory.wrappedValue.last?.iframeSrc ?? "", appBinding: appBinding))
         default:
             return AnyView(Text("Error"))
         }

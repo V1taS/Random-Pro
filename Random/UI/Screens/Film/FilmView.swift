@@ -145,7 +145,8 @@ private extension FilmView {
 private extension FilmView {
     var navigationButtonPlay: some View {
         Button(action: {
-            getLinkFromStringURL(strURL: appBinding.film.filmsVideoHistory.wrappedValue.last?.iframeSrc)
+            let filterarr = appBinding.film.filmsVideoHistory.wrappedValue.filter { $0.ruTitle == appBinding.film.filmInfo.data.wrappedValue?.nameRu }
+            getLinkFromStringURL(strURL: filterarr.first?.iframeSrc)
         }) {
             if appBinding.film.selectedGenres.wrappedValue == 2 {
                 if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {

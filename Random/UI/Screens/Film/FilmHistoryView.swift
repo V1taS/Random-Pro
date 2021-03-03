@@ -30,7 +30,7 @@ private extension FilmHistoryView {
                 
                 VStack {
                     NavigationLink(
-                        destination: FilmInformationAllFilmView(filmsInfo: film, iframeSrc: (appBinding.film.filmsVideoHistory.wrappedValue[index].iframeSrc!))
+                        destination: FilmInformationAllFilmView(filmsInfo: film, iframeSrc: (appBinding.film.filmsVideoHistory.wrappedValue[index].iframeSrc!), appBinding: appBinding)
                             .allowAutoDismiss { false }) {
                         
                         VStack(spacing: 4) {

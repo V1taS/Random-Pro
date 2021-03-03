@@ -9,8 +9,8 @@
 import Foundation
 
 extension AppActions {
-    struct FilmActions {
-        enum GetDowloadFilms {
+    struct FilmActions: Equatable {
+        enum GetDowloadAllFilms {
             case firstStart
             case ifNotEnough
             case non

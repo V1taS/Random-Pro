@@ -166,7 +166,6 @@ private extension SettingsView {
         
         state.listWords.listData.wrappedValue = []
         state.team.listPlayersData.wrappedValue = []
-        state.film.filmInfo.wrappedValue = FilmsInfo.plug
     }
 }
 

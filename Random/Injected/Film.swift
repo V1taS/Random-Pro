@@ -13,6 +13,8 @@ extension AppState.AppData {
         
         var films: [Datum] = []
         var filmsVideoHistory: [Datum] = []
+        
+        var filmsTemp: [FilmsInfo] = []
         var filmsHistory: [FilmsInfo] = []
         var filmInfo = FilmsInfo.plug
         
@@ -26,8 +28,12 @@ extension AppState.AppData {
         
         
         var selectedGenres = 0
+        var nameFilm = ""
+        var imageFilm = ""
+        var ratingFilm: Double = 0.0
+        var ratingIsShow = false
+        
         var showSettings = false
         var showActivityIndicator = false
-        
     }
 }

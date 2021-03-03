@@ -23,11 +23,13 @@ struct DataClass: Codable {
     var webUrl: String?
     var posterUrlPreview: String?
     var year, filmLength, slogan, description: String?
-    let ratingAgeLimits: Int?
+    var ratingAgeLimits: Int?
+    var countries: [FilmsInfoCountry]?
+    var genres: [FilmsInfoCountry]?
 }
 
-// MARK: - Country
-struct Country: Codable {
+// MARK: - FilmsInfoCountry
+struct FilmsInfoCountry: Codable {
     var name: String?
 }
 
@@ -83,6 +85,13 @@ struct Backdrop: Codable {
     var height, width: Int?
 }
 
+extension FilmsInfoCountry: Equatable {
+    static func == (lhs: FilmsInfoCountry, rhs: FilmsInfoCountry) -> Bool {
+        return
+            lhs.name == rhs.name
+    }
+}
+
 extension FilmsInfo: Equatable {
     static func == (lhs: FilmsInfo, rhs: FilmsInfo) -> Bool {
         return
@@ -127,16 +136,16 @@ extension DataClass: Equatable {
 }
 
 extension FilmsInfo {
-    static let plug = FilmsInfo(data: DataClass(filmId: 1,
-                                                nameRu: "",
-                                                nameEn: "",
-                                                webUrl: "",
-                                                posterUrlPreview: "",
-                                                year: "",
-                                                filmLength: "",
-                                                slogan: "",
-                                                description: "",
-                                                ratingAgeLimits: 1),
-                                rating: Rating(ratingImdb: 1),
-                                review: Review(ratingGoodReview: ""))
+    static let plug = FilmsInfo(data: DataClass(filmId: nil,
+                                                nameRu: nil,
+                                                nameEn: nil,
+                                                webUrl: nil,
+                                                posterUrlPreview: nil,
+                                                year: nil,
+                                                filmLength: nil,
+                                                slogan: nil,
+                                                description: nil,
+                                                ratingAgeLimits: nil),
+                                rating: Rating(ratingImdb: nil),
+                                review: Review(ratingGoodReview: nil))
 }

@@ -19,34 +19,47 @@ protocol FilmInteractor {
 struct FilmInteractorImpl: FilmInteractor {
     func getMovies(state: Binding<AppState.AppData>) {
         
-        if state.film.filmsBest.wrappedValue.count == 0 || state.film.filmsBest.wrappedValue.count == 2 {
-            let page = Int.random(in: 1...13)
-            state.film.showActivityIndicator.wrappedValue = true
-            Networking.share.getInfoKinopoiskBestFilms(page: page) { films in
-                let films = films.films?.shuffled()
-                state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
-                state.film.showActivityIndicator.wrappedValue = false
+        DispatchQueue.main.async {
+            if state.film.filmsBest.wrappedValue.count == 0 || state.film.filmsBest.wrappedValue.count == 1 {
+                let page = Int.random(in: 1...13)
+                state.film.showActivityIndicator.wrappedValue = true
+                Networking.share.getInfoKinopoiskBestFilms(page: page) { films in
+                    let films = films.films?.shuffled()
+                    state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
+                    state.film.showActivityIndicator.wrappedValue = false
+                }
             }
-        }
-        
-        if state.film.filmsPopular.wrappedValue.count == 0 || state.film.filmsPopular.wrappedValue.count == 2 {
-            let page = Int.random(in: 1...5)
-            state.film.showActivityIndicator.wrappedValue = true
-            Networking.share.getInfoKinopoiskPopularFilms(page: page) { films in
-                let films = films.films?.shuffled()
-                state.film.filmsPopular.wrappedValue.append(contentsOf: films ?? [])
-                state.film.showActivityIndicator.wrappedValue = false
+            
+            if state.film.filmsPopular.wrappedValue.count == 0 || state.film.filmsPopular.wrappedValue.count == 1 {
+                let page = Int.random(in: 1...5)
+                state.film.showActivityIndicator.wrappedValue = true
+                Networking.share.getInfoKinopoiskPopularFilms(page: page) { films in
+                    let films = films.films?.shuffled()
+                    state.film.filmsPopular.wrappedValue.append(contentsOf: films ?? [])
+                    state.film.showActivityIndicator.wrappedValue = false
+                }
             }
-        }
-        
-        if state.film.films.wrappedValue.count == 0 || state.film.films.wrappedValue.count == 2 {
-            let year = Int.random(in: 2010...2021)
-
-            state.film.showActivityIndicator.wrappedValue = true
-            Networking.share.getMovies(year: year, limit: 10) { films in
-                let films = films.data.shuffled()
-                state.film.films.wrappedValue.append(contentsOf: films)
-                state.film.showActivityIndicator.wrappedValue = false
+            
+            if state.film.films.wrappedValue.count == 0 || state.film.films.wrappedValue.count == 1 {
+                let year = Int.random(in: 2010...2021)
+                
+                state.film.showActivityIndicator.wrappedValue = true
+                Networking.share.getMovies(year: year, limit: 20) { films in
+                    var films = films
+                    
+                    for (index, film) in films.data.enumerated() {
+                        if film.kinopoiskID == nil {
+                            films.data.remove(at: index)
+                        }
+                    }
+                    
+                    let filmsShuffled = films.data.shuffled()
+                    state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
+                    
+                    Networking.share.getInfoKinopoisk(films: filmsShuffled, state: state)
+                    
+                    state.film.showActivityIndicator.wrappedValue = false
+                }
             }
         }
     }
@@ -74,12 +87,15 @@ struct FilmInteractorImpl: FilmInteractor {
                     state.film.films.wrappedValue.removeFirst()
                 }
                 
-                Networking.share.getInfoKinopoisk(films: state.film.films.wrappedValue) { film in
-                    state.film.filmInfo.wrappedValue = film
-                    state.film.filmsHistory.wrappedValue.append(film)
-                    state.film.filmsVideoHistory.wrappedValue.append(state.film.films.wrappedValue.first!)
-                    state.film.films.wrappedValue.removeFirst()
-                }
+                guard let filmsTemp = state.film.filmsTemp.wrappedValue.first else { return }
+                guard let films = state.film.films.wrappedValue.first else { return }
+                
+                state.film.filmInfo.wrappedValue = filmsTemp
+                state.film.filmsHistory.wrappedValue.append(filmsTemp)
+                state.film.filmsVideoHistory.wrappedValue.append(films)
+                state.film.films.wrappedValue.removeFirst()
+                state.film.filmsTemp.wrappedValue.removeFirst()
+                
             }
         default: break
         }
@@ -89,7 +105,13 @@ struct FilmInteractorImpl: FilmInteractor {
         state.film.films.wrappedValue = []
         state.film.filmsHistory.wrappedValue = []
         state.film.filmsVideoHistory.wrappedValue = []
-        state.film.filmInfo.wrappedValue = FilmsInfo.plug
+        state.film.filmsTemp.wrappedValue = []
+        
+        state.film.filmsBest.wrappedValue = []
+        state.film.filmsBestHistory.wrappedValue = []
+        
+        state.film.filmsPopular.wrappedValue = []
+        state.film.filmsPopularHistory.wrappedValue = []
     }
     
     func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
@@ -97,13 +119,17 @@ struct FilmInteractorImpl: FilmInteractor {
             saveFilms(state: state)
             saveFilmsVideoHistory(state: state)
             saveFilmsHistory(state: state)
-            saveFilmInfo(state: state)
+            saveFilmsBest(state: state)
+            saveFilmsBestHistory(state: state)
+            saveFilmsPopular(state: state)
+            saveFilmsBestPopular(state: state)
+            saveFilmsTemp(state: state)
         }
     }
 }
 
 extension FilmInteractorImpl {
-    private func encoder(films: [Datum], forKey: String) {
+    private func encoderArrDatum(films: [Datum], forKey: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(films) {
             UserDefaults.standard.set(encoded, forKey: forKey)
@@ -112,7 +138,7 @@ extension FilmInteractorImpl {
 }
 
 extension FilmInteractorImpl {
-    private func encoder(filmInfo: [FilmsInfo], forKey: String) {
+    private func encoderArrFilmsInfo(filmInfo: [FilmsInfo], forKey: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(filmInfo) {
             UserDefaults.standard.set(encoded, forKey: forKey)
@@ -121,9 +147,9 @@ extension FilmInteractorImpl {
 }
 
 extension FilmInteractorImpl {
-    private func encoder(filmInfo: FilmsInfo, forKey: String) {
+    private func encoderArrBestFilm(films: [BestFilm], forKey: String) {
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(filmInfo) {
+        if let encoded = try? encoder.encode(films) {
             UserDefaults.standard.set(encoded, forKey: forKey)
         }
     }
@@ -132,18 +158,40 @@ extension FilmInteractorImpl {
 // MARK - Films Save
 extension FilmInteractorImpl {
     private func saveFilms(state: Binding<AppState.AppData>) {
-        encoder(films: state.film.films.wrappedValue, forKey: "FilmsData")
+        encoderArrDatum(films: state.film.films.wrappedValue, forKey: "FilmsData")
     }
     
     private func saveFilmsVideoHistory(state: Binding<AppState.AppData>) {
-        encoder(films: state.film.filmsVideoHistory.wrappedValue, forKey: "FilmsVideoHistory")
+        encoderArrDatum(films: state.film.filmsVideoHistory.wrappedValue, forKey: "FilmsVideoHistory")
     }
     
     private func saveFilmsHistory(state: Binding<AppState.AppData>) {
-        encoder(filmInfo: state.film.filmsHistory.wrappedValue, forKey: "FilmsHistory")
+        encoderArrFilmsInfo(filmInfo: state.film.filmsHistory.wrappedValue, forKey: "FilmsHistory")
     }
     
-    private func saveFilmInfo(state: Binding<AppState.AppData>) {
-        encoder(filmInfo: state.film.filmInfo.wrappedValue, forKey: "FilmInfo")
+    private func saveFilmsTemp(state: Binding<AppState.AppData>) {
+        encoderArrFilmsInfo(filmInfo: state.film.filmsTemp.wrappedValue, forKey: "FilmsTemp")
+    }
+}
+
+// MARK - FilmsBest Save
+extension FilmInteractorImpl {
+    private func saveFilmsBest(state: Binding<AppState.AppData>) {
+        encoderArrBestFilm(films: state.film.filmsBest.wrappedValue, forKey: "FilmsBest")
+    }
+    
+    private func saveFilmsBestHistory(state: Binding<AppState.AppData>) {
+        encoderArrBestFilm(films: state.film.filmsBestHistory.wrappedValue, forKey: "FilmsBestHistory")
+    }
+}
+
+// MARK - FilmsPopular Save
+extension FilmInteractorImpl {
+    private func saveFilmsPopular(state: Binding<AppState.AppData>) {
+        encoderArrBestFilm(films: state.film.filmsPopular.wrappedValue, forKey: "FilmsPopular")
+    }
+    
+    private func saveFilmsBestPopular(state: Binding<AppState.AppData>) {
+        encoderArrBestFilm(films: state.film.filmsPopularHistory.wrappedValue, forKey: "FilmsPopularHistory")
     }
 }

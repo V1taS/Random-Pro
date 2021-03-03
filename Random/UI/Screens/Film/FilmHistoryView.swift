@@ -25,30 +25,43 @@ struct FilmHistoryView: View {
 
 private extension FilmHistoryView {
     var listResults: some View {
-        List {
+        Form {
             ForEach(Array(appBinding.film.filmsHistory.wrappedValue.enumerated()), id: \.0) { (index, film) in
                 
-                HStack(spacing: 16) {
+                VStack {
                     NavigationLink(
-                        destination: FilmInformationView(filmsInfo: film, iframeSrc: (appBinding.film.filmsVideoHistory.wrappedValue[index].iframeSrc!))
+                        destination: FilmInformationAllFilmView(filmsInfo: film, iframeSrc: (appBinding.film.filmsVideoHistory.wrappedValue[index].iframeSrc!))
                             .allowAutoDismiss { false }) {
                         
-                        Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(film.data?.nameRu ?? "нет")" : "\(film.data?.nameEn ?? "нет")")
-                            .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
-                            .font(.robotoMedium18())
+                        VStack(spacing: 4) {
+                            HStack {
+                                Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(film.data?.nameRu ?? "нет")" : "\(film.data?.nameEn ?? "нет")")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text("Год: \(film.data?.year ?? "")")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoRegular16())
+                                Spacer()
+                            }
+                        }
 
-                        Spacer()
-                        
                         WebImage(url: URL(string: film.data?.posterUrlPreview ?? ""))
                             .resizable()
                             .renderingMode(.original)
                             .onSuccess { image, data, cacheType in }
                             .placeholder(Image("no_image"))
                             .indicator(.activity)
+                            .frame(width: 70, height: 100)
                             .transition(.fade(duration: 0.5))
-                            .scaledToFill()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 70)
+                            .aspectRatio(contentMode: .fill)
+                            .cornerRadius(8)
+                            .overlay(RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color(.systemGray4)))
+                            
                     }
                 }
             }

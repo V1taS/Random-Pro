@@ -1,17 +1,18 @@
 //
-//  FilmInformationView.swift
+//  FilmInformationBestFilmView.swift
 //  Random Pro
 //
-//  Created by Vitalii Sosin on 01.03.2021.
+//  Created by Vitalii Sosin on 02.03.2021.
 //  Copyright © 2021 Sosin.bet. All rights reserved.
 //
 
 import SwiftUI
 
-struct FilmInformationView: View {
-    private var filmsInfo: FilmsInfo
+struct FilmInformationBestFilmView: View {
+    private var filmsInfo: BestFilm
     private var iframeSrc: String
-    init(filmsInfo: FilmsInfo, iframeSrc: String) {
+    
+    init(filmsInfo: BestFilm, iframeSrc: String) {
         self.filmsInfo = filmsInfo
         self.iframeSrc = iframeSrc
     }
@@ -27,11 +28,12 @@ struct FilmInformationView: View {
             Image(systemName: "play.rectangle")
                 .font(.system(size: 24))
                 .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+                .hidden()
         })
     }
 }
 
-private extension FilmInformationView {
+private extension FilmInformationBestFilmView {
     var listResults: some View {
         List {
             HStack(spacing: 16) {
@@ -41,9 +43,9 @@ private extension FilmInformationView {
                 
                 Spacer()
                 
-                Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(filmsInfo.data?.nameRu ?? "")" : "\(filmsInfo.data?.nameEn ?? "")")
-                    .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
-                    .font(.robotoMedium18())
+                Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(filmsInfo.nameRu ?? "")" : "\(filmsInfo.nameEn ?? "")")
+                    .foregroundColor(.primaryGray())
+                    .font(.robotoRegular16())
             }
             
             HStack(spacing: 16) {
@@ -53,9 +55,9 @@ private extension FilmInformationView {
                 
                 Spacer()
                 
-                Text("\(filmsInfo.data?.year ?? "")")
-                    .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
-                    .font(.robotoMedium18())
+                Text("\(filmsInfo.year ?? "")")
+                    .foregroundColor(.primaryGray())
+                    .font(.robotoRegular16())
             }
             
             HStack(spacing: 16) {
@@ -65,40 +67,53 @@ private extension FilmInformationView {
                 
                 Spacer()
                 
-                Text("\(filmsInfo.data?.filmLength ?? "")")
-                    .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
-                    .font(.robotoMedium18())
+                Text("\(filmsInfo.filmLength ?? "")")
+                    .foregroundColor(.primaryGray())
+                    .font(.robotoRegular16())
             }
             
             HStack(spacing: 16) {
-                Text(NSLocalizedString("Возрастные ограничения:", comment: ""))
+                Text(NSLocalizedString("Жанр:", comment: ""))
                     .foregroundColor(.primaryGray())
                     .font(.robotoMedium18())
                 
                 Spacer()
                 
-                Text("\(filmsInfo.data?.ratingAgeLimits ?? 0)+")
-                    .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
-                    .font(.robotoMedium18())
+                Text("\(filmsInfo.genres?.first?.genre?.firstUppercased ?? "-")")
+                    .foregroundColor(.primaryGray())
+                    .font(.robotoRegular16())
             }
             
             HStack(spacing: 16) {
-                Text(NSLocalizedString("Описание:", comment: ""))
+                Text(NSLocalizedString("Страна:", comment: ""))
                     .foregroundColor(.primaryGray())
                     .font(.robotoMedium18())
                 
                 Spacer()
                 
-                Text("\(filmsInfo.data?.description ?? "")")
-                    .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
+                Text("\(filmsInfo.countries?.first?.country ?? "-")")
+                    .foregroundColor(.primaryGray())
+                    .font(.robotoRegular16())
+            }
+            
+            HStack(spacing: 16) {
+                Text(NSLocalizedString("Рейтинг:", comment: ""))
+                    .foregroundColor(.primaryGray())
                     .font(.robotoMedium18())
+                
+                Spacer()
+                
+                Text("\(filmsInfo.rating ?? "-")")
+                    .foregroundColor(.primaryGray())
+                    .font(.robotoRegular16())
             }
         }
     }
 }
 
-struct FilmInformation_Previews: PreviewProvider {
+
+struct FilmInformationBestFilmView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmInformationView(filmsInfo: .init(), iframeSrc: "")
+        FilmInformationBestFilmView(filmsInfo: BestFilm.plug, iframeSrc: "")
     }
 }

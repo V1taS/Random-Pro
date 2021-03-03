@@ -6,7 +6,7 @@
 //  Copyright © 2021 Sosin.bet. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 
 class Networking {
     private let urlStringVideocdn: String = "https://videocdn.tv/api/"
@@ -31,32 +31,34 @@ class Networking {
             guard let data = data else { return }
             do {
                 let films = try JSONDecoder().decode(Films.self, from: data)
-                completion(films)
+                DispatchQueue.main.async {
+                    completion(films)
+                }
             } catch {
                 print("error: ", error)
             }
         }.resume()
     }
     
-    func getInfoKinopoisk(films: [Datum], completion: @escaping (FilmsInfo) -> Void) {
-        
-        guard let film = films.first else { return }
-        guard let kinopoiskID = film.kinopoiskID else { return }
-        guard let url = URL(string: "\(urlStringKinopoisk)\(String(describing: kinopoiskID))") else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("\(tokenKinopoisk)", forHTTPHeaderField: "X-API-KEY")
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        
-        session.dataTask(with: request as URLRequest) { (data, response, error) in
-            do {
-                let filmsInfo = try JSONDecoder().decode(FilmsInfo.self, from: data!)
-                completion(filmsInfo)
-            } catch {
-                print("Decoding error:", error)
-            }
-        }.resume()
+    func getInfoKinopoisk(films: [Datum], state: Binding<AppState.AppData>) {
+        for film in films {
+            guard let kinopoiskID = film.kinopoiskID else { return }
+            guard let url = URL(string: "\(urlStringKinopoisk)\(String(describing: kinopoiskID))") else { return }
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue("\(tokenKinopoisk)", forHTTPHeaderField: "X-API-KEY")
+            let session = URLSession(configuration: URLSessionConfiguration.default)
+            session.dataTask(with: request as URLRequest) { (data, response, error) in
+                do {
+                    let filmsInfo = try JSONDecoder().decode(FilmsInfo.self, from: data!)
+                    DispatchQueue.main.async {
+                        state.film.filmsTemp.wrappedValue.append(filmsInfo)
+                    }
+                } catch {
+                    print("Decoding error:", error)
+                }
+            }.resume()
+        }
     }
     
     func getInfoKinopoiskBestFilms(page: Int, completion: @escaping (WelcomeBestFilm) -> Void) {
@@ -71,7 +73,9 @@ class Networking {
         session.dataTask(with: request as URLRequest) { (data, response, error) in
             do {
                 let bestFilms = try JSONDecoder().decode(WelcomeBestFilm.self, from: data!)
-                completion(bestFilms)
+                DispatchQueue.main.async {
+                    completion(bestFilms)
+                }
             } catch {
                 print("Decoding error:", error)
             }
@@ -90,7 +94,9 @@ class Networking {
         session.dataTask(with: request as URLRequest) { (data, response, error) in
             do {
                 let bestFilms = try JSONDecoder().decode(WelcomeBestFilm.self, from: data!)
-                completion(bestFilms)
+                DispatchQueue.main.async {
+                    completion(bestFilms)
+                }
             } catch {
                 print("Decoding error:", error)
             }

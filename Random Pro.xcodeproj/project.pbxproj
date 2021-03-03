@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0CFA9C25EEB8B0000FB641 /* FilmInformationBestFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */; };
+		1B0CFAA725EF11F7000FB641 /* FilmBestHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */; };
 		1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26825DC19A600C9D31D /* SKProduct.swift */; };
 		1B0DB26D25DC49F500C9D31D /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26C25DC49F500C9D31D /* ActivityIndicator.swift */; };
 		1B0DB27025DC4A4300C9D31D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */; };
@@ -104,7 +106,7 @@
 		1B92035325D189890094D2BE /* CubeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92035225D189890094D2BE /* CubeSettingsView.swift */; };
 		1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92035525D18EF10094D2BE /* CellCubeOneView.swift */; };
 		1B9AB8A625ECB77700BD5CFD /* FilmSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8A525ECB77700BD5CFD /* FilmSettingsView.swift */; };
-		1B9AB8AC25ECC47800BD5CFD /* FilmInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8AB25ECC47800BD5CFD /* FilmInformationView.swift */; };
+		1B9AB8AC25ECC47800BD5CFD /* FilmInformationAllFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8AB25ECC47800BD5CFD /* FilmInformationAllFilmView.swift */; };
 		1B9AB8B125ECCC1600BD5CFD /* FilmHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8B025ECCC1600BD5CFD /* FilmHistoryView.swift */; };
 		1B9AB8BC25ECE82D00BD5CFD /* GlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8BB25ECE82D00BD5CFD /* GlobalFunc.swift */; };
 		1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */; };
@@ -161,6 +163,8 @@
 /* Begin PBXFileReference section */
 		0326B1D63B7BDBD08E4886CF /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10A47EA34A6F1414A8AC29C8 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInformationBestFilmView.swift; sourceTree = "<group>"; };
+		1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmBestHistoryView.swift; sourceTree = "<group>"; };
 		1B0DB26825DC19A600C9D31D /* SKProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProduct.swift; sourceTree = "<group>"; };
 		1B0DB26C25DC49F500C9D31D /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -261,7 +265,7 @@
 		1B92035225D189890094D2BE /* CubeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeSettingsView.swift; sourceTree = "<group>"; };
 		1B92035525D18EF10094D2BE /* CellCubeOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeOneView.swift; sourceTree = "<group>"; };
 		1B9AB8A525ECB77700BD5CFD /* FilmSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSettingsView.swift; sourceTree = "<group>"; };
-		1B9AB8AB25ECC47800BD5CFD /* FilmInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInformationView.swift; sourceTree = "<group>"; };
+		1B9AB8AB25ECC47800BD5CFD /* FilmInformationAllFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInformationAllFilmView.swift; sourceTree = "<group>"; };
 		1B9AB8B025ECCC1600BD5CFD /* FilmHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmHistoryView.swift; sourceTree = "<group>"; };
 		1B9AB8BB25ECE82D00BD5CFD /* GlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunc.swift; sourceTree = "<group>"; };
 		1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDateAndTimeInteractor.swift; sourceTree = "<group>"; };
@@ -747,8 +751,10 @@
 			children = (
 				1BBADE1725EC091100AD38F4 /* FilmView.swift */,
 				1B9AB8A525ECB77700BD5CFD /* FilmSettingsView.swift */,
-				1B9AB8AB25ECC47800BD5CFD /* FilmInformationView.swift */,
+				1B9AB8AB25ECC47800BD5CFD /* FilmInformationAllFilmView.swift */,
+				1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */,
 				1B9AB8B025ECCC1600BD5CFD /* FilmHistoryView.swift */,
+				1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */,
 			);
 			path = Film;
 			sourceTree = "<group>";
@@ -1064,6 +1070,7 @@
 				1B92031C25D1755B0094D2BE /* CharactersSettingsView.swift in Sources */,
 				1BF30DCB25D1963400DCE62B /* CellCubeFiveView.swift in Sources */,
 				1BF22F3E25D8B21A00775368 /* TeamSettingsView.swift in Sources */,
+				1B0CFAA725EF11F7000FB641 /* FilmBestHistoryView.swift in Sources */,
 				1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */,
 				1BF22F2B25D8860000775368 /* TeamInteractor.swift in Sources */,
 				1B0DB26D25DC49F500C9D31D /* ActivityIndicator.swift in Sources */,
@@ -1079,7 +1086,7 @@
 				1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */,
 				1B7F118025E4046E00FF64A3 /* View.swift in Sources */,
 				1B7F117425E3F70500FF64A3 /* ContactActions.swift in Sources */,
-				1B9AB8AC25ECC47800BD5CFD /* FilmInformationView.swift in Sources */,
+				1B9AB8AC25ECC47800BD5CFD /* FilmInformationAllFilmView.swift in Sources */,
 				1BBADE1025EC083800AD38F4 /* FilmActions.swift in Sources */,
 				1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */,
 				1BF22F4225D8B23F00775368 /* TeamResultsView.swift in Sources */,
@@ -1094,6 +1101,7 @@
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
+				1B0CFA9C25EEB8B0000FB641 /* FilmInformationBestFilmView.swift in Sources */,
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
 				1BF22F3225D88F3C00775368 /* Player.swift in Sources */,
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,

@@ -33,6 +33,7 @@ extension AppState.AppData {
         var ratingFilm: Double = 0.0
         var ratingIsShow = false
         
+        var showVideoPlayerIcon = false
         var showSettings = false
         var showActivityIndicator = false
     }

@@ -55,7 +55,8 @@ struct FilmView: View {
             .frame(width: 110)
             )
             
-            .sheet(isPresented: appBinding.film.showSettings, onDismiss: {
+            .sheet(isPresented: appBinding.film.showSettings,
+                   onDismiss: {
                 switch appBinding.film.selectedGenres.wrappedValue {
                 case 0:
                     if appBinding.film.filmsBest.wrappedValue.isEmpty && appBinding.film.filmsBestHistory.wrappedValue.isEmpty {
@@ -81,12 +82,16 @@ struct FilmView: View {
                 default: break
                 }
                 
-            }, content: {
+            }
+                   , content: {
                 FilmSettingsView(appBinding: appBinding)
             })
         }
         .onAppear {
             getMovies(state: appBinding)
+            
+            print("filmsHistory Last :\(String(describing: appBinding.film.filmsHistory.wrappedValue.last?.data?.nameRu))")
+            print("filmsVideoHistory Last :\(String(describing: appBinding.film.filmsVideoHistory.wrappedValue.last?.origTitle))")
         }
     }
 }
@@ -145,14 +150,15 @@ private extension FilmView {
 private extension FilmView {
     var navigationButtonPlay: some View {
         Button(action: {
-            let filterarr = appBinding.film.filmsVideoHistory.wrappedValue.filter { $0.ruTitle == appBinding.film.filmInfo.data.wrappedValue?.nameRu }
-            getLinkFromStringURL(strURL: filterarr.first?.iframeSrc)
+            getLinkOnPageAllVideo(state: appBinding)
         }) {
             if appBinding.film.selectedGenres.wrappedValue == 2 {
                 if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
-                    Image(systemName: "play.rectangle")
-                        .font(.system(size: 24))
-                        .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+                    if appBinding.film.showVideoPlayerIcon.wrappedValue {
+                        Image(systemName: "play.rectangle")
+                            .font(.system(size: 24))
+                            .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+                    }
                 }
             }
         }
@@ -162,7 +168,6 @@ private extension FilmView {
 private extension FilmView {
     var generateButton: some View {
         Button(action: {
-            
             getMovies(state: appBinding)
             getCurrentFilmInfo(state: appBinding)
             saveFilmsToUserDefaults(state: appBinding)
@@ -202,6 +207,7 @@ private extension FilmView {
                     appBinding.film.ratingIsShow.wrappedValue = false
                 }
             case 2:
+                validVideoplayerIcon(state: appBinding)
                 appBinding.film.nameFilm.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")"
                 appBinding.film.imageFilm.wrappedValue = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
                 
@@ -253,6 +259,23 @@ private extension FilmView {
     private func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.filmInteractor
             .saveFilmsToUserDefaults(state: state)
+    }
+}
+
+private extension FilmView {
+    private func getLinkOnPageAllVideo(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .getLinkOnPageAllVideo(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
+                                   filmKinopoisk: state.film.filmsHistory.wrappedValue.last)
+    }
+}
+
+private extension FilmView {
+    private func validVideoplayerIcon(state: Binding<AppState.AppData>) {
+        let valid = injected.interactors.filmInteractor
+            .validVideoplayerIcon(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
+                                  filmKinopoisk: state.film.filmsHistory.wrappedValue.last)
+        state.film.showVideoPlayerIcon.wrappedValue = valid
     }
 }
 

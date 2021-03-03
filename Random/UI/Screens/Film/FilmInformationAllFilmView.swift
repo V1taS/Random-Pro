@@ -10,28 +10,31 @@ import SwiftUI
 
 struct FilmInformationAllFilmView: View {
     private var filmsInfo: FilmsInfo
-    private var iframeSrc: String
     private var appBinding: Binding<AppState.AppData>
     
-    init(filmsInfo: FilmsInfo, iframeSrc: String, appBinding: Binding<AppState.AppData>) {
+    init(filmsInfo: FilmsInfo, appBinding: Binding<AppState.AppData>) {
         self.filmsInfo = filmsInfo
-        self.iframeSrc = iframeSrc
         self.appBinding = appBinding
+//        validVideoplayerIcon(state: appBinding,
+//                             filmKinopoisk: filmsInfo)
     }
+    @Environment(\.injected) private var injected: DIContainer
     
     var body: some View {
         VStack {
             listResults
         }
         .navigationBarTitle(Text(NSLocalizedString("Информация по фильму", comment: "")), displayMode: .inline)
-        .navigationBarItems(trailing: Button(action: {
-            let filterarr = appBinding.film.filmsVideoHistory.wrappedValue.filter { $0.ruTitle == appBinding.film.filmInfo.data.wrappedValue?.nameRu }
-            getLinkFromStringURL(strURL: filterarr.first?.iframeSrc)
-        }) {
-            Image(systemName: "play.rectangle")
-                .font(.system(size: 24))
-                .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
-        })
+//        .navigationBarItems(trailing: Button(action: {
+//            getLinkOnPageAllVideo(state: appBinding,
+//                                  filmKinopoisk: filmsInfo)
+//        }) {
+//            if appBinding.film.showVideoPlayerIcon.wrappedValue {
+//                Image(systemName: "play.rectangle")
+//                    .font(.system(size: 24))
+//                    .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+//            }
+//        })
     }
 }
 
@@ -103,8 +106,25 @@ private extension FilmInformationAllFilmView {
     }
 }
 
+private extension FilmInformationAllFilmView {
+    private func getLinkOnPageAllVideo(state: Binding<AppState.AppData>, filmKinopoisk: FilmsInfo?) {
+        injected.interactors.filmInteractor
+            .getLinkOnPageAllVideo(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
+                                   filmKinopoisk: filmKinopoisk)
+    }
+}
+
+private extension FilmInformationAllFilmView {
+    private func validVideoplayerIcon(state: Binding<AppState.AppData>, filmKinopoisk: FilmsInfo?) {
+        let valid = injected.interactors.filmInteractor
+            .validVideoplayerIcon(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
+                                  filmKinopoisk: filmKinopoisk)
+        state.film.showVideoPlayerIcon.wrappedValue = valid
+    }
+}
+
 struct FilmInformation_Previews: PreviewProvider {
     static var previews: some View {
-        FilmInformationAllFilmView(filmsInfo: .init(), iframeSrc: "", appBinding: .constant(.init()))
+        FilmInformationAllFilmView(filmsInfo: .init(), appBinding: .constant(.init()))
     }
 }

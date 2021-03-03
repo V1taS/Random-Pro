@@ -14,6 +14,7 @@ struct FilmHistoryView: View {
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
     }
+    @Environment(\.injected) private var injected: DIContainer
     
     var body: some View {
         VStack {
@@ -30,7 +31,8 @@ private extension FilmHistoryView {
                 
                 VStack {
                     NavigationLink(
-                        destination: FilmInformationAllFilmView(filmsInfo: film, iframeSrc: (appBinding.film.filmsVideoHistory.wrappedValue[index].iframeSrc!), appBinding: appBinding)
+                        destination: FilmInformationAllFilmView(filmsInfo: film,
+                                                                appBinding: appBinding)
                             .allowAutoDismiss { false }) {
                         
                         VStack(spacing: 4) {

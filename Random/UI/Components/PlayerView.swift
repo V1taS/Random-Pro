@@ -24,16 +24,17 @@ struct PlayerView: View {
                     .lineLimit(2)
                     .font(.robotoMedium16())
                     .foregroundColor(.primaryGray())
-                    .frame(width: 80)
+                    .multilineTextAlignment(.center)
+                    .frame(width: 100)
             }
         }
-        .frame(width: 80, height: 120)
+        .frame(width: 100, height: 120)
 //        .background(Color.blue)
     }
 }
 
 struct Player_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerView(name: "Сосин Виталий", image: "player2")
+        PlayerView(name: "Кожевников Евгений", image: "player2")
     }
 }

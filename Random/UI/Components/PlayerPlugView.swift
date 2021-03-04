@@ -12,15 +12,15 @@ struct PlayerPlugView: View {
     
     var body: some View {
         ZStack {
-            VStack(alignment: .center, spacing: 4) {
+            VStack(alignment: .center) {
                 Text("?")
-                    .lineLimit(2)
+                    .lineLimit(1)
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())
                     .frame(width: 100)
             }
         }
-        .frame(width: 100, height: 160)
+        .frame(width: 100, height: 120)
     }
 }
 

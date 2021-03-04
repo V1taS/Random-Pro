@@ -230,8 +230,7 @@ private extension CubeView {
             saveCubeToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(background: .primaryTertiary(),
-                       textColor: .primaryPale(),
+            ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Бросить кубик(и)", comment: ""),
                        switchImage: false,

@@ -65,8 +65,7 @@ private extension YesOrNotView {
             saveYesOrNotToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(background: .primaryTertiary(),
-                       textColor: .primaryPale(),
+            ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Да или Нет?", comment: ""),
                        switchImage: false,

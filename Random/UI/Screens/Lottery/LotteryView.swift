@@ -145,8 +145,7 @@ private extension LotteryView {
                 saveLotteryToUserDefaults(state: appBinding)
             }
         }) {
-            ButtonView(background: .primaryTertiary(),
-                       textColor: .primaryPale(),
+            ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,

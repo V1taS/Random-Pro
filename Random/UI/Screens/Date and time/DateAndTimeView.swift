@@ -63,8 +63,7 @@ private extension DateAndTimeView {
                     saveDayToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(background: .primaryTertiary(),
-                               textColor: .primaryPale(),
+                    ButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("День", comment: ""),
                                switchImage: false,
@@ -84,8 +83,7 @@ private extension DateAndTimeView {
                     saveDayToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(background: .primaryTertiary(),
-                               textColor: .primaryPale(),
+                    ButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("Время", comment: ""),
                                switchImage: false,
@@ -108,8 +106,7 @@ private extension DateAndTimeView {
                     saveDayToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(background: .primaryTertiary(),
-                               textColor: .primaryPale(),
+                    ButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("Дата", comment: ""),
                                switchImage: false,
@@ -129,8 +126,7 @@ private extension DateAndTimeView {
                     saveDayToUserDefaults(state: appBinding)
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(background: .primaryTertiary(),
-                               textColor: .primaryPale(),
+                    ButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("Месяц", comment: ""),
                                switchImage: false,

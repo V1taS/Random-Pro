@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ButtonView: View {
     
-    let background: UIColor
     let textColor: UIColor
     let borderColor: UIColor
     let text: String
@@ -34,7 +33,8 @@ struct ButtonView: View {
 private extension ButtonView {
     private var backgroundColor: AnyView {
         AnyView(
-            Color(background)
+            Rectangle()
+                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color(borderColor), lineWidth: 1.5))
@@ -70,8 +70,7 @@ private extension ButtonView {
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(background: .primaryPale(),
-                   textColor: .black,
+        ButtonView(textColor: .black,
                    borderColor: .red,
                    text: "Продолжить с Apple",
                    switchImage: true,

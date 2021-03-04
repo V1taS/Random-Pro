@@ -54,15 +54,16 @@ struct ContactView: View {
                             .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
                             .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
                             .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-                            .padding(.horizontal, 16)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 24)
                         
                         Text("\(appBinding.contact.resultPhone.wrappedValue)")
                             .font(.robotoBold30())
-                            .gradientForeground(colors: [Color.primaryGreen(), Color.primaryTertiary()])
+                            .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
                             .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
                             .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
                             .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, 24)
                     }
                     
                     .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
@@ -105,8 +106,7 @@ private extension ContactView {
             saveContactToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(background: .primaryTertiary(),
-                       textColor: .primaryPale(),
+            ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,

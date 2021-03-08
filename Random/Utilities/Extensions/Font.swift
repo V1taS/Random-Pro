@@ -73,6 +73,10 @@ extension Font {
         return Font.custom("Roboto-Medium", size: 28)
     }
     
+    static func robotoMedium24() -> Font {
+        return Font.custom("Roboto-Medium", size: 24)
+    }
+    
     static func robotoMedium20() -> Font {
         return Font.custom("Roboto-Medium", size: 20)
     }

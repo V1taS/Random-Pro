@@ -20,7 +20,9 @@ struct SettingsView: View {
                 Form {
                     Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
                         idea
-                        share
+                        if UIDevice.current.userInterfaceIdiom != .pad {
+                            share
+                        }
                         tipTheDeveloper
                     }
                     
@@ -31,6 +33,7 @@ struct SettingsView: View {
             }
             .navigationBarTitle(Text(LocalizedStringKey("Настройки")), displayMode: .automatic)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -40,7 +43,7 @@ private extension SettingsView {
             Image(systemName: "message")
                 .font(.title)
                 .frame(width: 50, alignment: .leading)
-                .foregroundColor(.primaryTertiary())
+                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
             
             HStack {
                 Button(action: {
@@ -65,7 +68,7 @@ private extension SettingsView {
             Image(systemName: "square.and.arrow.up")
                 .font(.title)
                 .frame(width: 50, alignment: .leading)
-                .foregroundColor(.primaryTertiary())
+                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
             
             HStack {
                 Button(action: {
@@ -92,7 +95,7 @@ private extension SettingsView {
                     Image(systemName: "bitcoinsign.circle.fill")
                         .font(.title)
                         .frame(width: 50, alignment: .leading)
-                        .foregroundColor(.primaryTertiary())
+                        .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
                     
                     Text(NSLocalizedString("Чаевые разработчику", comment: ""))
                         .foregroundColor(.primaryGray())

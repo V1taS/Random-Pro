@@ -57,41 +57,38 @@ struct FilmView: View {
             
             .sheet(isPresented: appBinding.film.showSettings,
                    onDismiss: {
-                switch appBinding.film.selectedGenres.wrappedValue {
-                case 0:
-                    if appBinding.film.filmsBest.wrappedValue.isEmpty && appBinding.film.filmsBestHistory.wrappedValue.isEmpty {
-                        appBinding.film.nameFilm.wrappedValue = ""
-                        appBinding.film.imageFilm.wrappedValue = ""
-                        appBinding.film.ratingFilm.wrappedValue = 0.0
-                        appBinding.film.ratingIsShow.wrappedValue = false
+                    switch appBinding.film.selectedGenres.wrappedValue {
+                    case 0:
+                        if appBinding.film.filmsBest.wrappedValue.isEmpty && appBinding.film.filmsBestHistory.wrappedValue.isEmpty {
+                            appBinding.film.nameFilm.wrappedValue = ""
+                            appBinding.film.imageFilm.wrappedValue = ""
+                            appBinding.film.ratingFilm.wrappedValue = 0.0
+                            appBinding.film.ratingIsShow.wrappedValue = false
+                        }
+                    case 1:
+                        if appBinding.film.filmsPopular.wrappedValue.isEmpty && appBinding.film.filmsPopularHistory.wrappedValue.isEmpty {
+                            appBinding.film.nameFilm.wrappedValue = ""
+                            appBinding.film.imageFilm.wrappedValue = ""
+                            appBinding.film.ratingFilm.wrappedValue = 0.0
+                            appBinding.film.ratingIsShow.wrappedValue = false
+                        }
+                    case 2:
+                        if appBinding.film.films.wrappedValue.isEmpty && appBinding.film.filmsHistory.wrappedValue.isEmpty {
+                            appBinding.film.nameFilm.wrappedValue = ""
+                            appBinding.film.imageFilm.wrappedValue = ""
+                            appBinding.film.ratingFilm.wrappedValue = 0.0
+                            appBinding.film.ratingIsShow.wrappedValue = false
+                        }
+                    default: break
                     }
-                case 1:
-                    if appBinding.film.filmsPopular.wrappedValue.isEmpty && appBinding.film.filmsPopularHistory.wrappedValue.isEmpty {
-                        appBinding.film.nameFilm.wrappedValue = ""
-                        appBinding.film.imageFilm.wrappedValue = ""
-                        appBinding.film.ratingFilm.wrappedValue = 0.0
-                        appBinding.film.ratingIsShow.wrappedValue = false
-                    }
-                case 2:
-                    if appBinding.film.films.wrappedValue.isEmpty && appBinding.film.filmsHistory.wrappedValue.isEmpty {
-                        appBinding.film.nameFilm.wrappedValue = ""
-                        appBinding.film.imageFilm.wrappedValue = ""
-                        appBinding.film.ratingFilm.wrappedValue = 0.0
-                        appBinding.film.ratingIsShow.wrappedValue = false
-                    }
-                default: break
-                }
-                
-            }
+                    
+                   }
                    , content: {
-                FilmSettingsView(appBinding: appBinding)
-            })
+                    FilmSettingsView(appBinding: appBinding)
+                   })
         }
         .onAppear {
             getMovies(state: appBinding)
-            
-            print("filmsHistory Last :\(String(describing: appBinding.film.filmsHistory.wrappedValue.last?.data?.nameRu))")
-            print("filmsVideoHistory Last :\(String(describing: appBinding.film.filmsVideoHistory.wrappedValue.last?.origTitle))")
         }
     }
 }
@@ -112,13 +109,9 @@ private extension FilmView {
 
 private extension FilmView {
     var filmImage: some View {
-        VStack {
-            FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShow.wrappedValue,
-                         ratingCount: appBinding.film.ratingFilm.wrappedValue,
-                         imageStr: appBinding.film.imageFilm.wrappedValue)
-        }
-        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 330),
-               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 450))
+        FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShow.wrappedValue,
+                     ratingCount: appBinding.film.ratingFilm.wrappedValue,
+                     imageStr: appBinding.film.imageFilm.wrappedValue)
     }
 }
 
@@ -132,7 +125,6 @@ private extension FilmView {
             .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
             .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
             .multilineTextAlignment(.center)
-            .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 330))
     }
 }
 

@@ -17,260 +17,240 @@ struct MainView: View {
     @Environment(\.injected) private var injected: DIContainer
     
     var body: some View {
-            NavigationView {
-                GridStack(minCellWidth: 300, spacing: 16, numItems: 15) { index, cellWidth in
-                
-                Text("\(index)")
-                    .foregroundColor(.red)
-                    .frame(width: cellWidth, height: cellWidth * 0.66)
-                    .background(Color.blue)
-                
-//                ScrollView(.vertical, showsIndicators: false) {
-//
-//
-//
-//                    if UIDevice.current.userInterfaceIdiom == .pad {
-//                        //                        iPad
-//                    }
-//                    else {
-//                        //                        iPhone
-//                    }
-//                }
-                .onAppear {
-                    userDefaultsGet(state: appBinding)
-                }
-                .navigationBarTitle(Text("Random"))
+        NavigationView {
+            ScrollView(.vertical, showsIndicators: false) {
+                device
             }
-            
-        } .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
-
-// MARK: iPAD
-private extension MainView {
-    var iPad: some View {
-        VStack(alignment: .center, spacing: 16) {
-            
-            HStack {
-                NavigationLink(
-                    destination: FilmView(appBinding: appBinding)) {
-                    CellMainView(image: "film",
-                                 title: NSLocalizedString("Фильмы", comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: TeamView(appBinding: appBinding)) {
-                    CellMainView(image: "person.3",
-                                 title: NSLocalizedString("Команды",
-                                                          comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: NumberView(appBinding: appBinding)) {
-                    CellMainView(image: "number",
-                                 title: NSLocalizedString("Число", comment: ""))
-                }
+            .onAppear {
+                userDefaultsGet(state: appBinding)
             }
+            .navigationBarTitle(Text("Random"))
             
-            HStack {
-                NavigationLink(
-                    destination: YesOrNotView(appBinding: appBinding)) {
-                    CellMainView(image: "questionmark.square",
-                                 title: NSLocalizedString("Да или Нет", comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: CharactersView(appBinding: appBinding)) {
-                    CellMainView(image: "textbox",
-                                 title: NSLocalizedString("Буква", comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: ListWordsView(appBinding: appBinding)) {
-                    CellMainView(image: "list.bullet.below.rectangle",
-                                 title: NSLocalizedString("Список", comment: ""))
-                }
-                
-                
-            }
-            
-            HStack {
-                NavigationLink(
-                    destination: CoinView(appBinding: appBinding)) {
-                    CellMainView(image: "bitcoinsign.circle",
-                                 title: NSLocalizedString("Монета", comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: CubeView(appBinding: appBinding)) {
-                    CellMainView(image: "cube",
-                                 title: NSLocalizedString("Кубики", comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: DateAndTimeView(appBinding: appBinding)) {
-                    CellMainView(image: "calendar",
-                                 title: NSLocalizedString("Дата и время",
-                                                          comment: ""))
-                }
-            }
-            
-            HStack {
-                NavigationLink(
-                    destination: LotteryView(appBinding: appBinding)) {
-                    CellMainView(image: "tag",
-                                 title: NSLocalizedString("Лотерея",
-                                                          comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: ContactView(appBinding: appBinding)) {
-                    CellMainView(image: "phone.circle",
-                                 title: NSLocalizedString("Контакт",
-                                                          comment: ""))
-                }
-                
-                Spacer()
-                
-                NavigationLink(
-                    destination: ContactView(appBinding: appBinding)) {
-                    CellMainView(image: "phone.circle",
-                                 title: NSLocalizedString("Контакт",
-                                                          comment: ""))
-                }.opacity(0)
-            }
-            
-            Spacer()
         }
-        .padding(.horizontal, 24)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
-// MARK: iPhone
-//private extension MainView {
-//    var iPhone: some View {
-//        VStack(alignment: .center, spacing: 16) {
-//
-//            HStack {
-//                NavigationLink(
-//                    destination: FilmView(appBinding: appBinding)) {
-//                    CellMainView(image: "film",
-//                                 title: NSLocalizedString("Фильмы", comment: ""))
-//                }
-//
-//                Spacer()
-//
-//                NavigationLink(
-//                    destination: TeamView(appBinding: appBinding)) {
-//                    CellMainView(image: "person.3",
-//                                 title: NSLocalizedString("Команды",
-//                                                          comment: ""))
-//                }
-//            }
-//
-//            HStack {
-//                NavigationLink(
-//                    destination: NumberView(appBinding: appBinding)) {
-//                    CellMainView(image: "number",
-//                                 title: NSLocalizedString("Число", comment: ""))
-//                }
-//
-//                Spacer()
-//
-//                NavigationLink(
-//                    destination: YesOrNotView(appBinding: appBinding)) {
-//                    CellMainView(image: "questionmark.square",
-//                                 title: NSLocalizedString("Да или Нет", comment: ""))
-//                }
-//            }
-//
-//            HStack {
-//                NavigationLink(
-//                    destination: CharactersView(appBinding: appBinding)) {
-//                    CellMainView(image: "textbox",
-//                                 title: NSLocalizedString("Буква", comment: ""))
-//                }
-//
-//                Spacer()
-//
-//                NavigationLink(
-//                    destination: ListWordsView(appBinding: appBinding)) {
-//                    CellMainView(image: "list.bullet.below.rectangle",
-//                                 title: NSLocalizedString("Список", comment: ""))
-//                }
-//            }
-//
-//            HStack {
-//                NavigationLink(
-//                    destination: CoinView(appBinding: appBinding)) {
-//                    CellMainView(image: "bitcoinsign.circle",
-//                                 title: NSLocalizedString("Монета", comment: ""))
-//                }
-//
-//                Spacer()
-//
-//                NavigationLink(
-//                    destination: CubeView(appBinding: appBinding)) {
-//                    CellMainView(image: "cube",
-//                                 title: NSLocalizedString("Кубики", comment: ""))
-//                }
-//            }
-//
-//            HStack {
-//                NavigationLink(
-//                    destination: DateAndTimeView(appBinding: appBinding)) {
-//                    CellMainView(image: "calendar",
-//                                 title: NSLocalizedString("Дата и время",
-//                                                          comment: ""))
-//                }
-//
-//                Spacer()
-//
-//                NavigationLink(
-//                    destination: LotteryView(appBinding: appBinding)) {
-//                    CellMainView(image: "tag",
-//                                 title: NSLocalizedString("Лотерея",
-//                                                          comment: ""))
-//                }
-//            }
-//
-//            HStack {
-//                NavigationLink(
-//                    destination: ContactView(appBinding: appBinding)) {
-//                    CellMainView(image: "phone.circle",
-//                                 title: NSLocalizedString("Контакт",
-//                                                          comment: ""))
-//                }
-//
-//                Spacer()
-//
-//                NavigationLink(
-//                    destination: ContactView(appBinding: appBinding)) {
-//                    CellMainView(image: "phone.circle",
-//                                 title: NSLocalizedString("Контакт",
-//                                                          comment: ""))
-//                }.opacity(0)
-//            }
-//
-//            Spacer()
-//        }
-//        .padding(.horizontal, 20)
-//    }
-//}
+// MARK: Device
+private extension MainView {
+    private var device: AnyView {
+        switch UIDevice.current.userInterfaceIdiom == .phone {
+        case true:
+            return AnyView(listIPhone)
+        case false:
+            return AnyView(listIPad)
+        }
+    }
+}
+
+// MARK: List iPad
+private extension MainView {
+    var listIPad: some View {
+        VStack(spacing: 16) {
+            HStack {
+                film
+                Spacer()
+                team
+                Spacer()
+                number
+            }
+            
+            HStack {
+                yesOrNot
+                Spacer()
+                characters
+                Spacer()
+                listWords
+            }
+            
+            HStack {
+                coin
+                Spacer()
+                cube
+                Spacer()
+                dateAndTime
+            }
+            
+            HStack {
+                lottery
+                Spacer()
+                contact
+                Spacer()
+                lottery.opacity(0)
+            }
+        }
+        .padding(.horizontal, 20)
+    }
+}
+
+// MARK: List iPhone
+private extension MainView {
+    var listIPhone: some View {
+        VStack(spacing: 12) {
+            HStack {
+                film
+                Spacer()
+                team
+            }
+            
+            HStack {
+                number
+                Spacer()
+                yesOrNot
+            }
+            
+            HStack {
+                characters
+                Spacer()
+                listWords
+            }
+            
+            HStack {
+                coin
+                Spacer()
+                cube
+            }
+            
+            HStack {
+                dateAndTime
+                Spacer()
+                lottery
+            }
+            
+            HStack {
+                contact
+                Spacer()
+                lottery.opacity(0)
+            }
+        }
+        .padding(.horizontal, 20)
+    }
+}
+
+// MARK: Film
+private extension MainView {
+    var film: some View {
+        NavigationLink(
+            destination: FilmView(appBinding: appBinding)) {
+            CellMainView(image: "film",
+                         title: NSLocalizedString("Фильмы", comment: ""))
+        }
+    }
+}
+
+// MARK: Team
+private extension MainView {
+    var team: some View {
+        NavigationLink(
+            destination: TeamView(appBinding: appBinding)) {
+            CellMainView(image: "person.3",
+                         title: NSLocalizedString("Команды",
+                                                  comment: ""))
+        }
+    }
+}
+
+// MARK: Number
+private extension MainView {
+    var number: some View {
+        NavigationLink(
+            destination: NumberView(appBinding: appBinding)) {
+            CellMainView(image: "number",
+                         title: NSLocalizedString("Число", comment: ""))
+        }
+    }
+}
+
+// MARK: YesOrNot
+private extension MainView {
+    var yesOrNot: some View {
+        NavigationLink(
+            destination: YesOrNotView(appBinding: appBinding)) {
+            CellMainView(image: "questionmark.square",
+                         title: NSLocalizedString("Да или Нет", comment: ""))
+        }
+    }
+}
+
+// MARK: Characters
+private extension MainView {
+    var characters: some View {
+        NavigationLink(
+            destination: CharactersView(appBinding: appBinding)) {
+            CellMainView(image: "textbox",
+                         title: NSLocalizedString("Буква", comment: ""))
+        }
+    }
+}
+
+// MARK: ListWords
+private extension MainView {
+    var listWords: some View {
+        NavigationLink(
+            destination: ListWordsView(appBinding: appBinding)) {
+            CellMainView(image: "list.bullet.below.rectangle",
+                         title: NSLocalizedString("Список", comment: ""))
+        }
+    }
+}
+
+// MARK: Coin
+private extension MainView {
+    var coin: some View {
+        NavigationLink(
+            destination: CoinView(appBinding: appBinding)) {
+            CellMainView(image: "bitcoinsign.circle",
+                         title: NSLocalizedString("Монета", comment: ""))
+        }
+    }
+}
+
+// MARK: Cube
+private extension MainView {
+    var cube: some View {
+        NavigationLink(
+            destination: CubeView(appBinding: appBinding)) {
+            CellMainView(image: "cube",
+                         title: NSLocalizedString("Кубики", comment: ""))
+        }
+    }
+}
+
+// MARK: DateAndTime
+private extension MainView {
+    var dateAndTime: some View {
+        NavigationLink(
+            destination: DateAndTimeView(appBinding: appBinding)) {
+            CellMainView(image: "calendar",
+                         title: NSLocalizedString("Дата и время",
+                                                  comment: ""))
+        }
+    }
+}
+
+// MARK: Lottery
+private extension MainView {
+    var lottery: some View {
+        NavigationLink(
+            destination: LotteryView(appBinding: appBinding)) {
+            CellMainView(image: "tag",
+                         title: NSLocalizedString("Лотерея",
+                                                  comment: ""))
+        }
+    }
+}
+
+// MARK: Contact
+private extension MainView {
+    var contact: some View {
+        NavigationLink(
+            destination: ContactView(appBinding: appBinding)) {
+            CellMainView(image: "phone.circle",
+                         title: NSLocalizedString("Контакт",
+                                                  comment: ""))
+        }
+    }
+}
 
 // MARK: Actions
 private extension MainView {

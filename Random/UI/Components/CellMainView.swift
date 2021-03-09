@@ -32,8 +32,7 @@ private extension CellMainView {
     var iPad: some View {
         ZStack {
             Rectangle()
-                .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 110),
-                       height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 110))
+                .frame(width: CGFloat(225.28), height: CGFloat(138.7192118226601))
                 .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))]), startPoint: .trailing, endPoint: .leading))
                 .cornerRadius(8)
                 .overlay(RoundedRectangle(cornerRadius: 8)
@@ -57,17 +56,16 @@ private extension CellMainView {
                 HStack {
                     Spacer()
                     Text(title)
-                        .font(.robotoMedium24())
+                        .font(.robotoMedium20())
                         .foregroundColor(Color.primaryPale())
                         .lineLimit(2)
-                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 90), alignment: .trailing)
+                        .frame(width: CGFloat(184.32), alignment: .trailing)
                 }
                 .padding(.bottom, 16)
                 .padding(.horizontal, 16)
             }
         }
-        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 110),
-               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 110))
+        .frame(width: CGFloat(225.28), height: CGFloat(138.7192118226601))
     }
 }
 

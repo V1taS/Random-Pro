@@ -12,6 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     @ObservedObject var storeManager = StoreManager()
+    var orientation = Orientation()
     private let productIDs = [
         "com.sosinvitalii.Random.TipForTea",
         "com.sosinvitalii.Random.TipForWine",
@@ -27,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             window.overrideUserInterfaceStyle = .light
             window.rootViewController = UIHostingController( rootView: TabBarView(storeManager: storeManager)
+                                                                .environmentObject(orientation)
                                                                 .onAppear(perform: { [self] in
                                                                     SKPaymentQueue.default().add(storeManager)
                                                                     storeManager.getProducts(productIDs: productIDs)
@@ -35,6 +37,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+    
+    func windowScene(_ windowScene: UIWindowScene, didUpdate previousCoordinateSpace: UICoordinateSpace, interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation, traitCollection previousTraitCollection: UITraitCollection) {
+        orientation.isLandScape = windowScene.interfaceOrientation.isLandscape
     }
 }
 

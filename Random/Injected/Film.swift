@@ -26,7 +26,6 @@ extension AppState.AppData {
         var filmsPopularHistory: [BestFilm] = []
         var filmsPopularInfo = BestFilm.plug
         
-        
         var selectedGenres = 0
         var nameFilm = ""
         var imageFilm = ""

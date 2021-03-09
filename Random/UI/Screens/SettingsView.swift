@@ -183,7 +183,7 @@ private extension SettingsView {
 private extension SettingsView {
     private func actionSheet() {
         guard let data = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956") else { return }
-        let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
+        let av = UIActivityViewController(activityItems: [data], applicationActivities: [UIActivity()])
         UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }

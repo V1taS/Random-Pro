@@ -34,6 +34,7 @@ struct FilmView: View {
                     filmImage
                         .padding(.top, 24)
                     filmText
+                        .padding(.horizontal, 20)
                         .padding(.top, 8)
                     Spacer()
                 }

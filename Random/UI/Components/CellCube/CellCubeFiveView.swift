@@ -10,6 +10,25 @@ import SwiftUI
 
 struct CellCubeFiveView: View {
     var body: some View {
+        cube
+    }
+}
+
+// MARK: Device
+private extension CellCubeFiveView {
+    private var cube: AnyView {
+        switch UIDevice.current.userInterfaceIdiom == .phone {
+        case true:
+            return AnyView(cubeIPhone)
+        case false:
+            return AnyView(cubeiPad)
+        }
+    }
+}
+
+// MARK: Cube IPhone
+private extension CellCubeFiveView {
+    var cubeIPhone: some View {
         ZStack {
             Rectangle()
                 .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 100),
@@ -63,6 +82,58 @@ struct CellCubeFiveView: View {
         }
         .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 100),
                height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 100))
+    }
+}
+
+// MARK: Cube iPad
+private extension CellCubeFiveView {
+    var cubeiPad: some View {
+        ZStack {
+            Rectangle()
+                .frame(width: 100, height: 100)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))]), startPoint: .trailing, endPoint: .leading))
+                .cornerRadius(8)
+                .overlay(RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color(.clear)))
+                .foregroundColor(.clear)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Circle()
+                        .frame(width: 20, height: 20)
+                    Spacer()
+                    
+                    Circle()
+                        .frame(width: 20, height: 20)
+                }
+                .padding(.top, 14)
+                .padding(.horizontal, 14)
+                
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    Circle()
+                        .frame(width: 20, height: 20)
+                    Spacer()
+                }
+                
+                Spacer()
+                
+                HStack {
+                    Circle()
+                        .frame(width: 20, height: 20)
+                    
+                    Spacer()
+                    Circle()
+                        .frame(width: 20, height: 20)
+                }
+                .padding(.bottom, 14)
+                .padding(.horizontal, 14)
+
+            }
+        }
+        .frame(width: 100, height: 100)
     }
 }
 

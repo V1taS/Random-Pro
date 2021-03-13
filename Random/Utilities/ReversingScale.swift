@@ -23,9 +23,6 @@ struct ReversingScale: AnimatableModifier {
     var animatableData: CGFloat {
         get { value }
         set { value = newValue
-            // newValue here is interpolating by engine, so changing
-            // from previous to initially set, so when they got equal
-            // animation ended
             if newValue == target {
                 onEnded()
             }

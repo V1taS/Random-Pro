@@ -68,7 +68,6 @@
 		1B7F66D525D08C1000933AD6 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CE25D08C1000933AD6 /* SFProDisplay-Medium.ttf */; };
 		1B7F66D625D08C1000933AD6 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66CF25D08C1000933AD6 /* Roboto-Light.ttf */; };
 		1B7F66D725D08C1000933AD6 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F66D025D08C1000933AD6 /* Roboto-Black.ttf */; };
-		1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */; };
 		1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66DE25D08D1300933AD6 /* Size.swift */; };
 		1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */; };
 		1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66E425D08D5A00933AD6 /* Font.swift */; };
@@ -132,7 +131,6 @@
 		1BD1F92425D733AB00A1C7A4 /* LotteryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F92325D733AB00A1C7A4 /* LotteryActions.swift */; };
 		1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */; };
 		1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */; };
-		1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */; };
 		1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */; };
 		1BF1F5CA25F705D700613F20 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF1F5C925F705D700613F20 /* Orientation.swift */; };
 		1BF22F1F25D8856000775368 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F1E25D8856000775368 /* TeamView.swift */; };
@@ -228,7 +226,6 @@
 		1B7F66CE25D08C1000933AD6 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		1B7F66CF25D08C1000933AD6 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		1B7F66D025D08C1000933AD6 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
-		1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		1B7F66DE25D08D1300933AD6 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedColorEdge.swift; sourceTree = "<group>"; };
 		1B7F66E425D08D5A00933AD6 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -292,7 +289,6 @@
 		1BD1F92325D733AB00A1C7A4 /* LotteryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryActions.swift; sourceTree = "<group>"; };
 		1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryInteractor.swift; sourceTree = "<group>"; };
 		1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
-		1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellNumberView.swift; sourceTree = "<group>"; };
 		1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSettingsView.swift; sourceTree = "<group>"; };
 		1BF1F5C925F705D700613F20 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		1BF22F1E25D8856000775368 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
@@ -508,17 +504,14 @@
 			isa = PBXGroup;
 			children = (
 				1BF30DD025D196BB00DCE62B /* CellCube */,
-				1B7F66DA25D08CE200933AD6 /* ProgressBarView.swift */,
 				1B7F66FE25D0937100933AD6 /* CellMainView.swift */,
 				1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */,
 				1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */,
-				1BEC8EB325D0AB9300FE3A3F /* CellNumberView.swift */,
 				1BF22F2D25D88F1A00775368 /* PlayerView.swift */,
 				1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */,
 				1BF22F3725D89E4000775368 /* AddPlayerSheet.swift */,
 				1BF22F3A25D8AD2600775368 /* ScrollTeamPlayers.swift */,
 				1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */,
-				1B0DB27325DC680A00C9D31D /* ReversingScale.swift */,
 				1B0DB27625DC776F00C9D31D /* TextRoundView.swift */,
 				1BB8DFA025EE4485007C389D /* FilmCellView.swift */,
 			);
@@ -563,6 +556,7 @@
 				1B7F66F625D08E2A00933AD6 /* UIKit */,
 				1B7F66D925D08CBB00933AD6 /* Extensions */,
 				1B7F66C625D08B1700933AD6 /* Store.swift */,
+				1B0DB27325DC680A00C9D31D /* ReversingScale.swift */,
 				1B7F66DE25D08D1300933AD6 /* Size.swift */,
 				1B325C0525D2C9CA00382F33 /* Feedback.swift */,
 				1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */,
@@ -995,7 +989,6 @@
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
 				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
 				1BBADE0625EC02CE00AD38F4 /* CellImageMainView.swift in Sources */,
-				1B7F66DB25D08CE200933AD6 /* ProgressBarView.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
 				1BF22F1F25D8856000775368 /* TeamView.swift in Sources */,
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
@@ -1112,7 +1105,6 @@
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
 				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
-				1BEC8EB425D0AB9300FE3A3F /* CellNumberView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,

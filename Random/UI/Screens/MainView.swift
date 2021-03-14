@@ -120,7 +120,7 @@ private extension MainView {
             HStack {
                 contact
                 Spacer()
-                lottery.opacity(0)
+                travel
             }
         }
         .padding(.horizontal, 20)
@@ -235,6 +235,18 @@ private extension MainView {
             destination: LotteryView(appBinding: appBinding)) {
             CellMainView(image: "tag",
                          title: NSLocalizedString("Лотерея",
+                                                  comment: ""))
+        }
+    }
+}
+
+// MARK: Travel
+private extension MainView {
+    var travel: some View {
+        NavigationLink(
+            destination: TravelView()) {
+            CellMainView(image: "airplane",
+                         title: NSLocalizedString("Travel",
                                                   comment: ""))
         }
     }

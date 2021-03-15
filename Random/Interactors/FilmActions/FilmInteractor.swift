@@ -23,26 +23,26 @@ struct FilmInteractorImpl: FilmInteractor {
     func validVideoplayerIcon(state: Binding<AppState.AppData>) {
         switch state.film.selectedGenres.wrappedValue {
         case 0:
-            state.film.showVideoPlayerIcon.wrappedValue = false
+            state.film.showVideoPlayerIconBest.wrappedValue = false
             let idKinopoisk = String(state.film.filmsBestInfo.filmId.wrappedValue ?? 0)
             Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
                 guard (film.data.first?.iframeSrc) != nil else { return  }
-                state.film.showVideoPlayerIcon.wrappedValue = true
+                state.film.showVideoPlayerIconBest.wrappedValue = true
             }
         case 1:
-            state.film.showVideoPlayerIcon.wrappedValue = false
+            state.film.showVideoPlayerIconPopular.wrappedValue = false
             let idKinopoisk = String(state.film.filmsPopularInfo.filmId.wrappedValue ?? 0)
             Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
                 guard (film.data.first?.iframeSrc) != nil else { return }
-                state.film.showVideoPlayerIcon.wrappedValue = true
+                state.film.showVideoPlayerIconPopular.wrappedValue = true
             }
         case 2:
-            state.film.showVideoPlayerIcon.wrappedValue = false
+            state.film.showVideoPlayerIconAll.wrappedValue = false
             guard let filmKinopoisk = state.film.filmInfo.data.wrappedValue?.filmId else { return }
             let idKinopoisk = String(filmKinopoisk)
             Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
                 guard (film.data.first?.iframeSrc) != nil else { return }
-                state.film.showVideoPlayerIcon.wrappedValue = true
+                state.film.showVideoPlayerIconAll.wrappedValue = true
             }
         default:
             print("Валидация не прошла")
@@ -170,7 +170,9 @@ struct FilmInteractorImpl: FilmInteractor {
         state.film.filmsPopular.wrappedValue = []
         state.film.filmsPopularHistory.wrappedValue = []
         
-        state.film.showVideoPlayerIcon.wrappedValue = false
+        state.film.showVideoPlayerIconBest.wrappedValue = false
+        state.film.showVideoPlayerIconPopular.wrappedValue = false
+        state.film.showVideoPlayerIconAll.wrappedValue = false
     }
     
     func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {

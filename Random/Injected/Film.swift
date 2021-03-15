@@ -27,12 +27,25 @@ extension AppState.AppData {
         var filmsPopularInfo = BestFilm.plug
         
         var selectedGenres = 0
-        var nameFilm = ""
-        var imageFilm = ""
-        var ratingFilm: Double = 0.0
-        var ratingIsShow = false
         
-        var showVideoPlayerIcon = false
+        var nameFilmBest = ""
+        var imageFilmBest = ""
+        var ratingFilmBest = 0.0
+        var ratingIsShowBest = false
+        var showVideoPlayerIconBest = false
+        
+        var nameFilmPopular = ""
+        var imageFilmPopular = ""
+        var ratingFilmPopular = 0.0
+        var ratingIsShowPopular = false
+        var showVideoPlayerIconPopular = false
+        
+        var nameFilmAll = ""
+        var imageFilmAll = ""
+        var ratingFilmAll = 0.0
+        var ratingIsShowAll = false
+        var showVideoPlayerIconAll = false
+        
         var showSettings = false
         var showActivityIndicator = false
     }

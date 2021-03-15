@@ -31,11 +31,7 @@ struct FilmView: View {
                 
                 VStack(spacing: 0) {
                     pickerView
-                    filmImage
-                        .padding(.top, 24)
-                    filmText
-                        .padding(.horizontal, 20)
-                        .padding(.top, 8)
+                    content
                     Spacer()
                 }
                 
@@ -58,31 +54,7 @@ struct FilmView: View {
             
             .sheet(isPresented: appBinding.film.showSettings,
                    onDismiss: {
-                    switch appBinding.film.selectedGenres.wrappedValue {
-                    case 0:
-                        if appBinding.film.filmsBest.wrappedValue.isEmpty && appBinding.film.filmsBestHistory.wrappedValue.isEmpty {
-                            appBinding.film.nameFilm.wrappedValue = ""
-                            appBinding.film.imageFilm.wrappedValue = ""
-                            appBinding.film.ratingFilm.wrappedValue = 0.0
-                            appBinding.film.ratingIsShow.wrappedValue = false
-                        }
-                    case 1:
-                        if appBinding.film.filmsPopular.wrappedValue.isEmpty && appBinding.film.filmsPopularHistory.wrappedValue.isEmpty {
-                            appBinding.film.nameFilm.wrappedValue = ""
-                            appBinding.film.imageFilm.wrappedValue = ""
-                            appBinding.film.ratingFilm.wrappedValue = 0.0
-                            appBinding.film.ratingIsShow.wrappedValue = false
-                        }
-                    case 2:
-                        if appBinding.film.films.wrappedValue.isEmpty && appBinding.film.filmsHistory.wrappedValue.isEmpty {
-                            appBinding.film.nameFilm.wrappedValue = ""
-                            appBinding.film.imageFilm.wrappedValue = ""
-                            appBinding.film.ratingFilm.wrappedValue = 0.0
-                            appBinding.film.ratingIsShow.wrappedValue = false
-                        }
-                    default: break
-                    }
-                    
+                    cleanContentOnDismissSetting()
                    }
                    , content: {
                     FilmSettingsView(appBinding: appBinding)
@@ -109,27 +81,6 @@ private extension FilmView {
 }
 
 private extension FilmView {
-    var filmImage: some View {
-        FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShow.wrappedValue,
-                     ratingCount: appBinding.film.ratingFilm.wrappedValue,
-                     imageStr: appBinding.film.imageFilm.wrappedValue)
-    }
-}
-
-private extension FilmView {
-    var filmText: some View {
-        Text(appBinding.film.nameFilm.wrappedValue)
-            .font(.robotoMedium20())
-            .lineLimit(2)
-            .foregroundColor(.black)
-            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-            .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-            .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-            .multilineTextAlignment(.center)
-    }
-}
-
-private extension FilmView {
     var navigationButtonGear: some View {
         Button(action: {
             appBinding.film.showSettings.wrappedValue.toggle()
@@ -145,7 +96,54 @@ private extension FilmView {
         Button(action: {
             getLinkOnPageKinopoiskVideo(state: appBinding)
         }) {
-            if appBinding.film.showVideoPlayerIcon.wrappedValue {
+            showVideoPlayerIcon
+        }
+    }
+}
+
+private extension FilmView {
+    private var showVideoPlayerIcon: AnyView {
+        switch appBinding.film.selectedGenres.wrappedValue {
+        case 0:
+            return AnyView(showVideoPlayerIconBestFilms)
+        case 1:
+            return AnyView(showVideoPlayerIconPopularFilms)
+        case 2:
+            return AnyView(showVideoPlayerIconAllFilms)
+        default:
+            return AnyView(showVideoPlayerIconAllFilms)
+        }
+    }
+}
+
+private extension FilmView {
+    var showVideoPlayerIconBestFilms: some View {
+        VStack(spacing: 0) {
+            if appBinding.film.showVideoPlayerIconBest.wrappedValue {
+                Image(systemName: "play.rectangle")
+                    .font(.system(size: 24))
+                    .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+            }
+        }
+    }
+}
+
+private extension FilmView {
+    var showVideoPlayerIconPopularFilms: some View {
+        VStack(spacing: 0) {
+            if appBinding.film.showVideoPlayerIconPopular.wrappedValue {
+                Image(systemName: "play.rectangle")
+                    .font(.system(size: 24))
+                    .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
+            }
+        }
+    }
+}
+
+private extension FilmView {
+    var showVideoPlayerIconAllFilms: some View {
+        VStack(spacing: 0) {
+            if appBinding.film.showVideoPlayerIconAll.wrappedValue {
                 Image(systemName: "play.rectangle")
                     .font(.system(size: 24))
                     .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
@@ -161,52 +159,8 @@ private extension FilmView {
             getMovies(state: appBinding)
             getCurrentFilmInfo(state: appBinding)
             saveFilmsToUserDefaults(state: appBinding)
-            switch appBinding.film.selectedGenres.wrappedValue {
-            case 0:
-                appBinding.film.nameFilm.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? "")"
-                appBinding.film.imageFilm.wrappedValue = appBinding.film.filmsBestInfo.posterUrlPreview.wrappedValue ?? ""
-                
-                if let rating = appBinding.film.filmsBestInfo.rating.wrappedValue {
-                    appBinding.film.ratingIsShow.wrappedValue = true
-                    let ratingDouble = Double(rating)
-                    if let ratingDouble = ratingDouble {
-                        appBinding.film.ratingFilm.wrappedValue = ratingDouble
-                    } else {
-                        appBinding.film.ratingIsShow.wrappedValue = false
-                    }
-                } else {
-                    appBinding.film.ratingIsShow.wrappedValue = false
-                }
-                
-            case 1:
-                appBinding.film.nameFilm.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopularInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsPopularInfo.nameEn.wrappedValue ?? "")"
-                appBinding.film.imageFilm.wrappedValue = appBinding.film.filmsPopularInfo.posterUrlPreview.wrappedValue ?? ""
-                
-                if let rating = appBinding.film.filmsPopularInfo.rating.wrappedValue {
-                    appBinding.film.ratingIsShow.wrappedValue = true
-                    let ratingDouble = Double(rating)
-                    
-                    if let ratingDouble = ratingDouble {
-                        appBinding.film.ratingFilm.wrappedValue = ratingDouble
-                    } else {
-                        appBinding.film.ratingIsShow.wrappedValue = false
-                    }
-                    
-                } else {
-                    appBinding.film.ratingIsShow.wrappedValue = false
-                }
-            case 2:
-                appBinding.film.nameFilm.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")"
-                appBinding.film.imageFilm.wrappedValue = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
-                
-                if let rating = appBinding.film.filmInfo.rating.wrappedValue?.ratingImdb {
-                    appBinding.film.ratingIsShow.wrappedValue = true
-                    appBinding.film.ratingFilm.wrappedValue = rating
-                } else {
-                    appBinding.film.ratingIsShow.wrappedValue = false
-                }
-            default: break
-            }
+            
+            settingsScreen()
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -229,7 +183,164 @@ private extension FilmView {
     }
 }
 
+private extension FilmView {
+    private var content: AnyView {
+        switch appBinding.film.selectedGenres.wrappedValue {
+        case 0:
+            return AnyView(bestFilms)
+        case 1:
+            return AnyView(popularFilms)
+        case 2:
+            return AnyView(allFilms)
+        default:
+            return AnyView(bestFilms)
+        }
+    }
+}
+
+private extension FilmView {
+    var bestFilms: some View {
+        VStack(spacing: 0) {
+            FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShowBest.wrappedValue,
+                         ratingCount: appBinding.film.ratingFilmBest.wrappedValue,
+                         imageStr: appBinding.film.imageFilmBest.wrappedValue)
+                .padding(.top, 24)
+            
+            Text(appBinding.film.nameFilmBest.wrappedValue)
+                .font(.robotoMedium20())
+                .lineLimit(2)
+                .foregroundColor(.black)
+                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+        }
+    }
+}
+
+private extension FilmView {
+    var allFilms: some View {
+        VStack(spacing: 0) {
+            FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShowAll.wrappedValue,
+                         ratingCount: appBinding.film.ratingFilmAll.wrappedValue,
+                         imageStr: appBinding.film.imageFilmAll.wrappedValue)
+                .padding(.top, 24)
+            
+            Text(appBinding.film.nameFilmAll.wrappedValue)
+                .font(.robotoMedium20())
+                .lineLimit(2)
+                .foregroundColor(.black)
+                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+        }
+    }
+}
+
+private extension FilmView {
+    var popularFilms: some View {
+        VStack(spacing: 0) {
+            FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShowPopular.wrappedValue,
+                         ratingCount: appBinding.film.ratingFilmPopular.wrappedValue,
+                         imageStr: appBinding.film.imageFilmPopular.wrappedValue)
+                .padding(.top, 24)
+            
+            Text(appBinding.film.nameFilmPopular.wrappedValue)
+                .font(.robotoMedium20())
+                .lineLimit(2)
+                .foregroundColor(.black)
+                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+        }
+    }
+}
+
 // MARK: Actions
+private extension FilmView {
+    private func settingsScreen() {
+        switch appBinding.film.selectedGenres.wrappedValue {
+        case 0:
+            appBinding.film.nameFilmBest.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? "")"
+            appBinding.film.imageFilmBest.wrappedValue = appBinding.film.filmsBestInfo.posterUrlPreview.wrappedValue ?? ""
+            
+            if let rating = appBinding.film.filmsBestInfo.rating.wrappedValue {
+                appBinding.film.ratingIsShowBest.wrappedValue = true
+                let ratingDouble = Double(rating)
+                if let ratingDouble = ratingDouble {
+                    appBinding.film.ratingFilmBest.wrappedValue = ratingDouble
+                } else {
+                    appBinding.film.ratingIsShowBest.wrappedValue = false
+                }
+            } else {
+                appBinding.film.ratingIsShowBest.wrappedValue = false
+            }
+            
+        case 1:
+            appBinding.film.nameFilmPopular.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopularInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsPopularInfo.nameEn.wrappedValue ?? "")"
+            appBinding.film.imageFilmPopular.wrappedValue = appBinding.film.filmsPopularInfo.posterUrlPreview.wrappedValue ?? ""
+            
+            if let rating = appBinding.film.filmsPopularInfo.rating.wrappedValue {
+                appBinding.film.ratingIsShowPopular.wrappedValue = true
+                let ratingDouble = Double(rating)
+                
+                if let ratingDouble = ratingDouble {
+                    appBinding.film.ratingFilmPopular.wrappedValue = ratingDouble
+                } else {
+                    appBinding.film.ratingIsShowPopular.wrappedValue = false
+                }
+                
+            } else {
+                appBinding.film.ratingIsShowPopular.wrappedValue = false
+            }
+        case 2:
+            appBinding.film.nameFilmAll.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")"
+            appBinding.film.imageFilmAll.wrappedValue = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
+            
+            if let rating = appBinding.film.filmInfo.rating.wrappedValue?.ratingImdb {
+                appBinding.film.ratingIsShowAll.wrappedValue = true
+                appBinding.film.ratingFilmAll.wrappedValue = rating
+            } else {
+                appBinding.film.ratingIsShowAll.wrappedValue = false
+            }
+        default: break
+        }
+    }
+}
+
+private extension FilmView {
+    private func cleanContentOnDismissSetting() {
+        if appBinding.film.filmsBest.wrappedValue.isEmpty && appBinding.film.filmsBestHistory.wrappedValue.isEmpty &&
+            appBinding.film.filmsPopular.wrappedValue.isEmpty && appBinding.film.filmsPopularHistory.wrappedValue.isEmpty &&
+            appBinding.film.films.wrappedValue.isEmpty && appBinding.film.filmsHistory.wrappedValue.isEmpty {
+            
+            appBinding.film.nameFilmBest.wrappedValue = ""
+            appBinding.film.imageFilmBest.wrappedValue = ""
+            appBinding.film.ratingFilmBest.wrappedValue = 0.0
+            appBinding.film.ratingIsShowBest.wrappedValue = false
+            
+            appBinding.film.nameFilmPopular.wrappedValue = ""
+            appBinding.film.imageFilmPopular.wrappedValue = ""
+            appBinding.film.ratingFilmPopular.wrappedValue = 0.0
+            appBinding.film.ratingIsShowPopular.wrappedValue = false
+            
+            appBinding.film.nameFilmAll.wrappedValue = ""
+            appBinding.film.imageFilmAll.wrappedValue = ""
+            appBinding.film.ratingFilmAll.wrappedValue = 0.0
+            appBinding.film.ratingIsShowAll.wrappedValue = false
+        }
+    }
+}
+
+
 private extension FilmView {
     private func getCurrentFilmInfo(state: Binding<AppState.AppData>) {
         injected.interactors.filmInteractor

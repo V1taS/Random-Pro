@@ -106,23 +106,6 @@ private extension FilmInformationAllFilmView {
     }
 }
 
-private extension FilmInformationAllFilmView {
-    private func getLinkOnPageAllVideo(state: Binding<AppState.AppData>, filmKinopoisk: FilmsInfo?) {
-        injected.interactors.filmInteractor
-            .getLinkOnPageAllVideo(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
-                                   filmKinopoisk: filmKinopoisk)
-    }
-}
-
-private extension FilmInformationAllFilmView {
-    private func validVideoplayerIcon(state: Binding<AppState.AppData>, filmKinopoisk: FilmsInfo?) {
-        let valid = injected.interactors.filmInteractor
-            .validVideoplayerIcon(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
-                                  filmKinopoisk: filmKinopoisk)
-        state.film.showVideoPlayerIcon.wrappedValue = valid
-    }
-}
-
 struct FilmInformation_Previews: PreviewProvider {
     static var previews: some View {
         FilmInformationAllFilmView(filmsInfo: .init(), appBinding: .constant(.init()))

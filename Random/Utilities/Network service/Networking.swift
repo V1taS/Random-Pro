@@ -83,7 +83,6 @@ class Networking {
     }
     
     func getInfoKinopoiskPopularFilms(page: Int, completion: @escaping (WelcomeBestFilm) -> Void) {
-        
         guard let url = URL(string: "\(urlStringKinopoiskPopularFilms)" + "&page=\(page)") else { return }
         
         var request = URLRequest(url: url)
@@ -99,6 +98,24 @@ class Networking {
                 }
             } catch {
                 print("Decoding error:", error)
+            }
+        }.resume()
+    }
+    
+    func searchMoviesFor(idKinopoisk: String, completion: @escaping (Films) -> Void) {
+        guard let url = URL(string: urlStringVideocdn + "short" + tokenVideocdn + "&kinopoisk_id=\(idKinopoisk)") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        session.dataTask(with: request as URLRequest) { (data, response, error) in
+            guard let data = data else { return }
+            do {
+                let films = try JSONDecoder().decode(Films.self, from: data)
+                DispatchQueue.main.async {
+                    completion(films)
+                }
+            } catch {
+                print("error: ", error)
             }
         }.resume()
     }

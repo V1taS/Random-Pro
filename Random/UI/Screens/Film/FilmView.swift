@@ -143,16 +143,12 @@ private extension FilmView {
 private extension FilmView {
     var navigationButtonPlay: some View {
         Button(action: {
-            getLinkOnPageAllVideo(state: appBinding)
+            getLinkOnPageKinopoiskVideo(state: appBinding)
         }) {
-            if appBinding.film.selectedGenres.wrappedValue == 2 {
-                if !appBinding.film.filmsVideoHistory.wrappedValue.isEmpty {
-                    if appBinding.film.showVideoPlayerIcon.wrappedValue {
-                        Image(systemName: "play.rectangle")
-                            .font(.system(size: 24))
-                            .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
-                    }
-                }
+            if appBinding.film.showVideoPlayerIcon.wrappedValue {
+                Image(systemName: "play.rectangle")
+                    .font(.system(size: 24))
+                    .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
             }
         }
     }
@@ -161,10 +157,10 @@ private extension FilmView {
 private extension FilmView {
     var generateButton: some View {
         Button(action: {
+            validVideoplayerIcon(state: appBinding)
             getMovies(state: appBinding)
             getCurrentFilmInfo(state: appBinding)
             saveFilmsToUserDefaults(state: appBinding)
-            
             switch appBinding.film.selectedGenres.wrappedValue {
             case 0:
                 appBinding.film.nameFilm.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? "")"
@@ -200,7 +196,6 @@ private extension FilmView {
                     appBinding.film.ratingIsShow.wrappedValue = false
                 }
             case 2:
-                validVideoplayerIcon(state: appBinding)
                 appBinding.film.nameFilm.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")"
                 appBinding.film.imageFilm.wrappedValue = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
                 
@@ -255,19 +250,16 @@ private extension FilmView {
 }
 
 private extension FilmView {
-    private func getLinkOnPageAllVideo(state: Binding<AppState.AppData>) {
+    private func getLinkOnPageKinopoiskVideo(state: Binding<AppState.AppData>) {
         injected.interactors.filmInteractor
-            .getLinkOnPageAllVideo(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
-                                   filmKinopoisk: state.film.filmsHistory.wrappedValue.last)
+            .getLinkOnPageKinopoiskVideo(state: state)
     }
 }
 
 private extension FilmView {
     private func validVideoplayerIcon(state: Binding<AppState.AppData>) {
-        let valid = injected.interactors.filmInteractor
-            .validVideoplayerIcon(filmHistoryData: state.film.filmsVideoHistory.wrappedValue,
-                                  filmKinopoisk: state.film.filmsHistory.wrappedValue.last)
-        state.film.showVideoPlayerIcon.wrappedValue = valid
+        injected.interactors.filmInteractor
+            .validVideoplayerIcon(state: state)
     }
 }
 

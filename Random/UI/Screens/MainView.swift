@@ -76,7 +76,7 @@ private extension MainView {
                 Spacer()
                 contact
                 Spacer()
-                lottery.opacity(0)
+                travel.opacity(0)
             }
         }
         .padding(.horizontal, 20)
@@ -120,7 +120,7 @@ private extension MainView {
             HStack {
                 contact
                 Spacer()
-                travel
+                travel.opacity(0)
             }
         }
         .padding(.horizontal, 20)

@@ -14,49 +14,64 @@ protocol FilmInteractor {
     func getCurrentFilmInfo(state: Binding<AppState.AppData>)
     func cleanFilms(state: Binding<AppState.AppData>)
     func saveFilmsToUserDefaults(state: Binding<AppState.AppData>)
-    func getLinkOnPageAllVideo(filmHistoryData: [Datum]?, filmKinopoisk: FilmsInfo?)
-    func validVideoplayerIcon(filmHistoryData: [Datum]?, filmKinopoisk: FilmsInfo?) -> Bool
+    func getLinkOnPageKinopoiskVideo(state: Binding<AppState.AppData>)
+    func validVideoplayerIcon(state: Binding<AppState.AppData>)
 }
 
 struct FilmInteractorImpl: FilmInteractor {
     
-    func validVideoplayerIcon(filmHistoryData: [Datum]?, filmKinopoisk: FilmsInfo?) -> Bool {
-        guard let filmHistoryData = filmHistoryData else { return false }
-        guard let filmKinopoisk = filmKinopoisk else { return false }
-        
-        if let kinopoiskIdStr = filmKinopoisk.data?.filmId {
-            let filmWithId = filmHistoryData.filter { $0.kinopoiskID == "\(kinopoiskIdStr)" }
-            guard filmWithId.first?.iframeSrc != nil else { return false }
-            return true
-        } else if let kinopoiskNameRu = filmKinopoisk.data?.nameRu {
-            let filmWithNameRu = filmHistoryData.filter { $0.ruTitle == "\(kinopoiskNameRu)" }
-            guard filmWithNameRu.first?.iframeSrc != nil else { return false }
-            return true
-        } else if let kinopoiskNameEn = filmKinopoisk.data?.nameEn {
-            let filmWithNameEn = filmHistoryData.filter { $0.origTitle == "\(kinopoiskNameEn)" }
-            guard filmWithNameEn.first?.iframeSrc != nil else { return false }
-            return true
+    func validVideoplayerIcon(state: Binding<AppState.AppData>) {
+        switch state.film.selectedGenres.wrappedValue {
+        case 0:
+            state.film.showVideoPlayerIcon.wrappedValue = false
+            let idKinopoisk = String(state.film.filmsBestInfo.filmId.wrappedValue ?? 0)
+            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
+                guard (film.data.first?.iframeSrc) != nil else { return  }
+                state.film.showVideoPlayerIcon.wrappedValue = true
+            }
+        case 1:
+            state.film.showVideoPlayerIcon.wrappedValue = false
+            let idKinopoisk = String(state.film.filmsPopularInfo.filmId.wrappedValue ?? 0)
+            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
+                guard (film.data.first?.iframeSrc) != nil else { return }
+                state.film.showVideoPlayerIcon.wrappedValue = true
+            }
+        case 2:
+            state.film.showVideoPlayerIcon.wrappedValue = false
+            guard let filmKinopoisk = state.film.filmInfo.data.wrappedValue?.filmId else { return }
+            let idKinopoisk = String(filmKinopoisk)
+            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
+                guard (film.data.first?.iframeSrc) != nil else { return }
+                state.film.showVideoPlayerIcon.wrappedValue = true
+            }
+        default:
+            print("Валидация не прошла")
         }
-        return false
     }
     
-    
-    func getLinkOnPageAllVideo(filmHistoryData: [Datum]?, filmKinopoisk: FilmsInfo?) {
-        guard let filmHistoryData = filmHistoryData else { return }
-        guard let filmKinopoisk = filmKinopoisk else { return }
-        
-        if let kinopoiskIdStr = filmKinopoisk.data?.filmId {
-            let filmWithId = filmHistoryData.filter { $0.kinopoiskID == "\(kinopoiskIdStr)" }
-            guard let iframeSrc = filmWithId.first?.iframeSrc else {return }
-            getLinkFromStringURL(strURL: iframeSrc)
-        } else if let kinopoiskNameRu = filmKinopoisk.data?.nameRu {
-            let filmWithNameRu = filmHistoryData.filter { $0.ruTitle == "\(kinopoiskNameRu)" }
-            guard let iframeSrc = filmWithNameRu.first?.iframeSrc else {return }
-            getLinkFromStringURL(strURL: iframeSrc)
-        } else if let kinopoiskNameEn = filmKinopoisk.data?.nameEn {
-            let filmWithNameEn = filmHistoryData.filter { $0.origTitle == "\(kinopoiskNameEn)" }
-            guard let iframeSrc = filmWithNameEn.first?.iframeSrc else {return }
-            getLinkFromStringURL(strURL: iframeSrc)
+    func getLinkOnPageKinopoiskVideo(state: Binding<AppState.AppData>) {
+        switch state.film.selectedGenres.wrappedValue {
+        case 0:
+            let idKinopoisk = String(state.film.filmsBestInfo.filmId.wrappedValue ?? 0)
+            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
+                guard let iframeSrc = film.data.first?.iframeSrc else { return }
+                getLinkFromStringURL(strURL: iframeSrc)
+            }
+        case 1:
+            let idKinopoisk = String(state.film.filmsPopularInfo.filmId.wrappedValue ?? 0)
+            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
+                guard let iframeSrc = film.data.first?.iframeSrc else { return }
+                getLinkFromStringURL(strURL: iframeSrc)
+            }
+        case 2:
+            guard let filmKinopoisk = state.film.filmInfo.data.wrappedValue?.filmId else { return }
+            let idKinopoisk = String(filmKinopoisk)
+            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
+                guard let iframeSrc = film.data.first?.iframeSrc else { return }
+                getLinkFromStringURL(strURL: iframeSrc)
+            }
+        default:
+            print("ID Фильма не найденно")
         }
     }
 
@@ -154,6 +169,8 @@ struct FilmInteractorImpl: FilmInteractor {
         
         state.film.filmsPopular.wrappedValue = []
         state.film.filmsPopularHistory.wrappedValue = []
+        
+        state.film.showVideoPlayerIcon.wrappedValue = false
     }
     
     func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {

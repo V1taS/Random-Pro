@@ -42,8 +42,8 @@ class Networking {
     
     func getInfoKinopoisk(films: [Datum], state: Binding<AppState.AppData>) {
         for film in films {
-            guard let kinopoiskID = film.kinopoiskID else { return }
-            guard let url = URL(string: "\(urlStringKinopoisk)\(String(describing: kinopoiskID))") else { return }
+            guard let kinopoiskID = film.kinopoiskID else { continue }
+            guard let url = URL(string: "\(urlStringKinopoisk)" + kinopoiskID) else { continue }
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.setValue("\(tokenKinopoisk)", forHTTPHeaderField: "X-API-KEY")
@@ -51,9 +51,7 @@ class Networking {
             session.dataTask(with: request as URLRequest) { (data, response, error) in
                 do {
                     let filmsInfo = try JSONDecoder().decode(FilmsInfo.self, from: data!)
-                    DispatchQueue.main.async {
                         state.film.filmsTemp.wrappedValue.append(filmsInfo)
-                    }
                 } catch {
                     print("Decoding error:", error)
                 }

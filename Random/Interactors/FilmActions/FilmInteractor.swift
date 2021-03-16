@@ -74,50 +74,12 @@ struct FilmInteractorImpl: FilmInteractor {
             print("ID Фильма не найденно")
         }
     }
-
+    
     func getMovies(state: Binding<AppState.AppData>) {
         DispatchQueue.main.async {
-            if state.film.filmsBest.wrappedValue.count == 0 || state.film.filmsBest.wrappedValue.count == 1 {
-                let page = Int.random(in: 1...13)
-                state.film.showActivityIndicator.wrappedValue = true
-                Networking.share.getInfoKinopoiskBestFilms(page: page) { films in
-                    let films = films.films?.shuffled()
-                    state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
-                    state.film.showActivityIndicator.wrappedValue = false
-                }
-            }
-            
-            if state.film.filmsPopular.wrappedValue.count == 0 || state.film.filmsPopular.wrappedValue.count == 1 {
-                let page = Int.random(in: 1...5)
-                state.film.showActivityIndicator.wrappedValue = true
-                Networking.share.getInfoKinopoiskPopularFilms(page: page) { films in
-                    let films = films.films?.shuffled()
-                    state.film.filmsPopular.wrappedValue.append(contentsOf: films ?? [])
-                    state.film.showActivityIndicator.wrappedValue = false
-                }
-            }
-            
-            if state.film.films.wrappedValue.count == 0 || state.film.films.wrappedValue.count == 1 {
-                let year = Int.random(in: 2010...2021)
-                
-                state.film.showActivityIndicator.wrappedValue = true
-                Networking.share.getMovies(year: year, limit: 20) { films in
-                    var films = films
-                    
-                    for (index, film) in films.data.enumerated() {
-                        if film.kinopoiskID == nil {
-                            films.data.remove(at: index)
-                        }
-                    }
-                    
-                    let filmsShuffled = films.data.shuffled()
-                    state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
-                    
-                    Networking.share.getInfoKinopoisk(films: filmsShuffled, state: state)
-
-                    state.film.showActivityIndicator.wrappedValue = false
-                }
-            }
+            getMoviesBestFilms(state: state)
+            getMoviesPopularFilms(state: state)
+            getMoviesAllFilms(state: state)
         }
     }
     
@@ -139,20 +101,11 @@ struct FilmInteractorImpl: FilmInteractor {
                 state.film.filmsPopular.wrappedValue.removeFirst()
             }
         case 2:
-            if !state.film.films.wrappedValue.isEmpty {
-                if state.film.films.wrappedValue.first?.kinopoiskID == nil {
-                    state.film.films.wrappedValue.removeFirst()
-                }
-                
+            if !state.film.filmsTemp.wrappedValue.isEmpty {
                 guard let filmsTemp = state.film.filmsTemp.wrappedValue.first else { return }
-                guard let films = state.film.films.wrappedValue.first else { return }
-                
                 state.film.filmInfo.wrappedValue = filmsTemp
                 state.film.filmsHistory.wrappedValue.append(filmsTemp)
-                state.film.filmsVideoHistory.wrappedValue.append(films)
-                state.film.films.wrappedValue.removeFirst()
                 state.film.filmsTemp.wrappedValue.removeFirst()
-                
             }
         default: break
         }
@@ -185,6 +138,97 @@ struct FilmInteractorImpl: FilmInteractor {
             saveFilmsPopular(state: state)
             saveFilmsBestPopular(state: state)
             saveFilmsTemp(state: state)
+        }
+    }
+}
+
+//MARK: - Best Films
+extension FilmInteractorImpl {
+    private func getMoviesBestFilms(state: Binding<AppState.AppData>) {
+        if state.film.filmsBest.wrappedValue.count == 0 || state.film.filmsBest.wrappedValue.count == 1 {
+            state.film.showActivityIndicator.wrappedValue = true
+            if state.film.pageNumberBest.wrappedValue.count == 0 {
+                var pageNumber: [Int] = []
+                for page in 1...13 {
+                    pageNumber.append(page)
+                }
+                state.film.pageNumberBest.wrappedValue = pageNumber.shuffled()
+            }
+            
+            guard let firstPage = state.film.pageNumberBest.wrappedValue.first else { return }
+            
+            Networking.share.getInfoKinopoiskBestFilms(page: firstPage) { films in
+                let films = films.films?.shuffled()
+                state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
+                state.film.showActivityIndicator.wrappedValue = false
+            }
+            state.film.pageNumberBest.wrappedValue.removeFirst()
+        }
+    }
+}
+
+//MARK: - Popular Films
+extension FilmInteractorImpl {
+    private func getMoviesPopularFilms(state: Binding<AppState.AppData>) {
+        if state.film.filmsPopular.wrappedValue.count == 0 || state.film.filmsPopular.wrappedValue.count == 1 {
+            state.film.showActivityIndicator.wrappedValue = true
+            
+            if state.film.pageNumberPopular.wrappedValue.count == 0 {
+                var pageNumber: [Int] = []
+                for page in 1...5 {
+                    pageNumber.append(page)
+                }
+                state.film.pageNumberPopular.wrappedValue = pageNumber.shuffled()
+            }
+            guard let firstPage = state.film.pageNumberPopular.wrappedValue.first else { return }
+            Networking.share.getInfoKinopoiskPopularFilms(page: firstPage) { films in
+                let films = films.films?.shuffled()
+                state.film.filmsPopular.wrappedValue.append(contentsOf: films ?? [])
+                state.film.showActivityIndicator.wrappedValue = false
+            }
+            state.film.pageNumberPopular.wrappedValue.removeFirst()
+        }
+    }
+}
+
+//MARK: - All Films
+extension FilmInteractorImpl {
+    private func getMoviesAllFilms(state: Binding<AppState.AppData>) {
+        if state.film.filmsTemp.wrappedValue.count == 0 || state.film.filmsTemp.wrappedValue.count == 1 {
+            if state.film.films.wrappedValue.isEmpty {
+                let year = Int.random(in: 2000...2021)
+                var tempFilm20: [Datum] = []
+                
+                state.film.showActivityIndicator.wrappedValue = true
+                Networking.share.getMovies(year: year, limit: 100) { films in
+                    let filmsShuffled = films.data.shuffled()
+                    state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
+                    
+                    for _ in state.film.films.wrappedValue {
+                        tempFilm20.append(state.film.films.wrappedValue.first!)
+                        state.film.films.wrappedValue.removeFirst()
+                        if tempFilm20.count == 20 {
+                            break
+                        }
+                    }
+                    
+                    Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
+                    state.film.showActivityIndicator.wrappedValue = false
+                }
+            } else {
+                state.film.showActivityIndicator.wrappedValue = true
+                var tempFilm20: [Datum] = []
+                
+                for _ in state.film.films.wrappedValue {
+                    tempFilm20.append(state.film.films.wrappedValue.first!)
+                    state.film.films.wrappedValue.removeFirst()
+                    if tempFilm20.count == 20 {
+                        break
+                    }
+                }
+                Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
+                state.film.showActivityIndicator.wrappedValue = false
+            }
         }
     }
 }

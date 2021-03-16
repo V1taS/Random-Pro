@@ -28,12 +28,14 @@ extension AppState.AppData {
         
         var selectedGenres = 0
         
+        var pageNumberBest: [Int] = []
         var nameFilmBest = ""
         var imageFilmBest = ""
         var ratingFilmBest = 0.0
         var ratingIsShowBest = false
         var showVideoPlayerIconBest = false
         
+        var pageNumberPopular: [Int] = []
         var nameFilmPopular = ""
         var imageFilmPopular = ""
         var ratingFilmPopular = 0.0

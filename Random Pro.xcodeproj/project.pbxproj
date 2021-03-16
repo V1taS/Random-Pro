@@ -23,6 +23,8 @@
 		1B1B501926009FAD00F73A14 /* Random_Pro_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B501826009FAD00F73A14 /* Random_Pro_Widget.swift */; };
 		1B1B501B26009FAD00F73A14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B501A26009FAD00F73A14 /* Assets.xcassets */; };
 		1B1B501F26009FAD00F73A14 /* Random Pro WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1B1B501226009FAD00F73A14 /* Random Pro WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1B1B505626011B0200F73A14 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B505526011B0200F73A14 /* MusicView.swift */; };
+		1B1B505C26011FF000F73A14 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B505B26011FF000F73A14 /* Music.swift */; };
 		1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B325C0525D2C9CA00382F33 /* Feedback.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
@@ -207,6 +209,8 @@
 		1B1B501826009FAD00F73A14 /* Random_Pro_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random_Pro_Widget.swift; sourceTree = "<group>"; };
 		1B1B501A26009FAD00F73A14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B1B501C26009FAD00F73A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B1B505526011B0200F73A14 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
+		1B1B505B26011FF000F73A14 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		1B325C0525D2C9CA00382F33 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -386,6 +390,14 @@
 			path = "Random Pro Widget";
 			sourceTree = "<group>";
 		};
+		1B1B505426011AEC00F73A14 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				1B1B505526011B0200F73A14 /* MusicView.swift */,
+			);
+			path = Music;
+			sourceTree = "<group>";
+		};
 		1B4EBFF825FE546B00A41945 /* Travel */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +533,7 @@
 				1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */,
 				1BB8DFA325EE5E86007C389D /* BestFilm.swift */,
 				1B4EBFFD25FE57A900A41945 /* Travel.swift */,
+				1B1B505B26011FF000F73A14 /* Music.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -606,6 +619,7 @@
 				1B7F116625E3F59500FF64A3 /* Contact */,
 				1BBADE0925EC07DA00AD38F4 /* Film */,
 				1B4EBFF825FE546B00A41945 /* Travel */,
+				1B1B505426011AEC00F73A14 /* Music */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1190,6 +1204,7 @@
 				1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */,
 				1B7F118025E4046E00FF64A3 /* View.swift in Sources */,
 				1B7F117425E3F70500FF64A3 /* ContactActions.swift in Sources */,
+				1B1B505626011B0200F73A14 /* MusicView.swift in Sources */,
 				1B9AB8AC25ECC47800BD5CFD /* FilmInformationAllFilmView.swift in Sources */,
 				1BBADE1025EC083800AD38F4 /* FilmActions.swift in Sources */,
 				1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */,
@@ -1221,6 +1236,7 @@
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
+				1B1B505C26011FF000F73A14 /* Music.swift in Sources */,
 				1B7F117B25E3F85600FF64A3 /* FetchedContacts.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,
 				1BF1F5CA25F705D700613F20 /* Orientation.swift in Sources */,

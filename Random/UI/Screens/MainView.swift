@@ -76,7 +76,7 @@ private extension MainView {
                 Spacer()
                 contact
                 Spacer()
-                travel.opacity(0)
+                music
             }
         }
         .padding(.horizontal, 20)
@@ -120,7 +120,7 @@ private extension MainView {
             HStack {
                 contact
                 Spacer()
-                travel.opacity(0)
+                music
             }
         }
         .padding(.horizontal, 20)
@@ -247,6 +247,18 @@ private extension MainView {
             destination: TravelView()) {
             CellMainView(image: "airplane",
                          title: NSLocalizedString("Travel",
+                                                  comment: ""))
+        }
+    }
+}
+
+// MARK: Music
+private extension MainView {
+    var music: some View {
+        NavigationLink(
+            destination: MusicView()) {
+            CellMainView(image: "tv.music.note",
+                         title: NSLocalizedString("Music",
                                                   comment: ""))
         }
     }

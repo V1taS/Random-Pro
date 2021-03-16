@@ -47,7 +47,17 @@ struct Random_Pro_WidgetEntryView : View {
             LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))]), startPoint: .trailing, endPoint: .leading)
             
             VStack {
+                Text("Random Pro")
+                    .lineLimit(1)
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 20)
                 Text(entry.date, style: .time)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 20)
             }
         }
     }
@@ -61,7 +71,7 @@ struct Random_Pro_Widget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Random_Pro_WidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
+        .configurationDisplayName("Random Widget")
         .description("This is an example widget.")
     }
 }

@@ -14,5 +14,6 @@ target 'Random Pro' do
   # Pods for Random Pro
 
 pod 'SDWebImageSwiftUI'
+pod 'SwiftyJSON', '~> 4.0'
 
 end

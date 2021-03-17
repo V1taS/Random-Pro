@@ -19,7 +19,7 @@ protocol ContactInteractor {
 struct ContactInteractorImpl: ContactInteractor {
     
     func saveContactToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveContacts(state: state)
             saveResultFullName(state: state)
             saveResultPhone(state: state)

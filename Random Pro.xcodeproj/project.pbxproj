@@ -24,7 +24,11 @@
 		1B1B501B26009FAD00F73A14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B501A26009FAD00F73A14 /* Assets.xcassets */; };
 		1B1B501F26009FAD00F73A14 /* Random Pro WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1B1B501226009FAD00F73A14 /* Random Pro WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1B1B505626011B0200F73A14 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B505526011B0200F73A14 /* MusicView.swift */; };
-		1B1B505C26011FF000F73A14 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B505B26011FF000F73A14 /* Music.swift */; };
+		1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */; };
+		1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60572601FBA400847843 /* MusicITunes.swift */; };
+		1B1D606A260225CA00847843 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D6069260225CA00847843 /* Music.swift */; };
+		1B1D607126023D0E00847843 /* MusicActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D607026023D0E00847843 /* MusicActions.swift */; };
+		1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D607626023D3C00847843 /* MusicInteractor.swift */; };
 		1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B325C0525D2C9CA00382F33 /* Feedback.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
@@ -210,7 +214,11 @@
 		1B1B501A26009FAD00F73A14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B1B501C26009FAD00F73A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B1B505526011B0200F73A14 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
-		1B1B505B26011FF000F73A14 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAPI.swift; sourceTree = "<group>"; };
+		1B1D60572601FBA400847843 /* MusicITunes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicITunes.swift; sourceTree = "<group>"; };
+		1B1D6069260225CA00847843 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
+		1B1D607026023D0E00847843 /* MusicActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicActions.swift; sourceTree = "<group>"; };
+		1B1D607626023D3C00847843 /* MusicInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractor.swift; sourceTree = "<group>"; };
 		1B325C0525D2C9CA00382F33 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -398,6 +406,15 @@
 			path = Music;
 			sourceTree = "<group>";
 		};
+		1B1D606F26023CF200847843 /* MusicActions */ = {
+			isa = PBXGroup;
+			children = (
+				1B1D607026023D0E00847843 /* MusicActions.swift */,
+				1B1D607626023D3C00847843 /* MusicInteractor.swift */,
+			);
+			path = MusicActions;
+			sourceTree = "<group>";
+		};
 		1B4EBFF825FE546B00A41945 /* Travel */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +516,7 @@
 				1BF22F2225D8857A00775368 /* Team.swift */,
 				1B7F116E25E3F67000FF64A3 /* Contact.swift */,
 				1BBADE0A25EC080500AD38F4 /* Film.swift */,
+				1B1D6069260225CA00847843 /* Music.swift */,
 			);
 			path = Injected;
 			sourceTree = "<group>";
@@ -520,6 +538,7 @@
 				1BF22F2525D885A600775368 /* TeamActions */,
 				1B7F117125E3F6CC00FF64A3 /* ContactActions */,
 				1BBADE0E25EC082500AD38F4 /* FilmActions */,
+				1B1D606F26023CF200847843 /* MusicActions */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -533,7 +552,7 @@
 				1BBADDFF25EC013500AD38F4 /* FilmInfo.swift */,
 				1BB8DFA325EE5E86007C389D /* BestFilm.swift */,
 				1B4EBFFD25FE57A900A41945 /* Travel.swift */,
-				1B1B505B26011FF000F73A14 /* Music.swift */,
+				1B1D60572601FBA400847843 /* MusicITunes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -822,6 +841,7 @@
 			isa = PBXGroup;
 			children = (
 				1BBADE1A25EC0C5100AD38F4 /* Networking.swift */,
+				1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */,
 			);
 			path = "Network service";
 			sourceTree = "<group>";
@@ -1142,6 +1162,7 @@
 				1B7F117825E3F74100FF64A3 /* ContactInteractor.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
 				1B9AB8BC25ECE82D00BD5CFD /* GlobalFunc.swift in Sources */,
+				1B1D606A260225CA00847843 /* Music.swift in Sources */,
 				1BF22F2E25D88F1A00775368 /* PlayerView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
@@ -1162,6 +1183,7 @@
 				1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
 				1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */,
+				1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */,
 				1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */,
 				1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */,
 				1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */,
@@ -1212,11 +1234,13 @@
 				1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */,
 				1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */,
 				1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */,
+				1B1D607126023D0E00847843 /* MusicActions.swift in Sources */,
 				1B9AB8A625ECB77700BD5CFD /* FilmSettingsView.swift in Sources */,
 				1BF22F2325D8857A00775368 /* Team.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
+				1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
@@ -1231,12 +1255,12 @@
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
 				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
+				1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
-				1B1B505C26011FF000F73A14 /* Music.swift in Sources */,
 				1B7F117B25E3F85600FF64A3 /* FetchedContacts.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,
 				1BF1F5CA25F705D700613F20 /* Orientation.swift in Sources */,

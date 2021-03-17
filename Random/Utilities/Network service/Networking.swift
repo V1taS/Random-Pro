@@ -20,7 +20,6 @@ class Networking {
     private let urlStringKinopoiskPopularFilms: String = "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS"
     
     private let musicAPIKey = "UugnazuJLfmsha8MgulqFbca4Qyup1dtV6NjsnlRueiEXvEDIE"
-    private let developerToken = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlBBV0hYV1k2NDYifQ.eyJpc3MiOiIzNFZEU1BaWVU5IiwiZXhwIjoxNjMxNzAwOTA5LCJpYXQiOjE2MTU5MzI5MDl9.k0Pc48z7qdIbS0Bd7XNb08PPbGMdDG3wdSZzh9rbd-gi69RksTn9WDP9jognJ1-vi7F16g2geSMNQAO1ZW2_0w'"
 
     static let share = Networking()
     
@@ -35,7 +34,7 @@ class Networking {
             guard let data = data else { return }
             do {
                 let films = try JSONDecoder().decode(Films.self, from: data)
-                DispatchQueue.main.async {
+                DispatchQueue.global(qos: .userInitiated).async {
                     completion(films)
                 }
             } catch {
@@ -55,7 +54,7 @@ class Networking {
             session.dataTask(with: request as URLRequest) { (data, response, error) in
                 do {
                     let filmsInfo = try JSONDecoder().decode(FilmsInfo.self, from: data!)
-                    DispatchQueue.main.async {
+                    DispatchQueue.global(qos: .userInitiated).async {
                         state.film.filmsTemp.wrappedValue.append(filmsInfo)
                     }
                 } catch {
@@ -77,7 +76,7 @@ class Networking {
         session.dataTask(with: request as URLRequest) { (data, response, error) in
             do {
                 let bestFilms = try JSONDecoder().decode(WelcomeBestFilm.self, from: data!)
-                DispatchQueue.main.async {
+                DispatchQueue.global(qos: .userInitiated).async {
                     completion(bestFilms)
                 }
             } catch {
@@ -97,7 +96,7 @@ class Networking {
         session.dataTask(with: request as URLRequest) { (data, response, error) in
             do {
                 let bestFilms = try JSONDecoder().decode(WelcomeBestFilm.self, from: data!)
-                DispatchQueue.main.async {
+                DispatchQueue.global(qos: .userInitiated).async {
                     completion(bestFilms)
                 }
             } catch {
@@ -115,27 +114,8 @@ class Networking {
             guard let data = data else { return }
             do {
                 let films = try JSONDecoder().decode(Films.self, from: data)
-                DispatchQueue.main.async {
+                DispatchQueue.global(qos: .userInitiated).async {
                     completion(films)
-                }
-            } catch {
-                print("error: ", error)
-            }
-        }.resume()
-    }
-    
-    func getNusic(completion: @escaping (Music) -> Void) {
-        guard let url = URL(string: "https://api.music.apple.com/v1/catalog/us/charts?types=songs,albums,playlists&genre=20&limit=1") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        session.dataTask(with: request as URLRequest) { (data, response, error) in
-            guard let data = data else { return }
-            do {
-                let music = try JSONDecoder().decode(Music.self, from: data)
-                DispatchQueue.main.async {
-                    completion(music)
                 }
             } catch {
                 print("error: ", error)

@@ -246,7 +246,7 @@ private extension MainView {
         NavigationLink(
             destination: TravelView()) {
             CellMainView(image: "airplane",
-                         title: NSLocalizedString("Travel",
+                         title: NSLocalizedString("Путешествие",
                                                   comment: ""))
         }
     }
@@ -256,9 +256,9 @@ private extension MainView {
 private extension MainView {
     var music: some View {
         NavigationLink(
-            destination: MusicView()) {
+            destination: MusicView(appBinding: appBinding)) {
             CellMainView(image: "tv.music.note",
-                         title: NSLocalizedString("Music",
+                         title: NSLocalizedString("Музыка",
                                                   comment: ""))
         }
     }

@@ -18,7 +18,7 @@ protocol NumberInteractor {
 struct NumberInteractorImpl: NumberInteractor {
     
     func saveNumberToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveListResult(state: state)
             saveListRandomNumber(state: state)
             saveNoRepetitions(state: state)

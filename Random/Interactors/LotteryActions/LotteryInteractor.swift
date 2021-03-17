@@ -18,7 +18,7 @@ protocol LotteryInteractor {
 struct LotteryInteractorImpl: LotteryInteractor {
     
     func saveLotteryToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveResult(state: state)
             savelistResult(state: state)
             saveFirstTF(state: state)

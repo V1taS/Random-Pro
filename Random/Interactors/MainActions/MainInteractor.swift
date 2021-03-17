@@ -17,7 +17,7 @@ protocol MainInteractor {
 struct MainInteractorImpl: MainInteractor {
     
     func userDefaultsGet(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             userDefaultsGetNumbers(state: state)
             userDefaultsGetYesOrNot(state: state)
             userDefaultsCharacters(state: state)
@@ -33,7 +33,7 @@ struct MainInteractorImpl: MainInteractor {
     }
     
     func cleanAll(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             cleanNumberView()
             cleanYesOrNot()
             cleanCharacters()

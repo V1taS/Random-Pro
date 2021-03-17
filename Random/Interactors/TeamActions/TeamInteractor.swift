@@ -53,7 +53,7 @@ struct TeamInteractorImpl: TeamInteractor {
     }
     
     func saveTeamToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             savelistResult1(state: state)
             savelistResult2(state: state)
             savelistResult3(state: state)

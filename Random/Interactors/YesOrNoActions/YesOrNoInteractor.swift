@@ -18,7 +18,7 @@ protocol YesOrNoInteractor {
 struct YesOrNoInteractorImpl: YesOrNoInteractor {
     
     func saveYesOrNoToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveListResult(state: state)
             saveResult(state: state)
         }

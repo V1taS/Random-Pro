@@ -18,7 +18,7 @@ protocol CoinInteractor {
 struct CoinInteractorImpl: CoinInteractor {
     
     func saveCoinIToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveListResult(state: state)
             saveListResultImage(state: state)
             saveResult(state: state)

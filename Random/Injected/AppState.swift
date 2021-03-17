@@ -31,6 +31,7 @@ extension AppState {
         var team = Team()
         var contact = Contact()
         var film = Film()
+        var music = Music()
     }
 }
 

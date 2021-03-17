@@ -18,7 +18,7 @@ protocol CharactersInteractor {
 struct CharactersInteractorImpl: CharactersInteractor {
     
     func saveCharactersToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveListResult(state: state)
             saveNoRepetitions(state: state)
             saveResult(state: state)

@@ -76,7 +76,7 @@ struct FilmInteractorImpl: FilmInteractor {
     }
     
     func getMovies(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             getMoviesBestFilms(state: state)
             getMoviesPopularFilms(state: state)
             getMoviesAllFilms(state: state)
@@ -129,7 +129,7 @@ struct FilmInteractorImpl: FilmInteractor {
     }
     
     func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveFilms(state: state)
             saveFilmsVideoHistory(state: state)
             saveFilmsHistory(state: state)

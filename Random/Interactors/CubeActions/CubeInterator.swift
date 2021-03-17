@@ -18,7 +18,7 @@ protocol CubeInterator {
 struct CubeInteratorImpl: CubeInterator {
     
     func saveCubeToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveListResult(state: state)
             saveSelectedCube(state: state)
             saveCubeOne(state: state)

@@ -18,7 +18,7 @@ protocol DateAndTimeInteractor: DayDateAndTimeInteractor, MonthDateAndTimeIntera
 struct DateAndTimeInteractorImpl: DateAndTimeInteractor {
     
     func saveDayToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveResult(state: state)
             savelistResult(state: state)
             savelistDay(state: state)

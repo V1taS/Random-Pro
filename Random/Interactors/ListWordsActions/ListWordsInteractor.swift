@@ -18,7 +18,7 @@ protocol ListWordsInteractor {
 struct ListWordsInteractorImpl: ListWordsInteractor {
     
     func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
             saveListResult(state: state)
             saveListTemp(state: state)
             saveListData(state: state)

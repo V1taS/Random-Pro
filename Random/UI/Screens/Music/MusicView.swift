@@ -20,6 +20,7 @@ struct MusicView: View {
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
     @State private var isPressedTouch = false
+    private let size = UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 300)
     
     @State var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
     
@@ -33,7 +34,7 @@ struct MusicView: View {
                         .onSuccess { image, data, cacheType in }
                         .placeholder(Image("musicPH"))
                         .indicator(.activity)
-                        .frame(width: 300, height: 300)
+                        .frame(width: size, height: size)
                         .transition(.fade(duration: 0.5))
                         .scaledToFill()
                         .aspectRatio(contentMode: .fill)
@@ -162,7 +163,7 @@ private extension MusicView {
             // Пропустить трек
             //            self.musicPlayer.skipToNextItem()
             
-            DispatchQueue.main.async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 getMusicFile(state: appBinding)
                 getCurrentMusicFile(state: appBinding)
                 musicPlayer.setQueue(with: [appBinding.music.resultMusic.wrappedValue.id ?? ""])
@@ -213,7 +214,7 @@ private extension MusicView {
                     .resizable()
                     .renderingMode(.original)
                     .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))]).opacity(appBinding.music.playButtonIsDisabled.wrappedValue ? 0.044 : 1)
-                    .frame(width: 100, height: 100)
+                    .frame(width: 70, height: 70)
             }
         }
     }

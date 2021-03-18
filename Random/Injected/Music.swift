@@ -21,5 +21,7 @@ extension AppState.AppData {
         var isPlaying = false
         var showActivityIndicator = false
         var playButtonIsDisabled = true
+        
+        var countLoopDowload = 0
     }
 }

@@ -27,12 +27,11 @@ struct MusicInteractorImpl: MusicInteractor {
             SKCloudServiceController.requestAuthorization { (status) in
                 if status == .authorized {
                     state.music.showActivityIndicator.wrappedValue = true
-                    let offset = Int.random(in: 0...100)
                     
                     var musics: [MusicITunesDatum] = []
                     
                     DispatchQueue.global(qos: .userInteractive).async {
-                        AppleMusicAPI.share.getChartsAppleMusic(limit: 50, offset: offset) { music in
+                        AppleMusicAPI.share.getChartsAppleMusic(limit: 50, offset: state.music.countLoopDowload.wrappedValue) { music in
                             guard let music = music.results?.songs?.first?.data else { return }
                             
                             for item in music {
@@ -42,6 +41,7 @@ struct MusicInteractorImpl: MusicInteractor {
                             }
                             state.music.listMusic.wrappedValue = musics.shuffled()
                         }
+                        state.music.countLoopDowload.wrappedValue += 50
                         state.music.showActivityIndicator.wrappedValue = false
                     }
                 } else {
@@ -64,6 +64,7 @@ struct MusicInteractorImpl: MusicInteractor {
     func cleanMusic(state: Binding<AppState.AppData>) {
         state.music.listMusic.wrappedValue = []
         state.music.listMusicHistory.wrappedValue = []
+        state.music.countLoopDowload.wrappedValue = 0
         state.music.resultMusic.wrappedValue = MusicITunesDatum(attributes: nil, href: nil, id: nil)
     }
     
@@ -73,6 +74,7 @@ struct MusicInteractorImpl: MusicInteractor {
             saveListMusicHistory(state: state)
             saveResultMusic(state: state)
             savePlayButtonIsDisabled(state: state)
+            saveCountLoopDowload(state: state)
         }
     }
 }
@@ -116,5 +118,11 @@ extension MusicInteractorImpl {
         UserDefaults.standard.set(state.music
                                     .playButtonIsDisabled.wrappedValue,
                                   forKey: "MusicPlayButtonIsDisabled")
+    }
+    
+    private func saveCountLoopDowload(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.music
+                                    .countLoopDowload.wrappedValue,
+                                  forKey: "MusicCountLoopDowload")
     }
 }

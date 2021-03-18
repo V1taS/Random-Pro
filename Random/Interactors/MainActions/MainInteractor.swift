@@ -304,6 +304,7 @@ extension MainInteractorImpl {
             
             state.music.playButtonIsDisabled.wrappedValue = UserDefaults.standard.bool(forKey: "MusicPlayButtonIsDisabled")
             
+            state.music.countLoopDowload.wrappedValue = UserDefaults.standard.object(forKey: "MusicCountLoopDowload") as? Int ?? 0
         }
     }
 }
@@ -410,5 +411,6 @@ extension MainInteractorImpl {
         UserDefaults.standard.set([], forKey: "listMusicHistory")
         
         UserDefaults.standard.set(true, forKey: "MusicPlayButtonIsDisabled")
+        UserDefaults.standard.set(0, forKey: "MusicCountLoopDowload")
     }
 }

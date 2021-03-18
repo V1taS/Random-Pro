@@ -20,7 +20,8 @@ struct MusicView: View {
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
     @State private var isPressedTouch = false
-    private let size = UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 300)
+    private let sizePhone = UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 300)
+    private let sizeIPad = UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 270)
     
     @State var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
     
@@ -28,20 +29,7 @@ struct MusicView: View {
         LoadingView(isShowing: appBinding.music.showActivityIndicator) {
             ZStack {
                 VStack(spacing: 0) {
-                    WebImage(url: URL(string: appBinding.music.resultMusic.wrappedValue.attributes?.artwork?.url?.replacingOccurrences(of: "{w}", with: "300").replacingOccurrences(of: "{h}", with: "300") ?? ""))
-                        .resizable()
-                        .renderingMode(.original)
-                        .onSuccess { image, data, cacheType in }
-                        .placeholder(Image("musicPH"))
-                        .indicator(.activity)
-                        .frame(width: size, height: size)
-                        .transition(.fade(duration: 0.5))
-                        .scaledToFill()
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(6)
-                        .overlay(RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color(.systemGray4)))
-                        .padding(.top, 24)
+                    deviceImage
                     
                     Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.name ?? NSLocalizedString("Название песни", comment: ""))")
                         .font(.robotoMedium32())
@@ -122,6 +110,58 @@ struct MusicView: View {
                 
             }
         }
+    }
+}
+
+// MARK: Device
+private extension MusicView {
+    private var deviceImage: AnyView {
+        switch UIDevice.current.userInterfaceIdiom == .phone {
+        case true:
+            return AnyView(imageForIPhone)
+        case false:
+            return AnyView(imageForIPad)
+        }
+    }
+}
+
+// MARK: Device Phone
+private extension MusicView {
+    var imageForIPhone: some View {
+        WebImage(url: URL(string: appBinding.music.resultMusic.wrappedValue.attributes?.artwork?.url?.replacingOccurrences(of: "{w}", with: "300").replacingOccurrences(of: "{h}", with: "300") ?? ""))
+            .resizable()
+            .renderingMode(.original)
+            .onSuccess { image, data, cacheType in }
+            .placeholder(Image("musicPH"))
+            .indicator(.activity)
+            .frame(width: sizePhone, height: sizePhone)
+            .transition(.fade(duration: 0.5))
+            .scaledToFill()
+            .aspectRatio(contentMode: .fill)
+            .cornerRadius(6)
+            .overlay(RoundedRectangle(cornerRadius: 6)
+                        .stroke(Color(.systemGray4)))
+            .padding(.top, 24)
+    }
+}
+
+// MARK: Device IPad
+private extension MusicView {
+    var imageForIPad: some View {
+        WebImage(url: URL(string: appBinding.music.resultMusic.wrappedValue.attributes?.artwork?.url?.replacingOccurrences(of: "{w}", with: "300").replacingOccurrences(of: "{h}", with: "300") ?? ""))
+            .resizable()
+            .renderingMode(.original)
+            .onSuccess { image, data, cacheType in }
+            .placeholder(Image("musicPH"))
+            .indicator(.activity)
+            .frame(width: sizeIPad, height: sizeIPad)
+            .transition(.fade(duration: 0.5))
+            .scaledToFill()
+            .aspectRatio(contentMode: .fill)
+            .cornerRadius(6)
+            .overlay(RoundedRectangle(cornerRadius: 6)
+                        .stroke(Color(.systemGray4)))
+            .padding(.top, 24)
     }
 }
 

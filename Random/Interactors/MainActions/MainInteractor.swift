@@ -29,6 +29,7 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultTeam(state: state)
             userDefaultContact(state: state)
             userDefaultFilms(state: state)
+            userDefaultMusic(state: state)
         }
     }
     
@@ -45,6 +46,7 @@ struct MainInteractorImpl: MainInteractor {
             cleanTeam()
             cleanContact()
             cleanFilms()
+            cleanMusic()
         }
     }
 }
@@ -102,6 +104,30 @@ extension MainInteractorImpl {
         if let items = UserDefaults.standard.data(forKey: forKey) {
             let decoder = JSONDecoder()
             if let decoded = try? decoder.decode([FetchedContacts].self, from: items) {
+                return decoded
+            }
+        }
+        return nil
+    }
+}
+
+extension MainInteractorImpl {
+    private func decoderArrMusicsITunesDatum(forKey: String) -> [MusicITunesDatum]? {
+        if let items = UserDefaults.standard.data(forKey: forKey) {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([MusicITunesDatum].self, from: items) {
+                return decoded
+            }
+        }
+        return nil
+    }
+}
+
+extension MainInteractorImpl {
+    private func decoderMusicITunesDatum(forKey: String) -> MusicITunesDatum? {
+        if let items = UserDefaults.standard.data(forKey: forKey) {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode(MusicITunesDatum.self, from: items) {
                 return decoded
             }
         }
@@ -266,6 +292,20 @@ extension MainInteractorImpl {
             state.film.filmsPopularHistory.wrappedValue = decoderFilmsArrBestFilm(forKey: "FilmsPopularHistory") ?? []
         }
     }
+    
+    private func userDefaultMusic(state: Binding<AppState.AppData>) {
+        if state.music.listMusic.wrappedValue.isEmpty {
+            
+            state.music.listMusic.wrappedValue = decoderArrMusicsITunesDatum(forKey: "listMusic") ?? []
+            
+            state.music.listMusicHistory.wrappedValue = decoderArrMusicsITunesDatum(forKey: "listMusicHistory") ?? []
+            
+            state.music.resultMusic.wrappedValue = decoderMusicITunesDatum(forKey: "resultMusic") ?? MusicITunesDatum(attributes: nil, href: nil, id: nil)
+            
+            state.music.playButtonIsDisabled.wrappedValue = UserDefaults.standard.bool(forKey: "MusicPlayButtonIsDisabled")
+            
+        }
+    }
 }
 
 extension MainInteractorImpl {
@@ -363,5 +403,12 @@ extension MainInteractorImpl {
         
         UserDefaults.standard.set([], forKey: "FilmsPopular")
         UserDefaults.standard.set([], forKey: "FilmsPopularHistory")
+    }
+    
+    private func cleanMusic() {
+        UserDefaults.standard.set([], forKey: "listMusic")
+        UserDefaults.standard.set([], forKey: "listMusicHistory")
+        
+        UserDefaults.standard.set(true, forKey: "MusicPlayButtonIsDisabled")
     }
 }

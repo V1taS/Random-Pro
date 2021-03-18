@@ -29,6 +29,8 @@
 		1B1D606A260225CA00847843 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D6069260225CA00847843 /* Music.swift */; };
 		1B1D607126023D0E00847843 /* MusicActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D607026023D0E00847843 /* MusicActions.swift */; };
 		1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D607626023D3C00847843 /* MusicInteractor.swift */; };
+		1B1D60812602D2C500847843 /* MusicSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60802602D2C500847843 /* MusicSettingsView.swift */; };
+		1B1D60852602DE6A00847843 /* MusicHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60842602DE6A00847843 /* MusicHistoryView.swift */; };
 		1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B325C0525D2C9CA00382F33 /* Feedback.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
@@ -219,6 +221,8 @@
 		1B1D6069260225CA00847843 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		1B1D607026023D0E00847843 /* MusicActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicActions.swift; sourceTree = "<group>"; };
 		1B1D607626023D3C00847843 /* MusicInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractor.swift; sourceTree = "<group>"; };
+		1B1D60802602D2C500847843 /* MusicSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSettingsView.swift; sourceTree = "<group>"; };
+		1B1D60842602DE6A00847843 /* MusicHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHistoryView.swift; sourceTree = "<group>"; };
 		1B325C0525D2C9CA00382F33 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -402,6 +406,8 @@
 			isa = PBXGroup;
 			children = (
 				1B1B505526011B0200F73A14 /* MusicView.swift */,
+				1B1D60802602D2C500847843 /* MusicSettingsView.swift */,
+				1B1D60842602DE6A00847843 /* MusicHistoryView.swift */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -1168,6 +1174,7 @@
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
 				1BBADE0025EC013500AD38F4 /* FilmInfo.swift in Sources */,
+				1B1D60852602DE6A00847843 /* MusicHistoryView.swift in Sources */,
 				1BD1F92425D733AB00A1C7A4 /* LotteryActions.swift in Sources */,
 				1B92034625D1888B0094D2BE /* Cube.swift in Sources */,
 				1BD1F92025D7338700A1C7A4 /* Lottery.swift in Sources */,
@@ -1263,6 +1270,7 @@
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1B7F117B25E3F85600FF64A3 /* FetchedContacts.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,
+				1B1D60812602D2C500847843 /* MusicSettingsView.swift in Sources */,
 				1BF1F5CA25F705D700613F20 /* Orientation.swift in Sources */,
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
 				1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */,

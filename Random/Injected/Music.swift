@@ -15,9 +15,11 @@ extension AppState.AppData {
         var listMusicHistory: [MusicITunesDatum] = []
         var resultMusic: MusicITunesDatum = MusicITunesDatum(attributes: nil, href: nil, id: nil)
         
-        var musicPlayList: [String] = []
+//        var musicPlayList: [String] = []
         
         var showSettings = false
         var isPlaying = false
+        var showActivityIndicator = false
+        var playButtonIsDisabled = true
     }
 }

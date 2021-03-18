@@ -24,81 +24,134 @@ struct MusicView: View {
     @State var musicPlayer = MPMusicPlayerController.applicationMusicPlayer
     
     var body: some View {
-        ZStack {
+        LoadingView(isShowing: appBinding.music.showActivityIndicator) {
+            ZStack {
+                VStack(spacing: 0) {
+                    WebImage(url: URL(string: appBinding.music.resultMusic.wrappedValue.attributes?.artwork?.url?.replacingOccurrences(of: "{w}", with: "300").replacingOccurrences(of: "{h}", with: "300") ?? ""))
+                        .resizable()
+                        .renderingMode(.original)
+                        .onSuccess { image, data, cacheType in }
+                        .placeholder(Image("musicPH"))
+                        .indicator(.activity)
+                        .frame(width: 300, height: 300)
+                        .transition(.fade(duration: 0.5))
+                        .scaledToFill()
+                        .aspectRatio(contentMode: .fill)
+                        .cornerRadius(6)
+                        .overlay(RoundedRectangle(cornerRadius: 6)
+                                    .stroke(Color(.systemGray4)))
+                        .padding(.top, 24)
+                    
+                    Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.name ?? NSLocalizedString("Название песни", comment: ""))")
+                        .font(.robotoMedium32())
+                        .foregroundColor(.primaryGray())
+                        .lineLimit(2)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 16)
+                    
+                    Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.artistName ?? NSLocalizedString("Имя артиста", comment: ""))")
+                        .font(.robotoRegular24())
+                        .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+                        .lineLimit(2)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 8)
+                    
+                    Text("\(NSLocalizedString("Релиз:", comment: "")) \(appBinding.music.resultMusic.wrappedValue.attributes?.releaseDate ?? "")")
+                        .font(.robotoMedium18())
+                        .foregroundColor(.gray)
+                        .lineLimit(2)
+                        .foregroundColor(.black)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 4)
+                    
+                    playAndPauseButton
+                        .disabled(appBinding.music.playButtonIsDisabled.wrappedValue)
+                        .padding(.top, 24)
+                    Spacer()
+                    generateButton
+                }
+            }
+            .dismissingKeyboard()
             
-            VStack(spacing: 0) {
-                WebImage(url: URL(string: appBinding.music.resultMusic.wrappedValue.attributes?.artwork?.url ?? ""))
-                    .resizable()
-                    .renderingMode(.original)
-                    .onSuccess { image, data, cacheType in }
-                    .placeholder(Image("musicPH"))
-                    .indicator(.activity)
-                    .frame(width: 300, height: 300)
-                    .transition(.fade(duration: 0.5))
-                    .scaledToFill()
-                    .aspectRatio(contentMode: .fill)
-                    .cornerRadius(6)
-                    .overlay(RoundedRectangle(cornerRadius: 6)
-                                .stroke(Color(.systemGray4)))
-                    .padding(.top, 24)
-                
-                Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.name ?? "Название песни")")
-                    .font(.robotoMedium18())
-                    .foregroundColor(.black)
-                    .lineLimit(2)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 16)
-                
-                Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.artistName ?? "Имя артиста")")
-                    .font(.robotoRegular18())
-                    .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
-                    .lineLimit(2)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-                
-                Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.releaseDate ?? "2021")")
-                    .font(.robotoBold13())
-                    .foregroundColor(.gray)
-                    .lineLimit(2)
-                    .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 4)
-    
-                playAndPauseButton
-                    .padding(.top, 24)
+            
+            .navigationBarTitle(Text(NSLocalizedString("Музыка", comment: "")), displayMode: .inline)
+            .navigationBarItems(trailing: HStack(spacing: 16) {
                 Spacer()
-                generateButton
+                navigationButtonPlay
+                Color.clear
+                    .frame(width: 2)
+                navigationButtonGear
             }
-        }
-        .dismissingKeyboard()
-        
-        
-        .navigationBarTitle(Text(NSLocalizedString("Музыка", comment: "")), displayMode: .inline)
-        .navigationBarItems(trailing: HStack(spacing: 16) {
-            Spacer()
-//            navigationButtonPlay
-//            navigationButtonGear
-        }
-        .frame(width: 110)
-        )
-        
-        .sheet(isPresented: appBinding.film.showSettings,
-               onDismiss: {
-//                cleanContentOnDismissSetting()
-               }
-               , content: {
-//                FilmSettingsView(appBinding: appBinding)
-               })
-
+            .frame(width: 110)
+            )
+            
+            .sheet(isPresented: appBinding.music.showSettings,
+                   onDismiss: {
+                    if appBinding.music.listMusic.wrappedValue.isEmpty {
+                        getMusicFile(state: appBinding)
+                        musicPlayer.pause()
+                        appBinding.music.isPlaying.wrappedValue = false
+                        appBinding.music.playButtonIsDisabled.wrappedValue = true
+                    }
+                   }
+                   , content: {
+                    MusicSettingsView(appBinding: appBinding)
+                   })
+            
             .onAppear() {
+                if appBinding.music.listMusic.wrappedValue.isEmpty {
+                    musicPlayer.pause()
+                    appBinding.music.isPlaying.wrappedValue = false
+                    appBinding.music.playButtonIsDisabled.wrappedValue = true
+                } else {
+                    musicPlayer.setQueue(with: [appBinding.music.resultMusic.wrappedValue.id ?? ""])
+                }
                 getMusicFile(state: appBinding)
-                getCurrentMusicFile(state: appBinding)
+                
+                if self.musicPlayer.playbackState == .playing {
+                    appBinding.music.isPlaying.wrappedValue = true
+                } else {
+                    appBinding.music.isPlaying.wrappedValue = false
+                }
+                
             }
+        }
+    }
+}
+
+private extension MusicView {
+    var navigationButtonPlay: some View {
+        Button(action: {
+            guard let urlStr = appBinding.music.resultMusic.wrappedValue.attributes?.url else { return }
+            if let url = URL(string: urlStr) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
+            
+        }) {
+            Image("musicAdd")
+                .resizable()
+                .renderingMode(.original)
+                .frame(width: 24, height: 24)
+                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+        }
+    }
+}
+
+private extension MusicView {
+    var navigationButtonGear: some View {
+        Button(action: {
+            appBinding.music.showSettings.wrappedValue.toggle()
+        }) {
+            Image(systemName: "gear")
+                .font(.system(size: 24))
+        }
     }
 }
 
@@ -106,16 +159,22 @@ private extension MusicView {
     var generateButton: some View {
         Button(action: {
             
-            print("musicPlayList: \(appBinding.music.musicPlayList.wrappedValue.count)")
+            // Пропустить трек
+            //            self.musicPlayer.skipToNextItem()
             
-            print("listMusic (del): \(appBinding.music.listMusic.wrappedValue.count)")
+            DispatchQueue.main.async {
+                getMusicFile(state: appBinding)
+                getCurrentMusicFile(state: appBinding)
+                musicPlayer.setQueue(with: [appBinding.music.resultMusic.wrappedValue.id ?? ""])
+                musicPlayer.play()
+            }
             
-            getMusicFile(state: appBinding)
-            getCurrentMusicFile(state: appBinding)
+            appBinding.music.isPlaying.wrappedValue = true
             
-            self.musicPlayer.setQueue(with: appBinding.music.musicPlayList.wrappedValue)
-            self.musicPlayer.play()
-            
+            if appBinding.music.playButtonIsDisabled.wrappedValue {
+                appBinding.music.playButtonIsDisabled.wrappedValue = false
+            }
+            saveFilmsToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -151,6 +210,10 @@ private extension MusicView {
                 }
             }) {
                 Image(appBinding.music.isPlaying.wrappedValue ? "pause" : "play")
+                    .resizable()
+                    .renderingMode(.original)
+                    .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))]).opacity(appBinding.music.playButtonIsDisabled.wrappedValue ? 0.044 : 1)
+                    .frame(width: 100, height: 100)
             }
         }
     }
@@ -165,6 +228,11 @@ private extension MusicView {
     private func getCurrentMusicFile(state: Binding<AppState.AppData>) {
         injected.interactors.musicInteractor
             .getCurrentMusicFile(state: state)
+    }
+    
+    private func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.musicInteractor
+            .saveFilmsToUserDefaults(state: state)
     }
 }
 

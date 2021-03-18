@@ -16,6 +16,7 @@ protocol MusicInteractor {
     func getMusicFile(state: Binding<AppState.AppData>)
     func getCurrentMusicFile(state: Binding<AppState.AppData>)
     func cleanMusic(state: Binding<AppState.AppData>)
+    func saveFilmsToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct MusicInteractorImpl: MusicInteractor {
@@ -25,11 +26,23 @@ struct MusicInteractorImpl: MusicInteractor {
         if state.music.listMusic.wrappedValue.count == 0 || state.music.listMusic.wrappedValue.count == 1 {
             SKCloudServiceController.requestAuthorization { (status) in
                 if status == .authorized {
-                    let offset = Int.random(in: 1...50)
-                    DispatchQueue.global(qos: .userInitiated).async {
+                    state.music.showActivityIndicator.wrappedValue = true
+                    let offset = Int.random(in: 0...100)
+                    
+                    var musics: [MusicITunesDatum] = []
+                    
+                    DispatchQueue.global(qos: .userInteractive).async {
                         AppleMusicAPI.share.getChartsAppleMusic(limit: 50, offset: offset) { music in
-                            state.music.listMusic.wrappedValue = music.results?.songs?.first?.data ?? []
+                            guard let music = music.results?.songs?.first?.data else { return }
+                            
+                            for item in music {
+                                if item.attributes != nil {
+                                    musics.append(item)
+                                }
+                            }
+                            state.music.listMusic.wrappedValue = musics.shuffled()
                         }
+                        state.music.showActivityIndicator.wrappedValue = false
                     }
                 } else {
                     UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""),
@@ -42,19 +55,9 @@ struct MusicInteractorImpl: MusicInteractor {
     
     func getCurrentMusicFile(state: Binding<AppState.AppData>) {
         guard let music = state.music.listMusic.wrappedValue.first else { return }
-        
-        if state.music.listMusic.wrappedValue.count == 1 {
-            state.music.musicPlayList.wrappedValue = []
-        }
-        
-        if state.music.musicPlayList.wrappedValue.count == 0 || state.music.musicPlayList.wrappedValue.count == 1 {
-            for music in state.music.listMusic.wrappedValue {
-                state.music.musicPlayList.wrappedValue.append(music.id ?? "")
-            }
-        }
-        
         state.music.resultMusic.wrappedValue = music
         state.music.listMusicHistory.wrappedValue.append(music)
+        
         state.music.listMusic.wrappedValue.removeFirst()
     }
     
@@ -62,5 +65,56 @@ struct MusicInteractorImpl: MusicInteractor {
         state.music.listMusic.wrappedValue = []
         state.music.listMusicHistory.wrappedValue = []
         state.music.resultMusic.wrappedValue = MusicITunesDatum(attributes: nil, href: nil, id: nil)
+    }
+    
+    func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
+        DispatchQueue.global(qos: .background).async {
+            saveListMusic(state: state)
+            saveListMusicHistory(state: state)
+            saveResultMusic(state: state)
+            savePlayButtonIsDisabled(state: state)
+        }
+    }
+}
+
+extension MusicInteractorImpl {
+    private func encoderArrMusicsITunesDatum(music: [MusicITunesDatum], forKey: String) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(music) {
+            UserDefaults.standard.set(encoded, forKey: forKey)
+        }
+    }
+}
+
+extension MusicInteractorImpl {
+    private func encoderMusicITunesDatum(music: MusicITunesDatum, forKey: String) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(music) {
+            UserDefaults.standard.set(encoded, forKey: forKey)
+        }
+    }
+}
+
+// MARK - Music Save
+extension MusicInteractorImpl {
+    private func saveListMusic(state: Binding<AppState.AppData>) {
+        encoderArrMusicsITunesDatum(music: state.music.listMusic.wrappedValue,
+                                    forKey: "listMusic")
+    }
+    
+    private func saveListMusicHistory(state: Binding<AppState.AppData>) {
+        encoderArrMusicsITunesDatum(music: state.music.listMusicHistory.wrappedValue,
+                                    forKey: "listMusicHistory")
+    }
+    
+    private func saveResultMusic(state: Binding<AppState.AppData>) {
+        encoderMusicITunesDatum(music: state.music.resultMusic.wrappedValue,
+                                    forKey: "resultMusic")
+    }
+    
+    private func savePlayButtonIsDisabled(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.music
+                                    .playButtonIsDisabled.wrappedValue,
+                                  forKey: "MusicPlayButtonIsDisabled")
     }
 }

@@ -49,7 +49,7 @@ class AppleMusicAPI {
         URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
             guard error == nil else { return }
             if let json = try? JSON(data: data!) {
-                let result = (json["data"]).array!
+                let result = (json["data"]).array ?? []
                 let id = (result[0].dictionaryValue)["id"]!
                 storefrontID = id.stringValue
                 lock.signal()

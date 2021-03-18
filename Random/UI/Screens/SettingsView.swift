@@ -167,6 +167,10 @@ private extension SettingsView {
         injected.interactors.filmInteractor
             .cleanFilms(state: state)
         
+        injected.interactors.musicInteractor
+                .cleanMusic(state: state)
+        
+        state.music.resultMusic.wrappedValue = MusicITunesDatum(attributes: nil, href: nil, id: nil)
         state.listWords.listData.wrappedValue = []
         state.team.listPlayersData.wrappedValue = []
     }

@@ -17,13 +17,16 @@ class AppleMusicAPI {
     static let share = AppleMusicAPI()
     private init() {}
     
-    func getUserToken() -> String {
-        var userToken = String()
+    func getUserToken() -> String? {
+        var userToken: String? = nil
         // Остановка потока до тех пор, пока не будет передано конкретное сообщение
         let lock = DispatchSemaphore(value: 0)
         // Аутентифицируем пользователя в персонализированных запросах Apple Music API.
         SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken) { (receivedToken, error) in
-            guard error == nil else { return }
+            guard error == nil else {
+                lock.signal()
+                return
+            }
             if let token = receivedToken {
                 userToken = token
                 lock.signal()
@@ -39,13 +42,13 @@ class AppleMusicAPI {
         // Семафор отправки, вызываемый, lockчтобы гарантировать, что функция возвращает a storefrontIDтолько после того, как данные были получены из нашего URL-запроса.
         let lock = DispatchSemaphore(value: 0)
         var storefrontID = String()
-        
         let musicURL = URL(string: "https://api.music.apple.com/v1/me/storefront")!
         var musicRequest = URLRequest(url: musicURL)
         musicRequest.httpMethod = "GET"
-        
         musicRequest.addValue("Bearer \(developerToken)", forHTTPHeaderField: "Authorization")
-        musicRequest.addValue(getUserToken(), forHTTPHeaderField: "Music-User-Token")
+        
+        musicRequest.addValue(getUserToken() ?? "", forHTTPHeaderField: "Music-User-Token")
+
         URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
             guard error == nil else { return }
             if let json = try? JSON(data: data!) {
@@ -61,12 +64,13 @@ class AppleMusicAPI {
         return storefrontID
     }
     
-    func getChartsAppleMusic(limit: Int, offset: Int, completion: @escaping (MusicITunes) -> Void){
+    func getChartsAppleMusic(limit: Int, offset: Int, completion: @escaping (MusicITunes) -> Void) {
         let musicURL = URL(string: "https://api.music.apple.com/v1/catalog/\(fetchStorefrontID())/charts?types=songs&limit=\(limit)&offset=\(offset)")!
         var musicRequest = URLRequest(url: musicURL)
         musicRequest.httpMethod = "GET"
         musicRequest.addValue("Bearer \(developerToken)", forHTTPHeaderField: "Authorization")
-        musicRequest.addValue(getUserToken(), forHTTPHeaderField: "Music-User-Token")
+        
+        musicRequest.addValue(getUserToken() ?? "", forHTTPHeaderField: "Music-User-Token")
         
         URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
             guard error == nil else { return }

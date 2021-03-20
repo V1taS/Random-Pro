@@ -33,7 +33,6 @@ struct MusicInteractorImpl: MusicInteractor {
                     DispatchQueue.global(qos: .userInteractive).async {
                         AppleMusicAPI.share.getChartsAppleMusic(limit: 50, offset: state.music.countLoopDowload.wrappedValue) { music in
                             guard let music = music.results?.songs?.first?.data else { return }
-                            
                             for item in music {
                                 if item.attributes != nil {
                                     musics.append(item)
@@ -46,7 +45,7 @@ struct MusicInteractorImpl: MusicInteractor {
                     }
                 } else {
                     UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""),
-                                                                                      and: "Необходимо разрешить доступ к Apple Music в настройках",
+                                                                                      and: NSLocalizedString("Необходимо разрешить доступ к Apple Music в настройках", comment: ""),
                                                                     style: .alert)
                 }
             }

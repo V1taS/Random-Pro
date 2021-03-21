@@ -74,52 +74,40 @@ struct MusicView: View {
                 
                 DispatchQueue.global(qos: .userInteractive).async {
                     if AppleMusicAPI.share.getUserToken() == nil {
-                        noSubscription
+                        print("Подписки Apple music - нет")
+
+                        DispatchQueue.main.async {
+                            UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("Ваше устройство не имеет подписки Apple Music", comment: ""), style: .alert) {
+                                presentationMode.wrappedValue.dismiss()
+                                appBinding.music.showActivityIndicator.wrappedValue = false
+                            }
+                        }
+                        
                     } else {
-                        subscription
+                        print("Подписка Apple music есть")
+                        
+                        if appBinding.music.listMusic.wrappedValue.isEmpty {
+                            musicPlayer.pause()
+                            appBinding.music.isPlaying.wrappedValue = false
+                            appBinding.music.playButtonIsDisabled.wrappedValue = true
+                        } else {
+                            musicPlayer.setQueue(with: [appBinding.music.resultMusic.wrappedValue.id ?? ""])
+                        }
+                        
+                        getMusicFile(state: appBinding)
+
+                        if self.musicPlayer.playbackState == .playing {
+                            appBinding.music.isPlaying.wrappedValue = true
+                        } else {
+                            appBinding.music.isPlaying.wrappedValue = false
+                        }
+                        
+                        appBinding.music.showActivityIndicator.wrappedValue = false
                     }
+                    
                 }
             }
         }
-    }
-}
-
-// MARK: No subscription
-private extension MusicView {
-    var noSubscription: some View {
-        print("Подписки Apple music - нет")
-        
-        DispatchQueue.main.async {
-            UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("Ваше устройство не имеет подписки Apple Music", comment: ""), style: .alert) {
-                presentationMode.wrappedValue.dismiss()
-                appBinding.music.showActivityIndicator.wrappedValue = false
-            }
-        }
-    }
-}
-
-// MARK: Subscription
-private extension MusicView {
-    var subscription: some View {
-        print("Подписка Apple music есть")
-        
-        if appBinding.music.listMusic.wrappedValue.isEmpty {
-            musicPlayer.pause()
-            appBinding.music.isPlaying.wrappedValue = false
-            appBinding.music.playButtonIsDisabled.wrappedValue = true
-        } else {
-            musicPlayer.setQueue(with: [appBinding.music.resultMusic.wrappedValue.id ?? ""])
-        }
-        
-        getMusicFile(state: appBinding)
-        
-        if self.musicPlayer.playbackState == .playing {
-            appBinding.music.isPlaying.wrappedValue = true
-        } else {
-            appBinding.music.isPlaying.wrappedValue = false
-        }
-        
-        appBinding.music.showActivityIndicator.wrappedValue = false
     }
 }
 

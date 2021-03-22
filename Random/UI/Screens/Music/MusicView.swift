@@ -42,8 +42,6 @@ struct MusicView: View {
                 }
             }
             .dismissingKeyboard()
-            
-            
             .navigationBarTitle(Text(NSLocalizedString("Музыка", comment: "")), displayMode: .inline)
             .navigationBarItems(trailing: HStack(spacing: 16) {
                 Spacer()

@@ -15,7 +15,6 @@ struct ContactView: View {
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
-    @State private var isPressedTouch = false
     
     var body: some View {
         ZStack {
@@ -30,53 +29,41 @@ struct ContactView: View {
                         .font(.robotoBold70())
                         .foregroundColor(.primaryGray())
                         .padding(.horizontal, 16)
-                        .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                        .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                        .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-                        
-                        .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
-                                    .onChanged { _ in
-                                        isPressedTouch = true
-                                        generateContacts(state: appBinding)
-                                        saveContactToUserDefaults(state: appBinding)
-                                        Feedback.shared.impactHeavy(.medium)
-                                    }
-                                    .onEnded { _ in
-                                        isPressedTouch = false
-                                    }
-                        )
+                        .opacity(isPressedButton ? 0.8 : 1)
+                        .scaleEffect(isPressedButton ? 0.8 : 1)
+                        .animation(.easeInOut(duration: 0.2), value: isPressedButton)
+                    
+                    //                        .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
+                    //                                    .onChanged { _ in
+                    //                                        isPressedTouch = true
+                    //                                        generateContacts(state: appBinding)
+                    //                                        saveContactToUserDefaults(state: appBinding)
+                    //                                        Feedback.shared.impactHeavy(.medium)
+                    //                                    }
+                    //                                    .onEnded { _ in
+                    //                                        isPressedTouch = false
+                    //                                    }
+                    //                        )
                     
                 } else {
                     VStack(spacing: 24) {
                         Text("\(appBinding.contact.resultFullName.wrappedValue)")
                             .font(.robotoBold30())
                             .foregroundColor(.primaryGray())
-                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                            .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                            .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                            .opacity(isPressedButton ? 0.8 : 1)
+                            .scaleEffect(isPressedButton ? 0.8 : 1)
+                            .animation(.easeInOut(duration: 0.2), value: isPressedButton)
                             .multilineTextAlignment(.center)
                             .padding(.horizontal, 24)
                         
                         Text("\(appBinding.contact.resultPhone.wrappedValue)")
                             .font(.robotoBold30())
                             .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
-                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                            .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                            .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                            .opacity(isPressedButton ? 0.8 : 1)
+                            .scaleEffect(isPressedButton ? 0.8 : 1)
+                            .animation(.easeInOut(duration: 0.2), value: isPressedButton)
                             .padding(.horizontal, 24)
                     }
-                    
-                    .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
-                                .onChanged { _ in
-                                    isPressedTouch = true
-                                    generateContacts(state: appBinding)
-                                    saveContactToUserDefaults(state: appBinding)
-                                    Feedback.shared.impactHeavy(.medium)
-                                }
-                                .onEnded { _ in
-                                    isPressedTouch = false
-                                }
-                    )
                 }
                 Spacer()
                 

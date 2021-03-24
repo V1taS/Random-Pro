@@ -19,7 +19,6 @@ struct DateAndTimeView: View {
     @State private var isPressedButtonTime = false
     @State private var isPressedButtonDate = false
     @State private var isPressedButtonMonth = false
-    @State private var isPressedTouch = false
     
     var body: some View {
         VStack {
@@ -28,14 +27,12 @@ struct DateAndTimeView: View {
                 .font(.robotoBold50())
                 .foregroundColor(.primaryGray())
                 .opacity(isPressedButtonMonth || isPressedButtonDate ||
-                            isPressedButtonTime || isPressedButtonDay ||
-                            isPressedTouch ? 0.8 : 1)
+                            isPressedButtonTime || isPressedButtonDay ? 0.8 : 1)
                 .scaleEffect(isPressedButtonMonth || isPressedButtonDate ||
-                                isPressedButtonTime || isPressedButtonDay ||
-                                isPressedTouch ? 0.8 : 1)
+                                isPressedButtonTime || isPressedButtonDay ? 0.8 : 1)
                 .animation(.easeInOut(duration: 0.2), value: isPressedButtonMonth ||
                             isPressedButtonDate || isPressedButtonTime ||
-                            isPressedButtonDay || isPressedTouch)
+                            isPressedButtonDay)
             
             Spacer()
             listResults
@@ -156,14 +153,12 @@ private extension DateAndTimeView {
                     if index == 0 {
                         TextRoundView(name: "\(element)")
                             .opacity(isPressedButtonMonth || isPressedButtonDate ||
-                                        isPressedButtonTime || isPressedButtonDay ||
-                                        isPressedTouch ? 0.8 : 1)
+                                        isPressedButtonTime || isPressedButtonDay ? 0.8 : 1)
                             .scaleEffect(isPressedButtonMonth || isPressedButtonDate ||
-                                            isPressedButtonTime || isPressedButtonDay ||
-                                            isPressedTouch ? 0.9 : 1)
+                                            isPressedButtonTime || isPressedButtonDay ? 0.9 : 1)
                             .animation(.easeInOut(duration: 0.1), value: isPressedButtonMonth ||
                                         isPressedButtonDate || isPressedButtonTime ||
-                                        isPressedButtonDay || isPressedTouch)
+                                        isPressedButtonDay)
                     } else {
                         Text("\(element)")
                             .foregroundColor(.primaryGray())

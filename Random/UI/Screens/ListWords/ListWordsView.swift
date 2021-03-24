@@ -15,9 +15,7 @@ struct ListWordsView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
-    
     @State private var isPressedButton = false
-    @State private var isPressedTouch = false
     
     var body: some View {
         VStack {
@@ -25,22 +23,9 @@ struct ListWordsView: View {
             Text("\(appBinding.listWords.result.wrappedValue)")
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
-                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-                .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
-                            .onChanged { _ in
-                                isPressedTouch = true
-                                generateWords(state: appBinding)
-                                saveListWordsToUserDefaults(state: appBinding)
-                                if !appBinding.listWords.listTemp.wrappedValue.isEmpty {
-                                    Feedback.shared.impactHeavy(.medium)
-                                }
-                            }
-                            .onEnded { _ in
-                                isPressedTouch = false
-                            }
-                )
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
             
             Spacer()
             
@@ -97,9 +82,9 @@ private extension ListWordsView {
                     
                     if index == 0 {
                         TextRoundView(name: "\(word)")
-                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                            .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
-                            .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
+                            .opacity(isPressedButton ? 0.8 : 1)
+                            .scaleEffect(isPressedButton ? 0.9 : 1)
+                            .animation(.easeInOut(duration: 0.1), value: isPressedButton)
                     } else {
                         Text("\(word)")
                             .foregroundColor(.primaryGray())

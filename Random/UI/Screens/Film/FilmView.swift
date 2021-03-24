@@ -16,8 +16,6 @@ struct FilmView: View {
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
-    @State private var isPressedTouch = false
-    
     @State var genres = [NSLocalizedString("250 Лучших", comment: ""),
                          NSLocalizedString("100 Популярных", comment: ""),
                          NSLocalizedString("Все", comment: "")
@@ -213,9 +211,9 @@ private extension FilmView {
                 .font(.robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
-                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
@@ -235,9 +233,9 @@ private extension FilmView {
                 .font(.robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
-                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
@@ -257,9 +255,9 @@ private extension FilmView {
                 .font(.robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
-                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
@@ -272,7 +270,7 @@ private extension FilmView {
     private func settingsScreen() {
         switch appBinding.film.selectedGenres.wrappedValue {
         case 0:
-            appBinding.film.nameFilmBest.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? "")"
+            appBinding.film.nameFilmBest.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
             appBinding.film.imageFilmBest.wrappedValue = appBinding.film.filmsBestInfo.posterUrlPreview.wrappedValue ?? ""
             
             if let rating = appBinding.film.filmsBestInfo.rating.wrappedValue {
@@ -288,7 +286,7 @@ private extension FilmView {
             }
             
         case 1:
-            appBinding.film.nameFilmPopular.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopularInfo.nameRu.wrappedValue ?? "")" : "\(appBinding.film.filmsPopularInfo.nameEn.wrappedValue ?? "")"
+            appBinding.film.nameFilmPopular.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopularInfo.nameRu.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(appBinding.film.filmsPopularInfo.nameEn.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
             appBinding.film.imageFilmPopular.wrappedValue = appBinding.film.filmsPopularInfo.posterUrlPreview.wrappedValue ?? ""
             
             if let rating = appBinding.film.filmsPopularInfo.rating.wrappedValue {
@@ -305,7 +303,7 @@ private extension FilmView {
                 appBinding.film.ratingIsShowPopular.wrappedValue = false
             }
         case 2:
-            appBinding.film.nameFilmAll.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? "")" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? "")"
+            appBinding.film.nameFilmAll.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
             appBinding.film.imageFilmAll.wrappedValue = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
             
             if let rating = appBinding.film.filmInfo.rating.wrappedValue?.ratingImdb {

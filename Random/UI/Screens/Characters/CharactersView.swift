@@ -18,9 +18,7 @@ struct CharactersView: View {
     @State var lang = [NSLocalizedString("Русские буквы", comment: ""),
                        NSLocalizedString("Английские буквы", comment: "")]
     @State var selectedLang = 0
-    
     @State private var isPressedButton = false
-    @State private var isPressedTouch = false
     
     var body: some View {
         VStack {
@@ -37,22 +35,9 @@ struct CharactersView: View {
             Text("\(appBinding.characters.result.wrappedValue)")
                 .font(.robotoBold70())
                 .foregroundColor(.primaryGray())
-                .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-                
-                .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
-                            .onChanged { _ in
-                                isPressedTouch = true
-                                appBinding.characters.selectedLang.wrappedValue = selectedLang
-                                generateYesOrNo(state: appBinding)
-                                saveCharactersToUserDefaults(state: appBinding)
-                                Feedback.shared.impactHeavy(.medium)
-                            }
-                            .onEnded { _ in
-                                isPressedTouch = false
-                            }
-                )
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
             
             Spacer()
             
@@ -108,9 +93,9 @@ private extension CharactersView {
                                 .wrappedValue.enumerated()), id: \.0) { (index, character) in
                     if index == 0 {
                         TextRoundView(name: "\(character)")
-                            .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                            .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
-                            .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
+                            .opacity(isPressedButton ? 0.8 : 1)
+                            .scaleEffect(isPressedButton ? 0.9 : 1)
+                            .animation(.easeInOut(duration: 0.1), value: isPressedButton)
                     } else {
                         Text("\(character)")
                             .foregroundColor(.primaryGray())

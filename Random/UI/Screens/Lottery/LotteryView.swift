@@ -16,7 +16,6 @@ struct LotteryView: View {
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
-    @State private var isPressedTouch = false
     
     var body: some View {
         ZStack {
@@ -33,23 +32,9 @@ struct LotteryView: View {
                     .font(.robotoBold50())
                     .foregroundColor(.primaryGray())
                     .padding(.horizontal, 16)
-                    .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                    .scaleEffect(isPressedButton || isPressedTouch ? 0.8 : 1)
-                    .animation(.easeInOut(duration: 0.2), value: isPressedButton || isPressedTouch)
-                    .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
-                                .onChanged { _ in
-                                    isPressedTouch = true
-                                    if !appBinding.lottery.firstNumber.wrappedValue.isEmpty &&
-                                        !appBinding.lottery.secondNumber.wrappedValue.isEmpty {
-                                        generateNumbers(state: appBinding)
-                                        Feedback.shared.impactHeavy(.medium)
-                                        saveLotteryToUserDefaults(state: appBinding)
-                                    }
-                                }
-                                .onEnded { _ in
-                                    isPressedTouch = false
-                                }
-                    )
+                    .opacity(isPressedButton ? 0.8 : 1)
+                    .scaleEffect(isPressedButton ? 0.8 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: isPressedButton)
                 
                 Spacer()
                 
@@ -124,9 +109,9 @@ private extension LotteryView {
                     Text("\(number)")
                         .foregroundColor(.primaryGray())
                         .font(.robotoMedium18())
-                        .opacity(isPressedButton || isPressedTouch ? 0.8 : 1)
-                        .scaleEffect(isPressedButton || isPressedTouch ? 0.9 : 1)
-                        .animation(.easeInOut(duration: 0.1), value: isPressedButton || isPressedTouch)
+                        .opacity(isPressedButton ? 0.8 : 1)
+                        .scaleEffect(isPressedButton ? 0.9 : 1)
+                        .animation(.easeInOut(duration: 0.1), value: isPressedButton)
                 }
             }
             .padding(.leading, 16)

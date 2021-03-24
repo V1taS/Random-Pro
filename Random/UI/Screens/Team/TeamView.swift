@@ -28,7 +28,6 @@ struct TeamView: View {
                 content
             }
             generateButton
-            
         }
         
         .navigationBarTitle(Text(NSLocalizedString("Команды", comment: "")), displayMode: .inline)
@@ -57,10 +56,6 @@ struct TeamView: View {
 private extension TeamView {
     var header: some View {
         VStack {
-//            Text(NSLocalizedString("Количество команд", comment: ""))
-//                .font(.robotoMedium20())
-//                .foregroundColor(.primaryGray())
-            
             Picker(selection: $selectedTeam,
                    label: Text("Picker")) {
                 ForEach(0..<countTeam.count) {
@@ -69,7 +64,6 @@ private extension TeamView {
             }
             .disabled(appBinding.team.disabledPickerView.wrappedValue)
             .pickerStyle(SegmentedPickerStyle())
-//            .padding(.top, 16)
             .padding(.horizontal, 16)
         }
         .padding(.top, 16)

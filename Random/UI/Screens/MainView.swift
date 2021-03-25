@@ -15,115 +15,42 @@ struct MainView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    private let columns = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 3
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
-                device
-            }
-            .onAppear {
-                userDefaultsGet(state: appBinding)
-            }
-            .navigationBarTitle(Text("Random"))
+            makeGrid()
+                .onAppear {
+                    userDefaultsGet(state: appBinding)
+                }
+                .navigationBarTitle(Text("Random"))
             
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
-// MARK: Device
+// MARK: Cell menu
 private extension MainView {
-    private var device: AnyView {
-        switch UIDevice.current.userInterfaceIdiom == .phone {
-        case true:
-            return AnyView(listIPhone)
-        case false:
-            return AnyView(listIPad)
-        }
-    }
-}
-
-// MARK: List iPad
-private extension MainView {
-    var listIPad: some View {
-        VStack(spacing: 16) {
-            HStack {
-                film
-                Spacer()
-                team
-                Spacer()
-                number
-            }
-            
-            HStack {
-                yesOrNot
-                Spacer()
-                characters
-                Spacer()
-                listWords
-            }
-            
-            HStack {
-                coin
-                Spacer()
-                cube
-                Spacer()
-                dateAndTime
-            }
-            
-            HStack {
-                lottery
-                Spacer()
-                contact
-                Spacer()
-                music
-            }
-        }
-        .padding(.horizontal, 20)
-    }
-}
-
-// MARK: List iPhone
-private extension MainView {
-    var listIPhone: some View {
-        VStack(spacing: 12) {
-            HStack {
-                film
-                Spacer()
-                team
-            }
-            
-            HStack {
-                number
-                Spacer()
-                yesOrNot
-            }
-            
-            HStack {
-                characters
-                Spacer()
-                listWords
-            }
-            
-            HStack {
-                coin
-                Spacer()
-                cube
-            }
-            
-            HStack {
-                dateAndTime
-                Spacer()
-                lottery
-            }
-            
-            HStack {
-                contact
-                Spacer()
-                music
-            }
-        }
-        .padding(.horizontal, 20)
+    private func arrView() -> [String: AnyView] {
+        return [NSLocalizedString("Фильмы", comment: ""): AnyView(film),
+                NSLocalizedString("Команды",
+                                         comment: ""): AnyView(team),
+                NSLocalizedString("Число", comment: ""): AnyView(number),
+                NSLocalizedString("Да или Нет", comment: ""): AnyView(yesOrNot),
+                NSLocalizedString("Буква", comment: ""): AnyView(characters),
+                NSLocalizedString("Список", comment: ""): AnyView(listWords),
+                NSLocalizedString("Монета", comment: ""): AnyView(coin),
+                NSLocalizedString("Кубики", comment: ""): AnyView(cube),
+                NSLocalizedString("Дата и время",
+                                         comment: ""): AnyView(dateAndTime),
+                NSLocalizedString("Лотерея",
+                                         comment: ""): AnyView(lottery),
+                NSLocalizedString("Контакт",
+                                         comment: ""): AnyView(contact),
+                NSLocalizedString("Музыка",
+                                         comment: ""): AnyView(music)
+        ]
     }
 }
 
@@ -280,6 +207,33 @@ private extension MainView {
 private extension MainView {
     private func userDefaultsGet(state: Binding<AppState.AppData>) {
         injected.interactors.mainInteractor.userDefaultsGet(state: state)
+    }
+}
+
+private extension MainView {
+    private func makeGrid() -> some View {
+        let count = appBinding.main.storeCellMenu.wrappedValue.count
+        let rows = count / columns + (count % columns == 0 ? 0 : 1)
+        
+        return ScrollView(.vertical, showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 16) {
+                ForEach(0..<rows) { row in
+                    HStack(alignment: .center, spacing: 16) {
+                        ForEach(0..<self.columns) { column -> AnyView in
+                            let index = row * self.columns + column
+                            if index < count {
+                                let arrAnyViewCell = arrView()
+                                let elementStore = appBinding.main.storeCellMenu.wrappedValue[index]
+                                let view = arrAnyViewCell[elementStore]
+                                return AnyView(view)
+                            } else {
+                                return AnyView(EmptyView())
+                            }
+                        }
+                    }
+                }
+            } .frame(maxWidth: .infinity)
+        }
     }
 }
 

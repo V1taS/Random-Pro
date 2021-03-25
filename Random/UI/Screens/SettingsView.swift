@@ -26,6 +26,10 @@ struct SettingsView: View {
                         tipTheDeveloper
                     }
                     
+                    Section(header: Text(LocalizedStringKey("Внешний вид"))) {
+                        categories
+                    }
+                    
                     Section(header: Text(LocalizedStringKey("Другие"))) {
                         clearAppButton
                     }
@@ -34,6 +38,28 @@ struct SettingsView: View {
             .navigationBarTitle(Text(LocalizedStringKey("Настройки")), displayMode: .automatic)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+}
+
+private extension SettingsView {
+    var categories: some View {
+        HStack {
+            NavigationLink(
+                destination: CategoriesView(appBinding: appBinding)
+                    .allowAutoDismiss { false }) {
+                HStack {
+                    Image(systemName: "square.grid.2x2")
+                        .font(.title)
+                        .frame(width: 50, alignment: .leading)
+                        .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+                    
+                    Text(NSLocalizedString("Категории", comment: ""))
+                        .foregroundColor(.primaryGray())
+                        .font(.robotoMedium18())
+                }
+            }
+            Spacer()
+        }
     }
 }
 

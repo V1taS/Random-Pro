@@ -21,8 +21,6 @@ struct CategoriesView: View {
     var body: some View {
         VStack {
             Form {
-                
-                
                 Section(header: Text(NSLocalizedString("Активные", comment: "") + " - \(storeCellMenu.count)")) {
                     
                     ForEach(Array(storeCellMenu.enumerated()), id: \.0) { (index, element) in
@@ -30,11 +28,11 @@ struct CategoriesView: View {
                         HStack {
                             Spacer()
                             Text(NSLocalizedString("\(element)", comment: ""))
-                                .foregroundColor(.primaryBlue())
+                                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
                                 .font(.robotoRegular16())
                             Spacer()
                         }
-                        .frame(width: .infinity, height: 30)
+                        .background(Color(#colorLiteral(red: 0.99598068, green: 0.9961469769, blue: 0.9959587455, alpha: 1)))
                         .onTapGesture {
                             storeCellMenu.remove(at: index)
                             storeCellMenuHidden.append(element)
@@ -45,6 +43,8 @@ struct CategoriesView: View {
                                 saveMainMenuToUserDefaults(state: appBinding)
                             }
                         }
+                        
+                        
                     }
                     .onMove(perform: { indices, newOffset in
                         move(from: indices, to: newOffset)
@@ -62,10 +62,11 @@ struct CategoriesView: View {
                         HStack {
                             Spacer()
                             Text(NSLocalizedString("\(element)", comment: ""))
-                                .foregroundColor(.primaryBlue())
+                                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
                                 .font(.robotoRegular16())
                             Spacer()
                         }
+                        .background(Color(#colorLiteral(red: 0.99598068, green: 0.9961469769, blue: 0.9959587455, alpha: 1)))
                         .onTapGesture {
                             storeCellMenuHidden.remove(at: index)
                             storeCellMenu.append(element)
@@ -83,9 +84,18 @@ struct CategoriesView: View {
         .onAppear {
             storeCellMenu = appBinding.main.storeCellMenu.wrappedValue
             storeCellMenuHidden = appBinding.main.storeCellMenuHidden.wrappedValue
+            
+            if !UserDefaults.standard.bool(forKey: "CategoriesViewMessage") {
+                UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("Чтобы скрыть или показать раздел, просто нажми на него", comment: ""), style: .actionSheet) {
+                    UserDefaults.standard.set(true, forKey: "CategoriesViewMessage")
+                }
+            }
         }
         .navigationBarTitle(Text(LocalizedStringKey("Категории")), displayMode: .automatic)
-        .navigationBarItems(trailing: EditButton())
+        .navigationBarItems(trailing:
+                                EditButton()
+                                .foregroundColor(.primaryBlue())
+        )
     }
     
     func move(from source: IndexSet, to destination: Int) {

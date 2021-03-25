@@ -285,11 +285,23 @@ private extension MusicView {
     
     private func onAppearCheak() {
         appBinding.music.showActivityIndicator.wrappedValue = true
-        DispatchQueue.global(qos: .userInteractive).async {
-            if AppleMusicAPI.share.getUserToken() == nil {
-                noSubscriptionForAppleMusic()
+        
+        SKCloudServiceController.requestAuthorization { status in
+            if status == .authorized {
+                AppleMusicAPI.share.cheakUserToken() { access in
+                    switch access {
+                    case true:
+                        print("true")
+                        subscriptionForAppleMusic()
+                    case false:
+                        print("false")
+                        noSubscriptionForAppleMusic()
+                    }
+                }
             } else {
-                subscriptionForAppleMusic()
+                UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""),
+                                                                                  and: NSLocalizedString("Необходимо разрешить доступ к Apple Music в настройках", comment: ""),
+                                                                                  style: .alert)
             }
         }
     }

@@ -17,16 +17,23 @@ class AppleMusicAPI {
     static let share = AppleMusicAPI()
     private init() {}
     
+    func cheakUserToken(completion: @escaping (Bool) -> Void) {
+        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken) { (_, error) in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
+    
     func getUserToken() -> String? {
         var userToken: String? = nil
         // Остановка потока до тех пор, пока не будет передано конкретное сообщение
         let lock = DispatchSemaphore(value: 0)
         // Аутентифицируем пользователя в персонализированных запросах Apple Music API.
         SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken) { (receivedToken, error) in
-            guard error == nil else {
-                lock.signal()
-                return
-            }
+            guard error == nil else { return }
             if let token = receivedToken {
                 userToken = token
                 lock.signal()
@@ -52,8 +59,14 @@ class AppleMusicAPI {
         URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
             guard error == nil else { return }
             if let json = try? JSON(data: data!) {
-                let result = (json["data"]).array ?? []
-                let id = (result[0].dictionaryValue)["id"]!
+                guard let result = (json["data"]).array else {
+//                    print("Подписки Apple music - нет")
+                    return
+                }
+                guard let id = (result[0].dictionaryValue)["id"] else {
+//                    print("Подписки Apple music - нет")
+                    return
+                }
                 storefrontID = id.stringValue
                 lock.signal()
             }

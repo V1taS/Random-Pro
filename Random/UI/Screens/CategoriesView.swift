@@ -29,7 +29,7 @@ struct CategoriesView: View {
                         
                         HStack {
                             Spacer()
-                            Text("\(element)")
+                            Text(NSLocalizedString("\(element)", comment: ""))
                                 .foregroundColor(.primaryBlue())
                                 .font(.robotoRegular16())
                             Spacer()
@@ -61,7 +61,7 @@ struct CategoriesView: View {
                         
                         HStack {
                             Spacer()
-                            Text("\(element)")
+                            Text(NSLocalizedString("\(element)", comment: ""))
                                 .foregroundColor(.primaryBlue())
                                 .font(.robotoRegular16())
                             Spacer()

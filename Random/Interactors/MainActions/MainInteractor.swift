@@ -333,23 +333,8 @@ extension MainInteractorImpl {
     }
     
     private func userDefaultsGetMain(state: Binding<AppState.AppData>) {
-        state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? [NSLocalizedString("Фильмы", comment: ""),
-                                                                                                                              NSLocalizedString("Команды",
-                                                                                                                                                comment: ""),
-                                                                                                                              NSLocalizedString("Число", comment: ""),
-                                                                                                                              NSLocalizedString("Да или Нет", comment: ""),
-                                                                                                                              NSLocalizedString("Буква", comment: ""),
-                                                                                                                              NSLocalizedString("Список", comment: ""),
-                                                                                                                              NSLocalizedString("Монета", comment: ""),
-                                                                                                                              NSLocalizedString("Кубики", comment: ""),
-                                                                                                                              NSLocalizedString("Дата и время",
-                                                                                                                                                comment: ""),
-                                                                                                                              NSLocalizedString("Лотерея",
-                                                                                                                                                comment: ""),
-                                                                                                                              NSLocalizedString("Контакт",
-                                                                                                                                                comment: ""),
-                                                                                                                              NSLocalizedString("Музыка",
-                                                                                                                                                comment: "")]
+        state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? ["Фильмы", "Команды", "Число", "Да или Нет", "Буква", "Список", "Монета",
+                                                                                                                              "Кубики", "Дата и время", "Лотерея", "Контакт", "Музыка"]
         
         state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
     }

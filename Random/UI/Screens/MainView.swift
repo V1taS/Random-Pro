@@ -33,23 +33,18 @@ struct MainView: View {
 // MARK: Cell menu
 private extension MainView {
     private func arrView() -> [String: AnyView] {
-        return [NSLocalizedString("Фильмы", comment: ""): AnyView(film),
-                NSLocalizedString("Команды",
-                                         comment: ""): AnyView(team),
-                NSLocalizedString("Число", comment: ""): AnyView(number),
-                NSLocalizedString("Да или Нет", comment: ""): AnyView(yesOrNot),
-                NSLocalizedString("Буква", comment: ""): AnyView(characters),
-                NSLocalizedString("Список", comment: ""): AnyView(listWords),
-                NSLocalizedString("Монета", comment: ""): AnyView(coin),
-                NSLocalizedString("Кубики", comment: ""): AnyView(cube),
-                NSLocalizedString("Дата и время",
-                                         comment: ""): AnyView(dateAndTime),
-                NSLocalizedString("Лотерея",
-                                         comment: ""): AnyView(lottery),
-                NSLocalizedString("Контакт",
-                                         comment: ""): AnyView(contact),
-                NSLocalizedString("Музыка",
-                                         comment: ""): AnyView(music)
+        return ["Фильмы": AnyView(film),
+                "Команды": AnyView(team),
+                "Число": AnyView(number),
+                "Да или Нет": AnyView(yesOrNot),
+                "Буква": AnyView(characters),
+                "Список": AnyView(listWords),
+                "Монета": AnyView(coin),
+                "Кубики": AnyView(cube),
+                "Дата и время": AnyView(dateAndTime),
+                "Лотерея": AnyView(lottery),
+                "Контакт": AnyView(contact),
+                "Музыка": AnyView(music)
         ]
     }
 }

@@ -10,23 +10,8 @@ import Foundation
 
 extension AppState.AppData {
     struct Main: Equatable {
-        var storeCellMenu = [NSLocalizedString("Фильмы", comment: ""),
-                             NSLocalizedString("Команды",
-                                                      comment: ""),
-                             NSLocalizedString("Число", comment: ""),
-                             NSLocalizedString("Да или Нет", comment: ""),
-                             NSLocalizedString("Буква", comment: ""),
-                             NSLocalizedString("Список", comment: ""),
-                             NSLocalizedString("Монета", comment: ""),
-                             NSLocalizedString("Кубики", comment: ""),
-                             NSLocalizedString("Дата и время",
-                                                      comment: ""),
-                             NSLocalizedString("Лотерея",
-                                                      comment: ""),
-                             NSLocalizedString("Контакт",
-                                                      comment: ""),
-                             NSLocalizedString("Музыка",
-                                                      comment: "")]
+        var storeCellMenu = ["Фильмы", "Команды", "Число", "Да или Нет", "Буква", "Список", "Монета",
+                             "Кубики", "Дата и время", "Лотерея", "Контакт", "Музыка"]
         
         var storeCellMenuHidden: [String] = []
     }

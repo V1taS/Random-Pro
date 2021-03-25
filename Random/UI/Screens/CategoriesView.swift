@@ -15,34 +15,89 @@ struct CategoriesView: View {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    @State var storeCellMenu: [String] = []
+    @State var storeCellMenuHidden: [String] = []
     
     var body: some View {
         VStack {
             Form {
-                Section(header: Text(LocalizedStringKey("Активные"))) {
-                    ForEach(Array(appBinding.main.storeCellMenu
-                                    .wrappedValue.enumerated()), id: \.offset) { (index, view) in
+                
+                
+                Section(header: Text(NSLocalizedString("Активные", comment: "") + " - \(storeCellMenu.count)")) {
+                    
+                    ForEach(Array(storeCellMenu.enumerated()), id: \.0) { (index, element) in
                         
-                        Text(view)
-                            .foregroundColor(.primaryGray())
-                            .font(.robotoRegular18())
-                            .onTapGesture {
-                                appBinding.main.storeCellMenu
-                                    .wrappedValue.remove(at: index)
+                        HStack {
+                            Spacer()
+                            Text("\(element)")
+                                .foregroundColor(.primaryBlue())
+                                .font(.robotoRegular16())
+                            Spacer()
+                        }
+                        .frame(width: .infinity, height: 30)
+                        .onTapGesture {
+                            storeCellMenu.remove(at: index)
+                            storeCellMenuHidden.append(element)
+                            
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                appBinding.main.storeCellMenu.wrappedValue = storeCellMenu
+                                appBinding.main.storeCellMenuHidden.wrappedValue = storeCellMenuHidden
+                                saveMainMenuToUserDefaults(state: appBinding)
                             }
+                        }
                     }
+                    .onMove(perform: { indices, newOffset in
+                        move(from: indices, to: newOffset)
+                        
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            appBinding.main.storeCellMenu.wrappedValue = storeCellMenu
+                            saveMainMenuToUserDefaults(state: appBinding)
+                        }
+                    })
                 }
                 
-                Section(header: Text(LocalizedStringKey("Скрытые"))) {
-                    ForEach(Array(appBinding.main.storeCellMenuHidden
-                                    .wrappedValue.enumerated()), id: \.0) { (index, view) in
+                Section(header: Text(NSLocalizedString("Скрытые", comment: "") + " - \(storeCellMenuHidden.count)")) {
+                    ForEach(Array(storeCellMenuHidden.enumerated()), id: \.0) { (index, element) in
                         
-
+                        HStack {
+                            Spacer()
+                            Text("\(element)")
+                                .foregroundColor(.primaryBlue())
+                                .font(.robotoRegular16())
+                            Spacer()
+                        }
+                        .onTapGesture {
+                            storeCellMenuHidden.remove(at: index)
+                            storeCellMenu.append(element)
+                            
+                            DispatchQueue.global(qos: .userInitiated).async {
+                                appBinding.main.storeCellMenu.wrappedValue = storeCellMenu
+                                appBinding.main.storeCellMenuHidden.wrappedValue = storeCellMenuHidden
+                                saveMainMenuToUserDefaults(state: appBinding)
+                            }
+                        }
                     }
                 }
             }
         }
+        .onAppear {
+            storeCellMenu = appBinding.main.storeCellMenu.wrappedValue
+            storeCellMenuHidden = appBinding.main.storeCellMenuHidden.wrappedValue
+        }
         .navigationBarTitle(Text(LocalizedStringKey("Категории")), displayMode: .automatic)
+        .navigationBarItems(trailing: EditButton())
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        storeCellMenu.move(fromOffsets: source, toOffset: destination)
+    }
+}
+
+// MARK: Actions
+private extension CategoriesView {
+    private func saveMainMenuToUserDefaults(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor
+            .saveMainMenuToUserDefaults(state: state)
     }
 }
 

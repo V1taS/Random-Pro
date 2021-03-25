@@ -12,12 +12,13 @@ import SwiftUI
 protocol MainInteractor {
     func userDefaultsGet(state: Binding<AppState.AppData>)
     func cleanAll(state: Binding<AppState.AppData>)
+    func saveMainMenuToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct MainInteractorImpl: MainInteractor {
-    
     func userDefaultsGet(state: Binding<AppState.AppData>) {
         DispatchQueue.global(qos: .background).async {
+            userDefaultsGetMain(state: state)
             userDefaultsGetNumbers(state: state)
             userDefaultsGetYesOrNot(state: state)
             userDefaultsCharacters(state: state)
@@ -48,6 +49,29 @@ struct MainInteractorImpl: MainInteractor {
             cleanFilms()
             cleanMusic()
         }
+    }
+    
+    func saveMainMenuToUserDefaults(state: Binding<AppState.AppData>) {
+        DispatchQueue.global(qos: .background).async {
+            saveStoreCellMenu(state: state)
+            saveStoreCellMenuHidden(state: state)
+        }
+    }
+}
+
+extension MainInteractorImpl {
+    private func saveStoreCellMenu(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.main
+                                    .storeCellMenu.wrappedValue,
+                                  forKey: "MainMenuStoreCellMenu")
+    }
+}
+
+extension MainInteractorImpl {
+    private func saveStoreCellMenuHidden(state: Binding<AppState.AppData>) {
+        UserDefaults.standard.set(state.main
+                                    .storeCellMenuHidden.wrappedValue,
+                                  forKey: "MainMenuStoreCellMenuHidden")
     }
 }
 
@@ -212,7 +236,7 @@ extension MainInteractorImpl {
         if state.dateAndTime.listResult.wrappedValue.isEmpty {
             
             state.dateAndTime.listResult.wrappedValue = UserDefaults.standard.array(forKey: "DateAndTimelistResult") as? [String] ?? []
-        
+            
             state.dateAndTime.result.wrappedValue = UserDefaults.standard.object(forKey: "DateAndTimResult") as? String ?? "?"
             
             state.dateAndTime.noRepetitionsDate.wrappedValue = UserDefaults.standard.bool(forKey: "DateAndTimeNoRepetitionsDate")
@@ -232,7 +256,7 @@ extension MainInteractorImpl {
     private func userDefaultsLottery(state: Binding<AppState.AppData>) {
         if state.lottery.listResult.wrappedValue.isEmpty {
             state.lottery.listResult.wrappedValue = UserDefaults.standard.array(forKey: "LotterylistResult") as? [String] ?? []
-        
+            
             state.lottery.result.wrappedValue = UserDefaults.standard.object(forKey: "LotteryResult") as? String ?? "?"
             
             state.lottery.firstNumber.wrappedValue = UserDefaults.standard.object(forKey: "LotteryViewFirstNumber") as? String ?? "7"
@@ -306,6 +330,28 @@ extension MainInteractorImpl {
             
             state.music.countLoopDowload.wrappedValue = UserDefaults.standard.object(forKey: "MusicCountLoopDowload") as? Int ?? 0
         }
+    }
+    
+    private func userDefaultsGetMain(state: Binding<AppState.AppData>) {
+        state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? [NSLocalizedString("Фильмы", comment: ""),
+                                                                                                                              NSLocalizedString("Команды",
+                                                                                                                                                comment: ""),
+                                                                                                                              NSLocalizedString("Число", comment: ""),
+                                                                                                                              NSLocalizedString("Да или Нет", comment: ""),
+                                                                                                                              NSLocalizedString("Буква", comment: ""),
+                                                                                                                              NSLocalizedString("Список", comment: ""),
+                                                                                                                              NSLocalizedString("Монета", comment: ""),
+                                                                                                                              NSLocalizedString("Кубики", comment: ""),
+                                                                                                                              NSLocalizedString("Дата и время",
+                                                                                                                                                comment: ""),
+                                                                                                                              NSLocalizedString("Лотерея",
+                                                                                                                                                comment: ""),
+                                                                                                                              NSLocalizedString("Контакт",
+                                                                                                                                                comment: ""),
+                                                                                                                              NSLocalizedString("Музыка",
+                                                                                                                                                comment: "")]
+        
+        state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
     }
 }
 

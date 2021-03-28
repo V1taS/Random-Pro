@@ -155,8 +155,12 @@ private extension FilmCellView {
                 .onSuccess { image, data, cacheType in }
                 .placeholder(Image("no_image"))
                 .indicator(.activity)
-                .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 300),
-                       height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 450))
+                .frame(width: UIScreen.screenHeight < 570 ?
+                        UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 250) :
+                        UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 300),
+                       height: UIScreen.screenHeight < 570 ?
+                        UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 400) :
+                        UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 450))
                 .transition(.fade(duration: 0.5))
                 .scaledToFill()
                 .aspectRatio(contentMode: .fill)
@@ -169,9 +173,11 @@ private extension FilmCellView {
                     HStack {
                         Text("\(ratingFormat)")
                             .foregroundColor(.white)
-                            .frame(width: 50, height: 30)
+//                            .frame(width: 50, height: 30)
+                            .frame(width: UIScreen.screenHeight < 570 ? 35 : 50,
+                                   height: UIScreen.screenHeight < 570 ? 22 : 30)
                             .lineLimit(1)
-                            .font(.robotoBold25())
+                            .font(UIScreen.screenHeight < 570 ? .robotoBold13() : .robotoBold25())
                             .background(backgroundFormat)
                             .cornerRadius(8)
                         Spacer()
@@ -182,8 +188,12 @@ private extension FilmCellView {
                 }
             }
         }
-        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 300),
-               height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 450))
+        .frame(width: UIScreen.screenHeight < 570 ?
+                UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 250) :
+                UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 300),
+               height: UIScreen.screenHeight < 570 ?
+                UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 400) :
+                UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 450))
     }
 }
 

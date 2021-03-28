@@ -208,7 +208,7 @@ private extension FilmView {
                 .padding(.top, 24)
             
             Text(appBinding.film.nameFilmBest.wrappedValue)
-                .font(.robotoMedium20())
+                .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
                 .opacity(isPressedButton ? 0.8 : 1)
@@ -230,7 +230,7 @@ private extension FilmView {
                 .padding(.top, 24)
             
             Text(appBinding.film.nameFilmAll.wrappedValue)
-                .font(.robotoMedium20())
+                .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
                 .opacity(isPressedButton ? 0.8 : 1)
@@ -252,7 +252,7 @@ private extension FilmView {
                 .padding(.top, 24)
             
             Text(appBinding.film.nameFilmPopular.wrappedValue)
-                .font(.robotoMedium20())
+                .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
                 .opacity(isPressedButton ? 0.8 : 1)

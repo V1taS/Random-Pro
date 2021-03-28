@@ -36,7 +36,7 @@ struct MusicView: View {
                     realiaseMusic
                     playAndPauseButton
                         .disabled(appBinding.music.playButtonIsDisabled.wrappedValue)
-                        .padding(.top, 24)
+                        .padding(.top, 8)
                     Spacer()
                     generateButton
                 }
@@ -62,8 +62,10 @@ struct MusicView: View {
                    })
             
             .onAppear {
+                if !UserDefaults.standard.bool(forKey: "ManuMusicNew") {
+                    UserDefaults.standard.set(true, forKey: "ManuMusicNew")
+                }
                 onAppearCheak()
-                
             }
         }
     }
@@ -73,7 +75,7 @@ struct MusicView: View {
 private extension MusicView {
     var nameMusic: some View {
         Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.name ?? NSLocalizedString("Название песни", comment: ""))")
-            .font(.robotoMedium32())
+            .font(UIScreen.screenHeight < 570 ? .robotoMedium24() : .robotoMedium32())
             .foregroundColor(.primaryGray())
             .lineLimit(2)
             .foregroundColor(.black)
@@ -87,7 +89,7 @@ private extension MusicView {
 private extension MusicView {
     var nameArtist: some View {
         Text("\(appBinding.music.resultMusic.wrappedValue.attributes?.artistName ?? NSLocalizedString("Имя артиста", comment: ""))")
-            .font(.robotoRegular24())
+            .font(UIScreen.screenHeight < 570 ? .robotoRegular18() : .robotoRegular24())
             .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
             .lineLimit(2)
             .foregroundColor(.black)
@@ -101,7 +103,7 @@ private extension MusicView {
 private extension MusicView {
     var realiaseMusic: some View {
         Text("\(NSLocalizedString("Релиз:", comment: "")) \(appBinding.music.resultMusic.wrappedValue.attributes?.releaseDate ?? "")")
-            .font(.robotoMedium18())
+            .font(UIScreen.screenHeight < 570 ? .robotoMedium16() : .robotoMedium18())
             .foregroundColor(.gray)
             .lineLimit(2)
             .foregroundColor(.black)
@@ -252,7 +254,8 @@ private extension MusicView {
                     .resizable()
                     .renderingMode(.original)
                     .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))]).opacity(appBinding.music.playButtonIsDisabled.wrappedValue ? 0.044 : 1)
-                    .frame(width: 70, height: 70)
+                    .frame(width: UIScreen.screenHeight < 570 ? 50 : 70,
+                           height: UIScreen.screenHeight < 570 ? 50 : 70)
             }
         }
     }

@@ -86,8 +86,15 @@ struct CategoriesView: View {
             storeCellMenuHidden = appBinding.main.storeCellMenuHidden.wrappedValue
             
             if !UserDefaults.standard.bool(forKey: "CategoriesViewMessage") {
-                UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("Чтобы скрыть или показать раздел, просто нажми на него", comment: ""), style: .actionSheet) {
-                    UserDefaults.standard.set(true, forKey: "CategoriesViewMessage")
+                
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("Чтобы скрыть или показать раздел, просто нажми на него", comment: ""), style: .actionSheet) {
+                        UserDefaults.standard.set(true, forKey: "CategoriesViewMessage")
+                    }
+                } else {
+                    UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("Чтобы скрыть или показать раздел, просто нажми на него", comment: ""), style: .alert) {
+                        UserDefaults.standard.set(true, forKey: "CategoriesViewMessage")
+                    }
                 }
             }
         }

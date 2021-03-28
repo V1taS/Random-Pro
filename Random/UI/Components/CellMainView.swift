@@ -12,10 +12,14 @@ struct CellMainView: View {
     
     private let image: String
     private let title: String
+    private let isLabelDisabled: Bool
+    private let textLabel: String
     
-    init(image: String, title: String) {
+    init(image: String, title: String, isLabelDisabled: Bool, textLabel: String) {
         self.image = image
         self.title = title
+        self.isLabelDisabled = isLabelDisabled
+        self.textLabel = textLabel
     }
     
     var body: some View {
@@ -86,9 +90,8 @@ private extension CellMainView {
                 HStack {
                     Image(systemName: image)
                         .renderingMode(.template)
-                        .font(.title)
+                        .font(UIScreen.screenHeight < 570 ? .body : .title)
                         .foregroundColor(Color.primaryPale())
-                    
                     Spacer()
                 }
                 .padding(.top, 8)
@@ -99,13 +102,37 @@ private extension CellMainView {
                 HStack {
                     Spacer()
                     Text(title)
-                        .font(.robotoMedium18())
+                        .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium18())
                         .foregroundColor(Color.primaryPale())
                         .lineLimit(2)
-                        .frame(width: 130, alignment: .trailing)
+                        .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 130), alignment: .trailing)
                 }
                 .padding(.bottom, 8)
                 .padding(.horizontal, 8)
+            }
+            
+            if !isLabelDisabled {
+                VStack(spacing: 0) {
+                    HStack {
+                        Spacer()
+                        Text(textLabel)
+                            .foregroundColor(.white)
+                            .frame(width: UIScreen.screenHeight < 570 ?
+                                    UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 50) :
+                                    UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 50),
+                                   height: UIScreen.screenHeight < 570 ?
+                                    UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 24) :
+                                    UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 20))
+                            .lineLimit(1)
+                            .font(UIScreen.screenHeight < 570 ? .robotoBold8() : .robotoBold10())
+                            .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)), Color.primaryError()]), startPoint: .top, endPoint: .bottom))
+                            .cornerRadius(UIScreen.screenHeight < 570 ? 6 : 8)
+                    }
+                    .padding(.top, UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 8))
+                    .padding(.trailing, UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 8))
+                    Spacer()
+                }
+                .opacity(0.9)
             }
         }
         .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 160),
@@ -115,6 +142,6 @@ private extension CellMainView {
 
 struct CellMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CellMainView(image: "number", title: "Число")
+        CellMainView(image: "number", title: "Число", isLabelDisabled: false, textLabel: "HIT")
     }
 }

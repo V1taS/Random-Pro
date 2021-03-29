@@ -15,7 +15,7 @@ struct TextRoundView: View {
         Text(name)
             .foregroundColor(.white)
             .font(.robotoBold25())
-            .roundedEdge()
+            .roundedEdge(startPointColor: Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), endPointColor: Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1)))
             .lineLimit(1)
     }
 }

@@ -57,7 +57,7 @@ private extension MainView {
             CellMainView(image: "film",
                          title: NSLocalizedString("Фильмы", comment: ""),
                          isLabelDisabled: false,
-                         textLabel: NSLocalizedString("Хит", comment: ""))
+                         textLabel: NSLocalizedString("ХИТ", comment: ""))
         }
     }
 }
@@ -205,7 +205,7 @@ private extension MainView {
                          title: NSLocalizedString("Музыка",
                                                   comment: ""),
                          isLabelDisabled: UserDefaults.standard.bool(forKey: "ManuMusicNew"),
-                         textLabel: NSLocalizedString("Новое",
+                         textLabel: NSLocalizedString("НОВОЕ",
                                                       comment: ""))
         }
     }

@@ -92,7 +92,17 @@ private extension FilmView {
 private extension FilmView {
     var navigationButtonPlay: some View {
         Button(action: {
-            getLinkOnPageKinopoiskVideo(state: appBinding)
+            
+            if !UserDefaults.standard.bool(forKey: "FilmNavigationButtonPlay") {
+                UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("В некоторых странах сайт с контентом заблокирован", comment: ""), style: .alert) { 
+                    getLinkOnPageKinopoiskVideo(state: appBinding)
+                }
+                
+                
+                UserDefaults.standard.set(true, forKey: "FilmNavigationButtonPlay")
+            } else {
+                getLinkOnPageKinopoiskVideo(state: appBinding)
+            }
         }) {
             showVideoPlayerIcon
         }

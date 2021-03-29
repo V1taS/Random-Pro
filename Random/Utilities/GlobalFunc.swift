@@ -12,8 +12,10 @@ func getLinkFromStringURL(strURL: String?) {
     guard let url = strURL?.dropFirst(2) else { return }
     let httpsUrl = "https://\(String(describing: url))"
     if let url = URL(string: httpsUrl) {
-        if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:])
+        DispatchQueue.main.async {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:])
+            }
         }
     }
 }

@@ -31,6 +31,7 @@
 		1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D607626023D3C00847843 /* MusicInteractor.swift */; };
 		1B1D60812602D2C500847843 /* MusicSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60802602D2C500847843 /* MusicSettingsView.swift */; };
 		1B1D60852602DE6A00847843 /* MusicHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60842602DE6A00847843 /* MusicHistoryView.swift */; };
+		1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B225C452619E253001B9124 /* GoogleService-Info.plist */; };
 		1B2F1D46260CC18E00ADCB12 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */; };
 		1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B325C0525D2C9CA00382F33 /* Feedback.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
@@ -224,6 +225,7 @@
 		1B1D607626023D3C00847843 /* MusicInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicInteractor.swift; sourceTree = "<group>"; };
 		1B1D60802602D2C500847843 /* MusicSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSettingsView.swift; sourceTree = "<group>"; };
 		1B1D60842602DE6A00847843 /* MusicHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHistoryView.swift; sourceTree = "<group>"; };
+		1B225C452619E253001B9124 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		1B325C0525D2C9CA00382F33 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -594,6 +596,7 @@
 				1B7F667025D0856300933AD6 /* AppDelegate.swift */,
 				1B7F667225D0856300933AD6 /* SceneDelegate.swift */,
 				1B7F667E25D0856300933AD6 /* Info.plist */,
+				1B225C452619E253001B9124 /* GoogleService-Info.plist */,
 				1B325C1525D2CFDF00382F33 /* Localizable.strings */,
 			);
 			path = System;
@@ -1000,6 +1003,7 @@
 				1B7F666B25D0856300933AD6 /* Resources */,
 				FA9677E44862566325477548 /* [CP] Embed Pods Frameworks */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
+				1B225C582619E472001B9124 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1069,6 +1073,7 @@
 				1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */,
 				1B7F66D725D08C1000933AD6 /* Roboto-Black.ttf in Resources */,
 				1B7F66D225D08C1000933AD6 /* Roboto-Bold.ttf in Resources */,
+				1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */,
 				1B7F66D625D08C1000933AD6 /* Roboto-Light.ttf in Resources */,
 				1B7F66D125D08C1000933AD6 /* Roboto-Medium.ttf in Resources */,
 			);
@@ -1077,6 +1082,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1B225C582619E472001B9124 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		1D884772BB6CBD009BDB5453 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1311,7 +1335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8;
+				CURRENT_PROJECT_VERSION = 3.9;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "Random Pro Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -1320,7 +1344,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 38;
+				MARKETING_VERSION = 39;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1335,7 +1359,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8;
+				CURRENT_PROJECT_VERSION = 3.9;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				INFOPLIST_FILE = "Random Pro Widget/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -1344,7 +1368,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 38;
+				MARKETING_VERSION = 39;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1357,8 +1381,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUILD = 3.8;
-				APP_VERSION = 38;
+				APP_BUILD = 3.9;
+				APP_VERSION = 39;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1421,8 +1445,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUILD = 3.8;
-				APP_VERSION = 38;
+				APP_BUILD = 3.9;
+				APP_VERSION = 39;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1483,7 +1507,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8;
+				CURRENT_PROJECT_VERSION = 3.9;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=appletvsimulator*]" = "$(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR)) arm64";
@@ -1494,7 +1519,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 38;
+				MARKETING_VERSION = 39;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1512,7 +1537,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3.8;
+				CURRENT_PROJECT_VERSION = 3.9;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=appletvsimulator*]" = "$(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR)) arm64";
@@ -1523,7 +1548,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 38;
+				MARKETING_VERSION = 39;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

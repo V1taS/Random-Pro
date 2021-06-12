@@ -97,20 +97,6 @@ class AppleMusicAPI {
             } catch {
                 print("error: ", error)
             }
-            
-            
-            //            if let json = try? JSON(data: data!) {
-            //
-            //                print("\(json)")
-            
-            //                let result = (json["results"]["songs"]["data"]).array
-            
-            //                for song in result {
-            //                    let attributes = song["attributes"]
-            //                    let currentSong = Song(id: attributes["playParams"]["id"].string!, name: attributes["name"].string!, artistName: attributes["artistName"].string!, artworkURL: attributes["artwork"]["url"].string!)
-            //                    songs.append(currentSong)
-            //                }
-            //                lock.signal()
         } .resume()
     }
 }

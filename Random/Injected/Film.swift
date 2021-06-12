@@ -11,20 +11,20 @@ import Foundation
 extension AppState.AppData {
     struct Film: Equatable {
         
-        var films: [Datum] = []
-        var filmsVideoHistory: [Datum] = []
+        var films: [VideoCDNResult.Data] = []
+        var filmsVideoHistory: [VideoCDNResult.Data] = []
         
-        var filmsTemp: [FilmsInfo] = []
-        var filmsHistory: [FilmsInfo] = []
-        var filmInfo = FilmsInfo.plug
+        var filmsTemp: [KinopoiskInfoResult] = []
+        var filmsHistory: [KinopoiskInfoResult] = []
+        var filmInfo = KinopoiskInfoResult.plug
         
-        var filmsBest: [BestFilm] = []
-        var filmsBestHistory: [BestFilm] = []
-        var filmsBestInfo = BestFilm.plug
+        var filmsBest: [KinopoiskBestFilmsResult.BestFilm] = []
+        var filmsBestHistory: [KinopoiskBestFilmsResult.BestFilm] = []
+        var filmsBestInfo = KinopoiskBestFilmsResult.plug
         
-        var filmsPopular: [BestFilm] = []
-        var filmsPopularHistory: [BestFilm] = []
-        var filmsPopularInfo = BestFilm.plug
+        var filmsPopular: [KinopoiskBestFilmsResult.BestFilm] = []
+        var filmsPopularHistory: [KinopoiskBestFilmsResult.BestFilm] = []
+        var filmsPopularInfo = KinopoiskBestFilmsResult.plug
         
         var selectedGenres = 0
         

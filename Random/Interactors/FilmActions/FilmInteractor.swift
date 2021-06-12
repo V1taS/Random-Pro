@@ -157,7 +157,7 @@ extension FilmInteractorImpl {
             
             guard let firstPage = state.film.pageNumberBest.wrappedValue.first else { return }
             
-            Networking.share.getInfoKinopoiskBestFilms(page: firstPage) { films in
+            Networking.share.getKinopoiskBestFilms(page: firstPage) { films in
                 let films = films.films?.shuffled()
                 state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
                 state.film.showActivityIndicator.wrappedValue = false
@@ -181,7 +181,7 @@ extension FilmInteractorImpl {
                 state.film.pageNumberPopular.wrappedValue = pageNumber.shuffled()
             }
             guard let firstPage = state.film.pageNumberPopular.wrappedValue.first else { return }
-            Networking.share.getInfoKinopoiskPopularFilms(page: firstPage) { films in
+            Networking.share.getKinopoiskPopularFilms(page: firstPage) { films in
                 let films = films.films?.shuffled()
                 state.film.filmsPopular.wrappedValue.append(contentsOf: films ?? [])
                 state.film.showActivityIndicator.wrappedValue = false
@@ -197,10 +197,12 @@ extension FilmInteractorImpl {
         if state.film.filmsTemp.wrappedValue.count == 0 || state.film.filmsTemp.wrappedValue.count == 1 {
             if state.film.films.wrappedValue.isEmpty {
                 let year = Int.random(in: 2000...2021)
-                var tempFilm20: [Datum] = []
+                var tempFilm20: [VideoCDNResult.Data] = []
                 
                 state.film.showActivityIndicator.wrappedValue = true
-                Networking.share.getMovies(year: year, limit: 100) { films in
+                
+                
+                Networking.share.getVideoCDN(year: year, limit: 100) { films in
                     let filmsShuffled = films.data.shuffled()
                     state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
                     
@@ -215,9 +217,30 @@ extension FilmInteractorImpl {
                     Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
                     state.film.showActivityIndicator.wrappedValue = false
                 }
+                
+                
+                
+                
+                
+                
+//                Networking.share.getMovies(year: year, limit: 100) { films in
+//                    let filmsShuffled = films.data.shuffled()
+//                    state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
+//
+//                    for _ in state.film.films.wrappedValue {
+//                        tempFilm20.append(state.film.films.wrappedValue.first!)
+//                        state.film.films.wrappedValue.removeFirst()
+//                        if tempFilm20.count == 20 {
+//                            break
+//                        }
+//                    }
+//
+//                    Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
+//                    state.film.showActivityIndicator.wrappedValue = false
+//                }
             } else {
                 state.film.showActivityIndicator.wrappedValue = true
-                var tempFilm20: [Datum] = []
+                var tempFilm20: [VideoCDNResult.Data] = []
                 
                 for _ in state.film.films.wrappedValue {
                     tempFilm20.append(state.film.films.wrappedValue.first!)
@@ -234,7 +257,7 @@ extension FilmInteractorImpl {
 }
 
 extension FilmInteractorImpl {
-    private func encoderArrDatum(films: [Datum], forKey: String) {
+    private func encoderArrDatum(films: [VideoCDNResult.Data], forKey: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(films) {
             UserDefaults.standard.set(encoded, forKey: forKey)
@@ -243,7 +266,7 @@ extension FilmInteractorImpl {
 }
 
 extension FilmInteractorImpl {
-    private func encoderArrFilmsInfo(filmInfo: [FilmsInfo], forKey: String) {
+    private func encoderArrFilmsInfo(filmInfo: [KinopoiskInfoResult], forKey: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(filmInfo) {
             UserDefaults.standard.set(encoded, forKey: forKey)
@@ -252,7 +275,7 @@ extension FilmInteractorImpl {
 }
 
 extension FilmInteractorImpl {
-    private func encoderArrBestFilm(films: [BestFilm], forKey: String) {
+    private func encoderArrBestFilm(films: [KinopoiskBestFilmsResult.BestFilm], forKey: String) {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(films) {
             UserDefaults.standard.set(encoded, forKey: forKey)

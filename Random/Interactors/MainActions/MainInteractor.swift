@@ -76,10 +76,10 @@ extension MainInteractorImpl {
 }
 
 extension MainInteractorImpl {
-    private func decoderFilmsArrBestFilm(forKey: String) -> [BestFilm]? {
+    private func decoderFilmsArrBestFilm(forKey: String) -> [KinopoiskBestFilmsResult.BestFilm]? {
         if let items = UserDefaults.standard.data(forKey: forKey) {
             let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([BestFilm].self, from: items) {
+            if let decoded = try? decoder.decode([KinopoiskBestFilmsResult.BestFilm].self, from: items) {
                 return decoded
             }
         }
@@ -88,10 +88,10 @@ extension MainInteractorImpl {
 }
 
 extension MainInteractorImpl {
-    private func decoderFilmsArrDatum(forKey: String) -> [Datum]? {
+    private func decoderFilmsArrDatum(forKey: String) -> [VideoCDNResult.Data]? {
         if let items = UserDefaults.standard.data(forKey: forKey) {
             let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([Datum].self, from: items) {
+            if let decoded = try? decoder.decode([VideoCDNResult.Data].self, from: items) {
                 return decoded
             }
         }
@@ -100,10 +100,10 @@ extension MainInteractorImpl {
 }
 
 extension MainInteractorImpl {
-    private func decoderFilmsArrFilmsInfo(forKey: String) -> [FilmsInfo]? {
+    private func decoderFilmsArrFilmsInfo(forKey: String) -> [KinopoiskInfoResult]? {
         if let items = UserDefaults.standard.data(forKey: forKey) {
             let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([FilmsInfo].self, from: items) {
+            if let decoded = try? decoder.decode([KinopoiskInfoResult].self, from: items) {
                 return decoded
             }
         }
@@ -334,7 +334,7 @@ extension MainInteractorImpl {
     
     private func userDefaultsGetMain(state: Binding<AppState.AppData>) {
         state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? ["Фильмы", "Команды", "Число", "Да или Нет", "Буква", "Список", "Монета",
-                                                                                                                              "Кубики", "Дата и время", "Лотерея", "Контакт", "Музыка"]
+                                                                                                                              "Кубики", "Дата и время", "Лотерея", "Контакт", "Музыка", "Путешествие"]
         
         state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
     }

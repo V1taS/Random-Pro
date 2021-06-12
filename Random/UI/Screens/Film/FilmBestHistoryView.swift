@@ -11,8 +11,8 @@ import SDWebImageSwiftUI
 
 struct FilmBestHistoryView: View {
     
-    private var filmsBest: [BestFilm]
-    init(filmsBest: [BestFilm]) {
+    private var filmsBest: [KinopoiskBestFilmsResult.BestFilm]
+    init(filmsBest: [KinopoiskBestFilmsResult.BestFilm]) {
         self.filmsBest = filmsBest
     }
     

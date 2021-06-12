@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct FilmInformationAllFilmView: View {
-    private var filmsInfo: FilmsInfo
+    private var filmsInfo: KinopoiskInfoResult
     private var appBinding: Binding<AppState.AppData>
     
-    init(filmsInfo: FilmsInfo, appBinding: Binding<AppState.AppData>) {
+    init(filmsInfo: KinopoiskInfoResult, appBinding: Binding<AppState.AppData>) {
         self.filmsInfo = filmsInfo
         self.appBinding = appBinding
 //        validVideoplayerIcon(state: appBinding,

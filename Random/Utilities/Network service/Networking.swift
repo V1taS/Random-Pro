@@ -7,119 +7,95 @@
 //
 
 import SwiftUI
-import StoreKit
 
-class Networking {
-    private let urlStringVideocdn: String = "https://videocdn.tv/api/"
-    private let tokenVideocdn: String = "?api_token=VGstdXXDwaGDIM4Ec8ofDLcZnAaTsU0X"
+final class Networking {
     
-    private let urlStringKinopoisk: String = "https://kinopoiskapiunofficial.tech/api/v2.1/films/"
-    private let tokenKinopoisk: String = "f835989c-b489-4624-9209-6d93bfead535"
-    
-    private let urlStringKinopoiskBestFilms: String = "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS"
-    private let urlStringKinopoiskPopularFilms: String = "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS"
-    
-    private let musicAPIKey = "UugnazuJLfmsha8MgulqFbca4Qyup1dtV6NjsnlRueiEXvEDIE"
-
+    let networkRequestPerformer = URLSessionRequestPerformer()
+    let service: DefaultService
     static let share = Networking()
     
-    private init() {}
-    
-    func getMovies(year: Int, limit: Int, completion: @escaping (Films) -> Void) {
-        
-        var request = URLRequest(url: URL(string: urlStringVideocdn + "movies" + tokenVideocdn + "&year=\(year)&limit=\(limit)")!)
-        request.httpMethod = "GET"
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        session.dataTask(with: request as URLRequest) { (data, response, error) in
-            guard let data = data else { return }
-            do {
-                let films = try JSONDecoder().decode(Films.self, from: data)
-                DispatchQueue.global(qos: .userInitiated).async {
-                    completion(films)
-                }
-            } catch {
-                print("error: ", error)
-            }
-        }.resume()
+    init() {
+        self.service = DefaultService(networkRequestPerformer)
     }
     
-    func getInfoKinopoisk(films: [Datum], state: Binding<AppState.AppData>) {
-        for film in films {
-            guard let kinopoiskID = film.kinopoiskID else { continue }
-            guard let url = URL(string: "\(urlStringKinopoisk)" + kinopoiskID) else { continue }
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.setValue("\(tokenKinopoisk)", forHTTPHeaderField: "X-API-KEY")
-            let session = URLSession(configuration: URLSessionConfiguration.default)
-            session.dataTask(with: request as URLRequest) { (data, response, error) in
-                do {
-                    let filmsInfo = try JSONDecoder().decode(FilmsInfo.self, from: data!)
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        state.film.filmsTemp.wrappedValue.append(filmsInfo)
-                    }
-                } catch {
-                    print("Decoding error:", error)
+    func getVideoCDN(year: Int, limit: Int, completion: @escaping (VideoCDNResult) -> Void) {
+        service.videoCDN(year: year, limit: limit) { result in
+            switch result {
+            case .success(let films):
+                DispatchQueue.main.async {
+                    completion(films)
                 }
-            }.resume()
+            case .failure(let error): print(error)
+            }
         }
     }
     
-    func getInfoKinopoiskBestFilms(page: Int, completion: @escaping (WelcomeBestFilm) -> Void) {
+    func getInfoKinopoisk(films: [VideoCDNResult.Data], state: Binding<AppState.AppData>) {
+        for film in films {
+            guard let kinopoiskID = film.kinopoiskID else { continue }
+            
+            service.getInfoKinopoisk(kinopoiskID: kinopoiskID) { result in
+                switch result {
+                case .success(let film):
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        state.film.filmsTemp.wrappedValue.append(film)
+                    }
+                case .failure(let error): print("getInfoKinopoisk \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    
+    func getKinopoiskBestFilms(page: Int, completion: @escaping (KinopoiskBestFilmsResult) -> Void) {
         
-        guard let url = URL(string: "\(urlStringKinopoiskBestFilms)" + "&page=\(page)") else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("\(tokenKinopoisk)", forHTTPHeaderField: "X-API-KEY")
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        
-        session.dataTask(with: request as URLRequest) { (data, response, error) in
-            do {
-                let bestFilms = try JSONDecoder().decode(WelcomeBestFilm.self, from: data!)
+        service.getKinopoiskBestFilms(page: page) { result in
+            switch result {
+            case .success(let bestFilms):
                 DispatchQueue.global(qos: .userInitiated).async {
                     completion(bestFilms)
                 }
-            } catch {
-                print("Decoding error:", error)
+            case .failure(let error): print("getKinopoiskBestFilms \(error.localizedDescription)")
             }
-        }.resume()
+        }
     }
     
-    func getInfoKinopoiskPopularFilms(page: Int, completion: @escaping (WelcomeBestFilm) -> Void) {
-        guard let url = URL(string: "\(urlStringKinopoiskPopularFilms)" + "&page=\(page)") else { return }
+    func getKinopoiskPopularFilms(page: Int, completion: @escaping (KinopoiskBestFilmsResult) -> Void) {
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("\(tokenKinopoisk)", forHTTPHeaderField: "X-API-KEY")
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        
-        session.dataTask(with: request as URLRequest) { (data, response, error) in
-            do {
-                let bestFilms = try JSONDecoder().decode(WelcomeBestFilm.self, from: data!)
+        service.getKinopoiskPopularFilms(page: page) { result in
+            switch result {
+            case .success(let popularFilms):
                 DispatchQueue.global(qos: .userInitiated).async {
-                    completion(bestFilms)
+                    completion(popularFilms)
                 }
-            } catch {
-                print("Decoding error:", error)
+            case .failure(let error): print("getKinopoiskPopularFilms \(error.localizedDescription)")
             }
-        }.resume()
+        }
     }
     
-    func searchMoviesFor(idKinopoisk: String, completion: @escaping (Films) -> Void) {
-        guard let url = URL(string: urlStringVideocdn + "short" + tokenVideocdn + "&kinopoisk_id=\(idKinopoisk)") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        let session = URLSession(configuration: URLSessionConfiguration.default)
-        session.dataTask(with: request as URLRequest) { (data, response, error) in
-            guard let data = data else { return }
-            do {
-                let films = try JSONDecoder().decode(Films.self, from: data)
+    func searchMoviesFor(idKinopoisk: String, completion: @escaping (VideoCDNResult) -> Void) {
+        
+        service.searchMovies(kinopoiskId: idKinopoisk) { result in
+            switch result {
+            case .success(let film):
                 DispatchQueue.global(qos: .userInitiated).async {
-                    completion(films)
+                    completion(film)
                 }
-            } catch {
-                print("error: ", error)
+            case .failure(let error): print("searchMovies \(error)")
             }
-        }.resume()
+        }
+    }
+    
+    func getHotTravel(startDate: String, endDate: String, completion: @escaping (HotTravelResult) -> Void) {
+        
+        service.getHotTravel(startDate: startDate, endDate: endDate) { result in
+            switch result {
+            case .success(let trip):
+                DispatchQueue.global(qos: .userInitiated).async {
+                    completion(trip)
+                }
+            case .failure(let error): print(error)
+            }
+        }
     }
 }

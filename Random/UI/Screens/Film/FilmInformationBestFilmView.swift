@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct FilmInformationBestFilmView: View {
-    private var filmsInfo: BestFilm
+    private var filmsInfo: KinopoiskBestFilmsResult.BestFilm
     private var iframeSrc: String
     
-    init(filmsInfo: BestFilm, iframeSrc: String) {
+    init(filmsInfo: KinopoiskBestFilmsResult.BestFilm, iframeSrc: String) {
         self.filmsInfo = filmsInfo
         self.iframeSrc = iframeSrc
     }
@@ -114,6 +114,6 @@ private extension FilmInformationBestFilmView {
 
 struct FilmInformationBestFilmView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmInformationBestFilmView(filmsInfo: BestFilm.plug, iframeSrc: "")
+        FilmInformationBestFilmView(filmsInfo: KinopoiskBestFilmsResult.plug, iframeSrc: "")
     }
 }

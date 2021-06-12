@@ -28,6 +28,7 @@ struct NumberView: View {
                     secondTF
                 }
                 Spacer()
+                Divider()
                 Text("\(appBinding.numberRandom.result.wrappedValue)")
                     .font(.robotoBold70())
                     .foregroundColor(.primaryGray())

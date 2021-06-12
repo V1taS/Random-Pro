@@ -22,6 +22,14 @@ struct MainView: View {
             makeGrid()
                 .onAppear {
                     userDefaultsGet(state: appBinding)
+
+                    Networking.share.getHotTravel(startDate: "10.07.2021", endDate: "20.07.2021") { result in
+                        print("---------------------------------")
+                        print("---------------------------------")
+                        print("--------------\(result)-------------------")
+                        print("---------------------------------")
+                        print("---------------------------------")
+                    }
                 }
                 .navigationBarTitle(Text("Random"))
             
@@ -44,7 +52,8 @@ private extension MainView {
                 "Дата и время": AnyView(dateAndTime),
                 "Лотерея": AnyView(lottery),
                 "Контакт": AnyView(contact),
-                "Музыка": AnyView(music)
+                "Музыка": AnyView(music),
+                "Путешествие": AnyView(travel)
         ]
     }
 }
@@ -190,8 +199,8 @@ private extension MainView {
             CellMainView(image: "airplane",
                          title: NSLocalizedString("Путешествие",
                                                   comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
+                         isLabelDisabled: false,
+                         textLabel: NSLocalizedString("ХИТ", comment: ""))
         }
     }
 }

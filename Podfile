@@ -15,7 +15,5 @@ target 'Random Pro' do
 
 pod 'SDWebImageSwiftUI'
 pod 'SwiftyJSON', '~> 4.0'
-pod 'Firebase/Crashlytics'
-pod 'Firebase/Analytics'
 
 end

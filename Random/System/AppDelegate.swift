@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Firebase
+
 //import YandexMobileMetrica
 //import YandexMobileMetricaCrashes
 
@@ -14,11 +14,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Initializing the AppMetrica SDK.
-//        let configuration = YMMYandexMetricaConfiguration.init(apiKey: "b4921e71-faf2-4bd3-8bea-e033a76457ae")
-//        YMMYandexMetrica.activate(with: configuration!)
         
-        FirebaseApp.configure()
         return true
     }
     

@@ -37,7 +37,7 @@ final class Networking {
             service.getInfoKinopoisk(kinopoiskID: kinopoiskID) { result in
                 switch result {
                 case .success(let film):
-                    DispatchQueue.global(qos: .userInitiated).async {
+                    DispatchQueue.main.async {
                         state.film.filmsTemp.wrappedValue.append(film)
                     }
                 case .failure(let error): print("getInfoKinopoisk \(error.localizedDescription)")
@@ -52,7 +52,7 @@ final class Networking {
         service.getKinopoiskBestFilms(page: page) { result in
             switch result {
             case .success(let bestFilms):
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
                     completion(bestFilms)
                 }
             case .failure(let error): print("getKinopoiskBestFilms \(error.localizedDescription)")
@@ -65,7 +65,7 @@ final class Networking {
         service.getKinopoiskPopularFilms(page: page) { result in
             switch result {
             case .success(let popularFilms):
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
                     completion(popularFilms)
                 }
             case .failure(let error): print("getKinopoiskPopularFilms \(error.localizedDescription)")
@@ -78,7 +78,7 @@ final class Networking {
         service.searchMovies(kinopoiskId: idKinopoisk) { result in
             switch result {
             case .success(let film):
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
                     completion(film)
                 }
             case .failure(let error): print("searchMovies \(error)")
@@ -91,7 +91,7 @@ final class Networking {
         service.getHotTravel(startDate: startDate, endDate: endDate) { result in
             switch result {
             case .success(let trip):
-                DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async {
                     completion(trip)
                 }
             case .failure(let error): print(error)

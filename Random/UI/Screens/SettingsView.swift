@@ -73,12 +73,12 @@ private extension SettingsView {
             
             HStack {
                 Button(action: {
-                    EmailHelper.shared.sendEmail(subject: NSLocalizedString("Идея для Random Pro", comment: ""),
-                                                 body: NSLocalizedString("Напишите здесь Вашу идею или предложение", comment: ""),
+                    EmailHelper.shared.sendEmail(subject: NSLocalizedString("Обратная связь Random Pro", comment: ""),
+                                                 body: NSLocalizedString("Напишите здесь Ваш текст", comment: ""),
                                                  to: "375693@mail.ru")
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    Text(NSLocalizedString("Предложить свою идею", comment: ""))
+                    Text(NSLocalizedString("Обратная связь", comment: ""))
                         .foregroundColor(.primaryGray())
                         .font(.robotoMedium18())
                 }

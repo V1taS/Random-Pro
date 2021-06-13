@@ -10,8 +10,9 @@ import Foundation
 
 extension AppState.AppData {
     struct Main: Equatable {
-        var storeCellMenu = ["Фильмы", "Команды", "Число", "Да или Нет", "Буква", "Список", "Монета",
-                             "Кубики", "Дата и время", "Лотерея", "Контакт", "Музыка", "Путешествие"]
+        var storeCellMenu = AppActions.MainActions.MenuName.allCases.compactMap {
+            $0.rawValue
+        }
         
         var storeCellMenuHidden: [String] = []
     }

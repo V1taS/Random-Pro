@@ -11,8 +11,6 @@ import SDWebImageSwiftUI
 
 struct FilmCellView: View {
     
-    @EnvironmentObject var orientation: Orientation
-    
     init(ratingIsSwitch: Bool, ratingCount: Double, imageStr: String) {
         self.ratingIsSwitch = ratingIsSwitch
         self.ratingCount = ratingCount
@@ -48,100 +46,7 @@ struct FilmCellView: View {
 // MARK: Device
 private extension FilmCellView {
     private var imageDevice: AnyView {
-        switch UIDevice.current.userInterfaceIdiom == .phone {
-        case true:
-            return AnyView(imageIPhone)
-        case false:
-            return AnyView(imageIPad)
-        }
-    }
-}
-
-// MARK: Image iPad
-private extension FilmCellView {
-    var imageIPad: some View {
-        Group {
-
-            if orientation.isLandScape {
-               
-                let widthPortret = CGFloat(400)
-                let heightPortret = CGFloat(450)
-                
-                ZStack {
-                    WebImage(url: URL(string: imageStr))
-                        .resizable()
-                        .renderingMode(.original)
-                        .onSuccess { image, data, cacheType in }
-                        .placeholder(Image("no_image"))
-                        .indicator(.activity)
-                        .frame(width: widthPortret, height: heightPortret)
-                        .transition(.fade(duration: 0.5))
-                        .scaledToFill()
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(16)
-                        .overlay(RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color(.systemGray4)))
-                    
-                    if ratingIsSwitch {
-                        VStack(spacing: 0) {
-                            HStack {
-                                Text("\(ratingFormat)")
-                                    .foregroundColor(.white)
-                                    .frame(width: 50, height: 30)
-                                    .lineLimit(1)
-                                    .font(.robotoBold25())
-                                    .background(backgroundFormat)
-                                    .cornerRadius(8)
-                                Spacer()
-                            }
-                            .padding(.top, 16)
-                            .offset(x: -13)
-                            Spacer()
-                        }
-                    }
-                }
-                .frame(width: widthPortret, height: heightPortret)
-            } else {
-                
-                let standartWidthPortret = CGFloat(500)
-                let standartHeightPortret = CGFloat(650)
-
-                ZStack {
-                    WebImage(url: URL(string: imageStr))
-                        .resizable()
-                        .renderingMode(.original)
-                        .onSuccess { image, data, cacheType in }
-                        .placeholder(Image("no_image"))
-                        .indicator(.activity)
-                        .frame(width: standartWidthPortret, height: standartHeightPortret)
-                        .transition(.fade(duration: 0.5))
-                        .scaledToFill()
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(16)
-                        .overlay(RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color(.systemGray4)))
-                    
-                    if ratingIsSwitch {
-                        VStack(spacing: 0) {
-                            HStack {
-                                Text("\(ratingFormat)")
-                                    .foregroundColor(.white)
-                                    .frame(width: 50, height: 30)
-                                    .lineLimit(1)
-                                    .font(.robotoBold25())
-                                    .background(backgroundFormat)
-                                    .cornerRadius(8)
-                                Spacer()
-                            }
-                            .padding(.top, 16)
-                            .offset(x: -13)
-                            Spacer()
-                        }
-                    }
-                }
-                .frame(width: standartWidthPortret, height: standartHeightPortret)
-            }
-        }
+        return AnyView(imageIPhone)
     }
 }
 
@@ -173,7 +78,6 @@ private extension FilmCellView {
                     HStack {
                         Text("\(ratingFormat)")
                             .foregroundColor(.white)
-//                            .frame(width: 50, height: 30)
                             .frame(width: UIScreen.screenHeight < 570 ? 35 : 50,
                                    height: UIScreen.screenHeight < 570 ? 22 : 30)
                             .lineLimit(1)

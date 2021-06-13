@@ -169,9 +169,6 @@ private extension FilmView {
             saveFilmsToUserDefaults(state: appBinding)
             
             settingsScreen()
-            
-            
-            
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),

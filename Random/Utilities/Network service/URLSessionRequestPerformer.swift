@@ -81,7 +81,7 @@ extension URLSessionRequestPerformer: NetworkRequestPerformer {
 
             #if DEBUG
             if request.logRequest {
-                print("urlRequest result: \(String(describing: $0?.prettyPrintedJSON))")
+                print("Task urlRequest result: \(String(describing: $0?.prettyPrintedJSON))")
             }
             #endif
 

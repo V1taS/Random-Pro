@@ -15,6 +15,18 @@ struct ButtonView: View {
     let text: String
     let switchImage: Bool
     let image: String
+    let height: CGFloat
+    let gradientForeground: [Color]
+    
+    init(textColor: UIColor, borderColor: UIColor, text: String, switchImage: Bool = false, image: String = "", height: CGFloat = 52, gradientForeground: [Color] = [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))]) {
+        self.textColor = textColor
+        self.borderColor = borderColor
+        self.text = text
+        self.switchImage = switchImage
+        self.image = image
+        self.height = height
+        self.gradientForeground = gradientForeground
+    }
     
     var body: some View {
         ZStack {
@@ -34,12 +46,12 @@ private extension ButtonView {
     private var backgroundColor: AnyView {
         AnyView(
             Rectangle()
-                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+                .gradientForeground(colors: gradientForeground)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
                 .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color(borderColor), lineWidth: 1.5))
                 
-                .frame(height: 52)
+                .frame(height: height)
         )
     }
 }

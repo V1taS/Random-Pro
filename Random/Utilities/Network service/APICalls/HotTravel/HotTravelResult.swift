@@ -22,7 +22,7 @@ struct HotTravelResult: Codable {
         var adults: Int?
         var region: String?
         var country: String?
-        var discount: Float?
+        var discount: Double?
         var transfer: Bool?
         var medical_insurance: Bool?
         var pansion_name: String?
@@ -78,4 +78,8 @@ extension HotTravelResult.Data: Equatable {
             lhs.pansion_description == rhs.pansion_description &&
             lhs.hotel == rhs.hotel
     }
+}
+
+extension HotTravelResult {
+    static let plug = HotTravelResult.Data()
 }

@@ -11,6 +11,7 @@ import SwiftUI
 struct MainView: View {
     
     private var appBinding: Binding<AppState.AppData>
+    private let nameMenu = AppActions.MainActions.MenuName.self
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
     }
@@ -22,17 +23,9 @@ struct MainView: View {
             makeGrid()
                 .onAppear {
                     userDefaultsGet(state: appBinding)
-
-                    Networking.share.getHotTravel(startDate: "10.07.2021", endDate: "20.07.2021") { result in
-                        print("---------------------------------")
-                        print("---------------------------------")
-                        print("--------------\(result)-------------------")
-                        print("---------------------------------")
-                        print("---------------------------------")
-                    }
+                    checkNewMenu()
                 }
                 .navigationBarTitle(Text("Random"))
-            
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -41,19 +34,19 @@ struct MainView: View {
 // MARK: Cell menu
 private extension MainView {
     private func arrView() -> [String: AnyView] {
-        return ["Фильмы": AnyView(film),
-                "Команды": AnyView(team),
-                "Число": AnyView(number),
-                "Да или Нет": AnyView(yesOrNot),
-                "Буква": AnyView(characters),
-                "Список": AnyView(listWords),
-                "Монета": AnyView(coin),
-                "Кубики": AnyView(cube),
-                "Дата и время": AnyView(dateAndTime),
-                "Лотерея": AnyView(lottery),
-                "Контакт": AnyView(contact),
-                "Музыка": AnyView(music),
-                "Путешествие": AnyView(travel)
+        return [nameMenu.films.rawValue: AnyView(film),
+                nameMenu.teams.rawValue: AnyView(team),
+                nameMenu.number.rawValue: AnyView(number),
+                nameMenu.yesOrNo.rawValue: AnyView(yesOrNot),
+                nameMenu.character.rawValue: AnyView(characters),
+                nameMenu.list.rawValue: AnyView(listWords),
+                nameMenu.coin.rawValue: AnyView(coin),
+                nameMenu.cube.rawValue: AnyView(cube),
+                nameMenu.dateAndTime.rawValue: AnyView(dateAndTime),
+                nameMenu.lottery.rawValue: AnyView(lottery),
+                nameMenu.contact.rawValue: AnyView(contact),
+                nameMenu.music.rawValue: AnyView(music),
+                nameMenu.travel.rawValue: AnyView(travel)
         ]
     }
 }
@@ -195,7 +188,7 @@ private extension MainView {
 private extension MainView {
     var travel: some View {
         NavigationLink(
-            destination: TravelView()) {
+            destination: TravelView(appBinding: appBinding)) {
             CellMainView(image: "airplane",
                          title: NSLocalizedString("Путешествие",
                                                   comment: ""),
@@ -242,15 +235,30 @@ private extension MainView {
 }
 
 private extension MainView {
+    private func checkNewMenu() {
+        let countOldCellMenu = appBinding.main.storeCellMenu.wrappedValue.count + appBinding.main.storeCellMenuHidden.wrappedValue.count
+        
+        let countNewCellMenu = AppActions.MainActions.MenuName.allCases.count
+        if countOldCellMenu < countNewCellMenu {
+            appBinding.main.storeCellMenu.wrappedValue = AppActions.MainActions.MenuName.allCases.compactMap {
+                $0.rawValue
+            }
+            appBinding.main.storeCellMenuHidden.wrappedValue = []
+            injected.interactors.mainInteractor.saveMainMenuToUserDefaults(state: appBinding)
+        }
+    }
+}
+
+private extension MainView {
     private func makeGrid() -> some View {
         let count = appBinding.main.storeCellMenu.wrappedValue.count
         let rows = count / columns + (count % columns == 0 ? 0 : 1)
         
         return ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 16) {
-                ForEach(0..<rows) { row in
+                ForEach(0..<rows, id: \.self) { row in
                     HStack(alignment: .center, spacing: 16) {
-                        ForEach(0..<self.columns) { column -> AnyView in
+                        ForEach(0..<self.columns, id: \.self) { column -> AnyView in
                             let index = row * self.columns + column
                             if index < count {
                                 let arrAnyViewCell = arrView()
@@ -264,6 +272,7 @@ private extension MainView {
                     }
                 }
             } .frame(maxWidth: .infinity)
+            .padding(.bottom, 16)
         }
     }
 }

@@ -116,6 +116,16 @@
 		1B8EB6352674457B009016BE /* SearchMoviesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB6342674457B009016BE /* SearchMoviesRequest.swift */; };
 		1B8EB63A26744FA5009016BE /* HotTravelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB63926744FA5009016BE /* HotTravelRequest.swift */; };
 		1B8EB63C26744FC7009016BE /* HotTravelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB63B26744FC7009016BE /* HotTravelResult.swift */; };
+		1B8EB63E2674E422009016BE /* TravelImageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB63D2674E422009016BE /* TravelImageCellView.swift */; };
+		1B8EB640267506E8009016BE /* TravelMiddleContentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB63F267506E8009016BE /* TravelMiddleContentCellView.swift */; };
+		1B8EB64226750D2A009016BE /* TravelSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB64126750D2A009016BE /* TravelSettingsView.swift */; };
+		1B8EB644267531DC009016BE /* TravelHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB643267531DC009016BE /* TravelHistoryView.swift */; };
+		1B8EB646267618A8009016BE /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB645267618A8009016BE /* NumberFormatter.swift */; };
+		1B8EB64826762BB0009016BE /* String+RemovingWhiteSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB64726762BB0009016BE /* String+RemovingWhiteSpaces.swift */; };
+		1B8EB64A26763C98009016BE /* TravelInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB64926763C98009016BE /* TravelInformationView.swift */; };
+		1B8EB64C26763DFA009016BE /* TravelInformationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB64B26763DFA009016BE /* TravelInformationViewCell.swift */; };
+		1B8EB64F267658B0009016BE /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 1B8EB651267658B0009016BE /* Localizable.stringsdict */; };
+		1B8EB65426765ECE009016BE /* String+FormatterDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB65326765ECE009016BE /* String+FormatterDate.swift */; };
 		1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9202F825D16CE90094D2BE /* YesOrNotView.swift */; };
 		1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9202FC25D16D760094D2BE /* YesOrNo.swift */; };
 		1B92030225D16DF20094D2BE /* YesOrNoActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92030125D16DF20094D2BE /* YesOrNoActions.swift */; };
@@ -331,6 +341,17 @@
 		1B8EB6342674457B009016BE /* SearchMoviesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMoviesRequest.swift; sourceTree = "<group>"; };
 		1B8EB63926744FA5009016BE /* HotTravelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotTravelRequest.swift; sourceTree = "<group>"; };
 		1B8EB63B26744FC7009016BE /* HotTravelResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotTravelResult.swift; sourceTree = "<group>"; };
+		1B8EB63D2674E422009016BE /* TravelImageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelImageCellView.swift; sourceTree = "<group>"; };
+		1B8EB63F267506E8009016BE /* TravelMiddleContentCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelMiddleContentCellView.swift; sourceTree = "<group>"; };
+		1B8EB64126750D2A009016BE /* TravelSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelSettingsView.swift; sourceTree = "<group>"; };
+		1B8EB643267531DC009016BE /* TravelHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelHistoryView.swift; sourceTree = "<group>"; };
+		1B8EB645267618A8009016BE /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
+		1B8EB64726762BB0009016BE /* String+RemovingWhiteSpaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RemovingWhiteSpaces.swift"; sourceTree = "<group>"; };
+		1B8EB64926763C98009016BE /* TravelInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInformationView.swift; sourceTree = "<group>"; };
+		1B8EB64B26763DFA009016BE /* TravelInformationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInformationViewCell.swift; sourceTree = "<group>"; };
+		1B8EB650267658B0009016BE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		1B8EB652267658B6009016BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		1B8EB65326765ECE009016BE /* String+FormatterDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FormatterDate.swift"; sourceTree = "<group>"; };
 		1B9202F825D16CE90094D2BE /* YesOrNotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotView.swift; sourceTree = "<group>"; };
 		1B9202FC25D16D760094D2BE /* YesOrNo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNo.swift; sourceTree = "<group>"; };
 		1B92030125D16DF20094D2BE /* YesOrNoActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNoActions.swift; sourceTree = "<group>"; };
@@ -465,6 +486,9 @@
 			isa = PBXGroup;
 			children = (
 				1B4EBFF925FE548E00A41945 /* TravelView.swift */,
+				1B8EB64126750D2A009016BE /* TravelSettingsView.swift */,
+				1B8EB643267531DC009016BE /* TravelHistoryView.swift */,
+				1B8EB64926763C98009016BE /* TravelInformationView.swift */,
 			);
 			path = Travel;
 			sourceTree = "<group>";
@@ -632,6 +656,7 @@
 				1B7F667E25D0856300933AD6 /* Info.plist */,
 				1B225C452619E253001B9124 /* GoogleService-Info.plist */,
 				1B325C1525D2CFDF00382F33 /* Localizable.strings */,
+				1B8EB651267658B0009016BE /* Localizable.stringsdict */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -660,6 +685,9 @@
 				1B0DB26F25DC4A4300C9D31D /* LoadingView.swift */,
 				1B0DB27625DC776F00C9D31D /* TextRoundView.swift */,
 				1BB8DFA025EE4485007C389D /* FilmCellView.swift */,
+				1B8EB63D2674E422009016BE /* TravelImageCellView.swift */,
+				1B8EB63F267506E8009016BE /* TravelMiddleContentCellView.swift */,
+				1B8EB64B26763DFA009016BE /* TravelInformationViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -774,6 +802,9 @@
 				1B8EB61026741256009016BE /* URL.swift */,
 				1B8EB6122674168F009016BE /* NetworkError.swift */,
 				1B8EB614267418BF009016BE /* Data+PrettyPrintedJSON.swift */,
+				1B8EB645267618A8009016BE /* NumberFormatter.swift */,
+				1B8EB64726762BB0009016BE /* String+RemovingWhiteSpaces.swift */,
+				1B8EB65326765ECE009016BE /* String+FormatterDate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1188,6 +1219,7 @@
 				1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */,
 				1B7F66D425D08C1000933AD6 /* Roboto-Thin.ttf in Resources */,
 				1B7F66D325D08C1000933AD6 /* Roboto-Regular.ttf in Resources */,
+				1B8EB64F267658B0009016BE /* Localizable.stringsdict in Resources */,
 				1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */,
 				1B7F66D725D08C1000933AD6 /* Roboto-Black.ttf in Resources */,
 				1B7F66D225D08C1000933AD6 /* Roboto-Bold.ttf in Resources */,
@@ -1301,10 +1333,12 @@
 				1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */,
 				1BDC80D6264DBB77001B0893 /* TravelInteractor.swift in Sources */,
 				1BD1F91C25D7336D00A1C7A4 /* LotteryView.swift in Sources */,
+				1B8EB64826762BB0009016BE /* String+RemovingWhiteSpaces.swift in Sources */,
 				1BF30DC825D195EC00DCE62B /* CellCubeFourView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
 				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
+				1B8EB64226750D2A009016BE /* TravelSettingsView.swift in Sources */,
 				1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */,
 				1BDC80D1264DBA85001B0893 /* Travel.swift in Sources */,
 				1B7F118325E4068000FF64A3 /* ContactResultsView.swift in Sources */,
@@ -1346,16 +1380,20 @@
 				1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */,
 				1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */,
 				1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */,
+				1B8EB64A26763C98009016BE /* TravelInformationView.swift in Sources */,
 				1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */,
 				1B8EB62D26743E50009016BE /* KinopoiskBestFilmsResult.swift in Sources */,
 				1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */,
 				1B92034125D1885C0094D2BE /* CubeView.swift in Sources */,
 				1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */,
+				1B8EB646267618A8009016BE /* NumberFormatter.swift in Sources */,
 				1BF30DC225D194A300DCE62B /* CellCubeTwoView.swift in Sources */,
 				1B92030625D16E1D0094D2BE /* YesOrNoInteractor.swift in Sources */,
 				1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */,
+				1B8EB65426765ECE009016BE /* String+FormatterDate.swift in Sources */,
 				1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */,
 				1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */,
+				1B8EB64C26763DFA009016BE /* TravelInformationViewCell.swift in Sources */,
 				1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */,
 				1BF22F3825D89E4000775368 /* AddPlayerSheet.swift in Sources */,
 				1BDC80D4264DBB4D001B0893 /* TravelActions.swift in Sources */,
@@ -1406,6 +1444,7 @@
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
+				1B8EB640267506E8009016BE /* TravelMiddleContentCellView.swift in Sources */,
 				1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */,
@@ -1418,11 +1457,13 @@
 				1B8EB6282674324F009016BE /* KinopoiskInfoResult.swift in Sources */,
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
+				1B8EB644267531DC009016BE /* TravelHistoryView.swift in Sources */,
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
 				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
 				1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */,
+				1B8EB63E2674E422009016BE /* TravelImageCellView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
@@ -1460,6 +1501,15 @@
 				1B325C1925D2D18300382F33 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		1B8EB651267658B0009016BE /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B8EB650267658B0009016BE /* ru */,
+				1B8EB652267658B6009016BE /* en */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1661,7 +1711,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1690,7 +1740,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -10,9 +10,20 @@ import Foundation
 
 extension AppActions {
     struct MainActions {
-        enum RegularNum: String {
-            case yes = "yes"
-            case no = "no"
+        enum MenuName: String, CaseIterable {
+            case films = "Фильмы"
+            case teams = "Команды"
+            case number = "Число"
+            case yesOrNo = "Да или Нет"
+            case character = "Буква"
+            case list = "Список"
+            case coin = "Монета"
+            case cube = "Кубики"
+            case dateAndTime = "Дата и время"
+            case lottery = "Лотерея"
+            case contact = "Контакт"
+            case music = "Музыка"
+            case travel = "Путешествие"
         }
     }
 }

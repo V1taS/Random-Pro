@@ -32,19 +32,6 @@ struct ContactView: View {
                         .opacity(isPressedButton ? 0.8 : 1)
                         .scaleEffect(isPressedButton ? 0.8 : 1)
                         .animation(.easeInOut(duration: 0.2), value: isPressedButton)
-                    
-                    //                        .gesture(DragGesture(minimumDistance: 0.0, coordinateSpace: .global)
-                    //                                    .onChanged { _ in
-                    //                                        isPressedTouch = true
-                    //                                        generateContacts(state: appBinding)
-                    //                                        saveContactToUserDefaults(state: appBinding)
-                    //                                        Feedback.shared.impactHeavy(.medium)
-                    //                                    }
-                    //                                    .onEnded { _ in
-                    //                                        isPressedTouch = false
-                    //                                    }
-                    //                        )
-                    
                 } else {
                     VStack(spacing: 24) {
                         Text("\(appBinding.contact.resultFullName.wrappedValue)")

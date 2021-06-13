@@ -20,8 +20,6 @@ struct FilmSettingsView: View {
         NavigationView {
             VStack {
                 Form {
-                    
-                    
                     HStack {
                         NavigationLink(
                             destination: filmInformation

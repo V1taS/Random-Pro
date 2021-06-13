@@ -15,8 +15,6 @@ struct FilmInformationAllFilmView: View {
     init(filmsInfo: KinopoiskInfoResult, appBinding: Binding<AppState.AppData>) {
         self.filmsInfo = filmsInfo
         self.appBinding = appBinding
-//        validVideoplayerIcon(state: appBinding,
-//                             filmKinopoisk: filmsInfo)
     }
     @Environment(\.injected) private var injected: DIContainer
     
@@ -25,16 +23,6 @@ struct FilmInformationAllFilmView: View {
             listResults
         }
         .navigationBarTitle(Text(NSLocalizedString("Информация по фильму", comment: "")), displayMode: .inline)
-//        .navigationBarItems(trailing: Button(action: {
-//            getLinkOnPageAllVideo(state: appBinding,
-//                                  filmKinopoisk: filmsInfo)
-//        }) {
-//            if appBinding.film.showVideoPlayerIcon.wrappedValue {
-//                Image(systemName: "play.rectangle")
-//                    .font(.system(size: 24))
-//                    .gradientForeground(colors: [Color.primaryError(), Color.red]).opacity(0.5)
-//            }
-//        })
     }
 }
 

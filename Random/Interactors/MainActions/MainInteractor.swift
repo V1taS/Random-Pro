@@ -333,8 +333,11 @@ extension MainInteractorImpl {
     }
     
     private func userDefaultsGetMain(state: Binding<AppState.AppData>) {
-        state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? ["Фильмы", "Команды", "Число", "Да или Нет", "Буква", "Список", "Монета",
-                                                                                                                              "Кубики", "Дата и время", "Лотерея", "Контакт", "Музыка", "Путешествие"]
+        let listNameMenu = AppActions.MainActions.MenuName.allCases.compactMap {
+            $0.rawValue
+        }
+        
+        state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? listNameMenu
         
         state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
     }

@@ -11,9 +11,6 @@ import Combine
 
 struct TravelView: View {
     
-    private var isEnabledSelectedDepartureOne = false
-    private var isEnabledSelectedDepartureTwo = true
-    private var isEnabledSelectedDepartureThree = true
     private var appBinding: Binding<AppState.AppData>
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
@@ -178,6 +175,10 @@ private extension TravelView {
         .padding(16)
     }
 }
+
+var isEnabledSelectedDepartureOne = false
+var isEnabledSelectedDepartureTwo = true
+var isEnabledSelectedDepartureThree = true
 
 private extension TravelView {
     var pickerViewSelectedDeparture: some View {

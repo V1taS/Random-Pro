@@ -15,6 +15,8 @@ struct TravelImageCellView: View {
     private var isEnabledStarsCount = true
     private var isEnabledImageStr = false
     
+    @EnvironmentObject var orientation: Orientation
+    
     init(discount: Double, starsCount: Int, imageStr: String) {
         self.discount = discount
         self.starsCount = starsCount
@@ -64,10 +66,173 @@ struct TravelImageCellView: View {
 
 // MARK: Device
 private extension TravelImageCellView {
-    private var imageDevice: AnyView {
-        return AnyView(imageIPhone)
-    }
-}
+     private var imageDevice: AnyView {
+         switch UIDevice.current.userInterfaceIdiom == .phone {
+         case true:
+             return AnyView(imageIPhone)
+         case false:
+             return AnyView(imageIPad)
+         }
+     }
+ }
+
+// MARK: Image iPad
+ private extension TravelImageCellView {
+     var imageIPad: some View {
+         Group {
+             if orientation.isLandScape {
+
+                 let widthPortret = CGFloat(340)
+                 let heightPortret = CGFloat(250)
+
+                 ZStack {
+                     WebImage(url: URL(string: imageStr))
+                         .resizable()
+                         .renderingMode(.original)
+                         .onSuccess { image, data, cacheType in }
+                         .placeholder(Image("no_image"))
+                         .indicator(.activity)
+                         .frame(width: widthPortret, height: heightPortret)
+                         .transition(.fade(duration: 0.5))
+                         .scaledToFill()
+                         .aspectRatio(contentMode: .fill)
+                         .cornerRadius(16)
+                         .overlay(RoundedRectangle(cornerRadius: 16)
+                                     .stroke(Color(.systemGray4)))
+                    
+                    if isEnabledImageStr {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .background(LinearGradient(gradient: Gradient(colors: [.clear, .primarySky().opacity(0.2)]), startPoint: .leading, endPoint: .trailing))
+                            .frame(width: widthPortret,
+                                   height: heightPortret)
+                            .cornerRadius(16)
+                            .overlay(RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color(.systemGray4)))
+                    }
+                    
+                    if isEnabledDiscount {
+                        VStack(spacing: 0) {
+                            HStack {
+                                Spacer()
+                                Text("- \(discountFormat)%")
+                                    .foregroundColor(.white)
+                                    .frame(width: 50, height: 25)
+                                    .lineLimit(1)
+                                    .font(.robotoBold14())
+                                    .background(backgroundFormat)
+                                    .cornerRadius(8)
+                            }
+                            .padding(.top, 16)
+                            .offset(x: 13)
+                            Spacer()
+                        }
+                    }
+                    
+                    if isEnabledStarsCount {
+                        VStack(spacing: 0) {
+                            HStack {
+                                Spacer()
+                                ZStack {
+                                    Image(systemName: "star.fill")
+                                        .font(.title)
+                                        .foregroundColor(.red)
+                                        .gradientForeground(colors: starBackgroundFormat)
+                                    
+                                    Text("\(starsCount)")
+                                        .foregroundColor(.white)
+                                        .lineLimit(1)
+                                        .font(.robotoBold13())
+                                        .offset(y: 3)
+                                }
+                            }
+                            .padding(.top, 50)
+                            .offset(x: 13)
+                            Spacer()
+                        }
+                    }
+
+
+                 }
+                 .frame(width: widthPortret, height: heightPortret)
+             } else {
+
+                 let standartWidthPortret = CGFloat(340)
+                 let standartHeightPortret = CGFloat(250)
+
+                 ZStack {
+                     WebImage(url: URL(string: imageStr))
+                         .resizable()
+                         .renderingMode(.original)
+                         .onSuccess { image, data, cacheType in }
+                         .placeholder(Image("no_image"))
+                         .indicator(.activity)
+                         .frame(width: standartWidthPortret, height: standartHeightPortret)
+                         .transition(.fade(duration: 0.5))
+                         .scaledToFill()
+                         .aspectRatio(contentMode: .fill)
+                         .cornerRadius(16)
+                         .overlay(RoundedRectangle(cornerRadius: 16)
+                                     .stroke(Color(.systemGray4)))
+
+                    
+                    if isEnabledImageStr {
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .background(LinearGradient(gradient: Gradient(colors: [.clear, .primarySky().opacity(0.2)]), startPoint: .leading, endPoint: .trailing))
+                            .frame(width: standartWidthPortret,
+                                   height: standartHeightPortret)
+                            .cornerRadius(16)
+                            .overlay(RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color(.systemGray4)))
+                    }
+                    
+                    if isEnabledDiscount {
+                        VStack(spacing: 0) {
+                            HStack {
+                                Spacer()
+                                Text("- \(discountFormat)%")
+                                    .foregroundColor(.white)
+                                    .frame(width: 50, height: 25)
+                                    .lineLimit(1)
+                                    .font(.robotoBold14())
+                                    .background(backgroundFormat)
+                                    .cornerRadius(8)
+                            }
+                            .padding(.top, 16)
+                            .offset(x: 13)
+                            Spacer()
+                        }
+                    }
+                    
+                    if isEnabledStarsCount {
+                        VStack(spacing: 0) {
+                            HStack {
+                                Spacer()
+                                ZStack {
+                                    Image(systemName: "star.fill")
+                                        .font(.title)
+                                        .foregroundColor(.red)
+                                        .gradientForeground(colors: starBackgroundFormat)
+                                    
+                                    Text("\(starsCount)")
+                                        .foregroundColor(.white)
+                                        .lineLimit(1)
+                                        .font(.robotoBold13())
+                                        .offset(y: 3)
+                                }
+                            }
+                            .padding(.top, 50)
+                            .offset(x: 13)
+                            Spacer()
+                        }
+                    }
+                 }
+                 .frame(width: standartWidthPortret, height: standartHeightPortret)
+             }
+         }
+     }
+ }
 
 // MARK: Image iPhone
 private extension TravelImageCellView {

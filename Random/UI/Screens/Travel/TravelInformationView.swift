@@ -78,24 +78,66 @@ private extension TravelInformationView {
                 Spacer()
             }
             
+            imageDevice
+        }
+    }
+}
+
+// MARK: Device
+private extension TravelInformationView {
+     private var imageDevice: AnyView {
+         switch UIDevice.current.userInterfaceIdiom == .phone {
+         case true:
+             return AnyView(imageIPhone)
+         case false:
+             return AnyView(imageIPad)
+         }
+     }
+ }
+
+// MARK: Image iPhone
+private extension TravelInformationView {
+    var imageIPhone: some View {
+        WebImage(url: URL(string: "\(tourInfo.hotel?.picture ?? "")"))
+            .resizable()
+            .renderingMode(.original)
+            .onSuccess { image, data, cacheType in }
+            .placeholder(Image("no_image"))
+            .indicator(.activity)
+            .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 340),
+                   height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 250))
+            .transition(.fade(duration: 0.5))
+            .aspectRatio(contentMode: .fill)
+            .cornerRadius(8)
+            .overlay(RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color(.systemGray4)))
+            .padding(.vertical, 24)
+    }
+}
+
+// MARK: Image iPad
+ private extension TravelInformationView {
+     var imageIPad: some View {
+        HStack {
+            Spacer()
             WebImage(url: URL(string: "\(tourInfo.hotel?.picture ?? "")"))
                 .resizable()
                 .renderingMode(.original)
                 .onSuccess { image, data, cacheType in }
                 .placeholder(Image("no_image"))
                 .indicator(.activity)
-                .frame(width: UIScreen.screenWidth * Size.shared.getAdaptSizeWidth(px: 340),
-                       height: UIScreen.screenHeight * Size.shared.getAdaptSizeHeight(px: 250))
+                .frame(width: 340,
+                       height: 250)
                 .transition(.fade(duration: 0.5))
                 .aspectRatio(contentMode: .fill)
                 .cornerRadius(8)
                 .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color(.systemGray4)))
                 .padding(.vertical, 24)
-            
+            Spacer()
         }
-    }
-}
+     }
+ }
 
 private extension TravelInformationView {
     var buyButton: some View {

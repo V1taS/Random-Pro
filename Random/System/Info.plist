@@ -27,7 +27,7 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Please provide access to the music library to generate songs</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Access must be granted to fetch contacts</string>
+	<string>Provide access to randomly generate contacts</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Black.ttf</string>

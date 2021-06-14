@@ -18,11 +18,6 @@
 		1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */; };
 		1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088A25D808180005A2D7 /* LotterySettingsView.swift */; };
 		1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088D25D808C40005A2D7 /* LotteryResultsView.swift */; };
-		1B1B501426009FAD00F73A14 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B1B501326009FAD00F73A14 /* WidgetKit.framework */; };
-		1B1B501626009FAD00F73A14 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B1B501526009FAD00F73A14 /* SwiftUI.framework */; };
-		1B1B501926009FAD00F73A14 /* Random_Pro_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B501826009FAD00F73A14 /* Random_Pro_Widget.swift */; };
-		1B1B501B26009FAD00F73A14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B501A26009FAD00F73A14 /* Assets.xcassets */; };
-		1B1B501F26009FAD00F73A14 /* Random Pro WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1B1B501226009FAD00F73A14 /* Random Pro WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1B1B505626011B0200F73A14 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B505526011B0200F73A14 /* MusicView.swift */; };
 		1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */; };
 		1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60572601FBA400847843 /* MusicITunes.swift */; };
@@ -203,16 +198,6 @@
 		2346BE475B916EAB962AAA5C /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A1B77C318B76AB5AF3EDF8 /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1B1B501D26009FAD00F73A14 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1B7F666525D0856300933AD6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1B1B501126009FAD00F73A14;
-			remoteInfo = "Random Pro WidgetExtension";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		1B1B502026009FAD00F73A14 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -220,7 +205,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				1B1B501F26009FAD00F73A14 /* Random Pro WidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,12 +223,8 @@
 		1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1B10088A25D808180005A2D7 /* LotterySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySettingsView.swift; sourceTree = "<group>"; };
 		1B10088D25D808C40005A2D7 /* LotteryResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultsView.swift; sourceTree = "<group>"; };
-		1B1B501226009FAD00F73A14 /* Random Pro WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Random Pro WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B1B501326009FAD00F73A14 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		1B1B501526009FAD00F73A14 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		1B1B501826009FAD00F73A14 /* Random_Pro_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random_Pro_Widget.swift; sourceTree = "<group>"; };
-		1B1B501A26009FAD00F73A14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1B1B501C26009FAD00F73A14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B1B505526011B0200F73A14 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAPI.swift; sourceTree = "<group>"; };
 		1B1D60572601FBA400847843 /* MusicITunes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicITunes.swift; sourceTree = "<group>"; };
@@ -432,15 +412,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1B1B500F26009FAD00F73A14 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1B1B501626009FAD00F73A14 /* SwiftUI.framework in Frameworks */,
-				1B1B501426009FAD00F73A14 /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B7F666A25D0856300933AD6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,16 +424,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B1B501726009FAD00F73A14 /* Random Pro Widget */ = {
-			isa = PBXGroup;
-			children = (
-				1B1B501826009FAD00F73A14 /* Random_Pro_Widget.swift */,
-				1B1B501A26009FAD00F73A14 /* Assets.xcassets */,
-				1B1B501C26009FAD00F73A14 /* Info.plist */,
-			);
-			path = "Random Pro Widget";
-			sourceTree = "<group>";
-		};
 		1B1B505426011AEC00F73A14 /* Music */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,7 +496,6 @@
 			isa = PBXGroup;
 			children = (
 				1B7F666F25D0856300933AD6 /* Random */,
-				1B1B501726009FAD00F73A14 /* Random Pro Widget */,
 				1B7F666E25D0856300933AD6 /* Products */,
 				1B6875A625DB614F006E82D4 /* Frameworks */,
 				63571909499D2B3D03E5C196 /* Pods */,
@@ -546,7 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				1B7F666D25D0856300933AD6 /* Random Pro.app */,
-				1B1B501226009FAD00F73A14 /* Random Pro WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1125,23 +1084,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1B1B501126009FAD00F73A14 /* Random Pro WidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1B1B502326009FAD00F73A14 /* Build configuration list for PBXNativeTarget "Random Pro WidgetExtension" */;
-			buildPhases = (
-				1B1B500E26009FAD00F73A14 /* Sources */,
-				1B1B500F26009FAD00F73A14 /* Frameworks */,
-				1B1B501026009FAD00F73A14 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Random Pro WidgetExtension";
-			productName = "Random Pro WidgetExtension";
-			productReference = 1B1B501226009FAD00F73A14 /* Random Pro WidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		1B7F666C25D0856300933AD6 /* Random Pro */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
@@ -1157,7 +1099,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				1B1B501E26009FAD00F73A14 /* PBXTargetDependency */,
 			);
 			name = "Random Pro";
 			productName = Random;
@@ -1174,9 +1115,6 @@
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Sosin.bet;
 				TargetAttributes = {
-					1B1B501126009FAD00F73A14 = {
-						CreatedOnToolsVersion = 12.4;
-					};
 					1B7F666C25D0856300933AD6 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -1196,20 +1134,11 @@
 			projectRoot = "";
 			targets = (
 				1B7F666C25D0856300933AD6 /* Random Pro */,
-				1B1B501126009FAD00F73A14 /* Random Pro WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1B1B501026009FAD00F73A14 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1B1B501B26009FAD00F73A14 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B7F666B25D0856300933AD6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1294,14 +1223,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1B1B500E26009FAD00F73A14 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1B1B501926009FAD00F73A14 /* Random_Pro_Widget.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1B7F666925D0856300933AD6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1486,14 +1407,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		1B1B501E26009FAD00F73A14 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1B1B501126009FAD00F73A14 /* Random Pro WidgetExtension */;
-			targetProxy = 1B1B501D26009FAD00F73A14 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		1B325C1525D2CFDF00382F33 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -1516,60 +1429,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1B1B502126009FAD00F73A14 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0;
-				DEVELOPMENT_TEAM = 34VDSPZYU9;
-				INFOPLIST_FILE = "Random Pro Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 40;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random.Widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1B1B502226009FAD00F73A14 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0;
-				DEVELOPMENT_TEAM = 34VDSPZYU9;
-				INFOPLIST_FILE = "Random Pro Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 40;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random.Widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		1B7F667F25D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUILD = 4.0;
-				APP_VERSION = 40;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1632,8 +1495,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUILD = 4.0;
-				APP_VERSION = 40;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1694,7 +1555,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0;
+				CURRENT_PROJECT_VERSION = 4.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -1706,13 +1567,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 40;
+				MARKETING_VERSION = 42;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1724,7 +1585,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.0;
+				CURRENT_PROJECT_VERSION = 4.2;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=appletvsimulator*]" = "$(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR)) arm64";
@@ -1735,28 +1596,19 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 40;
+				MARKETING_VERSION = 42;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1B1B502326009FAD00F73A14 /* Build configuration list for PBXNativeTarget "Random Pro WidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1B1B502126009FAD00F73A14 /* Debug */,
-				1B1B502226009FAD00F73A14 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1B7F666825D0856300933AD6 /* Build configuration list for PBXProject "Random Pro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

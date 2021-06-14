@@ -47,6 +47,7 @@
 		1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */; };
 		1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */; };
 		1B4EBFFA25FE548E00A41945 /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EBFF925FE548E00A41945 /* TravelView.swift */; };
+		1B5C18D02676C23E00E44B14 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */; };
 		1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875A325DB307C006E82D4 /* PurchasesView.swift */; };
 		1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
 		1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875AA25DB620C006E82D4 /* StoreManager.swift */; };
@@ -151,7 +152,6 @@
 		1B9AB8A625ECB77700BD5CFD /* FilmSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8A525ECB77700BD5CFD /* FilmSettingsView.swift */; };
 		1B9AB8AC25ECC47800BD5CFD /* FilmInformationAllFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8AB25ECC47800BD5CFD /* FilmInformationAllFilmView.swift */; };
 		1B9AB8B125ECCC1600BD5CFD /* FilmHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8B025ECCC1600BD5CFD /* FilmHistoryView.swift */; };
-		1B9AB8BC25ECE82D00BD5CFD /* GlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8BB25ECE82D00BD5CFD /* GlobalFunc.swift */; };
 		1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */; };
 		1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */; };
 		1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */; };
@@ -270,6 +270,7 @@
 		1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressActions.swift; sourceTree = "<group>"; };
 		1B4EBFF925FE548E00A41945 /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
+		1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		1B6875A325DB307C006E82D4 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
 		1B6875A725DB614F006E82D4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1B6875AA25DB620C006E82D4 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -377,7 +378,6 @@
 		1B9AB8A525ECB77700BD5CFD /* FilmSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSettingsView.swift; sourceTree = "<group>"; };
 		1B9AB8AB25ECC47800BD5CFD /* FilmInformationAllFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInformationAllFilmView.swift; sourceTree = "<group>"; };
 		1B9AB8B025ECCC1600BD5CFD /* FilmHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmHistoryView.swift; sourceTree = "<group>"; };
-		1B9AB8BB25ECE82D00BD5CFD /* GlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunc.swift; sourceTree = "<group>"; };
 		1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSettingsView.swift; sourceTree = "<group>"; };
 		1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeResultsView.swift; sourceTree = "<group>"; };
@@ -740,7 +740,6 @@
 				1B446F2A25E517000060E163 /* ReviewUtility.swift */,
 				1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */,
 				1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */,
-				1B9AB8BB25ECE82D00BD5CFD /* GlobalFunc.swift */,
 				1BF1F5C925F705D700613F20 /* Orientation.swift */,
 			);
 			path = Utilities;
@@ -805,6 +804,7 @@
 				1B8EB645267618A8009016BE /* NumberFormatter.swift */,
 				1B8EB64726762BB0009016BE /* String+RemovingWhiteSpaces.swift */,
 				1B8EB65326765ECE009016BE /* String+FormatterDate.swift */,
+				1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1353,7 +1353,6 @@
 				1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */,
 				1B7F117825E3F74100FF64A3 /* ContactInteractor.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
-				1B9AB8BC25ECE82D00BD5CFD /* GlobalFunc.swift in Sources */,
 				1B2F1D46260CC18E00ADCB12 /* CategoriesView.swift in Sources */,
 				1B1D606A260225CA00847843 /* Music.swift in Sources */,
 				1BF22F2E25D88F1A00775368 /* PlayerView.swift in Sources */,
@@ -1471,6 +1470,7 @@
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1B8EB61D26741F03009016BE /* NetworkServiceResult.swift in Sources */,
+				1B5C18D02676C23E00E44B14 /* DateFormatter.swift in Sources */,
 				1B8EB62B26743E3D009016BE /* KinopoiskBestFilmsRequest.swift in Sources */,
 				1B7F117B25E3F85600FF64A3 /* FetchedContacts.swift in Sources */,
 				1BF30DD725D19E2500DCE62B /* Settings.swift in Sources */,

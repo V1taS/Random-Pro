@@ -10,9 +10,10 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct TravelHistoryView: View {
-    private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
-        self.appBinding = appBinding
+    private var toursInfo: [HotTravelResult.Data]
+    
+    init(toursInfo: [HotTravelResult.Data]) {
+        self.toursInfo = toursInfo
     }
     @Environment(\.injected) private var injected: DIContainer
     
@@ -28,9 +29,9 @@ struct TravelHistoryView: View {
 private extension TravelHistoryView {
     var listResults: some View {
         Form {
-            ForEach(Array(appBinding.film.filmsHistory.wrappedValue.enumerated()), id: \.0) { (index, film) in
+            ForEach(Array(toursInfo.enumerated()), id: \.0) { (_, tour) in
                 
-                NavigationLink(destination: EmptyView().allowAutoDismiss(false)) {
+                NavigationLink(destination: TravelInformationView(tourInfo: tour).allowAutoDismiss(false)) {
                     HStack {
                         VStack(alignment: .leading, spacing: 8) {
                             VStack(alignment: .leading, spacing: 4) {
@@ -39,7 +40,7 @@ private extension TravelHistoryView {
                                     .lineLimit(1)
                                     .foregroundColor(.primaryInactive())
                                 
-                                Text("Россия")
+                                Text("\(tour.country ?? "-")")
                                     .font(UIScreen.screenHeight < 700 ? .robotoMedium14() : .robotoMedium20())
                                     .lineLimit(1)
                                     .foregroundColor(.black)
@@ -51,7 +52,7 @@ private extension TravelHistoryView {
                                     .lineLimit(1)
                                     .foregroundColor(.primaryInactive())
                                 
-                                Text("26 июня")
+                                Text("\(tour.date?.formatterDate() ?? "-")")
                                     .font(UIScreen.screenHeight < 700 ? .robotoMedium14() : .robotoMedium20())
                                     .lineLimit(1)
                                     .foregroundColor(.black)
@@ -60,7 +61,7 @@ private extension TravelHistoryView {
                         
                         Spacer()
                         
-                        WebImage(url: URL(string: ""))
+                        WebImage(url: URL(string: "\(tour.hotel?.picture ?? "")"))
                             .resizable()
                             .renderingMode(.original)
                             .onSuccess { image, data, cacheType in }
@@ -81,6 +82,6 @@ private extension TravelHistoryView {
 
 struct TravelHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        TravelHistoryView(appBinding: .constant(.init()))
+        TravelHistoryView(toursInfo: [])
     }
 }

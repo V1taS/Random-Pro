@@ -141,8 +141,8 @@
 "ДАТА ВЫЛЕТА" = "DEPARTURE DATE";
 "Купить" = "Buy";
 "Сегодня" = "Today";
-"На неделе" = "On the week";
-"В этом месяце" = "This month";
+"Неделя" = "A week";
+"Месяц" = "Month";
 "не важно" = "no matter";
 "любое" = "any";
 "Дата вылета:" = "Departure date:";
@@ -171,8 +171,8 @@
 "Стоимость в рублях" = "Price in rubles";
 "Количество людей" = "Number of people";
 "Размер скидки в %" = "Discount rate in %";
-"Трансфер включен" = "Transfer included";
-"Мед. страховка включена" = "Medical insurance included";
+"Трансфер" = "Transfer";
+"Мед. страховка" = "Medical insurance";
 "Название отеля" = "The name of the hotel";
 "Количество звезд" = "Number of stars";
 "января" = "january";
@@ -186,3 +186,5 @@
 "сентября" = "september";
 "октября" = "october";
 "декабря" = "december";
+"есть" = "yes";
+"нет" = "not";

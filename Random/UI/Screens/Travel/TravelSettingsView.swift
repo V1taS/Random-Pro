@@ -28,78 +28,78 @@ struct TravelSettingsView: View {
             VStack {
                 Form {
                     
-                    Group {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(NSLocalizedString("Дата вылета:", comment: ""))
-                                    .foregroundColor(.primaryGray())
-                                    .font(.robotoMedium18())
-                                pickerViewSelectedDeparture
-                            }
-                        }
-                        .padding(.vertical, 8)
+//                    Group {
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 8) {
+//                                Text(NSLocalizedString("Дата вылета:", comment: ""))
+//                                    .foregroundColor(.primaryGray())
+//                                    .font(.robotoMedium18())
+//                                pickerViewSelectedDeparture
+//                            }
+//                        }
+//                        .padding(.vertical, 8)
                         
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(NSLocalizedString("Количество звезд у отеля:", comment: ""))
-                                    .foregroundColor(.primaryGray())
-                                    .font(.robotoMedium18())
-                                
-                                pickerViewStarsForHotel
-                            }
-                        }
-                        .padding(.vertical, 8)
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 8) {
+//                                Text(NSLocalizedString("Количество звезд у отеля:", comment: ""))
+//                                    .foregroundColor(.primaryGray())
+//                                    .font(.robotoMedium18())
+//
+//                                pickerViewStarsForHotel
+//                            }
+//                        }
+//                        .padding(.vertical, 8)
                         
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(NSLocalizedString("Питание", comment: ""))
-                                    .foregroundColor(.primaryGray())
-                                    .font(.robotoMedium18())
-                                
-                                pickerViewPansions
-                                descriptionPansions
-                            }
-                        }
-                        .padding(.vertical, 8)
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 8) {
+//                                Text(NSLocalizedString("Питание", comment: ""))
+//                                    .foregroundColor(.primaryGray())
+//                                    .font(.robotoMedium18())
+//
+//                                pickerViewPansions
+//                                descriptionPansions
+//                            }
+//                        }
+//                        .padding(.vertical, 8)
                         
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(NSLocalizedString("Количество ночей:", comment: ""))
-                                    .foregroundColor(.primaryGray())
-                                    .font(.robotoMedium18())
-                                
-                                textFieldCountOfNight
-                            }
-                        }
-                        .padding(.vertical, 8)
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 8) {
+//                                Text(NSLocalizedString("Количество ночей:", comment: ""))
+//                                    .foregroundColor(.primaryGray())
+//                                    .font(.robotoMedium18())
+//
+//                                textFieldCountOfNight
+//                            }
+//                        }
+//                        .padding(.vertical, 8)
                         
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(NSLocalizedString("Количество взрослых:", comment: ""))
-                                    .foregroundColor(.primaryGray())
-                                    .font(.robotoMedium18())
-                                
-                                textFieldCountAdults
-                            }
-                        }
-                        .padding(.vertical, 8)
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 8) {
+//                                Text(NSLocalizedString("Количество взрослых:", comment: ""))
+//                                    .foregroundColor(.primaryGray())
+//                                    .font(.robotoMedium18())
+//
+//                                textFieldCountAdults
+//                            }
+//                        }
+//                        .padding(.vertical, 8)
                         
-                        HStack {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(NSLocalizedString("Стоимость тура:", comment: ""))
-                                    .foregroundColor(.primaryGray())
-                                    .font(.robotoMedium18())
-                                
-                                costTextFields
-                            }
-                        }
-                        .padding(.vertical, 8)
-                    }
+//                        HStack {
+//                            VStack(alignment: .leading, spacing: 8) {
+//                                Text(NSLocalizedString("Стоимость тура:", comment: ""))
+//                                    .foregroundColor(.primaryGray())
+//                                    .font(.robotoMedium18())
+//                                
+//                                costTextFields
+//                            }
+//                        }
+//                        .padding(.vertical, 8)
+//                    }
                     
                     
                     HStack {
                         NavigationLink(
-                            destination: filmInformation
+                            destination: travelInformation
                                 .allowAutoDismiss { false }) {
                             Text(NSLocalizedString("Информация по туру", comment: ""))
                                 .foregroundColor(.primaryGray())
@@ -121,17 +121,19 @@ struct TravelSettingsView: View {
                             .font(.robotoMedium18())
                         Spacer()
                         
-                        filmsCountGenerate
+                        toursCountGenerate
                     }
                     .padding(.vertical, 8)
                     
                     HStack {
                         Spacer()
                         Button(action: {
-                            cleanFilms(state: appBinding)
-                            appBinding.film.showSettings.wrappedValue = false
-                            getMovies(state: appBinding)
-                            saveFilmsToUserDefaults(state: appBinding)
+                            cleanTravel(state: appBinding)
+                            appBinding.travel.showSettings.wrappedValue = false
+                            getTravel(state: appBinding) {
+                                getCurrentTravel(state: appBinding)
+                            }
+//                            saveFilmsToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
@@ -159,7 +161,7 @@ private extension TravelSettingsView {
         switch appBinding.travel.selectedPlace.wrappedValue {
         case 0:
             return AnyView(NavigationLink(
-                destination: TravelHistoryView(appBinding: appBinding)
+                destination: TravelHistoryView(toursInfo: appBinding.travel.travelRussiaHistory.wrappedValue)
                     .allowAutoDismiss { false }) {
                 Text(NSLocalizedString("История генерации", comment: ""))
                     .foregroundColor(.primaryGray())
@@ -188,10 +190,10 @@ private extension TravelSettingsView {
 }
 
 private extension TravelSettingsView {
-    private var filmsCountGenerate: AnyView {
-        switch appBinding.film.selectedGenres.wrappedValue {
+    private var toursCountGenerate: AnyView {
+        switch appBinding.travel.selectedPlace.wrappedValue {
         case 0:
-            return AnyView(Text("\(appBinding.film.filmsBestHistory.wrappedValue.count)")
+            return AnyView(Text("\(appBinding.travel.travelRussiaHistory.wrappedValue.count)")
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16()))
         case 1:
@@ -209,10 +211,10 @@ private extension TravelSettingsView {
 }
 
 private extension TravelSettingsView {
-    private var filmInformation: AnyView {
+    private var travelInformation: AnyView {
         switch appBinding.travel.selectedPlace.wrappedValue {
         case 0:
-            return AnyView(TravelInformationView(appBinding: appBinding))
+            return AnyView(TravelInformationView(tourInfo: appBinding.travel.travelRussiaInfo.wrappedValue))
         case 1:
             return AnyView(FilmInformationBestFilmView(
                             filmsInfo: appBinding.film.filmsPopularInfo.wrappedValue,
@@ -454,21 +456,19 @@ private extension TravelSettingsView {
 
 // MARK: Actions
 private extension TravelSettingsView {
-    private func cleanFilms(state: Binding<AppState.AppData>) {
-        injected.interactors.filmInteractor
-            .cleanFilms(state: state)
+    private func getCurrentTravel(state: Binding<AppState.AppData>) {
+        injected.interactors.travelInteractor
+            .getCurrentTravel(state: state)
     }
     
-    private func getMovies(state: Binding<AppState.AppData>) {
-        injected.interactors.filmInteractor
-            .getMovies(state: state)
+    private func getTravel(state: Binding<AppState.AppData>, _ completion: (() -> Void)? = nil) {
+        injected.interactors.travelInteractor
+            .getTravel(state: state, completion: completion)
     }
-}
-
-private extension TravelSettingsView {
-    private func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
-        injected.interactors.filmInteractor
-            .saveFilmsToUserDefaults(state: state)
+    
+    private func cleanTravel(state: Binding<AppState.AppData>) {
+        injected.interactors.travelInteractor
+            .cleanTravel(state: state)
     }
 }
 

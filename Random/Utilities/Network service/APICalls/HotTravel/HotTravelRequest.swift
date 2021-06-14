@@ -29,6 +29,7 @@ public struct HotTravelRequest: NetworkRequest {
     init(startDate: String, endDate: String) {
         params["start_date"] = startDate
         params["end_date"] = endDate
+        params["per_page"] = 100
         params["sort_by"] = "prices"
     }
 }

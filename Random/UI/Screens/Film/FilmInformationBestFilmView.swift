@@ -111,6 +111,19 @@ private extension FilmInformationBestFilmView {
     }
 }
 
+private extension FilmInformationBestFilmView {
+    private func getLinkFromStringURL(strURL: String?) {
+        guard let url = strURL?.dropFirst(2) else { return }
+        let httpsUrl = "https://\(String(describing: url))"
+        if let url = URL(string: httpsUrl) {
+            DispatchQueue.main.async {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
+        }
+    }
+}
 
 struct FilmInformationBestFilmView_Previews: PreviewProvider {
     static var previews: some View {

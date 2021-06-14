@@ -217,27 +217,6 @@ extension FilmInteractorImpl {
                     Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
                     state.film.showActivityIndicator.wrappedValue = false
                 }
-                
-                
-                
-                
-                
-                
-//                Networking.share.getMovies(year: year, limit: 100) { films in
-//                    let filmsShuffled = films.data.shuffled()
-//                    state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
-//
-//                    for _ in state.film.films.wrappedValue {
-//                        tempFilm20.append(state.film.films.wrappedValue.first!)
-//                        state.film.films.wrappedValue.removeFirst()
-//                        if tempFilm20.count == 20 {
-//                            break
-//                        }
-//                    }
-//
-//                    Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
-//                    state.film.showActivityIndicator.wrappedValue = false
-//                }
             } else {
                 state.film.showActivityIndicator.wrappedValue = true
                 var tempFilm20: [VideoCDNResult.Data] = []
@@ -256,6 +235,19 @@ extension FilmInteractorImpl {
     }
 }
 
+extension FilmInteractorImpl {
+    private func getLinkFromStringURL(strURL: String?) {
+        guard let url = strURL?.dropFirst(2) else { return }
+        let httpsUrl = "https://\(String(describing: url))"
+        if let url = URL(string: httpsUrl) {
+            DispatchQueue.main.async {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
+        }
+    }
+}
 extension FilmInteractorImpl {
     private func encoderArrDatum(films: [VideoCDNResult.Data], forKey: String) {
         let encoder = JSONEncoder()

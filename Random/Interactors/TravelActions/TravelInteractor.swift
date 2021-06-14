@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 protocol TravelInteractor {
-    func getTravel(state: Binding<AppState.AppData>)
+    func getTravel(state: Binding<AppState.AppData>, completion: (() -> Void)?)
     func getCurrentTravel(state: Binding<AppState.AppData>)
     func cleanTravel(state: Binding<AppState.AppData>)
     func saveTravelToUserDefaults(state: Binding<AppState.AppData>)
@@ -18,9 +18,9 @@ protocol TravelInteractor {
 
 struct TravelInteractorImpl: TravelInteractor {
     
-    func getTravel(state: Binding<AppState.AppData>) {
+    func getTravel(state: Binding<AppState.AppData>, completion: (() -> Void)?) {
         DispatchQueue.main.async {
-            getTravelRussia(state: state)
+            getTravelRussia(state: state, completion)
         }
     }
     
@@ -55,19 +55,39 @@ struct TravelInteractorImpl: TravelInteractor {
 
 //MARK: - Get Travel Russia
 extension TravelInteractorImpl {
-    private func getTravelRussia(state: Binding<AppState.AppData>) {
+    private func getTravelRussia(state: Binding<AppState.AppData>, _ completion: (() -> Void)?) {
         
         if state.travel.travelRussiaData.wrappedValue.count == 0 || state.travel.travelRussiaData.wrappedValue.count == 1 {
             
             state.travel.showActivityIndicator.wrappedValue = true
             
-            Networking.share.getHotTravel(startDate: "14.06.2021", endDate: "20.06.2021") { tours in
+            let date = Date()
+            let dateFormatter = DateFormatter.onlyDate
+            let now = dateFormatter.string(from: date)
+            
+            var end = ""
+            
+            switch state.travel.selectedDeparture.wrappedValue {
+            case 0:
+                end = dateFormatter.string(from: date)
+            case 1:
+                guard let endDate = Calendar.current.date(byAdding: .day, value: 7, to: date) else { return }
+                end = dateFormatter.string(from: endDate)
+            default:
+                guard let endDate = Calendar.current.date(byAdding: .day, value: 30, to: date) else { return }
+                end = dateFormatter.string(from: endDate)
+            }
+            
+            Networking.share.getHotTravel(startDate: now, endDate: end) { tours in
                 
                 guard let tours = tours.hot_tours else { return }
                 let toursShuffled = tours.shuffled()
 
                 state.travel.travelRussiaData.wrappedValue = toursShuffled
                 state.travel.showActivityIndicator.wrappedValue = false
+                if let completion = completion {
+                    completion()
+                }
             }
         }
     }

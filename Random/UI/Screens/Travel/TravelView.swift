@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct TravelView: View {
     
@@ -17,11 +18,13 @@ struct TravelView: View {
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
     @State private var isPressedButtonMini = false
-    @State var place = [NSLocalizedString("Россия", comment: ""),
-                        NSLocalizedString("Турция", comment: ""),
-                        NSLocalizedString("Египет", comment: ""),
+    @State var place = [NSLocalizedString("Популярные", comment: ""),
                         NSLocalizedString("Острова", comment: ""),
                         NSLocalizedString("Везде", comment: "")
+    ]
+    @State var departure = [NSLocalizedString("Сегодня", comment: ""),
+                            NSLocalizedString("Неделя", comment: ""),
+                            NSLocalizedString("Месяц", comment: "")
     ]
     
     var body: some View {
@@ -31,7 +34,8 @@ struct TravelView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 0) {
-                    pickerView
+                    //                    pickerView
+                    pickerViewSelectedDeparture
                     content
                     Spacer()
                     generateButton
@@ -50,7 +54,9 @@ struct TravelView: View {
                     TravelSettingsView(appBinding: appBinding)
                    })
             .onAppear {
-                getTravel(state: appBinding)
+                getTravel(state: appBinding) {
+                    getCurrentTravel(state: appBinding)
+                }
             }
         }
     }
@@ -120,7 +126,7 @@ private extension TravelView {
                 .padding(.top, UIScreen.screenHeight < 700 ? 12 : 24)
             
             Button(action: {
-                
+                openLinkTravel(link: appBinding.travel.travelRussiaInfo.link.wrappedValue)
                 Feedback.shared.impactHeavy(.medium)
             }) {
                 ButtonView(textColor: .primaryPale(),
@@ -169,14 +175,79 @@ private extension TravelView {
         .padding(16)
     }
 }
+var isEnabledSelectedDepartureOne = false
+var isEnabledSelectedDepartureTwo = true
+var isEnabledSelectedDepartureThree = true
+
+private extension TravelView {
+    var pickerViewSelectedDeparture: some View {
+        VStack {
+            Picker(selection: appBinding.travel.selectedDeparture,
+                   label: Text("Picker")) {
+                ForEach(0..<departure.count, id: \.self) {
+                    Text("\(departure[$0])")
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+        }
+        .onReceive(Just(appBinding.travel.selectedDeparture.wrappedValue)) { value in
+            
+            switch value {
+            case 0:
+                if isEnabledSelectedDepartureOne {
+                    if appBinding.travel.travelRussiaData.wrappedValue.isEmpty {
+                        appBinding.travel.travelRussiaData.wrappedValue = []
+                        getTravel(state: appBinding) {
+                            getCurrentTravel(state: appBinding)
+                        }
+                        print(value)
+                    }
+                    isEnabledSelectedDepartureOne = false
+                    isEnabledSelectedDepartureTwo = true
+                    isEnabledSelectedDepartureThree = true
+                }
+            case 1:
+                if isEnabledSelectedDepartureTwo {
+                    if appBinding.travel.travelRussiaData.wrappedValue.isEmpty {
+                        appBinding.travel.travelRussiaData.wrappedValue = []
+                        getTravel(state: appBinding) {
+                            getCurrentTravel(state: appBinding)
+                        }
+                        print(value)
+                    }
+                    isEnabledSelectedDepartureOne = true
+                    isEnabledSelectedDepartureTwo = false
+                    isEnabledSelectedDepartureThree = true
+                }
+            default:
+                if isEnabledSelectedDepartureThree {
+                    if appBinding.travel.travelRussiaData.wrappedValue.isEmpty {
+                        appBinding.travel.travelRussiaData.wrappedValue = []
+                        getTravel(state: appBinding) {
+                            getCurrentTravel(state: appBinding)
+                        }
+                        print(value)
+                    }
+                    isEnabledSelectedDepartureOne = true
+                    isEnabledSelectedDepartureTwo = true
+                    isEnabledSelectedDepartureThree = false
+                }
+            }
+        }
+    }
+}
 
 private extension TravelView {
     var navigationButtonGear: some View {
-        Button(action: {
-            appBinding.travel.showSettings.wrappedValue.toggle()
-        }) {
-            Image(systemName: "gear")
-                .font(.system(size: 24))
+        VStack {
+            if !appBinding.travel.travelRussiaHistory.wrappedValue.isEmpty {
+                Button(action: {
+                    appBinding.travel.showSettings.wrappedValue.toggle()
+                }) {
+                    Image(systemName: "gear")
+                        .font(.system(size: 24))
+                }
+            }
         }
     }
 }
@@ -199,9 +270,23 @@ private extension TravelView {
             .getCurrentTravel(state: state)
     }
     
-    private func getTravel(state: Binding<AppState.AppData>) {
+    private func getTravel(state: Binding<AppState.AppData>, _ completion: (() -> Void)? = nil) {
         injected.interactors.travelInteractor
-            .getTravel(state: state)
+            .getTravel(state: state, completion: completion)
+    }
+}
+
+private extension TravelView {
+    private func openLinkTravel(link: String?) {
+        guard let link = link else { return }
+        let httpsUrl = "https://tp.media/r?marker=314946&trs=53541&p=660&u=https%3A%2F%2Flevel.travel%2F\(link)"
+        if let url = URL(string: httpsUrl) {
+            DispatchQueue.main.async {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
+        }
     }
 }
 

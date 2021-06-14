@@ -10,11 +10,13 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct TravelInformationView: View {
-    private var appBinding: Binding<AppState.AppData>
     
-    init(appBinding: Binding<AppState.AppData>) {
-        self.appBinding = appBinding
+    private var tourInfo: HotTravelResult.Data
+    
+    init(tourInfo: HotTravelResult.Data) {
+        self.tourInfo = tourInfo
     }
+    
     @Environment(\.injected) private var injected: DIContainer
     
     var body: some View {
@@ -31,46 +33,52 @@ private extension TravelInformationView {
             
             Group {
                 TravelInformationViewCell(leftText: NSLocalizedString("Страна", comment: ""),
-                                          rightText: "Россия")
-
+                                          rightText: "\(tourInfo.country ?? "-")")
+                
                 TravelInformationViewCell(leftText: NSLocalizedString("Город", comment: ""),
-                                          rightText: "Москва")
+                                          rightText: "\(tourInfo.region ?? "-")")
                 
                 TravelInformationViewCell(leftText: NSLocalizedString("Дата вылета", comment: ""),
-                                          rightText: "26 мая")
+                                          rightText:  "\(tourInfo.date?.formatterDate() ?? "-")")
                 
                 TravelInformationViewCell(leftText: NSLocalizedString("Количество дней", comment: ""),
-                                          rightText: "7")
+                                          rightText: "\(tourInfo.nights ?? 0)")
                 
                 TravelInformationViewCell(leftText: NSLocalizedString("Стоимость в рублях", comment: ""),
-                                          rightText: "200 000 Р")
+                                          rightText: "\(priceFormatted(tourInfo.price ?? 0))")
                 
                 TravelInformationViewCell(leftText: NSLocalizedString("Количество людей", comment: ""),
-                                          rightText: "2")
+                                          rightText: "\(tourInfo.adults ?? 0)")
                 
                 TravelInformationViewCell(leftText: NSLocalizedString("Размер скидки в %", comment: ""),
-                                          rightText: "20")
-
-                TravelInformationViewCell(leftText: NSLocalizedString("Трансфер включен", comment: ""),
-                                          rightText: "да")
-           
+                                          rightText: "\(Int(tourInfo.discount ?? 0))")
                 
-                TravelInformationViewCell(leftText: NSLocalizedString("Мед. страховка включена", comment: ""),
-                                          rightText: "да")
+                TravelInformationViewCell(leftText: NSLocalizedString("Трансфер", comment: ""),
+                                          rightText: "\(getTrueOrFalse(tourInfo.transfer))")
+                
+                
+                TravelInformationViewCell(leftText: NSLocalizedString("Мед. страховка", comment: ""),
+                                          rightText: "\(getTrueOrFalse(tourInfo.medical_insurance))")
             }
             
             Group {
                 TravelInformationViewCell(leftText: NSLocalizedString("Питание", comment: ""),
-                                          rightText: "Без питания")
+                                          rightText: "\(tourInfo.pansion_description ?? "-")")
                 
                 TravelInformationViewCell(leftText: NSLocalizedString("Название отеля", comment: ""),
-                                          rightText: "Elysium Gallery Hotel")
+                                          rightText: "\(tourInfo.hotel?.name ?? "-")")
                 
                 TravelInformationViewCell(leftText: NSLocalizedString("Количество звезд", comment: ""),
-                                          rightText: "5")
+                                          rightText: "\(tourInfo.hotel?.stars ?? 0)")
             }
             
-            WebImage(url: URL(string: ""))
+            HStack {
+                Spacer()
+                buyButton
+                Spacer()
+            }
+            
+            WebImage(url: URL(string: "\(tourInfo.hotel?.picture ?? "")"))
                 .resizable()
                 .renderingMode(.original)
                 .onSuccess { image, data, cacheType in }
@@ -84,13 +92,60 @@ private extension TravelInformationView {
                 .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color(.systemGray4)))
                 .padding(.vertical, 24)
+            
+        }
+    }
+}
 
+private extension TravelInformationView {
+    var buyButton: some View {
+        Button(action: {
+            print("TAPPP")
+            openLinkTravel(link: tourInfo.link)
+            Feedback.shared.impactHeavy(.medium)
+        }) {
+            ButtonView(textColor: .black,
+                       borderColor: .white,
+                       text: NSLocalizedString("Купить", comment: ""),
+                       height: 30,
+                       gradientForeground: [.white])
+                .frame(width: 80)
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 8)
+    }
+}
+
+private extension TravelInformationView {
+    private func priceFormatted(_ value: Double) -> String {
+        return String.formatted(with: .currency, value: NSNumber(value: value))
+    }
+    
+    private func getTrueOrFalse(_ value: Bool?) -> String {
+        guard let value = value else { return "-" }
+        return value ? NSLocalizedString("есть", comment: "") : NSLocalizedString("нет", comment: "")
+    }
+    
+}
+
+private extension TravelInformationView {
+    private func openLinkTravel(link: String?) {
+        print("link \(String(describing: link))")
+        guard let link = link else { return }
+        print("guard link \(link)")
+        let httpsUrl = "https://tp.media/r?marker=314946&trs=53541&p=660&u=https%3A%2F%2Flevel.travel%2F\(link)"
+        if let url = URL(string: httpsUrl) {
+            DispatchQueue.main.async {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
         }
     }
 }
 
 struct TravelInformationView_Previews: PreviewProvider {
     static var previews: some View {
-        TravelInformationView(appBinding: .constant(.init()))
+        TravelInformationView(tourInfo: HotTravelResult.Data())
     }
 }

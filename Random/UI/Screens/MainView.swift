@@ -25,9 +25,29 @@ struct MainView: View {
                     userDefaultsGet(state: appBinding)
                     checkNewMenu()
                 }
+                
                 .navigationBarTitle(Text("Random"))
+                .navigationBarItems(trailing: HStack(spacing: 24) {
+                    Button(action: {
+                        appBinding.premium.presentingModal.wrappedValue = true
+                    }) {
+                        Image(systemName: "crown.fill")
+                            .renderingMode(.template)
+                            .font(.system(size: 24))
+                            .gradientForeground(colors: setColorForCrown())
+                    }
+                })
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        
+    }
+}
+
+// MARK: Cell menu
+private extension MainView {
+    private func setColorForCrown() -> [Color] {
+        return appBinding.premium.premiumIsEnabled
+            .wrappedValue ? [Color(#colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)), Color(#colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))] : [Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))]
     }
 }
 
@@ -54,12 +74,22 @@ private extension MainView {
 // MARK: Film
 private extension MainView {
     var film: some View {
-        NavigationLink(
-            destination: FilmView(appBinding: appBinding)) {
-            CellMainView(image: "film",
-                         title: NSLocalizedString("Фильмы", comment: ""),
-                         isLabelDisabled: false,
-                         textLabel: NSLocalizedString("ХИТ", comment: ""))
+        VStack {
+            if appBinding.premium.premiumIsEnabled.wrappedValue {
+                NavigationLink(
+                    destination: FilmView(appBinding: appBinding)) {
+                    CellMainView(image: "film",
+                                 title: NSLocalizedString("Фильмы", comment: ""),
+                                 isLabelDisabled: false,
+                                 textLabel: NSLocalizedString("ХИТ", comment: ""))
+                }
+            } else {
+                CellMainLockView(image: "film",
+                                 title: NSLocalizedString("Фильмы", comment: ""))
+                    .onTapGesture {
+                        alertLockCell(NSLocalizedString("Фильмы", comment: ""))
+                    }
+            }
         }
     }
 }
@@ -67,14 +97,25 @@ private extension MainView {
 // MARK: Team
 private extension MainView {
     var team: some View {
-        NavigationLink(
-            destination: TeamView(appBinding: appBinding)) {
-            CellMainView(image: "person.3",
-                         title: NSLocalizedString("Команды",
-                                                  comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
+        VStack {
+            if appBinding.premium.premiumIsEnabled.wrappedValue {
+                NavigationLink(
+                    destination: TeamView(appBinding: appBinding)) {
+                    CellMainView(image: "person.3",
+                                 title: NSLocalizedString("Команды",
+                                                          comment: ""),
+                                 isLabelDisabled: true,
+                                 textLabel: "")
+                }
+            } else {
+                CellMainLockView(image: "person.3",
+                                 title: NSLocalizedString("Команды", comment: ""))
+                    .onTapGesture {
+                        alertLockCell(NSLocalizedString("Команды", comment: ""))
+                    }
+            }
         }
+        
     }
 }
 
@@ -187,14 +228,25 @@ private extension MainView {
 // MARK: Travel
 private extension MainView {
     var travel: some View {
-        NavigationLink(
-            destination: TravelView(appBinding: appBinding)) {
-            CellMainView(image: "airplane",
-                         title: NSLocalizedString("Путешествие",
-                                                  comment: ""),
-                         isLabelDisabled: false,
-                         textLabel: NSLocalizedString("ХИТ", comment: ""))
+        VStack {
+            if appBinding.premium.premiumIsEnabled.wrappedValue {
+                NavigationLink(
+                    destination: TravelView(appBinding: appBinding)) {
+                    CellMainView(image: "airplane",
+                                 title: NSLocalizedString("Путешествие",
+                                                          comment: ""),
+                                 isLabelDisabled: false,
+                                 textLabel: NSLocalizedString("ХИТ", comment: ""))
+                }
+            } else {
+                CellMainLockView(image: "airplane",
+                                 title: NSLocalizedString("Путешествие", comment: ""))
+                    .onTapGesture {
+                        alertLockCell(NSLocalizedString("Путешествие", comment: ""))
+                    }
+            }
         }
+        
     }
 }
 
@@ -274,6 +326,21 @@ private extension MainView {
             } .frame(maxWidth: .infinity)
             .padding(.bottom, 16)
         }
+    }
+}
+
+private extension MainView {
+    func alertLockCell(_ name: String) {
+        UIApplication.shared.windows.first?.rootViewController?
+            .showAlert(
+                with: NSLocalizedString("Заблокировано", comment: ""),
+                and: "\"\(name)\" \(NSLocalizedString("является частью преимуществ Random Premium", comment: ""))",
+                titleOk: NSLocalizedString("Подробнее", comment: ""),
+                titleCancel: NSLocalizedString("Отмена", comment: ""),
+                completionOk: {
+                    appBinding.premium.presentingModal.wrappedValue = true
+                }
+            )
     }
 }
 

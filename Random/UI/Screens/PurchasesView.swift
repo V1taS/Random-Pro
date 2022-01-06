@@ -14,7 +14,7 @@ struct PurchasesView: View {
     @ObservedObject var storeManager: StoreManager
     
     var body: some View {
-        LoadingView(isShowing: $storeManager.showActivityIndicator){
+        LoadingView(isShowing: $storeManager.showActivityIndicator) {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     teaView

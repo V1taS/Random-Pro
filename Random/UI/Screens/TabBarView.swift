@@ -19,7 +19,6 @@ struct TabBarView: View {
     
     var body: some View {
         ZStack {
-            
             TabView {
                 MainView(appBinding: appBinding)
                     .tabItem {
@@ -39,6 +38,9 @@ struct TabBarView: View {
         }
         .onAppear {
             ReviewUtility.sharedInstance.recordLaunch()
+        }
+        .sheet(isPresented: appBinding.premium.presentingModal, onDismiss: nil) {
+            PremiumSubscriptionView(storeManager: storeManager, appBinding: appBinding)
         }
     }
 }

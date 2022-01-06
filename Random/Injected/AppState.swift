@@ -33,6 +33,7 @@ extension AppState {
         var film = Film()
         var music = Music()
         var travel = Travel()
+        var premium = Premium()
     }
 }
 

@@ -10,8 +10,8 @@ import Combine
 import SwiftUI
 
 protocol FilmInteractor {
-    func getMovies(state: Binding<AppState.AppData>)
-    func getCurrentFilmInfo(state: Binding<AppState.AppData>)
+    func getMovies(state: Binding<AppState.AppData>, complition: (() -> Void)?)
+    func removeCurrentFilm(state: Binding<AppState.AppData>)
     func cleanFilms(state: Binding<AppState.AppData>)
     func saveFilmsToUserDefaults(state: Binding<AppState.AppData>)
     func getLinkOnPageKinopoiskVideo(state: Binding<AppState.AppData>)
@@ -21,82 +21,61 @@ protocol FilmInteractor {
 struct FilmInteractorImpl: FilmInteractor {
     
     func validVideoplayerIcon(state: Binding<AppState.AppData>) {
-        switch state.film.selectedGenres.wrappedValue {
-        case 0:
-            state.film.showVideoPlayerIconBest.wrappedValue = false
-            let idKinopoisk = String(state.film.filmsBestInfo.filmId.wrappedValue ?? 0)
-            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
-                guard (film.data.first?.iframeSrc) != nil else { return  }
-                state.film.showVideoPlayerIconBest.wrappedValue = true
-            }
-        case 1:
-            state.film.showVideoPlayerIconPopular.wrappedValue = false
-            let idKinopoisk = String(state.film.filmsPopularInfo.filmId.wrappedValue ?? 0)
-            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
-                guard (film.data.first?.iframeSrc) != nil else { return }
-                state.film.showVideoPlayerIconPopular.wrappedValue = true
-            }
-        case 2:
-            state.film.showVideoPlayerIconAll.wrappedValue = false
-            guard let filmKinopoisk = state.film.filmInfo.data.wrappedValue?.filmId else { return }
-            let idKinopoisk = String(filmKinopoisk)
-            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
-                guard (film.data.first?.iframeSrc) != nil else { return }
-                state.film.showVideoPlayerIconAll.wrappedValue = true
-            }
-        default:
-            print("Валидация не прошла")
-        }
+        state.film.showVideoPlayerIconBest.wrappedValue = true
+        state.film.showVideoPlayerIconPopular.wrappedValue = true
     }
     
     func getLinkOnPageKinopoiskVideo(state: Binding<AppState.AppData>) {
         switch state.film.selectedGenres.wrappedValue {
         case 0:
-            let idKinopoisk = String(state.film.filmsBestInfo.filmId.wrappedValue ?? 0)
-            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
-                guard let iframeSrc = film.data.first?.iframeSrc else { return }
-                getLinkFromStringURL(strURL: iframeSrc)
-            }
+            let name = configureText(ru: state.film.filmsBest.first?.nameRu, en: state.film.filmsBest.first?.nameEn)
+            let year = state.film.filmsBest.first?.year.wrappedValue
+            getLinkFromStringURL(nameFilm: name, years: year)
         case 1:
-            let idKinopoisk = String(state.film.filmsPopularInfo.filmId.wrappedValue ?? 0)
-            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
-                guard let iframeSrc = film.data.first?.iframeSrc else { return }
-                getLinkFromStringURL(strURL: iframeSrc)
-            }
+            let name = configureText(ru: state.film.filmsPopular.first?.nameRu, en: state.film.filmsPopular.first?.nameEn)
+            let year = state.film.filmsPopular.first?.year.wrappedValue
+            getLinkFromStringURL(nameFilm: name, years: year)
         case 2:
-            guard let filmKinopoisk = state.film.filmInfo.data.wrappedValue?.filmId else { return }
-            let idKinopoisk = String(filmKinopoisk)
-            Networking.share.searchMoviesFor(idKinopoisk: idKinopoisk) { film in
-                guard let iframeSrc = film.data.first?.iframeSrc else { return }
-                getLinkFromStringURL(strURL: iframeSrc)
-            }
+            let name = state.film.nameFilmAll.wrappedValue
+            getLinkFromStringURL(nameFilm: name, years: nil)
         default:
             print("ID Фильма не найденно")
         }
     }
-    
-    func getMovies(state: Binding<AppState.AppData>) {
+
+    func getMovies(state: Binding<AppState.AppData>, complition: (() -> Void)?) {
         DispatchQueue.global(qos: .background).async {
-            getMoviesBestFilms(state: state)
-            getMoviesPopularFilms(state: state)
-            getMoviesAllFilms(state: state)
+            let downloadGroup = DispatchGroup()
+            downloadGroup.enter()
+            downloadGroup.enter()
+            
+            getMoviesBestFilms(state: state) {
+                downloadGroup.leave()
+            }
+            getMoviesPopularFilms(state: state) {
+                downloadGroup.leave()
+            }
+            
+            downloadGroup.notify(queue: DispatchQueue.main) {
+                complition?()
+            }
+            
+//            getMoviesAllFilms(state: state)
         }
     }
     
-    func getCurrentFilmInfo(state: Binding<AppState.AppData>) {
+    func removeCurrentFilm(state: Binding<AppState.AppData>) {
         
         switch state.film.selectedGenres.wrappedValue {
         case 0:
             if !state.film.filmsBest.wrappedValue.isEmpty {
                 let film = state.film.filmsBest.wrappedValue.first
-                state.film.filmsBestInfo.wrappedValue = film!
                 state.film.filmsBestHistory.wrappedValue.append(film!)
                 state.film.filmsBest.wrappedValue.removeFirst()
             }
         case 1:
             if !state.film.filmsPopular.wrappedValue.isEmpty {
                 let film = state.film.filmsPopular.wrappedValue.first
-                state.film.filmsPopularInfo.wrappedValue = film!
                 state.film.filmsPopularHistory.wrappedValue.append(film!)
                 state.film.filmsPopular.wrappedValue.removeFirst()
             }
@@ -144,7 +123,7 @@ struct FilmInteractorImpl: FilmInteractor {
 
 //MARK: - Best Films
 extension FilmInteractorImpl {
-    private func getMoviesBestFilms(state: Binding<AppState.AppData>) {
+    private func getMoviesBestFilms(state: Binding<AppState.AppData>, complition: (() -> Void)?) {
         if state.film.filmsBest.wrappedValue.count == 0 || state.film.filmsBest.wrappedValue.count == 1 {
             state.film.showActivityIndicator.wrappedValue = true
             if state.film.pageNumberBest.wrappedValue.count == 0 {
@@ -155,12 +134,15 @@ extension FilmInteractorImpl {
                 state.film.pageNumberBest.wrappedValue = pageNumber.shuffled()
             }
             
-            guard let firstPage = state.film.pageNumberBest.wrappedValue.first else { return }
+            guard let firstPage = state.film.pageNumberBest.wrappedValue.first else {
+                return
+            }
             
             Networking.share.getKinopoiskBestFilms(page: firstPage) { films in
                 let films = films.films?.shuffled()
                 state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
                 state.film.showActivityIndicator.wrappedValue = false
+                complition?()
             }
             state.film.pageNumberBest.wrappedValue.removeFirst()
         }
@@ -169,7 +151,7 @@ extension FilmInteractorImpl {
 
 //MARK: - Popular Films
 extension FilmInteractorImpl {
-    private func getMoviesPopularFilms(state: Binding<AppState.AppData>) {
+    private func getMoviesPopularFilms(state: Binding<AppState.AppData>, complition: (() -> Void)?) {
         if state.film.filmsPopular.wrappedValue.count == 0 || state.film.filmsPopular.wrappedValue.count == 1 {
             state.film.showActivityIndicator.wrappedValue = true
             
@@ -180,11 +162,14 @@ extension FilmInteractorImpl {
                 }
                 state.film.pageNumberPopular.wrappedValue = pageNumber.shuffled()
             }
-            guard let firstPage = state.film.pageNumberPopular.wrappedValue.first else { return }
+            guard let firstPage = state.film.pageNumberPopular.wrappedValue.first else {
+                return
+            }
             Networking.share.getKinopoiskPopularFilms(page: firstPage) { films in
                 let films = films.films?.shuffled()
                 state.film.filmsPopular.wrappedValue.append(contentsOf: films ?? [])
                 state.film.showActivityIndicator.wrappedValue = false
+                complition?()
             }
             state.film.pageNumberPopular.wrappedValue.removeFirst()
         }
@@ -196,13 +181,13 @@ extension FilmInteractorImpl {
     private func getMoviesAllFilms(state: Binding<AppState.AppData>) {
         if state.film.filmsTemp.wrappedValue.count == 0 || state.film.filmsTemp.wrappedValue.count == 1 {
             if state.film.films.wrappedValue.isEmpty {
-                let year = Int.random(in: 2000...2021)
+                let year = Int.random(in: 2021...2021)
                 var tempFilm20: [VideoCDNResult.Data] = []
                 
                 state.film.showActivityIndicator.wrappedValue = true
                 
                 
-                Networking.share.getVideoCDN(year: year, limit: 100) { films in
+                Networking.share.getVideoCDN(year: year, limit: 20) { films in
                     let filmsShuffled = films.data.shuffled()
                     state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
                     
@@ -236,16 +221,32 @@ extension FilmInteractorImpl {
 }
 
 extension FilmInteractorImpl {
-    private func getLinkFromStringURL(strURL: String?) {
-        guard let url = strURL?.dropFirst(2) else { return }
-        let httpsUrl = "https://\(String(describing: url))"
-        if let url = URL(string: httpsUrl) {
-            DispatchQueue.main.async {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:])
-                }
-            }
+    private func getLinkFromStringURL(nameFilm: String?, years: String?) {
+        guard let nameFilm = nameFilm else { return }
+        let nameFilmLink = nameFilm.replacingOccurrences(of: " ", with: "+")
+        let yearFilmLink = years?.replacingOccurrences(of: " ", with: "+") ?? ""
+        
+        let watch = NSLocalizedString("Смотреть", comment: "")
+        let online = NSLocalizedString("онлайн", comment: "")
+        
+        var configuresUrl = ""
+        if watch == "Смотреть" {
+            configuresUrl = "https://yandex.ru/search/?lr=10758&text=+\(watch)+\(online)+\(nameFilmLink)+\(yearFilmLink)"
+            
+        } else {
+            configuresUrl = "https://www.google.ru/search?q=+\(watch)+\(online)+\(nameFilmLink)+\(yearFilmLink)"
         }
+        
+        guard let urlString = configuresUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard let httpsUrl = URL(string: urlString) else { return }
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.open(httpsUrl, options: [:])
+        }
+    }
+    
+    private func configureText(ru textRu: Binding<String?>?, en textEn: Binding<String?>?) -> String {
+        return NSLocalizedString("домен", comment: "") == "ru" ? "\(textRu?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(textEn?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
     }
 }
 extension FilmInteractorImpl {

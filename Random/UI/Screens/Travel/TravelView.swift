@@ -176,9 +176,9 @@ private extension TravelView {
     }
 }
 
-var isEnabledSelectedDepartureOne = false
-var isEnabledSelectedDepartureTwo = true
-var isEnabledSelectedDepartureThree = true
+private var isEnabledSelectedDepartureOne = false
+private var isEnabledSelectedDepartureTwo = true
+private var isEnabledSelectedDepartureThree = true
 
 private extension TravelView {
     var pickerViewSelectedDeparture: some View {
@@ -201,7 +201,6 @@ private extension TravelView {
                         getTravel(state: appBinding) {
                             getCurrentTravel(state: appBinding)
                         }
-                        print(value)
                     }
                     isEnabledSelectedDepartureOne = false
                     isEnabledSelectedDepartureTwo = true
@@ -214,7 +213,6 @@ private extension TravelView {
                         getTravel(state: appBinding) {
                             getCurrentTravel(state: appBinding)
                         }
-                        print(value)
                     }
                     isEnabledSelectedDepartureOne = true
                     isEnabledSelectedDepartureTwo = false
@@ -227,7 +225,6 @@ private extension TravelView {
                         getTravel(state: appBinding) {
                             getCurrentTravel(state: appBinding)
                         }
-                        print(value)
                     }
                     isEnabledSelectedDepartureOne = true
                     isEnabledSelectedDepartureTwo = true

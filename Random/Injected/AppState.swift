@@ -59,5 +59,6 @@ func == (lhs: AppState, rhs: AppState) -> Bool {
     return lhs.appData == rhs.appData &&
         lhs.system == rhs.system &&
         lhs.appData.main == rhs.appData.main &&
-        lhs.appData.team == rhs.appData.team
+        lhs.appData.team == rhs.appData.team &&
+        lhs.appData.team.listTeam == rhs.appData.team.listTeam
 }

@@ -17,8 +17,7 @@ struct FilmView: View {
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
     @State var genres = [NSLocalizedString("250 Лучших", comment: ""),
-                         NSLocalizedString("100 Популярных", comment: ""),
-                         NSLocalizedString("Все", comment: "")
+                         NSLocalizedString("100 Популярных", comment: "")
     ]
     
     var body: some View {
@@ -40,26 +39,28 @@ struct FilmView: View {
             }
             .dismissingKeyboard()
             
-            
             .navigationBarTitle(Text(NSLocalizedString("Фильмы", comment: "")), displayMode: .inline)
-            .navigationBarItems(trailing: HStack(spacing: 16) {
+            .navigationBarItems(trailing: HStack(spacing: .zero) {
                 Spacer()
                 navigationButtonPlay
                 navigationButtonGear
             }
-            .frame(width: 110)
+                                    .frame(width: 110)
             )
             
             .sheet(isPresented: appBinding.film.showSettings,
                    onDismiss: {
-                    cleanContentOnDismissSetting()
-                   }
+                cleanContentOnDismissSetting()
+            }
                    , content: {
-                    FilmSettingsView(appBinding: appBinding)
-                   })
+                FilmSettingsView(appBinding: appBinding)
+            })
         }
         .onAppear {
-            getMovies(state: appBinding)
+            getMovies(state: appBinding) {
+                saveFilmsToUserDefaults(state: appBinding)
+            }
+            validVideoplayerIcon(state: appBinding)
         }
     }
 }
@@ -73,7 +74,7 @@ private extension FilmView {
                     Text("\(genres[$0])")
                 }
             }
-            .pickerStyle(SegmentedPickerStyle())
+                   .pickerStyle(SegmentedPickerStyle())
         }
     }
 }
@@ -92,17 +93,7 @@ private extension FilmView {
 private extension FilmView {
     var navigationButtonPlay: some View {
         Button(action: {
-            
-            if !UserDefaults.standard.bool(forKey: "FilmNavigationButtonPlay") {
-                UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("В некоторых странах сайт с контентом заблокирован", comment: ""), style: .alert) { 
-                    getLinkOnPageKinopoiskVideo(state: appBinding)
-                }
-                
-                
-                UserDefaults.standard.set(true, forKey: "FilmNavigationButtonPlay")
-            } else {
-                getLinkOnPageKinopoiskVideo(state: appBinding)
-            }
+            getLinkOnPageKinopoiskVideo(state: appBinding)
         }) {
             showVideoPlayerIcon
         }
@@ -165,10 +156,9 @@ private extension FilmView {
         Button(action: {
             validVideoplayerIcon(state: appBinding)
             getMovies(state: appBinding)
-            getCurrentFilmInfo(state: appBinding)
-            saveFilmsToUserDefaults(state: appBinding)
+            removeCurrentFilm(state: appBinding)
             
-            settingsScreen()
+            saveFilmsToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -209,12 +199,34 @@ private extension FilmView {
 private extension FilmView {
     var bestFilms: some View {
         VStack(spacing: 0) {
-            FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShowBest.wrappedValue,
-                         ratingCount: appBinding.film.ratingFilmBest.wrappedValue,
-                         imageStr: appBinding.film.imageFilmBest.wrappedValue)
+            FilmCellView(ratingIsSwitch: ratingIsShow(appBinding.film.filmsBest.first?.rating),
+                         ratingCount: ratingCount(appBinding.film.filmsBest.first?.rating),
+                         imageStr: appBinding.film.filmsBest.first?.posterUrlPreview ?? .constant(""))
                 .padding(.top, 24)
             
-            Text(appBinding.film.nameFilmBest.wrappedValue)
+            Text(configureText(ru: appBinding.film.filmsBest.first?.nameRu, en: appBinding.film.filmsBest.first?.nameEn))
+                .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
+                .lineLimit(2)
+                .foregroundColor(.black)
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+        }
+    }
+}
+
+private extension FilmView {
+    var popularFilms: some View {
+        VStack(spacing: 0) {
+            FilmCellView(ratingIsSwitch: ratingIsShow(appBinding.film.filmsPopular.first?.rating),
+                         ratingCount: ratingCount(appBinding.film.filmsPopular.first?.rating),
+                         imageStr: appBinding.film.filmsPopular.first?.posterUrlPreview ?? .constant(""))
+                .padding(.top, 24)
+            
+            Text(configureText(ru: appBinding.film.filmsPopular.first?.nameRu, en: appBinding.film.filmsPopular.first?.nameEn))
                 .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
@@ -233,7 +245,7 @@ private extension FilmView {
         VStack(spacing: 0) {
             FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShowAll.wrappedValue,
                          ratingCount: appBinding.film.ratingFilmAll.wrappedValue,
-                         imageStr: appBinding.film.imageFilmAll.wrappedValue)
+                         imageStr: appBinding.film.filmsPopular.first?.posterUrlPreview ?? .constant(""))
                 .padding(.top, 24)
             
             Text(appBinding.film.nameFilmAll.wrappedValue)
@@ -246,80 +258,6 @@ private extension FilmView {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.top, 8)
-        }
-    }
-}
-
-private extension FilmView {
-    var popularFilms: some View {
-        VStack(spacing: 0) {
-            FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShowPopular.wrappedValue,
-                         ratingCount: appBinding.film.ratingFilmPopular.wrappedValue,
-                         imageStr: appBinding.film.imageFilmPopular.wrappedValue)
-                .padding(.top, 24)
-            
-            Text(appBinding.film.nameFilmPopular.wrappedValue)
-                .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
-                .lineLimit(2)
-                .foregroundColor(.black)
-                .opacity(isPressedButton ? 0.8 : 1)
-                .scaleEffect(isPressedButton ? 0.8 : 1)
-                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-        }
-    }
-}
-
-// MARK: Actions
-private extension FilmView {
-    private func settingsScreen() {
-        switch appBinding.film.selectedGenres.wrappedValue {
-        case 0:
-            appBinding.film.nameFilmBest.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
-            appBinding.film.imageFilmBest.wrappedValue = appBinding.film.filmsBestInfo.posterUrlPreview.wrappedValue ?? ""
-            
-            if let rating = appBinding.film.filmsBestInfo.rating.wrappedValue {
-                appBinding.film.ratingIsShowBest.wrappedValue = true
-                let ratingDouble = Double(rating)
-                if let ratingDouble = ratingDouble {
-                    appBinding.film.ratingFilmBest.wrappedValue = ratingDouble
-                } else {
-                    appBinding.film.ratingIsShowBest.wrappedValue = false
-                }
-            } else {
-                appBinding.film.ratingIsShowBest.wrappedValue = false
-            }
-            
-        case 1:
-            appBinding.film.nameFilmPopular.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopularInfo.nameRu.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(appBinding.film.filmsPopularInfo.nameEn.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
-            appBinding.film.imageFilmPopular.wrappedValue = appBinding.film.filmsPopularInfo.posterUrlPreview.wrappedValue ?? ""
-            
-            if let rating = appBinding.film.filmsPopularInfo.rating.wrappedValue {
-                appBinding.film.ratingIsShowPopular.wrappedValue = true
-                let ratingDouble = Double(rating)
-                
-                if let ratingDouble = ratingDouble {
-                    appBinding.film.ratingFilmPopular.wrappedValue = ratingDouble
-                } else {
-                    appBinding.film.ratingIsShowPopular.wrappedValue = false
-                }
-                
-            } else {
-                appBinding.film.ratingIsShowPopular.wrappedValue = false
-            }
-        case 2:
-            appBinding.film.nameFilmAll.wrappedValue = NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmInfo.data.wrappedValue?.nameRu ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(appBinding.film.filmInfo.data.wrappedValue?.nameEn ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
-            appBinding.film.imageFilmAll.wrappedValue = appBinding.film.filmInfo.data.wrappedValue?.posterUrlPreview ?? ""
-            
-            if let rating = appBinding.film.filmInfo.rating.wrappedValue?.ratingImdb {
-                appBinding.film.ratingIsShowAll.wrappedValue = true
-                appBinding.film.ratingFilmAll.wrappedValue = rating
-            } else {
-                appBinding.film.ratingIsShowAll.wrappedValue = false
-            }
-        default: break
         }
     }
 }
@@ -348,16 +286,49 @@ private extension FilmView {
     }
 }
 
-
 private extension FilmView {
-    private func getCurrentFilmInfo(state: Binding<AppState.AppData>) {
-        injected.interactors.filmInteractor
-            .getCurrentFilmInfo(state: state)
+    func ratingIsShow(_ rating: Binding<String?>?) -> Bool {
+        guard let rating = rating else { return false }
+        if let rating = rating.wrappedValue {
+            let ratingDouble = Double(rating)
+            if ratingDouble != nil {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
     }
     
-    private func getMovies(state: Binding<AppState.AppData>) {
+    func ratingCount(_ rating: Binding<String?>?) -> Double {
+        guard let rating = rating else { return .zero }
+        if let rating = rating.wrappedValue {
+            let ratingDouble = Double(rating)
+            if let ratingDouble = ratingDouble {
+                return ratingDouble
+            } else {
+                return .zero
+            }
+        } else {
+            return .zero
+        }
+    }
+    
+    func configureText(ru textRu: Binding<String?>?, en textEn: Binding<String?>?) -> String {
+        return NSLocalizedString("домен", comment: "") == "ru" ? "\(textRu?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(textEn?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
+    }
+}
+
+private extension FilmView {
+    private func removeCurrentFilm(state: Binding<AppState.AppData>) {
         injected.interactors.filmInteractor
-            .getMovies(state: state)
+            .removeCurrentFilm(state: state)
+    }
+    
+    private func getMovies(state: Binding<AppState.AppData>, complition: (() -> Void)? = nil) {
+        injected.interactors.filmInteractor
+            .getMovies(state: state, complition: complition)
     }
 }
 

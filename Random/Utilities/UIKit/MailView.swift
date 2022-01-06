@@ -6,7 +6,7 @@
 //  Copyright © 2021 Sosin.bet. All rights reserved.
 //
 
-import SwiftUI
+import UIKit
 import MessageUI
 
 class EmailHelper: NSObject, MFMailComposeViewControllerDelegate {

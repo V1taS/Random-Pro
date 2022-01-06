@@ -42,7 +42,7 @@ struct TeamInteractorImpl: TeamInteractor {
     func createPlayer(state: Binding<AppState.AppData>) {
         let image = state.team.playerImageTemp.wrappedValue
         let name = state.team.playerNameTF.wrappedValue
-        let player = Player(name: name, photo: image)
+        let player = Player(id: UUID().uuidString, name: name, photo: image)
         state.team.listPlayersData.wrappedValue.append(player)
         state.team.listTempPlayers.wrappedValue.append(player)
     }
@@ -150,12 +150,140 @@ extension TeamInteractorImpl {
 
 extension TeamInteractorImpl {
     private func switchCurrentTeam(state: Binding<AppState.AppData>) {
+        let listResult1 = state.team.listResult1.wrappedValue.count
+        let listResult2 = state.team.listResult2.wrappedValue.count
+        let listResult3 = state.team.listResult3.wrappedValue.count
+        let listResult4 = state.team.listResult4.wrappedValue.count
+        let listResult5 = state.team.listResult5.wrappedValue.count
+        let listResult6 = state.team.listResult6.wrappedValue.count
         
-        for _ in 1..<state.team.selectedTeam.wrappedValue + 1 {
-            if state.team.currentNumber.wrappedValue <= state.team.selectedTeam.wrappedValue {
-                state.team.currentNumber.wrappedValue += 1
+        let arrResultCount = [listResult1, listResult2, listResult3, listResult4, listResult5, listResult6].sorted()
+        let maxCount = arrResultCount.last ?? .zero
+
+        if 1 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult1.wrappedValue.count == .zero {
+                state.team.currentNumber.wrappedValue = 1
+                return
+            }
+        }
+        
+        if 2 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult2.wrappedValue.count == .zero {
+                state.team.currentNumber.wrappedValue = 2
+                return
+            }
+        }
+        
+        if 3 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult3.wrappedValue.count == .zero {
+                state.team.currentNumber.wrappedValue = 3
+                return
+            }
+        }
+        
+        if 4 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult4.wrappedValue.count == .zero {
+                state.team.currentNumber.wrappedValue = 4
+                return
+            }
+        }
+        
+        if 5 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult5.wrappedValue.count == .zero {
+                state.team.currentNumber.wrappedValue = 5
+                return
+            }
+        }
+        
+        if 6 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult6.wrappedValue.count == .zero {
+                state.team.currentNumber.wrappedValue = 6
+                return
+            }
+        }
+        
+        if 1 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult1.wrappedValue.count > .zero && state.team.listResult1.wrappedValue.count < maxCount {
+                state.team.currentNumber.wrappedValue = 1
+                return
+            }
+        }
+        if 2 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult2.wrappedValue.count > .zero && state.team.listResult2.wrappedValue.count < maxCount {
+                state.team.currentNumber.wrappedValue = 2
+                return
+            }
+        }
+        if 3 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult3.wrappedValue.count > .zero && state.team.listResult3.wrappedValue.count < maxCount {
+                state.team.currentNumber.wrappedValue = 3
+                return
+            }
+        }
+        if 4 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult4.wrappedValue.count > .zero && state.team.listResult4.wrappedValue.count < maxCount {
+                state.team.currentNumber.wrappedValue = 4
+                return
+            }
+        }
+        if 5 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult5.wrappedValue.count > .zero && state.team.listResult5.wrappedValue.count < maxCount {
+                state.team.currentNumber.wrappedValue = 5
+                return
+            }
+        }
+        if 6 <= state.team.selectedTeam.wrappedValue + 1 {
+            if state.team.listResult6.wrappedValue.count > .zero && state.team.listResult6.wrappedValue.count < maxCount {
+                state.team.currentNumber.wrappedValue = 6
+                return
+            }
+        }
+        
+        switch state.team.listTeam.wrappedValue {
+        case .listResult1:
+            if 1 <= state.team.selectedTeam.wrappedValue + 1 {
+                state.team.currentNumber.wrappedValue = 1
+                state.team.listTeam.wrappedValue = .listResult2
+            }
+        case .listResult2:
+            if 2 <= state.team.selectedTeam.wrappedValue + 1 {
+                state.team.currentNumber.wrappedValue = 2
+                state.team.listTeam.wrappedValue = .listResult3
             } else {
                 state.team.currentNumber.wrappedValue = 1
+                state.team.listTeam.wrappedValue = .listResult1
+            }
+        case .listResult3:
+            if 3 <= state.team.selectedTeam.wrappedValue + 1 {
+                state.team.currentNumber.wrappedValue = 3
+                state.team.listTeam.wrappedValue = .listResult4
+            } else {
+                state.team.currentNumber.wrappedValue = 1
+                state.team.listTeam.wrappedValue = .listResult1
+            }
+        case .listResult4:
+            if 4 <= state.team.selectedTeam.wrappedValue + 1 {
+                state.team.currentNumber.wrappedValue = 4
+                state.team.listTeam.wrappedValue = .listResult5
+            } else {
+                state.team.currentNumber.wrappedValue = 1
+                state.team.listTeam.wrappedValue = .listResult1
+            }
+        case .listResult5:
+            if 5 <= state.team.selectedTeam.wrappedValue + 1 {
+                state.team.currentNumber.wrappedValue = 5
+                state.team.listTeam.wrappedValue = .listResult6
+            } else {
+                state.team.currentNumber.wrappedValue = 1
+                state.team.listTeam.wrappedValue = .listResult1
+            }
+        case .listResult6:
+            if 6 <= state.team.selectedTeam.wrappedValue + 1 {
+                state.team.currentNumber.wrappedValue = 6
+                state.team.listTeam.wrappedValue = .listResult1
+            } else {
+                state.team.currentNumber.wrappedValue = 1
+                state.team.listTeam.wrappedValue = .listResult1
             }
         }
     }
@@ -169,6 +297,40 @@ extension TeamInteractorImpl {
 
 extension TeamInteractorImpl {
     private func takeElementListTeams(state: Binding<AppState.AppData>) {
+        var newListTempPlayers: [Player] = []
+        for player in state.team.listTempPlayers.wrappedValue {
+            if player.team == "DNP" {
+                continue
+            }
+            if player.team == "1" {
+                state.team.listResult1.wrappedValue.insert(player, at: .zero)
+                continue
+            }
+            if player.team == "2" {
+                state.team.listResult2.wrappedValue.insert(player, at: .zero)
+                continue
+            }
+            if player.team == "3" {
+                state.team.listResult3.wrappedValue.insert(player, at: .zero)
+                continue
+            }
+            if player.team == "4" {
+                state.team.listResult4.wrappedValue.insert(player, at: .zero)
+                continue
+            }
+            if player.team == "5" {
+                state.team.listResult5.wrappedValue.insert(player, at: .zero)
+                continue
+            }
+            if player.team == "6" {
+                state.team.listResult6.wrappedValue.insert(player, at: .zero)
+                continue
+            }
+            newListTempPlayers.append(player)
+        }
+        
+        state.team.listTempPlayers.wrappedValue = newListTempPlayers
+        
         if state.team.listTempPlayers.wrappedValue.count != 0 {
             
             switch state.team.currentNumber.wrappedValue {

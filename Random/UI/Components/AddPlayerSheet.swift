@@ -38,10 +38,7 @@ struct AddPlayerSheet: View {
                             Spacer()
                             Image("\(appBinding.team.playerImageTemp.wrappedValue)")
                                 .resizable()
-                                .frame(width: 100, height: 100)
-                                .onAppear {
-                                    generationImage(state: appBinding)
-                                }
+                                .frame(width: 100, height: 100, alignment: .center)
                             Spacer()
                         }
                         .padding(.top, 16)
@@ -184,14 +181,6 @@ private extension AddPlayerSheet {
     func createPlayer(state: Binding<AppState.AppData>) {
         injected.interactors.teamInteractor
             .createPlayer(state: state)
-    }
-}
-
-private extension AddPlayerSheet {
-    func generationImage(state: Binding<AppState.AppData>) {
-        appBinding.team
-            .playerImageTemp.wrappedValue = injected.interactors
-            .teamInteractor.generationImageRandom()
     }
 }
 

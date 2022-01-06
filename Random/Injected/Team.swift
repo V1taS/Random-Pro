@@ -10,6 +10,8 @@ import Foundation
 
 extension AppState.AppData {
     struct Team: Equatable, Decodable {
+        var listTeam: ListTeam = .listResult1
+        
         var listResult1: [Player] = []
         var listResult2: [Player] = []
         var listResult3: [Player] = []
@@ -21,7 +23,7 @@ extension AppState.AppData {
         var listPlayersData: [Player] = []
         
         var listTempPlayers: [Player] = []
-        var playerImageTemp = "player1"
+        var playerImageTemp = "player15"
         
         var selectedTeam = 1
         
@@ -32,3 +34,14 @@ extension AppState.AppData {
         var disabledPickerView = false
     }
 }
+extension AppState.AppData {
+    enum ListTeam: Equatable, Decodable {
+        case listResult1
+        case listResult2
+        case listResult3
+        case listResult4
+        case listResult5
+        case listResult6
+    }
+}
+

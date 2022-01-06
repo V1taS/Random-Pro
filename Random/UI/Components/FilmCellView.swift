@@ -13,13 +13,13 @@ struct FilmCellView: View {
     
     @EnvironmentObject var orientation: Orientation
     
-    init(ratingIsSwitch: Bool, ratingCount: Double, imageStr: String) {
+    init(ratingIsSwitch: Bool, ratingCount: Double, imageStr: Binding<String?>) {
         self.ratingIsSwitch = ratingIsSwitch
         self.ratingCount = ratingCount
         self.imageStr = imageStr
     }
 
-    private var imageStr: String
+    private var imageStr: Binding<String?>
     private var ratingIsSwitch: Bool
     private var ratingCount: Double
     
@@ -67,7 +67,7 @@ private extension FilmCellView {
                  let heightPortret = CGFloat(450)
 
                  ZStack {
-                     WebImage(url: URL(string: imageStr))
+                     WebImage(url: URL(string: imageStr.wrappedValue ?? ""))
                          .resizable()
                          .renderingMode(.original)
                          .onSuccess { image, data, cacheType in }
@@ -106,7 +106,7 @@ private extension FilmCellView {
                  let standartHeightPortret = CGFloat(650)
 
                  ZStack {
-                     WebImage(url: URL(string: imageStr))
+                     WebImage(url: URL(string: imageStr.wrappedValue ?? ""))
                          .resizable()
                          .renderingMode(.original)
                          .onSuccess { image, data, cacheType in }
@@ -148,7 +148,7 @@ private extension FilmCellView {
 private extension FilmCellView {
     var imageIPhone: some View {
         ZStack {
-            WebImage(url: URL(string: imageStr))
+            WebImage(url: URL(string: imageStr.wrappedValue ?? ""))
                 .resizable()
                 .renderingMode(.original)
                 .onSuccess { image, data, cacheType in }
@@ -199,6 +199,6 @@ struct FilmCellView_Previews: PreviewProvider {
     static var previews: some View {
         FilmCellView(ratingIsSwitch: true,
                      ratingCount: 7.33333,
-                     imageStr: "")
+                     imageStr: .constant(""))
     }
 }

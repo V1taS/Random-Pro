@@ -18,7 +18,7 @@ extension AppState.AppData {
         var showActivityIndicator = false
         
         var selectedPlace = 0
-        var selectedDeparture = 0 {
+        var selectedDeparture = 1 {
             didSet {
                 travelRussiaData = []
                 travelRussiaInfo = HotTravelResult.plug

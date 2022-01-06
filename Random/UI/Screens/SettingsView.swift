@@ -138,9 +138,18 @@ private extension SettingsView {
         HStack {
             Spacer()
             Button(action: {
-                cleanApp(state: appBinding)
-                cleanAllUserDefualts(state: appBinding)
-                Feedback.shared.impactHeavy(.medium)
+                UIApplication.shared.windows.first?.rootViewController?.showAlert(
+                    with: NSLocalizedString("Внимание", comment: ""),
+                    and: NSLocalizedString("Очистить кэш", comment: "") + "?",
+                    titleOk: NSLocalizedString("Очистить", comment: ""),
+                    titleCancel: NSLocalizedString("Отмена", comment: ""),
+                    completionOk: {
+                        cleanApp(state: appBinding)
+                        cleanAllUserDefualts(state: appBinding)
+                        Feedback.shared.impactHeavy(.medium)
+                    }
+                )
+
             }) {
                 Text(NSLocalizedString("Очистить кэш", comment: ""))
                     .foregroundColor(.primaryError())

@@ -34,6 +34,8 @@ struct TeamView: View {
         .navigationBarItems(trailing: HStack(spacing: 24) {
             Button(action: {
                 appBinding.team.showAddPlayer.wrappedValue.toggle()
+                generationImage(state: appBinding)
+                appBinding.team.selectedTeam.wrappedValue = selectedTeam
             }) {
                 Image(systemName: "person.badge.plus")
                     .font(.system(size: 24))
@@ -41,6 +43,7 @@ struct TeamView: View {
             
             Button(action: {
                 appBinding.team.showSettings.wrappedValue.toggle()
+                appBinding.team.selectedTeam.wrappedValue = selectedTeam
             }) {
                 Image(systemName: "gear")
                     .font(.system(size: 24))
@@ -49,7 +52,9 @@ struct TeamView: View {
                 TeamSettingsView(appBinding: appBinding)
             })
         })
-        
+        .onAppear {
+            selectedTeam = appBinding.team.selectedTeam.wrappedValue
+        }
     }
 }
 
@@ -77,11 +82,11 @@ private extension TeamView {
             
             Button(action: {
                 if !appBinding.team.listTempPlayers.wrappedValue.isEmpty {
-                    appBinding.team.selectedTeam.wrappedValue = selectedTeam
                     generateListTeams(state: appBinding)
                     appBinding.team.disabledPickerView.wrappedValue = true
                     Feedback.shared.impactHeavy(.medium)
                 }
+                appBinding.team.selectedTeam.wrappedValue = selectedTeam
             }) {
                 Text("?")
                     .font(.robotoBold70())
@@ -296,6 +301,14 @@ private extension TeamView {
     private func saveTeamToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.teamInteractor
             .saveTeamToUserDefaults(state: state)
+    }
+}
+
+private extension TeamView {
+    func generationImage(state: Binding<AppState.AppData>) {
+        appBinding.team
+            .playerImageTemp.wrappedValue = injected.interactors
+            .teamInteractor.generationImageRandom()
     }
 }
 

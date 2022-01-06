@@ -46,6 +46,8 @@ private extension ScrollTeamPlayers {
                                 .cornerRadius(12)
                         } else {
                             PlayerView(name: player.name, image: player.photo)
+                                .background(LinearGradient(gradient: Gradient(colors: [Color.gray, Color.gray]), startPoint: .top, endPoint: .bottom).opacity(0.1))
+                                .cornerRadius(12)
                         }
                     }
                     .padding(.leading, 16)
@@ -57,7 +59,7 @@ private extension ScrollTeamPlayers {
 
 struct ScrollTeamPlayers_Previews: PreviewProvider {
     static var previews: some View {
-        ScrollTeamPlayers(listPlayers: .constant([Player(name: "Сосин Виталий", photo: "player1"), Player(name: "Трифонов Дмитрий", photo: "player2")]), isPressedButton: .constant(false),
+        ScrollTeamPlayers(listPlayers: .constant([Player(id: UUID().uuidString, name: "Сосин Виталий", photo: "player16"), Player(id: UUID().uuidString, name: "Трифонов Дмитрий", photo: "player24")]), isPressedButton: .constant(false),
                           teamNumber: 1)
     }
 }

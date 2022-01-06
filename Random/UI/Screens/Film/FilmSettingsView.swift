@@ -60,6 +60,7 @@ struct FilmSettingsView: View {
                             cleanFilms(state: appBinding)
                             appBinding.film.showSettings.wrappedValue = false
                             getMovies(state: appBinding)
+                            validVideoplayerIcon(state: appBinding)
                             saveFilmsToUserDefaults(state: appBinding)
                             Feedback.shared.impactHeavy(.medium)
                         }) {
@@ -140,11 +141,11 @@ private extension FilmSettingsView {
     private var lastFilmName: AnyView {
         switch appBinding.film.selectedGenres.wrappedValue {
         case 0:
-            return AnyView(Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBestInfo.nameRu.wrappedValue ?? "нет")" : "\(appBinding.film.filmsBestInfo.nameEn.wrappedValue ?? "нет")")
+            return AnyView(Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsBest.wrappedValue.first?.nameRu ?? "нет")" : "\(appBinding.film.filmsBest.wrappedValue.first?.nameEn ?? "нет")")
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16()))
         case 1:
-            return AnyView(Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopularInfo.nameRu.wrappedValue ?? "нет")" : "\(appBinding.film.filmsPopularInfo.nameEn.wrappedValue ?? "нет")")
+            return AnyView(Text(NSLocalizedString("домен", comment: "") == "ru" ? "\(appBinding.film.filmsPopular.wrappedValue.first?.nameRu ?? "нет")" : "\(appBinding.film.filmsPopular.wrappedValue.first?.nameEn ?? "нет")")
                             .foregroundColor(.primaryGray())
                             .font(.robotoRegular16()))
         case 2:
@@ -162,11 +163,11 @@ private extension FilmSettingsView {
         switch appBinding.film.selectedGenres.wrappedValue {
         case 0:
             return AnyView(FilmInformationBestFilmView(
-                            filmsInfo: appBinding.film.filmsBestInfo.wrappedValue,
+                filmsInfo: appBinding.film.filmsBest.wrappedValue.first!,
                             iframeSrc: ""))
         case 1:
             return AnyView(FilmInformationBestFilmView(
-                            filmsInfo: appBinding.film.filmsPopularInfo.wrappedValue,
+                filmsInfo: appBinding.film.filmsPopular.wrappedValue.first!,
                             iframeSrc: ""))
         case 2:
             return AnyView(FilmInformationAllFilmView(
@@ -185,9 +186,9 @@ private extension FilmSettingsView {
             .cleanFilms(state: state)
     }
     
-    private func getMovies(state: Binding<AppState.AppData>) {
+    private func getMovies(state: Binding<AppState.AppData>, complition: (() -> Void)? = nil) {
         injected.interactors.filmInteractor
-            .getMovies(state: state)
+            .getMovies(state: state, complition: complition)
     }
 }
 
@@ -195,6 +196,13 @@ private extension FilmSettingsView {
     private func saveFilmsToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.filmInteractor
             .saveFilmsToUserDefaults(state: state)
+    }
+}
+
+private extension FilmSettingsView {
+    private func validVideoplayerIcon(state: Binding<AppState.AppData>) {
+        injected.interactors.filmInteractor
+            .validVideoplayerIcon(state: state)
     }
 }
 

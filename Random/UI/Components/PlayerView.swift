@@ -18,23 +18,22 @@ struct PlayerView: View {
             VStack(alignment: .center, spacing: 4) {
                 Image(image)
                     .resizable()
-                    .frame(width: 70, height: 70, alignment: .center)
+                    .frame(width: 50, height: 50, alignment: .center)
                 
                 Text(name)
                     .lineLimit(2)
-                    .font(.robotoMedium16())
+                    .font(.robotoMedium14())
                     .foregroundColor(.primaryGray())
                     .multilineTextAlignment(.center)
-                    .frame(width: 100)
+                    .frame(width: 90)
             }
         }
-        .frame(width: 100, height: 120)
-//        .background(Color.blue)
+        .frame(width: 90, height: 100)
     }
 }
 
 struct Player_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerView(name: "Кожевников Евгений", image: "player2")
+        PlayerView(name: "Кожевников Евгений", image: "player1")
     }
 }

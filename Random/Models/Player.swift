@@ -9,14 +9,17 @@
 import Foundation
 
 struct Player: Decodable, Encodable {
+    var id: String
     let name: String
     let photo: String
+    var team: String?
 }
 
 extension Player: Equatable {
     static func == (lhs: Player, rhs: Player) -> Bool {
-            return
-                lhs.name == rhs.name &&
-                lhs.photo == rhs.photo
-        }
+        return lhs.name == rhs.name &&
+        lhs.photo == rhs.photo &&
+        lhs.team == rhs.team &&
+        lhs.id == rhs.id
+    }
 }

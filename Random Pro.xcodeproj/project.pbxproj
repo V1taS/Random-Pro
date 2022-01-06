@@ -18,6 +18,11 @@
 		1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */; };
 		1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088A25D808180005A2D7 /* LotterySettingsView.swift */; };
 		1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10088D25D808C40005A2D7 /* LotteryResultsView.swift */; };
+		1B14038A2687F394007A5150 /* FPSStatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1403852687F394007A5150 /* FPSStatusBarWindow.swift */; };
+		1B14038B2687F394007A5150 /* FPSCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1403862687F394007A5150 /* FPSCounter.swift */; };
+		1B14038C2687F394007A5150 /* Снимок экрана 2021-06-27 в 02.25.10.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B1403872687F394007A5150 /* Снимок экрана 2021-06-27 в 02.25.10.png */; };
+		1B14038D2687F394007A5150 /* FPSStatusBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1403882687F394007A5150 /* FPSStatusBarViewController.swift */; };
+		1B14038E2687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B1403892687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png */; };
 		1B1B505626011B0200F73A14 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B505526011B0200F73A14 /* MusicView.swift */; };
 		1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */; };
 		1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60572601FBA400847843 /* MusicITunes.swift */; };
@@ -151,7 +156,6 @@
 		1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */; };
 		1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */; };
 		1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8DFA025EE4485007C389D /* FilmCellView.swift */; };
-		1BBADE0625EC02CE00AD38F4 /* CellImageMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */; };
 		1BBADE0B25EC080500AD38F4 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0A25EC080500AD38F4 /* Film.swift */; };
 		1BBADE1025EC083800AD38F4 /* FilmActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0F25EC083800AD38F4 /* FilmActions.swift */; };
 		1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1325EC087800AD38F4 /* FilmInteractor.swift */; };
@@ -223,6 +227,11 @@
 		1B10088025D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1B10088A25D808180005A2D7 /* LotterySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySettingsView.swift; sourceTree = "<group>"; };
 		1B10088D25D808C40005A2D7 /* LotteryResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultsView.swift; sourceTree = "<group>"; };
+		1B1403852687F394007A5150 /* FPSStatusBarWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSStatusBarWindow.swift; sourceTree = "<group>"; };
+		1B1403862687F394007A5150 /* FPSCounter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSCounter.swift; sourceTree = "<group>"; };
+		1B1403872687F394007A5150 /* Снимок экрана 2021-06-27 в 02.25.10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Снимок экрана 2021-06-27 в 02.25.10.png"; sourceTree = "<group>"; };
+		1B1403882687F394007A5150 /* FPSStatusBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPSStatusBarViewController.swift; sourceTree = "<group>"; };
+		1B1403892687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Снимок экрана 2021-06-27 в 02.24.36.png"; sourceTree = "<group>"; };
 		1B1B501526009FAD00F73A14 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		1B1B505526011B0200F73A14 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
 		1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAPI.swift; sourceTree = "<group>"; };
@@ -302,6 +311,7 @@
 		1B7F66FE25D0937100933AD6 /* CellMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMainView.swift; sourceTree = "<group>"; };
 		1B7F670525D09A9B00933AD6 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		1B7F670A25D0A27D00933AD6 /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
+		1B80A00E26D68E68008F8733 /* Random Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Pro.entitlements"; sourceTree = "<group>"; };
 		1B8EB60C26740D67009016BE /* URLSessionRequestPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionRequestPerformer.swift; sourceTree = "<group>"; };
 		1B8EB60E2674119F009016BE /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		1B8EB61026741256009016BE /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
@@ -361,7 +371,6 @@
 		1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSettingsView.swift; sourceTree = "<group>"; };
 		1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeResultsView.swift; sourceTree = "<group>"; };
 		1BB8DFA025EE4485007C389D /* FilmCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCellView.swift; sourceTree = "<group>"; };
-		1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CellImageMainView.swift; path = ../../../../../../../../../../Applications/CellImageMainView.swift; sourceTree = "<group>"; };
 		1BBADE0A25EC080500AD38F4 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		1BBADE0F25EC083800AD38F4 /* FilmActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmActions.swift; sourceTree = "<group>"; };
 		1BBADE1325EC087800AD38F4 /* FilmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInteractor.swift; sourceTree = "<group>"; };
@@ -423,6 +432,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B1403842687F394007A5150 /* FPSCounter */ = {
+			isa = PBXGroup;
+			children = (
+				1B1403852687F394007A5150 /* FPSStatusBarWindow.swift */,
+				1B1403862687F394007A5150 /* FPSCounter.swift */,
+				1B1403872687F394007A5150 /* Снимок экрана 2021-06-27 в 02.25.10.png */,
+				1B1403882687F394007A5150 /* FPSStatusBarViewController.swift */,
+				1B1403892687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png */,
+			);
+			path = FPSCounter;
+			sourceTree = "<group>";
+		};
 		1B1B505426011AEC00F73A14 /* Music */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,6 +514,7 @@
 		1B7F666425D0856300933AD6 = {
 			isa = PBXGroup;
 			children = (
+				1B80A00E26D68E68008F8733 /* Random Pro.entitlements */,
 				1B7F666F25D0856300933AD6 /* Random */,
 				1B7F666E25D0856300933AD6 /* Products */,
 				1B6875A625DB614F006E82D4 /* Frameworks */,
@@ -633,7 +655,6 @@
 			children = (
 				1BF30DD025D196BB00DCE62B /* CellCube */,
 				1B7F66FE25D0937100933AD6 /* CellMainView.swift */,
-				1BBADE0525EC02CE00AD38F4 /* CellImageMainView.swift */,
 				1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */,
 				1BF22F2D25D88F1A00775368 /* PlayerView.swift */,
 				1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */,
@@ -685,6 +706,7 @@
 		1B7F669525D0870E00933AD6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1B1403842687F394007A5150 /* FPSCounter */,
 				1BBADDF425EC005D00AD38F4 /* Network service */,
 				1B6875A925DB6200006E82D4 /* Purchases */,
 				1B7F66F625D08E2A00933AD6 /* UIKit */,
@@ -1145,6 +1167,8 @@
 				1B7F66D525D08C1000933AD6 /* SFProDisplay-Medium.ttf in Resources */,
 				1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */,
 				1B7F66D425D08C1000933AD6 /* Roboto-Thin.ttf in Resources */,
+				1B14038C2687F394007A5150 /* Снимок экрана 2021-06-27 в 02.25.10.png in Resources */,
+				1B14038E2687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png in Resources */,
 				1B7F66D325D08C1000933AD6 /* Roboto-Regular.ttf in Resources */,
 				1B8EB64F267658B0009016BE /* Localizable.stringsdict in Resources */,
 				1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */,
@@ -1235,9 +1259,9 @@
 				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
 				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
-				1BBADE0625EC02CE00AD38F4 /* CellImageMainView.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
 				1B8EB62626743221009016BE /* KinopoiskInfoRequest.swift in Sources */,
+				1B14038A2687F394007A5150 /* FPSStatusBarWindow.swift in Sources */,
 				1BF22F1F25D8856000775368 /* TeamView.swift in Sources */,
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
@@ -1258,6 +1282,7 @@
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
 				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
+				1B14038D2687F394007A5150 /* FPSStatusBarViewController.swift in Sources */,
 				1B8EB64226750D2A009016BE /* TravelSettingsView.swift in Sources */,
 				1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */,
 				1BDC80D1264DBA85001B0893 /* Travel.swift in Sources */,
@@ -1312,6 +1337,7 @@
 				1B8EB65426765ECE009016BE /* String+FormatterDate.swift in Sources */,
 				1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */,
 				1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */,
+				1B14038B2687F394007A5150 /* FPSCounter.swift in Sources */,
 				1B8EB64C26763DFA009016BE /* TravelInformationViewCell.swift in Sources */,
 				1B7F66DF25D08D1300933AD6 /* Size.swift in Sources */,
 				1BF22F3825D89E4000775368 /* AddPlayerSheet.swift in Sources */,
@@ -1465,6 +1491,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1527,6 +1555,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1552,12 +1581,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.3;
+				CURRENT_PROJECT_VERSION = 52;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
-				"EXCLUDED_ARCHS[sdk=appletvsimulator*]" = "$(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR)) arm64";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1565,11 +1594,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 43;
+				MARKETING_VERSION = 670;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1582,23 +1612,22 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4.3;
+				CURRENT_PROJECT_VERSION = 52;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
-				"EXCLUDED_ARCHS[sdk=appletvsimulator*]" = "$(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR)) arm64";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 43;
+				MARKETING_VERSION = 670;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -9,11 +9,7 @@
 import Foundation
 import StoreKit
 
-class ReviewUtility {
-
-  static let sharedInstance = ReviewUtility()
-
-  private init() {}
+final class ReviewUtility {
 
   func recordLaunch() {
     let defaults = UserDefaults.standard

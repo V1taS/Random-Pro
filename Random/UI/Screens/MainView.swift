@@ -25,11 +25,15 @@ struct MainView: View {
                     userDefaultsGet(state: appBinding)
                     checkNewMenu()
                 }
-                
+            
                 .navigationBarTitle(Text("Random"))
                 .navigationBarItems(trailing: HStack(spacing: 24) {
                     Button(action: {
-                        appBinding.premium.presentingModal.wrappedValue = true
+                        if appBinding.premium.premiumIsEnabled.wrappedValue {
+                            alertCrown()
+                        } else {
+                            appBinding.premium.presentingModal.wrappedValue = true
+                        }
                     }) {
                         Image(systemName: "crown.fill")
                             .renderingMode(.template)
@@ -78,11 +82,11 @@ private extension MainView {
             if appBinding.premium.premiumIsEnabled.wrappedValue {
                 NavigationLink(
                     destination: FilmView(appBinding: appBinding)) {
-                    CellMainView(image: "film",
-                                 title: NSLocalizedString("Фильмы", comment: ""),
-                                 isLabelDisabled: false,
-                                 textLabel: NSLocalizedString("ХИТ", comment: ""))
-                }
+                        CellMainView(image: "film",
+                                     title: NSLocalizedString("Фильмы", comment: ""),
+                                     isLabelDisabled: false,
+                                     textLabel: "PREMIUM")
+                    }
             } else {
                 CellMainLockView(image: "film",
                                  title: NSLocalizedString("Фильмы", comment: ""))
@@ -101,12 +105,12 @@ private extension MainView {
             if appBinding.premium.premiumIsEnabled.wrappedValue {
                 NavigationLink(
                     destination: TeamView(appBinding: appBinding)) {
-                    CellMainView(image: "person.3",
-                                 title: NSLocalizedString("Команды",
-                                                          comment: ""),
-                                 isLabelDisabled: true,
-                                 textLabel: "")
-                }
+                        CellMainView(image: "person.3",
+                                     title: NSLocalizedString("Команды",
+                                                              comment: ""),
+                                     isLabelDisabled: false,
+                                     textLabel: "PREMIUM")
+                    }
             } else {
                 CellMainLockView(image: "person.3",
                                  title: NSLocalizedString("Команды", comment: ""))
@@ -124,11 +128,11 @@ private extension MainView {
     var number: some View {
         NavigationLink(
             destination: NumberView(appBinding: appBinding)) {
-            CellMainView(image: "number",
-                         title: NSLocalizedString("Число", comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "number",
+                             title: NSLocalizedString("Число", comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -137,11 +141,11 @@ private extension MainView {
     var yesOrNot: some View {
         NavigationLink(
             destination: YesOrNotView(appBinding: appBinding)) {
-            CellMainView(image: "questionmark.square",
-                         title: NSLocalizedString("Да или Нет", comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "questionmark.square",
+                             title: NSLocalizedString("Да или Нет", comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -150,11 +154,11 @@ private extension MainView {
     var characters: some View {
         NavigationLink(
             destination: CharactersView(appBinding: appBinding)) {
-            CellMainView(image: "textbox",
-                         title: NSLocalizedString("Буква", comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "textbox",
+                             title: NSLocalizedString("Буква", comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -163,11 +167,11 @@ private extension MainView {
     var listWords: some View {
         NavigationLink(
             destination: ListWordsView(appBinding: appBinding)) {
-            CellMainView(image: "list.bullet.below.rectangle",
-                         title: NSLocalizedString("Список", comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "list.bullet.below.rectangle",
+                             title: NSLocalizedString("Список", comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -176,11 +180,11 @@ private extension MainView {
     var coin: some View {
         NavigationLink(
             destination: CoinView(appBinding: appBinding)) {
-            CellMainView(image: "bitcoinsign.circle",
-                         title: NSLocalizedString("Монета", comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "bitcoinsign.circle",
+                             title: NSLocalizedString("Монета", comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -189,11 +193,11 @@ private extension MainView {
     var cube: some View {
         NavigationLink(
             destination: CubeView(appBinding: appBinding)) {
-            CellMainView(image: "cube",
-                         title: NSLocalizedString("Кубики", comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "cube",
+                             title: NSLocalizedString("Кубики", comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -202,12 +206,12 @@ private extension MainView {
     var dateAndTime: some View {
         NavigationLink(
             destination: DateAndTimeView(appBinding: appBinding)) {
-            CellMainView(image: "calendar",
-                         title: NSLocalizedString("Дата и время",
-                                                  comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "calendar",
+                             title: NSLocalizedString("Дата и время",
+                                                      comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -216,12 +220,12 @@ private extension MainView {
     var lottery: some View {
         NavigationLink(
             destination: LotteryView(appBinding: appBinding)) {
-            CellMainView(image: "tag",
-                         title: NSLocalizedString("Лотерея",
-                                                  comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "tag",
+                             title: NSLocalizedString("Лотерея",
+                                                      comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -232,12 +236,12 @@ private extension MainView {
             if appBinding.premium.premiumIsEnabled.wrappedValue {
                 NavigationLink(
                     destination: TravelView(appBinding: appBinding)) {
-                    CellMainView(image: "airplane",
-                                 title: NSLocalizedString("Путешествие",
-                                                          comment: ""),
-                                 isLabelDisabled: false,
-                                 textLabel: NSLocalizedString("ХИТ", comment: ""))
-                }
+                        CellMainView(image: "airplane",
+                                     title: NSLocalizedString("Путешествие",
+                                                              comment: ""),
+                                     isLabelDisabled: false,
+                                     textLabel: "PREMIUM")
+                    }
             } else {
                 CellMainLockView(image: "airplane",
                                  title: NSLocalizedString("Путешествие", comment: ""))
@@ -255,13 +259,13 @@ private extension MainView {
     var music: some View {
         NavigationLink(
             destination: MusicView(appBinding: appBinding)) {
-            CellMainView(image: "tv.music.note",
-                         title: NSLocalizedString("Музыка",
-                                                  comment: ""),
-                         isLabelDisabled: UserDefaults.standard.bool(forKey: "ManuMusicNew"),
-                         textLabel: NSLocalizedString("НОВОЕ",
-                                                      comment: ""))
-        }
+                CellMainView(image: "tv.music.note",
+                             title: NSLocalizedString("Музыка",
+                                                      comment: ""),
+                             isLabelDisabled: UserDefaults.standard.bool(forKey: "ManuMusicNew"),
+                             textLabel: NSLocalizedString("НОВОЕ",
+                                                          comment: ""))
+            }
     }
 }
 
@@ -270,12 +274,12 @@ private extension MainView {
     var contact: some View {
         NavigationLink(
             destination: ContactView(appBinding: appBinding)) {
-            CellMainView(image: "phone.circle",
-                         title: NSLocalizedString("Контакт",
-                                                  comment: ""),
-                         isLabelDisabled: true,
-                         textLabel: "")
-        }
+                CellMainView(image: "phone.circle",
+                             title: NSLocalizedString("Контакт",
+                                                      comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "")
+            }
     }
 }
 
@@ -324,7 +328,7 @@ private extension MainView {
                     }
                 }
             } .frame(maxWidth: .infinity)
-            .padding(.bottom, 16)
+                .padding(.bottom, 16)
         }
     }
 }
@@ -340,6 +344,15 @@ private extension MainView {
                 completionOk: {
                     appBinding.premium.presentingModal.wrappedValue = true
                 }
+            )
+    }
+    
+    
+    func alertCrown() {
+        UIApplication.shared.windows.first?.rootViewController?
+            .showAlert(with: NSLocalizedString("Внимание", comment: ""),
+                       and: NSLocalizedString("Премиум доступ активирован", comment: ""),
+                       style: .alert
             )
     }
 }

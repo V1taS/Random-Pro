@@ -86,7 +86,6 @@ struct CategoriesView: View {
             storeCellMenuHidden = appBinding.main.storeCellMenuHidden.wrappedValue
             
             if !UserDefaults.standard.bool(forKey: "CategoriesViewMessage") {
-                
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     UIApplication.shared.windows.first?.rootViewController?.showAlert(with: NSLocalizedString("Внимание", comment: ""), and: NSLocalizedString("Чтобы скрыть или показать раздел, просто нажми на него", comment: ""), style: .actionSheet) {
                         UserDefaults.standard.set(true, forKey: "CategoriesViewMessage")
@@ -100,9 +99,12 @@ struct CategoriesView: View {
         }
         .navigationBarTitle(Text(LocalizedStringKey("Категории")), displayMode: .automatic)
         .navigationBarItems(trailing:
-                                EditButton()
-                                .foregroundColor(.primaryBlue())
-        )
+                                HStack {
+            Spacer()
+            EditButton()
+                .foregroundColor(.primaryBlue())
+                .font(.robotoRegular16())
+        })
     }
     
     func move(from source: IndexSet, to destination: Int) {

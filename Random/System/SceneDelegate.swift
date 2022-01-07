@@ -11,24 +11,20 @@ import StoreKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    @ObservedObject var storeManager = StoreManager()
+    
+    @ObservedObject private var storeManager = StoreManager()
+    
+    @Environment(\.injected) private var injected: DIContainer
+    
     var orientation = Orientation()
-    private let productIDs = [
-        "com.sosinvitalii.Random.TipForTea",
-        "com.sosinvitalii.Random.TipForWine",
-        "com.sosinvitalii.Random.TipForBreakfast",
-        "com.sosinvitalii.Random.TipForLunch",
-        "com.sosinvitalii.Random.TipForDinner",
-        "com.sosinvitalii.Random.TipForDateWithMyGirlfriend",
-        "com.sosinvitalii.Random.TipForTravel"
-    ]
+    private let productIDs = ProductSubscriptionIDs.allSubscription
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
 //            FPSCounter.showInStatusBar(windowScene: windowScene)
             let window = UIWindow(windowScene: windowScene)
             window.overrideUserInterfaceStyle = .light
-            window.rootViewController = UIHostingController( rootView: TabBarView(storeManager: storeManager)
+            window.rootViewController = UIHostingController(rootView: TabBarView(storeManager: storeManager)
                                                                 .environmentObject(orientation)
                                                                 .onAppear(perform: { [self] in
                                                                     SKPaymentQueue.default().add(storeManager)
@@ -44,4 +40,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         orientation.isLandScape = windowScene.interfaceOrientation.isLandscape
     }
 }
-

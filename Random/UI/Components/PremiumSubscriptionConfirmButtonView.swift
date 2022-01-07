@@ -38,7 +38,7 @@ struct PremiumSubscriptionConfirmButtonView: View {
             
             HStack(alignment: .center, spacing: 8) {
                 termsAndConditionsButton
-                Text("и")
+                Text("|")
                     .font(.robotoRegular14())
                     .foregroundColor(Color.primaryGray())
                 privacyPolicyButton

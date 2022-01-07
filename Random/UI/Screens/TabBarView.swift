@@ -10,12 +10,17 @@ import SwiftUI
 
 struct TabBarView: View {
     
+    @ObservedObject var storeManager: StoreManager
+    
     @State private var appState: AppState.AppData = .init()
     private var appBinding: Binding<AppState.AppData> {
         $appState.dispatched(to: injected.appState, \.appData)
     }
+    
     @Environment(\.injected) private var injected: DIContainer
-    @ObservedObject var storeManager: StoreManager
+    
+    private let reviewTrackingManager = ReviewTrackingManager()
+    private let reviewUtility = ReviewUtility()
     
     var body: some View {
         ZStack {
@@ -24,8 +29,7 @@ struct TabBarView: View {
                     .tabItem {
                         Image(systemName: "slider.horizontal.3")
                         Text(NSLocalizedString("Генераторы", comment: ""))
-                }
-                
+                    }
                 SettingsView(appBinding: appBinding, storeManager: storeManager)
                     .tabItem {
                         Image(systemName: "gear")
@@ -37,14 +41,33 @@ struct TabBarView: View {
             showAddPlayerView
         }
         .onAppear {
-            ReviewUtility.sharedInstance.recordLaunch()
+            reviewUtility.recordLaunch()
+            loadPremiumStatus()
         }
         .sheet(isPresented: appBinding.premium.presentingModal, onDismiss: nil) {
             PremiumSubscriptionView(storeManager: storeManager, appBinding: appBinding)
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            reviewTrackingManager.requestIDFA()
+        }
     }
 }
 
+// MARK: Private
+private extension TabBarView {
+    func loadPremiumStatus() {
+        appBinding.premium.premiumIsEnabled
+            .wrappedValue = UserDefaults.standard
+            .bool(forKey: GlobalConstants.premiumUserDefaultsID)
+        DispatchQueue.main.async {
+            storeManager.restoreProducts()
+            storeManager.statePurchase = { status in
+                appBinding.premium.premiumIsEnabled.wrappedValue = status
+                UserDefaults.standard.set(status, forKey: GlobalConstants.premiumUserDefaultsID)
+            }
+        }
+    }
+}
 
 // MARK: Sheet View
 private extension TabBarView {
@@ -77,6 +100,6 @@ private extension TabBarView {
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView(storeManager: StoreManager())
+        TabBarView(storeManager: .init())
     }
 }

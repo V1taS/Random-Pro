@@ -11,6 +11,6 @@ import Foundation
 extension AppState.AppData {
     struct Premium: Equatable {
         var presentingModal = false
-        var premiumIsEnabled = true
+        var premiumIsEnabled = false
     }
 }

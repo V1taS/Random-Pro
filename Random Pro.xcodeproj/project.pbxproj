@@ -54,6 +54,11 @@
 		1B57F641278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F640278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift */; };
 		1B57F64327877496005F220C /* Premium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F64227877496005F220C /* Premium.swift */; };
 		1B57F64527877B6A005F220C /* CellMainLockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F64427877B6A005F220C /* CellMainLockView.swift */; };
+		1B57F64727883498005F220C /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F64627883497005F220C /* GlobalConstants.swift */; };
+		1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B57F64827883A62005F220C /* AdSupport.framework */; };
+		1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B57F64A27883A75005F220C /* AppTrackingTransparency.framework */; };
+		1B57F64D27884397005F220C /* ReviewTrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F64C27884397005F220C /* ReviewTrackingManager.swift */; };
+		1B57F64F2788B7F7005F220C /* CategoriesNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F64E2788B7F7005F220C /* CategoriesNewView.swift */; };
 		1B5C18D02676C23E00E44B14 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */; };
 		1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875A325DB307C006E82D4 /* PurchasesView.swift */; };
 		1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
@@ -272,6 +277,11 @@
 		1B57F640278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSubscriptionConfirmButtonView.swift; sourceTree = "<group>"; };
 		1B57F64227877496005F220C /* Premium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Premium.swift; sourceTree = "<group>"; };
 		1B57F64427877B6A005F220C /* CellMainLockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellMainLockView.swift; sourceTree = "<group>"; };
+		1B57F64627883497005F220C /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		1B57F64827883A62005F220C /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		1B57F64A27883A75005F220C /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
+		1B57F64C27884397005F220C /* ReviewTrackingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTrackingManager.swift; sourceTree = "<group>"; };
+		1B57F64E2788B7F7005F220C /* CategoriesNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesNewView.swift; sourceTree = "<group>"; };
 		1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		1B6875A325DB307C006E82D4 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
 		1B6875A725DB614F006E82D4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -439,7 +449,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */,
+				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
 				D9E5F8E9DB54FC37DBA5E777 /* Pods_Random_Pro.framework in Frameworks */,
+				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +511,8 @@
 		1B6875A625DB614F006E82D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B57F64A27883A75005F220C /* AppTrackingTransparency.framework */,
+				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
 				FA6D843FE99E39F30863F1D0 /* Pods_Random_Pro.framework */,
@@ -655,6 +669,7 @@
 			children = (
 				1B7F667025D0856300933AD6 /* AppDelegate.swift */,
 				1B7F667225D0856300933AD6 /* SceneDelegate.swift */,
+				1B57F64627883497005F220C /* GlobalConstants.swift */,
 				1B7F667E25D0856300933AD6 /* Info.plist */,
 				1B225C452619E253001B9124 /* GoogleService-Info.plist */,
 				1B325C1525D2CFDF00382F33 /* Localizable.strings */,
@@ -705,6 +720,7 @@
 				1B7F66FB25D0930600933AD6 /* MainView.swift */,
 				1BF30DD225D19B1600DCE62B /* SettingsView.swift */,
 				1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */,
+				1B57F64E2788B7F7005F220C /* CategoriesNewView.swift */,
 				1B6875A325DB307C006E82D4 /* PurchasesView.swift */,
 				1B7F670825D0A25A00933AD6 /* Number */,
 				1B9202F725D16CD10094D2BE /* YesOrNot */,
@@ -746,6 +762,7 @@
 				1B325C0525D2C9CA00382F33 /* Feedback.swift */,
 				1B7F66E125D08D3100933AD6 /* RoundedColorEdge.swift */,
 				1B446F2A25E517000060E163 /* ReviewUtility.swift */,
+				1B57F64C27884397005F220C /* ReviewTrackingManager.swift */,
 				1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */,
 				1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */,
 				1BF1F5C925F705D700613F20 /* Orientation.swift */,
@@ -1295,6 +1312,7 @@
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
 				1B92030A25D1703E0094D2BE /* CharactersView.swift in Sources */,
+				1B57F64727883498005F220C /* GlobalConstants.swift in Sources */,
 				1B57F63B2787305D005F220C /* TitleWithDescriptionCell.swift in Sources */,
 				1B8EB60F2674119F009016BE /* URLRequest.swift in Sources */,
 				1B92032C25D17D3A0094D2BE /* CoinView.swift in Sources */,
@@ -1429,6 +1447,7 @@
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */,
 				1B8EB6132674168F009016BE /* NetworkError.swift in Sources */,
+				1B57F64D27884397005F220C /* ReviewTrackingManager.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
 				1B0CFA9C25EEB8B0000FB641 /* FilmInformationBestFilmView.swift in Sources */,
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
@@ -1449,6 +1468,7 @@
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
+				1B57F64F2788B7F7005F220C /* CategoriesNewView.swift in Sources */,
 				1B8EB61D26741F03009016BE /* NetworkServiceResult.swift in Sources */,
 				1B57F64327877496005F220C /* Premium.swift in Sources */,
 				1B5C18D02676C23E00E44B14 /* DateFormatter.swift in Sources */,

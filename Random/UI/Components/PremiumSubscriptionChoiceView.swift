@@ -45,19 +45,19 @@ struct PremiumSubscriptionChoiceView: View {
                 .onTapGesture {
                     typeSubscriptions = .years
                     changeColorButton()
-                    buttonAction?(typeSubscriptions)
+                    buttonAction?(yearsColor ? .years : .non)
                 }
             monthButton
                 .onTapGesture {
                     typeSubscriptions = .monthly
                     changeColorButton()
-                    buttonAction?(typeSubscriptions)
+                    buttonAction?(monthlyColor ? .monthly : .non)
                 }
             lifePlanButton
                 .onTapGesture {
                     typeSubscriptions = .lifelong
                     changeColorButton()
-                    buttonAction?(typeSubscriptions)
+                    buttonAction?(lifelongColor ? .lifelong : .non)
                 }
         }
     }

@@ -10,13 +10,24 @@ import SwiftUI
 
 struct PremiumSubscriptionView: View {
     
-    @ObservedObject var storeManager: StoreManager
+    @ObservedObject
+    var storeManager: StoreManager
     
     var appBinding: Binding<AppState.AppData>
     
     @Environment(\.injected) private var injected: DIContainer
     
     private let constants = Constants()
+    
+    @State
+    private var premiumSubscriptionChoiceType: PremiumSubscriptionChoiceView.TypeSubscriptions = .non
+    
+    @State
+    private var showAlertPremiumAccessActivated = false
+    @State
+    private var showAlertNoPreviousPurchasesFound = false
+    @State
+    private var showAlertNone = false
     
     var body: some View {
         NavigationView {
@@ -25,14 +36,39 @@ struct PremiumSubscriptionView: View {
                     
                     VStack(alignment: .leading, spacing: 8) {
                         info
+                            .padding(.horizontal)
+                            .alert(isPresented: $showAlertPremiumAccessActivated) {
+                                Alert(title: Text(NSLocalizedString("Внимание", comment: "")),
+                                      message: Text(constants.premiumAccessActivated),
+                                      dismissButton: .default(Text(NSLocalizedString("Ок", comment: "")),
+                                                              action: {
+                                    appBinding.premium.presentingModal.wrappedValue = false
+                                }))
+                            }
                         buttons
                             .padding(.top, 32)
+                            .padding(.horizontal)
+                            .alert(isPresented: $showAlertNoPreviousPurchasesFound) {
+                                Alert(title: Text(NSLocalizedString("Внимание", comment: "")),
+                                      message: Text(constants.noPreviousPurchasesFound),
+                                      dismissButton: .default(Text(NSLocalizedString("Ок", comment: "")),
+                                                              action: {}
+                                                             )
+                                )
+                            }
                         
                         confirmButtons
                             .padding(.top, 32)
+                            .alert(isPresented: $showAlertNone) {
+                                Alert(title: Text(NSLocalizedString("Внимание", comment: "")),
+                                      message: Text(constants.youDidNotChooseAnything),
+                                      dismissButton: .default(Text(NSLocalizedString("Ок", comment: "")),
+                                                              action: {}
+                                                             )
+                                )
+                            }
                     }
                     .padding(.top, 24)
-                    .padding(.horizontal)
                 }
                 .navigationBarTitle(Text("Premium"), displayMode: .large)
                 .navigationBarItems(trailing: HStack(spacing: 24) {
@@ -46,7 +82,6 @@ struct PremiumSubscriptionView: View {
                     }
                 })
             }
-            
         }
     }
 }
@@ -75,27 +110,19 @@ private extension PremiumSubscriptionView {
     var buttons: some View {
         PremiumSubscriptionChoiceView(
             buttonAction: { type in
-                switch type {
-                case .non: break
-                case .years:
-                    break
-                case .monthly:
-                    break
-                case .lifelong:
-                    break
-                }
+                premiumSubscriptionChoiceType = type
             },
-            yearsPrimaryTitle: "\(constants.yearsPlan) - \(constants.saving) 50%",
+            yearsPrimaryTitle: "\(constants.yearsPlan)",
             yearsSecondaryTitle: "",
-            yearsPrimaryDescription: "1 050,00 Р / \(constants.year)",
-            yearsSecondaryDescription: "(2 0 90,00 Р / \(constants.year))",
-            monthlyPrimaryTitle: "\(constants.monthlyPlan) - \(constants.saving) 20%",
+            yearsPrimaryDescription: "\(calculatesTheCost(type: .yearsSubscription)) / \(constants.year)",
+            yearsSecondaryDescription: "",
+            monthlyPrimaryTitle: "\(constants.monthlyPlan)",
             monthlySecondaryTitle: "",
-            monthlyPrimaryDescription: "269,00 Р / \(constants.month)",
+            monthlyPrimaryDescription: "\(calculatesTheCost(type: .monthlySubscription)) / \(constants.month)",
             monthlySecondaryDescription: "",
-            lifelongPrimaryTitle: "\(constants.lifePlan) - \(constants.saving) 95%",
+            lifelongPrimaryTitle: "\(constants.lifePlan)",
             lifelongSecondaryTitle: "",
-            lifelongPrimaryDescription: "3 390,00 Р",
+            lifelongPrimaryDescription: "\(calculatesTheCost(type: .lifePlan))",
             lifelongSecondaryDescription: ""
         )
     }
@@ -108,9 +135,28 @@ private extension PremiumSubscriptionView {
                 switch typeButtons {
                 case .non: break
                 case .confirm:
-                    break
+                    switch premiumSubscriptionChoiceType {
+                    case .non:
+                        showAlertNone = true
+                    case .years:
+                        purchaseProduct(type: .yearsSubscription)
+                    case .monthly:
+                        purchaseProduct(type: .monthlySubscription)
+                    case .lifelong:
+                        purchaseProduct(type: .lifePlan)
+                    }
                 case .restore:
-                    break
+                    storeManager.showActivityIndicator = true
+                    storeManager.restoreProducts()
+                    storeManager.statePurchase = { status in
+                        savePremiumStatus(status: status)
+                        appBinding.premium.premiumIsEnabled.wrappedValue = status
+                        if status {
+                            showAlertPremiumAccessActivated = true
+                        } else {
+                            showAlertNoPreviousPurchasesFound = true
+                        }
+                    }
                 case .termsAndConditions:
                     openLinkFromStringURL(link: constants.termsAndConditionsLink)
                 case .privacyPolicy:
@@ -122,16 +168,35 @@ private extension PremiumSubscriptionView {
 }
 
 private extension PremiumSubscriptionView {
+    func purchaseProduct(type: ProductSubscriptionIDs) {
+        guard let getProduct = ProductSubscriptionIDs
+                .getSKProduct(
+                    type: type,
+                    productsSKP: storeManager.myProducts
+                ) else { return }
+        storeManager.showActivityIndicator = true
+        storeManager.purchaseProduct(product: getProduct)
+        storeManager.statePurchase = { status in
+            savePremiumStatus(status: status)
+            appBinding.premium.premiumIsEnabled.wrappedValue = status
+            if status {
+                appBinding.premium.presentingModal.wrappedValue = false
+            }
+        }
+    }
+}
+
+private extension PremiumSubscriptionView {
     struct Constants {
         let titleAdv = NSLocalizedString("Отсутствие рекламы", comment: "")
-        let descriptionAdv = NSLocalizedString("Полностью исключите показ рекламы в приложении", comment: "")
+        let descriptionAdv = NSLocalizedString("Полное отключение всплывающей рекламы", comment: "")
         
         let titleAdvanced = NSLocalizedString("Расширенный функционал", comment: "")
         let descriptionAdvanced = NSLocalizedString("Открывает доступ к заблокированным функциям", comment: "")
         
-        let yearsPlan = NSLocalizedString("Годовой план", comment: "")
-        let monthlyPlan = NSLocalizedString("Месячный план", comment: "")
-        let lifePlan = NSLocalizedString("Пожизненный план", comment: "")
+        let yearsPlan = NSLocalizedString("Годовая подписка", comment: "")
+        let monthlyPlan = NSLocalizedString("Месячная подписка", comment: "")
+        let lifePlan = NSLocalizedString("Разовая покупка навсегда", comment: "")
         let saving = NSLocalizedString("экономия", comment: "")
         let inYear = NSLocalizedString("в год", comment: "")
         let year = NSLocalizedString("год", comment: "")
@@ -139,9 +204,30 @@ private extension PremiumSubscriptionView {
         
         let termsAndConditionsLink = "https://sosinvitalii.com/terms-conditions"
         let privacyPolicyLink = "https://sosinvitalii.com/privacy-policy"
+        
+        let premiumAccessActivated = NSLocalizedString("Премиум доступ активирован", comment: "")
+        let noPreviousPurchasesFound = NSLocalizedString("Ранее совершенных покупок не найдено", comment: "")
+        let youDidNotChooseAnything = NSLocalizedString("Вы ничего не выбрали", comment: "")
     }
 }
 
+private extension PremiumSubscriptionView {
+    func savePremiumStatus(status: Bool) {
+        UserDefaults.standard.set(status, forKey: GlobalConstants.premiumUserDefaultsID)
+    }
+    
+    func calculatesTheCost(type: ProductSubscriptionIDs) -> String {
+        guard let getProduct = ProductSubscriptionIDs.getSKProduct(type: type,
+                                                                   productsSKP: storeManager.myProducts) else { return "error" }
+        return getProduct.localizedPrice ?? "error"
+        
+
+    }
+    
+    func calculatesDiscount() {
+        // TODO: -
+    }
+}
 private extension PremiumSubscriptionView {
     func openLinkFromStringURL(link: String?) {
         guard let link = link else { return }

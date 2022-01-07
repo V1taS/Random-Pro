@@ -9,14 +9,14 @@
 import Foundation
 import StoreKit
 
-class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+final class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     @Published var myProducts = [SKProduct]()
     @Published var transactionState: SKPaymentTransactionState?
     @Published var showActivityIndicator = false
     var request: SKProductsRequest!
     
-    
+    var statePurchase: ((Bool) -> Void)?
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         print("Did receive response")
@@ -45,39 +45,60 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         print("Request did fail: \(error)")
     }
     
-    //        эта функция вызывается каждый раз, когда что-то меняется в статусе транзакции (транзакций), обрабатываемой в данный момент.
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        if queue.transactions.isEmpty {
+            statePurchase?(false)
+            showActivityIndicator = false
+        }
+    }
+    
+    // эта функция вызывается каждый раз, когда что-то меняется в статусе транзакции (транзакций), обрабатываемой в данный момент.
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchasing:
                 transactionState = .purchasing
             case .purchased:
-                showActivityIndicator = false
+                statePurchase?(true)
                 queue.finishTransaction(transaction)
                 transactionState = .purchased
-            case .restored:
                 showActivityIndicator = false
+            case .restored:
+                statePurchase?(true)
                 queue.finishTransaction(transaction)
                 transactionState = .restored
+                showActivityIndicator = false
             case .failed, .deferred:
-                showActivityIndicator = false
                 transactionState = .failed
-            default:
+                print("\(String(describing: transaction.error))")
                 showActivityIndicator = false
+            @unknown default:
                 queue.finishTransaction(transaction)
+                showActivityIndicator = false
             }
         }
     }
     
-    
-    //    Чтобы начать транзакцию, мы реализуем новую функцию под названием «PurchaseProducts», которая принимает SKProduct.
+    // Чтобы начать транзакцию, мы реализуем новую функцию под названием «PurchaseProducts», которая принимает SKProduct.
     func purchaseProduct(product: SKProduct) {
         if SKPaymentQueue.canMakePayments() {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
         } else {
-            print("User can't make payment.")
+            alert(NSLocalizedString("Пользователь не может произвести оплату", comment: ""))
         }
     }
     
+    func restoreProducts() {
+        print("Restoring products ...")
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    
+}
+
+private extension StoreManager {
+    func alert(_ message: String) {
+        UIApplication.shared.windows.first?.rootViewController?
+            .showAlert(with: NSLocalizedString("Ошибка", comment: ""), and: message, style: .alert)
+    }
 }

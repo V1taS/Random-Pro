@@ -45,7 +45,7 @@ private extension SettingsView {
     var categories: some View {
         HStack {
             NavigationLink(
-                destination: CategoriesView(appBinding: appBinding)
+                destination: CategoriesNewView(appBinding: appBinding)
                     .allowAutoDismiss { false }) {
                 HStack {
                     Image(systemName: "square.grid.2x2")

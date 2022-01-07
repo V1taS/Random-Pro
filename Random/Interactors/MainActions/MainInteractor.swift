@@ -54,7 +54,7 @@ struct MainInteractorImpl: MainInteractor {
     func saveMainMenuToUserDefaults(state: Binding<AppState.AppData>) {
         DispatchQueue.global(qos: .background).async {
             saveStoreCellMenu(state: state)
-            saveStoreCellMenuHidden(state: state)
+//            saveStoreCellMenuHidden(state: state)
         }
     }
 }
@@ -67,13 +67,13 @@ extension MainInteractorImpl {
     }
 }
 
-extension MainInteractorImpl {
-    private func saveStoreCellMenuHidden(state: Binding<AppState.AppData>) {
-        UserDefaults.standard.set(state.main
-                                    .storeCellMenuHidden.wrappedValue,
-                                  forKey: "MainMenuStoreCellMenuHidden")
-    }
-}
+//extension MainInteractorImpl {
+//    private func saveStoreCellMenuHidden(state: Binding<AppState.AppData>) {
+//        UserDefaults.standard.set(state.main
+//                                    .storeCellMenuHidden.wrappedValue,
+//                                  forKey: "MainMenuStoreCellMenuHidden")
+//    }
+//}
 
 extension MainInteractorImpl {
     private func decoderFilmsArrBestFilm(forKey: String) -> [KinopoiskBestFilmsResult.BestFilm]? {
@@ -339,7 +339,7 @@ extension MainInteractorImpl {
         
         state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? listNameMenu
         
-        state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
+//        state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
     }
 }
 

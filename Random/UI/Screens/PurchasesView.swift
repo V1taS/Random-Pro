@@ -7,14 +7,14 @@
 //
 
 import SwiftUI
-import  StoreKit
+import StoreKit
 
 struct PurchasesView: View {
     
     @ObservedObject var storeManager: StoreManager
     
     var body: some View {
-        LoadingView(isShowing: $storeManager.showActivityIndicator){
+        LoadingView(isShowing: $storeManager.showActivityIndicator) {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     teaView
@@ -38,7 +38,7 @@ struct PurchasesView: View {
 private extension PurchasesView {
     var teaView: some View {
         Button(action: {
-            guard let getTeaPrice = getTeaPrice() else { return }
+            guard let getTeaPrice = ProductSubscriptionIDs.getSKProduct(type: .tipForTea, productsSKP: storeManager.myProducts) else { return }
             storeManager.showActivityIndicator = true
             storeManager.purchaseProduct(product: getTeaPrice)
             
@@ -53,7 +53,7 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        if let priceTea = getTeaPrice() {
+                        if let priceTea = ProductSubscriptionIDs.getSKProduct(type: .tipForTea, productsSKP: storeManager.myProducts) {
                             Text("\(priceTea.localizedPrice ?? "error" )")
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoRegular16())
@@ -69,16 +69,10 @@ private extension PurchasesView {
 }
 
 private extension PurchasesView {
-    func getTeaPrice() -> SKProduct? {
-        let priceTea = storeManager.myProducts.filter { $0.productIdentifier == "com.sosinvitalii.Random.TipForTea" }
-        return priceTea.first
-    }
-}
-
-private extension PurchasesView {
     var wineView: some View {
         Button(action: {
-            guard let getTeaPrice = getWinePrice() else { return }
+            guard let getTeaPrice = ProductSubscriptionIDs.getSKProduct(type: .tipForWine,
+                                                                        productsSKP: storeManager.myProducts) else { return }
             storeManager.showActivityIndicator = true
             storeManager.purchaseProduct(product: getTeaPrice)
         }) {
@@ -92,7 +86,8 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        if let priceTea = getWinePrice() {
+                        if let priceTea = ProductSubscriptionIDs.getSKProduct(type: .tipForWine,
+                                                                              productsSKP: storeManager.myProducts) {
                             Text("\(priceTea.localizedPrice ?? "error" )")
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoRegular16())
@@ -107,16 +102,10 @@ private extension PurchasesView {
 }
 
 private extension PurchasesView {
-    func getWinePrice() -> SKProduct? {
-        let priceTea = storeManager.myProducts.filter { $0.productIdentifier == "com.sosinvitalii.Random.TipForWine" }
-        return priceTea.first
-    }
-}
-
-private extension PurchasesView {
     var breakfastView: some View {
         Button(action: {
-            guard let getTeaPrice = getBreakfastPrice() else { return }
+            guard let getTeaPrice = ProductSubscriptionIDs.getSKProduct(type: .tipForBreakfast,
+                                                                        productsSKP: storeManager.myProducts) else { return }
             storeManager.showActivityIndicator = true
             storeManager.purchaseProduct(product: getTeaPrice)
         }) {
@@ -130,7 +119,8 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        if let priceTea = getBreakfastPrice() {
+                        if let priceTea = ProductSubscriptionIDs.getSKProduct(type: .tipForBreakfast,
+                                                                              productsSKP: storeManager.myProducts) {
                             Text("\(priceTea.localizedPrice ?? "error" )")
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoRegular16())
@@ -145,16 +135,10 @@ private extension PurchasesView {
 }
 
 private extension PurchasesView {
-    func getBreakfastPrice() -> SKProduct? {
-        let priceTea = storeManager.myProducts.filter { $0.productIdentifier == "com.sosinvitalii.Random.TipForBreakfast" }
-        return priceTea.first
-    }
-}
-
-private extension PurchasesView {
     var lunchView: some View {
         Button(action: {
-            guard let getTeaPrice = getLunchPrice() else { return }
+            guard let getTeaPrice = ProductSubscriptionIDs.getSKProduct(type: .tipForLunch,
+                                                                        productsSKP: storeManager.myProducts) else { return }
             storeManager.showActivityIndicator = true
             storeManager.purchaseProduct(product: getTeaPrice)
         }) {
@@ -168,7 +152,8 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        if let priceTea = getLunchPrice() {
+                        if let priceTea = ProductSubscriptionIDs.getSKProduct(type: .tipForLunch,
+                                                                              productsSKP: storeManager.myProducts) {
                             Text("\(priceTea.localizedPrice ?? "error" )")
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoRegular16())
@@ -183,16 +168,10 @@ private extension PurchasesView {
 }
 
 private extension PurchasesView {
-    func getLunchPrice() -> SKProduct? {
-        let priceTea = storeManager.myProducts.filter { $0.productIdentifier == "com.sosinvitalii.Random.TipForLunch" }
-        return priceTea.first
-    }
-}
-
-private extension PurchasesView {
     var dinnerView: some View {
         Button(action: {
-            guard let getTeaPrice = getDinnerPrice() else { return }
+            guard let getTeaPrice = ProductSubscriptionIDs.getSKProduct(type: .tipForDinner,
+                                                                        productsSKP: storeManager.myProducts) else { return }
             storeManager.showActivityIndicator = true
             storeManager.purchaseProduct(product: getTeaPrice)
         }) {
@@ -206,7 +185,8 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        if let priceTea = getDinnerPrice() {
+                        if let priceTea = ProductSubscriptionIDs.getSKProduct(type: .tipForDinner,
+                                                                              productsSKP: storeManager.myProducts) {
                             Text("\(priceTea.localizedPrice ?? "error" )")
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoRegular16())
@@ -221,16 +201,10 @@ private extension PurchasesView {
 }
 
 private extension PurchasesView {
-    func getDinnerPrice() -> SKProduct? {
-        let priceTea = storeManager.myProducts.filter { $0.productIdentifier == "com.sosinvitalii.Random.TipForDinner" }
-        return priceTea.first
-    }
-}
-
-private extension PurchasesView {
     var dateWithMyGirlView: some View {
         Button(action: {
-            guard let getTeaPrice = getDateWithMyGirlPrice() else { return }
+            guard let getTeaPrice = ProductSubscriptionIDs.getSKProduct(type: .tipForDateWithMyGirlfriend,
+                                                                        productsSKP: storeManager.myProducts) else { return }
             storeManager.showActivityIndicator = true
             storeManager.purchaseProduct(product: getTeaPrice)
         }) {
@@ -244,7 +218,8 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        if let priceTea = getDateWithMyGirlPrice() {
+                        if let priceTea = ProductSubscriptionIDs.getSKProduct(type: .tipForDateWithMyGirlfriend,
+                                                                              productsSKP: storeManager.myProducts) {
                             Text("\(priceTea.localizedPrice ?? "error" )")
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoRegular16())
@@ -259,16 +234,10 @@ private extension PurchasesView {
 }
 
 private extension PurchasesView {
-    func getDateWithMyGirlPrice() -> SKProduct? {
-        let priceTea = storeManager.myProducts.filter { $0.productIdentifier == "com.sosinvitalii.Random.TipForDateWithMyGirlfriend" }
-        return priceTea.first
-    }
-}
-
-private extension PurchasesView {
     var tripView: some View {
         Button(action: {
-            guard let getTeaPrice = getTripPrice() else { return }
+            guard let getTeaPrice = ProductSubscriptionIDs.getSKProduct(type: .tipForTravel,
+                                                                        productsSKP: storeManager.myProducts) else { return }
             storeManager.showActivityIndicator = true
             storeManager.purchaseProduct(product: getTeaPrice)
         }) {
@@ -282,7 +251,8 @@ private extension PurchasesView {
                             .foregroundColor(.primaryGray())
                             .font(.robotoBold25())
                         
-                        if let priceTea = getTripPrice() {
+                        if let priceTea = ProductSubscriptionIDs.getSKProduct(type: .tipForTravel,
+                                                                              productsSKP: storeManager.myProducts) {
                             Text("\(priceTea.localizedPrice ?? "error" )")
                                 .foregroundColor(.primaryGray())
                                 .font(.robotoRegular16())
@@ -293,13 +263,6 @@ private extension PurchasesView {
                 Divider()
             }
         }
-    }
-}
-
-private extension PurchasesView {
-    func getTripPrice() -> SKProduct? {
-        let priceTea = storeManager.myProducts.filter { $0.productIdentifier == "com.sosinvitalii.Random.TipForTravel" }
-        return priceTea.first
     }
 }
 

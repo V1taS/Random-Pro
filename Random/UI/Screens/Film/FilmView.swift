@@ -40,13 +40,11 @@ struct FilmView: View {
             .dismissingKeyboard()
             
             .navigationBarTitle(Text(NSLocalizedString("Фильмы", comment: "")), displayMode: .inline)
-            .navigationBarItems(trailing: HStack(spacing: .zero) {
+            .navigationBarItems(trailing: HStack(spacing: 24) {
                 Spacer()
                 navigationButtonPlay
                 navigationButtonGear
-            }
-                                    .frame(width: 110)
-            )
+            })
             
             .sheet(isPresented: appBinding.film.showSettings,
                    onDismiss: {

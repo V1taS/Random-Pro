@@ -27,7 +27,11 @@ private extension TeamResultsView {
         List {
             
             if !appBinding.team.listResult1.wrappedValue.isEmpty {
-                Section(header: Text(NSLocalizedString("Команда номер", comment: "") + " 1")) {
+                Section(header: HStack {
+                    Text(NSLocalizedString("Команда номер", comment: "") + " 1")
+                    Spacer()
+                    Text(NSLocalizedString("Количество игроков", comment: "") + " \(appBinding.team.listResult1.wrappedValue.count)")
+                }) {
                     ForEach(appBinding.team.listResult1.wrappedValue, id: \.name) { player in
                         HStack(spacing: 16) {
                             Image("\(player.photo)")
@@ -44,7 +48,11 @@ private extension TeamResultsView {
             }
             
             if !appBinding.team.listResult2.wrappedValue.isEmpty {
-                Section(header: Text(NSLocalizedString("Команда номер", comment: "") + " 2")) {
+                Section(header: HStack {
+                    Text(NSLocalizedString("Команда номер", comment: "") + " 2")
+                    Spacer()
+                    Text(NSLocalizedString("Количество игроков", comment: "") + " \(appBinding.team.listResult2.wrappedValue.count)")
+                }) {
                     ForEach(appBinding.team.listResult2.wrappedValue, id: \.name) { player in
                         HStack(spacing: 16) {
                             Image("\(player.photo)")
@@ -61,7 +69,11 @@ private extension TeamResultsView {
             }
             
             if !appBinding.team.listResult3.wrappedValue.isEmpty {
-                Section(header: Text(NSLocalizedString("Команда номер", comment: "") + " 3")) {
+                Section(header: HStack {
+                    Text(NSLocalizedString("Команда номер", comment: "") + " 3")
+                    Spacer()
+                    Text(NSLocalizedString("Количество игроков", comment: "") + " \(appBinding.team.listResult3.wrappedValue.count)")
+                }) {
                     ForEach(appBinding.team.listResult3.wrappedValue, id: \.name) { player in
                         HStack(spacing: 16) {
                             Image("\(player.photo)")
@@ -79,7 +91,11 @@ private extension TeamResultsView {
             
             
             if !appBinding.team.listResult4.wrappedValue.isEmpty {
-                Section(header: Text(NSLocalizedString("Команда номер", comment: "") + " 4")) {
+                Section(header: HStack {
+                    Text(NSLocalizedString("Команда номер", comment: "") + " 4")
+                    Spacer()
+                    Text(NSLocalizedString("Количество игроков", comment: "") + " \(appBinding.team.listResult4.wrappedValue.count)")
+                }) {
                     ForEach(appBinding.team.listResult4.wrappedValue, id: \.name) { player in
                         HStack(spacing: 16) {
                             Image("\(player.photo)")
@@ -96,7 +112,11 @@ private extension TeamResultsView {
             }
             
             if !appBinding.team.listResult5.wrappedValue.isEmpty {
-                Section(header: Text(NSLocalizedString("Команда номер", comment: "") + " 5")) {
+                Section(header: HStack {
+                    Text(NSLocalizedString("Команда номер", comment: "") + " 5")
+                    Spacer()
+                    Text(NSLocalizedString("Количество игроков", comment: "") + " \(appBinding.team.listResult5.wrappedValue.count)")
+                }) {
                     ForEach(appBinding.team.listResult5.wrappedValue, id: \.name) { player in
                         HStack(spacing: 16) {
                             Image("\(player.photo)")
@@ -113,7 +133,11 @@ private extension TeamResultsView {
             }
             
             if !appBinding.team.listResult6.wrappedValue.isEmpty {
-                Section(header: Text(NSLocalizedString("Команда номер", comment: "") + " 6")) {
+                Section(header: HStack {
+                    Text(NSLocalizedString("Команда номер", comment: "") + " 6")
+                    Spacer()
+                    Text(NSLocalizedString("Количество игроков", comment: "") + " \(appBinding.team.listResult6.wrappedValue.count)")
+                }) {
                     ForEach(appBinding.team.listResult6.wrappedValue, id: \.name) { player in
                         HStack(spacing: 16) {
                             Image("\(player.photo)")

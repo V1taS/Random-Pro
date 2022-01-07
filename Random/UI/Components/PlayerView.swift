@@ -25,7 +25,7 @@ struct PlayerView: View {
                     .font(.robotoMedium14())
                     .foregroundColor(.primaryGray())
                     .multilineTextAlignment(.center)
-                    .frame(width: 90)
+                    .frame(width: 80)
             }
         }
         .frame(width: 90, height: 100)

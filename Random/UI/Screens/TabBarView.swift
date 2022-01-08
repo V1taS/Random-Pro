@@ -16,16 +16,22 @@ struct TabBarView: View {
     private var appBinding: Binding<AppState.AppData> {
         $appState.dispatched(to: injected.appState, \.appData)
     }
-    
     @Environment(\.injected) private var injected: DIContainer
     
+    @Environment(\.viewController) private var viewControllerHolder: UIViewController?
+    private var viewController: UIViewController? {
+        self.viewControllerHolder!
+    }
+    
     private let reviewTrackingManager = ReviewTrackingManager()
-    private let reviewUtility = ReviewUtility()
+    private let reviewUtility = RecordReviewApp()
     
     var body: some View {
         ZStack {
             TabView {
-                MainView(appBinding: appBinding)
+                MainView(appBinding: appBinding, actionButton: {
+                    presentADV()
+                })
                     .tabItem {
                         Image(systemName: "slider.horizontal.3")
                         Text(NSLocalizedString("Генераторы", comment: ""))
@@ -44,7 +50,7 @@ struct TabBarView: View {
             reviewUtility.recordLaunch()
             loadPremiumStatus()
         }
-        .sheet(isPresented: appBinding.premium.presentingModal, onDismiss: nil) {
+        .sheet(isPresented: appBinding.premium.presentingModal, onDismiss: {}) {
             PremiumSubscriptionView(storeManager: storeManager, appBinding: appBinding)
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
@@ -93,6 +99,23 @@ private extension TabBarView {
         }
         .transition(.move(edge: .bottom))
         .animation(.easeOut(duration: 0.5))
+    }
+}
+
+// MARK: Present ADV
+private extension TabBarView {
+    private func presentADV() {
+        if !appBinding.premium.premiumIsEnabled.wrappedValue {
+            if appBinding.adv.advCount.wrappedValue % GlobalConstants.adDisplayInterval == .zero {
+                self.viewController?.present(style: .fullScreen, animated: false) {
+                    NativeAdViewRepresentable(willDisappearAction: {
+                        self.viewController?.dismiss(animated: true, completion: nil)
+                    }, closeButtonAction: {
+                        self.viewController?.dismiss(animated: true, completion: nil)
+                    })
+                }
+            }
+        }
     }
 }
 

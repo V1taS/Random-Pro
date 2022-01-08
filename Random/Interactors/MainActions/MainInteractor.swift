@@ -10,12 +10,19 @@ import Combine
 import SwiftUI
 
 protocol MainInteractor {
+    func recordClick(state: Binding<AppState.AppData>)
     func userDefaultsGet(state: Binding<AppState.AppData>)
     func cleanAll(state: Binding<AppState.AppData>)
     func saveMainMenuToUserDefaults(state: Binding<AppState.AppData>)
 }
 
 struct MainInteractorImpl: MainInteractor {
+    
+    func recordClick(state: Binding<AppState.AppData>) {
+        state.adv.advCount.wrappedValue += 1
+        UserDefaults.standard.set(state.adv.advCount.wrappedValue, forKey: GlobalConstants.recordClickUserDefaultsID)
+    }
+    
     func userDefaultsGet(state: Binding<AppState.AppData>) {
         DispatchQueue.global(qos: .background).async {
             userDefaultsGetMain(state: state)
@@ -31,6 +38,7 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultContact(state: state)
             userDefaultFilms(state: state)
             userDefaultMusic(state: state)
+            getClick(state: state)
         }
     }
     
@@ -60,6 +68,11 @@ struct MainInteractorImpl: MainInteractor {
 }
 
 extension MainInteractorImpl {
+    private func getClick(state: Binding<AppState.AppData>) {
+        let advCount = UserDefaults.standard.integer(forKey: GlobalConstants.recordClickUserDefaultsID)
+        state.adv.advCount.wrappedValue = advCount
+    }
+    
     private func saveStoreCellMenu(state: Binding<AppState.AppData>) {
         UserDefaults.standard.set(state.main
                                     .storeCellMenu.wrappedValue,

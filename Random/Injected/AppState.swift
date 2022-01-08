@@ -34,6 +34,7 @@ extension AppState {
         var music = Music()
         var travel = Travel()
         var premium = Premium()
+        var adv = ADV()
     }
 }
 

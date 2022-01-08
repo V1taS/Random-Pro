@@ -11,8 +11,11 @@ import SwiftUI
 struct CubeView: View {
     
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State var countCube = ["1", "2", "3", "4", "5", "6"]
@@ -201,6 +204,8 @@ private extension CubeView {
             appBinding.cube.selectedCube.wrappedValue = selectedCube
             generateCube(state: appBinding)
             saveCubeToUserDefaults(state: appBinding)
+            recordClick(state: appBinding)
+            actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -236,8 +241,15 @@ private extension CubeView {
     }
 }
 
+// MARK: Record Click
+private extension CubeView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct CubeView_Previews: PreviewProvider {
     static var previews: some View {
-        CubeView(appBinding: .constant(.init()))
+        CubeView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

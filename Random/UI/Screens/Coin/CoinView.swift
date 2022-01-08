@@ -11,8 +11,11 @@ import SwiftUI
 struct CoinView: View {
     
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
@@ -65,6 +68,8 @@ private extension CoinView {
         Button(action: {
             generateCoins(state: appBinding)
             saveCoinIToUserDefaults(state: appBinding)
+            recordClick(state: appBinding)
+            actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -125,8 +130,15 @@ private extension CoinView {
     }
 }
 
+// MARK: Record Click
+private extension CoinView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct CoinView_Previews: PreviewProvider {
     static var previews: some View {
-        CoinView(appBinding: .constant(.init()))
+        CoinView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

@@ -9,9 +9,13 @@
 import SwiftUI
 
 struct DateAndTimeView: View {
+    
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     
@@ -58,6 +62,8 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateDay(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
+                    recordClick(state: appBinding)
+                    actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     ButtonView(textColor: .primaryPale(),
@@ -78,6 +84,8 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateTime(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
+                    recordClick(state: appBinding)
+                    actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     ButtonView(textColor: .primaryPale(),
@@ -101,6 +109,8 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateDate(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
+                    recordClick(state: appBinding)
+                    actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     ButtonView(textColor: .primaryPale(),
@@ -121,6 +131,8 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateMonth(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
+                    recordClick(state: appBinding)
+                    actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     ButtonView(textColor: .primaryPale(),
@@ -211,8 +223,15 @@ private extension DateAndTimeView {
     }
 }
 
+// MARK: Record Click
+private extension DateAndTimeView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct DateAndTimeView_Previews: PreviewProvider {
     static var previews: some View {
-        DateAndTimeView(appBinding: .constant(.init()))
+        DateAndTimeView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

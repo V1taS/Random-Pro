@@ -11,8 +11,11 @@ import SwiftUI
 struct NumberView: View {
     
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
@@ -133,7 +136,9 @@ private extension NumberView {
                 generateNumber(state: appBinding)
                 Feedback.shared.impactHeavy(.medium)
                 saveNumberToUserDefaults(state: appBinding)
+                recordClick(state: appBinding)
             }
+            actionButton?()
         }) {
             ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
@@ -167,8 +172,15 @@ private extension NumberView {
     }
 }
 
+// MARK: Record Click
+private extension NumberView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct NumberView_Previews: PreviewProvider {
     static var previews: some View {
-        NumberView(appBinding: .constant(.init()))
+        NumberView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

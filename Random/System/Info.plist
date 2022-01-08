@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>zq492l623r.skadnetwork</string>
+		</dict>
+	</array>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Can you use your activity data? If you allow, Random Pro&apos;s ads on websites and other apps will be more relevant.</string>
 	<key>CFBundleDevelopmentRegion</key>

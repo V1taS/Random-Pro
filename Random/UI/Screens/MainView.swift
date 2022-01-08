@@ -12,8 +12,11 @@ struct MainView: View {
     
     private var appBinding: Binding<AppState.AppData>
     private let nameMenu = AppActions.MainActions.MenuName.self
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     private let columns = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 3
@@ -81,7 +84,7 @@ private extension MainView {
         VStack {
             if appBinding.premium.premiumIsEnabled.wrappedValue {
                 NavigationLink(
-                    destination: FilmView(appBinding: appBinding)) {
+                    destination: FilmView(appBinding: appBinding, actionButton: actionButton)) {
                         CellMainView(image: "film",
                                      title: NSLocalizedString("Фильмы", comment: ""),
                                      isLabelDisabled: false,
@@ -104,7 +107,7 @@ private extension MainView {
         VStack {
             if appBinding.premium.premiumIsEnabled.wrappedValue {
                 NavigationLink(
-                    destination: TeamView(appBinding: appBinding)) {
+                    destination: TeamView(appBinding: appBinding, actionButton: actionButton)) {
                         CellMainView(image: "person.3",
                                      title: NSLocalizedString("Команды",
                                                               comment: ""),
@@ -127,7 +130,7 @@ private extension MainView {
 private extension MainView {
     var number: some View {
         NavigationLink(
-            destination: NumberView(appBinding: appBinding)) {
+            destination: NumberView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "number",
                              title: NSLocalizedString("Число", comment: ""),
                              isLabelDisabled: true,
@@ -140,7 +143,7 @@ private extension MainView {
 private extension MainView {
     var yesOrNot: some View {
         NavigationLink(
-            destination: YesOrNotView(appBinding: appBinding)) {
+            destination: YesOrNotView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "questionmark.square",
                              title: NSLocalizedString("Да или Нет", comment: ""),
                              isLabelDisabled: true,
@@ -153,7 +156,7 @@ private extension MainView {
 private extension MainView {
     var characters: some View {
         NavigationLink(
-            destination: CharactersView(appBinding: appBinding)) {
+            destination: CharactersView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "textbox",
                              title: NSLocalizedString("Буква", comment: ""),
                              isLabelDisabled: true,
@@ -166,7 +169,7 @@ private extension MainView {
 private extension MainView {
     var listWords: some View {
         NavigationLink(
-            destination: ListWordsView(appBinding: appBinding)) {
+            destination: ListWordsView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "list.bullet.below.rectangle",
                              title: NSLocalizedString("Список", comment: ""),
                              isLabelDisabled: true,
@@ -179,7 +182,7 @@ private extension MainView {
 private extension MainView {
     var coin: some View {
         NavigationLink(
-            destination: CoinView(appBinding: appBinding)) {
+            destination: CoinView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "bitcoinsign.circle",
                              title: NSLocalizedString("Монета", comment: ""),
                              isLabelDisabled: true,
@@ -192,7 +195,7 @@ private extension MainView {
 private extension MainView {
     var cube: some View {
         NavigationLink(
-            destination: CubeView(appBinding: appBinding)) {
+            destination: CubeView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "cube",
                              title: NSLocalizedString("Кубики", comment: ""),
                              isLabelDisabled: true,
@@ -205,7 +208,7 @@ private extension MainView {
 private extension MainView {
     var dateAndTime: some View {
         NavigationLink(
-            destination: DateAndTimeView(appBinding: appBinding)) {
+            destination: DateAndTimeView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "calendar",
                              title: NSLocalizedString("Дата и время",
                                                       comment: ""),
@@ -219,7 +222,7 @@ private extension MainView {
 private extension MainView {
     var lottery: some View {
         NavigationLink(
-            destination: LotteryView(appBinding: appBinding)) {
+            destination: LotteryView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "tag",
                              title: NSLocalizedString("Лотерея",
                                                       comment: ""),
@@ -235,7 +238,7 @@ private extension MainView {
         VStack {
             if appBinding.premium.premiumIsEnabled.wrappedValue {
                 NavigationLink(
-                    destination: TravelView(appBinding: appBinding)) {
+                    destination: TravelView(appBinding: appBinding, actionButton: actionButton)) {
                         CellMainView(image: "airplane",
                                      title: NSLocalizedString("Путешествие",
                                                               comment: ""),
@@ -258,7 +261,7 @@ private extension MainView {
 private extension MainView {
     var music: some View {
         NavigationLink(
-            destination: MusicView(appBinding: appBinding)) {
+            destination: MusicView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "tv.music.note",
                              title: NSLocalizedString("Музыка",
                                                       comment: ""),
@@ -273,7 +276,7 @@ private extension MainView {
 private extension MainView {
     var contact: some View {
         NavigationLink(
-            destination: ContactView(appBinding: appBinding)) {
+            destination: ContactView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "phone.circle",
                              title: NSLocalizedString("Контакт",
                                                       comment: ""),
@@ -359,6 +362,6 @@ private extension MainView {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(appBinding: .constant(.init()))
+        MainView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

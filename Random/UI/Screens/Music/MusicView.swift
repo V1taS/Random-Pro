@@ -14,8 +14,11 @@ import SDWebImageSwiftUI
 struct MusicView: View {
     
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
@@ -199,9 +202,8 @@ private extension MusicView {
 private extension MusicView {
     var generateButton: some View {
         Button(action: {
-            
-            // Пропустить трек
-            //            self.musicPlayer.skipToNextItem()
+            recordClick(state: appBinding)
+            actionButton?()
             
             DispatchQueue.global(qos: .userInteractive).async {
                 getMusicFile(state: appBinding)
@@ -343,8 +345,15 @@ private extension MusicView {
     }
 }
 
+// MARK: Record Click
+private extension MusicView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct MusicView_Previews: PreviewProvider {
     static var previews: some View {
-        MusicView(appBinding: .constant(.init()))
+        MusicView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

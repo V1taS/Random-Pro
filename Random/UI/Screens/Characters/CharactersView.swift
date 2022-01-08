@@ -11,8 +11,11 @@ import SwiftUI
 struct CharactersView: View {
     
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State var lang = [NSLocalizedString("Русские буквы", comment: ""),
@@ -65,6 +68,8 @@ private extension CharactersView {
             appBinding.characters.selectedLang.wrappedValue = selectedLang
             generateYesOrNo(state: appBinding)
             saveCharactersToUserDefaults(state: appBinding)
+            recordClick(state: appBinding)
+            actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -122,9 +127,16 @@ private extension CharactersView {
     }
 }
 
+// MARK: Record Click
+private extension CharactersView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct CharactersView_Previews: PreviewProvider {
     static var previews: some View {
-        CharactersView(appBinding: .constant(.init()))
+        CharactersView(appBinding: .constant(.init()), actionButton: nil)
     }
 }
 

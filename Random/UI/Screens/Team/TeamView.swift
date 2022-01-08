@@ -9,9 +9,13 @@
 import SwiftUI
 
 struct TeamView: View {
+    
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State var countTeam = ["1", "2", "3", "4", "5", "6"]
@@ -268,7 +272,9 @@ private extension TeamView {
                 saveTeamToUserDefaults(state: appBinding)
                 appBinding.team.disabledPickerView.wrappedValue = true
                 Feedback.shared.impactHeavy(.medium)
+                recordClick(state: appBinding)
             }
+            actionButton?()
         }) {
             ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
@@ -312,8 +318,15 @@ private extension TeamView {
     }
 }
 
+// MARK: Record Click
+private extension TeamView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct TeamView_Previews: PreviewProvider {
     static var previews: some View {
-        TeamView(appBinding: .constant(.init()))
+        TeamView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

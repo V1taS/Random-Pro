@@ -10,9 +10,13 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct FilmView: View {
+    
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
@@ -157,6 +161,9 @@ private extension FilmView {
             removeCurrentFilm(state: appBinding)
             
             saveFilmsToUserDefaults(state: appBinding)
+            
+            recordClick(state: appBinding)
+            actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -351,8 +358,15 @@ private extension FilmView {
     }
 }
 
+// MARK: Record Click
+private extension FilmView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct FilmView_Previews: PreviewProvider {
     static var previews: some View {
-        FilmView(appBinding: .constant(.init()))
+        FilmView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

@@ -11,8 +11,11 @@ import SwiftUI
 struct LotteryView: View {
     
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
@@ -128,7 +131,9 @@ private extension LotteryView {
                 generateNumbers(state: appBinding)
                 Feedback.shared.impactHeavy(.medium)
                 saveLotteryToUserDefaults(state: appBinding)
+                recordClick(state: appBinding)
             }
+            actionButton?()
         }) {
             ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
@@ -163,8 +168,15 @@ private extension LotteryView {
     }
 }
 
+// MARK: Record Click
+private extension LotteryView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct LotteryView_Previews: PreviewProvider {
     static var previews: some View {
-        LotteryView(appBinding: .constant(.init()))
+        LotteryView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

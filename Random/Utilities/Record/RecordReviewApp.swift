@@ -9,7 +9,7 @@
 import Foundation
 import StoreKit
 
-final class ReviewUtility {
+final class RecordReviewApp {
 
   func recordLaunch() {
     let defaults = UserDefaults.standard

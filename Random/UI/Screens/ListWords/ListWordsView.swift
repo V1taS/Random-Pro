@@ -11,8 +11,11 @@ import SwiftUI
 struct ListWordsView: View {
     
     private var appBinding: Binding<AppState.AppData>
-    init(appBinding: Binding<AppState.AppData>) {
+    private var actionButton: (() -> Void)?
+    
+    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
+        self.actionButton = actionButton
     }
     @Environment(\.injected) private var injected: DIContainer
     @State private var isPressedButton = false
@@ -51,6 +54,8 @@ private extension ListWordsView {
         Button(action: {
             generateWords(state: appBinding)
             saveListWordsToUserDefaults(state: appBinding)
+            recordClick(state: appBinding)
+            actionButton?()
             if !appBinding.listWords.listTemp.wrappedValue.isEmpty {
                 Feedback.shared.impactHeavy(.medium)
             }
@@ -113,8 +118,15 @@ private extension ListWordsView {
     }
 }
 
+// MARK: Record Click
+private extension ListWordsView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
+    }
+}
+
 struct ListWordsView_Previews: PreviewProvider {
     static var previews: some View {
-        ListWordsView(appBinding: .constant(.init()))
+        ListWordsView(appBinding: .constant(.init()), actionButton: nil)
     }
 }

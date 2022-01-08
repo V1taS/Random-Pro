@@ -28,6 +28,8 @@ struct PremiumSubscriptionView: View {
     private var showAlertNoPreviousPurchasesFound = false
     @State
     private var showAlertNone = false
+    @State
+    private var mainButtonTitle = NSLocalizedString("Продолжить", comment: "")
     
     var body: some View {
         NavigationView {
@@ -46,7 +48,7 @@ struct PremiumSubscriptionView: View {
                                 }))
                             }
                         buttons
-                            .padding(.top, 32)
+                            .padding(.top, 24)
                             .padding(.horizontal)
                             .alert(isPresented: $showAlertNoPreviousPurchasesFound) {
                                 Alert(title: Text(NSLocalizedString("Внимание", comment: "")),
@@ -58,7 +60,7 @@ struct PremiumSubscriptionView: View {
                             }
                         
                         confirmButtons
-                            .padding(.top, 32)
+                            .padding(.top, 24)
                             .alert(isPresented: $showAlertNone) {
                                 Alert(title: Text(NSLocalizedString("Внимание", comment: "")),
                                       message: Text(constants.youDidNotChooseAnything),
@@ -111,6 +113,16 @@ private extension PremiumSubscriptionView {
         PremiumSubscriptionChoiceView(
             buttonAction: { type in
                 premiumSubscriptionChoiceType = type
+                switch type {
+                case .non:
+                    mainButtonTitle = constants.mainButtonTitle
+                case .years:
+                    mainButtonTitle = constants.mainButtonTitleSubscribe
+                case .monthly:
+                    mainButtonTitle = constants.mainButtonTitleSubscribe
+                case .lifelong:
+                    mainButtonTitle = constants.mainButtonTitleBuy
+                }
             },
             yearsPrimaryTitle: "\(constants.yearsPlan)",
             yearsSecondaryTitle: "",
@@ -162,7 +174,8 @@ private extension PremiumSubscriptionView {
                 case .privacyPolicy:
                     openLinkFromStringURL(link: constants.privacyPolicyLink)
                 }
-            }
+            },
+            nameMainButton: $mainButtonTitle
         )
     }
 }
@@ -208,6 +221,10 @@ private extension PremiumSubscriptionView {
         let premiumAccessActivated = NSLocalizedString("Премиум доступ активирован", comment: "")
         let noPreviousPurchasesFound = NSLocalizedString("Ранее совершенных покупок не найдено", comment: "")
         let youDidNotChooseAnything = NSLocalizedString("Вы ничего не выбрали", comment: "")
+        
+        let mainButtonTitle = NSLocalizedString("Продолжить", comment: "")
+        let mainButtonTitleSubscribe = NSLocalizedString("Подписаться", comment: "")
+        let mainButtonTitleBuy = NSLocalizedString("Купить", comment: "")
     }
 }
 

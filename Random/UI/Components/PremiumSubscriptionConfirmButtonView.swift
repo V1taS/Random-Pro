@@ -29,20 +29,29 @@ struct PremiumSubscriptionConfirmButtonView: View {
     
     // MARK: - Public
     var actionButton: ((TypeButtons) -> Void)?
+    @Binding var nameMainButton: String
     
     var body: some View {
-        VStack(alignment: .center, spacing: 24) {
+        VStack(alignment: .center, spacing: 16) {
             Divider()
             restorePurchaseButton
             mainButton
-            
-            HStack(alignment: .center, spacing: 8) {
-                termsAndConditionsButton
-                Text("|")
-                    .font(.robotoRegular14())
+            VStack(alignment: .center, spacing: 4) {
+                Text(constants.termsEULA)
+                    .multilineTextAlignment(.center)
+                    .font(.robotoRegular12())
                     .foregroundColor(Color.primaryGray())
-                privacyPolicyButton
+                    .padding(.horizontal, 16)
+                
+                HStack(alignment: .center, spacing: 8) {
+                    termsAndConditionsButton
+                    Text("|")
+                        .font(.robotoRegular14())
+                        .foregroundColor(Color.primaryGray())
+                    privacyPolicyButton
+                }
             }
+            
         }
     }
 }
@@ -56,7 +65,7 @@ private extension PremiumSubscriptionConfirmButtonView {
         }) {
             ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: constants.mainButtonTitle,
+                       text: nameMainButton,
                        switchImage: false,
                        image: "")
         }
@@ -98,7 +107,7 @@ private extension PremiumSubscriptionConfirmButtonView {
         }) {
             Text(constants.termsAndConditionsTitle)
                 .font(.robotoRegular14())
-                .foregroundColor(Color.primaryGray())
+                .foregroundColor(.blue)
         }
         .opacity(isPressedTermsAndConditionsButton ? 0.8 : 1)
         .scaleEffect(isPressedTermsAndConditionsButton ? 0.9 : 1)
@@ -118,7 +127,7 @@ private extension PremiumSubscriptionConfirmButtonView {
         }) {
             Text(constants.privacyPolicyTitle)
                 .font(.robotoRegular14())
-                .foregroundColor(Color.primaryGray())
+                .foregroundColor(.blue)
         }
         .opacity(isPressedPrivacyPolicyButton ? 0.8 : 1)
         .scaleEffect(isPressedPrivacyPolicyButton ? 0.9 : 1)
@@ -134,14 +143,15 @@ private extension PremiumSubscriptionConfirmButtonView {
 private extension PremiumSubscriptionConfirmButtonView {
     struct Constants {
         let restorePurchaseTitle = NSLocalizedString("Восстановить покупку", comment: "")
-        let mainButtonTitle = NSLocalizedString("Продолжить", comment: "")
         let termsAndConditionsTitle = NSLocalizedString("Условия и Положения", comment: "")
         let privacyPolicyTitle = NSLocalizedString("Политика конфиденциальности", comment: "")
+        
+        let termsEULA = NSLocalizedString("EULASubscriptions", comment: "")
     }
 }
 
 struct PremiumSubscriptionConfirmButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        PremiumSubscriptionConfirmButtonView()
+        PremiumSubscriptionConfirmButtonView(nameMainButton: .constant("Продолжить"))
     }
 }

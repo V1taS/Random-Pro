@@ -32,8 +32,7 @@ struct ButtonView: View {
         ZStack {
             backgroundColor
             
-            HStack {
-                imageView
+            HStack(alignment: .center) {
                 textView
             }
         }
@@ -76,6 +75,7 @@ private extension ButtonView {
             Text(text)
                 .foregroundColor(Color(textColor))
                 .font(.robotoMedium18())
+                .multilineTextAlignment(.center)
         )
     }
 }

@@ -20,10 +20,11 @@ struct SettingsView: View {
                 Form {
                     Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
                         idea
+                        premium
                         if UIDevice.current.userInterfaceIdiom != .pad {
                             share
                         }
-//                        tipTheDeveloper
+                        //                        tipTheDeveloper
                     }
                     
                     Section(header: Text(LocalizedStringKey("Внешний вид"))) {
@@ -47,18 +48,56 @@ private extension SettingsView {
             NavigationLink(
                 destination: CategoriesNewView(appBinding: appBinding)
                     .allowAutoDismiss { false }) {
-                HStack {
-                    Image(systemName: "square.grid.2x2")
-                        .font(.title)
-                        .frame(width: 50, alignment: .leading)
-                        .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
-                    
-                    Text(NSLocalizedString("Категории", comment: ""))
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
-                }
-            }
+                        HStack {
+                            Image(systemName: "square.grid.2x2")
+                                .font(.title)
+                                .frame(width: 50, alignment: .leading)
+                                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+                            
+                            Text(NSLocalizedString("Категории", comment: ""))
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                    }
             Spacer()
+        }
+    }
+}
+
+private extension SettingsView {
+    var premium: some View {
+        HStack {
+            Image(systemName: "star")
+                .font(.title)
+                .frame(width: 50, alignment: .leading)
+                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+            
+            HStack {
+                Button(action: {
+                    appBinding.premium.presentingModal.wrappedValue = true
+                    Feedback.shared.impactHeavy(.medium)
+                }) {
+                    HStack {
+                        Text("Premium")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                        
+                        Spacer()
+                        
+                        if appBinding.premium.premiumIsEnabled.wrappedValue {
+                            Text(NSLocalizedString("Активна", comment: ""))
+                                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+                                .font(.robotoRegular16())
+                        } else {
+                            Text(NSLocalizedString("Не активна", comment: ""))
+                                .foregroundColor(.gray)
+                                .font(.robotoRegular16())
+                        }
+                    }
+                    
+                }
+                Spacer()
+            }
         }
     }
 }
@@ -117,17 +156,17 @@ private extension SettingsView {
             NavigationLink(
                 destination: PurchasesView(storeManager: storeManager)
                     .allowAutoDismiss { false }) {
-                HStack {
-                    Image(systemName: "bitcoinsign.circle.fill")
-                        .font(.title)
-                        .frame(width: 50, alignment: .leading)
-                        .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
-                    
-                    Text(NSLocalizedString("Чаевые разработчику", comment: ""))
-                        .foregroundColor(.primaryGray())
-                        .font(.robotoMedium18())
-                }
-            }
+                        HStack {
+                            Image(systemName: "bitcoinsign.circle.fill")
+                                .font(.title)
+                                .frame(width: 50, alignment: .leading)
+                                .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+                            
+                            Text(NSLocalizedString("Чаевые разработчику", comment: ""))
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                    }
             Spacer()
         }
     }
@@ -149,7 +188,7 @@ private extension SettingsView {
                         Feedback.shared.impactHeavy(.medium)
                     }
                 )
-
+                
             }) {
                 Text(NSLocalizedString("Очистить кэш", comment: ""))
                     .foregroundColor(.primaryError())
@@ -203,7 +242,7 @@ private extension SettingsView {
             .cleanFilms(state: state)
         
         injected.interactors.musicInteractor
-                .cleanMusic(state: state)
+            .cleanMusic(state: state)
         
         state.music.resultMusic.wrappedValue = MusicITunesDatum(attributes: nil, href: nil, id: nil)
         state.listWords.listData.wrappedValue = []

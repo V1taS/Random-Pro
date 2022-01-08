@@ -23,7 +23,7 @@ struct SettingsView: View {
                         if UIDevice.current.userInterfaceIdiom != .pad {
                             share
                         }
-                        tipTheDeveloper
+//                        tipTheDeveloper
                     }
                     
                     Section(header: Text(LocalizedStringKey("Внешний вид"))) {

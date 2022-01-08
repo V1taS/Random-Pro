@@ -2,15 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SKAdNetworkItems</key>
-	<array>
-		<dict>
-			<key>SKAdNetworkIdentifier</key>
-			<string>zq492l623r.skadnetwork</string>
-		</dict>
-	</array>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Can you use your activity data? If you allow, Random Pro&apos;s ads on websites and other apps will be more relevant.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -37,6 +28,15 @@
 	<string>Please provide access to the music library to generate songs</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Provide access to randomly generate contacts</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Can you use your activity data? If you allow, Random Pro's ads on websites and other apps will be more relevant.</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>zq492l623r.skadnetwork</string>
+		</dict>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Black.ttf</string>

@@ -35,6 +35,8 @@ struct PremiumSubscriptionConfirmButtonView: View {
         VStack(alignment: .center, spacing: 16) {
             Divider()
             restorePurchaseButton
+                .padding(.bottom, 16)
+            
             mainButton
             VStack(alignment: .center, spacing: 4) {
                 Text(constants.termsEULA)

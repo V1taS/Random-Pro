@@ -35,6 +35,7 @@ extension AppState {
         var travel = Travel()
         var premium = Premium()
         var adv = ADV()
+        var adminOwner = AdminOwner()
     }
 }
 

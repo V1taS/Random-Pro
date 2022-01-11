@@ -12,7 +12,6 @@ struct PremiumSubscriptionView: View {
     
     @ObservedObject
     var storeManager: StoreManager
-    
     var appBinding: Binding<AppState.AppData>
     
     @Environment(\.injected) private var injected: DIContainer
@@ -20,16 +19,14 @@ struct PremiumSubscriptionView: View {
     private let constants = Constants()
     
     @State
-    private var premiumSubscriptionChoiceType: PremiumSubscriptionChoiceView.TypeSubscriptions = .non
-    
-    @State
     private var showAlertPremiumAccessActivated = false
     @State
     private var showAlertNoPreviousPurchasesFound = false
     @State
     private var showAlertNone = false
+    
     @State
-    private var mainButtonTitle = NSLocalizedString("Продолжить", comment: "")
+    private var isShowOwnerAdminView = false
     
     var body: some View {
         NavigationView {
@@ -60,7 +57,7 @@ struct PremiumSubscriptionView: View {
                             }
                         
                         confirmButtons
-                            .padding(.top, 24)
+                            .padding(.top, 32)
                             .alert(isPresented: $showAlertNone) {
                                 Alert(title: Text(NSLocalizedString("Внимание", comment: "")),
                                       message: Text(constants.youDidNotChooseAnything),
@@ -80,7 +77,7 @@ struct PremiumSubscriptionView: View {
                         Image(systemName: "xmark.circle")
                             .renderingMode(.template)
                             .font(.system(size: 24))
-                            .gradientForeground(colors: [Color(#colorLiteral(red: 0.007843137255, green: 0.7960784314, blue: 0.6705882353, alpha: 1)), Color(#colorLiteral(red: 0.01176470588, green: 0.6745098039, blue: 0.6941176471, alpha: 1))])
+                            .foregroundColor(.blue)
                     }
                 })
             }
@@ -104,6 +101,18 @@ private extension PremiumSubscriptionView {
                 description: constants.descriptionAdvanced,
                 isEnabledDivider: false
             )
+                .onTapGesture(count: 20) {
+                    isShowOwnerAdminView = true
+                }
+        }
+        .sheet(isPresented: $isShowOwnerAdminView, onDismiss: {
+            isShowOwnerAdminView = false
+            appBinding.adminOwner.passwordTF.wrappedValue = ""
+            UserDefaults.standard.set(appBinding.adminOwner.premiumIsEnabled.wrappedValue, forKey: GlobalConstants.ownerPremiumUserDefaultsID)
+            appBinding.premium.premiumIsEnabled.wrappedValue = appBinding.adminOwner.premiumIsEnabled.wrappedValue
+            UserDefaults.standard.set(appBinding.premium.premiumIsEnabled.wrappedValue, forKey: GlobalConstants.premiumUserDefaultsID)
+        }) {
+            OwnerAdminView(appBinding: appBinding)
         }
     }
 }
@@ -112,16 +121,15 @@ private extension PremiumSubscriptionView {
     var buttons: some View {
         PremiumSubscriptionChoiceView(
             buttonAction: { type in
-                premiumSubscriptionChoiceType = type
                 switch type {
                 case .non:
-                    mainButtonTitle = constants.mainButtonTitle
+                    showAlertNone = true
                 case .years:
-                    mainButtonTitle = constants.mainButtonTitleSubscribe
+                    purchaseProduct(type: .yearsSubscription)
                 case .monthly:
-                    mainButtonTitle = constants.mainButtonTitleSubscribe
+                    purchaseProduct(type: .monthlySubscription)
                 case .lifelong:
-                    mainButtonTitle = constants.mainButtonTitleBuy
+                    purchaseProduct(type: .lifePlan)
                 }
             },
             yearsPrimaryTitle: "\(constants.yearsPlan)",
@@ -146,17 +154,7 @@ private extension PremiumSubscriptionView {
             actionButton: { typeButtons in
                 switch typeButtons {
                 case .non: break
-                case .confirm:
-                    switch premiumSubscriptionChoiceType {
-                    case .non:
-                        showAlertNone = true
-                    case .years:
-                        purchaseProduct(type: .yearsSubscription)
-                    case .monthly:
-                        purchaseProduct(type: .monthlySubscription)
-                    case .lifelong:
-                        purchaseProduct(type: .lifePlan)
-                    }
+                case .confirm: break
                 case .restore:
                     storeManager.showActivityIndicator = true
                     storeManager.restoreProducts()
@@ -174,9 +172,7 @@ private extension PremiumSubscriptionView {
                 case .privacyPolicy:
                     openLinkFromStringURL(link: constants.privacyPolicyLink)
                 }
-            },
-            nameMainButton: $mainButtonTitle
-        )
+            })
     }
 }
 
@@ -235,10 +231,8 @@ private extension PremiumSubscriptionView {
     
     func calculatesTheCost(type: ProductSubscriptionIDs) -> String {
         guard let getProduct = ProductSubscriptionIDs.getSKProduct(type: type,
-                                                                   productsSKP: storeManager.myProducts) else { return "error" }
-        return getProduct.localizedPrice ?? "error"
-        
-
+                                                                   productsSKP: storeManager.myProducts) else { return NSLocalizedString("Обновление прайса", comment: "") }
+        return getProduct.localizedPrice ?? NSLocalizedString("Обновление прайса", comment: "")
     }
     
     func calculatesDiscount() {

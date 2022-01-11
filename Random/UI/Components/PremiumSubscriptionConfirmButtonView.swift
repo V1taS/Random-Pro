@@ -29,15 +29,11 @@ struct PremiumSubscriptionConfirmButtonView: View {
     
     // MARK: - Public
     var actionButton: ((TypeButtons) -> Void)?
-    @Binding var nameMainButton: String
     
     var body: some View {
         VStack(alignment: .center, spacing: 16) {
-            Divider()
             restorePurchaseButton
-                .padding(.bottom, 16)
             
-            mainButton
             VStack(alignment: .center, spacing: 4) {
                 Text(constants.termsEULA)
                     .multilineTextAlignment(.center)
@@ -67,7 +63,7 @@ private extension PremiumSubscriptionConfirmButtonView {
         }) {
             ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
-                       text: nameMainButton,
+                       text: "Продолжить",
                        switchImage: false,
                        image: "")
         }
@@ -89,7 +85,7 @@ private extension PremiumSubscriptionConfirmButtonView {
             Feedback.shared.impactHeavy(.soft)
         }) {
             Text(constants.restorePurchaseTitle)
-                .foregroundColor(Color.primaryGray())
+                .foregroundColor(.blue)
         }
         .opacity(isPressedRestoreButton ? 0.8 : 1)
         .scaleEffect(isPressedRestoreButton ? 0.9 : 1)
@@ -154,6 +150,6 @@ private extension PremiumSubscriptionConfirmButtonView {
 
 struct PremiumSubscriptionConfirmButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        PremiumSubscriptionConfirmButtonView(nameMainButton: .constant("Продолжить"))
+        PremiumSubscriptionConfirmButtonView()
     }
 }

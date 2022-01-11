@@ -64,7 +64,7 @@ private extension PremiumSubscriptionComponentView {
         .background(Color.gray.opacity(0.01))
         .cornerRadius(8)
         .overlay(RoundedRectangle(cornerRadius: 8)
-                    .stroke(isEnabled ? borderColorIsOn : borderColorIsOff, lineWidth: 4))
+                    .stroke(isEnabled ? borderColorIsOn : borderColorIsOff, lineWidth: 2))
     }
 }
 

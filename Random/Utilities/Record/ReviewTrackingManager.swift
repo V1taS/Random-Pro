@@ -15,21 +15,7 @@ final class ReviewTrackingManager {
     func requestIDFA() {
         if #available(iOS 14, *) {
             if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
-                ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                    DispatchQueue.main.async {
-                        switch status {
-                        case .notDetermined, .restricted, .denied:
-                            self.alertIDFA()
-                        case .authorized: break
-                        @unknown default: break
-                        }
-                    }
-                })
-            } else if ATTrackingManager.trackingAuthorizationStatus == .denied || ATTrackingManager.trackingAuthorizationStatus == .restricted {
-                if !UserDefaults.standard.bool(forKey: "reviewTrackingManager") {
-                    alertIDFA()
-                    UserDefaults.standard.set(true, forKey: "reviewTrackingManager")
-                }
+                ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in })
             }
         }
     }

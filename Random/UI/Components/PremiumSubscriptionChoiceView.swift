@@ -18,9 +18,13 @@ struct PremiumSubscriptionChoiceView: View {
     
     // MARK: - Private
     @State private var typeSubscriptions: TypeSubscriptions = .non
-    @State private var yearsColor = false
-    @State private var monthlyColor = false
-    @State private var lifelongColor = false
+    @State private var yearsColor = true
+    @State private var monthlyColor = true
+    @State private var lifelongColor = true
+    
+    @State private var isPressedYearsButton = false
+    @State private var isPressedMonthButton = false
+    @State private var isPressedLifePlanButton = false
     
     // MARK: - Public
     var buttonAction: ((TypeSubscriptions) -> Void)?
@@ -42,22 +46,36 @@ struct PremiumSubscriptionChoiceView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             yearsButton
-                .onTapGesture {
-                    typeSubscriptions = .years
-                    changeColorButton()
-                    buttonAction?(yearsColor ? .years : .non)
+                .opacity(isPressedYearsButton ? 0.8 : 1)
+                .scaleEffect(isPressedYearsButton ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedYearsButton = true
+                } onRelease: {
+                    isPressedYearsButton = false
+                    buttonAction?(.years)
                 }
+            
             monthButton
-                .onTapGesture {
-                    typeSubscriptions = .monthly
-                    changeColorButton()
-                    buttonAction?(monthlyColor ? .monthly : .non)
+                .opacity(isPressedMonthButton ? 0.8 : 1)
+                .scaleEffect(isPressedMonthButton ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedMonthButton = true
+                } onRelease: {
+                    isPressedMonthButton = false
+                    buttonAction?(.monthly)
                 }
+            
             lifePlanButton
-                .onTapGesture {
-                    typeSubscriptions = .lifelong
-                    changeColorButton()
-                    buttonAction?(lifelongColor ? .lifelong : .non)
+                .opacity(isPressedLifePlanButton ? 0.8 : 1)
+                .scaleEffect(isPressedLifePlanButton ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedLifePlanButton = true
+                } onRelease: {
+                    isPressedLifePlanButton = false
+                    buttonAction?(.lifelong)
                 }
         }
     }

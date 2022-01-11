@@ -62,6 +62,11 @@ struct TabBarView: View {
 // MARK: Private
 private extension TabBarView {
     func loadPremiumStatus() {
+        appBinding.adminOwner.premiumIsEnabled.wrappedValue = UserDefaults.standard.bool(forKey: GlobalConstants.ownerPremiumUserDefaultsID)
+        appBinding.premium.premiumIsEnabled.wrappedValue = UserDefaults.standard.bool(forKey: GlobalConstants.premiumUserDefaultsID)
+
+        guard !appBinding.adminOwner.premiumIsEnabled.wrappedValue else { return }
+        
         appBinding.premium.premiumIsEnabled
             .wrappedValue = UserDefaults.standard
             .bool(forKey: GlobalConstants.premiumUserDefaultsID)

@@ -37,6 +37,7 @@ enum ProductSubscriptionIDs: String, CaseIterable {
 
 enum GlobalConstants {
     static var premiumUserDefaultsID: String { "RandomPremium" }
+    static var ownerPremiumUserDefaultsID: String { "OwnerRandomPremium" }
     static var recordClickUserDefaultsID: String { "RandomRecordClick" }
     static var adDisplayInterval: Int { 15 }
 }

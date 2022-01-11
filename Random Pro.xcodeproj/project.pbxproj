@@ -43,6 +43,8 @@
 		1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */; };
 		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
+		1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC20278E295D00578BFB /* OwnerAdminView.swift */; };
+		1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC22278E2C4200578BFB /* AdminOwner.swift */; };
 		1B446F2B25E517000060E163 /* RecordReviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B446F2A25E517000060E163 /* RecordReviewApp.swift */; };
 		1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */; };
 		1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */; };
@@ -271,6 +273,8 @@
 		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
+		1B40AC20278E295D00578BFB /* OwnerAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerAdminView.swift; sourceTree = "<group>"; };
+		1B40AC22278E2C4200578BFB /* AdminOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOwner.swift; sourceTree = "<group>"; };
 		1B446F2A25E517000060E163 /* RecordReviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReviewApp.swift; sourceTree = "<group>"; };
 		1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressActions.swift; sourceTree = "<group>"; };
@@ -499,6 +503,14 @@
 			path = MusicActions;
 			sourceTree = "<group>";
 		};
+		1B40AC1F278E293400578BFB /* OwnerAdmin */ = {
+			isa = PBXGroup;
+			children = (
+				1B40AC20278E295D00578BFB /* OwnerAdminView.swift */,
+			);
+			path = OwnerAdmin;
+			sourceTree = "<group>";
+		};
 		1B4EBFF825FE546B00A41945 /* Travel */ = {
 			isa = PBXGroup;
 			children = (
@@ -614,6 +626,7 @@
 			isa = PBXGroup;
 			children = (
 				1B7F669825D0876F00933AD6 /* AppState.swift */,
+				1B40AC22278E2C4200578BFB /* AdminOwner.swift */,
 				1B57F64227877496005F220C /* Premium.swift */,
 				1B57F6672789E7A3005F220C /* ADV.swift */,
 				1B7F66BF25D08AD500933AD6 /* InteractorsContainer.swift */,
@@ -765,6 +778,7 @@
 				1B4EBFF825FE546B00A41945 /* Travel */,
 				1B1B505426011AEC00F73A14 /* Music */,
 				1B57F63727872C6E005F220C /* PremiumSubscription */,
+				1B40AC1F278E293400578BFB /* OwnerAdmin */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1424,6 +1438,7 @@
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
 				1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
+				1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */,
 				1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */,
 				1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */,
 				1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */,
@@ -1522,6 +1537,7 @@
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
+				1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */,
 				1B57F64F2788B7F7005F220C /* CategoriesNewView.swift in Sources */,
 				1B8EB61D26741F03009016BE /* NetworkServiceResult.swift in Sources */,
 				1B57F64327877496005F220C /* Premium.swift in Sources */,
@@ -1693,7 +1709,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 57;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -1704,7 +1720,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 673;
+				MARKETING_VERSION = 675;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1724,7 +1740,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
@@ -1733,7 +1749,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 673;
+				MARKETING_VERSION = 675;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

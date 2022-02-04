@@ -24,6 +24,7 @@
 		1B14038D2687F394007A5150 /* FPSStatusBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1403882687F394007A5150 /* FPSStatusBarViewController.swift */; };
 		1B14038E2687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B1403892687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png */; };
 		1B1B505626011B0200F73A14 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1B505526011B0200F73A14 /* MusicView.swift */; };
+		1B1B5B4727ADDFAF00EF283E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */; };
 		1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */; };
 		1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60572601FBA400847843 /* MusicITunes.swift */; };
 		1B1D606A260225CA00847843 /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D6069260225CA00847843 /* Music.swift */; };
@@ -258,6 +259,8 @@
 		1B1403892687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Снимок экрана 2021-06-27 в 02.24.36.png"; sourceTree = "<group>"; };
 		1B1B501526009FAD00F73A14 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		1B1B505526011B0200F73A14 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
+		1B1B5B4827ADDFAF00EF283E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1B1B5B4A27ADDFB100EF283E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B1D60532601FB7E00847843 /* AppleMusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAPI.swift; sourceTree = "<group>"; };
 		1B1D60572601FBA400847843 /* MusicITunes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicITunes.swift; sourceTree = "<group>"; };
 		1B1D6069260225CA00847843 /* Music.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
@@ -730,6 +733,7 @@
 				1B225C452619E253001B9124 /* GoogleService-Info.plist */,
 				1B325C1525D2CFDF00382F33 /* Localizable.strings */,
 				1B8EB651267658B0009016BE /* Localizable.stringsdict */,
+				1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -1287,6 +1291,7 @@
 				1B7F66D525D08C1000933AD6 /* SFProDisplay-Medium.ttf in Resources */,
 				1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */,
 				1B7F66D425D08C1000933AD6 /* Roboto-Thin.ttf in Resources */,
+				1B1B5B4727ADDFAF00EF283E /* InfoPlist.strings in Resources */,
 				1B14038C2687F394007A5150 /* Снимок экрана 2021-06-27 в 02.25.10.png in Resources */,
 				1B14038E2687F394007A5150 /* Снимок экрана 2021-06-27 в 02.24.36.png in Resources */,
 				1B7F66D325D08C1000933AD6 /* Roboto-Regular.ttf in Resources */,
@@ -1590,6 +1595,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B1B5B4827ADDFAF00EF283E /* en */,
+				1B1B5B4A27ADDFB100EF283E /* ru */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		1B325C1525D2CFDF00382F33 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

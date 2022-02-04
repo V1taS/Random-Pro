@@ -12,7 +12,7 @@ public class KeyboardInfo: ObservableObject {
 
     public static var shared = KeyboardInfo()
 
-    @Published public var height: CGFloat = 0
+    @Published public var height: CGFloat = .zero
 
     private init() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardChanged), name: UIApplication.keyboardWillShowNotification, object: nil)
@@ -22,9 +22,9 @@ public class KeyboardInfo: ObservableObject {
 
     @objc func keyboardChanged(notification: Notification) {
         if notification.name == UIApplication.keyboardWillHideNotification {
-            self.height = 0
+            self.height = .zero
         } else {
-            self.height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
+            self.height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? .zero
         }
     }
 
@@ -32,18 +32,22 @@ public class KeyboardInfo: ObservableObject {
 
 struct KeyboardAware: ViewModifier {
     @ObservedObject private var keyboard = KeyboardInfo.shared
+    var keyboardWillShow: ((CGFloat) -> Void)?
 
     func body(content: Content) -> some View {
-        content
+        keyboardWillShow?(self.keyboard.height)
+        
+        return content
+            .background(Color.white.opacity(0.000000000001))
             .padding(.bottom, self.keyboard.height)
-            .edgesIgnoringSafeArea(self.keyboard.height > 0 ? .bottom : [])
+            .edgesIgnoringSafeArea(self.keyboard.height > .zero ? .bottom : [])
             .animation(.easeOut)
     }
 }
 
 extension View {
-    public func keyboardAware() -> some View {
-        ModifiedContent(content: self, modifier: KeyboardAware())
+    public func keyboardAware(_ customeHeight: CGFloat = .zero, keyboardWillShow: ((CGFloat) -> Void)? = nil) -> some View {
+        ModifiedContent(content: self, modifier: KeyboardAware(keyboardWillShow: keyboardWillShow))
     }
 }
 

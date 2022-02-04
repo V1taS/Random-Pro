@@ -92,18 +92,21 @@ private extension PremiumSubscriptionView {
                 iconSystemName: "megaphone.fill",
                 title: constants.titleAdv,
                 description: constants.descriptionAdv,
-                isEnabledDivider: true
-            )
-            
-            TitleWithDescriptionCell(
-                iconSystemName: "lock.open.fill",
-                title: constants.titleAdvanced,
-                description: constants.descriptionAdvanced,
                 isEnabledDivider: false
             )
                 .onTapGesture(count: 20) {
                     isShowOwnerAdminView = true
                 }
+            
+//            TitleWithDescriptionCell(
+//                iconSystemName: "lock.open.fill",
+//                title: constants.titleAdvanced,
+//                description: constants.descriptionAdvanced,
+//                isEnabledDivider: false
+//            )
+//                .onTapGesture(count: 20) {
+//                    isShowOwnerAdminView = true
+//                }
         }
         .sheet(isPresented: $isShowOwnerAdminView, onDismiss: {
             isShowOwnerAdminView = false

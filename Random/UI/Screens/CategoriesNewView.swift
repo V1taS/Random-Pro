@@ -18,7 +18,6 @@ struct CategoriesNewView: View {
     @State var storeCellMenu: [String] = []
     
     var body: some View {
-        VStack {
             List {
                 ForEach(Array(storeCellMenu.enumerated()), id: \.0) { (index, element) in
                     HStack {
@@ -38,7 +37,7 @@ struct CategoriesNewView: View {
                     }
                 })
             }
-            .navigationBarTitle(Text(LocalizedStringKey("Категории")), displayMode: .automatic)
+            .navigationBarTitle(Text(LocalizedStringKey("Категории")), displayMode: .inline)
             .navigationBarItems(trailing:
                                     EditButton()
                                     .foregroundColor(Color.blue)
@@ -48,7 +47,6 @@ struct CategoriesNewView: View {
             .onAppear {
                 storeCellMenu = appBinding.main.storeCellMenu.wrappedValue
             }
-        }
     }
     
     func move(from source: IndexSet, to destination: Int) {

@@ -10,9 +10,11 @@ import SwiftUI
 
 struct TeamSettingsView: View {
     private var appBinding: Binding<AppState.AppData>
+    
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
     }
+    
     @Environment(\.injected) private var injected: DIContainer
     
     var body: some View {
@@ -63,7 +65,6 @@ struct TeamSettingsView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            
                             cleanTeams(state: appBinding)
                             appBinding.team.disabledPickerView.wrappedValue = false
                             saveTeamToUserDefaults(state: appBinding)
@@ -71,20 +72,6 @@ struct TeamSettingsView: View {
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
                                 .font(.robotoRegular16())
-                        }
-                        Spacer()
-                    }
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            appBinding.team.listPlayersData.wrappedValue = []
-                            saveTeamToUserDefaults(state: appBinding)
-                            Feedback.shared.impactHeavy(.medium)
-                        }) {
-                            Text(NSLocalizedString("Удалить добавленных игроков", comment: ""))
-                                .font(.robotoRegular16())
-                                .foregroundColor(.primaryError())
                         }
                         Spacer()
                     }

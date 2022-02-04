@@ -81,47 +81,62 @@ private extension MainView {
 // MARK: Film
 private extension MainView {
     var film: some View {
-        VStack {
-            if appBinding.premium.premiumIsEnabled.wrappedValue {
-                NavigationLink(
-                    destination: FilmView(appBinding: appBinding, actionButton: actionButton)) {
-                        CellMainView(image: "film",
-                                     title: NSLocalizedString("Фильмы", comment: ""),
-                                     isLabelDisabled: false,
-                                     textLabel: "PREMIUM")
-                    }
-            } else {
-                CellMainLockView(image: "film",
-                                 title: NSLocalizedString("Фильмы", comment: ""))
-                    .onTapGesture {
-                        alertLockCell(NSLocalizedString("Фильмы", comment: ""))
-                    }
+        NavigationLink(
+            destination: FilmView(appBinding: appBinding, actionButton: actionButton)) {
+                CellMainView(image: "film",
+                             title: NSLocalizedString("Фильмы", comment: ""),
+                             isLabelDisabled: false,
+                             textLabel: NSLocalizedString("ХИТ", comment: ""))
             }
-        }
+//        VStack {
+//            if appBinding.premium.premiumIsEnabled.wrappedValue {
+//                NavigationLink(
+//                    destination: FilmView(appBinding: appBinding, actionButton: actionButton)) {
+//                        CellMainView(image: "film",
+//                                     title: NSLocalizedString("Фильмы", comment: ""),
+//                                     isLabelDisabled: false,
+//                                     textLabel: "PREMIUM")
+//                    }
+//            } else {
+//                CellMainLockView(image: "film",
+//                                 title: NSLocalizedString("Фильмы", comment: ""))
+//                    .onTapGesture {
+//                        alertLockCell(NSLocalizedString("Фильмы", comment: ""))
+//                    }
+//            }
+//        }
     }
 }
 
 // MARK: Team
 private extension MainView {
     var team: some View {
-        VStack {
-            if appBinding.premium.premiumIsEnabled.wrappedValue {
-                NavigationLink(
-                    destination: TeamView(appBinding: appBinding, actionButton: actionButton)) {
-                        CellMainView(image: "person.3",
-                                     title: NSLocalizedString("Команды",
-                                                              comment: ""),
-                                     isLabelDisabled: false,
-                                     textLabel: "PREMIUM")
-                    }
-            } else {
-                CellMainLockView(image: "person.3",
-                                 title: NSLocalizedString("Команды", comment: ""))
-                    .onTapGesture {
-                        alertLockCell(NSLocalizedString("Команды", comment: ""))
-                    }
+        NavigationLink(
+            destination: TeamView(appBinding: appBinding, actionButton: actionButton)) {
+                CellMainView(image: "person.3",
+                             title: NSLocalizedString("Команды",
+                                                      comment: ""),
+                             isLabelDisabled: false,
+                             textLabel: NSLocalizedString("ХИТ", comment: ""))
             }
-        }
+//        VStack {
+//            if appBinding.premium.premiumIsEnabled.wrappedValue {
+//                NavigationLink(
+//                    destination: TeamView(appBinding: appBinding, actionButton: actionButton)) {
+//                        CellMainView(image: "person.3",
+//                                     title: NSLocalizedString("Команды",
+//                                                              comment: ""),
+//                                     isLabelDisabled: false,
+//                                     textLabel: "PREMIUM")
+//                    }
+//            } else {
+//                CellMainLockView(image: "person.3",
+//                                 title: NSLocalizedString("Команды", comment: ""))
+//                    .onTapGesture {
+//                        alertLockCell(NSLocalizedString("Команды", comment: ""))
+//                    }
+//            }
+//        }
         
     }
 }
@@ -172,8 +187,8 @@ private extension MainView {
             destination: ListWordsView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "list.bullet.below.rectangle",
                              title: NSLocalizedString("Список", comment: ""),
-                             isLabelDisabled: true,
-                             textLabel: "")
+                             isLabelDisabled: false,
+                             textLabel: NSLocalizedString("ХИТ", comment: ""))
             }
     }
 }
@@ -235,24 +250,32 @@ private extension MainView {
 // MARK: Travel
 private extension MainView {
     var travel: some View {
-        VStack {
-            if appBinding.premium.premiumIsEnabled.wrappedValue {
-                NavigationLink(
-                    destination: TravelView(appBinding: appBinding, actionButton: actionButton)) {
-                        CellMainView(image: "airplane",
-                                     title: NSLocalizedString("Путешествие",
-                                                              comment: ""),
-                                     isLabelDisabled: false,
-                                     textLabel: "PREMIUM")
-                    }
-            } else {
-                CellMainLockView(image: "airplane",
-                                 title: NSLocalizedString("Путешествие", comment: ""))
-                    .onTapGesture {
-                        alertLockCell(NSLocalizedString("Путешествие", comment: ""))
-                    }
+        NavigationLink(
+            destination: TravelView(appBinding: appBinding, actionButton: actionButton)) {
+                CellMainView(image: "airplane",
+                             title: NSLocalizedString("Путешествие",
+                                                      comment: ""),
+                             isLabelDisabled: true,
+                             textLabel: "PREMIUM")
             }
-        }
+//        VStack {
+//            if appBinding.premium.premiumIsEnabled.wrappedValue {
+//                NavigationLink(
+//                    destination: TravelView(appBinding: appBinding, actionButton: actionButton)) {
+//                        CellMainView(image: "airplane",
+//                                     title: NSLocalizedString("Путешествие",
+//                                                              comment: ""),
+//                                     isLabelDisabled: false,
+//                                     textLabel: "PREMIUM")
+//                    }
+//            } else {
+//                CellMainLockView(image: "airplane",
+//                                 title: NSLocalizedString("Путешествие", comment: ""))
+//                    .onTapGesture {
+//                        alertLockCell(NSLocalizedString("Путешествие", comment: ""))
+//                    }
+//            }
+//        }
         
     }
 }

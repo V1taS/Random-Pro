@@ -11,6 +11,7 @@ import SwiftUI
 struct SettingsView: View {
     
     var appBinding: Binding<AppState.AppData>
+    
     @Environment(\.injected) private var injected: DIContainer
     @ObservedObject var storeManager: StoreManager
     
@@ -188,7 +189,6 @@ private extension SettingsView {
                         Feedback.shared.impactHeavy(.medium)
                     }
                 )
-                
             }) {
                 Text(NSLocalizedString("Очистить кэш", comment: ""))
                     .foregroundColor(.primaryError())

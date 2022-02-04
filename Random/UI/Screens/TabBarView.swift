@@ -67,16 +67,23 @@ private extension TabBarView {
 
         guard !appBinding.adminOwner.premiumIsEnabled.wrappedValue else { return }
         
-        appBinding.premium.premiumIsEnabled
-            .wrappedValue = UserDefaults.standard
-            .bool(forKey: GlobalConstants.premiumUserDefaultsID)
-        DispatchQueue.main.async {
-            storeManager.restoreProducts()
-            storeManager.statePurchase = { status in
-                appBinding.premium.premiumIsEnabled.wrappedValue = status
-                UserDefaults.standard.set(status, forKey: GlobalConstants.premiumUserDefaultsID)
+        let firstStart = UserDefaults.standard.bool(forKey: GlobalConstants.firstStart)
+        
+        if firstStart {
+            appBinding.premium.premiumIsEnabled
+                .wrappedValue = UserDefaults.standard
+                .bool(forKey: GlobalConstants.premiumUserDefaultsID)
+            DispatchQueue.main.async {
+                storeManager.restoreProducts()
+                storeManager.statePurchase = { status in
+                    appBinding.premium.premiumIsEnabled.wrappedValue = status
+                    UserDefaults.standard.set(status, forKey: GlobalConstants.premiumUserDefaultsID)
+                }
             }
+        } else {
+            UserDefaults.standard.set(true, forKey: GlobalConstants.firstStart)
         }
+        
     }
 }
 

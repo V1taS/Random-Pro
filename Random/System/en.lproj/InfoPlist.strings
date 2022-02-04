@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Random Pro
+
+  Created by Vitalii Sosin on 12.01.2022.
+  Copyright © 2022 Sosin.bet. All rights reserved.
+*/
+
+"NSContactsUsageDescription" = "Provide access to randomly generate contacts";
+"NSAppleMusicUsageDescription" = "Please provide access to the music library to generate songs";
+"NSUserTrackingUsageDescription" = "Can you use your activity data? If you allow, Random Pro's ads on websites and other apps will be more relevant.";

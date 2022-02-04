@@ -28,12 +28,12 @@ struct FilmInteractorImpl: FilmInteractor {
     func getLinkOnPageKinopoiskVideo(state: Binding<AppState.AppData>) {
         switch state.film.selectedGenres.wrappedValue {
         case 0:
-            let name = configureText(ru: state.film.filmsBest.first?.nameRu, en: state.film.filmsBest.first?.nameEn)
-            let year = state.film.filmsBest.first?.year.wrappedValue
+            let name = configureText(ru: state.film.filmsBest.wrappedValue.first?.nameRu, en: state.film.filmsBest.wrappedValue.first?.nameEn)
+            let year = state.film.filmsBest.wrappedValue.first?.year
             getLinkFromStringURL(nameFilm: name, years: year)
         case 1:
-            let name = configureText(ru: state.film.filmsPopular.first?.nameRu, en: state.film.filmsPopular.first?.nameEn)
-            let year = state.film.filmsPopular.first?.year.wrappedValue
+            let name = configureText(ru: state.film.filmsPopular.wrappedValue.first?.nameRu, en: state.film.filmsPopular.wrappedValue.first?.nameEn)
+            let year = state.film.filmsPopular.wrappedValue.first?.year
             getLinkFromStringURL(nameFilm: name, years: year)
         case 2:
             let name = state.film.nameFilmAll.wrappedValue
@@ -245,8 +245,8 @@ extension FilmInteractorImpl {
         }
     }
     
-    private func configureText(ru textRu: Binding<String?>?, en textEn: Binding<String?>?) -> String {
-        return NSLocalizedString("домен", comment: "") == "ru" ? "\(textRu?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(textEn?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
+    private func configureText(ru textRu: String?, en textEn: String?) -> String {
+        return NSLocalizedString("домен", comment: "") == "ru" ? "\(textRu ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(textEn ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
     }
 }
 extension FilmInteractorImpl {

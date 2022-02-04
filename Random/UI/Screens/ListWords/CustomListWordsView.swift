@@ -14,32 +14,81 @@ struct CustomListWordsView: View {
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
     }
+    private let listService = ListService()
+    
+    @State private var isSentDataToCloud = false
+    @State private var isPressedButton = false
+    @State private var isPressedButtonRemove = false
+    
     @Environment(\.injected) private var injected: DIContainer
     
     @State var listResult: [String] = []
     @State var textField = ""
     
     var body: some View {
+        listResults
+            .onDisappear(perform: {
+                appBinding.listWords.listData.wrappedValue = listResult
+                saveListWordsToUserDefaults(state: appBinding)
+                if isSentDataToCloud {
+                    DispatchQueue.global(qos: .background).async {
+                        listService.deleteAllElements {
+                            listResult.forEach { element in
+                                listService.add(element: element)
+                            }
+                        }
+                    }
+                }
+            })
+            .onAppear {
+                listResult = appBinding.listWords.listData.wrappedValue
+            }
+            .keyboardAware()
+            .dismissingKeyboard()
+            .navigationBarTitle(Text(NSLocalizedString("Список", comment: "")), displayMode: .inline)
+    }
+}
+
+private extension CustomListWordsView {
+    var deleteAllElements: some View {
         VStack {
-            listResults
-            VStack(spacing: 16) {
-                TextField
-                generateButton
+            if !listResult.isEmpty {
+                HStack {
+                    Spacer()
+                    Text(NSLocalizedString("Удалить элементы из списка", comment: ""))
+                        .font(.robotoRegular16())
+                        .foregroundColor(.primaryError())
+                        .opacity(isPressedButtonRemove ? 0.8 : 1)
+                        .scaleEffect(isPressedButtonRemove ? 0.8 : 1)
+                        .animation(.easeInOut(duration: 0.2), value: isPressedButtonRemove)
+                    Spacer()
+                }
+                .padding(.vertical, 16)
+                .background(Color.white)
+                .onTapGesture {
+                    appBinding.team.listPlayersData.wrappedValue = []
+                    saveListWordsToUserDefaults(state: appBinding)
+                    listResult = []
+                    Feedback.shared.impactHeavy(.medium)
+                    DispatchQueue.global(qos: .background).async {
+                        listService.deleteAllElements {
+                            print("Deleted")
+                        }
+                    }
+                }.pressAction {
+                    isPressedButtonRemove = true
+                } onRelease: {
+                    isPressedButtonRemove = false
+                }
             }
         }
-        .onAppear {
-            listResult = appBinding.listWords.listData.wrappedValue
-        }
-        .keyboardAware()
-        .dismissingKeyboard()
-        .navigationBarTitle(Text(NSLocalizedString("Список", comment: "")), displayMode: .inline)
     }
 }
 
 private extension CustomListWordsView {
     var listResults: some View {
         List {
-            ForEach(listResult, id: \.self) { element in
+            ForEach(Array(zip(listResult.indices, listResult)), id: \.0) { index, element in
                 
                 HStack {
                     Spacer()
@@ -48,12 +97,18 @@ private extension CustomListWordsView {
                         .font(.robotoMedium18())
                     Spacer()
                 }
-            } .onDelete(perform: { indexSet in
+                
+            }.onDelete(perform: { indexSet in
                 listResult.remove(atOffsets: indexSet)
                 appBinding.listWords.listData.wrappedValue.remove(atOffsets: indexSet)
                 appBinding.listWords.listTemp.wrappedValue = appBinding.listWords.listData.wrappedValue
                 saveListWordsToUserDefaults(state: appBinding)
             })
+            TextField
+            generateButton
+            if !appBinding.listWords.listData.wrappedValue.isEmpty {
+                deleteAllElements
+            }
             
         }
     }
@@ -77,27 +132,38 @@ private extension CustomListWordsView {
                             .stroke(Color(.primaryGray())))
                 .foregroundColor(.clear)
         }
-        .padding(.horizontal, 16)
     }
 }
 
 private extension CustomListWordsView {
     var generateButton: some View {
-        Button(action: {
-            if !textField.isEmpty {
-                appendWord(state: appBinding)
-                clearTF(state: appBinding)
-                saveListWordsToUserDefaults(state: appBinding)
-                Feedback.shared.impactHeavy(.medium)
-            }
-        }) {
+        VStack {
             ButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Добавить", comment: ""),
                        switchImage: false,
                        image: "")
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.8 : 1)
+                .animation(.easeInOut(duration: 0.2), value: isPressedButton)
+                .onTapGesture {
+                    if !textField.isEmpty {
+                        isSentDataToCloud = true
+                        appendWord(state: appBinding)
+                        clearTF(state: appBinding)
+                        saveListWordsToUserDefaults(state: appBinding)
+                        Feedback.shared.impactHeavy(.medium)
+                    }
+                }
+                .opacity(isPressedButton ? 0.8 : 1)
+                .scaleEffect(isPressedButton ? 0.9 : 1)
+                .animation(.easeInOut(duration: 0.1))
+                .pressAction {
+                    isPressedButton = true
+                } onRelease: {
+                    isPressedButton = false
+                }
         }
-        .padding(.horizontal, 16)
     }
 }
 

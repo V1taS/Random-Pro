@@ -18,6 +18,7 @@ protocol TeamInteractor {
 }
 
 struct TeamInteractorImpl: TeamInteractor {
+    private let playersService = PlayersService()
     
     func generateListTeams(state: Binding<AppState.AppData>) {
         if !state.team.listTempPlayers.wrappedValue.isEmpty {
@@ -40,9 +41,18 @@ struct TeamInteractorImpl: TeamInteractor {
     }
     
     func createPlayer(state: Binding<AppState.AppData>) {
-        let image = state.team.playerImageTemp.wrappedValue
+        let id = UUID().uuidString
         let name = state.team.playerNameTF.wrappedValue
-        let player = Player(id: UUID().uuidString, name: name, photo: image)
+        let image = state.team.playerImageTemp.wrappedValue
+        
+        playersService.addPlayer(
+            id: id,
+            name: name,
+            photo: image,
+            team: nil
+        )
+
+        let player = Player(id: id, name: name, photo: image, team: "")
         state.team.listPlayersData.wrappedValue.append(player)
         state.team.listTempPlayers.wrappedValue.append(player)
     }

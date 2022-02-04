@@ -11,10 +11,12 @@ import SwiftUI
 struct ListWordsSettingsView: View {
     
     private var appBinding: Binding<AppState.AppData>
+    
     init(appBinding: Binding<AppState.AppData>) {
         self.appBinding = appBinding
     }
     @Environment(\.injected) private var injected: DIContainer
+    
     
     var body: some View {
         NavigationView {
@@ -85,20 +87,6 @@ struct ListWordsSettingsView: View {
                             Feedback.shared.impactHeavy(.medium)
                         }) {
                             Text(NSLocalizedString("Очистить", comment: ""))
-                                .font(.robotoRegular16())
-                        }
-                        Spacer()
-                    }
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            appBinding.listWords.listData.wrappedValue = []
-                            saveListWordsToUserDefaults(state: appBinding)
-                            Feedback.shared.impactHeavy(.medium)
-                        }) {
-                            Text(NSLocalizedString("Удалить элементы из списка", comment: ""))
-                                .foregroundColor(.primaryError())
                                 .font(.robotoRegular16())
                         }
                         Spacer()

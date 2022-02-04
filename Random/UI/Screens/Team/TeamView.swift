@@ -12,6 +12,7 @@ struct TeamView: View {
     
     private var appBinding: Binding<AppState.AppData>
     private var actionButton: (() -> Void)?
+    private let playersService = PlayersService()
     
     init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
@@ -58,6 +59,20 @@ struct TeamView: View {
         })
         .onAppear {
             selectedTeam = appBinding.team.selectedTeam.wrappedValue
+            
+            if appBinding.team.listPlayersData.wrappedValue.isEmpty {
+                playersService.fetchPlayers { playersCloud in
+                    let players = playersCloud.map {
+                        Player(
+                            id: $0.id,
+                            name: $0.name,
+                            photo: $0.photo,
+                            team: $0.team
+                        )
+                    }
+                    appBinding.team.listPlayersData.wrappedValue = players
+                }
+            }
         }
     }
 }
@@ -71,9 +86,9 @@ private extension TeamView {
                     Text("\(countTeam[$0])")
                 }
             }
-            .disabled(appBinding.team.disabledPickerView.wrappedValue)
-            .pickerStyle(SegmentedPickerStyle())
-            .padding(.horizontal, 16)
+                   .disabled(appBinding.team.disabledPickerView.wrappedValue)
+                   .pickerStyle(SegmentedPickerStyle())
+                   .padding(.horizontal, 16)
         }
         .padding(.top, 16)
     }

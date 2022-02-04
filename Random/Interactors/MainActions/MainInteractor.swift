@@ -17,6 +17,8 @@ protocol MainInteractor {
 }
 
 struct MainInteractorImpl: MainInteractor {
+    private let playersService = PlayersService()
+    private let listService = ListService()
     
     func recordClick(state: Binding<AppState.AppData>) {
         state.adv.advCount.wrappedValue += 1
@@ -215,6 +217,13 @@ extension MainInteractorImpl {
             state.listWords.noRepetitions.wrappedValue = UserDefaults.standard.bool(forKey: "ListWordsNoRepetitions")
             
             state.listWords.result.wrappedValue = UserDefaults.standard.object(forKey: "ListWordsResult") as? String ?? "?"
+            
+            if state.listWords.listData.wrappedValue.isEmpty {
+                listService.fetchList { listCloud in
+                    let list = listCloud.map { $0.element }
+                    state.listWords.listData.wrappedValue = list
+                }
+            }
         }
     }
     
@@ -279,7 +288,7 @@ extension MainInteractorImpl {
     
     private func userDefaultTeam(state: Binding<AppState.AppData>) {
         if state.team.listResult1.wrappedValue.isEmpty {
-            
+
             state.team.listResult1.wrappedValue = decoderPlayer(forKey: "TeamlistResult1") ?? []
             state.team.listResult2.wrappedValue = decoderPlayer(forKey: "TeamlistResult2") ?? []
             state.team.listResult3.wrappedValue = decoderPlayer(forKey: "TeamlistResult3") ?? []
@@ -294,6 +303,20 @@ extension MainInteractorImpl {
             state.team.selectedTeam.wrappedValue = UserDefaults.standard.object(forKey: "TeamSelectedTeam") as? Int ?? 1
             
             state.team.disabledPickerView.wrappedValue = UserDefaults.standard.bool(forKey: "TeamDisabledPickerView")
+            
+            if state.team.listPlayersData.wrappedValue.isEmpty {
+                playersService.fetchPlayers { playersCloud in
+                    let players = playersCloud.map {
+                        Player(
+                            id: $0.id,
+                            name: $0.name,
+                            photo: $0.photo,
+                            team: $0.team
+                        )
+                    }
+                    state.team.listPlayersData.wrappedValue = players
+                }
+            }
         }
     }
     

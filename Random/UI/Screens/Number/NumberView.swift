@@ -12,7 +12,7 @@ struct NumberView: View {
     
     private var appBinding: Binding<AppState.AppData>
     private var actionButton: (() -> Void)?
-    
+
     init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
         self.actionButton = actionButton

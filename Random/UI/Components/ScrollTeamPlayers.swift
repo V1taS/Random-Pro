@@ -59,7 +59,13 @@ private extension ScrollTeamPlayers {
 
 struct ScrollTeamPlayers_Previews: PreviewProvider {
     static var previews: some View {
-        ScrollTeamPlayers(listPlayers: .constant([Player(id: UUID().uuidString, name: "Сосин Виталий", photo: "player16"), Player(id: UUID().uuidString, name: "Трифонов Дмитрий", photo: "player24")]), isPressedButton: .constant(false),
-                          teamNumber: 1)
+        ScrollTeamPlayers(listPlayers: .constant([
+            Player(
+                id: UUID().uuidString,
+                name: "Сосин Виталий",
+                photo: "player10",
+                team: ""
+            )
+        ]), isPressedButton: .constant(false), teamNumber: 1)
     }
 }

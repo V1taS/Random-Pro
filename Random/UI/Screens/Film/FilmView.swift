@@ -204,12 +204,12 @@ private extension FilmView {
 private extension FilmView {
     var bestFilms: some View {
         VStack(spacing: 0) {
-            FilmCellView(ratingIsSwitch: ratingIsShow(appBinding.film.filmsBest.first?.rating),
-                         ratingCount: ratingCount(appBinding.film.filmsBest.first?.rating),
-                         imageStr: appBinding.film.filmsBest.first?.posterUrlPreview ?? .constant(""))
+            FilmCellView(ratingIsSwitch: ratingIsShow(appBinding.film.filmsBest.wrappedValue.first?.rating),
+                         ratingCount: ratingCount(appBinding.film.filmsBest.wrappedValue.first?.rating),
+                         imageStr: appBinding.film.filmsBest.wrappedValue.first?.posterUrlPreview ?? "")
                 .padding(.top, 24)
             
-            Text(configureText(ru: appBinding.film.filmsBest.first?.nameRu, en: appBinding.film.filmsBest.first?.nameEn))
+            Text(configureText(ru: appBinding.film.filmsBest.wrappedValue.first?.nameRu, en: appBinding.film.filmsBest.wrappedValue.first?.nameEn))
                 .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
@@ -226,12 +226,12 @@ private extension FilmView {
 private extension FilmView {
     var popularFilms: some View {
         VStack(spacing: 0) {
-            FilmCellView(ratingIsSwitch: ratingIsShow(appBinding.film.filmsPopular.first?.rating),
-                         ratingCount: ratingCount(appBinding.film.filmsPopular.first?.rating),
-                         imageStr: appBinding.film.filmsPopular.first?.posterUrlPreview ?? .constant(""))
+            FilmCellView(ratingIsSwitch: ratingIsShow(appBinding.film.filmsPopular.wrappedValue.first?.rating),
+                         ratingCount: ratingCount(appBinding.film.filmsPopular.wrappedValue.first?.rating),
+                         imageStr: appBinding.film.filmsPopular.wrappedValue.first?.posterUrlPreview ?? "")
                 .padding(.top, 24)
             
-            Text(configureText(ru: appBinding.film.filmsPopular.first?.nameRu, en: appBinding.film.filmsPopular.first?.nameEn))
+            Text(configureText(ru: appBinding.film.filmsPopular.wrappedValue.first?.nameRu, en: appBinding.film.filmsPopular.wrappedValue.first?.nameEn))
                 .font(UIScreen.screenHeight < 570 ? .robotoMedium14() : .robotoMedium20())
                 .lineLimit(2)
                 .foregroundColor(.black)
@@ -250,7 +250,7 @@ private extension FilmView {
         VStack(spacing: 0) {
             FilmCellView(ratingIsSwitch: appBinding.film.ratingIsShowAll.wrappedValue,
                          ratingCount: appBinding.film.ratingFilmAll.wrappedValue,
-                         imageStr: appBinding.film.filmsPopular.first?.posterUrlPreview ?? .constant(""))
+                         imageStr: appBinding.film.filmsPopular.wrappedValue.first?.posterUrlPreview ?? "")
                 .padding(.top, 24)
             
             Text(appBinding.film.nameFilmAll.wrappedValue)
@@ -292,36 +292,28 @@ private extension FilmView {
 }
 
 private extension FilmView {
-    func ratingIsShow(_ rating: Binding<String?>?) -> Bool {
+    func ratingIsShow(_ rating: String?) -> Bool {
         guard let rating = rating else { return false }
-        if let rating = rating.wrappedValue {
             let ratingDouble = Double(rating)
             if ratingDouble != nil {
                 return true
             } else {
                 return false
             }
-        } else {
-            return false
-        }
     }
     
-    func ratingCount(_ rating: Binding<String?>?) -> Double {
+    func ratingCount(_ rating: String?) -> Double {
         guard let rating = rating else { return .zero }
-        if let rating = rating.wrappedValue {
             let ratingDouble = Double(rating)
             if let ratingDouble = ratingDouble {
                 return ratingDouble
             } else {
                 return .zero
             }
-        } else {
-            return .zero
-        }
     }
     
-    func configureText(ru textRu: Binding<String?>?, en textEn: Binding<String?>?) -> String {
-        return NSLocalizedString("домен", comment: "") == "ru" ? "\(textRu?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(textEn?.wrappedValue ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
+    func configureText(ru textRu: String?, en textEn: String?) -> String {
+        return NSLocalizedString("домен", comment: "") == "ru" ? "\(textRu ?? NSLocalizedString("Название фильма отсутствует", comment: ""))" : "\(textEn ?? NSLocalizedString("Название фильма отсутствует", comment: ""))"
     }
 }
 

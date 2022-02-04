@@ -39,5 +39,6 @@ enum GlobalConstants {
     static var premiumUserDefaultsID: String { "RandomPremium" }
     static var ownerPremiumUserDefaultsID: String { "OwnerRandomPremium" }
     static var recordClickUserDefaultsID: String { "RandomRecordClick" }
+    static var firstStart: String { "RandomFirstStart" }
     static var adDisplayInterval: Int { 15 }
 }

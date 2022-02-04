@@ -12,7 +12,7 @@ struct Player: Decodable, Encodable {
     var id: String
     let name: String
     let photo: String
-    var team: String?
+    var team: String
 }
 
 extension Player: Equatable {

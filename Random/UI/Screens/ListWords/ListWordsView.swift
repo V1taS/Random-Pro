@@ -12,6 +12,7 @@ struct ListWordsView: View {
     
     private var appBinding: Binding<AppState.AppData>
     private var actionButton: (() -> Void)?
+    private let listService = ListService()
     
     init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
         self.appBinding = appBinding
@@ -46,6 +47,14 @@ struct ListWordsView: View {
         .sheet(isPresented: appBinding.listWords.showSettings, content: {
             ListWordsSettingsView(appBinding: appBinding)
         })
+        .onAppear {
+            if appBinding.listWords.listData.wrappedValue.isEmpty {
+                listService.fetchList { listCloud in
+                    let list = listCloud.map { $0.element }
+                    appBinding.listWords.listData.wrappedValue = list
+                }
+            }
+        }
     }
 }
 

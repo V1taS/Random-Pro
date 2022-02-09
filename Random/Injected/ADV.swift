@@ -10,6 +10,6 @@ import Foundation
 
 extension AppState.AppData {
     struct ADV: Equatable {
-        var advCount: Int = .zero
+        var advCount: Int = 1
     }
 }

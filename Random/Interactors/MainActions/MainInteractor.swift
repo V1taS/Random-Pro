@@ -22,7 +22,12 @@ struct MainInteractorImpl: MainInteractor {
     
     func recordClick(state: Binding<AppState.AppData>) {
         state.adv.advCount.wrappedValue += 1
-        UserDefaults.standard.set(state.adv.advCount.wrappedValue, forKey: GlobalConstants.recordClickUserDefaultsID)
+        
+        if state.adv.advCount.wrappedValue == .zero {
+            UserDefaults.standard.set(1, forKey: GlobalConstants.recordClickUserDefaultsID)
+        } else {
+            UserDefaults.standard.set(state.adv.advCount.wrappedValue, forKey: GlobalConstants.recordClickUserDefaultsID)
+        }
     }
     
     func userDefaultsGet(state: Binding<AppState.AppData>) {
@@ -64,7 +69,7 @@ struct MainInteractorImpl: MainInteractor {
     func saveMainMenuToUserDefaults(state: Binding<AppState.AppData>) {
         DispatchQueue.global(qos: .background).async {
             saveStoreCellMenu(state: state)
-//            saveStoreCellMenuHidden(state: state)
+            //            saveStoreCellMenuHidden(state: state)
         }
     }
 }
@@ -72,7 +77,11 @@ struct MainInteractorImpl: MainInteractor {
 extension MainInteractorImpl {
     private func getClick(state: Binding<AppState.AppData>) {
         let advCount = UserDefaults.standard.integer(forKey: GlobalConstants.recordClickUserDefaultsID)
-        state.adv.advCount.wrappedValue = advCount
+        if advCount == .zero {
+            state.adv.advCount.wrappedValue = 1
+        } else {
+            state.adv.advCount.wrappedValue = advCount
+        }
     }
     
     private func saveStoreCellMenu(state: Binding<AppState.AppData>) {
@@ -288,7 +297,7 @@ extension MainInteractorImpl {
     
     private func userDefaultTeam(state: Binding<AppState.AppData>) {
         if state.team.listResult1.wrappedValue.isEmpty {
-
+            
             state.team.listResult1.wrappedValue = decoderPlayer(forKey: "TeamlistResult1") ?? []
             state.team.listResult2.wrappedValue = decoderPlayer(forKey: "TeamlistResult2") ?? []
             state.team.listResult3.wrappedValue = decoderPlayer(forKey: "TeamlistResult3") ?? []
@@ -375,7 +384,7 @@ extension MainInteractorImpl {
         
         state.main.storeCellMenu.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenu") as? [String] ?? listNameMenu
         
-//        state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
+        //        state.main.storeCellMenuHidden.wrappedValue = UserDefaults.standard.array(forKey: "MainMenuStoreCellMenuHidden") as? [String] ?? []
     }
 }
 

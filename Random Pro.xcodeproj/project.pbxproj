@@ -1755,7 +1755,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 62;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -1766,7 +1766,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 675;
+				MARKETING_VERSION = 680;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1786,7 +1786,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 57;
+				CURRENT_PROJECT_VERSION = 62;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
@@ -1795,7 +1795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 675;
+				MARKETING_VERSION = 680;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

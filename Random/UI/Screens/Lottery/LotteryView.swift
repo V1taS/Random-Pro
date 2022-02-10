@@ -56,7 +56,9 @@ struct LotteryView: View {
             .sheet(isPresented: appBinding.lottery.showSettings, content: {
                 LotterySettingsView(appBinding: appBinding)
             })
-        }
+        }.onAppear(perform: {
+            Metrics.trackEvent(name: .lotteryScreen)
+        })
         .dismissingKeyboard()
     }
 }

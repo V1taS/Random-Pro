@@ -56,7 +56,9 @@ struct NumberView: View {
             .sheet(isPresented: appBinding.numberRandom.showSettings, content: {
                 NumberSettingsView(appBinding: appBinding)
             })
-        }
+        }.onAppear(perform: {
+            Metrics.trackEvent(name: .numbersScreen)
+        })
         .dismissingKeyboard()
     }
 }

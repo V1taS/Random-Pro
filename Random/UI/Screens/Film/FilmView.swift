@@ -59,6 +59,7 @@ struct FilmView: View {
             })
         }
         .onAppear {
+            Metrics.trackEvent(name: .filmScreen)
             getMovies(state: appBinding) {
                 saveFilmsToUserDefaults(state: appBinding)
             }

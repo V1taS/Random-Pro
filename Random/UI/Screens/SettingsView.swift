@@ -113,6 +113,7 @@ private extension SettingsView {
             
             HStack {
                 Button(action: {
+                    Metrics.trackEvent(name: .mailScreen)
                     EmailHelper.shared.sendEmail(subject: NSLocalizedString("Обратная связь Random Pro", comment: ""),
                                                  body: NSLocalizedString("Напишите здесь Ваш текст", comment: ""),
                                                  to: "375693@mail.ru")
@@ -138,6 +139,7 @@ private extension SettingsView {
             
             HStack {
                 Button(action: {
+                    Metrics.trackEvent(name: .shareScreen)
                     actionSheet()
                     Feedback.shared.impactHeavy(.medium)
                 }) {

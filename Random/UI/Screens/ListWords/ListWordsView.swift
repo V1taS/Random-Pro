@@ -48,6 +48,7 @@ struct ListWordsView: View {
             ListWordsSettingsView(appBinding: appBinding)
         })
         .onAppear {
+            Metrics.trackEvent(name: .listScreen)
             if appBinding.listWords.listData.wrappedValue.isEmpty {
                 listService.fetchList { listCloud in
                     let list = listCloud.map { $0.element }

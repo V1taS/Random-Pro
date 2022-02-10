@@ -58,6 +58,7 @@ struct TeamView: View {
             })
         })
         .onAppear {
+            Metrics.trackEvent(name: .teamsScreen)
             selectedTeam = appBinding.team.selectedTeam.wrappedValue
             
             if appBinding.team.listPlayersData.wrappedValue.isEmpty {

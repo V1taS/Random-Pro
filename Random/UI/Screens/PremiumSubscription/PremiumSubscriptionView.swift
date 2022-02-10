@@ -80,6 +80,8 @@ struct PremiumSubscriptionView: View {
                             .foregroundColor(.blue)
                     }
                 })
+            }.onAppear {
+                Metrics.trackEvent(name: .purchasesScreen)
             }
         }
     }

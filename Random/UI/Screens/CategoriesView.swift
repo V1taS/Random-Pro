@@ -82,6 +82,7 @@ struct CategoriesView: View {
             }
         }
         .onAppear {
+            Metrics.trackEvent(name: .categoriesScreen)
             storeCellMenu = appBinding.main.storeCellMenu.wrappedValue
             storeCellMenuHidden = appBinding.main.storeCellMenuHidden.wrappedValue
             

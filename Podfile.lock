@@ -1,7 +1,7 @@
 PODS:
-  - SDWebImage (5.12.2):
-    - SDWebImage/Core (= 5.12.2)
-  - SDWebImage/Core (5.12.2)
+  - SDWebImage (5.12.3):
+    - SDWebImage/Core (= 5.12.3)
+  - SDWebImage/Core (5.12.3)
   - SDWebImageSwiftUI (2.0.2):
     - SDWebImage (~> 5.10)
   - SwiftyJSON (4.3.0)
@@ -18,6 +18,7 @@ DEPENDENCIES:
   - SDWebImageSwiftUI
   - SwiftyJSON (~> 4.0)
   - YandexMobileAds/Dynamic (= 4.4.2)
+  - YandexMobileMetrica/Dynamic
 
 SPEC REPOS:
   trunk:
@@ -28,12 +29,12 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 SPEC CHECKSUMS:
-  SDWebImage: 240e5c12b592fb1268c1d03b8c90d90e8c2ffe82
+  SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   YandexMobileAds: 1306a03792ac2a6576e7e52f49f86a9e7e65c49b
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: 44d17e6e510589e8ecbbdee0a15e4ea8c36d34ea
+PODFILE CHECKSUM: 37a40a5cea7647640084e7739d1370c88fb1f9b7
 
 COCOAPODS: 1.11.2

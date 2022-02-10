@@ -35,7 +35,9 @@ struct YesOrNotView: View {
             Spacer()
             listResults
             generateButton
-        }
+        }.onAppear(perform: {
+            Metrics.trackEvent(name: .yesOrNotScreen)
+        })
         .navigationBarTitle(Text(NSLocalizedString("Да или Нет", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.yesOrNo.showSettings.wrappedValue.toggle()

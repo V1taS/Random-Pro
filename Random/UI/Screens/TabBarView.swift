@@ -31,6 +31,7 @@ struct TabBarView: View {
             TabView {
                 MainView(appBinding: appBinding, actionButton: {
                     presentADV()
+                    Metrics.trackEvent(name: .totalNumberOfClicks)
                 })
                     .tabItem {
                         Image(systemName: "slider.horizontal.3")

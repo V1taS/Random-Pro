@@ -65,6 +65,7 @@ struct MusicView: View {
                    })
             
             .onAppear {
+                Metrics.trackEvent(name: .musicScreen)
                 if !UserDefaults.standard.bool(forKey: "ManuMusicNew") {
                     UserDefaults.standard.set(true, forKey: "ManuMusicNew")
                 }

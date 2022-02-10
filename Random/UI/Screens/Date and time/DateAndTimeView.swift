@@ -41,7 +41,9 @@ struct DateAndTimeView: View {
             Spacer()
             listResults
             generateButton
-        }
+        }.onAppear(perform: {
+            Metrics.trackEvent(name: .dateAndTimeScreen)
+        })
         .navigationBarTitle(Text(NSLocalizedString("Дата и время", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.dateAndTime.showSettings.wrappedValue.toggle()

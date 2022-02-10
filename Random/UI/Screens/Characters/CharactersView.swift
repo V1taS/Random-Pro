@@ -46,7 +46,9 @@ struct CharactersView: View {
             
             listResults
             generateButton
-        }
+        }.onAppear(perform: {
+            Metrics.trackEvent(name: .charactersScreen)
+        })
         .padding(.horizontal, 16)
         
         .navigationBarTitle(Text(NSLocalizedString("Буква", comment: "")), displayMode: .inline)

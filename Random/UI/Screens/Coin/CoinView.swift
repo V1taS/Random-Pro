@@ -32,8 +32,9 @@ struct CoinView: View {
             Spacer()
             listResults
             generateButton
-        }
-        
+        }.onAppear(perform: {
+            Metrics.trackEvent(name: .coinScreen)
+        })
         .navigationBarTitle(Text(NSLocalizedString("Орел или Решка", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {
             appBinding.coin.showSettings.wrappedValue.toggle()

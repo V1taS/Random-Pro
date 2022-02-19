@@ -26,23 +26,30 @@ struct TabBarView: View {
     private let reviewTrackingManager = ReviewTrackingManager()
     private let reviewUtility = RecordReviewApp()
     
+//    @State private var tabBar: UITabBar?
+    
     var body: some View {
         ZStack {
-            TabView {
-                MainView(appBinding: appBinding, actionButton: {
-                    presentADV()
-                    Metrics.trackEvent(name: .totalNumberOfClicks)
-                })
-                    .tabItem {
-                        Image(systemName: "slider.horizontal.3")
-                        Text(NSLocalizedString("Генераторы", comment: ""))
-                    }
-                SettingsView(appBinding: appBinding, storeManager: storeManager)
-                    .tabItem {
-                        Image(systemName: "gear")
-                        Text(NSLocalizedString("Настройки", comment: ""))
-                    }
-            }
+            MainView(appBinding: appBinding, actionButton: {
+                presentADV()
+                Metrics.trackEvent(name: .totalNumberOfClicks)
+            }, storeManager: storeManager)
+            
+//            TabView {
+//                MainView(appBinding: appBinding, actionButton: {
+//                    presentADV()
+//                    Metrics.trackEvent(name: .totalNumberOfClicks)
+//                })
+//                    .tabItem {
+//                        Image(systemName: "slider.horizontal.3")
+//                        Text(NSLocalizedString("Генераторы", comment: ""))
+//                    }
+//                SettingsView(appBinding: appBinding, storeManager: storeManager)
+//                    .tabItem {
+//                        Image(systemName: "gear")
+//                        Text(NSLocalizedString("Настройки", comment: ""))
+//                    }
+//            }
             .accentColor(Color.primaryGray())
             backgroundColor
             showAddPlayerView
@@ -120,6 +127,7 @@ private extension TabBarView {
     private func presentADV() {
         if !appBinding.premium.premiumIsEnabled.wrappedValue {
             if appBinding.adv.advCount.wrappedValue % GlobalConstants.adDisplayInterval == .zero {
+                Metrics.trackEvent(name: .adv)
                 self.viewController?.present(style: .fullScreen, animated: false) {
                     NativeAdViewRepresentable(willDisappearAction: {
                         self.viewController?.dismiss(animated: true, completion: nil)

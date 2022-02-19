@@ -6,7 +6,7 @@
 //  Copyright © 2021 Sosin.bet. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension AppState.AppData {
     struct Main: Equatable {
@@ -15,5 +15,7 @@ extension AppState.AppData {
         }
         
         var storeCellMenuHidden: [String] = []
+        
+        var presenSettingsView = false
     }
 }

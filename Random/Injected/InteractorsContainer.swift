@@ -23,6 +23,8 @@ extension DIContainer {
         let filmInteractor: FilmInteractor
         let musicInteractor: MusicInteractor
         let travelInteractor: TravelInteractor
+        let passwordInteractor: PasswordInteractor
+        let russianLottoInteractor: RussianLottoInteractor
 
         init(mainInteractor: MainInteractor,
              numberInteractor: NumberInteractor,
@@ -38,7 +40,9 @@ extension DIContainer {
              contactInteractor: ContactInteractor,
              filmInteractor: FilmInteractor,
              musicInteractor: MusicInteractor,
-             travelInteractor: TravelInteractor) {
+             travelInteractor: TravelInteractor,
+             passwordInteractor: PasswordInteractor,
+             russianLottoInteractor: RussianLottoInteractor) {
             self.mainInteractor = mainInteractor
             self.numberInteractor = numberInteractor
             self.listWordsInteractor = listWordsInteractor
@@ -54,6 +58,8 @@ extension DIContainer {
             self.filmInteractor = filmInteractor
             self.musicInteractor = musicInteractor
             self.travelInteractor = travelInteractor
+            self.passwordInteractor = passwordInteractor
+            self.russianLottoInteractor = russianLottoInteractor
         }
 
         static var stub: Self {
@@ -71,7 +77,9 @@ extension DIContainer {
                   contactInteractor: ContactInteractorImpl(),
                   filmInteractor: FilmInteractorImpl(),
                   musicInteractor: MusicInteractorImpl(),
-                  travelInteractor: TravelInteractorImpl())
+                  travelInteractor: TravelInteractorImpl(),
+                  passwordInteractor: PasswordInteractorImpl(),
+                  russianLottoInteractor: RussianLottoInteractorImpl())
         }
     }
 }

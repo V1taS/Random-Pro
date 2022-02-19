@@ -12,11 +12,15 @@ struct MainView: View {
     
     private var appBinding: Binding<AppState.AppData>
     private let nameMenu = AppActions.MainActions.MenuName.self
+    private let storeManager: StoreManager
     private var actionButton: (() -> Void)?
     
-    init(appBinding: Binding<AppState.AppData>, actionButton: (() -> Void)?) {
+    init(appBinding: Binding<AppState.AppData>,
+         actionButton: (() -> Void)?,
+         storeManager: StoreManager) {
         self.appBinding = appBinding
         self.actionButton = actionButton
+        self.storeManager = storeManager
     }
     @Environment(\.injected) private var injected: DIContainer
     private let columns = UIDevice.current.userInterfaceIdiom == .phone ? 2 : 3
@@ -28,25 +32,33 @@ struct MainView: View {
                     userDefaultsGet(state: appBinding)
                     checkNewMenu()
                 }
-            
                 .navigationBarTitle(Text("Random"))
-                .navigationBarItems(trailing: HStack(spacing: 24) {
-                    Button(action: {
-                        if appBinding.premium.premiumIsEnabled.wrappedValue {
-                            alertCrown()
-                        } else {
-                            appBinding.premium.presentingModal.wrappedValue = true
-                        }
-                    }) {
-                        Image(systemName: "crown.fill")
-                            .renderingMode(.template)
-                            .font(.system(size: 24))
-                            .gradientForeground(colors: setColorForCrown())
+            
+                .navigationBarItems(leading: Button(action: {
+                    appBinding.main.presenSettingsView.wrappedValue = true
+                }) {
+                    Image(systemName: "gear")
+                        .renderingMode(.template)
+                        .font(.system(size: 24))
+                        .foregroundColor(.blue)
+                },
+                                    trailing: Button(action: {
+                    if appBinding.premium.premiumIsEnabled.wrappedValue {
+                        alertCrown()
+                    } else {
+                        appBinding.premium.presentingModal.wrappedValue = true
                     }
+                }) {
+                    Image(systemName: "crown.fill")
+                        .renderingMode(.template)
+                        .font(.system(size: 24))
+                        .gradientForeground(colors: setColorForCrown())
                 })
         }
+        .sheet(isPresented: appBinding.main.presenSettingsView, onDismiss: {}) {
+            SettingsView(appBinding: appBinding, storeManager: storeManager)
+        }
         .navigationViewStyle(StackNavigationViewStyle())
-        
     }
 }
 
@@ -73,8 +85,36 @@ private extension MainView {
                 nameMenu.lottery.rawValue: AnyView(lottery),
                 nameMenu.contact.rawValue: AnyView(contact),
                 nameMenu.music.rawValue: AnyView(music),
-                nameMenu.travel.rawValue: AnyView(travel)
+                nameMenu.travel.rawValue: AnyView(travel),
+                nameMenu.password.rawValue: AnyView(password),
+//                nameMenu.russianLotto.rawValue: AnyView(russianLotto)
         ]
+    }
+}
+
+// MARK: Russian Lotto View
+private extension MainView {
+    var russianLotto: some View {
+        NavigationLink(
+            destination: RussianLottoView(appBinding: appBinding, actionButton: actionButton)) {
+                CellMainView(image: "square.grid.4x3.fill",
+                             title: NSLocalizedString("Русское Лото", comment: ""),
+                             isLabelDisabled: false,
+                             textLabel: NSLocalizedString("НОВОЕ", comment: ""))
+            }
+    }
+}
+
+// MARK: Password
+private extension MainView {
+    var password: some View {
+        NavigationLink(
+            destination: PasswordView(appBinding: appBinding, actionButton: actionButton)) {
+                CellMainView(image: "wand.and.stars",
+                             title: NSLocalizedString("Пароли", comment: ""),
+                             isLabelDisabled: false,
+                             textLabel: NSLocalizedString("НОВОЕ", comment: ""))
+            }
     }
 }
 
@@ -148,8 +188,8 @@ private extension MainView {
             destination: NumberView(appBinding: appBinding, actionButton: actionButton)) {
                 CellMainView(image: "number",
                              title: NSLocalizedString("Число", comment: ""),
-                             isLabelDisabled: true,
-                             textLabel: "")
+                             isLabelDisabled: false,
+                             textLabel: NSLocalizedString("ХИТ", comment: ""))
             }
     }
 }
@@ -353,8 +393,9 @@ private extension MainView {
                         }
                     }
                 }
-            } .frame(maxWidth: .infinity)
-                .padding(.bottom, 16)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.bottom, 16)
         }
     }
 }
@@ -385,6 +426,6 @@ private extension MainView {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(appBinding: .constant(.init()), actionButton: nil)
+        MainView(appBinding: .constant(.init()), actionButton: nil, storeManager: .init())
     }
 }

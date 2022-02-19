@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 import YandexMobileMetrica
 
 @main
@@ -18,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let configuration = YMMYandexMetricaConfiguration.init(apiKey: "b4921e71-faf2-4bd3-8bea-e033a76457ae") {
             YMMYandexMetrica.activate(with: configuration)
         }
-       
+        
         return true
     }
     

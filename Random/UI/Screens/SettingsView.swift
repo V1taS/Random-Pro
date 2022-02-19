@@ -14,13 +14,15 @@ struct SettingsView: View {
     
     @Environment(\.injected) private var injected: DIContainer
     @ObservedObject var storeManager: StoreManager
+    @State private var showActionSheet = false
+    @State private var isSharePresented = false
     
     var body: some View {
         NavigationView {
             VStack {
                 Form {
                     Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
-                        idea
+                        //                        idea
                         premium
                         if UIDevice.current.userInterfaceIdiom != .pad {
                             share
@@ -38,6 +40,19 @@ struct SettingsView: View {
                 }
             }
             .navigationBarTitle(Text(LocalizedStringKey("Настройки")), displayMode: .automatic)
+            .navigationBarItems(trailing: HStack(spacing: 24) {
+                Button(action: {
+                    appBinding.main.presenSettingsView.wrappedValue = false
+                }) {
+                    Image(systemName: "xmark.circle")
+                        .renderingMode(.template)
+                        .font(.system(size: 24))
+                        .foregroundColor(.blue)
+                }
+            })
+        }
+        .sheet(isPresented: appBinding.premium.presentingFromSettingsModal, onDismiss: {}) {
+            PremiumSubscriptionView(storeManager: storeManager, appBinding: appBinding)
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -75,7 +90,7 @@ private extension SettingsView {
             
             HStack {
                 Button(action: {
-                    appBinding.premium.presentingModal.wrappedValue = true
+                    appBinding.premium.presentingFromSettingsModal.wrappedValue = true
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     HStack {
@@ -95,9 +110,7 @@ private extension SettingsView {
                                 .font(.robotoRegular16())
                         }
                     }
-                    
                 }
-                Spacer()
             }
         }
     }
@@ -140,7 +153,7 @@ private extension SettingsView {
             HStack {
                 Button(action: {
                     Metrics.trackEvent(name: .shareScreen)
-                    actionSheet()
+                    isSharePresented.toggle()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
                     Text(NSLocalizedString("Поделиться", comment: ""))
@@ -149,7 +162,13 @@ private extension SettingsView {
                 }
                 Spacer()
             }
-        }
+        }.sheet(isPresented: $isSharePresented, onDismiss: {
+            print("Dismiss")
+        }, content: {
+            if let url = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956") {
+                ActivityViewController(activityItems: [url])
+            }
+        })
     }
 }
 
@@ -180,23 +199,25 @@ private extension SettingsView {
         HStack {
             Spacer()
             Button(action: {
-                UIApplication.shared.windows.first?.rootViewController?.showAlert(
-                    with: NSLocalizedString("Внимание", comment: ""),
-                    and: NSLocalizedString("Очистить кэш", comment: "") + "?",
-                    titleOk: NSLocalizedString("Очистить", comment: ""),
-                    titleCancel: NSLocalizedString("Отмена", comment: ""),
-                    completionOk: {
-                        cleanApp(state: appBinding)
-                        cleanAllUserDefualts(state: appBinding)
-                        Feedback.shared.impactHeavy(.medium)
-                    }
-                )
+                showActionSheet.toggle()
             }) {
                 Text(NSLocalizedString("Очистить кэш", comment: ""))
                     .foregroundColor(.primaryError())
                     .font(.robotoRegular16())
             }
             Spacer()
+        }
+        .actionSheet(isPresented: $showActionSheet) {
+            ActionSheet(title: Text(NSLocalizedString("Очистить кэш", comment: "") + "?"),
+                        buttons: [
+                            .default(Text(NSLocalizedString("Очистить", comment: "")), action: {
+                                cleanApp(state: appBinding)
+                                cleanAllUserDefualts(state: appBinding)
+                                Feedback.shared.impactHeavy(.medium)
+                            }),
+                            .cancel()
+                            
+                        ])
         }
     }
 }
@@ -257,14 +278,6 @@ private extension SettingsView {
         injected.interactors.mainInteractor
             .cleanAll(state: state)
         
-    }
-}
-
-private extension SettingsView {
-    private func actionSheet() {
-        guard let data = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956") else { return }
-        let av = UIActivityViewController(activityItems: [data], applicationActivities: [UIActivity()])
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
     }
 }
 

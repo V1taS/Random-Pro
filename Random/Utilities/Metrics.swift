@@ -15,6 +15,7 @@ enum MetricsApplicationSections: String {
     case mailScreen = "Обратная связь"
     case shareScreen = "Поделиться"
     case totalNumberOfClicks = "Общее количество нажатий"
+    case adv = "Реклама"
     
     // Категории
     case filmScreen = "Фильмы"
@@ -30,6 +31,7 @@ enum MetricsApplicationSections: String {
     case contactScreen = "Контакт"
     case musicScreen = "Музыка"
     case travelScreen = "Путешествие"
+    case passwordScreen = "Пароли"
 }
 
 final class Metrics {

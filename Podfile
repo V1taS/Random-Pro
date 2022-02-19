@@ -15,6 +15,7 @@ target 'Random Pro' do
   use_frameworks!
 
   pod 'SDWebImageSwiftUI'
+  pod 'SDWebImage'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'YandexMobileAds/Dynamic', '4.4.2'
   pod 'YandexMobileMetrica/Dynamic'

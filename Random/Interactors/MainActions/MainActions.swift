@@ -24,6 +24,8 @@ extension AppActions {
             case contact = "Контакт"
             case music = "Музыка"
             case travel = "Путешествие"
+            case password = "Пароли"
+            case russianLotto = "Русское Лото"
         }
     }
 }

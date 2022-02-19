@@ -73,6 +73,7 @@ struct PremiumSubscriptionView: View {
                 .navigationBarItems(trailing: HStack(spacing: 24) {
                     Button(action: {
                         appBinding.premium.presentingModal.wrappedValue = false
+                        appBinding.premium.presentingFromSettingsModal.wrappedValue = false
                     }) {
                         Image(systemName: "xmark.circle")
                             .renderingMode(.template)

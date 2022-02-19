@@ -15,6 +15,7 @@ PODS:
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
+  - SDWebImage
   - SDWebImageSwiftUI
   - SwiftyJSON (~> 4.0)
   - YandexMobileAds/Dynamic (= 4.4.2)
@@ -35,6 +36,6 @@ SPEC CHECKSUMS:
   YandexMobileAds: 1306a03792ac2a6576e7e52f49f86a9e7e65c49b
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: 37a40a5cea7647640084e7739d1370c88fb1f9b7
+PODFILE CHECKSUM: 17bf20d3a7b520b9710a9b3f3b8fdffe6d93fbf0
 
 COCOAPODS: 1.11.2

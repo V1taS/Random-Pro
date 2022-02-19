@@ -36,6 +36,8 @@ extension AppState {
         var premium = Premium()
         var adv = ADV()
         var adminOwner = AdminOwner()
+        var password = Password()
+        var russianLotto = RussianLotto()
     }
 }
 

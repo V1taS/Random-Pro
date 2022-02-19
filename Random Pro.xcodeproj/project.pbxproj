@@ -44,6 +44,7 @@
 		1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */; };
 		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
+		1B406A3827B9A75200500170 /* KegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B406A3727B9A75200500170 /* KegView.swift */; };
 		1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC20278E295D00578BFB /* OwnerAdminView.swift */; };
 		1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC22278E2C4200578BFB /* AdminOwner.swift */; };
 		1B446F2B25E517000060E163 /* RecordReviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B446F2A25E517000060E163 /* RecordReviewApp.swift */; };
@@ -69,6 +70,11 @@
 		1B57F6682789E7A4005F220C /* ADV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F6672789E7A3005F220C /* ADV.swift */; };
 		1B5A103B27B5257E008DF773 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5A103A27B5257E008DF773 /* Metrics.swift */; };
 		1B5C18D02676C23E00E44B14 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */; };
+		1B5F698127C0115E0050647A /* Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F698027C0115E0050647A /* Password.swift */; };
+		1B5F698427C011BC0050647A /* PasswordActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F698327C011BC0050647A /* PasswordActions.swift */; };
+		1B5F698627C011ED0050647A /* PasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F698527C011ED0050647A /* PasswordInteractor.swift */; };
+		1B5F698827C012B60050647A /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F698727C012B60050647A /* PasswordView.swift */; };
+		1B5F698A27C0289A0050647A /* String+OffsetBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F698927C0289A0050647A /* String+OffsetBy.swift */; };
 		1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875A325DB307C006E82D4 /* PurchasesView.swift */; };
 		1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
 		1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6875AA25DB620C006E82D4 /* StoreManager.swift */; };
@@ -119,6 +125,13 @@
 		1B7F66FF25D0937100933AD6 /* CellMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F66FE25D0937100933AD6 /* CellMainView.swift */; };
 		1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F670525D09A9B00933AD6 /* TabBarView.swift */; };
 		1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F670A25D0A27D00933AD6 /* NumberView.swift */; };
+		1B88ED6E27C11FAA00030202 /* RussianLotto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88ED6D27C11FAA00030202 /* RussianLotto.swift */; };
+		1B88ED7127C11FE300030202 /* RussianLottoActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88ED7027C11FE300030202 /* RussianLottoActions.swift */; };
+		1B88ED7327C1200500030202 /* RussianLottoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88ED7227C1200500030202 /* RussianLottoInteractor.swift */; };
+		1B88ED7627C1208800030202 /* RussianLottoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88ED7527C1208800030202 /* RussianLottoView.swift */; };
+		1B88ED7827C120A000030202 /* RussianLottoSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88ED7727C120A000030202 /* RussianLottoSettingsView.swift */; };
+		1B88ED7C27C14E1800030202 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88ED7B27C14E1800030202 /* ShareSheet.swift */; };
+		1B88ED7E27C1589900030202 /* Shake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88ED7D27C1589900030202 /* Shake.swift */; };
 		1B8EB60D26740D67009016BE /* URLSessionRequestPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB60C26740D67009016BE /* URLSessionRequestPerformer.swift */; };
 		1B8EB60F2674119F009016BE /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB60E2674119F009016BE /* URLRequest.swift */; };
 		1B8EB61126741256009016BE /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8EB61026741256009016BE /* URL.swift */; };
@@ -186,6 +199,7 @@
 		1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1325EC087800AD38F4 /* FilmInteractor.swift */; };
 		1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1725EC091100AD38F4 /* FilmView.swift */; };
 		1BBADE1B25EC0C5100AD38F4 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1A25EC0C5100AD38F4 /* Networking.swift */; };
+		1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCDBF827C065F00004FF0D /* EncryptPassword.swift */; };
 		1BCC579127A83CE200DF5ED0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCC579027A83CE200DF5ED0 /* CloudKit.framework */; };
 		1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90325D7250D00A1C7A4 /* MailView.swift */; };
 		1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */; };
@@ -215,6 +229,8 @@
 		1BF22F4225D8B23F00775368 /* TeamResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F4125D8B23F00775368 /* TeamResultsView.swift */; };
 		1BF22F4525D8D49E00775368 /* TeamCustomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F4425D8D49E00775368 /* TeamCustomListView.swift */; };
 		1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */; };
+		1BF30B8227BC420100B3B4E5 /* BagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30B8127BC420100B3B4E5 /* BagView.swift */; };
+		1BF30B8427BC42E200B3B4E5 /* LotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30B8327BC42E200B3B4E5 /* LotoView.swift */; };
 		1BF30DC225D194A300DCE62B /* CellCubeTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DC125D194A300DCE62B /* CellCubeTwoView.swift */; };
 		1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DC425D195A900DCE62B /* CellCubeThreeView.swift */; };
 		1BF30DC825D195EC00DCE62B /* CellCubeFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DC725D195EC00DCE62B /* CellCubeFourView.swift */; };
@@ -225,7 +241,7 @@
 		1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */; };
 		1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */; };
 		1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */; };
-		C68F95613C9463A6A2DA5A55 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF2D8101058169E18AD6F95 /* Pods_Random_Pro.framework */; };
+		51994ECD77A1234031C62B98 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C2D2AD9B4D6CAF9A9CF8099 /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -282,6 +298,7 @@
 		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
+		1B406A3727B9A75200500170 /* KegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KegView.swift; sourceTree = "<group>"; };
 		1B40AC20278E295D00578BFB /* OwnerAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerAdminView.swift; sourceTree = "<group>"; };
 		1B40AC22278E2C4200578BFB /* AdminOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOwner.swift; sourceTree = "<group>"; };
 		1B446F2A25E517000060E163 /* RecordReviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReviewApp.swift; sourceTree = "<group>"; };
@@ -307,6 +324,11 @@
 		1B57F6672789E7A3005F220C /* ADV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADV.swift; sourceTree = "<group>"; };
 		1B5A103A27B5257E008DF773 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		1B5F698027C0115E0050647A /* Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Password.swift; sourceTree = "<group>"; };
+		1B5F698327C011BC0050647A /* PasswordActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordActions.swift; sourceTree = "<group>"; };
+		1B5F698527C011ED0050647A /* PasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordInteractor.swift; sourceTree = "<group>"; };
+		1B5F698727C012B60050647A /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		1B5F698927C0289A0050647A /* String+OffsetBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+OffsetBy.swift"; sourceTree = "<group>"; };
 		1B6875A325DB307C006E82D4 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
 		1B6875A725DB614F006E82D4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1B6875AA25DB620C006E82D4 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -360,6 +382,13 @@
 		1B7F670525D09A9B00933AD6 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		1B7F670A25D0A27D00933AD6 /* NumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberView.swift; sourceTree = "<group>"; };
 		1B80A00E26D68E68008F8733 /* Random Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Pro.entitlements"; sourceTree = "<group>"; };
+		1B88ED6D27C11FAA00030202 /* RussianLotto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianLotto.swift; sourceTree = "<group>"; };
+		1B88ED7027C11FE300030202 /* RussianLottoActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianLottoActions.swift; sourceTree = "<group>"; };
+		1B88ED7227C1200500030202 /* RussianLottoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianLottoInteractor.swift; sourceTree = "<group>"; };
+		1B88ED7527C1208800030202 /* RussianLottoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianLottoView.swift; sourceTree = "<group>"; };
+		1B88ED7727C120A000030202 /* RussianLottoSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianLottoSettingsView.swift; sourceTree = "<group>"; };
+		1B88ED7B27C14E1800030202 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		1B88ED7D27C1589900030202 /* Shake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shake.swift; sourceTree = "<group>"; };
 		1B8EB60C26740D67009016BE /* URLSessionRequestPerformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionRequestPerformer.swift; sourceTree = "<group>"; };
 		1B8EB60E2674119F009016BE /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		1B8EB61026741256009016BE /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
@@ -428,6 +457,7 @@
 		1BBADE1325EC087800AD38F4 /* FilmInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInteractor.swift; sourceTree = "<group>"; };
 		1BBADE1725EC091100AD38F4 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		1BBADE1A25EC0C5100AD38F4 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		1BBCDBF827C065F00004FF0D /* EncryptPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptPassword.swift; sourceTree = "<group>"; };
 		1BCC579027A83CE200DF5ED0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1BD1F90325D7250D00A1C7A4 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -457,6 +487,8 @@
 		1BF22F4125D8B23F00775368 /* TeamResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamResultsView.swift; sourceTree = "<group>"; };
 		1BF22F4425D8D49E00775368 /* TeamCustomListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCustomListView.swift; sourceTree = "<group>"; };
 		1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPlugView.swift; sourceTree = "<group>"; };
+		1BF30B8127BC420100B3B4E5 /* BagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagView.swift; sourceTree = "<group>"; };
+		1BF30B8327BC42E200B3B4E5 /* LotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotoView.swift; sourceTree = "<group>"; };
 		1BF30DC125D194A300DCE62B /* CellCubeTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeTwoView.swift; sourceTree = "<group>"; };
 		1BF30DC425D195A900DCE62B /* CellCubeThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeThreeView.swift; sourceTree = "<group>"; };
 		1BF30DC725D195EC00DCE62B /* CellCubeFourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellCubeFourView.swift; sourceTree = "<group>"; };
@@ -467,9 +499,9 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		4DF2D8101058169E18AD6F95 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB02F04A37388E542D766BDD /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
-		EEF4FFAB47F5696548B2F2D7 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		4C2D2AD9B4D6CAF9A9CF8099 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1A7743C3164EF990A60C1A7 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		E9EF79D125C292833FBA90A9 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,7 +513,7 @@
 				1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */,
 				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
-				C68F95613C9463A6A2DA5A55 /* Pods_Random_Pro.framework in Frameworks */,
+				51994ECD77A1234031C62B98 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +596,23 @@
 			path = Record;
 			sourceTree = "<group>";
 		};
+		1B5F697F27C011420050647A /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				1B5F698727C012B60050647A /* PasswordView.swift */,
+			);
+			path = Password;
+			sourceTree = "<group>";
+		};
+		1B5F698227C0119A0050647A /* PasswordActions */ = {
+			isa = PBXGroup;
+			children = (
+				1B5F698327C011BC0050647A /* PasswordActions.swift */,
+				1B5F698527C011ED0050647A /* PasswordInteractor.swift */,
+			);
+			path = PasswordActions;
+			sourceTree = "<group>";
+		};
 		1B6875A625DB614F006E82D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,7 +621,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				4DF2D8101058169E18AD6F95 /* Pods_Random_Pro.framework */,
+				4C2D2AD9B4D6CAF9A9CF8099 /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -663,6 +712,8 @@
 				1BBADE0A25EC080500AD38F4 /* Film.swift */,
 				1B1D6069260225CA00847843 /* Music.swift */,
 				1BDC80D0264DBA85001B0893 /* Travel.swift */,
+				1B5F698027C0115E0050647A /* Password.swift */,
+				1B88ED6D27C11FAA00030202 /* RussianLotto.swift */,
 			);
 			path = Injected;
 			sourceTree = "<group>";
@@ -670,6 +721,8 @@
 		1B7F668B25D0867700933AD6 /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
+				1B88ED6F27C11FDD00030202 /* RussianLottoActions */,
+				1B5F698227C0119A0050647A /* PasswordActions */,
 				1B7F66A425D0889100933AD6 /* AppActions.swift */,
 				1B7F66A725D0890C00933AD6 /* MainActions */,
 				1BF30DD925D19E4200DCE62B /* SettingsActions */,
@@ -771,6 +824,9 @@
 				1B57F63C27873805005F220C /* PremiumSubscriptionChoiceView.swift */,
 				1B57F63E27873E27005F220C /* PremiumSubscriptionComponentView.swift */,
 				1B57F640278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift */,
+				1B406A3727B9A75200500170 /* KegView.swift */,
+				1BF30B8127BC420100B3B4E5 /* BagView.swift */,
+				1BF30B8327BC42E200B3B4E5 /* LotoView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -778,6 +834,8 @@
 		1B7F669325D086DE00933AD6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				1B5F697F27C011420050647A /* Password */,
+				1B88ED7427C1207C00030202 /* RussianLottoView */,
 				1B7F670525D09A9B00933AD6 /* TabBarView.swift */,
 				1B7F66FB25D0930600933AD6 /* MainView.swift */,
 				1BF30DD225D19B1600DCE62B /* SettingsView.swift */,
@@ -823,6 +881,7 @@
 				1B7F66F625D08E2A00933AD6 /* UIKit */,
 				1B7F66D925D08CBB00933AD6 /* Extensions */,
 				1B7F66C625D08B1700933AD6 /* Store.swift */,
+				1BBCDBF827C065F00004FF0D /* EncryptPassword.swift */,
 				1B0DB27325DC680A00C9D31D /* ReversingScale.swift */,
 				1B7F66DE25D08D1300933AD6 /* Size.swift */,
 				1B325C0525D2C9CA00382F33 /* Feedback.swift */,
@@ -832,6 +891,7 @@
 				1BF1F5C925F705D700613F20 /* Orientation.swift */,
 				1B57F6632789C58F005F220C /* FullscreenSheet.swift */,
 				1B5A103A27B5257E008DF773 /* Metrics.swift */,
+				1B88ED7D27C1589900030202 /* Shake.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -896,6 +956,7 @@
 				1B8EB64726762BB0009016BE /* String+RemovingWhiteSpaces.swift */,
 				1B8EB65326765ECE009016BE /* String+FormatterDate.swift */,
 				1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */,
+				1B5F698927C0289A0050647A /* String+OffsetBy.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -909,6 +970,7 @@
 				1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */,
 				1B0DB26C25DC49F500C9D31D /* ActivityIndicator.swift */,
 				1B57F6652789E0DF005F220C /* UIImageView+Color.swift */,
+				1B88ED7B27C14E1800030202 /* ShareSheet.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -921,6 +983,24 @@
 				1B3D19EE25D1BB3D0027A83B /* NumberResultsView.swift */,
 			);
 			path = Number;
+			sourceTree = "<group>";
+		};
+		1B88ED6F27C11FDD00030202 /* RussianLottoActions */ = {
+			isa = PBXGroup;
+			children = (
+				1B88ED7027C11FE300030202 /* RussianLottoActions.swift */,
+				1B88ED7227C1200500030202 /* RussianLottoInteractor.swift */,
+			);
+			path = RussianLottoActions;
+			sourceTree = "<group>";
+		};
+		1B88ED7427C1207C00030202 /* RussianLottoView */ = {
+			isa = PBXGroup;
+			children = (
+				1B88ED7527C1208800030202 /* RussianLottoView.swift */,
+				1B88ED7727C120A000030202 /* RussianLottoSettingsView.swift */,
+			);
+			path = RussianLottoView;
 			sourceTree = "<group>";
 		};
 		1B8EB61626741A13009016BE /* APICalls */ = {
@@ -1217,8 +1297,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DB02F04A37388E542D766BDD /* Pods-Random Pro.debug.xcconfig */,
-				EEF4FFAB47F5696548B2F2D7 /* Pods-Random Pro.release.xcconfig */,
+				D1A7743C3164EF990A60C1A7 /* Pods-Random Pro.debug.xcconfig */,
+				E9EF79D125C292833FBA90A9 /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1230,14 +1310,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				012F1092BCC78126A42D6487 /* [CP] Check Pods Manifest.lock */,
+				3202B6AC2CBDE7C282A84CFC /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				C8C406D8F3B60363727B4E70 /* [CP] Embed Pods Frameworks */,
-				3160497082B9FA6C029DB810 /* [CP] Copy Pods Resources */,
+				0CFD60D918456AA8023AF258 /* [CP] Embed Pods Frameworks */,
+				83153151ED87EC010ADE965B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1307,26 +1387,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		012F1092BCC78126A42D6487 /* [CP] Check Pods Manifest.lock */ = {
+		0CFD60D918456AA8023AF258 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1B225C582619E472001B9124 /* ShellScript */ = {
@@ -1349,7 +1424,29 @@
 ";
 			showEnvVarsInLog = 0;
 		};
-		3160497082B9FA6C029DB810 /* [CP] Copy Pods Resources */ = {
+		3202B6AC2CBDE7C282A84CFC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83153151ED87EC010ADE965B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1364,23 +1461,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C8C406D8F3B60363727B4E70 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1399,6 +1479,7 @@
 				1BF22F2725D885C100775368 /* TeamActions.swift in Sources */,
 				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
 				1B9D22CE27A6EC3900D4E427 /* PlayersService.swift in Sources */,
+				1B5F698827C012B60050647A /* PasswordView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
 				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
@@ -1408,6 +1489,7 @@
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
 				1B92030A25D1703E0094D2BE /* CharactersView.swift in Sources */,
+				1B88ED7C27C14E1800030202 /* ShareSheet.swift in Sources */,
 				1B57F64727883498005F220C /* GlobalConstants.swift in Sources */,
 				1B57F63B2787305D005F220C /* TitleWithDescriptionCell.swift in Sources */,
 				1B9D22D027A6EC6A00D4E427 /* CloudList.swift in Sources */,
@@ -1419,6 +1501,7 @@
 				1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */,
 				1B7F66A225D0884F00933AD6 /* ListWords.swift in Sources */,
 				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
+				1B88ED7E27C1589900030202 /* Shake.swift in Sources */,
 				1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */,
 				1BDC80D6264DBB77001B0893 /* TravelInteractor.swift in Sources */,
 				1BD1F91C25D7336D00A1C7A4 /* LotteryView.swift in Sources */,
@@ -1454,7 +1537,9 @@
 				1B8EB615267418BF009016BE /* Data+PrettyPrintedJSON.swift in Sources */,
 				1B9D22D227A6EC7600D4E427 /* CloudPlayer.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
+				1BF30B8427BC42E200B3B4E5 /* LotoView.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
+				1B88ED6E27C11FAA00030202 /* RussianLotto.swift in Sources */,
 				1B1D60852602DE6A00847843 /* MusicHistoryView.swift in Sources */,
 				1BD1F92425D733AB00A1C7A4 /* LotteryActions.swift in Sources */,
 				1B92034625D1888B0094D2BE /* Cube.swift in Sources */,
@@ -1464,18 +1549,22 @@
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
 				1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */,
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
+				1B406A3827B9A75200500170 /* KegView.swift in Sources */,
 				1B8EB6352674457B009016BE /* SearchMoviesRequest.swift in Sources */,
 				1BBADE0B25EC080500AD38F4 /* Film.swift in Sources */,
 				1B57F6662789E0DF005F220C /* UIImageView+Color.swift in Sources */,
 				1BF22F4525D8D49E00775368 /* TeamCustomListView.swift in Sources */,
 				1B8EB61926741A93009016BE /* VideoCDNRequest.swift in Sources */,
 				1B92032725D179330094D2BE /* ListWordsSettingsView.swift in Sources */,
+				1B88ED7127C11FE300030202 /* RussianLottoActions.swift in Sources */,
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
 				1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */,
+				1B5F698A27C0289A0050647A /* String+OffsetBy.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
 				1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */,
 				1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */,
 				1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */,
+				1B5F698427C011BC0050647A /* PasswordActions.swift in Sources */,
 				1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */,
 				1B8EB64A26763C98009016BE /* TravelInformationView.swift in Sources */,
 				1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */,
@@ -1489,6 +1578,7 @@
 				1B7F66F425D08DE800933AD6 /* StringProtocol.swift in Sources */,
 				1B8EB65426765ECE009016BE /* String+FormatterDate.swift in Sources */,
 				1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */,
+				1B5F698127C0115E0050647A /* Password.swift in Sources */,
 				1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */,
 				1B14038B2687F394007A5150 /* FPSCounter.swift in Sources */,
 				1B8EB64C26763DFA009016BE /* TravelInformationViewCell.swift in Sources */,
@@ -1520,6 +1610,7 @@
 				1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
 				1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */,
+				1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */,
 				1B5A103B27B5257E008DF773 /* Metrics.swift in Sources */,
 				1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */,
 				1B57F6682789E7A4005F220C /* ADV.swift in Sources */,
@@ -1529,6 +1620,7 @@
 				1B9D22CD27A6EC3900D4E427 /* ListService.swift in Sources */,
 				1B8EB623267421D4009016BE /* DefaultAPICall.swift in Sources */,
 				1B8EB6212674204B009016BE /* CodableResultMapper.swift in Sources */,
+				1BF30B8227BC420100B3B4E5 /* BagView.swift in Sources */,
 				1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */,
 				1B8EB60D26740D67009016BE /* URLSessionRequestPerformer.swift in Sources */,
 				1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */,
@@ -1546,6 +1638,7 @@
 				1B9AB8A625ECB77700BD5CFD /* FilmSettingsView.swift in Sources */,
 				1BF22F2325D8857A00775368 /* Team.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
+				1B88ED7827C120A000030202 /* RussianLottoSettingsView.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
 				1B8EB640267506E8009016BE /* TravelMiddleContentCellView.swift in Sources */,
@@ -1564,6 +1657,7 @@
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B8EB644267531DC009016BE /* TravelHistoryView.swift in Sources */,
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
+				1B5F698627C011ED0050647A /* PasswordInteractor.swift in Sources */,
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
 				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
@@ -1572,6 +1666,7 @@
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
+				1B88ED7327C1200500030202 /* RussianLottoInteractor.swift in Sources */,
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */,
@@ -1589,6 +1684,7 @@
 				1B8EB63A26744FA5009016BE /* HotTravelRequest.swift in Sources */,
 				1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */,
 				1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */,
+				1B88ED7627C1208800030202 /* RussianLottoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1748,14 +1844,14 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB02F04A37388E542D766BDD /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = D1A7743C3164EF990A60C1A7 /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 63;
+				CURRENT_PROJECT_VERSION = 66;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -1766,7 +1862,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 681;
+				MARKETING_VERSION = 684;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1779,14 +1875,14 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EEF4FFAB47F5696548B2F2D7 /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = E9EF79D125C292833FBA90A9 /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 63;
+				CURRENT_PROJECT_VERSION = 66;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
@@ -1795,7 +1891,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 681;
+				MARKETING_VERSION = 684;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

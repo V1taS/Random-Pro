@@ -229,3 +229,18 @@
 
 "Обновление прайса" = "Price update";
 "Удалить" = "Remove";
+"Генератор паролей" = "Password generator";
+"Фраза пароль" = "Phrase password";
+"Скопировать" = "Copy";
+"Пароли" = "Passwords";
+"Фраза" = "Phrase";
+"Введите фразу" = "Enter a phrase";
+"Получите пароль" = "Get a password";
+"Параметры" = "Parameters";
+"Длина пароля" = "Password length";
+"Прописные буквы" = "Capital letters";
+"Цифры" = "Numbers";
+"Строчные буквы" = "Lower case";
+"Символы" = "Symbols";
+"От" = "From";
+"До" = "Before";

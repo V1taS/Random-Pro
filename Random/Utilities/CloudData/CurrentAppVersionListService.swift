@@ -1,8 +1,8 @@
 //
-//  ListService.swift
+//  CurrentAppVersionListService.swift
 //  Random Pro
 //
-//  Created by Vitalii Sosin on 30.01.2022.
+//  Created by Vitalii Sosin on 20.02.2022.
 //  Copyright © 2022 Sosin.bet. All rights reserved.
 //
 
@@ -10,11 +10,11 @@ import CloudKit
 import UIKit
 import CoreData
 
-final class ListService {
+final class CurrentAppVersionListService {
     
     // MARK: - Public variables
    
-    public var onChange : (([CloudList]) -> Void)?
+    public var onChange : (([CloudCurrentAppVersion]) -> Void)?
     
     public var onError : ((Error) -> Void)?
     
@@ -33,9 +33,9 @@ final class ListService {
     
     // MARK: - Private variables
     
-    private let database = CKContainer.default().privateCloudDatabase
+    private let database = CKContainer.default().publicCloudDatabase
     private var records: [CKRecord] = []
-    private var insertedObjects: [CloudList] = []
+    private var insertedObjects: [CloudCurrentAppVersion] = []
     private var deletedObjectIds: Set<CKRecord.ID> = []
     
     private func handle(error: Error) {
@@ -44,7 +44,7 @@ final class ListService {
         }
     }
     
-    private var list: [CloudList] = [] {
+    private var list: [CloudCurrentAppVersion] = [] {
         didSet {
             self.notificationQueue.addOperation {
                 self.onChange?(self.list)
@@ -53,7 +53,7 @@ final class ListService {
     }
     
     func add(element: String) {
-        var list = CloudList()
+        var list = CloudCurrentAppVersion()
         list.element = element
         
         database.save(list.record) { _, error in
@@ -82,7 +82,7 @@ final class ListService {
     }
     
     public func deleteAllElements(_ completion: (() -> Void)? = nil) {
-        let query = CKQuery(recordType: CloudList.recordType, predicate: NSPredicate(value: true))
+        let query = CKQuery(recordType: CloudCurrentAppVersion.recordType, predicate: NSPredicate(value: true))
         database.perform(query, inZoneWith: nil) { [weak self] records, error in
             guard let self = self else { return }
             
@@ -101,8 +101,8 @@ final class ListService {
         self.deletedObjectIds = []
     }
     
-    public func fetchList(completion: (([CloudList]) -> Void)? = nil) {
-        let query = CKQuery(recordType: CloudList.recordType, predicate: NSPredicate(value: true))
+    public func fetchList(completion: (([CloudCurrentAppVersion]) -> Void)? = nil) {
+        let query = CKQuery(recordType: CloudCurrentAppVersion.recordType, predicate: NSPredicate(value: true))
         
         database.perform(query, inZoneWith: nil) { records, error in
             
@@ -112,7 +112,7 @@ final class ListService {
             }
             
             self.list = records.map { record in
-                return CloudList(record: record)
+                return CloudCurrentAppVersion(record: record)
             }
             self.records = records
             self.updateList()
@@ -132,7 +132,7 @@ final class ListService {
         // remove objects from our local list once we see them not being returned from storage anymore
         self.deletedObjectIds.formIntersection(knownIds)
         
-        var list = records.map { record in CloudList(record: record) }
+        var list = records.map { record in CloudCurrentAppVersion(record: record) }
         
         list.append(contentsOf: self.insertedObjects)
         list.removeAll { element in
@@ -143,4 +143,5 @@ final class ListService {
         debugPrint("Tracking local objects \(self.insertedObjects) \(self.deletedObjectIds)")
     }
 }
+
 

@@ -57,7 +57,6 @@ private extension YesOrNotView {
             generateYesOrNo(state: appBinding)
             saveYesOrNotToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
-            recordClick(state: appBinding)
             actionButton?()
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -113,13 +112,6 @@ private extension YesOrNotView {
     private func saveYesOrNotToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.yesOrNoInteractor
             .saveYesOrNoToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension YesOrNotView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

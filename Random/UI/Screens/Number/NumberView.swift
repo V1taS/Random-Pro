@@ -138,7 +138,6 @@ private extension NumberView {
                 generateNumber(state: appBinding)
                 Feedback.shared.impactHeavy(.medium)
                 saveNumberToUserDefaults(state: appBinding)
-                recordClick(state: appBinding)
             }
             actionButton?()
         }) {
@@ -171,13 +170,6 @@ private extension NumberView {
     private func saveNumberToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.numberInteractor
             .saveNumberToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension NumberView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

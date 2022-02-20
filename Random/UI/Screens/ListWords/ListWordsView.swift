@@ -64,7 +64,6 @@ private extension ListWordsView {
         Button(action: {
             generateWords(state: appBinding)
             saveListWordsToUserDefaults(state: appBinding)
-            recordClick(state: appBinding)
             actionButton?()
             if !appBinding.listWords.listTemp.wrappedValue.isEmpty {
                 Feedback.shared.impactHeavy(.medium)
@@ -125,13 +124,6 @@ private extension ListWordsView {
     private func saveListWordsToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.listWordsInteractor
             .saveListWordsToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension ListWordsView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

@@ -15,6 +15,10 @@ struct MainView: View {
     private let storeManager: StoreManager
     private var actionButton: (() -> Void)?
     
+    private let currentAppVersionListService = CurrentAppVersionListService()
+    @State private var cloudAppVersion = ""
+    private let appVersion = Bundle.main.appBuild
+    
     init(appBinding: Binding<AppState.AppData>,
          actionButton: (() -> Void)?,
          storeManager: StoreManager) {
@@ -31,6 +35,12 @@ struct MainView: View {
                 .onAppear {
                     userDefaultsGet(state: appBinding)
                     checkNewMenu()
+                    currentAppVersionListService.fetchList { listCloud in
+                        let list = listCloud.map { $0.element }
+                        if let appVersion = list.first {
+                            self.cloudAppVersion = appVersion
+                        }
+                    }
                 }
                 .navigationBarTitle(Text("Random"))
             
@@ -42,17 +52,33 @@ struct MainView: View {
                         .font(.system(size: 24))
                         .foregroundColor(.blue)
                 },
-                                    trailing: Button(action: {
-                    if appBinding.premium.premiumIsEnabled.wrappedValue {
-                        alertCrown()
-                    } else {
-                        appBinding.premium.presentingModal.wrappedValue = true
+                                    trailing: HStack {
+                    if !cloudAppVersion.isEmpty {
+                        if cloudAppVersion != appVersion {
+                            Button(action: {
+                                Metrics.trackEvent(name: .updateApp)
+                                openLink(url: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956")
+                            }) {
+                                Image(systemName: "arrow.clockwise.icloud")
+                                    .renderingMode(.template)
+                                    .font(.system(size: 24))
+                                    .gradientForeground(colors: [.red, .primaryGray()])
+                            }
+                        }
                     }
-                }) {
-                    Image(systemName: "crown.fill")
-                        .renderingMode(.template)
-                        .font(.system(size: 24))
-                        .gradientForeground(colors: setColorForCrown())
+                    
+                    Button(action: {
+                        if appBinding.premium.premiumIsEnabled.wrappedValue {
+                            alertCrown()
+                        } else {
+                            appBinding.premium.presentingModal.wrappedValue = true
+                        }
+                    }) {
+                        Image(systemName: "crown.fill")
+                            .renderingMode(.template)
+                            .font(.system(size: 24))
+                            .gradientForeground(colors: setColorForCrown())
+                    }
                 })
         }
         .sheet(isPresented: appBinding.main.presenSettingsView, onDismiss: {}) {
@@ -87,7 +113,7 @@ private extension MainView {
                 nameMenu.music.rawValue: AnyView(music),
                 nameMenu.travel.rawValue: AnyView(travel),
                 nameMenu.password.rawValue: AnyView(password),
-//                nameMenu.russianLotto.rawValue: AnyView(russianLotto)
+                nameMenu.russianLotto.rawValue: AnyView(russianLotto)
         ]
     }
 }
@@ -128,23 +154,23 @@ private extension MainView {
                              isLabelDisabled: false,
                              textLabel: NSLocalizedString("ХИТ", comment: ""))
             }
-//        VStack {
-//            if appBinding.premium.premiumIsEnabled.wrappedValue {
-//                NavigationLink(
-//                    destination: FilmView(appBinding: appBinding, actionButton: actionButton)) {
-//                        CellMainView(image: "film",
-//                                     title: NSLocalizedString("Фильмы", comment: ""),
-//                                     isLabelDisabled: false,
-//                                     textLabel: "PREMIUM")
-//                    }
-//            } else {
-//                CellMainLockView(image: "film",
-//                                 title: NSLocalizedString("Фильмы", comment: ""))
-//                    .onTapGesture {
-//                        alertLockCell(NSLocalizedString("Фильмы", comment: ""))
-//                    }
-//            }
-//        }
+        //        VStack {
+        //            if appBinding.premium.premiumIsEnabled.wrappedValue {
+        //                NavigationLink(
+        //                    destination: FilmView(appBinding: appBinding, actionButton: actionButton)) {
+        //                        CellMainView(image: "film",
+        //                                     title: NSLocalizedString("Фильмы", comment: ""),
+        //                                     isLabelDisabled: false,
+        //                                     textLabel: "PREMIUM")
+        //                    }
+        //            } else {
+        //                CellMainLockView(image: "film",
+        //                                 title: NSLocalizedString("Фильмы", comment: ""))
+        //                    .onTapGesture {
+        //                        alertLockCell(NSLocalizedString("Фильмы", comment: ""))
+        //                    }
+        //            }
+        //        }
     }
 }
 
@@ -159,24 +185,24 @@ private extension MainView {
                              isLabelDisabled: false,
                              textLabel: NSLocalizedString("ХИТ", comment: ""))
             }
-//        VStack {
-//            if appBinding.premium.premiumIsEnabled.wrappedValue {
-//                NavigationLink(
-//                    destination: TeamView(appBinding: appBinding, actionButton: actionButton)) {
-//                        CellMainView(image: "person.3",
-//                                     title: NSLocalizedString("Команды",
-//                                                              comment: ""),
-//                                     isLabelDisabled: false,
-//                                     textLabel: "PREMIUM")
-//                    }
-//            } else {
-//                CellMainLockView(image: "person.3",
-//                                 title: NSLocalizedString("Команды", comment: ""))
-//                    .onTapGesture {
-//                        alertLockCell(NSLocalizedString("Команды", comment: ""))
-//                    }
-//            }
-//        }
+        //        VStack {
+        //            if appBinding.premium.premiumIsEnabled.wrappedValue {
+        //                NavigationLink(
+        //                    destination: TeamView(appBinding: appBinding, actionButton: actionButton)) {
+        //                        CellMainView(image: "person.3",
+        //                                     title: NSLocalizedString("Команды",
+        //                                                              comment: ""),
+        //                                     isLabelDisabled: false,
+        //                                     textLabel: "PREMIUM")
+        //                    }
+        //            } else {
+        //                CellMainLockView(image: "person.3",
+        //                                 title: NSLocalizedString("Команды", comment: ""))
+        //                    .onTapGesture {
+        //                        alertLockCell(NSLocalizedString("Команды", comment: ""))
+        //                    }
+        //            }
+        //        }
         
     }
 }
@@ -298,24 +324,24 @@ private extension MainView {
                              isLabelDisabled: true,
                              textLabel: "PREMIUM")
             }
-//        VStack {
-//            if appBinding.premium.premiumIsEnabled.wrappedValue {
-//                NavigationLink(
-//                    destination: TravelView(appBinding: appBinding, actionButton: actionButton)) {
-//                        CellMainView(image: "airplane",
-//                                     title: NSLocalizedString("Путешествие",
-//                                                              comment: ""),
-//                                     isLabelDisabled: false,
-//                                     textLabel: "PREMIUM")
-//                    }
-//            } else {
-//                CellMainLockView(image: "airplane",
-//                                 title: NSLocalizedString("Путешествие", comment: ""))
-//                    .onTapGesture {
-//                        alertLockCell(NSLocalizedString("Путешествие", comment: ""))
-//                    }
-//            }
-//        }
+        //        VStack {
+        //            if appBinding.premium.premiumIsEnabled.wrappedValue {
+        //                NavigationLink(
+        //                    destination: TravelView(appBinding: appBinding, actionButton: actionButton)) {
+        //                        CellMainView(image: "airplane",
+        //                                     title: NSLocalizedString("Путешествие",
+        //                                                              comment: ""),
+        //                                     isLabelDisabled: false,
+        //                                     textLabel: "PREMIUM")
+        //                    }
+        //            } else {
+        //                CellMainLockView(image: "airplane",
+        //                                 title: NSLocalizedString("Путешествие", comment: ""))
+        //                    .onTapGesture {
+        //                        alertLockCell(NSLocalizedString("Путешествие", comment: ""))
+        //                    }
+        //            }
+        //        }
         
     }
 }
@@ -421,6 +447,16 @@ private extension MainView {
                        and: NSLocalizedString("Премиум доступ активирован", comment: ""),
                        style: .alert
             )
+    }
+}
+
+private extension MainView {
+    func openLink(url: String) {
+        guard let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard let httpsUrl = URL(string: urlString) else { return }
+        DispatchQueue.main.async {
+            UIApplication.shared.open(httpsUrl, options: [:])
+        }
     }
 }
 

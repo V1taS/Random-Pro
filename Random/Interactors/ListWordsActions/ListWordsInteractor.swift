@@ -107,6 +107,4 @@ extension ListWordsInteractorImpl {
                                     .result.wrappedValue,
                                   forKey: "ListWordsResult")
     }
-    
-    
 }

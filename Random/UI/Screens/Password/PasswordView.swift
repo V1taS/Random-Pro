@@ -249,7 +249,6 @@ private extension PasswordView {
     var generateButton: some View {
         Button(action: {
             result = generatePass(state: appBinding)
-            recordClick(state: appBinding)
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
@@ -268,13 +267,6 @@ private extension PasswordView {
             isPressedButton = false
         }
         .padding(.vertical, 16)
-    }
-}
-
-// MARK: Record Click
-private extension PasswordView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

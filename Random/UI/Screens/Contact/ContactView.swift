@@ -85,7 +85,6 @@ private extension ContactView {
             generateContacts(state: appBinding)
             saveContactToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
-            recordClick(state: appBinding)
             actionButton?()
         }) {
             ButtonView(textColor: .primaryPale(),
@@ -120,14 +119,6 @@ private extension ContactView {
             .saveContactToUserDefaults(state: state)
     }
 }
-
-// MARK: Record Click
-private extension ContactView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
-    }
-}
-
 
 struct ContactView_Previews: PreviewProvider {
     static var previews: some View {

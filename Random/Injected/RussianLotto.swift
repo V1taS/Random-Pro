@@ -6,10 +6,12 @@
 //  Copyright © 2022 Sosin.bet. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 
 extension AppState.AppData {
     struct RussianLotto: Equatable, Decodable {
-
+        var kegsNumber: [Int] = []
+        var currentKegNumber = 0
+        var kegsNumberDesk: [Int] = []
     }
 }

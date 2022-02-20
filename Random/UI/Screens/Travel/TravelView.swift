@@ -160,7 +160,6 @@ private extension TravelView {
         Button(action: {
             getTravel(state: appBinding)
             getCurrentTravel(state: appBinding)
-            recordClick(state: appBinding)
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
@@ -291,13 +290,6 @@ private extension TravelView {
                 }
             }
         }
-    }
-}
-
-// MARK: Record Click
-private extension TravelView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

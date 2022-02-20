@@ -288,7 +288,6 @@ private extension TeamView {
                 saveTeamToUserDefaults(state: appBinding)
                 appBinding.team.disabledPickerView.wrappedValue = true
                 Feedback.shared.impactHeavy(.medium)
-                recordClick(state: appBinding)
             }
             actionButton?()
         }) {
@@ -331,13 +330,6 @@ private extension TeamView {
         appBinding.team
             .playerImageTemp.wrappedValue = injected.interactors
             .teamInteractor.generationImageRandom()
-    }
-}
-
-// MARK: Record Click
-private extension TeamView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

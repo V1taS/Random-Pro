@@ -44,6 +44,10 @@
 		1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */; };
 		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
+		1B3FE41D27C2750700266882 /* Bundle+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE41C27C2750700266882 /* Bundle+Info.swift */; };
+		1B3FE41F27C277CB00266882 /* CurrentAppVersionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE41E27C277CB00266882 /* CurrentAppVersionListService.swift */; };
+		1B3FE42127C2780700266882 /* CloudCurrentAppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE42027C2780700266882 /* CloudCurrentAppVersion.swift */; };
+		1B3FE42327C2942500266882 /* KegMiniView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE42227C2942500266882 /* KegMiniView.swift */; };
 		1B406A3827B9A75200500170 /* KegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B406A3727B9A75200500170 /* KegView.swift */; };
 		1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC20278E295D00578BFB /* OwnerAdminView.swift */; };
 		1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC22278E2C4200578BFB /* AdminOwner.swift */; };
@@ -298,6 +302,10 @@
 		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
+		1B3FE41C27C2750700266882 /* Bundle+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Info.swift"; sourceTree = "<group>"; };
+		1B3FE41E27C277CB00266882 /* CurrentAppVersionListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentAppVersionListService.swift; sourceTree = "<group>"; };
+		1B3FE42027C2780700266882 /* CloudCurrentAppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudCurrentAppVersion.swift; sourceTree = "<group>"; };
+		1B3FE42227C2942500266882 /* KegMiniView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KegMiniView.swift; sourceTree = "<group>"; };
 		1B406A3727B9A75200500170 /* KegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KegView.swift; sourceTree = "<group>"; };
 		1B40AC20278E295D00578BFB /* OwnerAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerAdminView.swift; sourceTree = "<group>"; };
 		1B40AC22278E2C4200578BFB /* AdminOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOwner.swift; sourceTree = "<group>"; };
@@ -746,6 +754,7 @@
 		1B7F668C25D0868400933AD6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1B3FE42027C2780700266882 /* CloudCurrentAppVersion.swift */,
 				1B9D22CF27A6EC6A00D4E427 /* CloudList.swift */,
 				1B9D22D127A6EC7600D4E427 /* CloudPlayer.swift */,
 				1BF22F3125D88F3C00775368 /* Player.swift */,
@@ -825,6 +834,7 @@
 				1B57F63E27873E27005F220C /* PremiumSubscriptionComponentView.swift */,
 				1B57F640278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift */,
 				1B406A3727B9A75200500170 /* KegView.swift */,
+				1B3FE42227C2942500266882 /* KegMiniView.swift */,
 				1BF30B8127BC420100B3B4E5 /* BagView.swift */,
 				1BF30B8327BC42E200B3B4E5 /* LotoView.swift */,
 			);
@@ -957,6 +967,7 @@
 				1B8EB65326765ECE009016BE /* String+FormatterDate.swift */,
 				1B5C18CF2676C23E00E44B14 /* DateFormatter.swift */,
 				1B5F698927C0289A0050647A /* String+OffsetBy.swift */,
+				1B3FE41C27C2750700266882 /* Bundle+Info.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1158,6 +1169,7 @@
 		1B9D22CA27A6EC3900D4E427 /* CloudData */ = {
 			isa = PBXGroup;
 			children = (
+				1B3FE41E27C277CB00266882 /* CurrentAppVersionListService.swift */,
 				1B9D22CB27A6EC3900D4E427 /* ListService.swift */,
 				1B9D22CC27A6EC3900D4E427 /* PlayersService.swift */,
 			);
@@ -1493,6 +1505,7 @@
 				1B57F64727883498005F220C /* GlobalConstants.swift in Sources */,
 				1B57F63B2787305D005F220C /* TitleWithDescriptionCell.swift in Sources */,
 				1B9D22D027A6EC6A00D4E427 /* CloudList.swift in Sources */,
+				1B3FE42327C2942500266882 /* KegMiniView.swift in Sources */,
 				1B8EB60F2674119F009016BE /* URLRequest.swift in Sources */,
 				1B92032C25D17D3A0094D2BE /* CoinView.swift in Sources */,
 				1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */,
@@ -1562,6 +1575,7 @@
 				1B5F698A27C0289A0050647A /* String+OffsetBy.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
 				1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */,
+				1B3FE41F27C277CB00266882 /* CurrentAppVersionListService.swift in Sources */,
 				1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */,
 				1B1D607726023D3C00847843 /* MusicInteractor.swift in Sources */,
 				1B5F698427C011BC0050647A /* PasswordActions.swift in Sources */,
@@ -1569,6 +1583,7 @@
 				1B8EB64A26763C98009016BE /* TravelInformationView.swift in Sources */,
 				1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */,
 				1B8EB62D26743E50009016BE /* KinopoiskBestFilmsResult.swift in Sources */,
+				1B3FE42127C2780700266882 /* CloudCurrentAppVersion.swift in Sources */,
 				1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */,
 				1B92034125D1885C0094D2BE /* CubeView.swift in Sources */,
 				1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */,
@@ -1683,6 +1698,7 @@
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
 				1B8EB63A26744FA5009016BE /* HotTravelRequest.swift in Sources */,
 				1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */,
+				1B3FE41D27C2750700266882 /* Bundle+Info.swift in Sources */,
 				1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */,
 				1B88ED7627C1208800030202 /* RussianLottoView.swift in Sources */,
 			);
@@ -1851,7 +1867,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 69;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -1862,7 +1878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 684;
+				MARKETING_VERSION = 687;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1882,7 +1898,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 69;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
@@ -1891,7 +1907,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 684;
+				MARKETING_VERSION = 687;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

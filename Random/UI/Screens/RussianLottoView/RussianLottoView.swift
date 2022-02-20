@@ -23,7 +23,7 @@ struct RussianLottoView: View {
     
     var body: some View {
         VStack {
-            LotoView()
+            LotoView(appBinding: appBinding, actionButton: actionButton)
         }
         .navigationBarTitle(Text(NSLocalizedString("Русское Лото", comment: "")), displayMode: .inline)
     }

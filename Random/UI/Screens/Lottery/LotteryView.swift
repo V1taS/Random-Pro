@@ -133,7 +133,6 @@ private extension LotteryView {
                 generateNumbers(state: appBinding)
                 Feedback.shared.impactHeavy(.medium)
                 saveLotteryToUserDefaults(state: appBinding)
-                recordClick(state: appBinding)
             }
             actionButton?()
         }) {
@@ -167,13 +166,6 @@ private extension LotteryView {
     private func saveLotteryToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.lotteryInteractor
             .saveLotteryToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension LotteryView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

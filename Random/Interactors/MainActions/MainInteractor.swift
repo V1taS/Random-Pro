@@ -45,6 +45,7 @@ struct MainInteractorImpl: MainInteractor {
             userDefaultContact(state: state)
             userDefaultFilms(state: state)
             userDefaultMusic(state: state)
+            userDefaultRussianLotto(state: state)
             getClick(state: state)
         }
     }
@@ -63,6 +64,7 @@ struct MainInteractorImpl: MainInteractor {
             cleanContact()
             cleanFilms()
             cleanMusic()
+            cleanRussianLotto()
         }
     }
     
@@ -362,6 +364,14 @@ extension MainInteractorImpl {
         }
     }
     
+    private func userDefaultRussianLotto(state: Binding<AppState.AppData>) {
+        if state.russianLotto.kegsNumber.wrappedValue.isEmpty {
+            state.russianLotto.kegsNumber.wrappedValue = UserDefaults.standard.array(forKey: "RussianLottoSaveKegsNumber") as? [Int] ?? []
+            state.russianLotto.kegsNumberDesk.wrappedValue = UserDefaults.standard.array(forKey: "RussianLottoSaveKegsNumberDesk") as? [Int] ?? []
+            state.russianLotto.currentKegNumber.wrappedValue = UserDefaults.standard.object(forKey: "RussianLottoSaveCurrentKegNumber") as? Int ?? 0
+        }
+    }
+    
     private func userDefaultMusic(state: Binding<AppState.AppData>) {
         if state.music.listMusic.wrappedValue.isEmpty {
             
@@ -491,5 +501,11 @@ extension MainInteractorImpl {
         
         UserDefaults.standard.set(true, forKey: "MusicPlayButtonIsDisabled")
         UserDefaults.standard.set(0, forKey: "MusicCountLoopDowload")
+    }
+    
+    private func cleanRussianLotto() {
+        UserDefaults.standard.set([], forKey: "RussianLottoSaveKegsNumber")
+        UserDefaults.standard.set([], forKey: "RussianLottoSaveKegsNumberDesk")
+        UserDefaults.standard.set(0, forKey: "RussianLottoSaveCurrentKegNumber")
     }
 }

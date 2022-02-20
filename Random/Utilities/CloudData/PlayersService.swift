@@ -33,7 +33,7 @@ final class PlayersService {
     
     // MARK: - Private variables
     
-    private let database = CKContainer.default().publicCloudDatabase
+    private let database = CKContainer.default().privateCloudDatabase
     private var records: [CKRecord] = []
     private var insertedObjects: [CloudPlayer] = []
     private var deletedObjectIds: Set<CKRecord.ID> = []

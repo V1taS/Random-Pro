@@ -16,6 +16,8 @@ enum MetricsApplicationSections: String {
     case shareScreen = "Поделиться"
     case totalNumberOfClicks = "Общее количество нажатий"
     case adv = "Реклама"
+    case openTelegram = "Обратная связь - Телеграм"
+    case updateApp = "Обновить приложение"
     
     // Категории
     case filmScreen = "Фильмы"

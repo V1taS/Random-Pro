@@ -69,7 +69,6 @@ private extension CoinView {
         Button(action: {
             generateCoins(state: appBinding)
             saveCoinIToUserDefaults(state: appBinding)
-            recordClick(state: appBinding)
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
@@ -128,13 +127,6 @@ private extension CoinView {
     private func saveCoinIToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.coinInteractor
             .saveCoinIToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension CoinView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

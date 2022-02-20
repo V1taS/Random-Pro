@@ -17,27 +17,110 @@ struct SettingsView: View {
     @State private var showActionSheet = false
     @State private var isSharePresented = false
     
+    @State private var isUpdateAppButton = false
+    @State private var isTelegramButton = false
+    private let currentAppVersionListService = CurrentAppVersionListService()
+    @State private var cloudAppVersion = ""
+    private let appVersion = Bundle.main.appBuild
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Form {
-                    Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
-                        //                        idea
-                        premium
-                        if UIDevice.current.userInterfaceIdiom != .pad {
-                            share
+            ZStack {
+                VStack {
+                    Form {
+                        Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
+                            //                        idea
+                            premium
+                            if UIDevice.current.userInterfaceIdiom != .pad {
+                                share
+                            }
+                            //                        tipTheDeveloper
                         }
-                        //                        tipTheDeveloper
-                    }
-                    
-                    Section(header: Text(LocalizedStringKey("Внешний вид"))) {
-                        categories
-                    }
-                    
-                    Section(header: Text(LocalizedStringKey("Другие"))) {
-                        clearAppButton
+                        
+                        Section(header: Text(LocalizedStringKey("Внешний вид"))) {
+                            categories
+                        }
+                        
+                        Section(header: Text(LocalizedStringKey("Другие"))) {
+                            clearAppButton
+                        }
                     }
                 }
+                
+                VStack(spacing: 16) {
+                    Spacer()
+                    
+                    if cloudAppVersion.isEmpty {
+                        HStack {
+                            Text(NSLocalizedString("Версия приложения", comment: "") + ":")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                            
+                            Text("\(appVersion)")
+                                .foregroundColor(.primaryGray())
+                                .font(.robotoMedium18())
+                        }
+                    } else {
+                        if cloudAppVersion != appVersion {
+                            Text(NSLocalizedString("Обновить приложение", comment: ""))
+                                .foregroundColor(.primaryError())
+                                .font(.robotoMedium18())
+                                .opacity(isUpdateAppButton ? 0.95 : 1)
+                                .scaleEffect(isUpdateAppButton ? 0.95 : 1)
+                                .animation(.easeInOut(duration: 0.2), value: isUpdateAppButton)
+                                .onTapGesture {
+                                    Metrics.trackEvent(name: .updateApp)
+                                    openLink(url: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956")
+                                }
+                                .opacity(isUpdateAppButton ? 0.95 : 1)
+                                .scaleEffect(isUpdateAppButton ? 0.95 : 1)
+                                .animation(.easeInOut(duration: 0.1))
+                                .pressAction {
+                                    isUpdateAppButton = true
+                                } onRelease: {
+                                    isUpdateAppButton = false
+                                }
+                        } else {
+                            HStack {
+                                Text(NSLocalizedString("Версия приложения", comment: "") + ":")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                                
+                                Text("\(appVersion)")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                            }
+                        }
+                    }
+                    
+                    HStack {
+                        Text(NSLocalizedString("Обратная связь", comment: "") + ":")
+                            .foregroundColor(.primaryGray())
+                            .font(.robotoMedium18())
+                        
+                        
+                        Text(NSLocalizedString("@telegram", comment: ""))
+                            .foregroundColor(.blue)
+                            .font(.robotoMedium18())
+                            .opacity(isTelegramButton ? 0.95 : 1)
+                            .scaleEffect(isTelegramButton ? 0.95 : 1)
+                            .animation(.easeInOut(duration: 0.2), value: isTelegramButton)
+                            .onTapGesture {
+                                Metrics.trackEvent(name: .openTelegram)
+                                openLink(url: "https://t.me/V1taS")
+                            }
+                            .opacity(isTelegramButton ? 0.95 : 1)
+                            .scaleEffect(isTelegramButton ? 0.95 : 1)
+                            .animation(.easeInOut(duration: 0.1))
+                            .pressAction {
+                                isTelegramButton = true
+                            } onRelease: {
+                                isTelegramButton = false
+                            }
+                    }
+                    
+                }
+                .padding(.bottom, 24)
             }
             .navigationBarTitle(Text(LocalizedStringKey("Настройки")), displayMode: .automatic)
             .navigationBarItems(trailing: HStack(spacing: 24) {
@@ -51,6 +134,14 @@ struct SettingsView: View {
                 }
             })
         }
+        .onAppear(perform: {
+            currentAppVersionListService.fetchList { listCloud in
+                let list = listCloud.map { $0.element }
+                if let appVersion = list.first {
+                    self.cloudAppVersion = appVersion
+                }
+            }
+        })
         .sheet(isPresented: appBinding.premium.presentingFromSettingsModal, onDismiss: {}) {
             PremiumSubscriptionView(storeManager: storeManager, appBinding: appBinding)
         }
@@ -267,6 +358,9 @@ private extension SettingsView {
         injected.interactors.musicInteractor
             .cleanMusic(state: state)
         
+        injected.interactors.russianLottoInteractor
+            .cleanKegs(state: state)
+        
         state.music.resultMusic.wrappedValue = MusicITunesDatum(attributes: nil, href: nil, id: nil)
         state.listWords.listData.wrappedValue = []
         state.team.listPlayersData.wrappedValue = []
@@ -278,6 +372,16 @@ private extension SettingsView {
         injected.interactors.mainInteractor
             .cleanAll(state: state)
         
+    }
+}
+
+private extension SettingsView {
+    func openLink(url: String) {
+        guard let urlString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard let httpsUrl = URL(string: urlString) else { return }
+        DispatchQueue.main.async {
+            UIApplication.shared.open(httpsUrl, options: [:])
+        }
     }
 }
 

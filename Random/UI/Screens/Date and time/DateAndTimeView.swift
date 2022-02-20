@@ -64,7 +64,6 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateDay(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
-                    recordClick(state: appBinding)
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
@@ -86,7 +85,6 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateTime(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
-                    recordClick(state: appBinding)
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
@@ -111,7 +109,6 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateDate(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
-                    recordClick(state: appBinding)
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
@@ -133,7 +130,6 @@ private extension DateAndTimeView {
                 Button(action: {
                     generateMonth(state: appBinding)
                     saveDayToUserDefaults(state: appBinding)
-                    recordClick(state: appBinding)
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
@@ -222,13 +218,6 @@ private extension DateAndTimeView {
     private func saveDayToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.dateAndTimeInteractor
             .saveDayToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension DateAndTimeView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

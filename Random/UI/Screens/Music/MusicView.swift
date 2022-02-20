@@ -203,7 +203,6 @@ private extension MusicView {
 private extension MusicView {
     var generateButton: some View {
         Button(action: {
-            recordClick(state: appBinding)
             actionButton?()
             
             DispatchQueue.global(qos: .userInteractive).async {
@@ -343,13 +342,6 @@ private extension MusicView {
                 appBinding.music.showActivityIndicator.wrappedValue = false
             }
         }
-    }
-}
-
-// MARK: Record Click
-private extension MusicView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

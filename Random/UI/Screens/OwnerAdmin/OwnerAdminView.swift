@@ -10,8 +10,12 @@ import SwiftUI
 
 struct OwnerAdminView: View {
     
+    @State var versionApp = ""
+    private let appVersion = Bundle.main.appBuild
+    
     var appBinding: Binding<AppState.AppData>
     @State private var isPressedButton = false
+    private let currentAppVersionListService = CurrentAppVersionListService()
     
     var body: some View {
         NavigationView {
@@ -19,16 +23,55 @@ struct OwnerAdminView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     
                     if appBinding.adminOwner.key.wrappedValue == appBinding.adminOwner.passwordTF.wrappedValue {
-                        HStack(alignment: .center, spacing: 16) {
-                            Text("Premium")
-                                .font(.robotoMedium18())
-                                .foregroundColor(.primaryGray())
-                            Spacer()
-                            Toggle(isOn: appBinding.adminOwner.premiumIsEnabled) {
-                                Text("")
+                        VStack {
+                            HStack(alignment: .center, spacing: 16) {
+                                Text("Premium")
+                                    .font(.robotoMedium18())
+                                    .foregroundColor(.primaryGray())
+                                Spacer()
+                                Toggle(isOn: appBinding.adminOwner.premiumIsEnabled) {
+                                    Text("")
+                                }
                             }
+                            .padding(.horizontal, 24)
+                            
+                            HStack(alignment: .center, spacing: 16) {
+                                Text("Версия приложения")
+                                    .font(.robotoMedium18())
+                                    .foregroundColor(.primaryGray())
+                                
+                                versionTF
+                            }
+                            .padding(.horizontal, 24)
+                            .padding(.top, 16)
+                            
+                            HStack {
+                                Text("Текущая версия приложения:")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                                
+                                Text("\(appVersion)")
+                                    .foregroundColor(.primaryGray())
+                                    .font(.robotoMedium18())
+                                Spacer()
+                            }
+                            .padding(.top, 16)
+                            .padding(.horizontal, 24)
+                            
+                            Button(action: {
+                                DispatchQueue.global(qos: .background).async {
+                                    currentAppVersionListService.deleteAllElements {
+                                        currentAppVersionListService.add(element: versionApp)
+                                    }
+                                }
+                            }) {
+                                Text("Применить")
+                                    .font(.robotoMedium18())
+                                    .foregroundColor(.blue)
+                            }
+                            .padding(.top, 16)
                         }
-                        .padding(.horizontal, 24)
+                        
                     } else {
                         VStack(alignment: .center, spacing: 16) {
                             passwordTF
@@ -43,8 +86,36 @@ struct OwnerAdminView: View {
             }
             
             .navigationBarTitle(Text("Admin"), displayMode: .large)
+        } .onAppear {
+            currentAppVersionListService.fetchList { listCloud in
+                let list = listCloud.map { $0.element }
+                if let appVersion = list.first {
+                    versionApp = appVersion
+                }
+            }
         }
         
+    }
+}
+
+private extension OwnerAdminView {
+    var versionTF: some View {
+        HStack {
+            TextFieldUIKit(placeholder: "",
+                           text: $versionApp,
+                           font: UIFont.robotoMedium16()!,
+                           foregroundColor: UIColor.primaryGray(),
+                           keyType: .default,
+                           isSecureText: false,
+                           textAlignment: .center,
+                           limitLength: 10)
+                .frame(width: 200, height: 30, alignment: .center)
+                .background(Color.primaryPale())
+                .cornerRadius(4)
+                .overlay(RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color(.primaryDefault())))
+                .foregroundColor(.clear)
+        }
     }
 }
 

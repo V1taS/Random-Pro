@@ -70,7 +70,6 @@ private extension CharactersView {
             appBinding.characters.selectedLang.wrappedValue = selectedLang
             generateYesOrNo(state: appBinding)
             saveCharactersToUserDefaults(state: appBinding)
-            recordClick(state: appBinding)
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
@@ -126,13 +125,6 @@ private extension CharactersView {
     private func saveCharactersToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.charactersInteractor
             .saveCharactersToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension CharactersView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

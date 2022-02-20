@@ -160,10 +160,7 @@ private extension FilmView {
             validVideoplayerIcon(state: appBinding)
             getMovies(state: appBinding)
             removeCurrentFilm(state: appBinding)
-            
             saveFilmsToUserDefaults(state: appBinding)
-            
-            recordClick(state: appBinding)
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
@@ -348,13 +345,6 @@ private extension FilmView {
     private func validVideoplayerIcon(state: Binding<AppState.AppData>) {
         injected.interactors.filmInteractor
             .validVideoplayerIcon(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension FilmView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

@@ -206,7 +206,6 @@ private extension CubeView {
             appBinding.cube.selectedCube.wrappedValue = selectedCube
             generateCube(state: appBinding)
             saveCubeToUserDefaults(state: appBinding)
-            recordClick(state: appBinding)
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
@@ -240,13 +239,6 @@ private extension CubeView {
     private func saveCubeToUserDefaults(state: Binding<AppState.AppData>) {
         injected.interactors.cubeInterator
             .saveCubeToUserDefaults(state: state)
-    }
-}
-
-// MARK: Record Click
-private extension CubeView {
-    private func recordClick(state: Binding<AppState.AppData>) {
-        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

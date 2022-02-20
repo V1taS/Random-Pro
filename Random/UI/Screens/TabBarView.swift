@@ -26,7 +26,7 @@ struct TabBarView: View {
     private let reviewTrackingManager = ReviewTrackingManager()
     private let reviewUtility = RecordReviewApp()
     
-//    @State private var tabBar: UITabBar?
+    //    @State private var tabBar: UITabBar?
     
     var body: some View {
         ZStack {
@@ -35,22 +35,22 @@ struct TabBarView: View {
                 Metrics.trackEvent(name: .totalNumberOfClicks)
             }, storeManager: storeManager)
             
-//            TabView {
-//                MainView(appBinding: appBinding, actionButton: {
-//                    presentADV()
-//                    Metrics.trackEvent(name: .totalNumberOfClicks)
-//                })
-//                    .tabItem {
-//                        Image(systemName: "slider.horizontal.3")
-//                        Text(NSLocalizedString("Генераторы", comment: ""))
-//                    }
-//                SettingsView(appBinding: appBinding, storeManager: storeManager)
-//                    .tabItem {
-//                        Image(systemName: "gear")
-//                        Text(NSLocalizedString("Настройки", comment: ""))
-//                    }
-//            }
-            .accentColor(Color.primaryGray())
+            //            TabView {
+            //                MainView(appBinding: appBinding, actionButton: {
+            //                    presentADV()
+            //                    Metrics.trackEvent(name: .totalNumberOfClicks)
+            //                })
+            //                    .tabItem {
+            //                        Image(systemName: "slider.horizontal.3")
+            //                        Text(NSLocalizedString("Генераторы", comment: ""))
+            //                    }
+            //                SettingsView(appBinding: appBinding, storeManager: storeManager)
+            //                    .tabItem {
+            //                        Image(systemName: "gear")
+            //                        Text(NSLocalizedString("Настройки", comment: ""))
+            //                    }
+            //            }
+                .accentColor(Color.primaryGray())
             backgroundColor
             showAddPlayerView
         }
@@ -72,7 +72,7 @@ private extension TabBarView {
     func loadPremiumStatus() {
         appBinding.adminOwner.premiumIsEnabled.wrappedValue = UserDefaults.standard.bool(forKey: GlobalConstants.ownerPremiumUserDefaultsID)
         appBinding.premium.premiumIsEnabled.wrappedValue = UserDefaults.standard.bool(forKey: GlobalConstants.premiumUserDefaultsID)
-
+        
         guard !appBinding.adminOwner.premiumIsEnabled.wrappedValue else { return }
         
         let firstStart = UserDefaults.standard.bool(forKey: GlobalConstants.firstStart)
@@ -125,6 +125,10 @@ private extension TabBarView {
 // MARK: Present ADV
 private extension TabBarView {
     private func presentADV() {
+        recordClick(state: appBinding)
+        print("--------------------------")
+        print("\(appBinding.adv.advCount.wrappedValue)")
+        print("--------------------------")
         if !appBinding.premium.premiumIsEnabled.wrappedValue {
             if appBinding.adv.advCount.wrappedValue % GlobalConstants.adDisplayInterval == .zero {
                 Metrics.trackEvent(name: .adv)
@@ -137,6 +141,13 @@ private extension TabBarView {
                 }
             }
         }
+    }
+}
+
+// MARK: Record Click
+private extension TabBarView {
+    private func recordClick(state: Binding<AppState.AppData>) {
+        injected.interactors.mainInteractor.recordClick(state: state)
     }
 }
 

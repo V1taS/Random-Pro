@@ -12,6 +12,6 @@ extension AppState.AppData {
     struct Premium: Equatable {
         var presentingModal = false
         var presentingFromSettingsModal = false
-        var premiumIsEnabled = false
+        var premiumIsEnabled = true
     }
 }

@@ -31,7 +31,7 @@ struct TabBarView: View {
     var body: some View {
         ZStack {
             MainView(appBinding: appBinding, actionButton: {
-                presentADV()
+//                presentADV()
                 Metrics.trackEvent(name: .totalNumberOfClicks)
             }, storeManager: storeManager)
             
@@ -57,6 +57,10 @@ struct TabBarView: View {
         .onAppear {
             reviewUtility.recordLaunch()
             loadPremiumStatus()
+            
+            if appBinding.premium.premiumIsEnabled.wrappedValue == false {
+                appBinding.premium.premiumIsEnabled.wrappedValue = true
+            }
         }
         .sheet(isPresented: appBinding.premium.presentingModal, onDismiss: {}) {
             PremiumSubscriptionView(storeManager: storeManager, appBinding: appBinding)

@@ -30,7 +30,7 @@ struct SettingsView: View {
                     Form {
                         Section(header: Text(LocalizedStringKey("ОСНОВНЫЕ"))) {
                             //                        idea
-                            premium
+//                            premium
                             if UIDevice.current.userInterfaceIdiom != .pad {
                                 share
                             }

@@ -10,8 +10,14 @@ import SwiftUI
 import Combine
 
 struct AppState: Equatable {
+    
+    /// AppData
     var appData = AppData()
+    
+    /// System
     var system = System()
+    
+    /// StoreManager
     var storeManager = StoreManager()
 }
 

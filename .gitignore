@@ -13,6 +13,7 @@ build/
 DerivedData/
 Build
 Index
+.xcworkspace
 
 ## Various settings
 

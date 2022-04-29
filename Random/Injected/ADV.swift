@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// ADV
 extension AppState.AppData {
     struct ADV: Equatable {
         var advCount: Int = 1

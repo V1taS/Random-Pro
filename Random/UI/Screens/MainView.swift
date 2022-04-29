@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// MainView
 struct MainView: View {
     
     private var appBinding: Binding<AppState.AppData>

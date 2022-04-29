@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// TabBarView
 struct TabBarView: View {
     
     @ObservedObject var storeManager: StoreManager

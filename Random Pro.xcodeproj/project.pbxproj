@@ -187,6 +187,8 @@
 		1B92034F25D188DC0094D2BE /* CubeInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92034E25D188DC0094D2BE /* CubeInterator.swift */; };
 		1B92035325D189890094D2BE /* CubeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92035225D189890094D2BE /* CubeSettingsView.swift */; };
 		1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92035525D18EF10094D2BE /* CellCubeOneView.swift */; };
+		1B92E09F281D54A400398966 /* RandomUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1B92E09E281D54A400398966 /* RandomUIKit */; };
+		1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 1B92E0A1281D54BE00398966 /* RandomNetwork */; };
 		1B9AB8A625ECB77700BD5CFD /* FilmSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8A525ECB77700BD5CFD /* FilmSettingsView.swift */; };
 		1B9AB8AC25ECC47800BD5CFD /* FilmInformationAllFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8AB25ECC47800BD5CFD /* FilmInformationAllFilmView.swift */; };
 		1B9AB8B125ECCC1600BD5CFD /* FilmHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9AB8B025ECCC1600BD5CFD /* FilmHistoryView.swift */; };
@@ -517,9 +519,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B92E09F281D54A400398966 /* RandomUIKit in Frameworks */,
 				1BCC579127A83CE200DF5ED0 /* CloudKit.framework in Frameworks */,
 				1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */,
 				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
+				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				51994ECD77A1234031C62B98 /* Pods_Random_Pro.framework in Frameworks */,
 			);
@@ -1336,6 +1340,10 @@
 			dependencies = (
 			);
 			name = "Random Pro";
+			packageProductDependencies = (
+				1B92E09E281D54A400398966 /* RandomUIKit */,
+				1B92E0A1281D54BE00398966 /* RandomNetwork */,
+			);
 			productName = Random;
 			productReference = 1B7F666D25D0856300933AD6 /* Random Pro.app */;
 			productType = "com.apple.product-type.application";
@@ -1364,6 +1372,10 @@
 				ru,
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
+			packageReferences = (
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
+			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1939,6 +1951,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1B92E09E281D54A400398966 /* RandomUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
+			productName = RandomUIKit;
+		};
+		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
+			productName = RandomNetwork;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1B7F666525D0856300933AD6 /* Project object */;
 }

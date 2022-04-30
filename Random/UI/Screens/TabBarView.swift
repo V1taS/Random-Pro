@@ -127,28 +127,6 @@ private extension TabBarView {
     }
 }
 
-// MARK: Present ADV
-private extension TabBarView {
-    private func presentADV() {
-        recordClick(state: appBinding)
-        print("--------------------------")
-        print("\(appBinding.adv.advCount.wrappedValue)")
-        print("--------------------------")
-        if !appBinding.premium.premiumIsEnabled.wrappedValue {
-            if appBinding.adv.advCount.wrappedValue % GlobalConstants.adDisplayInterval == .zero {
-                Metrics.trackEvent(name: .adv)
-                self.viewController?.present(style: .fullScreen, animated: false) {
-                    NativeAdViewRepresentable(willDisappearAction: {
-                        self.viewController?.dismiss(animated: true, completion: nil)
-                    }, closeButtonAction: {
-                        self.viewController?.dismiss(animated: true, completion: nil)
-                    })
-                }
-            }
-        }
-    }
-}
-
 // MARK: Record Click
 private extension TabBarView {
     private func recordClick(state: Binding<AppState.AppData>) {

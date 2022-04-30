@@ -8,7 +8,6 @@
 
 import Foundation
 import StoreKit
-import SwiftyJSON
 
 class AppleMusicAPI {
     
@@ -56,21 +55,21 @@ class AppleMusicAPI {
         
         musicRequest.addValue(getUserToken() ?? "", forHTTPHeaderField: "Music-User-Token")
 
-        URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
-            guard error == nil else { return }
-            if let json = try? JSON(data: data!) {
-                guard let result = (json["data"]).array else {
-//                    print("Подписки Apple music - нет")
-                    return
-                }
-                guard let id = (result[0].dictionaryValue)["id"] else {
-//                    print("Подписки Apple music - нет")
-                    return
-                }
-                storefrontID = id.stringValue
-                lock.signal()
-            }
-        }.resume()
+//        URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
+//            guard error == nil else { return }
+//            if let json = try? JSON(data: data!) {
+//                guard let result = (json["data"]).array else {
+////                    print("Подписки Apple music - нет")
+//                    return
+//                }
+//                guard let id = (result[0].dictionaryValue)["id"] else {
+////                    print("Подписки Apple music - нет")
+//                    return
+//                }
+//                storefrontID = id.stringValue
+//                lock.signal()
+//            }
+//        }.resume()
         
         // Просим семафор отправки подождать перед возвратом идентификатора.
         lock.wait()

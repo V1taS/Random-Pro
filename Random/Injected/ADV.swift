@@ -10,6 +10,7 @@ import Foundation
 
 /// ADV_
 /// Test
+/// Test 2
 extension AppState.AppData {
     struct ADV: Equatable {
         var advCount: Int = 1

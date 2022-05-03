@@ -12,6 +12,48 @@ protocol MainScreenModuleOutput: AnyObject {
     
     /// Открыть раздел `Number`
     func openNumber()
+    
+    /// Открыть раздел `Films`
+    func openFilms()
+    
+    /// Открыть раздел `Teams`
+    func openTeams()
+    
+    /// Открыть раздел `YesOrNo`
+    func openYesOrNo()
+    
+    /// Открыть раздел `Character`
+    func openCharacter()
+    
+    /// Открыть раздел `List`
+    func openList()
+    
+    /// Открыть раздел `Coin`
+    func openCoin()
+    
+    /// Открыть раздел `Cube`
+    func openCube()
+    
+    /// Открыть раздел `DateAndTime`
+    func openDateAndTime()
+    
+    /// Открыть раздел `Lottery`
+    func openLottery()
+    
+    /// Открыть раздел `Contact`
+    func openContact()
+    
+    /// Открыть раздел `Music`
+    func openMusic()
+    
+    /// Открыть раздел `Travel`
+    func openTravel()
+    
+    /// Открыть раздел `Password`
+    func openPassword()
+    
+    /// Открыть раздел `Password`
+    func openRussianLotto()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -68,17 +110,71 @@ final class MainScreenViewController: MainScreenModule {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.largeTitleDisplayMode = .automatic
-        
         interactor.getCells()
-        title = "Random"
+        title = Appearance().title
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+    func openFilms() {
+        moduleOutput?.openFilms()
+    }
+    
+    func openTeams() {
+        moduleOutput?.openTeams()
+    }
+    
+    func openYesOrNo() {
+        moduleOutput?.openYesOrNo()
+    }
+    
+    func openCharacter() {
+        moduleOutput?.openCharacter()
+    }
+    
+    func openList() {
+        moduleOutput?.openList()
+    }
+    
+    func openCoin() {
+        moduleOutput?.openCoin()
+    }
+    
+    func openCube() {
+        moduleOutput?.openCube()
+    }
+    
+    func openDateAndTime() {
+        moduleOutput?.openDateAndTime()
+    }
+    
+    func openLottery() {
+        moduleOutput?.openLottery()
+    }
+    
+    func openContact() {
+        moduleOutput?.openContact()
+    }
+    
+    func openMusic() {
+        moduleOutput?.openMusic()
+    }
+    
+    func openTravel() {
+        moduleOutput?.openTravel()
+    }
+    
+    func openPassword() {
+        moduleOutput?.openPassword()
+    }
+    
+    func openRussianLotto() {
+        moduleOutput?.openRussianLotto()
+    }
+    
     func openNumber() {
         moduleOutput?.openNumber()
     }
@@ -87,21 +183,23 @@ extension MainScreenViewController: MainScreenViewOutput {
 // MARK: - MainScreenInteractorOutput
 
 extension MainScreenViewController: MainScreenInteractorOutput {
-    func didRecive(cells: [MainScreenCell]) {
-        moduleView.configureWith(cells: cells)
+    func didRecive(cells: [MainScreenCellModel.MainScreenCell]) {
+        factory.createModelsFrom(cells: cells)
     }
 }
 
 // MARK: - MainScreenFactoryOutput
 
 extension MainScreenViewController: MainScreenFactoryOutput {
-    
+    func didRecive(models: [MainScreenCellModel]) {
+        moduleView.configureCellsWith(models: models)
+    }
 }
 
 // MARK: - Appearance
 
 private extension MainScreenViewController {
     struct Appearance {
-        
+        let title = "Random"
     }
 }

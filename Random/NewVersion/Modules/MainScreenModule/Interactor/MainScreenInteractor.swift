@@ -11,7 +11,8 @@ import UIKit
 protocol MainScreenInteractorOutput: AnyObject {
     
     /// Были получены ячейки
-    func didRecive(cells: [MainScreenCell])
+    ///  - Parameter cells: Массив ячеек на главном экране
+    func didRecive(cells: [MainScreenCellModel.MainScreenCell])
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -24,6 +25,12 @@ protocol MainScreenInteractorInput {
 /// Интерактор
 final class MainScreenInteractor: MainScreenInteractorInput {
     
+    // MARK: - Private properties
+    
+    // TODO: -  Повесить фича тогл на отключение ячеек
+    // TODO: -  Сделать настройку ADV лайблов
+    private let featureToggles: [MainScreenCellModel.MainScreenCell] = []
+    
     // MARK: - Internal properties
     
     weak var output: MainScreenInteractorOutput?
@@ -31,8 +38,27 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     // MARK: - Internal func
     
     func getCells() {
-        let cells = MainScreenCell.allCases
+        var cells: [MainScreenCellModel.MainScreenCell] = []
+        
+        MainScreenCellModel.MainScreenCell.allCases.forEach { cell in
+            if checkIsShow(cell: cell,
+                           featureToggles: featureToggles) {
+                cells.append(cell)
+            }
+        }
+        
         output?.didRecive(cells: cells)
+    }
+    
+    // MARK: - Private func
+    
+    /// Фича тогл, для выключения определенных ячеек
+    /// - Parameters:
+    ///   - cell: Ячейка которую проверяем, скрытая ли она
+    ///   - featureToggles: список ячеек которые не показываем на экране
+    private func checkIsShow(cell: MainScreenCellModel.MainScreenCell,
+                             featureToggles: [MainScreenCellModel.MainScreenCell]) -> Bool {
+        !featureToggles.contains(cell)
     }
 }
 

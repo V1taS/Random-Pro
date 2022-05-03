@@ -6,13 +6,106 @@
 //  Copyright © 2022 Sosin.bet. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-// MARK: - MainScreenCell
+// MARK: - MainScreenCellModel
 
-enum MainScreenCell: String, CaseIterable {
+struct MainScreenCellModel {
     
-    // MARK: - Cases
+    let cell: MainScreenCell
+    let imageCard: UIImage
+    let titleCard: String
+    let isShowADVLabel: Bool
+    let titleADVText: String?
     
-    case number = "Число"
+    // MARK: - MainScreenCell
+    
+    enum MainScreenCell: CaseIterable, Equatable {
+        
+        /// Общий список ячеек
+        static var allCases: [MainScreenCellModel.MainScreenCell] = [
+            .films(advLabel: .none),
+            .teams(advLabel: .none),
+            .number(advLabel: .none),
+            .yesOrNo(advLabel: .none),
+            .character(advLabel: .none),
+            .list(advLabel: .none),
+            .coin(advLabel: .none),
+            .cube(advLabel: .none),
+            .dateAndTime(advLabel: .none),
+            .lottery(advLabel: .none),
+            .contact(advLabel: .none),
+            .music(advLabel: .none),
+            .travel(advLabel: .none),
+            .password(advLabel: .none),
+            .russianLotto(advLabel: .none)
+        ]
+        
+        // MARK: - Cases
+        
+        /// Раздел: `Фильмы`
+        case films(advLabel: ADVLabel)
+        
+        /// Раздел: `Команды`
+        case teams(advLabel: ADVLabel)
+        
+        /// Раздел: `Число`
+        case number(advLabel: ADVLabel)
+        
+        /// Раздел: `Да или Нет`
+        case yesOrNo(advLabel: ADVLabel)
+        
+        /// Раздел: `Буква`
+        case character(advLabel: ADVLabel)
+        
+        /// Раздел: `Список`
+        case list(advLabel: ADVLabel)
+        
+        /// Раздел: `Монета`
+        case coin(advLabel: ADVLabel)
+        
+        /// Раздел: `Кубики`
+        case cube(advLabel: ADVLabel)
+        
+        /// Раздел: `Дата и Время`
+        case dateAndTime(advLabel: ADVLabel)
+        
+        /// Раздел: `Лотерея`
+        case lottery(advLabel: ADVLabel)
+        
+        /// Раздел: `Контакты`
+        case contact(advLabel: ADVLabel)
+        
+        /// Раздел: `Музыка`
+        case music(advLabel: ADVLabel)
+        
+        /// Раздел: `Путешествие`
+        case travel(advLabel: ADVLabel)
+        
+        /// Раздел: `Пароли`
+        case password(advLabel: ADVLabel)
+        
+        /// Раздел: `Русское Лото`
+        case russianLotto(advLabel: ADVLabel)
+        
+        // MARK: - ADVLabel
+        
+        enum ADVLabel: CaseIterable, Equatable {
+            
+            /// Лайбл: `ХИТ`
+            case hit
+            
+            /// Лайбл: `НОВОЕ`
+            case new
+            
+            /// Лайбл: `ПРЕМИУМ`
+            case premium
+            
+            /// Лайбл: `ЗАКРЫТО`
+            case close
+            
+            /// Лайбл: `пусто`
+            case none
+        }
+    }
 }

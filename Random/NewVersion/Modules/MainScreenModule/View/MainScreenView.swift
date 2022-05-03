@@ -12,14 +12,56 @@ protocol MainScreenViewOutput: AnyObject {
     
     /// Открыть раздел `Number`
     func openNumber()
+    
+    /// Открыть раздел `Films`
+    func openFilms()
+    
+    /// Открыть раздел `Teams`
+    func openTeams()
+    
+    /// Открыть раздел `YesOrNo`
+    func openYesOrNo()
+    
+    /// Открыть раздел `Character`
+    func openCharacter()
+    
+    /// Открыть раздел `List`
+    func openList()
+    
+    /// Открыть раздел `Coin`
+    func openCoin()
+    
+    /// Открыть раздел `Cube`
+    func openCube()
+    
+    /// Открыть раздел `DateAndTime`
+    func openDateAndTime()
+    
+    /// Открыть раздел `Lottery`
+    func openLottery()
+    
+    /// Открыть раздел `Contact`
+    func openContact()
+    
+    /// Открыть раздел `Music`
+    func openMusic()
+    
+    /// Открыть раздел `Travel`
+    func openTravel()
+    
+    /// Открыть раздел `Password`
+    func openPassword()
+    
+    /// Открыть раздел `Password`
+    func openRussianLotto()
 }
 
 /// События которые отправляем от Presenter ко View
 protocol MainScreenViewInput: AnyObject {
     
     /// Настройка главного экрана
-    ///  - Parameter cells: Список ячеек
-    func configureWith(cells: [MainScreenCell])
+    ///  - Parameter models: Список моделек для ячейки
+    func configureCellsWith(models: [MainScreenCellModel])
 }
 
 /// Псевдоним протокола UIView & MainScreenViewInput
@@ -39,7 +81,7 @@ final class MainScreenView: MainScreenViewProtocol {
     private let collectionViewLayout = UICollectionViewFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero,
                                                        collectionViewLayout: collectionViewLayout)
-    private var cells: [MainScreenCell] = []
+    private var models: [MainScreenCellModel] = []
     
     // MARK: - Initialization
     
@@ -56,8 +98,8 @@ final class MainScreenView: MainScreenViewProtocol {
     
     // MARK: - Internal func
     
-    func configureWith(cells: [MainScreenCell]) {
-        self.cells = cells
+    func configureCellsWith(models: [MainScreenCellModel]) {
+        self.models = models
         collectionView.reloadData()
     }
     
@@ -105,10 +147,38 @@ final class MainScreenView: MainScreenViewProtocol {
 
 extension MainScreenView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = cells[indexPath.row]
+        let item = models[indexPath.row].cell
         switch item {
         case .number:
             output?.openNumber()
+        case .films:
+            output?.openFilms()
+        case .teams:
+            output?.openTeams()
+        case .yesOrNo:
+            output?.openYesOrNo()
+        case .character:
+            output?.openCharacter()
+        case .list:
+            output?.openList()
+        case .coin:
+            output?.openCoin()
+        case .cube:
+            output?.openCube()
+        case .dateAndTime:
+            output?.openDateAndTime()
+        case .lottery:
+            output?.openLottery()
+        case .contact:
+            output?.openContact()
+        case .music:
+            output?.openMusic()
+        case .travel:
+            output?.openTravel()
+        case .password:
+            output?.openPassword()
+        case .russianLotto:
+            output?.openRussianLotto()
         }
     }
 }
@@ -117,7 +187,7 @@ extension MainScreenView: UICollectionViewDelegate {
 
 extension MainScreenView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cells.count
+        return models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -127,7 +197,8 @@ extension MainScreenView: UICollectionViewDataSource {
         ) as? MainScreenCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.configure(with: cells[indexPath.row].rawValue)
+        let model = models[indexPath.row]
+        cell.configureCellWith(model: model)
         return cell
     }
 }
@@ -138,8 +209,8 @@ private extension MainScreenView {
     struct Appearance {
         let collectionViewInsets: UIEdgeInsets = .zero
         let backgroundColor = UIColor.white
-        let estimatedRowHeight: CGFloat = 85
+        let estimatedRowHeight: CGFloat = 95
         let sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-        let cellWidthConstant = UIScreen.main.bounds.width * 0.4
+        let cellWidthConstant = UIScreen.main.bounds.width * 0.45
     }
 }

@@ -35,12 +35,12 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Internal func
     
-    func configure(with text: String) {
+    func configureCellWith(model: MainScreenCellModel) {
         mainCardView.configureWith(
-            imageCard: UIImage(systemName: "film"),
-            titleCard: "Фильмы",
-            isShowADVLabel: false,
-            titleADVText: nil
+            imageCard: model.imageCard,
+            titleCard: model.titleCard,
+            isShowADVLabel: model.isShowADVLabel,
+            titleADVText: model.titleADVText
         )
     }
     

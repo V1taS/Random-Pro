@@ -33,7 +33,7 @@ struct CoinView: View {
             listResults
             generateButton
         }.onAppear(perform: {
-            Metrics.trackEvent(name: .coinScreen)
+            AppMetrics.trackEvent(name: .coinScreen)
         })
         .navigationBarTitle(Text(NSLocalizedString("Орел или Решка", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {

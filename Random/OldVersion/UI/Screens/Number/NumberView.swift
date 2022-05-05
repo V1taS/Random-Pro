@@ -57,7 +57,7 @@ struct NumberView: View {
                 NumberSettingsView(appBinding: appBinding)
             })
         }.onAppear(perform: {
-            Metrics.trackEvent(name: .numbersScreen)
+            AppMetrics.trackEvent(name: .numbersScreen)
         })
         .dismissingKeyboard()
     }

@@ -19,10 +19,10 @@ protocol Service: AnyObject {
 
 final class DefaultService {
     
-    private let requestPerformer: NetworkRequestPerformer
+    private let requestPerformer: AppNetworkRequestPerformer
     private var requestResultMapper = CodableResultMapper()
     
-    init(_ requestPerformer: NetworkRequestPerformer) {
+    init(_ requestPerformer: AppNetworkRequestPerformer) {
         self.requestPerformer = requestPerformer
     }
 }

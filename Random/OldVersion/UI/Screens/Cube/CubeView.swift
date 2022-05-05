@@ -61,7 +61,7 @@ struct CubeView: View {
             listResults
             generateButton
         }.onAppear(perform: {
-            Metrics.trackEvent(name: .cubeScreen)
+            AppMetrics.trackEvent(name: .cubeScreen)
         })
         .navigationBarTitle(Text(NSLocalizedString("Кубики", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: Button(action: {

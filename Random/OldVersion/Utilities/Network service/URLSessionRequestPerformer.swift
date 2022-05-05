@@ -8,19 +8,19 @@
 
 import UIKit
 
-public protocol NetworkRequestPerformerDelegate: AnyObject {
-    func networkRequestPerformer(_ performer: NetworkRequestPerformer,
-                                 needsTokenUpdateFor request: NetworkRequest,
+public protocol AppNetworkRequestPerformerDelegate: AnyObject {
+    func networkRequestPerformer(_ performer: AppNetworkRequestPerformer,
+                                 needsTokenUpdateFor request: AppNetworkRequest,
                                  completion: @escaping (NetworkRequestResult) -> Void)
 }
 
-public protocol NetworkRequestPerformer {
-    var delegate: NetworkRequestPerformerDelegate? { get set }
-    func perform(_ request: NetworkRequest, completion: ((NetworkRequestResult) -> Void)?)
+public protocol AppNetworkRequestPerformer {
+    var delegate: AppNetworkRequestPerformerDelegate? { get set }
+    func perform(_ request: AppNetworkRequest, completion: ((NetworkRequestResult) -> Void)?)
 }
 
-public protocol NetworkRequest {
-    var httpMethod: NetworkRequestHTTPMethod { get }
+public protocol AppNetworkRequest {
+    var httpMethod: AppNetworkRequestHTTPMethod { get }
     var basePath: String { get }
     var path: String { get }
     var httpHeaders: [String: String] { get }
@@ -28,7 +28,7 @@ public protocol NetworkRequest {
     var logRequest: Bool { get }
 }
 
-public enum NetworkRequestHTTPMethod: String {
+public enum AppNetworkRequestHTTPMethod: String {
     case options = "OPTIONS"
     case get = "GET"
     case head = "HEAD"
@@ -45,9 +45,9 @@ public struct NetworkRequestResult {
     public let error: Error?
 }
 
-final class URLSessionRequestPerformer {
+final class AppURLSessionRequestPerformer {
     
-    weak var delegate: NetworkRequestPerformerDelegate?
+    weak var delegate: AppNetworkRequestPerformerDelegate?
     private let session: URLSession
     
     init() {
@@ -61,9 +61,9 @@ final class URLSessionRequestPerformer {
     }
 }
 
-extension URLSessionRequestPerformer: NetworkRequestPerformer {
+extension AppURLSessionRequestPerformer: AppNetworkRequestPerformer {
 
-    func perform(_ request: NetworkRequest, completion: ((NetworkRequestResult) -> Void)?) {
+    func perform(_ request: AppNetworkRequest, completion: ((NetworkRequestResult) -> Void)?) {
 
         guard let urlRequest = URLRequest(baseUrl: request.basePath, path: request.path, params: request.queryParameters, method: request, headers: request.httpHeaders) else {
             completion?(NetworkRequestResult(data: nil, error: NetworkError.invalidURLRequest))

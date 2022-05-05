@@ -57,7 +57,7 @@ struct TravelView: View {
                     TravelSettingsView(appBinding: appBinding)
                    })
             .onAppear {
-                Metrics.trackEvent(name: .travelScreen)
+                AppMetrics.trackEvent(name: .travelScreen)
                 getTravel(state: appBinding) {
                     getCurrentTravel(state: appBinding)
                 }

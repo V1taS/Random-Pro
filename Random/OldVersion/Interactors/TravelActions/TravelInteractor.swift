@@ -78,7 +78,7 @@ extension TravelInteractorImpl {
                 end = dateFormatter.string(from: endDate)
             }
             
-            Networking.share.getHotTravel(startDate: now, endDate: end) { tours in
+            AppNetworking.share.getHotTravel(startDate: now, endDate: end) { tours in
                 
                 guard let tours = tours.hot_tours else { return }
                 let toursShuffled = tours.shuffled()

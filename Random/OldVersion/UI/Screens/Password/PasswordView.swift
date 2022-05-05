@@ -58,7 +58,7 @@ struct PasswordView: View {
                         ])
         }
         .onAppear(perform: {
-            Metrics.trackEvent(name: .passwordScreen)
+            AppMetrics.trackEvent(name: .passwordScreen)
         })
         .navigationBarTitle(Text(NSLocalizedString("Пароли", comment: "")), displayMode: .inline)
         .navigationBarItems(trailing: HStack(spacing: 24) {

@@ -82,7 +82,7 @@ struct PremiumSubscriptionView: View {
                     }
                 })
             }.onAppear {
-                Metrics.trackEvent(name: .purchasesScreen)
+                AppMetrics.trackEvent(name: .purchasesScreen)
             }
         }
     }

@@ -36,7 +36,7 @@ enum MetricsApplicationSections: String {
     case passwordScreen = "Пароли"
 }
 
-final class Metrics {
+final class AppMetrics {
     
     static func trackEvent(name: MetricsApplicationSections, properties: [String: String]) {
         YMMYandexMetrica.reportEvent(name.rawValue, parameters: properties) { error in

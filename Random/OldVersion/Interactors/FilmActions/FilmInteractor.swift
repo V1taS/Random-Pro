@@ -138,7 +138,7 @@ extension FilmInteractorImpl {
                 return
             }
             
-            Networking.share.getKinopoiskBestFilms(page: firstPage) { films in
+            AppNetworking.share.getKinopoiskBestFilms(page: firstPage) { films in
                 let films = films.films?.shuffled()
                 state.film.filmsBest.wrappedValue.append(contentsOf: films ?? [])
                 state.film.showActivityIndicator.wrappedValue = false
@@ -165,7 +165,7 @@ extension FilmInteractorImpl {
             guard let firstPage = state.film.pageNumberPopular.wrappedValue.first else {
                 return
             }
-            Networking.share.getKinopoiskPopularFilms(page: firstPage) { films in
+            AppNetworking.share.getKinopoiskPopularFilms(page: firstPage) { films in
                 let films = films.films?.shuffled()
                 state.film.filmsPopular.wrappedValue.append(contentsOf: films ?? [])
                 state.film.showActivityIndicator.wrappedValue = false
@@ -187,7 +187,7 @@ extension FilmInteractorImpl {
                 state.film.showActivityIndicator.wrappedValue = true
                 
                 
-                Networking.share.getVideoCDN(year: year, limit: 20) { films in
+                AppNetworking.share.getVideoCDN(year: year, limit: 20) { films in
                     let filmsShuffled = films.data.shuffled()
                     state.film.films.wrappedValue.append(contentsOf: filmsShuffled)
                     
@@ -199,7 +199,7 @@ extension FilmInteractorImpl {
                         }
                     }
                     
-                    Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
+                    AppNetworking.share.getInfoKinopoisk(films: tempFilm20, state: state)
                     state.film.showActivityIndicator.wrappedValue = false
                 }
             } else {
@@ -213,7 +213,7 @@ extension FilmInteractorImpl {
                         break
                     }
                 }
-                Networking.share.getInfoKinopoisk(films: tempFilm20, state: state)
+                AppNetworking.share.getInfoKinopoisk(films: tempFilm20, state: state)
                 state.film.showActivityIndicator.wrappedValue = false
             }
         }

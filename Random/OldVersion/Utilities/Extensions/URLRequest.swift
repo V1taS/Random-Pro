@@ -9,7 +9,7 @@
 import Foundation
 
 extension URLRequest {
-    init?(baseUrl: String, path: String, params: [String: Any] = [:], method: NetworkRequest, headers: [String: String] = [:]) {
+    init?(baseUrl: String, path: String, params: [String: Any] = [:], method: AppNetworkRequest, headers: [String: String] = [:]) {
         guard let url = URL(baseUrl: baseUrl, path: path, params: params) else { return nil }
         self.init(url: url)
         httpMethod = method.httpMethod.rawValue

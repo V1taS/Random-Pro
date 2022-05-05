@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct KinopoiskBestFilmsRequest: NetworkRequest {
+public struct KinopoiskBestFilmsRequest: AppNetworkRequest {
     
     public var basePath: String = "https://kinopoiskapiunofficial.tech/"
-    public let httpMethod: NetworkRequestHTTPMethod = .get
+    public let httpMethod: AppNetworkRequestHTTPMethod = .get
     public var httpHeaders: [String : String] {
         ["X-API-KEY": "f835989c-b489-4624-9209-6d93bfead535"]
     }

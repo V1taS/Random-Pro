@@ -57,7 +57,7 @@ struct MainView: View {
                     if !cloudAppVersion.isEmpty {
                         if cloudAppVersion != appVersion {
                             Button(action: {
-                                Metrics.trackEvent(name: .updateApp)
+                                AppMetrics.trackEvent(name: .updateApp)
                                 openLink(url: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956")
                             }) {
                                 Image(systemName: "arrow.clockwise.icloud")

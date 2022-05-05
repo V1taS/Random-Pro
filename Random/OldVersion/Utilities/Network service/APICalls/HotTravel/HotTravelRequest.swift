@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct HotTravelRequest: NetworkRequest {
+public struct HotTravelRequest: AppNetworkRequest {
     
     public var basePath: String = "https://api.level.travel/"
-    public let httpMethod: NetworkRequestHTTPMethod = .get
+    public let httpMethod: AppNetworkRequestHTTPMethod = .get
     public var httpHeaders: [String : String] {
         ["Accept": "application/vnd.leveltravel.v3",
          "Authorization": "Token token=\"f7ca9ff62cac7ebe403b35b9e4065be4\""]

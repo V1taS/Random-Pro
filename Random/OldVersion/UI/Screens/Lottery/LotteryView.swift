@@ -57,7 +57,7 @@ struct LotteryView: View {
                 LotterySettingsView(appBinding: appBinding)
             })
         }.onAppear(perform: {
-            Metrics.trackEvent(name: .lotteryScreen)
+            AppMetrics.trackEvent(name: .lotteryScreen)
         })
         .dismissingKeyboard()
     }

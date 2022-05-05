@@ -33,7 +33,7 @@ struct TabBarView: View {
         ZStack {
             MainView(appBinding: appBinding, actionButton: {
 //                presentADV()
-                Metrics.trackEvent(name: .totalNumberOfClicks)
+                AppMetrics.trackEvent(name: .totalNumberOfClicks)
             }, storeManager: storeManager)
             
             //            TabView {

@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct SearchMoviesRequest: NetworkRequest {
+public struct SearchMoviesRequest: AppNetworkRequest {
     public var basePath: String = "https://videocdn.tv"
     public let path: String = "/api/short"
-    public let httpMethod: NetworkRequestHTTPMethod = .get
+    public let httpMethod: AppNetworkRequestHTTPMethod = .get
 
     public var httpHeaders: [String : String] = [:]
     public var queryParameters: [String : Any] {

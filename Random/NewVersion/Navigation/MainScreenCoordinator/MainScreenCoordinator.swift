@@ -13,13 +13,17 @@ final class MainScreenCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     private var mainScreenModule: MainScreenModule?
+    private let services: ApplicationServices
     
     // MARK: - Initialization
     
     /// - Parameters:
     ///   - navigationController: UINavigationController
-    init(_ navigationController: UINavigationController) {
+    ///   - services: Сервисы приложения
+    init(_ navigationController: UINavigationController,
+         _ services: ApplicationServices) {
         self.navigationController = navigationController
+        self.services = services
     }
     
     // MARK: - Internal func

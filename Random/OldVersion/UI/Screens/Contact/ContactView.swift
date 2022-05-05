@@ -73,7 +73,7 @@ struct ContactView: View {
                 ContactSettingsView(appBinding: appBinding)
             })
         }.onAppear(perform: {
-            Metrics.trackEvent(name: .contactScreen)
+            AppMetrics.trackEvent(name: .contactScreen)
         })
         .dismissingKeyboard()
     }

@@ -47,7 +47,7 @@ struct CharactersView: View {
             listResults
             generateButton
         }.onAppear(perform: {
-            Metrics.trackEvent(name: .charactersScreen)
+            AppMetrics.trackEvent(name: .charactersScreen)
         })
         .padding(.horizontal, 16)
         

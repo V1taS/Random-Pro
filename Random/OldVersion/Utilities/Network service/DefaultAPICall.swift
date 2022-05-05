@@ -10,13 +10,13 @@ import Foundation
 
 public struct DefaultAPICall {
     
-    private let requestPerformer: NetworkRequestPerformer
+    private let requestPerformer: AppNetworkRequestPerformer
     
-    public init(_ requestPerformer: NetworkRequestPerformer) {
+    public init(_ requestPerformer: AppNetworkRequestPerformer) {
         self.requestPerformer = requestPerformer
     }
     
-    public func perform(_ request: NetworkRequest, _ completion: ((NetworkRequestResult) -> Void)?) {
+    public func perform(_ request: AppNetworkRequest, _ completion: ((NetworkRequestResult) -> Void)?) {
         requestPerformer.perform(request, completion: completion)
     }
 }

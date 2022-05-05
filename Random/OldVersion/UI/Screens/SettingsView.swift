@@ -69,7 +69,7 @@ struct SettingsView: View {
                                 .scaleEffect(isUpdateAppButton ? 0.95 : 1)
                                 .animation(.easeInOut(duration: 0.2), value: isUpdateAppButton)
                                 .onTapGesture {
-                                    Metrics.trackEvent(name: .updateApp)
+                                    AppMetrics.trackEvent(name: .updateApp)
                                     openLink(url: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956")
                                 }
                                 .opacity(isUpdateAppButton ? 0.95 : 1)
@@ -106,7 +106,7 @@ struct SettingsView: View {
                             .scaleEffect(isTelegramButton ? 0.95 : 1)
                             .animation(.easeInOut(duration: 0.2), value: isTelegramButton)
                             .onTapGesture {
-                                Metrics.trackEvent(name: .openTelegram)
+                                AppMetrics.trackEvent(name: .openTelegram)
                                 openLink(url: "https://t.me/V1taS")
                             }
                             .opacity(isTelegramButton ? 0.95 : 1)
@@ -217,7 +217,7 @@ private extension SettingsView {
             
             HStack {
                 Button(action: {
-                    Metrics.trackEvent(name: .mailScreen)
+                    AppMetrics.trackEvent(name: .mailScreen)
                     EmailHelper.shared.sendEmail(subject: NSLocalizedString("Обратная связь Random Pro", comment: ""),
                                                  body: NSLocalizedString("Напишите здесь Ваш текст", comment: ""),
                                                  to: "375693@mail.ru")
@@ -243,7 +243,7 @@ private extension SettingsView {
             
             HStack {
                 Button(action: {
-                    Metrics.trackEvent(name: .shareScreen)
+                    AppMetrics.trackEvent(name: .shareScreen)
                     isSharePresented.toggle()
                     Feedback.shared.impactHeavy(.medium)
                 }) {

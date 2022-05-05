@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-final class Networking {
+final class AppNetworking {
     
-    let networkRequestPerformer = URLSessionRequestPerformer()
+    let networkRequestPerformer = AppURLSessionRequestPerformer()
     let service: DefaultService
-    static let share = Networking()
+    static let share = AppNetworking()
     
     init() {
         self.service = DefaultService(networkRequestPerformer)

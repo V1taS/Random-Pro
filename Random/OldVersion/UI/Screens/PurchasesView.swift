@@ -32,7 +32,7 @@ struct PurchasesView: View {
                 .navigationBarTitle(Text(LocalizedStringKey("Чаевые разработчику")), displayMode: .automatic)
             }
         } .onAppear {
-            Metrics.trackEvent(name: .purchasesScreen)
+            AppMetrics.trackEvent(name: .purchasesScreen)
         }
     }
 }

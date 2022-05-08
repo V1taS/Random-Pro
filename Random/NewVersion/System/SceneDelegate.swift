@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var orientation = Orientation()
     private let productIDs = ProductSubscriptionIDs.allSubscription
-    private var coordinator: Coordinator?
+    private var coordinator: RootCoordinatorProtocol?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {

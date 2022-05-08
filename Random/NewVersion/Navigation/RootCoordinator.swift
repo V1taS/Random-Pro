@@ -7,13 +7,17 @@
 
 import UIKit
 
-final class RootCoordinator: Coordinator {
+/// Псевдоним для координатора. Первый параметр `Input`, второй `FinishFlowTypeObject`
+///  По умолчанию `<Void, Void>`
+typealias RootCoordinatorProtocol = Coordinator<Void, Void>
+
+final class RootCoordinator: RootCoordinatorProtocol {
     
     // MARK: - Private variables
     
     private let window: UIWindow
     private let navigationController = UINavigationController()
-    private var mainScreenCoordinator: Coordinator?
+    private var mainScreenCoordinator: MainScreenCoordinatorProtocol?
     private let services: ApplicationServices = ApplicationServicesImpl()
     
     
@@ -26,9 +30,9 @@ final class RootCoordinator: Coordinator {
     
     // MARK: - Internal func
     
-    func start() {
-        let mainScreenCoordinator: Coordinator = MainScreenCoordinator(navigationController,
-                                                                       services)
+    override func start(parameter: Void) {
+        let mainScreenCoordinator: MainScreenCoordinatorProtocol = MainScreenCoordinator(navigationController,
+                                                                                         services)
         self.mainScreenCoordinator = mainScreenCoordinator
         mainScreenCoordinator.start()
         

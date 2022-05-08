@@ -7,7 +7,11 @@
 
 import UIKit
 
-final class MainScreenCoordinator: Coordinator {
+/// Псевдоним для координатора. Первый параметр `Input`, второй `FinishFlowTypeObject`
+///  По умолчанию `<Void, Void>`
+typealias MainScreenCoordinatorProtocol = Coordinator<Void, Void>
+
+final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     
     // MARK: - Private variables
     
@@ -28,7 +32,7 @@ final class MainScreenCoordinator: Coordinator {
     
     // MARK: - Internal func
     
-    func start() {
+    override func start(parameter: Void) {
         let mainScreenModule = MainScreenAssembly().createModule()
         self.mainScreenModule = mainScreenModule
         self.mainScreenModule?.moduleOutput = self

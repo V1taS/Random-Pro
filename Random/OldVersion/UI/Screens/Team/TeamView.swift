@@ -291,7 +291,7 @@ private extension TeamView {
             }
             actionButton?()
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,

@@ -61,7 +61,7 @@ private extension PremiumSubscriptionConfirmButtonView {
             actionButton?(typeButtons)
             Feedback.shared.impactHeavy(.soft)
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: "Продолжить",
                        switchImage: false,

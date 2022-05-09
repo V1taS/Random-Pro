@@ -209,7 +209,7 @@ private extension CubeView {
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Бросить кубик(и)", comment: ""),
                        switchImage: false,

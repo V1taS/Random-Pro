@@ -164,7 +164,7 @@ private extension FilmView {
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,

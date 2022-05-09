@@ -73,7 +73,7 @@ private extension CharactersView {
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Сгенерировать букву", comment: ""),
                        switchImage: false,

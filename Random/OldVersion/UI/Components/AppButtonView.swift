@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ButtonView: View {
+struct AppButtonView: View {
     
     let textColor: UIColor
     let borderColor: UIColor
@@ -41,7 +41,7 @@ struct ButtonView: View {
 
 
 // MARK: UI
-private extension ButtonView {
+private extension AppButtonView {
     private var backgroundColor: AnyView {
         AnyView(
             Rectangle()
@@ -55,7 +55,7 @@ private extension ButtonView {
     }
 }
 
-private extension ButtonView {
+private extension AppButtonView {
     private var imageView: AnyView {
         AnyView(
             VStack(spacing: 0) {
@@ -69,7 +69,7 @@ private extension ButtonView {
     }
 }
 
-private extension ButtonView {
+private extension AppButtonView {
     private var textView: AnyView {
         AnyView(
             Text(text)
@@ -82,7 +82,7 @@ private extension ButtonView {
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(textColor: .black,
+        AppButtonView(textColor: .black,
                    borderColor: .red,
                    text: "Продолжить с Apple",
                    switchImage: true,

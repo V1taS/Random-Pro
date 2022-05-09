@@ -133,7 +133,7 @@ private extension TravelView {
                 openLinkTravel(link: appBinding.travel.travelRussiaInfo.link.wrappedValue)
                 Feedback.shared.impactHeavy(.medium)
             }) {
-                ButtonView(textColor: .primaryPale(),
+                AppButtonView(textColor: .primaryPale(),
                            borderColor: .primaryPale(),
                            text: NSLocalizedString("Купить", comment: ""),
                            height: 30,
@@ -163,7 +163,7 @@ private extension TravelView {
             actionButton?()
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,

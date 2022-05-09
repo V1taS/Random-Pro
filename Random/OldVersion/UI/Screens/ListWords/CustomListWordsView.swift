@@ -138,7 +138,7 @@ private extension CustomListWordsView {
 private extension CustomListWordsView {
     var generateButton: some View {
         VStack {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Добавить", comment: ""),
                        switchImage: false,

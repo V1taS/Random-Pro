@@ -67,7 +67,7 @@ private extension DateAndTimeView {
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(textColor: .primaryPale(),
+                    AppButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("День", comment: ""),
                                switchImage: false,
@@ -88,7 +88,7 @@ private extension DateAndTimeView {
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(textColor: .primaryPale(),
+                    AppButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("Время", comment: ""),
                                switchImage: false,
@@ -112,7 +112,7 @@ private extension DateAndTimeView {
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(textColor: .primaryPale(),
+                    AppButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("Дата", comment: ""),
                                switchImage: false,
@@ -133,7 +133,7 @@ private extension DateAndTimeView {
                     actionButton?()
                     Feedback.shared.impactHeavy(.medium)
                 }) {
-                    ButtonView(textColor: .primaryPale(),
+                    AppButtonView(textColor: .primaryPale(),
                                borderColor: .primaryPale(),
                                text: NSLocalizedString("Месяц", comment: ""),
                                switchImage: false,

@@ -10,7 +10,7 @@ import Foundation
 protocol FlowCoordinator {
     
     ///  Общий тип данных для клоужера
-    associatedtype FinishFlowTypeObject
+    associatedtype CallBackTypeObject
     
     ///  Общий тип данных для параметра
     associatedtype InputParameter
@@ -20,7 +20,7 @@ protocol FlowCoordinator {
     func start(parameter: InputParameter)
     
     /// Акшен возвращет какой-то объект
-    var finishFolw: ((FinishFlowTypeObject) -> Void)? { get set }
+    var callBack: ((CallBackTypeObject) -> Void)? { get set }
 }
 
 /// Если `Input` пустой `Void` то функция `start()` без параметра
@@ -31,13 +31,13 @@ extension FlowCoordinator where InputParameter == Void {
 }
 
 /// Базовый класс координатора
-class Coordinator<Input, FinishFlowType>: FlowCoordinator {
-    typealias FinishFlowTypeObject = FinishFlowType
+class Coordinator<Input, CallBackType>: FlowCoordinator {
+    typealias CallBackTypeObject = CallBackType
     typealias InputParameter = Input
     
     // MARK: - Internal variables
     
-    var finishFolw: ((FinishFlowTypeObject) -> Void)?
+    var callBack: ((CallBackTypeObject) -> Void)?
     
     // MARK: - Internal func
     

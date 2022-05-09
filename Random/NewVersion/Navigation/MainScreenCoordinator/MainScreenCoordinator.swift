@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// Псевдоним для координатора. Первый параметр `Input`, второй `FinishFlowTypeObject`
+/// Псевдоним для координатора. Первый параметр `Input`, второй `CallBackTypeObject`
 ///  По умолчанию `<Void, Void>`
 typealias MainScreenCoordinatorProtocol = Coordinator<Void, Void>
 
@@ -18,6 +18,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     private let navigationController: UINavigationController
     private var mainScreenModule: MainScreenModule?
     private let services: ApplicationServices
+    private var numberScreenCoordinator: NumberScreenCoordinatorProtocol?
     
     // MARK: - Initialization
     
@@ -100,6 +101,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     func openNumber() {
-        // TODO: - Open Coordinator
+        let numberScreenCoordinator = NumberScreenCoordinator(navigationController: navigationController)
+        self.numberScreenCoordinator = numberScreenCoordinator
+        numberScreenCoordinator.start()
     }
 }

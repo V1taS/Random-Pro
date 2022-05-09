@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		175E922317EAF8E8893570E2 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4140967E40C564A24D80A19 /* Pods_Random_Pro.framework */; };
 		1B0CFA9C25EEB8B0000FB641 /* FilmInformationBestFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */; };
 		1B0CFAA725EF11F7000FB641 /* FilmBestHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */; };
 		1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26825DC19A600C9D31D /* SKProduct.swift */; };
@@ -263,6 +262,13 @@
 		1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */; };
 		1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */; };
 		1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */; };
+		6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EEF2829214100962062 /* NumberScreenView.swift */; };
+		6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF1282921F800962062 /* NumberScreenModule.swift */; };
+		6C9A9EF4282922A000962062 /* NumberScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF3282922A000962062 /* NumberScreenInteractor.swift */; };
+		6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF52829234F00962062 /* NumberScreenFactory.swift */; };
+		6C9A9EF82829242600962062 /* NumberScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF72829242600962062 /* NumberScreenAssembly.swift */; };
+		6C9A9EFB282926EA00962062 /* NumberScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EFA282926EA00962062 /* NumberScreenCoordinator.swift */; };
+		C6DDAF770E8669D9BE40ABB0 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6B64C5A9BD10F5D5CF2195 /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -539,9 +545,15 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		7E00CC0169F4167DCF71C24E /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
-		B4472A77AC4B9D949EF465C4 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
-		C4140967E40C564A24D80A19 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C6B64C5A9BD10F5D5CF2195 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B9B028EC89F07CE294013E6 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		6C9A9EEF2829214100962062 /* NumberScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenView.swift; sourceTree = "<group>"; };
+		6C9A9EF1282921F800962062 /* NumberScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenModule.swift; sourceTree = "<group>"; };
+		6C9A9EF3282922A000962062 /* NumberScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractor.swift; sourceTree = "<group>"; };
+		6C9A9EF52829234F00962062 /* NumberScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenFactory.swift; sourceTree = "<group>"; };
+		6C9A9EF72829242600962062 /* NumberScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenAssembly.swift; sourceTree = "<group>"; };
+		6C9A9EFA282926EA00962062 /* NumberScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenCoordinator.swift; sourceTree = "<group>"; };
+		78D540916733193D7EFC58FC /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -555,7 +567,7 @@
 				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
-				175E922317EAF8E8893570E2 /* Pods_Random_Pro.framework in Frameworks */,
+				C6DDAF770E8669D9BE40ABB0 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,7 +666,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				C4140967E40C564A24D80A19 /* Pods_Random_Pro.framework */,
+				2C6B64C5A9BD10F5D5CF2195 /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1271,6 +1283,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6C9A9EE9282920C900962062 /* NumberScreenModule */,
 				1B96E0E92820481F00A23880 /* MainScreenModule */,
 			);
 			path = Modules;
@@ -1356,6 +1369,7 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				6C9A9EF9282926B000962062 /* NumberScreenCoordinator */,
 			);
 			path = MainScreenCoordinator;
 			sourceTree = "<group>";
@@ -1512,10 +1526,70 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7E00CC0169F4167DCF71C24E /* Pods-Random Pro.debug.xcconfig */,
-				B4472A77AC4B9D949EF465C4 /* Pods-Random Pro.release.xcconfig */,
+				4B9B028EC89F07CE294013E6 /* Pods-Random Pro.debug.xcconfig */,
+				78D540916733193D7EFC58FC /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		6C9A9EE9282920C900962062 /* NumberScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A9EEE2829212100962062 /* View */,
+				6C9A9EED2829211700962062 /* Presenter */,
+				6C9A9EEC2829210200962062 /* Interactor */,
+				6C9A9EEB282920F600962062 /* Factory */,
+				6C9A9EEA282920E500962062 /* Assembly */,
+			);
+			path = NumberScreenModule;
+			sourceTree = "<group>";
+		};
+		6C9A9EEA282920E500962062 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A9EF72829242600962062 /* NumberScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6C9A9EEB282920F600962062 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A9EF52829234F00962062 /* NumberScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6C9A9EEC2829210200962062 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A9EF3282922A000962062 /* NumberScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6C9A9EED2829211700962062 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A9EF1282921F800962062 /* NumberScreenModule.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6C9A9EEE2829212100962062 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A9EEF2829214100962062 /* NumberScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C9A9EF9282926B000962062 /* NumberScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A9EFA282926EA00962062 /* NumberScreenCoordinator.swift */,
+			);
+			path = NumberScreenCoordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1525,13 +1599,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				86084672850EC8676E972F65 /* [CP] Check Pods Manifest.lock */,
+				363F061D018CFA07CFDB6049 /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				9E78A1D910E619F7A5D9EF25 /* [CP] Embed Pods Frameworks */,
+				074AEC8CF822D5430BEA66D0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1571,8 +1645,8 @@
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
 			packageReferences = (
-				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */,
-				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */,
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
 			projectDirPath = "";
@@ -1609,6 +1683,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		074AEC8CF822D5430BEA66D0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1B225C582619E472001B9124 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1625,10 +1716,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
-		86084672850EC8676E972F65 /* [CP] Check Pods Manifest.lock */ = {
+		363F061D018CFA07CFDB6049 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1650,23 +1742,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9E78A1D910E619F7A5D9EF25 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1685,6 +1760,7 @@
 				1B9D22CE27A6EC3900D4E427 /* PlayersService.swift in Sources */,
 				1B5F698827C012B60050647A /* PasswordView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
+				6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */,
 				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
 				1B8EB62626743221009016BE /* KinopoiskInfoRequest.swift in Sources */,
@@ -1767,6 +1843,7 @@
 				1B92032725D179330094D2BE /* ListWordsSettingsView.swift in Sources */,
 				1B88ED7127C11FE300030202 /* RussianLottoActions.swift in Sources */,
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
+				6C9A9EF82829242600962062 /* NumberScreenAssembly.swift in Sources */,
 				1B3D19F525D1EAE00027A83B /* CustomListWordsView.swift in Sources */,
 				1B5F698A27C0289A0050647A /* String+OffsetBy.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
@@ -1853,10 +1930,12 @@
 				1B9AB8A625ECB77700BD5CFD /* FilmSettingsView.swift in Sources */,
 				1B941DEC2821923C00D968DF /* ObjectCustomUserDefaultsWrapper.swift in Sources */,
 				1BF22F2325D8857A00775368 /* Team.swift in Sources */,
+				6C9A9EFB282926EA00962062 /* NumberScreenCoordinator.swift in Sources */,
 				1B941DE028217FF600D968DF /* UserDefaultsWrapper.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1B88ED7827C120A000030202 /* RussianLottoSettingsView.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
+				6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */,
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
 				1B8EB640267506E8009016BE /* TravelMiddleContentCellView.swift in Sources */,
 				1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */,
@@ -1890,6 +1969,7 @@
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */,
 				1B96E0F32820483F00A23880 /* MainScreenView.swift in Sources */,
+				6C9A9EF4282922A000962062 /* NumberScreenInteractor.swift in Sources */,
 				1B57F64F2788B7F7005F220C /* CategoriesNewView.swift in Sources */,
 				1B8EB61D26741F03009016BE /* NetworkServiceResult.swift in Sources */,
 				1BD25B6D282459B4006661B8 /* MetricsService.swift in Sources */,
@@ -1904,6 +1984,7 @@
 				1B8EB630267442B3009016BE /* KinopoiskPopularFilmsRequest.swift in Sources */,
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
 				1B8EB63A26744FA5009016BE /* HotTravelRequest.swift in Sources */,
+				6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */,
 				1BBADE1425EC087800AD38F4 /* FilmInteractor.swift in Sources */,
 				1B3FE41D27C2750700266882 /* Bundle+Info.swift in Sources */,
 				1B7F66B725D089F600933AD6 /* MainInteractor.swift in Sources */,
@@ -2067,7 +2148,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E00CC0169F4167DCF71C24E /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = 4B9B028EC89F07CE294013E6 /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2098,7 +2179,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4472A77AC4B9D949EF465C4 /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = 78D540916733193D7EFC58FC /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2148,7 +2229,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */ = {
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
 			requirement = {
@@ -2156,7 +2237,7 @@
 				kind = branch;
 			};
 		};
-		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */ = {
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
 			requirement = {
@@ -2169,12 +2250,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1B92E09E281D54A400398966 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
 			productName = RandomUIKit;
 		};
 		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
 			productName = RandomNetwork;
 		};
 /* End XCSwiftPackageProductDependency section */

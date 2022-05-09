@@ -67,10 +67,12 @@ final class NumberScreenViewController: NumberScreenModule {
     // MARK: - Private func
     
     private func setupNavBar() {
-        navigationController?.navigationBar.prefersLargeTitles = false
-        title = Appearance().title
+        let appearance = Appearance()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Appearance().settingsButtonIcon,
+        navigationController?.navigationBar.prefersLargeTitles = false
+        title = appearance.title
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(settingButtonAction))

@@ -220,7 +220,7 @@ private extension MusicView {
             saveFilmsToUserDefaults(state: appBinding)
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: NSLocalizedString("Сгенерировать", comment: ""),
                        switchImage: false,

@@ -146,7 +146,7 @@ private extension TravelInformationView {
             openLinkTravel(link: tourInfo.link)
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(textColor: .black,
+            AppButtonView(textColor: .black,
                        borderColor: .white,
                        text: NSLocalizedString("Купить", comment: ""),
                        height: 30,

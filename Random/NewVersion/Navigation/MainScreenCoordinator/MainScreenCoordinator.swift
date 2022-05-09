@@ -101,7 +101,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     func openNumber() {
-        let numberScreenCoordinator = NumberScreenCoordinator(navigationController: navigationController)
+        let numberScreenCoordinator = NumberScreenCoordinator(navigationController: navigationController,
+                                                              services: services)
         self.numberScreenCoordinator = numberScreenCoordinator
         numberScreenCoordinator.start()
     }

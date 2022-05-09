@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13BD2233B37AD252A8483306 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A24C0C9CC2C6537BBBFD458 /* Pods_Random_Pro.framework */; };
 		1B0CFA9C25EEB8B0000FB641 /* FilmInformationBestFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */; };
 		1B0CFAA725EF11F7000FB641 /* FilmBestHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */; };
 		1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26825DC19A600C9D31D /* SKProduct.swift */; };
@@ -235,7 +236,7 @@
 		1BDC80D1264DBA85001B0893 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC80D0264DBA85001B0893 /* Travel.swift */; };
 		1BDC80D4264DBB4D001B0893 /* TravelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC80D3264DBB4D001B0893 /* TravelActions.swift */; };
 		1BDC80D6264DBB77001B0893 /* TravelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC80D5264DBB77001B0893 /* TravelInteractor.swift */; };
-		1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */; };
+		1BEC8EB125D0A9F900FE3A3F /* AppButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB025D0A9F900FE3A3F /* AppButtonView.swift */; };
 		1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */; };
 		1BF1F5CA25F705D700613F20 /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF1F5C925F705D700613F20 /* Orientation.swift */; };
 		1BF22F1F25D8856000775368 /* TeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF22F1E25D8856000775368 /* TeamView.swift */; };
@@ -268,7 +269,6 @@
 		6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF52829234F00962062 /* NumberScreenFactory.swift */; };
 		6C9A9EF82829242600962062 /* NumberScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF72829242600962062 /* NumberScreenAssembly.swift */; };
 		6C9A9EFB282926EA00962062 /* NumberScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EFA282926EA00962062 /* NumberScreenCoordinator.swift */; };
-		C6DDAF770E8669D9BE40ABB0 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C6B64C5A9BD10F5D5CF2195 /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -285,6 +285,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05170E57F31B5DC5FBDD8D20 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 		1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInformationBestFilmView.swift; sourceTree = "<group>"; };
 		1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmBestHistoryView.swift; sourceTree = "<group>"; };
 		1B0DB26825DC19A600C9D31D /* SKProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProduct.swift; sourceTree = "<group>"; };
@@ -518,7 +519,7 @@
 		1BDC80D0264DBA85001B0893 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		1BDC80D3264DBB4D001B0893 /* TravelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelActions.swift; sourceTree = "<group>"; };
 		1BDC80D5264DBB77001B0893 /* TravelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInteractor.swift; sourceTree = "<group>"; };
-		1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		1BEC8EB025D0A9F900FE3A3F /* AppButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppButtonView.swift; sourceTree = "<group>"; };
 		1BEC8EB625D0B2A700FE3A3F /* NumberSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSettingsView.swift; sourceTree = "<group>"; };
 		1BF1F5C925F705D700613F20 /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		1BF22F1E25D8856000775368 /* TeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamView.swift; sourceTree = "<group>"; };
@@ -545,15 +546,14 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		2C6B64C5A9BD10F5D5CF2195 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4B9B028EC89F07CE294013E6 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		2B525113022208C5106CAB15 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		6C9A9EEF2829214100962062 /* NumberScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenView.swift; sourceTree = "<group>"; };
 		6C9A9EF1282921F800962062 /* NumberScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenModule.swift; sourceTree = "<group>"; };
 		6C9A9EF3282922A000962062 /* NumberScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractor.swift; sourceTree = "<group>"; };
 		6C9A9EF52829234F00962062 /* NumberScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenFactory.swift; sourceTree = "<group>"; };
 		6C9A9EF72829242600962062 /* NumberScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenAssembly.swift; sourceTree = "<group>"; };
 		6C9A9EFA282926EA00962062 /* NumberScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenCoordinator.swift; sourceTree = "<group>"; };
-		78D540916733193D7EFC58FC /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		7A24C0C9CC2C6537BBBFD458 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -567,7 +567,7 @@
 				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
-				C6DDAF770E8669D9BE40ABB0 /* Pods_Random_Pro.framework in Frameworks */,
+				13BD2233B37AD252A8483306 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,7 +666,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				2C6B64C5A9BD10F5D5CF2195 /* Pods_Random_Pro.framework */,
+				7A24C0C9CC2C6537BBBFD458 /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -844,7 +844,7 @@
 				1BF30DD025D196BB00DCE62B /* CellCube */,
 				1B7F66FE25D0937100933AD6 /* CellMainView.swift */,
 				1B57F64427877B6A005F220C /* CellMainLockView.swift */,
-				1BEC8EB025D0A9F900FE3A3F /* ButtonView.swift */,
+				1BEC8EB025D0A9F900FE3A3F /* AppButtonView.swift */,
 				1BF22F2D25D88F1A00775368 /* PlayerView.swift */,
 				1BF22F4725D8DBC400775368 /* PlayerPlugView.swift */,
 				1BF22F3725D89E4000775368 /* AddPlayerSheet.swift */,
@@ -1526,8 +1526,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4B9B028EC89F07CE294013E6 /* Pods-Random Pro.debug.xcconfig */,
-				78D540916733193D7EFC58FC /* Pods-Random Pro.release.xcconfig */,
+				2B525113022208C5106CAB15 /* Pods-Random Pro.debug.xcconfig */,
+				05170E57F31B5DC5FBDD8D20 /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1599,13 +1599,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				363F061D018CFA07CFDB6049 /* [CP] Check Pods Manifest.lock */,
+				837E2D3551040193E075830B /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				074AEC8CF822D5430BEA66D0 /* [CP] Embed Pods Frameworks */,
+				66E07EF386FC793D2CB3CDE8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1683,23 +1683,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		074AEC8CF822D5430BEA66D0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1B225C582619E472001B9124 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1720,7 +1703,24 @@
 ";
 			showEnvVarsInLog = 0;
 		};
-		363F061D018CFA07CFDB6049 /* [CP] Check Pods Manifest.lock */ = {
+		66E07EF386FC793D2CB3CDE8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		837E2D3551040193E075830B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1756,7 +1756,7 @@
 				1B0DB27025DC4A4300C9D31D /* LoadingView.swift in Sources */,
 				1B92035325D189890094D2BE /* CubeSettingsView.swift in Sources */,
 				1BF22F2725D885C100775368 /* TeamActions.swift in Sources */,
-				1BEC8EB125D0A9F900FE3A3F /* ButtonView.swift in Sources */,
+				1BEC8EB125D0A9F900FE3A3F /* AppButtonView.swift in Sources */,
 				1B9D22CE27A6EC3900D4E427 /* PlayersService.swift in Sources */,
 				1B5F698827C012B60050647A /* PasswordView.swift in Sources */,
 				1B7F66F125D08DC100933AD6 /* ColorExtensions.swift in Sources */,
@@ -2148,7 +2148,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B9B028EC89F07CE294013E6 /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = 2B525113022208C5106CAB15 /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2179,7 +2179,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78D540916733193D7EFC58FC /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = 05170E57F31B5DC5FBDD8D20 /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

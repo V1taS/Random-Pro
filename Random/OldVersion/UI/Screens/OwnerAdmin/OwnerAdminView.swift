@@ -145,7 +145,7 @@ private extension OwnerAdminView {
         Button(action: {
             Feedback.shared.impactHeavy(.medium)
         }) {
-            ButtonView(textColor: .primaryPale(),
+            AppButtonView(textColor: .primaryPale(),
                        borderColor: .primaryPale(),
                        text: "Done",
                        switchImage: false,

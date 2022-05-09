@@ -10,6 +10,8 @@ import UIKit
 
 protocol NumberScreenModuleOutput: AnyObject {
     
+    /// Была нажата кнопка (настройки)
+    func settingButtonAction()
 }
 
 protocol NumberScreenModuleInput: AnyObject {
@@ -59,7 +61,23 @@ final class NumberScreenViewController: NumberScreenModule {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
+    }
+    
+    // MARK: - Private func
+    
+    private func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        title = Appearance().title
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Appearance().settingsButtonIcon,
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(settingButtonAction))
+    }
+    
+    @objc private func settingButtonAction() {
+        moduleOutput?.settingButtonAction()
     }
 }
 
@@ -79,4 +97,13 @@ extension NumberScreenViewController: NumberScreenFactoryOutput {
 
 extension NumberScreenViewController: NumberScreenInteractorOutput {
     
+}
+
+// MARK: - Appearance
+
+private extension NumberScreenViewController {
+    struct Appearance {
+        let title = "Число"
+        let settingsButtonIcon = UIImage(systemName: "gear")
+    }
 }

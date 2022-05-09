@@ -36,5 +36,7 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
 // MARK: - NumberScreenModuleOutput
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
-    
+    func settingButtonAction() {
+        // TODO: - Open setting screen
+    }
 }

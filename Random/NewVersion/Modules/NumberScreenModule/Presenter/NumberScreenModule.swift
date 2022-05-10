@@ -45,7 +45,7 @@ final class NumberScreenViewController: NumberScreenModule {
         self.moduleView = moduleView
         self.interactor = interactor
         self.factory = factory
-        super .init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -62,6 +62,7 @@ final class NumberScreenViewController: NumberScreenModule {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        interactor.getContent()
     }
     
     // MARK: - Private func
@@ -86,19 +87,35 @@ final class NumberScreenViewController: NumberScreenModule {
 // MARK: - NumberScreenViewOutput
 
 extension NumberScreenViewController: NumberScreenViewOutput {
-    
+    func generateButtonAction(firstTextFieldValue: String?, secondTextFieldValue: String?) {
+        interactor.generateContent(firstTextFieldValue: firstTextFieldValue,
+                                   secondTextFieldValue: secondTextFieldValue)
+    }
 }
 
 // MARK: - NumberScreenFactoryOutput
 
 extension NumberScreenViewController: NumberScreenFactoryOutput {
-    
+    func didReverse(listResult: [String]) {
+        moduleView.set(listResult: listResult)
+    }
 }
 
 // MARK: - NumberScreenInteractorOutput
 
 extension NumberScreenViewController: NumberScreenInteractorOutput {
+    func didRecive(listResult: [String]) {
+        factory.reverse(listResult: listResult)
+    }
     
+    func didRecive(result: String?) {
+        moduleView.set(result: result)
+    }
+    
+    func didRecive(firstTextFieldValue: String?, secondTextFieldValue: String?) {
+        moduleView.set(firstTextFieldValue: firstTextFieldValue,
+                       secondTextFieldValue: secondTextFieldValue)
+    }
 }
 
 // MARK: - Appearance

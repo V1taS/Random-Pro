@@ -11,10 +11,30 @@ import RandomUIKit
 
 protocol NumberScreenViewOutput: AnyObject {
     
+    /// Кнопка нажата пользователем
+    /// - Parameters:
+    ///  - firstTextFieldValue: Первый textField
+    ///  - secondTextFieldValue: Второй textField
+    func generateButtonAction(firstTextFieldValue: String?,
+                              secondTextFieldValue: String?)
 }
 
 protocol NumberScreenViewInput: AnyObject {
     
+    /// Устанавливаем данные для первого и второго поля ввода числа
+    /// - Parameters:
+    ///  - firstTextFieldValue: Первый textField
+    ///  - secondTextFieldValue: Второй textField
+    func set(firstTextFieldValue: String?,
+             secondTextFieldValue: String?)
+    
+    /// Устанавливаем данные в result
+    ///  - Parameter result: результат генерации
+    func set(result: String?)
+    
+    /// Устанавливает список результатов
+    ///  - Parameter listResult: массив результатов
+    func set(listResult: [String])
 }
 
 typealias NumberScreenViewProtocol = UIView & NumberScreenViewInput
@@ -60,32 +80,53 @@ final class NumberScreenView: NumberScreenViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func set(firstTextFieldValue: String?,
+             secondTextFieldValue: String?) {
+        firstTextField.text = firstTextFieldValue
+        secondTextField.text = secondTextFieldValue
+    }
+    
+    func set(result: String?) {
+        resultLabel.text = result
+    }
+    
+    func set(listResult: [String]) {
+        scrollResultView.listLabels = listResult
+    }
+    
     // MARK: - Private func
     
     private func setupDefaultSettings() {
         let appearance = Appearance()
         
-        resultLabel.text = appearance.someNumber
         resultLabel.font = RandomFont.primaryBold70
         resultLabel.textColor = RandomColor.primaryGray
+        resultLabel.textAlignment = .center
+        resultLabel.numberOfLines = 10
         
         generateButton.setTitle(appearance.setTextButton, for: .normal)
+        generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
         
         textFieldStackView.axis = .horizontal
         textFieldStackView.spacing = appearance.spacing
         textFieldStackView.distribution = .fillEqually
         
-        firstTextField.placeholder = appearance.firstTextFieldValue
-        firstTextField.text = appearance.firstTextFieldValue
+        firstTextField.placeholder = appearance.firstTextFieldPlaceholder
         firstTextField.delegate = self
+        firstTextField.keyboardType = .numberPad
         
-        secondTextField.placeholder = appearance.secondTextFieldValue
-        secondTextField.text = appearance.secondTextFieldValue
+        secondTextField.placeholder = appearance.secondTextFieldPlaceholder
         secondTextField.delegate = self
+        secondTextField.keyboardType = .numberPad
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
         addGestureRecognizer(tap)
+    }
+    
+    @objc private func generateButtonAction() {
+        output?.generateButtonAction(firstTextFieldValue: firstTextField.text,
+                                     secondTextFieldValue: secondTextField.text)
     }
     
     private func setupConstraints() {
@@ -123,8 +164,11 @@ final class NumberScreenView: NumberScreenViewProtocol {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
             
-            resultLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             resultLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                 constant: appearance.middleHorizontalSpacing),
+            resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                  constant: -appearance.middleHorizontalSpacing),
             
             generateButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                     constant: appearance.middleHorizontalSpacing),
@@ -135,10 +179,8 @@ final class NumberScreenView: NumberScreenViewProtocol {
             
             scrollResultView.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
                                                      constant: -appearance.lessVerticalSpacing),
-            scrollResultView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                      constant: appearance.middleHorizontalSpacing),
-            scrollResultView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                       constant: -appearance.middleHorizontalSpacing),
+            scrollResultView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            scrollResultView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             textFieldStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                         constant: appearance.largeHorizontalSpacing),
@@ -164,11 +206,10 @@ extension NumberScreenView: UITextFieldDelegate {
 
 private extension NumberScreenView {
     struct Appearance {
-        let someNumber = "?"
         let setTextButton = "Сгенерировать"
         let spacing: CGFloat = 28
-        let firstTextFieldValue = "1"
-        let secondTextFieldValue = "10"
+        let firstTextFieldPlaceholder = "1"
+        let secondTextFieldPlaceholder = "10"
         let middleHorizontalSpacing: CGFloat = 16
         let largeHorizontalSpacing: CGFloat = 56
         let lessVerticalSpacing: CGFloat = 8

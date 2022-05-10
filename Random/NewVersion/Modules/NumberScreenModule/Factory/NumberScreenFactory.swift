@@ -9,11 +9,17 @@
 import UIKit
 
 protocol NumberScreenFactoryOutput: AnyObject {
-    
+   
+    /// Список результатов был перевернут
+    ///  - Parameter listResult: массив результатов
+    func didReverse(listResult: [String])
 }
 
 protocol NumberScreenFactoryInput: AnyObject {
     
+    /// Переворачивает список результатов
+    ///  - Parameter listResult: массив результатов
+    func reverse(listResult: [String])
 }
 
 final class NumberScreenFactory: NumberScreenFactoryInput {
@@ -21,4 +27,8 @@ final class NumberScreenFactory: NumberScreenFactoryInput {
     // MARK: - Internal property
     
     weak var output: NumberScreenFactoryOutput?
+    
+    func reverse(listResult: [String]) {
+        output?.didReverse(listResult: listResult.reversed())
+    }
 }

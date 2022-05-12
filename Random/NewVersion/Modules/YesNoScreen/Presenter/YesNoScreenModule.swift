@@ -30,7 +30,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
     
     // MARK: - Private property
     
-    private let moduleView: UIView & YesNoScreenViewInput
+    private let moduleView: YesNoScreenViewProtocol
     private let interactor: YesNoScreenInteractorInput
     private let factory: YesNoScreenFactoryInput
     
@@ -40,7 +40,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
     ///   - interactor: интерактор
     ///   - moduleView: вью
     ///   - factory: фабрика
-    init(moduleView: UIView & YesNoScreenViewInput,
+    init(moduleView: YesNoScreenViewProtocol,
          interactor: YesNoScreenInteractorInput,
          factory: YesNoScreenFactoryInput) {
         self.moduleView = moduleView

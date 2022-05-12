@@ -25,9 +25,6 @@ protocol YesNoScreenInteractorInput: AnyObject {
     func getContent()
     
     /// Создать новые данные
-    /// - Parameters:
-    ///  - yesLabel: Первый label
-    ///  - noLabel: Второй label
     func generateContent()
 }
 

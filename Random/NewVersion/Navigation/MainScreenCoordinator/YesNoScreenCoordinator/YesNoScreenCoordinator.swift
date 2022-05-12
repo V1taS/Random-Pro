@@ -12,12 +12,18 @@ typealias YesNoScreenCoordinatorProtocol = Coordinator<Void, String>
 
 final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
 
+    // MARK: - Private property
+    
     private let navigationController: UINavigationController
     private var yesNoScreenModule: YesNoScreenModule?
+    
+    // MARK: - Initialization
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
+    
+    // MARK: - Internal func
     
     override func start(parameter: Void) {
         let yesNoScreenModule = YesNoScreenAssembly().createModule()
@@ -27,10 +33,10 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
     }
 }
 
+// MARK: - YesNoScreenModuleOutput
+
 extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
     func settingButtonAction() {
         
-    }
-    
-    
+    } 
 }

@@ -26,9 +26,9 @@ protocol YesNoScreenViewInput: AnyObject {
     func set(listResult: [String])
 }
 
-typealias YesNoScreenProtocol = UIView & YesNoScreenViewInput
+typealias YesNoScreenViewProtocol = UIView & YesNoScreenViewInput
 
-final class YesNoScreenView: YesNoScreenProtocol {
+final class YesNoScreenView: YesNoScreenViewProtocol {
     
     // MARK: - Internal property
     
@@ -65,7 +65,6 @@ final class YesNoScreenView: YesNoScreenProtocol {
     // MARK: - Private func
     
     private func setupDefaultSettings() {
-        
         resultLabel.font = RandomFont.primaryBold70
         resultLabel.textColor = RandomColor.primaryGray
         resultLabel.textAlignment = .center

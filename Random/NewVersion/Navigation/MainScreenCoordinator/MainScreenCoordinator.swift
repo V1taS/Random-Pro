@@ -19,6 +19,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     private var mainScreenModule: MainScreenModule?
     private let services: ApplicationServices
     private var numberScreenCoordinator: NumberScreenCoordinatorProtocol?
+    private var yesNoScreenCoordinator: YesNoScreenCoordinatorProtocol?
     
     // MARK: - Initialization
     
@@ -53,7 +54,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     func openYesOrNo() {
-        // TODO: - Open Coordinator
+        let yesNoScreenCoordinator = YesNoScreenCoordinator(navigationController: navigationController)
+        self.yesNoScreenCoordinator = yesNoScreenCoordinator
+        yesNoScreenCoordinator.start()
     }
     
     func openCharacter() {

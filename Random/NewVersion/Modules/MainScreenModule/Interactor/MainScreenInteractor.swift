@@ -29,7 +29,21 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     
     // TODO: -  Повесить фича тогл на отключение ячеек
     // TODO: -  Сделать настройку ADV лайблов
-    private let featureToggles: [MainScreenCellModel.MainScreenCell] = []
+    private let featureToggles: [MainScreenCellModel.MainScreenCell] = [
+        .films(advLabel: .none),
+        .teams(advLabel: .none),
+        .character(advLabel: .none),
+        .list(advLabel: .none),
+        .coin(advLabel: .none),
+        .cube(advLabel: .none),
+        .dateAndTime(advLabel: .none),
+        .lottery(advLabel: .none),
+        .contact(advLabel: .none),
+        .music(advLabel: .none),
+        .travel(advLabel: .none),
+        .password(advLabel: .none),
+        .russianLotto(advLabel: .none)
+    ]
     
     // MARK: - Internal properties
     

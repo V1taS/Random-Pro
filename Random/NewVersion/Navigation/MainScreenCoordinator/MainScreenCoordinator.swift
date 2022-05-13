@@ -20,6 +20,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     private let services: ApplicationServices
     private var numberScreenCoordinator: NumberScreenCoordinatorProtocol?
     private var yesNoScreenCoordinator: YesNoScreenCoordinatorProtocol?
+    private var dateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol?
     
     // MARK: - Initialization
     
@@ -76,7 +77,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     func openDateAndTime() {
-        // TODO: - Open Coordinator
+        let dateTimeScreenCoordinator = DateTimeScreenCoordinator(navigationController: navigationController)
+        self.dateTimeScreenCoordinator = dateTimeScreenCoordinator
+        dateTimeScreenCoordinator.start()
     }
     
     func openLottery() {

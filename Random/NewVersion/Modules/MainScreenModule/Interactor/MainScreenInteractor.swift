@@ -36,7 +36,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         .list(advLabel: .none),
         .coin(advLabel: .none),
         .cube(advLabel: .none),
-        .dateAndTime(advLabel: .none),
         .lottery(advLabel: .none),
         .contact(advLabel: .none),
         .music(advLabel: .none),

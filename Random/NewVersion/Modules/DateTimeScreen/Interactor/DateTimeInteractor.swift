@@ -58,7 +58,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     func generateContentDate() {
         let randomDate = Appearance().randomDate
         listResult.append("\(randomDate)")
-        result = ("\(randomDate)")
+        result = "\(randomDate)"
 
         output?.didRecive(result: result)
         output?.didRecive(listResult: listResult)
@@ -110,6 +110,7 @@ private extension DateTimeInteractor {
             NSLocalizedString("Суббота", comment: ""),
             NSLocalizedString("Воскресенье", comment: "")
         ]
+        
         let listMonth = [
             NSLocalizedString("Январь", comment: ""),
             NSLocalizedString("Февраль", comment: ""),

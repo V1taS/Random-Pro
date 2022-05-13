@@ -174,10 +174,10 @@ final class DateTimeView: DateTimeViewProtocol {
 
 extension DateTimeView {
     struct Appearance {
-        let textButtonDay = "День"
-        let textButtonDate = "Дата"
-        let textButtomTime = "Время"
-        let textButtonMonth = "Месяц"
+        let textButtonDay = NSLocalizedString("День", comment: "")
+        let textButtonDate = NSLocalizedString("Дата", comment: "")
+        let textButtomTime = NSLocalizedString("Время", comment: "")
+        let textButtonMonth = NSLocalizedString("Месяц", comment: "")
         let middleHorizontalSpacing: CGFloat = 16
         let lessHorizontalSpacing: CGFloat = 12
         let spasing: CGFloat = 8

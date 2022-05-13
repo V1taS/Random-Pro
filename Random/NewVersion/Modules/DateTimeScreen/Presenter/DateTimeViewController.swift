@@ -123,7 +123,7 @@ extension DateTimeViewController: DateTimeFactoryOutput {
 
 extension DateTimeViewController {
     struct Appearance {
-        let title = "Дата и время"
+        let title = NSLocalizedString("Дата и время", comment: "")
         let settingsButtonIcon = UIImage(systemName: "gear")
     }
 }

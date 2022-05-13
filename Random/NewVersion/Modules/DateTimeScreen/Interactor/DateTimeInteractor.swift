@@ -56,8 +56,9 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     }
     
     func generateContentDate() {
-        listResult.append("\(Appearance().randomDate)")
-        result = ("\(Appearance().randomDate)")
+        let randomDate = Appearance().randomDate
+        listResult.append("\(randomDate)")
+        result = ("\(randomDate)")
 
         output?.didRecive(result: result)
         output?.didRecive(listResult: listResult)
@@ -101,11 +102,27 @@ private extension DateTimeInteractor {
         let randomTimeMinets = Int.random(in: 1...59)
         let randomDate = Int.random(in: 1...30)
         let listDay = [
-        "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"
+            NSLocalizedString("Понедельник", comment: ""),
+            NSLocalizedString("Вторник", comment: ""),
+            NSLocalizedString("Среда", comment: ""),
+            NSLocalizedString("Четверг", comment: ""),
+            NSLocalizedString("Пятница", comment: ""),
+            NSLocalizedString("Суббота", comment: ""),
+            NSLocalizedString("Воскресенье", comment: "")
         ]
         let listMonth = [
-            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
-            "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+            NSLocalizedString("Январь", comment: ""),
+            NSLocalizedString("Февраль", comment: ""),
+            NSLocalizedString("Март", comment: ""),
+            NSLocalizedString("Апрель", comment: ""),
+            NSLocalizedString("Май", comment: ""),
+            NSLocalizedString("Июнь", comment: ""),
+            NSLocalizedString("Июль", comment: ""),
+            NSLocalizedString("Август", comment: ""),
+            NSLocalizedString("Сентябрь", comment: ""),
+            NSLocalizedString("Октябрь", comment: ""),
+            NSLocalizedString("Ноябрь", comment: ""),
+            NSLocalizedString("Декабрь", comment: ""),
         ]
     }
 }

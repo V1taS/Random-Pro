@@ -32,7 +32,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     private let featureToggles: [MainScreenCellModel.MainScreenCell] = [
         .films(advLabel: .none),
         .teams(advLabel: .none),
-        .character(advLabel: .none),
         .list(advLabel: .none),
         .coin(advLabel: .none),
         .cube(advLabel: .none),

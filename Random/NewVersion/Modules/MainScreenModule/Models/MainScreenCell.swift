@@ -35,8 +35,6 @@ struct MainScreenCellModel {
             .dateAndTime(advLabel: .none),
             .lottery(advLabel: .none),
             .contact(advLabel: .none),
-            .music(advLabel: .none),
-            .travel(advLabel: .none),
             .password(advLabel: .none),
             .russianLotto(advLabel: .none)
         ]
@@ -75,12 +73,6 @@ struct MainScreenCellModel {
         
         /// Раздел: `Контакты`
         case contact(advLabel: ADVLabel)
-        
-        /// Раздел: `Музыка`
-        case music(advLabel: ADVLabel)
-        
-        /// Раздел: `Путешествие`
-        case travel(advLabel: ADVLabel)
         
         /// Раздел: `Пароли`
         case password(advLabel: ADVLabel)

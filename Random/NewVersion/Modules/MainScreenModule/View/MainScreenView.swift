@@ -43,12 +43,6 @@ protocol MainScreenViewOutput: AnyObject {
     /// Открыть раздел `Contact`
     func openContact()
     
-    /// Открыть раздел `Music`
-    func openMusic()
-    
-    /// Открыть раздел `Travel`
-    func openTravel()
-    
     /// Открыть раздел `Password`
     func openPassword()
     
@@ -171,10 +165,6 @@ extension MainScreenView: UICollectionViewDelegate {
             output?.openLottery()
         case .contact:
             output?.openContact()
-        case .music:
-            output?.openMusic()
-        case .travel:
-            output?.openTravel()
         case .password:
             output?.openPassword()
         case .russianLotto:

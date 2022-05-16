@@ -43,12 +43,6 @@ protocol MainScreenModuleOutput: AnyObject {
     /// Открыть раздел `Contact`
     func openContact()
     
-    /// Открыть раздел `Music`
-    func openMusic()
-    
-    /// Открыть раздел `Travel`
-    func openTravel()
-    
     /// Открыть раздел `Password`
     func openPassword()
     
@@ -157,14 +151,6 @@ extension MainScreenViewController: MainScreenViewOutput {
     
     func openContact() {
         moduleOutput?.openContact()
-    }
-    
-    func openMusic() {
-        moduleOutput?.openMusic()
-    }
-    
-    func openTravel() {
-        moduleOutput?.openTravel()
     }
     
     func openPassword() {

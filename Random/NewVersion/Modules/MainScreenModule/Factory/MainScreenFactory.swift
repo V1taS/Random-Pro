@@ -115,20 +115,6 @@ final class MainScreenFactory: MainScreenFactoryInput {
                                                isShowADVLabel: isShow(advLabel),
                                                titleADVText: configure(advLabel))
                 models.append(model)
-            case .music(let advLabel):
-                let model = configureModelFrom(cell: cell,
-                                               imageCard: appearance.imageCardMusic,
-                                               titleCard: appearance.titleCardMusic,
-                                               isShowADVLabel: isShow(advLabel),
-                                               titleADVText: configure(advLabel))
-                models.append(model)
-            case .travel(let advLabel):
-                let model = configureModelFrom(cell: cell,
-                                               imageCard: appearance.imageCardTravel,
-                                               titleCard: appearance.titleCardTravel,
-                                               isShowADVLabel: isShow(advLabel),
-                                               titleADVText: configure(advLabel))
-                models.append(model)
             case .password(let advLabel):
                 let model = configureModelFrom(cell: cell,
                                                imageCard: appearance.imageCardPassword,
@@ -227,12 +213,6 @@ private extension MainScreenFactory {
         
         let imageCardContact = UIImage(systemName: "phone.circle") ?? UIImage()
         let titleCardContact = NSLocalizedString("Контакт", comment: "")
-        
-        let imageCardMusic = UIImage(systemName: "tv.music.note") ?? UIImage()
-        let titleCardMusic = NSLocalizedString("Музыка", comment: "")
-        
-        let imageCardTravel = UIImage(systemName: "airplane") ?? UIImage()
-        let titleCardTravel = NSLocalizedString("Путешествие", comment: "")
         
         let imageCardPassword = UIImage(systemName: "wand.and.stars") ?? UIImage()
         let titleCardPassword = NSLocalizedString("Пароли", comment: "")

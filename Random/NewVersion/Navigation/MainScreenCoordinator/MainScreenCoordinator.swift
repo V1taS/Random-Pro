@@ -93,14 +93,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
         // TODO: - Open Coordinator
     }
     
-    func openMusic() {
-        // TODO: - Open Coordinator
-    }
-    
-    func openTravel() {
-        // TODO: - Open Coordinator
-    }
-    
     func openPassword() {
         // TODO: - Open Coordinator
     }

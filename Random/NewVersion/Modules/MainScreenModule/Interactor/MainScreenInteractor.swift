@@ -37,8 +37,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         .cube(advLabel: .none),
         .lottery(advLabel: .none),
         .contact(advLabel: .none),
-        .music(advLabel: .none),
-        .travel(advLabel: .none),
         .password(advLabel: .none),
         .russianLotto(advLabel: .none)
     ]

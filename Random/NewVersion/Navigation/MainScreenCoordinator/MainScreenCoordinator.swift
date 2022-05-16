@@ -21,6 +21,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     private var numberScreenCoordinator: NumberScreenCoordinatorProtocol?
     private var yesNoScreenCoordinator: YesNoScreenCoordinatorProtocol?
     private var dateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol?
+    private var letterScreenCoordinator: LetterScreenCoordinatorProtocol?
     
     // MARK: - Initialization
     
@@ -61,7 +62,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     func openCharacter() {
-        // TODO: - Open Coordinator
+        let letterScreenCoordinator = LetterScreenCoordinator(navigationController: navigationController)
+        self.letterScreenCoordinator = letterScreenCoordinator
+        letterScreenCoordinator.start()
     }
     
     func openList() {

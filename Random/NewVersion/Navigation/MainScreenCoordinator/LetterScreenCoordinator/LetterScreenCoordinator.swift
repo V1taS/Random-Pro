@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias LetterScreenCoordinatorProtocol = Coordinator<Void, String>
+typealias LetterScreenCoordinatorProtocol = Coordinator<Void, Void>
 
 final class LetterScreenCoordinator: LetterScreenCoordinatorProtocol {
     

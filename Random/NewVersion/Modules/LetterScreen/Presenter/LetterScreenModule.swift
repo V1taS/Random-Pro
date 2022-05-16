@@ -77,6 +77,8 @@ final class LetterScreenViewController: LetterScreenModule {
     }
 }
 
+// MARK: - LetterScreenViewOutput
+
 extension LetterScreenViewController: LetterScreenViewOutput {
     func generateEngButtonAction() {
         interactor.generateContentEngLetter()
@@ -86,6 +88,8 @@ extension LetterScreenViewController: LetterScreenViewOutput {
         interactor.generateContentRusLetter()
     }
 }
+
+// MARK: - LetterScreenInteractorOutput
 
 extension LetterScreenViewController: LetterScreenInteractorOutput {
     func didRecive(result: String?) {
@@ -97,15 +101,19 @@ extension LetterScreenViewController: LetterScreenInteractorOutput {
     }
 }
 
+// MARK: - LetterScreenFactoryOutput
+
 extension LetterScreenViewController: LetterScreenFactoryOutput {
     func didReverse(listResult: [String]) {
         moduleView.set(listResult: listResult)
     }
 }
 
-extension LetterScreenViewController {
+// MARK: - Appearance
+
+private extension LetterScreenViewController {
     struct Appearance {
-        let title = "Буква"
+        let title = NSLocalizedString("Буква", comment: "")
         let settingsButtonIcon = UIImage(systemName: "gear")
     }
 }

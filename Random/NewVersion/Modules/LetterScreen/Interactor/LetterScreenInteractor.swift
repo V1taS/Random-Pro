@@ -10,7 +10,7 @@ import UIKit
 
 protocol LetterScreenInteractorOutput: AnyObject {
     
-    /// Данные були получены
+    /// Данные были получены
     /// - Parameter result: результат генерации
     func didRecive(result: String?)
     
@@ -39,7 +39,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
     
     // MARK: - Private property
     
-    private var result = "?"
+    private var result = Appearance().result
     private var listResult: [String] = []
     
     // MARK: - Internal func
@@ -72,6 +72,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
 
 private extension LetterScreenInteractor {
     struct Appearance {
+        let result = "?"
         let listRussionLetter = [
             "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т",
             "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"

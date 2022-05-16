@@ -77,10 +77,7 @@ final class LetterScreenView: LetterScreenViewProtocol {
         
         generateButton.setTitle(appearance.textButton, for: .normal)
         generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
-        
-        letterSegmentedControl.frame = CGRect(x: appearance.frameSize, y: appearance.frameSize,
-                                              width: appearance.width, height: appearance.height)
-        
+    
         letterSegmentedControl.insertSegment(withTitle: appearance.russionText,
                                              at: appearance.rusControl, animated: true)
         letterSegmentedControl.insertSegment(withTitle: appearance.englishText,
@@ -150,15 +147,12 @@ final class LetterScreenView: LetterScreenViewProtocol {
 
 private extension LetterScreenView {
     struct Appearance {
-        let textButton = "Сгенерировать букву"
-        let russionText = "Русские буквы"
-        let englishText = "Английские буквы"
+        let textButton = NSLocalizedString("Сгенерировать букву", comment: "")
+        let russionText = NSLocalizedString("Русские буквы", comment: "")
+        let englishText = NSLocalizedString("Английские буквы", comment: "")
         let lessVerticalSpacing: CGFloat = 8
         let middleHorizontalSize: CGFloat = 16
         let highVirticalSize: CGFloat = 28
-        let frameSize: Double = 0.0
-        let width: CGFloat = 300
-        let height: CGFloat = 50
         let engControl: Int = 1
         let rusControl: Int = 0
     }

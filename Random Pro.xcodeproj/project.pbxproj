@@ -268,6 +268,12 @@
 		6C7D4D4B282E558400A086BC /* DateTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4A282E558400A086BC /* DateTimeFactory.swift */; };
 		6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4C282E558E00A086BC /* DateTimeAssembly.swift */; };
 		6C7D4D50282E5A1D00A086BC /* DateTimeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */; };
+		6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBCC28339EB900D2E4FA /* CoinScreenView.swift */; };
+		6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBCE28339F5A00D2E4FA /* CoinScreenModule.swift */; };
+		6C98CBD128339FE300D2E4FA /* CoinScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBD028339FE300D2E4FA /* CoinScreenInteractor.swift */; };
+		6C98CBD32833A03A00D2E4FA /* CoinScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBD22833A03A00D2E4FA /* CoinScreenFactory.swift */; };
+		6C98CBD52833A07700D2E4FA /* CoinScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBD42833A07700D2E4FA /* CoinScreenAssembly.swift */; };
+		6C98CBD82833A1A900D2E4FA /* CoinScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBD72833A1A900D2E4FA /* CoinScreenCoordinator.swift */; };
 		6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EEF2829214100962062 /* NumberScreenView.swift */; };
 		6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF1282921F800962062 /* NumberScreenModule.swift */; };
 		6C9A9EF4282922A000962062 /* NumberScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9EF3282922A000962062 /* NumberScreenInteractor.swift */; };
@@ -287,7 +293,7 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
-		B9DE60A2DD2658A35E9C6738 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA717264240ED988B8B21135 /* Pods_Random_Pro.framework */; };
+		89E10678F9266E2153784E4D /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51DACBC28FA502D3BD5F499C /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -564,13 +570,21 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		5F9AC33862634B6DDC0F0AC8 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		44870031D0BED44B83DB193D /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		51DACBC28FA502D3BD5F499C /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AB3D2530860E9EE7A954EAB /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 		6C7D4D44282E556400A086BC /* DateTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeView.swift; sourceTree = "<group>"; };
 		6C7D4D46282E557100A086BC /* DateTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeViewController.swift; sourceTree = "<group>"; };
 		6C7D4D48282E557B00A086BC /* DateTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeInteractor.swift; sourceTree = "<group>"; };
 		6C7D4D4A282E558400A086BC /* DateTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeFactory.swift; sourceTree = "<group>"; };
 		6C7D4D4C282E558E00A086BC /* DateTimeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeAssembly.swift; sourceTree = "<group>"; };
 		6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeScreenCoordinator.swift; sourceTree = "<group>"; };
+		6C98CBCC28339EB900D2E4FA /* CoinScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenView.swift; sourceTree = "<group>"; };
+		6C98CBCE28339F5A00D2E4FA /* CoinScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenModule.swift; sourceTree = "<group>"; };
+		6C98CBD028339FE300D2E4FA /* CoinScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenInteractor.swift; sourceTree = "<group>"; };
+		6C98CBD22833A03A00D2E4FA /* CoinScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenFactory.swift; sourceTree = "<group>"; };
+		6C98CBD42833A07700D2E4FA /* CoinScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenAssembly.swift; sourceTree = "<group>"; };
+		6C98CBD72833A1A900D2E4FA /* CoinScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenCoordinator.swift; sourceTree = "<group>"; };
 		6C9A9EEF2829214100962062 /* NumberScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenView.swift; sourceTree = "<group>"; };
 		6C9A9EF1282921F800962062 /* NumberScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenModule.swift; sourceTree = "<group>"; };
 		6C9A9EF3282922A000962062 /* NumberScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractor.swift; sourceTree = "<group>"; };
@@ -590,8 +604,6 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
-		AA717264240ED988B8B21135 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D149205B6C298DEE4E875AF6 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -605,7 +617,7 @@
 				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
-				B9DE60A2DD2658A35E9C6738 /* Pods_Random_Pro.framework in Frameworks */,
+				89E10678F9266E2153784E4D /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,7 +716,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				AA717264240ED988B8B21135 /* Pods_Random_Pro.framework */,
+				51DACBC28FA502D3BD5F499C /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1321,6 +1333,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6C98CBC628339E8700D2E4FA /* CoinScreen */,
 				6CA3961C28324EF800F86248 /* LetterScreen */,
 				6C7D4D3E282E54FB00A086BC /* DateTimeScreen */,
 				6CE65F7C282D0CC200272D56 /* YesNoScreen */,
@@ -1410,6 +1423,7 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				6C98CBD62833A19100D2E4FA /* CoinScreenCoordinator */,
 				6CA3962C2832531E00F86248 /* LetterScreenCoordinator */,
 				6C7D4D4E282E59FA00A086BC /* DateTimeScreenCoordinator */,
 				6CE65F8C282D136800272D56 /* YesNoScreenCoordinator */,
@@ -1570,8 +1584,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D149205B6C298DEE4E875AF6 /* Pods-Random Pro.debug.xcconfig */,
-				5F9AC33862634B6DDC0F0AC8 /* Pods-Random Pro.release.xcconfig */,
+				44870031D0BED44B83DB193D /* Pods-Random Pro.debug.xcconfig */,
+				5AB3D2530860E9EE7A954EAB /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1634,6 +1648,66 @@
 				6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */,
 			);
 			path = DateTimeScreenCoordinator;
+			sourceTree = "<group>";
+		};
+		6C98CBC628339E8700D2E4FA /* CoinScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6C98CBCB28339EAB00D2E4FA /* View */,
+				6C98CBCA28339EA500D2E4FA /* Presenter */,
+				6C98CBC928339E9F00D2E4FA /* Interactor */,
+				6C98CBC828339E9900D2E4FA /* Factory */,
+				6C98CBC728339E9200D2E4FA /* Assembly */,
+			);
+			path = CoinScreen;
+			sourceTree = "<group>";
+		};
+		6C98CBC728339E9200D2E4FA /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6C98CBD42833A07700D2E4FA /* CoinScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6C98CBC828339E9900D2E4FA /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6C98CBD22833A03A00D2E4FA /* CoinScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6C98CBC928339E9F00D2E4FA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6C98CBD028339FE300D2E4FA /* CoinScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6C98CBCA28339EA500D2E4FA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6C98CBCE28339F5A00D2E4FA /* CoinScreenModule.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6C98CBCB28339EAB00D2E4FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C98CBCC28339EB900D2E4FA /* CoinScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C98CBD62833A19100D2E4FA /* CoinScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6C98CBD72833A1A900D2E4FA /* CoinScreenCoordinator.swift */,
+			);
+			path = CoinScreenCoordinator;
 			sourceTree = "<group>";
 		};
 		6C9A9EE9282920C900962062 /* NumberScreenModule */ = {
@@ -1840,13 +1914,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				3391874273E269D41AE33736 /* [CP] Check Pods Manifest.lock */,
+				6DBFE4FA8DD28E57BAAF6DBD /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				51E7FC26D486FA3A86204B88 /* [CP] Embed Pods Frameworks */,
+				B0BA2BAED432B6D097F1B9E5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1886,8 +1960,8 @@
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
 			packageReferences = (
-				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */,
-				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */,
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
 			projectDirPath = "";
@@ -1940,10 +2014,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
-		3391874273E269D41AE33736 /* [CP] Check Pods Manifest.lock */ = {
+		6DBFE4FA8DD28E57BAAF6DBD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1965,7 +2040,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		51E7FC26D486FA3A86204B88 /* [CP] Embed Pods Frameworks */ = {
+		B0BA2BAED432B6D097F1B9E5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2020,6 +2095,7 @@
 				1B8EB60F2674119F009016BE /* URLRequest.swift in Sources */,
 				6CA396292832517C00F86248 /* LetterScreenFactory.swift in Sources */,
 				6C7D4D47282E557100A086BC /* DateTimeViewController.swift in Sources */,
+				6C98CBD32833A03A00D2E4FA /* CoinScreenFactory.swift in Sources */,
 				1B92032C25D17D3A0094D2BE /* CoinView.swift in Sources */,
 				6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */,
 				1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */,
@@ -2028,6 +2104,7 @@
 				1B92034F25D188DC0094D2BE /* CubeInterator.swift in Sources */,
 				1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */,
 				1B7F66A225D0884F00933AD6 /* ListWords.swift in Sources */,
+				6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */,
 				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
 				1B88ED7E27C1589900030202 /* Shake.swift in Sources */,
 				1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */,
@@ -2068,6 +2145,7 @@
 				1B9D22D227A6EC7600D4E427 /* CloudPlayer.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1BF30B8427BC42E200B3B4E5 /* LotoView.swift in Sources */,
+				6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */,
 				1B96E0EF2820483F00A23880 /* MainScreenFactory.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
 				1B88ED6E27C11FAA00030202 /* RussianLotto.swift in Sources */,
@@ -2118,6 +2196,7 @@
 				1B5F698127C0115E0050647A /* Password.swift in Sources */,
 				6C7D4D50282E5A1D00A086BC /* DateTimeScreenCoordinator.swift in Sources */,
 				1B941DD62821758300D968DF /* KeyboardService.swift in Sources */,
+				6C98CBD82833A1A900D2E4FA /* CoinScreenCoordinator.swift in Sources */,
 				1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */,
 				1B14038B2687F394007A5150 /* FPSCounter.swift in Sources */,
 				1B8EB64C26763DFA009016BE /* TravelInformationViewCell.swift in Sources */,
@@ -2140,6 +2219,7 @@
 				1B0DB27725DC776F00C9D31D /* TextRoundView.swift in Sources */,
 				1B10087E25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift in Sources */,
 				1B9AB8B125ECCC1600BD5CFD /* FilmHistoryView.swift in Sources */,
+				6C98CBD128339FE300D2E4FA /* CoinScreenInteractor.swift in Sources */,
 				1B57F63D27873805005F220C /* PremiumSubscriptionChoiceView.swift in Sources */,
 				1B92031C25D1755B0094D2BE /* CharactersSettingsView.swift in Sources */,
 				1BF30DCB25D1963400DCE62B /* CellCubeFiveView.swift in Sources */,
@@ -2221,6 +2301,7 @@
 				1B8EB63E2674E422009016BE /* TravelImageCellView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
+				6C98CBD52833A07700D2E4FA /* CoinScreenAssembly.swift in Sources */,
 				1BF22F3B25D8AD2600775368 /* ScrollTeamPlayers.swift in Sources */,
 				1B88ED7327C1200500030202 /* RussianLottoInteractor.swift in Sources */,
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
@@ -2407,7 +2488,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D149205B6C298DEE4E875AF6 /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = 44870031D0BED44B83DB193D /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2438,7 +2519,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F9AC33862634B6DDC0F0AC8 /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = 5AB3D2530860E9EE7A954EAB /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2488,7 +2569,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */ = {
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
 			requirement = {
@@ -2496,7 +2577,7 @@
 				kind = branch;
 			};
 		};
-		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */ = {
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
 			requirement = {
@@ -2509,12 +2590,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1B92E09E281D54A400398966 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
 			productName = RandomUIKit;
 		};
 		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
 			productName = RandomNetwork;
 		};
 /* End XCSwiftPackageProductDependency section */

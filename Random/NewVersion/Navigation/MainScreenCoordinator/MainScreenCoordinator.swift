@@ -22,6 +22,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     private var yesNoScreenCoordinator: YesNoScreenCoordinatorProtocol?
     private var dateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol?
     private var letterScreenCoordinator: LetterScreenCoordinatorProtocol?
+    private var coinScreenCoordinator: CoinScreenCoordinatorProtocol?
     
     // MARK: - Initialization
     
@@ -72,7 +73,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     func openCoin() {
-        // TODO: - Open Coordinator
+        let coinScreenCoordinator = CoinScreenCoordinator(navigationController: navigationController)
+        self.coinScreenCoordinator = coinScreenCoordinator
+        coinScreenCoordinator.start()
     }
     
     func openCube() {

@@ -18,7 +18,7 @@ protocol CoinScreenInteractorOutput: AnyObject {
     /// - Parameter result: результат генерации
     func didReciveImage(result: UIImage?)
     
-    /// Возвращает перевернутый список результатов
+    /// Возвращает список результатов
     /// - Parameter listResult: список генераций
     func didRecive(listResult: [String])
 }

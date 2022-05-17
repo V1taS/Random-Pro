@@ -88,11 +88,11 @@ extension CoinScreenViewController: CoinScreenViewOutput {
 
 extension CoinScreenViewController: CoinScreenInteractorOutput {
     func didReciveName(result: String) {
-        moduleView.set(result: result)
+        moduleView.setName(result: result)
     }
     
     func didReciveImage(result: UIImage?) {
-        moduleView.set(resultImage: result)
+        moduleView.setImage(resultImage: result)
     }
     
     func didRecive(listResult: [String]) {

@@ -19,7 +19,7 @@ protocol CoinScreenViewInput: AnyObject {
     
     /// Устанавливает результат генерации
     /// - Parameter result: результат генерации
-    func set(result: String)
+    func setName(result: String)
     
     /// Устанавливает список результатов генерации
     /// - Parameter listResult: готовый список результатов
@@ -28,7 +28,7 @@ protocol CoinScreenViewInput: AnyObject {
     /// Устанавливает картинку генерации
     /// - Parameter resultImage: результат генерации
     
-    func set(resultImage: UIImage?)
+    func setImage(resultImage: UIImage?)
 }
 
 typealias CoinScreenViewProtocol = UIView & CoinScreenViewInput
@@ -44,7 +44,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
     private let resultLabel = UILabel()
     private let scrollResult = ScrollLabelGradientView()
     private let generateButton = ButtonView()
-    private let coinImage = UIImageView()
+    private let coinImageView = UIImageView()
     
     // MARK: - Internal func
     
@@ -60,7 +60,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(result: String) {
+    func setName(result: String) {
         resultLabel.text = result
     }
     
@@ -68,8 +68,8 @@ final class CoinScreenView: CoinScreenViewProtocol {
         scrollResult.listLabels = listResult
     }
     
-    func set(resultImage: UIImage?) {
-        coinImage.image = resultImage
+    func setImage(resultImage: UIImage?) {
+        coinImageView.image = resultImage
     }
     
     // MARK: - Private func
@@ -83,7 +83,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
         generateButton.setTitle(appearance.textButton, for: .normal)
         generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
         
-        coinImage.layer.cornerRadius = appearance.cornerRadius
+        coinImageView.layer.cornerRadius = appearance.cornerRadius
     }
     
     @objc private func generateButtonAction() {
@@ -93,19 +93,20 @@ final class CoinScreenView: CoinScreenViewProtocol {
     private func setupConstraints() {
         let appearance = Appearance()
         
-        [resultLabel, generateButton, coinImage, scrollResult].forEach {
+        [resultLabel, generateButton, coinImageView, scrollResult].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             addSubview($0)
         }
         
         NSLayoutConstraint.activate([
-            resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -appearance.centerConstant),
             resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            resultLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                             constant: appearance.lessVirticalSize),
             
-            coinImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-            coinImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            coinImage.heightAnchor.constraint(equalToConstant: appearance.height),
-            coinImage.widthAnchor.constraint(equalToConstant: appearance.width),
+            coinImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            coinImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            coinImageView.heightAnchor.constraint(equalToConstant: appearance.height),
+            coinImageView.widthAnchor.constraint(equalToConstant: appearance.width),
             
             generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                     constant: appearance.middleHorizontalSize),
@@ -127,7 +128,6 @@ private extension CoinScreenView {
     struct Appearance {
         let textButton = NSLocalizedString("Сгенерировать", comment: "")
         let cornerRadius: CGFloat = 100
-        let centerConstant: CGFloat = 240
         let middleHorizontalSize: CGFloat = 16
         let hightVirticalSize: CGFloat = 28
         let lessVirticalSize: CGFloat = 8

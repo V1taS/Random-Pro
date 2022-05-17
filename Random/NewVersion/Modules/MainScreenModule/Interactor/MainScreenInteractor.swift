@@ -33,7 +33,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         .films(advLabel: .none),
         .teams(advLabel: .none),
         .list(advLabel: .none),
-        .coin(advLabel: .none),
         .cube(advLabel: .none),
         .lottery(advLabel: .none),
         .contact(advLabel: .none),

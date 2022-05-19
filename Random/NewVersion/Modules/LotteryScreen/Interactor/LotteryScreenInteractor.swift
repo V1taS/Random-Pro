@@ -10,12 +10,12 @@ import UIKit
 
 protocol LotteryScreenInteractorOutput: AnyObject {
     
-    /// Были получены данные для первого и второго поля ввода числа
+    /// Были получены данные для количественного textField и диапазонов textField
     /// - Parameters:
-    ///  - firstTextFieldValue: Первый textField
-    ///  - secondTextFieldValue: Второй textField
-    func didRecive(firstTextFieldValue: String?,
-                   secondTextFieldValue: String?, amountTextFieldValue: String?)
+    ///  - rangeStartValue: стартовый textField диапазона
+    ///  - rangeEndValue: финальный textField диапазона
+    ///  - amountNumberValue: количественный textField
+    func didRecive(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?)
     
     /// Были получены данные
     ///  - Parameter result: результат генерации
@@ -27,11 +27,12 @@ protocol LotteryScreenInteractorInput: AnyObject {
     /// Получить данные
     func getContent()
     
-    /// Создать новые данные
+    /// Создать новые данные для количественного textField и диапазонов textField
     /// - Parameters:
-    ///  - firstTextFieldValue: Первый textField
-    ///  - secondTextFieldValue: Второй textField
-    func generateContent(firstTextFieldValue: String?, secondTextFieldValue: String?, amountTextFieldValue: String?)
+    ///  - rangeStartValue: стартовый textField диапазона
+    ///  - rangeEndValue: финальный textField диапазона
+    ///  - amountNumberValue: количественный textField
+    func generateContent(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?)
 }
 
 final class LotteryScreenInteractor: LotteryScreenInteractorInput {
@@ -43,34 +44,34 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
     // MARK: - Private property
     
     private var result = Appearance().result
-    private let firstTextFieldValue = "1"
-    private let secondTextFieldValue = "10"
-    private let amountTextFieldValue = "1"
+    private let rangeStartTextFieldValue = Appearance().startTextFieldValue
+    private let rangeEndTextFieldValue = Appearance().endTextFieldValue
+    private let amountTextFieldValue = Appearance().startTextFieldValue
     
     // MARK: - Internal func
     
     func getContent() {
         output?.didRecive(result: result)
-        output?.didRecive(firstTextFieldValue: firstTextFieldValue, secondTextFieldValue: secondTextFieldValue,
-                          amountTextFieldValue: amountTextFieldValue)
+        output?.didRecive(rangeStartValue: rangeStartTextFieldValue, rangeEndValue: rangeEndTextFieldValue,
+                          amountNumberValue: amountTextFieldValue)
     }
     
-    func generateContent(firstTextFieldValue: String?, secondTextFieldValue: String?, amountTextFieldValue: String?) {
-        let firstValue = firstTextFieldValue ?? ""
-        let firstValueNumber = Int(firstValue) ?? 0
+    func generateContent(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?) {
+        let rangeStartValue = rangeStartValue ?? ""
+        let rangeStartValueNumber = Int(rangeStartValue) ?? .zero
         
-        let secondValue = secondTextFieldValue ?? ""
-        let secondValueNumber = Int(secondValue) ?? 0
+        let rangeEndValue = rangeEndValue ?? ""
+        let rangeEndValueNumber = Int(rangeEndValue) ?? .zero
         
-        let amountValue = amountTextFieldValue ?? ""
-        let amountValueNumber = Int(amountValue) ?? 0
+        let amountNumberValue = amountNumberValue ?? ""
+        let amountNumberValueInt = Int(amountNumberValue) ?? .zero
         
-        guard firstValueNumber < secondValueNumber else { return }
+        guard rangeStartValueNumber < rangeEndValueNumber else { return }
         
-        let rangeNumber = firstValueNumber...secondValueNumber
+        let rangeNumber = rangeStartValueNumber...rangeEndValueNumber
         let rangeNumberRandom = rangeNumber.shuffled()
         let rangeNumberRandomString = rangeNumberRandom.map { "\($0)"}
-        let arrayResult = Array<String>(rangeNumberRandomString.prefix(amountValueNumber))
+        let arrayResult = Array<String>(rangeNumberRandomString.prefix(amountNumberValueInt))
         let numbersResult = arrayResult.joined(separator: ", ")
         result = numbersResult
         
@@ -83,5 +84,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
 private extension LotteryScreenInteractor {
     struct Appearance {
         let result = "?"
+        let startTextFieldValue = "1"
+        let endTextFieldValue = "10"
     }
 }

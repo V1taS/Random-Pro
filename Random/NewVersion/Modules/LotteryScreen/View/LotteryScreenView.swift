@@ -13,19 +13,20 @@ protocol LotteryScreenViewOutput: AnyObject {
     
     /// Кнопка нажата пользователем
     /// - Parameters:
-    ///  - firstTextFieldValue: Первый textField
-    ///  - secondTextFieldValue: Второй textField
-    func generateButtonAction(firstTextFieldValue: String?, secondTextFieldValue: String?,
-                              amountTextFieldValue: String?)
+    ///  - rangeStartValue: стартовый textField диапазона
+    ///  - rangeEndValue: финальный textField диапазона
+    ///  - amountNumberValue: количественный textField
+    func generateButtonAction(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?)
 }
 
 protocol LotteryScreenViewInput: AnyObject {
     
-    /// Устанавливаем данные для первого и второго поля ввода числа
+    /// Устанавливаем данные для количественного textField и диапазонов 
     /// - Parameters:
-    ///  - firstTextFieldValue: Первый textField
-    ///  - secondTextFieldValue: Второй textField
-    func set(firstTextFieldValue: String?, secondTextFieldValue: String?, amountTextFieldValue: String?)
+    ///  - rangeStartValue: стартовый textField диапазона
+    ///  - rangeEndValue: финальный textField диапазона
+    ///  - amountNumberValue: количественный textField
+    func set(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?)
     
     /// Устанавливаем данные в result
     ///  - Parameter result: результат генерации
@@ -74,10 +75,10 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
         resultLabel.text = result
     }
     
-    func set(firstTextFieldValue: String?, secondTextFieldValue: String?, amountTextFieldValue: String?) {
-        rangeStartTextField.text = firstTextFieldValue
-        rangeEndTextField.text = secondTextFieldValue
-        amountNumberTextField.text = amountTextFieldValue
+    func set(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?) {
+        rangeStartTextField.text = rangeStartValue
+        rangeEndTextField.text = rangeEndValue
+        amountNumberTextField.text = amountNumberValue
     }
     
     // MARK: - Private func
@@ -88,13 +89,15 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
         resultLabel.font = RandomFont.primaryBold50
         resultLabel.textColor = RandomColor.primaryGray
         resultLabel.textAlignment = .center
-        resultLabel.numberOfLines = .zero
+        resultLabel.numberOfLines = appearance.numberOfLines
+        resultLabel.adjustsFontSizeToFitWidth = true
+        resultLabel.minimumScaleFactor = appearance.minimumScaleFactor
         
-        rangeStartTextField.placeholder = appearance.firstPlaceholder
+        rangeStartTextField.placeholder = appearance.startPlaceholder
         rangeStartTextField.keyboardType = .numberPad
         rangeStartTextField.delegate = self
         
-        rangeEndTextField.placeholder = appearance.secondPlaceholder
+        rangeEndTextField.placeholder = appearance.endPlaceholder
         rangeEndTextField.keyboardType = .numberPad
         rangeEndTextField.delegate = self
         
@@ -113,20 +116,20 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
         
         amountNumberLabel.textColor = RandomColor.primaryGray
         amountNumberLabel.font = RandomFont.primaryRegular18
-        amountNumberLabel.text = "Количество:"
+        amountNumberLabel.text = appearance.textAmountLabel
         
-        amountNumberTextField.placeholder = "1"
+        amountNumberTextField.placeholder = appearance.startPlaceholder
         amountNumberTextField.keyboardType = .numberPad
         amountNumberTextField.delegate = self
         
         rangeNumberLabel.font = RandomFont.primaryRegular18
         rangeNumberLabel.textColor = RandomColor.primaryGray
         rangeNumberLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        rangeNumberLabel.text = "Диапазон:"
+        rangeNumberLabel.text = appearance.textRangeLabel
         
         betweenRangeLabel.font = RandomFont.primaryMedium18
         betweenRangeLabel.textColor = RandomColor.primaryGray
-        betweenRangeLabel.text = " - "
+        betweenRangeLabel.text = appearance.dashBetween
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
         tap.cancelsTouchesInView = false
@@ -134,9 +137,9 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     }
     
     @objc private func generateButtonAction() {
-        output?.generateButtonAction(firstTextFieldValue: rangeStartTextField.text,
-                                     secondTextFieldValue: rangeEndTextField.text,
-                                     amountTextFieldValue: amountNumberTextField.text)
+        output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
+                                     rangeEndValue: rangeEndTextField.text,
+                                     amountNumberValue: amountNumberTextField.text)
     }
     
     private func setupConstraints() {
@@ -160,7 +163,11 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
         NSLayoutConstraint.activate([
             resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.middleHorizontalSize),
             resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.middleHorizontalSize),
-            resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            resultLabel.topAnchor.constraint(equalTo: rangeTextFieldStackView.bottomAnchor,
+                                             constant: appearance.middleHorizontalSize),
+            resultLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
+                                                constant: -appearance.middleHorizontalSize),
+            
             rangeStartTextField.widthAnchor.constraint(equalTo: rangeEndTextField.widthAnchor),
             betweenRangeLabel.widthAnchor.constraint(equalToConstant: appearance.lesswidthAnchorSize),
             amountNumberLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: appearance.widthAnchorSize),
@@ -203,13 +210,18 @@ extension LotteryScreenView: UITextFieldDelegate {
 
 private extension LotteryScreenView {
     struct Appearance {
-        let firstPlaceholder = "1"
-        let secondPlaceholder = "100"
+        let startPlaceholder = "1"
+        let endPlaceholder = "100"
         let spasing: CGFloat = 8
         let textButton = NSLocalizedString("Сгенерировать", comment: "")
+        let textRangeLabel = NSLocalizedString("Диапазон", comment: "") + ":"
+        let textAmountLabel = NSLocalizedString("Количество", comment: "") + ":"
+        let dashBetween = " - "
         let middleHorizontalSize: CGFloat = 16
         let largeVerticalSpacing: CGFloat = 28
         let widthAnchorSize: CGFloat = 112
         let lesswidthAnchorSize: CGFloat = 12
+        let numberOfLines: Int = 5
+        let minimumScaleFactor: CGFloat = 0.3
     }
 }

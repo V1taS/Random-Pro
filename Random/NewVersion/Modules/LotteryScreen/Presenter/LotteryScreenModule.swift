@@ -14,6 +14,7 @@ protocol LotteryScreenModuleOutput: AnyObject {
 
 protocol LotteryScreenModuleInput: AnyObject {
     
+    /// События которые отправляем из `текущего модуля` в  `другой модуль`
     var moduleOutput: LotteryScreenModuleOutput? { get set }
 }
 
@@ -75,31 +76,29 @@ final class LotteryScreenViewController: LotteryScreenModule {
     }
     
     @objc private func settingButtonAction() {
-        
+
     }
 }
 
 // MARK: - LotteryScreenViewOutput
 
 extension LotteryScreenViewController: LotteryScreenViewOutput {
-    func generateButtonAction(firstTextFieldValue: String?, secondTextFieldValue: String?, amountTextFieldValue: String?) {
-        interactor.generateContent(firstTextFieldValue: firstTextFieldValue,
-                                   secondTextFieldValue: secondTextFieldValue,
-                                   amountTextFieldValue: amountTextFieldValue)
+    func generateButtonAction(rangeStartValue: String?, rangeEndValue: String?, amountNumberValue: String?) {
+        interactor.generateContent(rangeStartValue: rangeStartValue,
+                                   rangeEndValue: rangeEndValue, amountNumberValue: amountNumberValue)
     }
 }
 
 // MARK: - LotteryScreenInteractorOutput
 
 extension LotteryScreenViewController: LotteryScreenInteractorOutput {
+    func didRecive(rangeStartValue: String?, rangeEndValue: String?, amountNumberValue: String?) {
+        moduleView.set(rangeStartValue: rangeStartValue,
+                       rangeEndValue: rangeEndValue, amountNumberValue: amountNumberValue)
+    }
+    
     func didRecive(result: String?) {
         moduleView.set(result: result)
-    }
-
-    func didRecive(firstTextFieldValue: String?, secondTextFieldValue: String?, amountTextFieldValue: String?) {
-        moduleView.set(firstTextFieldValue: firstTextFieldValue,
-                       secondTextFieldValue: secondTextFieldValue,
-                       amountTextFieldValue: amountTextFieldValue)
     }
 }
 
@@ -114,6 +113,6 @@ extension LotteryScreenViewController: LotteryScreenFactoryOutput {
 private extension LotteryScreenViewController {
     struct Appearance {
         let settingsButtonIcon = UIImage(systemName: "gear")
-        let title = "Лотерея"
+        let title = NSLocalizedString("Лотерея", comment: "")
     }
 }

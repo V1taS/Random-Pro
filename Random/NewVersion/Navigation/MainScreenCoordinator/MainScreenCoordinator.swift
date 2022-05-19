@@ -23,6 +23,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     private var dateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol?
     private var letterScreenCoordinator: LetterScreenCoordinatorProtocol?
     private var coinScreenCoordinator: CoinScreenCoordinatorProtocol?
+    private var lotteryScreenCoordinator: LotteryScreenCoordinatorProtocol?
     
     // MARK: - Initialization
     
@@ -89,7 +90,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     func openLottery() {
-        // TODO: - Open Coordinator
+        let lotteryScreenCoordinator = LotteryScreenCoordinator(navigationController: navigationController)
+        self.lotteryScreenCoordinator = lotteryScreenCoordinator
+        lotteryScreenCoordinator.start()
     }
     
     func openContact() {

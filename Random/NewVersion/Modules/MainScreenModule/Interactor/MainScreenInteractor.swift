@@ -34,7 +34,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         .teams(advLabel: .none),
         .list(advLabel: .none),
         .cube(advLabel: .none),
-        .lottery(advLabel: .none),
         .contact(advLabel: .none),
         .password(advLabel: .none),
         .russianLotto(advLabel: .none)

@@ -262,6 +262,13 @@
 		1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */; };
 		1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */; };
 		1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */; };
+		4F67851948A1D9AC036C732C /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6879C759378BFBD82C2A79 /* Pods_Random_Pro.framework */; };
+		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
+		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
+		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
+		6C1A0CBE2834EA4800A3040E /* LotteryScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBD2834EA4800A3040E /* LotteryScreenFactory.swift */; };
+		6C1A0CC02834EA7800A3040E /* LotteryScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBF2834EA7800A3040E /* LotteryScreenAssembly.swift */; };
+		6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CC22834EC2E00A3040E /* LotteryScreenCoordinator.swift */; };
 		6C7D4D45282E556400A086BC /* DateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D44282E556400A086BC /* DateTimeView.swift */; };
 		6C7D4D47282E557100A086BC /* DateTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D46282E557100A086BC /* DateTimeViewController.swift */; };
 		6C7D4D49282E557B00A086BC /* DateTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D48282E557B00A086BC /* DateTimeInteractor.swift */; };
@@ -293,7 +300,6 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
-		89E10678F9266E2153784E4D /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51DACBC28FA502D3BD5F499C /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -310,6 +316,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		09E3222233FDB91BCB22E921 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 		1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInformationBestFilmView.swift; sourceTree = "<group>"; };
 		1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmBestHistoryView.swift; sourceTree = "<group>"; };
 		1B0DB26825DC19A600C9D31D /* SKProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProduct.swift; sourceTree = "<group>"; };
@@ -570,9 +577,13 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		44870031D0BED44B83DB193D /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
-		51DACBC28FA502D3BD5F499C /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AB3D2530860E9EE7A954EAB /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		4B6879C759378BFBD82C2A79 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
+		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
+		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
+		6C1A0CBD2834EA4800A3040E /* LotteryScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenFactory.swift; sourceTree = "<group>"; };
+		6C1A0CBF2834EA7800A3040E /* LotteryScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenAssembly.swift; sourceTree = "<group>"; };
+		6C1A0CC22834EC2E00A3040E /* LotteryScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenCoordinator.swift; sourceTree = "<group>"; };
 		6C7D4D44282E556400A086BC /* DateTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeView.swift; sourceTree = "<group>"; };
 		6C7D4D46282E557100A086BC /* DateTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeViewController.swift; sourceTree = "<group>"; };
 		6C7D4D48282E557B00A086BC /* DateTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeInteractor.swift; sourceTree = "<group>"; };
@@ -604,6 +615,7 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
+		A4E23252EA74FAD73F8FA9FC /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -617,7 +629,7 @@
 				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
-				89E10678F9266E2153784E4D /* Pods_Random_Pro.framework in Frameworks */,
+				4F67851948A1D9AC036C732C /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +728,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				51DACBC28FA502D3BD5F499C /* Pods_Random_Pro.framework */,
+				4B6879C759378BFBD82C2A79 /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1333,6 +1345,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6C1A0CB12834E88000A3040E /* LotteryScreen */,
 				6C98CBC628339E8700D2E4FA /* CoinScreen */,
 				6CA3961C28324EF800F86248 /* LetterScreen */,
 				6C7D4D3E282E54FB00A086BC /* DateTimeScreen */,
@@ -1422,6 +1435,7 @@
 		1B96E0FA282048BF00A23880 /* MainScreenCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				6C1A0CC12834EC1A00A3040E /* LotteryScreenCoordinator */,
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
 				6C98CBD62833A19100D2E4FA /* CoinScreenCoordinator */,
 				6CA3962C2832531E00F86248 /* LetterScreenCoordinator */,
@@ -1584,10 +1598,70 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				44870031D0BED44B83DB193D /* Pods-Random Pro.debug.xcconfig */,
-				5AB3D2530860E9EE7A954EAB /* Pods-Random Pro.release.xcconfig */,
+				A4E23252EA74FAD73F8FA9FC /* Pods-Random Pro.debug.xcconfig */,
+				09E3222233FDB91BCB22E921 /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		6C1A0CB12834E88000A3040E /* LotteryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A0CB62834E8B400A3040E /* View */,
+				6C1A0CB52834E8A500A3040E /* Presenter */,
+				6C1A0CB42834E89D00A3040E /* Interactor */,
+				6C1A0CB32834E89500A3040E /* Factory */,
+				6C1A0CB22834E88D00A3040E /* Assembly */,
+			);
+			path = LotteryScreen;
+			sourceTree = "<group>";
+		};
+		6C1A0CB22834E88D00A3040E /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A0CBF2834EA7800A3040E /* LotteryScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6C1A0CB32834E89500A3040E /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A0CBD2834EA4800A3040E /* LotteryScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6C1A0CB42834E89D00A3040E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6C1A0CB52834E8A500A3040E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6C1A0CB62834E8B400A3040E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C1A0CC12834EC1A00A3040E /* LotteryScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6C1A0CC22834EC2E00A3040E /* LotteryScreenCoordinator.swift */,
+			);
+			path = LotteryScreenCoordinator;
 			sourceTree = "<group>";
 		};
 		6C7D4D3E282E54FB00A086BC /* DateTimeScreen */ = {
@@ -1914,13 +1988,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				6DBFE4FA8DD28E57BAAF6DBD /* [CP] Check Pods Manifest.lock */,
+				0F53B1E4B50917025100C0BC /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				B0BA2BAED432B6D097F1B9E5 /* [CP] Embed Pods Frameworks */,
+				3FF28AA16C0042A83CB3D5BF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1998,27 +2072,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B225C582619E472001B9124 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "
-";
-			showEnvVarsInLog = 0;
-		};
-		6DBFE4FA8DD28E57BAAF6DBD /* [CP] Check Pods Manifest.lock */ = {
+		0F53B1E4B50917025100C0BC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2040,7 +2094,27 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B0BA2BAED432B6D097F1B9E5 /* [CP] Embed Pods Frameworks */ = {
+		1B225C582619E472001B9124 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+			showEnvVarsInLog = 0;
+		};
+		3FF28AA16C0042A83CB3D5BF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2152,10 +2226,12 @@
 				1B1D60852602DE6A00847843 /* MusicHistoryView.swift in Sources */,
 				1BD1F92425D733AB00A1C7A4 /* LotteryActions.swift in Sources */,
 				1B92034625D1888B0094D2BE /* Cube.swift in Sources */,
+				6C1A0CBE2834EA4800A3040E /* LotteryScreenFactory.swift in Sources */,
 				1BD1F92025D7338700A1C7A4 /* Lottery.swift in Sources */,
 				1B96E0FE282048D000A23880 /* MainScreenCoordinator.swift in Sources */,
 				1BD1F90C25D7313000A1C7A4 /* DateAndTimeView.swift in Sources */,
 				1B7F66C025D08AD500933AD6 /* InteractorsContainer.swift in Sources */,
+				6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */,
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
 				1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */,
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
@@ -2212,6 +2288,7 @@
 				6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */,
 				1B92033825D17DCD0094D2BE /* CoinInteractor.swift in Sources */,
 				1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */,
+				6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */,
 				1B57F641278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift in Sources */,
 				1B7F66EE25D08DA600933AD6 /* KeyboardAware.swift in Sources */,
 				1B446F2B25E517000060E163 /* RecordReviewApp.swift in Sources */,
@@ -2284,6 +2361,7 @@
 				1B96E10428204CD000A23880 /* MainScreenCollectionViewCell.swift in Sources */,
 				1B92033D25D17EDE0094D2BE /* CoinSettingsView.swift in Sources */,
 				1B0CFA9C25EEB8B0000FB641 /* FilmInformationBestFilmView.swift in Sources */,
+				6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */,
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
 				1B4EBFFA25FE548E00A41945 /* TravelView.swift in Sources */,
 				1BF22F3225D88F3C00775368 /* Player.swift in Sources */,
@@ -2307,6 +2385,7 @@
 				1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */,
 				1B7F66B325D089AF00933AD6 /* ListWordsActions.swift in Sources */,
 				1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */,
+				6C1A0CC02834EA7800A3040E /* LotteryScreenAssembly.swift in Sources */,
 				1B96E0F32820483F00A23880 /* MainScreenView.swift in Sources */,
 				6C9A9EF4282922A000962062 /* NumberScreenInteractor.swift in Sources */,
 				1B57F64F2788B7F7005F220C /* CategoriesNewView.swift in Sources */,
@@ -2322,6 +2401,7 @@
 				1BF1F5CA25F705D700613F20 /* Orientation.swift in Sources */,
 				1B96E0FF282048D000A23880 /* RootCoordinator.swift in Sources */,
 				1B8EB630267442B3009016BE /* KinopoiskPopularFilmsRequest.swift in Sources */,
+				6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */,
 				1B7F670625D09A9B00933AD6 /* TabBarView.swift in Sources */,
 				1B8EB63A26744FA5009016BE /* HotTravelRequest.swift in Sources */,
 				6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */,
@@ -2488,7 +2568,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44870031D0BED44B83DB193D /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = A4E23252EA74FAD73F8FA9FC /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2519,7 +2599,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5AB3D2530860E9EE7A954EAB /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = 09E3222233FDB91BCB22E921 /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

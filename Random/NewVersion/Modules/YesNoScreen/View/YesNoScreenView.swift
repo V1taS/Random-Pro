@@ -93,7 +93,8 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
                                                     constant: appearance.middleHorizontalSpacing),
             generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                      constant: -appearance.middleHorizontalSpacing),
-            generateButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -appearance.largeVerticalSpacing),
+            generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                   constant: -appearance.middleHorizontalSpacing),
             
             scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -109,7 +110,7 @@ private extension YesNoScreenView {
     struct Appearance {
         let setTextButton = NSLocalizedString("Да или Нет", comment: "")
         let middleHorizontalSpacing: CGFloat = 16
-        let largeVerticalSpacing: CGFloat = 28
+        let largeVerticalSpacing: CGFloat = 24
         let lessVerticalSpacing: CGFloat = 8
     }
 }

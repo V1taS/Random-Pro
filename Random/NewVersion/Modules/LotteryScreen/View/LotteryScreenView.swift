@@ -176,7 +176,8 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
             generateButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.middleHorizontalSize),
             generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                      constant: -appearance.middleHorizontalSize),
-            generateButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -appearance.largeVerticalSpacing),
+            generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                   constant: -appearance.middleHorizontalSize),
             
             amountNumberTextFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                                     constant: appearance.middleHorizontalSize),
@@ -218,7 +219,7 @@ private extension LotteryScreenView {
         let textAmountLabel = NSLocalizedString("Количество", comment: "") + ":"
         let dashBetween = " - "
         let middleHorizontalSize: CGFloat = 16
-        let largeVerticalSpacing: CGFloat = 28
+        let largeVerticalSpacing: CGFloat = 24
         let widthAnchorSize: CGFloat = 112
         let lesswidthAnchorSize: CGFloat = 12
         let numberOfLines: Int = 5

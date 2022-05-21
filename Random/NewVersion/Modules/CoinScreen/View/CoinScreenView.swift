@@ -112,7 +112,8 @@ final class CoinScreenView: CoinScreenViewProtocol {
                                                     constant: appearance.middleHorizontalSize),
             generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                      constant: -appearance.middleHorizontalSize),
-            generateButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -appearance.hightVirticalSize),
+            generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                   constant: -appearance.middleHorizontalSize),
             
             scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -129,7 +130,7 @@ private extension CoinScreenView {
         let textButton = NSLocalizedString("Сгенерировать", comment: "")
         let cornerRadius: CGFloat = 100
         let middleHorizontalSize: CGFloat = 16
-        let hightVirticalSize: CGFloat = 28
+        let hightVirticalSize: CGFloat = 24
         let lessVirticalSize: CGFloat = 8
         let height: CGFloat = 200
         let width: CGFloat = 200

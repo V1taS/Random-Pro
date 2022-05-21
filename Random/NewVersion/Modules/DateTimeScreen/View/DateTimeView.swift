@@ -159,8 +159,8 @@ final class DateTimeView: DateTimeViewProtocol {
                                                         constant: appearance.middleHorizontalSpacing),
             buttonStackViewTwo.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                          constant: -appearance.middleHorizontalSpacing),
-            buttonStackViewTwo.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                                       constant: -appearance.lessHorizontalSpacing),
+            buttonStackViewTwo.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                       constant: -appearance.middleHorizontalSpacing),
             
             scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -179,7 +179,7 @@ extension DateTimeView {
         let textButtomTime = NSLocalizedString("Время", comment: "")
         let textButtonMonth = NSLocalizedString("Месяц", comment: "")
         let middleHorizontalSpacing: CGFloat = 16
-        let lessHorizontalSpacing: CGFloat = 12
+        let lessHorizontalSpacing: CGFloat = 16
         let spasing: CGFloat = 8
     }
 }

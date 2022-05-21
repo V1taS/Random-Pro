@@ -126,8 +126,8 @@ final class LetterScreenView: LetterScreenViewProtocol {
                                                     constant: appearance.middleHorizontalSize),
             generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                      constant: -appearance.middleHorizontalSize),
-            generateButton.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                                   constant: -appearance.highVirticalSize),
+            generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                   constant: -appearance.middleHorizontalSize),
             
             letterSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                             constant: appearance.middleHorizontalSize),
@@ -152,7 +152,7 @@ private extension LetterScreenView {
         let englishText = NSLocalizedString("Английские буквы", comment: "")
         let lessVerticalSpacing: CGFloat = 8
         let middleHorizontalSize: CGFloat = 16
-        let highVirticalSize: CGFloat = 28
+        let highVirticalSize: CGFloat = 24
         let engControl: Int = 1
         let rusControl: Int = 0
     }

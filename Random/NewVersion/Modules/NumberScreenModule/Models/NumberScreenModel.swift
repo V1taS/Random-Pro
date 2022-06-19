@@ -23,5 +23,5 @@ struct NumberScreenModel: Equatable & Encodable & Decodable {
   let listResult: [String]
   
   /// Без повторений
-  let isNoRepetition: Bool
+  let isEnabledWithoutRepetition: Bool
 }

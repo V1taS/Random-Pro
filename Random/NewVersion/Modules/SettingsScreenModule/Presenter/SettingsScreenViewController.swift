@@ -11,23 +11,22 @@ import UIKit
 protocol SettingsScreenModuleOutput: AnyObject {
   
   /// Событие, без повторений
-  ///  - Parameter model: Модель
-  func withoutRepetitionAction(model: SettingsScreenModel)
+  /// - Parameter isOn: Без повторений `true` или `false`
+  func withoutRepetitionAction(isOn: Bool)
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
   /// Событие, кнопка `Список чисел` была нажата
-  ///  - Parameter numbers: Массив чисел
-  func listOfNumbersAction(numbers: [String])
+  func listOfObjectsAction()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol SettingsScreenModuleInput {
   
   /// Установить настройки по умолчанию
-  ///  - Parameter model: Модель данных
-  func setupDefaultsSettingsFrom(model: SettingsScreenModel)
+  ///  - Parameter typeObject: Тип отображаемого контента
+  func setupDefaultsSettings(for typeObject: SettingsScreenType)
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: SettingsScreenModuleOutput? { get set }
@@ -48,7 +47,6 @@ final class SettingsScreenViewController: SettingsScreenModule {
   private let interactor: SettingsScreenInteractorInput
   private let moduleView: SettingsScreenViewProtocol
   private let factory: SettingsScreenFactoryInput
-  private var cacheModel: SettingsScreenModel?
   
   // MARK: - Initialization
   
@@ -84,9 +82,8 @@ final class SettingsScreenViewController: SettingsScreenModule {
   
   // MARK: - Internal func
   
-  func setupDefaultsSettingsFrom(model: SettingsScreenModel) {
-    cacheModel = model
-    factory.getContentFrom(model: model)
+  func setupDefaultsSettings(for typeObject: SettingsScreenType) {
+    factory.getContent(from: typeObject)
   }
 }
 
@@ -94,24 +91,15 @@ final class SettingsScreenViewController: SettingsScreenModule {
 
 extension SettingsScreenViewController: SettingsScreenViewOutput {
   func withoutRepetitionAction(isOn: Bool) {
-    guard let cacheModel = cacheModel else { return }
-    let model = SettingsScreenModel(result: cacheModel.result,
-                                    listResult: cacheModel.listResult,
-                                    isNoRepetition: isOn)
-    moduleOutput?.withoutRepetitionAction(model: model)
+    moduleOutput?.withoutRepetitionAction(isOn: isOn)
   }
   
   func cleanButtonAction() {
-    let model = SettingsScreenModel(result: "?",
-                                    listResult: [],
-                                    isNoRepetition: cacheModel?.isNoRepetition ?? false)
-    factory.getContentFrom(model: model)
     moduleOutput?.cleanButtonAction()
   }
   
-  func listOfNumbersAction() {
-    guard let cacheModel = cacheModel else { return }
-    moduleOutput?.listOfNumbersAction(numbers: cacheModel.listResult)
+  func listOfObjectsAction() {
+    moduleOutput?.listOfObjectsAction()
   }
 }
 
@@ -124,8 +112,8 @@ extension SettingsScreenViewController: SettingsScreenInteractorOutput {
 // MARK: - SettingsScreenFactoryOutput
 
 extension SettingsScreenViewController: SettingsScreenFactoryOutput {
-  func didRecive(models: [SettingsScreenCell]) {
-    moduleView.updateContentWitch(models: models)
+  func didRecive(models: [Any]) {
+    moduleView.updateContentWith(models: models)
   }
 }
 

@@ -37,16 +37,40 @@ final class NumberScreenCoordinator: Coordinator {
 // MARK: - NumberScreenModuleOutput
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
+  func cleanButtonWasSelected(model: NumberScreenModel) {
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .number(.init(
+      isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
+      numbersGenerated: "\(model.listResult.count)",
+      lastNumber: model.result
+    )))
+  }
+  
   func settingButtonAction(model: NumberScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController: navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    
+    settingsScreenCoordinator.setupDefaultsSettings(for: .number(.init(
+      isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
+      numbersGenerated: "\(model.listResult.count)",
+      lastNumber: model.result
+    )))
   }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func withoutRepetitionAction(isOn: Bool) {
+    numberScreenModule?.withoutRepetitionAction(isOn: isOn)
+  }
   
+  func cleanButtonAction() {
+    numberScreenModule?.cleanButtonAction()
+  }
+  
+  func listOfObjectsAction() {
+    // TODO: - 🥳
+  }
 }

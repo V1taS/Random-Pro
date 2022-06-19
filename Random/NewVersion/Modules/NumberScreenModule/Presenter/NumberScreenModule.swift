@@ -13,13 +13,17 @@ protocol NumberScreenModuleOutput: AnyObject {
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
   func settingButtonAction(model: NumberScreenModel)
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: NumberScreenModel)
 }
 
 protocol NumberScreenModuleInput: AnyObject {
   
   /// Событие, без повторений
-  ///  - Parameter model: Модель
-  func withoutRepetitionAction(model: NumberScreenModel)
+  /// - Parameter isOn: Без повторений `true` или `false`
+  func withoutRepetitionAction(isOn: Bool)
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
@@ -76,8 +80,8 @@ final class NumberScreenViewController: NumberScreenModule {
   
   // MARK: - Internal func
   
-  func withoutRepetitionAction(model: NumberScreenModel) {
-    interactor.withoutRepetition(model: model)
+  func withoutRepetitionAction(isOn: Bool) {
+    interactor.withoutRepetitionAction(isOn: isOn)
   }
   
   func cleanButtonAction() {
@@ -132,6 +136,11 @@ extension NumberScreenViewController: NumberScreenFactoryOutput {
 // MARK: - NumberScreenInteractorOutput
 
 extension NumberScreenViewController: NumberScreenInteractorOutput {
+  func cleanButtonWasSelected(model: NumberScreenModel) {
+    cacheModel = model
+    moduleOutput?.cleanButtonWasSelected(model: model)
+  }
+  
   func didRecive(model: NumberScreenModel) {
     cacheModel = model
     factory.reverse(listResult: model.listResult)

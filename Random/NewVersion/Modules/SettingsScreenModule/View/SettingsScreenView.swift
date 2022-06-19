@@ -19,7 +19,7 @@ protocol SettingsScreenViewOutput: AnyObject {
   func cleanButtonAction()
   
   /// Событие, кнопка `Список чисел` была нажата
-  func listOfNumbersAction()
+  func listOfObjectsAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -27,7 +27,7 @@ protocol SettingsScreenViewInput: AnyObject {
   
   /// Обновить контент
   ///  - Parameter models: Массив моделек
-  func updateContentWitch(models: [SettingsScreenCell])
+  func updateContentWith(models: [Any])
 }
 
 /// Псевдоним протокола UIView & SettingsScreenViewInput
@@ -45,7 +45,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   // MARK: - Private properties
   
   private let tableView = UITableView()
-  private var models: [SettingsScreenCell] = []
+  private var models: [Any] = []
   
   // MARK: - Initialization
   
@@ -64,7 +64,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWitch(models: [SettingsScreenCell]) {
+  func updateContentWith(models: [Any]) {
     self.models = models
     tableView.reloadData()
   }
@@ -72,15 +72,16 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   // MARK: - Private func
   
   private func configureLayout() {
+    let appearance = Appearance()
     [tableView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
       tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
     ])
   }
@@ -109,7 +110,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
     
     tableView.tableFooterView = UIView()
     tableView.tableHeaderView = UIView()
-    tableView.contentInset.top = 16
+    tableView.contentInset.top = Appearance().inset.top
   }
 }
 
@@ -118,13 +119,10 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 extension SettingsScreenView: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let model = models[indexPath.row]
-    
-    switch model {
-    case .listOfNumbers:
-      output?.listOfNumbersAction()
-    default: break
+    guard models[indexPath.row] is ListOfObjectsSettingsModel else {
+      return
     }
+    output?.listOfObjectsAction()
   }
 }
 
@@ -138,45 +136,52 @@ extension SettingsScreenView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
     
-    switch model {
-    case .withoutRepetition(let result):
+    if let model = model as? WithoutRepetitionSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndSwitchCell.reuseIdentifier
       ) as! LabelAndSwitchCell
       
-      cell.configureCellWith(titleText: result?.title,
-                             isResultSwitch: result?.isOn ?? false)
+      cell.configureCellWith(titleText: model.title,
+                             isResultSwitch: model.isEnabled)
       cell.switchAction = { [weak self] isOn in
         self?.output?.withoutRepetitionAction(isOn: isOn)
       }
-      cell.layer.cornerRadius = 8
+      cell.layer.cornerRadius = Appearance().cornerRadius
       cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
       return cell
-    case .numbersGenerated(let result):
+    }
+    
+    if let model = model as? CountGeneratedSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as! DoubleTitleCell
       
-      cell.configureCellWith(primaryText: result?.primaryText,
-                             secondaryText: result?.secondaryText)
+      cell.configureCellWith(primaryText: model.title,
+                             secondaryText: model.countGeneratedText)
       return cell
-    case .lastNumber(let result):
+    }
+    
+    if let model = model as? LastObjectSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as! DoubleTitleCell
       
-      cell.configureCellWith(primaryText: result?.primaryText,
-                             secondaryText: result?.secondaryText)
+      cell.configureCellWith(primaryText: model.title,
+                             secondaryText: model.lastObjectText)
       return cell
-    case .listOfNumbers(let result):
+    }
+    
+    if let model = model as? ListOfObjectsSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndImageCell.reuseIdentifier
       ) as! LabelAndImageCell
       
-      cell.configureCellWith(titleText: result?.title,
-                             imageAside: result?.asideImage)
+      cell.configureCellWith(titleText: model.title,
+                             imageAside: model.asideImage)
       return cell
-    case .cleanButton(let title):
+    }
+    
+    if let model = model as? CleanButtonSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: SmallButtonCell.reuseIdentifier
       ) as! SmallButtonCell
@@ -184,19 +189,13 @@ extension SettingsScreenView: UITableViewDataSource {
       cell.action = { [weak self] in
         self?.output?.cleanButtonAction()
       }
-      cell.configureCellWith(titleButton: title)
+      cell.configureCellWith(titleButton: model.title)
       cell.isHiddenSeparator = true
-      cell.layer.cornerRadius = 8
+      cell.layer.cornerRadius = Appearance().cornerRadius
       cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
       return cell
-    case .padding(let height):
-      let cell = tableView.dequeueReusableCell(
-        withIdentifier: CustomPaddingCell.reuseIdentifier
-      ) as! CustomPaddingCell
-      
-      cell.configureCellWith(height: height)
-      return cell
     }
+    return UITableViewCell()
   }
 }
 
@@ -204,6 +203,7 @@ extension SettingsScreenView: UITableViewDataSource {
 
 private extension SettingsScreenView {
   struct Appearance {
-    
+    let inset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    let cornerRadius: CGFloat = 8
   }
 }

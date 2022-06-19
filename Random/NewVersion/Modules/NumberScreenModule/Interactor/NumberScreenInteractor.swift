@@ -21,6 +21,10 @@ protocol NumberScreenInteractorOutput: AnyObject {
   /// Были получены данные
   ///  - Parameter text: Было получено конец диапазона
   func didReciveRangeEnd(text: String?)
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: NumberScreenModel)
 }
 
 protocol NumberScreenInteractorInput: AnyObject {
@@ -29,8 +33,8 @@ protocol NumberScreenInteractorInput: AnyObject {
   func cleanButtonAction()
   
   /// Событие, без повторений
-  ///  - Parameter model: Модель
-  func withoutRepetition(model: NumberScreenModel)
+  /// - Parameter isOn: Без повторений `true` или `false`
+  func withoutRepetitionAction(isOn: Bool)
   
   /// Получить данные
   func getContent()
@@ -70,26 +74,28 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   func cleanButtonAction() {
     model = nil
     getContent()
+    guard let model = model else { return }
+    output?.cleanButtonWasSelected(model: model)
   }
   
-  func withoutRepetition(model: NumberScreenModel) {
-    self.model = model
+  func withoutRepetitionAction(isOn: Bool) {
+    guard let model = model else {
+      configureModel(withWithoutRepetition: isOn)
+      return
+    }
+    let modelNew = NumberScreenModel(
+      rangeStartValue: model.rangeStartValue,
+      rangeEndValue: model.rangeEndValue,
+      result: model.result,
+      listResult: model.listResult,
+      isEnabledWithoutRepetition: isOn
+    )
+    self.model = modelNew
+    getContent()
   }
   
   func getContent() {
-    if let model = model {
-      output?.didRecive(model: model)
-    } else {
-      let appearance = Appearance()
-      let model = NumberScreenModel(
-        rangeStartValue: appearance.rangeStartValue,
-        rangeEndValue: appearance.rangeEndValue,
-        result: appearance.result,
-        listResult: [],
-        isNoRepetition: false
-      )
-      output?.didRecive(model: model)
-    }
+    configureModel()
   }
   
   func generateContent(firstTextFieldValue: String?,
@@ -104,24 +110,34 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
     
     guard rangeStartValueNum < rangeEndValueNum else { return }
     let randomNumber = Int.random(in: rangeStartValueNum...rangeEndValueNum)
-    let randomNumberFormatter = formatter(text: String(randomNumber)) ?? ""
-    
     var listResult: [String] = []
     
     if let model = model {
-      listResult = model.listResult
+      listResult = model.listResult.map { $0.replacingOccurrences(of: appearance.withoutSpaces, with: "") }
     }
-    listResult.append(randomNumberFormatter)
     
-    let model = NumberScreenModel(
-      rangeStartValue: formatter(text: rangeStartValue),
-      rangeEndValue: formatter(text: rangeEndValue),
-      result: randomNumberFormatter,
-      listResult: listResult,
-      isNoRepetition: self.model?.isNoRepetition ?? false
-    )
-    self.model = model
-    getContent()
+    // Срабатывает если включенно "Без повторений"
+    if let model = model, model.isEnabledWithoutRepetition {
+      guard let modelWithoutRepetition = generateContentWithoutRepetition(listResult: listResult,
+                                                                          rangeStartValueNum: rangeStartValueNum,
+                                                                          rangeEndValueNum: rangeEndValueNum) else {
+        return
+      }
+      self.model = modelWithoutRepetition
+      getContent()
+    } else {
+      listResult.append(String(randomNumber))
+      
+      let model = NumberScreenModel(
+        rangeStartValue: formatter(text: rangeStartValue),
+        rangeEndValue: formatter(text: rangeEndValue),
+        result: formatter(text: String(randomNumber)) ?? "",
+        listResult: listResult.map { formatter(text: String($0)) ?? "" },
+        isEnabledWithoutRepetition: self.model?.isEnabledWithoutRepetition ?? false
+      )
+      self.model = model
+      getContent()
+    }
   }
   
   func rangeStartDidChange(_ text: String?) {
@@ -138,7 +154,49 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
 // MARK: - Private
 
 private extension NumberScreenInteractor {
-  private func formatter(text: String?) -> String? {
+  func generateContentWithoutRepetition(
+    listResult: [String],
+    rangeStartValueNum: Int,
+    rangeEndValueNum: Int
+  ) -> NumberScreenModel? {
+    var randomNumber = Int.random(in: rangeStartValueNum...rangeEndValueNum)
+    var listResult = listResult
+    
+    if listResult.count < rangeEndValueNum {
+      while listResult.contains("\(randomNumber)") {
+        randomNumber = Int.random(in: rangeStartValueNum...rangeEndValueNum)
+      }
+      listResult.append("\(randomNumber)")
+      return NumberScreenModel(
+        rangeStartValue: formatter(text: "\(rangeStartValueNum)"),
+        rangeEndValue: formatter(text: "\(rangeEndValueNum)"),
+        result: formatter(text: String(randomNumber)) ?? "",
+        listResult: listResult.map { formatter(text: String($0)) ?? "" },
+        isEnabledWithoutRepetition: self.model?.isEnabledWithoutRepetition ?? false
+      )
+    } else {
+      return nil
+    }
+  }
+  
+  func configureModel(withWithoutRepetition isOn: Bool = false) {
+    if let model = model {
+      output?.didRecive(model: model)
+    } else {
+      let appearance = Appearance()
+      let model = NumberScreenModel(
+        rangeStartValue: appearance.rangeStartValue,
+        rangeEndValue: appearance.rangeEndValue,
+        result: appearance.result,
+        listResult: [],
+        isEnabledWithoutRepetition: isOn
+      )
+      self.model = model
+      output?.didRecive(model: model)
+    }
+  }
+  
+  func formatter(text: String?) -> String? {
     guard let text = text else {
       return nil
     }

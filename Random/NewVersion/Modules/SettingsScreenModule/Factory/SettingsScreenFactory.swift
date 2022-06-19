@@ -12,15 +12,15 @@ protocol SettingsScreenFactoryOutput: AnyObject {
   
   /// Был получен массив моделек
   ///  - Parameter models: Массив моделек
-  func didRecive(models: [SettingsScreenCell])
+  func didRecive(models: [Any])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
 protocol SettingsScreenFactoryInput {
   
   /// Получить массив моделей
-  ///  - Parameter model: Модель данных
-  func getContentFrom(model: SettingsScreenModel)
+  ///  - Parameter typeObject: Тип отображаемого контента
+  func getContent(from typeObject: SettingsScreenType)
 }
 
 /// Фабрика
@@ -32,41 +32,34 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func getContentFrom(model: SettingsScreenModel) {
-    var models: [SettingsScreenCell] = []
+  func getContent(from typeObject: SettingsScreenType) {
+    let appearance = Appearance()
+    var models: [Any] = []
     
-    SettingsScreenCell.allCases.forEach { cell in
-      switch cell {
-      case .withoutRepetition:
-        let model = SettingsScreenCell.withoutRepetition(
-          SettingsScreenCell.WithoutRepetitionModel(title: "Без повторений",
-                                                    isOn: model.isNoRepetition)
-        )
-        models.append(model)
-      case .numbersGenerated:
-        let model = SettingsScreenCell.numbersGenerated(
-          SettingsScreenCell.NumbersGeneratedModel(primaryText: "Чисел сгенерировано",
-                                                   secondaryText: "\(model.listResult.count)")
-        )
-        models.append(model)
-      case .lastNumber:
-        let model = SettingsScreenCell.lastNumber(
-          SettingsScreenCell.LastNumberModel(primaryText: "Последнее число",
-                                             secondaryText: model.result)
-        )
-        models.append(model)
-      case .listOfNumbers:
-        let model = SettingsScreenCell.listOfNumbers(
-          SettingsScreenCell.ListOfNumbersModel(title: "Список чисел",
-                                                asideImage: nil)
-        )
-        models.append(model)
-      case .cleanButton:
-        let model = SettingsScreenCell.cleanButton("Очистить")
-        models.append(model)
-      case .padding:
-        let model = SettingsScreenCell.padding(8)
-        models.append(model)
+    switch typeObject {
+    case .number(let result):
+      SettingsScreenType.NumberCaseIterable.allCases.forEach { caseIterable in
+        switch caseIterable {
+        case .withoutRepetition:
+          let model = WithoutRepetitionSettingsModel(title: appearance.withoutRepetitionTitle,
+                                                     isEnabled: result.isEnabledWithoutRepetition)
+          models.append(model)
+        case .numbersGenerated:
+          let model = CountGeneratedSettingsModel(title: appearance.countGeneratedTitle,
+                                                  countGeneratedText: result.numbersGenerated)
+          models.append(model)
+        case .lastNumber:
+          let model = LastObjectSettingsModel(title: appearance.lastObjectTitle,
+                                              lastObjectText: result.lastNumber)
+          models.append(model)
+        case .listOfNumbers:
+          let model = ListOfObjectsSettingsModel(title: appearance.listOfNumbersTitle,
+                                                 asideImage: appearance.listOfNumbersIcon)
+          models.append(model)
+        case .cleanButton:
+          let model = CleanButtonSettingsModel(title: appearance.cleanButtonTitle)
+          models.append(model)
+        }
       }
     }
     output?.didRecive(models: models)
@@ -77,6 +70,17 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
 
 private extension SettingsScreenFactory {
   struct Appearance {
+    let withoutRepetitionTitle = NSLocalizedString("Без повторений",
+                                                   comment: "")
+    let countGeneratedTitle = NSLocalizedString("Чисел сгенерировано",
+                                                comment: "")
+    let lastObjectTitle = NSLocalizedString("Последнее число",
+                                            comment: "")
+    let cleanButtonTitle = NSLocalizedString("Очистить",
+                                             comment: "")
+    let listOfNumbersIcon = UIImage(systemName: "chevron.right")
     
+    let listOfNumbersTitle = NSLocalizedString("Список чисел",
+                                               comment: "")
   }
 }

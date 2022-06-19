@@ -9,9 +9,22 @@ import UIKit
 
 protocol SettingsScreenCoordinatorOutput: AnyObject {
   
+  /// Событие, без повторений
+  /// - Parameter isOn: Без повторений `true` или `false`
+  func withoutRepetitionAction(isOn: Bool)
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
+  
+  /// Событие, кнопка `Список чисел` была нажата
+  func listOfObjectsAction()
 }
 
 protocol SettingsScreenCoordinatorInput: AnyObject {
+  
+  /// Установить настройки по умолчанию
+  ///  - Parameter typeObject: Тип отображаемого контента
+  func setupDefaultsSettings(for typeObject: SettingsScreenType)
   
   /// События которые отправляем из `текущего координатора` в  `другой координатор`
   var output: SettingsScreenCoordinatorOutput? { get set }
@@ -40,25 +53,32 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   
   func start() {
     let settingsScreenModule = SettingsScreenAssembly().createModule()
-    
     self.settingsScreenModule = settingsScreenModule
     self.settingsScreenModule?.moduleOutput = self
     navigationController.pushViewController(settingsScreenModule, animated: true)
   }
 }
 
+// MARK: - SettingsScreenCoordinatorInput
+
+extension SettingsScreenCoordinator {
+  func setupDefaultsSettings(for typeObject: SettingsScreenType) {
+    settingsScreenModule?.setupDefaultsSettings(for: typeObject)
+  }
+}
+
 // MARK: - SettingsScreenModuleOutput
 
 extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
-  func withoutRepetitionAction(model: SettingsScreenModel) {
-    
-  }
-  
-  func listOfNumbersAction(numbers: [String]) {
-    
+  func withoutRepetitionAction(isOn: Bool) {
+    output?.withoutRepetitionAction(isOn: isOn)
   }
   
   func cleanButtonAction() {
-    
+    output?.cleanButtonAction()
+  }
+  
+  func listOfObjectsAction() {
+    output?.listOfObjectsAction()
   }
 }

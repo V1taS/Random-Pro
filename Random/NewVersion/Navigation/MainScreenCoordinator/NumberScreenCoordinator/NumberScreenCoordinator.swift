@@ -38,6 +38,13 @@ final class NumberScreenCoordinator: Coordinator {
 // MARK: - NumberScreenModuleOutput
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
+  func didReciveRangeEnded() {
+    services.notificationService.showWarning(
+      title: Appearance().numberRangeEnded,
+      subtitle: nil,
+      bannerPosition: .top)
+  }
+  
   func cleanButtonWasSelected(model: NumberScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .number(.init(
       isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
@@ -86,3 +93,11 @@ extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension NumberScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Appearance
+
+private extension NumberScreenCoordinator {
+  struct Appearance {
+    let numberRangeEnded = NSLocalizedString("Диапазон чисел закончился", comment: "")
+  }
+}

@@ -25,6 +25,9 @@ protocol NumberScreenInteractorOutput: AnyObject {
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
   func cleanButtonWasSelected(model: NumberScreenModel)
+  
+  /// Диапазон чисел закончился
+  func didReciveRangeEnded()
 }
 
 protocol NumberScreenInteractorInput: AnyObject {
@@ -175,6 +178,7 @@ private extension NumberScreenInteractor {
         isEnabledWithoutRepetition: self.model?.isEnabledWithoutRepetition ?? false
       )
     } else {
+      output?.didReciveRangeEnded()
       return nil
     }
   }

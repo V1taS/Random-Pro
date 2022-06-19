@@ -1,9 +1,14 @@
 PODS:
+  - MarqueeLabel (4.0.5)
+  - NotificationBannerSwift (3.0.6):
+    - MarqueeLabel (~> 4.0.5)
+    - SnapKit (~> 5.0.1)
   - SDWebImage (5.12.3):
     - SDWebImage/Core (= 5.12.3)
   - SDWebImage/Core (5.12.3)
   - SDWebImageSwiftUI (2.0.2):
     - SDWebImage (~> 5.10)
+  - SnapKit (5.0.1)
   - YandexMobileMetrica/Dynamic (3.17.0):
     - YandexMobileMetrica/Dynamic/Core (= 3.17.0)
     - YandexMobileMetrica/Dynamic/Crashes (= 3.17.0)
@@ -12,21 +17,28 @@ PODS:
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
+  - NotificationBannerSwift (~> 3.0.0)
   - SDWebImage
   - SDWebImageSwiftUI
   - YandexMobileMetrica/Dynamic
 
 SPEC REPOS:
   trunk:
+    - MarqueeLabel
+    - NotificationBannerSwift
     - SDWebImage
     - SDWebImageSwiftUI
+    - SnapKit
     - YandexMobileMetrica
 
 SPEC CHECKSUMS:
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
+  NotificationBannerSwift: 7021be2338f8f29cf424b0aca43da462bf9e2a1a
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
 
-PODFILE CHECKSUM: 6f4e4251bd062b672ba67104d3d07ca01fde483d
+PODFILE CHECKSUM: e125254f988e37606db518d836b84e38cce484e2
 
 COCOAPODS: 1.11.2

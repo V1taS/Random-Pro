@@ -27,11 +27,18 @@ protocol ApplicationServices {
   
   /// Сервис по работе с метриками
   var metricsService: MetricsService { get }
+  
+  /// Сервис по работе с уведомлениями
+  var notificationService: NotificationService { get }
 }
 
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
+  var notificationService: NotificationService {
+    NotificationServiceImpl()
+  }
+  
   var metricsService: MetricsService {
     MetricsServiceImpl()
   }

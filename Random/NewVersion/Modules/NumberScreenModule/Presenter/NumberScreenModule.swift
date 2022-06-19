@@ -17,6 +17,9 @@ protocol NumberScreenModuleOutput: AnyObject {
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
   func cleanButtonWasSelected(model: NumberScreenModel)
+  
+  /// Диапазон чисел закончился
+  func didReciveRangeEnded()
 }
 
 protocol NumberScreenModuleInput: AnyObject {
@@ -136,6 +139,10 @@ extension NumberScreenViewController: NumberScreenFactoryOutput {
 // MARK: - NumberScreenInteractorOutput
 
 extension NumberScreenViewController: NumberScreenInteractorOutput {
+  func didReciveRangeEnded() {
+    moduleOutput?.didReciveRangeEnded()
+  }
+  
   func cleanButtonWasSelected(model: NumberScreenModel) {
     cacheModel = model
     moduleOutput?.cleanButtonWasSelected(model: model)

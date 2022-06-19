@@ -1,5 +1,5 @@
 //
-//  YesOrNoModel.swift
+//  SettingsScreenYesOrNoModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.

@@ -63,8 +63,6 @@ typealias MainScreenModule = UIViewController & MainScreenModuleInput
 /// Презентер
 final class MainScreenViewController: MainScreenModule {
   
-  // MARK: - Public properties
-  
   // MARK: - Internal properties
   
   weak var moduleOutput: MainScreenModuleOutput?
@@ -106,6 +104,10 @@ final class MainScreenViewController: MainScreenModule {
     
     interactor.getCells()
     title = Appearance().title
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     navigationController?.navigationBar.prefersLargeTitles = true
   }
 }

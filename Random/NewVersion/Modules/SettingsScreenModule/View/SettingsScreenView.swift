@@ -36,8 +36,6 @@ typealias SettingsScreenViewProtocol = UIView & SettingsScreenViewInput
 /// View для экрана
 final class SettingsScreenView: SettingsScreenViewProtocol {
   
-  // MARK: - Public properties
-  
   // MARK: - Internal properties
   
   weak var output: SettingsScreenViewOutput?
@@ -59,8 +57,6 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  // MARK: - Public func
   
   // MARK: - Internal func
   
@@ -146,8 +142,12 @@ extension SettingsScreenView: UITableViewDataSource {
       cell.switchAction = { [weak self] isOn in
         self?.output?.withoutRepetitionAction(isOn: isOn)
       }
-      cell.layer.cornerRadius = Appearance().cornerRadius
-      cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+      
+      if tableView.isFirst(for: indexPath) {
+        cell.layer.cornerRadius = Appearance().cornerRadius
+        cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+      }
+      
       return cell
     }
     
@@ -190,9 +190,13 @@ extension SettingsScreenView: UITableViewDataSource {
         self?.output?.cleanButtonAction()
       }
       cell.configureCellWith(titleButton: model.title)
-      cell.isHiddenSeparator = true
-      cell.layer.cornerRadius = Appearance().cornerRadius
-      cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+      
+      if tableView.isLast(for: indexPath) {
+        cell.isHiddenSeparator = true
+        cell.layer.cornerRadius = Appearance().cornerRadius
+        cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+      }
+      
       return cell
     }
     return UITableViewCell()

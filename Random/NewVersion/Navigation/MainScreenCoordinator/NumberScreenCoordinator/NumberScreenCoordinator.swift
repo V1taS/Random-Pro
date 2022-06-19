@@ -16,6 +16,7 @@ final class NumberScreenCoordinator: Coordinator {
   private let services: ApplicationServices
   private var numberScreenModule: NumberScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
+  private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -41,7 +42,8 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .number(.init(
       isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
       numbersGenerated: "\(model.listResult.count)",
-      lastNumber: model.result
+      lastNumber: model.result,
+      listResult: model.listResult
     )))
   }
   
@@ -54,7 +56,8 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
     settingsScreenCoordinator.setupDefaultsSettings(for: .number(.init(
       isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
       numbersGenerated: "\(model.listResult.count)",
-      lastNumber: model.result
+      lastNumber: model.result,
+      listResult: model.listResult
     )))
   }
 }
@@ -62,6 +65,15 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func listOfObjectsAction(_ list: [String]) {
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
+    self.listResultScreenCoordinator = listResultScreenCoordinator
+    self.listResultScreenCoordinator?.output = self
+    self.listResultScreenCoordinator?.start()
+    
+    listResultScreenCoordinator.setupDefaultsSettings(for: .number(list: list))
+  }
+  
   func withoutRepetitionAction(isOn: Bool) {
     numberScreenModule?.withoutRepetitionAction(isOn: isOn)
   }
@@ -69,8 +81,8 @@ extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
   func cleanButtonAction() {
     numberScreenModule?.cleanButtonAction()
   }
-  
-  func listOfObjectsAction() {
-    // TODO: - 🥳
-  }
 }
+
+// MARK: - ListResultScreenCoordinatorOutput
+
+extension NumberScreenCoordinator: ListResultScreenCoordinatorOutput {}

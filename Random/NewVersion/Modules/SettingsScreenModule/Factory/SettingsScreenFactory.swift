@@ -13,6 +13,10 @@ protocol SettingsScreenFactoryOutput: AnyObject {
   /// Был получен массив моделек
   ///  - Parameter models: Массив моделек
   func didRecive(models: [Any])
+  
+  /// Был получен массив результатов
+  ///  - Parameter listResult: Список результатов
+  func didRecive(listResult: [String])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -38,6 +42,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
     
     switch typeObject {
     case .number(let result):
+      output?.didRecive(listResult: result.listResult)
       SettingsScreenType.NumberCaseIterable.allCases.forEach { caseIterable in
         switch caseIterable {
         case .withoutRepetition:
@@ -53,14 +58,28 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                               lastObjectText: result.lastNumber)
           models.append(model)
         case .listOfNumbers:
-          let model = ListOfObjectsSettingsModel(title: appearance.listOfNumbersTitle,
-                                                 asideImage: appearance.listOfNumbersIcon)
-          models.append(model)
+          if !result.listResult.isEmpty {
+            let model = ListOfObjectsSettingsModel(title: appearance.listOfNumbersTitle,
+                                                   asideImage: appearance.listOfNumbersIcon)
+            models.append(model)
+          }
         case .cleanButton:
           let model = CleanButtonSettingsModel(title: appearance.cleanButtonTitle)
           models.append(model)
         }
       }
+    case .films(_): break
+    case .teams(_): break
+    case .yesOrNo(_): break
+    case .character(_): break
+    case .list(_): break
+    case .coin(_): break
+    case .cube(_): break
+    case .dateAndTime(_): break
+    case .lottery(_): break
+    case .contact(_): break
+    case .password(_): break
+    case .russianLotto(_): break
     }
     output?.didRecive(models: models)
   }

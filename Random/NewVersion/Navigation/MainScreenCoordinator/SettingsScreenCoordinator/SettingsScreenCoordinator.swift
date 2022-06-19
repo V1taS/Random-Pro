@@ -17,10 +17,11 @@ protocol SettingsScreenCoordinatorOutput: AnyObject {
   func cleanButtonAction()
   
   /// Событие, кнопка `Список чисел` была нажата
-  func listOfObjectsAction()
+  /// - Parameter list: Список объектов
+  func listOfObjectsAction(_ list: [String])
 }
 
-protocol SettingsScreenCoordinatorInput: AnyObject {
+protocol SettingsScreenCoordinatorInput {
   
   /// Установить настройки по умолчанию
   ///  - Parameter typeObject: Тип отображаемого контента
@@ -70,15 +71,15 @@ extension SettingsScreenCoordinator {
 // MARK: - SettingsScreenModuleOutput
 
 extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
+  func listOfObjectsAction(_ list: [String]) {
+    output?.listOfObjectsAction(list)
+  }
+  
   func withoutRepetitionAction(isOn: Bool) {
     output?.withoutRepetitionAction(isOn: isOn)
   }
   
   func cleanButtonAction() {
     output?.cleanButtonAction()
-  }
-  
-  func listOfObjectsAction() {
-    output?.listOfObjectsAction()
   }
 }

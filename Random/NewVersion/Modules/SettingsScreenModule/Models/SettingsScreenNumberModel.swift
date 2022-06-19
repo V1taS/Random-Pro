@@ -1,5 +1,5 @@
 //
-//  NumberModel.swift
+//  SettingsScreenNumberModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -24,6 +24,9 @@ extension SettingsScreenType {
     
     /// Последнее число
     let lastNumber: String
+    
+    /// Список результатов
+    let listResult: [String]
   }
   
   // MARK: - NumberCaseIterable

@@ -1,5 +1,5 @@
 //
-//  DateAndTimeModel.swift
+//  SettingsScreenRussianLottoModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - DateAndTimeModel
+// MARK: - RussianLottoModel
 
 extension SettingsScreenType {
   
-  // MARK: - DateAndTime
+  // MARK: - RussianLotto
   
-  struct DateAndTime {
+  struct RussianLotto {
     // TODO: - 🤪
   }
   
-  // MARK: - DateAndTimeCaseIterable
+  // MARK: - RussianLottoCaseIterable
   
-  enum DateAndTimeCaseIterable: CaseIterable {
+  enum RussianLottoCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

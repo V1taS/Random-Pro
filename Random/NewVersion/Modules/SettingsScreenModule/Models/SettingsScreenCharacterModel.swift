@@ -1,5 +1,5 @@
 //
-//  LotteryModel.swift
+//  SettingsScreenCharacterModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - LotteryModel
+// MARK: - CharacterModel
 
 extension SettingsScreenType {
   
-  // MARK: - Lottery
+  // MARK: - Character
   
-  struct Lottery {
+  struct Character {
     // TODO: - 🤪
   }
   
-  // MARK: - LotteryCaseIterable
+  // MARK: - CharacterCaseIterable
   
-  enum LotteryCaseIterable: CaseIterable {
+  enum CharacterCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

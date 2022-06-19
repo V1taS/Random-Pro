@@ -1,5 +1,5 @@
 //
-//  ListModel.swift
+//  SettingsScreenDateAndTimeModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - ListModel
+// MARK: - DateAndTimeModel
 
 extension SettingsScreenType {
   
-  // MARK: - List
+  // MARK: - DateAndTime
   
-  struct List {
+  struct DateAndTime {
     // TODO: - 🤪
   }
   
-  // MARK: - ListCaseIterable
+  // MARK: - DateAndTimeCaseIterable
   
-  enum ListCaseIterable: CaseIterable {
+  enum DateAndTimeCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

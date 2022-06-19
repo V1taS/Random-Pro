@@ -35,20 +35,27 @@
 		1B1D60852602DE6A00847843 /* MusicHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60842602DE6A00847843 /* MusicHistoryView.swift */; };
 		1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B225C452619E253001B9124 /* GoogleService-Info.plist */; };
 		1B2F1D46260CC18E00ADCB12 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */; };
-		1B31F604285F3B7000A88217 /* NumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F603285F3B7000A88217 /* NumberModel.swift */; };
-		1B31F606285F3BE200A88217 /* FilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F605285F3BE200A88217 /* FilmsModel.swift */; };
-		1B31F608285F3C1A00A88217 /* TeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F607285F3C1A00A88217 /* TeamsModel.swift */; };
-		1B31F60A285F3C4A00A88217 /* YesOrNoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F609285F3C4A00A88217 /* YesOrNoModel.swift */; };
-		1B31F60C285F3C7F00A88217 /* CharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60B285F3C7F00A88217 /* CharacterModel.swift */; };
-		1B31F60E285F3CA000A88217 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60D285F3CA000A88217 /* ListModel.swift */; };
-		1B31F610285F3CBC00A88217 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60F285F3CBC00A88217 /* CoinModel.swift */; };
-		1B31F612285F3CEE00A88217 /* CubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F611285F3CEE00A88217 /* CubeModel.swift */; };
-		1B31F614285F3D0C00A88217 /* DateAndTimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F613285F3D0C00A88217 /* DateAndTimeModel.swift */; };
-		1B31F616285F3D2D00A88217 /* LotteryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F615285F3D2D00A88217 /* LotteryModel.swift */; };
-		1B31F618285F3D5600A88217 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F617285F3D5600A88217 /* ContactModel.swift */; };
-		1B31F61A285F3D7F00A88217 /* PasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F619285F3D7F00A88217 /* PasswordModel.swift */; };
-		1B31F61C285F3DA100A88217 /* RussianLottoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F61B285F3DA100A88217 /* RussianLottoModel.swift */; };
+		1B31F604285F3B7000A88217 /* SettingsScreenNumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */; };
+		1B31F606285F3BE200A88217 /* SettingsScreenFilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */; };
+		1B31F608285F3C1A00A88217 /* SettingsScreenTeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F607285F3C1A00A88217 /* SettingsScreenTeamsModel.swift */; };
+		1B31F60A285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */; };
+		1B31F60C285F3C7F00A88217 /* SettingsScreenCharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60B285F3C7F00A88217 /* SettingsScreenCharacterModel.swift */; };
+		1B31F60E285F3CA000A88217 /* SettingsScreenListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60D285F3CA000A88217 /* SettingsScreenListModel.swift */; };
+		1B31F610285F3CBC00A88217 /* SettingsScreenCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60F285F3CBC00A88217 /* SettingsScreenCoinModel.swift */; };
+		1B31F612285F3CEE00A88217 /* SettingsScreenCubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F611285F3CEE00A88217 /* SettingsScreenCubeModel.swift */; };
+		1B31F614285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F613285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift */; };
+		1B31F616285F3D2D00A88217 /* SettingsScreenLotteryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F615285F3D2D00A88217 /* SettingsScreenLotteryModel.swift */; };
+		1B31F618285F3D5600A88217 /* SettingsScreenContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F617285F3D5600A88217 /* SettingsScreenContactModel.swift */; };
+		1B31F61A285F3D7F00A88217 /* SettingsScreenPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F619285F3D7F00A88217 /* SettingsScreenPasswordModel.swift */; };
+		1B31F61C285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F61B285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift */; };
 		1B31F61E285F4E6600A88217 /* SettingsScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F61D285F4E6600A88217 /* SettingsScreenModels.swift */; };
+		1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F626285F926200A88217 /* ListResultScreenFactory.swift */; };
+		1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F627285F926200A88217 /* ListResultScreenViewController.swift */; };
+		1B31F62D285F926200A88217 /* ListResultScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F628285F926200A88217 /* ListResultScreenAssembly.swift */; };
+		1B31F62E285F926200A88217 /* ListResultScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F629285F926200A88217 /* ListResultScreenInteractor.swift */; };
+		1B31F62F285F926200A88217 /* ListResultScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F62A285F926200A88217 /* ListResultScreenView.swift */; };
+		1B31F638285F92E600A88217 /* ListResultScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F637285F92E600A88217 /* ListResultScreenCoordinator.swift */; };
+		1B31F63A285F977200A88217 /* ListResultScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F639285F977200A88217 /* ListResultScreenType.swift */; };
 		1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B325C0525D2C9CA00382F33 /* Feedback.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
@@ -368,20 +375,27 @@
 		1B1D60842602DE6A00847843 /* MusicHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHistoryView.swift; sourceTree = "<group>"; };
 		1B225C452619E253001B9124 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		1B31F603285F3B7000A88217 /* NumberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberModel.swift; sourceTree = "<group>"; };
-		1B31F605285F3BE200A88217 /* FilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsModel.swift; sourceTree = "<group>"; };
-		1B31F607285F3C1A00A88217 /* TeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsModel.swift; sourceTree = "<group>"; };
-		1B31F609285F3C4A00A88217 /* YesOrNoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNoModel.swift; sourceTree = "<group>"; };
-		1B31F60B285F3C7F00A88217 /* CharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModel.swift; sourceTree = "<group>"; };
-		1B31F60D285F3CA000A88217 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
-		1B31F60F285F3CBC00A88217 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
-		1B31F611285F3CEE00A88217 /* CubeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeModel.swift; sourceTree = "<group>"; };
-		1B31F613285F3D0C00A88217 /* DateAndTimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeModel.swift; sourceTree = "<group>"; };
-		1B31F615285F3D2D00A88217 /* LotteryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryModel.swift; sourceTree = "<group>"; };
-		1B31F617285F3D5600A88217 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
-		1B31F619285F3D7F00A88217 /* PasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModel.swift; sourceTree = "<group>"; };
-		1B31F61B285F3DA100A88217 /* RussianLottoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RussianLottoModel.swift; sourceTree = "<group>"; };
+		1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenNumberModel.swift; sourceTree = "<group>"; };
+		1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenFilmsModel.swift; sourceTree = "<group>"; };
+		1B31F607285F3C1A00A88217 /* SettingsScreenTeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTeamsModel.swift; sourceTree = "<group>"; };
+		1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenYesOrNoModel.swift; sourceTree = "<group>"; };
+		1B31F60B285F3C7F00A88217 /* SettingsScreenCharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCharacterModel.swift; sourceTree = "<group>"; };
+		1B31F60D285F3CA000A88217 /* SettingsScreenListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenListModel.swift; sourceTree = "<group>"; };
+		1B31F60F285F3CBC00A88217 /* SettingsScreenCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCoinModel.swift; sourceTree = "<group>"; };
+		1B31F611285F3CEE00A88217 /* SettingsScreenCubeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCubeModel.swift; sourceTree = "<group>"; };
+		1B31F613285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenDateAndTimeModel.swift; sourceTree = "<group>"; };
+		1B31F615285F3D2D00A88217 /* SettingsScreenLotteryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenLotteryModel.swift; sourceTree = "<group>"; };
+		1B31F617285F3D5600A88217 /* SettingsScreenContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenContactModel.swift; sourceTree = "<group>"; };
+		1B31F619285F3D7F00A88217 /* SettingsScreenPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenPasswordModel.swift; sourceTree = "<group>"; };
+		1B31F61B285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenRussianLottoModel.swift; sourceTree = "<group>"; };
 		1B31F61D285F4E6600A88217 /* SettingsScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenModels.swift; sourceTree = "<group>"; };
+		1B31F626285F926200A88217 /* ListResultScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenFactory.swift; sourceTree = "<group>"; };
+		1B31F627285F926200A88217 /* ListResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenViewController.swift; sourceTree = "<group>"; };
+		1B31F628285F926200A88217 /* ListResultScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenAssembly.swift; sourceTree = "<group>"; };
+		1B31F629285F926200A88217 /* ListResultScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenInteractor.swift; sourceTree = "<group>"; };
+		1B31F62A285F926200A88217 /* ListResultScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenView.swift; sourceTree = "<group>"; };
+		1B31F637285F92E600A88217 /* ListResultScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenCoordinator.swift; sourceTree = "<group>"; };
+		1B31F639285F977200A88217 /* ListResultScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenType.swift; sourceTree = "<group>"; };
 		1B325C0525D2C9CA00382F33 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -709,6 +723,75 @@
 				1B1D607626023D3C00847843 /* MusicInteractor.swift */,
 			);
 			path = MusicActions;
+			sourceTree = "<group>";
+		};
+		1B31F625285F923800A88217 /* ListResultScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F635285F928900A88217 /* View */,
+				1B31F634285F928200A88217 /* Presenter */,
+				1B31F633285F927C00A88217 /* Factory */,
+				1B31F632285F927600A88217 /* Assembly */,
+				1B31F631285F927000A88217 /* Interactor */,
+				1B31F630285F926A00A88217 /* Models */,
+			);
+			path = ListResultScreenModule;
+			sourceTree = "<group>";
+		};
+		1B31F630285F926A00A88217 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F639285F977200A88217 /* ListResultScreenType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1B31F631285F927000A88217 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F629285F926200A88217 /* ListResultScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B31F632285F927600A88217 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F628285F926200A88217 /* ListResultScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B31F633285F927C00A88217 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F626285F926200A88217 /* ListResultScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B31F634285F928200A88217 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F627285F926200A88217 /* ListResultScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B31F635285F928900A88217 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F62A285F926200A88217 /* ListResultScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B31F636285F92CC00A88217 /* ListResultScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B31F637285F92E600A88217 /* ListResultScreenCoordinator.swift */,
+			);
+			path = ListResultScreenCoordinator;
 			sourceTree = "<group>";
 		};
 		1B40AC1F278E293400578BFB /* OwnerAdmin */ = {
@@ -1397,6 +1480,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1B31F625285F923800A88217 /* ListResultScreenModule */,
 				1B9D4552283BDC0400A85F25 /* SettingsScreenModule */,
 				6C1A0CB12834E88000A3040E /* LotteryScreenModule */,
 				6C98CBC628339E8700D2E4FA /* CoinScreenModule */,
@@ -1489,6 +1573,7 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				1B31F636285F92CC00A88217 /* ListResultScreenCoordinator */,
 				1B9D4563283BDD2A00A85F25 /* SettingsScreenCoordinator */,
 				6C9A9EF9282926B000962062 /* NumberScreenCoordinator */,
 				6C1A0CC12834EC1A00A3040E /* LotteryScreenCoordinator */,
@@ -1576,19 +1661,19 @@
 			children = (
 				1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */,
 				1B31F61D285F4E6600A88217 /* SettingsScreenModels.swift */,
-				1B31F603285F3B7000A88217 /* NumberModel.swift */,
-				1B31F605285F3BE200A88217 /* FilmsModel.swift */,
-				1B31F607285F3C1A00A88217 /* TeamsModel.swift */,
-				1B31F609285F3C4A00A88217 /* YesOrNoModel.swift */,
-				1B31F60B285F3C7F00A88217 /* CharacterModel.swift */,
-				1B31F60D285F3CA000A88217 /* ListModel.swift */,
-				1B31F60F285F3CBC00A88217 /* CoinModel.swift */,
-				1B31F611285F3CEE00A88217 /* CubeModel.swift */,
-				1B31F613285F3D0C00A88217 /* DateAndTimeModel.swift */,
-				1B31F615285F3D2D00A88217 /* LotteryModel.swift */,
-				1B31F617285F3D5600A88217 /* ContactModel.swift */,
-				1B31F619285F3D7F00A88217 /* PasswordModel.swift */,
-				1B31F61B285F3DA100A88217 /* RussianLottoModel.swift */,
+				1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */,
+				1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */,
+				1B31F607285F3C1A00A88217 /* SettingsScreenTeamsModel.swift */,
+				1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */,
+				1B31F60B285F3C7F00A88217 /* SettingsScreenCharacterModel.swift */,
+				1B31F60D285F3CA000A88217 /* SettingsScreenListModel.swift */,
+				1B31F60F285F3CBC00A88217 /* SettingsScreenCoinModel.swift */,
+				1B31F611285F3CEE00A88217 /* SettingsScreenCubeModel.swift */,
+				1B31F613285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift */,
+				1B31F615285F3D2D00A88217 /* SettingsScreenLotteryModel.swift */,
+				1B31F617285F3D5600A88217 /* SettingsScreenContactModel.swift */,
+				1B31F619285F3D7F00A88217 /* SettingsScreenPasswordModel.swift */,
+				1B31F61B285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2283,6 +2368,7 @@
 				6CA3962528324FC500F86248 /* LetterScreenModule.swift in Sources */,
 				6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */,
 				1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */,
+				1B31F62E285F926200A88217 /* ListResultScreenInteractor.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
 				1B8EB62626743221009016BE /* KinopoiskInfoRequest.swift in Sources */,
 				1B96E0F22820483F00A23880 /* MainScreenInteractor.swift in Sources */,
@@ -2300,6 +2386,7 @@
 				1B8EB60F2674119F009016BE /* URLRequest.swift in Sources */,
 				6CA396292832517C00F86248 /* LetterScreenFactory.swift in Sources */,
 				6C7D4D47282E557100A086BC /* DateTimeViewController.swift in Sources */,
+				1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */,
 				6C98CBD32833A03A00D2E4FA /* CoinScreenFactory.swift in Sources */,
 				1B92032C25D17D3A0094D2BE /* CoinView.swift in Sources */,
 				6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */,
@@ -2307,10 +2394,11 @@
 				1B8EB63C26744FC7009016BE /* HotTravelResult.swift in Sources */,
 				6C7D4D49282E557B00A086BC /* DateTimeInteractor.swift in Sources */,
 				1B92034F25D188DC0094D2BE /* CubeInterator.swift in Sources */,
-				1B31F60E285F3CA000A88217 /* ListModel.swift in Sources */,
+				1B31F60E285F3CA000A88217 /* SettingsScreenListModel.swift in Sources */,
 				1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */,
 				1B7F66A225D0884F00933AD6 /* ListWords.swift in Sources */,
-				1B31F606285F3BE200A88217 /* FilmsModel.swift in Sources */,
+				1B31F606285F3BE200A88217 /* SettingsScreenFilmsModel.swift in Sources */,
+				1B31F62D285F926200A88217 /* ListResultScreenAssembly.swift in Sources */,
 				6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */,
 				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
 				1B9D4558283BDC7C00A85F25 /* SettingsScreenFactory.swift in Sources */,
@@ -2323,7 +2411,7 @@
 				1B57F63F27873E27005F220C /* PremiumSubscriptionComponentView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
-				1B31F616285F3D2D00A88217 /* LotteryModel.swift in Sources */,
+				1B31F616285F3D2D00A88217 /* SettingsScreenLotteryModel.swift in Sources */,
 				1B57F64527877B6A005F220C /* CellMainLockView.swift in Sources */,
 				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
 				1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */,
@@ -2331,7 +2419,7 @@
 				1B8EB64226750D2A009016BE /* TravelSettingsView.swift in Sources */,
 				1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */,
 				1BDC80D1264DBA85001B0893 /* Travel.swift in Sources */,
-				1B31F60C285F3C7F00A88217 /* CharacterModel.swift in Sources */,
+				1B31F60C285F3C7F00A88217 /* SettingsScreenCharacterModel.swift in Sources */,
 				1B7F118325E4068000FF64A3 /* ContactResultsView.swift in Sources */,
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */,
@@ -2352,11 +2440,11 @@
 				1BF22F2E25D88F1A00775368 /* PlayerView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
 				1B8EB615267418BF009016BE /* Data+PrettyPrintedJSON.swift in Sources */,
-				1B31F61A285F3D7F00A88217 /* PasswordModel.swift in Sources */,
+				1B31F61A285F3D7F00A88217 /* SettingsScreenPasswordModel.swift in Sources */,
 				1B9D22D227A6EC7600D4E427 /* CloudPlayer.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1BF30B8427BC42E200B3B4E5 /* LotoView.swift in Sources */,
-				1B31F610285F3CBC00A88217 /* CoinModel.swift in Sources */,
+				1B31F610285F3CBC00A88217 /* SettingsScreenCoinModel.swift in Sources */,
 				6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */,
 				1B96E0EF2820483F00A23880 /* MainScreenFactory.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
@@ -2371,14 +2459,17 @@
 				1B7F66C025D08AD500933AD6 /* InteractorsContainer.swift in Sources */,
 				6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */,
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
+				1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */,
 				1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */,
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
 				1B406A3827B9A75200500170 /* KegView.swift in Sources */,
+				1B31F63A285F977200A88217 /* ListResultScreenType.swift in Sources */,
 				1B8EB6352674457B009016BE /* SearchMoviesRequest.swift in Sources */,
 				1BBADE0B25EC080500AD38F4 /* Film.swift in Sources */,
 				1B57F6662789E0DF005F220C /* UIImageView+Color.swift in Sources */,
 				1BF22F4525D8D49E00775368 /* TeamCustomListView.swift in Sources */,
 				1B8EB61926741A93009016BE /* VideoCDNRequest.swift in Sources */,
+				1B31F62F285F926200A88217 /* ListResultScreenView.swift in Sources */,
 				1B92032725D179330094D2BE /* ListWordsSettingsView.swift in Sources */,
 				1B88ED7127C11FE300030202 /* RussianLottoActions.swift in Sources */,
 				1B92030E25D170640094D2BE /* Characters.swift in Sources */,
@@ -2387,7 +2478,7 @@
 				1B5F698A27C0289A0050647A /* String+OffsetBy.swift in Sources */,
 				1B9D455C283BDC7C00A85F25 /* SettingsScreenView.swift in Sources */,
 				6CA3962328324F3500F86248 /* LetterScreenView.swift in Sources */,
-				1B31F618285F3D5600A88217 /* ContactModel.swift in Sources */,
+				1B31F618285F3D5600A88217 /* SettingsScreenContactModel.swift in Sources */,
 				6C7D4D45282E556400A086BC /* DateTimeView.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
 				1B31F61E285F4E6600A88217 /* SettingsScreenModels.swift in Sources */,
@@ -2428,7 +2519,7 @@
 				1B7F66A525D0889100933AD6 /* AppActions.swift in Sources */,
 				6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */,
 				1B92033825D17DCD0094D2BE /* CoinInteractor.swift in Sources */,
-				1B31F60A285F3C4A00A88217 /* YesOrNoModel.swift in Sources */,
+				1B31F60A285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift in Sources */,
 				1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */,
 				6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */,
 				1B57F641278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift in Sources */,
@@ -2459,14 +2550,15 @@
 				1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */,
 				1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */,
 				1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */,
-				1B31F604285F3B7000A88217 /* NumberModel.swift in Sources */,
+				1B31F604285F3B7000A88217 /* SettingsScreenNumberModel.swift in Sources */,
 				1B5A103B27B5257E008DF773 /* AppMetrics.swift in Sources */,
 				1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */,
+				1B31F638285F92E600A88217 /* ListResultScreenCoordinator.swift in Sources */,
 				1B57F6682789E7A4005F220C /* ADV.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
 				6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */,
-				1B31F614285F3D0C00A88217 /* DateAndTimeModel.swift in Sources */,
+				1B31F614285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
 				1BBADE1B25EC0C5100AD38F4 /* AppNetworking.swift in Sources */,
 				1B9D22CD27A6EC3900D4E427 /* ListService.swift in Sources */,
@@ -2495,7 +2587,7 @@
 				1B941DE028217FF600D968DF /* UserDefaultsWrapper.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,
-				1B31F608285F3C1A00A88217 /* TeamsModel.swift in Sources */,
+				1B31F608285F3C1A00A88217 /* SettingsScreenTeamsModel.swift in Sources */,
 				1B88ED7827C120A000030202 /* RussianLottoSettingsView.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */,
@@ -2515,7 +2607,7 @@
 				1B4EBFFA25FE548E00A41945 /* TravelView.swift in Sources */,
 				1BF22F3225D88F3C00775368 /* Player.swift in Sources */,
 				1B8EB6282674324F009016BE /* KinopoiskInfoResult.swift in Sources */,
-				1B31F61C285F3DA100A88217 /* RussianLottoModel.swift in Sources */,
+				1B31F61C285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift in Sources */,
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B8EB644267531DC009016BE /* TravelHistoryView.swift in Sources */,
@@ -2527,7 +2619,7 @@
 				1B96E100282048D000A23880 /* Coordinator.swift in Sources */,
 				1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */,
 				1B8EB63E2674E422009016BE /* TravelImageCellView.swift in Sources */,
-				1B31F612285F3CEE00A88217 /* CubeModel.swift in Sources */,
+				1B31F612285F3CEE00A88217 /* SettingsScreenCubeModel.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				6C98CBD52833A07700D2E4FA /* CoinScreenAssembly.swift in Sources */,

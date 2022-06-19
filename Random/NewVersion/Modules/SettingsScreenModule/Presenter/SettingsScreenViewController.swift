@@ -18,7 +18,8 @@ protocol SettingsScreenModuleOutput: AnyObject {
   func cleanButtonAction()
   
   /// Событие, кнопка `Список чисел` была нажата
-  func listOfObjectsAction()
+  /// - Parameter list: Список объектов
+  func listOfObjectsAction(_ list: [String])
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -47,6 +48,7 @@ final class SettingsScreenViewController: SettingsScreenModule {
   private let interactor: SettingsScreenInteractorInput
   private let moduleView: SettingsScreenViewProtocol
   private let factory: SettingsScreenFactoryInput
+  private var cacheListResult: [String]?
   
   // MARK: - Initialization
   
@@ -78,6 +80,7 @@ final class SettingsScreenViewController: SettingsScreenModule {
     super.viewDidLoad()
     
     title = Appearance().title
+    navigationController?.navigationBar.prefersLargeTitles = false
   }
   
   // MARK: - Internal func
@@ -99,7 +102,10 @@ extension SettingsScreenViewController: SettingsScreenViewOutput {
   }
   
   func listOfObjectsAction() {
-    moduleOutput?.listOfObjectsAction()
+    guard let cacheListResult = cacheListResult else {
+      return
+    }
+    moduleOutput?.listOfObjectsAction(cacheListResult)
   }
 }
 
@@ -112,6 +118,10 @@ extension SettingsScreenViewController: SettingsScreenInteractorOutput {
 // MARK: - SettingsScreenFactoryOutput
 
 extension SettingsScreenViewController: SettingsScreenFactoryOutput {
+  func didRecive(listResult: [String]) {
+    cacheListResult = listResult
+  }
+  
   func didRecive(models: [Any]) {
     moduleView.updateContentWith(models: models)
   }
@@ -121,6 +131,6 @@ extension SettingsScreenViewController: SettingsScreenFactoryOutput {
 
 private extension SettingsScreenViewController {
   struct Appearance {
-    let title = "Настройки"
+    let title = NSLocalizedString("Настройки", comment: "")
   }
 }

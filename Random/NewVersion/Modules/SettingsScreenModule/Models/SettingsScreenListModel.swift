@@ -1,5 +1,5 @@
 //
-//  ContactModel.swift
+//  SettingsScreenListModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - ContactModel
+// MARK: - ListModel
 
 extension SettingsScreenType {
   
-  // MARK: - Contact
+  // MARK: - List
   
-  struct Contact {
+  struct List {
     // TODO: - 🤪
   }
   
-  // MARK: - ContactCaseIterable
+  // MARK: - ListCaseIterable
   
-  enum ContactCaseIterable: CaseIterable {
+  enum ListCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

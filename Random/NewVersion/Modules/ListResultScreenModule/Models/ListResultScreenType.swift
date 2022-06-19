@@ -1,55 +1,55 @@
 //
-//  SettingsScreenType.swift
+//  ListResultScreenType.swift
 //  Random Pro
 //
-//  Created by Vitalii Sosin on 23.05.2022.
+//  Created by Vitalii Sosin on 19.06.2022.
 //  Copyright © 2022 Sosin.bet. All rights reserved.
 //
 
 import Foundation
 
-// MARK: - SettingsScreenType
+// MARK: - ListResultScreenType
 
-enum SettingsScreenType {
+enum ListResultScreenType {
   
   // MARK: - Cases
   
   /// Раздел: `Фильмы`
-  case films(Films)
+  case films
   
   /// Раздел: `Команды`
-  case teams(Teams)
+  case teams
   
   /// Раздел: `Число`
-  case number(Number)
+  case number(list: [String])
   
   /// Раздел: `Да или Нет`
-  case yesOrNo(YesOrNo)
+  case yesOrNo
   
   /// Раздел: `Буква`
-  case character(Character)
+  case character
   
   /// Раздел: `Список`
-  case list(List)
+  case list
   
   /// Раздел: `Монета`
-  case coin(Coin)
+  case coin
   
   /// Раздел: `Кубики`
-  case cube(Cube)
+  case cube
   
   /// Раздел: `Дата и Время`
-  case dateAndTime(DateAndTime)
+  case dateAndTime
   
   /// Раздел: `Лотерея`
-  case lottery(Lottery)
+  case lottery
   
   /// Раздел: `Контакты`
-  case contact(Contact)
+  case contact
   
   /// Раздел: `Пароли`
-  case password(Password)
+  case password
   
   /// Раздел: `Русское Лото`
-  case russianLotto(RussianLotto)
+  case russianLotto
 }

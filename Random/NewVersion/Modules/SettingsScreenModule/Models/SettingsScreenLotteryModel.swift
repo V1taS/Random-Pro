@@ -1,5 +1,5 @@
 //
-//  RussianLottoModel.swift
+//  SettingsScreenLotteryModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - RussianLottoModel
+// MARK: - LotteryModel
 
 extension SettingsScreenType {
   
-  // MARK: - RussianLotto
+  // MARK: - Lottery
   
-  struct RussianLotto {
+  struct Lottery {
     // TODO: - 🤪
   }
   
-  // MARK: - RussianLottoCaseIterable
+  // MARK: - LotteryCaseIterable
   
-  enum RussianLottoCaseIterable: CaseIterable {
+  enum LotteryCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

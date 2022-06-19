@@ -1,5 +1,5 @@
 //
-//  CharacterModel.swift
+//  SettingsScreenContactModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - CharacterModel
+// MARK: - ContactModel
 
 extension SettingsScreenType {
   
-  // MARK: - Character
+  // MARK: - Contact
   
-  struct Character {
+  struct Contact {
     // TODO: - 🤪
   }
   
-  // MARK: - CharacterCaseIterable
+  // MARK: - ContactCaseIterable
   
-  enum CharacterCaseIterable: CaseIterable {
+  enum ContactCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

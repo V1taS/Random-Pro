@@ -1,5 +1,5 @@
 //
-//  CoinModel.swift
+//  SettingsScreenCubeModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - CoinModel
+// MARK: - CubeModel
 
 extension SettingsScreenType {
   
-  // MARK: - Coin
+  // MARK: - Cube
   
-  struct Coin {
+  struct Cube {
     // TODO: - 🤪
   }
   
-  // MARK: - CoinCaseIterable
+  // MARK: - CubeCaseIterable
   
-  enum CoinCaseIterable: CaseIterable {
+  enum CubeCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

@@ -26,7 +26,7 @@ struct MainScreenCellModel {
     static var allCases: [MainScreenCellModel.MainScreenCell] = [
       .films(advLabel: .none),
       .teams(advLabel: .none),
-      .number(advLabel: .none),
+      .number(advLabel: .new),
       .yesOrNo(advLabel: .none),
       .character(advLabel: .none),
       .list(advLabel: .none),

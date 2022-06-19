@@ -1,5 +1,5 @@
 //
-//  FilmsModel.swift
+//  SettingsScreenTeamsModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 19.06.2022.
@@ -8,19 +8,19 @@
 
 import Foundation
 
-// MARK: - FilmsModel
+// MARK: - TeamsModel
 
 extension SettingsScreenType {
   
-  // MARK: - Films
+  // MARK: - Teams
   
-  struct Films {
+  struct Teams {
     // TODO: - 🤪
   }
   
-  // MARK: - FilmsCaseIterable
+  // MARK: - TeamsCaseIterable
   
-  enum FilmsCaseIterable: CaseIterable {
+  enum TeamsCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

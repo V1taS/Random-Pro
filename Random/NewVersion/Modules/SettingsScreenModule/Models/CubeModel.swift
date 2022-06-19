@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum Cube: CaseIterable {
+  // MARK: - Cube
+  
+  struct Cube {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - CubeCaseIterable
+  
+  enum CubeCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

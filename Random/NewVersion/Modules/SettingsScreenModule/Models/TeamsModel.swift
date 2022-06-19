@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum Teams: CaseIterable {
+  // MARK: - Teams
+  
+  struct Teams {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - TeamsCaseIterable
+  
+  enum TeamsCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

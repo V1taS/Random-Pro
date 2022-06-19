@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum Contact: CaseIterable {
+  // MARK: - Contact
+  
+  struct Contact {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - ContactCaseIterable
+  
+  enum ContactCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

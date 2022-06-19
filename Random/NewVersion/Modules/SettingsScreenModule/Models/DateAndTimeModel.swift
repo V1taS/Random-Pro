@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum DateAndTime: CaseIterable {
+  // MARK: - DateAndTime
+  
+  struct DateAndTime {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - DateAndTimeCaseIterable
+  
+  enum DateAndTimeCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

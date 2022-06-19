@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum Lottery: CaseIterable {
+  // MARK: - Lottery
+  
+  struct Lottery {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - LotteryCaseIterable
+  
+  enum LotteryCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

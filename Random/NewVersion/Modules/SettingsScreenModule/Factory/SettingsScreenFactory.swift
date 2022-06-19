@@ -78,7 +78,7 @@ private extension SettingsScreenFactory {
                                             comment: "")
     let cleanButtonTitle = NSLocalizedString("Очистить",
                                              comment: "")
-    let listOfNumbersIcon = UIImage(systemName: "chevron.right")
+    let listOfNumbersIcon = UIImage(systemName: "chevron.compact.right")
     
     let listOfNumbersTitle = NSLocalizedString("Список чисел",
                                                comment: "")

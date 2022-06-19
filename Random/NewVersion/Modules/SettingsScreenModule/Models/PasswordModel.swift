@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum Password: CaseIterable {
+  // MARK: - Password
+  
+  struct Password {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - PasswordCaseIterable
+  
+  enum PasswordCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

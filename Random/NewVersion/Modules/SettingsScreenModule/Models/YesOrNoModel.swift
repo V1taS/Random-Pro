@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum YesOrNo: CaseIterable {
+  // MARK: - YesOrNo
+  
+  struct YesOrNo {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - YesOrNoCaseIterable
+  
+  enum YesOrNoCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

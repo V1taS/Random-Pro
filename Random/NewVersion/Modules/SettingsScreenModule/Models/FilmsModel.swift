@@ -12,7 +12,15 @@ import Foundation
 
 extension SettingsScreenType {
   
-  enum Films: CaseIterable {
+  // MARK: - Films
+  
+  struct Films {
+    // TODO: - 🤪
+  }
+  
+  // MARK: - FilmsCaseIterable
+  
+  enum FilmsCaseIterable: CaseIterable {
     // TODO: - 🤪
   }
 }

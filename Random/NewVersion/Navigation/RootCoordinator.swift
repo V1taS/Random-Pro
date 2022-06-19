@@ -7,36 +7,32 @@
 
 import UIKit
 
-/// Псевдоним для координатора. Первый параметр `Input`, второй `FinishFlowTypeObject`
-///  По умолчанию `<Void, Void>`
-typealias RootCoordinatorProtocol = Coordinator<Void, Void>
-
-final class RootCoordinator: RootCoordinatorProtocol {
+final class RootCoordinator: Coordinator {
+  
+  // MARK: - Private variables
+  
+  private let window: UIWindow
+  private let navigationController = UINavigationController()
+  private var mainScreenCoordinator: Coordinator?
+  private let services: ApplicationServices = ApplicationServicesImpl()
+  
+  
+  // MARK: - Initialization
+  
+  /// - Parameter window: UIWindow
+  init(window: UIWindow) {
+    self.window = window
+  }
+  
+  // MARK: - Internal func
+  
+  func start() {
+    let mainScreenCoordinator: Coordinator = MainScreenCoordinator(navigationController,
+                                                                   services)
+    self.mainScreenCoordinator = mainScreenCoordinator
+    mainScreenCoordinator.start()
     
-    // MARK: - Private variables
-    
-    private let window: UIWindow
-    private let navigationController = UINavigationController()
-    private var mainScreenCoordinator: MainScreenCoordinatorProtocol?
-    private let services: ApplicationServices = ApplicationServicesImpl()
-    
-    
-    // MARK: - Initialization
-    
-    /// - Parameter window: UIWindow
-    init(window: UIWindow) {
-        self.window = window
-    }
-    
-    // MARK: - Internal func
-    
-    override func start(parameter: Void) {
-        let mainScreenCoordinator: MainScreenCoordinatorProtocol = MainScreenCoordinator(navigationController,
-                                                                                         services)
-        self.mainScreenCoordinator = mainScreenCoordinator
-        mainScreenCoordinator.start()
-        
-        window.makeKeyAndVisible()
-        window.rootViewController = navigationController
-    }
+    window.makeKeyAndVisible()
+    window.rootViewController = navigationController
+  }
 }

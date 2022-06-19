@@ -8,34 +8,32 @@
 
 import UIKit
 
-typealias DateTimeScreenCoordinatorProtocol = Coordinator<Void, String>
-
-final class DateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol {
-    
-    // MARK: - Private property
-    
-    private let navigationController: UINavigationController
-    private var dateTimeScreenModule: DateTimeModule?
-    
-    // MARK: - Initialization
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    // MARK: - Internal func
-    
-    override func start(parameter: Void) {
-        let dateTimeScreenModule = DateTimeAssembly().createModule()
-        self.dateTimeScreenModule = dateTimeScreenModule
-        dateTimeScreenModule.moduleOutput = self
-        navigationController.pushViewController(dateTimeScreenModule, animated: true)
-    }
+final class DateTimeScreenCoordinator: Coordinator {
+  
+  // MARK: - Private property
+  
+  private let navigationController: UINavigationController
+  private var dateTimeScreenModule: DateTimeModule?
+  
+  // MARK: - Initialization
+  
+  init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
+  
+  // MARK: - Internal func
+  
+  func start() {
+    let dateTimeScreenModule = DateTimeAssembly().createModule()
+    self.dateTimeScreenModule = dateTimeScreenModule
+    dateTimeScreenModule.moduleOutput = self
+    navigationController.pushViewController(dateTimeScreenModule, animated: true)
+  }
 }
 
 // MARK: - DateTimeModuleOutput
 
 extension DateTimeScreenCoordinator: DateTimeModuleOutput {
-    func settingButtonAction() {
-    }
+  func settingButtonAction() {
+  }
 }

@@ -18,30 +18,30 @@ import RandomNetwork
 ///
 /// Прочитать про концепцию можно в [статье](https://blog.ploeh.dk/2011/07/28/CompositionRoot/)
 protocol ApplicationServices {
-    
-    /// Сервис клавиатуры
-    var keyboardService: KeyboardService { get }
-    
-    /// Сервис по работе с сетью
-    var network: NetworkRequestPerformer { get }
-    
-    /// Сервис по работе с метриками
-    var metricsService: MetricsService { get }
+  
+  /// Сервис клавиатуры
+  var keyboardService: KeyboardService { get }
+  
+  /// Сервис по работе с сетью
+  var network: NetworkRequestPerformer { get }
+  
+  /// Сервис по работе с метриками
+  var metricsService: MetricsService { get }
 }
 
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
-    var metricsService: MetricsService {
-        MetricsServiceImpl()
-    }
-    
-    var keyboardService: KeyboardService {
-        KeyboardServiceImpl()
-    }
-    
-    var network: NetworkRequestPerformer {
-        let network: NetworkRequestPerformer = URLSessionRequestPerformer()
-        return network
-    }
+  var metricsService: MetricsService {
+    MetricsServiceImpl()
+  }
+  
+  var keyboardService: KeyboardService {
+    KeyboardServiceImpl()
+  }
+  
+  var network: NetworkRequestPerformer {
+    let network: NetworkRequestPerformer = URLSessionRequestPerformer()
+    return network
+  }
 }

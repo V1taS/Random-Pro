@@ -70,3 +70,5 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 Random Pro.xcworkspace/xcuserdata/TSSosina.xcuserdatad/UserInterfaceState.xcuserstate
 Random Pro.xcworkspace/xcuserdata/v1tas.xcuserdatad/UserInterfaceState.xcuserstate
+Random Pro.xcworkspace/xcuserdata/v1tas.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+.DS_Store

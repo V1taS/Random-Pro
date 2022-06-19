@@ -11,65 +11,65 @@ import RandomUIKit
 
 /// CollectionViewCell
 final class MainScreenCollectionViewCell: UICollectionViewCell {
+  
+  // MARK: - Internal properties
+  
+  static let reuseIdentifier = MainScreenCollectionViewCell.description()
+  
+  // MARK: - Private properties
+  
+  private let mainCardView = MainCardView()
+  
+  // MARK: - Initialization
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
     
-    // MARK: - Internal properties
-    
-    static let reuseIdentifier = MainScreenCollectionViewCell.description()
-    
-    // MARK: - Private properties
-    
-    private let mainCardView = MainCardView()
-    
-    // MARK: - Initialization
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureLayout()
-        applyDefaultBehavior()
+    configureLayout()
+    applyDefaultBehavior()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Internal func
+  
+  func configureCellWith(model: MainScreenCellModel) {
+    mainCardView.configureWith(
+      imageCard: model.imageCard,
+      titleCard: model.titleCard,
+      isShowADVLabel: model.isShowADVLabel,
+      titleADVText: model.titleADVText
+    )
+  }
+  
+  // MARK: - Private func
+  
+  private func configureLayout() {
+    [mainCardView].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      contentView.addSubview($0)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    NSLayoutConstraint.activate([
+      mainCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+      mainCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+      mainCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+      mainCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5)
+    ])
+  }
+  
+  private func applyDefaultBehavior() {
     
-    // MARK: - Internal func
-    
-    func configureCellWith(model: MainScreenCellModel) {
-        mainCardView.configureWith(
-            imageCard: model.imageCard,
-            titleCard: model.titleCard,
-            isShowADVLabel: model.isShowADVLabel,
-            titleADVText: model.titleADVText
-        )
-    }
-    
-    // MARK: - Private func
-    
-    private func configureLayout() {
-        [mainCardView].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview($0)
-        }
-        
-        NSLayoutConstraint.activate([
-            mainCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            mainCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            mainCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            mainCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5)
-        ])
-    }
-    
-    private func applyDefaultBehavior() {
-
-        backgroundColor = .white
-    }
+    backgroundColor = .white
+  }
 }
 
 // MARK: - Appearance
 
 private extension MainScreenCollectionViewCell {
-    struct Appearance {
-
-    }
+  struct Appearance {
+    
+  }
 }

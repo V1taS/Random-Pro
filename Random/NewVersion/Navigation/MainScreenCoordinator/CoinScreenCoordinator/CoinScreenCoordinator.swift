@@ -8,34 +8,32 @@
 
 import UIKit
 
-typealias CoinScreenCoordinatorProtocol = Coordinator<Void, Void>
-
-final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
-    
-    // MARK: - Private property
-    
-    private let navigationController: UINavigationController
-    private var coinScreenModule: CoinScreenModule?
-    
-    // MARK: - Initialization
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    // MARK: - Internal func
-    
-    override func start(parameter: Void) {
-        let coinScreenModule = CoinScreenAssembly().createModule()
-        self.coinScreenModule = coinScreenModule
-        coinScreenModule.moduleOutput = self
-        navigationController.pushViewController(coinScreenModule, animated: true)
-    }
+final class CoinScreenCoordinator: Coordinator {
+  
+  // MARK: - Private property
+  
+  private let navigationController: UINavigationController
+  private var coinScreenModule: CoinScreenModule?
+  
+  // MARK: - Initialization
+  
+  init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
+  
+  // MARK: - Internal func
+  
+  func start() {
+    let coinScreenModule = CoinScreenAssembly().createModule()
+    self.coinScreenModule = coinScreenModule
+    coinScreenModule.moduleOutput = self
+    navigationController.pushViewController(coinScreenModule, animated: true)
+  }
 }
 
 // MARK: - CoinScreenModuleOutput
 
 extension CoinScreenCoordinator: CoinScreenModuleOutput {
-    func settingsButtonAction() {
-    }
+  func settingsButtonAction() {
+  }
 }

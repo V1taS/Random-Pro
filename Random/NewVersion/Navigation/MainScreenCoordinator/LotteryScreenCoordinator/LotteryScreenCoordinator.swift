@@ -8,33 +8,31 @@
 
 import UIKit
 
-typealias LotteryScreenCoordinatorProtocol = Coordinator<Void, Void>
-
-final class LotteryScreenCoordinator: LotteryScreenCoordinatorProtocol {
-    
-    // MARK: - Private property
-    
-    private let navigationController: UINavigationController
-    private var lotteryScreenModule: LotteryScreenModule?
-    
-    // MARK: - Initialization
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    // MARK: - Internal func
-    
-    override func start(parameter: Void) {
-        let lotteryScreenModule = LotteryScreenAssembly().createModule()
-        self.lotteryScreenModule = lotteryScreenModule
-        lotteryScreenModule.moduleOutput = self
-        navigationController.pushViewController(lotteryScreenModule, animated: true)
-    }
+final class LotteryScreenCoordinator: Coordinator {
+  
+  // MARK: - Private property
+  
+  private let navigationController: UINavigationController
+  private var lotteryScreenModule: LotteryScreenModule?
+  
+  // MARK: - Initialization
+  
+  init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
+  
+  // MARK: - Internal func
+  
+  func start() {
+    let lotteryScreenModule = LotteryScreenAssembly().createModule()
+    self.lotteryScreenModule = lotteryScreenModule
+    lotteryScreenModule.moduleOutput = self
+    navigationController.pushViewController(lotteryScreenModule, animated: true)
+  }
 }
 
 // MARK: - LotteryScreenModuleOutput
 
 extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
-    
+  
 }

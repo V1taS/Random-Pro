@@ -8,35 +8,33 @@
 
 import UIKit
 
-typealias YesNoScreenCoordinatorProtocol = Coordinator<Void, String>
-
-final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
-
-    // MARK: - Private property
-    
-    private let navigationController: UINavigationController
-    private var yesNoScreenModule: YesNoScreenModule?
-    
-    // MARK: - Initialization
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    // MARK: - Internal func
-    
-    override func start(parameter: Void) {
-        let yesNoScreenModule = YesNoScreenAssembly().createModule()
-        self.yesNoScreenModule = yesNoScreenModule
-        yesNoScreenModule.moduleOutput = self
-        navigationController.pushViewController(yesNoScreenModule, animated: true)
-    }
+final class YesNoScreenCoordinator: Coordinator {
+  
+  // MARK: - Private property
+  
+  private let navigationController: UINavigationController
+  private var yesNoScreenModule: YesNoScreenModule?
+  
+  // MARK: - Initialization
+  
+  init(navigationController: UINavigationController) {
+    self.navigationController = navigationController
+  }
+  
+  // MARK: - Internal func
+  
+  func start() {
+    let yesNoScreenModule = YesNoScreenAssembly().createModule()
+    self.yesNoScreenModule = yesNoScreenModule
+    yesNoScreenModule.moduleOutput = self
+    navigationController.pushViewController(yesNoScreenModule, animated: true)
+  }
 }
 
 // MARK: - YesNoScreenModuleOutput
 
 extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
-    func settingButtonAction() {
-        
-    } 
+  func settingButtonAction() {
+    
+  }
 }

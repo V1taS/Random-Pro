@@ -12,7 +12,7 @@ import Foundation
 ///
 /// Пример использования
 ///
-/// `@ObjectUserDefaultsWrapper(key: "Уникальный ключ")private var object: T`
+/// `@ObjectUserDefaultsWrapper<T>(key: "Уникальный ключ")private var object: T?`
 ///
 
 /// Сгруппировали нужные протоколы
@@ -20,26 +20,26 @@ typealias ObjectUserDefaultsProtocol = Equatable & Encodable & Decodable
 
 @propertyWrapper
 struct ObjectUserDefaultsWrapper<T: ObjectUserDefaultsProtocol> {
-    
-    // MARK: - Internal property
-    
-    var wrappedValue: T? {
-        get {
-            let object: T? = UserDefaultsWrapper.object(for: key)
-            return object
-        }
-        set {
-            UserDefaultsWrapper.set(newValue, for: key)
-        }
+  
+  // MARK: - Internal property
+  
+  var wrappedValue: T? {
+    get {
+      let object: T? = UserDefaultsWrapper.object(for: key)
+      return object
     }
-    
-    // MARK: - Private property
-    
-    private let key: String
-    
-    // MARK: - Initialization
-    
-    init(key: String) {
-        self.key = key
+    set {
+      UserDefaultsWrapper.set(newValue, for: key)
     }
+  }
+  
+  // MARK: - Private property
+  
+  private let key: String
+  
+  // MARK: - Initialization
+  
+  init(key: String) {
+    self.key = key
+  }
 }

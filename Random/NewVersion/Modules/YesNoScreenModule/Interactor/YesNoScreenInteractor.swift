@@ -11,12 +11,8 @@ import UIKit
 protocol YesNoScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
-  ///  - Parameter result: результат генерации
-  func didRecive(result: String?)
-  
-  /// Возвращает список результатов
-  ///  - Parameter listResult: массив результатов
-  func didRecive(listResult: [String])
+  ///  - Parameter model: результат генерации
+  func didRecive(model: YesNoScreenModel)
 }
 
 protocol YesNoScreenInteractorInput: AnyObject {
@@ -36,23 +32,36 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var result = Appearance().result
-  private var listResult: [String] = []
+  @ObjectCustomUserDefaultsWrapper<YesNoScreenModel>(key: Appearance().keyUserDefaults)
+  private var model: YesNoScreenModel?
   
   // MARK: - Initarnal func
   
   func getContent() {
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    if let model = model {
+      output?.didRecive(model: model)
+    } else {
+      let appearance = Appearance()
+      let model = YesNoScreenModel(result: appearance.result,
+                                   listResult: [])
+      self.model = model
+      output?.didRecive(model: model)
+    }
   }
   
   func generateContent() {
-    let randomElementYesOrNo = Appearance().listAnswer.shuffled().first ?? ""
-    listResult.append(randomElementYesOrNo)
-    result = randomElementYesOrNo
+    guard let model = model else {
+      return
+    }
     
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    let randomElementYesOrNo = Appearance().listResult.shuffled().first ?? ""
+    var listResult: [String] = model.listResult
+    
+    listResult.append(randomElementYesOrNo)
+    let newModel = YesNoScreenModel(result: randomElementYesOrNo,
+                                    listResult: listResult)
+    self.model = newModel
+    output?.didRecive(model: newModel)
   }
 }
 
@@ -60,10 +69,11 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
 
 private extension YesNoScreenInteractor {
   struct Appearance {
-    let listAnswer = [
+    let listResult = [
       NSLocalizedString("Да", comment: ""),
       NSLocalizedString("Нет", comment: "")
     ]
     let result = "?"
+    let keyUserDefaults = "yes_no_screen_user_defaults_key"
   }
 }

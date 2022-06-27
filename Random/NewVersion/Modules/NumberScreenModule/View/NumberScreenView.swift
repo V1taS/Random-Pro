@@ -27,6 +27,10 @@ protocol NumberScreenViewOutput: AnyObject {
   /// - Parameters:
   ///  - text: Значение для текстового поля
   func rangeEndDidChange(_ text: String?)
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
 }
 
 protocol NumberScreenViewInput: AnyObject {
@@ -125,6 +129,9 @@ final class NumberScreenView: NumberScreenViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
+    isUserInteractionEnabled = true
+    resultLabel.isUserInteractionEnabled = true
+    
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
@@ -148,11 +155,21 @@ final class NumberScreenView: NumberScreenViewProtocol {
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
+    
+    let resultLabelTap = UITapGestureRecognizer(target: self, action: #selector(resultLabelAction))
+    resultLabelTap.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelTap)
   }
   
-  @objc private func generateButtonAction() {
+  @objc
+  private func generateButtonAction() {
     output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
                                  rangeEndValue: rangeEndTextField.text)
+  }
+  
+  @objc
+  private func resultLabelAction() {
+    output?.resultLabelAction(text: resultLabel.text)
   }
   
   private func setupConstraints() {

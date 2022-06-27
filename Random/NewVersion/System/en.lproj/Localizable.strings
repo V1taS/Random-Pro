@@ -252,3 +252,7 @@
 "Количество" = "Amount";
 "Диапазон" = "Range";
 "Диапазон чисел закончился" = "Number range ended";
+"Скопировано в буфер" = "Copied to clipboard";
+"Количество генераций" = "Number of generations";
+"Последняя генерация" = "Latest generation";
+"Список результатов" = "List of results";

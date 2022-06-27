@@ -89,6 +89,7 @@ final class NotificationServiceImpl: NotificationService {
     
     banner.dismissOnTap = true
     banner.dismissOnSwipeUp = true
+    banner.duration = 0.4
   }
   
   func showError(title: String?,
@@ -126,6 +127,7 @@ final class NotificationServiceImpl: NotificationService {
     
     banner.dismissOnTap = true
     banner.dismissOnSwipeUp = true
+    banner.duration = 0.4
   }
   
   func showWarning(title: String?,
@@ -163,5 +165,6 @@ final class NotificationServiceImpl: NotificationService {
     
     banner.dismissOnTap = true
     banner.dismissOnSwipeUp = true
+    banner.duration = 0.4
   }
 }

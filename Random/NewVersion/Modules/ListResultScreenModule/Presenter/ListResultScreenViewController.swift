@@ -67,7 +67,7 @@ final class ListResultScreenViewController: ListResultScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationController?.navigationBar.prefersLargeTitles = false
+    navigationItem.largeTitleDisplayMode = .never
   }
   
   // MARK: - Internal func

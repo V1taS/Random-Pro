@@ -67,7 +67,7 @@ final class LotteryScreenViewController: LotteryScreenModule {
   private func navigationBar() {
     let appearance = Appearance()
     
-    navigationController?.navigationBar.prefersLargeTitles = false
+    navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
                                                         style: .plain,

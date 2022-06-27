@@ -15,12 +15,39 @@ extension SettingsScreenType {
   // MARK: - YesOrNo
   
   struct YesOrNo {
-    // TODO: - 🤪
+    
+    /// Всего сгенерировано
+    let numbersGenerated: String
+    
+    /// Последний результат
+    let lastResult: String
+    
+    /// Список результатов
+    let listResult: [String]
   }
   
   // MARK: - YesOrNoCaseIterable
   
   enum YesOrNoCaseIterable: CaseIterable {
-    // TODO: - 🤪
+    
+    /// Общий список ячеек
+    static var allCases: [SettingsScreenType.YesOrNoCaseIterable] = [
+      .numbersGenerated,
+      .lastResult,
+      .listOfNumbers,
+      .cleanButton
+    ]
+    
+    /// Всего чисел сгенерировано
+    case numbersGenerated
+    
+    /// Последний результат
+    case lastResult
+    
+    /// Список результатов
+    case listOfNumbers
+    
+    /// Кнопка очистить
+    case cleanButton
   }
 }

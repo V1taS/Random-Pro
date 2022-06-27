@@ -131,6 +131,7 @@ extension SettingsScreenView: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
+    var viewCell = UITableViewCell()
     
     if let model = model as? WithoutRepetitionSettingsModel {
       let cell = tableView.dequeueReusableCell(
@@ -142,13 +143,7 @@ extension SettingsScreenView: UITableViewDataSource {
       cell.switchAction = { [weak self] isOn in
         self?.output?.withoutRepetitionAction(isOn: isOn)
       }
-      
-      if tableView.isFirst(for: indexPath) {
-        cell.layer.cornerRadius = Appearance().cornerRadius
-        cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-      }
-      
-      return cell
+      viewCell = cell
     }
     
     if let model = model as? CountGeneratedSettingsModel {
@@ -158,7 +153,7 @@ extension SettingsScreenView: UITableViewDataSource {
       
       cell.configureCellWith(primaryText: model.title,
                              secondaryText: model.countGeneratedText)
-      return cell
+      viewCell = cell
     }
     
     if let model = model as? LastObjectSettingsModel {
@@ -168,7 +163,7 @@ extension SettingsScreenView: UITableViewDataSource {
       
       cell.configureCellWith(primaryText: model.title,
                              secondaryText: model.lastObjectText)
-      return cell
+      viewCell = cell
     }
     
     if let model = model as? ListOfObjectsSettingsModel {
@@ -178,7 +173,7 @@ extension SettingsScreenView: UITableViewDataSource {
       
       cell.configureCellWith(titleText: model.title,
                              imageAside: model.asideImage)
-      return cell
+      viewCell = cell
     }
     
     if let model = model as? CleanButtonSettingsModel {
@@ -191,15 +186,21 @@ extension SettingsScreenView: UITableViewDataSource {
       }
       cell.configureCellWith(titleButton: model.title)
       
-      if tableView.isLast(for: indexPath) {
-        cell.isHiddenSeparator = true
-        cell.layer.cornerRadius = Appearance().cornerRadius
-        cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-      }
-      
-      return cell
+      viewCell = cell
     }
-    return UITableViewCell()
+    
+    if tableView.isFirst(for: indexPath) {
+      viewCell.layer.cornerRadius = Appearance().cornerRadius
+      viewCell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    if tableView.isLast(for: indexPath) {
+      viewCell.isHiddenSeparator = true
+      viewCell.layer.cornerRadius = Appearance().cornerRadius
+      viewCell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    }
+    
+    return viewCell
   }
 }
 

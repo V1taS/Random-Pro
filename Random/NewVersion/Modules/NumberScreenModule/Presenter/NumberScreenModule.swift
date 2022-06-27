@@ -20,6 +20,10 @@ protocol NumberScreenModuleOutput: AnyObject {
   
   /// Диапазон чисел закончился
   func didReciveRangeEnded()
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
 }
 
 protocol NumberScreenModuleInput: AnyObject {
@@ -96,7 +100,7 @@ final class NumberScreenViewController: NumberScreenModule {
   private func setupNavBar() {
     let appearance = Appearance()
     
-    navigationController?.navigationBar.prefersLargeTitles = false
+    navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
@@ -114,6 +118,10 @@ final class NumberScreenViewController: NumberScreenModule {
 // MARK: - NumberScreenViewOutput
 
 extension NumberScreenViewController: NumberScreenViewOutput {
+  func resultLabelAction(text: String?) {
+    factory.clearGeneration(text: text)
+  }
+  
   func rangeStartDidChange(_ text: String?) {
     interactor.rangeStartDidChange(text)
   }
@@ -131,6 +139,10 @@ extension NumberScreenViewController: NumberScreenViewOutput {
 // MARK: - NumberScreenFactoryOutput
 
 extension NumberScreenViewController: NumberScreenFactoryOutput {
+  func didClearGeneration(text: String?) {
+    moduleOutput?.resultLabelAction(text: text)
+  }
+  
   func didReverse(listResult: [String]) {
     moduleView.set(listResult: listResult)
   }

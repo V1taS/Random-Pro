@@ -80,7 +80,7 @@ final class SettingsScreenViewController: SettingsScreenModule {
     super.viewDidLoad()
     
     title = Appearance().title
-    navigationController?.navigationBar.prefersLargeTitles = false
+    navigationItem.largeTitleDisplayMode = .never
   }
   
   // MARK: - Internal func

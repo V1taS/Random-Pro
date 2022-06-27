@@ -188,6 +188,7 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 
 private extension MainScreenViewController {
   struct Appearance {
-    let title = "Random"
+//    let title = "Random"
+    let title = "Random (БЕТА)"
   }
 }

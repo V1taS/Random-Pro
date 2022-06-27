@@ -14,6 +14,8 @@ final class YesNoScreenCoordinator: Coordinator {
   
   private let navigationController: UINavigationController
   private var yesNoScreenModule: YesNoScreenModule?
+  private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
+  private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -34,7 +36,42 @@ final class YesNoScreenCoordinator: Coordinator {
 // MARK: - YesNoScreenModuleOutput
 
 extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
-  func settingButtonAction() {
+  func settingButtonAction(model: YesNoScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController: navigationController)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    
+    settingsScreenCoordinator.setupDefaultsSettings(for: .yesOrNo(.init(
+      numbersGenerated: "\(model.listResult.count)",
+      lastResult: model.result,
+      listResult: model.listResult)))
+  }
+}
+
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func withoutRepetitionAction(isOn: Bool) {
     
   }
+  
+  func cleanButtonAction() {
+    
+  }
+  
+  func listOfObjectsAction(_ list: [String]) {
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
+    self.listResultScreenCoordinator = listResultScreenCoordinator
+    self.listResultScreenCoordinator?.output = self
+    self.listResultScreenCoordinator?.start()
+    
+    listResultScreenCoordinator.setupDefaultsSettings(for: .number(list: list))
+  }
+}
+
+// MARK: - ListResultScreenCoordinatorOutput
+
+extension YesNoScreenCoordinator: ListResultScreenCoordinatorOutput {
+  
 }

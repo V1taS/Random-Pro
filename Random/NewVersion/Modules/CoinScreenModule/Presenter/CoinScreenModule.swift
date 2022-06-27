@@ -66,7 +66,7 @@ final class CoinScreenViewController: CoinScreenModule {
   private func settingNavigationBar() {
     let appearance = Appearance()
     
-    navigationController?.navigationBar.prefersLargeTitles = false
+    navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon, style: .plain,
                                                         target: self, action: #selector(settingsButtonAction))

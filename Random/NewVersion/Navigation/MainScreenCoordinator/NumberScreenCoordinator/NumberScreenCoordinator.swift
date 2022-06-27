@@ -38,6 +38,15 @@ final class NumberScreenCoordinator: Coordinator {
 // MARK: - NumberScreenModuleOutput
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
+  func resultLabelAction(text: String?) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    services.notificationService.showSuccess(
+      title: Appearance().copiedToClipboard,
+      subtitle: nil,
+      bannerPosition: .top)
+  }
+  
   func didReciveRangeEnded() {
     services.notificationService.showWarning(
       title: Appearance().numberRangeEnded,
@@ -99,5 +108,6 @@ extension NumberScreenCoordinator: ListResultScreenCoordinatorOutput {}
 private extension NumberScreenCoordinator {
   struct Appearance {
     let numberRangeEnded = NSLocalizedString("Диапазон чисел закончился", comment: "")
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
   }
 }

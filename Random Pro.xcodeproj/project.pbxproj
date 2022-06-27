@@ -34,6 +34,7 @@
 		1B1D60812602D2C500847843 /* MusicSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60802602D2C500847843 /* MusicSettingsView.swift */; };
 		1B1D60852602DE6A00847843 /* MusicHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D60842602DE6A00847843 /* MusicHistoryView.swift */; };
 		1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B225C452619E253001B9124 /* GoogleService-Info.plist */; };
+		1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */; };
 		1B2F1D46260CC18E00ADCB12 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */; };
 		1B31F604285F3B7000A88217 /* SettingsScreenNumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */; };
 		1B31F606285F3BE200A88217 /* SettingsScreenFilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */; };
@@ -376,6 +377,7 @@
 		1B1D60802602D2C500847843 /* MusicSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSettingsView.swift; sourceTree = "<group>"; };
 		1B1D60842602DE6A00847843 /* MusicHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicHistoryView.swift; sourceTree = "<group>"; };
 		1B225C452619E253001B9124 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenModel.swift; sourceTree = "<group>"; };
 		1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenNumberModel.swift; sourceTree = "<group>"; };
 		1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenFilmsModel.swift; sourceTree = "<group>"; };
@@ -725,6 +727,14 @@
 				1B1D607626023D3C00847843 /* MusicInteractor.swift */,
 			);
 			path = MusicActions;
+			sourceTree = "<group>";
+		};
+		1B250C0F286A13AC00AA7B59 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1B31F625285F923800A88217 /* ListResultScreenModule */ = {
@@ -1672,10 +1682,10 @@
 			children = (
 				1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */,
 				1B31F61D285F4E6600A88217 /* SettingsScreenModels.swift */,
+				1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */,
 				1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */,
 				1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */,
 				1B31F607285F3C1A00A88217 /* SettingsScreenTeamsModel.swift */,
-				1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */,
 				1B31F60B285F3C7F00A88217 /* SettingsScreenCharacterModel.swift */,
 				1B31F60D285F3CA000A88217 /* SettingsScreenListModel.swift */,
 				1B31F60F285F3CBC00A88217 /* SettingsScreenCoinModel.swift */,
@@ -2150,6 +2160,7 @@
 		6CE65F7C282D0CC200272D56 /* YesNoScreenModule */ = {
 			isa = PBXGroup;
 			children = (
+				1B250C0F286A13AC00AA7B59 /* Models */,
 				6CE65F81282D0D4400272D56 /* View */,
 				6CE65F80282D0D3900272D56 /* Presenter */,
 				6CE65F7F282D0D3200272D56 /* Interactor */,
@@ -2548,6 +2559,7 @@
 				1BF22F3E25D8B21A00775368 /* TeamSettingsView.swift in Sources */,
 				1B0CFAA725EF11F7000FB641 /* FilmBestHistoryView.swift in Sources */,
 				6CE65F83282D0D5600272D56 /* YesNoScreenView.swift in Sources */,
+				1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */,
 				1B92035625D18EF10094D2BE /* CellCubeOneView.swift in Sources */,
 				1B8EB61B26741DC9009016BE /* VideoCDNResult.swift in Sources */,
 				1B57F63927872C93005F220C /* PremiumSubscriptionView.swift in Sources */,
@@ -2831,7 +2843,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 71;
+				CURRENT_PROJECT_VERSION = 72;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -2842,7 +2854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 701;
+				MARKETING_VERSION = 702;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2862,7 +2874,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 71;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Random/NewVersion/System/Info.plist";
@@ -2871,7 +2883,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 701;
+				MARKETING_VERSION = 702;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

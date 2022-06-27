@@ -11,7 +11,8 @@ import UIKit
 protocol YesNoScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
-  func settingButtonAction()
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: YesNoScreenModel)
 }
 
 protocol YesNoScreenModuleInput: AnyObject {
@@ -33,6 +34,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
   private let moduleView: YesNoScreenViewProtocol
   private let interactor: YesNoScreenInteractorInput
   private let factory: YesNoScreenFactoryInput
+  private var cacheModel: YesNoScreenModel?
   
   // MARK: - Initialization
   
@@ -71,7 +73,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
   private func setupNavBar() {
     let appearance = Appearance()
     
-    navigationController?.navigationBar.prefersLargeTitles = false
+    navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
@@ -80,8 +82,12 @@ final class YesNoScreenViewController: YesNoScreenModule {
                                                         action: #selector(settingButtonAction))
   }
   
-  @objc private func settingButtonAction() {
-    moduleOutput?.settingButtonAction()
+  @objc
+  private func settingButtonAction() {
+    guard let cacheModel = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: cacheModel)
   }
 }
 
@@ -96,12 +102,10 @@ extension YesNoScreenViewController: YesNoScreenViewOutput {
 // MARK: - YesNoScreenInteractorOutput
 
 extension YesNoScreenViewController: YesNoScreenInteractorOutput {
-  func didRecive(result: String?) {
-    moduleView.set(result: result)
-  }
-  
-  func didRecive(listResult: [String]) {
-    factory.reverse(listResult: listResult)
+  func didRecive(model: YesNoScreenModel) {
+    cacheModel = model
+    moduleView.set(result: model.result)
+    factory.reverse(listResult: model.listResult)
   }
 }
 

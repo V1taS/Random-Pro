@@ -46,7 +46,8 @@ final class ListResultScreenFactory: ListResultScreenFactoryInput {
     case .number(list: let list):
       models = list
       output?.didRecive(title: appearance.numberTitle)
-    case .yesOrNo: break
+    case .yesOrNo:
+      output?.didRecive(title: appearance.numberTitle)
     case .character: break
     case .list: break
     case .coin: break
@@ -65,6 +66,6 @@ final class ListResultScreenFactory: ListResultScreenFactoryInput {
 
 private extension ListResultScreenFactory {
   struct Appearance {
-    let numberTitle = NSLocalizedString("Список чисел", comment: "")
+    let numberTitle = NSLocalizedString("Список результатов", comment: "")
   }
 }

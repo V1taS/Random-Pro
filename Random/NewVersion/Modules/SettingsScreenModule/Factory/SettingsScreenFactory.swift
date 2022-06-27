@@ -54,12 +54,12 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   countGeneratedText: result.numbersGenerated)
           models.append(model)
         case .lastNumber:
-          let model = LastObjectSettingsModel(title: appearance.lastObjectTitle,
+          let model = LastObjectSettingsModel(title: appearance.latestGeneration,
                                               lastObjectText: result.lastNumber)
           models.append(model)
         case .listOfNumbers:
           if !result.listResult.isEmpty {
-            let model = ListOfObjectsSettingsModel(title: appearance.listOfNumbersTitle,
+            let model = ListOfObjectsSettingsModel(title: appearance.numberOfGenerations,
                                                    asideImage: appearance.listOfNumbersIcon)
             models.append(model)
           }
@@ -70,7 +70,29 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       }
     case .films(_): break
     case .teams(_): break
-    case .yesOrNo(_): break
+    case .yesOrNo(let result):
+      output?.didRecive(listResult: result.listResult)
+      SettingsScreenType.YesOrNoCaseIterable.allCases.forEach { caseIterable in
+        switch caseIterable {
+        case .numbersGenerated:
+          let model = CountGeneratedSettingsModel(title: appearance.countGeneratedTitle,
+                                                  countGeneratedText: result.numbersGenerated)
+          models.append(model)
+        case .lastResult:
+          let model = LastObjectSettingsModel(title: appearance.latestGeneration,
+                                              lastObjectText: result.lastResult)
+          models.append(model)
+        case .listOfNumbers:
+          if !result.listResult.isEmpty {
+            let model = ListOfObjectsSettingsModel(title: appearance.numberOfGenerations,
+                                                   asideImage: appearance.listOfNumbersIcon)
+            models.append(model)
+          }
+        case .cleanButton:
+          let model = CleanButtonSettingsModel(title: appearance.cleanButtonTitle)
+          models.append(model)
+        }
+      }
     case .character(_): break
     case .list(_): break
     case .coin(_): break
@@ -93,13 +115,13 @@ private extension SettingsScreenFactory {
                                                    comment: "")
     let countGeneratedTitle = NSLocalizedString("Чисел сгенерировано",
                                                 comment: "")
-    let lastObjectTitle = NSLocalizedString("Последнее число",
+    let latestGeneration = NSLocalizedString("Последняя генерация",
                                             comment: "")
     let cleanButtonTitle = NSLocalizedString("Очистить",
                                              comment: "")
     let listOfNumbersIcon = UIImage(systemName: "chevron.compact.right")
     
-    let listOfNumbersTitle = NSLocalizedString("Список чисел",
-                                               comment: "")
+    let numberOfGenerations = NSLocalizedString("Список результатов",
+                                                comment: "")
   }
 }

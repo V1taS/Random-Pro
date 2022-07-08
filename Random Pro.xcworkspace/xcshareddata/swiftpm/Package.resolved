@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "notifications",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/V1taS/Notifications",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8e7920c9409992b3d13a256736c1b5fecdebf896"
+      }
+    },
+    {
       "identity" : "randomnetwork",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/V1taS/RandomNetwork.git",
@@ -15,7 +24,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "main",
-        "revision" : "1dbdb37ca3926a5a50dd56c8c69cb63e79f23c64"
+        "revision" : "bf7482e8e95d8198b25ad4bd7e427aad2239b6bf"
       }
     }
   ],

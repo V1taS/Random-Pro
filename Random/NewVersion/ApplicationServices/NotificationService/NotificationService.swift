@@ -7,164 +7,123 @@
 //
 
 import UIKit
-import RandomUIKit
-import NotificationBannerSwift
+import Notifications
 
 protocol NotificationService {
   
-  /// Показать алерт успеха
+  /// Показать позитивное уведомление
   ///  - Parameters:
-  ///   - title: Заголовок алерта
-  ///   - subtitle: Описание алерта
-  ///   - bannerPosition: Позиция алерта
-  func showSuccess(title: String?,
-                   subtitle: String?,
-                   bannerPosition: NotificationServiceImpl.BannerPosition)
+  ///   - title: Заголовок уведомления
+  ///   - glyph: Включена или выключена иконка
+  func showPositiveAlertWith(title: String,
+                             glyph: Bool)
   
-  /// Показать алерт успеха
+  /// Показать нейтральное уведомление
   ///  - Parameters:
-  ///   - title: Заголовок алерта
-  ///   - subtitle: Описание алерта
-  ///   - bannerPosition: Позиция алерта
-  func showError(title: String?,
-                 subtitle: String?,
-                 bannerPosition: NotificationServiceImpl.BannerPosition)
+  ///   - title: Заголовок уведомления
+  ///   - glyph: Включена или выключена иконка
+  func showNeutralAlertWith(title: String,
+                            glyph: Bool)
   
-  /// Показать алерт успеха
+  /// Показать негативное уведомление
   ///  - Parameters:
-  ///   - title: Заголовок алерта
-  ///   - subtitle: Описание алерта
-  ///   - bannerPosition: Позиция алерта
-  func showWarning(title: String?,
-                   subtitle: String?,
-                   bannerPosition: NotificationServiceImpl.BannerPosition)
+  ///   - title: Заголовок уведомления
+  ///   - glyph: Включена или выключена иконка
+  func showNegativeAlertWith(title: String,
+                             glyph: Bool)
+  
+  /// Показать настраиваемое уведомление
+  ///  - Parameters:
+  ///   - title: Заголовок уведомления
+  ///   - glyph: Включена или выключена иконка
+  ///   - backgroundColor: Фон уведомления
+  ///   - imageGlyph: Иконка слева
+  ///   - colorGlyph: Цвет иконки
+  func showCustomAlertWith(title: String,
+                           glyph: Bool,
+                           backgroundColor: UIColor?,
+                           imageGlyph: UIImage?,
+                           colorGlyph: UIColor?)
 }
 
 final class NotificationServiceImpl: NotificationService {
+  private let notifications = Notifications()
   
-  /// Позиция баннера
-  enum BannerPosition {
+  func showPositiveAlertWith(title: String, glyph: Bool) {
+    let appearance = Appearance()
     
-    /// Сверху
-    case top
-    
-    /// Снизу
-    case bottom
+    notifications.showAlertWith(
+      model: NotificationsModel(
+        text: title,
+        style: .positive,
+        timeout: appearance.timeout,
+        glyph: glyph,
+        throttleDelay: appearance.throttleDelay,
+        action: {}
+      )
+    )
   }
   
-  // MARK: - Internal func
-  
-  func showSuccess(title: String?,
-                   subtitle: String?,
-                   bannerPosition: NotificationServiceImpl.BannerPosition = .top) {
-    guard title != nil || subtitle != nil else {
-      return
-    }
+  func showNeutralAlertWith(title: String, glyph: Bool) {
+    let appearance = Appearance()
     
-    let bannerPosition: NotificationBannerSwift.BannerPosition = bannerPosition == .top ? .top : .bottom
-    let banner = NotificationBanner(title: title,
-                                    subtitle: subtitle,
-                                    style: .success)
-    
-    if title == nil {
-      banner.applyStyling(subtitleColor: RandomColor.primaryWhite,
-                          subtitleTextAlign: .center)
-    }
-    
-    if subtitle == nil {
-      banner.applyStyling(titleColor: RandomColor.primaryWhite,
-                          titleTextAlign: .center)
-    }
-    
-    if title != nil && subtitle != nil {
-      banner.applyStyling(titleColor: RandomColor.primaryWhite,
-                          titleTextAlign: .center,
-                          subtitleColor: RandomColor.primaryWhite,
-                          subtitleTextAlign: .center)
-    }
-    
-    banner.show(queuePosition: .back,
-                bannerPosition: bannerPosition,
-                queue: .default)
-    
-    banner.dismissOnTap = true
-    banner.dismissOnSwipeUp = true
-    banner.duration = 0.4
+    notifications.showAlertWith(
+      model: NotificationsModel(
+        text: title,
+        style: .neutral,
+        timeout: appearance.timeout,
+        glyph: glyph,
+        throttleDelay: appearance.throttleDelay,
+        action: {}
+      )
+    )
   }
   
-  func showError(title: String?,
-                 subtitle: String?,
-                 bannerPosition: NotificationServiceImpl.BannerPosition = .top) {
-    guard title != nil || subtitle != nil else {
-      return
-    }
+  func showNegativeAlertWith(title: String, glyph: Bool) {
+    let appearance = Appearance()
     
-    let bannerPosition: NotificationBannerSwift.BannerPosition = bannerPosition == .top ? .top : .bottom
-    let banner = NotificationBanner(title: title,
-                                    subtitle: subtitle,
-                                    style: .danger)
-    
-    if title == nil {
-      banner.applyStyling(subtitleColor: RandomColor.primaryWhite,
-                          subtitleTextAlign: .center)
-    }
-    
-    if subtitle == nil {
-      banner.applyStyling(titleColor: RandomColor.primaryWhite,
-                          titleTextAlign: .center)
-    }
-    
-    if title != nil && subtitle != nil {
-      banner.applyStyling(titleColor: RandomColor.primaryWhite,
-                          titleTextAlign: .center,
-                          subtitleColor: RandomColor.primaryWhite,
-                          subtitleTextAlign: .center)
-    }
-    
-    banner.show(queuePosition: .back,
-                bannerPosition: bannerPosition,
-                queue: .default)
-    
-    banner.dismissOnTap = true
-    banner.dismissOnSwipeUp = true
-    banner.duration = 0.4
+    notifications.showAlertWith(
+      model: NotificationsModel(
+        text: title,
+        style: .negative,
+        timeout: appearance.timeout,
+        glyph: glyph,
+        throttleDelay: appearance.throttleDelay,
+        action: {}
+      )
+    )
   }
   
-  func showWarning(title: String?,
-                   subtitle: String?,
-                   bannerPosition: NotificationServiceImpl.BannerPosition = .top) {
-    guard title != nil || subtitle != nil else {
-      return
-    }
+  func showCustomAlertWith(title: String,
+                           glyph: Bool,
+                           backgroundColor: UIColor?,
+                           imageGlyph: UIImage?,
+                           colorGlyph: UIColor?) {
+    let appearance = Appearance()
     
-    let bannerPosition: NotificationBannerSwift.BannerPosition = bannerPosition == .top ? .top : .bottom
-    let banner = NotificationBanner(title: title,
-                                    subtitle: subtitle,
-                                    style: .warning)
-    
-    if title == nil {
-      banner.applyStyling(subtitleColor: RandomColor.primaryWhite,
-                          subtitleTextAlign: .center)
-    }
-    
-    if subtitle == nil {
-      banner.applyStyling(titleColor: RandomColor.primaryWhite,
-                          titleTextAlign: .center)
-    }
-    
-    if title != nil && subtitle != nil {
-      banner.applyStyling(titleColor: RandomColor.primaryWhite,
-                          titleTextAlign: .center,
-                          subtitleColor: RandomColor.primaryWhite,
-                          subtitleTextAlign: .center)
-    }
-    
-    banner.show(queuePosition: .back,
-                bannerPosition: bannerPosition,
-                queue: .default)
-    
-    banner.dismissOnTap = true
-    banner.dismissOnSwipeUp = true
-    banner.duration = 0.4
+    notifications.showAlertWith(
+      model: NotificationsModel(
+        text: title,
+        style: .custom(
+          backgroundColor: backgroundColor,
+          glyph: imageGlyph,
+          colorGlyph: colorGlyph
+        ),
+        timeout: appearance.timeout,
+        glyph: glyph,
+        throttleDelay: appearance.throttleDelay,
+        action: {}
+      )
+    )
+  }
+}
+
+// MARK: - Appearance
+
+private extension NotificationServiceImpl {
+  struct Appearance {
+    let timeout: Double = 2
+    let throttleDelay: Double = 0.5
+    let systemFontSize: CGFloat = 44
   }
 }

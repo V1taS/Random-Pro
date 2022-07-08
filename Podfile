@@ -17,6 +17,5 @@ target 'Random Pro' do
   pod 'SDWebImageSwiftUI'
   pod 'SDWebImage'
   pod 'YandexMobileMetrica/Dynamic'
-  pod 'NotificationBannerSwift', '~> 3.0.0'
 
 end

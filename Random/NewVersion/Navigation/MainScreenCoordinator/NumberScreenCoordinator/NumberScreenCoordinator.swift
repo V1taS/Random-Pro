@@ -41,17 +41,13 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
   func resultLabelAction(text: String?) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-    services.notificationService.showSuccess(
-      title: Appearance().copiedToClipboard,
-      subtitle: nil,
-      bannerPosition: .top)
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true)
   }
   
   func didReciveRangeEnded() {
-    services.notificationService.showWarning(
-      title: Appearance().numberRangeEnded,
-      subtitle: nil,
-      bannerPosition: .top)
+    services.notificationService.showNeutralAlertWith(title: Appearance().numberRangeEnded,
+                                                      glyph: true)
   }
   
   func cleanButtonWasSelected(model: NumberScreenModel) {

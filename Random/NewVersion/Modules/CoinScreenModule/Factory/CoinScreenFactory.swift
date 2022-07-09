@@ -10,16 +10,16 @@ import UIKit
 
 protocol CoinScreenFactoryOutput: AnyObject {
   
-  /// Возвращает перевернутый список результатов
-  /// - Parameter listResult: массив результатов
-  func didRevarsed(listResult: [String])
+  /// Список результатов был перевернут
+  ///  - Parameter model: Модель
+  func didReverseListResult(model: CoinScreenModel)
 }
 
 protocol CoinScreenFactoryInput: AnyObject {
   
-  /// Перевернуть список результатов
-  /// - Parameter listResult: массов результатов
-  func revers(listResult: [String])
+  /// Переворачивает список результатов
+  ///  - Parameter model: Модель
+  func reverseListResultFrom(model: CoinScreenModel)
 }
 
 final class CoinScreenFactory: CoinScreenFactoryInput {
@@ -30,7 +30,12 @@ final class CoinScreenFactory: CoinScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func revers(listResult: [String]) {
-    output?.didRevarsed(listResult: listResult.reversed())
+  func reverseListResultFrom(model: CoinScreenModel) {
+    let newModel = CoinScreenModel(
+      result: model.result,
+      сoinType: model.сoinType,
+      listResult: model.listResult.reversed()
+    )
+    output?.didReverseListResult(model: newModel)
   }
 }

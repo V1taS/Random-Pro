@@ -17,18 +17,9 @@ protocol CoinScreenViewOutput: AnyObject {
 
 protocol CoinScreenViewInput: AnyObject {
   
-  /// Устанавливает результат генерации
-  /// - Parameter result: результат генерации
-  func setName(result: String)
-  
-  /// Устанавливает список результатов генерации
-  /// - Parameter listResult: готовый список результатов
-  func set(listResult: [String])
-  
-  /// Устанавливает картинку генерации
-  /// - Parameter resultImage: результат генерации
-  
-  func setImage(resultImage: UIImage?)
+  /// Обновить контент
+  /// - Parameter model: Модель
+  func updateContentWith(model: CoinScreenModel)
 }
 
 typealias CoinScreenViewProtocol = UIView & CoinScreenViewInput
@@ -60,16 +51,17 @@ final class CoinScreenView: CoinScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func setName(result: String) {
-    resultLabel.text = result
-  }
-  
-  func set(listResult: [String]) {
-    scrollResult.listLabels = listResult
-  }
-  
-  func setImage(resultImage: UIImage?) {
-    coinImageView.image = resultImage
+  func updateContentWith(model: CoinScreenModel) {
+    resultLabel.text = model.result
+    scrollResult.listLabels = model.listResult
+    
+    if model.сoinType != .none {
+      let appearance = Appearance()
+      let image = model.сoinType == .eagle ? appearance.eagle : appearance.tails
+      coinImageView.image = image.withTintColor(RandomColor.primaryGray).withRenderingMode(.alwaysOriginal)
+    } else {
+      coinImageView.image = nil
+    }
   }
   
   // MARK: - Private func
@@ -86,7 +78,8 @@ final class CoinScreenView: CoinScreenViewProtocol {
     coinImageView.layer.cornerRadius = appearance.cornerRadius
   }
   
-  @objc private func generateButtonAction() {
+  @objc
+  private func generateButtonAction() {
     output?.generateButtonAction()
   }
   
@@ -134,5 +127,8 @@ private extension CoinScreenView {
     let lessVirticalSize: CGFloat = 8
     let height: CGFloat = 200
     let width: CGFloat = 200
+    
+    let eagle = UIImage(systemName: "b.circle.fill") ?? UIImage()
+    let tails = UIImage(systemName: "b.circle") ?? UIImage()
   }
 }

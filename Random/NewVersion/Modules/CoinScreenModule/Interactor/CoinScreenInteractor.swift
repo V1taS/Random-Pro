@@ -10,17 +10,13 @@ import UIKit
 
 protocol CoinScreenInteractorOutput: AnyObject {
   
-  /// Данные были получены
-  /// - Parameter result: результат генерации
-  func didReciveName(result: String)
+  /// Были получены данные
+  ///  - Parameter model: результат генерации
+  func didRecive(model: CoinScreenModel)
   
-  /// Данные были получены
-  /// - Parameter result: результат генерации
-  func didReciveImage(result: UIImage?)
-  
-  /// Возвращает список результатов
-  /// - Parameter listResult: список генераций
-  func didRecive(listResult: [String])
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: CoinScreenModel)
 }
 
 protocol CoinScreenInteractorInput: AnyObject {
@@ -30,42 +26,74 @@ protocol CoinScreenInteractorInput: AnyObject {
   
   /// Создать новые данные генерации
   func generateContentCoin()
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
 }
 
 final class CoinScreenInteractor: CoinScreenInteractorInput {
-  
+
   // MARK: - Internal property
   
   weak var output: CoinScreenInteractorOutput?
   
   // MARK: - Private property
   
-  private var resultName = Appearance().resultName
-  private var resultImage: UIImage?
-  private var listResult: [String] = []
+  @ObjectCustomUserDefaultsWrapper<CoinScreenModel>(key: Appearance().keyUserDefaults)
+  private var model: CoinScreenModel?
   
   // MARK: - Internal func
   
+  func cleanButtonAction() {
+    model = nil
+    getContent()
+    guard let model = model else { return }
+    output?.cleanButtonWasSelected(model: model)
+  }
+  
   func getContent() {
-    output?.didRecive(listResult: listResult)
-    output?.didReciveName(result: resultName)
-    output?.didReciveImage(result: resultImage)
+    configureModel()
   }
   
   func generateContentCoin() {
     let appearance = Appearance()
+    guard let model = model else {
+      return
+    }
     
     let randonIndex = Int.random(in: 0...1)
-    let randomImage = appearance.imagesCoin[randonIndex]
     let randomName = appearance.namesCoin[randonIndex]
+    let сoinType: CoinScreenModel.CoinType = randonIndex == .zero ? .eagle : .tails
     
-    resultName = randomName
-    resultImage = randomImage
+    var listResult = model.listResult
     listResult.append(randomName)
     
-    output?.didRecive(listResult: listResult)
-    output?.didReciveName(result: resultName)
-    output?.didReciveImage(result: resultImage)
+    let newModel = CoinScreenModel(
+      result: randomName,
+      сoinType: сoinType,
+      listResult: listResult
+    )
+    
+    self.model = newModel
+    output?.didRecive(model: newModel)
+  }
+}
+
+// MARK: - Private
+
+private extension CoinScreenInteractor {
+  func configureModel(withWithoutRepetition isOn: Bool = false) {
+    if let model = model {
+      output?.didRecive(model: model)
+    } else {
+      let model = CoinScreenModel(
+        result: Appearance().resultName,
+        сoinType: .none,
+        listResult: []
+      )
+      self.model = model
+      output?.didRecive(model: model)
+    }
   }
 }
 
@@ -74,14 +102,10 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
 private extension CoinScreenInteractor {
   struct Appearance {
     let resultName = "?"
-    let imagesCoin = [
-      UIImage(named: "eagleNew") ?? UIImage(),
-      UIImage(named: "tailsNew") ?? UIImage()
-    ]
-    
     let namesCoin = [
       NSLocalizedString("Орел", comment: ""),
       NSLocalizedString("Решка", comment: "")
     ]
+    let keyUserDefaults = "coin_screen_user_defaults_key"
   }
 }

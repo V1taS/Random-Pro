@@ -24,6 +24,9 @@ protocol NumberScreenModuleOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
   func resultLabelAction(text: String?)
+  
+  /// Неправильный диапазон чисел
+  func didReciveRangeError()
 }
 
 protocol NumberScreenModuleInput: AnyObject {
@@ -151,6 +154,10 @@ extension NumberScreenViewController: NumberScreenFactoryOutput {
 // MARK: - NumberScreenInteractorOutput
 
 extension NumberScreenViewController: NumberScreenInteractorOutput {
+  func didReciveRangeError() {
+    moduleOutput?.didReciveRangeError()
+  }
+  
   func didReciveRangeEnded() {
     moduleOutput?.didReciveRangeEnded()
   }

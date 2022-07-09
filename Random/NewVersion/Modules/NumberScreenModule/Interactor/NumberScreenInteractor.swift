@@ -28,6 +28,9 @@ protocol NumberScreenInteractorOutput: AnyObject {
   
   /// Диапазон чисел закончился
   func didReciveRangeEnded()
+  
+  /// Неправильный диапазон чисел
+  func didReciveRangeError()
 }
 
 protocol NumberScreenInteractorInput: AnyObject {
@@ -111,7 +114,10 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
     let rangeEndValue = (secondTextFieldValue ?? "").replacingOccurrences(of: appearance.withoutSpaces, with: "")
     let rangeEndValueNum = Int(rangeEndValue) ?? .zero
     
-    guard rangeStartValueNum < rangeEndValueNum else { return }
+    guard rangeStartValueNum < rangeEndValueNum else {
+      output?.didReciveRangeError()
+      return
+    }
     let randomNumber = Int.random(in: rangeStartValueNum...rangeEndValueNum)
     var listResult: [String] = []
     

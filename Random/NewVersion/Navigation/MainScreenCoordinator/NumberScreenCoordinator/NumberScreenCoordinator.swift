@@ -38,6 +38,11 @@ final class NumberScreenCoordinator: Coordinator {
 // MARK: - NumberScreenModuleOutput
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
+  func didReciveRangeError() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
+                                                       glyph: true)
+  }
+  
   func resultLabelAction(text: String?) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -94,6 +99,7 @@ extension NumberScreenCoordinator: ListResultScreenCoordinatorOutput {}
 private extension NumberScreenCoordinator {
   struct Appearance {
     let numberRangeEnded = NSLocalizedString("Диапазон чисел закончился", comment: "")
+    let numberRangeError = NSLocalizedString("Неверно задан диапазон", comment: "")
     let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
   }
 }

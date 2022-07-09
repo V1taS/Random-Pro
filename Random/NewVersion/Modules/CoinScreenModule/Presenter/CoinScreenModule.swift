@@ -3,7 +3,7 @@
 //  Random Pro
 //
 //  Created by Tatiana Sosina on 17.05.2022.
-//  Copyright © 2022 Sosin.bet. All rights reserved.
+//  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
 import UIKit
@@ -11,10 +11,18 @@ import UIKit
 protocol CoinScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
-  func settingsButtonAction()
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: CoinScreenModel)
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: CoinScreenModel)
 }
 
 protocol CoinScreenModuleInput: AnyObject {
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
   
   var moduleOutput: CoinScreenModuleOutput? { get set }
 }
@@ -32,6 +40,7 @@ final class CoinScreenViewController: CoinScreenModule {
   private let moduleView: CoinScreenViewProtocol
   private let interactor: CoinScreenInteractorInput
   private let factory: CoinScreenFactoryInput
+  private var cacheModel: CoinScreenModel?
   
   // MARK: - Initialization
   
@@ -61,6 +70,10 @@ final class CoinScreenViewController: CoinScreenModule {
     settingNavigationBar()
   }
   
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
+  }
+  
   // MARK: - Private func
   
   private func settingNavigationBar() {
@@ -72,7 +85,12 @@ final class CoinScreenViewController: CoinScreenModule {
                                                         target: self, action: #selector(settingsButtonAction))
   }
   
-  @objc private func settingsButtonAction() {
+  @objc
+  private func settingsButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
@@ -87,24 +105,22 @@ extension CoinScreenViewController: CoinScreenViewOutput {
 // MARK: - CoinScreenInteractorOutput
 
 extension CoinScreenViewController: CoinScreenInteractorOutput {
-  func didReciveName(result: String) {
-    moduleView.setName(result: result)
+  func cleanButtonWasSelected(model: CoinScreenModel) {
+    cacheModel = model
+    moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didReciveImage(result: UIImage?) {
-    moduleView.setImage(resultImage: result)
-  }
-  
-  func didRecive(listResult: [String]) {
-    factory.revers(listResult: listResult)
+  func didRecive(model: CoinScreenModel) {
+    cacheModel = model
+    factory.reverseListResultFrom(model: model)
   }
 }
 
 // MARK: - CoinScreenFactoryOutput
 
 extension CoinScreenViewController: CoinScreenFactoryOutput {
-  func didRevarsed(listResult: [String]) {
-    moduleView.set(listResult: listResult)
+  func didReverseListResult(model: CoinScreenModel) {
+    moduleView.updateContentWith(model: model)
   }
 }
 

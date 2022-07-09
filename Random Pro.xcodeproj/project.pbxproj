@@ -289,6 +289,7 @@
 		6C1A0CBE2834EA4800A3040E /* LotteryScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBD2834EA4800A3040E /* LotteryScreenFactory.swift */; };
 		6C1A0CC02834EA7800A3040E /* LotteryScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBF2834EA7800A3040E /* LotteryScreenAssembly.swift */; };
 		6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CC22834EC2E00A3040E /* LotteryScreenCoordinator.swift */; };
+		6C7662C8287A34D10069C13E /* CoinScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7662C7287A34D10069C13E /* CoinScreenModel.swift */; };
 		6C7D4D45282E556400A086BC /* DateTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D44282E556400A086BC /* DateTimeView.swift */; };
 		6C7D4D47282E557100A086BC /* DateTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D46282E557100A086BC /* DateTimeViewController.swift */; };
 		6C7D4D49282E557B00A086BC /* DateTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D48282E557B00A086BC /* DateTimeInteractor.swift */; };
@@ -319,7 +320,7 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
-		EB724EAB29CBA451A392DD67 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F46EDA5F3B370F86566F5E2 /* Pods_Random_Pro.framework */; };
+		C85C46CB0DF86D308EAB08A0 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC1246CD7EDEEDEA82664D4F /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -616,14 +617,14 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		1F46EDA5F3B370F86566F5E2 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6537964FBB3FC89D2B06F8D2 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		486B82ADBEA23DEFC7D50D19 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
 		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
 		6C1A0CBD2834EA4800A3040E /* LotteryScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenFactory.swift; sourceTree = "<group>"; };
 		6C1A0CBF2834EA7800A3040E /* LotteryScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenAssembly.swift; sourceTree = "<group>"; };
 		6C1A0CC22834EC2E00A3040E /* LotteryScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenCoordinator.swift; sourceTree = "<group>"; };
+		6C7662C7287A34D10069C13E /* CoinScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenModel.swift; sourceTree = "<group>"; };
 		6C7D4D44282E556400A086BC /* DateTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeView.swift; sourceTree = "<group>"; };
 		6C7D4D46282E557100A086BC /* DateTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeViewController.swift; sourceTree = "<group>"; };
 		6C7D4D48282E557B00A086BC /* DateTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeInteractor.swift; sourceTree = "<group>"; };
@@ -654,7 +655,8 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
-		F29BB1EB21AC9F8D4FEA505A /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		B99B8A0417717A32F183B2DA /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		BC1246CD7EDEEDEA82664D4F /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -669,7 +671,7 @@
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				EB724EAB29CBA451A392DD67 /* Pods_Random_Pro.framework in Frameworks */,
+				C85C46CB0DF86D308EAB08A0 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,7 +854,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				1F46EDA5F3B370F86566F5E2 /* Pods_Random_Pro.framework */,
+				BC1246CD7EDEEDEA82664D4F /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1431,7 +1433,6 @@
 			children = (
 				1B96E0E8282046BB00A23880 /* System */,
 				1B96E0E7282046B100A23880 /* Modules */,
-				1B96E0E62820469B00A23880 /* Extensions */,
 				1B96E0E52820468A00A23880 /* ApplicationServices */,
 				1B96E0E42820467C00A23880 /* Navigation */,
 			);
@@ -1459,13 +1460,6 @@
 				1B941DD42821757C00D968DF /* KeyboardService */,
 			);
 			path = ApplicationServices;
-			sourceTree = "<group>";
-		};
-		1B96E0E62820469B00A23880 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		1B96E0E7282046B100A23880 /* Modules */ = {
@@ -1799,8 +1793,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F29BB1EB21AC9F8D4FEA505A /* Pods-Random Pro.debug.xcconfig */,
-				6537964FBB3FC89D2B06F8D2 /* Pods-Random Pro.release.xcconfig */,
+				B99B8A0417717A32F183B2DA /* Pods-Random Pro.debug.xcconfig */,
+				486B82ADBEA23DEFC7D50D19 /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1863,6 +1857,14 @@
 				6C1A0CC22834EC2E00A3040E /* LotteryScreenCoordinator.swift */,
 			);
 			path = LotteryScreenCoordinator;
+			sourceTree = "<group>";
+		};
+		6C7662C6287A34B20069C13E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6C7662C7287A34D10069C13E /* CoinScreenModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		6C7D4D3E282E54FB00A086BC /* DateTimeScreenModule */ = {
@@ -1928,6 +1930,7 @@
 		6C98CBC628339E8700D2E4FA /* CoinScreenModule */ = {
 			isa = PBXGroup;
 			children = (
+				6C7662C6287A34B20069C13E /* Models */,
 				6C98CBCB28339EAB00D2E4FA /* View */,
 				6C98CBCA28339EA500D2E4FA /* Presenter */,
 				6C98CBC928339E9F00D2E4FA /* Interactor */,
@@ -2183,13 +2186,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				02C1388523B43EEFC18A5A08 /* [CP] Check Pods Manifest.lock */,
+				31BDC46D193CB79C99188AB9 /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				4E78C741F709DD8904AE460C /* [CP] Embed Pods Frameworks */,
+				4571736294AFEACE7F08D631 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2213,7 +2216,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = Sosin.bet;
+				ORGANIZATIONNAME = SosinVitalii.com;
 				TargetAttributes = {
 					1B7F666C25D0856300933AD6 = {
 						CreatedOnToolsVersion = 12.4;
@@ -2269,7 +2272,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02C1388523B43EEFC18A5A08 /* [CP] Check Pods Manifest.lock */ = {
+		1B225C582619E472001B9124 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+			showEnvVarsInLog = 0;
+		};
+		31BDC46D193CB79C99188AB9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2291,27 +2314,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1B225C582619E472001B9124 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "
-";
-			showEnvVarsInLog = 0;
-		};
-		4E78C741F709DD8904AE460C /* [CP] Embed Pods Frameworks */ = {
+		4571736294AFEACE7F08D631 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2602,6 +2605,7 @@
 				1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */,
 				6C1A0CC02834EA7800A3040E /* LotteryScreenAssembly.swift in Sources */,
 				1B96E0F32820483F00A23880 /* MainScreenView.swift in Sources */,
+				6C7662C8287A34D10069C13E /* CoinScreenModel.swift in Sources */,
 				6C9A9EF4282922A000962062 /* NumberScreenInteractor.swift in Sources */,
 				1B57F64F2788B7F7005F220C /* CategoriesNewView.swift in Sources */,
 				6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */,
@@ -2784,7 +2788,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F29BB1EB21AC9F8D4FEA505A /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = B99B8A0417717A32F183B2DA /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2815,7 +2819,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6537964FBB3FC89D2B06F8D2 /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = 486B82ADBEA23DEFC7D50D19 /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

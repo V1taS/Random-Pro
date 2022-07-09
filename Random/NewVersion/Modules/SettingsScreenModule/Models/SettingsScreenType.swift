@@ -3,7 +3,7 @@
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 23.05.2022.
-//  Copyright © 2022 Sosin.bet. All rights reserved.
+//  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
 import Foundation
@@ -18,7 +18,7 @@ enum SettingsScreenType {
     switch self {
     case .number, .letter:
       return [.withoutRepetition, .itemsGenerated, .lastItem, .listOfItems, .cleanButton]
-    case .yesOrNo:
+    case .yesOrNo, .coin:
       return [.itemsGenerated, .lastItem, .listOfItems, .cleanButton]
     default: return []
     }

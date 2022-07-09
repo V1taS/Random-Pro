@@ -3,7 +3,7 @@
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 02.05.2022.
-//  Copyright © 2022 Sosin.bet. All rights reserved.
+//  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
 import UIKit
@@ -26,11 +26,11 @@ struct MainScreenCellModel {
     static var allCases: [MainScreenCellModel.MainScreenCell] = [
       .films(advLabel: .none),
       .teams(advLabel: .none),
-      .number(advLabel: .new),
-      .yesOrNo(advLabel: .hit),
+      .number(advLabel: .premium),
+      .yesOrNo(advLabel: .premium),
       .letter(advLabel: .premium),
       .list(advLabel: .none),
-      .coin(advLabel: .none),
+      .coin(advLabel: .premium),
       .cube(advLabel: .none),
       .dateAndTime(advLabel: .none),
       .lottery(advLabel: .none),

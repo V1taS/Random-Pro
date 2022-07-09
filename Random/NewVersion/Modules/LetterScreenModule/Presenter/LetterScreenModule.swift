@@ -10,9 +10,26 @@ import UIKit
 
 protocol LetterScreenModuleOutput: AnyObject {
   
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: LetterScreenModel)
+  
+  /// Диапазон чисел закончился
+  func didReciveRangeEnded()
+  
+  /// Была нажата кнопка (настройки)
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: LetterScreenModel)
 }
 
 protocol LetterScreenModuleInput: AnyObject {
+  
+  /// Событие, без повторений
+  /// - Parameter isOn: Без повторений `true` или `false`
+  func withoutRepetitionAction(isOn: Bool)
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: LetterScreenModuleOutput? { get set }
@@ -21,7 +38,7 @@ protocol LetterScreenModuleInput: AnyObject {
 typealias LetterScreenModule = UIViewController & LetterScreenModuleInput
 
 final class LetterScreenViewController: LetterScreenModule {
-  
+
   // MARK: - Internal property
   
   weak var moduleOutput: LetterScreenModuleOutput?
@@ -31,6 +48,7 @@ final class LetterScreenViewController: LetterScreenModule {
   private let moduleView: LetterScreenViewProtocol
   private let interactor: LetterScreenInteractorInput
   private let factory: LetterScreenFactoryInput
+  private var cacheModel: LetterScreenModel?
   
   // MARK: - Initialization
   
@@ -60,6 +78,14 @@ final class LetterScreenViewController: LetterScreenModule {
     interactor.getContent()
   }
   
+  func withoutRepetitionAction(isOn: Bool) {
+    interactor.withoutRepetitionAction(isOn: isOn)
+  }
+  
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
+  }
+  
   // MARK: - Private func
   
   private func navigationBar() {
@@ -73,7 +99,12 @@ final class LetterScreenViewController: LetterScreenModule {
                                                         action: #selector(settingButtonAction))
   }
   
-  @objc private func settingButtonAction() {
+  @objc
+  private func settingButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
@@ -92,20 +123,26 @@ extension LetterScreenViewController: LetterScreenViewOutput {
 // MARK: - LetterScreenInteractorOutput
 
 extension LetterScreenViewController: LetterScreenInteractorOutput {
-  func didRecive(result: String?) {
-    moduleView.set(result: result)
+  func cleanButtonWasSelected(model: LetterScreenModel) {
+    cacheModel = model
+    moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(listResult: [String]) {
-    factory.resive(listResult: listResult)
+  func didRecive(model: LetterScreenModel) {
+    cacheModel = model
+    factory.reverseListResultFrom(model: model)
+  }
+  
+  func didReciveRangeEnded() {
+    moduleOutput?.didReciveRangeEnded()
   }
 }
 
 // MARK: - LetterScreenFactoryOutput
 
 extension LetterScreenViewController: LetterScreenFactoryOutput {
-  func didReverse(listResult: [String]) {
-    moduleView.set(listResult: listResult)
+  func didReverseListResult(model: LetterScreenModel) {
+    moduleView.updateContentWith(model: model)
   }
 }
 

@@ -17,8 +17,8 @@ protocol ListResultScreenViewOutput: AnyObject {
 protocol ListResultScreenViewInput: AnyObject {
   
   /// Обновить контент
-  ///  - Parameter models: Массив моделек
-  func updateContentWith(models: [Any])
+  ///  - Parameter list: Список результатов
+  func updateContentWith(list: [String])
 }
 
 /// Псевдоним протокола UIView & ListResultScreenViewInput
@@ -34,7 +34,7 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
   // MARK: - Private properties
   
   private let tableView = UITableView()
-  private var models: [Any] = []
+  private var list: [String] = []
   
   // MARK: - Initialization
   
@@ -51,8 +51,8 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(models: [Any]) {
-    self.models = models
+  func updateContentWith(list: [String]) {
+    self.list = list
     tableView.reloadData()
   }
   
@@ -101,36 +101,30 @@ extension ListResultScreenView: UITableViewDelegate {}
 
 extension ListResultScreenView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    models.count
+    list.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let model = models[indexPath.row]
-    var viewCell = UITableViewCell()
+    let result = list[indexPath.row]
+    let cell = tableView.dequeueReusableCell(
+      withIdentifier: CustomTextCell.reuseIdentifier
+    ) as! CustomTextCell
     
-    if let text = model as? String {
-      let cell = tableView.dequeueReusableCell(
-        withIdentifier: CustomTextCell.reuseIdentifier
-      ) as! CustomTextCell
-      
-      cell.configureCellWith(titleText: text,
-                             textColor: RandomColor.primaryGray,
-                             textAlignment: .center)
-      viewCell = cell
-    }
+    cell.configureCellWith(titleText: result,
+                           textColor: RandomColor.primaryGray,
+                           textAlignment: .center)
     
     if tableView.isFirst(for: indexPath) {
-      viewCell.layer.cornerRadius = Appearance().cornerRadius
-      viewCell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+      cell.layer.cornerRadius = Appearance().cornerRadius
+      cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     if tableView.isLast(for: indexPath) {
-      viewCell.isHiddenSeparator = true
-      viewCell.layer.cornerRadius = Appearance().cornerRadius
-      viewCell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+      cell.isHiddenSeparator = true
+      cell.layer.cornerRadius = Appearance().cornerRadius
+      cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
-    
-    return viewCell
+    return cell
   }
 }
 

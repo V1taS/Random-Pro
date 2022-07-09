@@ -151,7 +151,7 @@ extension MainScreenView: UICollectionViewDelegate {
       output?.openTeams()
     case .yesOrNo:
       output?.openYesOrNo()
-    case .character:
+    case .letter:
       output?.openCharacter()
     case .list:
       output?.openList()

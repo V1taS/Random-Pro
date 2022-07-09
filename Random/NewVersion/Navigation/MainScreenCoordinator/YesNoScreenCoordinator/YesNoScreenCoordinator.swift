@@ -66,7 +66,7 @@ extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setupDefaultsSettings(for: .number(list: list))
+    listResultScreenCoordinator.setContentsFrom(list: list)
   }
 }
 

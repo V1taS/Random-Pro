@@ -15,9 +15,9 @@ protocol ListResultScreenModuleOutput: AnyObject {
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol ListResultScreenModuleInput {
   
-  /// Установить настройки по умолчанию
-  ///  - Parameter typeObject: Тип отображаемого контента
-  func setupDefaultsSettings(for typeObject: ListResultScreenType)
+  /// Установить список результатов
+  ///  - Parameter list: Список результатов
+  func setContentsFrom(list: [String])
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: ListResultScreenModuleOutput? { get set }
@@ -67,44 +67,34 @@ final class ListResultScreenViewController: ListResultScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    title = Appearance().title
     navigationItem.largeTitleDisplayMode = .never
   }
   
   // MARK: - Internal func
   
-  func setupDefaultsSettings(for typeObject: ListResultScreenType) {
-    factory.getContent(from: typeObject)
+  func setContentsFrom(list: [String]) {
+    moduleView.updateContentWith(list: list)
   }
 }
 
 // MARK: - ListResultScreenViewOutput
 
-extension ListResultScreenViewController: ListResultScreenViewOutput {
-  
-}
+extension ListResultScreenViewController: ListResultScreenViewOutput {}
 
 // MARK: - ListResultScreenInteractorOutput
 
-extension ListResultScreenViewController: ListResultScreenInteractorOutput {
-  
-}
+extension ListResultScreenViewController: ListResultScreenInteractorOutput {}
 
 // MARK: - ListResultScreenFactoryOutput
 
-extension ListResultScreenViewController: ListResultScreenFactoryOutput {
-  func didRecive(title: String) {
-    self.title = title
-  }
-  
-  func didRecive(models: [Any]) {
-    moduleView.updateContentWith(models: models)
-  }
-}
+extension ListResultScreenViewController: ListResultScreenFactoryOutput {}
 
 // MARK: - Appearance
 
 private extension ListResultScreenViewController {
   struct Appearance {
-    
+    let title = NSLocalizedString("Список результатов", comment: "")
   }
 }

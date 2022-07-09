@@ -16,7 +16,7 @@ enum SettingsScreenType {
   
   var allCasesIterable: [SettingsScreenType.AllCasesIterable] {
     switch self {
-    case .number:
+    case .number, .letter:
       return [.withoutRepetition, .itemsGenerated, .lastItem, .listOfItems, .cleanButton]
     case .yesOrNo:
       return [.itemsGenerated, .lastItem, .listOfItems, .cleanButton]
@@ -39,7 +39,7 @@ enum SettingsScreenType {
   case yesOrNo(SettingsScreenModel)
   
   /// Раздел: `Буква`
-  case character(SettingsScreenModel)
+  case letter(SettingsScreenModel)
   
   /// Раздел: `Список`
   case list(SettingsScreenModel)

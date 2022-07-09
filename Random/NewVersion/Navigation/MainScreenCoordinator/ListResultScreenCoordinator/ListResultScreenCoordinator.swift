@@ -11,9 +11,9 @@ protocol ListResultScreenCoordinatorOutput: AnyObject { }
 
 protocol ListResultScreenCoordinatorInput {
   
-  /// Установить настройки по умолчанию
-  ///  - Parameter typeObject: Тип отображаемого контента
-  func setupDefaultsSettings(for typeObject: ListResultScreenType)
+  /// Установить список результатов
+  ///  - Parameter list: Список результатов
+  func setContentsFrom(list: [String])
   
   /// События которые отправляем из `текущего координатора` в  `другой координатор`
   var output: ListResultScreenCoordinatorOutput? { get set }
@@ -52,7 +52,7 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
 // MARK: - SettingsScreenCoordinatorInput
 
 extension ListResultScreenCoordinator {
-  func setupDefaultsSettings(for typeObject: ListResultScreenType) {
-    listResultScreenModule?.setupDefaultsSettings(for: typeObject)
+  func setContentsFrom(list: [String]) {
+    listResultScreenModule?.setContentsFrom(list: list)
   }
 }

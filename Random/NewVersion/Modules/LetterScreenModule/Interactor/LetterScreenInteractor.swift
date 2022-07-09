@@ -10,16 +10,26 @@ import UIKit
 
 protocol LetterScreenInteractorOutput: AnyObject {
   
-  /// Данные были получены
-  /// - Parameter result: результат генерации
-  func didRecive(result: String?)
+  /// Были получены данные
+  ///  - Parameter model: результат генерации
+  func didRecive(model: LetterScreenModel)
   
-  /// Возвращает перевернутый список результатов
-  /// - Parameter listResult: список генераций
-  func didRecive(listResult: [String])
+  /// Диапазон букв закончился
+  func didReciveRangeEnded()
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: LetterScreenModel)
 }
 
 protocol LetterScreenInteractorInput: AnyObject {
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
+  
+  /// Событие, без повторений
+  /// - Parameter isOn: Без повторений `true` или `false`
+  func withoutRepetitionAction(isOn: Bool)
   
   /// Получить данные
   func getContent()
@@ -39,32 +49,151 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var result = Appearance().result
-  private var listResult: [String] = []
+  @ObjectCustomUserDefaultsWrapper<LetterScreenModel>(key: Appearance().keyUserDefaults)
+  private var model: LetterScreenModel?
   
   // MARK: - Internal func
   
+  func cleanButtonAction() {
+    model = nil
+    getContent()
+    guard let model = model else { return }
+    output?.cleanButtonWasSelected(model: model)
+  }
+  
+  func withoutRepetitionAction(isOn: Bool) {
+    guard let model = model else {
+      configureModel(withWithoutRepetition: isOn)
+      return
+    }
+    
+    let modelNew = LetterScreenModel(
+      result: model.result,
+      listResult: model.listResult,
+      isEnabledWithoutRepetition: isOn,
+      languageIndexSegmented: model.languageIndexSegmented
+    )
+    self.model = modelNew
+    getContent()
+  }
+  
   func getContent() {
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    configureModel()
   }
   
   func generateContentRusLetter() {
-    let russianLetter = Appearance().listRussionLetter.shuffled().first ?? ""
-    listResult.append(russianLetter)
-    result = russianLetter
+    let appearance = Appearance()
+    guard let model = model else {
+      configureModel()
+      return
+    }
     
-    output?.didRecive(listResult: listResult)
-    output?.didRecive(result: result)
+    if model.isEnabledWithoutRepetition {
+      guard let newModel = generateContentWithoutRepetitionWith(
+        model: model,
+        listLetter: appearance.listRussionLetter,
+        languageIndexSegmented: appearance.rusControl
+      ) else {
+        configureModel()
+        return
+      }
+      self.model = newModel
+      output?.didRecive(model: newModel)
+    } else {
+      let newModel = generateRandomContent(model: model,
+                                           listLetter: Appearance().listRussionLetter,
+                                           languageIndexSegmented: appearance.rusControl)
+      self.model = newModel
+      output?.didRecive(model: newModel)
+    }
   }
   
   func generateContentEngLetter() {
-    let englishLetter = Appearance().listEnglishLetter.shuffled().first ?? ""
-    listResult.append(englishLetter)
-    result = englishLetter
+    let appearance = Appearance()
+    guard let model = model else {
+      assertionFailure("Неудалось получить модель")
+      configureModel()
+      return
+    }
     
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    if model.isEnabledWithoutRepetition {
+      guard let newModel = generateContentWithoutRepetitionWith(
+        model: model,
+        listLetter: appearance.listEnglishLetter,
+        languageIndexSegmented: appearance.engControl
+      ) else {
+        assertionFailure("Неудалось получить модель")
+        configureModel()
+        return
+      }
+      self.model = newModel
+      output?.didRecive(model: newModel)
+    } else {
+      let newModel = generateRandomContent(model: model,
+                                           listLetter: Appearance().listEnglishLetter,
+                                           languageIndexSegmented: appearance.engControl)
+      self.model = newModel
+      output?.didRecive(model: newModel)
+    }
+  }
+}
+
+// MARK: - Private
+
+private extension LetterScreenInteractor {
+  func configureModel(withWithoutRepetition isOn: Bool = false) {
+    if let model = model {
+      output?.didRecive(model: model)
+    } else {
+      let appearance = Appearance()
+      let model = LetterScreenModel(
+        result: appearance.result,
+        listResult: [],
+        isEnabledWithoutRepetition: isOn,
+        languageIndexSegmented: appearance.rusControl
+      )
+      self.model = model
+      output?.didRecive(model: model)
+    }
+  }
+  
+  func generateRandomContent(model: LetterScreenModel,
+                             listLetter: [String],
+                             languageIndexSegmented: Int) -> LetterScreenModel {
+    let result = listLetter.shuffled().first ?? ""
+    var listResult = model.listResult
+    listResult.append(result)
+    
+    return LetterScreenModel(
+      result: result,
+      listResult: listResult,
+      isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
+      languageIndexSegmented: languageIndexSegmented
+    )
+  }
+  
+  func generateContentWithoutRepetitionWith(model: LetterScreenModel,
+                                            listLetter: [String],
+                                            languageIndexSegmented: Int) -> LetterScreenModel? {
+    var result = listLetter.shuffled().first ?? ""
+    var listResult = model.listResult
+    
+    if listResult.count < listLetter.count {
+      while listResult.contains("\(result)") {
+        result = listLetter.shuffled().first ?? ""
+      }
+      listResult.append("\(result)")
+      
+      return LetterScreenModel(
+        result: result,
+        listResult: listResult,
+        isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
+        languageIndexSegmented: languageIndexSegmented
+      )
+    } else {
+      output?.didReciveRangeEnded()
+      return nil
+    }
   }
 }
 
@@ -81,5 +210,8 @@ private extension LetterScreenInteractor {
       "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
       "U", "V", "W", "X", "Y", "Z"
     ]
+    let keyUserDefaults = "letter_screen_user_defaults_key"
+    let rusControl: Int = 0
+    let engControl: Int = 1
   }
 }

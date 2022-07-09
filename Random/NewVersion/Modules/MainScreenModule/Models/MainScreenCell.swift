@@ -28,7 +28,7 @@ struct MainScreenCellModel {
       .teams(advLabel: .none),
       .number(advLabel: .new),
       .yesOrNo(advLabel: .hit),
-      .character(advLabel: .none),
+      .letter(advLabel: .premium),
       .list(advLabel: .none),
       .coin(advLabel: .none),
       .cube(advLabel: .none),
@@ -54,7 +54,7 @@ struct MainScreenCellModel {
     case yesOrNo(advLabel: ADVLabel)
     
     /// Раздел: `Буква`
-    case character(advLabel: ADVLabel)
+    case letter(advLabel: ADVLabel)
     
     /// Раздел: `Список`
     case list(advLabel: ADVLabel)

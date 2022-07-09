@@ -10,15 +10,15 @@ import UIKit
 protocol LetterScreenFactoryOutput: AnyObject {
   
   /// Список результатов был перевернут
-  ///  - Parameter listResult: массив результатов
-  func didReverse(listResult: [String])
+  ///  - Parameter model: Модель
+  func didReverseListResult(model: LetterScreenModel)
 }
 
 protocol LetterScreenFactoryInput: AnyObject {
   
   /// Переворачивает список результатов
-  ///  - Parameter listResult: массив результатов
-  func resive(listResult: [String])
+  ///  - Parameter model: Модель
+  func reverseListResultFrom(model: LetterScreenModel)
 }
 
 final class LetterScreenFactory: LetterScreenFactoryInput {
@@ -29,7 +29,13 @@ final class LetterScreenFactory: LetterScreenFactoryInput {
   
   // MARK: - Initarnal func
   
-  func resive(listResult: [String]) {
-    output?.didReverse(listResult: listResult.reversed())
+  func reverseListResultFrom(model: LetterScreenModel) {
+    let newModel = LetterScreenModel(
+      result: model.result,
+      listResult: model.listResult.reversed(),
+      isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
+      languageIndexSegmented: model.languageIndexSegmented
+    )
+    output?.didReverseListResult(model: newModel)
   }
 }

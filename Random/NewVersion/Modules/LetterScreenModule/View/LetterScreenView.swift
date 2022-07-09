@@ -20,13 +20,9 @@ protocol LetterScreenViewOutput: AnyObject {
 
 protocol LetterScreenViewInput: AnyObject {
   
-  /// Устанавливает результат генерации
-  /// - Parameter result: результат генерации
-  func set(result: String?)
-  
-  /// Устанавливает список результатов
-  /// - Parameter listResult: массив генераций
-  func set(listResult: [String])
+  /// Обновить контент
+  /// - Parameter model: Модель
+  func updateContentWith(model: LetterScreenModel)
 }
 
 typealias LetterScreenViewProtocol = UIView & LetterScreenViewInput
@@ -43,7 +39,6 @@ final class LetterScreenView: LetterScreenViewProtocol {
   private let scrollResult = ScrollLabelGradientView()
   private let generateButton = ButtonView()
   private let letterSegmentedControl = UISegmentedControl()
-  private var letterContent: LetterScreenContent = .rus
   
   // MARK: - Internal func
   
@@ -59,12 +54,10 @@ final class LetterScreenView: LetterScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func set(result: String?) {
-    resultLabel.text = result
-  }
-  
-  func set(listResult: [String]) {
-    scrollResult.listLabels = listResult
+  func updateContentWith(model: LetterScreenModel) {
+    resultLabel.text = model.result
+    scrollResult.listLabels = model.listResult
+    letterSegmentedControl.selectedSegmentIndex = model.languageIndexSegmented
   }
   
   // MARK: - Private func
@@ -82,30 +75,20 @@ final class LetterScreenView: LetterScreenViewProtocol {
                                          at: appearance.rusControl, animated: false)
     letterSegmentedControl.insertSegment(withTitle: appearance.englishText,
                                          at: appearance.engControl, animated: false)
-    
     letterSegmentedControl.selectedSegmentIndex = appearance.rusControl
-    letterSegmentedControl.addTarget(self, action: #selector(segmentedControlAction(_:)), for: .valueChanged)
   }
   
-  @objc private func generateButtonAction() {
-    switch letterContent {
-    case .rus:
-      output?.generateRusButtonAction()
-    case .eng:
-      output?.generateEngButtonAction()
-    }
-  }
-  
-  @objc private func segmentedControlAction(_ segmentedControl: UISegmentedControl) {
+  @objc
+  private func generateButtonAction() {
     let appearance = Appearance()
     
-    if segmentedControl.selectedSegmentIndex == appearance.rusControl {
-      letterContent = .rus
+    if letterSegmentedControl.selectedSegmentIndex == appearance.rusControl {
+      output?.generateRusButtonAction()
       return
     }
     
-    if segmentedControl.selectedSegmentIndex == appearance.engControl {
-      letterContent = .eng
+    if letterSegmentedControl.selectedSegmentIndex == appearance.engControl {
+      output?.generateEngButtonAction()
       return
     }
   }

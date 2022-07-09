@@ -73,7 +73,7 @@ extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setupDefaultsSettings(for: .number(list: list))
+    listResultScreenCoordinator.setContentsFrom(list: list)
   }
   
   func withoutRepetitionAction(isOn: Bool) {

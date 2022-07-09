@@ -60,7 +60,10 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openCharacter() {
-    let letterScreenCoordinator = LetterScreenCoordinator(navigationController: navigationController)
+    let letterScreenCoordinator = LetterScreenCoordinator(
+      navigationController: navigationController,
+      services: services
+    )
     self.letterScreenCoordinator = letterScreenCoordinator
     letterScreenCoordinator.start()
   }

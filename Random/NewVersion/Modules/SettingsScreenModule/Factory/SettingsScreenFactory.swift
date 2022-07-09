@@ -38,26 +38,10 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
   
   func getContent(from typeObject: SettingsScreenType) {
     var models: [Any] = []
+    let screenModel = getScreenModel(from: typeObject)
     
-    switch typeObject {
-    case .number(let result):
-      output?.didRecive(listResult: result.listResult)
-      models = configure(model: result, typeObject: typeObject)
-    case .films(_): break
-    case .teams(_): break
-    case .yesOrNo(let result):
-      output?.didRecive(listResult: result.listResult)
-      models = configure(model: result, typeObject: typeObject)
-    case .character(_): break
-    case .list(_): break
-    case .coin(_): break
-    case .cube(_): break
-    case .dateAndTime(_): break
-    case .lottery(_): break
-    case .contact(_): break
-    case .password(_): break
-    case .russianLotto(_): break
-    }
+    output?.didRecive(listResult: screenModel.listResult)
+    models = configure(model: screenModel, typeObject: typeObject)
     output?.didRecive(models: models)
   }
 }
@@ -65,6 +49,24 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
 // MARK: - Private
 
 private extension SettingsScreenFactory {
+  func getScreenModel(from typeObject: SettingsScreenType) -> SettingsScreenModel {
+    switch typeObject {
+    case .number(let result): return result
+    case .films(let result): return result
+    case .teams(let result): return result
+    case .yesOrNo(let result): return result
+    case .letter(let result): return result
+    case .list(let result): return result
+    case .coin(let result): return result
+    case .cube(let result): return result
+    case .dateAndTime(let result): return result
+    case .lottery(let result): return result
+    case .contact(let result): return result
+    case .password(let result): return result
+    case .russianLotto(let result): return result
+    }
+  }
+  
   func configure(model: SettingsScreenModel, typeObject: SettingsScreenType) -> [Any] {
     let appearance = Appearance()
     var models: [Any] = []

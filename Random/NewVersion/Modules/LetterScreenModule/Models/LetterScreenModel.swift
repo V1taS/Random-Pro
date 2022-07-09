@@ -1,23 +1,14 @@
 //
-//  LetterScreenContent.swift
+//  LetterScreenModel.swift
 //  Random Pro
 //
-//  Created by Tatiana Sosina on 16.05.2022.
+//  Created by Vitalii Sosin on 09.07.2022.
 //  Copyright © 2022 Sosin.bet. All rights reserved.
 //
 
 import Foundation
 
-enum LetterScreenContent {
-  
-  /// Русский контент
-  case rus
-  
-  /// Английский контент
-  case eng
-}
-
-struct LetterScreenModel: Equatable & Encodable & Decodable {
+struct LetterScreenModel: UserDefaultsCodable, SettingsScreenModel {
   
   /// Результат генерации
   let result: String
@@ -27,4 +18,7 @@ struct LetterScreenModel: Equatable & Encodable & Decodable {
   
   /// Без повторений
   let isEnabledWithoutRepetition: Bool
+  
+  /// Индекс выбранного языка
+  let languageIndexSegmented: Int
 }

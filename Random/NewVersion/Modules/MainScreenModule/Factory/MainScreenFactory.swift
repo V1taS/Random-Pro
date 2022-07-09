@@ -66,7 +66,7 @@ final class MainScreenFactory: MainScreenFactoryInput {
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .character(let advLabel):
+      case .letter(let advLabel):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardCharacters,
                                        titleCard: appearance.titleCardCharacters,

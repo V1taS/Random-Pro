@@ -3,7 +3,7 @@
 //  Random Pro
 //
 //  Created by Tatiana Sosina on 16.05.2022.
-//  Copyright © 2022 Sosin.bet. All rights reserved.
+//  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
 import UIKit

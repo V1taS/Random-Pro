@@ -115,7 +115,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 extension SettingsScreenView: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard models[indexPath.row] is ListOfObjectsSettingsModel else {
+    guard models[indexPath.row] is SettingsScreenType.ListOfObjectsSettingsModel else {
       return
     }
     output?.listOfObjectsAction()
@@ -133,7 +133,7 @@ extension SettingsScreenView: UITableViewDataSource {
     let model = models[indexPath.row]
     var viewCell = UITableViewCell()
     
-    if let model = model as? WithoutRepetitionSettingsModel {
+    if let model = model as? SettingsScreenType.WithoutRepetitionSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndSwitchCell.reuseIdentifier
       ) as! LabelAndSwitchCell
@@ -146,7 +146,7 @@ extension SettingsScreenView: UITableViewDataSource {
       viewCell = cell
     }
     
-    if let model = model as? CountGeneratedSettingsModel {
+    if let model = model as? SettingsScreenType.CountGeneratedSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as! DoubleTitleCell
@@ -156,7 +156,7 @@ extension SettingsScreenView: UITableViewDataSource {
       viewCell = cell
     }
     
-    if let model = model as? LastObjectSettingsModel {
+    if let model = model as? SettingsScreenType.LastObjectSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as! DoubleTitleCell
@@ -166,7 +166,7 @@ extension SettingsScreenView: UITableViewDataSource {
       viewCell = cell
     }
     
-    if let model = model as? ListOfObjectsSettingsModel {
+    if let model = model as? SettingsScreenType.ListOfObjectsSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndImageCell.reuseIdentifier
       ) as! LabelAndImageCell
@@ -176,7 +176,7 @@ extension SettingsScreenView: UITableViewDataSource {
       viewCell = cell
     }
     
-    if let model = model as? CleanButtonSettingsModel {
+    if let model = model as? SettingsScreenType.CleanButtonSettingsModel {
       let cell = tableView.dequeueReusableCell(
         withIdentifier: SmallButtonCell.reuseIdentifier
       ) as! SmallButtonCell

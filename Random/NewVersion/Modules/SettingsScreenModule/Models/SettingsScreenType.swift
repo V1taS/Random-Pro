@@ -12,44 +12,76 @@ import Foundation
 
 enum SettingsScreenType {
   
+  // MARK: - Property
+  
+  var allCasesIterable: [SettingsScreenType.AllCasesIterable] {
+    switch self {
+    case .number:
+      return [.withoutRepetition, .itemsGenerated, .lastItem, .listOfItems, .cleanButton]
+    case .yesOrNo:
+      return [.itemsGenerated, .lastItem, .listOfItems, .cleanButton]
+    default: return []
+    }
+  }
+  
   // MARK: - Cases
   
   /// Раздел: `Фильмы`
-  case films(Films)
+  case films(SettingsScreenModel)
   
   /// Раздел: `Команды`
-  case teams(Teams)
+  case teams(SettingsScreenModel)
   
   /// Раздел: `Число`
-  case number(Number)
+  case number(SettingsScreenModel)
   
   /// Раздел: `Да или Нет`
-  case yesOrNo(YesOrNo)
+  case yesOrNo(SettingsScreenModel)
   
   /// Раздел: `Буква`
-  case character(Character)
+  case character(SettingsScreenModel)
   
   /// Раздел: `Список`
-  case list(List)
+  case list(SettingsScreenModel)
   
   /// Раздел: `Монета`
-  case coin(Coin)
+  case coin(SettingsScreenModel)
   
   /// Раздел: `Кубики`
-  case cube(Cube)
+  case cube(SettingsScreenModel)
   
   /// Раздел: `Дата и Время`
-  case dateAndTime(DateAndTime)
+  case dateAndTime(SettingsScreenModel)
   
   /// Раздел: `Лотерея`
-  case lottery(Lottery)
+  case lottery(SettingsScreenModel)
   
   /// Раздел: `Контакты`
-  case contact(Contact)
+  case contact(SettingsScreenModel)
   
   /// Раздел: `Пароли`
-  case password(Password)
+  case password(SettingsScreenModel)
   
   /// Раздел: `Русское Лото`
-  case russianLotto(RussianLotto)
+  case russianLotto(SettingsScreenModel)
+  
+  // MARK: - AllCasesIterable
+  
+  enum AllCasesIterable {
+    
+    /// Без повторений
+    case withoutRepetition
+    
+    /// Всего объектов сгенерировано
+    case itemsGenerated
+    
+    /// Последний объект
+    case lastItem
+    
+    /// Список объектов
+    case listOfItems
+    
+    /// Кнопка очистить
+    case cleanButton
+  }
 }

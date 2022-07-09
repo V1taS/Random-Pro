@@ -36,20 +36,7 @@
 		1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B225C452619E253001B9124 /* GoogleService-Info.plist */; };
 		1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */; };
 		1B2F1D46260CC18E00ADCB12 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */; };
-		1B31F604285F3B7000A88217 /* SettingsScreenNumberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */; };
-		1B31F606285F3BE200A88217 /* SettingsScreenFilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */; };
-		1B31F608285F3C1A00A88217 /* SettingsScreenTeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F607285F3C1A00A88217 /* SettingsScreenTeamsModel.swift */; };
-		1B31F60A285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */; };
-		1B31F60C285F3C7F00A88217 /* SettingsScreenCharacterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60B285F3C7F00A88217 /* SettingsScreenCharacterModel.swift */; };
-		1B31F60E285F3CA000A88217 /* SettingsScreenListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60D285F3CA000A88217 /* SettingsScreenListModel.swift */; };
-		1B31F610285F3CBC00A88217 /* SettingsScreenCoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F60F285F3CBC00A88217 /* SettingsScreenCoinModel.swift */; };
-		1B31F612285F3CEE00A88217 /* SettingsScreenCubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F611285F3CEE00A88217 /* SettingsScreenCubeModel.swift */; };
-		1B31F614285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F613285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift */; };
-		1B31F616285F3D2D00A88217 /* SettingsScreenLotteryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F615285F3D2D00A88217 /* SettingsScreenLotteryModel.swift */; };
-		1B31F618285F3D5600A88217 /* SettingsScreenContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F617285F3D5600A88217 /* SettingsScreenContactModel.swift */; };
-		1B31F61A285F3D7F00A88217 /* SettingsScreenPasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F619285F3D7F00A88217 /* SettingsScreenPasswordModel.swift */; };
-		1B31F61C285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F61B285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift */; };
-		1B31F61E285F4E6600A88217 /* SettingsScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F61D285F4E6600A88217 /* SettingsScreenModels.swift */; };
+		1B31F61E285F4E6600A88217 /* SettingsScreenCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F61D285F4E6600A88217 /* SettingsScreenCellModel.swift */; };
 		1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F626285F926200A88217 /* ListResultScreenFactory.swift */; };
 		1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F627285F926200A88217 /* ListResultScreenViewController.swift */; };
 		1B31F62D285F926200A88217 /* ListResultScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F628285F926200A88217 /* ListResultScreenAssembly.swift */; };
@@ -243,6 +230,8 @@
 		1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */; };
 		1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */; };
 		1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */; };
+		1BA83CF52879D4F8000035E3 /* SettingsScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF42879D4F8000035E3 /* SettingsScreenModel.swift */; };
+		1BA83CF72879DA42000035E3 /* UserDefaultsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */; };
 		1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8DFA025EE4485007C389D /* FilmCellView.swift */; };
 		1BBADE0B25EC080500AD38F4 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0A25EC080500AD38F4 /* Film.swift */; };
 		1BBADE1025EC083800AD38F4 /* FilmActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE0F25EC083800AD38F4 /* FilmActions.swift */; };
@@ -379,20 +368,7 @@
 		1B225C452619E253001B9124 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenModel.swift; sourceTree = "<group>"; };
 		1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenNumberModel.swift; sourceTree = "<group>"; };
-		1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenFilmsModel.swift; sourceTree = "<group>"; };
-		1B31F607285F3C1A00A88217 /* SettingsScreenTeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTeamsModel.swift; sourceTree = "<group>"; };
-		1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenYesOrNoModel.swift; sourceTree = "<group>"; };
-		1B31F60B285F3C7F00A88217 /* SettingsScreenCharacterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCharacterModel.swift; sourceTree = "<group>"; };
-		1B31F60D285F3CA000A88217 /* SettingsScreenListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenListModel.swift; sourceTree = "<group>"; };
-		1B31F60F285F3CBC00A88217 /* SettingsScreenCoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCoinModel.swift; sourceTree = "<group>"; };
-		1B31F611285F3CEE00A88217 /* SettingsScreenCubeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCubeModel.swift; sourceTree = "<group>"; };
-		1B31F613285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenDateAndTimeModel.swift; sourceTree = "<group>"; };
-		1B31F615285F3D2D00A88217 /* SettingsScreenLotteryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenLotteryModel.swift; sourceTree = "<group>"; };
-		1B31F617285F3D5600A88217 /* SettingsScreenContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenContactModel.swift; sourceTree = "<group>"; };
-		1B31F619285F3D7F00A88217 /* SettingsScreenPasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenPasswordModel.swift; sourceTree = "<group>"; };
-		1B31F61B285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenRussianLottoModel.swift; sourceTree = "<group>"; };
-		1B31F61D285F4E6600A88217 /* SettingsScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenModels.swift; sourceTree = "<group>"; };
+		1B31F61D285F4E6600A88217 /* SettingsScreenCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCellModel.swift; sourceTree = "<group>"; };
 		1B31F626285F926200A88217 /* ListResultScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenFactory.swift; sourceTree = "<group>"; };
 		1B31F627285F926200A88217 /* ListResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenViewController.swift; sourceTree = "<group>"; };
 		1B31F628285F926200A88217 /* ListResultScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenAssembly.swift; sourceTree = "<group>"; };
@@ -589,6 +565,8 @@
 		1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSettingsView.swift; sourceTree = "<group>"; };
 		1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeResultsView.swift; sourceTree = "<group>"; };
+		1BA83CF42879D4F8000035E3 /* SettingsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenModel.swift; sourceTree = "<group>"; };
+		1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsCodable.swift; sourceTree = "<group>"; };
 		1BB8DFA025EE4485007C389D /* FilmCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCellView.swift; sourceTree = "<group>"; };
 		1BBADE0A25EC080500AD38F4 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		1BBADE0F25EC083800AD38F4 /* FilmActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmActions.swift; sourceTree = "<group>"; };
@@ -1439,6 +1417,7 @@
 				1B941DDF28217FF600D968DF /* UserDefaultsWrapper.swift */,
 				1B10E540282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift */,
 				1B941DEB2821923C00D968DF /* ObjectCustomUserDefaultsWrapper.swift */,
+				1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -1682,21 +1661,9 @@
 		1B9D4566283BEF8000A85F25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1BA83CF42879D4F8000035E3 /* SettingsScreenModel.swift */,
 				1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */,
-				1B31F61D285F4E6600A88217 /* SettingsScreenModels.swift */,
-				1B31F609285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift */,
-				1B31F603285F3B7000A88217 /* SettingsScreenNumberModel.swift */,
-				1B31F605285F3BE200A88217 /* SettingsScreenFilmsModel.swift */,
-				1B31F607285F3C1A00A88217 /* SettingsScreenTeamsModel.swift */,
-				1B31F60B285F3C7F00A88217 /* SettingsScreenCharacterModel.swift */,
-				1B31F60D285F3CA000A88217 /* SettingsScreenListModel.swift */,
-				1B31F60F285F3CBC00A88217 /* SettingsScreenCoinModel.swift */,
-				1B31F611285F3CEE00A88217 /* SettingsScreenCubeModel.swift */,
-				1B31F613285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift */,
-				1B31F615285F3D2D00A88217 /* SettingsScreenLotteryModel.swift */,
-				1B31F617285F3D5600A88217 /* SettingsScreenContactModel.swift */,
-				1B31F619285F3D7F00A88217 /* SettingsScreenPasswordModel.swift */,
-				1B31F61B285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift */,
+				1B31F61D285F4E6600A88217 /* SettingsScreenCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2274,8 +2241,8 @@
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
 			packageReferences = (
-				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */,
-				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */,
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
 				1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
@@ -2351,7 +2318,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
 		4E78C741F709DD8904AE460C /* [CP] Embed Pods Frameworks */ = {
@@ -2419,10 +2387,8 @@
 				1B8EB63C26744FC7009016BE /* HotTravelResult.swift in Sources */,
 				6C7D4D49282E557B00A086BC /* DateTimeInteractor.swift in Sources */,
 				1B92034F25D188DC0094D2BE /* CubeInterator.swift in Sources */,
-				1B31F60E285F3CA000A88217 /* SettingsScreenListModel.swift in Sources */,
 				1B9202FD25D16D760094D2BE /* YesOrNo.swift in Sources */,
 				1B7F66A225D0884F00933AD6 /* ListWords.swift in Sources */,
-				1B31F606285F3BE200A88217 /* SettingsScreenFilmsModel.swift in Sources */,
 				1B31F62D285F926200A88217 /* ListResultScreenAssembly.swift in Sources */,
 				6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */,
 				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
@@ -2436,7 +2402,6 @@
 				1B57F63F27873E27005F220C /* PremiumSubscriptionComponentView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
-				1B31F616285F3D2D00A88217 /* SettingsScreenLotteryModel.swift in Sources */,
 				1B57F64527877B6A005F220C /* CellMainLockView.swift in Sources */,
 				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
 				1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */,
@@ -2444,7 +2409,6 @@
 				1B8EB64226750D2A009016BE /* TravelSettingsView.swift in Sources */,
 				1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */,
 				1BDC80D1264DBA85001B0893 /* Travel.swift in Sources */,
-				1B31F60C285F3C7F00A88217 /* SettingsScreenCharacterModel.swift in Sources */,
 				1B7F118325E4068000FF64A3 /* ContactResultsView.swift in Sources */,
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */,
@@ -2456,6 +2420,7 @@
 				1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */,
 				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
 				1B96E0F12820483F00A23880 /* MainScreenAssembly.swift in Sources */,
+				1BA83CF52879D4F8000035E3 /* SettingsScreenModel.swift in Sources */,
 				1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */,
 				1B7F117825E3F74100FF64A3 /* ContactInteractor.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
@@ -2465,11 +2430,9 @@
 				1BF22F2E25D88F1A00775368 /* PlayerView.swift in Sources */,
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
 				1B8EB615267418BF009016BE /* Data+PrettyPrintedJSON.swift in Sources */,
-				1B31F61A285F3D7F00A88217 /* SettingsScreenPasswordModel.swift in Sources */,
 				1B9D22D227A6EC7600D4E427 /* CloudPlayer.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1BF30B8427BC42E200B3B4E5 /* LotoView.swift in Sources */,
-				1B31F610285F3CBC00A88217 /* SettingsScreenCoinModel.swift in Sources */,
 				6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */,
 				1B96E0EF2820483F00A23880 /* MainScreenFactory.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
@@ -2503,10 +2466,10 @@
 				1B5F698A27C0289A0050647A /* String+OffsetBy.swift in Sources */,
 				1B9D455C283BDC7C00A85F25 /* SettingsScreenView.swift in Sources */,
 				6CA3962328324F3500F86248 /* LetterScreenView.swift in Sources */,
-				1B31F618285F3D5600A88217 /* SettingsScreenContactModel.swift in Sources */,
 				6C7D4D45282E556400A086BC /* DateTimeView.swift in Sources */,
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
-				1B31F61E285F4E6600A88217 /* SettingsScreenModels.swift in Sources */,
+				1BA83CF72879DA42000035E3 /* UserDefaultsCodable.swift in Sources */,
+				1B31F61E285F4E6600A88217 /* SettingsScreenCellModel.swift in Sources */,
 				1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */,
 				1B3FE41F27C277CB00266882 /* CurrentAppVersionListService.swift in Sources */,
 				1B10088125D7EFCB0005A2D7 /* TimeDateAndTimeInteractor.swift in Sources */,
@@ -2544,7 +2507,6 @@
 				1B7F66A525D0889100933AD6 /* AppActions.swift in Sources */,
 				6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */,
 				1B92033825D17DCD0094D2BE /* CoinInteractor.swift in Sources */,
-				1B31F60A285F3C4A00A88217 /* SettingsScreenYesOrNoModel.swift in Sources */,
 				1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */,
 				6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */,
 				1B57F641278753D7005F220C /* PremiumSubscriptionConfirmButtonView.swift in Sources */,
@@ -2576,7 +2538,6 @@
 				1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */,
 				1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */,
 				1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */,
-				1B31F604285F3B7000A88217 /* SettingsScreenNumberModel.swift in Sources */,
 				1B5A103B27B5257E008DF773 /* AppMetrics.swift in Sources */,
 				1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */,
 				1B31F638285F92E600A88217 /* ListResultScreenCoordinator.swift in Sources */,
@@ -2584,7 +2545,6 @@
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
 				6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */,
-				1B31F614285F3D0C00A88217 /* SettingsScreenDateAndTimeModel.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
 				1BBADE1B25EC0C5100AD38F4 /* AppNetworking.swift in Sources */,
 				1B9D22CD27A6EC3900D4E427 /* ListService.swift in Sources */,
@@ -2614,7 +2574,6 @@
 				1B941DE028217FF600D968DF /* UserDefaultsWrapper.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,
-				1B31F608285F3C1A00A88217 /* SettingsScreenTeamsModel.swift in Sources */,
 				1B88ED7827C120A000030202 /* RussianLottoSettingsView.swift in Sources */,
 				1BF30DC525D195A900DCE62B /* CellCubeThreeView.swift in Sources */,
 				6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */,
@@ -2634,7 +2593,6 @@
 				1B4EBFFA25FE548E00A41945 /* TravelView.swift in Sources */,
 				1BF22F3225D88F3C00775368 /* Player.swift in Sources */,
 				1B8EB6282674324F009016BE /* KinopoiskInfoResult.swift in Sources */,
-				1B31F61C285F3DA100A88217 /* SettingsScreenRussianLottoModel.swift in Sources */,
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
 				1B8EB644267531DC009016BE /* TravelHistoryView.swift in Sources */,
@@ -2646,7 +2604,6 @@
 				1B96E100282048D000A23880 /* Coordinator.swift in Sources */,
 				1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */,
 				1B8EB63E2674E422009016BE /* TravelImageCellView.swift in Sources */,
-				1B31F612285F3CEE00A88217 /* SettingsScreenCubeModel.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,
 				6C98CBD52833A07700D2E4FA /* CoinScreenAssembly.swift in Sources */,
@@ -2920,7 +2877,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */ = {
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
 			requirement = {
@@ -2928,7 +2885,7 @@
 				kind = branch;
 			};
 		};
-		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */ = {
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
 			requirement = {
@@ -2949,12 +2906,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1B92E09E281D54A400398966 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
 			productName = RandomUIKit;
 		};
 		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
 			productName = RandomNetwork;
 		};
 		1BDB1CC92878E31D00F75299 /* Notifications */ = {

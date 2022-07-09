@@ -13,12 +13,19 @@ protocol YesNoScreenModuleOutput: AnyObject {
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
   func settingButtonAction(model: YesNoScreenModel)
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: YesNoScreenModel)
 }
 
 protocol YesNoScreenModuleInput: AnyObject {
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: YesNoScreenModuleOutput? { get set }
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
 }
 
 typealias YesNoScreenModule = UIViewController & YesNoScreenModuleInput
@@ -68,6 +75,10 @@ final class YesNoScreenViewController: YesNoScreenModule {
     setupNavBar()
   }
   
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
+  }
+  
   // MARK: - Private func
   
   private func setupNavBar() {
@@ -102,6 +113,11 @@ extension YesNoScreenViewController: YesNoScreenViewOutput {
 // MARK: - YesNoScreenInteractorOutput
 
 extension YesNoScreenViewController: YesNoScreenInteractorOutput {
+  func cleanButtonWasSelected(model: YesNoScreenModel) {
+    cacheModel = model
+    moduleOutput?.cleanButtonWasSelected(model: model)
+  }
+  
   func didRecive(model: YesNoScreenModel) {
     cacheModel = model
     moduleView.set(result: model.result)

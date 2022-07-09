@@ -79,9 +79,9 @@ final class LetterScreenView: LetterScreenViewProtocol {
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
     letterSegmentedControl.insertSegment(withTitle: appearance.russionText,
-                                         at: appearance.rusControl, animated: true)
+                                         at: appearance.rusControl, animated: false)
     letterSegmentedControl.insertSegment(withTitle: appearance.englishText,
-                                         at: appearance.engControl, animated: true)
+                                         at: appearance.engControl, animated: false)
     
     letterSegmentedControl.selectedSegmentIndex = appearance.rusControl
     letterSegmentedControl.addTarget(self, action: #selector(segmentedControlAction(_:)), for: .valueChanged)

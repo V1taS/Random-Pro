@@ -13,6 +13,10 @@ protocol YesNoScreenInteractorOutput: AnyObject {
   /// Были получены данные
   ///  - Parameter model: результат генерации
   func didRecive(model: YesNoScreenModel)
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: YesNoScreenModel)
 }
 
 protocol YesNoScreenInteractorInput: AnyObject {
@@ -20,8 +24,11 @@ protocol YesNoScreenInteractorInput: AnyObject {
   /// Получить данные
   func getContent()
   
-  /// Создать новые данные
+  /// Нажата кнопка сгенераровать данные
   func generateContent()
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
 }
 
 final class YesNoScreenInteractor: YesNoScreenInteractorInput {
@@ -36,6 +43,13 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   private var model: YesNoScreenModel?
   
   // MARK: - Initarnal func
+  
+  func cleanButtonAction() {
+    model = nil
+    getContent()
+    guard let model = model else { return }
+    output?.cleanButtonWasSelected(model: model)
+  }
   
   func getContent() {
     if let model = model {

@@ -51,12 +51,7 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
   }
   
   func cleanButtonWasSelected(model: NumberScreenModel) {
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .number(.init(
-      isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
-      numbersGenerated: "\(model.listResult.count)",
-      lastNumber: model.result,
-      listResult: model.listResult
-    )))
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .number(model))
   }
   
   func settingButtonAction(model: NumberScreenModel) {
@@ -65,12 +60,7 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .number(.init(
-      isEnabledWithoutRepetition: model.isEnabledWithoutRepetition,
-      numbersGenerated: "\(model.listResult.count)",
-      lastNumber: model.result,
-      listResult: model.listResult
-    )))
+    settingsScreenCoordinator.setupDefaultsSettings(for: .number(model))
   }
 }
 

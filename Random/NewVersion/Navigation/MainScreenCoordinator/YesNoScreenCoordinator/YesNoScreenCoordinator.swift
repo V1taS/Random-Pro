@@ -36,16 +36,16 @@ final class YesNoScreenCoordinator: Coordinator {
 // MARK: - YesNoScreenModuleOutput
 
 extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
+  func cleanButtonWasSelected(model: YesNoScreenModel) {
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .yesOrNo(model))
+  }
+  
   func settingButtonAction(model: YesNoScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController: navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
-    
-    settingsScreenCoordinator.setupDefaultsSettings(for: .yesOrNo(.init(
-      numbersGenerated: "\(model.listResult.count)",
-      lastResult: model.result,
-      listResult: model.listResult)))
+    settingsScreenCoordinator.setupDefaultsSettings(for: .yesOrNo(model))
   }
 }
 
@@ -57,7 +57,7 @@ extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func cleanButtonAction() {
-    
+    yesNoScreenModule?.cleanButtonAction()
   }
   
   func listOfObjectsAction(_ list: [String]) {

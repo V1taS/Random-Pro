@@ -27,7 +27,7 @@ struct CharactersSettingsView: View {
                     }
                     
                     HStack {
-                        Text(NSLocalizedString("Cгенерировано:", comment: ""))
+                        Text(NSLocalizedString("Cгенерировано", comment: ""))
                             .foregroundColor(.primaryGray())
                             .font(.robotoMedium18())
                         Spacer()

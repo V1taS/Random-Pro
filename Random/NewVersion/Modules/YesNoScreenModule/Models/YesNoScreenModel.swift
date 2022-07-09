@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YesNoScreenModel: Equatable & Encodable & Decodable {
+struct YesNoScreenModel: UserDefaultsCodable, SettingsScreenModel {
   
   /// Результат генерации
   let result: String

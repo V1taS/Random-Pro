@@ -69,7 +69,7 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
       tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
-      tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
@@ -106,6 +106,7 @@ extension ListResultScreenView: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
+    var viewCell = UITableViewCell()
     
     if let text = model as? String {
       let cell = tableView.dequeueReusableCell(
@@ -115,21 +116,21 @@ extension ListResultScreenView: UITableViewDataSource {
       cell.configureCellWith(titleText: text,
                              textColor: RandomColor.primaryGray,
                              textAlignment: .center)
-      
-      if tableView.isFirst(for: indexPath) {
-        cell.layer.cornerRadius = Appearance().cornerRadius
-        cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-      }
-      
-      if tableView.isLast(for: indexPath) {
-        cell.isHiddenSeparator = true
-        cell.layer.cornerRadius = Appearance().cornerRadius
-        cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-      }
-      
-      return cell
+      viewCell = cell
     }
-    return UITableViewCell()
+    
+    if tableView.isFirst(for: indexPath) {
+      viewCell.layer.cornerRadius = Appearance().cornerRadius
+      viewCell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    if tableView.isLast(for: indexPath) {
+      viewCell.isHiddenSeparator = true
+      viewCell.layer.cornerRadius = Appearance().cornerRadius
+      viewCell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    }
+    
+    return viewCell
   }
 }
 

@@ -16,3 +16,15 @@ enum LetterScreenContent {
   /// Английский контент
   case eng
 }
+
+struct LetterScreenModel: Equatable & Encodable & Decodable {
+  
+  /// Результат генерации
+  let result: String
+  
+  /// Список результатов
+  let listResult: [String]
+  
+  /// Без повторений
+  let isEnabledWithoutRepetition: Bool
+}

@@ -27,7 +27,7 @@ struct MainScreenCellModel {
       .films(advLabel: .none),
       .teams(advLabel: .none),
       .number(advLabel: .new),
-      .yesOrNo(advLabel: .none),
+      .yesOrNo(advLabel: .hit),
       .character(advLabel: .none),
       .list(advLabel: .none),
       .coin(advLabel: .none),

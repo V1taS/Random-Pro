@@ -26,13 +26,9 @@ protocol DateTimeViewOutput: AnyObject {
 
 protocol DateTimeViewInput: AnyObject {
   
-  /// Устанавливаем данные в result
-  ///  - Parameter result: результат генерации
-  func set(result: String?)
-  
-  /// Устанавливает список результатов
-  ///  - Parameter listResult: массив результатов
-  func set(listResult: [String])
+  /// Обновить контент
+  /// - Parameter model: Модель
+  func updateContentWith(model: DateTimeScreenModel)
 }
 
 typealias DateTimeViewProtocol = UIView & DateTimeViewInput
@@ -69,12 +65,9 @@ final class DateTimeView: DateTimeViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func set(result: String?) {
-    resultLabel.text = result
-  }
-  
-  func set(listResult: [String]) {
-    scrollResult.listLabels = listResult
+  func updateContentWith(model: DateTimeScreenModel) {
+    resultLabel.text = model.result
+    scrollResult.listLabels = model.listResult
   }
   
   // MARK: - Private func

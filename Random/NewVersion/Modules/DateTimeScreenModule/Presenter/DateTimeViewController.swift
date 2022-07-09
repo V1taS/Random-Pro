@@ -11,10 +11,18 @@ import UIKit
 protocol DateTimeModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
-  func settingButtonAction()
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: DateTimeScreenModel)
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: DateTimeScreenModel)
 }
 
 protocol DateTimeModuleInput: AnyObject {
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: DateTimeModuleOutput? { get set }
@@ -33,6 +41,7 @@ final class DateTimeViewController: DateTimeModule {
   private let moduleView: DateTimeViewProtocol
   private let interactor: DateTimeInteractorInput
   private let factory: DateTimeFactoryInput
+  private var cacheModel: DateTimeScreenModel?
   
   // MARK: - Initialization
   
@@ -60,6 +69,10 @@ final class DateTimeViewController: DateTimeModule {
     navigationBar()
   }
   
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
+  }
+  
   // MARK: - Private func
   
   private func navigationBar() {
@@ -74,8 +87,12 @@ final class DateTimeViewController: DateTimeModule {
                                                         action: #selector(settingButtonAction))
   }
   
-  @objc private func settingButtonAction() {
-    moduleOutput?.settingButtonAction()
+  @objc
+  private func settingButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
@@ -102,20 +119,22 @@ extension DateTimeViewController: DateTimeViewOutput {
 // MARK: - DateTimeInteractorOutput
 
 extension DateTimeViewController: DateTimeInteractorOutput {
-  func didRecive(result: String?) {
-    moduleView.set(result: result)
+  func cleanButtonWasSelected(model: DateTimeScreenModel) {
+    cacheModel = model
+    moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(listResult: [String]) {
-    factory.reverse(listResult: listResult)
+  func didRecive(model: DateTimeScreenModel) {
+    cacheModel = model
+    factory.reverseListResultFrom(model: model)
   }
 }
 
 // MARK: - DateTimeFactoryOutput
 
 extension DateTimeViewController: DateTimeFactoryOutput {
-  func didReverse(listResult: [String]) {
-    moduleView.set(listResult: listResult)
+  func didReverseListResult(model: DateTimeScreenModel) {
+    moduleView.updateContentWith(model: model)
   }
 }
 

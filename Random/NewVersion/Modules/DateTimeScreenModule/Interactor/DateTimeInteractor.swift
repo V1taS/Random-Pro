@@ -11,18 +11,21 @@ import UIKit
 protocol DateTimeInteractorOutput: AnyObject {
   
   /// Были получены данные
-  ///  - Parameter result: результат генерации
-  func didRecive(result: String?)
+  ///  - Parameter model: результат генерации
+  func didRecive(model: DateTimeScreenModel)
   
-  /// Возвращает список результатов
-  ///  - Parameter listResult: массив результатов
-  func didRecive(listResult: [String])
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: DateTimeScreenModel)
 }
 
 protocol DateTimeInteractorInput: AnyObject {
   
   /// Получить данные
   func getContent()
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
   
   /// Создать новые данные date
   func generateContentDate()
@@ -38,58 +41,118 @@ protocol DateTimeInteractorInput: AnyObject {
 }
 
 final class DateTimeInteractor: DateTimeInteractorInput {
-  
+
   // MARK: - Internal property
   
   weak var output: DateTimeInteractorOutput?
   
   // MARK: - Private property
   
-  private var result = Appearance().result
-  private var listResult: [String] = []
+  @ObjectCustomUserDefaultsWrapper<DateTimeScreenModel>(key: Appearance().keyUserDefaults)
+  private var model: DateTimeScreenModel?
   
   // MARK: - Internal func
   
+  func cleanButtonAction() {
+    model = nil
+    getContent()
+    guard let model = model else { return }
+    output?.cleanButtonWasSelected(model: model)
+  }
+  
   func getContent() {
-    output?.didRecive(listResult: listResult)
-    output?.didRecive(result: result)
+    configureModel()
   }
   
   func generateContentDate() {
-    let randomDate = Appearance().randomDate
-    listResult.append("\(randomDate)")
-    result = "\(randomDate)"
+    guard let model = model else {
+      return
+    }
     
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    let randomDate = Appearance().randomDate
+    var listResult = model.listResult
+    listResult.append("\(randomDate)")
+    
+    let newModel = DateTimeScreenModel(
+      result: "\(randomDate)",
+      listResult: listResult
+    )
+    
+    self.model = newModel
+    output?.didRecive(model: newModel)
   }
   
   func generateContentTime() {
+    guard let model = model else {
+      return
+    }
+    
     let appearance = Appearance()
+    var listResult = model.listResult
+    let randomTime = "\(appearance.randomTimeHours):\(appearance.randomTimeMinets)"
+    listResult.append(randomTime)
     
-    listResult.append("\(appearance.randomTimeHours) : \(appearance.randomTimeMinets)")
-    result = ("\(appearance.randomTimeHours) : \(appearance.randomTimeMinets)")
+    let newModel = DateTimeScreenModel(
+      result: randomTime,
+      listResult: listResult
+    )
     
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    self.model = newModel
+    output?.didRecive(model: newModel)
   }
   
   func generateContentDay() {
-    let randomElementDay = Appearance().listDay.shuffled().first ?? ""
-    listResult.append(randomElementDay)
-    result = randomElementDay
+    guard let model = model else {
+      return
+    }
     
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    let appearance = Appearance()
+    var listResult = model.listResult
+    let randomElementDay = appearance.listDay.shuffled().first ?? ""
+    listResult.append(randomElementDay)
+    
+    let newModel = DateTimeScreenModel(
+      result: randomElementDay,
+      listResult: listResult
+    )
+    
+    self.model = newModel
+    output?.didRecive(model: newModel)
   }
   
   func generateContentMonth() {
-    let randomElementMonth = Appearance().listMonth.shuffled().first ?? ""
-    listResult.append(randomElementMonth)
-    result = randomElementMonth
+    guard let model = model else {
+      return
+    }
     
-    output?.didRecive(result: result)
-    output?.didRecive(listResult: listResult)
+    let randomElementMonth = Appearance().listMonth.shuffled().first ?? ""
+    var listResult = model.listResult
+    listResult.append(randomElementMonth)
+    
+    let newModel = DateTimeScreenModel(
+      result: randomElementMonth,
+      listResult: listResult
+    )
+    
+    self.model = newModel
+    output?.didRecive(model: newModel)
+  }
+}
+
+// MARK: - Private
+
+private extension DateTimeInteractor {
+  func configureModel(withWithoutRepetition isOn: Bool = false) {
+    if let model = model {
+      output?.didRecive(model: model)
+    } else {
+      let model = DateTimeScreenModel(
+        result: Appearance().result,
+        listResult: []
+      )
+      self.model = model
+      output?.didRecive(model: model)
+    }
   }
 }
 
@@ -125,5 +188,6 @@ private extension DateTimeInteractor {
       NSLocalizedString("Ноябрь", comment: ""),
       NSLocalizedString("Декабрь", comment: ""),
     ]
+    let keyUserDefaults = "date_time_screen_user_defaults_key"
   }
 }

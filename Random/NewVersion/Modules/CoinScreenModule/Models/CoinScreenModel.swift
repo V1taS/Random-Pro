@@ -6,7 +6,7 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 struct CoinScreenModel: UserDefaultsCodable, SettingsScreenModel {
 

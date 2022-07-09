@@ -32,7 +32,7 @@ struct MainScreenCellModel {
       .list(advLabel: .none),
       .coin(advLabel: .premium),
       .cube(advLabel: .none),
-      .dateAndTime(advLabel: .none),
+      .dateAndTime(advLabel: .premium),
       .lottery(advLabel: .none),
       .contact(advLabel: .none),
       .password(advLabel: .none),

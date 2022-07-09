@@ -11,15 +11,15 @@ import UIKit
 protocol DateTimeFactoryOutput: AnyObject {
   
   /// Список результатов был перевернут
-  ///  - Parameter listResult: массив результатов
-  func didReverse(listResult: [String])
+  ///  - Parameter model: Модель
+  func didReverseListResult(model: DateTimeScreenModel)
 }
 
 protocol DateTimeFactoryInput: AnyObject {
   
   /// Переворачивает список результатов
-  ///  - Parameter listResult: массив результатов
-  func reverse(listResult: [String])
+  ///  - Parameter model: Модель
+  func reverseListResultFrom(model: DateTimeScreenModel)
 }
 
 final class DateTimeFactory: DateTimeFactoryInput {
@@ -30,7 +30,11 @@ final class DateTimeFactory: DateTimeFactoryInput {
   
   // MARK: - Internal func
   
-  func reverse(listResult: [String]) {
-    output?.didReverse(listResult: listResult.reversed())
+  func reverseListResultFrom(model: DateTimeScreenModel) {
+    let newModel = DateTimeScreenModel(
+      result: model.result,
+      listResult: model.listResult.reversed()
+    )
+    output?.didReverseListResult(model: newModel)
   }
 }

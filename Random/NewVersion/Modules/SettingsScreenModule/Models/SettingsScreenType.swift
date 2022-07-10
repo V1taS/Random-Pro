@@ -18,7 +18,7 @@ enum SettingsScreenType {
     switch self {
     case .number, .letter:
       return [.withoutRepetition, .itemsGenerated, .lastItem, .listOfItems, .cleanButton]
-    case .yesOrNo, .coin, .dateAndTime:
+    case .yesOrNo, .coin, .dateAndTime, .lottery:
       return [.itemsGenerated, .lastItem, .listOfItems, .cleanButton]
     default: return []
     }

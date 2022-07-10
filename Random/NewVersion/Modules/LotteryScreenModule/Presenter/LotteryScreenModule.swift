@@ -9,10 +9,26 @@
 import UIKit
 
 protocol LotteryScreenModuleOutput: AnyObject {
+  /// Неправильный диапазон чисел
+  func didReciveRangeError()
   
+  /// Была нажата кнопка (настройки)
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: LotteryScreenModel)
+  
+  /// Кнопка очистить была нажата
+  /// - Parameter model: результат генерации
+  func cleanButtonWasSelected(model: LotteryScreenModel)
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter model: Результат генерации
+  func resultLabelAction(model: LotteryScreenModel)
 }
 
 protocol LotteryScreenModuleInput: AnyObject {
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: LotteryScreenModuleOutput? { get set }
@@ -31,6 +47,7 @@ final class LotteryScreenViewController: LotteryScreenModule {
   private let moduleView: LotteryScreenViewProtocol
   private let interactor: LotteryScreenInteractorInput
   private let factory: LotteryScreenFactoryInput
+  private var cacheModel: LotteryScreenModel?
   
   // MARK: - Initialization
   /// - Parameters:
@@ -62,6 +79,10 @@ final class LotteryScreenViewController: LotteryScreenModule {
     interactor.getContent()
   }
   
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
+  }
+  
   // MARK: - Private func
   
   private func navigationBar() {
@@ -75,14 +96,25 @@ final class LotteryScreenViewController: LotteryScreenModule {
                                                         action: #selector(settingButtonAction))
   }
   
-  @objc private func settingButtonAction() {
-    
+  @objc
+  private func settingButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
 // MARK: - LotteryScreenViewOutput
 
 extension LotteryScreenViewController: LotteryScreenViewOutput {
+  func resultLabelAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.resultLabelAction(model: model)
+  }
+  
   func generateButtonAction(rangeStartValue: String?, rangeEndValue: String?, amountNumberValue: String?) {
     interactor.generateContent(rangeStartValue: rangeStartValue,
                                rangeEndValue: rangeEndValue, amountNumberValue: amountNumberValue)
@@ -92,20 +124,27 @@ extension LotteryScreenViewController: LotteryScreenViewOutput {
 // MARK: - LotteryScreenInteractorOutput
 
 extension LotteryScreenViewController: LotteryScreenInteractorOutput {
-  func didRecive(rangeStartValue: String?, rangeEndValue: String?, amountNumberValue: String?) {
-    moduleView.set(rangeStartValue: rangeStartValue,
-                   rangeEndValue: rangeEndValue, amountNumberValue: amountNumberValue)
+  func cleanButtonWasSelected(model: LotteryScreenModel) {
+    cacheModel = model
+    moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(result: String?) {
-    moduleView.set(result: result)
+  func didRecive(model: LotteryScreenModel) {
+    cacheModel = model
+    factory.reverseListResultFrom(model: model)
+  }
+  
+  func didReciveRangeError() {
+    moduleOutput?.didReciveRangeError()
   }
 }
 
 // MARK: - LotteryScreenFactoryOutput
 
 extension LotteryScreenViewController: LotteryScreenFactoryOutput {
-  
+  func didReverseListResult(model: LotteryScreenModel) {
+    moduleView.updateContentWith(model: model)
+  }
 }
 
 // MARK: - Appearance

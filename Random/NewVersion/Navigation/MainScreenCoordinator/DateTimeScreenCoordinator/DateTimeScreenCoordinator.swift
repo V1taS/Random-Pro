@@ -16,11 +16,13 @@ final class DateTimeScreenCoordinator: Coordinator {
   private var dateTimeScreenModule: DateTimeModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
+  private let services: ApplicationServices
   
   // MARK: - Initialization
   
-  init(navigationController: UINavigationController) {
+  init(navigationController: UINavigationController, services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -36,6 +38,13 @@ final class DateTimeScreenCoordinator: Coordinator {
 // MARK: - DateTimeModuleOutput
 
 extension DateTimeScreenCoordinator: DateTimeModuleOutput {
+  func resultLabelAction(model: DateTimeScreenModel) {
+    UIPasteboard.general.string = model.result
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true)
+  }
+  
   func cleanButtonWasSelected(model: DateTimeScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .dateAndTime(model))
   }
@@ -72,3 +81,11 @@ extension DateTimeScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension DateTimeScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Appearance
+
+private extension DateTimeScreenCoordinator {
+  struct Appearance {
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+  }
+}

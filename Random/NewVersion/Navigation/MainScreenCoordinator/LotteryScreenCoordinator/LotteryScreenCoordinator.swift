@@ -14,11 +14,15 @@ final class LotteryScreenCoordinator: Coordinator {
   
   private let navigationController: UINavigationController
   private var lotteryScreenModule: LotteryScreenModule?
+  private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
+  private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
+  private let services: ApplicationServices
   
   // MARK: - Initialization
   
-  init(navigationController: UINavigationController) {
+  init(navigationController: UINavigationController, services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -34,5 +38,60 @@ final class LotteryScreenCoordinator: Coordinator {
 // MARK: - LotteryScreenModuleOutput
 
 extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
+  func resultLabelAction(model: LotteryScreenModel) {
+    UIPasteboard.general.string = model.result
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true)
+  }
   
+  func cleanButtonWasSelected(model: LotteryScreenModel) {
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .lottery(model))
+  }
+  
+  func settingButtonAction(model: LotteryScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController: navigationController)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    
+    settingsScreenCoordinator.setupDefaultsSettings(for: .lottery(model))
+  }
+  
+  func didReciveRangeError() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
+                                                       glyph: true)
+  }
+}
+
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension LotteryScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func listOfObjectsAction(_ list: [String]) {
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
+    self.listResultScreenCoordinator = listResultScreenCoordinator
+    self.listResultScreenCoordinator?.output = self
+    self.listResultScreenCoordinator?.start()
+    
+    listResultScreenCoordinator.setContentsFrom(list: list)
+  }
+  
+  func cleanButtonAction() {
+    lotteryScreenModule?.cleanButtonAction()
+  }
+  
+  func withoutRepetitionAction(isOn: Bool) {}
+}
+
+// MARK: - ListResultScreenCoordinatorOutput
+
+extension LotteryScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Appearance
+
+private extension LotteryScreenCoordinator {
+  struct Appearance {
+    let numberRangeError = NSLocalizedString("Неверно задан диапазон", comment: "")
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+  }
 }

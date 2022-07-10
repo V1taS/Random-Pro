@@ -22,6 +22,9 @@ protocol DateTimeViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку Месяц
   func generateButtonMonthAction()
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 protocol DateTimeViewInput: AnyObject {
@@ -75,6 +78,9 @@ final class DateTimeView: DateTimeViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
+    isUserInteractionEnabled = true
+    resultLabel.isUserInteractionEnabled = true
+    
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
@@ -98,21 +104,34 @@ final class DateTimeView: DateTimeViewProtocol {
     buttonStackViewTwo.axis = .horizontal
     buttonStackViewTwo.distribution = .fillEqually
     buttonStackViewTwo.spacing = appearance.lessHorizontalSpacing
+    
+    let resultLabelTap = UITapGestureRecognizer(target: self, action: #selector(resultLabelAction))
+    resultLabelTap.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelTap)
   }
   
-  @objc private func generateButtonDayAction() {
+  @objc
+  private func resultLabelAction() {
+    output?.resultLabelAction()
+  }
+  
+  @objc
+  private func generateButtonDayAction() {
     output?.generateButtonDayAction()
   }
   
-  @objc private func generateButtonDateAction() {
+  @objc
+  private func generateButtonDateAction() {
     output?.generateButtonDateAction()
   }
   
-  @objc private func generateButtonTimeAction() {
+  @objc
+  private func generateButtonTimeAction() {
     output?.generateButtonTimeAction()
   }
   
-  @objc private func generateButtonMonthAction() {
+  @objc
+  private func generateButtonMonthAction() {
     output?.generateButtonMonthAction()
   }
   

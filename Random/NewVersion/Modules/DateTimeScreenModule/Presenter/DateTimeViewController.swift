@@ -17,6 +17,10 @@ protocol DateTimeModuleOutput: AnyObject {
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
   func cleanButtonWasSelected(model: DateTimeScreenModel)
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter model: Результат генерации
+  func resultLabelAction(model: DateTimeScreenModel)
 }
 
 protocol DateTimeModuleInput: AnyObject {
@@ -99,6 +103,13 @@ final class DateTimeViewController: DateTimeModule {
 // MARK: - DateTimeViewOutput
 
 extension DateTimeViewController: DateTimeViewOutput {
+  func resultLabelAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.resultLabelAction(model: model)
+  }
+  
   func generateButtonDayAction() {
     interactor.generateContentDay()
   }

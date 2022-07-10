@@ -54,6 +54,12 @@
 		1B3D19FF25D21DBB0027A83B /* CharactersResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */; };
 		1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0125D21E920027A83B /* CoinResultsView.swift */; };
 		1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */; };
+		1B3EF11A287AD17600D667E1 /* AdminFeatureToggleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF115287AD17600D667E1 /* AdminFeatureToggleFactory.swift */; };
+		1B3EF11B287AD17600D667E1 /* AdminFeatureToggleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF116287AD17600D667E1 /* AdminFeatureToggleViewController.swift */; };
+		1B3EF11C287AD17600D667E1 /* AdminFeatureToggleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF117287AD17600D667E1 /* AdminFeatureToggleAssembly.swift */; };
+		1B3EF11D287AD17600D667E1 /* AdminFeatureToggleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */; };
+		1B3EF11E287AD17600D667E1 /* AdminFeatureToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */; };
+		1B3EF127287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */; };
 		1B3FE41D27C2750700266882 /* Bundle+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE41C27C2750700266882 /* Bundle+Info.swift */; };
 		1B3FE41F27C277CB00266882 /* CurrentAppVersionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE41E27C277CB00266882 /* CurrentAppVersionListService.swift */; };
 		1B3FE42127C2780700266882 /* CloudCurrentAppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE42027C2780700266882 /* CloudCurrentAppVersion.swift */; };
@@ -390,6 +396,12 @@
 		1B3D19FE25D21DBB0027A83B /* CharactersResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0125D21E920027A83B /* CoinResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinResultsView.swift; sourceTree = "<group>"; };
 		1B3D1A0425D21F2D0027A83B /* CubeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeResultsView.swift; sourceTree = "<group>"; };
+		1B3EF115287AD17600D667E1 /* AdminFeatureToggleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleFactory.swift; sourceTree = "<group>"; };
+		1B3EF116287AD17600D667E1 /* AdminFeatureToggleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleViewController.swift; sourceTree = "<group>"; };
+		1B3EF117287AD17600D667E1 /* AdminFeatureToggleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleAssembly.swift; sourceTree = "<group>"; };
+		1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleInteractor.swift; sourceTree = "<group>"; };
+		1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleView.swift; sourceTree = "<group>"; };
+		1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleCoordinator.swift; sourceTree = "<group>"; };
 		1B3FE41C27C2750700266882 /* Bundle+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Info.swift"; sourceTree = "<group>"; };
 		1B3FE41E27C277CB00266882 /* CurrentAppVersionListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentAppVersionListService.swift; sourceTree = "<group>"; };
 		1B3FE42027C2780700266882 /* CloudCurrentAppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudCurrentAppVersion.swift; sourceTree = "<group>"; };
@@ -787,6 +799,66 @@
 				1B31F640285FB85E00A88217 /* NotificationService.swift */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		1B3EF114287AD12400D667E1 /* AdminFeatureToggleModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF124287AD1A100D667E1 /* Interactor */,
+				1B3EF123287AD19B00D667E1 /* Assembly */,
+				1B3EF122287AD19500D667E1 /* Factory */,
+				1B3EF121287AD18F00D667E1 /* Presenter */,
+				1B3EF120287AD18900D667E1 /* View */,
+			);
+			path = AdminFeatureToggleModule;
+			sourceTree = "<group>";
+		};
+		1B3EF120287AD18900D667E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B3EF121287AD18F00D667E1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF116287AD17600D667E1 /* AdminFeatureToggleViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B3EF122287AD19500D667E1 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF115287AD17600D667E1 /* AdminFeatureToggleFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B3EF123287AD19B00D667E1 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF117287AD17600D667E1 /* AdminFeatureToggleAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B3EF124287AD1A100D667E1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B3EF125287AD1E100D667E1 /* AdminFeatureToggleCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */,
+			);
+			path = AdminFeatureToggleCoordinator;
 			sourceTree = "<group>";
 		};
 		1B40AC1F278E293400578BFB /* OwnerAdmin */ = {
@@ -1469,6 +1541,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1B3EF114287AD12400D667E1 /* AdminFeatureToggleModule */,
 				1B31F625285F923800A88217 /* ListResultScreenModule */,
 				1B9D4552283BDC0400A85F25 /* SettingsScreenModule */,
 				6C1A0CB12834E88000A3040E /* LotteryScreenModule */,
@@ -1562,6 +1635,7 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				1B3EF125287AD1E100D667E1 /* AdminFeatureToggleCoordinator */,
 				1B31F636285F92CC00A88217 /* ListResultScreenCoordinator */,
 				1B9D4563283BDD2A00A85F25 /* SettingsScreenCoordinator */,
 				6C9A9EF9282926B000962062 /* NumberScreenCoordinator */,
@@ -2384,6 +2458,7 @@
 				1BF22F1F25D8856000775368 /* TeamView.swift in Sources */,
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
+				1B3EF11B287AD17600D667E1 /* AdminFeatureToggleViewController.swift in Sources */,
 				1B92030A25D1703E0094D2BE /* CharactersView.swift in Sources */,
 				1B88ED7C27C14E1800030202 /* ShareSheet.swift in Sources */,
 				1B57F64727883498005F220C /* GlobalConstants.swift in Sources */,
@@ -2494,6 +2569,7 @@
 				1B3D19F825D20DA90027A83B /* BoxCellCubeOneView.swift in Sources */,
 				1B8EB62D26743E50009016BE /* KinopoiskBestFilmsResult.swift in Sources */,
 				1B3FE42127C2780700266882 /* CloudCurrentAppVersion.swift in Sources */,
+				1B3EF11E287AD17600D667E1 /* AdminFeatureToggleView.swift in Sources */,
 				1B7F66E225D08D3100933AD6 /* RoundedColorEdge.swift in Sources */,
 				1B92034125D1885C0094D2BE /* CubeView.swift in Sources */,
 				1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */,
@@ -2555,6 +2631,7 @@
 				1B5A103B27B5257E008DF773 /* AppMetrics.swift in Sources */,
 				1B10088E25D808C40005A2D7 /* LotteryResultsView.swift in Sources */,
 				1B31F638285F92E600A88217 /* ListResultScreenCoordinator.swift in Sources */,
+				1B3EF11C287AD17600D667E1 /* AdminFeatureToggleAssembly.swift in Sources */,
 				1B57F6682789E7A4005F220C /* ADV.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
@@ -2581,6 +2658,7 @@
 				1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */,
 				1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */,
 				1B1D607126023D0E00847843 /* MusicActions.swift in Sources */,
+				1B3EF11A287AD17600D667E1 /* AdminFeatureToggleFactory.swift in Sources */,
 				1B9AB8A625ECB77700BD5CFD /* FilmSettingsView.swift in Sources */,
 				1B941DEC2821923C00D968DF /* ObjectCustomUserDefaultsWrapper.swift in Sources */,
 				1BF22F2325D8857A00775368 /* Team.swift in Sources */,
@@ -2597,6 +2675,7 @@
 				1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */,
+				1B3EF11D287AD17600D667E1 /* AdminFeatureToggleInteractor.swift in Sources */,
 				1B8EB6132674168F009016BE /* NetworkError.swift in Sources */,
 				1B57F64D27884397005F220C /* ReviewTrackingManager.swift in Sources */,
 				1B96E10428204CD000A23880 /* MainScreenCollectionViewCell.swift in Sources */,
@@ -2618,6 +2697,7 @@
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
 				1B96E100282048D000A23880 /* Coordinator.swift in Sources */,
 				1B1D60542601FB7E00847843 /* AppleMusicAPI.swift in Sources */,
+				1B3EF127287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift in Sources */,
 				1B8EB63E2674E422009016BE /* TravelImageCellView.swift in Sources */,
 				1B92032025D177510094D2BE /* ListWordsView.swift in Sources */,
 				1B7B3C3D25D3F410002ED8CD /* ListWordsResultsView.swift in Sources */,

@@ -44,7 +44,6 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
   
   override init(frame: CGRect) {
     super .init(frame: frame)
-    backgroundColor = RandomColor.secondaryWhite
     
     setupDefaultSettings()
     setupConstraints()
@@ -65,6 +64,8 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
   // MARK: - Private func
   
   private func setupDefaultSettings() {
+    backgroundColor = RandomColor.secondaryWhite
+    
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center

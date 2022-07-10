@@ -20,8 +20,11 @@ final class LetterScreenCoordinator: Coordinator {
   
   // MARK: - Initialization
   
-  init(navigationController: UINavigationController,
-       services: ApplicationServices) {
+  /// - Parameters:
+  ///   - navigationController: UINavigationController
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
     self.services = services
   }
@@ -44,7 +47,7 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
   }
   
   func settingButtonAction(model: LetterScreenModel) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController: navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()

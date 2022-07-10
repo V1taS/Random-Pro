@@ -112,7 +112,8 @@ final class NumberScreenViewController: NumberScreenModule {
                                                         action: #selector(settingButtonAction))
   }
   
-  @objc private func settingButtonAction() {
+  @objc
+  private func settingButtonAction() {
     guard let cacheModel = cacheModel else { return }
     moduleOutput?.settingButtonAction(model: cacheModel)
   }

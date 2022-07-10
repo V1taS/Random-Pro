@@ -92,7 +92,6 @@ final class NumberScreenView: NumberScreenViewProtocol {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = RandomColor.secondaryWhite
     
     setupConstraints()
     setupDefaultSettings()
@@ -129,8 +128,7 @@ final class NumberScreenView: NumberScreenViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
-    isUserInteractionEnabled = true
-    resultLabel.isUserInteractionEnabled = true
+    backgroundColor = RandomColor.secondaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray
@@ -155,10 +153,12 @@ final class NumberScreenView: NumberScreenViewProtocol {
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
+    isUserInteractionEnabled = true
     
     let resultLabelTap = UITapGestureRecognizer(target: self, action: #selector(resultLabelAction))
     resultLabelTap.cancelsTouchesInView = false
     resultLabel.addGestureRecognizer(resultLabelTap)
+    resultLabel.isUserInteractionEnabled = true
   }
   
   @objc

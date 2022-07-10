@@ -48,6 +48,9 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Password`
   func openRussianLotto()
+  
+  /// Открыть админ-панель фича тоглов
+  func adminFeatureToggleAction()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -103,12 +106,36 @@ final class MainScreenViewController: MainScreenModule {
     super.viewDidLoad()
     
     interactor.getCells()
-    title = Appearance().title
+    setupNavBar()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationController?.navigationBar.prefersLargeTitles = true
+  }
+}
+
+// MARK: - Private
+
+private extension MainScreenViewController {
+  func setupNavBar() {
+    let appearance = Appearance()
+    title = appearance.title
+    
+    let adminFeatureToggleImageView = UIImageView()
+    adminFeatureToggleImageView.image = appearance.adminFeatureToggleIcon
+    let adminFeatureToggleTap = UITapGestureRecognizer(target: self,
+                                                       action: #selector(adminFeatureToggleAction))
+    adminFeatureToggleTap.numberOfTapsRequired = appearance.numberOfTapsRequired
+    adminFeatureToggleImageView.addGestureRecognizer(adminFeatureToggleTap)
+    adminFeatureToggleImageView.isUserInteractionEnabled = true
+    adminFeatureToggleTap.cancelsTouchesInView = false
+    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: adminFeatureToggleImageView)
+  }
+  
+  @objc
+  private func adminFeatureToggleAction() {
+    moduleOutput?.adminFeatureToggleAction()
   }
 }
 
@@ -190,5 +217,7 @@ private extension MainScreenViewController {
   struct Appearance {
 //    let title = "Random"
     let title = "Random (БЕТА)"
+    let adminFeatureToggleIcon = UIImage(named: "Empty")
+    let numberOfTapsRequired = 1
   }
 }

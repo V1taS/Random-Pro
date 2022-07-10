@@ -19,7 +19,9 @@ final class CoinScreenCoordinator: Coordinator {
   
   // MARK: - Initialization
   
-  init(navigationController: UINavigationController) {
+  /// - Parameters:
+  ///   - navigationController: UINavigationController
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
   }
   
@@ -41,7 +43,7 @@ extension CoinScreenCoordinator: CoinScreenModuleOutput {
   }
   
   func settingButtonAction(model: CoinScreenModel) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController: navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()

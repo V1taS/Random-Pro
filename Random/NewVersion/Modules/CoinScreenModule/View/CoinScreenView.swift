@@ -41,7 +41,6 @@ final class CoinScreenView: CoinScreenViewProtocol {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = RandomColor.secondaryWhite
     
     setupDefaultSettings()
     setupConstraints()
@@ -68,6 +67,8 @@ final class CoinScreenView: CoinScreenViewProtocol {
   
   private func setupDefaultSettings() {
     let appearance = Appearance()
+    
+    backgroundColor = RandomColor.secondaryWhite
     
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.primaryGray

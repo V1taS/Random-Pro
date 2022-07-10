@@ -58,7 +58,6 @@ final class DateTimeView: DateTimeViewProtocol {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = RandomColor.secondaryWhite
     
     setupConstraints()
     setupDefaultSettings()
@@ -78,8 +77,8 @@ final class DateTimeView: DateTimeViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
+    backgroundColor = RandomColor.secondaryWhite
     isUserInteractionEnabled = true
-    resultLabel.isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.primaryGray
@@ -107,6 +106,7 @@ final class DateTimeView: DateTimeViewProtocol {
     
     let resultLabelTap = UITapGestureRecognizer(target: self, action: #selector(resultLabelAction))
     resultLabelTap.cancelsTouchesInView = false
+    resultLabel.isUserInteractionEnabled = true
     resultLabel.addGestureRecognizer(resultLabelTap)
   }
   

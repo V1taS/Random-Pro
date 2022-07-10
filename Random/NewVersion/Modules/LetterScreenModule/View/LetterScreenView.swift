@@ -44,7 +44,6 @@ final class LetterScreenView: LetterScreenViewProtocol {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = RandomColor.secondaryWhite
     
     setupConstraints()
     setupDefaultSettings()
@@ -64,6 +63,7 @@ final class LetterScreenView: LetterScreenViewProtocol {
   
   private func setupDefaultSettings() {
     let appearance = Appearance()
+    backgroundColor = RandomColor.secondaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray

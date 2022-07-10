@@ -46,7 +46,9 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   
   // MARK: - Initialization
   
-  init(navigationController: UINavigationController) {
+  /// - Parameters:
+  ///   - navigationController: UINavigationController
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
   }
   

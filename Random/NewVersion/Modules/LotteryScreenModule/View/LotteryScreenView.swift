@@ -61,7 +61,6 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = RandomColor.secondaryWhite
     
     setupConstraints()
     setupDefaultSettings()
@@ -84,8 +83,8 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
+    backgroundColor = RandomColor.secondaryWhite
     isUserInteractionEnabled = true
-    resultLabel.isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.primaryGray
@@ -138,6 +137,7 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     
     let resultLabelTap = UITapGestureRecognizer(target: self, action: #selector(resultLabelAction))
     resultLabelTap.cancelsTouchesInView = false
+    resultLabel.isUserInteractionEnabled = true
     resultLabel.addGestureRecognizer(resultLabelTap)
   }
   

@@ -45,7 +45,7 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
   
   func resultLabelAction(text: String?) {
     UIPasteboard.general.string = text
-    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true)
   }

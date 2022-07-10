@@ -83,13 +83,15 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openDateAndTime() {
-    let dateTimeScreenCoordinator = DateTimeScreenCoordinator(navigationController: navigationController)
+    let dateTimeScreenCoordinator = DateTimeScreenCoordinator(navigationController: navigationController,
+                                                              services: services)
     self.dateTimeScreenCoordinator = dateTimeScreenCoordinator
     dateTimeScreenCoordinator.start()
   }
   
   func openLottery() {
-    let lotteryScreenCoordinator = LotteryScreenCoordinator(navigationController: navigationController)
+    let lotteryScreenCoordinator = LotteryScreenCoordinator(navigationController: navigationController,
+                                                            services: services)
     self.lotteryScreenCoordinator = lotteryScreenCoordinator
     lotteryScreenCoordinator.start()
   }

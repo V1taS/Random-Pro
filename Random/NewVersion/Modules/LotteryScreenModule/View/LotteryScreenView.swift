@@ -16,21 +16,19 @@ protocol LotteryScreenViewOutput: AnyObject {
   ///  - rangeStartValue: стартовый textField диапазона
   ///  - rangeEndValue: финальный textField диапазона
   ///  - amountNumberValue: количественный textField
-  func generateButtonAction(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?)
+  func generateButtonAction(rangeStartValue: String?,
+                            rangeEndValue: String?,
+                            amountNumberValue: String?)
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 protocol LotteryScreenViewInput: AnyObject {
   
-  /// Устанавливаем данные для количественного textField и диапазонов 
-  /// - Parameters:
-  ///  - rangeStartValue: стартовый textField диапазона
-  ///  - rangeEndValue: финальный textField диапазона
-  ///  - amountNumberValue: количественный textField
-  func set(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?)
-  
-  /// Устанавливаем данные в result
-  ///  - Parameter result: результат генерации
-  func set(result: String?)
+  /// Обновить контент
+  /// - Parameter model: Модель
+  func updateContentWith(model: LotteryScreenModel)
 }
 
 typealias LotteryScreenViewProtocol = UIView & LotteryScreenViewInput
@@ -57,6 +55,8 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   private let rangeNumberLabel = UILabel()
   private let amountNumberLabel = UILabel()
   
+  private let scrollResult = ScrollLabelGradientView()
+  
   // MARK: - Internal func
   
   override init(frame: CGRect) {
@@ -71,20 +71,21 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func set(result: String?) {
-    resultLabel.text = result
-  }
-  
-  func set(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?) {
-    rangeStartTextField.text = rangeStartValue
-    rangeEndTextField.text = rangeEndValue
-    amountNumberTextField.text = amountNumberValue
+  func updateContentWith(model: LotteryScreenModel) {
+    resultLabel.text = model.result
+    scrollResult.listLabels = model.listResult
+    rangeStartTextField.text = model.rangeStartValue
+    rangeEndTextField.text = model.rangeEndValue
+    amountNumberTextField.text = model.amountValue
   }
   
   // MARK: - Private func
   
   private func setupDefaultSettings() {
     let appearance = Appearance()
+    
+    isUserInteractionEnabled = true
+    resultLabel.isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.primaryGray
@@ -134,18 +135,29 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
+    
+    let resultLabelTap = UITapGestureRecognizer(target: self, action: #selector(resultLabelAction))
+    resultLabelTap.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelTap)
   }
   
-  @objc private func generateButtonAction() {
+  @objc
+  private func generateButtonAction() {
     output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
                                  rangeEndValue: rangeEndTextField.text,
                                  amountNumberValue: amountNumberTextField.text)
   }
   
+  @objc
+  private func resultLabelAction() {
+    output?.resultLabelAction()
+  }
+  
   private func setupConstraints() {
     let appearance = Appearance()
     
-    [amountNumberTextFieldStackView, rangeTextFieldStackView, resultLabel, generateButton].forEach {
+    [amountNumberTextFieldStackView, rangeTextFieldStackView,
+     resultLabel, scrollResult, generateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -161,17 +173,23 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     }
     
     NSLayoutConstraint.activate([
+      scrollResult.heightAnchor.constraint(equalToConstant: appearance.scrollResultHeight),
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.middleHorizontalSize),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.middleHorizontalSize),
       resultLabel.topAnchor.constraint(equalTo: rangeTextFieldStackView.bottomAnchor,
                                        constant: appearance.middleHorizontalSize),
-      resultLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
+      resultLabel.bottomAnchor.constraint(equalTo: scrollResult.topAnchor,
                                           constant: -appearance.middleHorizontalSize),
       
       rangeStartTextField.widthAnchor.constraint(equalTo: rangeEndTextField.widthAnchor),
       betweenRangeLabel.widthAnchor.constraint(equalToConstant: appearance.lesswidthAnchorSize),
       amountNumberLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: appearance.widthAnchorSize),
       rangeNumberLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: appearance.widthAnchorSize),
+      
+      scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
+      scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
+      scrollResult.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
+                                           constant: -appearance.lessVerticalSpacing),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.middleHorizontalSize),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
@@ -224,5 +242,7 @@ private extension LotteryScreenView {
     let lesswidthAnchorSize: CGFloat = 12
     let numberOfLines: Int = 5
     let minimumScaleFactor: CGFloat = 0.3
+    let lessVerticalSpacing: CGFloat = 8
+    let scrollResultHeight: CGFloat = 30
   }
 }

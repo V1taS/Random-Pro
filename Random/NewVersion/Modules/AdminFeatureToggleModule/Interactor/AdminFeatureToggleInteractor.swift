@@ -15,6 +15,10 @@ protocol AdminFeatureToggleInteractorOutput: AnyObject {
   
   /// Успешная проверка логина и пароля
   func loginOrPasswordSuccess()
+  
+  /// Список фича тоглов был получен
+  ///  - Parameter toggles: Список фича тоглов
+  func didReciveFeature(toggles: [MainScreenCellModel.MainScreenCell])
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -25,6 +29,9 @@ protocol AdminFeatureToggleInteractorInput {
   ///  - login: Логин админа
   ///  - password: Пароль админа
   func cheak(login: String, password: String)
+  
+  /// Получить список фича тоглов
+  func getFeatureToggles()
 }
 
 /// Интерактор
@@ -38,6 +45,10 @@ final class AdminFeatureToggleInteractor: AdminFeatureToggleInteractorInput {
   
   func cheak(login: String, password: String) {
     output?.loginOrPasswordSuccess()
+  }
+  
+  func getFeatureToggles() {
+    output?.didReciveFeature(toggles: MainScreenCellModel.MainScreenCell.allCases)
   }
 }
 

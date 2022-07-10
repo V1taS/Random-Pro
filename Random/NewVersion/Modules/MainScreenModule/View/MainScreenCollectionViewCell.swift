@@ -62,7 +62,7 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
   
   private func applyDefaultBehavior() {
     
-    backgroundColor = .white
+    backgroundColor = RandomColor.secondaryWhite
   }
 }
 

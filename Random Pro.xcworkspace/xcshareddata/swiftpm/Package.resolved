@@ -6,7 +6,7 @@
       "location" : "https://github.com/V1taS/Notifications",
       "state" : {
         "branch" : "main",
-        "revision" : "8e7920c9409992b3d13a256736c1b5fecdebf896"
+        "revision" : "524b11b7155c962add97338f919d7ddc57ed627d"
       }
     },
     {
@@ -24,7 +24,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "main",
-        "revision" : "b9c92d11d2e3819b8d0a396bb781c54566342ec0"
+        "revision" : "25a06199eacaf7c757bfcb75194f1ba2790692a0"
       }
     }
   ],

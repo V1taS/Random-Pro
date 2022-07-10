@@ -38,91 +38,91 @@ final class MainScreenFactory: MainScreenFactoryInput {
     
     cells.forEach { cell in
       switch cell {
-      case .films(let advLabel):
+      case .films(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardFilms,
                                        titleCard: appearance.titleCardFilms,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .teams(let advLabel):
+      case .teams(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardTeam,
                                        titleCard: appearance.titleCardTeam,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .number(let advLabel):
+      case .number(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardNumber,
                                        titleCard: appearance.titleCardNumber,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .yesOrNo(let advLabel):
+      case .yesOrNo(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardYesOrNot,
                                        titleCard: appearance.titleCardYesOrNot,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .letter(let advLabel):
+      case .letter(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardCharacters,
                                        titleCard: appearance.titleCardCharacters,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .list(let advLabel):
+      case .list(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardList,
                                        titleCard: appearance.titleCardList,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .coin(let advLabel):
+      case .coin(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardCoin,
                                        titleCard: appearance.titleCardCoin,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .cube(let advLabel):
+      case .cube(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardCube,
                                        titleCard: appearance.titleCardCube,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .dateAndTime(let advLabel):
+      case .dateAndTime(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardDateAndTime,
                                        titleCard: appearance.titleCardDateAndTime,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .lottery(let advLabel):
+      case .lottery(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardLottery,
                                        titleCard: appearance.titleCardLottery,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .contact(let advLabel):
+      case .contact(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardContact,
                                        titleCard: appearance.titleCardContact,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .password(let advLabel):
+      case .password(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardPassword,
                                        titleCard: appearance.titleCardPassword,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .russianLotto(let advLabel):
+      case .russianLotto(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardRussianLotto,
                                        titleCard: appearance.titleCardRussianLotto,
@@ -152,7 +152,7 @@ final class MainScreenFactory: MainScreenFactoryInput {
   /// Проверяем можно ли показать рекламный лайбл
   private func isShow(_ advLabel: MainScreenCellModel.MainScreenCell.ADVLabel) -> Bool {
     switch advLabel {
-    case .hit, .new, .premium, .close:
+    case .hit, .new, .premium:
       return true
     case .none:
       return false
@@ -169,8 +169,6 @@ final class MainScreenFactory: MainScreenFactoryInput {
       return appearance.advLabelNew.uppercased()
     case .premium:
       return appearance.advLabelPremium.uppercased()
-    case .close:
-      return appearance.advLabelClosed.uppercased()
     case .none:
       return nil
     }
@@ -223,6 +221,5 @@ private extension MainScreenFactory {
     let advLabelHit = NSLocalizedString("ХИТ", comment: "")
     let advLabelNew = NSLocalizedString("НОВОЕ", comment: "")
     let advLabelPremium = NSLocalizedString("Премиум", comment: "")
-    let advLabelClosed = NSLocalizedString("Закрыто", comment: "")
   }
 }

@@ -36,6 +36,10 @@ protocol AdminFeatureToggleViewInput: AnyObject {
   /// Показать экран авторизации
   ///  - Parameter isShow: Показать / Скрыть экран
   func loginPage(isShow: Bool)
+  
+  /// Обновить контент
+  /// - Parameter models: Модели для ячеек
+  func updateContentWith(models: [AdminFeatureToggleModel])
 }
 
 /// Псевдоним протокола UIView & AdminFeatureToggleViewInput
@@ -58,7 +62,7 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
   
   private let tableView = UITableView()
   private let saveSettingsButton = ButtonView()
-  private var models: [Any] = []
+  private var models: [AdminFeatureToggleModel] = []
   
   private let loader = UIActivityIndicatorView()
   
@@ -89,6 +93,11 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
   func stopLoader() {
     loader.isHidden = true
     loader.stopAnimating()
+  }
+  
+  func updateContentWith(models: [AdminFeatureToggleModel]) {
+    self.models = models
+    tableView.reloadData()
   }
   
   // MARK: - Private func
@@ -153,8 +162,8 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
   
   private func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.secondaryWhite
-    tableView.backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
+    tableView.backgroundColor = RandomColor.primaryWhite
     loginContainer.backgroundColor = RandomColor.secondaryWhite
     
     loginTextField.placeholder = appearance.loginValue
@@ -174,8 +183,11 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
     tableView.delegate = self
     tableView.dataSource = self
     
-    tableView.register(LabelAndSwitchCell.self,
-                       forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
+    tableView.showsVerticalScrollIndicator = false
+    tableView.register(LabelAndSwitchWithSegmentedCell.self,
+                       forCellReuseIdentifier: LabelAndSwitchWithSegmentedCell.reuseIdentifier)
+    tableView.tableFooterView = UIView()
+    tableView.tableHeaderView = UIView()
     
     loginButton.setTitle(appearance.loginButtonTitle, for: .normal)
     loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
@@ -223,7 +235,7 @@ extension AdminFeatureToggleView: UITextFieldDelegate {
 
 // MARK: - UITableViewDelegate
 
-extension AdminFeatureToggleView: UITableViewDelegate { }
+extension AdminFeatureToggleView: UITableViewDelegate {}
 
 // MARK: - UITableViewDataSource
 
@@ -233,8 +245,33 @@ extension AdminFeatureToggleView: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(
+      withIdentifier: LabelAndSwitchWithSegmentedCell.reuseIdentifier
+    ) as? LabelAndSwitchWithSegmentedCell else {
+      return UITableViewCell()
+    }
+    
     let model = models[indexPath.row]
-    return UITableViewCell()
+    
+    cell.removeAllSegments()
+    model.advLabels.enumerated().forEach { index, label in
+      cell.insertSegment(withTitle: label.rawValue, at: index, animated: false)
+    }
+    cell.selectedSegmentIndex = model.currentIndexADVLabels
+    cell.configureCellWith(titleText: model.sectionName, isResultSwitch: model.isFeatureToggle)
+    
+    if tableView.isFirst(for: indexPath) {
+      cell.layer.cornerRadius = Appearance().cornerRadius
+      cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    if tableView.isLast(for: indexPath) {
+      cell.isHiddenSeparator = true
+      cell.layer.cornerRadius = Appearance().cornerRadius
+      cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    }
+    
+    return cell
   }
 }
 
@@ -246,6 +283,7 @@ private extension AdminFeatureToggleView {
     let loginStackViewSpacing: CGFloat = 16
     let loginTextFieldTopSpacing: CGFloat = 150
     let loginButtonBottomSpacing: CGFloat = 64
+    let cornerRadius: CGFloat = 8
     let loginValue = "Admin login"
     let passwordValue = "Admin password"
     let loginButtonTitle = "Login"

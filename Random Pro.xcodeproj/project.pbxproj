@@ -60,6 +60,7 @@
 		1B3EF11D287AD17600D667E1 /* AdminFeatureToggleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */; };
 		1B3EF11E287AD17600D667E1 /* AdminFeatureToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */; };
 		1B3EF127287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */; };
+		1B3EF137287B0EF200D667E1 /* AdminFeatureToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF136287B0EF200D667E1 /* AdminFeatureToggleModel.swift */; };
 		1B3FE41D27C2750700266882 /* Bundle+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE41C27C2750700266882 /* Bundle+Info.swift */; };
 		1B3FE41F27C277CB00266882 /* CurrentAppVersionListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE41E27C277CB00266882 /* CurrentAppVersionListService.swift */; };
 		1B3FE42127C2780700266882 /* CloudCurrentAppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3FE42027C2780700266882 /* CloudCurrentAppVersion.swift */; };
@@ -402,6 +403,7 @@
 		1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleInteractor.swift; sourceTree = "<group>"; };
 		1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleView.swift; sourceTree = "<group>"; };
 		1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleCoordinator.swift; sourceTree = "<group>"; };
+		1B3EF136287B0EF200D667E1 /* AdminFeatureToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleModel.swift; sourceTree = "<group>"; };
 		1B3FE41C27C2750700266882 /* Bundle+Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Info.swift"; sourceTree = "<group>"; };
 		1B3FE41E27C277CB00266882 /* CurrentAppVersionListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentAppVersionListService.swift; sourceTree = "<group>"; };
 		1B3FE42027C2780700266882 /* CloudCurrentAppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudCurrentAppVersion.swift; sourceTree = "<group>"; };
@@ -804,6 +806,7 @@
 		1B3EF114287AD12400D667E1 /* AdminFeatureToggleModule */ = {
 			isa = PBXGroup;
 			children = (
+				1B3EF135287B0ED900D667E1 /* Models */,
 				1B3EF124287AD1A100D667E1 /* Interactor */,
 				1B3EF123287AD19B00D667E1 /* Assembly */,
 				1B3EF122287AD19500D667E1 /* Factory */,
@@ -859,6 +862,14 @@
 				1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */,
 			);
 			path = AdminFeatureToggleCoordinator;
+			sourceTree = "<group>";
+		};
+		1B3EF135287B0ED900D667E1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B3EF136287B0EF200D667E1 /* AdminFeatureToggleModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1B40AC1F278E293400578BFB /* OwnerAdmin */ = {
@@ -2542,6 +2553,7 @@
 				1B406A3827B9A75200500170 /* KegView.swift in Sources */,
 				1B8EB6352674457B009016BE /* SearchMoviesRequest.swift in Sources */,
 				1BBADE0B25EC080500AD38F4 /* Film.swift in Sources */,
+				1B3EF137287B0EF200D667E1 /* AdminFeatureToggleModel.swift in Sources */,
 				1B57F6662789E0DF005F220C /* UIImageView+Color.swift in Sources */,
 				1BF22F4525D8D49E00775368 /* TeamCustomListView.swift in Sources */,
 				1B8EB61926741A93009016BE /* VideoCDNRequest.swift in Sources */,

@@ -92,6 +92,10 @@ extension AdminFeatureToggleViewController: AdminFeatureToggleViewOutput {
 // MARK: - AdminFeatureToggleInteractorOutput
 
 extension AdminFeatureToggleViewController: AdminFeatureToggleInteractorOutput {
+  func didReciveFeature(toggles: [MainScreenCellModel.MainScreenCell]) {
+    factory.createModelsFrom(featureToggles: toggles)
+  }
+  
   func loginOrPasswordFailure() {
     moduleOutput?.loginOrPasswordError()
     moduleView.stopLoader()
@@ -100,13 +104,16 @@ extension AdminFeatureToggleViewController: AdminFeatureToggleInteractorOutput {
   func loginOrPasswordSuccess() {
     moduleView.stopLoader()
     moduleView.loginPage(isShow: false)
+    interactor.getFeatureToggles()
   }
 }
 
 // MARK: - AdminFeatureToggleFactoryOutput
 
 extension AdminFeatureToggleViewController: AdminFeatureToggleFactoryOutput {
-  
+  func didRecive(models: [AdminFeatureToggleModel]) {
+    moduleView.updateContentWith(models: models)
+  }
 }
 
 // MARK: - Appearance

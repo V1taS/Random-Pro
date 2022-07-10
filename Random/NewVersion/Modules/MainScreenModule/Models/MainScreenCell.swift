@@ -24,80 +24,77 @@ struct MainScreenCellModel {
     
     /// Общий список ячеек
     static var allCases: [MainScreenCellModel.MainScreenCell] = [
-      .films(advLabel: .none),
-      .teams(advLabel: .none),
-      .number(advLabel: .none),
-      .yesOrNo(advLabel: .none),
-      .letter(advLabel: .none),
-      .list(advLabel: .none),
-      .coin(advLabel: .none),
-      .cube(advLabel: .none),
-      .dateAndTime(advLabel: .none),
-      .lottery(advLabel: .none),
-      .contact(advLabel: .none),
-      .password(advLabel: .none),
-      .russianLotto(advLabel: .none)
+      .films(advLabel: .none, isEnabled: true),
+      .teams(advLabel: .none, isEnabled: true),
+      .number(advLabel: .none, isEnabled: true),
+      .yesOrNo(advLabel: .none, isEnabled: true),
+      .letter(advLabel: .none, isEnabled: true),
+      .list(advLabel: .none, isEnabled: true),
+      .coin(advLabel: .none, isEnabled: true),
+      .cube(advLabel: .none, isEnabled: true),
+      .dateAndTime(advLabel: .none, isEnabled: true),
+      .lottery(advLabel: .none, isEnabled: true),
+      .contact(advLabel: .none, isEnabled: true),
+      .password(advLabel: .none, isEnabled: true),
+      .russianLotto(advLabel: .none, isEnabled: true)
     ]
     
     // MARK: - Cases
     
     /// Раздел: `Фильмы`
-    case films(advLabel: ADVLabel)
+    case films(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Команды`
-    case teams(advLabel: ADVLabel)
+    case teams(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Число`
-    case number(advLabel: ADVLabel)
+    case number(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Да или Нет`
-    case yesOrNo(advLabel: ADVLabel)
+    case yesOrNo(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Буква`
-    case letter(advLabel: ADVLabel)
+    case letter(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Список`
-    case list(advLabel: ADVLabel)
+    case list(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Монета`
-    case coin(advLabel: ADVLabel)
+    case coin(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Кубики`
-    case cube(advLabel: ADVLabel)
+    case cube(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Дата и Время`
-    case dateAndTime(advLabel: ADVLabel)
+    case dateAndTime(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Лотерея`
-    case lottery(advLabel: ADVLabel)
+    case lottery(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Контакты`
-    case contact(advLabel: ADVLabel)
+    case contact(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Пароли`
-    case password(advLabel: ADVLabel)
+    case password(advLabel: ADVLabel, isEnabled: Bool)
     
     /// Раздел: `Русское Лото`
-    case russianLotto(advLabel: ADVLabel)
+    case russianLotto(advLabel: ADVLabel, isEnabled: Bool)
     
     // MARK: - ADVLabel
     
-    enum ADVLabel: CaseIterable, Equatable {
+    enum ADVLabel: String, CaseIterable, Equatable {
       
       /// Лайбл: `ХИТ`
-      case hit
+      case hit = "Hit"
       
       /// Лайбл: `НОВОЕ`
-      case new
+      case new = "New"
       
       /// Лайбл: `ПРЕМИУМ`
-      case premium
+      case premium = "Premium"
       
-      /// Лайбл: `ЗАКРЫТО`
-      case close
-      
-      /// Лайбл: `пусто`
-      case none
+      /// Лайбл: `Пусто`
+      case none = "None"
     }
   }
 }

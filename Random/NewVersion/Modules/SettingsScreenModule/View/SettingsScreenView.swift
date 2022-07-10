@@ -128,6 +128,7 @@ extension SettingsScreenView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
     var viewCell = UITableViewCell()
+    viewCell.isHiddenSeparator = false
     
     if let model = model as? SettingsScreenType.WithoutRepetitionSettingsModel {
       let cell = tableView.dequeueReusableCell(

@@ -248,10 +248,12 @@ extension AdminFeatureToggleView: UITableViewDataSource {
     guard let cell = tableView.dequeueReusableCell(
       withIdentifier: LabelAndSwitchWithSegmentedCell.reuseIdentifier
     ) as? LabelAndSwitchWithSegmentedCell else {
+      assertionFailure("Не получилось прокастить ячейку")
       return UITableViewCell()
     }
     
     let model = models[indexPath.row]
+    cell.isHiddenSeparator = false
     
     cell.removeAllSegments()
     model.advLabels.enumerated().forEach { index, label in

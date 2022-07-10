@@ -106,10 +106,14 @@ extension ListResultScreenView: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let result = list[indexPath.row]
-    let cell = tableView.dequeueReusableCell(
+    guard let cell = tableView.dequeueReusableCell(
       withIdentifier: CustomTextCell.reuseIdentifier
-    ) as! CustomTextCell
+    ) as? CustomTextCell else {
+      assertionFailure("Не получилось прокастить ячейку")
+      return UITableViewCell()
+    }
     
+    cell.isHiddenSeparator = false
     cell.configureCellWith(titleText: result,
                            textColor: RandomColor.primaryGray,
                            textAlignment: .center)

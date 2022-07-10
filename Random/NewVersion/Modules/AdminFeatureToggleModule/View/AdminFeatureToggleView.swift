@@ -19,6 +19,9 @@ protocol AdminFeatureToggleViewOutput: AnyObject {
   
   /// Неверный логин или пароль
   func loginOrPasswordError()
+  
+  /// Кнопка сохранить настройки была нажата
+  func saveSettingsButtonAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -52,6 +55,10 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
   private let loginTextField = TextFieldView()
   private let passwordTextField = TextFieldView()
   private let loginStackView = UIStackView()
+  
+  private let tableView = UITableView()
+  private let saveSettingsButton = ButtonView()
+  private var models: [Any] = []
   
   private let loader = UIActivityIndicatorView()
   
@@ -89,7 +96,7 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
   private func configureLayout() {
     let appearance = Appearance()
     
-    [loginContainer, loader].forEach {
+    [tableView, saveSettingsButton, loginContainer, loader].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -111,29 +118,43 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
       loginContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
       
       loginTextField.leadingAnchor.constraint(equalTo: loginContainer.leadingAnchor,
-                                           constant: appearance.middleHorizontalSpacing),
+                                              constant: appearance.defaultInset),
       loginTextField.trailingAnchor.constraint(equalTo: loginContainer.trailingAnchor,
-                                            constant: -appearance.middleHorizontalSpacing),
+                                               constant: -appearance.defaultInset),
       loginTextField.topAnchor.constraint(equalTo: loginContainer.topAnchor,
                                           constant: appearance.loginTextFieldTopSpacing),
       
       loginButton.leadingAnchor.constraint(equalTo: loginContainer.leadingAnchor,
-                                           constant: appearance.middleHorizontalSpacing),
+                                           constant: appearance.defaultInset),
       loginButton.trailingAnchor.constraint(equalTo: loginContainer.trailingAnchor,
-                                            constant: -appearance.middleHorizontalSpacing),
+                                            constant: -appearance.defaultInset),
       loginButton.bottomAnchor.constraint(equalTo: loginContainer.bottomAnchor,
                                           constant: -appearance.loginButtonBottomSpacing),
       
       loader.centerXAnchor.constraint(equalTo: centerXAnchor),
-      loader.centerYAnchor.constraint(equalTo: centerYAnchor)
+      loader.centerYAnchor.constraint(equalTo: centerYAnchor),
+      
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                         constant: appearance.defaultInset),
+      tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                          constant: -appearance.defaultInset),
+      
+      saveSettingsButton.topAnchor.constraint(equalTo: tableView.bottomAnchor,
+                                              constant: appearance.defaultInset),
+      saveSettingsButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                  constant: appearance.defaultInset),
+      saveSettingsButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                   constant: -appearance.defaultInset),
+      saveSettingsButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                 constant: -appearance.defaultInset),
     ])
   }
   
   private func applyDefaultBehavior() {
     let appearance = Appearance()
     backgroundColor = RandomColor.secondaryWhite
-    
-    /// Авторизация в Админ панель
+    tableView.backgroundColor = RandomColor.secondaryWhite
     loginContainer.backgroundColor = RandomColor.secondaryWhite
     
     loginTextField.placeholder = appearance.loginValue
@@ -150,8 +171,17 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
     
     loader.isHidden = true
     
+    tableView.delegate = self
+    tableView.dataSource = self
+    
+    tableView.register(LabelAndSwitchCell.self,
+                       forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
+    
     loginButton.setTitle(appearance.loginButtonTitle, for: .normal)
     loginButton.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
+    
+    saveSettingsButton.setTitle(appearance.saveSettingsButtonTitle, for: .normal)
+    saveSettingsButton.addTarget(self, action: #selector(saveSettingsButtonAction), for: .touchUpInside)
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
@@ -164,11 +194,16 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
 
 private extension AdminFeatureToggleView {
   @objc
+  func saveSettingsButtonAction() {
+    output?.saveSettingsButtonAction()
+  }
+  
+  @objc
   func loginButtonAction() {
     guard let login = loginTextField.text,
-            !login.isEmpty,
-            let password = passwordTextField.text,
-            !password.isEmpty else {
+          !login.isEmpty,
+          let password = passwordTextField.text,
+          !password.isEmpty else {
       output?.loginOrPasswordError()
       return
     }
@@ -186,16 +221,34 @@ extension AdminFeatureToggleView: UITextFieldDelegate {
   }
 }
 
+// MARK: - UITableViewDelegate
+
+extension AdminFeatureToggleView: UITableViewDelegate { }
+
+// MARK: - UITableViewDataSource
+
+extension AdminFeatureToggleView: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    models.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let model = models[indexPath.row]
+    return UITableViewCell()
+  }
+}
+
 // MARK: - Appearance
 
 private extension AdminFeatureToggleView {
   struct Appearance {
-    let middleHorizontalSpacing: CGFloat = 16
+    let defaultInset: CGFloat = 16
     let loginStackViewSpacing: CGFloat = 16
     let loginTextFieldTopSpacing: CGFloat = 150
     let loginButtonBottomSpacing: CGFloat = 64
     let loginValue = "Admin login"
     let passwordValue = "Admin password"
     let loginButtonTitle = "Login"
+    let saveSettingsButtonTitle = "Save settings"
   }
 }

@@ -47,7 +47,7 @@ final class AdminFeatureToggleCoordinator: AdminFeatureToggleCoordinatorProtocol
     let adminFeatureToggleModule = AdminFeatureToggleAssembly().createModule()
     self.adminFeatureToggleModule = adminFeatureToggleModule
     self.adminFeatureToggleModule?.moduleOutput = self
-    navigationController.present(adminFeatureToggleModule, animated: true)
+    navigationController.pushViewController(adminFeatureToggleModule, animated: true)
   }
 }
 
@@ -55,6 +55,15 @@ final class AdminFeatureToggleCoordinator: AdminFeatureToggleCoordinatorProtocol
 
 extension AdminFeatureToggleCoordinator: AdminFeatureToggleModuleOutput {
   func loginOrPasswordError() {
-    
+    services.notificationService.showNegativeAlertWith(title: Appearance().wrongLoginOrPassword,
+                                                       glyph: true)
+  }
+}
+
+// MARK: - Appearance
+
+private extension AdminFeatureToggleCoordinator {
+  struct Appearance {
+    let wrongLoginOrPassword = NSLocalizedString("Неверный логин или пароль", comment: "")
   }
 }

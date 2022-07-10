@@ -68,12 +68,17 @@ final class AdminFeatureToggleViewController: AdminFeatureToggleModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    title = Appearance().title
   }
 }
 
 // MARK: - AdminFeatureToggleViewOutput
 
 extension AdminFeatureToggleViewController: AdminFeatureToggleViewOutput {
+  func saveSettingsButtonAction() {
+    // TODO: -
+  }
+  
   func loginButtonAction(login: String, password: String) {
     moduleView.startLoader()
     interactor.cheak(login: login, password: password)
@@ -108,6 +113,6 @@ extension AdminFeatureToggleViewController: AdminFeatureToggleFactoryOutput {
 
 private extension AdminFeatureToggleViewController {
   struct Appearance {
-    
+    let title = "Admin panel"
   }
 }

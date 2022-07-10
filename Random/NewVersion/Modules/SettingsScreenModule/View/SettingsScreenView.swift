@@ -86,13 +86,9 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
     backgroundColor = RandomColor.primaryWhite
     tableView.backgroundColor = RandomColor.primaryWhite
     
-    // Сами self(SettingsScreenView) получает события от tableView
     tableView.delegate = self
-    
-    // Сами self(SettingsScreenView) устанавливаем данные для отображения в tableView
     tableView.dataSource = self
     
-    // Зарегистрировали ячейку в табличке
     tableView.register(LabelAndSwitchCell.self,
                        forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
     tableView.register(DoubleTitleCell.self,

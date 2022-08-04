@@ -24,6 +24,8 @@ final class PasswordScreenViewController: PasswordScreenModule {
   
   weak var moduleOutput: PasswordScreenModuleOutput?
   
+  // MARK: - Private property
+  
   private let moduleView: PasswordScreenViewProtocol
   private let interactor: PasswordScreenInteractorInput
   private let factory: PasswordScreenFactoryInput
@@ -50,15 +52,30 @@ final class PasswordScreenViewController: PasswordScreenModule {
   override func loadView() {
     super.loadView()
     view = moduleView
-
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.largeTitleDisplayMode = .never
-    title = "Пароли"
+    navigationBar()
   }
   
+  
+  // MARK: - Private func
+  
+  private func navigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+//    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+//                                                        style: .plain,
+//                                                        target: self,
+//                                                        action: #selector(cleanButtonAction))
+  }
+  
+  @objc private func cleanButtonAction() {
+    
+  }
 }
 
 extension PasswordScreenViewController: PasswordScreenViewOutput {
@@ -71,4 +88,13 @@ extension PasswordScreenViewController: PasswordScreenFactoryOutput {
 
 extension PasswordScreenViewController: PasswordScreenInteractorOutput {
   
+}
+
+// MARK: - Appearance
+
+private extension PasswordScreenViewController {
+  struct Appearance {
+    let title = NSLocalizedString("Пароли", comment: "")
+    let settingsButtonIcon = UIImage(systemName: "clean")
+  }
 }

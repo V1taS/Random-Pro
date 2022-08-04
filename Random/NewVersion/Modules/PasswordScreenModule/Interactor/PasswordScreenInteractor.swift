@@ -14,10 +14,19 @@ protocol PasswordScreenInteractorOutput: AnyObject {
 
 protocol PasswordScreenInteractorInput: AnyObject {
   
+  /// Получить данные
+  func getContent()
 }
 
 final class PasswordScreenInteractor: PasswordScreenInteractorInput {
   
   weak var output: PasswordScreenInteractorOutput?
   
+  private let rangeStartTextField = UITextField()
+  private let rangeEndTextField = UITextField()
+  private let resultLabel = UILabel()
+  
+  func getContent() {
+    
+  }
 }

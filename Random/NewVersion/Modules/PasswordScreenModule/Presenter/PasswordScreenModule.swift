@@ -55,7 +55,8 @@ final class PasswordScreenViewController: PasswordScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    navigationItem.largeTitleDisplayMode = .never
+    title = "Пароли"
   }
   
 }

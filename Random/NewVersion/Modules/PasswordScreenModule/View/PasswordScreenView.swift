@@ -2,7 +2,7 @@
 //  PasswordScreenView.swift
 //  Random Pro
 //
-//  Created by Tatiana Sosina on 04.08.2022.
+//  Created by Tatyana Sosina on 04.08.2022.
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 

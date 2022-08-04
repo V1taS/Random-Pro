@@ -2,7 +2,7 @@
 //  YesNoScreenFactory.swift
 //  Random Pro
 //
-//  Created by Tatiana Sosina on 12.05.2022.
+//  Created by Tatyana Sosina on 12.05.2022.
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 

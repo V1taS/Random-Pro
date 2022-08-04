@@ -21,6 +21,7 @@ final class MainScreenCoordinator: Coordinator {
   private var coinScreenCoordinator: Coordinator?
   private var lotteryScreenCoordinator: Coordinator?
   private var adminFeatureToggleCoordinator: Coordinator?
+  private var passwordScreenCoordinator: Coordinator?
   
   // MARK: - Initialization
   
@@ -103,7 +104,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openPassword() {
-    // TODO: - Open Coordinator
+    let passwordScreenCoordinator = PasswordScreenCoordinator(navigationController)
+    self.passwordScreenCoordinator = passwordScreenCoordinator
+    passwordScreenCoordinator.start()
   }
   
   func openRussianLotto() {

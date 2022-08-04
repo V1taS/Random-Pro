@@ -35,7 +35,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     .list(advLabel: .none, isEnabled: true),
     .cube(advLabel: .none, isEnabled: true),
     .contact(advLabel: .none, isEnabled: true),
-    .password(advLabel: .none, isEnabled: true),
     .russianLotto(advLabel: .none, isEnabled: true)
   ]
   

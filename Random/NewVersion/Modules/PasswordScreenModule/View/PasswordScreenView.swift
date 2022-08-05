@@ -32,7 +32,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
   private let phrasePasswordView = PhrasePasswordView()
   private let genarateButton = ButtonView()
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -51,8 +51,12 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
     let appearance = Appearance()
     backgroundColor = RandomColor.secondaryWhite
     
-    passwordSegmentedControl.insertSegment(withTitle: appearance.generatePassword, at: appearance.zero, animated: false)
-    passwordSegmentedControl.insertSegment(withTitle: appearance.phrasePassword, at: appearance.first, animated: false)
+    passwordSegmentedControl.insertSegment(withTitle: appearance.generatePassword,
+                                           at: appearance.zero,
+                                           animated: false)
+    passwordSegmentedControl.insertSegment(withTitle: appearance.phrasePassword,
+                                           at: appearance.first,
+                                           animated: false)
     passwordSegmentedControl.selectedSegmentIndex = appearance.zero
     passwordSegmentedControl.addTarget(self, action: #selector(segmentedControlAction), for: .valueChanged)
     

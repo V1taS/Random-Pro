@@ -20,11 +20,17 @@ protocol PasswordScreenInteractorInput: AnyObject {
 
 final class PasswordScreenInteractor: PasswordScreenInteractorInput {
   
+  // MARK: - Internal property
+  
   weak var output: PasswordScreenInteractorOutput?
+  
+  // MARK: - Private property
   
   private let rangeStartTextField = UITextField()
   private let rangeEndTextField = UITextField()
   private let resultLabel = UILabel()
+  
+  // MARK: - Internal func
   
   func getContent() {
     

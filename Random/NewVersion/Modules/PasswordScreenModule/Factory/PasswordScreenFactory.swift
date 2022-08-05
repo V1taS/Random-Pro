@@ -18,6 +18,8 @@ protocol PasswordScreenFactoryInput: AnyObject {
 
 final class PasswordScreenFactory: PasswordScreenFactoryInput {
   
+  // MARK: - Internal property
+  
   weak var output: PasswordScreenFactoryOutput?
   
 }

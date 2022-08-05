@@ -8,18 +8,16 @@
 import UIKit
 import RandomUIKit
 
-/// View для экрана
 final class PhrasePasswordView: UIView {
-    
-    // MARK: - Public properties
-    
-    // MARK: - Internal properties
     
     // MARK: - Private properties
   
   private let phraseLabel = UILabel()
   private let phraseTextField = UITextField()
   private let passwordLabel = UILabel()
+  private let resultLabel = UILabel()
+  private let charactersLabel = UILabel()
+  private let layerView = UIView()
     
     // MARK: - Initialization
     
@@ -34,47 +32,99 @@ final class PhrasePasswordView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Public func
-    
-    // MARK: - Internal func
-    
     // MARK: - Private func
     
     private func configureLayout() {
+      let appearance = Appearance()
       
-      [phraseLabel, phraseTextField, passwordLabel ].forEach {
+      [phraseLabel, passwordLabel, resultLabel, layerView, phraseTextField, charactersLabel].forEach {
         $0.translatesAutoresizingMaskIntoConstraints = false
         addSubview($0)
       }
       
       NSLayoutConstraint.activate([
-        phraseLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-        phraseLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+        phraseLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                             constant: appearance.mediumSpasing),
+        phraseLabel.topAnchor.constraint(equalTo: topAnchor,
+                                         constant: appearance.mediumSpasing),
+        phraseLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                              constant: -appearance.mediumSpasing),
         
-        phraseTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-        phraseTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-        phraseTextField.topAnchor.constraint(equalTo: phraseLabel.bottomAnchor, constant: 16),
+        layerView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                           constant: appearance.mediumSpasing),
+        layerView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                            constant: -appearance.mediumSpasing),
+        layerView.topAnchor.constraint(equalTo: phraseLabel.bottomAnchor,
+                                       constant: appearance.mediumSpasing),
+        layerView.bottomAnchor.constraint(equalTo: passwordLabel.topAnchor,
+                                          constant: -appearance.mediumSpasing),
         
-        passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-        passwordLabel.topAnchor.constraint(equalTo: phraseTextField.bottomAnchor, constant: 16)
+        phraseTextField.leadingAnchor.constraint(equalTo: layerView.leadingAnchor,
+                                                 constant: appearance.horizontalSpasing),
+        phraseTextField.trailingAnchor.constraint(equalTo: layerView.trailingAnchor,
+                                                  constant: -appearance.midleSpasing),
+        phraseTextField.topAnchor.constraint(equalTo: phraseLabel.bottomAnchor,
+                                             constant: appearance.mediumSpasing),
+        phraseTextField.heightAnchor.constraint(equalToConstant: appearance.heightSpasing),
+        
+        passwordLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                               constant: appearance.mediumSpasing),
+        passwordLabel.topAnchor.constraint(equalTo: phraseTextField.bottomAnchor,
+                                           constant: appearance.mediumSpasing),
+        passwordLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                constant: -appearance.mediumSpasing),
+        
+        resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                             constant: appearance.mediumSpasing),
+        resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                              constant: -appearance.mediumSpasing),
+        resultLabel.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor,
+                                         constant: appearance.horizontalSpasing),
+        
+        charactersLabel.leadingAnchor.constraint(equalTo: phraseTextField.trailingAnchor,
+                                                 constant: appearance.lessSpasing),
+        charactersLabel.trailingAnchor.constraint(equalTo: layerView.trailingAnchor,
+                                                  constant: -appearance.mediumSpasing),
+        charactersLabel.topAnchor.constraint(equalTo: layerView.topAnchor,
+                                             constant: appearance.mediumSpasing)
     ])
     }
     
     private func applyDefaultBehavior() {
+      let appearance = Appearance()
+      
       backgroundColor = RandomColor.secondaryWhite
       
-      phraseLabel.text = "Фраза"
+      phraseLabel.text = appearance.phrase
       phraseLabel.font = RandomFont.primaryBold18
       phraseLabel.textColor = RandomColor.primaryGray
+      phraseLabel.textAlignment = .center
       
-      phraseTextField.placeholder = "Введите фразу"
+      layerView.backgroundColor = .white
+      layerView.layer.borderWidth = appearance.width
+      layerView.layer.cornerRadius = appearance.mediumSpasing
+      
+      phraseTextField.placeholder = appearance.enterPhase
       phraseTextField.delegate = self
+      phraseTextField.textColor = RandomColor.primaryGray
       
-      passwordLabel.text = "Полученный пароль"
+      passwordLabel.text = appearance.getPassword
       passwordLabel.font = RandomFont.primaryBold18
       passwordLabel.textColor = RandomColor.primaryGray
+      passwordLabel.textAlignment = .center
+      
+      resultLabel.textAlignment = .center
+      resultLabel.text = appearance.result
+      resultLabel.font = RandomFont.primaryBold50
+      resultLabel.textColor = RandomColor.primaryGray
+      
+      charactersLabel.text = appearance.numbers
+      charactersLabel.font = RandomFont.primaryRegular18
+      charactersLabel.textColor = RandomColor.primaryGray
     }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension PhrasePasswordView: UITextFieldDelegate {
   
@@ -84,6 +134,16 @@ extension PhrasePasswordView: UITextFieldDelegate {
 
 private extension PhrasePasswordView {
     struct Appearance {
-        
+      let phrase = NSLocalizedString("Фраза", comment: "") + ":"
+      let enterPhase = NSLocalizedString("Введите фразу", comment: "")
+      let getPassword = NSLocalizedString("Полученный пароль", comment: "") + ":"
+      let result = "?"
+      let numbers = "0"
+      let width: CGFloat = 0.5
+      let mediumSpasing: CGFloat = 16
+      let lessSpasing: CGFloat = 8
+      let horizontalSpasing: CGFloat = 24
+      let midleSpasing: CGFloat = 40
+      let heightSpasing: CGFloat = 48
     }
 }

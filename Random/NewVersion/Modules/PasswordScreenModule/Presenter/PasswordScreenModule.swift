@@ -22,6 +22,8 @@ typealias PasswordScreenModule = UIViewController & PasswordScreenModuleInput
 
 final class PasswordScreenViewController: PasswordScreenModule {
   
+  // MARK: - Internal property
+  
   weak var moduleOutput: PasswordScreenModuleOutput?
   
   // MARK: - Private property
@@ -49,6 +51,8 @@ final class PasswordScreenViewController: PasswordScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - Internal func
+  
   override func loadView() {
     super.loadView()
     view = moduleView
@@ -57,6 +61,7 @@ final class PasswordScreenViewController: PasswordScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationBar()
+    interactor.getContent()
   }
   
   
@@ -78,13 +83,19 @@ final class PasswordScreenViewController: PasswordScreenModule {
   }
 }
 
+// MARK: - PasswordScreenViewOutput
+
 extension PasswordScreenViewController: PasswordScreenViewOutput {
   
 }
 
+// MARK: - PasswordScreenFactoryOutput
+
 extension PasswordScreenViewController: PasswordScreenFactoryOutput {
   
 }
+
+// MARK: - PasswordScreenInteractorOutput
 
 extension PasswordScreenViewController: PasswordScreenInteractorOutput {
   

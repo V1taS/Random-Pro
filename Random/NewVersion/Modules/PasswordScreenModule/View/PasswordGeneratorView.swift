@@ -8,7 +8,6 @@
 import UIKit
 import RandomUIKit
 
-/// View для экрана
 final class PasswordGeneratorView: UIView {
   
   // MARK: - Private properties
@@ -47,10 +46,6 @@ final class PasswordGeneratorView: UIView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  // MARK: - Public func
-  
-  // MARK: - Internal func
   
   // MARK: - Private func
   
@@ -221,8 +216,8 @@ extension PasswordGeneratorView: UITextFieldDelegate {
 
 private extension PasswordGeneratorView {
   struct Appearance {
-    let parameters = NSLocalizedString("Параметры:", comment: "")
-    let longPassword = NSLocalizedString("Длина пароля:", comment: "")
+    let parameters = NSLocalizedString("Параметры", comment: "") + ":"
+    let longPassword = NSLocalizedString("Длина пароля", comment: "") + ":"
     let uppercase = NSLocalizedString("Прописные буквы", comment: "")
     let lovercase = NSLocalizedString("Строчные буквы", comment: "")
     let numbers = NSLocalizedString("Цифры", comment: "")

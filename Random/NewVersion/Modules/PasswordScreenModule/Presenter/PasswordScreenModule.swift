@@ -8,11 +8,9 @@
 
 import UIKit
 
-protocol PasswordScreenModuleOutput: AnyObject {
-  
-}
+protocol PasswordScreenModuleOutput: AnyObject {}
 
-protocol PasswordScreenModuleInput: AnyObject {
+protocol PasswordScreenModuleInput {
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: PasswordScreenModuleOutput? { get set }
@@ -60,46 +58,33 @@ final class PasswordScreenViewController: PasswordScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationBar()
+    setNavigationBar()
     interactor.getContent()
   }
   
-  
   // MARK: - Private func
   
-  private func navigationBar() {
+  private func setNavigationBar() {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-//    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-//                                                        style: .plain,
-//                                                        target: self,
-//                                                        action: #selector(cleanButtonAction))
   }
   
-  @objc private func cleanButtonAction() {
-    
-  }
+  @objc private func cleanButtonAction() {}
 }
 
 // MARK: - PasswordScreenViewOutput
 
-extension PasswordScreenViewController: PasswordScreenViewOutput {
-  
-}
+extension PasswordScreenViewController: PasswordScreenViewOutput {}
 
 // MARK: - PasswordScreenFactoryOutput
 
-extension PasswordScreenViewController: PasswordScreenFactoryOutput {
-  
-}
+extension PasswordScreenViewController: PasswordScreenFactoryOutput {}
 
 // MARK: - PasswordScreenInteractorOutput
 
-extension PasswordScreenViewController: PasswordScreenInteractorOutput {
-  
-}
+extension PasswordScreenViewController: PasswordScreenInteractorOutput {}
 
 // MARK: - Appearance
 

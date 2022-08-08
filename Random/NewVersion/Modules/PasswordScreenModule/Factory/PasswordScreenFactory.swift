@@ -8,18 +8,13 @@
 
 import UIKit
 
-protocol PasswordScreenFactoryOutput: AnyObject {
-  
-}
+protocol PasswordScreenFactoryOutput: AnyObject {}
 
-protocol PasswordScreenFactoryInput: AnyObject {
-  
-}
+protocol PasswordScreenFactoryInput {}
 
 final class PasswordScreenFactory: PasswordScreenFactoryInput {
   
   // MARK: - Internal property
   
   weak var output: PasswordScreenFactoryOutput?
-  
 }

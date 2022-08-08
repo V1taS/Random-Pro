@@ -28,14 +28,11 @@ final class PasswordScreenCoordinator: Coordinator {
   // MARK: - Internal func
   
   func start() {
-    let passwordScreenModule = PasswordScreenAssembly().createModule()
+    var passwordScreenModule = PasswordScreenAssembly().createModule()
     self.passwordScreenModule = passwordScreenModule
     passwordScreenModule.moduleOutput = self
     navigationController.pushViewController(passwordScreenModule, animated: true)
   }
-  
 }
 
-extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
-  
-}
+extension PasswordScreenCoordinator: PasswordScreenModuleOutput {}

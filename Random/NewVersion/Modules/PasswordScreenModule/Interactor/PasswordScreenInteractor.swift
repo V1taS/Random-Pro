@@ -8,11 +8,9 @@
 
 import UIKit
 
-protocol PasswordScreenInteractorOutput: AnyObject {
-  
-}
+protocol PasswordScreenInteractorOutput: AnyObject {}
 
-protocol PasswordScreenInteractorInput: AnyObject {
+protocol PasswordScreenInteractorInput {
   
   /// Получить данные
   func getContent()
@@ -24,15 +22,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
   
   weak var output: PasswordScreenInteractorOutput?
   
-  // MARK: - Private property
-  
-  private let rangeStartTextField = UITextField()
-  private let rangeEndTextField = UITextField()
-  private let resultLabel = UILabel()
-  
   // MARK: - Internal func
   
-  func getContent() {
-    
-  }
+  func getContent() {}
 }

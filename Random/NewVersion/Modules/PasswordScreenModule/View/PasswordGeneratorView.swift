@@ -12,7 +12,7 @@ final class PasswordGeneratorView: UIView {
   
   // MARK: - Private properties
   
-  private let optionsLabel = UILabel()
+  private let settingOptionsLabel = UILabel()
   private let uppercaseLettersLabel = UILabel()
   private let lowercaseLettersLabel = UILabel()
   private let numbersLabel = UILabel()
@@ -28,7 +28,7 @@ final class PasswordGeneratorView: UIView {
   private let rangeEndTextField = TextFieldView()
   
   private let labelsStackView = UIStackView()
-  private let switcherStackView = UIStackView()
+  private let switchersStackView = UIStackView()
   private let textFieldStackView = UIStackView()
   private let generalStackView = UIStackView()
   
@@ -59,7 +59,7 @@ final class PasswordGeneratorView: UIView {
     
     [uppercaseLettersSwitch, lowercaseLettersSwitch, numbersSwitch, symbolsSwitch].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
-      switcherStackView.addArrangedSubview($0)
+      switchersStackView.addArrangedSubview($0)
     }
     
     [rangeStartTextField, rangeEndTextField].forEach {
@@ -67,39 +67,39 @@ final class PasswordGeneratorView: UIView {
       textFieldStackView.addArrangedSubview($0)
     }
     
-    [optionsLabel, labelsStackView, switcherStackView,
+    [settingOptionsLabel, labelsStackView, switchersStackView,
      passwordLengthLabel, textFieldStackView, resultLabel, generalStackView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
-    [labelsStackView, switcherStackView].forEach {
+    [labelsStackView, switchersStackView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       generalStackView.addArrangedSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      optionsLabel.topAnchor.constraint(equalTo: topAnchor,
-                                        constant: appearance.middleHorizontalSpacing),
-      optionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+      settingOptionsLabel.topAnchor.constraint(equalTo: topAnchor,
+                                               constant: appearance.middleHorizontalSpacing),
+      settingOptionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       
       labelsStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                constant: appearance.middleVirticalSpacing),
-      labelsStackView.topAnchor.constraint(equalTo: optionsLabel.bottomAnchor,
+      labelsStackView.topAnchor.constraint(equalTo: settingOptionsLabel.bottomAnchor,
                                            constant: appearance.middleHorizontalSpacing),
       labelsStackView.widthAnchor.constraint(equalToConstant: appearance.widthAnchorSpacing),
       
-      switcherStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                  constant: -appearance.middleHorizontalSpacing),
-      switcherStackView.topAnchor.constraint(equalTo:  optionsLabel.bottomAnchor,
-                                             constant: appearance.middleHorizontalSpacing),
-      switcherStackView.widthAnchor.constraint(equalToConstant: appearance.widthAnchor),
+      switchersStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                   constant: -appearance.middleVirticalSpacing),
+      switchersStackView.topAnchor.constraint(equalTo:  settingOptionsLabel.bottomAnchor,
+                                              constant: appearance.middleHorizontalSpacing),
+      switchersStackView.widthAnchor.constraint(equalToConstant: appearance.widthAnchor),
       
       generalStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                 constant: appearance.middleHorizontalSpacing),
       generalStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                  constant: -appearance.middleHorizontalSpacing),
-      generalStackView.topAnchor.constraint(equalTo: optionsLabel.bottomAnchor,
+      generalStackView.topAnchor.constraint(equalTo: settingOptionsLabel.bottomAnchor,
                                             constant: appearance.middleHorizontalSpacing),
       
       passwordLengthLabel.topAnchor.constraint(equalTo: generalStackView.bottomAnchor,
@@ -118,7 +118,9 @@ final class PasswordGeneratorView: UIView {
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
                                            constant: appearance.middleHorizontalSpacing),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.middleHorizontalSpacing)
+                                            constant: -appearance.middleHorizontalSpacing),
+      resultLabel.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor)
+      
     ])
   }
   
@@ -126,9 +128,10 @@ final class PasswordGeneratorView: UIView {
     let appearance = Appearance()
     backgroundColor = RandomColor.secondaryWhite
     
-    optionsLabel.text = appearance.parameters
-    optionsLabel.textColor = RandomColor.primaryGray
-    optionsLabel.font = RandomFont.primaryBold18
+    settingOptionsLabel.text = appearance.parameters + ":"
+    settingOptionsLabel.textColor = RandomColor.primaryGray
+    settingOptionsLabel.font = RandomFont.primaryBold18
+    settingOptionsLabel.numberOfLines = 1
     
     labelsStackView.axis = .vertical
     labelsStackView.distribution = .fillEqually
@@ -150,9 +153,9 @@ final class PasswordGeneratorView: UIView {
     symbolsLabel.textColor = RandomColor.primaryGray
     symbolsLabel.font = RandomFont.primaryMedium18
     
-    switcherStackView.axis = .vertical
-    switcherStackView.distribution = .fillEqually
-    switcherStackView.spacing = appearance.lessVerticalSpacing
+    switchersStackView.axis = .vertical
+    switchersStackView.distribution = .fillEqually
+    switchersStackView.spacing = appearance.lessVerticalSpacing
     
     uppercaseLettersSwitch.isOn = true
     uppercaseLettersSwitch.addTarget(self, action: #selector(uppercaseSwitchValueDidChange(_:)), for: .valueChanged)
@@ -166,7 +169,7 @@ final class PasswordGeneratorView: UIView {
     symbolsSwitch.isOn = true
     symbolsSwitch.addTarget(self, action: #selector(symbolsSwitchValueDidChange(_:)), for: .valueChanged)
     
-    passwordLengthLabel.text = appearance.longPassword
+    passwordLengthLabel.text = appearance.longPassword + ":"
     passwordLengthLabel.textColor = RandomColor.primaryGray
     passwordLengthLabel.font = RandomFont.primaryBold18
     
@@ -175,7 +178,6 @@ final class PasswordGeneratorView: UIView {
     textFieldStackView.distribution = .fillEqually
     
     generalStackView.axis = .horizontal
-    generalStackView.distribution = .fill
     
     rangeStartTextField.placeholder = appearance.rangeStartValue
     rangeStartTextField.delegate = self
@@ -185,44 +187,36 @@ final class PasswordGeneratorView: UIView {
     
     resultLabel.text = appearance.resultLabel
     resultLabel.textColor = RandomColor.primaryGray
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = RandomFont.primaryBold32
+    resultLabel.numberOfLines = 0
     resultLabel.textAlignment = .center
+    resultLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
   }
   
-  @objc private func uppercaseSwitchValueDidChange(_ sender: UISwitch) {
-    
-  }
+  @objc private func uppercaseSwitchValueDidChange(_ sender: UISwitch) {}
   
-  @objc private func lowercaseSwitchValueDidChange(_ sender: UISwitch) {
-    
-  }
+  @objc private func lowercaseSwitchValueDidChange(_ sender: UISwitch) {}
   
-  @objc private func numbersSwitchValueDidChange(_ sender: UISwitch) {
-    
-  }
+  @objc private func numbersSwitchValueDidChange(_ sender: UISwitch) {}
   
-  @objc private func symbolsSwitchValueDidChange(_ sender: UISwitch) {
-    
-  }
+  @objc private func symbolsSwitchValueDidChange(_ sender: UISwitch) {}
 }
 
 // MARK: - UITextFieldDelegate
 
-extension PasswordGeneratorView: UITextFieldDelegate {
-  
-}
+extension PasswordGeneratorView: UITextFieldDelegate {}
 
 // MARK: - Appearance
 
 private extension PasswordGeneratorView {
   struct Appearance {
-    let parameters = NSLocalizedString("Параметры", comment: "") + ":"
-    let longPassword = NSLocalizedString("Длина пароля", comment: "") + ":"
+    let parameters = NSLocalizedString("Параметры", comment: "")
+    let longPassword = NSLocalizedString("Длина пароля", comment: "")
     let uppercase = NSLocalizedString("Прописные буквы", comment: "")
     let lovercase = NSLocalizedString("Строчные буквы", comment: "")
     let numbers = NSLocalizedString("Цифры", comment: "")
     let symbols = NSLocalizedString("Символы", comment: "")
-    let resultLabel = "?"
+    let resultLabel = "cgfkswdhalokwffdhgjklyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gms;lkgmlks;mgckjytdcvclkdfghjklkjhgfdertydfghjkl;'ert"
     let spacing: CGFloat = 18
     let rangeStartValue = "1"
     let rangeEndValue = "60"
@@ -230,7 +224,7 @@ private extension PasswordGeneratorView {
     let lessVerticalSpacing: CGFloat = 8
     let middleVirticalSpacing: CGFloat = 40
     let largeVerticalSpacing: CGFloat = 26
-    let widthAnchor: CGFloat = 100
+    let widthAnchor: CGFloat = 60
     let widthAnchorSpacing: CGFloat = 200
   }
 }

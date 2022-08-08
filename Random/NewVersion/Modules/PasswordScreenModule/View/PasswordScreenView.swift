@@ -9,13 +9,9 @@
 import UIKit
 import RandomUIKit
 
-protocol PasswordScreenViewOutput: AnyObject {
-  
-}
+protocol PasswordScreenViewOutput: AnyObject {}
 
-protocol PasswordScreenViewInput: AnyObject {
-  
-}
+protocol PasswordScreenViewInput {}
 
 typealias PasswordScreenViewProtocol = UIView & PasswordScreenViewInput
 
@@ -52,22 +48,23 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
     backgroundColor = RandomColor.secondaryWhite
     
     passwordSegmentedControl.insertSegment(withTitle: appearance.generatePassword,
-                                           at: appearance.zero,
+                                           at: appearance.passwordIndex,
                                            animated: false)
     passwordSegmentedControl.insertSegment(withTitle: appearance.phrasePassword,
-                                           at: appearance.first,
+                                           at: appearance.phraseIndex,
                                            animated: false)
-    passwordSegmentedControl.selectedSegmentIndex = appearance.zero
-    passwordSegmentedControl.addTarget(self, action: #selector(segmentedControlAction), for: .valueChanged)
+    passwordSegmentedControl.selectedSegmentIndex = appearance.passwordIndex
+    passwordSegmentedControl.addTarget(self, action: #selector(passwordSegmentedControlAction), for: .valueChanged)
     
     phrasePasswordView.isHidden = true
     
     genarateButton.setTitle(appearance.setTextButton, for: .normal)
+    genarateButton.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
     genarateButton.addTarget(self, action: #selector(genarateButtonAction), for: .touchUpInside)
   }
   
-  @objc private func segmentedControlAction() {
-    if passwordSegmentedControl.selectedSegmentIndex == 0 {
+  @objc private func passwordSegmentedControlAction() {
+    if passwordSegmentedControl.selectedSegmentIndex == Appearance().passwordIndex {
       passwordGeneratorView.isHidden = false
       phrasePasswordView.isHidden = true
     } else {
@@ -76,9 +73,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
     }
   }
   
-  @objc private func genarateButtonAction() {
-    
-  }
+  @objc private func genarateButtonAction() {}
   
   private func setupConstraints() {
     let appearance = Appearance()
@@ -99,23 +94,24 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       passwordGeneratorView.leadingAnchor.constraint(equalTo: leadingAnchor),
       passwordGeneratorView.trailingAnchor.constraint(equalTo: trailingAnchor),
       passwordGeneratorView.topAnchor.constraint(equalTo: passwordSegmentedControl.bottomAnchor,
-                                                 constant: appearance.lessVerticalSpacing),
+                                                 constant: appearance.minVerticalInset),
       passwordGeneratorView.bottomAnchor.constraint(equalTo: genarateButton.topAnchor,
-                                                    constant: -appearance.lessVerticalSpacing),
+                                                    constant: -appearance.minVerticalInset),
       
       phrasePasswordView.leadingAnchor.constraint(equalTo: leadingAnchor),
       phrasePasswordView.trailingAnchor.constraint(equalTo: trailingAnchor),
       phrasePasswordView.topAnchor.constraint(equalTo: passwordSegmentedControl.bottomAnchor,
-                                              constant: appearance.lessVerticalSpacing),
+                                              constant: appearance.minVerticalInset),
       phrasePasswordView.bottomAnchor.constraint(equalTo: genarateButton.topAnchor,
-                                                 constant: -appearance.lessVerticalSpacing),
+                                                 constant: -appearance.minVerticalInset),
       
       genarateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.middleHorizontalSpacing),
       genarateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                constant: -appearance.middleHorizontalSpacing),
       genarateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSpacing)
+                                             constant: -appearance.middleHorizontalSpacing),
+      genarateButton.heightAnchor.constraint(equalToConstant: 52)
     ])
   }
 }
@@ -128,8 +124,8 @@ private extension PasswordScreenView {
     let generatePassword = NSLocalizedString("Генератор паролей", comment: "")
     let phrasePassword = NSLocalizedString("Фраза пароль", comment: "")
     let middleHorizontalSpacing: CGFloat = 16
-    let lessVerticalSpacing: CGFloat = 8
-    let zero: Int = 0
-    let first: Int = 1
+    let minVerticalInset: CGFloat = 8
+    let passwordIndex: Int = 0
+    let phraseIndex: Int = 1
   }
 }

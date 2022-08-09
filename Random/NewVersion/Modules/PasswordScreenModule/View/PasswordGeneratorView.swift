@@ -120,7 +120,6 @@ final class PasswordGeneratorView: UIView {
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
                                             constant: -appearance.middleHorizontalSpacing),
       resultLabel.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor)
-      
     ])
   }
   
@@ -187,7 +186,7 @@ final class PasswordGeneratorView: UIView {
     
     resultLabel.text = appearance.resultLabel
     resultLabel.textColor = RandomColor.primaryGray
-    resultLabel.font = RandomFont.primaryBold32
+    resultLabel.font = RandomFont.primaryBold50
     resultLabel.numberOfLines = 0
     resultLabel.textAlignment = .center
     resultLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
@@ -216,7 +215,7 @@ private extension PasswordGeneratorView {
     let lovercase = NSLocalizedString("Строчные буквы", comment: "")
     let numbers = NSLocalizedString("Цифры", comment: "")
     let symbols = NSLocalizedString("Символы", comment: "")
-    let resultLabel = "cgfkswdhalokwffdhgjklyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gmlyuifgkguytdcfkgytcdk,ytdcgytdfcghjkl;lkijuhygtrdsfghjkl;dnmsklgmslk;gms;lkgmlks;mgckjytdcvclkdfghjklkjhgfdertydfghjkl;'ert"
+    let resultLabel = "?"
     let spacing: CGFloat = 18
     let rangeStartValue = "1"
     let rangeEndValue = "60"

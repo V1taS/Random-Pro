@@ -90,6 +90,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       passwordSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                          constant: -appearance.middleHorizontalSpacing),
       passwordSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      passwordSegmentedControl.heightAnchor.constraint(equalToConstant: appearance.passwordHeightSpacing),
       
       passwordGeneratorView.leadingAnchor.constraint(equalTo: leadingAnchor),
       passwordGeneratorView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -111,7 +112,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
                                                constant: -appearance.middleHorizontalSpacing),
       genarateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -appearance.middleHorizontalSpacing),
-      genarateButton.heightAnchor.constraint(equalToConstant: 52)
+      genarateButton.heightAnchor.constraint(equalToConstant: appearance.buttonHeightSpacing)
     ])
   }
 }
@@ -125,6 +126,8 @@ private extension PasswordScreenView {
     let phrasePassword = NSLocalizedString("Фраза пароль", comment: "")
     let middleHorizontalSpacing: CGFloat = 16
     let minVerticalInset: CGFloat = 8
+    let passwordHeightSpacing: CGFloat = 28
+    let buttonHeightSpacing: CGFloat = 52
     let passwordIndex: Int = 0
     let phraseIndex: Int = 1
   }

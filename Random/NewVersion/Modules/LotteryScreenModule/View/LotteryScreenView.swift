@@ -2,7 +2,7 @@
 //  LotteryScreenView.swift
 //  Random Pro
 //
-//  Created by Tatiana Sosina on 18.05.2022.
+//  Created by Tatyana Sosina on 18.05.2022.
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
@@ -116,7 +116,7 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     
     amountNumberLabel.textColor = RandomColor.primaryGray
     amountNumberLabel.font = RandomFont.primaryRegular18
-    amountNumberLabel.text = appearance.textAmountLabel
+    amountNumberLabel.text = appearance.textAmountLabel + ":"
     
     amountNumberTextField.placeholder = appearance.startPlaceholder
     amountNumberTextField.keyboardType = .numberPad
@@ -125,7 +125,7 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     rangeNumberLabel.font = RandomFont.primaryRegular18
     rangeNumberLabel.textColor = RandomColor.primaryGray
     rangeNumberLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    rangeNumberLabel.text = appearance.textRangeLabel
+    rangeNumberLabel.text = appearance.textRangeLabel + ":"
     
     betweenRangeLabel.font = RandomFont.primaryMedium18
     betweenRangeLabel.textColor = RandomColor.primaryGray
@@ -233,8 +233,8 @@ private extension LotteryScreenView {
     let endPlaceholder = "100"
     let spasing: CGFloat = 8
     let textButton = NSLocalizedString("Сгенерировать", comment: "")
-    let textRangeLabel = NSLocalizedString("Диапазон", comment: "") + ":"
-    let textAmountLabel = NSLocalizedString("Количество", comment: "") + ":"
+    let textRangeLabel = NSLocalizedString("Диапазон", comment: "")
+    let textAmountLabel = NSLocalizedString("Количество", comment: "")
     let dashBetween = " - "
     let middleHorizontalSize: CGFloat = 16
     let largeVerticalSpacing: CGFloat = 24

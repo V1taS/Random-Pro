@@ -21,6 +21,8 @@ final class MainScreenCoordinator: Coordinator {
   private var coinScreenCoordinator: Coordinator?
   private var lotteryScreenCoordinator: Coordinator?
   private var adminFeatureToggleCoordinator: Coordinator?
+  private var passwordScreenCoordinator: Coordinator?
+  private var moviesScreenCoordinator: Coordinator?
   
   // MARK: - Initialization
   
@@ -53,7 +55,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openFilms() {
-    // TODO: - Open Coordinator
+    let moviesScreenCoordinator = MoviesScreenCoordinator(navigationController)
+    self.moviesScreenCoordinator = moviesScreenCoordinator
+    moviesScreenCoordinator.start()
   }
   
   func openTeams() {
@@ -103,7 +107,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openPassword() {
-    // TODO: - Open Coordinator
+    let passwordScreenCoordinator = PasswordScreenCoordinator(navigationController)
+    self.passwordScreenCoordinator = passwordScreenCoordinator
+    passwordScreenCoordinator.start()
   }
   
   func openRussianLotto() {

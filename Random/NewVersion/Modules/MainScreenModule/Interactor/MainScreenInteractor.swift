@@ -30,7 +30,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // TODO: -  Повесить фича тогл на отключение ячеек
   // TODO: -  Сделать настройку ADV лайблов
   private let featureToggles: [MainScreenCellModel.MainScreenCell] = [
-    .films(advLabel: .none, isEnabled: true),
     .teams(advLabel: .none, isEnabled: true),
     .list(advLabel: .none, isEnabled: true),
     .cube(advLabel: .none, isEnabled: true),

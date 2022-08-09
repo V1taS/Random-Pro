@@ -19,12 +19,22 @@ typealias MoviesScreenModule = UIViewController & MoviesScreenModuleInput
 
 final class MoviesScreenViewController: MoviesScreenModule {
   
+  // MARK: - Internal property
+  
   weak var moduleOutput: MoviesScreenModuleOutput?
+  
+  // MARK: - Private property
   
   private let moduleView: MoviesScreenViewProtocol
   private let interactor: MoviesScreenInteractorInput
   private let factory: MoviesScreenFactoryInput
   
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - interactor: интерактор
+  ///   - moduleView: вью
+  ///   - factory: фабрика
   init(moduleView: MoviesScreenViewProtocol,
        interactor: MoviesScreenInteractor,
        factory: MoviesScreenFactory) {
@@ -37,6 +47,8 @@ final class MoviesScreenViewController: MoviesScreenModule {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  // MARK: - Internal func
   
   override func loadView() {
     super.loadView()
@@ -57,20 +69,20 @@ final class MoviesScreenViewController: MoviesScreenModule {
   }
 }
 
-extension MoviesScreenViewController: MoviesScreenViewOutput {
-  
-}
+// MARK: - MoviesScreenViewOutput
 
-extension MoviesScreenViewController: MoviesScreenInteractorOutput {
-  
-}
+extension MoviesScreenViewController: MoviesScreenViewOutput {}
 
-extension MoviesScreenViewController: MoviesScreenFactoryOutput {
-  
-}
+// MARK: - MoviesScreenInteractorOutput
+
+extension MoviesScreenViewController: MoviesScreenInteractorOutput {}
+
+// MARK: - MoviesScreenFactoryOutput
+
+extension MoviesScreenViewController: MoviesScreenFactoryOutput {}
+
+// MARK: - Appearance
 
 extension MoviesScreenViewController {
-  struct Appearance {
-    
-  }
+  struct Appearance {}
 }

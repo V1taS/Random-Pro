@@ -14,6 +14,7 @@ protocol MoviesScreenInteractorInput {}
 
 final class MoviesScreenInteractor: MoviesScreenInteractorInput {
   
-  weak var output: MoviesScreenInteractorOutput?
+  // MARK: - Internal property
   
+  weak var output: MoviesScreenInteractorOutput?
 }

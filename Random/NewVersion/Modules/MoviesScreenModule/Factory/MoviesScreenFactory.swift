@@ -14,6 +14,7 @@ protocol MoviesScreenFactoryInput {}
 
 final class MoviesScreenFactory: MoviesScreenFactoryInput {
   
-  weak var output: MoviesScreenFactoryOutput?
+  // MARK: - Internal property
   
+  weak var output: MoviesScreenFactoryOutput?
 }

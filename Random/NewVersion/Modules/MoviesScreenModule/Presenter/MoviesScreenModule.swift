@@ -63,10 +63,17 @@ final class MoviesScreenViewController: MoviesScreenModule {
   // MARK: - Private func
   
   private func setNavigationBar() {
+    let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
-    title = "Фильмы"
+    title = appearance.setTitle
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
   }
+  
+  @objc private func settingButtonAction() {}
 }
 
 // MARK: - MoviesScreenViewOutput
@@ -84,5 +91,8 @@ extension MoviesScreenViewController: MoviesScreenFactoryOutput {}
 // MARK: - Appearance
 
 extension MoviesScreenViewController {
-  struct Appearance {}
+  struct Appearance {
+    let setTitle = NSLocalizedString("Фильмы", comment: "")
+    let settingsButtonIcon = UIImage(systemName: "gear")
+  }
 }

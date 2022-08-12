@@ -14,9 +14,8 @@ final class MoviesImageScreenView: UIView {
   // MARK: - Private property
   
   private let moviesImageView = UIView()
-  private let ratingImageView = UIView()
-  private let moviewTitleLabel = UILabel()
-  private let numberRatingLabel = UILabel()
+  private let ratingImageView = LabelGradientView()
+  private let moviesTitleLabel = UILabel()
   
   // MARK: - Initialization
   
@@ -36,34 +35,32 @@ final class MoviesImageScreenView: UIView {
   private func applyDefaultBehavior() {
     let appearance = Appearance()
     backgroundColor = RandomColor.secondaryWhite
+
+    moviesImageView.layer.borderWidth = appearance.borderWidthView
+    moviesImageView.layer.cornerRadius = appearance.middleSpacing
     
-    moviesImageView.backgroundColor = .white
-    moviesImageView.layer.borderWidth = appearance.borderWidth
-    moviesImageView.layer.cornerRadius = appearance.moviesLayer
+    moviesTitleLabel.text = appearance.setTextNameFilm
+    moviesTitleLabel.font = RandomFont.primaryRegular18
+    moviesTitleLabel.textColor = RandomColor.primaryGray
+    moviesTitleLabel.textAlignment = .center
     
-    ratingImageView.backgroundColor = .green
-    ratingImageView.layer.borderWidth = appearance.borderWidth
-    ratingImageView.layer.cornerRadius = appearance.ratingLayer
-    
-    moviewTitleLabel.text = appearance.setTextNameFilm
-    moviewTitleLabel.font = RandomFont.primaryRegular18
-    moviewTitleLabel.textColor = RandomColor.primaryGray
-    
-    numberRatingLabel.text = appearance.ratingLabel
-    numberRatingLabel.font = RandomFont.primaryBold16
+    ratingImageView.configureWith(
+      titleText: appearance.setTextRetingLabel,
+      font: RandomFont.primaryBold24,
+      textColor: nil,
+      borderWidth: appearance.borderWidthView,
+      borderColor: RandomColor.primaryBlack,
+      gradientDVLabel: [RandomColor.primaryGreen,
+                        RandomColor.secondaryGreen]
+    )
   }
   
   private func configureLayout() {
     let appearance = Appearance()
     
-    [moviesImageView, moviewTitleLabel, ratingImageView].forEach {
+    [moviesImageView, ratingImageView, moviesTitleLabel].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
-    }
-    
-    [ratingImageView, numberRatingLabel].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      moviesImageView.addSubview($0)
     }
     
     NSLayoutConstraint.activate([
@@ -71,25 +68,22 @@ final class MoviesImageScreenView: UIView {
                                                constant: appearance.averageSpasing),
       moviesImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                 constant: -appearance.averageSpasing),
-      moviesImageView.heightAnchor.constraint(equalToConstant: appearance.heightView),
+      moviesImageView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                              constant: -appearance.heightView),
       moviesImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
                                            constant: appearance.middleSpacing),
       
       ratingImageView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                               constant: appearance.minimumSpasing),
+                                               constant: appearance.intermediateSpasing),
       ratingImageView.topAnchor.constraint(equalTo: moviesImageView.topAnchor,
                                            constant: appearance.averageSpasing),
-      ratingImageView.heightAnchor.constraint(equalToConstant: appearance.minimumSpasing),
-      ratingImageView.widthAnchor.constraint(equalToConstant: appearance.averageSpasing),
       
-      numberRatingLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                 constant: appearance.labelSpasing),
-      numberRatingLabel.topAnchor.constraint(equalTo: moviesImageView.topAnchor,
-                                             constant: appearance.ratingSpasing),
-      
-      moviewTitleLabel.topAnchor.constraint(equalTo: moviesImageView.bottomAnchor,
+      moviesTitleLabel.topAnchor.constraint(equalTo: moviesImageView.bottomAnchor,
                                             constant: appearance.middleSpacing),
-      moviewTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+      moviesTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                constant: appearance.middleSpacing),
+      moviesTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                 constant: -appearance.middleSpacing)
     ])
   }
 }
@@ -99,16 +93,11 @@ final class MoviesImageScreenView: UIView {
 extension MoviesImageScreenView {
   struct Appearance {
     let setTextNameFilm = NSLocalizedString("Name movie", comment: "")
+    let setTextRetingLabel = NSLocalizedString("10.0", comment: "")
     let middleSpacing: CGFloat = 16
-    let minInset: CGFloat = 8
+    let intermediateSpasing: CGFloat = 24
     let averageSpasing: CGFloat = 40
-    let ratingSpasing: CGFloat = 42
-    let minimumSpasing: CGFloat = 24
-    let labelSpasing: CGFloat = 26
-    let heightView: CGFloat = 360
-    let borderWidth: CGFloat = 1
-    let moviesLayer: CGFloat = 16
-    let ratingLayer: CGFloat = 8
-    let ratingLabel = "10.0"
+    let heightView: CGFloat = 140
+    let borderWidthView: CGFloat = 0.2
   }
 }

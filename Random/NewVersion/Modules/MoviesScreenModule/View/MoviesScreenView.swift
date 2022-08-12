@@ -26,6 +26,7 @@ final class MoviesScreenView: MoviesScreenViewProtocol {
   private let moviesSegmentedControl = UISegmentedControl()
   private let moviesImageScreenView = MoviesImageScreenView()
   private let genarateButton = ButtonView()
+  private let advLabel = LabelGradientView()
   
   // MARK: - Initialization
   
@@ -56,7 +57,6 @@ final class MoviesScreenView: MoviesScreenViewProtocol {
     
     genarateButton.setTitle(appearance.setTextButton, for: .normal)
     genarateButton.addTarget(self, action: #selector(genarateButtonAction), for: .touchUpInside)
-
   }
   
   @objc private func moviesSegmentedControlAction() {}

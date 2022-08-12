@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol LetterScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
@@ -22,7 +23,8 @@ protocol LetterScreenModuleOutput: AnyObject {
   func settingButtonAction(model: LetterScreenModel)
 }
 
-protocol LetterScreenModuleInput: AnyObject {
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
+protocol LetterScreenModuleInput {
   
   /// Событие, без повторений
   /// - Parameter isOn: Без повторений `true` или `false`
@@ -74,7 +76,7 @@ final class LetterScreenViewController: LetterScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationBar()
+    setNavigationBar()
     interactor.getContent()
   }
   
@@ -84,27 +86,6 @@ final class LetterScreenViewController: LetterScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
-  }
-  
-  // MARK: - Private func
-  
-  private func navigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
-  }
-  
-  @objc
-  private func settingButtonAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
@@ -143,6 +124,29 @@ extension LetterScreenViewController: LetterScreenInteractorOutput {
 extension LetterScreenViewController: LetterScreenFactoryOutput {
   func didReverseListResult(model: LetterScreenModel) {
     moduleView.updateContentWith(model: model)
+  }
+}
+
+// MARK: - Private
+
+private extension LetterScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
+  }
+  
+  @objc
+  func settingButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
   }
 }
 

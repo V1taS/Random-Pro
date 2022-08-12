@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol CoinScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
@@ -19,11 +20,13 @@ protocol CoinScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected(model: CoinScreenModel)
 }
 
-protocol CoinScreenModuleInput: AnyObject {
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
+protocol CoinScreenModuleInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
+  /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: CoinScreenModuleOutput? { get set }
 }
 
@@ -67,30 +70,11 @@ final class CoinScreenViewController: CoinScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     interactor.getContent()
-    settingNavigationBar()
+    setNavigationBar()
   }
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
-  }
-  
-  // MARK: - Private func
-  
-  private func settingNavigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon, style: .plain,
-                                                        target: self, action: #selector(settingsButtonAction))
-  }
-  
-  @objc
-  private func settingsButtonAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
@@ -124,7 +108,28 @@ extension CoinScreenViewController: CoinScreenFactoryOutput {
   }
 }
 
-// MARK: - Private Appearance
+// MARK: - Private
+
+private extension CoinScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon, style: .plain,
+                                                        target: self, action: #selector(settingsButtonAction))
+  }
+  
+  @objc
+  func settingsButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
+  }
+}
+
+// MARK: - Appearance
 
 private extension CoinScreenViewController {
   struct Appearance {

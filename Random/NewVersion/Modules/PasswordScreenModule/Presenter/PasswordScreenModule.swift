@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol PasswordScreenModuleOutput: AnyObject {}
 
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol PasswordScreenModuleInput {
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
@@ -61,17 +63,6 @@ final class PasswordScreenViewController: PasswordScreenModule {
     setNavigationBar()
     interactor.getContent()
   }
-  
-  // MARK: - Private func
-  
-  private func setNavigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-  }
-  
-  @objc private func cleanButtonAction() {}
 }
 
 // MARK: - PasswordScreenViewOutput
@@ -85,6 +76,20 @@ extension PasswordScreenViewController: PasswordScreenFactoryOutput {}
 // MARK: - PasswordScreenInteractorOutput
 
 extension PasswordScreenViewController: PasswordScreenInteractorOutput {}
+
+// MARK: - Private
+
+private extension PasswordScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+  }
+  
+  @objc
+  func cleanButtonAction() {}
+}
 
 // MARK: - Appearance
 

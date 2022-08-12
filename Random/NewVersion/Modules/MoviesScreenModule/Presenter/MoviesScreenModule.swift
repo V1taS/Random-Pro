@@ -8,10 +8,13 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol MoviesScreenModuleOutput: AnyObject {}
 
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol MoviesScreenModuleInput {
   
+  /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: MoviesScreenModuleOutput? { get set }
 }
 
@@ -59,21 +62,6 @@ final class MoviesScreenViewController: MoviesScreenModule {
     super.viewDidLoad()
     setNavigationBar()
   }
-  
-  // MARK: - Private func
-  
-  private func setNavigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.setTitle
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
-  }
-  
-  @objc private func settingButtonAction() {}
 }
 
 // MARK: - MoviesScreenViewOutput
@@ -88,9 +76,27 @@ extension MoviesScreenViewController: MoviesScreenInteractorOutput {}
 
 extension MoviesScreenViewController: MoviesScreenFactoryOutput {}
 
+// MARK: - Private
+
+private extension MoviesScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.setTitle
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
+  }
+  
+  @objc
+  func settingButtonAction() {}
+}
+
 // MARK: - Appearance
 
-extension MoviesScreenViewController {
+private extension MoviesScreenViewController {
   struct Appearance {
     let setTitle = NSLocalizedString("Фильмы", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")

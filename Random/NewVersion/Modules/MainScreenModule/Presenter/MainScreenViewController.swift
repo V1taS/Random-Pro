@@ -115,30 +115,6 @@ final class MainScreenViewController: MainScreenModule {
   }
 }
 
-// MARK: - Private
-
-private extension MainScreenViewController {
-  func setupNavBar() {
-    let appearance = Appearance()
-    title = appearance.title
-    
-    let adminFeatureToggleImageView = UIImageView()
-    adminFeatureToggleImageView.image = appearance.adminFeatureToggleIcon
-    let adminFeatureToggleTap = UITapGestureRecognizer(target: self,
-                                                       action: #selector(adminFeatureToggleAction))
-    adminFeatureToggleTap.numberOfTapsRequired = appearance.numberOfTapsRequired
-    adminFeatureToggleImageView.addGestureRecognizer(adminFeatureToggleTap)
-    adminFeatureToggleImageView.isUserInteractionEnabled = true
-    adminFeatureToggleTap.cancelsTouchesInView = false
-    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: adminFeatureToggleImageView)
-  }
-  
-  @objc
-  private func adminFeatureToggleAction() {
-    moduleOutput?.adminFeatureToggleAction()
-  }
-}
-
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
@@ -211,11 +187,35 @@ extension MainScreenViewController: MainScreenFactoryOutput {
   }
 }
 
+// MARK: - Private
+
+private extension MainScreenViewController {
+  func setupNavBar() {
+    let appearance = Appearance()
+    title = appearance.title
+    
+    let adminFeatureToggleImageView = UIImageView()
+    adminFeatureToggleImageView.image = appearance.adminFeatureToggleIcon
+    let adminFeatureToggleTap = UITapGestureRecognizer(target: self,
+                                                       action: #selector(adminFeatureToggleAction))
+    adminFeatureToggleTap.numberOfTapsRequired = appearance.numberOfTapsRequired
+    adminFeatureToggleImageView.addGestureRecognizer(adminFeatureToggleTap)
+    adminFeatureToggleImageView.isUserInteractionEnabled = true
+    adminFeatureToggleTap.cancelsTouchesInView = false
+    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: adminFeatureToggleImageView)
+  }
+  
+  @objc
+  func adminFeatureToggleAction() {
+    moduleOutput?.adminFeatureToggleAction()
+  }
+}
+
 // MARK: - Appearance
 
 private extension MainScreenViewController {
   struct Appearance {
-//    let title = "Random"
+    //    let title = "Random"
     let title = "Random (БЕТА)"
     let adminFeatureToggleIcon = UIImage(named: "Empty")
     let numberOfTapsRequired = 1

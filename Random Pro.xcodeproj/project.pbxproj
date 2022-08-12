@@ -72,6 +72,12 @@
 		1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */; };
 		1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */; };
 		1B4EBFFA25FE548E00A41945 /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EBFF925FE548E00A41945 /* TravelView.swift */; };
+		1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065528A6BDF0009AABF2 /* TeamsScreenFactory.swift */; };
+		1B50065B28A6BDF0009AABF2 /* TeamsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065628A6BDF0009AABF2 /* TeamsScreenViewController.swift */; };
+		1B50065C28A6BDF0009AABF2 /* TeamsScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065728A6BDF0009AABF2 /* TeamsScreenAssembly.swift */; };
+		1B50065D28A6BDF0009AABF2 /* TeamsScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065828A6BDF0009AABF2 /* TeamsScreenInteractor.swift */; };
+		1B50065E28A6BDF0009AABF2 /* TeamsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065928A6BDF0009AABF2 /* TeamsScreenView.swift */; };
+		1B50066628A6BE6D009AABF2 /* TeamsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50066528A6BE6D009AABF2 /* TeamsScreenCoordinator.swift */; };
 		1B50E4D22842C19300C7A1D9 /* NumberScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50E4D12842C19300C7A1D9 /* NumberScreenModel.swift */; };
 		1B57F63927872C93005F220C /* PremiumSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F63827872C93005F220C /* PremiumSubscriptionView.swift */; };
 		1B57F63B2787305D005F220C /* TitleWithDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B57F63A2787305C005F220C /* TitleWithDescriptionCell.swift */; };
@@ -290,6 +296,7 @@
 		1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */; };
 		1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */; };
 		1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */; };
+		2B0E1811B270B556201348D8 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A98BAD92EE4B29B5825A96F /* Pods_Random_Pro.framework */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
 		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
@@ -344,7 +351,6 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
-		77412777CA59877EC8C628AC /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE0CD94BA0D9C4F738C0AE9E /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -361,7 +367,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		010BA24241C33D7A0D689B35 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmInformationBestFilmView.swift; sourceTree = "<group>"; };
 		1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmBestHistoryView.swift; sourceTree = "<group>"; };
 		1B0DB26825DC19A600C9D31D /* SKProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProduct.swift; sourceTree = "<group>"; };
@@ -430,6 +435,12 @@
 		1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressActions.swift; sourceTree = "<group>"; };
 		1B4EBFF925FE548E00A41945 /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
+		1B50065528A6BDF0009AABF2 /* TeamsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenFactory.swift; sourceTree = "<group>"; };
+		1B50065628A6BDF0009AABF2 /* TeamsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenViewController.swift; sourceTree = "<group>"; };
+		1B50065728A6BDF0009AABF2 /* TeamsScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenAssembly.swift; sourceTree = "<group>"; };
+		1B50065828A6BDF0009AABF2 /* TeamsScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenInteractor.swift; sourceTree = "<group>"; };
+		1B50065928A6BDF0009AABF2 /* TeamsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenView.swift; sourceTree = "<group>"; };
+		1B50066528A6BE6D009AABF2 /* TeamsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B50E4D12842C19300C7A1D9 /* NumberScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenModel.swift; sourceTree = "<group>"; };
 		1B57F63827872C93005F220C /* PremiumSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumSubscriptionView.swift; sourceTree = "<group>"; };
 		1B57F63A2787305C005F220C /* TitleWithDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithDescriptionCell.swift; sourceTree = "<group>"; };
@@ -703,8 +714,9 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
-		7CA7E79CCE49FAD95B2AF5CE /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
-		EE0CD94BA0D9C4F738C0AE9E /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A98BAD92EE4B29B5825A96F /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92F51A18CF5AC428BADF4C3B /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		B732B49A98A09A4199293949 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -719,7 +731,7 @@
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				77412777CA59877EC8C628AC /* Pods_Random_Pro.framework in Frameworks */,
+				2B0E1811B270B556201348D8 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,6 +933,66 @@
 			path = Travel;
 			sourceTree = "<group>";
 		};
+		1B50065428A6BDCB009AABF2 /* TeamsScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B50066328A6BE11009AABF2 /* Assembly */,
+				1B50066228A6BE0A009AABF2 /* Factory */,
+				1B50066128A6BE04009AABF2 /* Interactor */,
+				1B50066028A6BDFF009AABF2 /* Presenter */,
+				1B50065F28A6BDFA009AABF2 /* View */,
+			);
+			path = TeamsScreenModule;
+			sourceTree = "<group>";
+		};
+		1B50065F28A6BDFA009AABF2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B50065928A6BDF0009AABF2 /* TeamsScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B50066028A6BDFF009AABF2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B50065628A6BDF0009AABF2 /* TeamsScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B50066128A6BE04009AABF2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B50065828A6BDF0009AABF2 /* TeamsScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B50066228A6BE0A009AABF2 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B50065528A6BDF0009AABF2 /* TeamsScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B50066328A6BE11009AABF2 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B50065728A6BDF0009AABF2 /* TeamsScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B50066428A6BE44009AABF2 /* TeamsScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B50066528A6BE6D009AABF2 /* TeamsScreenCoordinator.swift */,
+			);
+			path = TeamsScreenCoordinator;
+			sourceTree = "<group>";
+		};
 		1B50E4D02842C16300C7A1D9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,7 +1043,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				EE0CD94BA0D9C4F738C0AE9E /* Pods_Random_Pro.framework */,
+				8A98BAD92EE4B29B5825A96F /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1582,6 +1654,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1B50065428A6BDCB009AABF2 /* TeamsScreenModule */,
 				6C3C8DBB28A25EB20040FD7C /* MoviesScreenModule */,
 				6CBFD04B289BC36B005F9104 /* PasswordScreenModule */,
 				1B3EF114287AD12400D667E1 /* AdminFeatureToggleModule */,
@@ -1678,6 +1751,8 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				6CE65F8C282D136800272D56 /* YesNoScreenCoordinator */,
+				1B50066428A6BE44009AABF2 /* TeamsScreenCoordinator */,
 				1B3EF125287AD1E100D667E1 /* AdminFeatureToggleCoordinator */,
 				6C3C8DCB28A264D80040FD7C /* MoviesScreenCoordinator */,
 				6CBFD05B289BC75C005F9104 /* PasswordScreenCoordinator */,
@@ -1688,7 +1763,6 @@
 				6C98CBD62833A19100D2E4FA /* CoinScreenCoordinator */,
 				6CA3962C2832531E00F86248 /* LetterScreenCoordinator */,
 				6C7D4D4E282E59FA00A086BC /* DateTimeScreenCoordinator */,
-				6CE65F8C282D136800272D56 /* YesNoScreenCoordinator */,
 			);
 			path = MainScreenCoordinator;
 			sourceTree = "<group>";
@@ -1916,8 +1990,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				010BA24241C33D7A0D689B35 /* Pods-Random Pro.debug.xcconfig */,
-				7CA7E79CCE49FAD95B2AF5CE /* Pods-Random Pro.release.xcconfig */,
+				92F51A18CF5AC428BADF4C3B /* Pods-Random Pro.debug.xcconfig */,
+				B732B49A98A09A4199293949 /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2450,13 +2524,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				3F21E8BE3B9DCCC726C20AA0 /* [CP] Check Pods Manifest.lock */,
+				16F5036CDE0393563BAC53D1 /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				22F68A5FA8994E99542C23E0 /* [CP] Embed Pods Frameworks */,
+				9446363F8C81E75470C81EC3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2497,8 +2571,8 @@
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
 			packageReferences = (
-				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */,
-				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */,
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
 				1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
@@ -2536,43 +2610,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1B225C582619E472001B9124 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\n";
-			showEnvVarsInLog = 0;
-		};
-		22F68A5FA8994E99542C23E0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3F21E8BE3B9DCCC726C20AA0 /* [CP] Check Pods Manifest.lock */ = {
+		16F5036CDE0393563BAC53D1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2592,6 +2630,43 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1B225C582619E472001B9124 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+			showEnvVarsInLog = 0;
+		};
+		9446363F8C81E75470C81EC3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2623,6 +2698,7 @@
 				1B31F62E285F926200A88217 /* ListResultScreenInteractor.swift in Sources */,
 				1B92033425D17DAC0094D2BE /* CoinActions.swift in Sources */,
 				1B8EB62626743221009016BE /* KinopoiskInfoRequest.swift in Sources */,
+				1B50065C28A6BDF0009AABF2 /* TeamsScreenAssembly.swift in Sources */,
 				1B96E0F22820483F00A23880 /* MainScreenInteractor.swift in Sources */,
 				1B14038A2687F394007A5150 /* FPSStatusBarWindow.swift in Sources */,
 				1BF22F1F25D8856000775368 /* TeamView.swift in Sources */,
@@ -2653,6 +2729,7 @@
 				6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */,
 				1B7F669C25D0881300933AD6 /* Main.swift in Sources */,
 				1B9D4558283BDC7C00A85F25 /* SettingsScreenFactory.swift in Sources */,
+				1B50066628A6BE6D009AABF2 /* TeamsScreenCoordinator.swift in Sources */,
 				1B88ED7E27C1589900030202 /* Shake.swift in Sources */,
 				1B6875AB25DB620C006E82D4 /* StoreManager.swift in Sources */,
 				1BDC80D6264DBB77001B0893 /* TravelInteractor.swift in Sources */,
@@ -2769,6 +2846,7 @@
 				1B92034B25D188BE0094D2BE /* CubeActions.swift in Sources */,
 				1B10E541282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift in Sources */,
 				1B7F66FF25D0937100933AD6 /* CellMainView.swift in Sources */,
+				1B50065D28A6BDF0009AABF2 /* TeamsScreenInteractor.swift in Sources */,
 				1B96E0F02820483F00A23880 /* MainScreenViewController.swift in Sources */,
 				6CA3962E2832533A00F86248 /* LetterScreenCoordinator.swift in Sources */,
 				1B7F66A525D0889100933AD6 /* AppActions.swift in Sources */,
@@ -2814,6 +2892,7 @@
 				1B3EF11C287AD17600D667E1 /* AdminFeatureToggleAssembly.swift in Sources */,
 				1B57F6682789E7A4005F220C /* ADV.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
+				1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
 				6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */,
 				1B7F66F825D08E3300933AD6 /* TextFieldUIKit.swift in Sources */,
@@ -2827,6 +2906,7 @@
 				1B8EB60D26740D67009016BE /* URLSessionRequestPerformer.swift in Sources */,
 				1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */,
 				1B7F118025E4046E00FF64A3 /* View.swift in Sources */,
+				1B50065E28A6BDF0009AABF2 /* TeamsScreenView.swift in Sources */,
 				1B7F117425E3F70500FF64A3 /* ContactActions.swift in Sources */,
 				1B1B505626011B0200F73A14 /* MusicView.swift in Sources */,
 				1B9AB8AC25ECC47800BD5CFD /* FilmInformationAllFilmView.swift in Sources */,
@@ -2868,6 +2948,7 @@
 				1B7F66E825D08D7E00933AD6 /* UIScreen.swift in Sources */,
 				1B4EBFFA25FE548E00A41945 /* TravelView.swift in Sources */,
 				1BF22F3225D88F3C00775368 /* Player.swift in Sources */,
+				1B50065B28A6BDF0009AABF2 /* TeamsScreenViewController.swift in Sources */,
 				1B8EB6282674324F009016BE /* KinopoiskInfoResult.swift in Sources */,
 				1B7F66BA25D08A4600933AD6 /* NumberInteractor.swift in Sources */,
 				1BEC8EB725D0B2A700FE3A3F /* NumberSettingsView.swift in Sources */,
@@ -3075,7 +3156,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 010BA24241C33D7A0D689B35 /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = 92F51A18CF5AC428BADF4C3B /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3106,7 +3187,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CA7E79CCE49FAD95B2AF5CE /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = B732B49A98A09A4199293949 /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3156,7 +3237,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */ = {
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
 			requirement = {
@@ -3164,7 +3245,7 @@
 				kind = branch;
 			};
 		};
-		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */ = {
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
 			requirement = {
@@ -3185,12 +3266,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1B92E09E281D54A400398966 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
 			productName = RandomUIKit;
 		};
 		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
 			productName = RandomNetwork;
 		};
 		1BDB1CC92878E31D00F75299 /* Notifications */ = {

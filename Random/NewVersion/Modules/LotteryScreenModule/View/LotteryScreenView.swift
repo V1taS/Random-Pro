@@ -83,7 +83,7 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50

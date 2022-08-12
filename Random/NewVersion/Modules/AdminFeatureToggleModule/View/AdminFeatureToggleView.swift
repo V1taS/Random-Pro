@@ -164,7 +164,7 @@ final class AdminFeatureToggleView: AdminFeatureToggleViewProtocol {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     tableView.backgroundColor = RandomColor.primaryWhite
-    loginContainer.backgroundColor = RandomColor.secondaryWhite
+    loginContainer.backgroundColor = RandomColor.primaryWhite
     
     loginTextField.placeholder = appearance.loginValue
     loginTextField.delegate = self

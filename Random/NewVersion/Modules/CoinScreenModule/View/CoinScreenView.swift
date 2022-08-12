@@ -68,7 +68,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.primaryGray

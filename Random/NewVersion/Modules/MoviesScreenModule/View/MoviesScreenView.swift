@@ -44,7 +44,7 @@ final class MoviesScreenView: MoviesScreenViewProtocol {
   
   private func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     
     moviesSegmentedControl.insertSegment(withTitle: appearance.bestText,
                                          at: appearance.bestIndex,

@@ -34,7 +34,7 @@ final class MoviesImageScreenView: UIView {
   
   private func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
 
     moviesImageView.layer.borderWidth = appearance.borderWidthView
     moviesImageView.layer.cornerRadius = appearance.middleSpacing

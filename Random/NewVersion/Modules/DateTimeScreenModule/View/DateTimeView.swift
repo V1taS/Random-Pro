@@ -77,7 +77,7 @@ final class DateTimeView: DateTimeViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50

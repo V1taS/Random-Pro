@@ -34,7 +34,7 @@ final class DateTimeScreenCoordinator: Coordinator {
   func start() {
     let dateTimeScreenModule = DateTimeAssembly().createModule()
     self.dateTimeScreenModule = dateTimeScreenModule
-    dateTimeScreenModule.moduleOutput = self
+    self.dateTimeScreenModule?.moduleOutput = self
     navigationController.pushViewController(dateTimeScreenModule, animated: true)
   }
 }

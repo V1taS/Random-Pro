@@ -34,7 +34,7 @@ final class LotteryScreenCoordinator: Coordinator {
   func start() {
     let lotteryScreenModule = LotteryScreenAssembly().createModule()
     self.lotteryScreenModule = lotteryScreenModule
-    lotteryScreenModule.moduleOutput = self
+    self.lotteryScreenModule?.moduleOutput = self
     navigationController.pushViewController(lotteryScreenModule, animated: true)
   }
 }

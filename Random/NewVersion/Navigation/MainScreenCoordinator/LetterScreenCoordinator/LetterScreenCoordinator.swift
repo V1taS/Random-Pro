@@ -34,7 +34,7 @@ final class LetterScreenCoordinator: Coordinator {
   func start() {
     let letterScreenModule = LetterScreenAssembly().createModule()
     self.letterScreenModule = letterScreenModule
-    letterScreenModule.moduleOutput = self
+    self.letterScreenModule?.moduleOutput = self
     navigationController.pushViewController(letterScreenModule, animated: true)
   }
 }

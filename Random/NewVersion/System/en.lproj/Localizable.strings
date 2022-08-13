@@ -259,3 +259,6 @@
 "Диапазон букв закончился" = "The range of letters is over";
 "Неверно задан диапазон" = "Incorrect range set";
 "Неверный логин или пароль" = "Wrong login or password";
+"Cгенерировано команд" = "Teams generated";
+"Всего игроков" = "Total Players";
+"Cгенерировано игроков" = "Players generated";

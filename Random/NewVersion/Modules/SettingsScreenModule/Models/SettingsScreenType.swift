@@ -20,6 +20,8 @@ enum SettingsScreenType {
       return [.withoutRepetition, .itemsGenerated, .lastItem, .listOfItems, .cleanButton]
     case .yesOrNo, .coin, .dateAndTime, .lottery:
       return [.itemsGenerated, .lastItem, .listOfItems, .cleanButton]
+    case .teams:
+      return [.generatedTeamsCount, .allPlayersCount, .generatedPlayersCount, .listPlayersAction, .cleanButton]
     default: return []
     }
   }
@@ -83,5 +85,17 @@ enum SettingsScreenType {
     
     /// Кнопка очистить
     case cleanButton
+    
+    /// Количество сгенерированных команд
+    case generatedTeamsCount
+    
+    /// Количество всех игороков
+    case allPlayersCount
+    
+    /// Количество сгенерированных игроков
+    case generatedPlayersCount
+    
+    /// Перейти на список игроков
+    case listPlayersAction
   }
 }

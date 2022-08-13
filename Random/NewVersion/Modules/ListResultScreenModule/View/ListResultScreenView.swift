@@ -74,8 +74,8 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
   }
   
   private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.secondaryWhite
+    tableView.backgroundColor = RandomColor.secondaryWhite
     
     // Сами self(SettingsScreenView) получает события от tableView
     tableView.delegate = self

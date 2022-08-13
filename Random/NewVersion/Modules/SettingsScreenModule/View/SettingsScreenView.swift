@@ -78,13 +78,13 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
       tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
-      tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
   private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.secondaryWhite
+    tableView.backgroundColor = RandomColor.secondaryWhite
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -109,9 +109,8 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 // MARK: - UITableViewDelegate
 
 extension SettingsScreenView: UITableViewDelegate {
-  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard models[indexPath.row] is SettingsScreenType.ListOfObjectsSettingsModel else {
+    guard models[indexPath.row] is SettingsScreenType.TitleAndImageModel else {
       return
     }
     output?.listOfObjectsAction()
@@ -130,60 +129,49 @@ extension SettingsScreenView: UITableViewDataSource {
     var viewCell = UITableViewCell()
     viewCell.isHiddenSeparator = false
     
-    if let model = model as? SettingsScreenType.WithoutRepetitionSettingsModel {
-      let cell = tableView.dequeueReusableCell(
+    if let model = model as? SettingsScreenType.TitleAndSwitcherModel {
+      if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndSwitchCell.reuseIdentifier
-      ) as! LabelAndSwitchCell
-      
-      cell.configureCellWith(titleText: model.title,
-                             isResultSwitch: model.isEnabled)
-      cell.switchAction = { [weak self] isOn in
-        self?.output?.withoutRepetitionAction(isOn: isOn)
+      ) as? LabelAndSwitchCell {
+        cell.configureCellWith(titleText: model.title,
+                               isResultSwitch: model.isEnabled)
+        cell.switchAction = { [weak self] isOn in
+          self?.output?.withoutRepetitionAction(isOn: isOn)
+        }
+        viewCell = cell
       }
-      viewCell = cell
     }
     
-    if let model = model as? SettingsScreenType.CountGeneratedSettingsModel {
-      let cell = tableView.dequeueReusableCell(
+    if let model = model as? SettingsScreenType.TitleAndDescriptionModel {
+      if let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
-      ) as! DoubleTitleCell
-      
-      cell.configureCellWith(primaryText: model.title,
-                             secondaryText: model.countGeneratedText)
-      viewCell = cell
+      ) as? DoubleTitleCell {
+        cell.configureCellWith(primaryText: model.title,
+                               secondaryText: model.description)
+        viewCell = cell
+      }
     }
     
-    if let model = model as? SettingsScreenType.LastObjectSettingsModel {
-      let cell = tableView.dequeueReusableCell(
-        withIdentifier: DoubleTitleCell.reuseIdentifier
-      ) as! DoubleTitleCell
-      
-      cell.configureCellWith(primaryText: model.title,
-                             secondaryText: model.lastObjectText)
-      viewCell = cell
-    }
-    
-    if let model = model as? SettingsScreenType.ListOfObjectsSettingsModel {
-      let cell = tableView.dequeueReusableCell(
+    if let model = model as? SettingsScreenType.TitleAndImageModel {
+      if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndImageCell.reuseIdentifier
-      ) as! LabelAndImageCell
-      
-      cell.configureCellWith(titleText: model.title,
-                             imageAside: model.asideImage)
-      viewCell = cell
+      ) as? LabelAndImageCell {
+        cell.configureCellWith(titleText: model.title,
+                               imageAside: model.asideImage)
+        viewCell = cell
+      }
     }
     
-    if let model = model as? SettingsScreenType.CleanButtonSettingsModel {
-      let cell = tableView.dequeueReusableCell(
+    if let model = model as? SettingsScreenType.CleanButtonModel {
+      if let cell = tableView.dequeueReusableCell(
         withIdentifier: SmallButtonCell.reuseIdentifier
-      ) as! SmallButtonCell
-      
-      cell.action = { [weak self] in
-        self?.output?.cleanButtonAction()
+      ) as? SmallButtonCell {
+        cell.action = { [weak self] in
+          self?.output?.cleanButtonAction()
+        }
+        cell.configureCellWith(titleButton: model.title)
+        viewCell = cell
       }
-      cell.configureCellWith(titleButton: model.title)
-      
-      viewCell = cell
     }
     
     if tableView.isFirst(for: indexPath) {

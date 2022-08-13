@@ -8,7 +8,12 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в  `другой модуль`
-protocol TeamsScreenModuleOutput: AnyObject {}
+protocol TeamsScreenModuleOutput: AnyObject {
+  
+  /// Была нажата кнопка (настройки)
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: TeamsScreenModel)
+}
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol TeamsScreenModuleInput {
@@ -32,6 +37,7 @@ final class TeamsScreenViewController: TeamsScreenModule {
   private let interactor: TeamsScreenInteractorInput
   private let moduleView: TeamsScreenViewProtocol
   private let factory: TeamsScreenFactoryInput
+  private var cacheModel: TeamsScreenModel?
   
   // MARK: - Initialization
   
@@ -62,6 +68,7 @@ final class TeamsScreenViewController: TeamsScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    interactor.getContent()
     setNavigationBar()
   }
 }
@@ -72,7 +79,11 @@ extension TeamsScreenViewController: TeamsScreenViewOutput {}
 
 // MARK: - TeamsScreenInteractorOutput
 
-extension TeamsScreenViewController: TeamsScreenInteractorOutput {}
+extension TeamsScreenViewController: TeamsScreenInteractorOutput {
+  func didRecive(model: TeamsScreenModel) {
+    cacheModel = model
+  }
+}
 
 // MARK: - TeamsScreenFactoryOutput
 
@@ -95,7 +106,10 @@ private extension TeamsScreenViewController {
   
   @objc
   func settingButtonAction() {
-    // TODO: -
+    guard let cacheModel = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: cacheModel)
   }
 }
 

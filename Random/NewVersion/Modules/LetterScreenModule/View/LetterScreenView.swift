@@ -63,7 +63,7 @@ final class LetterScreenView: LetterScreenViewProtocol {
   
   private func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray

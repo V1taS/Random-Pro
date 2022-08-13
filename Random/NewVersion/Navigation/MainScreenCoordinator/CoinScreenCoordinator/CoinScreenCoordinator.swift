@@ -30,7 +30,7 @@ final class CoinScreenCoordinator: Coordinator {
   func start() {
     let coinScreenModule = CoinScreenAssembly().createModule()
     self.coinScreenModule = coinScreenModule
-    coinScreenModule.moduleOutput = self
+    self.coinScreenModule?.moduleOutput = self
     navigationController.pushViewController(coinScreenModule, animated: true)
   }
 }

@@ -97,26 +97,6 @@ final class NumberScreenViewController: NumberScreenModule {
   func cleanButtonAction() {
     interactor.cleanButtonAction()
   }
-  
-  // MARK: - Private func
-  
-  private func setupNavBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
-  }
-  
-  @objc
-  private func settingButtonAction() {
-    guard let cacheModel = cacheModel else { return }
-    moduleOutput?.settingButtonAction(model: cacheModel)
-  }
 }
 
 // MARK: - NumberScreenViewOutput
@@ -182,6 +162,28 @@ extension NumberScreenViewController: NumberScreenInteractorOutput {
   
   func didReciveRangeEnd(text: String?) {
     moduleView.setRangeEnd(text)
+  }
+}
+
+// MARK: - Private
+
+private extension NumberScreenViewController {
+  func setupNavBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
+  }
+  
+  @objc
+  func settingButtonAction() {
+    guard let cacheModel = cacheModel else { return }
+    moduleOutput?.settingButtonAction(model: cacheModel)
   }
 }
 

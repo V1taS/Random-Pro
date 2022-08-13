@@ -10,7 +10,7 @@ import Foundation
 
 protocol SettingsScreenModel {
   
-  /// Результат генерации
+  /// Последний результат генерации
   var result: String { get }
   
   /// Список результатов
@@ -24,5 +24,13 @@ extension SettingsScreenModel {
   
   var isEnabledWithoutRepetition: Bool {
     return false
+  }
+  
+  var result: String {
+    return "?"
+  }
+  
+  var listResult: [String] {
+    return []
   }
 }

@@ -64,7 +64,7 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
   // MARK: - Private func
   
   private func setupDefaultSettings() {
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray

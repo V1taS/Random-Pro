@@ -8,7 +8,9 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol LotteryScreenModuleOutput: AnyObject {
+  
   /// Неправильный диапазон чисел
   func didReciveRangeError()
   
@@ -25,7 +27,8 @@ protocol LotteryScreenModuleOutput: AnyObject {
   func resultLabelAction(model: LotteryScreenModel)
 }
 
-protocol LotteryScreenModuleInput: AnyObject {
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
+protocol LotteryScreenModuleInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
@@ -75,33 +78,12 @@ final class LotteryScreenViewController: LotteryScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationBar()
+    setNavigationBar()
     interactor.getContent()
   }
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
-  }
-  
-  // MARK: - Private func
-  
-  private func navigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
-  }
-  
-  @objc
-  private func settingButtonAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
@@ -144,6 +126,29 @@ extension LotteryScreenViewController: LotteryScreenInteractorOutput {
 extension LotteryScreenViewController: LotteryScreenFactoryOutput {
   func didReverseListResult(model: LotteryScreenModel) {
     moduleView.updateContentWith(model: model)
+  }
+}
+
+// MARK: - Private
+
+private extension LotteryScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
+  }
+  
+  @objc
+  func settingButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
   }
 }
 

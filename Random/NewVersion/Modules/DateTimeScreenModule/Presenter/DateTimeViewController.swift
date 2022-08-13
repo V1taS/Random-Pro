@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol DateTimeModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
@@ -23,7 +24,8 @@ protocol DateTimeModuleOutput: AnyObject {
   func resultLabelAction(model: DateTimeScreenModel)
 }
 
-protocol DateTimeModuleInput: AnyObject {
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
+protocol DateTimeModuleInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
@@ -70,33 +72,11 @@ final class DateTimeViewController: DateTimeModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     interactor.getContent()
-    navigationBar()
+    setNavigationBar()
   }
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
-  }
-  
-  // MARK: - Private func
-  
-  private func navigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
-  }
-  
-  @objc
-  private func settingButtonAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(model: model)
   }
 }
 
@@ -149,9 +129,33 @@ extension DateTimeViewController: DateTimeFactoryOutput {
   }
 }
 
-// MARK: - Private Appearance
+// MARK: - Private
 
-extension DateTimeViewController {
+private extension DateTimeViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
+  }
+  
+  @objc
+  func settingButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: model)
+  }
+}
+
+// MARK: - Appearance
+
+private extension DateTimeViewController {
   struct Appearance {
     let title = NSLocalizedString("Дата и время", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")

@@ -97,7 +97,7 @@ final class PhrasePasswordView: UIView {
   
   private func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     
     phraseLabel.text = appearance.phrase + ":"
     phraseLabel.font = RandomFont.primaryBold18

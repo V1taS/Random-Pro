@@ -10,10 +10,10 @@ import UIKit
 
 extension SettingsScreenType {
   
-  // MARK: - WithoutRepetitionSettingsModel
+  // MARK: - TitleAndSwitcherModel
   
   /// Моделька - `Без повторений`
-  struct WithoutRepetitionSettingsModel {
+  struct TitleAndSwitcherModel {
     
     /// Заголовок
     let title: String
@@ -22,34 +22,22 @@ extension SettingsScreenType {
     let isEnabled: Bool
   }
   
-  // MARK: - CountGeneratedSettingsModel
+  // MARK: - TitleAndDescriptionModel
   
   /// Моделька - `Количество объектов сгенерировано`
-  struct CountGeneratedSettingsModel {
+  struct TitleAndDescriptionModel {
     
     /// Заголовок
     let title: String
     
-    /// Количество объектов сгенерировано
-    let countGeneratedText: String
+    /// Описание
+    let description: String
   }
   
-  // MARK: - LastObjectSettingsModel
-  
-  /// Моделька - `Последний сгенерированный объект`
-  struct LastObjectSettingsModel {
-    
-    /// Заголовок
-    let title: String
-    
-    /// Последний сгенерированный объект
-    let lastObjectText: String
-  }
-  
-  // MARK: - ListOfObjectsSettingsModel
+  // MARK: - TitleAndImageModel
   
   /// Моделька - `Список объектов`
-  struct ListOfObjectsSettingsModel {
+  struct TitleAndImageModel {
     
     /// Заголовок
     let title: String
@@ -58,10 +46,10 @@ extension SettingsScreenType {
     let asideImage: UIImage?
   }
   
-  // MARK: - CleanButtonSettingsModel
+  // MARK: - CleanButtonModel
   
   /// Моделька - `Кнопка очистеть`
-  struct CleanButtonSettingsModel {
+  struct CleanButtonModel {
     
     /// Заголовок
     let title: String

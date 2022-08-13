@@ -24,8 +24,8 @@ struct MainScreenCellModel {
     
     /// Общий список ячеек
     static var allCases: [MainScreenCellModel.MainScreenCell] = [
-      .films(advLabel: .none, isEnabled: true),
-      .teams(advLabel: .none, isEnabled: true),
+      .films(advLabel: .new, isEnabled: true),
+      .teams(advLabel: .new, isEnabled: true),
       .number(advLabel: .none, isEnabled: true),
       .yesOrNo(advLabel: .none, isEnabled: true),
       .letter(advLabel: .none, isEnabled: true),
@@ -35,7 +35,7 @@ struct MainScreenCellModel {
       .dateAndTime(advLabel: .none, isEnabled: true),
       .lottery(advLabel: .none, isEnabled: true),
       .contact(advLabel: .none, isEnabled: true),
-      .password(advLabel: .none, isEnabled: true),
+      .password(advLabel: .new, isEnabled: true),
       .russianLotto(advLabel: .none, isEnabled: true)
     ]
     

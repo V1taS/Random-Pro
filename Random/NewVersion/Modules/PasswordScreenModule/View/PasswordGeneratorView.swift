@@ -125,7 +125,7 @@ final class PasswordGeneratorView: UIView {
   
   private func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     
     settingOptionsLabel.text = appearance.parameters + ":"
     settingOptionsLabel.textColor = RandomColor.primaryGray

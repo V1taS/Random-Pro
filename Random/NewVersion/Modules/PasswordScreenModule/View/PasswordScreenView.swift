@@ -45,7 +45,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
   
   private func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
     
     passwordSegmentedControl.insertSegment(withTitle: appearance.generatePassword,
                                            at: appearance.passwordIndex,
@@ -111,8 +111,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       genarateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                constant: -appearance.middleHorizontalSpacing),
       genarateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSpacing),
-      genarateButton.heightAnchor.constraint(equalToConstant: appearance.buttonHeightSpacing)
+                                             constant: -appearance.middleHorizontalSpacing)
     ])
   }
 }
@@ -127,7 +126,6 @@ private extension PasswordScreenView {
     let middleHorizontalSpacing: CGFloat = 16
     let minVerticalInset: CGFloat = 8
     let passwordHeightSpacing: CGFloat = 28
-    let buttonHeightSpacing: CGFloat = 52
     let passwordIndex: Int = 0
     let phraseIndex: Int = 1
   }

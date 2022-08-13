@@ -74,34 +74,75 @@ private extension SettingsScreenFactory {
     typeObject.allCasesIterable.forEach { caseIterable in
       switch caseIterable {
       case .withoutRepetition:
-        let model = SettingsScreenType.WithoutRepetitionSettingsModel(
+        let model = SettingsScreenType.TitleAndSwitcherModel(
           title: appearance.withoutRepetitionTitle,
           isEnabled: model.isEnabledWithoutRepetition
         )
         models.append(model)
       case .itemsGenerated:
-        let model = SettingsScreenType.CountGeneratedSettingsModel(
+        let model = SettingsScreenType.TitleAndDescriptionModel(
           title: appearance.countGeneratedTitle,
-          countGeneratedText: "\(model.listResult.count)"
+          description: "\(model.listResult.count)"
         )
         models.append(model)
       case .lastItem:
-        let model = SettingsScreenType.LastObjectSettingsModel(
+        let model = SettingsScreenType.TitleAndDescriptionModel(
           title: appearance.latestGeneration,
-          lastObjectText: model.result
+          description: model.result
         )
         models.append(model)
       case .listOfItems:
         if !model.listResult.isEmpty {
-          let model = SettingsScreenType.ListOfObjectsSettingsModel(
+          let model = SettingsScreenType.TitleAndImageModel(
             title: appearance.numberOfGenerations,
             asideImage: appearance.listOfNumbersIcon
           )
           models.append(model)
         }
       case .cleanButton:
-        let model = SettingsScreenType.CleanButtonSettingsModel(
+        let model = SettingsScreenType.CleanButtonModel(
           title: appearance.cleanButtonTitle
+        )
+        models.append(model)
+      case .generatedTeamsCount:
+        guard let playerModel = model as? TeamsScreenModel else {
+          return
+        }
+        
+        let model = SettingsScreenType.TitleAndDescriptionModel(
+          title: appearance.generatedTeamsCountTitle,
+          description: "\(playerModel.teams.count)"
+        )
+        models.append(model)
+      case .allPlayersCount:
+        guard let playerModel = model as? TeamsScreenModel else {
+          return
+        }
+        
+        let model = SettingsScreenType.TitleAndDescriptionModel(
+          title: appearance.allPlayersCount,
+          description: "\(playerModel.allPlayers.count)"
+        )
+        models.append(model)
+      case .generatedPlayersCount:
+        guard let playerModel = model as? TeamsScreenModel else {
+          return
+        }
+        
+        var generatedPlayersCount: Int = .zero
+        playerModel.teams.forEach {
+          generatedPlayersCount += $0.players.count
+        }
+        
+        let model = SettingsScreenType.TitleAndDescriptionModel(
+          title: appearance.generatedPlayersCount,
+          description: "\(generatedPlayersCount)"
+        )
+        models.append(model)
+      case .listPlayersAction:
+        let model = SettingsScreenType.TitleAndImageModel(
+          title: appearance.listPlayersActionTitle,
+          asideImage: appearance.listOfNumbersIcon
         )
         models.append(model)
       }
@@ -125,6 +166,15 @@ private extension SettingsScreenFactory {
     let listOfNumbersIcon = UIImage(systemName: "chevron.compact.right")
     
     let numberOfGenerations = NSLocalizedString("Список результатов",
+                                                comment: "")
+    let listPlayersActionTitle = NSLocalizedString("Список игроков",
+                                                comment: "")
+    
+    let generatedTeamsCountTitle = NSLocalizedString("Cгенерировано команд",
+                                                comment: "")
+    let allPlayersCount = NSLocalizedString("Всего игроков",
+                                                comment: "")
+    let generatedPlayersCount = NSLocalizedString("Cгенерировано игроков",
                                                 comment: "")
   }
 }

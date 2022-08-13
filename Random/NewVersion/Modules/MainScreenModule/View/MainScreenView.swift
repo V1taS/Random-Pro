@@ -109,19 +109,22 @@ final class MainScreenView: MainScreenViewProtocol {
     }
     
     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: topAnchor, constant: appearance.collectionViewInsets.top),
-      collectionView.leftAnchor.constraint(equalTo: leftAnchor, constant: appearance.collectionViewInsets.left),
-      collectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -appearance.collectionViewInsets.right),
-      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -appearance.collectionViewInsets.bottom),
+      collectionView.topAnchor.constraint(equalTo: topAnchor,
+                                          constant: appearance.collectionViewInsets.top),
+      collectionView.leftAnchor.constraint(equalTo: leftAnchor,
+                                           constant: appearance.collectionViewInsets.left),
+      collectionView.rightAnchor.constraint(equalTo: rightAnchor,
+                                            constant: -appearance.collectionViewInsets.right),
+      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                             constant: -appearance.collectionViewInsets.bottom),
     ])
   }
   
   private func applyDefaultBehavior() {
     let appearance = Appearance()
+    backgroundColor = RandomColor.primaryWhite
     
-    backgroundColor = appearance.backgroundColor
-    collectionView.backgroundColor = appearance.backgroundColor
-    
+    collectionView.backgroundColor = RandomColor.primaryWhite
     collectionView.alwaysBounceVertical = true
     collectionView.register(MainScreenCollectionViewCell.self,
                             forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)
@@ -199,7 +202,6 @@ extension MainScreenView: UICollectionViewDataSource {
 private extension MainScreenView {
   struct Appearance {
     let collectionViewInsets: UIEdgeInsets = .zero
-    let backgroundColor = RandomColor.secondaryWhite
     let estimatedRowHeight: CGFloat = 95
     let sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     let cellWidthConstant = UIScreen.main.bounds.width * 0.45

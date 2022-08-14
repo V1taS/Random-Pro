@@ -121,12 +121,14 @@ extension ListResultScreenView: UITableViewDataSource {
     if tableView.isFirst(for: indexPath) {
       cell.layer.cornerRadius = Appearance().cornerRadius
       cell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+      cell.clipsToBounds = true
     }
     
     if tableView.isLast(for: indexPath) {
       cell.isHiddenSeparator = true
       cell.layer.cornerRadius = Appearance().cornerRadius
       cell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+      cell.clipsToBounds = true
     }
     return cell
   }

@@ -177,14 +177,15 @@ extension SettingsScreenView: UITableViewDataSource {
     if tableView.isFirst(for: indexPath) {
       viewCell.layer.cornerRadius = Appearance().cornerRadius
       viewCell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+      viewCell.clipsToBounds = true
     }
     
     if tableView.isLast(for: indexPath) {
       viewCell.isHiddenSeparator = true
       viewCell.layer.cornerRadius = Appearance().cornerRadius
       viewCell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+      viewCell.clipsToBounds = true
     }
-    
     return viewCell
   }
 }

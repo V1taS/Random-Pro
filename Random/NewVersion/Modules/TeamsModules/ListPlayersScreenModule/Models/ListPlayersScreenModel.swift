@@ -37,7 +37,7 @@ struct ListPlayersScreenModel: UserDefaultsCodable {
   enum PlayerState: String, UserDefaultsCodable {
     
     /// Состояние по умолчанию
-    case random
+    case random = ""
     
     /// Принудительно в команду один
     case teamOne

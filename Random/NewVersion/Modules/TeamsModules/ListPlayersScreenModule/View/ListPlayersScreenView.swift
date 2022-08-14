@@ -12,7 +12,8 @@ import RandomUIKit
 protocol ListPlayersScreenViewOutput: AnyObject {
   
   /// Было добавлено имя игрока
-  func addedPlayer(neme: String?)
+  ///  - Parameter name: Имя игрока
+  func playerAdded(name: String?)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -36,6 +37,7 @@ final class ListPlayersScreenView: ListPlayersScreenViewProtocol {
   // MARK: - Private properties
   
   private let tableView = UITableView()
+  private let textField = TextFieldView()
   private var models: [ListPlayersScreenType] = []
   
   // MARK: - Initialization
@@ -61,23 +63,28 @@ final class ListPlayersScreenView: ListPlayersScreenViewProtocol {
   // MARK: - Private func
   
   private func configureLayout() {
+    let appearance = Appearance()
     [tableView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
       tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
   private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.secondaryWhite
+    tableView.backgroundColor = RandomColor.secondaryWhite
     
+    textField.placeholder = "Создай игрока"
+    textField.delegate = self
+    
+    tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
     
@@ -87,6 +94,8 @@ final class ListPlayersScreenView: ListPlayersScreenViewProtocol {
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
     tableView.register(TextFieldWithButtonCell.self,
                        forCellReuseIdentifier: TextFieldWithButtonCell.reuseIdentifier)
+    tableView.register(DividerTableViewCell.self,
+                       forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
     
     tableView.tableFooterView = UIView()
     tableView.tableHeaderView = UIView()
@@ -111,8 +120,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
     var viewCell = UITableViewCell()
-    viewCell.isHiddenSeparator = false
-    
+
     switch model {
     case .player(let playerModel):
       if let cell = tableView.dequeueReusableCell(
@@ -122,7 +130,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
           avatar: UIImage(data: playerModel.avatar ?? Data()),
           namePlayer: playerModel.name,
           nameTeam: playerModel.state.rawValue,
-          emoji: Character(playerModel.emoji ?? ""),
+          emoji: Character(playerModel.emoji ?? " "),
           emojiAction: {
             // TODO: - to do
           },
@@ -137,26 +145,34 @@ extension ListPlayersScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
+        cell.backgroundColor = RandomColor.primaryWhite
+        cell.contentView.backgroundColor = RandomColor.primaryWhite
         viewCell = cell
       }
-    case .textField(let placeholder):
+    case .textField:
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: TextFieldWithButtonCell.reuseIdentifier
       ) as? TextFieldWithButtonCell {
-        let textField = TextFieldView()
-        textField.placeholder = placeholder
-        textField.delegate = self
+        let checkmarkImage = UIImage(systemName: Appearance().checkmarkImageName,
+                                     withConfiguration: Appearance().largeConfig)
         
         cell.configureCellWith(
           textField: textField,
-          buttonImageSystemName: Appearance().buttonImageSystemName,
+          buttonImage: checkmarkImage,
           buttonAction: { [weak self] in
             guard let self = self else {
               return
             }
-            self.output?.addedPlayer(neme: textField.text)
+            self.output?.playerAdded(name: self.textField.text)
+            self.textField.text = nil
           }
         )
+        viewCell = cell
+      }
+    case .divider:
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: DividerTableViewCell.reuseIdentifier
+      ) as? DividerTableViewCell {
         viewCell = cell
       }
     }
@@ -164,12 +180,13 @@ extension ListPlayersScreenView: UITableViewDataSource {
     if tableView.isFirst(for: indexPath) {
       viewCell.layer.cornerRadius = Appearance().cornerRadius
       viewCell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+      viewCell.clipsToBounds = true
     }
     
     if tableView.isLast(for: indexPath) {
-      viewCell.isHiddenSeparator = true
       viewCell.layer.cornerRadius = Appearance().cornerRadius
       viewCell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+      viewCell.clipsToBounds = true
     }
     return viewCell
   }
@@ -195,6 +212,9 @@ private extension ListPlayersScreenView {
   struct Appearance {
     let inset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     let cornerRadius: CGFloat = 8
-    let buttonImageSystemName = "checkmark.circle.fill"
+    let largeConfig = UIImage.SymbolConfiguration(pointSize: 20,
+                                                  weight: .bold,
+                                                  scale: .large)
+    let checkmarkImageName = "checkmark.circle.fill"
   }
 }

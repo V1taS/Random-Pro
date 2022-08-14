@@ -20,5 +20,8 @@ enum ListPlayersScreenType {
   case insets(Double)
   
   /// Секция текстового поля
-  case textField(String?)
+  case textField
+  
+  /// Разделитель
+  case divider
 }

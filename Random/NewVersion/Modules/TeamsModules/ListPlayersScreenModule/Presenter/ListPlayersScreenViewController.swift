@@ -15,6 +15,10 @@ protocol ListPlayersScreenModuleOutput: AnyObject {
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol ListPlayersScreenModuleInput {
   
+  /// Обновить контент
+  ///  - Parameter models: Модели игроков
+  func updateContentWith<T: PlayerProtocol>(models: [T])
+  
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: ListPlayersScreenModuleOutput? { get set }
 }
@@ -24,8 +28,6 @@ typealias ListPlayersScreenModule = UIViewController & ListPlayersScreenModuleIn
 
 /// Презентер
 final class ListPlayersScreenViewController: ListPlayersScreenModule {
-  
-  // MARK: - Public properties
   
   // MARK: - Internal properties
   
@@ -65,18 +67,24 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    interactor.getContent()
     
+    interactor.getContent()
     title = "Appearance().title"
     navigationItem.largeTitleDisplayMode = .never
+  }
+  
+  // MARK: - Internal func
+  
+  func updateContentWith<T: PlayerProtocol>(models: [T]) {
+    interactor.updateContentWith(models: models)
   }
 }
 
 // MARK: - ListPlayersScreenViewOutput
 
 extension ListPlayersScreenViewController: ListPlayersScreenViewOutput {
-  func addedPlayer(neme: String?) {
-    // TODO: -
+  func playerAdded(name: String?) {
+    interactor.playerAdd(name: name)
   }
 }
 

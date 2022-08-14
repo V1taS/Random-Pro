@@ -34,12 +34,24 @@ final class ListPlayersScreenFactory: ListPlayersScreenFactoryInput {
   
   func createListModelFrom(players: [ListPlayersScreenModel.Player]) {
     var model: [ListPlayersScreenType] = []
+    var playersCount = 0
     
-    players.forEach {
-      model.append(.player($0))
+    model.append(.insets(16))
+    model.append(.textField)
+    model.append(.insets(16))
+    
+    if !players.isEmpty {
+      model.append(.divider)
     }
     
-    model.append(.textField("Плейсхолдер"))
+    players.reversed().forEach {
+      playersCount += 1
+      model.append(.player($0))
+      
+      if playersCount != players.count {
+        model.append(.divider)
+      }
+    }
     output?.didRecive(model: model)
   }
 }

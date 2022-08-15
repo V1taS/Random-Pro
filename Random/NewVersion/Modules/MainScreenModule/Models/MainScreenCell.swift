@@ -31,7 +31,7 @@ struct MainScreenCellModel {
       .letter(advLabel: .none, isEnabled: true),
       .list(advLabel: .none, isEnabled: true),
       .coin(advLabel: .none, isEnabled: true),
-      .cube(advLabel: .none, isEnabled: true),
+      .cube(advLabel: .new, isEnabled: true),
       .dateAndTime(advLabel: .none, isEnabled: true),
       .lottery(advLabel: .none, isEnabled: true),
       .contact(advLabel: .none, isEnabled: true),

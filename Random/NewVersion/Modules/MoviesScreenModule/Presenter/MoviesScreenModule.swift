@@ -76,7 +76,7 @@ extension MoviesScreenViewController: MoviesScreenInteractorOutput {}
 
 extension MoviesScreenViewController: MoviesScreenFactoryOutput {}
 
-// MARK: - Private
+// MARK: - Private func
 
 private extension MoviesScreenViewController {
   func setNavigationBar() {

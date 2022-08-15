@@ -329,6 +329,13 @@
 		6C7D4D4B282E558400A086BC /* DateTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4A282E558400A086BC /* DateTimeFactory.swift */; };
 		6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4C282E558E00A086BC /* DateTimeAssembly.swift */; };
 		6C7D4D50282E5A1D00A086BC /* DateTimeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */; };
+		6C8E74A928AA5686006474EB /* CubesScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E74A828AA5686006474EB /* CubesScreenView.swift */; };
+		6C8E74AB28AA5743006474EB /* CubesScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E74AA28AA5743006474EB /* CubesScreenModule.swift */; };
+		6C8E74AD28AA57D7006474EB /* CubesScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E74AC28AA57D7006474EB /* CubesScreenInteractor.swift */; };
+		6C8E74AF28AA5813006474EB /* CubesScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E74AE28AA5813006474EB /* CubesScreenFactory.swift */; };
+		6C8E74B128AA5838006474EB /* CubesScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E74B028AA5838006474EB /* CubesScreenAssembly.swift */; };
+		6C8E74B428AA5B94006474EB /* CubesScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E74B328AA5B94006474EB /* CubesScreenCoordinator.swift */; };
+		6C8E74B628AA7D6A006474EB /* CubesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C8E74B528AA7D6A006474EB /* CubesView.swift */; };
 		6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBCC28339EB900D2E4FA /* CoinScreenView.swift */; };
 		6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBCE28339F5A00D2E4FA /* CoinScreenModule.swift */; };
 		6C98CBD128339FE300D2E4FA /* CoinScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBD028339FE300D2E4FA /* CoinScreenInteractor.swift */; };
@@ -361,6 +368,7 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
+		6D5CF60DCFCB5BB36F22DC45 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C588038D05549F7646DEC1ED /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -694,6 +702,7 @@
 		6C3C8DC928A25F4F0040FD7C /* MoviesScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesScreenAssembly.swift; sourceTree = "<group>"; };
 		6C3C8DCC28A264F50040FD7C /* MoviesScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesScreenCoordinator.swift; sourceTree = "<group>"; };
 		6C3C8DCE28A26B0F0040FD7C /* MoviesImageScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesImageScreenView.swift; sourceTree = "<group>"; };
+		6C719BCD5E2A3083359F34FD /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 		6C7662C7287A34D10069C13E /* CoinScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenModel.swift; sourceTree = "<group>"; };
 		6C7662CA287A430A0069C13E /* DateTimeScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeScreenModel.swift; sourceTree = "<group>"; };
 		6C7662CD287A4B210069C13E /* LotteryScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModel.swift; sourceTree = "<group>"; };
@@ -703,6 +712,13 @@
 		6C7D4D4A282E558400A086BC /* DateTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeFactory.swift; sourceTree = "<group>"; };
 		6C7D4D4C282E558E00A086BC /* DateTimeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeAssembly.swift; sourceTree = "<group>"; };
 		6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeScreenCoordinator.swift; sourceTree = "<group>"; };
+		6C8E74A828AA5686006474EB /* CubesScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesScreenView.swift; sourceTree = "<group>"; };
+		6C8E74AA28AA5743006474EB /* CubesScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesScreenModule.swift; sourceTree = "<group>"; };
+		6C8E74AC28AA57D7006474EB /* CubesScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesScreenInteractor.swift; sourceTree = "<group>"; };
+		6C8E74AE28AA5813006474EB /* CubesScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesScreenFactory.swift; sourceTree = "<group>"; };
+		6C8E74B028AA5838006474EB /* CubesScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesScreenAssembly.swift; sourceTree = "<group>"; };
+		6C8E74B328AA5B94006474EB /* CubesScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesScreenCoordinator.swift; sourceTree = "<group>"; };
+		6C8E74B528AA7D6A006474EB /* CubesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesView.swift; sourceTree = "<group>"; };
 		6C98CBCC28339EB900D2E4FA /* CoinScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenView.swift; sourceTree = "<group>"; };
 		6C98CBCE28339F5A00D2E4FA /* CoinScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenModule.swift; sourceTree = "<group>"; };
 		6C98CBD028339FE300D2E4FA /* CoinScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenInteractor.swift; sourceTree = "<group>"; };
@@ -1773,6 +1789,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6C8E74A228AA5636006474EB /* CubesScreenModule */,
 				1B74318828A79CE400205C2C /* TeamsModules */,
 				6C3C8DBB28A25EB20040FD7C /* MoviesScreenModule */,
 				6CBFD04B289BC36B005F9104 /* PasswordScreenModule */,
@@ -1869,6 +1886,7 @@
 		1B96E0FA282048BF00A23880 /* MainScreenCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				6C8E74B228AA5B68006474EB /* CubesScreenCoordinator */,
 				1B9D4563283BDD2A00A85F25 /* SettingsScreenCoordinator */,
 				1B74319928A79FB300205C2C /* TeamsCoordinators */,
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
@@ -2319,6 +2337,67 @@
 				6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */,
 			);
 			path = DateTimeScreenCoordinator;
+			sourceTree = "<group>";
+		};
+		6C8E74A228AA5636006474EB /* CubesScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				6C8E74A728AA566D006474EB /* View */,
+				6C8E74A628AA5666006474EB /* Presenter */,
+				6C8E74A528AA565F006474EB /* Interactor */,
+				6C8E74A428AA5658006474EB /* Factory */,
+				6C8E74A328AA564E006474EB /* Assembly */,
+			);
+			path = CubesScreenModule;
+			sourceTree = "<group>";
+		};
+		6C8E74A328AA564E006474EB /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6C8E74B028AA5838006474EB /* CubesScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6C8E74A428AA5658006474EB /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6C8E74AE28AA5813006474EB /* CubesScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6C8E74A528AA565F006474EB /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6C8E74AC28AA57D7006474EB /* CubesScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6C8E74A628AA5666006474EB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6C8E74AA28AA5743006474EB /* CubesScreenModule.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6C8E74A728AA566D006474EB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C8E74A828AA5686006474EB /* CubesScreenView.swift */,
+				6C8E74B528AA7D6A006474EB /* CubesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C8E74B228AA5B68006474EB /* CubesScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6C8E74B328AA5B94006474EB /* CubesScreenCoordinator.swift */,
+			);
+			path = CubesScreenCoordinator;
 			sourceTree = "<group>";
 		};
 		6C98CBC628339E8700D2E4FA /* CoinScreenModule */ = {
@@ -2772,6 +2851,28 @@
 			);
 			inputFileListPaths = (
 			);
+			outputFileListPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			showEnvVarsInLog = 0;
+		};
+		90C1C018E7C2DE8A55278F24 /* [CP] Check Pods Manifest.lock */ = {
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
@@ -2831,6 +2932,7 @@
 				1B57F63B2787305D005F220C /* TitleWithDescriptionCell.swift in Sources */,
 				1B9D22D027A6EC6A00D4E427 /* CloudList.swift in Sources */,
 				1B3FE42327C2942500266882 /* KegMiniView.swift in Sources */,
+				6C8E74B628AA7D6A006474EB /* CubesView.swift in Sources */,
 				1B8EB60F2674119F009016BE /* URLRequest.swift in Sources */,
 				6CA396292832517C00F86248 /* LetterScreenFactory.swift in Sources */,
 				6C7D4D47282E557100A086BC /* DateTimeViewController.swift in Sources */,
@@ -2890,10 +2992,12 @@
 				1B7F66AE25D0898000933AD6 /* NumberActions.swift in Sources */,
 				1B8EB615267418BF009016BE /* Data+PrettyPrintedJSON.swift in Sources */,
 				1B9D22D227A6EC7600D4E427 /* CloudPlayer.swift in Sources */,
+				6C8E74AD28AA57D7006474EB /* CubesScreenInteractor.swift in Sources */,
 				1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */,
 				1BF30B8427BC42E200B3B4E5 /* LotoView.swift in Sources */,
 				6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */,
 				1B96E0EF2820483F00A23880 /* MainScreenFactory.swift in Sources */,
+				6C8E74B128AA5838006474EB /* CubesScreenAssembly.swift in Sources */,
 				1B92033025D17D5B0094D2BE /* Coin.swift in Sources */,
 				6CBFD05D289BC775005F9104 /* PasswordScreenCoordinator.swift in Sources */,
 				1B88ED6E27C11FAA00030202 /* RussianLotto.swift in Sources */,
@@ -2907,6 +3011,7 @@
 				1B7F66C025D08AD500933AD6 /* InteractorsContainer.swift in Sources */,
 				6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */,
 				1B7F66EB25D08D9100933AD6 /* KeyboardListener.swift in Sources */,
+				6C8E74AF28AA5813006474EB /* CubesScreenFactory.swift in Sources */,
 				1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */,
 				1BD1F91825D732E900A1C7A4 /* DateAndTimeInteractor.swift in Sources */,
 				1BF30DCE25D1967A00DCE62B /* CellCubeSixView.swift in Sources */,
@@ -3010,6 +3115,7 @@
 				6CBFD05F289C0EE2005F9104 /* PasswordGeneratorView.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
 				1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */,
+				6C8E74A928AA5686006474EB /* CubesScreenView.swift in Sources */,
 				1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */,
 				1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */,
 				1B5A103B27B5257E008DF773 /* AppMetrics.swift in Sources */,
@@ -3062,6 +3168,7 @@
 				1B325C0625D2C9CA00382F33 /* Feedback.swift in Sources */,
 				1B8EB640267506E8009016BE /* TravelMiddleContentCellView.swift in Sources */,
 				6C7662CE287A4B210069C13E /* LotteryScreenModel.swift in Sources */,
+				6C8E74B428AA5B94006474EB /* CubesScreenCoordinator.swift in Sources */,
 				1B1D60582601FBA400847843 /* MusicITunes.swift in Sources */,
 				1B7F66A925D0892900933AD6 /* MainActions.swift in Sources */,
 				1B6875A425DB307C006E82D4 /* PurchasesView.swift in Sources */,
@@ -3084,6 +3191,7 @@
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
 				1B5F698627C011ED0050647A /* PasswordInteractor.swift in Sources */,
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
+				6C8E74AB28AA5743006474EB /* CubesScreenModule.swift in Sources */,
 				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
 				1B96E100282048D000A23880 /* Coordinator.swift in Sources */,

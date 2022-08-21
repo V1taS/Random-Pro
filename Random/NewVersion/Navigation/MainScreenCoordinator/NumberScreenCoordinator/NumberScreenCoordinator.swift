@@ -60,7 +60,11 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
   }
   
   func cleanButtonWasSelected(model: NumberScreenModel) {
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .number(model))
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .number(
+      withoutRepetition: model.isEnabledWithoutRepetition,
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func settingButtonAction(model: NumberScreenModel) {
@@ -69,22 +73,26 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .number(model))
+    settingsScreenCoordinator.setupDefaultsSettings(for: .number(
+      withoutRepetition: model.isEnabledWithoutRepetition,
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func listOfObjectsAction(_ list: [String]) {
+  func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setContentsFrom(list: list)
+    listResultScreenCoordinator.setContentsFrom(list: numberScreenModule?.returnListResult() ?? [])
   }
-  
+
   func withoutRepetitionAction(isOn: Bool) {
     numberScreenModule?.withoutRepetitionAction(isOn: isOn)
   }

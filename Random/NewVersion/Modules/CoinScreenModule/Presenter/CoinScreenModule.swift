@@ -23,6 +23,9 @@ protocol CoinScreenModuleOutput: AnyObject {
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol CoinScreenModuleInput {
   
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
+  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
@@ -75,6 +78,10 @@ final class CoinScreenViewController: CoinScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
+  }
+  
+  func returnListResult() -> [String] {
+    interactor.returnListResult()
   }
 }
 

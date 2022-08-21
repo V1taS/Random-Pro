@@ -39,7 +39,10 @@ final class CoinScreenCoordinator: Coordinator {
 
 extension CoinScreenCoordinator: CoinScreenModuleOutput {
   func cleanButtonWasSelected(model: CoinScreenModel) {
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .coin(model))
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .coin(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func settingButtonAction(model: CoinScreenModel) {
@@ -48,20 +51,23 @@ extension CoinScreenCoordinator: CoinScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .coin(model))
+    settingsScreenCoordinator.setupDefaultsSettings(for: .coin(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension CoinScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func listOfObjectsAction(_ list: [String]) {
+  func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setContentsFrom(list: list)
+    listResultScreenCoordinator.setContentsFrom(list: coinScreenModule?.returnListResult() ?? [])
   }
   
   func cleanButtonAction() {

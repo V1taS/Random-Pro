@@ -43,7 +43,11 @@ final class LetterScreenCoordinator: Coordinator {
 
 extension LetterScreenCoordinator: LetterScreenModuleOutput {
   func cleanButtonWasSelected(model: LetterScreenModel) {
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .letter(model))
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .letter(
+      withoutRepetition: model.isEnabledWithoutRepetition,
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func settingButtonAction(model: LetterScreenModel) {
@@ -52,7 +56,11 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .letter(model))
+    settingsScreenCoordinator.setupDefaultsSettings(for: .letter(
+      withoutRepetition: model.isEnabledWithoutRepetition,
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func didReciveRangeEnded() {
@@ -66,13 +74,13 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension LetterScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func listOfObjectsAction(_ list: [String]) {
+  func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setContentsFrom(list: list)
+    listResultScreenCoordinator.setContentsFrom(list: letterScreenModule?.returnListResult() ?? [])
   }
   
   func withoutRepetitionAction(isOn: Bool) {

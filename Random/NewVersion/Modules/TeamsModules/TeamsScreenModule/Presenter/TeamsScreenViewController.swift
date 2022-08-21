@@ -11,12 +11,25 @@ import UIKit
 protocol TeamsScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
-  /// - Parameter model: результат генерации
-  func settingButtonAction(model: TeamsScreenModel)
+  /// - Parameter players: список игроков
+  func settingButtonAction<T: PlayerProtocol>(players: [T])
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol TeamsScreenModuleInput {
+  
+  /// Возвращает текущее количество команд
+  func returnGeneratedCountTeams() -> Int
+  
+  /// Возвращает список команд
+  func returnListTeams() -> [TeamsScreenModel.Team]
+  
+  /// Количество сгенерированных игроков
+  func returnGeneratedCountPlayers() -> Int
+  
+  /// Обновить список игроков
+  ///  - Parameter players: Список игроков
+  func updateContentWith<T: PlayerProtocol>(players: [T])
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: TeamsScreenModuleOutput? { get set }
@@ -71,6 +84,24 @@ final class TeamsScreenViewController: TeamsScreenModule {
     interactor.getContent()
     setNavigationBar()
   }
+  
+  // MARK: - Internal func
+  
+  func updateContentWith<T: PlayerProtocol>(players: [T]) {
+    interactor.updateContentWith(models: players)
+  }
+  
+  func returnGeneratedCountTeams() -> Int {
+    interactor.returnGeneratedCountTeams()
+  }
+  
+  func returnListTeams() -> [TeamsScreenModel.Team] {
+    interactor.returnListTeams()
+  }
+  
+  func returnGeneratedCountPlayers() -> Int {
+    interactor.returnGeneratedCountPlayers()
+  }
 }
 
 // MARK: - TeamsScreenViewOutput
@@ -109,7 +140,7 @@ private extension TeamsScreenViewController {
     guard let cacheModel = cacheModel else {
       return
     }
-    moduleOutput?.settingButtonAction(model: cacheModel)
+    moduleOutput?.settingButtonAction(players: cacheModel.allPlayers)
   }
 }
 

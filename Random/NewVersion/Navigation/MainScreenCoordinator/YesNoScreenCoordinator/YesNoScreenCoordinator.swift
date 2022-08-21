@@ -39,7 +39,10 @@ final class YesNoScreenCoordinator: Coordinator {
 
 extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
   func cleanButtonWasSelected(model: YesNoScreenModel) {
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .yesOrNo(model))
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .yesOrNo(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func settingButtonAction(model: YesNoScreenModel) {
@@ -47,33 +50,33 @@ extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
-    settingsScreenCoordinator.setupDefaultsSettings(for: .yesOrNo(model))
+    
+    settingsScreenCoordinator.setupDefaultsSettings(for: .yesOrNo(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func withoutRepetitionAction(isOn: Bool) {
-    
-  }
+  func withoutRepetitionAction(isOn: Bool) {}
   
-  func cleanButtonAction() {
-    yesNoScreenModule?.cleanButtonAction()
-  }
-  
-  func listOfObjectsAction(_ list: [String]) {
+  func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setContentsFrom(list: list)
+    listResultScreenCoordinator.setContentsFrom(list: yesNoScreenModule?.returnListResult() ?? [])
+  }
+  
+  func cleanButtonAction() {
+    yesNoScreenModule?.cleanButtonAction()
   }
 }
 
 // MARK: - ListResultScreenCoordinatorOutput
 
-extension YesNoScreenCoordinator: ListResultScreenCoordinatorOutput {
-  
-}
+extension YesNoScreenCoordinator: ListResultScreenCoordinatorOutput {}

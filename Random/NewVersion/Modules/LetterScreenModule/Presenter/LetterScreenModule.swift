@@ -26,6 +26,9 @@ protocol LetterScreenModuleOutput: AnyObject {
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol LetterScreenModuleInput {
   
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
+  
   /// Событие, без повторений
   /// - Parameter isOn: Без повторений `true` или `false`
   func withoutRepetitionAction(isOn: Bool)
@@ -86,6 +89,10 @@ final class LetterScreenViewController: LetterScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
+  }
+  
+  func returnListResult() -> [String] {
+    interactor.returnListResult()
   }
 }
 

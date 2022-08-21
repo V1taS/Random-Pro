@@ -30,6 +30,9 @@ protocol LotteryScreenModuleOutput: AnyObject {
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol LotteryScreenModuleInput {
   
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
+  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
@@ -84,6 +87,10 @@ final class LotteryScreenViewController: LotteryScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
+  }
+  
+  func returnListResult() -> [String] {
+    interactor.returnListResult()
   }
 }
 

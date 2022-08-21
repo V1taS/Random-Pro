@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DateTimeScreenModel: UserDefaultsCodable, SettingsScreenModel {
+struct DateTimeScreenModel: UserDefaultsCodable {
   
   /// Результат генерации
   let result: String

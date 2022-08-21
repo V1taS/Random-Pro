@@ -50,7 +50,10 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
   }
   
   func cleanButtonWasSelected(model: LotteryScreenModel) {
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .lottery(model))
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .lottery(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func settingButtonAction(model: LotteryScreenModel) {
@@ -59,7 +62,10 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .lottery(model))
+    settingsScreenCoordinator.setupDefaultsSettings(for: .lottery(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func didReciveRangeError() {
@@ -71,13 +77,13 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension LotteryScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func listOfObjectsAction(_ list: [String]) {
+  func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setContentsFrom(list: list)
+    listResultScreenCoordinator.setContentsFrom(list: lotteryScreenModule?.returnListResult() ?? [])
   }
   
   func cleanButtonAction() {

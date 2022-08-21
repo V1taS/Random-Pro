@@ -36,7 +36,6 @@
 		1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B225C452619E253001B9124 /* GoogleService-Info.plist */; };
 		1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */; };
 		1B2F1D46260CC18E00ADCB12 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */; };
-		1B31F61E285F4E6600A88217 /* SettingsScreenCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F61D285F4E6600A88217 /* SettingsScreenCellModel.swift */; };
 		1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F626285F926200A88217 /* ListResultScreenFactory.swift */; };
 		1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F627285F926200A88217 /* ListResultScreenViewController.swift */; };
 		1B31F62D285F926200A88217 /* ListResultScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F628285F926200A88217 /* ListResultScreenAssembly.swift */; };
@@ -252,7 +251,6 @@
 		1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */; };
 		1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */; };
 		1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */; };
-		1BA83CF52879D4F8000035E3 /* SettingsScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF42879D4F8000035E3 /* SettingsScreenModel.swift */; };
 		1BA83CF72879DA42000035E3 /* UserDefaultsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */; };
 		1BA83CF92879E991000035E3 /* LetterScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF82879E991000035E3 /* LetterScreenModel.swift */; };
 		1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB8DFA025EE4485007C389D /* FilmCellView.swift */; };
@@ -263,6 +261,7 @@
 		1BBADE1B25EC0C5100AD38F4 /* AppNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1A25EC0C5100AD38F4 /* AppNetworking.swift */; };
 		1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCDBF827C065F00004FF0D /* EncryptPassword.swift */; };
 		1BCB6EC928B27C390040F46E /* PlayerStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB6EC828B27C390040F46E /* PlayerStateProtocol.swift */; };
+		1BCB6ECB28B29F870040F46E /* SettingsScreenTableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB6ECA28B29F870040F46E /* SettingsScreenTableViewType.swift */; };
 		1BCC579127A83CE200DF5ED0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCC579027A83CE200DF5ED0 /* CloudKit.framework */; };
 		1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90325D7250D00A1C7A4 /* MailView.swift */; };
 		1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */; };
@@ -409,7 +408,6 @@
 		1B225C452619E253001B9124 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenModel.swift; sourceTree = "<group>"; };
 		1B2F1D45260CC18E00ADCB12 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		1B31F61D285F4E6600A88217 /* SettingsScreenCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCellModel.swift; sourceTree = "<group>"; };
 		1B31F626285F926200A88217 /* ListResultScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenFactory.swift; sourceTree = "<group>"; };
 		1B31F627285F926200A88217 /* ListResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenViewController.swift; sourceTree = "<group>"; };
 		1B31F628285F926200A88217 /* ListResultScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenAssembly.swift; sourceTree = "<group>"; };
@@ -628,7 +626,6 @@
 		1BA1D0AD25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDateAndTimeInteractor.swift; sourceTree = "<group>"; };
 		1BA1D0B125D740D400C3FC91 /* DateAndTimeSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeSettingsView.swift; sourceTree = "<group>"; };
 		1BA1D0B425D7423900C3FC91 /* DateAndTimeResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndTimeResultsView.swift; sourceTree = "<group>"; };
-		1BA83CF42879D4F8000035E3 /* SettingsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenModel.swift; sourceTree = "<group>"; };
 		1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsCodable.swift; sourceTree = "<group>"; };
 		1BA83CF82879E991000035E3 /* LetterScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterScreenModel.swift; sourceTree = "<group>"; };
 		1BB8DFA025EE4485007C389D /* FilmCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCellView.swift; sourceTree = "<group>"; };
@@ -639,6 +636,7 @@
 		1BBADE1A25EC0C5100AD38F4 /* AppNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNetworking.swift; sourceTree = "<group>"; };
 		1BBCDBF827C065F00004FF0D /* EncryptPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptPassword.swift; sourceTree = "<group>"; };
 		1BCB6EC828B27C390040F46E /* PlayerStateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateProtocol.swift; sourceTree = "<group>"; };
+		1BCB6ECA28B29F870040F46E /* SettingsScreenTableViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTableViewType.swift; sourceTree = "<group>"; };
 		1BCC579027A83CE200DF5ED0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1BD1F90325D7250D00A1C7A4 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -1962,9 +1960,8 @@
 		1B9D4566283BEF8000A85F25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1BA83CF42879D4F8000035E3 /* SettingsScreenModel.swift */,
+				1BCB6ECA28B29F870040F46E /* SettingsScreenTableViewType.swift */,
 				1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */,
-				1B31F61D285F4E6600A88217 /* SettingsScreenCellModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2882,7 +2879,6 @@
 				1B7B3C3A25D3F0A1002ED8CD /* MbModalHackView.swift in Sources */,
 				1B7F670B25D0A27D00933AD6 /* NumberView.swift in Sources */,
 				1B96E0F12820483F00A23880 /* MainScreenAssembly.swift in Sources */,
-				1BA83CF52879D4F8000035E3 /* SettingsScreenModel.swift in Sources */,
 				1BA1D0B225D740D400C3FC91 /* DateAndTimeSettingsView.swift in Sources */,
 				1B7F117825E3F74100FF64A3 /* ContactInteractor.swift in Sources */,
 				1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */,
@@ -2936,7 +2932,6 @@
 				1BF30DD325D19B1600DCE62B /* SettingsView.swift in Sources */,
 				1BA83CF72879DA42000035E3 /* UserDefaultsCodable.swift in Sources */,
 				6C7662CB287A430A0069C13E /* DateTimeScreenModel.swift in Sources */,
-				1B31F61E285F4E6600A88217 /* SettingsScreenCellModel.swift in Sources */,
 				1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */,
 				1B3FE41F27C277CB00266882 /* CurrentAppVersionListService.swift in Sources */,
 				1B7431AC28A7E86D00205C2C /* TeamsScreenModel.swift in Sources */,
@@ -2961,6 +2956,7 @@
 				1B8EB65426765ECE009016BE /* String+FormatterDate.swift in Sources */,
 				1BD1F91425D7328A00A1C7A4 /* DateAndTimeActions.swift in Sources */,
 				1B74319128A79F4F00205C2C /* ListPlayersScreenAssembly.swift in Sources */,
+				1BCB6ECB28B29F870040F46E /* SettingsScreenTableViewType.swift in Sources */,
 				1B5F698127C0115E0050647A /* Password.swift in Sources */,
 				1B74319C28A79FF000205C2C /* ListPlayersScreenCoordinator.swift in Sources */,
 				6C7D4D50282E5A1D00A086BC /* DateTimeScreenCoordinator.swift in Sources */,

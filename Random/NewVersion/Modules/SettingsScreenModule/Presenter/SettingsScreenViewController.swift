@@ -18,8 +18,7 @@ protocol SettingsScreenModuleOutput: AnyObject {
   func cleanButtonAction()
   
   /// Событие, кнопка `Список чисел` была нажата
-  /// - Parameter list: Список объектов
-  func listOfObjectsAction(_ list: [String])
+  func listOfObjectsAction()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -48,7 +47,6 @@ final class SettingsScreenViewController: SettingsScreenModule {
   private let interactor: SettingsScreenInteractorInput
   private let moduleView: SettingsScreenViewProtocol
   private let factory: SettingsScreenFactoryInput
-  private var cacheListResult: [String]?
   
   // MARK: - Initialization
   
@@ -86,7 +84,7 @@ final class SettingsScreenViewController: SettingsScreenModule {
   // MARK: - Internal func
   
   func setupDefaultsSettings(for typeObject: SettingsScreenType) {
-    factory.getContent(from: typeObject)
+    factory.createListModelFrom(type: typeObject)
   }
 }
 
@@ -102,10 +100,7 @@ extension SettingsScreenViewController: SettingsScreenViewOutput {
   }
   
   func listOfObjectsAction() {
-    guard let cacheListResult = cacheListResult else {
-      return
-    }
-    moduleOutput?.listOfObjectsAction(cacheListResult)
+    moduleOutput?.listOfObjectsAction()
   }
 }
 
@@ -118,11 +113,7 @@ extension SettingsScreenViewController: SettingsScreenInteractorOutput {
 // MARK: - SettingsScreenFactoryOutput
 
 extension SettingsScreenViewController: SettingsScreenFactoryOutput {
-  func didRecive(listResult: [String]) {
-    cacheListResult = listResult
-  }
-  
-  func didRecive(models: [Any]) {
+  func didRecive(models: [SettingsScreenTableViewType]) {
     moduleView.updateContentWith(models: models)
   }
 }

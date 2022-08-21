@@ -35,6 +35,9 @@ protocol NumberScreenInteractorOutput: AnyObject {
 
 protocol NumberScreenInteractorInput: AnyObject {
   
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
+  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
@@ -157,6 +160,14 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   func rangeEndDidChange(_ text: String?) {
     let rangeEnd = formatter(text: text)
     output?.didReciveRangeEnd(text: rangeEnd)
+  }
+  
+  func returnListResult() -> [String] {
+    if let model = model {
+      return model.listResult
+    } else {
+      return []
+    }
   }
 }
 

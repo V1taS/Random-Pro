@@ -8,7 +8,34 @@
 
 import UIKit
 
-final class ListPlayersScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol ListPlayersScreenCoordinatorOutput: AnyObject {
+  
+  /// Были получены игроки
+  ///  - Parameter players: Список игроков
+  func didRecive<T: PlayerProtocol>(players: [T])
+}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol ListPlayersScreenCoordinatorInput {
+  
+  /// Обновить контент
+  ///  - Parameters:
+  ///   - models: Модели игроков
+  ///   - teamsCount: Общее количество игроков
+  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int)
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: ListPlayersScreenCoordinatorOutput? { get set }
+}
+
+typealias ListPlayersScreenCoordinatorProtocol = ListPlayersScreenCoordinatorInput & Coordinator
+
+final class ListPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol {
+  
+  // MARK: - Internal property
+  
+  weak var output: ListPlayersScreenCoordinatorOutput?
   
   // MARK: - Private property
   
@@ -31,6 +58,10 @@ final class ListPlayersScreenCoordinator: Coordinator {
     self.listPlayersScreenModule?.moduleOutput = self
     navigationController.pushViewController(listPlayersScreenModule, animated: true)
   }
+  
+  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int) {
+    listPlayersScreenModule?.updateContentWith(models: models, teamsCount: teamsCount)
+  }
 }
 
 // MARK: - ListPlayersScreenModuleOutput
@@ -40,8 +71,8 @@ extension ListPlayersScreenCoordinator: ListPlayersScreenModuleOutput {
     removePlayersAlert()
   }
   
-  func didRecive<T : PlayerProtocol>(players: [T]) {
-    // TODO: -
+  func didRecive<T: PlayerProtocol>(players: [T]) {
+    output?.didRecive(players: players)
   }
 }
 

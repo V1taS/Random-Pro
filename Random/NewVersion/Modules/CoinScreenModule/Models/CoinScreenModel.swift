@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CoinScreenModel: UserDefaultsCodable, SettingsScreenModel {
+struct CoinScreenModel: UserDefaultsCodable {
 
   /// Результат генерации
   let result: String

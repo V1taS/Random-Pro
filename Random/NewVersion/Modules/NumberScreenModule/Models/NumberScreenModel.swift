@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NumberScreenModel: UserDefaultsCodable, SettingsScreenModel {
+struct NumberScreenModel: UserDefaultsCodable {
   
   /// Начало диапазона
   let rangeStartValue: String?

@@ -21,6 +21,9 @@ protocol YesNoScreenModuleOutput: AnyObject {
 
 protocol YesNoScreenModuleInput: AnyObject {
   
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
+  
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: YesNoScreenModuleOutput? { get set }
   
@@ -31,7 +34,7 @@ protocol YesNoScreenModuleInput: AnyObject {
 typealias YesNoScreenModule = UIViewController & YesNoScreenModuleInput
 
 final class YesNoScreenViewController: YesNoScreenModule {
-  
+
   // MARK: - Internal property
   
   weak var moduleOutput: YesNoScreenModuleOutput?
@@ -77,6 +80,10 @@ final class YesNoScreenViewController: YesNoScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
+  }
+  
+  func returnListResult() -> [String] {
+    interactor.returnListResult()
   }
   
   // MARK: - Private func

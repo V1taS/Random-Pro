@@ -12,90 +12,44 @@ import Foundation
 
 enum SettingsScreenType {
   
-  // MARK: - Property
-  
-  var allCasesIterable: [SettingsScreenType.AllCasesIterable] {
-    switch self {
-    case .number, .letter:
-      return [.withoutRepetition, .itemsGenerated, .lastItem, .listOfItems, .cleanButton]
-    case .yesOrNo, .coin, .dateAndTime, .lottery:
-      return [.itemsGenerated, .lastItem, .listOfItems, .cleanButton]
-    case .teams:
-      return [.generatedTeamsCount, .allPlayersCount, .generatedPlayersCount, .listPlayersAction, .cleanButton]
-    default: return []
-    }
-  }
-  
   // MARK: - Cases
   
   /// Раздел: `Фильмы`
-  case films(SettingsScreenModel)
+  case films
   
   /// Раздел: `Команды`
-  case teams(SettingsScreenModel)
+  case teams(generatedTeamsCount: String, allPlayersCount: String, generatedPlayersCount: String)
   
   /// Раздел: `Число`
-  case number(SettingsScreenModel)
+  case number(withoutRepetition: Bool, itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Да или Нет`
-  case yesOrNo(SettingsScreenModel)
+  case yesOrNo(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Буква`
-  case letter(SettingsScreenModel)
+  case letter(withoutRepetition: Bool, itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Список`
-  case list(SettingsScreenModel)
+  case list
   
   /// Раздел: `Монета`
-  case coin(SettingsScreenModel)
+  case coin(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Кубики`
-  case cube(SettingsScreenModel)
+  case cube
   
   /// Раздел: `Дата и Время`
-  case dateAndTime(SettingsScreenModel)
+  case dateAndTime(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Лотерея`
-  case lottery(SettingsScreenModel)
+  case lottery(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Контакты`
-  case contact(SettingsScreenModel)
+  case contact
   
   /// Раздел: `Пароли`
-  case password(SettingsScreenModel)
+  case password
   
   /// Раздел: `Русское Лото`
-  case russianLotto(SettingsScreenModel)
-  
-  // MARK: - AllCasesIterable
-  
-  enum AllCasesIterable {
-    
-    /// Без повторений
-    case withoutRepetition
-    
-    /// Всего объектов сгенерировано
-    case itemsGenerated
-    
-    /// Последний объект
-    case lastItem
-    
-    /// Список объектов
-    case listOfItems
-    
-    /// Кнопка очистить
-    case cleanButton
-    
-    /// Количество сгенерированных команд
-    case generatedTeamsCount
-    
-    /// Количество всех игороков
-    case allPlayersCount
-    
-    /// Количество сгенерированных игроков
-    case generatedPlayersCount
-    
-    /// Перейти на список игроков
-    case listPlayersAction
-  }
+  case russianLotto
 }

@@ -31,6 +31,9 @@ protocol NumberScreenModuleOutput: AnyObject {
 
 protocol NumberScreenModuleInput: AnyObject {
   
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
+  
   /// Событие, без повторений
   /// - Parameter isOn: Без повторений `true` или `false`
   func withoutRepetitionAction(isOn: Bool)
@@ -45,7 +48,7 @@ protocol NumberScreenModuleInput: AnyObject {
 typealias NumberScreenModule = UIViewController & NumberScreenModuleInput
 
 final class NumberScreenViewController: NumberScreenModule {
-  
+
   // MARK: - Internal property
   
   weak var moduleOutput: NumberScreenModuleOutput?
@@ -96,6 +99,10 @@ final class NumberScreenViewController: NumberScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
+  }
+  
+  func returnListResult() -> [String] {
+    interactor.returnListResult()
   }
 }
 

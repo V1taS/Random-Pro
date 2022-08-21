@@ -10,21 +10,17 @@ import UIKit
 /// Cобытия которые отправляем из Factory в Presenter
 protocol SettingsScreenFactoryOutput: AnyObject {
   
-  /// Был получен массив моделек
-  ///  - Parameter models: Массив моделек
-  func didRecive(models: [Any])
-  
-  /// Был получен массив результатов
-  ///  - Parameter listResult: Список результатов
-  func didRecive(listResult: [String])
+  /// Были получены данные
+  ///  - Parameter models: результат генерации для таблички
+  func didRecive(models: [SettingsScreenTableViewType])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
 protocol SettingsScreenFactoryInput {
   
-  /// Получить массив моделей
-  ///  - Parameter typeObject: Тип отображаемого контента
-  func getContent(from typeObject: SettingsScreenType)
+  /// Создаем модельку для таблички
+  ///  - Parameter model: Модель с данными
+  func createListModelFrom(type: SettingsScreenType)
 }
 
 /// Фабрика
@@ -36,119 +32,98 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func getContent(from typeObject: SettingsScreenType) {
-    var models: [Any] = []
-    let screenModel = getScreenModel(from: typeObject)
-    
-    output?.didRecive(listResult: screenModel.listResult)
-    models = configure(model: screenModel, typeObject: typeObject)
-    output?.didRecive(models: models)
+  func createListModelFrom(type: SettingsScreenType) {
+    let appearance = Appearance()
+    var tableViewModels: [SettingsScreenTableViewType] = []
+    switch type {
+    case .teams(generatedTeamsCount: let generatedTeamsCount,
+                allPlayersCount: let allPlayersCount,
+                generatedPlayersCount: let generatedPlayersCount):
+      tableViewModels.append(.titleAndDescription(title: appearance.generatedTeamsCountTitle,
+                                                  description: generatedTeamsCount))
+      tableViewModels.append(.titleAndDescription(title: appearance.allPlayersCount,
+                                                  description: allPlayersCount))
+      tableViewModels.append(.titleAndDescription(title: appearance.generatedPlayersCount,
+                                                  description: generatedPlayersCount))
+      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .number(withoutRepetition: let withoutRepetition,
+                 itemsGenerated: let itemsGenerated,
+                 lastItem: let lastItem):
+      tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
+                                               isEnabled: withoutRepetition))
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
+                                                  description: lastItem))
+      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .yesOrNo(itemsGenerated: let itemsGenerated,
+                  lastItem: let lastItem):
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
+                                                  description: lastItem))
+      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .letter(withoutRepetition: let withoutRepetition,
+                 itemsGenerated: let itemsGenerated,
+                 lastItem: let lastItem):
+      tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
+                                               isEnabled: withoutRepetition))
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
+                                                  description: lastItem))
+      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .coin(itemsGenerated: let itemsGenerated,
+               lastItem: let lastItem):
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
+                                                  description: lastItem))
+      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .dateAndTime(itemsGenerated: let itemsGenerated,
+                      lastItem: let lastItem):
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
+                                                  description: lastItem))
+      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .lottery(itemsGenerated: let itemsGenerated,
+                  lastItem: let lastItem):
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
+                                                  description: lastItem))
+      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .list: break
+    case .films: break
+    case .cube: break
+    case .contact: break
+    case .password: break
+    case .russianLotto: break
+    }
+    output?.didRecive(models: tableViewModels)
   }
 }
 
 // MARK: - Private
 
 private extension SettingsScreenFactory {
-  func getScreenModel(from typeObject: SettingsScreenType) -> SettingsScreenModel {
-    switch typeObject {
-    case .number(let result): return result
-    case .films(let result): return result
-    case .teams(let result): return result
-    case .yesOrNo(let result): return result
-    case .letter(let result): return result
-    case .list(let result): return result
-    case .coin(let result): return result
-    case .cube(let result): return result
-    case .dateAndTime(let result): return result
-    case .lottery(let result): return result
-    case .contact(let result): return result
-    case .password(let result): return result
-    case .russianLotto(let result): return result
-    }
-  }
   
-  func configure(model: SettingsScreenModel, typeObject: SettingsScreenType) -> [Any] {
-    let appearance = Appearance()
-    var models: [Any] = []
-    
-    typeObject.allCasesIterable.forEach { caseIterable in
-      switch caseIterable {
-      case .withoutRepetition:
-        let model = SettingsScreenType.TitleAndSwitcherModel(
-          title: appearance.withoutRepetitionTitle,
-          isEnabled: model.isEnabledWithoutRepetition
-        )
-        models.append(model)
-      case .itemsGenerated:
-        let model = SettingsScreenType.TitleAndDescriptionModel(
-          title: appearance.countGeneratedTitle,
-          description: "\(model.listResult.count)"
-        )
-        models.append(model)
-      case .lastItem:
-        let model = SettingsScreenType.TitleAndDescriptionModel(
-          title: appearance.latestGeneration,
-          description: model.result
-        )
-        models.append(model)
-      case .listOfItems:
-        if !model.listResult.isEmpty {
-          let model = SettingsScreenType.TitleAndImageModel(
-            title: appearance.numberOfGenerations,
-            asideImage: appearance.listOfNumbersIcon
-          )
-          models.append(model)
-        }
-      case .cleanButton:
-        let model = SettingsScreenType.CleanButtonModel(
-          title: appearance.cleanButtonTitle
-        )
-        models.append(model)
-      case .generatedTeamsCount:
-        guard let playerModel = model as? TeamsScreenModel else {
-          return
-        }
-        
-        let model = SettingsScreenType.TitleAndDescriptionModel(
-          title: appearance.generatedTeamsCountTitle,
-          description: "\(playerModel.teams.count)"
-        )
-        models.append(model)
-      case .allPlayersCount:
-        guard let playerModel = model as? TeamsScreenModel else {
-          return
-        }
-        
-        let model = SettingsScreenType.TitleAndDescriptionModel(
-          title: appearance.allPlayersCount,
-          description: "\(playerModel.allPlayers.count)"
-        )
-        models.append(model)
-      case .generatedPlayersCount:
-        guard let playerModel = model as? TeamsScreenModel else {
-          return
-        }
-        
-        var generatedPlayersCount: Int = .zero
-        playerModel.teams.forEach {
-          generatedPlayersCount += $0.players.count
-        }
-        
-        let model = SettingsScreenType.TitleAndDescriptionModel(
-          title: appearance.generatedPlayersCount,
-          description: "\(generatedPlayersCount)"
-        )
-        models.append(model)
-      case .listPlayersAction:
-        let model = SettingsScreenType.TitleAndImageModel(
-          title: appearance.listPlayersActionTitle,
-          asideImage: appearance.listOfNumbersIcon
-        )
-        models.append(model)
-      }
-    }
-    return models
-  }
+  
 }
 
 // MARK: - Appearance
@@ -168,13 +143,13 @@ private extension SettingsScreenFactory {
     let numberOfGenerations = NSLocalizedString("Список результатов",
                                                 comment: "")
     let listPlayersActionTitle = NSLocalizedString("Список игроков",
-                                                comment: "")
+                                                   comment: "")
     
     let generatedTeamsCountTitle = NSLocalizedString("Cгенерировано команд",
-                                                comment: "")
+                                                     comment: "")
     let allPlayersCount = NSLocalizedString("Всего игроков",
-                                                comment: "")
+                                            comment: "")
     let generatedPlayersCount = NSLocalizedString("Cгенерировано игроков",
-                                                comment: "")
+                                                  comment: "")
   }
 }

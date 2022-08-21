@@ -38,10 +38,13 @@ protocol DateTimeInteractorInput: AnyObject {
   
   /// Создать новые данные month
   func generateContentMonth()
+  
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
 }
 
 final class DateTimeInteractor: DateTimeInteractorInput {
-
+  
   // MARK: - Internal property
   
   weak var output: DateTimeInteractorOutput?
@@ -136,6 +139,14 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     
     self.model = newModel
     output?.didRecive(model: newModel)
+  }
+  
+  func returnListResult() -> [String] {
+    if let model = model {
+      return model.listResult
+    } else {
+      return []
+    }
   }
 }
 

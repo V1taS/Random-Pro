@@ -29,10 +29,13 @@ protocol CoinScreenInteractorInput: AnyObject {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
 }
 
 final class CoinScreenInteractor: CoinScreenInteractorInput {
-
+  
   // MARK: - Internal property
   
   weak var output: CoinScreenInteractorOutput?
@@ -76,6 +79,14 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
     
     self.model = newModel
     output?.didRecive(model: newModel)
+  }
+  
+  func returnListResult() -> [String] {
+    if let model = model {
+      return model.listResult
+    } else {
+      return []
+    }
   }
 }
 

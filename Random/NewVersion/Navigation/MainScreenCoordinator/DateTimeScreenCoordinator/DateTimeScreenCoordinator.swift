@@ -50,7 +50,10 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
   }
   
   func cleanButtonWasSelected(model: DateTimeScreenModel) {
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .dateAndTime(model))
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .dateAndTime(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
   
   func settingButtonAction(model: DateTimeScreenModel) {
@@ -59,20 +62,23 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .dateAndTime(model))
+    settingsScreenCoordinator.setupDefaultsSettings(for: .dateAndTime(
+      itemsGenerated: "\(model.listResult.count)",
+      lastItem: model.result
+    ))
   }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension DateTimeScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func listOfObjectsAction(_ list: [String]) {
+  func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setContentsFrom(list: list)
+    listResultScreenCoordinator.setContentsFrom(list: dateTimeScreenModule?.returnListResult() ?? [])
   }
   
   func cleanButtonAction() {

@@ -39,6 +39,9 @@ protocol LetterScreenInteractorInput: AnyObject {
   
   /// Создать новые данные английских букв
   func generateContentEngLetter()
+  
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
 }
 
 final class LetterScreenInteractor: LetterScreenInteractorInput {
@@ -134,6 +137,14 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
                                            languageIndexSegmented: appearance.engControl)
       self.model = newModel
       output?.didRecive(model: newModel)
+    }
+  }
+  
+  func returnListResult() -> [String] {
+    if let model = model {
+      return model.listResult
+    } else {
+      return []
     }
   }
 }

@@ -83,7 +83,35 @@ final class ListPlayersScreenView: ListPlayersScreenViewProtocol {
 // MARK: - UITableViewDelegate
 
 extension ListPlayersScreenView: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let appearance = Appearance()
+    let deleteAction = UIContextualAction(style: .destructive,
+                                          title: appearance.deleteTitle) { [weak self] _, _, _ in
+      guard let self = self else {
+        return
+      }
+      
+      let model = self.models[indexPath.row]
+      switch model {
+      case .player(player: let player, _):
+        self.output?.playerRemoved(id: player.id)
+      default:
+        break
+      }
+    }
+    deleteAction.image = appearance.deleteImage
+    return UISwipeActionsConfiguration(actions: [deleteAction])
+  }
+  
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    let model = models[indexPath.row]
+    switch model {
+    case .player:
+      return true
+    default:
+      return false
+    }
+  }
 }
 
 // MARK: - UITableViewDataSource
@@ -176,34 +204,16 @@ extension ListPlayersScreenView: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 
 extension ListPlayersScreenView: UITextFieldDelegate {
-  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    let appearance = Appearance()
-    let deleteAction = UIContextualAction(style: .destructive,
-                                          title: appearance.deleteTitle) { [weak self] _, _, _ in
-      guard let self = self else {
-        return
-      }
-      
-      let model = self.models[indexPath.row]
-      switch model {
-      case .player(player: let player, _):
-        self.output?.playerRemoved(id: player.id)
-      default:
-        break
-      }
-    }
-    deleteAction.image = appearance.deleteImage
-    return UISwipeActionsConfiguration(actions: [deleteAction])
-  }
-  
-  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    let model = models[indexPath.row]
-    switch model {
-    case .player:
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    guard let text = textField.text else {
       return true
-    default:
-      return false
     }
+    
+    if !text.isEmpty {
+      output?.playerAdded(name: textField.text)
+      textField.text = ""
+    }
+    return false
   }
   
   func textField(_ textField: UITextField,
@@ -392,12 +402,14 @@ private extension ListPlayersScreenView {
     backgroundColor = RandomColor.primaryWhite
     tableView.backgroundColor = RandomColor.primaryWhite
     
+    textField.placeholder = appearance.textFieldPlaceholder
+    textField.delegate = self
+    textField.returnKeyType = .done
+    textField.autocapitalizationType = .words
+    
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = appearance.estimatedRowHeight
     tableView.keyboardDismissMode = .onDrag
-    
-    textField.placeholder = appearance.textFieldPlaceholder
-    textField.delegate = self
     
     tableView.separatorStyle = .none
     tableView.delegate = self

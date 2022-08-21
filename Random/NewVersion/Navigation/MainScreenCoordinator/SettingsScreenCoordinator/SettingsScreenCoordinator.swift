@@ -16,9 +16,8 @@ protocol SettingsScreenCoordinatorOutput: AnyObject {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// Событие, кнопка `Список чисел` была нажата
-  /// - Parameter list: Список объектов
-  func listOfObjectsAction(_ list: [String])
+  /// Событие, кнопка `Список` была нажата
+  func listOfObjectsAction()
 }
 
 protocol SettingsScreenCoordinatorInput {
@@ -73,8 +72,8 @@ extension SettingsScreenCoordinator {
 // MARK: - SettingsScreenModuleOutput
 
 extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
-  func listOfObjectsAction(_ list: [String]) {
-    output?.listOfObjectsAction(list)
+  func listOfObjectsAction() {
+    output?.listOfObjectsAction()
   }
   
   func withoutRepetitionAction(isOn: Bool) {

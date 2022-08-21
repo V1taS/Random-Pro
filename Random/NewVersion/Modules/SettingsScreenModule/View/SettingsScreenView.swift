@@ -27,7 +27,7 @@ protocol SettingsScreenViewInput: AnyObject {
   
   /// Обновить контент
   ///  - Parameter models: Массив моделек
-  func updateContentWith(models: [Any])
+  func updateContentWith(models: [SettingsScreenTableViewType])
 }
 
 /// Псевдоним протокола UIView & SettingsScreenViewInput
@@ -43,7 +43,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   // MARK: - Private properties
   
   private let tableView = TableView()
-  private var models: [Any] = []
+  private var models: [SettingsScreenTableViewType] = []
   
   // MARK: - Initialization
   
@@ -60,7 +60,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(models: [Any]) {
+  func updateContentWith(models: [SettingsScreenTableViewType]) {
     self.models = models
     tableView.reloadData()
   }
@@ -99,7 +99,10 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
                        forCellReuseIdentifier: SmallButtonCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
+    tableView.register(DividerTableViewCell.self,
+                       forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
     
+    tableView.separatorStyle = .none
     tableView.tableFooterView = UIView()
     tableView.tableHeaderView = UIView()
     tableView.contentInset.top = Appearance().inset.top
@@ -110,10 +113,11 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 
 extension SettingsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard models[indexPath.row] is SettingsScreenType.TitleAndImageModel else {
-      return
+    switch models[indexPath.row] {
+    case .titleAndImage:
+      output?.listOfObjectsAction()
+    default: break
     }
-    output?.listOfObjectsAction()
   }
 }
 
@@ -127,49 +131,58 @@ extension SettingsScreenView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
     var viewCell = UITableViewCell()
-    viewCell.isHiddenSeparator = false
     
-    if let model = model as? SettingsScreenType.TitleAndSwitcherModel {
+    switch model {
+    case .titleAndSwitcher(title: let title, isEnabled: let isEnabled):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndSwitchCell.reuseIdentifier
       ) as? LabelAndSwitchCell {
-        cell.configureCellWith(titleText: model.title,
-                               isResultSwitch: model.isEnabled)
+        cell.configureCellWith(titleText: title,
+                               isResultSwitch: isEnabled)
         cell.switchAction = { [weak self] isOn in
           self?.output?.withoutRepetitionAction(isOn: isOn)
         }
         viewCell = cell
       }
-    }
-    
-    if let model = model as? SettingsScreenType.TitleAndDescriptionModel {
+    case .titleAndDescription(title: let title, description: let description):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as? DoubleTitleCell {
-        cell.configureCellWith(primaryText: model.title,
-                               secondaryText: model.description)
+        cell.configureCellWith(primaryText: title,
+                               secondaryText: description)
         viewCell = cell
       }
-    }
-    
-    if let model = model as? SettingsScreenType.TitleAndImageModel {
+    case .titleAndImage(title: let title, asideImage: let asideImage):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndImageCell.reuseIdentifier
       ) as? LabelAndImageCell {
-        cell.configureCellWith(titleText: model.title,
-                               imageAside: model.asideImage)
+        cell.configureCellWith(titleText: title,
+                               imageAside: UIImage(data: asideImage ?? Data()))
         viewCell = cell
       }
-    }
-    
-    if let model = model as? SettingsScreenType.CleanButtonModel {
+    case .cleanButtonModel(title: let title):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: SmallButtonCell.reuseIdentifier
       ) as? SmallButtonCell {
         cell.action = { [weak self] in
           self?.output?.cleanButtonAction()
         }
-        cell.configureCellWith(titleButton: model.title)
+        cell.configureCellWith(titleButton: title)
+        viewCell = cell
+      }
+    case .insets(let inset):
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: CustomPaddingCell.reuseIdentifier
+      ) as? CustomPaddingCell {
+        cell.configureCellWith(height: CGFloat(inset))
+        cell.backgroundColor = RandomColor.primaryWhite
+        cell.contentView.backgroundColor = RandomColor.primaryWhite
+        viewCell = cell
+      }
+    case .divider:
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: DividerTableViewCell.reuseIdentifier
+      ) as? DividerTableViewCell {
         viewCell = cell
       }
     }

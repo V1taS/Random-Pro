@@ -24,6 +24,9 @@ protocol LotteryScreenInteractorOutput: AnyObject {
 
 protocol LotteryScreenInteractorInput: AnyObject {
   
+  /// Возвращает список результатов
+  func returnListResult() -> [String]
+  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
@@ -99,6 +102,14 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
     )
     self.model = newModel
     output?.didRecive(model: newModel)
+  }
+  
+  func returnListResult() -> [String] {
+    if let model = model {
+      return model.listResult
+    } else {
+      return []
+    }
   }
 }
 

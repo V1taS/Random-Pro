@@ -20,11 +20,24 @@ protocol TeamsScreenInteractorInput {
   
   /// Получить данные
   func getContent()
+  
+  /// Обновить контент
+  ///  - Parameter models: Модели игроков
+  func updateContentWith<T: PlayerProtocol>(models: [T])
+  
+  /// Возвращает текущее количество команд
+  func returnGeneratedCountTeams() -> Int
+  
+  /// Количество сгенерированных игроков
+  func returnGeneratedCountPlayers() -> Int
+  
+  /// Возвращает список команд
+  func returnListTeams() -> [TeamsScreenModel.Team]
 }
 
 /// Интерактор
 final class TeamsScreenInteractor: TeamsScreenInteractorInput {
-
+  
   // MARK: - Internal properties
   
   weak var output: TeamsScreenInteractorOutput?
@@ -34,6 +47,24 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   func getContent() {
     let model = TeamsScreenModel(selectedTeam: .zero, allPlayers: [], teams: [])
     output?.didRecive(model: model)
+  }
+  
+  func updateContentWith<T: PlayerProtocol>(models: [T]) {
+    // TODO: -
+  }
+  
+  func returnGeneratedCountTeams() -> Int {
+    // TODO: -
+    return 5
+  }
+  
+  func returnGeneratedCountPlayers() -> Int {
+    return 2
+  }
+  
+  func returnListTeams() -> [TeamsScreenModel.Team] {
+    // TODO: -
+    return []
   }
 }
 

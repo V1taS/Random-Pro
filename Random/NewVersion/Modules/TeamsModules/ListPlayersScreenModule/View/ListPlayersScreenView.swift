@@ -14,6 +14,25 @@ protocol ListPlayersScreenViewOutput: AnyObject {
   /// Было добавлено имя игрока
   ///  - Parameter name: Имя игрока
   func playerAdded(name: String?)
+  
+  /// Игрок был удален
+  ///  - Parameter id: Уникальный номер игрока
+  func playerRemoved(id: String)
+  
+  /// Обновить реакцию у игрока
+  /// - Parameters:
+  ///  - emoji: Реакция
+  ///  - id: Уникальный номер игрока
+  func updatePlayer(emoji: String, id: String)
+  
+  /// Обновить статус у игрока
+  /// - Parameters:
+  ///  - state: Статус игрока
+  ///  - id: Уникальный номер игрока
+  func updatePlayer(state: ListPlayersScreenModel.PlayerState, id: String)
+  
+  /// Обновить контент
+  func updateContent()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -36,7 +55,7 @@ final class ListPlayersScreenView: ListPlayersScreenViewProtocol {
   
   // MARK: - Private properties
   
-  private let tableView = UITableView()
+  private let tableView = TableView()
   private let textField = TextFieldView()
   private var models: [ListPlayersScreenType] = []
   
@@ -59,49 +78,6 @@ final class ListPlayersScreenView: ListPlayersScreenViewProtocol {
     self.models = models
     tableView.reloadData()
   }
-  
-  // MARK: - Private func
-  
-  private func configureLayout() {
-    let appearance = Appearance()
-    [tableView].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      addSubview($0)
-    }
-    
-    NSLayoutConstraint.activate([
-      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
-      tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
-      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ])
-  }
-  
-  private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.secondaryWhite
-    tableView.backgroundColor = RandomColor.secondaryWhite
-    
-    textField.placeholder = "Создай игрока"
-    textField.delegate = self
-    
-    tableView.separatorStyle = .none
-    tableView.delegate = self
-    tableView.dataSource = self
-    
-    tableView.register(PlayerInfoTableViewCell.self,
-                       forCellReuseIdentifier: PlayerInfoTableViewCell.reuseIdentifier)
-    tableView.register(CustomPaddingCell.self,
-                       forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
-    tableView.register(TextFieldWithButtonCell.self,
-                       forCellReuseIdentifier: TextFieldWithButtonCell.reuseIdentifier)
-    tableView.register(DividerTableViewCell.self,
-                       forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
-    
-    tableView.tableFooterView = UIView()
-    tableView.tableHeaderView = UIView()
-    tableView.contentInset.top = Appearance().inset.top
-    tableView.showsVerticalScrollIndicator = false
-  }
 }
 
 // MARK: - UITableViewDelegate
@@ -120,23 +96,27 @@ extension ListPlayersScreenView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
     var viewCell = UITableViewCell()
-
+    let appearance = Appearance()
+    
     switch model {
-    case .player(let playerModel):
+    case .player(let playerModel, let teamsCount):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: PlayerInfoTableViewCell.reuseIdentifier
       ) as? PlayerInfoTableViewCell {
+        var statePlayer: String? = playerModel.state.localizedName
+        if playerModel.state == .random {
+          statePlayer = nil
+        }
+        
         cell.configureCellWith(
           avatar: UIImage(data: playerModel.avatar ?? Data()),
           namePlayer: playerModel.name,
-          nameTeam: playerModel.state.rawValue,
-          emoji: Character(playerModel.emoji ?? " "),
-          emojiAction: {
-            // TODO: - to do
-          },
-          contentAction: {
-            // TODO: - to do
-          }
+          nameTeam: statePlayer,
+          emoji: Character(playerModel.emoji ?? "⚪️"),
+          emojiMenu: emojiMenuAction(id: playerModel.id),
+          emojiMenuPrimaryAction: true,
+          cellMenu: contentMenuAction(teamsCount: teamsCount, id: playerModel.id),
+          cellMenuPrimaryAction: true
         )
         viewCell = cell
       }
@@ -155,7 +135,6 @@ extension ListPlayersScreenView: UITableViewDataSource {
       ) as? TextFieldWithButtonCell {
         let checkmarkImage = UIImage(systemName: Appearance().checkmarkImageName,
                                      withConfiguration: Appearance().largeConfig)
-        
         cell.configureCellWith(
           textField: textField,
           buttonImage: checkmarkImage,
@@ -164,7 +143,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
               return
             }
             self.output?.playerAdded(name: self.textField.text)
-            self.textField.text = nil
+            self.textField.text = ""
           }
         )
         viewCell = cell
@@ -175,18 +154,20 @@ extension ListPlayersScreenView: UITableViewDataSource {
       ) as? DividerTableViewCell {
         viewCell = cell
       }
-    }
-    
-    if tableView.isFirst(for: indexPath) {
-      viewCell.layer.cornerRadius = Appearance().cornerRadius
-      viewCell.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-      viewCell.clipsToBounds = true
-    }
-    
-    if tableView.isLast(for: indexPath) {
-      viewCell.layer.cornerRadius = Appearance().cornerRadius
-      viewCell.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-      viewCell.clipsToBounds = true
+    case .doubleTitle(let playersCount, let forGameCount):
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: DoubleTitleCell.reuseIdentifier
+      ) as? DoubleTitleCell {
+        cell.configureCellWith(
+          primaryText: "\(appearance.allTitle): \(playersCount)",
+          primaryTextColor: RandomColor.secondaryGray,
+          primaryTextFont: RandomFont.primaryMedium10,
+          secondaryText: "\(appearance.forGameTitle): \(forGameCount)",
+          secondaryTextColor: RandomColor.secondaryGray,
+          secondaryTextFont: RandomFont.primaryMedium10
+        )
+        viewCell = cell
+      }
     }
     return viewCell
   }
@@ -195,14 +176,252 @@ extension ListPlayersScreenView: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 
 extension ListPlayersScreenView: UITextFieldDelegate {
+  func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let appearance = Appearance()
+    let deleteAction = UIContextualAction(style: .destructive,
+                                          title: appearance.deleteTitle) { [weak self] _, _, _ in
+      guard let self = self else {
+        return
+      }
+      
+      let model = self.models[indexPath.row]
+      switch model {
+      case .player(player: let player, _):
+        self.output?.playerRemoved(id: player.id)
+      default:
+        break
+      }
+    }
+    deleteAction.image = appearance.deleteImage
+    return UISwipeActionsConfiguration(actions: [deleteAction])
+  }
+  
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    let model = models[indexPath.row]
+    switch model {
+    case .player:
+      return true
+    default:
+      return false
+    }
+  }
+  
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
-    
-    if range.location >= 20 {
+    let appearance = Appearance()
+    if range.location >= appearance.maxCharactersTF {
       return false
     }
     return true
+  }
+}
+
+// MARK: - Private
+
+private extension ListPlayersScreenView {
+  func contentMenuAction(teamsCount: Int, id: String) -> UIMenu {
+    let appearance = Appearance()
+    var menuItems: [UIAction] = []
+    
+    menuItems.append(UIAction(
+      title: ListPlayersScreenModel.PlayerState.random.localizedName,
+      image: appearance.contentMenuRandomImage, handler: { [weak self] _ in
+        self?.output?.updatePlayer(state: .random, id: id)
+      }
+    ))
+    
+    if teamsCount >= appearance.contentMenuTeamOne {
+      menuItems.append(UIAction(
+        title: ListPlayersScreenModel.PlayerState.teamOne.localizedName,
+        image: appearance.contentMenuTeamOneImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(state: .teamOne, id: id)
+        }
+      ))
+    }
+    
+    if teamsCount >= appearance.contentMenuTeamTwo {
+      menuItems.append(UIAction(
+        title: ListPlayersScreenModel.PlayerState.teamTwo.localizedName,
+        image: appearance.contentMenuTeamTwoImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(state: .teamTwo, id: id)
+        }
+      ))
+    }
+    
+    if teamsCount >= appearance.contentMenuTeamThree {
+      menuItems.append(UIAction(
+        title: ListPlayersScreenModel.PlayerState.teamThree.localizedName,
+        image: appearance.contentMenuTeamThreeImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(state: .teamThree, id: id)
+        }
+      ))
+    }
+    
+    if teamsCount >= appearance.contentMenuTeamFour {
+      menuItems.append(UIAction(
+        title: ListPlayersScreenModel.PlayerState.teamFour.localizedName,
+        image: appearance.contentMenuTeamFourImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(state: .teamFour, id: id)
+        }
+      ))
+    }
+    
+    if teamsCount >= appearance.contentMenuTeamFive {
+      menuItems.append(UIAction(
+        title: ListPlayersScreenModel.PlayerState.teamFive.localizedName,
+        image: appearance.contentMenuTeamFiveImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(state: .teamFive, id: id)
+        }
+      ))
+    }
+    
+    if teamsCount >= appearance.contentMenuTeamSix {
+      menuItems.append(UIAction(
+        title: ListPlayersScreenModel.PlayerState.teamSix.localizedName,
+        image: appearance.contentMenuTeamSixImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(state: .teamSix, id: id)
+        }
+      ))
+    }
+    
+    menuItems.append(UIAction(
+      title: ListPlayersScreenModel.PlayerState.doesNotPlay.localizedName,
+      image: appearance.contentMenuDoesNotPlayImage,
+      attributes: .destructive,
+      handler: { [weak self] _ in
+        self?.output?.updatePlayer(state: .doesNotPlay, id: id)
+      }
+    ))
+    return UIMenu(title: appearance.contentMenuStatePlayer,
+                  image: nil,
+                  identifier: nil,
+                  options: [],
+                  children: menuItems)
+  }
+  
+  func emojiMenuAction(id: String) -> UIMenu {
+    let appearance = Appearance()
+    let menuItems: [UIAction] = [
+      UIAction(
+        title: appearance.emojiMenuFlameTitle,
+        image: appearance.emojiMenuFlameImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "🔥", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuStarTitle,
+        image: appearance.emojiMenuStarImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "⭐️", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuBallTitle,
+        image: appearance.emojiMenuBallImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "⚽️", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuTshirtTitle,
+        image: appearance.emojiMenuTshirtImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "👕", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuRedTitle,
+        image: appearance.emojiMenuRedImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "🔴", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuGreenTitle,
+        image: appearance.emojiMenuGreenImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "🟢", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuPillsTitle,
+        image: appearance.emojiMenuPillsImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "💊", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuAirplaneTitle,
+        image: appearance.emojiMenuAirplaneImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "🛩", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuMoneyTitle,
+        image: appearance.emojiMenuMoneyImage, handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "🤑", id: id)
+        }
+      ),
+      UIAction(
+        title: appearance.emojiMenuReactionTitle,
+        image: appearance.emojiMenuReactionImage,
+        attributes: .destructive,
+        handler: { [weak self] _ in
+          self?.output?.updatePlayer(emoji: "⚪️", id: id)
+        }
+      )
+    ]
+    return UIMenu(title: appearance.emojiMenuTitle,
+                  image: nil,
+                  identifier: nil,
+                  options: [],
+                  children: menuItems)
+  }
+  
+  func configureLayout() {
+    [tableView].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      addSubview($0)
+    }
+    
+    NSLayoutConstraint.activate([
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+    ])
+  }
+  
+  func applyDefaultBehavior() {
+    let appearance = Appearance()
+    backgroundColor = RandomColor.primaryWhite
+    tableView.backgroundColor = RandomColor.primaryWhite
+    
+    tableView.rowHeight = UITableView.automaticDimension
+    tableView.estimatedRowHeight = appearance.estimatedRowHeight
+    tableView.keyboardDismissMode = .onDrag
+    
+    textField.placeholder = appearance.textFieldPlaceholder
+    textField.delegate = self
+    
+    tableView.separatorStyle = .none
+    tableView.delegate = self
+    tableView.dataSource = self
+    
+    tableView.register(PlayerInfoTableViewCell.self,
+                       forCellReuseIdentifier: PlayerInfoTableViewCell.reuseIdentifier)
+    tableView.register(CustomPaddingCell.self,
+                       forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
+    tableView.register(TextFieldWithButtonCell.self,
+                       forCellReuseIdentifier: TextFieldWithButtonCell.reuseIdentifier)
+    tableView.register(DividerTableViewCell.self,
+                       forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
+    tableView.register(DoubleTitleCell.self,
+                       forCellReuseIdentifier: DoubleTitleCell.reuseIdentifier)
+    
+    tableView.tableFooterView = UIView()
+    tableView.tableHeaderView = UIView()
+    tableView.showsVerticalScrollIndicator = false
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
+    tap.cancelsTouchesInView = false
+    addGestureRecognizer(tap)
+    isUserInteractionEnabled = true
   }
 }
 
@@ -210,11 +429,75 @@ extension ListPlayersScreenView: UITextFieldDelegate {
 
 private extension ListPlayersScreenView {
   struct Appearance {
-    let inset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     let cornerRadius: CGFloat = 8
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 20,
                                                   weight: .bold,
                                                   scale: .large)
     let checkmarkImageName = "checkmark.circle.fill"
+    let deleteImage = UIImage(systemName: "trash")
+    let allTitle = NSLocalizedString("Всего", comment: "")
+    let forGameTitle = NSLocalizedString("На игру", comment: "")
+    let deleteTitle = NSLocalizedString("Удалить", comment: "")
+    let textFieldPlaceholder = NSLocalizedString("Имя игрока", comment: "")
+    let maxCharactersTF = 20
+    let estimatedRowHeight: CGFloat = 70
+    
+    // Content menu
+    
+    let contentMenuRandomImage = UIImage(systemName: "die.face.5")
+    let contentMenuDoesNotPlayImage = UIImage(systemName: "xmark.circle.fill")
+    let contentMenuStatePlayer = NSLocalizedString("Статус игрока", comment: "")
+    
+    let contentMenuTeamOne = 1
+    let contentMenuTeamOneImage = UIImage(systemName: "1.square")
+    
+    let contentMenuTeamTwo = 2
+    let contentMenuTeamTwoImage = UIImage(systemName: "2.square")
+    
+    let contentMenuTeamThree = 3
+    let contentMenuTeamThreeImage = UIImage(systemName: "3.square")
+    
+    let contentMenuTeamFour = 4
+    let contentMenuTeamFourImage = UIImage(systemName: "4.square")
+    
+    let contentMenuTeamFive = 5
+    let contentMenuTeamFiveImage = UIImage(systemName: "5.square")
+    
+    let contentMenuTeamSix = 6
+    let contentMenuTeamSixImage = UIImage(systemName: "6.square")
+    
+    // Emoji menu
+    
+    let emojiMenuTitle = NSLocalizedString("Реакции", comment: "")
+    
+    let emojiMenuFlameTitle = NSLocalizedString("Огонь", comment: "")
+    let emojiMenuFlameImage = UIImage(systemName: "flame")
+    
+    let emojiMenuStarTitle = NSLocalizedString("Звезда", comment: "")
+    let emojiMenuStarImage = UIImage(systemName: "star")
+    
+    let emojiMenuBallTitle = NSLocalizedString("Мяч", comment: "")
+    let emojiMenuBallImage = UIImage(systemName: "circle.dashed.inset.filled")
+    
+    let emojiMenuTshirtTitle = NSLocalizedString("Форма", comment: "")
+    let emojiMenuTshirtImage = UIImage(systemName: "tshirt")
+    
+    let emojiMenuRedTitle = NSLocalizedString("Красный", comment: "")
+    let emojiMenuRedImage = UIImage(systemName: "eyedropper")
+    
+    let emojiMenuGreenTitle = NSLocalizedString("Зеленый", comment: "")
+    let emojiMenuGreenImage = UIImage(systemName: "eyedropper")
+    
+    let emojiMenuPillsTitle = NSLocalizedString("Таблетка", comment: "")
+    let emojiMenuPillsImage = UIImage(systemName: "pills")
+    
+    let emojiMenuAirplaneTitle = NSLocalizedString("Самолет", comment: "")
+    let emojiMenuAirplaneImage = UIImage(systemName: "airplane.departure")
+    
+    let emojiMenuMoneyTitle = NSLocalizedString("Деньги", comment: "")
+    let emojiMenuMoneyImage = UIImage(systemName: "dollarsign.circle")
+    
+    let emojiMenuReactionTitle = NSLocalizedString("Удалить реакцию", comment: "")
+    let emojiMenuReactionImage = UIImage(systemName: "trash")
   }
 }

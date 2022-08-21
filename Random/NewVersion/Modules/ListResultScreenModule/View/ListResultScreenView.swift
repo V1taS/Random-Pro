@@ -33,7 +33,7 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
   
   // MARK: - Private properties
   
-  private let tableView = UITableView()
+  private let tableView = TableView()
   private var list: [String] = []
   
   // MARK: - Initialization

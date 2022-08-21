@@ -11,16 +11,16 @@ import UIKit
 protocol ListPlayersScreenFactoryOutput: AnyObject {
   
   /// Были получены данные
-  ///  - Parameter model: результат генерации для таблички
-  func didRecive(model: [ListPlayersScreenType])
+  ///  - Parameter models: результат генерации для таблички
+  func didRecive(models: [ListPlayersScreenType])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
 protocol ListPlayersScreenFactoryInput {
   
   /// Создаем модельку для таблички
-  ///  - Parameter listResult: массив результатов
-  func createListModelFrom(players: [ListPlayersScreenModel.Player])
+  ///  - Parameter model: Модель с данными
+  func createListModelFrom(model: ListPlayersScreenModel)
 }
 
 /// Фабрика
@@ -32,27 +32,39 @@ final class ListPlayersScreenFactory: ListPlayersScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModelFrom(players: [ListPlayersScreenModel.Player]) {
-    var model: [ListPlayersScreenType] = []
-    var playersCount = 0
+  func createListModelFrom(model: ListPlayersScreenModel) {
+    output?.didRecive(models: createListFrom(model: model))
+  }
+}
+
+// MARK: - Private
+
+private extension ListPlayersScreenFactory {
+  func createListFrom(model: ListPlayersScreenModel) -> [ListPlayersScreenType] {
+    let appearance = Appearance()
+    var tableViewModels: [ListPlayersScreenType] = []
+    var playersCount: Int = .zero
     
-    model.append(.insets(16))
-    model.append(.textField)
-    model.append(.insets(16))
+    tableViewModels.append(.insets(appearance.middleInset))
+    tableViewModels.append(.textField)
+    tableViewModels.append(.insets(appearance.minimumInset))
     
-    if !players.isEmpty {
-      model.append(.divider)
+    if !model.players.isEmpty {
+      let forGameCount = model.players.filter { $0.state != .doesNotPlay }
+      tableViewModels.append(.doubleTitle(playersCount: model.players.count,
+                                          forGameCount: forGameCount.count))
+      tableViewModels.append(.divider)
     }
     
-    players.reversed().forEach {
-      playersCount += 1
-      model.append(.player($0))
+    model.players.reversed().forEach {
+      playersCount += appearance.increase
+      tableViewModels.append(.player(player: $0, teamsCount: model.teamsCount))
       
-      if playersCount != players.count {
-        model.append(.divider)
+      if playersCount != model.players.count {
+        tableViewModels.append(.divider)
       }
     }
-    output?.didRecive(model: model)
+    return tableViewModels
   }
 }
 
@@ -60,6 +72,8 @@ final class ListPlayersScreenFactory: ListPlayersScreenFactoryInput {
 
 private extension ListPlayersScreenFactory {
   struct Appearance {
-    
+    let minimumInset: Double = 8
+    let middleInset: Double = 16
+    let increase = 1
   }
 }

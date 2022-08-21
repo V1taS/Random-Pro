@@ -12,7 +12,10 @@ import Foundation
 protocol PlayerProtocol {
   
   /// Состояние игрока
-  associatedtype PlayerState
+  associatedtype PlayerState = PlayerStateProtocol
+  
+  /// Уникальный номер игрока
+  var id: String { get }
   
   /// Имя игрока
   var name: String { get }

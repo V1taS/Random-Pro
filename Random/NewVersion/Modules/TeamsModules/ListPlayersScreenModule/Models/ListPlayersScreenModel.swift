@@ -11,12 +11,19 @@ import Foundation
 /// Модель ListPlayers
 struct ListPlayersScreenModel: UserDefaultsCodable {
   
+  /// Список игроков
   let players: [Player]
+  
+  /// Общее количество команд
+  let teamsCount: Int
   
   // MARK: - Player
   
   /// Модель игрока
   struct Player: UserDefaultsCodable, PlayerProtocol {
+    
+    /// Уникальный номер игрока
+    var id: String = UUID().uuidString
     
     /// Имя игрока
     let name: String
@@ -34,10 +41,13 @@ struct ListPlayersScreenModel: UserDefaultsCodable {
   // MARK: - PlayerState
   
   /// Состояние игрока
-  enum PlayerState: String, UserDefaultsCodable {
+  enum PlayerState: PlayerStateProtocol, UserDefaultsCodable {
     
     /// Состояние по умолчанию
-    case random = ""
+    case random
+    
+    /// Не играет
+    case doesNotPlay
     
     /// Принудительно в команду один
     case teamOne
@@ -56,5 +66,38 @@ struct ListPlayersScreenModel: UserDefaultsCodable {
     
     /// Принудительно в команду шесть
     case teamSix
+    
+    /// Описание каждого состояния
+    var localizedName: String {
+      let appearance = Appearance()
+      switch self {
+      case .random:
+        return appearance.randomTitle
+      case .doesNotPlay:
+        return appearance.doesNotPlayTitle
+      case .teamOne:
+        return appearance.teamTitle + " - 1"
+      case .teamTwo:
+        return appearance.teamTitle + " - 2"
+      case .teamThree:
+        return appearance.teamTitle + " - 3"
+      case .teamFour:
+        return appearance.teamTitle + " - 4"
+      case .teamFive:
+        return appearance.teamTitle + " - 5"
+      case .teamSix:
+        return appearance.teamTitle + " - 6"
+      }
+    }
+  }
+}
+
+// MARK: - Appearance
+
+private extension ListPlayersScreenModel {
+  struct Appearance {
+    let randomTitle = NSLocalizedString("Рандом", comment: "")
+    let doesNotPlayTitle = NSLocalizedString("Не играет", comment: "")
+    let teamTitle = NSLocalizedString("Команда", comment: "")
   }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 /// Модель Teams
 struct TeamsScreenModel: UserDefaultsCodable, SettingsScreenModel {
-
+  
   /// Выбранная команда (0-5)
   let selectedTeam: Int
   
@@ -37,6 +37,9 @@ struct TeamsScreenModel: UserDefaultsCodable, SettingsScreenModel {
   /// Модель игрока
   struct Player: UserDefaultsCodable, PlayerProtocol {
     
+    /// Уникальный номер игрока
+    var id: String
+    
     /// Имя игрока
     let name: String
     
@@ -53,10 +56,13 @@ struct TeamsScreenModel: UserDefaultsCodable, SettingsScreenModel {
   // MARK: - PlayerState
   
   /// Состояние игрока
-  enum PlayerState: String, UserDefaultsCodable {
+  enum PlayerState: PlayerStateProtocol, UserDefaultsCodable {
     
     /// Состояние по умолчанию
     case random
+    
+    /// Не играет
+    case doesNotPlay
     
     /// Принудительно в команду один
     case teamOne
@@ -75,5 +81,38 @@ struct TeamsScreenModel: UserDefaultsCodable, SettingsScreenModel {
     
     /// Принудительно в команду шесть
     case teamSix
+    
+    /// Описание каждого состояния
+    var localizedName: String {
+      let appearance = Appearance()
+      switch self {
+      case .random:
+        return appearance.randomTitle
+      case .doesNotPlay:
+        return appearance.doesNotPlayTitle
+      case .teamOne:
+        return appearance.teamTitle + " - 1"
+      case .teamTwo:
+        return appearance.teamTitle + " - 2"
+      case .teamThree:
+        return appearance.teamTitle + " - 3"
+      case .teamFour:
+        return appearance.teamTitle + " - 4"
+      case .teamFive:
+        return appearance.teamTitle + " - 5"
+      case .teamSix:
+        return appearance.teamTitle + " - 6"
+      }
+    }
+  }
+}
+
+// MARK: - Appearance
+
+private extension TeamsScreenModel {
+  struct Appearance {
+    let randomTitle = NSLocalizedString("Рандом", comment: "")
+    let doesNotPlayTitle = NSLocalizedString("Не играет", comment: "")
+    let teamTitle = NSLocalizedString("Команда", comment: "")
   }
 }

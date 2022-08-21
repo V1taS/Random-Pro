@@ -14,7 +14,10 @@ import Foundation
 enum ListPlayersScreenType {
   
   /// Секция игрока
-  case player(ListPlayersScreenModel.Player)
+  /// - Parameters:
+  ///  - player: Текущий игрок
+  ///  - teamsCount: Общее количество команд
+  case player(player: ListPlayersScreenModel.Player, teamsCount: Int)
   
   /// Секция отступа
   case insets(Double)
@@ -24,4 +27,10 @@ enum ListPlayersScreenType {
   
   /// Разделитель
   case divider
+  
+  /// Двойной заголовок
+  /// - Parameters:
+  ///  - playersCount: Всего игроков
+  ///  - forGameCount: Все игроков, которые идут на игру
+  case doubleTitle(playersCount: Int, forGameCount: Int)
 }

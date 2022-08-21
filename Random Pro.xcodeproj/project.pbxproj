@@ -262,6 +262,7 @@
 		1BBADE1825EC091100AD38F4 /* FilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1725EC091100AD38F4 /* FilmView.swift */; };
 		1BBADE1B25EC0C5100AD38F4 /* AppNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBADE1A25EC0C5100AD38F4 /* AppNetworking.swift */; };
 		1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCDBF827C065F00004FF0D /* EncryptPassword.swift */; };
+		1BCB6EC928B27C390040F46E /* PlayerStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB6EC828B27C390040F46E /* PlayerStateProtocol.swift */; };
 		1BCC579127A83CE200DF5ED0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCC579027A83CE200DF5ED0 /* CloudKit.framework */; };
 		1BD1F90425D7250E00A1C7A4 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90325D7250D00A1C7A4 /* MailView.swift */; };
 		1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */; };
@@ -306,7 +307,7 @@
 		1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */; };
 		1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */; };
 		1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */; };
-		2B0E1811B270B556201348D8 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A98BAD92EE4B29B5825A96F /* Pods_Random_Pro.framework */; };
+		373290734869B89BBF460B6C /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE56591334FA91190FC3E1E /* Pods_Random_Pro.framework */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
 		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
@@ -637,6 +638,7 @@
 		1BBADE1725EC091100AD38F4 /* FilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmView.swift; sourceTree = "<group>"; };
 		1BBADE1A25EC0C5100AD38F4 /* AppNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNetworking.swift; sourceTree = "<group>"; };
 		1BBCDBF827C065F00004FF0D /* EncryptPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptPassword.swift; sourceTree = "<group>"; };
+		1BCB6EC828B27C390040F46E /* PlayerStateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateProtocol.swift; sourceTree = "<group>"; };
 		1BCC579027A83CE200DF5ED0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		1BD1F90325D7250D00A1C7A4 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		1BD1F90725D72B2500A1C7A4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
+		1EE56591334FA91190FC3E1E /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
 		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
@@ -734,9 +737,8 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
-		8A98BAD92EE4B29B5825A96F /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		92F51A18CF5AC428BADF4C3B /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
-		B732B49A98A09A4199293949 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		89AEBDB40C28FFC544A5ADBA /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		E5AAF1EE419FB488B2195CD2 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -751,7 +753,7 @@
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				2B0E1811B270B556201348D8 /* Pods_Random_Pro.framework in Frameworks */,
+				373290734869B89BBF460B6C /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,7 +1066,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				8A98BAD92EE4B29B5825A96F /* Pods_Random_Pro.framework */,
+				1EE56591334FA91190FC3E1E /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1159,6 +1161,8 @@
 		1B74319D28A7A19D00205C2C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1BCB6EC828B27C390040F46E /* PlayerStateProtocol.swift */,
+				1B7431AF28A8020C00205C2C /* PlayerProtocol.swift */,
 				1B7431AB28A7E86D00205C2C /* TeamsScreenModel.swift */,
 			);
 			path = Models;
@@ -1167,7 +1171,6 @@
 		1B74319E28A7A1A200205C2C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1B7431AF28A8020C00205C2C /* PlayerProtocol.swift */,
 				1B7431AD28A801C200205C2C /* ListPlayersScreenModel.swift */,
 				1B7431B128A805A800205C2C /* ListPlayersScreenType.swift */,
 			);
@@ -2108,8 +2111,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				92F51A18CF5AC428BADF4C3B /* Pods-Random Pro.debug.xcconfig */,
-				B732B49A98A09A4199293949 /* Pods-Random Pro.release.xcconfig */,
+				E5AAF1EE419FB488B2195CD2 /* Pods-Random Pro.debug.xcconfig */,
+				89AEBDB40C28FFC544A5ADBA /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2642,13 +2645,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				16F5036CDE0393563BAC53D1 /* [CP] Check Pods Manifest.lock */,
+				33BE407EABA3BAFD222CD206 /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				9446363F8C81E75470C81EC3 /* [CP] Embed Pods Frameworks */,
+				08A7BB10302524075DDDBEBA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2728,26 +2731,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		16F5036CDE0393563BAC53D1 /* [CP] Check Pods Manifest.lock */ = {
+		08A7BB10302524075DDDBEBA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1B225C582619E472001B9124 /* ShellScript */ = {
@@ -2770,21 +2768,26 @@
 ";
 			showEnvVarsInLog = 0;
 		};
-		9446363F8C81E75470C81EC3 /* [CP] Embed Pods Frameworks */ = {
+		33BE407EABA3BAFD222CD206 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3042,6 +3045,7 @@
 				1BBADE1025EC083800AD38F4 /* FilmActions.swift in Sources */,
 				1BD1F91025D7324000A1C7A4 /* DateAndTime.swift in Sources */,
 				1BF22F4225D8B23F00775368 /* TeamResultsView.swift in Sources */,
+				1BCB6EC928B27C390040F46E /* PlayerStateProtocol.swift in Sources */,
 				1B3D19FC25D21C8D0027A83B /* YesOrNotResultsView.swift in Sources */,
 				1B3D19EF25D1BB3D0027A83B /* NumberResultsView.swift in Sources */,
 				1B3D1A0525D21F2D0027A83B /* CubeResultsView.swift in Sources */,
@@ -3284,7 +3288,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92F51A18CF5AC428BADF4C3B /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = E5AAF1EE419FB488B2195CD2 /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3315,7 +3319,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B732B49A98A09A4199293949 /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = 89AEBDB40C28FFC544A5ADBA /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

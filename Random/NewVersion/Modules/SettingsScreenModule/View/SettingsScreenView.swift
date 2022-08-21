@@ -42,7 +42,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   
   // MARK: - Private properties
   
-  private let tableView = UITableView()
+  private let tableView = TableView()
   private var models: [Any] = []
   
   // MARK: - Initialization

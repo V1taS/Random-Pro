@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// События которые отправляем из View в Presenter
 protocol ContactScreenFactoryOutput: AnyObject {}
 
+/// События которые отправляем от Presenter ко View
 protocol ContactScreenFactoryInput {}
 
 final class ContactScreenFactory: ContactScreenFactoryInput {

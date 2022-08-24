@@ -9,10 +9,13 @@
 import UIKit
 import RandomUIKit
 
+/// События которые отправляем из View в Presenter
 protocol ContactScreenViewOutput: AnyObject {}
 
+/// События которые отправляем от Presenter ко View
 protocol ContactScreenViewInput {}
 
+/// Псевдоним протокола UIView & ContactScreenViewInput
 typealias ContactScreenViewProtocol = UIView & ContactScreenViewInput
 
 final class ContactScreenView: ContactScreenViewProtocol {
@@ -44,7 +47,7 @@ final class ContactScreenView: ContactScreenViewProtocol {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     
-    resultLabel.text = appearance.setResult
+    resultLabel.text = appearance.resultTitle
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
@@ -68,7 +71,6 @@ final class ContactScreenView: ContactScreenViewProtocol {
                                            constant: appearance.middleSpacing),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
                                             constant: -appearance.middleSpacing),
-      resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
@@ -85,7 +87,7 @@ final class ContactScreenView: ContactScreenViewProtocol {
 
 extension ContactScreenView {
   struct Appearance {
-    let setResult = "?"
+    let resultTitle = "?"
     let titleButton = NSLocalizedString("Сгенерировать", comment: "")
     let middleSpacing: CGFloat = 16
   }

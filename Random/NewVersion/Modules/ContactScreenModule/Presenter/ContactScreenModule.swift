@@ -8,18 +8,21 @@
 
 import UIKit
 
+/// События которые отправляем из View в Presenter
 protocol ContactScreenModuleOutput: AnyObject {
   
   /// Кнопка настройки была нажата
   func settingButtonAction()
 }
 
+/// События которые отправляем от Presenter ко View
 protocol ContactScreenModuleInput {
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: ContactScreenModuleOutput? { get set }
 }
 
+/// Псевдоним протокола UIViewController & ContactScreenModuleInput
 typealias ContactScreenModule = UIViewController & ContactScreenModuleInput
 
 final class ContactScreenViewController: ContactScreenModule {

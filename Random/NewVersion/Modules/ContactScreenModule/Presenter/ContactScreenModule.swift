@@ -8,14 +8,14 @@
 
 import UIKit
 
-/// События которые отправляем из View в Presenter
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol ContactScreenModuleOutput: AnyObject {
   
   /// Кнопка настройки была нажата
   func settingButtonAction()
 }
 
-/// События которые отправляем от Presenter ко View
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol ContactScreenModuleInput {
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`

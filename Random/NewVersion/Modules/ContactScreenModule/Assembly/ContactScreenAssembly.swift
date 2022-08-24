@@ -9,6 +9,8 @@
 import UIKit
 
 final class ContactScreenAssembly {
+  
+  /// Собирает модуль `ContactScreen`
   func createModule() -> ContactScreenModule {
     let view = ContactScreenView()
     let interactor = ContactScreenInteractor()

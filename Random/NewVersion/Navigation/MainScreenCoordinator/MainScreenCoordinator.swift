@@ -71,7 +71,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openList() {
-    // TODO: - Open Coordinator
+    let listScreenCoordinator = ListScreenCoordinator(navigationController)
+    anyCoordinator = listScreenCoordinator
+    listScreenCoordinator.start()
   }
   
   func openCoin() {

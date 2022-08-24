@@ -99,7 +99,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openContact() {
-    // TODO: - Open Coordinator
+    let contactScreenCoordinator = ContactScreenCoordinator(navigationController)
+    anyCoordinator = contactScreenCoordinator
+    contactScreenCoordinator.start()
   }
   
   func openPassword() {

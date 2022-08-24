@@ -81,7 +81,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openCube() {
-    // TODO: - Open Coordinator
+   let cubesScreenCoordinator = CubesScreenCoordinator(navigationController)
+    anyCoordinator = cubesScreenCoordinator
+    cubesScreenCoordinator.start()
   }
   
   func openDateAndTime() {

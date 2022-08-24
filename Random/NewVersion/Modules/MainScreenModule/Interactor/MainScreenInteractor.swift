@@ -31,7 +31,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // TODO: -  Сделать настройку ADV лайблов
   private let featureToggles: [MainScreenCellModel.MainScreenCell] = [
     .list(advLabel: .none, isEnabled: true),
-    .cube(advLabel: .none, isEnabled: true),
     .contact(advLabel: .none, isEnabled: true),
     .russianLotto(advLabel: .none, isEnabled: true)
   ]

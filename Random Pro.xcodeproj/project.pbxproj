@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14FD18577BF3DFED5D1FA8C9 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C78CF8529A565FEB6E2211DB /* Pods_Random_Pro.framework */; };
 		1B0CFA9C25EEB8B0000FB641 /* FilmInformationBestFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFA9B25EEB8B0000FB641 /* FilmInformationBestFilmView.swift */; };
 		1B0CFAA725EF11F7000FB641 /* FilmBestHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CFAA625EF11F7000FB641 /* FilmBestHistoryView.swift */; };
 		1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0DB26825DC19A600C9D31D /* SKProduct.swift */; };
@@ -306,7 +307,6 @@
 		1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */; };
 		1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */; };
 		1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */; };
-		373290734869B89BBF460B6C /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE56591334FA91190FC3E1E /* Pods_Random_Pro.framework */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
 		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
@@ -347,6 +347,13 @@
 		6CA396292832517C00F86248 /* LetterScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA396282832517C00F86248 /* LetterScreenFactory.swift */; };
 		6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA3962A283251AA00F86248 /* LetterScreenAssembly.swift */; };
 		6CA3962E2832533A00F86248 /* LetterScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA3962D2832533A00F86248 /* LetterScreenCoordinator.swift */; };
+		6CA6201B28B62DE30078C971 /* CubesScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6201128B62DE30078C971 /* CubesScreenAssembly.swift */; };
+		6CA6201C28B62DE30078C971 /* CubesScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6201328B62DE30078C971 /* CubesScreenModule.swift */; };
+		6CA6201D28B62DE30078C971 /* CubesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6201528B62DE30078C971 /* CubesView.swift */; };
+		6CA6201E28B62DE30078C971 /* CubesScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6201628B62DE30078C971 /* CubesScreenView.swift */; };
+		6CA6201F28B62DE30078C971 /* CubesScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6201828B62DE30078C971 /* CubesScreenInteractor.swift */; };
+		6CA6202028B62DE30078C971 /* CubesScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6201A28B62DE30078C971 /* CubesScreenFactory.swift */; };
+		6CA6202328B62DF50078C971 /* CubesScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6202228B62DF50078C971 /* CubesScreenCoordinator.swift */; };
 		6CBFD052289BC3B4005F9104 /* PasswordScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD051289BC3B4005F9104 /* PasswordScreenView.swift */; };
 		6CBFD054289BC42D005F9104 /* PasswordScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD053289BC42D005F9104 /* PasswordScreenModule.swift */; };
 		6CBFD056289BC4ED005F9104 /* PasswordScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD055289BC4ED005F9104 /* PasswordScreenInteractor.swift */; };
@@ -680,7 +687,6 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		1EE56591334FA91190FC3E1E /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
 		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
@@ -721,6 +727,13 @@
 		6CA396282832517C00F86248 /* LetterScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterScreenFactory.swift; sourceTree = "<group>"; };
 		6CA3962A283251AA00F86248 /* LetterScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterScreenAssembly.swift; sourceTree = "<group>"; };
 		6CA3962D2832533A00F86248 /* LetterScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterScreenCoordinator.swift; sourceTree = "<group>"; };
+		6CA6201128B62DE30078C971 /* CubesScreenAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubesScreenAssembly.swift; sourceTree = "<group>"; };
+		6CA6201328B62DE30078C971 /* CubesScreenModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubesScreenModule.swift; sourceTree = "<group>"; };
+		6CA6201528B62DE30078C971 /* CubesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubesView.swift; sourceTree = "<group>"; };
+		6CA6201628B62DE30078C971 /* CubesScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubesScreenView.swift; sourceTree = "<group>"; };
+		6CA6201828B62DE30078C971 /* CubesScreenInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubesScreenInteractor.swift; sourceTree = "<group>"; };
+		6CA6201A28B62DE30078C971 /* CubesScreenFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubesScreenFactory.swift; sourceTree = "<group>"; };
+		6CA6202228B62DF50078C971 /* CubesScreenCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CubesScreenCoordinator.swift; sourceTree = "<group>"; };
 		6CBFD051289BC3B4005F9104 /* PasswordScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenView.swift; sourceTree = "<group>"; };
 		6CBFD053289BC42D005F9104 /* PasswordScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenModule.swift; sourceTree = "<group>"; };
 		6CBFD055289BC4ED005F9104 /* PasswordScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenInteractor.swift; sourceTree = "<group>"; };
@@ -735,8 +748,9 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
-		89AEBDB40C28FFC544A5ADBA /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
-		E5AAF1EE419FB488B2195CD2 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		9B6D0814C9AEEDDDC5DB45B8 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		C78CF8529A565FEB6E2211DB /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6334417833BFF1559AB7CED /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -751,7 +765,7 @@
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				373290734869B89BBF460B6C /* Pods_Random_Pro.framework in Frameworks */,
+				14FD18577BF3DFED5D1FA8C9 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,7 +1078,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				1EE56591334FA91190FC3E1E /* Pods_Random_Pro.framework */,
+				C78CF8529A565FEB6E2211DB /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1773,6 +1787,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6CA6200F28B62DE30078C971 /* CubesScreenModule */,
 				1B74318828A79CE400205C2C /* TeamsModules */,
 				6C3C8DBB28A25EB20040FD7C /* MoviesScreenModule */,
 				6CBFD04B289BC36B005F9104 /* PasswordScreenModule */,
@@ -1869,6 +1884,7 @@
 		1B96E0FA282048BF00A23880 /* MainScreenCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				6CA6202128B62DF50078C971 /* CubesScreenCoordinator */,
 				1B9D4563283BDD2A00A85F25 /* SettingsScreenCoordinator */,
 				1B74319928A79FB300205C2C /* TeamsCoordinators */,
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
@@ -2108,8 +2124,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E5AAF1EE419FB488B2195CD2 /* Pods-Random Pro.debug.xcconfig */,
-				89AEBDB40C28FFC544A5ADBA /* Pods-Random Pro.release.xcconfig */,
+				9B6D0814C9AEEDDDC5DB45B8 /* Pods-Random Pro.debug.xcconfig */,
+				E6334417833BFF1559AB7CED /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2499,6 +2515,67 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		6CA6200F28B62DE30078C971 /* CubesScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6201028B62DE30078C971 /* Assembly */,
+				6CA6201228B62DE30078C971 /* Presenter */,
+				6CA6201428B62DE30078C971 /* View */,
+				6CA6201728B62DE30078C971 /* Interactor */,
+				6CA6201928B62DE30078C971 /* Factory */,
+			);
+			path = CubesScreenModule;
+			sourceTree = "<group>";
+		};
+		6CA6201028B62DE30078C971 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6201128B62DE30078C971 /* CubesScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6CA6201228B62DE30078C971 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6201328B62DE30078C971 /* CubesScreenModule.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6CA6201428B62DE30078C971 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6201528B62DE30078C971 /* CubesView.swift */,
+				6CA6201628B62DE30078C971 /* CubesScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6CA6201728B62DE30078C971 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6201828B62DE30078C971 /* CubesScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6CA6201928B62DE30078C971 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6201A28B62DE30078C971 /* CubesScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6CA6202128B62DF50078C971 /* CubesScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6202228B62DF50078C971 /* CubesScreenCoordinator.swift */,
+			);
+			path = CubesScreenCoordinator;
+			sourceTree = "<group>";
+		};
 		6CBFD04B289BC36B005F9104 /* PasswordScreenModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -2642,13 +2719,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				33BE407EABA3BAFD222CD206 /* [CP] Check Pods Manifest.lock */,
+				D42064EB38B1CDC8DCF2A83A /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				08A7BB10302524075DDDBEBA /* [CP] Embed Pods Frameworks */,
+				C7E6E14A489CF66648B2ED34 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2728,23 +2805,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		08A7BB10302524075DDDBEBA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1B225C582619E472001B9124 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -2765,7 +2825,24 @@
 ";
 			showEnvVarsInLog = 0;
 		};
-		33BE407EABA3BAFD222CD206 /* [CP] Check Pods Manifest.lock */ = {
+		C7E6E14A489CF66648B2ED34 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D42064EB38B1CDC8DCF2A83A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2827,6 +2904,7 @@
 				1B3EF11B287AD17600D667E1 /* AdminFeatureToggleViewController.swift in Sources */,
 				1B92030A25D1703E0094D2BE /* CharactersView.swift in Sources */,
 				1B88ED7C27C14E1800030202 /* ShareSheet.swift in Sources */,
+				6CA6202328B62DF50078C971 /* CubesScreenCoordinator.swift in Sources */,
 				1B57F64727883498005F220C /* GlobalConstants.swift in Sources */,
 				1B57F63B2787305D005F220C /* TitleWithDescriptionCell.swift in Sources */,
 				1B9D22D027A6EC6A00D4E427 /* CloudList.swift in Sources */,
@@ -2860,11 +2938,14 @@
 				1B57F63F27873E27005F220C /* PremiumSubscriptionComponentView.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				6C3C8DC428A25F2E0040FD7C /* MoviesScreenModule.swift in Sources */,
+				6CA6201B28B62DE30078C971 /* CubesScreenAssembly.swift in Sources */,
 				1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */,
 				1B57F64527877B6A005F220C /* CellMainLockView.swift in Sources */,
 				1B0DB26925DC19A600C9D31D /* SKProduct.swift in Sources */,
+				6CA6201E28B62DE30078C971 /* CubesScreenView.swift in Sources */,
 				1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */,
 				1B14038D2687F394007A5150 /* FPSStatusBarViewController.swift in Sources */,
+				6CA6202028B62DE30078C971 /* CubesScreenFactory.swift in Sources */,
 				1B8EB64226750D2A009016BE /* TravelSettingsView.swift in Sources */,
 				1B7F116F25E3F67000FF64A3 /* Contact.swift in Sources */,
 				1BDC80D1264DBA85001B0893 /* Travel.swift in Sources */,
@@ -3010,6 +3091,7 @@
 				6CBFD05F289C0EE2005F9104 /* PasswordGeneratorView.swift in Sources */,
 				1B7F669925D0876F00933AD6 /* AppState.swift in Sources */,
 				1BA1D0B525D7423900C3FC91 /* DateAndTimeResultsView.swift in Sources */,
+				6CA6201D28B62DE30078C971 /* CubesView.swift in Sources */,
 				1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */,
 				1BBCDBF927C065F00004FF0D /* EncryptPassword.swift in Sources */,
 				1B5A103B27B5257E008DF773 /* AppMetrics.swift in Sources */,
@@ -3018,6 +3100,7 @@
 				1B3EF11C287AD17600D667E1 /* AdminFeatureToggleAssembly.swift in Sources */,
 				1B57F6682789E7A4005F220C /* ADV.swift in Sources */,
 				1B92031325D170D50094D2BE /* CharactersActions.swift in Sources */,
+				6CA6201F28B62DE30078C971 /* CubesScreenInteractor.swift in Sources */,
 				1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */,
 				1B7431AE28A801C200205C2C /* ListPlayersScreenModel.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
@@ -3084,6 +3167,7 @@
 				1B7F669F25D0883C00933AD6 /* NumberRandom.swift in Sources */,
 				1B5F698627C011ED0050647A /* PasswordInteractor.swift in Sources */,
 				1B7F116C25E3F5CC00FF64A3 /* ContactSettingsView.swift in Sources */,
+				6CA6201C28B62DE30078C971 /* CubesScreenModule.swift in Sources */,
 				1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */,
 				1B0DB27425DC680A00C9D31D /* ReversingScale.swift in Sources */,
 				1B96E100282048D000A23880 /* Coordinator.swift in Sources */,
@@ -3284,7 +3368,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E5AAF1EE419FB488B2195CD2 /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = 9B6D0814C9AEEDDDC5DB45B8 /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3315,7 +3399,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89AEBDB40C28FFC544A5ADBA /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = E6334417833BFF1559AB7CED /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

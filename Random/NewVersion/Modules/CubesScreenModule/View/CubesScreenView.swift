@@ -64,7 +64,6 @@ final class CubesScreenView: CubesScreenViewProtocol {
                                     action: #selector(cubesSegmentedAction),
                                     for: .valueChanged)
     
-    
     resultLabel.isHidden = true
     resultLabel.text = appearance.result
     resultLabel.font = RandomFont.primaryBold70

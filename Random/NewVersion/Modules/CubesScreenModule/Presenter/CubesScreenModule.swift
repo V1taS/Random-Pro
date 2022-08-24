@@ -73,7 +73,6 @@ final class CubesScreenViewController: CubesScreenModule {
   @objc private func settingButtonAction() {}
 }
 
-
 extension CubesScreenViewController: CubesScreenViewOutput {
   func generateButtonAction() {}
 }

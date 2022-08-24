@@ -368,7 +368,7 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
-		6D5CF60DCFCB5BB36F22DC45 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C588038D05549F7646DEC1ED /* Pods_Random_Pro.framework */; };
+		75007B326D6A1B90AE1C59A6 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94FFBB87250692B2274B17D2 /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -702,7 +702,6 @@
 		6C3C8DC928A25F4F0040FD7C /* MoviesScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesScreenAssembly.swift; sourceTree = "<group>"; };
 		6C3C8DCC28A264F50040FD7C /* MoviesScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesScreenCoordinator.swift; sourceTree = "<group>"; };
 		6C3C8DCE28A26B0F0040FD7C /* MoviesImageScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesImageScreenView.swift; sourceTree = "<group>"; };
-		6C719BCD5E2A3083359F34FD /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 		6C7662C7287A34D10069C13E /* CoinScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenModel.swift; sourceTree = "<group>"; };
 		6C7662CA287A430A0069C13E /* DateTimeScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeScreenModel.swift; sourceTree = "<group>"; };
 		6C7662CD287A4B210069C13E /* LotteryScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModel.swift; sourceTree = "<group>"; };
@@ -2768,8 +2767,8 @@
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
 			packageReferences = (
-				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
-				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */,
 				1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
@@ -2840,8 +2839,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 			showEnvVarsInLog = 0;
 		};
 		33BE407EABA3BAFD222CD206 /* [CP] Check Pods Manifest.lock */ = {
@@ -3473,7 +3471,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
 			requirement = {
@@ -3481,7 +3479,7 @@
 				kind = branch;
 			};
 		};
-		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
 			requirement = {
@@ -3502,12 +3500,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1B92E09E281D54A400398966 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */;
 			productName = RandomUIKit;
 		};
 		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */;
 			productName = RandomNetwork;
 		};
 		1BDB1CC92878E31D00F75299 /* Notifications */ = {

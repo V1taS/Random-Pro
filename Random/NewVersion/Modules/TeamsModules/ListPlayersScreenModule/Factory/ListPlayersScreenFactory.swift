@@ -19,8 +19,10 @@ protocol ListPlayersScreenFactoryOutput: AnyObject {
 protocol ListPlayersScreenFactoryInput {
   
   /// Создаем модельку для таблички
-  ///  - Parameter model: Модель с данными
-  func createListModelFrom(model: ListPlayersScreenModel)
+  ///  - Parameters:
+  ///   - players: Список игроков
+  ///   - teamsCount: Количество команд
+  func createListModelFrom(players: [TeamsScreenPlayerModel], teamsCount: Int)
 }
 
 /// Фабрика
@@ -31,16 +33,16 @@ final class ListPlayersScreenFactory: ListPlayersScreenFactoryInput {
   weak var output: ListPlayersScreenFactoryOutput?
   
   // MARK: - Internal func
-  
-  func createListModelFrom(model: ListPlayersScreenModel) {
-    output?.didRecive(models: createListFrom(model: model))
+
+  func createListModelFrom(players: [TeamsScreenPlayerModel], teamsCount: Int) {
+    output?.didRecive(models: createListFrom(players: players, teamsCount: teamsCount))
   }
 }
 
 // MARK: - Private
 
 private extension ListPlayersScreenFactory {
-  func createListFrom(model: ListPlayersScreenModel) -> [ListPlayersScreenType] {
+  func createListFrom(players: [TeamsScreenPlayerModel], teamsCount: Int) -> [ListPlayersScreenType] {
     let appearance = Appearance()
     var tableViewModels: [ListPlayersScreenType] = []
     var playersCount: Int = .zero
@@ -49,18 +51,18 @@ private extension ListPlayersScreenFactory {
     tableViewModels.append(.textField)
     tableViewModels.append(.insets(appearance.minimumInset))
     
-    if !model.players.isEmpty {
-      let forGameCount = model.players.filter { $0.state != .doesNotPlay }
-      tableViewModels.append(.doubleTitle(playersCount: model.players.count,
+    if !players.isEmpty {
+      let forGameCount = players.filter { $0.state != .doesNotPlay }
+      tableViewModels.append(.doubleTitle(playersCount: players.count,
                                           forGameCount: forGameCount.count))
       tableViewModels.append(.divider)
     }
     
-    model.players.reversed().forEach {
+    players.reversed().forEach {
       playersCount += appearance.increase
-      tableViewModels.append(.player(player: $0, teamsCount: model.teamsCount))
+      tableViewModels.append(.player(player: $0, teamsCount: teamsCount))
       
-      if playersCount != model.players.count {
+      if playersCount != players.count {
         tableViewModels.append(.divider)
       }
     }

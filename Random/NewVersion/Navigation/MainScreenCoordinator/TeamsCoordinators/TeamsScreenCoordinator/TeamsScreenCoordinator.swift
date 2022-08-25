@@ -69,7 +69,7 @@ extension TeamsScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListPlayersScreenCoordinatorOutput
 
 extension TeamsScreenCoordinator: ListPlayersScreenCoordinatorOutput {
-  func didRecive<T: PlayerProtocol>(players: [T]) {
+  func didRecive(players: [TeamsScreenPlayerModel]) {
     guard let teamsScreenModule = teamsScreenModule else {
       return
     }

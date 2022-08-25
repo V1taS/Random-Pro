@@ -11,15 +11,17 @@ import UIKit
 protocol ListPlayersScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
-  ///  - Parameter model: результат генерации
-  func didRecive(model: ListPlayersScreenModel)
+  ///  - Parameters:
+  ///   - players: Список игроков
+  ///   - teamsCount: Количество команд
+  func didRecive(players: [TeamsScreenPlayerModel], teamsCount: Int)
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol ListPlayersScreenInteractorInput {
   
   /// Возвращает текущий список игроков
-  func returnCurrentListPlayers() -> [ListPlayersScreenModel.Player]
+  func returnCurrentListPlayers() -> [TeamsScreenPlayerModel]
   
   /// Получить данные
   func getContent()
@@ -28,7 +30,7 @@ protocol ListPlayersScreenInteractorInput {
   ///  - Parameters:
   ///   - models: Модели игроков
   ///   - teamsCount: Общее количество игроков
-  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int)
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int)
   
   /// Обновить реакцию у игрока
   /// - Parameters:
@@ -40,7 +42,7 @@ protocol ListPlayersScreenInteractorInput {
   /// - Parameters:
   ///  - state: Статус игрока
   ///  - id: Уникальный номер игрока
-  func updatePlayer(state: ListPlayersScreenModel.PlayerState, id: String)
+  func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String)
   
   /// Добавить игрока
   ///  - Parameter name: Имя игрока
@@ -63,78 +65,58 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private var model: ListPlayersScreenModel?
+  private var models: [TeamsScreenPlayerModel] = []
+  private var defaultTeamsCount = Appearance().defaultTeamsCount
   
   // MARK: - Internal func
   
   func getContent() {
-    if let model = model {
-      output?.didRecive(model: model)
-    } else {
-      let model = ListPlayersScreenModel(players: [], teamsCount: Appearance().defaultTeamsCount)
-      self.model = model
-      output?.didRecive(model: model)
-    }
+    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
   }
   
-  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int) {
-    if let players = models as? [ListPlayersScreenModel.Player] {
-      let model = ListPlayersScreenModel(players: players, teamsCount: teamsCount)
-      self.model = model
-      output?.didRecive(model: model)
-    }
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int) {
+    self.models = models
+    defaultTeamsCount = teamsCount
   }
   
   func updatePlayer(emoji: String, id: String) {
-    guard let model = model else {
-      return
-    }
-    
-    let index = model.players.firstIndex{ $0.id == id }
+    let index = models.firstIndex{ $0.id == id }
     guard let index = index else {
       return
     }
     
-    var players = model.players
-    let player = ListPlayersScreenModel.Player(
-      name: players[index].name,
-      avatar: players[index].avatar,
+    let player = TeamsScreenPlayerModel(
+      id: models[index].id,
+      name: models[index].name,
+      avatar: models[index].avatar,
       emoji: emoji,
-      state: players[index].state
+      state: models[index].state
     )
     
-    players.remove(at: index)
-    players.insert(player, at: index)
+    models.remove(at: index)
+    models.insert(player, at: index)
     
-    let newModel = ListPlayersScreenModel(players: players, teamsCount: model.teamsCount)
-    self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
   }
   
-  func updatePlayer(state: ListPlayersScreenModel.PlayerState, id: String) {
-    guard let model = model else {
-      return
-    }
-    
-    let index = model.players.firstIndex{ $0.id == id }
+  func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String) {
+    let index = models.firstIndex{ $0.id == id }
     guard let index = index else {
       return
     }
     
-    var players = model.players
-    let player = ListPlayersScreenModel.Player(
-      name: players[index].name,
-      avatar: players[index].avatar,
-      emoji: players[index].emoji,
+    let player = TeamsScreenPlayerModel(
+      id: models[index].id,
+      name: models[index].name,
+      avatar: models[index].avatar,
+      emoji: models[index].emoji,
       state: state
     )
     
-    players.remove(at: index)
-    players.insert(player, at: index)
+    models.remove(at: index)
+    models.insert(player, at: index)
     
-    let newModel = ListPlayersScreenModel(players: players, teamsCount: model.teamsCount)
-    self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func playerAdd(name: String?) {
@@ -145,57 +127,35 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
       return
     }
     
-    var players: [ListPlayersScreenModel.Player] = self.model?.players ?? []
-    let player = ListPlayersScreenModel.Player(
+    let player = TeamsScreenPlayerModel(
+      id: UUID().uuidString,
       name: name,
       avatar: generationImagePlayer()?.pngData(),
       emoji: "⚪️",
       state: .random
     )
     
-    players.append(player)
-    let model = ListPlayersScreenModel(players: players,
-                                       teamsCount: self.model?.teamsCount ?? Appearance().defaultTeamsCount)
-    self.model = model
-    output?.didRecive(model: model)
+    models.append(player)
+    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func playerRemove(id: String) {
-    guard let model = model else {
-      return
-    }
-    
-    let index = model.players.firstIndex{ $0.id == id }
+    let index = models.firstIndex{ $0.id == id }
     guard let index = index else {
       return
     }
     
-    var players = model.players
-    players.remove(at: index)
-    
-    let newModel = ListPlayersScreenModel(players: players, teamsCount: model.teamsCount)
-    self.model = newModel
-    output?.didRecive(model: newModel)
+    models.remove(at: index)
+    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func removeAllPlayers() {
-    if let model = model {
-      let model = ListPlayersScreenModel(players: [], teamsCount: model.teamsCount)
-      self.model = model
-      output?.didRecive(model: model)
-    } else {
-      let model = ListPlayersScreenModel(players: [], teamsCount: Appearance().defaultTeamsCount)
-      self.model = model
-      output?.didRecive(model: model)
-    }
+    models = []
+    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
   }
   
-  func returnCurrentListPlayers() -> [ListPlayersScreenModel.Player] {
-    if let model = model {
-      return model.players
-    } else {
-      return []
-    }
+  func returnCurrentListPlayers() -> [TeamsScreenPlayerModel] {
+    return models
   }
 }
 

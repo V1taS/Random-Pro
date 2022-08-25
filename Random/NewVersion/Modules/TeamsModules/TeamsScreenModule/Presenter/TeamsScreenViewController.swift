@@ -12,7 +12,7 @@ protocol TeamsScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter players: список игроков
-  func settingButtonAction<T: PlayerProtocol>(players: [T])
+  func settingButtonAction(players: [TeamsScreenPlayerModel])
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -29,7 +29,7 @@ protocol TeamsScreenModuleInput {
   
   /// Обновить список игроков
   ///  - Parameter players: Список игроков
-  func updateContentWith<T: PlayerProtocol>(players: [T])
+  func updateContentWith(players: [TeamsScreenPlayerModel])
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: TeamsScreenModuleOutput? { get set }

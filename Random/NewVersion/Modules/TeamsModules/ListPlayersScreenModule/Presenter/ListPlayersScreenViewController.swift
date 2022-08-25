@@ -15,7 +15,7 @@ protocol ListPlayersScreenModuleOutput: AnyObject {
   
   /// Были получены игроки
   ///  - Parameter players: Список игроков
-  func didRecive<T: PlayerProtocol>(players: [T])
+  func didRecive(players: [TeamsScreenPlayerModel])
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -28,7 +28,7 @@ protocol ListPlayersScreenModuleInput {
   ///  - Parameters:
   ///   - models: Модели игроков
   ///   - teamsCount: Общее количество игроков
-  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int)
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int)
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: ListPlayersScreenModuleOutput? { get set }
@@ -90,7 +90,7 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
   
   // MARK: - Internal func
   
-  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int) {
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int) {
     interactor.updateContentWith(models: models, teamsCount: teamsCount)
   }
   
@@ -110,7 +110,7 @@ extension ListPlayersScreenViewController: ListPlayersScreenViewOutput {
     interactor.getContent()
   }
   
-  func updatePlayer(state: ListPlayersScreenModel.PlayerState, id: String) {
+  func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String) {
     interactor.updatePlayer(state: state, id: id)
   }
   
@@ -126,8 +126,8 @@ extension ListPlayersScreenViewController: ListPlayersScreenViewOutput {
 // MARK: - ListPlayersScreenInteractorOutput
 
 extension ListPlayersScreenViewController: ListPlayersScreenInteractorOutput {
-  func didRecive(model: ListPlayersScreenModel) {
-    factory.createListModelFrom(model: model)
+  func didRecive(players: [TeamsScreenPlayerModel], teamsCount: Int) {
+    factory.createListModelFrom(players: players, teamsCount: teamsCount)
   }
 }
 

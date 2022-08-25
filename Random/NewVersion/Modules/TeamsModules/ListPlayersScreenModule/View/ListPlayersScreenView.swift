@@ -29,7 +29,7 @@ protocol ListPlayersScreenViewOutput: AnyObject {
   /// - Parameters:
   ///  - state: Статус игрока
   ///  - id: Уникальный номер игрока
-  func updatePlayer(state: ListPlayersScreenModel.PlayerState, id: String)
+  func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String)
   
   /// Обновить контент
   func updateContent()
@@ -235,7 +235,7 @@ private extension ListPlayersScreenView {
     var menuItems: [UIAction] = []
     
     menuItems.append(UIAction(
-      title: ListPlayersScreenModel.PlayerState.random.localizedName,
+      title: TeamsScreenPlayerModel.PlayerState.random.localizedName,
       image: appearance.contentMenuRandomImage, handler: { [weak self] _ in
         self?.output?.updatePlayer(state: .random, id: id)
       }
@@ -243,7 +243,7 @@ private extension ListPlayersScreenView {
     
     if teamsCount >= appearance.contentMenuTeamOne {
       menuItems.append(UIAction(
-        title: ListPlayersScreenModel.PlayerState.teamOne.localizedName,
+        title: TeamsScreenPlayerModel.PlayerState.teamOne.localizedName,
         image: appearance.contentMenuTeamOneImage, handler: { [weak self] _ in
           self?.output?.updatePlayer(state: .teamOne, id: id)
         }
@@ -252,7 +252,7 @@ private extension ListPlayersScreenView {
     
     if teamsCount >= appearance.contentMenuTeamTwo {
       menuItems.append(UIAction(
-        title: ListPlayersScreenModel.PlayerState.teamTwo.localizedName,
+        title: TeamsScreenPlayerModel.PlayerState.teamTwo.localizedName,
         image: appearance.contentMenuTeamTwoImage, handler: { [weak self] _ in
           self?.output?.updatePlayer(state: .teamTwo, id: id)
         }
@@ -261,7 +261,7 @@ private extension ListPlayersScreenView {
     
     if teamsCount >= appearance.contentMenuTeamThree {
       menuItems.append(UIAction(
-        title: ListPlayersScreenModel.PlayerState.teamThree.localizedName,
+        title: TeamsScreenPlayerModel.PlayerState.teamThree.localizedName,
         image: appearance.contentMenuTeamThreeImage, handler: { [weak self] _ in
           self?.output?.updatePlayer(state: .teamThree, id: id)
         }
@@ -270,7 +270,7 @@ private extension ListPlayersScreenView {
     
     if teamsCount >= appearance.contentMenuTeamFour {
       menuItems.append(UIAction(
-        title: ListPlayersScreenModel.PlayerState.teamFour.localizedName,
+        title: TeamsScreenPlayerModel.PlayerState.teamFour.localizedName,
         image: appearance.contentMenuTeamFourImage, handler: { [weak self] _ in
           self?.output?.updatePlayer(state: .teamFour, id: id)
         }
@@ -279,7 +279,7 @@ private extension ListPlayersScreenView {
     
     if teamsCount >= appearance.contentMenuTeamFive {
       menuItems.append(UIAction(
-        title: ListPlayersScreenModel.PlayerState.teamFive.localizedName,
+        title: TeamsScreenPlayerModel.PlayerState.teamFive.localizedName,
         image: appearance.contentMenuTeamFiveImage, handler: { [weak self] _ in
           self?.output?.updatePlayer(state: .teamFive, id: id)
         }
@@ -288,7 +288,7 @@ private extension ListPlayersScreenView {
     
     if teamsCount >= appearance.contentMenuTeamSix {
       menuItems.append(UIAction(
-        title: ListPlayersScreenModel.PlayerState.teamSix.localizedName,
+        title: TeamsScreenPlayerModel.PlayerState.teamSix.localizedName,
         image: appearance.contentMenuTeamSixImage, handler: { [weak self] _ in
           self?.output?.updatePlayer(state: .teamSix, id: id)
         }
@@ -296,7 +296,7 @@ private extension ListPlayersScreenView {
     }
     
     menuItems.append(UIAction(
-      title: ListPlayersScreenModel.PlayerState.doesNotPlay.localizedName,
+      title: TeamsScreenPlayerModel.PlayerState.doesNotPlay.localizedName,
       image: appearance.contentMenuDoesNotPlayImage,
       attributes: .destructive,
       handler: { [weak self] _ in

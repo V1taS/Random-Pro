@@ -17,7 +17,7 @@ enum ListPlayersScreenType {
   /// - Parameters:
   ///  - player: Текущий игрок
   ///  - teamsCount: Общее количество команд
-  case player(player: ListPlayersScreenModel.Player, teamsCount: Int)
+  case player(player: TeamsScreenPlayerModel, teamsCount: Int)
   
   /// Секция отступа
   case insets(Double)

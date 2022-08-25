@@ -13,7 +13,7 @@ protocol ListPlayersScreenCoordinatorOutput: AnyObject {
   
   /// Были получены игроки
   ///  - Parameter players: Список игроков
-  func didRecive<T: PlayerProtocol>(players: [T])
+  func didRecive(players: [TeamsScreenPlayerModel])
 }
 
 /// События которые отправляем из `другого координатора` в  `текущий координатор`
@@ -23,7 +23,7 @@ protocol ListPlayersScreenCoordinatorInput {
   ///  - Parameters:
   ///   - models: Модели игроков
   ///   - teamsCount: Общее количество игроков
-  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int)
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int)
   
   /// События которые отправляем из `текущего координатора` в  `другой координатор`
   var output: ListPlayersScreenCoordinatorOutput? { get set }
@@ -59,7 +59,7 @@ final class ListPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol {
     navigationController.pushViewController(listPlayersScreenModule, animated: true)
   }
   
-  func updateContentWith<T: PlayerProtocol>(models: [T], teamsCount: Int) {
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int) {
     listPlayersScreenModule?.updateContentWith(models: models, teamsCount: teamsCount)
   }
 }
@@ -71,7 +71,7 @@ extension ListPlayersScreenCoordinator: ListPlayersScreenModuleOutput {
     removePlayersAlert()
   }
   
-  func didRecive<T: PlayerProtocol>(players: [T]) {
+  func didRecive(players: [TeamsScreenPlayerModel]) {
     output?.didRecive(players: players)
   }
 }

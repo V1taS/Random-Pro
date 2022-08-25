@@ -48,8 +48,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndDescription(title: appearance.generatedPlayersCount,
                                                   description: generatedPlayersCount))
       tableViewModels.append(.divider)
-      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+                                            asideImage: appearance.titleAndImageIcon?.pngData()))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .number(withoutRepetition: let withoutRepetition,
@@ -65,8 +65,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
       
@@ -80,8 +80,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -98,8 +98,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -112,8 +112,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -126,8 +126,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -140,8 +140,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -175,11 +175,11 @@ private extension SettingsScreenFactory {
                                              comment: "")
     let cleanButtonTitle = NSLocalizedString("Очистить",
                                              comment: "")
-    let listOfNumbersIcon = UIImage(systemName: "chevron.compact.right")
+    let titleAndImageIcon = UIImage(systemName: "arrow.right.square")
     
     let numberOfGenerations = NSLocalizedString("Список результатов",
                                                 comment: "")
-    let listPlayersActionTitle = NSLocalizedString("Список игроков",
+    let titleAndImageTitle = NSLocalizedString("Список игроков",
                                                    comment: "")
     
     let generatedTeamsCountTitle = NSLocalizedString("Cгенерировано команд",

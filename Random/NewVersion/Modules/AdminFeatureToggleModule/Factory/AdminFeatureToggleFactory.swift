@@ -109,12 +109,6 @@ final class AdminFeatureToggleFactory: AdminFeatureToggleFactoryInput {
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .russianLotto(advLabel: let advLabel, isEnabled: let isEnabled):
-        models.append(configureModel(
-          sectionName: "Russian Lotto",
-          advLabel: advLabel,
-          isEnabled: isEnabled)
-        )
       }
     }
     output?.didRecive(models: models)

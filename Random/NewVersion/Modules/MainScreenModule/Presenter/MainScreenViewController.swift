@@ -218,6 +218,6 @@ private extension MainScreenViewController {
     //    let title = "Random"
     let title = "Random (БЕТА)"
     let adminFeatureToggleIcon = UIImage(named: "Empty")
-    let numberOfTapsRequired = 1
+    let numberOfTapsRequired = 10
   }
 }

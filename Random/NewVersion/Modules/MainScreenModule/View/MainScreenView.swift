@@ -46,9 +46,6 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `Password`
   func openPassword()
-  
-  /// Открыть раздел `Password`
-  func openRussianLotto()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -171,8 +168,6 @@ extension MainScreenView: UICollectionViewDelegate {
       output?.openContact()
     case .password:
       output?.openPassword()
-    case .russianLotto:
-      output?.openRussianLotto()
     }
   }
 }

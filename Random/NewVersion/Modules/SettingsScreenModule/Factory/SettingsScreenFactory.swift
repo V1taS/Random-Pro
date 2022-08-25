@@ -41,72 +41,109 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                 generatedPlayersCount: let generatedPlayersCount):
       tableViewModels.append(.titleAndDescription(title: appearance.generatedTeamsCountTitle,
                                                   description: generatedTeamsCount))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.allPlayersCount,
                                                   description: allPlayersCount))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.generatedPlayersCount,
                                                   description: generatedPlayersCount))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
                                             asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .number(withoutRepetition: let withoutRepetition,
                  itemsGenerated: let itemsGenerated,
                  lastItem: let lastItem):
       tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
                                                isEnabled: withoutRepetition))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
-      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
+      
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .yesOrNo(itemsGenerated: let itemsGenerated,
                   lastItem: let lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
-      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .letter(withoutRepetition: let withoutRepetition,
                  itemsGenerated: let itemsGenerated,
                  lastItem: let lastItem):
       tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
                                                isEnabled: withoutRepetition))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
-      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .coin(itemsGenerated: let itemsGenerated,
                lastItem: let lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
-      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .dateAndTime(itemsGenerated: let itemsGenerated,
                       lastItem: let lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
-      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .lottery(itemsGenerated: let itemsGenerated,
                   lastItem: let lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
-      tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
-                                            asideImage: appearance.listOfNumbersIcon?.pngData()))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.listPlayersActionTitle,
+                                              asideImage: appearance.listOfNumbersIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .list: break
     case .films: break

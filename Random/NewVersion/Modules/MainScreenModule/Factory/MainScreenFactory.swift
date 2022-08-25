@@ -122,13 +122,6 @@ final class MainScreenFactory: MainScreenFactoryInput {
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .russianLotto(let advLabel, _):
-        let model = configureModelFrom(cell: cell,
-                                       imageCard: appearance.imageCardRussianLotto,
-                                       titleCard: appearance.titleCardRussianLotto,
-                                       isShowADVLabel: isShow(advLabel),
-                                       titleADVText: configure(advLabel))
-        models.append(model)
       }
     }
     output?.didRecive(models: models)

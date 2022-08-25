@@ -306,6 +306,7 @@
 		1BF30DDB25D19E5400DCE62B /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */; };
 		1BF30DDF25D19E9D00DCE62B /* SettingsInterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */; };
 		1BF30DE225D19F6E00DCE62B /* YesOrNotSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */; };
+		2ABFA528D197D4940C502729 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B150458E14D73C9338D4E597 /* Pods_Random_Pro.framework */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
 		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
@@ -359,6 +360,12 @@
 		6CA6203128B633310078C971 /* ContactScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6203028B633310078C971 /* ContactScreenFactory.swift */; };
 		6CA6203328B633400078C971 /* ContactScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6203228B633400078C971 /* ContactScreenAssembly.swift */; };
 		6CA6203628B636190078C971 /* ContactScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6203528B636190078C971 /* ContactScreenCoordinator.swift */; };
+		6CA6203E28B679B40078C971 /* ListScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6203D28B679B40078C971 /* ListScreenView.swift */; };
+		6CA6204028B67A2E0078C971 /* ListScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6203F28B67A2E0078C971 /* ListScreenModule.swift */; };
+		6CA6204228B67A930078C971 /* ListScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6204128B67A930078C971 /* ListScreenInteractor.swift */; };
+		6CA6204428B67ACB0078C971 /* ListScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6204328B67ACB0078C971 /* ListScreenFactory.swift */; };
+		6CA6204628B67B4F0078C971 /* ListScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6204528B67B4F0078C971 /* ListScreenAssembly.swift */; };
+		6CA6204928B67D660078C971 /* ListScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6204828B67D660078C971 /* ListScreenCoordinator.swift */; };
 		6CBFD052289BC3B4005F9104 /* PasswordScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD051289BC3B4005F9104 /* PasswordScreenView.swift */; };
 		6CBFD054289BC42D005F9104 /* PasswordScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD053289BC42D005F9104 /* PasswordScreenModule.swift */; };
 		6CBFD056289BC4ED005F9104 /* PasswordScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD055289BC4ED005F9104 /* PasswordScreenInteractor.swift */; };
@@ -373,7 +380,6 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
-		7084AD44FB0BE4F4380EA5FD /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64358F1FAB0742B8CA3048DD /* Pods_Random_Pro.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -693,9 +699,7 @@
 		1BF30DDA25D19E5400DCE62B /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		1BF30DDE25D19E9D00DCE62B /* SettingsInterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterator.swift; sourceTree = "<group>"; };
 		1BF30DE125D19F6E00DCE62B /* YesOrNotSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesOrNotSettingsView.swift; sourceTree = "<group>"; };
-		434BE1F27633AE12C8984265 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
-		4618DE8A7ACD6BD3495F8EF2 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
-		64358F1FAB0742B8CA3048DD /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		44A062AAA8B3D007543ACDAD /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
 		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
@@ -749,6 +753,12 @@
 		6CA6203028B633310078C971 /* ContactScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScreenFactory.swift; sourceTree = "<group>"; };
 		6CA6203228B633400078C971 /* ContactScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScreenAssembly.swift; sourceTree = "<group>"; };
 		6CA6203528B636190078C971 /* ContactScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScreenCoordinator.swift; sourceTree = "<group>"; };
+		6CA6203D28B679B40078C971 /* ListScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenView.swift; sourceTree = "<group>"; };
+		6CA6203F28B67A2E0078C971 /* ListScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenModule.swift; sourceTree = "<group>"; };
+		6CA6204128B67A930078C971 /* ListScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenInteractor.swift; sourceTree = "<group>"; };
+		6CA6204328B67ACB0078C971 /* ListScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenFactory.swift; sourceTree = "<group>"; };
+		6CA6204528B67B4F0078C971 /* ListScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenAssembly.swift; sourceTree = "<group>"; };
+		6CA6204828B67D660078C971 /* ListScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenCoordinator.swift; sourceTree = "<group>"; };
 		6CBFD051289BC3B4005F9104 /* PasswordScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenView.swift; sourceTree = "<group>"; };
 		6CBFD053289BC42D005F9104 /* PasswordScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenModule.swift; sourceTree = "<group>"; };
 		6CBFD055289BC4ED005F9104 /* PasswordScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenInteractor.swift; sourceTree = "<group>"; };
@@ -763,6 +773,8 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
+		B150458E14D73C9338D4E597 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5721D7E57AB3DE64B0BBF99 /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -777,7 +789,7 @@
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				7084AD44FB0BE4F4380EA5FD /* Pods_Random_Pro.framework in Frameworks */,
+				2ABFA528D197D4940C502729 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1090,7 +1102,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				64358F1FAB0742B8CA3048DD /* Pods_Random_Pro.framework */,
+				B150458E14D73C9338D4E597 /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1799,6 +1811,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6CA6203728B679710078C971 /* ListScreenModule */,
 				6CA6202428B632B40078C971 /* ContactScreenModule */,
 				6CA6200F28B62DE30078C971 /* CubesScreenModule */,
 				1B74318828A79CE400205C2C /* TeamsModules */,
@@ -1897,6 +1910,7 @@
 		1B96E0FA282048BF00A23880 /* MainScreenCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				6CA6204728B67D4D0078C971 /* ListScreenCoordinator */,
 				6CA6203428B636070078C971 /* ContactScreenCoordinator */,
 				6CA6202128B62DF50078C971 /* CubesScreenCoordinator */,
 				1B9D4563283BDD2A00A85F25 /* SettingsScreenCoordinator */,
@@ -2138,8 +2152,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4618DE8A7ACD6BD3495F8EF2 /* Pods-Random Pro.debug.xcconfig */,
-				434BE1F27633AE12C8984265 /* Pods-Random Pro.release.xcconfig */,
+				44A062AAA8B3D007543ACDAD /* Pods-Random Pro.debug.xcconfig */,
+				F5721D7E57AB3DE64B0BBF99 /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2650,6 +2664,66 @@
 			path = ContactScreenCoordinator;
 			sourceTree = "<group>";
 		};
+		6CA6203728B679710078C971 /* ListScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6203B28B679970078C971 /* View */,
+				6CA6203C28B6799D0078C971 /* Presenter */,
+				6CA6203A28B679900078C971 /* Interactor */,
+				6CA6203928B6798A0078C971 /* Factory */,
+				6CA6203828B679820078C971 /* Assembly */,
+			);
+			path = ListScreenModule;
+			sourceTree = "<group>";
+		};
+		6CA6203828B679820078C971 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6204528B67B4F0078C971 /* ListScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6CA6203928B6798A0078C971 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6204328B67ACB0078C971 /* ListScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6CA6203A28B679900078C971 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6204128B67A930078C971 /* ListScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6CA6203B28B679970078C971 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6203D28B679B40078C971 /* ListScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6CA6203C28B6799D0078C971 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6203F28B67A2E0078C971 /* ListScreenModule.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6CA6204728B67D4D0078C971 /* ListScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6204828B67D660078C971 /* ListScreenCoordinator.swift */,
+			);
+			path = ListScreenCoordinator;
+			sourceTree = "<group>";
+		};
 		6CBFD04B289BC36B005F9104 /* PasswordScreenModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -2793,13 +2867,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				048D6575211BB46B56D9F244 /* [CP] Check Pods Manifest.lock */,
+				8AA408FC6EC7C391F2A5BE4D /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				847BA3A479B0D17A1A1A9E3F /* [CP] Embed Pods Frameworks */,
+				6309D0852D7EFB55B8473699 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2879,28 +2953,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		048D6575211BB46B56D9F244 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1B225C582619E472001B9124 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -2921,7 +2973,7 @@
 ";
 			showEnvVarsInLog = 0;
 		};
-		847BA3A479B0D17A1A1A9E3F /* [CP] Embed Pods Frameworks */ = {
+		6309D0852D7EFB55B8473699 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2936,6 +2988,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8AA408FC6EC7C391F2A5BE4D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2974,6 +3048,7 @@
 				1B96E0F22820483F00A23880 /* MainScreenInteractor.swift in Sources */,
 				1B14038A2687F394007A5150 /* FPSStatusBarWindow.swift in Sources */,
 				1BF22F1F25D8856000775368 /* TeamView.swift in Sources */,
+				6CA6204028B67A2E0078C971 /* ListScreenModule.swift in Sources */,
 				1B9202F925D16CE90094D2BE /* YesOrNotView.swift in Sources */,
 				1B7F66E525D08D5A00933AD6 /* Font.swift in Sources */,
 				1B3EF11B287AD17600D667E1 /* AdminFeatureToggleViewController.swift in Sources */,
@@ -2990,6 +3065,7 @@
 				1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */,
 				6C98CBD32833A03A00D2E4FA /* CoinScreenFactory.swift in Sources */,
 				1B92032C25D17D3A0094D2BE /* CoinView.swift in Sources */,
+				6CA6204928B67D660078C971 /* ListScreenCoordinator.swift in Sources */,
 				6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */,
 				1BA1D0AE25D73CF300C3FC91 /* DayDateAndTimeInteractor.swift in Sources */,
 				1B8EB63C26744FC7009016BE /* HotTravelResult.swift in Sources */,
@@ -3029,6 +3105,7 @@
 				1B3D1A0225D21E920027A83B /* CoinResultsView.swift in Sources */,
 				1BB8DFA125EE4485007C389D /* FilmCellView.swift in Sources */,
 				1BD1F90825D72B2500A1C7A4 /* UIViewController.swift in Sources */,
+				6CA6203E28B679B40078C971 /* ListScreenView.swift in Sources */,
 				1B8EB61F26741FEB009016BE /* DefaultService.swift in Sources */,
 				1B57F6642789C58F005F220C /* FullscreenSheet.swift in Sources */,
 				1B7F66BD25D08A7100933AD6 /* ListWordsInteractor.swift in Sources */,
@@ -3122,6 +3199,7 @@
 				1B941DD62821758300D968DF /* KeyboardService.swift in Sources */,
 				6C98CBD82833A1A900D2E4FA /* CoinScreenCoordinator.swift in Sources */,
 				1BF22F4825D8DBC400775368 /* PlayerPlugView.swift in Sources */,
+				6CA6204628B67B4F0078C971 /* ListScreenAssembly.swift in Sources */,
 				1B14038B2687F394007A5150 /* FPSCounter.swift in Sources */,
 				1B8EB64C26763DFA009016BE /* TravelInformationViewCell.swift in Sources */,
 				6C3C8DC828A25F460040FD7C /* MoviesScreenFactory.swift in Sources */,
@@ -3149,6 +3227,7 @@
 				1B10087E25D7EA420005A2D7 /* MonthDateAndTimeInteractor.swift in Sources */,
 				1B9AB8B125ECCC1600BD5CFD /* FilmHistoryView.swift in Sources */,
 				6C98CBD128339FE300D2E4FA /* CoinScreenInteractor.swift in Sources */,
+				6CA6204228B67A930078C971 /* ListScreenInteractor.swift in Sources */,
 				1B57F63D27873805005F220C /* PremiumSubscriptionChoiceView.swift in Sources */,
 				1B92031C25D1755B0094D2BE /* CharactersSettingsView.swift in Sources */,
 				1BF30DCB25D1963400DCE62B /* CellCubeFiveView.swift in Sources */,
@@ -3192,6 +3271,7 @@
 				1B31F641285FB85E00A88217 /* NotificationService.swift in Sources */,
 				1B10088B25D808180005A2D7 /* LotterySettingsView.swift in Sources */,
 				1B8EB60D26740D67009016BE /* URLSessionRequestPerformer.swift in Sources */,
+				6CA6204428B67ACB0078C971 /* ListScreenFactory.swift in Sources */,
 				1B7F116825E3F5B200FF64A3 /* ContactView.swift in Sources */,
 				1B7F118025E4046E00FF64A3 /* View.swift in Sources */,
 				1B50065E28A6BDF0009AABF2 /* TeamsScreenView.swift in Sources */,
@@ -3448,7 +3528,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4618DE8A7ACD6BD3495F8EF2 /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = 44A062AAA8B3D007543ACDAD /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -3479,7 +3559,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 434BE1F27633AE12C8984265 /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = F5721D7E57AB3DE64B0BBF99 /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

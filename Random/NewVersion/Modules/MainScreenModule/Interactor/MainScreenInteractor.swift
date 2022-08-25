@@ -30,7 +30,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // TODO: -  Повесить фича тогл на отключение ячеек
   // TODO: -  Сделать настройку ADV лайблов
   private let featureToggles: [MainScreenCellModel.MainScreenCell] = [
-    .list(advLabel: .none, isEnabled: true),
     .russianLotto(advLabel: .none, isEnabled: true)
   ]
   

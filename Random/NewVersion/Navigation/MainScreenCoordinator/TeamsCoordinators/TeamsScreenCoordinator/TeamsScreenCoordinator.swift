@@ -13,6 +13,7 @@ final class TeamsScreenCoordinator: Coordinator {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var teamsScreenModule: TeamsScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol?
@@ -21,8 +22,11 @@ final class TeamsScreenCoordinator: Coordinator {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  init(_ navigationController: UINavigationController) {
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -38,7 +42,20 @@ final class TeamsScreenCoordinator: Coordinator {
 // MARK: - TeamsScreenModuleOutput
 
 extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
-  func settingButtonAction<T: PlayerProtocol>(players: [T]) {
+  func cleanButtonWasSelected() {
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .teams(
+      generatedTeamsCount: "\(teamsScreenModule?.returnGeneratedCountTeams() ?? .zero)",
+      allPlayersCount: "\(teamsScreenModule?.returnListPlayers().count ?? .zero)",
+      generatedPlayersCount: "\(teamsScreenModule?.returnGeneratedCountPlayers() ?? .zero)"
+    ))
+  }
+  
+  func listPlayersIsEmpty() {
+    services.notificationService.showNeutralAlertWith(title: Appearance().addPlayersTitle,
+                                                      glyph: false)
+  }
+  
+  func settingButtonAction(players: [TeamsScreenPlayerModel]) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
@@ -60,10 +77,19 @@ extension TeamsScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listPlayersScreenCoordinator = listPlayersScreenCoordinator
     self.listPlayersScreenCoordinator?.start()
     self.listPlayersScreenCoordinator?.output = self
+    
+    guard let teamsScreenModule = teamsScreenModule else {
+      return
+    }
+    listPlayersScreenCoordinator.updateContentWith(models: teamsScreenModule.returnListPlayers(),
+                                                   teamsCount: teamsScreenModule.returnSelectedTeam())
+  }
+  
+  func cleanButtonAction() {
+    teamsScreenModule?.cleanButtonAction()
   }
   
   func withoutRepetitionAction(isOn: Bool) {}
-  func cleanButtonAction() {}
 }
 
 // MARK: - ListPlayersScreenCoordinatorOutput
@@ -80,5 +106,15 @@ extension TeamsScreenCoordinator: ListPlayersScreenCoordinatorOutput {
       allPlayersCount: "\(players.count)",
       generatedPlayersCount: "\(teamsScreenModule.returnGeneratedCountPlayers())"
     ))
+    
+    teamsScreenModule.updateContentWith(players: players)
+  }
+}
+
+// MARK: - Appearance
+
+private extension TeamsScreenCoordinator {
+  struct Appearance {
+    let addPlayersTitle = NSLocalizedString("Добавьте игроков", comment: "")
   }
 }

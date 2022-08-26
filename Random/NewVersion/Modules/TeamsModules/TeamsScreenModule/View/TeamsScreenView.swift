@@ -11,11 +11,23 @@ import RandomUIKit
 /// События которые отправляем из View в Presenter
 protocol TeamsScreenViewOutput: AnyObject {
   
+  /// Обновить количество команд
+  ///  - Parameter count: Количество команд
+  func updateTeams(count: Int)
 }
 
 /// События которые отправляем от Presenter ко View
 protocol TeamsScreenViewInput: AnyObject {
   
+  /// Обновить контент
+  /// - Parameters:
+  ///  - models: Список команд
+  ///  - teamsCount: Количество команд
+  func updateContentWith(models: [TeamsScreenModel.Team], teamsCount: Int)
+  
+  /// Показать заглушка
+  ///  - Parameter isShow: Показать заглушку
+  func plugIsShow( _ isShow: Bool)
 }
 
 /// Псевдоним протокола UIView & TeamsScreenViewInput
@@ -33,7 +45,9 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
   private let collectionViewLayout = UICollectionViewFlowLayout()
   private lazy var collectionView = UICollectionView(frame: .zero,
                                                      collectionViewLayout: collectionViewLayout)
-  private var models: [Int] = [1, 2, 3, 4, 5, 6]
+  private let countTeamsSegmentedControl = UISegmentedControl(items: Appearance().countTeams)
+  private var models: [TeamsScreenModel.Team] = []
+  private let resultLabel = UILabel()
   
   // MARK: - Initialization
   
@@ -48,25 +62,47 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - Internal func
+  
+  func updateContentWith(models: [TeamsScreenModel.Team], teamsCount: Int) {
+    self.models = models
+    countTeamsSegmentedControl.selectedSegmentIndex = teamsCount - 1
+    collectionView.reloadData()
+  }
+  
+  func plugIsShow( _ isShow: Bool) {
+    resultLabel.isHidden = !isShow
+    collectionView.isHidden = isShow
+  }
+  
   // MARK: - Private func
   
   private func configureLayout() {
     let appearance = Appearance()
     
-    [collectionView].forEach {
+    [countTeamsSegmentedControl, collectionView, resultLabel].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: topAnchor,
-                                          constant: appearance.collectionViewInsets.top),
-      collectionView.leftAnchor.constraint(equalTo: leftAnchor,
-                                           constant: appearance.collectionViewInsets.left),
-      collectionView.rightAnchor.constraint(equalTo: rightAnchor,
-                                            constant: -appearance.collectionViewInsets.right),
-      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                             constant: -appearance.collectionViewInsets.bottom),
+      countTeamsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      countTeamsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                          constant: appearance.middleInset),
+      countTeamsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                           constant: -appearance.middleInset),
+      
+      resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                           constant: appearance.middleInset),
+      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                            constant: -appearance.middleInset),
+      
+      collectionView.topAnchor.constraint(equalTo: countTeamsSegmentedControl.bottomAnchor,
+                                          constant: appearance.minimumInset),
+      collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
     ])
   }
   
@@ -74,8 +110,19 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     
-    collectionView.backgroundColor = RandomColor.primaryWhite
+    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textAlignment = .center
+    resultLabel.numberOfLines = .zero
+    resultLabel.text = appearance.resultLabelTitle
+    resultLabel.isHidden = true
     
+    countTeamsSegmentedControl.selectedSegmentIndex = appearance.selectedSegmentIndex
+    countTeamsSegmentedControl.addTarget(self,
+                                         action: #selector(countTeamsSegmentedControlAction),
+                                         for: .valueChanged)
+    
+    collectionView.backgroundColor = RandomColor.primaryWhite
     collectionView.alwaysBounceVertical = true
     collectionView.register(PlayerCollectionViewCell.self,
                             forCellWithReuseIdentifier: PlayerCollectionViewCell.reuseIdentifier)
@@ -86,14 +133,19 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
     collectionViewLayout.sectionInset = appearance.sectionInset
     collectionViewLayout.scrollDirection = .vertical
     collectionViewLayout.minimumInteritemSpacing = .zero
-    collectionViewLayout.minimumLineSpacing = 12
+    collectionViewLayout.minimumLineSpacing = appearance.minimumLineSpacing
     collectionViewLayout.headerReferenceSize = CGSize(width: collectionView.frame.size.width,
-                                                      height: 32)
+                                                      height: appearance.collectionHeaderHeight)
     collectionViewLayout.itemSize = CGSize(width: appearance.cellWidthConstant,
                                            height: appearance.estimatedRowHeight)
     
     collectionView.delegate = self
     collectionView.dataSource = self
+  }
+  
+  @objc
+  func countTeamsSegmentedControlAction() {
+    output?.updateTeams(count: countTeamsSegmentedControl.selectedSegmentIndex + 1)
   }
 }
 
@@ -107,12 +159,13 @@ extension TeamsScreenView: UICollectionViewDelegate {
       ofKind: kind,
       withReuseIdentifier: CustomDoubleTextHeaderCollectionCell.reuseIdentifier,
       for: indexPath) as! CustomDoubleTextHeaderCollectionCell
-
+    
+    let model = models[indexPath.section]
     headerView.configureCellWith(
-      primaryText: "Команда номер 1",
+      primaryText: model.name,
       primaryTextColor: RandomColor.primaryGray,
       primaryTextFont: RandomFont.primaryBold18,
-      secondaryText: "5",
+      secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: RandomColor.secondaryGray,
       secondaryTextFont: RandomFont.primaryRegular18
     )
@@ -125,11 +178,11 @@ extension TeamsScreenView: UICollectionViewDelegate {
 
 extension TeamsScreenView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return models.count
+    return models[section].players.count
   }
   
   func numberOfSections(in collectionView: UICollectionView) -> Int {
-    3
+    return models.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -139,16 +192,16 @@ extension TeamsScreenView: UICollectionViewDataSource {
     ) as? PlayerCollectionViewCell else {
       return UICollectionViewCell()
     }
+    
+    let player = models[indexPath.section].players[indexPath.row]
     cell.configureCellWith(
-      avatar: UIImage(named: "player12"),
-      name: "Сосин Виталий",
+      avatar: UIImage(data: player.avatar ?? Data()),
+      name: player.name,
       nameTextColor: RandomColor.primaryGray,
       styleCard: .defaultStyle,
-      styleEmoji: .ball,
+      styleEmoji: .customEmoji(Character(player.emoji ?? " ")),
       isBorder: true,
-      isShadow: true,
-      emojiAction: {},
-      cardAction: {}
+      isShadow: true
     )
     return cell
   }
@@ -158,9 +211,16 @@ extension TeamsScreenView: UICollectionViewDataSource {
 
 private extension TeamsScreenView {
   struct Appearance {
-    let collectionViewInsets: UIEdgeInsets = .zero
     let sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 16, right: 16)
     let cellWidthConstant: CGFloat = 90
     let estimatedRowHeight: CGFloat = 100
+    let countTeams = ["1", "2", "3", "4", "5", "6"]
+    let countPlayersTitle = NSLocalizedString("Количество", comment: "")
+    let middleInset: CGFloat = 16
+    let minimumInset: CGFloat = 8
+    let resultLabelTitle = "?"
+    let selectedSegmentIndex = 1
+    let minimumLineSpacing: CGFloat = 12
+    let collectionHeaderHeight: CGFloat = 32
   }
 }

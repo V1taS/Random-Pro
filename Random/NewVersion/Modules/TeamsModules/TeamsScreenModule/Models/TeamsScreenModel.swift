@@ -11,7 +11,7 @@ import Foundation
 /// Модель Teams
 struct TeamsScreenModel: UserDefaultsCodable {
   
-  /// Выбранная команда (0-5)
+  /// Выбранная команда (1-6)
   let selectedTeam: Int
   
   /// Все игроки

@@ -53,7 +53,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openTeams() {
-    let teamsScreenCoordinator = TeamsScreenCoordinator(navigationController)
+    let teamsScreenCoordinator = TeamsScreenCoordinator(navigationController,
+                                                        services)
     anyCoordinator = teamsScreenCoordinator
     teamsScreenCoordinator.start()
   }

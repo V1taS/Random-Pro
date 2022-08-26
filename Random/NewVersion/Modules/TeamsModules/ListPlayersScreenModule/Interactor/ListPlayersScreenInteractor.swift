@@ -131,7 +131,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
       id: UUID().uuidString,
       name: name,
       avatar: generationImagePlayer()?.pngData(),
-      emoji: "⚪️",
+      emoji: nil,
       state: .random
     )
     

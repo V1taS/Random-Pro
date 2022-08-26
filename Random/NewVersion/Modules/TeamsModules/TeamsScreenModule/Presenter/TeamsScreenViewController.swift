@@ -6,13 +6,20 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol TeamsScreenModuleOutput: AnyObject {
   
+  /// Список игроков пуст
+  func listPlayersIsEmpty()
+  
   /// Была нажата кнопка (настройки)
   /// - Parameter players: список игроков
   func settingButtonAction(players: [TeamsScreenPlayerModel])
+  
+  /// Кнопка очистить была нажата
+  func cleanButtonWasSelected()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -24,12 +31,21 @@ protocol TeamsScreenModuleInput {
   /// Возвращает список команд
   func returnListTeams() -> [TeamsScreenModel.Team]
   
+  /// Возвращает сколько выбрано команд
+  func returnSelectedTeam() -> Int
+  
+  /// Возвращает список игроков
+  func returnListPlayers() -> [TeamsScreenPlayerModel]
+  
   /// Количество сгенерированных игроков
   func returnGeneratedCountPlayers() -> Int
   
   /// Обновить список игроков
   ///  - Parameter players: Список игроков
   func updateContentWith(players: [TeamsScreenPlayerModel])
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: TeamsScreenModuleOutput? { get set }
@@ -50,7 +66,6 @@ final class TeamsScreenViewController: TeamsScreenModule {
   private let interactor: TeamsScreenInteractorInput
   private let moduleView: TeamsScreenViewProtocol
   private let factory: TeamsScreenFactoryInput
-  private var cacheModel: TeamsScreenModel?
   
   // MARK: - Initialization
   
@@ -87,38 +102,72 @@ final class TeamsScreenViewController: TeamsScreenModule {
   
   // MARK: - Internal func
   
-  func updateContentWith<T: PlayerProtocol>(players: [T]) {
-    interactor.updateContentWith(models: players)
+  func updateContentWith(players: [TeamsScreenPlayerModel]) {
+    interactor.updateContentWith(players: players)
   }
   
   func returnGeneratedCountTeams() -> Int {
-    interactor.returnGeneratedCountTeams()
+    interactor.returnCountTeams()
   }
   
   func returnListTeams() -> [TeamsScreenModel.Team] {
     interactor.returnListTeams()
   }
   
+  func returnListPlayers() -> [TeamsScreenPlayerModel] {
+    interactor.returnListPlayers()
+  }
+  
   func returnGeneratedCountPlayers() -> Int {
     interactor.returnGeneratedCountPlayers()
+  }
+  
+  func returnSelectedTeam() -> Int {
+    interactor.returnSelectedTeam()
+  }
+  
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
   }
 }
 
 // MARK: - TeamsScreenViewOutput
 
-extension TeamsScreenViewController: TeamsScreenViewOutput {}
+extension TeamsScreenViewController: TeamsScreenViewOutput {
+  func updateTeams(count: Int) {
+    interactor.updateTeams(count: count)
+  }
+}
 
 // MARK: - TeamsScreenInteractorOutput
 
 extension TeamsScreenViewController: TeamsScreenInteractorOutput {
+  func didReciveEmptyListTeams() {
+    moduleView.plugIsShow(true)
+  }
+  
   func didRecive(model: TeamsScreenModel) {
-    cacheModel = model
+    moduleView.updateContentWith(models: model.teams,
+                                 teamsCount: interactor.returnSelectedTeam())
+    moduleView.plugIsShow(model.teams.isEmpty)
+  }
+  
+  func cleanButtonWasSelected() {
+    moduleOutput?.cleanButtonWasSelected()
+    factory.createTeamsFrom(model: interactor.returnModel())
   }
 }
 
 // MARK: - TeamsScreenFactoryOutput
 
-extension TeamsScreenViewController: TeamsScreenFactoryOutput {}
+extension TeamsScreenViewController: TeamsScreenFactoryOutput {
+  func didRecive(teams: [TeamsScreenModel.Team]) {
+    interactor.updateList(teams: teams)
+    moduleView.updateContentWith(models: teams,
+                                 teamsCount: interactor.returnSelectedTeam())
+    moduleView.plugIsShow(teams.isEmpty)
+  }
+}
 
 // MARK: - Private
 
@@ -129,18 +178,33 @@ private extension TeamsScreenViewController {
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    let generateButton = UIBarButtonItem(image: appearance.generateButtonIcon,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(generateButtonAction))
+    generateButton.tintColor = RandomColor.primaryGreen
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      generateButton
+    ]
+  }
+  
+  @objc
+  func generateButtonAction() {
+    if interactor.returnModel().allPlayers.isEmpty {
+      moduleOutput?.listPlayersIsEmpty()
+    } else {
+      factory.createTeamsFrom(model: interactor.returnModel())
+    }
   }
   
   @objc
   func settingButtonAction() {
-    guard let cacheModel = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(players: cacheModel.allPlayers)
+    moduleOutput?.settingButtonAction(players: interactor.returnListPlayers())
   }
 }
 
@@ -150,5 +214,6 @@ private extension TeamsScreenViewController {
   struct Appearance {
     let title = NSLocalizedString("Команды", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let generateButtonIcon = UIImage(systemName: "forward.end.fill")
   }
 }

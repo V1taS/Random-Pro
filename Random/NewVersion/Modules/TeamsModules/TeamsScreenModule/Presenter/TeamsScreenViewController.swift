@@ -154,7 +154,7 @@ extension TeamsScreenViewController: TeamsScreenInteractorOutput {
   
   func cleanButtonWasSelected() {
     moduleOutput?.cleanButtonWasSelected()
-    factory.createTeamsFrom(model: interactor.returnModel())
+    factory.createTeamsFrom(model: TeamsScreenModel(selectedTeam: 2, allPlayers: [], teams: []))
   }
 }
 

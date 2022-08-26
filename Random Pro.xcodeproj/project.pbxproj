@@ -68,6 +68,7 @@
 		1B40AC21278E295D00578BFB /* OwnerAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC20278E295D00578BFB /* OwnerAdminView.swift */; };
 		1B40AC23278E2C4200578BFB /* AdminOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40AC22278E2C4200578BFB /* AdminOwner.swift */; };
 		1B446F2B25E517000060E163 /* RecordReviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B446F2A25E517000060E163 /* RecordReviewApp.swift */; };
+		1B4A5C9D28B9261300215064 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9C28B9261300215064 /* PermissionService.swift */; };
 		1B4D3A5C25E8425A00D22CD9 /* CustomButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */; };
 		1B4D3A6025E8490F00D22CD9 /* PressActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */; };
 		1B4EBFFA25FE548E00A41945 /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EBFF925FE548E00A41945 /* TravelView.swift */; };
@@ -458,6 +459,7 @@
 		1B40AC20278E295D00578BFB /* OwnerAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerAdminView.swift; sourceTree = "<group>"; };
 		1B40AC22278E2C4200578BFB /* AdminOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminOwner.swift; sourceTree = "<group>"; };
 		1B446F2A25E517000060E163 /* RecordReviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordReviewApp.swift; sourceTree = "<group>"; };
+		1B4A5C9C28B9261300215064 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		1B4D3A5B25E8425A00D22CD9 /* CustomButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonStyle.swift; sourceTree = "<group>"; };
 		1B4D3A5F25E8490F00D22CD9 /* PressActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressActions.swift; sourceTree = "<group>"; };
 		1B4EBFF925FE548E00A41945 /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
@@ -974,6 +976,14 @@
 				1B40AC20278E295D00578BFB /* OwnerAdminView.swift */,
 			);
 			path = OwnerAdmin;
+			sourceTree = "<group>";
+		};
+		1B4A5C9B28B9260800215064 /* PermissionService */ = {
+			isa = PBXGroup;
+			children = (
+				1B4A5C9C28B9261300215064 /* PermissionService.swift */,
+			);
+			path = PermissionService;
 			sourceTree = "<group>";
 		};
 		1B4EBFF825FE546B00A41945 /* Travel */ = {
@@ -1792,8 +1802,9 @@
 		1B96E0E52820468A00A23880 /* ApplicationServices */ = {
 			isa = PBXGroup;
 			children = (
-				1B31F63F285FB83F00A88217 /* NotificationService */,
 				1B941DDD282179A200D968DF /* ApplicationServices.swift */,
+				1B4A5C9B28B9260800215064 /* PermissionService */,
+				1B31F63F285FB83F00A88217 /* NotificationService */,
 				1BD25B6B282459AA006661B8 /* MetricsService */,
 				1B941DDA2821791A00D968DF /* LocalStorage */,
 				1B941DD7282175CB00D968DF /* APICallsNetworking */,
@@ -1904,12 +1915,12 @@
 		1B96E0FA282048BF00A23880 /* MainScreenCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
 				6CA6204728B67D4D0078C971 /* ListScreenCoordinator */,
 				6CA6203428B636070078C971 /* ContactScreenCoordinator */,
 				6CA6202128B62DF50078C971 /* CubesScreenCoordinator */,
 				1B9D4563283BDD2A00A85F25 /* SettingsScreenCoordinator */,
 				1B74319928A79FB300205C2C /* TeamsCoordinators */,
-				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
 				6C9A9EF9282926B000962062 /* NumberScreenCoordinator */,
 				6CE65F8C282D136800272D56 /* YesNoScreenCoordinator */,
 				1B3EF125287AD1E100D667E1 /* AdminFeatureToggleCoordinator */,
@@ -3051,6 +3062,7 @@
 				6CA6202328B62DF50078C971 /* CubesScreenCoordinator.swift in Sources */,
 				1B57F64727883498005F220C /* GlobalConstants.swift in Sources */,
 				1B57F63B2787305D005F220C /* TitleWithDescriptionCell.swift in Sources */,
+				1B4A5C9D28B9261300215064 /* PermissionService.swift in Sources */,
 				1B9D22D027A6EC6A00D4E427 /* CloudList.swift in Sources */,
 				1B3FE42327C2942500266882 /* KegMiniView.swift in Sources */,
 				1B8EB60F2674119F009016BE /* URLRequest.swift in Sources */,

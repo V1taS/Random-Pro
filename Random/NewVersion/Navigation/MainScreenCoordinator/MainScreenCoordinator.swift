@@ -40,6 +40,12 @@ final class MainScreenCoordinator: Coordinator {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func requestIDFA() {
+    if #available(iOS 14, *) {
+      services.permissionService.requestIDFA(nil)
+    }
+  }
+  
   func adminFeatureToggleAction() {
     let adminFeatureToggleCoordinator = AdminFeatureToggleCoordinator(navigationController, services)
     anyCoordinator = adminFeatureToggleCoordinator

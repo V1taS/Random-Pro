@@ -30,11 +30,18 @@ protocol ApplicationServices {
   
   /// Сервис по работе с уведомлениями
   var notificationService: NotificationService { get }
+  
+  /// Сервис по работе с разрешениями
+  var permissionService: PermissionService { get }
 }
 
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
+  var permissionService: PermissionService {
+    PermissionServiceImpl()
+  }
+  
   var notificationService: NotificationService {
     NotificationServiceImpl()
   }

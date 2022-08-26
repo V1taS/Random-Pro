@@ -45,7 +45,7 @@ struct ContactInteractorImpl: ContactInteractor {
 }
 
 extension ContactInteractorImpl {
-    
+  
     private func fetchContacts() -> [FetchedContacts] {
         var contacts = [FetchedContacts]()
         let store = CNContactStore()

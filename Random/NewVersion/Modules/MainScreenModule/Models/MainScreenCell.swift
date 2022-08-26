@@ -25,7 +25,7 @@ struct MainScreenCellModel {
     /// Общий список ячеек
     static var allCases: [MainScreenCellModel.MainScreenCell] = [
       .films(advLabel: .new, isEnabled: true),
-      .teams(advLabel: .new, isEnabled: true),
+      .teams(advLabel: .none, isEnabled: true),
       .number(advLabel: .none, isEnabled: true),
       .yesOrNo(advLabel: .none, isEnabled: true),
       .letter(advLabel: .none, isEnabled: true),

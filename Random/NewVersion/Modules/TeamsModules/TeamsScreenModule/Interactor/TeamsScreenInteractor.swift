@@ -180,10 +180,13 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func cleanButtonAction() {
-    let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
-                                 allPlayers: [],
-                                 teams: [])
-    self.model = model
+    guard let model = model else {
+      return
+    }
+    let newModel = TeamsScreenModel(selectedTeam: model.selectedTeam,
+                                    allPlayers: model.allPlayers,
+                                    teams: [])
+    self.model = newModel
     output?.cleanButtonWasSelected()
   }
 }

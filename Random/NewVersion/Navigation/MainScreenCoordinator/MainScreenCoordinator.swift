@@ -114,7 +114,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openPassword() {
-    let passwordScreenCoordinator = PasswordScreenCoordinator(navigationController)
+    let passwordScreenCoordinator = PasswordScreenCoordinator(navigationController, services)
     anyCoordinator = passwordScreenCoordinator
     passwordScreenCoordinator.start()
   }

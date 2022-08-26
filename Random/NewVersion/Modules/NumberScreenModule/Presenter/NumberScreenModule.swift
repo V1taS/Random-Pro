@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol NumberScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
@@ -29,6 +30,7 @@ protocol NumberScreenModuleOutput: AnyObject {
   func didReciveRangeError()
 }
 
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol NumberScreenModuleInput: AnyObject {
   
   /// Возвращает список результатов
@@ -159,8 +161,8 @@ extension NumberScreenViewController: NumberScreenInteractorOutput {
     cacheModel = model
     factory.reverse(listResult: model.listResult)
     moduleView.set(result: model.result)
-    moduleView.set(rangeStartValue: model.rangeStartValue,
-                   rangeEndValue: model.rangeEndValue)
+    moduleView.setRangeStart(model.rangeStartValue)
+    moduleView.setRangeEnd(model.rangeEndValue)
   }
   
   func didReciveRangeStart(text: String?) {

@@ -9,10 +9,31 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в  `другой модуль`
-protocol PasswordScreenModuleOutput: AnyObject {}
+protocol PasswordScreenModuleOutput: AnyObject {
+  
+  /// Была получена ошибка
+  func didReciveError()
+  
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
+  
+  /// Была нажата кнопка (настройки)
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: PasswordScreenModel)
+  
+  /// Кнопка очистить была нажата
+  func cleanButtonWasSelected()
+}
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol PasswordScreenModuleInput {
+  
+  /// Запросить текущую модель
+  func returnCurrentModel() -> PasswordScreenModel
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: PasswordScreenModuleOutput? { get set }
@@ -62,12 +83,60 @@ final class PasswordScreenViewController: PasswordScreenModule {
     super.viewDidLoad()
     setNavigationBar()
     interactor.getContent()
+    moduleView.startActivityIndicator()
+  }
+  
+  // MARK: - Internal func
+  
+  func returnCurrentModel() -> PasswordScreenModel {
+    interactor.returnCurrentModel()
+  }
+  
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
   }
 }
 
 // MARK: - PasswordScreenViewOutput
 
-extension PasswordScreenViewController: PasswordScreenViewOutput {}
+extension PasswordScreenViewController: PasswordScreenViewOutput {
+  func resultPhraseCopied() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultPhrase)
+  }
+  
+  func resultClassicCopied() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultClassic)
+  }
+  
+  func generateButtonAction(passwordLength: String?) {
+    moduleView.startActivityIndicator()
+    interactor.generateButtonAction(passwordLength: passwordLength)
+  }
+  
+  func rangePhraseDidChange(_ text: String?) {
+    interactor.rangePhraseDidChange(text)
+  }
+  
+  func passwordLengthDidChange(_ text: String?) {
+    interactor.passwordLengthDidChange(text)
+  }
+  
+  func uppercaseSwitchAction(status: Bool) {
+    interactor.uppercaseSwitchAction(status: status)
+  }
+  
+  func lowercaseSwitchAction(status: Bool) {
+    interactor.lowercaseSwitchAction(status: status)
+  }
+  
+  func numbersSwitchAction(status: Bool) {
+    interactor.numbersSwitchAction(status: status)
+  }
+  
+  func symbolsSwitchAction(status: Bool) {
+    interactor.symbolsSwitchAction(status: status)
+  }
+}
 
 // MARK: - PasswordScreenFactoryOutput
 
@@ -75,7 +144,26 @@ extension PasswordScreenViewController: PasswordScreenFactoryOutput {}
 
 // MARK: - PasswordScreenInteractorOutput
 
-extension PasswordScreenViewController: PasswordScreenInteractorOutput {}
+extension PasswordScreenViewController: PasswordScreenInteractorOutput {
+  func cleanButtonWasSelected() {
+    moduleOutput?.cleanButtonWasSelected()
+  }
+  
+  func didReciveError() {
+    moduleOutput?.didReciveError()
+  }
+  
+  func didRecive(model: PasswordScreenModel) {
+    moduleView.setPasswordLength(model.passwordLength)
+    moduleView.set(resultClassic: model.resultClassic,
+                   resultPhrase: model.resultPhrase,
+                   switchState: model.switchState)
+  }
+  
+  func didRecivePasswordLength(text: String?) {
+    moduleView.setPasswordLength(text)
+  }
+}
 
 // MARK: - Private
 
@@ -85,10 +173,17 @@ private extension PasswordScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
   }
   
   @objc
-  func cleanButtonAction() {}
+  func settingButtonAction() {
+    moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
+  }
 }
 
 // MARK: - Appearance
@@ -96,6 +191,6 @@ private extension PasswordScreenViewController {
 private extension PasswordScreenViewController {
   struct Appearance {
     let title = NSLocalizedString("Пароли", comment: "")
-    let settingsButtonIcon = UIImage(systemName: "clean")
+    let settingsButtonIcon = UIImage(systemName: "gear")
   }
 }

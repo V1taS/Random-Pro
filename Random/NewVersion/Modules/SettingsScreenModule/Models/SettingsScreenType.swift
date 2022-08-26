@@ -48,8 +48,5 @@ enum SettingsScreenType {
   case contact
   
   /// Раздел: `Пароли`
-  case password
-  
-  /// Раздел: `Русское Лото`
-  case russianLotto
+  case password(itemsGenerated: String, lastItem: String)
 }

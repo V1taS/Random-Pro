@@ -10,6 +10,16 @@ import RandomUIKit
 
 final class PasswordGeneratorView: UIView {
   
+  // MARK: - Internal properties
+  
+  let passwordLengthTextField = TextFieldView()
+  let resultTextView = UITextView()
+  
+  let uppercaseLettersSwitch = UISwitch()
+  let lowercaseLettersSwitch = UISwitch()
+  let numbersSwitch = UISwitch()
+  let symbolsSwitch = UISwitch()
+  
   // MARK: - Private properties
   
   private let settingOptionsLabel = UILabel()
@@ -18,21 +28,18 @@ final class PasswordGeneratorView: UIView {
   private let numbersLabel = UILabel()
   private let symbolsLabel = UILabel()
   
-  private let uppercaseLettersSwitch = UISwitch()
-  private let lowercaseLettersSwitch = UISwitch()
-  private let numbersSwitch = UISwitch()
-  private let symbolsSwitch = UISwitch()
-  
   private let passwordLengthLabel = UILabel()
-  private let rangeStartTextField = TextFieldView()
-  private let rangeEndTextField = TextFieldView()
   
   private let labelsStackView = UIStackView()
   private let switchersStackView = UIStackView()
   private let textFieldStackView = UIStackView()
   private let generalStackView = UIStackView()
   
-  private let resultLabel = UILabel()
+  private var uppercaseSwitchAction: ((Bool) -> Void)?
+  private var lowercaseSwitchAction: ((Bool) -> Void)?
+  private var numbersSwitchAction: ((Bool) -> Void)?
+  private var symbolsSwitchAction: ((Bool) -> Void)?
+  private var resultTextAction: (() -> Void)?
   
   // MARK: - Initialization
   
@@ -45,6 +52,27 @@ final class PasswordGeneratorView: UIView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Internal func
+  
+  /// Конфигурируем ячейку
+  /// - Parameters:
+  ///  - uppercaseSwitchAction: Переключатель прописных букв
+  ///  - lowercaseSwitchAction: Переключатель строчных букв
+  ///  - numbersSwitchAction: Переключатель цифр
+  ///  - symbolsSwitchAction: Переключатель Символов
+  ///  - resultTextAction: Экшен на нажатие на текст
+  func configureViewWith(uppercaseSwitchAction: ((Bool) -> Void)?,
+                         lowercaseSwitchAction: ((Bool) -> Void)?,
+                         numbersSwitchAction: ((Bool) -> Void)?,
+                         symbolsSwitchAction: ((Bool) -> Void)?,
+                         resultTextAction: (() -> Void)?) {
+    self.uppercaseSwitchAction = uppercaseSwitchAction
+    self.lowercaseSwitchAction = lowercaseSwitchAction
+    self.numbersSwitchAction = numbersSwitchAction
+    self.symbolsSwitchAction = symbolsSwitchAction
+    self.resultTextAction = resultTextAction
   }
   
   // MARK: - Private func
@@ -62,13 +90,13 @@ final class PasswordGeneratorView: UIView {
       switchersStackView.addArrangedSubview($0)
     }
     
-    [rangeStartTextField, rangeEndTextField].forEach {
+    [passwordLengthTextField].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       textFieldStackView.addArrangedSubview($0)
     }
     
     [settingOptionsLabel, labelsStackView, switchersStackView,
-     passwordLengthLabel, textFieldStackView, resultLabel, generalStackView].forEach {
+     passwordLengthLabel, textFieldStackView, resultTextView, generalStackView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -113,13 +141,14 @@ final class PasswordGeneratorView: UIView {
       textFieldStackView.topAnchor.constraint(equalTo: passwordLengthLabel.bottomAnchor,
                                               constant: appearance.middleHorizontalSpacing),
       
-      resultLabel.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor,
-                                       constant: appearance.middleHorizontalSpacing),
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.middleHorizontalSpacing),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.middleHorizontalSpacing),
-      resultLabel.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor)
+      resultTextView.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor,
+                                          constant: appearance.lessVerticalSpacing),
+      resultTextView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: appearance.middleHorizontalSpacing),
+      resultTextView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -appearance.middleHorizontalSpacing),
+      resultTextView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                             constant: -appearance.lessVerticalSpacing)
     ])
   }
   
@@ -178,32 +207,51 @@ final class PasswordGeneratorView: UIView {
     
     generalStackView.axis = .horizontal
     
-    rangeStartTextField.placeholder = appearance.rangeStartValue
-    rangeStartTextField.delegate = self
+    passwordLengthTextField.placeholder = appearance.rangeStartValue
+    passwordLengthTextField.keyboardType = .numberPad
     
-    rangeEndTextField.placeholder = appearance.rangeEndValue
-    rangeEndTextField.delegate = self
+    resultTextView.textColor = RandomColor.primaryGray
+    resultTextView.font = RandomFont.primaryMedium24
+    resultTextView.textAlignment = .center
+    resultTextView.isEditable = false
     
-    resultLabel.text = appearance.resultLabel
-    resultLabel.textColor = RandomColor.primaryGray
-    resultLabel.font = RandomFont.primaryBold50
-    resultLabel.numberOfLines = 0
-    resultLabel.textAlignment = .center
-    resultLabel.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
+    let padding = resultTextView.textContainer.lineFragmentPadding
+    resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,
+                                                      left: -padding,
+                                                      bottom: .zero,
+                                                      right: -padding)
+    
+    let resultTextTap = UITapGestureRecognizer(target: self, action: #selector(resultTextTapAction))
+    resultTextTap.cancelsTouchesInView = false
+    resultTextView.addGestureRecognizer(resultTextTap)
+    resultTextView.isUserInteractionEnabled = true
   }
   
-  @objc private func uppercaseSwitchValueDidChange(_ sender: UISwitch) {}
+  @objc
+  private func resultTextTapAction() {
+    resultTextAction?()
+  }
   
-  @objc private func lowercaseSwitchValueDidChange(_ sender: UISwitch) {}
+  @objc
+  private func uppercaseSwitchValueDidChange(_ sender: UISwitch) {
+    uppercaseSwitchAction?(sender.isOn)
+  }
   
-  @objc private func numbersSwitchValueDidChange(_ sender: UISwitch) {}
+  @objc
+  private func lowercaseSwitchValueDidChange(_ sender: UISwitch) {
+    lowercaseSwitchAction?(sender.isOn)
+  }
   
-  @objc private func symbolsSwitchValueDidChange(_ sender: UISwitch) {}
+  @objc
+  private func numbersSwitchValueDidChange(_ sender: UISwitch) {
+    numbersSwitchAction?(sender.isOn)
+  }
+  
+  @objc
+  private func symbolsSwitchValueDidChange(_ sender: UISwitch) {
+    symbolsSwitchAction?(sender.isOn)
+  }
 }
-
-// MARK: - UITextFieldDelegate
-
-extension PasswordGeneratorView: UITextFieldDelegate {}
 
 // MARK: - Appearance
 
@@ -215,10 +263,8 @@ private extension PasswordGeneratorView {
     let lovercase = NSLocalizedString("Строчные буквы", comment: "")
     let numbers = NSLocalizedString("Цифры", comment: "")
     let symbols = NSLocalizedString("Символы", comment: "")
-    let resultLabel = "?"
     let spacing: CGFloat = 18
-    let rangeStartValue = "1"
-    let rangeEndValue = "60"
+    let rangeStartValue = "99 999"
     let middleHorizontalSpacing: CGFloat = 16
     let lessVerticalSpacing: CGFloat = 8
     let middleVirticalSpacing: CGFloat = 40

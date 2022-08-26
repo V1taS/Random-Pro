@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Сборщик `NumberScreen`
 final class NumberScreenAssembly {
   
   /// Собирает модуль `NumberScreen`

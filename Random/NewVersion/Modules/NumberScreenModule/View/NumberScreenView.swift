@@ -9,6 +9,7 @@
 import UIKit
 import RandomUIKit
 
+/// События которые отправляем из View в Presenter
 protocol NumberScreenViewOutput: AnyObject {
   
   /// Кнопка нажата пользователем
@@ -33,14 +34,8 @@ protocol NumberScreenViewOutput: AnyObject {
   func resultLabelAction(text: String?)
 }
 
+/// События которые отправляем от Presenter ко View
 protocol NumberScreenViewInput: AnyObject {
-  
-  /// Устанавливаем данные для первого и второго поля ввода числа
-  /// - Parameters:
-  ///  - rangeStartValue: Первый textField
-  ///  - rangeEndValue: Второй textField
-  func set(rangeStartValue: String?,
-           rangeEndValue: String?)
   
   /// Устанавливаем данные в result
   ///  - Parameter result: результат генерации
@@ -99,12 +94,6 @@ final class NumberScreenView: NumberScreenViewProtocol {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-  
-  func set(rangeStartValue: String?,
-           rangeEndValue: String?) {
-    rangeStartTextField.text = rangeStartValue
-    rangeEndTextField.text = rangeEndValue
   }
   
   func set(result: String?) {

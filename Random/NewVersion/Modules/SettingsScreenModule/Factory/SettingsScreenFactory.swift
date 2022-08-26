@@ -65,7 +65,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
                                               asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
@@ -80,7 +80,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
                                               asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
@@ -98,7 +98,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
                                               asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
@@ -112,7 +112,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
                                               asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
@@ -126,7 +126,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
                                               asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
@@ -140,7 +140,17 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .password(itemsGenerated: let itemsGenerated, _):
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
                                               asideImage: appearance.titleAndImageIcon?.pngData()))
         tableViewModels.append(.divider)
       }
@@ -149,8 +159,6 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
     case .films: break
     case .cube: break
     case .contact: break
-    case .password: break
-    case .russianLotto: break
     }
     output?.didRecive(models: tableViewModels)
   }
@@ -180,7 +188,7 @@ private extension SettingsScreenFactory {
     let numberOfGenerations = NSLocalizedString("Список результатов",
                                                 comment: "")
     let titleAndImageTitle = NSLocalizedString("Список игроков",
-                                                   comment: "")
+                                               comment: "")
     
     let generatedTeamsCountTitle = NSLocalizedString("Cгенерировано команд",
                                                      comment: "")

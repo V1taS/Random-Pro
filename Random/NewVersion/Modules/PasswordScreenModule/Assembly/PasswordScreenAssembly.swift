@@ -8,7 +8,11 @@
 
 import UIKit
 
+/// Сборщик `PasswordScreen`
 final class PasswordScreenAssembly {
+  
+  /// Собирает модуль `PasswordScreen`
+  /// - Returns: Cобранный модуль `PasswordScreen`
   func createModule() -> PasswordScreenModule {
     let view = PasswordScreenView()
     let interactor = PasswordScreenInteractor()

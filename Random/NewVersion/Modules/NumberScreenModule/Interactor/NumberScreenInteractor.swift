@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// События которые отправляем из Interactor в Presenter
 protocol NumberScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
@@ -33,6 +34,7 @@ protocol NumberScreenInteractorOutput: AnyObject {
   func didReciveRangeError()
 }
 
+/// События которые отправляем от Presenter к Interactor
 protocol NumberScreenInteractorInput: AnyObject {
   
   /// Возвращает список результатов

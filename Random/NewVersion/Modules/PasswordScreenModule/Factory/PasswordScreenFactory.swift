@@ -8,8 +8,10 @@
 
 import UIKit
 
+/// Cобытия которые отправляем из Factory в Presenter
 protocol PasswordScreenFactoryOutput: AnyObject {}
 
+/// Cобытия которые отправляем от Presenter к Factory
 protocol PasswordScreenFactoryInput {}
 
 final class PasswordScreenFactory: PasswordScreenFactoryInput {

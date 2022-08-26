@@ -10,13 +10,16 @@ import RandomUIKit
 
 final class PhrasePasswordView: UIView {
   
+  // MARK: - Internal properties
+  
+  let resultTextView = UITextView()
+  let phraseTextField = UITextField()
+  var resultTextAction: (() -> Void)?
+  
   // MARK: - Private properties
   
   private let phraseLabel = UILabel()
-  private let phraseTextField = UITextField()
   private let passwordLabel = UILabel()
-  private let resultLabel = UILabel()
-  private let charactersCountLabel = UILabel()
   private let frameUnderTextFieldView = UIView()
   
   // MARK: - Initialization
@@ -37,12 +40,12 @@ final class PhrasePasswordView: UIView {
   private func configureLayout() {
     let appearance = Appearance()
     
-    [phraseLabel, passwordLabel, resultLabel, frameUnderTextFieldView, phraseTextField, charactersCountLabel].forEach {
+    [phraseLabel, passwordLabel, resultTextView, frameUnderTextFieldView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
-    [phraseTextField, charactersCountLabel].forEach {
+    [phraseTextField].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       frameUnderTextFieldView.addSubview($0)
     }
@@ -65,9 +68,9 @@ final class PhrasePasswordView: UIView {
                                         constant: -appearance.mediumSpasing),
       
       phraseTextField.leadingAnchor.constraint(equalTo: frameUnderTextFieldView.leadingAnchor,
-                                               constant: appearance.horizontalSpasing),
+                                               constant: appearance.lessSpasing),
       phraseTextField.trailingAnchor.constraint(equalTo: frameUnderTextFieldView.trailingAnchor,
-                                                constant: -appearance.midleSpasing),
+                                                constant: -appearance.lessSpasing),
       phraseTextField.topAnchor.constraint(equalTo: phraseLabel.bottomAnchor,
                                            constant: appearance.mediumSpasing),
       phraseTextField.heightAnchor.constraint(equalToConstant: appearance.heightSpasing),
@@ -79,19 +82,13 @@ final class PhrasePasswordView: UIView {
       passwordLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
                                               constant: -appearance.mediumSpasing),
       
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+      resultTextView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                            constant: appearance.mediumSpasing),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+      resultTextView.trailingAnchor.constraint(equalTo: trailingAnchor,
                                             constant: -appearance.mediumSpasing),
-      resultLabel.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor,
+      resultTextView.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor,
                                        constant: appearance.horizontalSpasing),
-      
-      charactersCountLabel.leadingAnchor.constraint(equalTo: phraseTextField.trailingAnchor,
-                                               constant: appearance.lessSpasing),
-      charactersCountLabel.trailingAnchor.constraint(equalTo: frameUnderTextFieldView.trailingAnchor,
-                                                constant: -appearance.mediumSpasing),
-      charactersCountLabel.topAnchor.constraint(equalTo: frameUnderTextFieldView.topAnchor,
-                                           constant: appearance.mediumSpasing)
+      resultTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
@@ -117,14 +114,26 @@ final class PhrasePasswordView: UIView {
     passwordLabel.textColor = RandomColor.primaryGray
     passwordLabel.textAlignment = .center
     
-    resultLabel.textAlignment = .center
-    resultLabel.text = appearance.result
-    resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.primaryGray
+    resultTextView.textColor = RandomColor.primaryGray
+    resultTextView.font = RandomFont.primaryMedium24
+    resultTextView.textAlignment = .center
+    resultTextView.isEditable = false
+
+    let padding = resultTextView.textContainer.lineFragmentPadding
+    resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,
+                                                      left: -padding,
+                                                      bottom: .zero,
+                                                      right: -padding)
     
-    charactersCountLabel.text = appearance.numbers
-    charactersCountLabel.font = RandomFont.primaryRegular18
-    charactersCountLabel.textColor = RandomColor.primaryGray
+    let resultTextTap = UITapGestureRecognizer(target: self, action: #selector(resultTextTapAction))
+    resultTextTap.cancelsTouchesInView = false
+    resultTextView.addGestureRecognizer(resultTextTap)
+    resultTextView.isUserInteractionEnabled = true
+  }
+  
+  @objc
+  private func resultTextTapAction() {
+    resultTextAction?()
   }
 }
 
@@ -139,7 +148,6 @@ private extension PhrasePasswordView {
     let phrase = NSLocalizedString("Фраза", comment: "")
     let enterPhase = NSLocalizedString("Введите фразу", comment: "")
     let getPassword = NSLocalizedString("Полученный пароль", comment: "")
-    let result = "?"
     let numbers = "0"
     let width: CGFloat = 0.5
     let mediumSpasing: CGFloat = 16

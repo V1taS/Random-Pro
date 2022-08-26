@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Cобытия которые отправляем из Factory в Presenter
 protocol NumberScreenFactoryOutput: AnyObject {
   
   /// Список результатов был перевернут
@@ -19,6 +20,7 @@ protocol NumberScreenFactoryOutput: AnyObject {
   func didClearGeneration(text: String?)
 }
 
+/// Cобытия которые отправляем от Presenter к Factory
 protocol NumberScreenFactoryInput: AnyObject {
   
   /// Очистить текст от лишних символов

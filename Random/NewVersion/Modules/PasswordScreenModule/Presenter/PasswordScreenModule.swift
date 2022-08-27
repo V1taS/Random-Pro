@@ -99,14 +99,6 @@ final class PasswordScreenViewController: PasswordScreenModule {
 // MARK: - PasswordScreenViewOutput
 
 extension PasswordScreenViewController: PasswordScreenViewOutput {
-  func resultPhraseCopied() {
-    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultPhrase)
-  }
-  
-  func resultClassicCopied() {
-    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultClassic)
-  }
-  
   func generateButtonAction(passwordLength: String?) {
     interactor.generateButtonAction(passwordLength: passwordLength)
   }
@@ -172,10 +164,27 @@ private extension PasswordScreenViewController {
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(copyButtonAction))
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    if moduleView.returnPasswordIndex() == .zero {
+      moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultClassic)
+    } else {
+      moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultPhrase)
+    }
   }
   
   @objc
@@ -190,5 +199,6 @@ private extension PasswordScreenViewController {
   struct Appearance {
     let title = NSLocalizedString("Пароли", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
   }
 }

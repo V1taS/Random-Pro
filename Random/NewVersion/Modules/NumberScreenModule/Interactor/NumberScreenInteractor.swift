@@ -37,6 +37,9 @@ protocol NumberScreenInteractorOutput: AnyObject {
 /// События которые отправляем от Presenter к Interactor
 protocol NumberScreenInteractorInput: AnyObject {
   
+  /// Возвращает основную модель данных
+  func returnModel() -> NumberScreenModel
+  
   /// Возвращает список результатов
   func returnListResult() -> [String]
   
@@ -169,6 +172,22 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
       return model.listResult
     } else {
       return []
+    }
+  }
+  
+  func returnModel() -> NumberScreenModel {
+    let appearance = Appearance()
+    if let model = model {
+      return model
+    } else {
+      let model = NumberScreenModel(
+        rangeStartValue: appearance.rangeStartValue,
+        rangeEndValue: appearance.rangeEndValue,
+        result: appearance.result,
+        listResult: [],
+        isEnabledWithoutRepetition: false
+      )
+      return model
     }
   }
 }

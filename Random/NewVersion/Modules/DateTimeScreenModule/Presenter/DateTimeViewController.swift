@@ -90,13 +90,6 @@ final class DateTimeViewController: DateTimeModule {
 // MARK: - DateTimeViewOutput
 
 extension DateTimeViewController: DateTimeViewOutput {
-  func resultLabelAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.resultLabelAction(model: model)
-  }
-  
   func generateButtonDayAction() {
     interactor.generateContentDay()
   }
@@ -145,18 +138,32 @@ private extension DateTimeViewController {
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(copyButtonAction))
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.resultLabelAction(model: model)
   }
   
   @objc
   func settingButtonAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(model: model)
+    guard let cacheModel = cacheModel else { return }
+    moduleOutput?.settingButtonAction(model: cacheModel)
   }
 }
 
@@ -166,5 +173,6 @@ private extension DateTimeViewController {
   struct Appearance {
     let title = NSLocalizedString("Дата и время", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
   }
 }

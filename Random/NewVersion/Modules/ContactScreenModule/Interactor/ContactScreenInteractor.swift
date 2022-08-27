@@ -127,17 +127,8 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   }
   
   func cleanButtonAction() {
-    guard let model = model else {
-      return
-    }
-
-   let newModel = ContactScreenModel(
-    allContacts: model.allContacts,
-    listResult: [],
-    result: Appearance().resultLabel
-   )
-    self.model = newModel
-    output?.didRecive(model: newModel)
+    self.model = nil
+    getContent()
     output?.cleanButtonWasSelected()
   }
 }

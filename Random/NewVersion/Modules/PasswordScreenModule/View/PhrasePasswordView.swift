@@ -14,7 +14,6 @@ final class PhrasePasswordView: UIView {
   
   let resultTextView = UITextView()
   let phraseTextField = UITextField()
-  var resultTextAction: (() -> Void)?
   
   // MARK: - Private properties
   
@@ -124,16 +123,6 @@ final class PhrasePasswordView: UIView {
                                                       left: -padding,
                                                       bottom: .zero,
                                                       right: -padding)
-    
-    let resultTextTap = UITapGestureRecognizer(target: self, action: #selector(resultTextTapAction))
-    resultTextTap.cancelsTouchesInView = false
-    resultTextView.addGestureRecognizer(resultTextTap)
-    resultTextView.isUserInteractionEnabled = true
-  }
-  
-  @objc
-  private func resultTextTapAction() {
-    resultTextAction?()
   }
 }
 

@@ -10,16 +10,7 @@ import Foundation
 
 // TODO: - Доработать название метрик
 
-enum MetricsSections: String {
-  case categoriesScreen = "Категории (new version)"
-  case purchasesScreen = "Экран покупки Премиум версии (new version)"
-  case mailScreen = "Обратная связь (new version)"
-  case shareScreen = "Поделиться (new version)"
-  case totalNumberOfClicks = "Общее количество нажатий (new version)"
-  case adv = "Реклама (new version)"
-  case openTelegram = "Обратная связь - Телеграм (new version)"
-  case updateApp = "Обновить приложение (new version)"
-  
+enum MetricsSections: String {  
   // Категории
   case filmScreen = "Фильмы (new version)"
   case teamsScreen = "Команды (new version)"
@@ -32,7 +23,5 @@ enum MetricsSections: String {
   case dateAndTimeScreen = "Дата и время (new version)"
   case lotteryScreen = "Лотерея (new version)"
   case contactScreen = "Контакт (new version)"
-  case musicScreen = "Музыка (new version)"
-  case travelScreen = "Путешествие (new version)"
   case passwordScreen = "Пароли (new version)"
 }

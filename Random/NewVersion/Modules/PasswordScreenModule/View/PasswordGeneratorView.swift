@@ -39,7 +39,6 @@ final class PasswordGeneratorView: UIView {
   private var lowercaseSwitchAction: ((Bool) -> Void)?
   private var numbersSwitchAction: ((Bool) -> Void)?
   private var symbolsSwitchAction: ((Bool) -> Void)?
-  private var resultTextAction: (() -> Void)?
   
   // MARK: - Initialization
   
@@ -62,17 +61,14 @@ final class PasswordGeneratorView: UIView {
   ///  - lowercaseSwitchAction: Переключатель строчных букв
   ///  - numbersSwitchAction: Переключатель цифр
   ///  - symbolsSwitchAction: Переключатель Символов
-  ///  - resultTextAction: Экшен на нажатие на текст
   func configureViewWith(uppercaseSwitchAction: ((Bool) -> Void)?,
                          lowercaseSwitchAction: ((Bool) -> Void)?,
                          numbersSwitchAction: ((Bool) -> Void)?,
-                         symbolsSwitchAction: ((Bool) -> Void)?,
-                         resultTextAction: (() -> Void)?) {
+                         symbolsSwitchAction: ((Bool) -> Void)?) {
     self.uppercaseSwitchAction = uppercaseSwitchAction
     self.lowercaseSwitchAction = lowercaseSwitchAction
     self.numbersSwitchAction = numbersSwitchAction
     self.symbolsSwitchAction = symbolsSwitchAction
-    self.resultTextAction = resultTextAction
   }
   
   // MARK: - Private func
@@ -220,16 +216,6 @@ final class PasswordGeneratorView: UIView {
                                                       left: -padding,
                                                       bottom: .zero,
                                                       right: -padding)
-    
-    let resultTextTap = UITapGestureRecognizer(target: self, action: #selector(resultTextTapAction))
-    resultTextTap.cancelsTouchesInView = false
-    resultTextView.addGestureRecognizer(resultTextTap)
-    resultTextView.isUserInteractionEnabled = true
-  }
-  
-  @objc
-  private func resultTextTapAction() {
-    resultTextAction?()
   }
   
   @objc

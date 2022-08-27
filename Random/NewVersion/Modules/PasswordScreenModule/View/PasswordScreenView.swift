@@ -12,12 +12,6 @@ import RandomUIKit
 /// События которые отправляем из View в Presenter
 protocol PasswordScreenViewOutput: AnyObject {
   
-  /// Результат генерации пароля скопирован
-  func resultClassicCopied()
-  
-  /// Результат генерации пароля скопирован
-  func resultPhraseCopied()
-  
   /// Текст в текстовом поле был изменен
   /// - Parameters:
   ///  - text: Значение для текстового поля
@@ -51,6 +45,9 @@ protocol PasswordScreenViewOutput: AnyObject {
 
 /// События которые отправляем от Presenter ко View
 protocol PasswordScreenViewInput {
+  
+  /// Возвращает индекс сегментед контроля. Определяем по индексу тип пароля
+  func returnPasswordIndex() -> Int
   
   /// Устанавливает значение в текстовое поле
   ///  - Parameter text: Значение для текстового поля
@@ -123,6 +120,10 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       
       self.phrasePasswordView.resultTextView.attributedText = result
     }
+  }
+  
+  func returnPasswordIndex() -> Int {
+    passwordSegmentedControl.selectedSegmentIndex
   }
 }
 
@@ -213,9 +214,6 @@ private extension PasswordScreenView {
     backgroundColor = RandomColor.primaryWhite
     
     phrasePasswordView.phraseTextField.delegate = self
-    phrasePasswordView.resultTextAction = { [weak self] in
-      self?.output?.resultPhraseCopied()
-    }
     
     passwordGeneratorView.passwordLengthTextField.delegate = self
     passwordGeneratorView.configureViewWith(
@@ -230,9 +228,6 @@ private extension PasswordScreenView {
       },
       symbolsSwitchAction: { [weak self] status in
         self?.output?.symbolsSwitchAction(status: status)
-      },
-      resultTextAction: { [weak self] in
-        self?.output?.resultClassicCopied()
       }
     )
     

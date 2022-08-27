@@ -57,6 +57,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     let moviesScreenCoordinator = MoviesScreenCoordinator(navigationController)
     anyCoordinator = moviesScreenCoordinator
     moviesScreenCoordinator.start()
+    
+    services.metricsService.track(event: .filmScreen)
   }
   
   func openTeams() {
@@ -64,6 +66,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                         services)
     anyCoordinator = teamsScreenCoordinator
     teamsScreenCoordinator.start()
+    
+    services.metricsService.track(event: .teamsScreen)
   }
   
   func openYesOrNo() {
@@ -71,6 +75,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                         services)
     anyCoordinator = yesNoScreenCoordinator
     yesNoScreenCoordinator.start()
+    
+    services.metricsService.track(event: .yesOrNotScreen)
   }
   
   func openCharacter() {
@@ -78,12 +84,16 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                           services)
     anyCoordinator = letterScreenCoordinator
     letterScreenCoordinator.start()
+    
+    services.metricsService.track(event: .charactersScreen)
   }
   
   func openList() {
     let listScreenCoordinator = ListScreenCoordinator(navigationController)
     anyCoordinator = listScreenCoordinator
     listScreenCoordinator.start()
+    
+    services.metricsService.track(event: .listScreen)
   }
   
   func openCoin() {
@@ -91,12 +101,16 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                       services)
     anyCoordinator = coinScreenCoordinator
     coinScreenCoordinator.start()
+    
+    services.metricsService.track(event: .coinScreen)
   }
   
   func openCube() {
    let cubesScreenCoordinator = CubesScreenCoordinator(navigationController)
     anyCoordinator = cubesScreenCoordinator
     cubesScreenCoordinator.start()
+    
+    services.metricsService.track(event: .cubeScreen)
   }
   
   func openDateAndTime() {
@@ -104,6 +118,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                               services)
     anyCoordinator = dateTimeScreenCoordinator
     dateTimeScreenCoordinator.start()
+    
+    services.metricsService.track(event: .dateAndTimeScreen)
   }
   
   func openLottery() {
@@ -111,6 +127,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                             services)
     anyCoordinator = lotteryScreenCoordinator
     lotteryScreenCoordinator.start()
+    
+    services.metricsService.track(event: .lotteryScreen)
   }
   
   func openContact() {
@@ -118,6 +136,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                             services)
     anyCoordinator = contactScreenCoordinator
     contactScreenCoordinator.start()
+    
+    services.metricsService.track(event: .contactScreen)
   }
   
   func openPassword() {
@@ -125,10 +145,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                               services)
     anyCoordinator = passwordScreenCoordinator
     passwordScreenCoordinator.start()
-  }
-  
-  func openRussianLotto() {
-    // TODO: - Open Coordinator
+    
+    services.metricsService.track(event: .passwordScreen)
   }
   
   func openNumber() {
@@ -136,5 +154,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                           services)
     anyCoordinator = numberScreenCoordinator
     numberScreenCoordinator.start()
+    
+    services.metricsService.track(event: .numbersScreen)
   }
 }

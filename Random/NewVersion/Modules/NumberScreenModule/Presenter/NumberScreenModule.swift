@@ -111,10 +111,6 @@ final class NumberScreenViewController: NumberScreenModule {
 // MARK: - NumberScreenViewOutput
 
 extension NumberScreenViewController: NumberScreenViewOutput {
-  func resultLabelAction(text: String?) {
-    factory.clearGeneration(text: text)
-  }
-  
   func rangeStartDidChange(_ text: String?) {
     interactor.rangeStartDidChange(text)
   }
@@ -183,10 +179,23 @@ private extension NumberScreenViewController {
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(copyButtonAction))
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    factory.clearGeneration(text: interactor.returnModel().result)
   }
   
   @objc
@@ -202,5 +211,6 @@ private extension NumberScreenViewController {
   struct Appearance {
     let title = NSLocalizedString("Число", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
   }
 }

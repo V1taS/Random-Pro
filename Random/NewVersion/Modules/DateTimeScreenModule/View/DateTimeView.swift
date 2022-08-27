@@ -22,9 +22,6 @@ protocol DateTimeViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку Месяц
   func generateButtonMonthAction()
-  
-  /// Было нажатие на результат генерации
-  func resultLabelAction()
 }
 
 protocol DateTimeViewInput: AnyObject {
@@ -103,16 +100,6 @@ final class DateTimeView: DateTimeViewProtocol {
     buttonStackViewTwo.axis = .horizontal
     buttonStackViewTwo.distribution = .fillEqually
     buttonStackViewTwo.spacing = appearance.lessHorizontalSpacing
-    
-    let resultLabelTap = UITapGestureRecognizer(target: self, action: #selector(resultLabelAction))
-    resultLabelTap.cancelsTouchesInView = false
-    resultLabel.isUserInteractionEnabled = true
-    resultLabel.addGestureRecognizer(resultLabelTap)
-  }
-  
-  @objc
-  private func resultLabelAction() {
-    output?.resultLabelAction()
   }
   
   @objc

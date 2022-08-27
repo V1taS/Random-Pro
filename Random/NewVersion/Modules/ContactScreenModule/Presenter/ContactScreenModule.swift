@@ -101,10 +101,24 @@ final class ContactScreenViewController: ContactScreenModule {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    
+    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(copyButtonAction))
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
   }
   
   @objc private func settingButtonAction() {
@@ -115,10 +129,6 @@ final class ContactScreenViewController: ContactScreenModule {
 // MARK: - ContactScreenViewOutput
 
 extension ContactScreenViewController: ContactScreenViewOutput {
-  func resultCopied() {
-    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
-  }
-  
   func generateButtonAction() {
     interactor.generateButtonAction()
   }
@@ -150,5 +160,6 @@ extension ContactScreenViewController {
   struct Appearance {
     let settingsButtonIcon = UIImage(systemName: "gear")
     let title = NSLocalizedString("Контакты", comment: "")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
   }
 }

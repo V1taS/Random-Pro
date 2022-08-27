@@ -97,13 +97,6 @@ final class LotteryScreenViewController: LotteryScreenModule {
 // MARK: - LotteryScreenViewOutput
 
 extension LotteryScreenViewController: LotteryScreenViewOutput {
-  func resultLabelAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.resultLabelAction(model: model)
-  }
-  
   func generateButtonAction(rangeStartValue: String?, rangeEndValue: String?, amountNumberValue: String?) {
     interactor.generateContent(rangeStartValue: rangeStartValue,
                                rangeEndValue: rangeEndValue, amountNumberValue: amountNumberValue)
@@ -144,18 +137,33 @@ private extension LotteryScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    
+    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(copyButtonAction))
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    guard let model = cacheModel else {
+      return
+    }
+    moduleOutput?.resultLabelAction(model: model)
   }
   
   @objc
   func settingButtonAction() {
-    guard let model = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(model: model)
+    guard let cacheModel = cacheModel else { return }
+    moduleOutput?.settingButtonAction(model: cacheModel)
   }
 }
 
@@ -165,5 +173,6 @@ private extension LotteryScreenViewController {
   struct Appearance {
     let settingsButtonIcon = UIImage(systemName: "gear")
     let title = NSLocalizedString("Лотерея", comment: "")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
   }
 }

@@ -14,9 +14,6 @@ protocol ContactScreenViewOutput: AnyObject {
   
   /// Кнопка нажата пользователем
   func generateButtonAction()
-  
-  /// Результат генерации  скопирован
-  func resultCopied()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -71,18 +68,8 @@ final class ContactScreenView: ContactScreenViewProtocol {
     
     generateButton.setTitle(appearance.titleButton, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
-    
-    let resultTextTap = UITapGestureRecognizer(target: self, action: #selector(resultTextTapAction))
-    resultTextTap.cancelsTouchesInView = false
-    resultLabel.addGestureRecognizer(resultTextTap)
-    resultLabel.isUserInteractionEnabled = true
   }
-  
-  @objc
-  private func resultTextTapAction() {
-    output?.resultCopied()
-  }
-  
+
   @objc
   private func generateButtonAction() {
     output?.generateButtonAction()

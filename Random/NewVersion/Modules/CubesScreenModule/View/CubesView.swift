@@ -11,31 +11,6 @@ import RandomUIKit
 /// View для экрана
 final class CubesView: UIView {
   
-  /// Тип кубиков
-  enum CubesType {
-    
-    /// Один кубик
-    case cubesOne(Int)
-    
-    /// Два кубика
-    case cubesTwo(cubesOne: Int, cubesTwo: Int)
-    
-    /// Три кубика
-    case cubesThree(cubesOne: Int, cubesTwo: Int, cubesThree: Int)
-    
-    /// Четыре кубика
-    case cubesFour(cubesOne: Int, cubesTwo: Int, cubesThree: Int,
-                   cubesFour: Int)
-    
-    /// Пять кубиков
-    case cubesFive(cubesOne: Int, cubesTwo: Int, cubesThree: Int,
-                   cubesFour: Int, cubesFive: Int)
-    
-    /// Шесть кубиков
-    case cubesSix(cubesOne: Int, cubesTwo: Int, cubesThree: Int,
-                  cubesFour: Int, cubesFive: Int, cubesSix: Int)
-  }
-  
   // MARK: - Private properties
   
   private let cubeOneImageView = UIImageView()
@@ -73,7 +48,7 @@ final class CubesView: UIView {
   
   /// Обновляет экран с кубиками
   ///  - Parameter type: Тип кубиков
-  func updateCubesWith(type: CubesType) {
+  func updateCubesWith(type: CubesScreenModel.CubesType) {
     self.configureConstraintsWith(type: type)
   }
   
@@ -87,7 +62,7 @@ final class CubesView: UIView {
     }
   }
   
-  private func configureConstraintsWith(type: CubesType) {
+  private func configureConstraintsWith(type: CubesScreenModel.CubesType) {
     let appearance = Appearance()
     deactivateCubes()
     

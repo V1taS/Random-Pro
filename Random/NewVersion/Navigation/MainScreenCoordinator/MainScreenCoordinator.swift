@@ -106,7 +106,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openCube() {
-   let cubesScreenCoordinator = CubesScreenCoordinator(navigationController)
+    let cubesScreenCoordinator = CubesScreenCoordinator(navigationController,
+                                                        services)
     anyCoordinator = cubesScreenCoordinator
     cubesScreenCoordinator.start()
     

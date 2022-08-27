@@ -46,9 +46,6 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Password`
   func openPassword()
   
-  /// Открыть раздел `Password`
-  func openRussianLotto()
-  
   /// Открыть админ-панель фича тоглов
   func adminFeatureToggleAction()
   
@@ -164,10 +161,6 @@ extension MainScreenViewController: MainScreenViewOutput {
   
   func openPassword() {
     moduleOutput?.openPassword()
-  }
-  
-  func openRussianLotto() {
-    moduleOutput?.openRussianLotto()
   }
   
   func openNumber() {

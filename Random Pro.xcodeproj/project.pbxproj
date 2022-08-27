@@ -276,6 +276,7 @@
 		1BD1F92825D733E900A1C7A4 /* LotteryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */; };
 		1BD25B6D282459B4006661B8 /* MetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD25B6C282459B4006661B8 /* MetricsService.swift */; };
 		1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD25B6E28245A80006661B8 /* MetricsnSections.swift */; };
+		1BD5398B28BA1E41009DA51C /* CubesScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5398A28BA1E41009DA51C /* CubesScreenModel.swift */; };
 		1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 1BDB1CC92878E31D00F75299 /* Notifications */; };
 		1BDC80D1264DBA85001B0893 /* Travel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC80D0264DBA85001B0893 /* Travel.swift */; };
 		1BDC80D4264DBB4D001B0893 /* TravelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC80D3264DBB4D001B0893 /* TravelActions.swift */; };
@@ -671,6 +672,7 @@
 		1BD1F92725D733E900A1C7A4 /* LotteryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryInteractor.swift; sourceTree = "<group>"; };
 		1BD25B6C282459B4006661B8 /* MetricsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsService.swift; sourceTree = "<group>"; };
 		1BD25B6E28245A80006661B8 /* MetricsnSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsnSections.swift; sourceTree = "<group>"; };
+		1BD5398A28BA1E41009DA51C /* CubesScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubesScreenModel.swift; sourceTree = "<group>"; };
 		1BDC80D0264DBA85001B0893 /* Travel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Travel.swift; sourceTree = "<group>"; };
 		1BDC80D3264DBB4D001B0893 /* TravelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelActions.swift; sourceTree = "<group>"; };
 		1BDC80D5264DBB77001B0893 /* TravelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInteractor.swift; sourceTree = "<group>"; };
@@ -2122,6 +2124,14 @@
 			path = MetricsService;
 			sourceTree = "<group>";
 		};
+		1BD5398928BA1E2B009DA51C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1BD5398A28BA1E41009DA51C /* CubesScreenModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		1BDC80D2264DBB36001B0893 /* TravelActions */ = {
 			isa = PBXGroup;
 			children = (
@@ -2571,6 +2581,7 @@
 		6CA6200F28B62DE30078C971 /* CubesScreenModule */ = {
 			isa = PBXGroup;
 			children = (
+				1BD5398928BA1E2B009DA51C /* Models */,
 				6CA6201028B62DE30078C971 /* Assembly */,
 				6CA6201228B62DE30078C971 /* Presenter */,
 				6CA6201428B62DE30078C971 /* View */,
@@ -2599,8 +2610,8 @@
 		6CA6201428B62DE30078C971 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6CA6201528B62DE30078C971 /* CubesView.swift */,
 				6CA6201628B62DE30078C971 /* CubesScreenView.swift */,
+				6CA6201528B62DE30078C971 /* CubesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3322,6 +3333,7 @@
 				6CBFD054289BC42D005F9104 /* PasswordScreenModule.swift in Sources */,
 				6C9A9EFB282926EA00962062 /* NumberScreenCoordinator.swift in Sources */,
 				6CE482F9289C133A005722EC /* PhrasePasswordView.swift in Sources */,
+				1BD5398B28BA1E41009DA51C /* CubesScreenModel.swift in Sources */,
 				1B941DE028217FF600D968DF /* UserDefaultsWrapper.swift in Sources */,
 				1B92031725D170F50094D2BE /* CharactersInteractor.swift in Sources */,
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,

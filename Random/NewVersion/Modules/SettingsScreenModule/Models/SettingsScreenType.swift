@@ -36,7 +36,7 @@ enum SettingsScreenType {
   case coin(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Кубики`
-  case cube
+  case cube(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Дата и Время`
   case dateAndTime(itemsGenerated: String, lastItem: String)

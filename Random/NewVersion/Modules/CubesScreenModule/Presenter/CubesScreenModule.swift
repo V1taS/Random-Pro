@@ -9,10 +9,28 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в  `другой модуль
-protocol CubesScreenModuleOutput: AnyObject {}
+protocol CubesScreenModuleOutput: AnyObject {
+  
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
+  
+  /// Была нажата кнопка (настройки)
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: CubesScreenModel)
+  
+  /// Кнопка очистить была нажата
+  func cleanButtonWasSelected()
+}
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol CubesScreenModuleInput {
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
+  
+  /// Запросить текущую модель
+  func returnCurrentModel() -> CubesScreenModel
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: CubesScreenModuleOutput? { get set }
@@ -21,7 +39,7 @@ protocol CubesScreenModuleInput {
 typealias CubesScreenModule = UIViewController & CubesScreenModuleInput
 
 final class CubesScreenViewController: CubesScreenModule {
-  
+
   weak var moduleOutput: CubesScreenModuleOutput?
   
   private let moduleView: CubesScreenViewProtocol
@@ -50,11 +68,23 @@ final class CubesScreenViewController: CubesScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    interactor.getContent()
     setNavigationBar()
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Internal func
+  
+  func returnCurrentModel() -> CubesScreenModel {
+    interactor.returnCurrentModel()
+  }
+  
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
   }
   
   // MARK: - Private func
@@ -63,27 +93,65 @@ final class CubesScreenViewController: CubesScreenModule {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
-    title = "Кубики"
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    title = appearance.title
+    
+    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
+                                     style: .plain,
+                                     target: self,
+                                     action: #selector(copyButtonAction))
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
   }
   
-  @objc private func settingButtonAction() {}
+  @objc
+  func copyButtonAction() {
+    guard let result = interactor.returnCurrentModel().listResult.last else {
+      return
+    }
+    moduleOutput?.resultCopied(text: result)
+  }
+  
+  @objc
+  private func settingButtonAction() {
+    moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
+  }
 }
 
 extension CubesScreenViewController: CubesScreenViewOutput {
-  func generateButtonAction() {}
+  func updateSelectedCountCubes(_ count: Int) {
+    interactor.updateSelectedCountCubes(count)
+  }
+  
+  func generateButtonAction() {
+    interactor.generateButtonAction()
+  }
 }
 
-extension CubesScreenViewController: CubesScreenInteractorOutput {}
+extension CubesScreenViewController: CubesScreenInteractorOutput {
+  func cleanButtonWasSelected() {
+    moduleOutput?.cleanButtonWasSelected()
+  }
+  
+  func didRecive(model: CubesScreenModel) {
+    moduleView.updateContentWith(selectedCountCubes: model.selectedCountCubes,
+                                 cubesType: model.cubesType,
+                                 listResult: factory.reverseListResult(model.listResult),
+                                 plagIsShow: model.listResult.isEmpty)
+  }
+}
 
 extension CubesScreenViewController: CubesScreenFactoryOutput {}
 
 extension CubesScreenViewController {
   struct Appearance {
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let title = NSLocalizedString("Кубики", comment: "")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
   }
 }
-

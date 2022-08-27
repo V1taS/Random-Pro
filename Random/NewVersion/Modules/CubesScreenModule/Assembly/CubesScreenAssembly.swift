@@ -8,7 +8,11 @@
 
 import UIKit
 
+/// Сборщик `CubesScreen`
 final class CubesScreenAssembly {
+  
+  /// Собирает модуль `CubesScreen`
+  /// - Returns: Cобранный модуль `CubesScreen`
   func createModule() -> CubesScreenModule {
     let view = CubesScreenView()
     let interactor = CubesScreenInteractor()

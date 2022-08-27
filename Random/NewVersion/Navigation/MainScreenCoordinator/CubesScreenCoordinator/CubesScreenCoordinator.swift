@@ -13,6 +13,7 @@ final class CubesScreenCoordinator: Coordinator {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var cubesScreenModule: CubesScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
@@ -21,8 +22,11 @@ final class CubesScreenCoordinator: Coordinator {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  init(_ navigationController: UINavigationController) {
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -37,4 +41,58 @@ final class CubesScreenCoordinator: Coordinator {
 
 // MARK: - CubesScreenModuleOutput
 
-extension CubesScreenCoordinator: CubesScreenModuleOutput {}
+extension CubesScreenCoordinator: CubesScreenModuleOutput {
+  func cleanButtonWasSelected() {
+    let model = cubesScreenModule?.returnCurrentModel()
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .cube(itemsGenerated: "\(model?.listResult.count ?? .zero)",
+                                                                lastItem: "\(model?.listResult.last ?? "")"))
+  }
+  
+  func settingButtonAction(model: CubesScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    
+    settingsScreenCoordinator.setupDefaultsSettings(for: .cube(itemsGenerated: "\(model.listResult.count)",
+                                                               lastItem: "\(model.listResult.last ?? "")"))
+  }
+  
+  func resultCopied(text: String) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true)
+  }
+}
+
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension CubesScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func withoutRepetitionAction(isOn: Bool) {}
+  
+  func cleanButtonAction() {
+    cubesScreenModule?.cleanButtonAction()
+  }
+  
+  func listOfObjectsAction() {
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    self.listResultScreenCoordinator = listResultScreenCoordinator
+    self.listResultScreenCoordinator?.output = self
+    self.listResultScreenCoordinator?.start()
+    
+    listResultScreenCoordinator.setContentsFrom(list: cubesScreenModule?.returnCurrentModel().listResult ?? [])
+  }
+}
+
+// MARK: - ListResultScreenCoordinatorOutput
+
+extension CubesScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Appearance
+
+private extension CubesScreenCoordinator {
+  struct Appearance {
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+  }
+}

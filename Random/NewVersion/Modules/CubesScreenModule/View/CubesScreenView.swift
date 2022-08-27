@@ -9,25 +9,49 @@
 import UIKit
 import RandomUIKit
 
+/// События которые отправляем из View в Presenter
 protocol CubesScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку генерации
   func generateButtonAction()
+  
+  /// Обновить количество кубиков
+  ///  - Parameter count: Количество кубиков
+  func updateSelectedCountCubes(_ count: Int)
 }
 
-protocol CubesScreenViewInput {}
+/// События которые отправляем от Presenter ко View
+protocol CubesScreenViewInput {
+  
+  /// Обновить контент
+  ///  - Parameters:
+  ///   - selectedCountCubes: Количество кубиков
+  ///   - cubesType: Тип кубиков
+  ///   - listResult: Список результатов
+  ///   - plagIsShow: Заглушка
+  func updateContentWith(selectedCountCubes: Int,
+                         cubesType: CubesScreenModel.CubesType,
+                         listResult: [String],
+                         plagIsShow: Bool)
+}
 
 typealias CubesScreenViewProtocol = UIView & CubesScreenViewInput
 
 final class CubesScreenView: CubesScreenViewProtocol {
   
+  // MARK: - Internal property
+  
   weak var output: CubesScreenViewOutput?
+  
+  // MARK: - Private property
   
   private let cubesSegmentedControl = UISegmentedControl()
   private let scrollResultView = ScrollLabelGradientView()
   private let resultLabel = UILabel()
   private let generateButton = ButtonView()
   private let cubesView = CubesView()
+  
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -37,6 +61,20 @@ final class CubesScreenView: CubesScreenViewProtocol {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Internal func
+  
+  func updateContentWith(selectedCountCubes: Int,
+                         cubesType: CubesScreenModel.CubesType,
+                         listResult: [String],
+                         plagIsShow: Bool) {
+    cubesSegmentedControl.selectedSegmentIndex = selectedCountCubes - 1
+    cubesView.updateCubesWith(type: cubesType)
+    scrollResultView.listLabels = listResult
+    
+    resultLabel.isHidden = !plagIsShow
+    cubesView.isHidden = plagIsShow
   }
   
   // MARK: - Private func
@@ -57,42 +95,28 @@ final class CubesScreenView: CubesScreenViewProtocol {
                                         at: appearance.numberIndexFour, animated: false)
     cubesSegmentedControl.insertSegment(withTitle: appearance.numberSix,
                                         at: appearance.numberIndexFive, animated: false)
-    cubesSegmentedControl.selectedSegmentIndex = .zero
-    
     
     cubesSegmentedControl.addTarget(self,
                                     action: #selector(cubesSegmentedAction),
                                     for: .valueChanged)
     
-    resultLabel.isHidden = true
     resultLabel.text = appearance.result
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
     
     generateButton.setTitle(appearance.titleButton, for: .normal)
-    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .valueChanged)
+    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
-  @objc private func generateButtonAction() {}
+  @objc
+  private func generateButtonAction() {
+    output?.generateButtonAction()
+  }
   
   @objc
   private func cubesSegmentedAction() {
-    if cubesSegmentedControl.selectedSegmentIndex == .zero {
-      cubesView.updateCubesWith(type: .cubesOne(3))
-    } else if cubesSegmentedControl.selectedSegmentIndex == 1 {
-      cubesView.updateCubesWith(type: .cubesTwo(cubesOne: 5, cubesTwo: 6))
-    } else if cubesSegmentedControl.selectedSegmentIndex == 2 {
-      cubesView.updateCubesWith(type: .cubesThree(cubesOne: 2, cubesTwo: 6, cubesThree: 4))
-    } else if cubesSegmentedControl.selectedSegmentIndex == 3 {
-      cubesView.updateCubesWith(type: .cubesFour(cubesOne: 3, cubesTwo: 3, cubesThree: 1, cubesFour: 5))
-    } else if cubesSegmentedControl.selectedSegmentIndex == 4 {
-      cubesView.updateCubesWith(type: .cubesFive(cubesOne: 1, cubesTwo: 2, cubesThree: 5,
-                                                 cubesFour: 6, cubesFive: 3))
-    } else if cubesSegmentedControl.selectedSegmentIndex == 5 {
-      cubesView.updateCubesWith(type: .cubesSix(cubesOne: 5, cubesTwo: 3, cubesThree: 2,
-                                                cubesFour: 1, cubesFive: 4, cubesSix: 6))
-    }
+    output?.updateSelectedCountCubes(cubesSegmentedControl.selectedSegmentIndex + 1)
   }
   
   private func setupConstraints() {
@@ -141,7 +165,6 @@ final class CubesScreenView: CubesScreenViewProtocol {
     ])
   }
 }
-
 
 extension CubesScreenView {
   struct Appearance {

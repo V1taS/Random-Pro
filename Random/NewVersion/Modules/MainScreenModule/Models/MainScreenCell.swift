@@ -32,7 +32,8 @@ struct MainScreenCellModel {
       .dateAndTime(advLabel: .none, isEnabled: true),
       .lottery(advLabel: .none, isEnabled: true),
       .contact(advLabel: .none, isEnabled: true),
-      .password(advLabel: .none, isEnabled: true)
+      .password(advLabel: .none, isEnabled: true),
+      .cube(advLabel: .none, isEnabled: true)
     ]
     
     // MARK: - Cases

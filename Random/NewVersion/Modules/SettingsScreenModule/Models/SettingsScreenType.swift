@@ -45,7 +45,7 @@ enum SettingsScreenType {
   case lottery(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Контакты`
-  case contact
+  case contact(itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Пароли`
   case password(itemsGenerated: String, lastItem: String)

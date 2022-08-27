@@ -30,14 +30,18 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
   // MARK: - Private variables
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var listResultScreenModule: ListResultScreenModule?
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  init(_ navigationController: UINavigationController) {
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -45,14 +49,30 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
   func start() {
     let listResultScreenModule = ListResultScreenAssembly().createModule()
     self.listResultScreenModule = listResultScreenModule
+    self.listResultScreenModule?.moduleOutput = self
     navigationController.pushViewController(listResultScreenModule, animated: true)
+  }
+  
+  func setContentsFrom(list: [String]) {
+    listResultScreenModule?.setContentsFrom(list: list)
   }
 }
 
-// MARK: - SettingsScreenCoordinatorInput
+// MARK: - ListResultScreenModuleOutput
 
-extension ListResultScreenCoordinator {
-  func setContentsFrom(list: [String]) {
-    listResultScreenModule?.setContentsFrom(list: list)
+extension ListResultScreenCoordinator: ListResultScreenModuleOutput {
+  func resultCopied(text: String) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true)
+  }
+}
+
+// MARK: - Appearance
+
+private extension ListResultScreenCoordinator {
+  struct Appearance {
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
   }
 }

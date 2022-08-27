@@ -13,10 +13,26 @@ protocol ContactScreenModuleOutput: AnyObject {
   
   /// Кнопка настройки была нажата
   func settingButtonAction()
+  
+  /// Была получена ошибка
+  func didReciveError()
+  
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
+  
+  /// Кнопка очистить была нажата
+  func cleanButtonWasSelected()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol ContactScreenModuleInput {
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
+  
+  /// Запросить текущую модель
+  func returnCurrentModel() -> ContactScreenModel
   
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: ContactScreenModuleOutput? { get set }
@@ -65,7 +81,17 @@ final class ContactScreenViewController: ContactScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    interactor.getContent()
     setNavigationBar()
+  }
+  
+  func returnCurrentModel() -> ContactScreenModel {
+    interactor.returnCurrentModel()
+  }
+  
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
   }
   
   // MARK: - Private func
@@ -88,11 +114,31 @@ final class ContactScreenViewController: ContactScreenModule {
 
 // MARK: - ContactScreenViewOutput
 
-extension ContactScreenViewController: ContactScreenViewOutput {}
+extension ContactScreenViewController: ContactScreenViewOutput {
+  func resultCopied() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+  }
+  
+  func generateButtonAction() {
+    interactor.generateButtonAction()
+  }
+}
 
 // MARK: - ContactScreenInteractorOutput
 
-extension ContactScreenViewController: ContactScreenInteractorOutput {}
+extension ContactScreenViewController: ContactScreenInteractorOutput {
+  func cleanButtonWasSelected() {
+    moduleOutput?.cleanButtonWasSelected()
+  }
+  
+  func didReciveError() {
+    moduleOutput?.didReciveError()
+  }
+  
+  func didRecive(model: ContactScreenModel) {
+    moduleView.setResult(model.result)
+  }
+}
 
 // MARK: - ContactScreenFactoryOutput
 

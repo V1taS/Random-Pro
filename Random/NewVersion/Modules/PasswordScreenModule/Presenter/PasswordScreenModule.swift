@@ -83,7 +83,6 @@ final class PasswordScreenViewController: PasswordScreenModule {
     super.viewDidLoad()
     setNavigationBar()
     interactor.getContent()
-    moduleView.startActivityIndicator()
   }
   
   // MARK: - Internal func
@@ -109,7 +108,6 @@ extension PasswordScreenViewController: PasswordScreenViewOutput {
   }
   
   func generateButtonAction(passwordLength: String?) {
-    moduleView.startActivityIndicator()
     interactor.generateButtonAction(passwordLength: passwordLength)
   }
   

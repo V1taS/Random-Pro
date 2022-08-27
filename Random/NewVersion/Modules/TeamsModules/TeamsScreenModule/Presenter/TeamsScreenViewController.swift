@@ -200,6 +200,7 @@ private extension TeamsScreenViewController {
     } else {
       factory.createTeamsFrom(model: interactor.returnModel())
     }
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
   }
   
   @objc

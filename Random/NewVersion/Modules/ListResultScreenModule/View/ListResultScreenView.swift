@@ -11,6 +11,9 @@ import RandomUIKit
 /// События которые отправляем из View в Presenter
 protocol ListResultScreenViewOutput: AnyObject {
   
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -95,7 +98,12 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
 
 // MARK: - UITableViewDelegate
 
-extension ListResultScreenView: UITableViewDelegate {}
+extension ListResultScreenView: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let result = list[indexPath.row]
+    output?.resultCopied(text: result)
+  }
+}
 
 // MARK: - UITableViewDataSource
 

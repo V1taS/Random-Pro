@@ -155,10 +155,19 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case .contact(itemsGenerated: let itemsGenerated, _):
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.divider)
+      if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
+        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
+                                              asideImage: appearance.titleAndImageIcon?.pngData()))
+        tableViewModels.append(.divider)
+      }
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .list: break
     case .films: break
     case .cube: break
-    case .contact: break
     }
     output?.didRecive(models: tableViewModels)
   }

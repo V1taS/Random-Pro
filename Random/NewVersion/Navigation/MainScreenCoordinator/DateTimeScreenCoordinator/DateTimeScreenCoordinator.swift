@@ -73,7 +73,7 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
 
 extension DateTimeScreenCoordinator: SettingsScreenCoordinatorOutput {
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()

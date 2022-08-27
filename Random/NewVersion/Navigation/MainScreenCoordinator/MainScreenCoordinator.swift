@@ -47,7 +47,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func adminFeatureToggleAction() {
-    let adminFeatureToggleCoordinator = AdminFeatureToggleCoordinator(navigationController, services)
+    let adminFeatureToggleCoordinator = AdminFeatureToggleCoordinator(navigationController,
+                                                                      services)
     anyCoordinator = adminFeatureToggleCoordinator
     adminFeatureToggleCoordinator.start()
   }
@@ -66,13 +67,15 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openYesOrNo() {
-    let yesNoScreenCoordinator = YesNoScreenCoordinator(navigationController)
+    let yesNoScreenCoordinator = YesNoScreenCoordinator(navigationController,
+                                                        services)
     anyCoordinator = yesNoScreenCoordinator
     yesNoScreenCoordinator.start()
   }
   
   func openCharacter() {
-    let letterScreenCoordinator = LetterScreenCoordinator(navigationController, services)
+    let letterScreenCoordinator = LetterScreenCoordinator(navigationController,
+                                                          services)
     anyCoordinator = letterScreenCoordinator
     letterScreenCoordinator.start()
   }
@@ -84,7 +87,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openCoin() {
-    let coinScreenCoordinator = CoinScreenCoordinator(navigationController)
+    let coinScreenCoordinator = CoinScreenCoordinator(navigationController,
+                                                      services)
     anyCoordinator = coinScreenCoordinator
     coinScreenCoordinator.start()
   }
@@ -96,25 +100,29 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openDateAndTime() {
-    let dateTimeScreenCoordinator = DateTimeScreenCoordinator(navigationController, services)
+    let dateTimeScreenCoordinator = DateTimeScreenCoordinator(navigationController,
+                                                              services)
     anyCoordinator = dateTimeScreenCoordinator
     dateTimeScreenCoordinator.start()
   }
   
   func openLottery() {
-    let lotteryScreenCoordinator = LotteryScreenCoordinator(navigationController, services)
+    let lotteryScreenCoordinator = LotteryScreenCoordinator(navigationController,
+                                                            services)
     anyCoordinator = lotteryScreenCoordinator
     lotteryScreenCoordinator.start()
   }
   
   func openContact() {
-    let contactScreenCoordinator = ContactScreenCoordinator(navigationController)
+    let contactScreenCoordinator = ContactScreenCoordinator(navigationController,
+                                                            services)
     anyCoordinator = contactScreenCoordinator
     contactScreenCoordinator.start()
   }
   
   func openPassword() {
-    let passwordScreenCoordinator = PasswordScreenCoordinator(navigationController, services)
+    let passwordScreenCoordinator = PasswordScreenCoordinator(navigationController,
+                                                              services)
     anyCoordinator = passwordScreenCoordinator
     passwordScreenCoordinator.start()
   }
@@ -124,7 +132,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openNumber() {
-    let numberScreenCoordinator = NumberScreenCoordinator(navigationController, services)
+    let numberScreenCoordinator = NumberScreenCoordinator(navigationController,
+                                                          services)
     anyCoordinator = numberScreenCoordinator
     numberScreenCoordinator.start()
   }

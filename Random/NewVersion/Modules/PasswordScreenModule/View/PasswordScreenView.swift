@@ -64,12 +64,6 @@ protocol PasswordScreenViewInput {
   func set(resultClassic: String?,
            resultPhrase: String?,
            switchState: PasswordScreenModel.SwitchState)
-  
-  /// Запустить лоадер
-  func startActivityIndicator()
-  
-  /// Остановить лоадер
-  func stopActivityIndicator()
 }
 
 typealias PasswordScreenViewProtocol = UIView & PasswordScreenViewInput
@@ -86,7 +80,6 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
   private let passwordGeneratorView = PasswordGeneratorView()
   private let phrasePasswordView = PhrasePasswordView()
   private let genarateButton = ButtonView()
-  private let activityIndicatorView = UIActivityIndicatorView()
   
   // MARK: - Initialization
   
@@ -121,8 +114,6 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       self.passwordGeneratorView.lowercaseLettersSwitch.isOn = switchState.lowercase
       self.passwordGeneratorView.numbersSwitch.isOn = switchState.numbers
       self.passwordGeneratorView.symbolsSwitch.isOn = switchState.symbols
-      
-      self.stopActivityIndicator()
     }
     
     setColorFor(password: resultPhrase ?? appearance.resultLabel) { [weak self] result in
@@ -131,18 +122,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       }
       
       self.phrasePasswordView.resultTextView.attributedText = result
-      self.stopActivityIndicator()
     }
-  }
-  
-  func startActivityIndicator() {
-    activityIndicatorView.isHidden = false
-    activityIndicatorView.startAnimating()
-  }
-  
-  func stopActivityIndicator() {
-    activityIndicatorView.isHidden = true
-    activityIndicatorView.stopAnimating()
   }
 }
 
@@ -256,8 +236,6 @@ private extension PasswordScreenView {
       }
     )
     
-    activityIndicatorView.isHidden = true
-    
     passwordSegmentedControl.insertSegment(withTitle: appearance.generatePassword,
                                            at: appearance.passwordIndex,
                                            animated: false)
@@ -298,8 +276,7 @@ private extension PasswordScreenView {
   
   func setupConstraints() {
     let appearance = Appearance()
-    [passwordSegmentedControl, passwordGeneratorView, phrasePasswordView,
-     genarateButton, activityIndicatorView].forEach {
+    [passwordSegmentedControl, passwordGeneratorView, phrasePasswordView, genarateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -327,10 +304,7 @@ private extension PasswordScreenView {
       genarateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                constant: -appearance.middleHorizontalSpacing),
       genarateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSpacing),
-      
-      activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor)
+                                             constant: -appearance.middleHorizontalSpacing)
     ])
   }
 }

@@ -31,6 +31,9 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // TODO: -  Сделать настройку ADV лайблов
   private let featureToggles: [MainScreenCellModel.MainScreenCell] = [
     // Написать название ячейки для отключения
+    .films(advLabel: .none, isEnabled: false),
+    .list(advLabel: .none, isEnabled: false),
+    .cube(advLabel: .none, isEnabled: false)
   ]
   
   // MARK: - Internal properties

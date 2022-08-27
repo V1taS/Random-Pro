@@ -13,6 +13,7 @@ final class CoinScreenCoordinator: Coordinator {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   private var coinScreenModule: CoinScreenModule?
@@ -21,8 +22,11 @@ final class CoinScreenCoordinator: Coordinator {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  init(_ navigationController: UINavigationController) {
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -62,7 +66,7 @@ extension CoinScreenCoordinator: CoinScreenModuleOutput {
 
 extension CoinScreenCoordinator: SettingsScreenCoordinatorOutput {
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()

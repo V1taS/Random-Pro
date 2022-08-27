@@ -11,9 +11,9 @@ import UIKit
 final class ContactScreenAssembly {
   
   /// Собирает модуль `ContactScreen`
-  func createModule() -> ContactScreenModule {
+  func createModule(permissionService: PermissionService) -> ContactScreenModule {
     let view = ContactScreenView()
-    let interactor = ContactScreenInteractor()
+    let interactor = ContactScreenInteractor(permissionService: permissionService)
     let factory = ContactScreenFactory()
     let presenter = ContactScreenViewController(moduleView: view,
                                               interactor: interactor,

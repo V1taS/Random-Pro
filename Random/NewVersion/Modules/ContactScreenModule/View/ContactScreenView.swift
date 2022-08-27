@@ -10,10 +10,22 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из View в Presenter
-protocol ContactScreenViewOutput: AnyObject {}
+protocol ContactScreenViewOutput: AnyObject {
+  
+  /// Кнопка нажата пользователем
+  func generateButtonAction()
+  
+  /// Результат генерации  скопирован
+  func resultCopied()
+}
 
 /// События которые отправляем от Presenter ко View
-protocol ContactScreenViewInput {}
+protocol ContactScreenViewInput {
+  
+  /// Устанавливаем данные в result
+  ///  - Parameter text: Результат генерации
+  func setResult(_ text: String?)
+}
 
 /// Псевдоним протокола UIView & ContactScreenViewInput
 typealias ContactScreenViewProtocol = UIView & ContactScreenViewInput
@@ -41,6 +53,10 @@ final class ContactScreenView: ContactScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func setResult(_ text: String?) {
+    resultLabel.text = text
+  }
+  
   // MARK: - Private func
   
   private func setupDefaultSettings() {
@@ -48,15 +64,29 @@ final class ContactScreenView: ContactScreenViewProtocol {
     backgroundColor = RandomColor.primaryWhite
     
     resultLabel.text = appearance.resultTitle
-    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.font = RandomFont.primaryMedium32
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
+    resultLabel.numberOfLines = .zero
     
     generateButton.setTitle(appearance.titleButton, for: .normal)
-    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .valueChanged)
+    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    
+    let resultTextTap = UITapGestureRecognizer(target: self, action: #selector(resultTextTapAction))
+    resultTextTap.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultTextTap)
+    resultLabel.isUserInteractionEnabled = true
   }
   
-  @objc private func generateButtonAction() {}
+  @objc
+  private func resultTextTapAction() {
+    output?.resultCopied()
+  }
+  
+  @objc
+  private func generateButtonAction() {
+    output?.generateButtonAction()
+  }
   
   private func setupConstraints() {
     let appearance = Appearance()

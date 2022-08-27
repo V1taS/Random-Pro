@@ -10,6 +10,9 @@ import UIKit
 /// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol ListResultScreenModuleOutput: AnyObject {
   
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -81,7 +84,11 @@ final class ListResultScreenViewController: ListResultScreenModule {
 
 // MARK: - ListResultScreenViewOutput
 
-extension ListResultScreenViewController: ListResultScreenViewOutput {}
+extension ListResultScreenViewController: ListResultScreenViewOutput {
+  func resultCopied(text: String) {
+    moduleOutput?.resultCopied(text: text)
+  }
+}
 
 // MARK: - ListResultScreenInteractorOutput
 

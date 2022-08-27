@@ -13,6 +13,7 @@ final class YesNoScreenCoordinator: Coordinator {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var yesNoScreenModule: YesNoScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
@@ -21,8 +22,11 @@ final class YesNoScreenCoordinator: Coordinator {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  init(_ navigationController: UINavigationController) {
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -64,7 +68,7 @@ extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()

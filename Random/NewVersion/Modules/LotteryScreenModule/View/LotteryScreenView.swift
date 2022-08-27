@@ -218,9 +218,16 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
 
 extension LotteryScreenView: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    rangeStartTextField.resignFirstResponder()
-    rangeEndTextField.resignFirstResponder()
-    amountNumberTextField.resignFirstResponder()
+    textField.resignFirstResponder()
+    return true
+  }
+  
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    if range.location >= 7 {
+      return false
+    }
     return true
   }
 }

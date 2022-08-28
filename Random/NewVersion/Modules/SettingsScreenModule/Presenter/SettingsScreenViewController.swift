@@ -19,6 +19,9 @@ protocol SettingsScreenModuleOutput: AnyObject {
   
   /// Событие, кнопка `Список чисел` была нажата
   func listOfObjectsAction()
+  
+  /// Событие, кнопка `Создать список` была нажата
+  func createListAction()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -91,16 +94,20 @@ final class SettingsScreenViewController: SettingsScreenModule {
 // MARK: - SettingsScreenViewOutput
 
 extension SettingsScreenViewController: SettingsScreenViewOutput {
+  func createListAction() {
+    moduleOutput?.createListAction()
+  }
+  
+  func listOfObjectsAction() {
+    moduleOutput?.listOfObjectsAction()
+  }
+  
   func withoutRepetitionAction(isOn: Bool) {
     moduleOutput?.withoutRepetitionAction(isOn: isOn)
   }
   
   func cleanButtonAction() {
     moduleOutput?.cleanButtonAction()
-  }
-  
-  func listOfObjectsAction() {
-    moduleOutput?.listOfObjectsAction()
   }
 }
 

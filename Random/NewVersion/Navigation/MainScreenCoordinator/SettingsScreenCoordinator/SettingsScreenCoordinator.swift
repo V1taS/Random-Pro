@@ -18,6 +18,15 @@ protocol SettingsScreenCoordinatorOutput: AnyObject {
   
   /// Событие, кнопка `Список` была нажата
   func listOfObjectsAction()
+  
+  /// Событие, кнопка `Создать список` была нажата
+  func createListAction()
+}
+
+/// Расширение протокола
+extension SettingsScreenCoordinatorOutput {
+  
+  func createListAction() {}
 }
 
 protocol SettingsScreenCoordinatorInput {
@@ -72,6 +81,10 @@ extension SettingsScreenCoordinator {
 // MARK: - SettingsScreenModuleOutput
 
 extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
+  func createListAction() {
+    output?.createListAction()
+  }
+  
   func listOfObjectsAction() {
     output?.listOfObjectsAction()
   }

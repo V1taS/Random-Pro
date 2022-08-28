@@ -54,6 +54,10 @@ final class LotteryScreenViewController: LotteryScreenModule {
   private let interactor: LotteryScreenInteractorInput
   private let factory: LotteryScreenFactoryInput
   private var cacheModel: LotteryScreenModel?
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   /// - Parameters:
@@ -81,8 +85,10 @@ final class LotteryScreenViewController: LotteryScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setNavigationBar()
     interactor.getContent()
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
   
   func cleanButtonAction() {
@@ -126,6 +132,7 @@ extension LotteryScreenViewController: LotteryScreenInteractorOutput {
 extension LotteryScreenViewController: LotteryScreenFactoryOutput {
   func didReverseListResult(model: LotteryScreenModel) {
     moduleView.updateContentWith(model: model)
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
 }
 
@@ -137,11 +144,6 @@ private extension LotteryScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    
-    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(copyButtonAction))
     
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,

@@ -20,6 +20,9 @@ protocol SettingsScreenViewOutput: AnyObject {
   
   /// Событие, кнопка `Список чисел` была нажата
   func listOfObjectsAction()
+  
+  /// Событие, кнопка `Создать список` была нажата
+  func createListAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -114,8 +117,12 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 extension SettingsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch models[indexPath.row] {
-    case .titleAndImage:
-      output?.listOfObjectsAction()
+    case .titleAndImage(_, _, let id):
+      if id == Appearance().createListID {
+        output?.createListAction()
+      } else {
+        output?.listOfObjectsAction()
+      }
     default: break
     }
   }
@@ -152,7 +159,7 @@ extension SettingsScreenView: UITableViewDataSource {
                                secondaryText: description)
         viewCell = cell
       }
-    case .titleAndImage(title: let title, asideImage: let asideImage):
+    case .titleAndImage(title: let title, asideImage: let asideImage, _):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndImageCell.reuseIdentifier
       ) as? LabelAndImageCell {
@@ -209,5 +216,6 @@ private extension SettingsScreenView {
   struct Appearance {
     let inset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     let cornerRadius: CGFloat = 8
+    let createListID = "createListID"
   }
 }

@@ -51,6 +51,10 @@ final class DateTimeViewController: DateTimeModule {
   private let interactor: DateTimeInteractorInput
   private let factory: DateTimeFactoryInput
   private var cacheModel: DateTimeScreenModel?
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -74,8 +78,10 @@ final class DateTimeViewController: DateTimeModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     interactor.getContent()
     setNavigationBar()
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
   
   func cleanButtonAction() {
@@ -126,6 +132,7 @@ extension DateTimeViewController: DateTimeInteractorOutput {
 extension DateTimeViewController: DateTimeFactoryOutput {
   func didReverseListResult(model: DateTimeScreenModel) {
     moduleView.updateContentWith(model: model)
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
 }
 
@@ -137,11 +144,6 @@ private extension DateTimeViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    
-    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(copyButtonAction))
     
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,

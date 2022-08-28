@@ -52,6 +52,10 @@ final class ContactScreenViewController: ContactScreenModule {
   private let moduleView: ContactScreenViewProtocol
   private let interactor: ContactScreenInteractorInput
   private let factory: ContactScreenFactoryInput
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -84,6 +88,7 @@ final class ContactScreenViewController: ContactScreenModule {
     
     interactor.getContent()
     setNavigationBar()
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
   func returnCurrentModel() -> ContactScreenModel {
@@ -101,12 +106,7 @@ final class ContactScreenViewController: ContactScreenModule {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    
-    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(copyButtonAction))
-    
+
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,
                       style: .plain,
@@ -117,11 +117,12 @@ final class ContactScreenViewController: ContactScreenModule {
   }
   
   @objc
-  func copyButtonAction() {
+  private func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
   }
   
-  @objc private func settingButtonAction() {
+  @objc
+  private func settingButtonAction() {
     moduleOutput?.settingButtonAction()
   }
 }
@@ -147,6 +148,7 @@ extension ContactScreenViewController: ContactScreenInteractorOutput {
   
   func didRecive(model: ContactScreenModel) {
     moduleView.setResult(model.result)
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
 }
 

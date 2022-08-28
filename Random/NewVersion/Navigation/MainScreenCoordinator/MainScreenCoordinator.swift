@@ -40,6 +40,24 @@ final class MainScreenCoordinator: Coordinator {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func shareButtonAction(_ url: URL) {
+    let objectsToShare = [url]
+    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      if let popup = activityVC.popoverPresentationController {
+        popup.sourceView = mainScreenModule?.view
+        popup.sourceRect = CGRect(x: (mainScreenModule?.view.frame.size.width ?? .zero) / 2,
+                                  y: (mainScreenModule?.view.frame.size.height ?? .zero) / 4,
+                                  width: .zero,
+                                  height: .zero)
+      }
+    }
+    
+    mainScreenModule?.present(activityVC, animated: true, completion: nil)
+    services.metricsService.track(event: .shareApp)
+  }
+  
   func requestIDFA() {
     if #available(iOS 14, *) {
       services.permissionService.requestIDFA(nil)
@@ -89,7 +107,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openList() {
-    let listScreenCoordinator = ListScreenCoordinator(navigationController)
+    let listScreenCoordinator = ListScreenCoordinator(navigationController,
+                                                      services)
     anyCoordinator = listScreenCoordinator
     listScreenCoordinator.start()
     

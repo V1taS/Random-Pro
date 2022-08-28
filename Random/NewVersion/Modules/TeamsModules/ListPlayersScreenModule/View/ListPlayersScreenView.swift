@@ -30,9 +30,6 @@ protocol ListPlayersScreenViewOutput: AnyObject {
   ///  - state: Статус игрока
   ///  - id: Уникальный номер игрока
   func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String)
-  
-  /// Обновить контент
-  func updateContent()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -441,7 +438,6 @@ private extension ListPlayersScreenView {
 
 private extension ListPlayersScreenView {
   struct Appearance {
-    let cornerRadius: CGFloat = 8
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 20,
                                                   weight: .bold,
                                                   scale: .large)

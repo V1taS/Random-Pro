@@ -14,10 +14,7 @@ struct PasswordScreenModel: UserDefaultsCodable {
   let passwordLength: String?
   
   /// Результат генерации
-  let resultClassic: String
-  
-  /// Результат генерации
-  let resultPhrase: String
+  let result: String
   
   /// Список результатов
   let listResult: [String]

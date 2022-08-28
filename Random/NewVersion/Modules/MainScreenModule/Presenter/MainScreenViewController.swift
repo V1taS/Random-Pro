@@ -51,6 +51,10 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Запрос на отслеживание
   func requestIDFA()
+  
+  /// Кнопка поделиться была нажата
+  ///  - Parameter url: Ссылка на приложение
+  func shareButtonAction( _ url: URL)
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -199,7 +203,24 @@ private extension MainScreenViewController {
     adminFeatureToggleImageView.addGestureRecognizer(adminFeatureToggleTap)
     adminFeatureToggleImageView.isUserInteractionEnabled = true
     adminFeatureToggleTap.cancelsTouchesInView = false
-    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: adminFeatureToggleImageView)
+    
+    let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(shareButtonAction))
+    
+    navigationItem.rightBarButtonItems = [
+      shareButton,
+      UIBarButtonItem(customView: adminFeatureToggleImageView),
+    ]
+  }
+  
+  @objc
+  func shareButtonAction() {
+    guard let url = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956") else {
+      return
+    }
+    moduleOutput?.shareButtonAction(url)
   }
   
   @objc
@@ -212,9 +233,9 @@ private extension MainScreenViewController {
 
 private extension MainScreenViewController {
   struct Appearance {
-    //    let title = "Random"
-    let title = "Random (БЕТА)"
+    let title = "Random"
     let adminFeatureToggleIcon = UIImage(named: "Empty")
+    let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     let numberOfTapsRequired = 10
   }
 }

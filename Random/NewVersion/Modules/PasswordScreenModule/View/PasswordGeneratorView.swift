@@ -250,7 +250,7 @@ private extension PasswordGeneratorView {
     let numbers = NSLocalizedString("Цифры", comment: "")
     let symbols = NSLocalizedString("Символы", comment: "")
     let spacing: CGFloat = 18
-    let rangeStartValue = "99 999"
+    let rangeStartValue = "9 999"
     let middleHorizontalSpacing: CGFloat = 16
     let lessVerticalSpacing: CGFloat = 8
     let middleVirticalSpacing: CGFloat = 40

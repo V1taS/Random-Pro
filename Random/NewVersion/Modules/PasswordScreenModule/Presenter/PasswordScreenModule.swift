@@ -52,6 +52,10 @@ final class PasswordScreenViewController: PasswordScreenModule {
   private let moduleView: PasswordScreenViewProtocol
   private let interactor: PasswordScreenInteractorInput
   private let factory: PasswordScreenFactoryInput
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -81,8 +85,10 @@ final class PasswordScreenViewController: PasswordScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setNavigationBar()
     interactor.getContent()
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
   // MARK: - Internal func
@@ -101,10 +107,6 @@ final class PasswordScreenViewController: PasswordScreenModule {
 extension PasswordScreenViewController: PasswordScreenViewOutput {
   func generateButtonAction(passwordLength: String?) {
     interactor.generateButtonAction(passwordLength: passwordLength)
-  }
-  
-  func rangePhraseDidChange(_ text: String?) {
-    interactor.rangePhraseDidChange(text)
   }
   
   func passwordLengthDidChange(_ text: String?) {
@@ -145,9 +147,9 @@ extension PasswordScreenViewController: PasswordScreenInteractorOutput {
   
   func didRecive(model: PasswordScreenModel) {
     moduleView.setPasswordLength(model.passwordLength)
-    moduleView.set(resultClassic: model.resultClassic,
-                   resultPhrase: model.resultPhrase,
+    moduleView.set(resultClassic: model.result,
                    switchState: model.switchState)
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
   func didRecivePasswordLength(text: String?) {
@@ -164,11 +166,6 @@ private extension PasswordScreenViewController {
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
-    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(copyButtonAction))
-    
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,
                       style: .plain,
@@ -180,11 +177,7 @@ private extension PasswordScreenViewController {
   
   @objc
   func copyButtonAction() {
-    if moduleView.returnPasswordIndex() == .zero {
-      moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultClassic)
-    } else {
-      moduleOutput?.resultCopied(text: interactor.returnCurrentModel().resultPhrase)
-    }
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
   }
   
   @objc

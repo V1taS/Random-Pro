@@ -10,7 +10,11 @@ import Foundation
 
 // TODO: - Доработать название метрик
 
-enum MetricsSections: String {  
+enum MetricsSections: String {
+  
+  // Кнопка поделиться
+  case shareApp = "Поделиться приложением (new version)"
+  
   // Категории
   case filmScreen = "Фильмы (new version)"
   case teamsScreen = "Команды (new version)"

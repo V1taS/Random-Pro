@@ -15,11 +15,6 @@ protocol PasswordScreenViewOutput: AnyObject {
   /// Текст в текстовом поле был изменен
   /// - Parameters:
   ///  - text: Значение для текстового поля
-  func rangePhraseDidChange(_ text: String?)
-  
-  /// Текст в текстовом поле был изменен
-  /// - Parameters:
-  ///  - text: Значение для текстового поля
   func passwordLengthDidChange(_ text: String?)
   
   /// Переключатель прописных букв
@@ -46,9 +41,6 @@ protocol PasswordScreenViewOutput: AnyObject {
 /// События которые отправляем от Presenter ко View
 protocol PasswordScreenViewInput {
   
-  /// Возвращает индекс сегментед контроля. Определяем по индексу тип пароля
-  func returnPasswordIndex() -> Int
-  
   /// Устанавливает значение в текстовое поле
   ///  - Parameter text: Значение для текстового поля
   func setPasswordLength(_ text: String?)
@@ -56,10 +48,8 @@ protocol PasswordScreenViewInput {
   /// Устанавливаем данные в result
   ///  - Parameters:
   ///   - resultClassic: Результат генерации
-  ///   - resultPhrase: Результат генерации
   ///   - switchState: Состояние тумблеров
   func set(resultClassic: String?,
-           resultPhrase: String?,
            switchState: PasswordScreenModel.SwitchState)
 }
 
@@ -73,9 +63,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
   
   // MARK: - Private property
   
-  private let passwordSegmentedControl = UISegmentedControl()
   private let passwordGeneratorView = PasswordGeneratorView()
-  private let phrasePasswordView = PhrasePasswordView()
   private let genarateButton = ButtonView()
   
   // MARK: - Initialization
@@ -98,7 +86,6 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
   }
   
   func set(resultClassic: String?,
-           resultPhrase: String?,
            switchState: PasswordScreenModel.SwitchState) {
     let appearance = Appearance()
     setColorFor(password: resultClassic ?? appearance.resultLabel) { [weak self] result in
@@ -112,18 +99,6 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       self.passwordGeneratorView.numbersSwitch.isOn = switchState.numbers
       self.passwordGeneratorView.symbolsSwitch.isOn = switchState.symbols
     }
-    
-    setColorFor(password: resultPhrase ?? appearance.resultLabel) { [weak self] result in
-      guard let self = self else {
-        return
-      }
-      
-      self.phrasePasswordView.resultTextView.attributedText = result
-    }
-  }
-  
-  func returnPasswordIndex() -> Int {
-    passwordSegmentedControl.selectedSegmentIndex
   }
 }
 
@@ -138,22 +113,14 @@ extension PasswordScreenView: UITextFieldDelegate {
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
-    if passwordGeneratorView.passwordLengthTextField == textField {
-      if range.location >= 6 {
-        return false
-      }
-      return true
-    } else {
-      return true
+    if range.location >= 5 {
+      return false
     }
+    return true
   }
   
   func textFieldDidChangeSelection(_ textField: UITextField) {
-    if passwordGeneratorView.passwordLengthTextField == textField {
-      output?.passwordLengthDidChange(textField.text)
-    } else {
-      output?.rangePhraseDidChange(textField.text)
-    }
+    output?.passwordLengthDidChange(textField.text)
   }
 }
 
@@ -213,8 +180,6 @@ private extension PasswordScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     
-    phrasePasswordView.phraseTextField.delegate = self
-    
     passwordGeneratorView.passwordLengthTextField.delegate = self
     passwordGeneratorView.configureViewWith(
       uppercaseSwitchAction: { [weak self] status in
@@ -231,17 +196,6 @@ private extension PasswordScreenView {
       }
     )
     
-    passwordSegmentedControl.insertSegment(withTitle: appearance.generatePassword,
-                                           at: appearance.passwordIndex,
-                                           animated: false)
-    passwordSegmentedControl.insertSegment(withTitle: appearance.phrasePassword,
-                                           at: appearance.phraseIndex,
-                                           animated: false)
-    passwordSegmentedControl.selectedSegmentIndex = appearance.passwordIndex
-    passwordSegmentedControl.addTarget(self, action: #selector(passwordSegmentedControlAction), for: .valueChanged)
-    
-    phrasePasswordView.isHidden = true
-    
     genarateButton.setTitle(appearance.setTextButton, for: .normal)
     genarateButton.addTarget(self, action: #selector(genarateButtonAction), for: .touchUpInside)
     
@@ -252,47 +206,22 @@ private extension PasswordScreenView {
   }
   
   @objc
-  func passwordSegmentedControlAction() {
-    if passwordSegmentedControl.selectedSegmentIndex == Appearance().passwordIndex {
-      passwordGeneratorView.isHidden = false
-      phrasePasswordView.isHidden = true
-      genarateButton.isHidden = false
-    } else {
-      passwordGeneratorView.isHidden = true
-      phrasePasswordView.isHidden = false
-      genarateButton.isHidden = true
-    }
-  }
-  
-  @objc
   func genarateButtonAction() {
     output?.generateButtonAction(passwordLength: passwordGeneratorView.passwordLengthTextField.text)
   }
   
   func setupConstraints() {
     let appearance = Appearance()
-    [passwordSegmentedControl, passwordGeneratorView, phrasePasswordView, genarateButton].forEach {
+    [passwordGeneratorView, genarateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      passwordSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                        constant: appearance.middleHorizontalSpacing),
-      passwordSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                         constant: -appearance.middleHorizontalSpacing),
-      passwordSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      passwordSegmentedControl.heightAnchor.constraint(equalToConstant: appearance.passwordHeightSpacing),
-      
       passwordGeneratorView.leadingAnchor.constraint(equalTo: leadingAnchor),
       passwordGeneratorView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      passwordGeneratorView.topAnchor.constraint(equalTo: passwordSegmentedControl.bottomAnchor),
+      passwordGeneratorView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       passwordGeneratorView.bottomAnchor.constraint(equalTo: genarateButton.topAnchor),
-      
-      phrasePasswordView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      phrasePasswordView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      phrasePasswordView.topAnchor.constraint(equalTo: passwordSegmentedControl.bottomAnchor),
-      phrasePasswordView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
       
       genarateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.middleHorizontalSpacing),
@@ -310,7 +239,6 @@ private extension PasswordScreenView {
   struct Appearance {
     let setTextButton = NSLocalizedString("Сгенерировать", comment: "")
     let generatePassword = NSLocalizedString("Генератор паролей", comment: "")
-    let phrasePassword = NSLocalizedString("Фраза пароль", comment: "")
     let middleHorizontalSpacing: CGFloat = 16
     let minVerticalInset: CGFloat = 8
     let passwordHeightSpacing: CGFloat = 28

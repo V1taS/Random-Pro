@@ -39,12 +39,16 @@ protocol CubesScreenModuleInput {
 typealias CubesScreenModule = UIViewController & CubesScreenModuleInput
 
 final class CubesScreenViewController: CubesScreenModule {
-
+  
   weak var moduleOutput: CubesScreenModuleOutput?
   
   private let moduleView: CubesScreenViewProtocol
   private let interactor: CubesScreenInteractorInput
   private let factory: CubesScreenFactoryInput
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -71,6 +75,7 @@ final class CubesScreenViewController: CubesScreenModule {
     
     interactor.getContent()
     setNavigationBar()
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
   required init?(coder: NSCoder) {
@@ -95,11 +100,6 @@ final class CubesScreenViewController: CubesScreenModule {
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
-    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(copyButtonAction))
-    
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,
                       style: .plain,
@@ -123,6 +123,8 @@ final class CubesScreenViewController: CubesScreenModule {
   }
 }
 
+// MARK: - CubesScreenViewOutput
+
 extension CubesScreenViewController: CubesScreenViewOutput {
   func updateSelectedCountCubes(_ count: Int) {
     interactor.updateSelectedCountCubes(count)
@@ -132,6 +134,8 @@ extension CubesScreenViewController: CubesScreenViewOutput {
     interactor.generateButtonAction()
   }
 }
+
+// MARK: - CubesScreenInteractorOutput
 
 extension CubesScreenViewController: CubesScreenInteractorOutput {
   func cleanButtonWasSelected() {
@@ -143,10 +147,15 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
                                  cubesType: model.cubesType,
                                  listResult: factory.reverseListResult(model.listResult),
                                  plagIsShow: model.listResult.isEmpty)
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
 }
 
+// MARK: - CubesScreenFactoryOutput
+
 extension CubesScreenViewController: CubesScreenFactoryOutput {}
+
+// MARK: - Appearance
 
 extension CubesScreenViewController {
   struct Appearance {

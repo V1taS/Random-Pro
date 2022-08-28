@@ -43,7 +43,7 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
   func cleanButtonWasSelected() {
     let model = passwordScreenModule?.returnCurrentModel()
     settingsScreenCoordinator?.setupDefaultsSettings(for: .password(itemsGenerated: "\(model?.listResult.count ?? .zero)",
-                                                                    lastItem: model?.resultClassic ?? ""))
+                                                                    lastItem: model?.result ?? ""))
   }
   
   func settingButtonAction(model: PasswordScreenModel) {
@@ -53,7 +53,7 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
     self.settingsScreenCoordinator?.start()
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .password(itemsGenerated: "\(model.listResult.count)",
-                                                                   lastItem: model.resultClassic))
+                                                                   lastItem: model.result))
   }
   
   func resultCopied(text: String) {

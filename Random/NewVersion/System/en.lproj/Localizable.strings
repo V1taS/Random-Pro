@@ -283,3 +283,7 @@
 "Количество" = "Count";
 "Добавьте игроков" = "Add Players";
 "Что-то пошло не так" = "Something went wrong";
+"Создать список" = "Create list";
+"Всего элементов" = "Total Items";
+"Список элементов пуст" = "List of elements is empty";
+"Список уникальных элементов закончился" = "The list of unique elements is over";

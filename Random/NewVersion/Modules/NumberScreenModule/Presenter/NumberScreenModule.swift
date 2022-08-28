@@ -50,7 +50,7 @@ protocol NumberScreenModuleInput: AnyObject {
 typealias NumberScreenModule = UIViewController & NumberScreenModuleInput
 
 final class NumberScreenViewController: NumberScreenModule {
-
+  
   // MARK: - Internal property
   
   weak var moduleOutput: NumberScreenModuleOutput?
@@ -61,6 +61,10 @@ final class NumberScreenViewController: NumberScreenModule {
   private let interactor: NumberScreenInteractorInput
   private let factory: NumberScreenFactoryInput
   private var cacheModel: NumberScreenModel?
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   /// - Parameters:
@@ -91,6 +95,7 @@ final class NumberScreenViewController: NumberScreenModule {
     super.viewDidLoad()
     setupNavBar()
     interactor.getContent()
+    copyButton.isEnabled = !interactor.returnModel().listResult.isEmpty
   }
   
   // MARK: - Internal func
@@ -159,6 +164,8 @@ extension NumberScreenViewController: NumberScreenInteractorOutput {
     moduleView.set(result: model.result)
     moduleView.setRangeStart(model.rangeStartValue)
     moduleView.setRangeEnd(model.rangeEndValue)
+    
+    copyButton.isEnabled = !interactor.returnModel().listResult.isEmpty
   }
   
   func didReciveRangeStart(text: String?) {
@@ -178,11 +185,6 @@ private extension NumberScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    
-    let copyButton = UIBarButtonItem(image: appearance.copyButtonIcon,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(copyButtonAction))
     
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,

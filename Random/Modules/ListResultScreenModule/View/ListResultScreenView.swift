@@ -22,6 +22,9 @@ protocol ListResultScreenViewInput: AnyObject {
   /// Обновить контент
   ///  - Parameter list: Список результатов
   func updateContentWith(list: [String])
+  
+  ///  Получить изображение контента
+  func returnCurrentContentImage() -> Data?
 }
 
 /// Псевдоним протокола UIView & ListResultScreenViewInput
@@ -57,6 +60,13 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
   func updateContentWith(list: [String]) {
     self.list = list
     tableView.reloadData()
+  }
+  
+  func returnCurrentContentImage() -> Data? {
+    guard let image = tableView.asImage() else {
+      return nil
+    }
+    return image.pngData()
   }
   
   // MARK: - Private func

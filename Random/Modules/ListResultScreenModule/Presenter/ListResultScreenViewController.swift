@@ -13,6 +13,10 @@ protocol ListResultScreenModuleOutput: AnyObject {
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
   func resultCopied(text: String)
+  
+  /// Кнопка поделиться была нажата
+  ///  - Parameter imageData: Изображение контента
+  func shareButtonAction(imageData: Data?)
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -41,6 +45,11 @@ final class ListResultScreenViewController: ListResultScreenModule {
   private let interactor: ListResultScreenInteractorInput
   private let moduleView: ListResultScreenViewProtocol
   private let factory: ListResultScreenFactoryInput
+  private var listCache: [String] = []
+  private lazy var shareButton = UIBarButtonItem(image: Appearance().shareButtonIcon,
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(shareButtonAction))
   
   // MARK: - Initialization
   
@@ -71,14 +80,16 @@ final class ListResultScreenViewController: ListResultScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = Appearance().title
-    navigationItem.largeTitleDisplayMode = .never
+    setNavigationBar()
+    shareButton.isEnabled = !listCache.isEmpty
   }
   
   // MARK: - Internal func
   
   func setContentsFrom(list: [String]) {
+    listCache = list
     moduleView.updateContentWith(list: list)
+    shareButton.isEnabled = !listCache.isEmpty
   }
 }
 
@@ -98,10 +109,29 @@ extension ListResultScreenViewController: ListResultScreenInteractorOutput {}
 
 extension ListResultScreenViewController: ListResultScreenFactoryOutput {}
 
+// MARK: - Private
+
+private extension ListResultScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+
+    navigationItem.rightBarButtonItem = shareButton
+  }
+  
+  @objc
+  func shareButtonAction() {
+    moduleOutput?.shareButtonAction(imageData: moduleView.returnCurrentContentImage())
+  }
+}
+
 // MARK: - Appearance
 
 private extension ListResultScreenViewController {
   struct Appearance {
     let title = NSLocalizedString("Список результатов", comment: "")
+    let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
   }
 }

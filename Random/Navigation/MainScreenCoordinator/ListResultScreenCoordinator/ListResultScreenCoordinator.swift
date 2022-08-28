@@ -32,6 +32,7 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var listResultScreenModule: ListResultScreenModule?
+  private var shareScreenCoordinator: ShareScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -61,6 +62,16 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
 // MARK: - ListResultScreenModuleOutput
 
 extension ListResultScreenCoordinator: ListResultScreenModuleOutput {
+  func shareButtonAction(imageData: Data?) {
+    let shareScreenCoordinator = ShareScreenCoordinator(navigationController,
+                                                        services)
+    self.shareScreenCoordinator = shareScreenCoordinator
+    self.shareScreenCoordinator?.output = self
+    shareScreenCoordinator.start()
+    
+    self.shareScreenCoordinator?.updateContentWith(imageData: imageData)
+  }
+  
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -68,6 +79,10 @@ extension ListResultScreenCoordinator: ListResultScreenModuleOutput {
                                                        glyph: true)
   }
 }
+
+// MARK: - ShareScreenCoordinatorOutput
+
+extension ListResultScreenCoordinator: ShareScreenCoordinatorOutput {}
 
 // MARK: - Appearance
 

@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Initializing the AppMetrica SDK.
     if let configuration = YMMYandexMetricaConfiguration.init(apiKey: "b4921e71-faf2-4bd3-8bea-e033a76457ae") {
-      //            YMMYandexMetrica.activate(with: configuration)
+      YMMYandexMetrica.activate(with: configuration)
     }
     
     return true

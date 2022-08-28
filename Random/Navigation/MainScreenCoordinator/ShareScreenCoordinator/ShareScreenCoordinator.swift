@@ -79,6 +79,7 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
     activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop,
                                                     UIActivity.ActivityType.postToFacebook]
     shareScreenModule?.present(activityViewController, animated: true, completion: nil)
+    services.metricsService.track(event: .shareImage)
   }
   
   func closeButtonAction() {

@@ -17,6 +17,7 @@ final class TeamsScreenCoordinator: Coordinator {
   private var teamsScreenModule: TeamsScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol?
+  private var shareScreenCoordinator: ShareScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -42,6 +43,16 @@ final class TeamsScreenCoordinator: Coordinator {
 // MARK: - TeamsScreenModuleOutput
 
 extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
+  func shareButtonAction(imageData: Data?) {
+    let shareScreenCoordinator = ShareScreenCoordinator(navigationController,
+                                                        services)
+    self.shareScreenCoordinator = shareScreenCoordinator
+    self.shareScreenCoordinator?.output = self
+    shareScreenCoordinator.start()
+    
+    self.shareScreenCoordinator?.updateContentWith(imageData: imageData)
+  }
+  
   func cleanButtonWasSelected() {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .teams(
       generatedTeamsCount: "\(teamsScreenModule?.returnGeneratedCountTeams() ?? .zero)",
@@ -110,6 +121,10 @@ extension TeamsScreenCoordinator: ListPlayersScreenCoordinatorOutput {
     teamsScreenModule.updateContentWith(players: players)
   }
 }
+
+// MARK: - ShareScreenCoordinatorOutput
+
+extension TeamsScreenCoordinator: ShareScreenCoordinatorOutput {}
 
 // MARK: - Appearance
 

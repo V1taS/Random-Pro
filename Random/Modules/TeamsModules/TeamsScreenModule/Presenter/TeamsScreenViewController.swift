@@ -20,6 +20,10 @@ protocol TeamsScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Кнопка поделиться была нажата
+  ///  - Parameter imageData: Изображение контента
+  func shareButtonAction(imageData: Data?)
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -66,6 +70,10 @@ final class TeamsScreenViewController: TeamsScreenModule {
   private let interactor: TeamsScreenInteractorInput
   private let moduleView: TeamsScreenViewProtocol
   private let factory: TeamsScreenFactoryInput
+  private lazy var shareButton = UIBarButtonItem(image: Appearance().shareButtonIcon,
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(shareButtonAction))
   
   // MARK: - Initialization
   
@@ -98,6 +106,7 @@ final class TeamsScreenViewController: TeamsScreenModule {
     
     interactor.getContent()
     setNavigationBar()
+    shareButton.isEnabled = !interactor.returnListTeams().isEmpty
   }
   
   // MARK: - Internal func
@@ -144,12 +153,14 @@ extension TeamsScreenViewController: TeamsScreenViewOutput {
 extension TeamsScreenViewController: TeamsScreenInteractorOutput {
   func didReciveEmptyListTeams() {
     moduleView.plugIsShow(true)
+    shareButton.isEnabled = !interactor.returnListTeams().isEmpty
   }
   
   func didRecive(model: TeamsScreenModel) {
     moduleView.updateContentWith(models: model.teams,
                                  teamsCount: interactor.returnSelectedTeam())
     moduleView.plugIsShow(model.teams.isEmpty)
+    shareButton.isEnabled = !interactor.returnListTeams().isEmpty
   }
   
   func cleanButtonWasSelected() {
@@ -166,6 +177,7 @@ extension TeamsScreenViewController: TeamsScreenFactoryOutput {
     moduleView.updateContentWith(models: teams,
                                  teamsCount: interactor.returnSelectedTeam())
     moduleView.plugIsShow(teams.isEmpty)
+    shareButton.isEnabled = !interactor.returnListTeams().isEmpty
   }
 }
 
@@ -183,14 +195,20 @@ private extension TeamsScreenViewController {
                                          target: self,
                                          action: #selector(generateButtonAction))
     generateButton.tintColor = RandomColor.primaryGreen
-    
+
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,
                       style: .plain,
                       target: self,
                       action: #selector(settingButtonAction)),
-      generateButton
+      generateButton,
+      shareButton
     ]
+  }
+  
+  @objc
+  func shareButtonAction() {
+    moduleOutput?.shareButtonAction(imageData: moduleView.returnCurrentContentImage())
   }
   
   @objc
@@ -216,5 +234,6 @@ private extension TeamsScreenViewController {
     let title = NSLocalizedString("Команды", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
     let generateButtonIcon = UIImage(systemName: "forward.end.fill")
+    let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
   }
 }

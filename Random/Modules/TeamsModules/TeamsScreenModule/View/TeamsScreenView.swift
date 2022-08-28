@@ -28,6 +28,9 @@ protocol TeamsScreenViewInput: AnyObject {
   /// Показать заглушка
   ///  - Parameter isShow: Показать заглушку
   func plugIsShow( _ isShow: Bool)
+  
+  ///  Получить изображение контента
+  func returnCurrentContentImage() -> Data?
 }
 
 /// Псевдоним протокола UIView & TeamsScreenViewInput
@@ -73,6 +76,13 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
   func plugIsShow( _ isShow: Bool) {
     resultLabel.isHidden = !isShow
     collectionView.isHidden = isShow
+  }
+  
+  func returnCurrentContentImage() -> Data? {
+    guard let image = collectionView.asImage() else {
+      return nil
+    }
+    return image.pngData()
   }
   
   // MARK: - Private func

@@ -29,23 +29,13 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Provide access to randomly generate contacts</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Can you use your activity data? If you allow, Random Pro's ads on websites and other apps will be more relevant.</string>
+	<string>Can you use your activity data? If you allow, Random Pro&apos;s ads on websites and other apps will be more relevant.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
 			<key>SKAdNetworkIdentifier</key>
 			<string>zq492l623r.skadnetwork</string>
 		</dict>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Roboto-Black.ttf</string>
-		<string>Roboto-Bold.ttf</string>
-		<string>Roboto-Light.ttf</string>
-		<string>Roboto-Medium.ttf</string>
-		<string>Roboto-Regular.ttf</string>
-		<string>Roboto-Thin.ttf</string>
-		<string>SFProDisplay-Medium.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

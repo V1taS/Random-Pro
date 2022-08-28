@@ -13,9 +13,6 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Number`
   func openNumber()
   
-  /// Открыть раздел `Films`
-  func openFilms()
-  
   /// Открыть раздел `Teams`
   func openTeams()
   
@@ -123,10 +120,6 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
-  func openFilms() {
-    moduleOutput?.openFilms()
-  }
-  
   func openTeams() {
     moduleOutput?.openTeams()
   }

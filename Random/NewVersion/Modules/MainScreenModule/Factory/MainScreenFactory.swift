@@ -38,13 +38,6 @@ final class MainScreenFactory: MainScreenFactoryInput {
     
     cells.forEach { cell in
       switch cell {
-      case .films(let advLabel, _):
-        let model = configureModelFrom(cell: cell,
-                                       imageCard: appearance.imageCardFilms,
-                                       titleCard: appearance.titleCardFilms,
-                                       isShowADVLabel: isShow(advLabel),
-                                       titleADVText: configure(advLabel))
-        models.append(model)
       case .teams(let advLabel, _):
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardTeam,

@@ -39,9 +39,6 @@ struct MainScreenCellModel {
     
     // MARK: - Cases
     
-    /// Раздел: `Фильмы`
-    case films(advLabel: ADVLabel, isEnabled: Bool)
-    
     /// Раздел: `Команды`
     case teams(advLabel: ADVLabel, isEnabled: Bool)
     

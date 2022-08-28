@@ -37,12 +37,6 @@ final class AdminFeatureToggleFactory: AdminFeatureToggleFactoryInput {
     
     featureToggles.forEach { featureToggle in
       switch featureToggle {
-      case .films(advLabel: let advLabel, isEnabled: let isEnabled):
-        models.append(configureModel(
-          sectionName: "Films",
-          advLabel: advLabel,
-          isEnabled: isEnabled)
-        )
       case .teams(advLabel: let advLabel, isEnabled: let isEnabled):
         models.append(configureModel(
           sectionName: "Teams",

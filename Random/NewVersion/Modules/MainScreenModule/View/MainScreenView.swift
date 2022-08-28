@@ -14,9 +14,6 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Number`
   func openNumber()
   
-  /// Открыть раздел `Films`
-  func openFilms()
-  
   /// Открыть раздел `Teams`
   func openTeams()
   
@@ -146,8 +143,6 @@ extension MainScreenView: UICollectionViewDelegate {
     switch item {
     case .number:
       output?.openNumber()
-    case .films:
-      output?.openFilms()
     case .teams:
       output?.openTeams()
     case .yesOrNo:

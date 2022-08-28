@@ -71,14 +71,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     adminFeatureToggleCoordinator.start()
   }
   
-  func openFilms() {
-    let moviesScreenCoordinator = MoviesScreenCoordinator(navigationController)
-    anyCoordinator = moviesScreenCoordinator
-    moviesScreenCoordinator.start()
-    
-    services.metricsService.track(event: .filmScreen)
-  }
-  
   func openTeams() {
     let teamsScreenCoordinator = TeamsScreenCoordinator(navigationController,
                                                         services)

@@ -17,7 +17,9 @@ final class NumberScreenAssembly {
     let view = NumberScreenView()
     let interactor = NumberScreenInteractor()
     let factory = NumberScreenFactory()
-    let presenter = NumberScreenViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = NumberScreenViewController(moduleView: view,
+                                               interactor: interactor,
+                                               factory: factory)
     
     view.output = presenter
     view.keyboardService = keyboardService

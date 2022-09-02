@@ -68,8 +68,8 @@ final class NumberScreenViewController: NumberScreenModule {
   
   // MARK: - Initialization
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(moduleView: UIView & NumberScreenViewInput,
        interactor: NumberScreenInteractorInput,
@@ -94,7 +94,7 @@ final class NumberScreenViewController: NumberScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupNavBar()
-    interactor.getContent()
+    interactor.getContent(withWithoutRepetition: false)
     copyButton.isEnabled = !interactor.returnModel().listResult.isEmpty
   }
   

@@ -51,7 +51,8 @@ protocol NumberScreenInteractorInput: AnyObject {
   func withoutRepetitionAction(isOn: Bool)
   
   /// Получить данные
-  func getContent()
+  ///  - Parameter withWithoutRepetition: Включить режим "без повторений"
+  func getContent(withWithoutRepetition isOn: Bool)
   
   /// Создать новые данные
   /// - Parameters:
@@ -108,8 +109,8 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
     getContent()
   }
   
-  func getContent() {
-    configureModel()
+  func getContent(withWithoutRepetition isOn: Bool = false) {
+    configureModel(withWithoutRepetition: isOn)
   }
   
   func generateContent(firstTextFieldValue: String?,
@@ -221,7 +222,7 @@ private extension NumberScreenInteractor {
     }
   }
   
-  func configureModel(withWithoutRepetition isOn: Bool = false) {
+  func configureModel(withWithoutRepetition isOn: Bool) {
     if let model = model {
       output?.didRecive(model: model)
     } else {

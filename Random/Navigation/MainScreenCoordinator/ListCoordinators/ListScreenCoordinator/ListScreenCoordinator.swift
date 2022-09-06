@@ -49,24 +49,28 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
   
   func didReciveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
   
   func didReciveIsEmptyError() {
     services.notificationService.showNeutralAlertWith(title: Appearance().listElementsIsEmpty,
-                                                      glyph: true)
+                                                      glyph: true,
+                                                      active: {})
   }
   
   func didReciveRangeUniqueItemsError() {
     services.notificationService.showNeutralAlertWith(title: Appearance().uniqueElementsIsOver,
-                                                      glyph: true)
+                                                      glyph: true,
+                                                      active: {})
   }
   
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
   
   func settingButtonAction() {

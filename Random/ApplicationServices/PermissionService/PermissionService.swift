@@ -9,6 +9,7 @@
 import UIKit
 import AppTrackingTransparency
 import Contacts
+import Photos
 
 protocol PermissionService {
   
@@ -22,6 +23,14 @@ protocol PermissionService {
   ///   - granted: Доступ разрешен
   ///   - error: Ошибка
   func requestContactStore(_ status: ((_ granted: Bool, _ error: Error?) -> Void)?)
+  
+  /// Запрос доступа к Камере
+  ///  - Parameter granted: Доступ разрешен
+  func requestCamera(_ status: ((_ granted: Bool) -> Void)?)
+  
+  /// Запрос доступа к Галерее
+  ///  - Parameter granted: Доступ разрешен
+  func requestPhotos(_ status: ((_ granted: Bool) -> Void)?)
 }
 
 final class PermissionServiceImpl: PermissionService {
@@ -49,6 +58,44 @@ final class PermissionServiceImpl: PermissionService {
       DispatchQueue.main.async {
         status?(granted, error)
       }
+    }
+  }
+  
+  func requestCamera(_ status: ((_ granted: Bool) -> Void)?) {
+    AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
+      DispatchQueue.main.async {
+        status?(granted)
+      }
+    }
+  }
+  
+  func requestPhotos(_ status: ((_ granted: Bool) -> Void)?) {
+    if #available(iOS 14, *) {
+      PHPhotoLibrary.requestAuthorization(for: .readWrite) { (resultStatus) in
+        DispatchQueue.main.async {
+          switch resultStatus {
+          case .denied, .notDetermined, .restricted:
+            status?(false)
+          case .authorized, .limited:
+            status?(true)
+          @unknown default:
+            status?(false)
+          }
+        }
+      }
+    } else {
+      PHPhotoLibrary.requestAuthorization({ resultStatus in
+        DispatchQueue.main.async {
+          switch resultStatus {
+          case .denied, .notDetermined, .restricted:
+            status?(false)
+          case .authorized, .limited:
+            status?(true)
+          @unknown default:
+            status?(false)
+          }
+        }
+      })
     }
   }
 }

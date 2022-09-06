@@ -16,6 +16,9 @@ protocol ShareScreenModuleOutput: AnyObject {
   
   /// Модуль был закрыт
   func closeButtonAction()
+  
+  /// Доступ  не получен к Галерее
+  func requestPhotosError()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -88,14 +91,18 @@ final class ShareScreenViewController: ShareScreenModule {
 
 // MARK: - ShareScreenViewOutput
 
-extension ShareScreenViewController: ShareScreenViewOutput {
-  
-}
+extension ShareScreenViewController: ShareScreenViewOutput {}
 
 // MARK: - ShareScreenInteractorOutput
 
 extension ShareScreenViewController: ShareScreenInteractorOutput {
+  func requestPhotosSuccess() {
+    moduleOutput?.shareButtonAction(imageData: imageDataCache)
+  }
   
+  func requestPhotosError() {
+    moduleOutput?.requestPhotosError()
+  }
 }
 
 // MARK: - ShareScreenFactoryOutput
@@ -122,8 +129,10 @@ private extension ShareScreenViewController {
                                       target: self,
                                       action: #selector(closeButtonAction))
     
-    navigationItem.rightBarButtonItem = closeButton
-    navigationItem.leftBarButtonItem = shareButton
+    navigationItem.rightBarButtonItems = [
+      closeButton,
+      shareButton
+    ]
   }
   
   @objc
@@ -133,7 +142,7 @@ private extension ShareScreenViewController {
   
   @objc
   func shareButtonAction() {
-    moduleOutput?.shareButtonAction(imageData: imageDataCache)
+    interactor.requestPhotosStatus()
   }
 }
 

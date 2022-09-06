@@ -46,7 +46,8 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
     UIPasteboard.general.string = model.result
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
   
   func cleanButtonWasSelected(model: LotteryScreenModel) {
@@ -70,7 +71,8 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
   
   func didReciveRangeError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
 }
 

@@ -15,22 +15,28 @@ protocol NotificationService {
   ///  - Parameters:
   ///   - title: Заголовок уведомления
   ///   - glyph: Включена или выключена иконка
+  ///   - active: Действие на кнопку
   func showPositiveAlertWith(title: String,
-                             glyph: Bool)
+                             glyph: Bool,
+                             active: (() -> Void)?)
   
   /// Показать нейтральное уведомление
   ///  - Parameters:
   ///   - title: Заголовок уведомления
   ///   - glyph: Включена или выключена иконка
+  ///   - active: Действие на кнопку
   func showNeutralAlertWith(title: String,
-                            glyph: Bool)
+                            glyph: Bool,
+                            active: (() -> Void)?)
   
   /// Показать негативное уведомление
   ///  - Parameters:
   ///   - title: Заголовок уведомления
   ///   - glyph: Включена или выключена иконка
+  ///   - active: Действие на кнопку
   func showNegativeAlertWith(title: String,
-                             glyph: Bool)
+                             glyph: Bool,
+                             active: (() -> Void)?)
   
   /// Показать настраиваемое уведомление
   ///  - Parameters:
@@ -39,17 +45,19 @@ protocol NotificationService {
   ///   - backgroundColor: Фон уведомления
   ///   - imageGlyph: Иконка слева
   ///   - colorGlyph: Цвет иконки
+  ///   - active: Действие на кнопку
   func showCustomAlertWith(title: String,
                            glyph: Bool,
                            backgroundColor: UIColor?,
                            imageGlyph: UIImage?,
-                           colorGlyph: UIColor?)
+                           colorGlyph: UIColor?,
+                           active: (() -> Void)?)
 }
 
 final class NotificationServiceImpl: NotificationService {
   private let notifications = Notifications()
   
-  func showPositiveAlertWith(title: String, glyph: Bool) {
+  func showPositiveAlertWith(title: String, glyph: Bool, active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(
@@ -59,12 +67,12 @@ final class NotificationServiceImpl: NotificationService {
         timeout: appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,
-        action: {}
+        action: active
       )
     )
   }
   
-  func showNeutralAlertWith(title: String, glyph: Bool) {
+  func showNeutralAlertWith(title: String, glyph: Bool, active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(
@@ -74,12 +82,12 @@ final class NotificationServiceImpl: NotificationService {
         timeout: appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,
-        action: {}
+        action: active
       )
     )
   }
   
-  func showNegativeAlertWith(title: String, glyph: Bool) {
+  func showNegativeAlertWith(title: String, glyph: Bool, active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(
@@ -89,7 +97,7 @@ final class NotificationServiceImpl: NotificationService {
         timeout: appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,
-        action: {}
+        action: active
       )
     )
   }
@@ -98,7 +106,8 @@ final class NotificationServiceImpl: NotificationService {
                            glyph: Bool,
                            backgroundColor: UIColor?,
                            imageGlyph: UIImage?,
-                           colorGlyph: UIColor?) {
+                           colorGlyph: UIColor?,
+                           active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(
@@ -112,7 +121,7 @@ final class NotificationServiceImpl: NotificationService {
         timeout: appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,
-        action: {}
+        action: active
       )
     )
   }

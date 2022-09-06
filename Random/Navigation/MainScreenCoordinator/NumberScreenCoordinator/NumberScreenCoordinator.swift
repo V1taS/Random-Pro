@@ -44,19 +44,22 @@ final class NumberScreenCoordinator: Coordinator {
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
   func didReciveRangeError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
   
   func resultLabelAction(text: String?) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
   
   func didReciveRangeEnded() {
     services.notificationService.showNeutralAlertWith(title: Appearance().numberRangeEnded,
-                                                      glyph: true)
+                                                      glyph: true,
+                                                      active: {})
   }
   
   func cleanButtonWasSelected(model: NumberScreenModel) {

@@ -46,7 +46,8 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
     UIPasteboard.general.string = model.result
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
   
   func cleanButtonWasSelected(model: DateTimeScreenModel) {

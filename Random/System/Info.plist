@@ -26,8 +26,14 @@
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Please provide access to the music library to generate songs</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please provide access to the Camera</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Provide access to randomly generate contacts</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please provide access to the Photo Library</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please provide access to the Photo Library</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Can you use your activity data? If you allow, Random Pro's ads on websites and other apps will be more relevant.</string>
 	<key>SKAdNetworkItems</key>

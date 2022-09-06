@@ -33,11 +33,18 @@ protocol ApplicationServices {
   
   /// Сервис по работе с разрешениями
   var permissionService: PermissionService { get }
+  
+  /// Сервис по работе с локальным хранилищем
+  var fileManagerService: FileManagerService { get }
 }
 
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
+  var fileManagerService: FileManagerService {
+    FileManagerImpl()
+  }
+  
   var permissionService: PermissionService {
     PermissionServiceImpl()
   }

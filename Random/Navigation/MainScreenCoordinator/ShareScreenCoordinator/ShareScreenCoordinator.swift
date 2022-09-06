@@ -50,7 +50,7 @@ final class ShareScreenCoordinator: ShareScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let shareScreenModule = ShareScreenAssembly().createModule()
+    let shareScreenModule = ShareScreenAssembly().createModule(permissionService: services.permissionService)
     self.shareScreenModule = shareScreenModule
     self.shareScreenModule?.moduleOutput = self
     let navController = UINavigationController(rootViewController: shareScreenModule)
@@ -65,19 +65,46 @@ final class ShareScreenCoordinator: ShareScreenCoordinatorProtocol {
 // MARK: - ShareScreenModuleOutput
 
 extension ShareScreenCoordinator: ShareScreenModuleOutput {
+  func requestPhotosError() {
+    services.notificationService.showNegativeAlertWith(
+      title: Appearance().allowAccessToGallery,
+      glyph: false,
+      active: {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+          return
+        }
+        UIApplication.shared.open(settingsUrl)
+      }
+    )
+  }
+  
   func shareButtonAction(imageData: Data?) {
     guard
       let imageData = imageData,
-      let image = UIImage(data: imageData)
+      let imageFile = services.fileManagerService.saveObjectWith(fileName: "Teams",
+                                                                 fileExtension: ".png",
+                                                                 data: imageData)
     else {
       return
     }
     
-    let imageToShare = [image]
-    let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+    let activityViewController = UIActivityViewController(activityItems: [imageFile],
+                                                          applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = shareScreenModule?.view
-    activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop,
+    activityViewController.excludedActivityTypes = [UIActivity.ActivityType.saveToCameraRoll,
+                                                    UIActivity.ActivityType.airDrop,
                                                     UIActivity.ActivityType.postToFacebook]
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      if let popup = activityViewController.popoverPresentationController {
+        popup.sourceView = shareScreenModule?.view
+        popup.sourceRect = CGRect(x: (shareScreenModule?.view.frame.size.width ?? .zero) / 2,
+                                  y: (shareScreenModule?.view.frame.size.height ?? .zero) / 4,
+                                  width: .zero,
+                                  height: .zero)
+      }
+    }
+    
     shareScreenModule?.present(activityViewController, animated: true, completion: nil)
     services.metricsService.track(event: .shareImage)
   }
@@ -90,6 +117,8 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
 // MARK: - Appearance
 
 private extension ShareScreenCoordinator {
-  struct Appearance {}
+  struct Appearance {
+    let allowAccessToGallery = NSLocalizedString("Разрешить доступ к галерее", comment: "")
+  }
 }
 

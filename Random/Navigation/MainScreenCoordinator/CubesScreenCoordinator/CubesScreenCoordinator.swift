@@ -62,7 +62,8 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
 }
 

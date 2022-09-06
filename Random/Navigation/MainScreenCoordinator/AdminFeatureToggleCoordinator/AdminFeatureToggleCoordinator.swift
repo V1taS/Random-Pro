@@ -56,7 +56,8 @@ final class AdminFeatureToggleCoordinator: AdminFeatureToggleCoordinatorProtocol
 extension AdminFeatureToggleCoordinator: AdminFeatureToggleModuleOutput {
   func loginOrPasswordError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().wrongLoginOrPassword,
-                                                       glyph: true)
+                                                       glyph: true,
+                                                       active: {})
   }
 }
 

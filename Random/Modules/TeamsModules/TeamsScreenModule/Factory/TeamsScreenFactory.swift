@@ -32,15 +32,27 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  private func addPlayersWithTeamsFrom(model: TeamsScreenModel) {
-    
-  }
-  
   func createTeamsFrom(model: TeamsScreenModel) {
     DispatchQueue.global(qos: .userInteractive).async {
       let appearance = Appearance()
       var teams: [TeamsScreenModel.Team] = []
-      let playersFiltered = model.allPlayers.shuffled().filter { $0.state != .doesNotPlay }
+      let allPlayers = model.allPlayers.map { result -> TeamsScreenPlayerModel in
+        var emoji: String?
+        
+        if result.emoji != "⚪️" {
+          emoji = result.emoji
+        }
+        
+        return TeamsScreenPlayerModel(
+          id: result.id,
+          name: result.name,
+          avatar: result.avatar,
+          emoji: emoji,
+          state: result.state
+        )
+      }
+      
+      let playersFiltered = allPlayers.shuffled().filter { $0.state != .doesNotPlay }
       let playersWithTeamsFiltered = playersFiltered.filter { $0.state != .random }
       let playersWithoutTeamsFiltered = playersFiltered.filter { $0.state == .random }
       

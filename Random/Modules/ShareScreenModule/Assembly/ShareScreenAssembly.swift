@@ -11,10 +11,10 @@ import UIKit
 final class ShareScreenAssembly {
   
   /// Собирает модуль `ShareScreen`
+  /// - Parameter permissionService: Сервис по работе с разрешениями
   /// - Returns: Cобранный модуль `ShareScreen`
-  func createModule() -> ShareScreenModule {
-    
-    let interactor = ShareScreenInteractor()
+  func createModule(permissionService: PermissionService) -> ShareScreenModule {
+    let interactor = ShareScreenInteractor(permissionService: permissionService)
     let view = ShareScreenView()
     let factory = ShareScreenFactory()
     

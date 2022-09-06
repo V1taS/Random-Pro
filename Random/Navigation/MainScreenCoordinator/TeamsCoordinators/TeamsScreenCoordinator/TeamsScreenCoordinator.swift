@@ -63,7 +63,8 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
   
   func listPlayersIsEmpty() {
     services.notificationService.showNeutralAlertWith(title: Appearance().addPlayersTitle,
-                                                      glyph: false)
+                                                      glyph: false,
+                                                      active: {})
   }
   
   func settingButtonAction(players: [TeamsScreenPlayerModel]) {

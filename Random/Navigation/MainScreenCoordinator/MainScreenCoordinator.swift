@@ -58,12 +58,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     services.metricsService.track(event: .shareApp)
   }
   
-  func requestIDFA() {
-    if #available(iOS 14, *) {
-      services.permissionService.requestIDFA(nil)
-    }
-  }
-  
   func adminFeatureToggleAction() {
     let adminFeatureToggleCoordinator = AdminFeatureToggleCoordinator(navigationController,
                                                                       services)

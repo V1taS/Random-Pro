@@ -123,7 +123,9 @@ private extension ListResultScreenViewController {
   
   @objc
   func shareButtonAction() {
-    moduleOutput?.shareButtonAction(imageData: moduleView.returnCurrentContentImage())
+    moduleView.returnCurrentContentImage { [weak self] dataImage in
+      self?.moduleOutput?.shareButtonAction(imageData: dataImage)
+    }
   }
 }
 

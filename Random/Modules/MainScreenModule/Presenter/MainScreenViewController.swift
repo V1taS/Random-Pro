@@ -46,9 +46,6 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть админ-панель фича тоглов
   func adminFeatureToggleAction()
   
-  /// Запрос на отслеживание
-  func requestIDFA()
-  
   /// Кнопка поделиться была нажата
   ///  - Parameter url: Ссылка на приложение
   func shareButtonAction( _ url: URL)
@@ -108,7 +105,6 @@ final class MainScreenViewController: MainScreenModule {
     
     interactor.getCells()
     setupNavBar()
-    moduleOutput?.requestIDFA()
   }
   
   override func viewWillAppear(_ animated: Bool) {

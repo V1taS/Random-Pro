@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AppTrackingTransparency
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -23,5 +24,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     self.coordinator = coordinator
     coordinator.start()
     self.window = window
+  }
+  
+  func sceneDidBecomeActive(_ scene: UIScene) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+      if #available(iOS 14, *) {
+        switch ATTrackingManager.trackingAuthorizationStatus {
+        case .notDetermined:
+          ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in })
+        default: break
+        }
+      }
+    }
   }
 }

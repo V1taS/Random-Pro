@@ -97,7 +97,7 @@ extension ShareScreenViewController: ShareScreenViewOutput {}
 
 extension ShareScreenViewController: ShareScreenInteractorOutput {
   func requestPhotosSuccess() {
-    moduleOutput?.shareButtonAction(imageData: imageDataCache)
+    moduleOutput?.shareButtonAction(imageData: moduleView.returnImageData())
   }
   
   func requestPhotosError() {

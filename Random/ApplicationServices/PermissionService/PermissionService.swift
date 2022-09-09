@@ -36,7 +36,7 @@ protocol PermissionService {
 final class PermissionServiceImpl: PermissionService {
   @available(iOS 14, *)
   func requestIDFA(_ status: ((ATTrackingManager.AuthorizationStatus) -> Void)? = nil) {
-    DispatchQueue.main.async {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
       switch ATTrackingManager.trackingAuthorizationStatus {
       case .notDetermined:
         status?(.notDetermined)

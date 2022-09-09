@@ -208,7 +208,9 @@ private extension TeamsScreenViewController {
   
   @objc
   func shareButtonAction() {
-    moduleOutput?.shareButtonAction(imageData: moduleView.returnCurrentContentImage())
+    moduleView.returnCurrentContentImage { [weak self] imgData in
+      self?.moduleOutput?.shareButtonAction(imageData: imgData)
+    }
   }
   
   @objc

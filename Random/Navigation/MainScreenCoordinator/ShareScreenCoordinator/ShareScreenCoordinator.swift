@@ -81,19 +81,31 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
   func shareButtonAction(imageData: Data?) {
     guard
       let imageData = imageData,
-      let imageFile = services.fileManagerService.saveObjectWith(fileName: "Teams",
+      let imageFile = services.fileManagerService.saveObjectWith(fileName: "Random",
                                                                  fileExtension: ".png",
-                                                                 data: imageData)
+                                                                 data: imageData),
+      let image = UIImage(data: imageData)
     else {
       return
     }
     
-    let activityViewController = UIActivityViewController(activityItems: [imageFile],
+    let activityViewController = UIActivityViewController(activityItems: [imageFile, image],
                                                           applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = shareScreenModule?.view
-    activityViewController.excludedActivityTypes = [UIActivity.ActivityType.saveToCameraRoll,
-                                                    UIActivity.ActivityType.airDrop,
-                                                    UIActivity.ActivityType.postToFacebook]
+    activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop,
+                                                    UIActivity.ActivityType.postToFacebook,
+                                                    UIActivity.ActivityType.message,
+                                                    UIActivity.ActivityType.addToReadingList,
+                                                    UIActivity.ActivityType.assignToContact,
+                                                    UIActivity.ActivityType.copyToPasteboard,
+                                                    UIActivity.ActivityType.markupAsPDF,
+                                                    UIActivity.ActivityType.openInIBooks,
+                                                    UIActivity.ActivityType.postToFlickr,
+                                                    UIActivity.ActivityType.postToTencentWeibo,
+                                                    UIActivity.ActivityType.postToTwitter,
+                                                    UIActivity.ActivityType.postToVimeo,
+                                                    UIActivity.ActivityType.postToWeibo,
+                                                    UIActivity.ActivityType.print]
     
     if UIDevice.current.userInterfaceIdiom == .pad {
       if let popup = activityViewController.popoverPresentationController {
@@ -121,4 +133,3 @@ private extension ShareScreenCoordinator {
     let allowAccessToGallery = NSLocalizedString("Разрешить доступ к галерее", comment: "")
   }
 }
-

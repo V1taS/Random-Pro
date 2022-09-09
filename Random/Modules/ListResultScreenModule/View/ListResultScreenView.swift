@@ -24,7 +24,7 @@ protocol ListResultScreenViewInput: AnyObject {
   func updateContentWith(list: [String])
   
   ///  Получить изображение контента
-  func returnCurrentContentImage() -> Data?
+  func returnCurrentContentImage(completion: @escaping (Data?) -> Void)
 }
 
 /// Псевдоним протокола UIView & ListResultScreenViewInput
@@ -41,6 +41,7 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
   
   private let tableView = TableView()
   private var list: [String] = []
+  private let contentPlugImage = UIImageView()
   
   // MARK: - Initialization
   
@@ -62,18 +63,30 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
     tableView.reloadData()
   }
   
-  func returnCurrentContentImage() -> Data? {
-    guard let image = tableView.asImage() else {
-      return nil
+  func returnCurrentContentImage(completion: @escaping (Data?) -> Void) {
+    showContentPlug()
+    return tableView.screenShotFullContent { [weak self] screenshot in
+      let imgData = screenshot?.pngData()
+      completion(imgData)
+      self?.hideContentPlug()
     }
-    return image.pngData()
   }
   
   // MARK: - Private func
   
+  private func showContentPlug() {
+    contentPlugImage.isHidden = false
+    contentPlugImage.image = self.asImage
+  }
+  
+  private func hideContentPlug() {
+    contentPlugImage.isHidden = true
+    contentPlugImage.image = nil
+  }
+  
   private func configureLayout() {
     let appearance = Appearance()
-    [tableView].forEach {
+    [tableView, contentPlugImage].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -82,13 +95,20 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
       tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
-      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+      tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      
+      contentPlugImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+      contentPlugImage.topAnchor.constraint(equalTo: topAnchor),
+      contentPlugImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+      contentPlugImage.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
   private func applyDefaultBehavior() {
     backgroundColor = RandomColor.secondaryWhite
     tableView.backgroundColor = RandomColor.secondaryWhite
+    
+    contentPlugImage.isHidden = true
     
     // Сами self(SettingsScreenView) получает события от tableView
     tableView.delegate = self

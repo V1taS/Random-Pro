@@ -30,7 +30,7 @@ protocol TeamsScreenViewInput: AnyObject {
   func plugIsShow( _ isShow: Bool)
   
   ///  Получить изображение контента
-  func returnCurrentContentImage() -> Data?
+  func returnCurrentContentImage(completion: @escaping (Data?) -> Void)
 }
 
 /// Псевдоним протокола UIView & TeamsScreenViewInput
@@ -51,6 +51,7 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
   private let countTeamsSegmentedControl = UISegmentedControl(items: Appearance().countTeams)
   private var models: [TeamsScreenModel.Team] = []
   private let resultLabel = UILabel()
+  private let contentPlugImage = UIImageView()
   
   // MARK: - Initialization
   
@@ -78,19 +79,31 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
     collectionView.isHidden = isShow
   }
   
-  func returnCurrentContentImage() -> Data? {
-    guard let image = collectionView.asImage() else {
-      return nil
+  func returnCurrentContentImage(completion: @escaping (Data?) -> Void) {
+    showContentPlug()
+    return collectionView.screenShotFullContent { [weak self] screenshot in
+      let imgData = screenshot?.pngData()
+      completion(imgData)
+      self?.hideContentPlug()
     }
-    return image.pngData()
   }
   
   // MARK: - Private func
   
+  private func showContentPlug() {
+    contentPlugImage.isHidden = false
+    contentPlugImage.image = self.asImage
+  }
+  
+  private func hideContentPlug() {
+    contentPlugImage.isHidden = true
+    contentPlugImage.image = nil
+  }
+  
   private func configureLayout() {
     let appearance = Appearance()
     
-    [countTeamsSegmentedControl, collectionView, resultLabel].forEach {
+    [countTeamsSegmentedControl, collectionView, resultLabel, contentPlugImage].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -113,6 +126,11 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
       collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
       collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      
+      contentPlugImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+      contentPlugImage.topAnchor.constraint(equalTo: topAnchor),
+      contentPlugImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+      contentPlugImage.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
@@ -126,6 +144,8 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
     resultLabel.numberOfLines = .zero
     resultLabel.text = appearance.resultLabelTitle
     resultLabel.isHidden = true
+    
+    contentPlugImage.isHidden = true
     
     countTeamsSegmentedControl.selectedSegmentIndex = appearance.selectedSegmentIndex
     countTeamsSegmentedControl.addTarget(self,

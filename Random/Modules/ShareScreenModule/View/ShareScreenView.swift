@@ -9,9 +9,7 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из View в Presenter
-protocol ShareScreenViewOutput: AnyObject {
-  
-}
+protocol ShareScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
 protocol ShareScreenViewInput: AnyObject {
@@ -19,6 +17,9 @@ protocol ShareScreenViewInput: AnyObject {
   /// Обновить контент
   ///  - Parameter imageData: Изображение контента
   func updateContentWith(imageData: Data?)
+  
+  /// Получить готовый контент
+  func returnImageData() -> Data?
 }
 
 /// Псевдоним протокола UIView & ShareScreenViewInput
@@ -34,7 +35,8 @@ final class ShareScreenView: ShareScreenViewProtocol {
   // MARK: - Private properties
   
   private let scrollView = UIScrollView()
-  private let contentView = UIImageView()
+  private let contentView = GradientView()
+  private let imageView = UIImageView()
   
   // MARK: - Initialization
   
@@ -55,8 +57,26 @@ final class ShareScreenView: ShareScreenViewProtocol {
     guard let imageData = imageData else {
       return
     }
-
-    contentView.image = UIImage(data: imageData)
+    
+    let colorOne = UIColor(red: CGFloat.random(in: 0...255) / 255,
+                           green: CGFloat.random(in: 0...255) / 255,
+                           blue: CGFloat.random(in: 0...255) / 255,
+                           alpha: 1)
+    let colorTwo = UIColor(red: CGFloat.random(in: 0...255) / 255,
+                           green: CGFloat.random(in: 0...255) / 255,
+                           blue: CGFloat.random(in: 0...255) / 255,
+                           alpha: 1)
+    let colorThree = UIColor(red: CGFloat.random(in: 0...255) / 255,
+                           green: CGFloat.random(in: 0...255) / 255,
+                           blue: CGFloat.random(in: 0...255) / 255,
+                           alpha: 1)
+    
+    imageView.image = UIImage(data: imageData)
+    contentView.applyGradient(colors: [colorOne, colorTwo, colorThree])
+  }
+  
+  func returnImageData() -> Data? {
+    contentView.asImage?.pngData()
   }
 }
 
@@ -74,6 +94,11 @@ private extension ShareScreenView {
       scrollView.addSubview($0)
     }
     
+    [imageView].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      contentView.addSubview($0)
+    }
+    
     NSLayoutConstraint.activate([
       scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -85,12 +110,26 @@ private extension ShareScreenView {
       contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
       contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-      contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+      contentView.heightAnchor.constraint(equalTo: imageView.heightAnchor),
+      
+      imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
     ])
   }
   
   func applyDefaultBehavior() {
     backgroundColor = RandomColor.primaryWhite
+    
+    imageView.layer.cornerRadius = 16
+    imageView.transform = .init(scaleX: 0.90, y: 0.96)
+
+    scrollView.minimumZoomScale = 1
+    scrollView.maximumZoomScale = 4.0
+    
+    imageView.contentMode = .scaleToFill
+    imageView.clipsToBounds = true
   }
 }
 

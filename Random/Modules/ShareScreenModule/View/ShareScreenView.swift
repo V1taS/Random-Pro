@@ -36,7 +36,7 @@ final class ShareScreenView: ShareScreenViewProtocol {
   
   private let scrollView = UIScrollView()
   private let contentView = GradientView()
-  private let imageView = UIImageView()
+  private let imageView = ScaledHeightImageView()
   
   // MARK: - Initialization
   
@@ -67,12 +67,20 @@ final class ShareScreenView: ShareScreenViewProtocol {
                            blue: CGFloat.random(in: 0...255) / 255,
                            alpha: 1)
     let colorThree = UIColor(red: CGFloat.random(in: 0...255) / 255,
-                           green: CGFloat.random(in: 0...255) / 255,
-                           blue: CGFloat.random(in: 0...255) / 255,
-                           alpha: 1)
+                             green: CGFloat.random(in: 0...255) / 255,
+                             blue: CGFloat.random(in: 0...255) / 255,
+                             alpha: 1)
     
-    imageView.image = UIImage(data: imageData)
+    let image = UIImage(data: imageData)!
+    imageView.image = image
     contentView.applyGradient(colors: [colorOne, colorTwo, colorThree])
+    
+    let aspectR = image.size.width / image.size.height
+    
+    NSLayoutConstraint.activate([
+      contentView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1 / aspectR)
+    ])
+    layoutIfNeeded()
   }
   
   func returnImageData() -> Data? {
@@ -110,7 +118,6 @@ private extension ShareScreenView {
       contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
       contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
       contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-      contentView.heightAnchor.constraint(equalTo: imageView.heightAnchor),
       
       imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
       imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -123,13 +130,10 @@ private extension ShareScreenView {
     backgroundColor = RandomColor.primaryWhite
     
     imageView.layer.cornerRadius = 16
-    imageView.transform = .init(scaleX: 0.90, y: 0.96)
-
-    scrollView.minimumZoomScale = 1
-    scrollView.maximumZoomScale = 4.0
-    
-    imageView.contentMode = .scaleToFill
     imageView.clipsToBounds = true
+    imageView.contentMode = .scaleAspectFit
+    imageView.transform = .init(scaleX: 0.90, y: 0.95)
+    imageView.scalesLargeContentImage = true
   }
 }
 

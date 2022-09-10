@@ -153,6 +153,7 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
                                          for: .valueChanged)
     
     collectionView.backgroundColor = RandomColor.primaryWhite
+    collectionView.showsVerticalScrollIndicator = false
     collectionView.alwaysBounceVertical = true
     collectionView.register(PlayerCollectionViewCell.self,
                             forCellWithReuseIdentifier: PlayerCollectionViewCell.reuseIdentifier)

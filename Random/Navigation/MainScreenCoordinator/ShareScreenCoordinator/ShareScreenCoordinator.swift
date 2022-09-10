@@ -83,13 +83,12 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
       let imageData = imageData,
       let imageFile = services.fileManagerService.saveObjectWith(fileName: "Random",
                                                                  fileExtension: ".png",
-                                                                 data: imageData),
-      let image = UIImage(data: imageData)
+                                                                 data: imageData)
     else {
       return
     }
     
-    let activityViewController = UIActivityViewController(activityItems: [imageFile, image],
+    let activityViewController = UIActivityViewController(activityItems: [imageFile],
                                                           applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = shareScreenModule?.view
     activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop,

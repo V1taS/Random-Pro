@@ -43,6 +43,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Password`
   func openPassword()
   
+  /// Открыть раздел `Colors`
+  func openColors()
+  
   /// Открыть админ-панель фича тоглов
   func adminFeatureToggleAction()
   
@@ -116,6 +119,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openColors() {
+    moduleOutput?.openColors()
+  }
+  
   func openTeams() {
     moduleOutput?.openTeams()
   }
@@ -222,7 +229,7 @@ private extension MainScreenViewController {
 
 private extension MainScreenViewController {
   struct Appearance {
-    let title = "Random"
+    let title = "Random Pro"
     let adminFeatureToggleIcon = UIImage(named: "Empty")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     let numberOfTapsRequired = 10

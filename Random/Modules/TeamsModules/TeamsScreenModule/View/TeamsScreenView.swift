@@ -200,7 +200,7 @@ extension TeamsScreenView: UICollectionViewDelegate {
       secondaryTextColor: RandomColor.secondaryGray,
       secondaryTextFont: RandomFont.primaryRegular18
     )
-    headerView.backgroundColor = RandomColor.tertiaryGray
+    headerView.backgroundColor = RandomColor.primaryWhite
     return headerView
   }
 }

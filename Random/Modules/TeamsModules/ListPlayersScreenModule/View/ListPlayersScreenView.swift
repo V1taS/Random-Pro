@@ -185,10 +185,10 @@ extension ListPlayersScreenView: UITableViewDataSource {
       ) as? DoubleTitleCell {
         cell.configureCellWith(
           primaryText: "\(appearance.allTitle): \(playersCount)",
-          primaryTextColor: RandomColor.secondaryGray,
+          primaryTextColor: RandomColor.primaryGray,
           primaryTextFont: RandomFont.primaryMedium10,
           secondaryText: "\(appearance.forGameTitle): \(forGameCount)",
-          secondaryTextColor: RandomColor.secondaryGray,
+          secondaryTextColor: RandomColor.primaryGray,
           secondaryTextFont: RandomFont.primaryMedium10
         )
         viewCell = cell

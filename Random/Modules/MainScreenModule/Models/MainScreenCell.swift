@@ -34,7 +34,8 @@ struct MainScreenCellModel {
       .contact(advLabel: .none, isEnabled: true),
       .password(advLabel: .none, isEnabled: true),
       .cube(advLabel: .none, isEnabled: true),
-      .list(advLabel: .none, isEnabled: true)
+      .list(advLabel: .none, isEnabled: true),
+      .colors(advLabel: .none, isEnabled: true)
     ]
     
     // MARK: - Cases
@@ -71,6 +72,9 @@ struct MainScreenCellModel {
     
     /// Раздел: `Пароли`
     case password(advLabel: ADVLabel, isEnabled: Bool)
+    
+    /// Раздел: `Цвета`
+    case colors(advLabel: ADVLabel, isEnabled: Bool)
     
     // MARK: - ADVLabel
     

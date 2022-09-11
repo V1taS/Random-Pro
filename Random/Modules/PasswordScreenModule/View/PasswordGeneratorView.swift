@@ -207,6 +207,7 @@ final class PasswordGeneratorView: UIView {
     passwordLengthTextField.keyboardType = .numberPad
     
     resultTextView.textColor = RandomColor.primaryGray
+    resultTextView.backgroundColor = RandomColor.primaryWhite
     resultTextView.font = RandomFont.primaryMedium24
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false

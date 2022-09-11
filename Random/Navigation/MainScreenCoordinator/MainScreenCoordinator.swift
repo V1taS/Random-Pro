@@ -40,29 +40,13 @@ final class MainScreenCoordinator: Coordinator {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
-  func shareButtonAction(_ url: URL) {
-    let objectsToShare = [url]
-    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+  func openColors() {
+    let colorsScreenCoordinator = ColorsScreenCoordinator(navigationController,
+                                                          services)
+    anyCoordinator = colorsScreenCoordinator
+    colorsScreenCoordinator.start()
     
-    if UIDevice.current.userInterfaceIdiom == .pad {
-      if let popup = activityVC.popoverPresentationController {
-        popup.sourceView = mainScreenModule?.view
-        popup.sourceRect = CGRect(x: (mainScreenModule?.view.frame.size.width ?? .zero) / 2,
-                                  y: (mainScreenModule?.view.frame.size.height ?? .zero) / 4,
-                                  width: .zero,
-                                  height: .zero)
-      }
-    }
-    
-    mainScreenModule?.present(activityVC, animated: true, completion: nil)
-    services.metricsService.track(event: .shareApp)
-  }
-  
-  func adminFeatureToggleAction() {
-    let adminFeatureToggleCoordinator = AdminFeatureToggleCoordinator(navigationController,
-                                                                      services)
-    anyCoordinator = adminFeatureToggleCoordinator
-    adminFeatureToggleCoordinator.start()
+    services.metricsService.track(event: .colorsScreen)
   }
   
   func openTeams() {
@@ -162,5 +146,30 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     numberScreenCoordinator.start()
     
     services.metricsService.track(event: .numbersScreen)
+  }
+  
+  func shareButtonAction(_ url: URL) {
+    let objectsToShare = [url]
+    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      if let popup = activityVC.popoverPresentationController {
+        popup.sourceView = mainScreenModule?.view
+        popup.sourceRect = CGRect(x: (mainScreenModule?.view.frame.size.width ?? .zero) / 2,
+                                  y: (mainScreenModule?.view.frame.size.height ?? .zero) / 4,
+                                  width: .zero,
+                                  height: .zero)
+      }
+    }
+    
+    mainScreenModule?.present(activityVC, animated: true, completion: nil)
+    services.metricsService.track(event: .shareApp)
+  }
+  
+  func adminFeatureToggleAction() {
+    let adminFeatureToggleCoordinator = AdminFeatureToggleCoordinator(navigationController,
+                                                                      services)
+    anyCoordinator = adminFeatureToggleCoordinator
+    adminFeatureToggleCoordinator.start()
   }
 }

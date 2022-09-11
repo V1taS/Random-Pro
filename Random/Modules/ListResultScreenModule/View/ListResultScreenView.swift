@@ -105,9 +105,10 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
   }
   
   private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.secondaryWhite
-    tableView.backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
+    tableView.backgroundColor = RandomColor.primaryWhite
     tableView.showsVerticalScrollIndicator = false
+    tableView.separatorColor = RandomColor.secondaryGray
     
     contentPlugImage.isHidden = true
     

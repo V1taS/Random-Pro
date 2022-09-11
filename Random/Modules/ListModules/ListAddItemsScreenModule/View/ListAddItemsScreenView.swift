@@ -164,10 +164,10 @@ extension ListAddItemsScreenView: UITableViewDataSource {
       ) as? DoubleTitleCell {
         cell.configureCellWith(
           primaryText: "\(appearance.allTitle): \(textCount)",
-          primaryTextColor: RandomColor.secondaryGray,
+          primaryTextColor: RandomColor.primaryGray,
           primaryTextFont: RandomFont.primaryMedium10,
           secondaryText: nil,
-          secondaryTextColor: RandomColor.secondaryGray,
+          secondaryTextColor: RandomColor.primaryGray,
           secondaryTextFont: RandomFont.primaryMedium10
         )
         viewCell = cell

@@ -68,6 +68,7 @@ private extension ListScreenView {
     resultTextView.font = RandomFont.primaryMedium32
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
+    resultTextView.backgroundColor = RandomColor.primaryWhite
     
     let padding = resultTextView.textContainer.lineFragmentPadding
     resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,

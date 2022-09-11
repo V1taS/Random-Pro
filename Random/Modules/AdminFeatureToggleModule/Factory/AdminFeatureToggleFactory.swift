@@ -37,69 +37,75 @@ final class AdminFeatureToggleFactory: AdminFeatureToggleFactoryInput {
     
     featureToggles.forEach { featureToggle in
       switch featureToggle {
-      case .teams(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .teams(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Teams",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .number(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .number(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Number",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .yesOrNo(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .yesOrNo(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Yer or No",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .letter(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .letter(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Letter",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .list(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .list(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "List",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .coin(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .coin(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Coin",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .cube(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .cube(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Cube",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .dateAndTime(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .dateAndTime(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Date and Time",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .lottery(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .lottery(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Lottery",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .contact(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .contact(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Contact",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )
-      case .password(advLabel: let advLabel, isEnabled: let isEnabled):
+      case .password(let advLabel, let isEnabled):
         models.append(configureModel(
           sectionName: "Password",
+          advLabel: advLabel,
+          isEnabled: isEnabled)
+        )
+      case .colors(let advLabel, let isEnabled):
+        models.append(configureModel(
+          sectionName: "Colors",
           advLabel: advLabel,
           isEnabled: isEnabled)
         )

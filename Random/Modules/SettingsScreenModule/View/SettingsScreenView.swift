@@ -86,8 +86,8 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
   }
   
   private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.secondaryWhite
-    tableView.backgroundColor = RandomColor.secondaryWhite
+    backgroundColor = RandomColor.primaryWhite
+    tableView.backgroundColor = RandomColor.primaryWhite
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -164,7 +164,8 @@ extension SettingsScreenView: UITableViewDataSource {
         withIdentifier: LabelAndImageCell.reuseIdentifier
       ) as? LabelAndImageCell {
         cell.configureCellWith(titleText: title,
-                               imageAside: UIImage(data: asideImage ?? Data()))
+                               imageAside: UIImage(data: asideImage ?? Data()),
+                               imageColor: RandomColor.primaryGray)
         viewCell = cell
       }
     case .cleanButtonModel(title: let title):

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 final class RootCoordinator: Coordinator {
   

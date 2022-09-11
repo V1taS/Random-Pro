@@ -38,80 +38,135 @@ final class MainScreenFactory: MainScreenFactoryInput {
     
     cells.forEach { cell in
       switch cell {
-      case .teams(let advLabel, _):
+      case .teams(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardTeam,
                                        titleCard: appearance.titleCardTeam,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .number(let advLabel, _):
+      case .number(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardNumber,
                                        titleCard: appearance.titleCardNumber,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .yesOrNo(let advLabel, _):
+      case .yesOrNo(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardYesOrNot,
                                        titleCard: appearance.titleCardYesOrNot,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .letter(let advLabel, _):
+      case .letter(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardCharacters,
                                        titleCard: appearance.titleCardCharacters,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .list(let advLabel, _):
+      case .list(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardList,
                                        titleCard: appearance.titleCardList,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .coin(let advLabel, _):
+      case .coin(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardCoin,
                                        titleCard: appearance.titleCardCoin,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .cube(let advLabel, _):
+      case .cube(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardCube,
                                        titleCard: appearance.titleCardCube,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .dateAndTime(let advLabel, _):
+      case .dateAndTime(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardDateAndTime,
                                        titleCard: appearance.titleCardDateAndTime,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .lottery(let advLabel, _):
+      case .lottery(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardLottery,
                                        titleCard: appearance.titleCardLottery,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .contact(let advLabel, _):
+      case .contact(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardContact,
                                        titleCard: appearance.titleCardContact,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
-      case .password(let advLabel, _):
+      case .password(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
         let model = configureModelFrom(cell: cell,
                                        imageCard: appearance.imageCardPassword,
                                        titleCard: appearance.titleCardPassword,
+                                       isShowADVLabel: isShow(advLabel),
+                                       titleADVText: configure(advLabel))
+        models.append(model)
+      case .colors(let advLabel, let isEnabled):
+        guard isEnabled else {
+          return
+        }
+        
+        let model = configureModelFrom(cell: cell,
+                                       imageCard: appearance.imageColors,
+                                       titleCard: appearance.titleColors,
                                        isShowADVLabel: isShow(advLabel),
                                        titleADVText: configure(advLabel))
         models.append(model)
@@ -203,6 +258,9 @@ private extension MainScreenFactory {
     
     let imageCardRussianLotto = UIImage(systemName: "square.grid.4x3.fill") ?? UIImage()
     let titleCardRussianLotto = NSLocalizedString("Русское Лото", comment: "")
+    
+    let imageColors = UIImage(systemName: "photo.on.rectangle.angled") ?? UIImage()
+    let titleColors = NSLocalizedString("Цвета", comment: "")
     
     let advLabelHit = NSLocalizedString("ХИТ", comment: "")
     let advLabelNew = NSLocalizedString("НОВОЕ", comment: "")

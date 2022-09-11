@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 import Notifications
 
 protocol NotificationService {
@@ -41,12 +42,14 @@ protocol NotificationService {
   /// Показать настраиваемое уведомление
   ///  - Parameters:
   ///   - title: Заголовок уведомления
+  ///   - textColor: Цвет текста
   ///   - glyph: Включена или выключена иконка
   ///   - backgroundColor: Фон уведомления
   ///   - imageGlyph: Иконка слева
   ///   - colorGlyph: Цвет иконки
   ///   - active: Действие на кнопку
   func showCustomAlertWith(title: String,
+                           textColor: UIColor?,
                            glyph: Bool,
                            backgroundColor: UIColor?,
                            imageGlyph: UIImage?,
@@ -63,7 +66,8 @@ final class NotificationServiceImpl: NotificationService {
     notifications.showAlertWith(
       model: NotificationsModel(
         text: title,
-        style: .positive,
+        textColor: .black,
+        style: .positive(colorGlyph: .black),
         timeout: appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,
@@ -78,7 +82,8 @@ final class NotificationServiceImpl: NotificationService {
     notifications.showAlertWith(
       model: NotificationsModel(
         text: title,
-        style: .neutral,
+        textColor: RandomColor.primaryGray,
+        style: .neutral(colorGlyph: RandomColor.primaryGray),
         timeout: appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,
@@ -93,7 +98,8 @@ final class NotificationServiceImpl: NotificationService {
     notifications.showAlertWith(
       model: NotificationsModel(
         text: title,
-        style: .negative,
+        textColor: .black,
+        style: .negative(colorGlyph: .black),
         timeout: appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,
@@ -103,6 +109,7 @@ final class NotificationServiceImpl: NotificationService {
   }
   
   func showCustomAlertWith(title: String,
+                           textColor: UIColor?,
                            glyph: Bool,
                            backgroundColor: UIColor?,
                            imageGlyph: UIImage?,
@@ -113,6 +120,7 @@ final class NotificationServiceImpl: NotificationService {
     notifications.showAlertWith(
       model: NotificationsModel(
         text: title,
+        textColor: textColor,
         style: .custom(
           backgroundColor: backgroundColor,
           glyph: imageGlyph,

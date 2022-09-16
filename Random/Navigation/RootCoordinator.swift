@@ -28,7 +28,8 @@ final class RootCoordinator: Coordinator {
   // MARK: - Internal func
   
   func start() {
-    let mainScreenCoordinator: Coordinator = MainScreenCoordinator(navigationController,
+    let mainScreenCoordinator: Coordinator = MainScreenCoordinator(window,
+                                                                   navigationController,
                                                                    services)
     self.mainScreenCoordinator = mainScreenCoordinator
     mainScreenCoordinator.start()

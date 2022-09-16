@@ -15,14 +15,19 @@ final class MainScreenCoordinator: Coordinator {
   private var mainScreenModule: MainScreenModule?
   private let services: ApplicationServices
   private var anyCoordinator: Coordinator?
+  private var settingsScreenCoordinator: MainSettingsScreenCoordinatorProtocol?
+  private let window: UIWindow?
   
   // MARK: - Initialization
   
   /// - Parameters:
+  ///   - window: Окно просмотра
   ///   - navigationController: UINavigationController
   ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
+  init(_ window: UIWindow?,
+       _ navigationController: UINavigationController,
        _ services: ApplicationServices) {
+    self.window = window
     self.navigationController = navigationController
     self.services = services
   }
@@ -33,6 +38,8 @@ final class MainScreenCoordinator: Coordinator {
     let mainScreenModule = MainScreenAssembly().createModule()
     self.mainScreenModule = mainScreenModule
     self.mainScreenModule?.moduleOutput = self
+    
+    checkDarkMode()
     navigationController.pushViewController(mainScreenModule, animated: true)
   }
 }
@@ -166,10 +173,44 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     services.metricsService.track(event: .shareApp)
   }
   
-  func adminFeatureToggleAction() {
-    let adminFeatureToggleCoordinator = AdminFeatureToggleCoordinator(navigationController,
-                                                                      services)
-    anyCoordinator = adminFeatureToggleCoordinator
-    adminFeatureToggleCoordinator.start()
+  func settingButtonAction() {
+    guard let mainScreenModule = mainScreenModule else {
+      return
+    }
+    
+    let settingsScreenCoordinator = MainSettingsScreenCoordinator(window,
+                                                                  navigationController,
+                                                                  services)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    settingsScreenCoordinator.start()
+    
+    settingsScreenCoordinator.updateContentWith(isDarkTheme: mainScreenModule.returnModel().isDarkMode)
+    settingsScreenCoordinator.updateContentWith(models: mainScreenModule.returnModel().allSections)
+    services.metricsService.track(event: .mainSettingsScreen)
+  }
+}
+
+// MARK: - Private
+
+extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput {
+  func didChanged(models: [MainScreenModel.Section]) {
+    mainScreenModule?.updateSectionsWith(models: models)
+  }
+  
+  func darkThemeChanged(_ isEnabled: Bool) {
+    mainScreenModule?.saveDarkModeStatus(isEnabled)
+  }
+}
+
+// MARK: - Private
+
+private extension MainScreenCoordinator {
+  func checkDarkMode() {
+    guard let isDarkTheme = mainScreenModule?.returnModel().isDarkMode, let window = window else {
+      return
+    }
+    
+    window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
   }
 }

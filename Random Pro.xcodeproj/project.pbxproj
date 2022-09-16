@@ -16,6 +16,22 @@
 		1B08ADA228CDDAD5007290F3 /* ColorsScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08AD9D28CDDAD5007290F3 /* ColorsScreenInteractor.swift */; };
 		1B08ADA328CDDAD5007290F3 /* ColorsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08AD9E28CDDAD5007290F3 /* ColorsScreenView.swift */; };
 		1B08ADAB28CDDB57007290F3 /* ColorsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08ADAA28CDDB57007290F3 /* ColorsScreenCoordinator.swift */; };
+		1B0ED1A628D4D9E7001BACF6 /* MainSettingsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A128D4D9E7001BACF6 /* MainSettingsScreenFactory.swift */; };
+		1B0ED1A728D4D9E7001BACF6 /* MainSettingsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A228D4D9E7001BACF6 /* MainSettingsScreenViewController.swift */; };
+		1B0ED1A828D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A328D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift */; };
+		1B0ED1A928D4D9E7001BACF6 /* MainSettingsScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A428D4D9E7001BACF6 /* MainSettingsScreenInteractor.swift */; };
+		1B0ED1AA28D4D9E7001BACF6 /* MainSettingsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A528D4D9E7001BACF6 /* MainSettingsScreenView.swift */; };
+		1B0ED1B328D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1B228D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift */; };
+		1B0ED1B528D4E098001BACF6 /* MainSettingsScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1B428D4E098001BACF6 /* MainSettingsScreenType.swift */; };
+		1B0ED1B728D4EC0C001BACF6 /* MainSettingsScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1B628D4EC0C001BACF6 /* MainSettingsScreenModel.swift */; };
+		1B0ED1C028D4FB3A001BACF6 /* CustomMainSectionsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1BB28D4FB3A001BACF6 /* CustomMainSectionsFactory.swift */; };
+		1B0ED1C128D4FB3A001BACF6 /* CustomMainSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1BC28D4FB3A001BACF6 /* CustomMainSectionsViewController.swift */; };
+		1B0ED1C228D4FB3A001BACF6 /* CustomMainSectionsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1BD28D4FB3A001BACF6 /* CustomMainSectionsAssembly.swift */; };
+		1B0ED1C328D4FB3A001BACF6 /* CustomMainSectionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1BE28D4FB3A001BACF6 /* CustomMainSectionsInteractor.swift */; };
+		1B0ED1C428D4FB3A001BACF6 /* CustomMainSectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1BF28D4FB3A001BACF6 /* CustomMainSectionsView.swift */; };
+		1B0ED1CD28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1CC28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift */; };
+		1B0ED1CF28D50199001BACF6 /* CustomMainSectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1CE28D50199001BACF6 /* CustomMainSectionsModel.swift */; };
+		1B0ED1D128D501B2001BACF6 /* CustomMainSectionsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D028D501B2001BACF6 /* CustomMainSectionsType.swift */; };
 		1B10E541282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E540282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift */; };
 		1B1B5B4727ADDFAF00EF283E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */; };
 		1B224BC428B9996200AC5D97 /* ContactScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B224BC328B9996200AC5D97 /* ContactScreenModel.swift */; };
@@ -30,13 +46,6 @@
 		1B31F641285FB85E00A88217 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F640285FB85E00A88217 /* NotificationService.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
-		1B3EF11A287AD17600D667E1 /* AdminFeatureToggleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF115287AD17600D667E1 /* AdminFeatureToggleFactory.swift */; };
-		1B3EF11B287AD17600D667E1 /* AdminFeatureToggleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF116287AD17600D667E1 /* AdminFeatureToggleViewController.swift */; };
-		1B3EF11C287AD17600D667E1 /* AdminFeatureToggleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF117287AD17600D667E1 /* AdminFeatureToggleAssembly.swift */; };
-		1B3EF11D287AD17600D667E1 /* AdminFeatureToggleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */; };
-		1B3EF11E287AD17600D667E1 /* AdminFeatureToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */; };
-		1B3EF127287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */; };
-		1B3EF137287B0EF200D667E1 /* AdminFeatureToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3EF136287B0EF200D667E1 /* AdminFeatureToggleModel.swift */; };
 		1B412BA728C7DFE60078126F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B412BA628C7DFE60078126F /* FileManager.swift */; };
 		1B4A5C9D28B9261300215064 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9C28B9261300215064 /* PermissionService.swift */; };
 		1B4A5CA028B949F400215064 /* PasswordScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */; };
@@ -77,7 +86,7 @@
 		1B96E0FE282048D000A23880 /* MainScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */; };
 		1B96E0FF282048D000A23880 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96E0FC282048D000A23880 /* RootCoordinator.swift */; };
 		1B96E100282048D000A23880 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96E0FD282048D000A23880 /* Coordinator.swift */; };
-		1B96E10228204BFF00A23880 /* MainScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96E10128204BFF00A23880 /* MainScreenCell.swift */; };
+		1B96E10228204BFF00A23880 /* MainScreenSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96E10128204BFF00A23880 /* MainScreenSection.swift */; };
 		1B96E10428204CD000A23880 /* MainScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B96E10328204CD000A23880 /* MainScreenCollectionViewCell.swift */; };
 		1B9D4558283BDC7C00A85F25 /* SettingsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4553283BDC7C00A85F25 /* SettingsScreenFactory.swift */; };
 		1B9D4559283BDC7C00A85F25 /* SettingsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4554283BDC7C00A85F25 /* SettingsScreenViewController.swift */; };
@@ -213,6 +222,22 @@
 		1B08AD9D28CDDAD5007290F3 /* ColorsScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreenInteractor.swift; sourceTree = "<group>"; };
 		1B08AD9E28CDDAD5007290F3 /* ColorsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreenView.swift; sourceTree = "<group>"; };
 		1B08ADAA28CDDB57007290F3 /* ColorsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreenCoordinator.swift; sourceTree = "<group>"; };
+		1B0ED1A128D4D9E7001BACF6 /* MainSettingsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenFactory.swift; sourceTree = "<group>"; };
+		1B0ED1A228D4D9E7001BACF6 /* MainSettingsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenViewController.swift; sourceTree = "<group>"; };
+		1B0ED1A328D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenAssembly.swift; sourceTree = "<group>"; };
+		1B0ED1A428D4D9E7001BACF6 /* MainSettingsScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenInteractor.swift; sourceTree = "<group>"; };
+		1B0ED1A528D4D9E7001BACF6 /* MainSettingsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenView.swift; sourceTree = "<group>"; };
+		1B0ED1B228D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenCoordinator.swift; sourceTree = "<group>"; };
+		1B0ED1B428D4E098001BACF6 /* MainSettingsScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenType.swift; sourceTree = "<group>"; };
+		1B0ED1B628D4EC0C001BACF6 /* MainSettingsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenModel.swift; sourceTree = "<group>"; };
+		1B0ED1BB28D4FB3A001BACF6 /* CustomMainSectionsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsFactory.swift; sourceTree = "<group>"; };
+		1B0ED1BC28D4FB3A001BACF6 /* CustomMainSectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsViewController.swift; sourceTree = "<group>"; };
+		1B0ED1BD28D4FB3A001BACF6 /* CustomMainSectionsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsAssembly.swift; sourceTree = "<group>"; };
+		1B0ED1BE28D4FB3A001BACF6 /* CustomMainSectionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsInteractor.swift; sourceTree = "<group>"; };
+		1B0ED1BF28D4FB3A001BACF6 /* CustomMainSectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsView.swift; sourceTree = "<group>"; };
+		1B0ED1CC28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsCoordinator.swift; sourceTree = "<group>"; };
+		1B0ED1CE28D50199001BACF6 /* CustomMainSectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsModel.swift; sourceTree = "<group>"; };
+		1B0ED1D028D501B2001BACF6 /* CustomMainSectionsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsType.swift; sourceTree = "<group>"; };
 		1B10E540282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectUserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		1B1B501526009FAD00F73A14 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		1B1B5B4827ADDFAF00EF283E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -230,13 +255,6 @@
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1B325C1925D2D18300382F33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1B3EF115287AD17600D667E1 /* AdminFeatureToggleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleFactory.swift; sourceTree = "<group>"; };
-		1B3EF116287AD17600D667E1 /* AdminFeatureToggleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleViewController.swift; sourceTree = "<group>"; };
-		1B3EF117287AD17600D667E1 /* AdminFeatureToggleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleAssembly.swift; sourceTree = "<group>"; };
-		1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleInteractor.swift; sourceTree = "<group>"; };
-		1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleView.swift; sourceTree = "<group>"; };
-		1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleCoordinator.swift; sourceTree = "<group>"; };
-		1B3EF136287B0EF200D667E1 /* AdminFeatureToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminFeatureToggleModel.swift; sourceTree = "<group>"; };
 		1B412BA628C7DFE60078126F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		1B4A5C9C28B9261300215064 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenModel.swift; sourceTree = "<group>"; };
@@ -279,7 +297,7 @@
 		1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B96E0FC282048D000A23880 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		1B96E0FD282048D000A23880 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		1B96E10128204BFF00A23880 /* MainScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCell.swift; sourceTree = "<group>"; };
+		1B96E10128204BFF00A23880 /* MainScreenSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenSection.swift; sourceTree = "<group>"; };
 		1B96E10328204CD000A23880 /* MainScreenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCollectionViewCell.swift; sourceTree = "<group>"; };
 		1B9D4553283BDC7C00A85F25 /* SettingsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenFactory.swift; sourceTree = "<group>"; };
 		1B9D4554283BDC7C00A85F25 /* SettingsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenViewController.swift; sourceTree = "<group>"; };
@@ -504,6 +522,179 @@
 			path = ColorsScreenCoordinator;
 			sourceTree = "<group>";
 		};
+		1B0ED19E28D4D8F4001BACF6 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				1B08AD9928CDDAAE007290F3 /* ColorsScreenModule */,
+				1BA199A728BBC6D50036D73C /* ShareScreenModule */,
+				1BD5398C28BA2FE0009DA51C /* ListModules */,
+				6CA6202428B632B40078C971 /* ContactScreenModule */,
+				6CA6200F28B62DE30078C971 /* CubesScreenModule */,
+				1B74318828A79CE400205C2C /* TeamsModules */,
+				6CBFD04B289BC36B005F9104 /* PasswordScreenModule */,
+				1B31F625285F923800A88217 /* ListResultScreenModule */,
+				1B9D4552283BDC0400A85F25 /* SettingsScreenModule */,
+				6C1A0CB12834E88000A3040E /* LotteryScreenModule */,
+				6C98CBC628339E8700D2E4FA /* CoinScreenModule */,
+				6CA3961C28324EF800F86248 /* LetterScreenModule */,
+				6C7D4D3E282E54FB00A086BC /* DateTimeScreenModule */,
+				6CE65F7C282D0CC200272D56 /* YesNoScreenModule */,
+				6CE65F7B282D0C4F00272D56 /* NumberScreenModule */,
+				1B96E0E92820481F00A23880 /* MainScreenModule */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		1B0ED19F28D4D935001BACF6 /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1BA28D4FAEB001BACF6 /* CustomMainSectionsModule */,
+				1B0ED1A028D4D9A7001BACF6 /* MainSettingsScreenModule */,
+			);
+			path = SettingsScreen;
+			sourceTree = "<group>";
+		};
+		1B0ED1A028D4D9A7001BACF6 /* MainSettingsScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1B028D4DA19001BACF6 /* View */,
+				1B0ED1AF28D4DA13001BACF6 /* Presenter */,
+				1B0ED1AE28D4DA0D001BACF6 /* Factory */,
+				1B0ED1AD28D4DA07001BACF6 /* Assembly */,
+				1B0ED1AC28D4DA01001BACF6 /* Interactor */,
+				1B0ED1AB28D4D9F1001BACF6 /* Models */,
+			);
+			path = MainSettingsScreenModule;
+			sourceTree = "<group>";
+		};
+		1B0ED1AB28D4D9F1001BACF6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1B428D4E098001BACF6 /* MainSettingsScreenType.swift */,
+				1B0ED1B628D4EC0C001BACF6 /* MainSettingsScreenModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1B0ED1AC28D4DA01001BACF6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1A428D4D9E7001BACF6 /* MainSettingsScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B0ED1AD28D4DA07001BACF6 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1A328D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B0ED1AE28D4DA0D001BACF6 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1A128D4D9E7001BACF6 /* MainSettingsScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B0ED1AF28D4DA13001BACF6 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1A228D4D9E7001BACF6 /* MainSettingsScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B0ED1B028D4DA19001BACF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1A528D4D9E7001BACF6 /* MainSettingsScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B0ED1B128D4DA51001BACF6 /* SettingsScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1B228D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift */,
+				1B0ED1CB28D4FB9E001BACF6 /* CustomMainSectionsCoordinator */,
+			);
+			path = SettingsScreenCoordinator;
+			sourceTree = "<group>";
+		};
+		1B0ED1BA28D4FAEB001BACF6 /* CustomMainSectionsModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1CA28D4FB6B001BACF6 /* Models */,
+				1B0ED1C928D4FB65001BACF6 /* Interactor */,
+				1B0ED1C828D4FB5E001BACF6 /* Assembly */,
+				1B0ED1C728D4FB52001BACF6 /* Factory */,
+				1B0ED1C628D4FB4B001BACF6 /* Presenter */,
+				1B0ED1C528D4FB46001BACF6 /* View */,
+			);
+			path = CustomMainSectionsModule;
+			sourceTree = "<group>";
+		};
+		1B0ED1C528D4FB46001BACF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1BF28D4FB3A001BACF6 /* CustomMainSectionsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B0ED1C628D4FB4B001BACF6 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1BC28D4FB3A001BACF6 /* CustomMainSectionsViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B0ED1C728D4FB52001BACF6 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1BB28D4FB3A001BACF6 /* CustomMainSectionsFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B0ED1C828D4FB5E001BACF6 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1BD28D4FB3A001BACF6 /* CustomMainSectionsAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B0ED1C928D4FB65001BACF6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1BE28D4FB3A001BACF6 /* CustomMainSectionsInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B0ED1CA28D4FB6B001BACF6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1CE28D50199001BACF6 /* CustomMainSectionsModel.swift */,
+				1B0ED1D028D501B2001BACF6 /* CustomMainSectionsType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1B0ED1CB28D4FB9E001BACF6 /* CustomMainSectionsCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1CC28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift */,
+			);
+			path = CustomMainSectionsCoordinator;
+			sourceTree = "<group>";
+		};
 		1B224BC228B9995600AC5D97 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,75 +777,6 @@
 				1B31F640285FB85E00A88217 /* NotificationService.swift */,
 			);
 			path = NotificationService;
-			sourceTree = "<group>";
-		};
-		1B3EF114287AD12400D667E1 /* AdminFeatureToggleModule */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF135287B0ED900D667E1 /* Models */,
-				1B3EF124287AD1A100D667E1 /* Interactor */,
-				1B3EF123287AD19B00D667E1 /* Assembly */,
-				1B3EF122287AD19500D667E1 /* Factory */,
-				1B3EF121287AD18F00D667E1 /* Presenter */,
-				1B3EF120287AD18900D667E1 /* View */,
-			);
-			path = AdminFeatureToggleModule;
-			sourceTree = "<group>";
-		};
-		1B3EF120287AD18900D667E1 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF119287AD17600D667E1 /* AdminFeatureToggleView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		1B3EF121287AD18F00D667E1 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF116287AD17600D667E1 /* AdminFeatureToggleViewController.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		1B3EF122287AD19500D667E1 /* Factory */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF115287AD17600D667E1 /* AdminFeatureToggleFactory.swift */,
-			);
-			path = Factory;
-			sourceTree = "<group>";
-		};
-		1B3EF123287AD19B00D667E1 /* Assembly */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF117287AD17600D667E1 /* AdminFeatureToggleAssembly.swift */,
-			);
-			path = Assembly;
-			sourceTree = "<group>";
-		};
-		1B3EF124287AD1A100D667E1 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF118287AD17600D667E1 /* AdminFeatureToggleInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		1B3EF125287AD1E100D667E1 /* AdminFeatureToggleCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF126287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift */,
-			);
-			path = AdminFeatureToggleCoordinator;
-			sourceTree = "<group>";
-		};
-		1B3EF135287B0ED900D667E1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1B3EF136287B0EF200D667E1 /* AdminFeatureToggleModel.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		1B412BA528C7DFB30078126F /* FileManager */ = {
@@ -932,6 +1054,7 @@
 				1B96E0FD282048D000A23880 /* Coordinator.swift */,
 				1B96E0FC282048D000A23880 /* RootCoordinator.swift */,
 				1B96E0FA282048BF00A23880 /* MainScreenCoordinator */,
+				1B0ED1B128D4DA51001BACF6 /* SettingsScreenCoordinator */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -953,23 +1076,8 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				1B08AD9928CDDAAE007290F3 /* ColorsScreenModule */,
-				1BA199A728BBC6D50036D73C /* ShareScreenModule */,
-				1BD5398C28BA2FE0009DA51C /* ListModules */,
-				6CA6202428B632B40078C971 /* ContactScreenModule */,
-				6CA6200F28B62DE30078C971 /* CubesScreenModule */,
-				1B74318828A79CE400205C2C /* TeamsModules */,
-				6CBFD04B289BC36B005F9104 /* PasswordScreenModule */,
-				1B3EF114287AD12400D667E1 /* AdminFeatureToggleModule */,
-				1B31F625285F923800A88217 /* ListResultScreenModule */,
-				1B9D4552283BDC0400A85F25 /* SettingsScreenModule */,
-				6C1A0CB12834E88000A3040E /* LotteryScreenModule */,
-				6C98CBC628339E8700D2E4FA /* CoinScreenModule */,
-				6CA3961C28324EF800F86248 /* LetterScreenModule */,
-				6C7D4D3E282E54FB00A086BC /* DateTimeScreenModule */,
-				6CE65F7C282D0CC200272D56 /* YesNoScreenModule */,
-				6CE65F7B282D0C4F00272D56 /* NumberScreenModule */,
-				1B96E0E92820481F00A23880 /* MainScreenModule */,
+				1B0ED19F28D4D935001BACF6 /* SettingsScreen */,
+				1B0ED19E28D4D8F4001BACF6 /* MainScreen */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1047,7 +1155,7 @@
 		1B96E0F92820489700A23880 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1B96E10128204BFF00A23880 /* MainScreenCell.swift */,
+				1B96E10128204BFF00A23880 /* MainScreenSection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1065,7 +1173,6 @@
 				1B74319928A79FB300205C2C /* TeamsCoordinators */,
 				6C9A9EF9282926B000962062 /* NumberScreenCoordinator */,
 				6CE65F8C282D136800272D56 /* YesNoScreenCoordinator */,
-				1B3EF125287AD1E100D667E1 /* AdminFeatureToggleCoordinator */,
 				6CBFD05B289BC75C005F9104 /* PasswordScreenCoordinator */,
 				1B31F636285F92CC00A88217 /* ListResultScreenCoordinator */,
 				6C1A0CC12834EC1A00A3040E /* LotteryScreenCoordinator */,
@@ -2196,6 +2303,7 @@
 				1B9D4565283BDDB600A85F25 /* SettingsScreenCoordinator.swift in Sources */,
 				6CA6203628B636190078C971 /* ContactScreenCoordinator.swift in Sources */,
 				1B7431B228A805A800205C2C /* ListPlayersScreenType.swift in Sources */,
+				1B0ED1A728D4D9E7001BACF6 /* MainSettingsScreenViewController.swift in Sources */,
 				1BA83CF92879E991000035E3 /* LetterScreenModel.swift in Sources */,
 				6CA3962528324FC500F86248 /* LetterScreenModule.swift in Sources */,
 				1B08ADA128CDDAD5007290F3 /* ColorsScreenAssembly.swift in Sources */,
@@ -2205,8 +2313,8 @@
 				1B50065C28A6BDF0009AABF2 /* TeamsScreenAssembly.swift in Sources */,
 				1B96E0F22820483F00A23880 /* MainScreenInteractor.swift in Sources */,
 				1B4A5CA028B949F400215064 /* PasswordScreenModel.swift in Sources */,
+				1B0ED1C228D4FB3A001BACF6 /* CustomMainSectionsAssembly.swift in Sources */,
 				6CA6204028B67A2E0078C971 /* ListScreenModule.swift in Sources */,
-				1B3EF11B287AD17600D667E1 /* AdminFeatureToggleViewController.swift in Sources */,
 				6CA6202328B62DF50078C971 /* CubesScreenCoordinator.swift in Sources */,
 				1B4A5C9D28B9261300215064 /* PermissionService.swift in Sources */,
 				6CA396292832517C00F86248 /* LetterScreenFactory.swift in Sources */,
@@ -2214,6 +2322,7 @@
 				6C7D4D47282E557100A086BC /* DateTimeViewController.swift in Sources */,
 				1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */,
 				6C98CBD32833A03A00D2E4FA /* CoinScreenFactory.swift in Sources */,
+				1B0ED1C428D4FB3A001BACF6 /* CustomMainSectionsView.swift in Sources */,
 				6CA6204928B67D660078C971 /* ListScreenCoordinator.swift in Sources */,
 				6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */,
 				6C7D4D49282E557B00A086BC /* DateTimeInteractor.swift in Sources */,
@@ -2221,6 +2330,7 @@
 				6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */,
 				1B9D4558283BDC7C00A85F25 /* SettingsScreenFactory.swift in Sources */,
 				1B50066628A6BE6D009AABF2 /* TeamsScreenCoordinator.swift in Sources */,
+				1B0ED1D128D501B2001BACF6 /* CustomMainSectionsType.swift in Sources */,
 				1B74319028A79F4F00205C2C /* ListPlayersScreenViewController.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				6CA6202D28B6331E0078C971 /* ContactScreenModule.swift in Sources */,
@@ -2235,6 +2345,8 @@
 				1BD539A428BA33E2009DA51C /* ListAddItemsScreenModel.swift in Sources */,
 				1BA199AD28BBC6FB0036D73C /* ShareScreenFactory.swift in Sources */,
 				6CE65F87282D0DE300272D56 /* YesNoScreenInteractor.swift in Sources */,
+				1B0ED1C328D4FB3A001BACF6 /* CustomMainSectionsInteractor.swift in Sources */,
+				1B0ED1A628D4D9E7001BACF6 /* MainSettingsScreenFactory.swift in Sources */,
 				1B7431B028A8020C00205C2C /* TeamsScreenPlayerModel.swift in Sources */,
 				6CA6202B28B633120078C971 /* ContactScreenView.swift in Sources */,
 				6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */,
@@ -2244,8 +2356,8 @@
 				1B96E0FE282048D000A23880 /* MainScreenCoordinator.swift in Sources */,
 				6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */,
 				1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */,
-				1B3EF137287B0EF200D667E1 /* AdminFeatureToggleModel.swift in Sources */,
 				1B74318F28A79F4F00205C2C /* ListPlayersScreenFactory.swift in Sources */,
+				1B0ED1C028D4FB3A001BACF6 /* CustomMainSectionsFactory.swift in Sources */,
 				1B31F62F285F926200A88217 /* ListResultScreenView.swift in Sources */,
 				1BD5399428BA303D009DA51C /* ListAddItemsScreenViewController.swift in Sources */,
 				6C9A9EF82829242600962062 /* NumberScreenAssembly.swift in Sources */,
@@ -2259,9 +2371,11 @@
 				1B7431AC28A7E86D00205C2C /* TeamsScreenModel.swift in Sources */,
 				6CBFD052289BC3B4005F9104 /* PasswordScreenView.swift in Sources */,
 				1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */,
+				1B0ED1A828D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift in Sources */,
+				1B0ED1A928D4D9E7001BACF6 /* MainSettingsScreenInteractor.swift in Sources */,
+				1B0ED1CD28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift in Sources */,
 				1BD5399528BA303D009DA51C /* ListAddItemsScreenAssembly.swift in Sources */,
 				6CA6203328B633400078C971 /* ContactScreenAssembly.swift in Sources */,
-				1B3EF11E287AD17600D667E1 /* AdminFeatureToggleView.swift in Sources */,
 				1B74319228A79F4F00205C2C /* ListPlayersScreenInteractor.swift in Sources */,
 				1B74319128A79F4F00205C2C /* ListPlayersScreenAssembly.swift in Sources */,
 				1BCB6ECB28B29F870040F46E /* SettingsScreenTableViewType.swift in Sources */,
@@ -2269,6 +2383,7 @@
 				1B74319C28A79FF000205C2C /* ListPlayersScreenCoordinator.swift in Sources */,
 				6C7D4D50282E5A1D00A086BC /* DateTimeScreenCoordinator.swift in Sources */,
 				1B941DD62821758300D968DF /* KeyboardService.swift in Sources */,
+				1B0ED1AA28D4D9E7001BACF6 /* MainSettingsScreenView.swift in Sources */,
 				6C98CBD82833A1A900D2E4FA /* CoinScreenCoordinator.swift in Sources */,
 				1BA199AF28BBC6FB0036D73C /* ShareScreenAssembly.swift in Sources */,
 				1BD5399728BA303D009DA51C /* ListAddItemsScreenView.swift in Sources */,
@@ -2289,25 +2404,27 @@
 				6C98CBD128339FE300D2E4FA /* CoinScreenInteractor.swift in Sources */,
 				6CA6204228B67A930078C971 /* ListScreenInteractor.swift in Sources */,
 				6CE65F83282D0D5600272D56 /* YesNoScreenView.swift in Sources */,
+				1B0ED1B528D4E098001BACF6 /* MainSettingsScreenType.swift in Sources */,
 				1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */,
 				6CE65F85282D0DD900272D56 /* YesNoScreenModule.swift in Sources */,
-				1B96E10228204BFF00A23880 /* MainScreenCell.swift in Sources */,
+				1B96E10228204BFF00A23880 /* MainScreenSection.swift in Sources */,
 				6CBFD05F289C0EE2005F9104 /* PasswordGeneratorView.swift in Sources */,
+				1B0ED1C128D4FB3A001BACF6 /* CustomMainSectionsViewController.swift in Sources */,
 				6CA6201D28B62DE30078C971 /* CubesView.swift in Sources */,
 				1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */,
 				1B31F638285F92E600A88217 /* ListResultScreenCoordinator.swift in Sources */,
-				1B3EF11C287AD17600D667E1 /* AdminFeatureToggleAssembly.swift in Sources */,
 				6CA6201F28B62DE30078C971 /* CubesScreenInteractor.swift in Sources */,
 				1BA199B928BBC7590036D73C /* ShareScreenCoordinator.swift in Sources */,
+				1B0ED1B728D4EC0C001BACF6 /* MainSettingsScreenModel.swift in Sources */,
 				1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
 				6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */,
 				1BD539A228BA318F009DA51C /* ListAddItemsScreenCoordinator.swift in Sources */,
 				1B31F641285FB85E00A88217 /* NotificationService.swift in Sources */,
+				1B0ED1B328D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift in Sources */,
 				6CA6204428B67ACB0078C971 /* ListScreenFactory.swift in Sources */,
 				1B50065E28A6BDF0009AABF2 /* TeamsScreenView.swift in Sources */,
 				6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */,
-				1B3EF11A287AD17600D667E1 /* AdminFeatureToggleFactory.swift in Sources */,
 				1B941DEC2821923C00D968DF /* ObjectCustomUserDefaultsWrapper.swift in Sources */,
 				6CBFD054289BC42D005F9104 /* PasswordScreenModule.swift in Sources */,
 				6C9A9EFB282926EA00962062 /* NumberScreenCoordinator.swift in Sources */,
@@ -2316,15 +2433,14 @@
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,
 				6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */,
 				6C7662CE287A4B210069C13E /* LotteryScreenModel.swift in Sources */,
-				1B3EF11D287AD17600D667E1 /* AdminFeatureToggleInteractor.swift in Sources */,
 				1B96E10428204CD000A23880 /* MainScreenCollectionViewCell.swift in Sources */,
 				1B9D4559283BDC7C00A85F25 /* SettingsScreenViewController.swift in Sources */,
 				6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */,
+				1B0ED1CF28D50199001BACF6 /* CustomMainSectionsModel.swift in Sources */,
 				1B50065B28A6BDF0009AABF2 /* TeamsScreenViewController.swift in Sources */,
 				6CA6203128B633310078C971 /* ContactScreenFactory.swift in Sources */,
 				6CA6201C28B62DE30078C971 /* CubesScreenModule.swift in Sources */,
 				1B96E100282048D000A23880 /* Coordinator.swift in Sources */,
-				1B3EF127287AD1FE00D667E1 /* AdminFeatureToggleCoordinator.swift in Sources */,
 				6C98CBD52833A07700D2E4FA /* CoinScreenAssembly.swift in Sources */,
 				1B08ADA028CDDAD5007290F3 /* ColorsScreenViewController.swift in Sources */,
 				6CBFD058289BC539005F9104 /* PasswordScreenFactory.swift in Sources */,

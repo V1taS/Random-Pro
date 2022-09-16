@@ -30,6 +30,10 @@ protocol ListPlayersScreenViewOutput: AnyObject {
   ///  - state: Статус игрока
   ///  - id: Уникальный номер игрока
   func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String)
+  
+  /// Пол игрока был изменен
+  /// - Parameter index: Индекс пола игрока
+  func genderValueChanged(_ index: Int)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -157,18 +161,26 @@ extension ListPlayersScreenView: UITableViewDataSource {
     case .textField:
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: TextFieldWithButtonCell.reuseIdentifier
-      ) as? TextFieldWithButtonCell {
+      ) as? TextFielAddPlayerCell {
         let checkmarkImage = UIImage(systemName: Appearance().checkmarkImageName,
                                      withConfiguration: Appearance().largeConfig)
         cell.configureCellWith(
           textField: textField,
           buttonImage: checkmarkImage,
+          listGender: [appearance.male, appearance.female],
           buttonAction: { [weak self] in
             guard let self = self else {
               return
             }
             self.output?.playerAdded(name: self.textField.text)
             self.textField.text = ""
+          },
+          genderValueChanged: { [weak self] selectedGenderIndex in
+            guard let self = self else {
+              return
+            }
+            
+            self.output?.genderValueChanged(selectedGenderIndex)
           }
         )
         viewCell = cell
@@ -416,7 +428,7 @@ private extension ListPlayersScreenView {
                        forCellReuseIdentifier: PlayerInfoTableViewCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
-    tableView.register(TextFieldWithButtonCell.self,
+    tableView.register(TextFielAddPlayerCell.self,
                        forCellReuseIdentifier: TextFieldWithButtonCell.reuseIdentifier)
     tableView.register(DividerTableViewCell.self,
                        forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
@@ -507,5 +519,8 @@ private extension ListPlayersScreenView {
     
     let emojiMenuReactionTitle = NSLocalizedString("Удалить реакцию", comment: "")
     let emojiMenuReactionImage = UIImage(systemName: "trash")
+    
+    let male = NSLocalizedString("М", comment: "")
+    let female = NSLocalizedString("Ж", comment: "")
   }
 }

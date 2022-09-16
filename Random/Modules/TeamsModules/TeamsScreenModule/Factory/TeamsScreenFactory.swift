@@ -52,200 +52,233 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
         )
       }
       
-      let playersFiltered = allPlayers.shuffled().filter { $0.state != .doesNotPlay }
+      var playersFiltered = allPlayers.shuffled().filter { $0.state != .doesNotPlay }
       let playersWithTeamsFiltered = playersFiltered.filter { $0.state != .random }
-      let playersWithoutTeamsFiltered = playersFiltered.filter { $0.state == .random }
+      var playersWithoutTeamsFiltered = playersFiltered.filter { $0.state == .random }
       
-      var teamOne: [TeamsScreenPlayerModel] = []
-      var teamTwo: [TeamsScreenPlayerModel] = []
-      var teamThree: [TeamsScreenPlayerModel] = []
-      var teamFour: [TeamsScreenPlayerModel] = []
-      var teamFive: [TeamsScreenPlayerModel] = []
-      var teamSix: [TeamsScreenPlayerModel] = []
+      while playersFiltered.count % model.selectedTeam != .zero {
+        let plugPlayer = TeamsScreenPlayerModel(
+          id: "",
+          name: "",
+          avatar: nil,
+          emoji: nil,
+          state: .doesNotPlay)
+        
+        playersWithoutTeamsFiltered.append(plugPlayer)
+        playersFiltered.append(plugPlayer)
+      }
+      
+      var teamOnePlayers: [TeamsScreenPlayerModel] = []
+      var teamTwoPlayers: [TeamsScreenPlayerModel] = []
+      var teamThreePlayers: [TeamsScreenPlayerModel] = []
+      var teamFourPlayers: [TeamsScreenPlayerModel] = []
+      var teamFivePlayers: [TeamsScreenPlayerModel] = []
+      var teamSixPlayers: [TeamsScreenPlayerModel] = []
+      var currentTeam = 1
       
       for player in playersWithTeamsFiltered {
         if player.state == .teamOne {
-          teamOne.append(player)
+          teamOnePlayers.append(player)
           continue
         }
         
         if player.state == .teamTwo {
-          teamTwo.append(player)
+          teamTwoPlayers.append(player)
           continue
         }
         
         if player.state == .teamThree {
-          teamThree.append(player)
+          teamThreePlayers.append(player)
           continue
         }
         
         if player.state == .teamFour {
-          teamFour.append(player)
+          teamFourPlayers.append(player)
           continue
         }
         
         if player.state == .teamFive {
-          teamFive.append(player)
+          teamFivePlayers.append(player)
           continue
         }
         
         if player.state == .teamSix {
-          teamSix.append(player)
+          teamSixPlayers.append(player)
           continue
         }
       }
       
       for player in playersWithoutTeamsFiltered {
         if model.selectedTeam == 1 {
-          teamOne.append(player)
+          teamOnePlayers.append(player)
           continue
         }
         
         if model.selectedTeam == 2 {
-          if teamOne.count < playersFiltered.count / model.selectedTeam {
-            teamOne.append(player)
+          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
+            teamOnePlayers.append(player)
+            currentTeam = 2
             continue
           }
           
-          teamTwo.append(player)
+          teamTwoPlayers.append(player)
+          currentTeam = 1
           continue
         }
         
         if model.selectedTeam == 3 {
-          if teamOne.count < playersFiltered.count / model.selectedTeam {
-            teamOne.append(player)
+          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
+            teamOnePlayers.append(player)
+            currentTeam = 2
             continue
           }
           
-          if teamTwo.count < playersFiltered.count / model.selectedTeam {
-            teamTwo.append(player)
+          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
+            teamTwoPlayers.append(player)
+            currentTeam = 3
             continue
           }
           
-          teamThree.append(player)
+          teamThreePlayers.append(player)
+          currentTeam = 1
           continue
         }
         
         if model.selectedTeam == 4 {
-          if teamOne.count < playersFiltered.count / model.selectedTeam {
-            teamOne.append(player)
+          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
+            teamOnePlayers.append(player)
+            currentTeam = 2
             continue
           }
           
-          if teamTwo.count < playersFiltered.count / model.selectedTeam {
-            teamTwo.append(player)
+          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
+            teamTwoPlayers.append(player)
+            currentTeam = 3
             continue
           }
           
-          if teamThree.count < playersFiltered.count / model.selectedTeam {
-            teamThree.append(player)
+          if teamThreePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 3 {
+            teamThreePlayers.append(player)
+            currentTeam = 4
             continue
           }
           
-          teamFour.append(player)
+          teamFourPlayers.append(player)
+          currentTeam = 1
           continue
         }
         
         if model.selectedTeam == 5 {
-          if teamOne.count < playersFiltered.count / model.selectedTeam {
-            teamOne.append(player)
+          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
+            teamOnePlayers.append(player)
+            currentTeam = 2
             continue
           }
           
-          if teamTwo.count < playersFiltered.count / model.selectedTeam {
-            teamTwo.append(player)
+          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
+            teamTwoPlayers.append(player)
+            currentTeam = 3
             continue
           }
           
-          if teamThree.count < playersFiltered.count / model.selectedTeam {
-            teamThree.append(player)
+          if teamThreePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 3 {
+            teamThreePlayers.append(player)
+            currentTeam = 4
             continue
           }
           
-          if teamFour.count < playersFiltered.count / model.selectedTeam {
-            teamFour.append(player)
+          if teamFourPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 4 {
+            teamFourPlayers.append(player)
+            currentTeam = 5
             continue
           }
           
-          teamFive.append(player)
+          teamFivePlayers.append(player)
+          currentTeam = 1
           continue
         }
         
         if model.selectedTeam == 6 {
-          if teamOne.count < playersFiltered.count / model.selectedTeam {
-            teamOne.append(player)
+          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
+            teamOnePlayers.append(player)
+            currentTeam = 2
             continue
           }
           
-          if teamTwo.count < playersFiltered.count / model.selectedTeam {
-            teamTwo.append(player)
+          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
+            teamTwoPlayers.append(player)
+            currentTeam = 3
             continue
           }
           
-          if teamThree.count < playersFiltered.count / model.selectedTeam {
-            teamThree.append(player)
+          if teamThreePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 3 {
+            teamThreePlayers.append(player)
+            currentTeam = 4
             continue
           }
           
-          if teamFour.count < playersFiltered.count / model.selectedTeam {
-            teamFour.append(player)
+          if teamFourPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 4 {
+            teamFourPlayers.append(player)
+            currentTeam = 5
             continue
           }
           
-          if teamFive.count < playersFiltered.count / model.selectedTeam {
-            teamFive.append(player)
+          if teamFivePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 5 {
+            teamFivePlayers.append(player)
+            currentTeam = 6
             continue
           }
           
-          teamSix.append(player)
+          teamSixPlayers.append(player)
+          currentTeam = 1
           continue
         }
       }
       
-      if !teamOne.isEmpty {
+      if !teamOnePlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 1",
-          players: teamOne
+          players: teamOnePlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
       
-      if !teamTwo.isEmpty {
+      if !teamTwoPlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 2",
-          players: teamTwo
+          players: teamTwoPlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
       
-      if !teamThree.isEmpty {
+      if !teamThreePlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 3",
-          players: teamThree
+          players: teamThreePlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
       
-      if !teamFour.isEmpty {
+      if !teamFourPlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 4",
-          players: teamFour
+          players: teamFourPlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
       
-      if !teamFive.isEmpty {
+      if !teamFivePlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 5",
-          players: teamFive
+          players: teamFivePlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
       
-      if !teamSix.isEmpty {
+      if !teamSixPlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 6",
-          players: teamSix
+          players: teamSixPlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }

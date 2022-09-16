@@ -17,7 +17,7 @@
 "Последнее число:" = "Last number:";
 "Список чисел" = "List of numbers";
 "Последнее слово:" = "The last word:";
-"нет" = "not";
+"нет" = "no";
 "Список ответов" = "Answer list";
 "Сгенерировать букву" = "Generate letter";
 "Последняя буква:" = "Last letter:";
@@ -34,7 +34,7 @@
 "Последняя сумма:" = "Last amount:";
 "Список кубиков" = "Dice List";
 "Да" = "Yes";
-"Нет" = "Not";
+"Нет" = "No";
 "Русские буквы" = "Russian letters";
 "Английские буквы" = "English letters";
 "Орел" = "Eagle";
@@ -292,3 +292,6 @@
 "Цвета" = "Colors";
 "Градиент" = "Gradient";
 "Обычный" = "Regular";
+"Орел или Pешка" = "Heads or tails";
+"М" = "M";
+"Ж" = "F";

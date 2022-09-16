@@ -102,6 +102,10 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
 // MARK: - ListPlayersScreenViewOutput
 
 extension ListPlayersScreenViewController: ListPlayersScreenViewOutput {
+  func genderValueChanged(_ index: Int) {
+    interactor.genderValueChanged(index)
+  }
+  
   func playerRemoved(id: String) {
     interactor.playerRemove(id: id)
   }

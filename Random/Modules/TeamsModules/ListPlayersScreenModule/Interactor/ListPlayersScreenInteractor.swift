@@ -54,11 +54,15 @@ protocol ListPlayersScreenInteractorInput {
   
   /// Удалить всех игроков
   func removeAllPlayers()
+  
+  /// Пол игрока был изменен
+  /// - Parameter index: Индекс пола игрока
+  func genderValueChanged(_ index: Int)
 }
 
 /// Интерактор
 final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
-  
+
   // MARK: - Internal properties
   
   weak var output: ListPlayersScreenInteractorOutput?
@@ -67,6 +71,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   
   private var models: [TeamsScreenPlayerModel] = []
   private var defaultTeamsCount = Appearance().defaultTeamsCount
+  private var genderIndex = Appearance().genderMaleIndex
   
   // MARK: - Internal func
   
@@ -157,14 +162,25 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   func returnCurrentListPlayers() -> [TeamsScreenPlayerModel] {
     return models
   }
+  
+  func genderValueChanged(_ index: Int) {
+    genderIndex = index
+  }
 }
 
 // MARK: - Private
 
 private extension ListPlayersScreenInteractor {
   func generationImagePlayer() -> UIImage? {
-    let randomNumberPlayers = Int.random(in: Appearance().rangeImagePlayer)
-    return UIImage(named: "player\(randomNumberPlayers)")
+    let appearance = Appearance()
+    
+    if genderIndex == appearance.genderMaleIndex {
+      let randomNumberPlayers = Int.random(in: Appearance().rangeImageMalePlayer)
+      return UIImage(named: "male_player\(randomNumberPlayers)")
+    } else {
+      let randomNumberPlayers = Int.random(in: Appearance().rangeImageFemalePlayer)
+      return UIImage(named: "female_player\(randomNumberPlayers)")
+    }
   }
 }
 
@@ -172,7 +188,10 @@ private extension ListPlayersScreenInteractor {
 
 private extension ListPlayersScreenInteractor {
   struct Appearance {
-    let rangeImagePlayer = 1...15
+    let rangeImageMalePlayer = 1...15
+    let rangeImageFemalePlayer = 1...21
     let defaultTeamsCount = 2
+    let genderMaleIndex = 0
+    let genderFemaleIndex = 1
   }
 }

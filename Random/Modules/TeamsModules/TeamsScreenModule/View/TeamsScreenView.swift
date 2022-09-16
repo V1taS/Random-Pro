@@ -228,7 +228,7 @@ extension TeamsScreenView: UICollectionViewDataSource {
     cell.configureCellWith(
       avatar: UIImage(data: player.avatar ?? Data()),
       name: player.name,
-      nameTextColor: RandomColor.darkApple,
+      nameTextColor: RandomColor.primaryGray,
       styleCard: .defaultStyle,
       styleEmoji: .customEmoji(Character(player.emoji ?? " ")),
       isBorder: true,

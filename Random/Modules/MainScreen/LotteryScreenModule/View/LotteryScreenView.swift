@@ -80,9 +80,9 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   private func setupDefaultSettings() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
-    rangeStartTextField.layer.borderColor = RandomColor.primaryGray.cgColor
-    rangeEndTextField.layer.borderColor = RandomColor.primaryGray.cgColor
-    amountNumberTextField.layer.borderColor = RandomColor.primaryGray.cgColor
+    rangeStartTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
+    rangeEndTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
+    amountNumberTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
     isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50

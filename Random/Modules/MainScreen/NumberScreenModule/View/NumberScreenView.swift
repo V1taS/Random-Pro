@@ -112,8 +112,8 @@ final class NumberScreenView: NumberScreenViewProtocol {
   
   private func setupDefaultSettings() {
     let appearance = Appearance()
-    rangeStartTextField.layer.borderColor = RandomColor.primaryGray.cgColor
-    rangeEndTextField.layer.borderColor = RandomColor.primaryGray.cgColor
+    rangeStartTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
+    rangeEndTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
     backgroundColor = RandomColor.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70

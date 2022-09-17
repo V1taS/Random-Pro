@@ -166,7 +166,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
                                      withConfiguration: Appearance().largeConfig)
         cell.configureCellWith(
           textField: textField,
-          textFieldBorderColor: RandomColor.primaryGray,
+          textFieldBorderColor: RandomColor.secondaryGray,
           buttonImage: checkmarkImage,
           listGender: [appearance.male, appearance.female],
           buttonAction: { [weak self] in
@@ -411,7 +411,7 @@ private extension ListPlayersScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     tableView.backgroundColor = RandomColor.primaryWhite
-    textField.layer.borderColor = RandomColor.primaryGray.cgColor
+    textField.layer.borderColor = RandomColor.secondaryGray.cgColor
     
     textField.placeholder = appearance.textFieldPlaceholder
     textField.delegate = self

@@ -82,6 +82,10 @@ final class OnboardingScreenViewController: OnboardingScreenModule {
 // MARK: - OnboardingScreenViewOutput
 
 extension OnboardingScreenViewController: OnboardingScreenViewOutput {
+  func didPressCloseButton() {
+    moduleOutput?.onboardingDidFinish()
+  }
+  
   func didPressButton(to page: Int) {
     interactor.didPressButton(to: page)
   }

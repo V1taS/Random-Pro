@@ -18,6 +18,9 @@ protocol OnboardingScreenViewOutput: AnyObject {
   /// Была нажата кнопка
   /// - Parameter page: Номер страницы
   func didPressButton(to page: Int)
+  
+  /// Закрыть экран
+  func didPressCloseButton()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -52,6 +55,7 @@ final class OnboardingScreenView: OnboardingScreenViewProtocol {
   private let pageIndicator = UIPageControl()
   private let scrollView = UIScrollView()
   private let stackView = UIStackView()
+  private let closeButton = UIButton()
   
   // MARK: - Initialization
   
@@ -121,7 +125,7 @@ private extension OnboardingScreenView {
       scrollView.addSubview($0)
     }
     
-    [pageIndicator, scrollView, button].forEach {
+    [pageIndicator, scrollView, button, closeButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -132,6 +136,11 @@ private extension OnboardingScreenView {
       scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
       scrollView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.7),
+      
+      closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                       constant: appearance.insetMiddle),
+      closeButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                            constant: -appearance.insetMiddle),
       
       pageIndicator.bottomAnchor.constraint(equalTo: button.topAnchor,
                                             constant: -appearance.insetLarge),
@@ -173,6 +182,16 @@ private extension OnboardingScreenView {
     button.addTarget(self,
                      action: #selector(buttonAction),
                      for: .touchUpInside)
+    
+    closeButton.setImage(Appearance().closeButtonIcon, for: .normal)
+    closeButton.addTarget(self,
+                          action: #selector(closeButtonction),
+                          for: .touchUpInside)
+  }
+  
+  @objc
+  func closeButtonction() {
+    output?.didPressCloseButton()
   }
   
   @objc
@@ -195,5 +214,6 @@ private extension OnboardingScreenView {
   struct Appearance {
     let insetMiddle: CGFloat = 16
     let insetLarge: CGFloat = 24
+    let closeButtonIcon = UIImage(systemName: "xmark")
   }
 }

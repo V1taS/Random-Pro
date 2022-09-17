@@ -141,6 +141,7 @@ extension ListAddItemsScreenView: UITableViewDataSource {
                                      withConfiguration: Appearance().largeConfig)
         cell.configureCellWith(
           textField: textField,
+          textFieldBorderColor: RandomColor.primaryGray,
           buttonImage: checkmarkImage,
           buttonAction: { [weak self] in
             guard let self = self else {
@@ -224,6 +225,7 @@ private extension ListAddItemsScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     tableView.backgroundColor = RandomColor.primaryWhite
+    textField.layer.borderColor = RandomColor.primaryGray.cgColor
     
     textField.placeholder = appearance.textFieldPlaceholder
     textField.delegate = self

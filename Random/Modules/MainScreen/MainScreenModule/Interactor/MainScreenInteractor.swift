@@ -48,6 +48,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // MARK: - Internal func
   
   func updateSectionsWith(models: [MainScreenModel.Section]) {
+    let models = MainScreenModel.updatesLocalizationTitleSectionForModel(models: models)
+    
     if let model = model {
       let newModel = MainScreenModel(
         isDarkMode: model.isDarkMode,
@@ -67,7 +69,12 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   func getContent() {
     if let model = model {
-      output?.didRecive(model: model)
+      let newModel = MainScreenModel(
+        isDarkMode: model.isDarkMode,
+        allSections: MainScreenModel.updatesLocalizationTitleSectionForModel(models: model.allSections)
+      )
+      self.model = newModel
+      output?.didRecive(model: newModel)
     } else {
       let newModel = MainScreenModel.createBaseModel()
       model = newModel

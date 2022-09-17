@@ -52,7 +52,7 @@ private extension MainSettingsScreenFactory {
   struct Appearance {
     let darkThemeTitle = NSLocalizedString("Тёмная тема",
                                            comment: "")
-    let customMainSectionsTitle = NSLocalizedString("Главный экран",
+    let customMainSectionsTitle = NSLocalizedString("Настройка секций",
                                                     comment: "")
   }
 }

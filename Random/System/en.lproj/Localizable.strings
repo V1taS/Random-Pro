@@ -298,3 +298,8 @@
 "Тёмная тема" = "Dark theme";
 "Главный экран" = "Main screen";
 "Настройка секций" = "Section setup";
+"Завершить" = "Complete";
+"Добавили темную тему" = "Added dark theme";
+"Подключить: \n Главный экран -> Настройки -> Темная тема" = "Connect: \n Home screen -> Settings -> Dark theme";
+"Добавили настройку секций" = "Added section settings";
+"Главный экран -> Настройки -> Настройка секций" = "Home Screen -> Settings -> Section Settings";

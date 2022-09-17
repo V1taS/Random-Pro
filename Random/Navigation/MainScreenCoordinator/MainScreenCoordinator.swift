@@ -16,6 +16,7 @@ final class MainScreenCoordinator: Coordinator {
   private let services: ApplicationServices
   private var anyCoordinator: Coordinator?
   private var settingsScreenCoordinator: MainSettingsScreenCoordinatorProtocol?
+  private var onboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol?
   private let window: UIWindow?
   
   // MARK: - Initialization
@@ -41,6 +42,10 @@ final class MainScreenCoordinator: Coordinator {
     
     checkDarkMode()
     navigationController.pushViewController(mainScreenModule, animated: true)
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+      self?.showOnboarding()
+    }
   }
 }
 
@@ -210,7 +215,20 @@ private extension MainScreenCoordinator {
     guard let isDarkTheme = mainScreenModule?.returnModel().isDarkMode, let window = window else {
       return
     }
-    
     window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
+  }
+  
+  func showOnboarding() {
+    let actualScreens = OnboardingScreenInteractor.getActualScreens()
+
+    guard !actualScreens.isEmpty else {
+      return
+    }
+    
+    let onboardingScreenCoordinator = OnboardingScreenCoordinator(self.navigationController,
+                                                                  self.services)
+    onboardingScreenCoordinator.start()
+    self.onboardingScreenCoordinator = onboardingScreenCoordinator
+    self.services.metricsService.track(event: .onboarding)
   }
 }

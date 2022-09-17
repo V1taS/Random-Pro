@@ -239,6 +239,128 @@ extension MainScreenModel {
     return MainScreenModel(isDarkMode: nil,
                            allSections: allSections)
   }
+  
+  static func updatesLocalizationTitleSectionForModel(
+    models: [Section]
+  ) -> [Section] {
+    let appearance = Appearance()
+    var newModel: [Section] = []
+    
+    models.forEach { model in
+      switch model.type {
+      case .teams:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardTeam,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .number:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardNumber,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .yesOrNo:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardYesOrNot,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .letter:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardCharacters,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .list:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardList,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .coin:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardCoin,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .cube:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardCube,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .dateAndTime:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardDateAndTime,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .lottery:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardLottery,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .contact:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardContact,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .password:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleCardPassword,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      case .colors:
+        newModel.append(Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleColors,
+          imageSection: model.imageSection,
+          isShowADVLabel: model.isShowADVLabel,
+          advLabel: model.advLabel
+        ))
+      }
+    }
+    
+    return newModel
+  }
 }
 
 // MARK: - Appearance

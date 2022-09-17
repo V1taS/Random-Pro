@@ -32,6 +32,20 @@
 		1B0ED1CD28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1CC28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift */; };
 		1B0ED1CF28D50199001BACF6 /* CustomMainSectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1CE28D50199001BACF6 /* CustomMainSectionsModel.swift */; };
 		1B0ED1D128D501B2001BACF6 /* CustomMainSectionsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D028D501B2001BACF6 /* CustomMainSectionsType.swift */; };
+		1B0ED1D828D5447B001BACF6 /* UpdateAppScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D328D5447B001BACF6 /* UpdateAppScreenFactory.swift */; };
+		1B0ED1D928D5447B001BACF6 /* UpdateAppScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D428D5447B001BACF6 /* UpdateAppScreenViewController.swift */; };
+		1B0ED1DA28D5447B001BACF6 /* UpdateAppScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D528D5447B001BACF6 /* UpdateAppScreenAssembly.swift */; };
+		1B0ED1DB28D5447B001BACF6 /* UpdateAppScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D628D5447B001BACF6 /* UpdateAppScreenInteractor.swift */; };
+		1B0ED1DC28D5447B001BACF6 /* UpdateAppScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D728D5447B001BACF6 /* UpdateAppScreenView.swift */; };
+		1B0ED1E428D54529001BACF6 /* UpdateAppScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1E328D54529001BACF6 /* UpdateAppScreenCoordinator.swift */; };
+		1B0ED1EB28D54E05001BACF6 /* OnboardingScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1E628D54E05001BACF6 /* OnboardingScreenFactory.swift */; };
+		1B0ED1EC28D54E05001BACF6 /* OnboardingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1E728D54E05001BACF6 /* OnboardingScreenViewController.swift */; };
+		1B0ED1ED28D54E05001BACF6 /* OnboardingScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1E828D54E05001BACF6 /* OnboardingScreenAssembly.swift */; };
+		1B0ED1EE28D54E05001BACF6 /* OnboardingScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1E928D54E05001BACF6 /* OnboardingScreenInteractor.swift */; };
+		1B0ED1EF28D54E05001BACF6 /* OnboardingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1EA28D54E05001BACF6 /* OnboardingScreenView.swift */; };
+		1B0ED1F728D54E5A001BACF6 /* OnboardingScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1F628D54E5A001BACF6 /* OnboardingScreenCoordinator.swift */; };
+		1B0ED1FA28D552D4001BACF6 /* OnboardingScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1F928D552D4001BACF6 /* OnboardingScreenModel.swift */; };
+		1B0ED1FC28D55A40001BACF6 /* OnboardingScreenContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1FB28D55A40001BACF6 /* OnboardingScreenContainerView.swift */; };
 		1B10E541282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E540282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift */; };
 		1B1B5B4727ADDFAF00EF283E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */; };
 		1B224BC428B9996200AC5D97 /* ContactScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B224BC328B9996200AC5D97 /* ContactScreenModel.swift */; };
@@ -238,6 +252,20 @@
 		1B0ED1CC28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsCoordinator.swift; sourceTree = "<group>"; };
 		1B0ED1CE28D50199001BACF6 /* CustomMainSectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsModel.swift; sourceTree = "<group>"; };
 		1B0ED1D028D501B2001BACF6 /* CustomMainSectionsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsType.swift; sourceTree = "<group>"; };
+		1B0ED1D328D5447B001BACF6 /* UpdateAppScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppScreenFactory.swift; sourceTree = "<group>"; };
+		1B0ED1D428D5447B001BACF6 /* UpdateAppScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppScreenViewController.swift; sourceTree = "<group>"; };
+		1B0ED1D528D5447B001BACF6 /* UpdateAppScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppScreenAssembly.swift; sourceTree = "<group>"; };
+		1B0ED1D628D5447B001BACF6 /* UpdateAppScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppScreenInteractor.swift; sourceTree = "<group>"; };
+		1B0ED1D728D5447B001BACF6 /* UpdateAppScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppScreenView.swift; sourceTree = "<group>"; };
+		1B0ED1E328D54529001BACF6 /* UpdateAppScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppScreenCoordinator.swift; sourceTree = "<group>"; };
+		1B0ED1E628D54E05001BACF6 /* OnboardingScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenFactory.swift; sourceTree = "<group>"; };
+		1B0ED1E728D54E05001BACF6 /* OnboardingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenViewController.swift; sourceTree = "<group>"; };
+		1B0ED1E828D54E05001BACF6 /* OnboardingScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenAssembly.swift; sourceTree = "<group>"; };
+		1B0ED1E928D54E05001BACF6 /* OnboardingScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenInteractor.swift; sourceTree = "<group>"; };
+		1B0ED1EA28D54E05001BACF6 /* OnboardingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenView.swift; sourceTree = "<group>"; };
+		1B0ED1F628D54E5A001BACF6 /* OnboardingScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenCoordinator.swift; sourceTree = "<group>"; };
+		1B0ED1F928D552D4001BACF6 /* OnboardingScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenModel.swift; sourceTree = "<group>"; };
+		1B0ED1FB28D55A40001BACF6 /* OnboardingScreenContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreenContainerView.swift; sourceTree = "<group>"; };
 		1B10E540282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectUserDefaultsWrapper.swift; sourceTree = "<group>"; };
 		1B1B501526009FAD00F73A14 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		1B1B5B4827ADDFAF00EF283E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -525,6 +553,8 @@
 		1B0ED19E28D4D8F4001BACF6 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				1B0ED1E528D54DE2001BACF6 /* OnboardingScreenModule */,
+				1B0ED1D228D54460001BACF6 /* UpdateAppScreenModule */,
 				1B08AD9928CDDAAE007290F3 /* ColorsScreenModule */,
 				1BA199A728BBC6D50036D73C /* ShareScreenModule */,
 				1BD5398C28BA2FE0009DA51C /* ListModules */,
@@ -693,6 +723,136 @@
 				1B0ED1CC28D4FBB3001BACF6 /* CustomMainSectionsCoordinator.swift */,
 			);
 			path = CustomMainSectionsCoordinator;
+			sourceTree = "<group>";
+		};
+		1B0ED1D228D54460001BACF6 /* UpdateAppScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1E128D544F5001BACF6 /* Assembly */,
+				1B0ED1E028D544EF001BACF6 /* Factory */,
+				1B0ED1DF28D544E9001BACF6 /* Interactor */,
+				1B0ED1DE28D544E3001BACF6 /* Presenter */,
+				1B0ED1DD28D544DD001BACF6 /* View */,
+			);
+			path = UpdateAppScreenModule;
+			sourceTree = "<group>";
+		};
+		1B0ED1DD28D544DD001BACF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1D728D5447B001BACF6 /* UpdateAppScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B0ED1DE28D544E3001BACF6 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1D428D5447B001BACF6 /* UpdateAppScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B0ED1DF28D544E9001BACF6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1D628D5447B001BACF6 /* UpdateAppScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B0ED1E028D544EF001BACF6 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1D328D5447B001BACF6 /* UpdateAppScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B0ED1E128D544F5001BACF6 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1D528D5447B001BACF6 /* UpdateAppScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B0ED1E228D54514001BACF6 /* UpdateAppScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1E328D54529001BACF6 /* UpdateAppScreenCoordinator.swift */,
+			);
+			path = UpdateAppScreenCoordinator;
+			sourceTree = "<group>";
+		};
+		1B0ED1E528D54DE2001BACF6 /* OnboardingScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1F828D552C7001BACF6 /* Models */,
+				1B0ED1F428D54E27001BACF6 /* View */,
+				1B0ED1F328D54E20001BACF6 /* Presenter */,
+				1B0ED1F228D54E19001BACF6 /* Interactor */,
+				1B0ED1F128D54E14001BACF6 /* Factory */,
+				1B0ED1F028D54E0E001BACF6 /* Assembly */,
+			);
+			path = OnboardingScreenModule;
+			sourceTree = "<group>";
+		};
+		1B0ED1F028D54E0E001BACF6 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1E828D54E05001BACF6 /* OnboardingScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B0ED1F128D54E14001BACF6 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1E628D54E05001BACF6 /* OnboardingScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B0ED1F228D54E19001BACF6 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1E928D54E05001BACF6 /* OnboardingScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B0ED1F328D54E20001BACF6 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1E728D54E05001BACF6 /* OnboardingScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B0ED1F428D54E27001BACF6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1EA28D54E05001BACF6 /* OnboardingScreenView.swift */,
+				1B0ED1FB28D55A40001BACF6 /* OnboardingScreenContainerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B0ED1F528D54E45001BACF6 /* OnboardingScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1F628D54E5A001BACF6 /* OnboardingScreenCoordinator.swift */,
+			);
+			path = OnboardingScreenCoordinator;
+			sourceTree = "<group>";
+		};
+		1B0ED1F828D552C7001BACF6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B0ED1F928D552D4001BACF6 /* OnboardingScreenModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1B224BC228B9995600AC5D97 /* Models */ = {
@@ -1164,6 +1324,8 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				1B0ED1F528D54E45001BACF6 /* OnboardingScreenCoordinator */,
+				1B0ED1E228D54514001BACF6 /* UpdateAppScreenCoordinator */,
 				1B08ADA928CDDB41007290F3 /* ColorsScreenCoordinator */,
 				1BA199B728BBC7460036D73C /* ShareScreenCoordinator */,
 				1BD5399F28BA3156009DA51C /* ListCoordinators */,
@@ -2304,9 +2466,12 @@
 				6CA6203628B636190078C971 /* ContactScreenCoordinator.swift in Sources */,
 				1B7431B228A805A800205C2C /* ListPlayersScreenType.swift in Sources */,
 				1B0ED1A728D4D9E7001BACF6 /* MainSettingsScreenViewController.swift in Sources */,
+				1B0ED1DC28D5447B001BACF6 /* UpdateAppScreenView.swift in Sources */,
 				1BA83CF92879E991000035E3 /* LetterScreenModel.swift in Sources */,
+				1B0ED1DA28D5447B001BACF6 /* UpdateAppScreenAssembly.swift in Sources */,
 				6CA3962528324FC500F86248 /* LetterScreenModule.swift in Sources */,
 				1B08ADA128CDDAD5007290F3 /* ColorsScreenAssembly.swift in Sources */,
+				1B0ED1ED28D54E05001BACF6 /* OnboardingScreenAssembly.swift in Sources */,
 				6CBFD056289BC4ED005F9104 /* PasswordScreenInteractor.swift in Sources */,
 				6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */,
 				1B31F62E285F926200A88217 /* ListResultScreenInteractor.swift in Sources */,
@@ -2338,6 +2503,8 @@
 				6CA6201B28B62DE30078C971 /* CubesScreenAssembly.swift in Sources */,
 				6CA6201E28B62DE30078C971 /* CubesScreenView.swift in Sources */,
 				1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */,
+				1B0ED1F728D54E5A001BACF6 /* OnboardingScreenCoordinator.swift in Sources */,
+				1B0ED1D928D5447B001BACF6 /* UpdateAppScreenViewController.swift in Sources */,
 				6CA6202028B62DE30078C971 /* CubesScreenFactory.swift in Sources */,
 				6CA6203E28B679B40078C971 /* ListScreenView.swift in Sources */,
 				1B941DDE282179A200D968DF /* ApplicationServices.swift in Sources */,
@@ -2351,11 +2518,14 @@
 				6CA6202B28B633120078C971 /* ContactScreenView.swift in Sources */,
 				6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */,
 				1B96E0EF2820483F00A23880 /* MainScreenFactory.swift in Sources */,
+				1B0ED1DB28D5447B001BACF6 /* UpdateAppScreenInteractor.swift in Sources */,
 				6CBFD05D289BC775005F9104 /* PasswordScreenCoordinator.swift in Sources */,
 				6C1A0CBE2834EA4800A3040E /* LotteryScreenFactory.swift in Sources */,
+				1B0ED1FC28D55A40001BACF6 /* OnboardingScreenContainerView.swift in Sources */,
 				1B96E0FE282048D000A23880 /* MainScreenCoordinator.swift in Sources */,
 				6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */,
 				1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */,
+				1B0ED1EB28D54E05001BACF6 /* OnboardingScreenFactory.swift in Sources */,
 				1B74318F28A79F4F00205C2C /* ListPlayersScreenFactory.swift in Sources */,
 				1B0ED1C028D4FB3A001BACF6 /* CustomMainSectionsFactory.swift in Sources */,
 				1B31F62F285F926200A88217 /* ListResultScreenView.swift in Sources */,
@@ -2380,6 +2550,7 @@
 				1B74319128A79F4F00205C2C /* ListPlayersScreenAssembly.swift in Sources */,
 				1BCB6ECB28B29F870040F46E /* SettingsScreenTableViewType.swift in Sources */,
 				1BA199B028BBC6FB0036D73C /* ShareScreenInteractor.swift in Sources */,
+				1B0ED1D828D5447B001BACF6 /* UpdateAppScreenFactory.swift in Sources */,
 				1B74319C28A79FF000205C2C /* ListPlayersScreenCoordinator.swift in Sources */,
 				6C7D4D50282E5A1D00A086BC /* DateTimeScreenCoordinator.swift in Sources */,
 				1B941DD62821758300D968DF /* KeyboardService.swift in Sources */,
@@ -2391,6 +2562,7 @@
 				1BD5399328BA303D009DA51C /* ListAddItemsScreenFactory.swift in Sources */,
 				1B10E541282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift in Sources */,
 				1B50065D28A6BDF0009AABF2 /* TeamsScreenInteractor.swift in Sources */,
+				1B0ED1EE28D54E05001BACF6 /* OnboardingScreenInteractor.swift in Sources */,
 				1B96E0F02820483F00A23880 /* MainScreenViewController.swift in Sources */,
 				1B08AD9F28CDDAD5007290F3 /* ColorsScreenFactory.swift in Sources */,
 				1B08ADAB28CDDB57007290F3 /* ColorsScreenCoordinator.swift in Sources */,
@@ -2398,12 +2570,15 @@
 				6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */,
 				6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */,
 				1B412BA728C7DFE60078126F /* FileManager.swift in Sources */,
+				1B0ED1EF28D54E05001BACF6 /* OnboardingScreenView.swift in Sources */,
 				1B50E4D22842C19300C7A1D9 /* NumberScreenModel.swift in Sources */,
+				1B0ED1E428D54529001BACF6 /* UpdateAppScreenCoordinator.swift in Sources */,
 				6C7D4D4B282E558400A086BC /* DateTimeFactory.swift in Sources */,
 				1BA199AE28BBC6FB0036D73C /* ShareScreenViewController.swift in Sources */,
 				6C98CBD128339FE300D2E4FA /* CoinScreenInteractor.swift in Sources */,
 				6CA6204228B67A930078C971 /* ListScreenInteractor.swift in Sources */,
 				6CE65F83282D0D5600272D56 /* YesNoScreenView.swift in Sources */,
+				1B0ED1FA28D552D4001BACF6 /* OnboardingScreenModel.swift in Sources */,
 				1B0ED1B528D4E098001BACF6 /* MainSettingsScreenType.swift in Sources */,
 				1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */,
 				6CE65F85282D0DD900272D56 /* YesNoScreenModule.swift in Sources */,
@@ -2452,6 +2627,7 @@
 				6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */,
 				1BD25B6D282459B4006661B8 /* MetricsService.swift in Sources */,
 				1B9D455B283BDC7C00A85F25 /* SettingsScreenInteractor.swift in Sources */,
+				1B0ED1EC28D54E05001BACF6 /* OnboardingScreenViewController.swift in Sources */,
 				1B96E0FF282048D000A23880 /* RootCoordinator.swift in Sources */,
 				6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */,
 				6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */,

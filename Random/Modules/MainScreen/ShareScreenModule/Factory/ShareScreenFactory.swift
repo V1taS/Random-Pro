@@ -8,14 +8,10 @@
 import UIKit
 
 /// Cобытия которые отправляем из Factory в Presenter
-protocol ShareScreenFactoryOutput: AnyObject {
-  
-}
+protocol ShareScreenFactoryOutput: AnyObject {}
 
 /// Cобытия которые отправляем от Presenter к Factory
-protocol ShareScreenFactoryInput {
-  
-}
+protocol ShareScreenFactoryInput {}
 
 /// Фабрика
 final class ShareScreenFactory: ShareScreenFactoryInput {
@@ -23,15 +19,10 @@ final class ShareScreenFactory: ShareScreenFactoryInput {
   // MARK: - Internal properties
   
   weak var output: ShareScreenFactoryOutput?
-  
-  // MARK: - Internal func
-  
 }
 
 // MARK: - Appearance
 
 private extension ShareScreenFactory {
-  struct Appearance {
-    
-  }
+  struct Appearance {}
 }

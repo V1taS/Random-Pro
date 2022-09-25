@@ -67,49 +67,6 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
     self.models = models
     tableView.reloadData()
   }
-  
-  // MARK: - Private func
-  
-  private func configureLayout() {
-    let appearance = Appearance()
-    [tableView].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      addSubview($0)
-    }
-    
-    NSLayoutConstraint.activate([
-      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
-      tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
-      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ])
-  }
-  
-  private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
-    
-    tableView.delegate = self
-    tableView.dataSource = self
-    
-    tableView.register(LabelAndSwitchCell.self,
-                       forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
-    tableView.register(DoubleTitleCell.self,
-                       forCellReuseIdentifier: DoubleTitleCell.reuseIdentifier)
-    tableView.register(LabelAndImageCell.self,
-                       forCellReuseIdentifier: LabelAndImageCell.reuseIdentifier)
-    tableView.register(SmallButtonCell.self,
-                       forCellReuseIdentifier: SmallButtonCell.reuseIdentifier)
-    tableView.register(CustomPaddingCell.self,
-                       forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
-    tableView.register(DividerTableViewCell.self,
-                       forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
-    
-    tableView.separatorStyle = .none
-    tableView.tableFooterView = UIView()
-    tableView.tableHeaderView = UIView()
-    tableView.contentInset.top = Appearance().inset.top
-  }
 }
 
 // MARK: - UITableViewDelegate
@@ -208,6 +165,51 @@ extension SettingsScreenView: UITableViewDataSource {
       viewCell.clipsToBounds = true
     }
     return viewCell
+  }
+}
+
+// MARK: - Private
+
+private extension SettingsScreenView {
+  func configureLayout() {
+    let appearance = Appearance()
+    [tableView].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      addSubview($0)
+    }
+    
+    NSLayoutConstraint.activate([
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
+      tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
+      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+    ])
+  }
+  
+  func applyDefaultBehavior() {
+    backgroundColor = RandomColor.primaryWhite
+    tableView.backgroundColor = RandomColor.primaryWhite
+    
+    tableView.delegate = self
+    tableView.dataSource = self
+    
+    tableView.register(LabelAndSwitchCell.self,
+                       forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
+    tableView.register(DoubleTitleCell.self,
+                       forCellReuseIdentifier: DoubleTitleCell.reuseIdentifier)
+    tableView.register(LabelAndImageCell.self,
+                       forCellReuseIdentifier: LabelAndImageCell.reuseIdentifier)
+    tableView.register(SmallButtonCell.self,
+                       forCellReuseIdentifier: SmallButtonCell.reuseIdentifier)
+    tableView.register(CustomPaddingCell.self,
+                       forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
+    tableView.register(DividerTableViewCell.self,
+                       forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
+    
+    tableView.separatorStyle = .none
+    tableView.tableFooterView = UIView()
+    tableView.tableHeaderView = UIView()
+    tableView.contentInset.top = Appearance().inset.top
   }
 }
 

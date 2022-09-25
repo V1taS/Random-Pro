@@ -19,14 +19,10 @@ final class UpdateAppScreenInteractor: UpdateAppScreenInteractorInput {
   // MARK: - Internal properties
   
   weak var output: UpdateAppScreenInteractorOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance
 
 private extension UpdateAppScreenInteractor {
-  struct Appearance {
-    
-  }
+  struct Appearance {}
 }

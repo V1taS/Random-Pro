@@ -53,8 +53,8 @@ final class CubesScreenViewController: CubesScreenModule {
   // MARK: - Initialization
   
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(moduleView: CubesScreenViewProtocol,
        interactor: CubesScreenInteractorInput,
@@ -64,6 +64,12 @@ final class CubesScreenViewController: CubesScreenModule {
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -78,10 +84,6 @@ final class CubesScreenViewController: CubesScreenModule {
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
   // MARK: - Internal func
   
   func returnCurrentModel() -> CubesScreenModel {
@@ -90,36 +92,6 @@ final class CubesScreenViewController: CubesScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
-  }
-  
-  // MARK: - Private func
-  
-  private func setNavigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    
-    navigationItem.rightBarButtonItems = [
-      UIBarButtonItem(image: appearance.settingsButtonIcon,
-                      style: .plain,
-                      target: self,
-                      action: #selector(settingButtonAction)),
-      copyButton
-    ]
-  }
-  
-  @objc
-  func copyButtonAction() {
-    guard let result = interactor.returnCurrentModel().listResult.last else {
-      return
-    }
-    moduleOutput?.resultCopied(text: result)
-  }
-  
-  @objc
-  private func settingButtonAction() {
-    moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
   }
 }
 
@@ -154,6 +126,38 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
 // MARK: - CubesScreenFactoryOutput
 
 extension CubesScreenViewController: CubesScreenFactoryOutput {}
+
+// MARK: - Private
+
+private extension CubesScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    guard let result = interactor.returnCurrentModel().listResult.last else {
+      return
+    }
+    moduleOutput?.resultCopied(text: result)
+  }
+  
+  @objc
+  func settingButtonAction() {
+    moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
+  }
+}
 
 // MARK: - Appearance
 

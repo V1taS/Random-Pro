@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class NumberScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol NumberScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol NumberScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: NumberScreenCoordinatorOutput? { get set }
+}
+
+typealias NumberScreenCoordinatorProtocol = NumberScreenCoordinatorInput & Coordinator
+
+final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: NumberScreenCoordinatorOutput?
   
   // MARK: - Private property
   
@@ -95,7 +111,7 @@ extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
     
     listResultScreenCoordinator.setContentsFrom(list: numberScreenModule?.returnListResult() ?? [])
   }
-
+  
   func withoutRepetitionAction(isOn: Bool) {
     numberScreenModule?.withoutRepetitionAction(isOn: isOn)
   }

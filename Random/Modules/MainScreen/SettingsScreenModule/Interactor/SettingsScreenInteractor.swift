@@ -8,14 +8,10 @@
 import UIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol SettingsScreenInteractorOutput: AnyObject {
-  
-}
+protocol SettingsScreenInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol SettingsScreenInteractorInput {
-  
-}
+protocol SettingsScreenInteractorInput {}
 
 /// Интерактор
 final class SettingsScreenInteractor: SettingsScreenInteractorInput {
@@ -23,14 +19,10 @@ final class SettingsScreenInteractor: SettingsScreenInteractorInput {
   // MARK: - Internal properties
   
   weak var output: SettingsScreenInteractorOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance
 
 private extension SettingsScreenInteractor {
-  struct Appearance {
-    
-  }
+  struct Appearance {}
 }

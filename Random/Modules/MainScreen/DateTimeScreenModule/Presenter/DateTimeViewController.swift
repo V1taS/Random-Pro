@@ -58,18 +58,24 @@ final class DateTimeViewController: DateTimeModule {
   
   // MARK: - Initialization
   
-  init(moduleView: DateTimeViewProtocol, interactor: DateTimeInteractorInput, factory: DateTimeFactoryInput) {
+  /// - Parameters:
+  ///   - moduleView: вью
+  ///   - interactor: интерактор
+  ///   - factory: фабрика
+  init(moduleView: DateTimeViewProtocol,
+       interactor: DateTimeInteractorInput,
+       factory: DateTimeFactoryInput) {
     self.moduleView = moduleView
     self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }
   
-  // MARK: - Internal func
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -83,6 +89,8 @@ final class DateTimeViewController: DateTimeModule {
     setNavigationBar()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
+  
+  // MARK: - Internal func
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()

@@ -53,10 +53,9 @@ final class ListResultScreenViewController: ListResultScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(interactor: ListResultScreenInteractorInput,
        moduleView: ListResultScreenViewProtocol,

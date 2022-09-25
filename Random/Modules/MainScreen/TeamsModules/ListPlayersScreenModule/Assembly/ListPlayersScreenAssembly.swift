@@ -17,8 +17,8 @@ final class ListPlayersScreenAssembly {
     let interactor = ListPlayersScreenInteractor()
     let view = ListPlayersScreenView()
     let factory = ListPlayersScreenFactory()
-    let presenter = ListPlayersScreenViewController(interactor: interactor,
-                                                    moduleView: view,
+    let presenter = ListPlayersScreenViewController(moduleView: view,
+                                                    interactor: interactor,
                                                     factory: factory)
     
     view.output = presenter

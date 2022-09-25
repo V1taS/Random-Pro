@@ -15,7 +15,9 @@ final class LetterScreenAssembly {
     let view = LetterScreenView()
     let interactor = LetterScreenInteractor()
     let factory = LetterScreenFactory()
-    let presenter = LetterScreenViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = LetterScreenViewController(moduleView: view,
+                                               interactor: interactor,
+                                               factory: factory)
     
     view.output = presenter
     interactor.output = presenter

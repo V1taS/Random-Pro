@@ -19,8 +19,6 @@ final class ColorsScreenFactory: ColorsScreenFactoryInput {
   // MARK: - Internal properties
   
   weak var output: ColorsScreenFactoryOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance

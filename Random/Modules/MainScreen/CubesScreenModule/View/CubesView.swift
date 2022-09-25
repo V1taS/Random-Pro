@@ -51,10 +51,12 @@ final class CubesView: UIView {
   func updateCubesWith(type: CubesScreenModel.CubesType) {
     self.configureConstraintsWith(type: type)
   }
-  
-  // MARK: - Private func
-  
-  private func configureLayout() {
+}
+
+// MARK: - Private
+
+private extension CubesView {
+  func configureLayout() {
     [cubeOneImageView, cubesTwoImageView, cubesThreeImageView,
      cubesFourImageView, cubesFiveImageView, cubesSixImageView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +64,7 @@ final class CubesView: UIView {
     }
   }
   
-  private func configureConstraintsWith(type: CubesScreenModel.CubesType) {
+  func configureConstraintsWith(type: CubesScreenModel.CubesType) {
     let appearance = Appearance()
     deactivateCubes()
     
@@ -187,16 +189,16 @@ final class CubesView: UIView {
                                                   constant: -appearance.oneHundredSpacing),
         cubeOneImageView.centerYAnchor.constraint(equalTo: centerYAnchor,
                                                   constant: appearance.fiftySpacing),
-
+        
         cubesTwoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
         cubesTwoImageView.centerYAnchor.constraint(equalTo: centerYAnchor,
                                                    constant: appearance.fiftySpacing),
-
+        
         cubesThreeImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
                                                      constant: appearance.oneHundredSpacing),
         cubesThreeImageView.centerYAnchor.constraint(equalTo: centerYAnchor,
                                                      constant: appearance.fiftySpacing),
-
+        
         cubesFourImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
                                                     constant: -appearance.fiftySpacing),
         cubesFourImageView.centerYAnchor.constraint(equalTo: centerYAnchor,
@@ -268,7 +270,7 @@ final class CubesView: UIView {
     }
   }
   
-  private func deactivateCubes() {
+  func deactivateCubes() {
     cubeOneConstraints.forEach {
       $0.isActive = false
     }
@@ -299,7 +301,7 @@ final class CubesView: UIView {
     }
   }
   
-  private func configureCubeImageFrom(number: Int) -> UIImage? {
+  func configureCubeImageFrom(number: Int) -> UIImage? {
     guard number >= 1 && number <= 6 else {
       return nil
     }
@@ -340,7 +342,7 @@ final class CubesView: UIView {
     return nil
   }
   
-  private func applyDefaultBehavior() {
+  func applyDefaultBehavior() {
     backgroundColor = RandomColor.primaryWhite
     
     cubeOneImageView.setImageColor(color: RandomColor.primaryGreen)

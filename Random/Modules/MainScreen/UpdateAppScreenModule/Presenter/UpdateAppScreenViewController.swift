@@ -37,16 +37,15 @@ final class UpdateAppScreenViewController: UpdateAppScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: UpdateAppScreenInteractorInput,
-       moduleView: UpdateAppScreenViewProtocol,
+  init(moduleView: UpdateAppScreenViewProtocol,
+       interactor: UpdateAppScreenInteractorInput,
        factory: UpdateAppScreenFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }

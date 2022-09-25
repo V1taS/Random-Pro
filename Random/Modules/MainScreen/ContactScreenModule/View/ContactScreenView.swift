@@ -37,7 +37,7 @@ final class ContactScreenView: ContactScreenViewProtocol {
   
   private let resultLabel = UILabel()
   private let generateButton = ButtonView()
- 
+  
   // MARK: - Internal func
   
   override init(frame: CGRect) {
@@ -53,10 +53,12 @@ final class ContactScreenView: ContactScreenViewProtocol {
   func setResult(_ text: String?) {
     resultLabel.text = text
   }
-  
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
+}
+
+// MARK: - Private
+
+private extension ContactScreenView {
+  func setupDefaultSettings() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     
@@ -69,13 +71,8 @@ final class ContactScreenView: ContactScreenViewProtocol {
     generateButton.setTitle(appearance.titleButton, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
-
-  @objc
-  private func generateButtonAction() {
-    output?.generateButtonAction()
-  }
   
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [resultLabel, generateButton].forEach {
@@ -97,6 +94,11 @@ final class ContactScreenView: ContactScreenViewProtocol {
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -appearance.middleSpacing)
     ])
+  }
+  
+  @objc
+  func generateButtonAction() {
+    output?.generateButtonAction()
   }
 }
 

@@ -79,7 +79,7 @@ final class NumberScreenView: NumberScreenViewProtocol {
   private let scrollView = UIScrollView()
   private let contentView = UIView()
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -91,6 +91,8 @@ final class NumberScreenView: NumberScreenViewProtocol {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  // MARK: - Internal func
   
   func set(result: String?) {
     resultLabel.text = result
@@ -107,10 +109,40 @@ final class NumberScreenView: NumberScreenViewProtocol {
   func setRangeEnd(_ text: String?) {
     rangeEndTextField.text = text
   }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension NumberScreenView: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    rangeStartTextField.resignFirstResponder()
+    rangeEndTextField.resignFirstResponder()
+    return true
+  }
   
-  // MARK: - Private func
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    
+    if range.location >= 11 {
+      return false
+    }
+    return true
+  }
   
-  private func setupDefaultSettings() {
+  func textFieldDidChangeSelection(_ textField: UITextField) {
+    if rangeStartTextField == textField {
+      output?.rangeStartDidChange(textField.text)
+    } else {
+      output?.rangeEndDidChange(textField.text)
+    }
+  }
+}
+
+// MARK: - Private
+
+private extension NumberScreenView {
+  func setupDefaultSettings() {
     let appearance = Appearance()
     rangeStartTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
     rangeEndTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
@@ -142,13 +174,7 @@ final class NumberScreenView: NumberScreenViewProtocol {
     isUserInteractionEnabled = true
   }
   
-  @objc
-  private func generateButtonAction() {
-    output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
-                                 rangeEndValue: rangeEndTextField.text)
-  }
-  
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [scrollView].forEach {
@@ -209,33 +235,11 @@ final class NumberScreenView: NumberScreenViewProtocol {
                                               constant: appearance.middleVirticalSpacing)
     ])
   }
-}
-
-// MARK: - UITextFieldDelegate
-
-extension NumberScreenView: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    rangeStartTextField.resignFirstResponder()
-    rangeEndTextField.resignFirstResponder()
-    return true
-  }
   
-  func textField(_ textField: UITextField,
-                 shouldChangeCharactersIn range: NSRange,
-                 replacementString string: String) -> Bool {
-    
-    if range.location >= 11 {
-      return false
-    }
-    return true
-  }
-  
-  func textFieldDidChangeSelection(_ textField: UITextField) {
-    if rangeStartTextField == textField {
-      output?.rangeStartDidChange(textField.text)
-    } else {
-      output?.rangeEndDidChange(textField.text)
-    }
+  @objc
+  func generateButtonAction() {
+    output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
+                                 rangeEndValue: rangeEndTextField.text)
   }
 }
 

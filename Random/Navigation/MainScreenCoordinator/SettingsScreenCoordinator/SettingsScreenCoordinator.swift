@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
 protocol SettingsScreenCoordinatorOutput: AnyObject {
   
   /// Событие, без повторений
@@ -29,6 +30,7 @@ extension SettingsScreenCoordinatorOutput {
   func createListAction() {}
 }
 
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
 protocol SettingsScreenCoordinatorInput {
   
   /// Установить настройки по умолчанию

@@ -37,8 +37,6 @@ final class UpdateAppScreenView: UpdateAppScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
-  
   // MARK: - Private func
   
   private func configureLayout() {}

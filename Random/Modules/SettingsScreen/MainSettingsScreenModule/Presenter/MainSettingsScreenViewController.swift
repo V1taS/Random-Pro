@@ -53,16 +53,15 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: MainSettingsScreenInteractorInput,
-       moduleView: MainSettingsScreenViewProtocol,
+  init(moduleView: MainSettingsScreenViewProtocol,
+       interactor: MainSettingsScreenInteractorInput,
        factory: MainSettingsScreenFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }

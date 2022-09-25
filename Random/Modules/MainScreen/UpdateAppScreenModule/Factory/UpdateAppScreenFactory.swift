@@ -19,8 +19,6 @@ final class UpdateAppScreenFactory: UpdateAppScreenFactoryInput {
   // MARK: - Internal properties
   
   weak var output: UpdateAppScreenFactoryOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance

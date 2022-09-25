@@ -90,7 +90,7 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   }
 }
 
-// MARK: - Private Appearance
+// MARK: - Appearance
 
 private extension YesNoScreenInteractor {
   struct Appearance {

@@ -60,8 +60,8 @@ final class PasswordScreenViewController: PasswordScreenModule {
   // MARK: - Initialization
   
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(moduleView: PasswordScreenViewProtocol,
        interactor: PasswordScreenInteractorInput,
@@ -76,7 +76,7 @@ final class PasswordScreenViewController: PasswordScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()

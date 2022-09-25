@@ -62,8 +62,6 @@ typealias MainScreenViewProtocol = UIView & MainScreenViewInput
 /// View для экрана
 final class MainScreenView: MainScreenViewProtocol {
   
-  // MARK: - Public properties
-  
   // MARK: - Internal properties
   
   weak var output: MainScreenViewOutput?
@@ -93,48 +91,6 @@ final class MainScreenView: MainScreenViewProtocol {
   func configureCellsWith(models: [MainScreenModel.Section]) {
     self.models = models
     collectionView.reloadData()
-  }
-  
-  // MARK: - Private func
-  
-  private func configureLayout() {
-    let appearance = Appearance()
-    
-    [collectionView].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      addSubview($0)
-    }
-    
-    NSLayoutConstraint.activate([
-      collectionView.topAnchor.constraint(equalTo: topAnchor,
-                                          constant: appearance.collectionViewInsets.top),
-      collectionView.leftAnchor.constraint(equalTo: leftAnchor,
-                                           constant: appearance.collectionViewInsets.left),
-      collectionView.rightAnchor.constraint(equalTo: rightAnchor,
-                                            constant: -appearance.collectionViewInsets.right),
-      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                             constant: -appearance.collectionViewInsets.bottom),
-    ])
-  }
-  
-  private func applyDefaultBehavior() {
-    let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
-    
-    collectionView.backgroundColor = RandomColor.primaryWhite
-    collectionView.alwaysBounceVertical = true
-    collectionView.register(MainScreenCollectionViewCell.self,
-                            forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)
-    
-    collectionViewLayout.sectionInset = appearance.sectionInset
-    collectionViewLayout.scrollDirection = .vertical
-    collectionViewLayout.minimumInteritemSpacing = .zero
-    collectionViewLayout.minimumLineSpacing = .zero
-    collectionViewLayout.itemSize = CGSize(width: appearance.cellWidthConstant,
-                                           height: appearance.estimatedRowHeight)
-    
-    collectionView.delegate = self
-    collectionView.dataSource = self
   }
 }
 
@@ -189,6 +145,50 @@ extension MainScreenView: UICollectionViewDataSource {
     let section = models[indexPath.row]
     cell.configureCellWith(model: section)
     return cell
+  }
+}
+
+// MARK: - Private
+
+private extension MainScreenView {
+  func configureLayout() {
+    let appearance = Appearance()
+    
+    [collectionView].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      addSubview($0)
+    }
+    
+    NSLayoutConstraint.activate([
+      collectionView.topAnchor.constraint(equalTo: topAnchor,
+                                          constant: appearance.collectionViewInsets.top),
+      collectionView.leftAnchor.constraint(equalTo: leftAnchor,
+                                           constant: appearance.collectionViewInsets.left),
+      collectionView.rightAnchor.constraint(equalTo: rightAnchor,
+                                            constant: -appearance.collectionViewInsets.right),
+      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                             constant: -appearance.collectionViewInsets.bottom),
+    ])
+  }
+  
+  func applyDefaultBehavior() {
+    let appearance = Appearance()
+    backgroundColor = RandomColor.primaryWhite
+    
+    collectionView.backgroundColor = RandomColor.primaryWhite
+    collectionView.alwaysBounceVertical = true
+    collectionView.register(MainScreenCollectionViewCell.self,
+                            forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)
+    
+    collectionViewLayout.sectionInset = appearance.sectionInset
+    collectionViewLayout.scrollDirection = .vertical
+    collectionViewLayout.minimumInteritemSpacing = .zero
+    collectionViewLayout.minimumLineSpacing = .zero
+    collectionViewLayout.itemSize = CGSize(width: appearance.cellWidthConstant,
+                                           height: appearance.estimatedRowHeight)
+    
+    collectionView.delegate = self
+    collectionView.dataSource = self
   }
 }
 

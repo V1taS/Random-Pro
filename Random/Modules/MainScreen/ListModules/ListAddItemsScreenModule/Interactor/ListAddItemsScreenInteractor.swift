@@ -100,7 +100,5 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
 // MARK: - Appearance
 
 private extension ListAddItemsScreenInteractor {
-  struct Appearance {
-    
-  }
+  struct Appearance {}
 }

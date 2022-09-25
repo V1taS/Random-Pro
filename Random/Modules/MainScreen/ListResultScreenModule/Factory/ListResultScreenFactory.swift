@@ -19,8 +19,6 @@ final class ListResultScreenFactory: ListResultScreenFactoryInput {
   // MARK: - Internal properties
   
   weak var output: ListResultScreenFactoryOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance

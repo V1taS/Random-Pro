@@ -77,16 +77,15 @@ final class TeamsScreenViewController: TeamsScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: TeamsScreenInteractorInput,
-       moduleView: TeamsScreenViewProtocol,
+  init(moduleView: TeamsScreenViewProtocol,
+       interactor: TeamsScreenInteractorInput,
        factory: TeamsScreenFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }

@@ -70,10 +70,12 @@ final class PasswordGeneratorView: UIView {
     self.numbersSwitchAction = numbersSwitchAction
     self.symbolsSwitchAction = symbolsSwitchAction
   }
-  
-  // MARK: - Private func
-  
-  private func configureLayout() {
+}
+
+// MARK: - Private
+
+private extension PasswordGeneratorView {
+  func configureLayout() {
     let appearance = Appearance()
     
     [uppercaseLettersLabel, lowercaseLettersLabel, numbersLabel, symbolsLabel].forEach {
@@ -148,7 +150,7 @@ final class PasswordGeneratorView: UIView {
     ])
   }
   
-  private func applyDefaultBehavior() {
+  func applyDefaultBehavior() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     passwordLengthTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
@@ -183,16 +185,24 @@ final class PasswordGeneratorView: UIView {
     switchersStackView.spacing = appearance.lessVerticalSpacing
     
     uppercaseLettersSwitch.isOn = true
-    uppercaseLettersSwitch.addTarget(self, action: #selector(uppercaseSwitchValueDidChange(_:)), for: .valueChanged)
+    uppercaseLettersSwitch.addTarget(self,
+                                     action: #selector(uppercaseSwitchValueDidChange(_:)),
+                                     for: .valueChanged)
     
     lowercaseLettersSwitch.isOn = true
-    lowercaseLettersSwitch.addTarget(self, action:#selector(lowercaseSwitchValueDidChange(_:)), for: .valueChanged)
+    lowercaseLettersSwitch.addTarget(self,
+                                     action:#selector(lowercaseSwitchValueDidChange(_:)),
+                                     for: .valueChanged)
     
     numbersSwitch.isOn = true
-    numbersSwitch.addTarget(self, action: #selector(numbersSwitchValueDidChange(_:)), for: .valueChanged)
+    numbersSwitch.addTarget(self,
+                            action: #selector(numbersSwitchValueDidChange(_:)),
+                            for: .valueChanged)
     
     symbolsSwitch.isOn = true
-    symbolsSwitch.addTarget(self, action: #selector(symbolsSwitchValueDidChange(_:)), for: .valueChanged)
+    symbolsSwitch.addTarget(self,
+                            action: #selector(symbolsSwitchValueDidChange(_:)),
+                            for: .valueChanged)
     
     passwordLengthLabel.text = appearance.longPassword + ":"
     passwordLengthLabel.textColor = RandomColor.primaryGray
@@ -221,22 +231,22 @@ final class PasswordGeneratorView: UIView {
   }
   
   @objc
-  private func uppercaseSwitchValueDidChange(_ sender: UISwitch) {
+  func uppercaseSwitchValueDidChange(_ sender: UISwitch) {
     uppercaseSwitchAction?(sender.isOn)
   }
   
   @objc
-  private func lowercaseSwitchValueDidChange(_ sender: UISwitch) {
+  func lowercaseSwitchValueDidChange(_ sender: UISwitch) {
     lowercaseSwitchAction?(sender.isOn)
   }
   
   @objc
-  private func numbersSwitchValueDidChange(_ sender: UISwitch) {
+  func numbersSwitchValueDidChange(_ sender: UISwitch) {
     numbersSwitchAction?(sender.isOn)
   }
   
   @objc
-  private func symbolsSwitchValueDidChange(_ sender: UISwitch) {
+  func symbolsSwitchValueDidChange(_ sender: UISwitch) {
     symbolsSwitchAction?(sender.isOn)
   }
 }

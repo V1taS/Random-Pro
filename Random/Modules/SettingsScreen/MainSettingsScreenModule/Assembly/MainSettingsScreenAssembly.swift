@@ -17,8 +17,8 @@ final class MainSettingsScreenAssembly {
     let interactor = MainSettingsScreenInteractor()
     let view = MainSettingsScreenView()
     let factory = MainSettingsScreenFactory()
-    let presenter = MainSettingsScreenViewController(interactor: interactor,
-                                                     moduleView: view,
+    let presenter = MainSettingsScreenViewController(moduleView: view,
+                                                     interactor: interactor,
                                                      factory: factory)
     
     view.output = presenter

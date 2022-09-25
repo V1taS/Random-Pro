@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class CoinScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol CoinScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol CoinScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: CoinScreenCoordinatorOutput? { get set }
+}
+
+typealias CoinScreenCoordinatorProtocol = CoinScreenCoordinatorInput & Coordinator
+
+final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: CoinScreenCoordinatorOutput?
   
   // MARK: - Private property
   

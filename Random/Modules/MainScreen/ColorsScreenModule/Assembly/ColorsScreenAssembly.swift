@@ -18,8 +18,8 @@ final class ColorsScreenAssembly {
     let interactor = ColorsScreenInteractor(permissionService: permissionService)
     let view = ColorsScreenView()
     let factory = ColorsScreenFactory()
-    let presenter = ColorsScreenViewController(interactor: interactor,
-                                               moduleView: view,
+    let presenter = ColorsScreenViewController(moduleView: view,
+                                               interactor: interactor,
                                                factory: factory)
     view.output = presenter
     interactor.output = presenter

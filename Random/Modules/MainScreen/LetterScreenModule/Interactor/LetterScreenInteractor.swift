@@ -208,7 +208,7 @@ private extension LetterScreenInteractor {
   }
 }
 
-// MARK: - private LetterScreenInteractor
+// MARK: - Appearance
 
 private extension LetterScreenInteractor {
   struct Appearance {

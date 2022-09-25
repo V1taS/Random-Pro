@@ -19,8 +19,6 @@ final class CustomMainSectionsFactory: CustomMainSectionsFactoryInput {
   // MARK: - Internal properties
   
   weak var output: CustomMainSectionsFactoryOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance

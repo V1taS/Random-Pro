@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class TeamsScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol TeamsScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol TeamsScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: TeamsScreenCoordinatorOutput? { get set }
+}
+
+typealias TeamsScreenCoordinatorProtocol = TeamsScreenCoordinatorInput & Coordinator
+
+final class TeamsScreenCoordinator: TeamsScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: TeamsScreenCoordinatorOutput?
   
   // MARK: - Private property
   

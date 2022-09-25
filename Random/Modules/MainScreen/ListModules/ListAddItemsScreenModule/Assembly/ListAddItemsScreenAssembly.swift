@@ -18,8 +18,8 @@ final class ListAddItemsScreenAssembly {
     let view = ListAddItemsScreenView()
     let factory = ListAddItemsScreenFactory()
     
-    let presenter = ListAddItemsScreenViewController(interactor: interactor,
-                                                     moduleView: view,
+    let presenter = ListAddItemsScreenViewController(moduleView: view,
+                                                     interactor: interactor,
                                                      factory: factory)
     
     view.output = presenter

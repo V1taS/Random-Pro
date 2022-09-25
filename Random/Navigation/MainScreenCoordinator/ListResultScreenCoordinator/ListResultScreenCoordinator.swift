@@ -7,8 +7,10 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
 protocol ListResultScreenCoordinatorOutput: AnyObject { }
 
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
 protocol ListResultScreenCoordinatorInput {
   
   /// Установить список результатов

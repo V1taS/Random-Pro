@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class DateTimeScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol DateTimeScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol DateTimeScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: DateTimeScreenCoordinatorOutput? { get set }
+}
+
+typealias DateTimeScreenCoordinatorProtocol = DateTimeScreenCoordinatorInput & Coordinator
+
+final class DateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: DateTimeScreenCoordinatorOutput?
   
   // MARK: - Private property
   

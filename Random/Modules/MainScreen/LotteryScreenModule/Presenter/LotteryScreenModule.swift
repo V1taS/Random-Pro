@@ -60,11 +60,13 @@ final class LotteryScreenViewController: LotteryScreenModule {
                                                 action: #selector(copyButtonAction))
   
   // MARK: - Initialization
+  
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(moduleView: LotteryScreenViewProtocol, interactor: LotteryScreenInteractorInput,
+  init(moduleView: LotteryScreenViewProtocol,
+       interactor: LotteryScreenInteractorInput,
        factory: LotteryScreenFactoryInput) {
     self.moduleView = moduleView
     self.interactor = interactor
@@ -76,7 +78,7 @@ final class LotteryScreenViewController: LotteryScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -90,6 +92,8 @@ final class LotteryScreenViewController: LotteryScreenModule {
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
+  
+  // MARK: - Internal func
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()

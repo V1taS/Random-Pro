@@ -17,8 +17,9 @@ final class TeamsScreenAssembly {
     let interactor = TeamsScreenInteractor()
     let view = TeamsScreenView()
     let factory = TeamsScreenFactory()
-    
-    let presenter = TeamsScreenViewController(interactor: interactor, moduleView: view, factory: factory)
+    let presenter = TeamsScreenViewController(moduleView: view,
+                                              interactor: interactor,
+                                              factory: factory)
     
     view.output = presenter
     interactor.output = presenter

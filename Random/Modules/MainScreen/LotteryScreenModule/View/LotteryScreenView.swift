@@ -54,7 +54,7 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   
   private let scrollResult = ScrollLabelGradientView()
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -67,6 +67,8 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - Internal func
+  
   func updateContentWith(model: LotteryScreenModel) {
     resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
@@ -74,10 +76,30 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     rangeEndTextField.text = model.rangeEndValue
     amountNumberTextField.text = model.amountValue
   }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension LotteryScreenView: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
   
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    if range.location >= 7 {
+      return false
+    }
+    return true
+  }
+}
+
+// MARK: - Private
+
+private extension LotteryScreenView {
+  func setupDefaultSettings() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     rangeStartTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
@@ -135,14 +157,7 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     addGestureRecognizer(tap)
   }
   
-  @objc
-  private func generateButtonAction() {
-    output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
-                                 rangeEndValue: rangeEndTextField.text,
-                                 amountNumberValue: amountNumberTextField.text)
-  }
-  
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [amountNumberTextFieldStackView, rangeTextFieldStackView,
@@ -201,23 +216,12 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
                                                         constant: -appearance.middleHorizontalSize)
     ])
   }
-}
-
-// MARK: - UITextFieldDelegate
-
-extension LotteryScreenView: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
-  }
   
-  func textField(_ textField: UITextField,
-                 shouldChangeCharactersIn range: NSRange,
-                 replacementString string: String) -> Bool {
-    if range.location >= 7 {
-      return false
-    }
-    return true
+  @objc
+  func generateButtonAction() {
+    output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
+                                 rangeEndValue: rangeEndTextField.text,
+                                 amountNumberValue: amountNumberTextField.text)
   }
 }
 

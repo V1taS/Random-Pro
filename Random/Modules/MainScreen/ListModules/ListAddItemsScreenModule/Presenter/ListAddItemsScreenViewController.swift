@@ -50,16 +50,15 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: ListAddItemsScreenInteractorInput,
-       moduleView: ListAddItemsScreenViewProtocol,
+  init(moduleView: ListAddItemsScreenViewProtocol,
+       interactor: ListAddItemsScreenInteractorInput,
        factory: ListAddItemsScreenFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }

@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class CubesScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol CubesScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol CubesScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: CubesScreenCoordinatorOutput? { get set }
+}
+
+typealias CubesScreenCoordinatorProtocol = CubesScreenCoordinatorInput & Coordinator
+
+final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: CubesScreenCoordinatorOutput?
   
   // MARK: - Private property
   

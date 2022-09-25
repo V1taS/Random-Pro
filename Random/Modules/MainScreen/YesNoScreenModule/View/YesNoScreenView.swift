@@ -40,7 +40,7 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
   private let scrollResult = ScrollLabelGradientView()
   private let generateButton = ButtonView()
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super .init(frame: frame)
@@ -53,6 +53,8 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - Internal func
+  
   func set(result: String?) {
     resultLabel.text = result
   }
@@ -60,10 +62,12 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
   func set(listResult: [String]) {
     scrollResult.listLabels = listResult
   }
-  
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
+}
+
+// MARK: - Private
+
+private extension YesNoScreenView {
+  func setupDefaultSettings() {
     backgroundColor = RandomColor.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
@@ -74,11 +78,7 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
-  @objc private func generateButtonAction() {
-    output?.generateButtonAction()
-  }
-  
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [resultLabel, scrollResult, generateButton].forEach {
@@ -103,9 +103,14 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
                                            constant: -appearance.lessVerticalSpacing)
     ])
   }
+  
+  @objc
+  func generateButtonAction() {
+    output?.generateButtonAction()
+  }
 }
 
-// MARK: - Private Appearance
+// MARK: - Appearance
 
 private extension YesNoScreenView {
   struct Appearance {

@@ -37,7 +37,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
   private let generateButton = ButtonView()
   private let coinImageView = UIImageView()
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -49,6 +49,8 @@ final class CoinScreenView: CoinScreenViewProtocol {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  // MARK: - Internal func
   
   func updateContentWith(model: CoinScreenModel) {
     resultLabel.text = model.result
@@ -62,10 +64,12 @@ final class CoinScreenView: CoinScreenViewProtocol {
       coinImageView.image = nil
     }
   }
-  
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
+}
+
+// MARK: - Private
+
+private extension CoinScreenView {
+  func setupDefaultSettings() {
     let appearance = Appearance()
     
     backgroundColor = RandomColor.primaryWhite
@@ -79,12 +83,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
     coinImageView.layer.cornerRadius = appearance.cornerRadius
   }
   
-  @objc
-  private func generateButtonAction() {
-    output?.generateButtonAction()
-  }
-  
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [resultLabel, generateButton, coinImageView, scrollResult].forEach {
@@ -115,9 +114,14 @@ final class CoinScreenView: CoinScreenViewProtocol {
                                            constant: -appearance.lessVirticalSize)
     ])
   }
+  
+  @objc
+  func generateButtonAction() {
+    output?.generateButtonAction()
+  }
 }
 
-// MARK: - Private Appearance
+// MARK: - Appearance
 
 private extension CoinScreenView {
   struct Appearance {

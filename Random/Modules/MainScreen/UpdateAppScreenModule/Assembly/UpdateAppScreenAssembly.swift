@@ -17,8 +17,8 @@ final class UpdateAppScreenAssembly {
     let interactor = UpdateAppScreenInteractor()
     let view = UpdateAppScreenView()
     let factory = UpdateAppScreenFactory()
-    let presenter = UpdateAppScreenViewController(interactor: interactor,
-                                                  moduleView: view,
+    let presenter = UpdateAppScreenViewController(moduleView: view,
+                                                  interactor: interactor,
                                                   factory: factory)
     
     view.output = presenter

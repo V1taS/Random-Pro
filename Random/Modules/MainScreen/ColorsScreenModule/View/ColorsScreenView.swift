@@ -9,9 +9,7 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из View в Presenter
-protocol ColorsScreenViewOutput: AnyObject {
-  
-}
+protocol ColorsScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
 protocol ColorsScreenViewInput: AnyObject {
@@ -55,10 +53,12 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
   func returnImageDataColor() -> Data? {
     contentView.asImage?.pngData()
   }
-  
-  // MARK: - Private func
-  
-  private func configureLayout() {
+}
+
+// MARK: - Private
+
+private extension ColorsScreenView {
+  func configureLayout() {
     let appearance = Appearance()
     
     [contentView, colorsSegmentedControl, resultLabel, generateButton].forEach {
@@ -88,7 +88,7 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
     ])
   }
   
-  private func applyDefaultBehavior() {
+  func applyDefaultBehavior() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     showPlugView()
@@ -96,7 +96,7 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
-    resultLabel.numberOfLines = 1
+    resultLabel.numberOfLines = appearance.resultLabelNumberOfLines
     resultLabel.text = appearance.resultLabelTitle
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
@@ -108,8 +108,18 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
                                      for: .valueChanged)
   }
   
+  func showPlugView() {
+    resultLabel.isHidden = false
+    contentView.applyGradient(colors: [RandomColor.primaryWhite])
+  }
+  
+  func hidePlugViewWith(colors: [UIColor]) {
+    resultLabel.isHidden = true
+    contentView.applyGradient(colors: colors)
+  }
+  
   @objc
-  private func generateButtonAction() {
+  func generateButtonAction() {
     let colorOne = UIColor(red: CGFloat.random(in: 0...255) / 255,
                            green: CGFloat.random(in: 0...255) / 255,
                            blue: CGFloat.random(in: 0...255) / 255,
@@ -135,17 +145,7 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
   }
   
   @objc
-  private func colorsSegmentedControlSegmentedControlAction() {}
-  
-  private func showPlugView() {
-    resultLabel.isHidden = false
-    contentView.applyGradient(colors: [RandomColor.primaryWhite])
-  }
-  
-  private func hidePlugViewWith(colors: [UIColor]) {
-    resultLabel.isHidden = true
-    contentView.applyGradient(colors: colors)
-  }
+  func colorsSegmentedControlSegmentedControlAction() {}
 }
 
 // MARK: - Appearance
@@ -160,5 +160,6 @@ private extension ColorsScreenView {
     let largeInset: CGFloat = 24
     let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
     let resultLabelTitle = "?"
+    let resultLabelNumberOfLines = 1
   }
 }

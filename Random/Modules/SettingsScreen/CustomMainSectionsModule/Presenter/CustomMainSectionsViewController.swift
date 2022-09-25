@@ -47,16 +47,15 @@ final class CustomMainSectionsViewController: CustomMainSectionsModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: CustomMainSectionsInteractorInput,
-       moduleView: CustomMainSectionsViewProtocol,
+  init(moduleView: CustomMainSectionsViewProtocol,
+       interactor: CustomMainSectionsInteractorInput,
        factory: CustomMainSectionsFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }

@@ -76,10 +76,12 @@ final class CubesScreenView: CubesScreenViewProtocol {
     resultLabel.isHidden = !plagIsShow
     cubesView.isHidden = plagIsShow
   }
-  
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
+}
+
+// MARK: - Private
+
+private extension CubesScreenView {
+  func setupDefaultSettings() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     
@@ -109,17 +111,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
-  @objc
-  private func generateButtonAction() {
-    output?.generateButtonAction()
-  }
-  
-  @objc
-  private func cubesSegmentedAction() {
-    output?.updateSelectedCountCubes(cubesSegmentedControl.selectedSegmentIndex + 1)
-  }
-  
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [cubesSegmentedControl, resultLabel, cubesView, scrollResultView, generateButton].forEach {
@@ -164,9 +156,21 @@ final class CubesScreenView: CubesScreenViewProtocol {
       scrollResultView.trailingAnchor.constraint(equalTo: trailingAnchor),
     ])
   }
+  
+  @objc
+  func generateButtonAction() {
+    output?.generateButtonAction()
+  }
+  
+  @objc
+  func cubesSegmentedAction() {
+    output?.updateSelectedCountCubes(cubesSegmentedControl.selectedSegmentIndex + 1)
+  }
 }
 
-extension CubesScreenView {
+// MARK: - Appearance
+
+private extension CubesScreenView {
   struct Appearance {
     let middleHorizontalSize: CGFloat = 16
     let lessVirticalSize: CGFloat = 8

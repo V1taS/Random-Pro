@@ -17,8 +17,9 @@ final class CustomMainSectionsAssembly {
     let interactor = CustomMainSectionsInteractor()
     let view = CustomMainSectionsView()
     let factory = CustomMainSectionsFactory()
-    
-    let presenter = CustomMainSectionsViewController(interactor: interactor, moduleView: view, factory: factory)
+    let presenter = CustomMainSectionsViewController(moduleView: view,
+                                                     interactor: interactor,
+                                                     factory: factory)
     
     view.output = presenter
     interactor.output = presenter

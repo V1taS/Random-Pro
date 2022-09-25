@@ -15,7 +15,9 @@ final class DateTimeAssembly {
     let view = DateTimeView()
     let interactor = DateTimeInteractor()
     let factory = DateTimeFactory()
-    let presenter = DateTimeViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = DateTimeViewController(moduleView: view,
+                                           interactor: interactor,
+                                           factory: factory)
     
     view.output = presenter
     interactor.output = presenter

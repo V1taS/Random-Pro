@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class LetterScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol LetterScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol LetterScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: LetterScreenCoordinatorOutput? { get set }
+}
+
+typealias LetterScreenCoordinatorProtocol = LetterScreenCoordinatorInput & Coordinator
+
+final class LetterScreenCoordinator: LetterScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: LetterScreenCoordinatorOutput?
   
   // MARK: - Private property
   

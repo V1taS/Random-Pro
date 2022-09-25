@@ -51,16 +51,15 @@ final class ShareScreenViewController: ShareScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: ShareScreenInteractorInput,
-       moduleView: ShareScreenViewProtocol,
+  init(moduleView: ShareScreenViewProtocol,
+       interactor: ShareScreenInteractorInput,
        factory: ShareScreenFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }
@@ -107,9 +106,7 @@ extension ShareScreenViewController: ShareScreenInteractorOutput {
 
 // MARK: - ShareScreenFactoryOutput
 
-extension ShareScreenViewController: ShareScreenFactoryOutput {
-  
-}
+extension ShareScreenViewController: ShareScreenFactoryOutput {}
 
 // MARK: - Private
 

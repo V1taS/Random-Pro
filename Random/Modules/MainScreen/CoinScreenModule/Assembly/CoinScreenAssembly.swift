@@ -15,7 +15,9 @@ final class CoinScreenAssembly {
     let view = CoinScreenView()
     let interactor = CoinScreenInteractor()
     let factory = CoinScreenFactory()
-    let presenter = CoinScreenViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = CoinScreenViewController(moduleView: view,
+                                             interactor: interactor,
+                                             factory: factory)
     
     view.output = presenter
     interactor.output = presenter

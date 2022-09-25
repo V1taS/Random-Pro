@@ -15,7 +15,9 @@ final class YesNoScreenAssembly {
     let view = YesNoScreenView()
     let interactor = YesNoScreenInteractor()
     let factory = YesNoScreenFactory()
-    let presenter = YesNoScreenViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = YesNoScreenViewController(moduleView: view,
+                                              interactor: interactor,
+                                              factory: factory)
     
     view.output = presenter
     interactor.output = presenter

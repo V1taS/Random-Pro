@@ -205,11 +205,6 @@ private extension PasswordScreenView {
     isUserInteractionEnabled = true
   }
   
-  @objc
-  func genarateButtonAction() {
-    output?.generateButtonAction(passwordLength: passwordGeneratorView.passwordLengthTextField.text)
-  }
-  
   func setupConstraints() {
     let appearance = Appearance()
     [passwordGeneratorView, genarateButton].forEach {
@@ -230,6 +225,11 @@ private extension PasswordScreenView {
       genarateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -appearance.middleHorizontalSpacing)
     ])
+  }
+  
+  @objc
+  func genarateButtonAction() {
+    output?.generateButtonAction(passwordLength: passwordGeneratorView.passwordLengthTextField.text)
   }
 }
 

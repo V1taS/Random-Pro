@@ -40,7 +40,7 @@ final class LetterScreenView: LetterScreenViewProtocol {
   private let generateButton = ButtonView()
   private let letterSegmentedControl = UISegmentedControl()
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -53,15 +53,19 @@ final class LetterScreenView: LetterScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - Internal func
+  
   func updateContentWith(model: LetterScreenModel) {
     resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
     letterSegmentedControl.selectedSegmentIndex = model.languageIndexSegmented
   }
-  
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
+}
+
+// MARK: - Private
+
+private extension LetterScreenView {
+  func setupDefaultSettings() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     
@@ -78,22 +82,7 @@ final class LetterScreenView: LetterScreenViewProtocol {
     letterSegmentedControl.selectedSegmentIndex = appearance.rusControl
   }
   
-  @objc
-  private func generateButtonAction() {
-    let appearance = Appearance()
-    
-    if letterSegmentedControl.selectedSegmentIndex == appearance.rusControl {
-      output?.generateRusButtonAction()
-      return
-    }
-    
-    if letterSegmentedControl.selectedSegmentIndex == appearance.engControl {
-      output?.generateEngButtonAction()
-      return
-    }
-  }
-  
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [resultLabel, scrollResult, generateButton, letterSegmentedControl].forEach {
@@ -124,9 +113,24 @@ final class LetterScreenView: LetterScreenViewProtocol {
                                            constant: -appearance.lessVerticalSpacing)
     ])
   }
+  
+  @objc
+  func generateButtonAction() {
+    let appearance = Appearance()
+    
+    if letterSegmentedControl.selectedSegmentIndex == appearance.rusControl {
+      output?.generateRusButtonAction()
+      return
+    }
+    
+    if letterSegmentedControl.selectedSegmentIndex == appearance.engControl {
+      output?.generateEngButtonAction()
+      return
+    }
+  }
 }
 
-// MARK: - private LetterScreenView
+// MARK: - Appearance
 
 private extension LetterScreenView {
   struct Appearance {

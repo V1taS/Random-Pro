@@ -57,6 +57,10 @@ final class LetterScreenViewController: LetterScreenModule {
   
   // MARK: - Initialization
   
+  /// - Parameters:
+  ///   - moduleView: вью
+  ///   - interactor: интерактор
+  ///   - factory: фабрика
   init(moduleView: LetterScreenViewProtocol,
        interactor: LetterScreenInteractorInput,
        factory: LetterScreenFactoryInput) {
@@ -70,7 +74,7 @@ final class LetterScreenViewController: LetterScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -82,6 +86,8 @@ final class LetterScreenViewController: LetterScreenModule {
     setNavigationBar()
     interactor.getContent()
   }
+  
+  // MARK: - Internal func
   
   func withoutRepetitionAction(isOn: Bool) {
     interactor.withoutRepetitionAction(isOn: isOn)

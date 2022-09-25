@@ -8,14 +8,10 @@
 import UIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol ListResultScreenInteractorOutput: AnyObject {
-  
-}
+protocol ListResultScreenInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol ListResultScreenInteractorInput {
-  
-}
+protocol ListResultScreenInteractorInput {}
 
 /// Интерактор
 final class ListResultScreenInteractor: ListResultScreenInteractorInput {
@@ -23,15 +19,10 @@ final class ListResultScreenInteractor: ListResultScreenInteractorInput {
   // MARK: - Internal properties
   
   weak var output: ListResultScreenInteractorOutput?
-  
-  // MARK: - Private properties
-  
 }
 
 // MARK: - Appearance
 
 private extension ListResultScreenInteractor {
-  struct Appearance {
-    
-  }
+  struct Appearance {}
 }

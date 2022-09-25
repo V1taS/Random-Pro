@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class PasswordScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol PasswordScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol PasswordScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: PasswordScreenCoordinatorOutput? { get set }
+}
+
+typealias PasswordScreenCoordinatorProtocol = PasswordScreenCoordinatorInput & Coordinator
+
+final class PasswordScreenCoordinator: PasswordScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: PasswordScreenCoordinatorOutput?
   
   // MARK: - Private property
   

@@ -15,7 +15,9 @@ final class LotteryScreenAssembly {
     let view = LotteryScreenView()
     let interactor = LotteryScreenInteractor()
     let factory = LotteryScreenFactory()
-    let presenter = LotteryScreenViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = LotteryScreenViewController(moduleView: view,
+                                                interactor: interactor,
+                                                factory: factory)
     
     view.output = presenter
     interactor.output = presenter

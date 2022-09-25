@@ -199,7 +199,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                             asideImage: nil,
                                             id: appearance.createListID))
       tableViewModels.append(.divider)
-      if let itemsGenerated = Int(generatedTextCount), itemsGenerated > 0 {
+      if let itemsGenerated = Int(generatedTextCount), itemsGenerated > .zero {
         tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
                                               asideImage: nil))
         tableViewModels.append(.divider)
@@ -209,13 +209,6 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
     }
     output?.didReceive(models: tableViewModels)
   }
-}
-
-// MARK: - Private
-
-private extension SettingsScreenFactory {
-  
-  
 }
 
 // MARK: - Appearance

@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class YesNoScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol YesNoScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol YesNoScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: YesNoScreenCoordinatorOutput? { get set }
+}
+
+typealias YesNoScreenCoordinatorProtocol = YesNoScreenCoordinatorInput & Coordinator
+
+final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: YesNoScreenCoordinatorOutput?
   
   // MARK: - Private property
   

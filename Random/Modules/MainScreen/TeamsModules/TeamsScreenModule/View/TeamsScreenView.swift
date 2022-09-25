@@ -87,97 +87,6 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
       self?.hideContentPlug()
     }
   }
-  
-  // MARK: - Private func
-  
-  private func showContentPlug() {
-    contentPlugImage.isHidden = false
-    contentPlugImage.image = self.asImage
-  }
-  
-  private func hideContentPlug() {
-    contentPlugImage.isHidden = true
-    contentPlugImage.image = nil
-  }
-  
-  private func configureLayout() {
-    let appearance = Appearance()
-    
-    [countTeamsSegmentedControl, collectionView, resultLabel, contentPlugImage].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      addSubview($0)
-    }
-    
-    NSLayoutConstraint.activate([
-      countTeamsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      countTeamsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                          constant: appearance.middleInset),
-      countTeamsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                           constant: -appearance.middleInset),
-      
-      resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.middleInset),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.middleInset),
-      
-      collectionView.topAnchor.constraint(equalTo: countTeamsSegmentedControl.bottomAnchor,
-                                          constant: appearance.minimumInset),
-      collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      
-      contentPlugImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-      contentPlugImage.topAnchor.constraint(equalTo: topAnchor),
-      contentPlugImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-      contentPlugImage.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ])
-  }
-  
-  private func applyDefaultBehavior() {
-    let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
-    
-    resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.primaryGray
-    resultLabel.textAlignment = .center
-    resultLabel.numberOfLines = .zero
-    resultLabel.text = appearance.resultLabelTitle
-    resultLabel.isHidden = true
-    
-    contentPlugImage.isHidden = true
-    
-    countTeamsSegmentedControl.selectedSegmentIndex = appearance.selectedSegmentIndex
-    countTeamsSegmentedControl.addTarget(self,
-                                         action: #selector(countTeamsSegmentedControlAction),
-                                         for: .valueChanged)
-    
-    collectionView.backgroundColor = RandomColor.primaryWhite
-    collectionView.showsVerticalScrollIndicator = false
-    collectionView.alwaysBounceVertical = true
-    collectionView.register(PlayerCollectionViewCell.self,
-                            forCellWithReuseIdentifier: PlayerCollectionViewCell.reuseIdentifier)
-    collectionView.register(CustomDoubleTextHeaderCollectionCell.self,
-                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                            withReuseIdentifier: CustomDoubleTextHeaderCollectionCell.reuseIdentifier)
-    
-    collectionViewLayout.sectionInset = appearance.sectionInset
-    collectionViewLayout.scrollDirection = .vertical
-    collectionViewLayout.minimumInteritemSpacing = .zero
-    collectionViewLayout.minimumLineSpacing = appearance.minimumLineSpacing
-    collectionViewLayout.headerReferenceSize = CGSize(width: collectionView.frame.size.width,
-                                                      height: appearance.collectionHeaderHeight)
-    collectionViewLayout.itemSize = CGSize(width: appearance.cellWidthConstant,
-                                           height: appearance.estimatedRowHeight)
-    
-    collectionView.delegate = self
-    collectionView.dataSource = self
-  }
-  
-  @objc
-  func countTeamsSegmentedControlAction() {
-    output?.updateTeams(count: countTeamsSegmentedControl.selectedSegmentIndex + 1)
-  }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -235,6 +144,99 @@ extension TeamsScreenView: UICollectionViewDataSource {
       isShadow: true
     )
     return cell
+  }
+}
+
+// MARK: - Private
+
+private extension TeamsScreenView {
+  func showContentPlug() {
+    contentPlugImage.isHidden = false
+    contentPlugImage.image = self.asImage
+  }
+  
+  func hideContentPlug() {
+    contentPlugImage.isHidden = true
+    contentPlugImage.image = nil
+  }
+  
+  func configureLayout() {
+    let appearance = Appearance()
+    
+    [countTeamsSegmentedControl, collectionView, resultLabel, contentPlugImage].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      addSubview($0)
+    }
+    
+    NSLayoutConstraint.activate([
+      countTeamsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      countTeamsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                          constant: appearance.middleInset),
+      countTeamsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                           constant: -appearance.middleInset),
+      
+      resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                           constant: appearance.middleInset),
+      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                            constant: -appearance.middleInset),
+      
+      collectionView.topAnchor.constraint(equalTo: countTeamsSegmentedControl.bottomAnchor,
+                                          constant: appearance.minimumInset),
+      collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      
+      contentPlugImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+      contentPlugImage.topAnchor.constraint(equalTo: topAnchor),
+      contentPlugImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+      contentPlugImage.bottomAnchor.constraint(equalTo: bottomAnchor)
+    ])
+  }
+  
+  func applyDefaultBehavior() {
+    let appearance = Appearance()
+    backgroundColor = RandomColor.primaryWhite
+    
+    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textAlignment = .center
+    resultLabel.numberOfLines = .zero
+    resultLabel.text = appearance.resultLabelTitle
+    resultLabel.isHidden = true
+    
+    contentPlugImage.isHidden = true
+    
+    countTeamsSegmentedControl.selectedSegmentIndex = appearance.selectedSegmentIndex
+    countTeamsSegmentedControl.addTarget(self,
+                                         action: #selector(countTeamsSegmentedControlAction),
+                                         for: .valueChanged)
+    
+    collectionView.backgroundColor = RandomColor.primaryWhite
+    collectionView.showsVerticalScrollIndicator = false
+    collectionView.alwaysBounceVertical = true
+    collectionView.register(PlayerCollectionViewCell.self,
+                            forCellWithReuseIdentifier: PlayerCollectionViewCell.reuseIdentifier)
+    collectionView.register(CustomDoubleTextHeaderCollectionCell.self,
+                            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                            withReuseIdentifier: CustomDoubleTextHeaderCollectionCell.reuseIdentifier)
+    
+    collectionViewLayout.sectionInset = appearance.sectionInset
+    collectionViewLayout.scrollDirection = .vertical
+    collectionViewLayout.minimumInteritemSpacing = .zero
+    collectionViewLayout.minimumLineSpacing = appearance.minimumLineSpacing
+    collectionViewLayout.headerReferenceSize = CGSize(width: collectionView.frame.size.width,
+                                                      height: appearance.collectionHeaderHeight)
+    collectionViewLayout.itemSize = CGSize(width: appearance.cellWidthConstant,
+                                           height: appearance.estimatedRowHeight)
+    
+    collectionView.delegate = self
+    collectionView.dataSource = self
+  }
+  
+  @objc
+  func countTeamsSegmentedControlAction() {
+    output?.updateTeams(count: countTeamsSegmentedControl.selectedSegmentIndex + 1)
   }
 }
 

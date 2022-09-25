@@ -108,7 +108,7 @@ private extension CoinScreenInteractor {
   }
 }
 
-// MARK: - CoinScreenInteractor
+// MARK: - Appearance
 
 private extension CoinScreenInteractor {
   struct Appearance {

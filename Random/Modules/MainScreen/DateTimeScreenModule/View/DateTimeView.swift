@@ -51,7 +51,7 @@ final class DateTimeView: DateTimeViewProtocol {
   private let generateButtonTime = ButtonView()
   private let generateButtonMonth = ButtonView()
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -64,14 +64,18 @@ final class DateTimeView: DateTimeViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: - Internal func
+  
   func updateContentWith(model: DateTimeScreenModel) {
     resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
   }
-  
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
+}
+
+// MARK: - Private
+
+private extension DateTimeView {
+  func setupDefaultSettings() {
     let appearance = Appearance()
     
     backgroundColor = RandomColor.primaryWhite
@@ -102,27 +106,7 @@ final class DateTimeView: DateTimeViewProtocol {
     buttonStackViewTwo.spacing = appearance.lessHorizontalSpacing
   }
   
-  @objc
-  private func generateButtonDayAction() {
-    output?.generateButtonDayAction()
-  }
-  
-  @objc
-  private func generateButtonDateAction() {
-    output?.generateButtonDateAction()
-  }
-  
-  @objc
-  private func generateButtonTimeAction() {
-    output?.generateButtonTimeAction()
-  }
-  
-  @objc
-  private func generateButtonMonthAction() {
-    output?.generateButtonMonthAction()
-  }
-  
-  private func setupConstraints() {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [generateButtonDay, generateButtonTime].forEach {
@@ -167,11 +151,31 @@ final class DateTimeView: DateTimeViewProtocol {
                                            constant: -appearance.spasing)
     ])
   }
+  
+  @objc
+  func generateButtonDayAction() {
+    output?.generateButtonDayAction()
+  }
+  
+  @objc
+  func generateButtonDateAction() {
+    output?.generateButtonDateAction()
+  }
+  
+  @objc
+  func generateButtonTimeAction() {
+    output?.generateButtonTimeAction()
+  }
+  
+  @objc
+  func generateButtonMonthAction() {
+    output?.generateButtonMonthAction()
+  }
 }
 
-// MARK: - Private Appearance
+// MARK: - Appearance
 
-extension DateTimeView {
+private extension DateTimeView {
   struct Appearance {
     let textButtonDay = NSLocalizedString("День", comment: "")
     let textButtonDate = NSLocalizedString("Дата", comment: "")

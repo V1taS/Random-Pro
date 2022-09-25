@@ -7,7 +7,23 @@
 
 import UIKit
 
-final class MainScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol MainScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol MainScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: MainScreenCoordinatorOutput? { get set }
+}
+
+typealias MainScreenCoordinatorProtocol = MainScreenCoordinatorInput & Coordinator
+
+final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: MainScreenCoordinatorOutput?
   
   // MARK: - Private variables
   
@@ -196,7 +212,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
 }
 
-// MARK: - Private
+// MARK: - MainSettingsScreenCoordinatorOutput
 
 extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput {
   func didChanged(models: [MainScreenModel.Section]) {

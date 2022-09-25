@@ -90,16 +90,15 @@ final class MainScreenViewController: MainScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: MainScreenInteractorInput,
-       moduleView: MainScreenViewProtocol,
+  init(moduleView: MainScreenViewProtocol,
+       interactor: MainScreenInteractorInput,
        factory: MainScreenFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }
@@ -216,11 +215,11 @@ private extension MainScreenViewController {
   func setupNavBar() {
     let appearance = Appearance()
     title = appearance.title
-
+    
     let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(shareButtonAction))
+                                      style: .plain,
+                                      target: self,
+                                      action: #selector(shareButtonAction))
     
     navigationItem.rightBarButtonItem = shareButton
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,

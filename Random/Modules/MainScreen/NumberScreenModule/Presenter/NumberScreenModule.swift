@@ -67,6 +67,7 @@ final class NumberScreenViewController: NumberScreenModule {
                                                 action: #selector(copyButtonAction))
   
   // MARK: - Initialization
+  
   /// - Parameters:
   ///   - moduleView: вью
   ///   - interactor: интерактор
@@ -84,7 +85,7 @@ final class NumberScreenViewController: NumberScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()

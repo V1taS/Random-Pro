@@ -71,61 +71,6 @@ final class ListResultScreenView: ListResultScreenViewProtocol {
       self?.hideContentPlug()
     }
   }
-  
-  // MARK: - Private func
-  
-  private func showContentPlug() {
-    contentPlugImage.isHidden = false
-    contentPlugImage.image = self.asImage
-  }
-  
-  private func hideContentPlug() {
-    contentPlugImage.isHidden = true
-    contentPlugImage.image = nil
-  }
-  
-  private func configureLayout() {
-    let appearance = Appearance()
-    [tableView, contentPlugImage].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      addSubview($0)
-    }
-    
-    NSLayoutConstraint.activate([
-      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
-      tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
-      tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      
-      contentPlugImage.leadingAnchor.constraint(equalTo: leadingAnchor),
-      contentPlugImage.topAnchor.constraint(equalTo: topAnchor),
-      contentPlugImage.trailingAnchor.constraint(equalTo: trailingAnchor),
-      contentPlugImage.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ])
-  }
-  
-  private func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
-    tableView.showsVerticalScrollIndicator = false
-    tableView.separatorColor = RandomColor.secondaryGray
-    
-    contentPlugImage.isHidden = true
-    
-    // Сами self(SettingsScreenView) получает события от tableView
-    tableView.delegate = self
-    
-    // Сами self(SettingsScreenView) устанавливаем данные для отображения в tableView
-    tableView.dataSource = self
-    
-    // Зарегистрировали ячейку в табличке
-    tableView.register(CustomTextCell.self,
-                       forCellReuseIdentifier: CustomTextCell.reuseIdentifier)
-    
-    tableView.tableFooterView = UIView()
-    tableView.tableHeaderView = UIView()
-    tableView.contentInset.top = Appearance().inset.top
-  }
 }
 
 // MARK: - UITableViewDelegate
@@ -171,6 +116,58 @@ extension ListResultScreenView: UITableViewDataSource {
       cell.clipsToBounds = true
     }
     return cell
+  }
+}
+
+// MARK: - Private
+
+private extension ListResultScreenView {
+  func showContentPlug() {
+    contentPlugImage.isHidden = false
+    contentPlugImage.image = self.asImage
+  }
+  
+  func hideContentPlug() {
+    contentPlugImage.isHidden = true
+    contentPlugImage.image = nil
+  }
+  
+  func configureLayout() {
+    let appearance = Appearance()
+    [tableView, contentPlugImage].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      addSubview($0)
+    }
+    
+    NSLayoutConstraint.activate([
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.inset.left),
+      tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.inset.right),
+      tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      
+      contentPlugImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+      contentPlugImage.topAnchor.constraint(equalTo: topAnchor),
+      contentPlugImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+      contentPlugImage.bottomAnchor.constraint(equalTo: bottomAnchor)
+    ])
+  }
+  
+  func applyDefaultBehavior() {
+    backgroundColor = RandomColor.primaryWhite
+    tableView.backgroundColor = RandomColor.primaryWhite
+    tableView.showsVerticalScrollIndicator = false
+    tableView.separatorColor = RandomColor.secondaryGray
+    
+    contentPlugImage.isHidden = true
+    
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.register(CustomTextCell.self,
+                       forCellReuseIdentifier: CustomTextCell.reuseIdentifier)
+    
+    tableView.tableFooterView = UIView()
+    tableView.tableHeaderView = UIView()
+    tableView.contentInset.top = Appearance().inset.top
   }
 }
 

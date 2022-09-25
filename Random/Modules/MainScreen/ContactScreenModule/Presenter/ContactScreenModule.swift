@@ -60,8 +60,8 @@ final class ContactScreenViewController: ContactScreenModule {
   // MARK: - Initialization
   
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(moduleView: ContactScreenViewProtocol,
        interactor: ContactScreenInteractorInput,
@@ -76,7 +76,7 @@ final class ContactScreenViewController: ContactScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -91,39 +91,14 @@ final class ContactScreenViewController: ContactScreenModule {
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
+  // MARK: - Internal func
+  
   func returnCurrentModel() -> ContactScreenModel {
     interactor.returnCurrentModel()
   }
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
-  }
-  
-  // MARK: - Private func
-  
-  private func setNavigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-
-    navigationItem.rightBarButtonItems = [
-      UIBarButtonItem(image: appearance.settingsButtonIcon,
-                      style: .plain,
-                      target: self,
-                      action: #selector(settingButtonAction)),
-      copyButton
-    ]
-  }
-  
-  @objc
-  private func copyButtonAction() {
-    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
-  }
-  
-  @objc
-  private func settingButtonAction() {
-    moduleOutput?.settingButtonAction()
   }
 }
 
@@ -155,6 +130,35 @@ extension ContactScreenViewController: ContactScreenInteractorOutput {
 // MARK: - ContactScreenFactoryOutput
 
 extension ContactScreenViewController: ContactScreenFactoryOutput {}
+
+// MARK: - Private
+
+private extension ContactScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+  }
+  
+  @objc
+  func settingButtonAction() {
+    moduleOutput?.settingButtonAction()
+  }
+}
 
 // MARK: - Appearance
 

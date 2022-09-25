@@ -50,9 +50,13 @@ final class CoinScreenViewController: CoinScreenModule {
   
   // MARK: - Initialization
   
-  init(moduleView: CoinScreenViewProtocol,interactor: CoinScreenInteractorInput,
+  /// - Parameters:
+  ///   - moduleView: вью
+  ///   - interactor: интерактор
+  ///   - factory: фабрика
+  init(moduleView: CoinScreenViewProtocol,
+       interactor: CoinScreenInteractorInput,
        factory: CoinScreenFactoryInput) {
-    
     self.moduleView = moduleView
     self.interactor = interactor
     self.factory = factory
@@ -63,7 +67,7 @@ final class CoinScreenViewController: CoinScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -75,6 +79,8 @@ final class CoinScreenViewController: CoinScreenModule {
     interactor.getContent()
     setNavigationBar()
   }
+  
+  // MARK: - Internal func
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()

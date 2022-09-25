@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class ContactScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol ContactScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol ContactScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: ContactScreenCoordinatorOutput? { get set }
+}
+
+typealias ContactScreenCoordinatorProtocol = ContactScreenCoordinatorInput & Coordinator
+
+final class ContactScreenCoordinator: ContactScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: ContactScreenCoordinatorOutput?
   
   // MARK: - Private property
   

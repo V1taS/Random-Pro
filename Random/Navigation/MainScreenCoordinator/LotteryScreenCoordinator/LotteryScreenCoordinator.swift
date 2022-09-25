@@ -8,7 +8,23 @@
 
 import UIKit
 
-final class LotteryScreenCoordinator: Coordinator {
+/// События которые отправляем из `текущего координатора` в  `другой координатор`
+protocol LotteryScreenCoordinatorOutput: AnyObject {}
+
+/// События которые отправляем из `другого координатора` в  `текущий координатор`
+protocol LotteryScreenCoordinatorInput {
+  
+  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  var output: LotteryScreenCoordinatorOutput? { get set }
+}
+
+typealias LotteryScreenCoordinatorProtocol = LotteryScreenCoordinatorInput & Coordinator
+
+final class LotteryScreenCoordinator: LotteryScreenCoordinatorProtocol {
+  
+  // MARK: - Internal variables
+  
+  weak var output: LotteryScreenCoordinatorOutput?
   
   // MARK: - Private property
   

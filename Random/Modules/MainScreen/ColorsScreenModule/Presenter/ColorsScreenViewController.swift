@@ -30,9 +30,7 @@ typealias ColorsScreenModule = UIViewController & ColorsScreenModuleInput
 
 /// Презентер
 final class ColorsScreenViewController: ColorsScreenModule {
-  
-  // MARK: - Public properties
-  
+
   // MARK: - Internal properties
   
   weak var moduleOutput: ColorsScreenModuleOutput?
@@ -45,16 +43,15 @@ final class ColorsScreenViewController: ColorsScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
-  init(interactor: ColorsScreenInteractorInput,
-       moduleView: ColorsScreenViewProtocol,
+  init(moduleView: ColorsScreenViewProtocol,
+       interactor: ColorsScreenInteractorInput,
        factory: ColorsScreenFactoryInput) {
-    self.interactor = interactor
     self.moduleView = moduleView
+    self.interactor = interactor
     self.factory = factory
     super.init(nibName: nil, bundle: nil)
   }

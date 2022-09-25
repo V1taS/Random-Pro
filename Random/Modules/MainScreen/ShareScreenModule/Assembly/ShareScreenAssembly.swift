@@ -18,7 +18,9 @@ final class ShareScreenAssembly {
     let view = ShareScreenView()
     let factory = ShareScreenFactory()
     
-    let presenter = ShareScreenViewController(interactor: interactor, moduleView: view, factory: factory)
+    let presenter = ShareScreenViewController(moduleView: view,
+                                              interactor: interactor,
+                                              factory: factory)
     
     view.output = presenter
     interactor.output = presenter

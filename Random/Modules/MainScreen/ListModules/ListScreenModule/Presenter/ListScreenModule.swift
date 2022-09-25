@@ -75,8 +75,8 @@ final class ListScreenViewController: ListScreenModule {
   // MARK: - Initialization
   
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(moduleView: ListScreenViewProtocol,
        interactor: ListScreenInteractorInput,
@@ -90,6 +90,8 @@ final class ListScreenViewController: ListScreenModule {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()

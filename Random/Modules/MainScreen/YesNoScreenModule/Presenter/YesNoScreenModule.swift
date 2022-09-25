@@ -34,7 +34,7 @@ protocol YesNoScreenModuleInput: AnyObject {
 typealias YesNoScreenModule = UIViewController & YesNoScreenModuleInput
 
 final class YesNoScreenViewController: YesNoScreenModule {
-
+  
   // MARK: - Internal property
   
   weak var moduleOutput: YesNoScreenModuleOutput?
@@ -49,8 +49,8 @@ final class YesNoScreenViewController: YesNoScreenModule {
   // MARK: - Initialization
   
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(moduleView: YesNoScreenViewProtocol,
        interactor: YesNoScreenInteractorInput,
@@ -65,7 +65,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Initernal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -78,34 +78,14 @@ final class YesNoScreenViewController: YesNoScreenModule {
     setupNavBar()
   }
   
+  // MARK: - Initernal func
+  
   func cleanButtonAction() {
     interactor.cleanButtonAction()
   }
   
   func returnListResult() -> [String] {
     interactor.returnListResult()
-  }
-  
-  // MARK: - Private func
-  
-  private func setupNavBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
-  }
-  
-  @objc
-  private func settingButtonAction() {
-    guard let cacheModel = cacheModel else {
-      return
-    }
-    moduleOutput?.settingButtonAction(model: cacheModel)
   }
 }
 
@@ -140,7 +120,31 @@ extension YesNoScreenViewController: YesNoScreenFactoryOutput {
   }
 }
 
-// MARK: - Private Appearance
+// MARK: - Private
+
+private extension YesNoScreenViewController {
+  func setupNavBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
+  }
+  
+  @objc
+  func settingButtonAction() {
+    guard let cacheModel = cacheModel else {
+      return
+    }
+    moduleOutput?.settingButtonAction(model: cacheModel)
+  }
+}
+
+// MARK: - Appearance
 
 private extension YesNoScreenViewController {
   struct Appearance {

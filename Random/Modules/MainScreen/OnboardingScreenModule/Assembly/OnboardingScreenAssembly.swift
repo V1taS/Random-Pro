@@ -18,7 +18,9 @@ final class OnboardingScreenAssembly {
     let view = OnboardingScreenView()
     let factory = OnboardingScreenFactory()
     
-    let presenter = OnboardingScreenViewController(interactor: interactor, moduleView: view, factory: factory)
+    let presenter = OnboardingScreenViewController(moduleView: view,
+                                                   interactor: interactor,
+                                                   factory: factory)
     
     view.output = presenter
     interactor.output = presenter

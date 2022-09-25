@@ -53,10 +53,9 @@ final class SettingsScreenViewController: SettingsScreenModule {
   
   // MARK: - Initialization
   
-  /// Инициализатор
   /// - Parameters:
-  ///   - interactor: интерактор
   ///   - moduleView: вью
+  ///   - interactor: интерактор
   ///   - factory: фабрика
   init(interactor: SettingsScreenInteractorInput,
        moduleView: SettingsScreenViewProtocol,
@@ -113,9 +112,7 @@ extension SettingsScreenViewController: SettingsScreenViewOutput {
 
 // MARK: - SettingsScreenInteractorOutput
 
-extension SettingsScreenViewController: SettingsScreenInteractorOutput {
-  
-}
+extension SettingsScreenViewController: SettingsScreenInteractorOutput {}
 
 // MARK: - SettingsScreenFactoryOutput
 

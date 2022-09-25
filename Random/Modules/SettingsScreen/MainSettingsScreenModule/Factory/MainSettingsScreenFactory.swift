@@ -12,7 +12,7 @@ protocol MainSettingsScreenFactoryOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: результат генерации для таблички
-  func didRecive(models: [MainSettingsScreenType])
+  func didReceive(models: [MainSettingsScreenType])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -42,7 +42,7 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
     tableViewModels.append(.titleAndImage(title: appearance.customMainSectionsTitle,
                                           asideImage: nil,
                                           type: .customMainSections))
-    output?.didRecive(models: tableViewModels)
+    output?.didReceive(models: tableViewModels)
   }
 }
 

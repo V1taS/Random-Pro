@@ -12,7 +12,7 @@ protocol SettingsScreenFactoryOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: результат генерации для таблички
-  func didRecive(models: [SettingsScreenTableViewType])
+  func didReceive(models: [SettingsScreenTableViewType])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -207,7 +207,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .films: break
     }
-    output?.didRecive(models: tableViewModels)
+    output?.didReceive(models: tableViewModels)
   }
 }
 

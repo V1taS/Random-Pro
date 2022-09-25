@@ -120,7 +120,7 @@ extension SettingsScreenViewController: SettingsScreenInteractorOutput {
 // MARK: - SettingsScreenFactoryOutput
 
 extension SettingsScreenViewController: SettingsScreenFactoryOutput {
-  func didRecive(models: [SettingsScreenTableViewType]) {
+  func didReceive(models: [SettingsScreenTableViewType]) {
     moduleView.updateContentWith(models: models)
   }
 }

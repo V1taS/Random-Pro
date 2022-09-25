@@ -13,7 +13,7 @@ protocol CubesScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: CubesScreenModel)
+  func didReceive(model: CubesScreenModel)
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -54,11 +54,11 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   
   func getContent() {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let newModel = Appearance().cubesModelDefault
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     }
   }
   
@@ -90,7 +90,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
         cubesType: .cubesOne(oneCube)
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
       return
     }
     
@@ -106,7 +106,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
         cubesType: .cubesTwo(cubesOne: oneCube, cubesTwo: twoCube)
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
       return
     }
     
@@ -125,7 +125,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
                                cubesThree: threeCube)
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
       return
     }
     
@@ -146,7 +146,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
                               cubesFour: fourCube)
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
       return
     }
     
@@ -169,7 +169,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
                               cubesFive: fiveCube)
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
       return
     }
     
@@ -194,7 +194,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
                              cubesSix: sixCube)
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
       return
     }
   }

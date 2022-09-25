@@ -12,10 +12,10 @@ protocol LetterScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: LetterScreenModel)
+  func didReceive(model: LetterScreenModel)
   
   /// Диапазон букв закончился
-  func didReciveRangeEnded()
+  func didReceiveRangeEnded()
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
@@ -101,13 +101,13 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
         return
       }
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
                                            listLetter: Appearance().listRussionLetter,
                                            languageIndexSegmented: appearance.rusControl)
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     }
   }
   
@@ -130,13 +130,13 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
         return
       }
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
                                            listLetter: Appearance().listEnglishLetter,
                                            languageIndexSegmented: appearance.engControl)
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     }
   }
   
@@ -154,7 +154,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
 private extension LetterScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
       let model = LetterScreenModel(
@@ -164,7 +164,7 @@ private extension LetterScreenInteractor {
         languageIndexSegmented: appearance.rusControl
       )
       self.model = model
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     }
   }
   
@@ -202,7 +202,7 @@ private extension LetterScreenInteractor {
         languageIndexSegmented: languageIndexSegmented
       )
     } else {
-      output?.didReciveRangeEnded()
+      output?.didReceiveRangeEnded()
       return nil
     }
   }

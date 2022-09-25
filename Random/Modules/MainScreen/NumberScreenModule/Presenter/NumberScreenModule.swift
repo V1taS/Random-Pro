@@ -20,14 +20,14 @@ protocol NumberScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected(model: NumberScreenModel)
   
   /// Диапазон чисел закончился
-  func didReciveRangeEnded()
+  func didReceiveRangeEnded()
   
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
   func resultLabelAction(text: String?)
   
   /// Неправильный диапазон чисел
-  func didReciveRangeError()
+  func didReceiveRangeError()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -145,12 +145,12 @@ extension NumberScreenViewController: NumberScreenFactoryOutput {
 // MARK: - NumberScreenInteractorOutput
 
 extension NumberScreenViewController: NumberScreenInteractorOutput {
-  func didReciveRangeError() {
-    moduleOutput?.didReciveRangeError()
+  func didReceiveRangeError() {
+    moduleOutput?.didReceiveRangeError()
   }
   
-  func didReciveRangeEnded() {
-    moduleOutput?.didReciveRangeEnded()
+  func didReceiveRangeEnded() {
+    moduleOutput?.didReceiveRangeEnded()
   }
   
   func cleanButtonWasSelected(model: NumberScreenModel) {
@@ -158,7 +158,7 @@ extension NumberScreenViewController: NumberScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(model: NumberScreenModel) {
+  func didReceive(model: NumberScreenModel) {
     cacheModel = model
     factory.reverse(listResult: model.listResult)
     moduleView.set(result: model.result)
@@ -168,11 +168,11 @@ extension NumberScreenViewController: NumberScreenInteractorOutput {
     copyButton.isEnabled = !interactor.returnModel().listResult.isEmpty
   }
   
-  func didReciveRangeStart(text: String?) {
+  func didReceiveRangeStart(text: String?) {
     moduleView.setRangeStart(text)
   }
   
-  func didReciveRangeEnd(text: String?) {
+  func didReceiveRangeEnd(text: String?) {
     moduleView.setRangeEnd(text)
   }
 }

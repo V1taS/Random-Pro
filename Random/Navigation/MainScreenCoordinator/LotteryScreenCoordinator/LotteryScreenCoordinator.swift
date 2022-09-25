@@ -69,7 +69,7 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
     ))
   }
   
-  func didReciveRangeError() {
+  func didReceiveRangeError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
                                                        glyph: true,
                                                        active: {})

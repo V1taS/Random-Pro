@@ -11,11 +11,11 @@ import UIKit
 protocol TeamsScreenInteractorOutput: AnyObject {
   
   /// Был получен пустой список сгенерированных команд
-  func didReciveEmptyListTeams()
+  func didReceiveEmptyListTeams()
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: TeamsScreenModel)
+  func didReceive(model: TeamsScreenModel)
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -101,13 +101,13 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   
   func getContent() {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
                                    allPlayers: [],
                                    teams: [])
       self.model = model
-      output?.didReciveEmptyListTeams()
+      output?.didReceiveEmptyListTeams()
     }
   }
   

@@ -16,7 +16,7 @@ protocol LetterScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected(model: LetterScreenModel)
   
   /// Диапазон чисел закончился
-  func didReciveRangeEnded()
+  func didReceiveRangeEnded()
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
@@ -116,13 +116,13 @@ extension LetterScreenViewController: LetterScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(model: LetterScreenModel) {
+  func didReceive(model: LetterScreenModel) {
     cacheModel = model
     factory.reverseListResultFrom(model: model)
   }
   
-  func didReciveRangeEnded() {
-    moduleOutput?.didReciveRangeEnded()
+  func didReceiveRangeEnded() {
+    moduleOutput?.didReceiveRangeEnded()
   }
 }
 

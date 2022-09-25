@@ -13,11 +13,11 @@ import Contacts
 protocol ContactScreenInteractorOutput: AnyObject {
   
   /// Была получена ошибка
-  func didReciveError()
+  func didReceiveError()
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: ContactScreenModel)
+  func didReceive(model: ContactScreenModel)
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -60,14 +60,14 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   
   func getContent() {
     if let model = self.model {
-      self.output?.didRecive(model: model)
+      self.output?.didReceive(model: model)
     } else {
       permissionService.requestContactStore { [weak self] granted, error in
         guard
           let self = self,
           error == nil
         else {
-          self?.output?.didReciveError()
+          self?.output?.didReceiveError()
           return
         }
         var listContacts: [ContactScreenModel.Contact] = []
@@ -85,7 +85,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
               ))
             })
           } catch {
-            self.output?.didReciveError()
+            self.output?.didReceiveError()
           }
         }
         let newModel = ContactScreenModel(
@@ -94,7 +94,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
           result: Appearance().resultLabel
         )
         self.model = newModel
-        self.output?.didRecive(model: newModel)
+        self.output?.didReceive(model: newModel)
       }
     }
   }
@@ -116,7 +116,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
       result: result
     )
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
   }
   
   func returnCurrentModel() -> ContactScreenModel {

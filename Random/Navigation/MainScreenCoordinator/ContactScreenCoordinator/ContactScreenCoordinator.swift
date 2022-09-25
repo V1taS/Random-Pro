@@ -58,7 +58,7 @@ extension ContactScreenCoordinator: ContactScreenModuleOutput {
                                                        active: {})
   }
   
-  func didReciveError() {
+  func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
                                                        active: {})

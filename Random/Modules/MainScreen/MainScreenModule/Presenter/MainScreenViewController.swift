@@ -197,7 +197,7 @@ extension MainScreenViewController: MainScreenViewOutput {
 // MARK: - MainScreenInteractorOutput
 
 extension MainScreenViewController: MainScreenInteractorOutput {
-  func didRecive(model: MainScreenModel) {
+  func didReceive(model: MainScreenModel) {
     factory.createCellsFrom(model: model)
   }
 }
@@ -205,7 +205,7 @@ extension MainScreenViewController: MainScreenInteractorOutput {
 // MARK: - MainScreenFactoryOutput
 
 extension MainScreenViewController: MainScreenFactoryOutput {
-  func didRecive(models: [MainScreenModel.Section]) {
+  func didReceive(models: [MainScreenModel.Section]) {
     moduleView.configureCellsWith(models: models)
   }
 }

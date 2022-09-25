@@ -13,7 +13,7 @@ protocol ListAddItemsScreenCoordinatorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: Модельки с текстами
-  func didReciveText(models: [ListAddItemsScreenModel.TextModel])
+  func didReceiveText(models: [ListAddItemsScreenModel.TextModel])
 }
 
 /// События которые отправляем из `другого координатора` в  `текущий координатор`
@@ -69,8 +69,8 @@ extension ListAddItemsScreenCoordinator: ListAddItemsScreenModuleOutput {
     removeTextAlert()
   }
   
-  func didReciveText(models: [ListAddItemsScreenModel.TextModel]) {
-    output?.didReciveText(models: models)
+  func didReceiveText(models: [ListAddItemsScreenModel.TextModel]) {
+    output?.didReceiveText(models: models)
   }
 }
 

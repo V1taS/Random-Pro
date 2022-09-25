@@ -151,12 +151,12 @@ extension TeamsScreenViewController: TeamsScreenViewOutput {
 // MARK: - TeamsScreenInteractorOutput
 
 extension TeamsScreenViewController: TeamsScreenInteractorOutput {
-  func didReciveEmptyListTeams() {
+  func didReceiveEmptyListTeams() {
     moduleView.plugIsShow(true)
     shareButton.isEnabled = !interactor.returnListTeams().isEmpty
   }
   
-  func didRecive(model: TeamsScreenModel) {
+  func didReceive(model: TeamsScreenModel) {
     moduleView.updateContentWith(models: model.teams,
                                  teamsCount: interactor.returnSelectedTeam())
     moduleView.plugIsShow(model.teams.isEmpty)
@@ -172,7 +172,7 @@ extension TeamsScreenViewController: TeamsScreenInteractorOutput {
 // MARK: - TeamsScreenFactoryOutput
 
 extension TeamsScreenViewController: TeamsScreenFactoryOutput {
-  func didRecive(teams: [TeamsScreenModel.Team]) {
+  func didReceive(teams: [TeamsScreenModel.Team]) {
     interactor.updateList(teams: teams)
     moduleView.updateContentWith(models: teams,
                                  teamsCount: interactor.returnSelectedTeam())

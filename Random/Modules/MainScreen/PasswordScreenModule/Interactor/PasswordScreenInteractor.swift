@@ -13,14 +13,14 @@ protocol PasswordScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter text: Было получено начало диапазона
-  func didRecivePasswordLength(text: String?)
+  func didReceivePasswordLength(text: String?)
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: PasswordScreenModel)
+  func didReceive(model: PasswordScreenModel)
   
   /// Была получена ошибка
-  func didReciveError()
+  func didReceiveError()
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -87,7 +87,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         switchState: model.switchState
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     } else {
       let appearance = Appearance()
       let newModel = PasswordScreenModel(
@@ -102,13 +102,13 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         )
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     }
   }
   
   func passwordLengthDidChange(_ text: String?) {
     let rangeStart = formatter(text: text)
-    output?.didRecivePasswordLength(text: rangeStart)
+    output?.didReceivePasswordLength(text: rangeStart)
     
     guard let model = model else {
       return
@@ -204,7 +204,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       let model = model,
       let passwordLengthInt = Int((passwordLength ?? "").replacingOccurrences(of: Appearance().withoutSpaces, with: ""))
     else {
-      output?.didReciveError()
+      output?.didReceiveError()
       return
     }
     
@@ -234,7 +234,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
           )
         )
         self.model = newModel
-        self.output?.didRecive(model: newModel)
+        self.output?.didReceive(model: newModel)
       }
     )
   }
@@ -272,7 +272,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       )
     )
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
     output?.cleanButtonWasSelected()
   }
 }

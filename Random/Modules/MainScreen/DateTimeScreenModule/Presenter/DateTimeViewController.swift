@@ -121,7 +121,7 @@ extension DateTimeViewController: DateTimeInteractorOutput {
     moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(model: DateTimeScreenModel) {
+  func didReceive(model: DateTimeScreenModel) {
     cacheModel = model
     factory.reverseListResultFrom(model: model)
   }

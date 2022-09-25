@@ -15,7 +15,7 @@ protocol ListPlayersScreenModuleOutput: AnyObject {
   
   /// Были получены игроки
   ///  - Parameter players: Список игроков
-  func didRecive(players: [TeamsScreenPlayerModel])
+  func didReceive(players: [TeamsScreenPlayerModel])
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -85,7 +85,7 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    moduleOutput?.didRecive(players: interactor.returnCurrentListPlayers())
+    moduleOutput?.didReceive(players: interactor.returnCurrentListPlayers())
   }
   
   // MARK: - Internal func
@@ -130,7 +130,7 @@ extension ListPlayersScreenViewController: ListPlayersScreenViewOutput {
 // MARK: - ListPlayersScreenInteractorOutput
 
 extension ListPlayersScreenViewController: ListPlayersScreenInteractorOutput {
-  func didRecive(players: [TeamsScreenPlayerModel], teamsCount: Int) {
+  func didReceive(players: [TeamsScreenPlayerModel], teamsCount: Int) {
     factory.createListModelFrom(players: players, teamsCount: teamsCount)
   }
 }
@@ -138,7 +138,7 @@ extension ListPlayersScreenViewController: ListPlayersScreenInteractorOutput {
 // MARK: - ListPlayersScreenFactoryOutput
 
 extension ListPlayersScreenViewController: ListPlayersScreenFactoryOutput {
-  func didRecive(models: [ListPlayersScreenType]) {
+  func didReceive(models: [ListPlayersScreenType]) {
     moduleView.updateContentWith(models: models)
     
     if interactor.returnCurrentListPlayers().isEmpty {

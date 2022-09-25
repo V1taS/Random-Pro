@@ -13,16 +13,16 @@ protocol ListScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: Моделька с данными
-  func didReciveModel(_ model: ListScreenModel)
+  func didReceiveModel(_ model: ListScreenModel)
   
   /// Была получена ошибка
-  func didReciveError()
+  func didReceiveError()
   
   /// Была получена ошибка об отсутствии элементов
-  func didReciveIsEmptyError()
+  func didReceiveIsEmptyError()
   
   /// Закончился диапазон уникальных элементов
-  func didReciveRangeUniqueItemsError()
+  func didReceiveRangeUniqueItemsError()
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -67,11 +67,11 @@ final class ListScreenInteractor: ListScreenInteractorInput {
   
   func getContent() {
     if let model = model {
-      output?.didReciveModel(model)
+      output?.didReceiveModel(model)
     } else {
       let newModel = Appearance().defaultModel
       self.model = newModel
-      output?.didReciveModel(newModel)
+      output?.didReceiveModel(newModel)
     }
   }
   
@@ -85,7 +85,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
   
   func updateContentWith(models: [ListScreenModel.TextModel]) {
     guard let model = model else {
-      output?.didReciveError()
+      output?.didReceiveError()
       return
     }
     let newModel = ListScreenModel(
@@ -100,7 +100,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
   
   func updateWithoutRepetition(_ value: Bool) {
     guard let model = model else {
-      output?.didReciveError()
+      output?.didReceiveError()
       return
     }
     let newModel = ListScreenModel(
@@ -115,7 +115,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
   
   func generateButtonAction() {
     guard let model = model else {
-      output?.didReciveIsEmptyError()
+      output?.didReceiveIsEmptyError()
       return
     }
     
@@ -123,7 +123,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
       let uniqueItems: [ListScreenModel.TextModel] = model.allItems.difference(from: model.tempUniqueItems)
 
       guard let randomItem = uniqueItems.shuffled().first else {
-        output?.didReciveRangeUniqueItemsError()
+        output?.didReceiveRangeUniqueItemsError()
         return
       }
       
@@ -134,7 +134,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
       tempUniqueItems.append(randomItem)
       
       if tempUniqueItems.count > model.allItems.count {
-        output?.didReciveRangeUniqueItemsError()
+        output?.didReceiveRangeUniqueItemsError()
       } else {
         let newModel = ListScreenModel(
           withoutRepetition: model.withoutRepetition,
@@ -144,11 +144,11 @@ final class ListScreenInteractor: ListScreenInteractorInput {
           result: randomItem.text ?? ""
         )
         self.model = newModel
-        output?.didReciveModel(newModel)
+        output?.didReceiveModel(newModel)
       }
     } else {
       guard let randomItem = model.allItems.shuffled().first else {
-        output?.didReciveIsEmptyError()
+        output?.didReceiveIsEmptyError()
         return
       }
       var generetionItems = model.generetionItems
@@ -165,7 +165,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
         result: randomItem.text ?? ""
       )
       self.model = newModel
-      output?.didReciveModel(newModel)
+      output?.didReceiveModel(newModel)
     }
   }
   
@@ -182,7 +182,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
       result: "?"
     )
     self.model = newModel
-    output?.didReciveModel(newModel)
+    output?.didReceiveModel(newModel)
     output?.cleanButtonWasSelected()
   }
 }

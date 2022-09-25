@@ -64,7 +64,7 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
                                                        active: {})
   }
   
-  func didReciveError() {
+  func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
                                                        active: {})

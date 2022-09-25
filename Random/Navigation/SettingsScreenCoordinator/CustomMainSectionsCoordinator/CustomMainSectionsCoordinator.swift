@@ -70,7 +70,7 @@ final class CustomMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol
 // MARK: - CustomMainSectionsModuleOutput
 
 extension CustomMainSectionsCoordinator: CustomMainSectionsModuleOutput {
-  func didReciveError() {
+  func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
                                                        active: {})

@@ -13,25 +13,25 @@ protocol NumberScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: NumberScreenModel)
+  func didReceive(model: NumberScreenModel)
   
   /// Были получены данные
   ///  - Parameter text: Было получено начало диапазона
-  func didReciveRangeStart(text: String?)
+  func didReceiveRangeStart(text: String?)
   
   /// Были получены данные
   ///  - Parameter text: Было получено конец диапазона
-  func didReciveRangeEnd(text: String?)
+  func didReceiveRangeEnd(text: String?)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
   func cleanButtonWasSelected(model: NumberScreenModel)
   
   /// Диапазон чисел закончился
-  func didReciveRangeEnded()
+  func didReceiveRangeEnded()
   
   /// Неправильный диапазон чисел
-  func didReciveRangeError()
+  func didReceiveRangeError()
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -124,7 +124,7 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
     let rangeEndValueNum = Int(rangeEndValue) ?? .zero
     
     guard rangeStartValueNum < rangeEndValueNum else {
-      output?.didReciveRangeError()
+      output?.didReceiveRangeError()
       return
     }
     let randomNumber = Int.random(in: rangeStartValueNum...rangeEndValueNum)
@@ -160,12 +160,12 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   
   func rangeStartDidChange(_ text: String?) {
     let rangeStart = formatter(text: text)
-    output?.didReciveRangeStart(text: rangeStart)
+    output?.didReceiveRangeStart(text: rangeStart)
   }
   
   func rangeEndDidChange(_ text: String?) {
     let rangeEnd = formatter(text: text)
-    output?.didReciveRangeEnd(text: rangeEnd)
+    output?.didReceiveRangeEnd(text: rangeEnd)
   }
   
   func returnListResult() -> [String] {
@@ -217,14 +217,14 @@ private extension NumberScreenInteractor {
         isEnabledWithoutRepetition: self.model?.isEnabledWithoutRepetition ?? false
       )
     } else {
-      output?.didReciveRangeEnded()
+      output?.didReceiveRangeEnded()
       return nil
     }
   }
   
   func configureModel(withWithoutRepetition isOn: Bool) {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
       let model = NumberScreenModel(
@@ -235,7 +235,7 @@ private extension NumberScreenInteractor {
         isEnabledWithoutRepetition: isOn
       )
       self.model = model
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     }
   }
   

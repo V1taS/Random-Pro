@@ -101,7 +101,7 @@ extension CoinScreenViewController: CoinScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(model: CoinScreenModel) {
+  func didReceive(model: CoinScreenModel) {
     cacheModel = model
     factory.reverseListResultFrom(model: model)
   }

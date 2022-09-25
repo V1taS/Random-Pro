@@ -12,7 +12,7 @@ protocol CoinScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: CoinScreenModel)
+  func didReceive(model: CoinScreenModel)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
@@ -78,7 +78,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
     )
     
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
@@ -95,7 +95,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
 private extension CoinScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let model = CoinScreenModel(
         result: Appearance().resultName,
@@ -103,7 +103,7 @@ private extension CoinScreenInteractor {
         listResult: []
       )
       self.model = model
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     }
   }
 }

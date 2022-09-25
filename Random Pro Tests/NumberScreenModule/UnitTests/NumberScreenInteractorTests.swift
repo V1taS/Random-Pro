@@ -50,7 +50,7 @@ final class NumberScreenInteractorTests: XCTestCase {
     var recievedModel: NumberScreenModel?
     let expectation = XCTestExpectation(description: "Wait for output call")
     
-    outputSpy.didReciveModelStub = { model in
+    outputSpy.didReceiveModelStub = { model in
       recievedModel = model
       expectation.fulfill()
     }
@@ -69,7 +69,7 @@ final class NumberScreenInteractorTests: XCTestCase {
     
     var recievedIsEnabledWithoutRepetition: Bool?
     let expectation = XCTestExpectation(description: "Wait for output call")
-    outputSpy.didReciveModelStub = { model in
+    outputSpy.didReceiveModelStub = { model in
       recievedIsEnabledWithoutRepetition = model.isEnabledWithoutRepetition
       expectation.fulfill()
     }
@@ -94,7 +94,7 @@ final class NumberScreenInteractorTests: XCTestCase {
     
     var recievedModel: NumberScreenModel?
     let expectation = XCTestExpectation(description: "Wait for output call")
-    outputSpy.didReciveModelStub = { model in
+    outputSpy.didReceiveModelStub = { model in
       recievedModel = model
       expectation.fulfill()
     }

@@ -14,7 +14,7 @@ protocol ListPlayersScreenInteractorOutput: AnyObject {
   ///  - Parameters:
   ///   - players: Список игроков
   ///   - teamsCount: Количество команд
-  func didRecive(players: [TeamsScreenPlayerModel], teamsCount: Int)
+  func didReceive(players: [TeamsScreenPlayerModel], teamsCount: Int)
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -76,7 +76,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   // MARK: - Internal func
   
   func getContent() {
-    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
+    output?.didReceive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int) {
@@ -101,7 +101,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
     models.remove(at: index)
     models.insert(player, at: index)
     
-    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
+    output?.didReceive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String) {
@@ -121,7 +121,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
     models.remove(at: index)
     models.insert(player, at: index)
     
-    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
+    output?.didReceive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func playerAdd(name: String?) {
@@ -141,7 +141,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
     )
     
     models.append(player)
-    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
+    output?.didReceive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func playerRemove(id: String) {
@@ -151,12 +151,12 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
     }
     
     models.remove(at: index)
-    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
+    output?.didReceive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func removeAllPlayers() {
     models = []
-    output?.didRecive(players: models, teamsCount: defaultTeamsCount)
+    output?.didReceive(players: models, teamsCount: defaultTeamsCount)
   }
   
   func returnCurrentListPlayers() -> [TeamsScreenPlayerModel] {

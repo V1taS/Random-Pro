@@ -47,19 +47,19 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
     updateSettingsScreenContent()
   }
   
-  func didReciveError() {
+  func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
                                                        active: {})
   }
   
-  func didReciveIsEmptyError() {
+  func didReceiveIsEmptyError() {
     services.notificationService.showNeutralAlertWith(title: Appearance().listElementsIsEmpty,
                                                       glyph: true,
                                                       active: {})
   }
   
-  func didReciveRangeUniqueItemsError() {
+  func didReceiveRangeUniqueItemsError() {
     services.notificationService.showNeutralAlertWith(title: Appearance().uniqueElementsIsOver,
                                                       glyph: true,
                                                       active: {})
@@ -123,7 +123,7 @@ extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListAddItemsScreenCoordinatorOutput
 
 extension ListScreenCoordinator: ListAddItemsScreenCoordinatorOutput {
-  func didReciveText(models: [ListAddItemsScreenModel.TextModel]) {
+  func didReceiveText(models: [ListAddItemsScreenModel.TextModel]) {
     let models = models.map {
       return ListScreenModel.TextModel(id: $0.id, text: $0.text)
     }

@@ -142,7 +142,7 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected()
   }
   
-  func didRecive(model: CubesScreenModel) {
+  func didReceive(model: CubesScreenModel) {
     moduleView.updateContentWith(selectedCountCubes: model.selectedCountCubes,
                                  cubesType: model.cubesType,
                                  listResult: factory.reverseListResult(model.listResult),

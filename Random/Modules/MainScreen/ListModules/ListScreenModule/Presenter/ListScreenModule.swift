@@ -20,13 +20,13 @@ protocol ListScreenModuleOutput: AnyObject {
   func resultCopied(text: String)
   
   /// Была получена ошибка
-  func didReciveError()
+  func didReceiveError()
   
   /// Была получена ошибка об отсутствии элементов
-  func didReciveIsEmptyError()
+  func didReceiveIsEmptyError()
   
   /// Закончился диапазон уникальных элементов
-  func didReciveRangeUniqueItemsError()
+  func didReceiveRangeUniqueItemsError()
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -138,19 +138,19 @@ extension ListScreenViewController: ListScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected()
   }
   
-  func didReciveIsEmptyError() {
-    moduleOutput?.didReciveIsEmptyError()
+  func didReceiveIsEmptyError() {
+    moduleOutput?.didReceiveIsEmptyError()
   }
   
-  func didReciveRangeUniqueItemsError() {
-    moduleOutput?.didReciveRangeUniqueItemsError()
+  func didReceiveRangeUniqueItemsError() {
+    moduleOutput?.didReceiveRangeUniqueItemsError()
   }
   
-  func didReciveError() {
-    moduleOutput?.didReciveError()
+  func didReceiveError() {
+    moduleOutput?.didReceiveError()
   }
   
-  func didReciveModel(_ model: ListScreenModel) {
+  func didReceiveModel(_ model: ListScreenModel) {
     moduleView.updateContentWith(text: model.result)
     copyButton.isEnabled = !interactor.returnCurrentModel().generetionItems.isEmpty
   }

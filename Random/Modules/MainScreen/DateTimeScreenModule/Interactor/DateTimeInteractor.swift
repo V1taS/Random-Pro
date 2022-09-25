@@ -12,7 +12,7 @@ protocol DateTimeInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: DateTimeScreenModel)
+  func didReceive(model: DateTimeScreenModel)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
@@ -82,7 +82,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     )
     
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
   }
   
   func generateContentTime() {
@@ -101,7 +101,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     )
     
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
   }
   
   func generateContentDay() {
@@ -120,7 +120,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     )
     
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
   }
   
   func generateContentMonth() {
@@ -138,7 +138,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     )
     
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
@@ -155,14 +155,14 @@ final class DateTimeInteractor: DateTimeInteractorInput {
 private extension DateTimeInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let model = DateTimeScreenModel(
         result: Appearance().result,
         listResult: []
       )
       self.model = model
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     }
   }
 }

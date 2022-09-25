@@ -13,36 +13,36 @@ final class NumberScreenInteractorOutputSpy: NumberScreenInteractorOutput {
   
   // MARK: - Stub (Возвращают набор предопределенных данных)
   
-  var didReciveModelStub: ((_ model: NumberScreenModel) -> Void)?
-  var didReciveRangeStartTextStub: ((_ text: String?) -> Void)?
-  var didReciveRangeEndTextStub: ((_ text: String?) -> Void)?
+  var didReceiveModelStub: ((_ model: NumberScreenModel) -> Void)?
+  var didReceiveRangeStartTextStub: ((_ text: String?) -> Void)?
+  var didReceiveRangeEndTextStub: ((_ text: String?) -> Void)?
   var cleanButtonWasSelectedModelStub: ((_ model: NumberScreenModel) -> Void)?
-  var didReciveRangeEndedStub: (() -> Void)?
-  var didReciveRangeErrorStub: (() -> Void)?
+  var didReceiveRangeEndedStub: (() -> Void)?
+  var didReceiveRangeErrorStub: (() -> Void)?
   
   // MARK: - NumberScreenInteractorOutput
   
-  func didRecive(model: NumberScreenModel) {
-    didReciveModelStub?(model)
+  func didReceive(model: NumberScreenModel) {
+    didReceiveModelStub?(model)
   }
   
-  func didReciveRangeStart(text: String?) {
-    didReciveRangeStartTextStub?(text)
+  func didReceiveRangeStart(text: String?) {
+    didReceiveRangeStartTextStub?(text)
   }
   
-  func didReciveRangeEnd(text: String?) {
-    didReciveRangeEndTextStub?(text)
+  func didReceiveRangeEnd(text: String?) {
+    didReceiveRangeEndTextStub?(text)
   }
   
   func cleanButtonWasSelected(model: NumberScreenModel) {
     cleanButtonWasSelectedModelStub?(model)
   }
   
-  func didReciveRangeEnded() {
-    didReciveRangeEndedStub?()
+  func didReceiveRangeEnded() {
+    didReceiveRangeEndedStub?()
   }
   
-  func didReciveRangeError() {
-    didReciveRangeErrorStub?()
+  func didReceiveRangeError() {
+    didReceiveRangeErrorStub?()
   }
 }

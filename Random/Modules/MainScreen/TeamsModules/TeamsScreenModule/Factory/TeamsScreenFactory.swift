@@ -12,7 +12,7 @@ protocol TeamsScreenFactoryOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter teams: Список команд
-  func didRecive(teams: [TeamsScreenModel.Team])
+  func didReceive(teams: [TeamsScreenModel.Team])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -283,7 +283,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
         teams.append(team)
       }
       DispatchQueue.main.async { [weak self] in
-        self?.output?.didRecive(teams: teams)
+        self?.output?.didReceive(teams: teams)
       }
     }
   }

@@ -12,7 +12,7 @@ protocol ListPlayersScreenFactoryOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: результат генерации для таблички
-  func didRecive(models: [ListPlayersScreenType])
+  func didReceive(models: [ListPlayersScreenType])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -35,7 +35,7 @@ final class ListPlayersScreenFactory: ListPlayersScreenFactoryInput {
   // MARK: - Internal func
 
   func createListModelFrom(players: [TeamsScreenPlayerModel], teamsCount: Int) {
-    output?.didRecive(models: createListFrom(players: players, teamsCount: teamsCount))
+    output?.didReceive(models: createListFrom(players: players, teamsCount: teamsCount))
   }
 }
 

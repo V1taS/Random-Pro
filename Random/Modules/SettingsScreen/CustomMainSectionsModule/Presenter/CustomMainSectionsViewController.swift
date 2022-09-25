@@ -15,7 +15,7 @@ protocol CustomMainSectionsModuleOutput: AnyObject {
   func didChanged(models: [MainScreenModel.Section])
   
   /// Получена ошибка
-  func didReciveError()
+  func didReceiveError()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -103,11 +103,11 @@ extension CustomMainSectionsViewController: CustomMainSectionsInteractorOutput {
     moduleOutput?.didChanged(models: models)
   }
   
-  func didReciveError() {
-    moduleOutput?.didReciveError()
+  func didReceiveError() {
+    moduleOutput?.didReceiveError()
   }
   
-  func didRecive(models: [MainScreenModel.Section]) {
+  func didReceive(models: [MainScreenModel.Section]) {
     moduleView.updateContentWith(models: models)
   }
 }

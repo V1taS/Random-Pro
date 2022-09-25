@@ -12,7 +12,7 @@ protocol ListAddItemsScreenFactoryOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: результат генерации для таблички
-  func didRecive(models: [ListAddItemsScreenModel])
+  func didReceive(models: [ListAddItemsScreenModel])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -33,7 +33,7 @@ final class ListAddItemsScreenFactory: ListAddItemsScreenFactoryInput {
   // MARK: - Internal func
   
   func createListModelFrom(models: [ListAddItemsScreenModel.TextModel]) {
-    output?.didRecive(models: createListFrom(models: models))
+    output?.didReceive(models: createListFrom(models: models))
   }
 }
 

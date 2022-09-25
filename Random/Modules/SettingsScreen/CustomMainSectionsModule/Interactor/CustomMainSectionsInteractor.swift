@@ -12,14 +12,14 @@ protocol CustomMainSectionsInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: результат генерации
-  func didRecive(models: [MainScreenModel.Section])
+  func didReceive(models: [MainScreenModel.Section])
   
   /// Данные были изменены
   ///  - Parameter models: результат генерации
   func didChanged(models: [MainScreenModel.Section])
   
   /// Получена ошибка
-  func didReciveError()
+  func didReceiveError()
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -57,12 +57,12 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
   
   func getContent(models: [MainScreenModel.Section]) {
     self.models =  models
-    output?.didRecive(models: models)
+    output?.didReceive(models: models)
   }
   
   func sectionChanged(_ index: Int, type: MainScreenModel.Section) {
     guard !models.isEmpty else {
-      output?.didReciveError()
+      output?.didReceiveError()
       return
     }
     
@@ -88,7 +88,7 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
   
   func sectionChanged(_ isEnabled: Bool, type: MainScreenModel.Section) {
     guard !models.isEmpty else {
-      output?.didReciveError()
+      output?.didReceiveError()
       return
     }
     

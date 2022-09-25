@@ -12,10 +12,10 @@ protocol LotteryScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: LotteryScreenModel)
+  func didReceive(model: LotteryScreenModel)
   
   /// Неправильный диапазон чисел
-  func didReciveRangeError()
+  func didReceiveRangeError()
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
@@ -76,7 +76,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
     let amountNumberValueInt = Int(amountNumberValue) ?? .zero
     
     guard rangeStartValueNumber < rangeEndValueNumber else {
-      output?.didReciveRangeError()
+      output?.didReceiveRangeError()
       return
     }
     
@@ -101,7 +101,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
       listResult: listResult
     )
     self.model = newModel
-    output?.didRecive(model: newModel)
+    output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
@@ -118,7 +118,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
 private extension LotteryScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
       let model = LotteryScreenModel(
@@ -129,7 +129,7 @@ private extension LotteryScreenInteractor {
         listResult: []
       )
       self.model = model
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     }
   }
 }

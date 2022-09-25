@@ -12,7 +12,7 @@ import UIKit
 protocol LotteryScreenModuleOutput: AnyObject {
   
   /// Неправильный диапазон чисел
-  func didReciveRangeError()
+  func didReceiveRangeError()
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
@@ -117,13 +117,13 @@ extension LotteryScreenViewController: LotteryScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(model: LotteryScreenModel) {
+  func didReceive(model: LotteryScreenModel) {
     cacheModel = model
     factory.reverseListResultFrom(model: model)
   }
   
-  func didReciveRangeError() {
-    moduleOutput?.didReciveRangeError()
+  func didReceiveRangeError() {
+    moduleOutput?.didReceiveRangeError()
   }
 }
 

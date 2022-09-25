@@ -109,7 +109,7 @@ final class NumberScreenModuleIntegrationTests: XCTestCase {
     XCTAssertTrue(view.isSetListResult)
   }
   
-  func testDidReciveModel() {
+  func testDidReceiveModel() {
     // Arrange
     let model = NumberScreenModel(rangeStartValue: nil,
                                   rangeEndValue: nil,
@@ -118,7 +118,7 @@ final class NumberScreenModuleIntegrationTests: XCTestCase {
                                   isEnabledWithoutRepetition: false)
     
     // Act
-    sut.didRecive(model: model)
+    sut.didReceive(model: model)
     
     // Assert
     XCTAssertTrue(factory.isReverse)
@@ -127,17 +127,17 @@ final class NumberScreenModuleIntegrationTests: XCTestCase {
     XCTAssertTrue(view.isSetRangeEnd)
   }
   
-  func testDidReciveRangeStart() {
+  func testDidReceiveRangeStart() {
     // Act
-    sut.didReciveRangeStart(text: nil)
+    sut.didReceiveRangeStart(text: nil)
     
     // Assert
     XCTAssertTrue(view.isSetRangeStart)
   }
   
-  func testDidReciveRangeEnd() {
+  func testDidReceiveRangeEnd() {
     // Act
-    sut.didReciveRangeEnd(text: nil)
+    sut.didReceiveRangeEnd(text: nil)
     
     // Assert
     XCTAssertTrue(view.isSetRangeEnd)

@@ -12,7 +12,7 @@ protocol MainSettingsScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: MainSettingsScreenModel)
+  func didReceive(model: MainSettingsScreenModel)
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -47,10 +47,10 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   
   func getContentWith(isDarkMode: Bool) {
     if let model = model {
-      output?.didRecive(model: model)
+      output?.didReceive(model: model)
     } else {
       let newModel = MainSettingsScreenModel(isDarkMode: isDarkMode)
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     }
   }
 }

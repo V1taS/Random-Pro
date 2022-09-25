@@ -63,7 +63,7 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
     ))
   }
   
-  func didReciveRangeEnded() {
+  func didReceiveRangeEnded() {
     services.notificationService.showNeutralAlertWith(
       title: Appearance().lettersRangeEnded,
       glyph: true,

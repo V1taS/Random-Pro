@@ -15,7 +15,7 @@ protocol ListAddItemsScreenModuleOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: Модельки с текстами
-  func didReciveText(models: [ListAddItemsScreenModel.TextModel])
+  func didReceiveText(models: [ListAddItemsScreenModel.TextModel])
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -83,7 +83,7 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    moduleOutput?.didReciveText(models: interactor.returnCurrentListTextModel())
+    moduleOutput?.didReceiveText(models: interactor.returnCurrentListTextModel())
   }
   
   // MARK: - Internal func
@@ -112,7 +112,7 @@ extension ListAddItemsScreenViewController: ListAddItemsScreenViewOutput {
 // MARK: - ListAddItemsScreenInteractorOutput
 
 extension ListAddItemsScreenViewController: ListAddItemsScreenInteractorOutput {
-  func didReciveText(models: [ListAddItemsScreenModel.TextModel]) {
+  func didReceiveText(models: [ListAddItemsScreenModel.TextModel]) {
     factory.createListModelFrom(models: models)
   }
 }
@@ -120,7 +120,7 @@ extension ListAddItemsScreenViewController: ListAddItemsScreenInteractorOutput {
 // MARK: - ListAddItemsScreenFactoryOutput
 
 extension ListAddItemsScreenViewController: ListAddItemsScreenFactoryOutput {
-  func didRecive(models: [ListAddItemsScreenModel]) {
+  func didReceive(models: [ListAddItemsScreenModel]) {
     moduleView.updateContentWith(models: models)
     
     if interactor.returnCurrentListTextModel().isEmpty {

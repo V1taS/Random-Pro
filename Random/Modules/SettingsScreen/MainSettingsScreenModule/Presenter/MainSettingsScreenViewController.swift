@@ -120,7 +120,7 @@ extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
 // MARK: - MainSettingsScreenInteractorOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenInteractorOutput {
-  func didRecive(model: MainSettingsScreenModel) {
+  func didReceive(model: MainSettingsScreenModel) {
     factory.createListModelWith(isDarkMode: model.isDarkMode)
   }
 }
@@ -128,7 +128,7 @@ extension MainSettingsScreenViewController: MainSettingsScreenInteractorOutput {
 // MARK: - MainSettingsScreenFactoryOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenFactoryOutput {
-  func didRecive(models: [MainSettingsScreenType]) {
+  func didReceive(models: [MainSettingsScreenType]) {
     moduleView.updateContentWith(models: models)
   }
 }

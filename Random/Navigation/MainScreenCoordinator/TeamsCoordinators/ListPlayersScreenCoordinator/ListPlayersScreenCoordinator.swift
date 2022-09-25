@@ -13,7 +13,7 @@ protocol ListPlayersScreenCoordinatorOutput: AnyObject {
   
   /// Были получены игроки
   ///  - Parameter players: Список игроков
-  func didRecive(players: [TeamsScreenPlayerModel])
+  func didReceive(players: [TeamsScreenPlayerModel])
 }
 
 /// События которые отправляем из `другого координатора` в  `текущий координатор`
@@ -71,8 +71,8 @@ extension ListPlayersScreenCoordinator: ListPlayersScreenModuleOutput {
     removePlayersAlert()
   }
   
-  func didRecive(players: [TeamsScreenPlayerModel]) {
-    output?.didRecive(players: players)
+  func didReceive(players: [TeamsScreenPlayerModel]) {
+    output?.didReceive(players: players)
   }
 }
 

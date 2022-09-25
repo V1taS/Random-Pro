@@ -15,7 +15,7 @@ protocol ContactScreenModuleOutput: AnyObject {
   func settingButtonAction()
   
   /// Была получена ошибка
-  func didReciveError()
+  func didReceiveError()
   
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
@@ -142,11 +142,11 @@ extension ContactScreenViewController: ContactScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected()
   }
   
-  func didReciveError() {
-    moduleOutput?.didReciveError()
+  func didReceiveError() {
+    moduleOutput?.didReceiveError()
   }
   
-  func didRecive(model: ContactScreenModel) {
+  func didReceive(model: ContactScreenModel) {
     moduleView.setResult(model.result)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }

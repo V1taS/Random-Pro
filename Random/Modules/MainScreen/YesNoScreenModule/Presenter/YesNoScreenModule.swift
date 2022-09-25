@@ -125,7 +125,7 @@ extension YesNoScreenViewController: YesNoScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
-  func didRecive(model: YesNoScreenModel) {
+  func didReceive(model: YesNoScreenModel) {
     cacheModel = model
     moduleView.set(result: model.result)
     factory.reverse(listResult: model.listResult)

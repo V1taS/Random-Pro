@@ -12,7 +12,7 @@ protocol MainScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter model: результат генерации
-  func didRecive(model: MainScreenModel)
+  func didReceive(model: MainScreenModel)
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -56,14 +56,14 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         allSections: models
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     } else {
       let newModel = MainScreenModel(
         isDarkMode: nil,
         allSections: models
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     }
   }
   
@@ -74,11 +74,11 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         allSections: MainScreenModel.updatesLocalizationTitleSectionForModel(models: model.allSections)
       )
       self.model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     } else {
       let newModel = MainScreenModel.createBaseModel()
       model = newModel
-      output?.didRecive(model: newModel)
+      output?.didReceive(model: newModel)
     }
   }
   

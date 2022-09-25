@@ -12,7 +12,7 @@ protocol MainScreenFactoryOutput: AnyObject {
   
   /// Были получены модельки
   ///  - Parameter models: Модельки для главного экрана
-  func didRecive(models: [MainScreenModel.Section])
+  func didReceive(models: [MainScreenModel.Section])
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -33,7 +33,7 @@ final class MainScreenFactory: MainScreenFactoryInput {
   // MARK: - Internal func
   
   func createCellsFrom(model: MainScreenModel) {
-    var models: [MainScreenModel.Section] = model.allSections.filter { $0.isEnabled }
-    output?.didRecive(models: models)
+    let models: [MainScreenModel.Section] = model.allSections.filter { $0.isEnabled }
+    output?.didReceive(models: models)
   }
 }

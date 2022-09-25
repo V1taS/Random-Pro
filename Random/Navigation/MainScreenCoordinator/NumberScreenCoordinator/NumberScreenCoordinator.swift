@@ -42,7 +42,7 @@ final class NumberScreenCoordinator: Coordinator {
 // MARK: - NumberScreenModuleOutput
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
-  func didReciveRangeError() {
+  func didReceiveRangeError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
                                                        glyph: true,
                                                        active: {})
@@ -56,7 +56,7 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
                                                        active: {})
   }
   
-  func didReciveRangeEnded() {
+  func didReceiveRangeEnded() {
     services.notificationService.showNeutralAlertWith(title: Appearance().numberRangeEnded,
                                                       glyph: true,
                                                       active: {})

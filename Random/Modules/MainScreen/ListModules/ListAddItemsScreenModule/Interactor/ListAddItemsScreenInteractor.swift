@@ -12,7 +12,7 @@ protocol ListAddItemsScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: Модельки с текстами
-  func didReciveText(models: [ListAddItemsScreenModel.TextModel])
+  func didReceiveText(models: [ListAddItemsScreenModel.TextModel])
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -54,7 +54,7 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
   // MARK: - Internal func
   
   func getContent() {
-    output?.didReciveText(models: models)
+    output?.didReceiveText(models: models)
   }
   
   func updateContentWith(models: [ListAddItemsScreenModel.TextModel]) {
@@ -79,7 +79,7 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
     )
     
     models.append(textModel)
-    output?.didReciveText(models: models)
+    output?.didReceiveText(models: models)
   }
   
   func textRemove(id: String) {
@@ -88,12 +88,12 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
       return
     }
     models.remove(at: index)
-    output?.didReciveText(models: models)
+    output?.didReceiveText(models: models)
   }
   
   func removeAllText() {
     models = []
-    output?.didReciveText(models: models)
+    output?.didReceiveText(models: models)
   }
 }
 

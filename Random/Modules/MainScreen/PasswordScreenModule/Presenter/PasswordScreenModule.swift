@@ -12,7 +12,7 @@ import UIKit
 protocol PasswordScreenModuleOutput: AnyObject {
   
   /// Была получена ошибка
-  func didReciveError()
+  func didReceiveError()
   
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
@@ -141,18 +141,18 @@ extension PasswordScreenViewController: PasswordScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected()
   }
   
-  func didReciveError() {
-    moduleOutput?.didReciveError()
+  func didReceiveError() {
+    moduleOutput?.didReceiveError()
   }
   
-  func didRecive(model: PasswordScreenModel) {
+  func didReceive(model: PasswordScreenModel) {
     moduleView.setPasswordLength(model.passwordLength)
     moduleView.set(resultClassic: model.result,
                    switchState: model.switchState)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
-  func didRecivePasswordLength(text: String?) {
+  func didReceivePasswordLength(text: String?) {
     moduleView.setPasswordLength(text)
   }
 }

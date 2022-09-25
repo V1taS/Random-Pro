@@ -20,18 +20,104 @@ protocol MetricsService {
   ///  - event: Выбираем метрику
   ///  - properties: Словарик с дополнительной информацией `[String : String]`
   func track(event: MetricsSections, properties: [String: String])
+  
+  /// Получаем модельки всех событий с количеством нажатий
+  func getAllEvents() -> [MetricsServiceModel]?
+  
+  /// Получаем количество нажатий на конкретное событие
+  ///  - Parameter type: Тип события
+  func getCountTappedOn(_ type: MetricsSections) -> Int?
+  
+  /// Получаем общее количество нажатий на все события
+  func getAllCountTapped() -> Int?
 }
 
 final class MetricsServiceImpl: MetricsService {
+  
+  // MARK: - Private property
+  
+  @ObjectCustomUserDefaultsWrapper<[MetricsSections.RawValue: Int]>(key: Appearance().keyUserDefaults)
+  private var dictionaryCountTapped: [MetricsSections.RawValue: Int]?
+  
+  // MARK: - Internal func
+  
   func track(event: MetricsSections) {
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
       print("REPORT ERROR: %@", error.localizedDescription)
     }
+    
+    increaseCountTapped(event: event)
   }
   
   func track(event: MetricsSections, properties: [String : String]) {
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
       print("REPORT ERROR: %@", error.localizedDescription)
     }
+    
+    increaseCountTapped(event: event)
+  }
+  
+  func getAllEvents() -> [MetricsServiceModel]? {
+    guard let dictionaryCountTapped = dictionaryCountTapped else {
+      return nil
+    }
+    
+    var countTappedModels: [MetricsServiceModel] = []
+    
+    for (key, value) in dictionaryCountTapped {
+      if let type = MetricsSections(rawValue: key) {
+        countTappedModels.append(MetricsServiceModel(type: type,
+                                                     countTapped: value))
+      }
+    }
+    return countTappedModels
+  }
+  
+  func getCountTappedOn(_ type: MetricsSections) -> Int? {
+    guard
+      let dictionaryCountTapped = dictionaryCountTapped,
+      let countTapped = dictionaryCountTapped[type.rawValue]
+    else {
+      return nil
+    }
+    return countTapped
+  }
+  
+  func getAllCountTapped() -> Int? {
+    guard let dictionaryCountTapped = dictionaryCountTapped else {
+      return nil
+    }
+    
+    var allCount = 0
+    for (_, value) in dictionaryCountTapped {
+      allCount += value
+    }
+    return allCount
+  }
+}
+
+
+// MARK: - Private
+
+private extension MetricsServiceImpl {
+  func increaseCountTapped(event: MetricsSections) {
+    if var dictionaryCountTapped = dictionaryCountTapped {
+      if let count = dictionaryCountTapped[event.rawValue] {
+        dictionaryCountTapped[event.rawValue] = count + 1
+      } else {
+        dictionaryCountTapped[event.rawValue] = 1
+      }
+      self.dictionaryCountTapped = dictionaryCountTapped
+    } else {
+      dictionaryCountTapped = [event.rawValue: 1]
+    }
+  }
+}
+
+// MARK: - Appearance
+
+private extension MetricsServiceImpl {
+  struct Appearance {
+    let keyUserDefaults = "metrics_service_user_defaults_key"
   }
 }

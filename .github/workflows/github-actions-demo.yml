@@ -13,9 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Force Xcode 14
-        run: sudo xcode-select -switch /Applications/Xcode_14.0.app
       - name: Build
-        run: swift build -v
+        run: swift build
       - name: Run tests
-        run: swift test -v
+        run: swift test

@@ -1146,7 +1146,6 @@
 		1B7F666425D0856300933AD6 = {
 			isa = PBXGroup;
 			children = (
-				1B80A00E26D68E68008F8733 /* Random Pro.entitlements */,
 				1B7F666F25D0856300933AD6 /* Random */,
 				1B06E0EB28BF66CD00BD58FB /* Random Pro Tests */,
 				1B7F666E25D0856300933AD6 /* Products */,
@@ -1247,6 +1246,7 @@
 		1B96E0E8282046BB00A23880 /* System */ = {
 			isa = PBXGroup;
 			children = (
+				1B80A00E26D68E68008F8733 /* Random Pro.entitlements */,
 				1B7F667925D0856300933AD6 /* Assets.xcassets */,
 				1B7F667025D0856300933AD6 /* AppDelegate.swift */,
 				1B7F667225D0856300933AD6 /* SceneDelegate.swift */,
@@ -2345,8 +2345,8 @@
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
 			packageReferences = (
-				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */,
-				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */,
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
 				1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
@@ -2399,7 +2399,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 			showEnvVarsInLog = 0;
 		};
 		27F50F97B227AB3333F06DA9 /* [CP] Check Pods Manifest.lock */ = {
@@ -2854,7 +2855,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 92;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2886,7 +2887,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Random Pro.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 92;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
@@ -2941,7 +2942,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */ = {
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
 			requirement = {
@@ -2949,7 +2950,7 @@
 				kind = branch;
 			};
 		};
-		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */ = {
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
 			requirement = {
@@ -2970,12 +2971,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1B92E09E281D54A400398966 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
 			productName = RandomUIKit;
 		};
 		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
 			productName = RandomNetwork;
 		};
 		1BDB1CC92878E31D00F75299 /* Notifications */ = {

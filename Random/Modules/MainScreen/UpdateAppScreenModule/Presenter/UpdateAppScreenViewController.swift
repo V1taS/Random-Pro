@@ -83,8 +83,6 @@ extension UpdateAppScreenViewController: UpdateAppScreenFactoryOutput {}
 
 private extension UpdateAppScreenViewController {
   func setupNavBar() {
-    let appearance = Appearance()
-    
     navigationItem.largeTitleDisplayMode = .never
   }
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16A7FEBA563D4948758EF757 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CACF8F8C43E0B527B9EB8465 /* Pods_Random_Pro.framework */; };
 		1B06E0F628C0A9D400BD58FB /* NumberScreenInteractorInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06E0F528C0A9D400BD58FB /* NumberScreenInteractorInputMock.swift */; };
 		1B06E0FB28C0B05200BD58FB /* NumberScreenModuleIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06E0FA28C0B05200BD58FB /* NumberScreenModuleIntegrationTests.swift */; };
 		1B06E0FD28C0B39300BD58FB /* NumberScreenFactoryInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B06E0FC28C0B39300BD58FB /* NumberScreenFactoryInputMock.swift */; };
@@ -136,6 +135,7 @@
 		1BD539A628BB8031009DA51C /* ListScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD539A528BB8031009DA51C /* ListScreenModel.swift */; };
 		1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 1BDB1CC92878E31D00F75299 /* Notifications */; };
 		1BF4137F28E0C0A2001F3F0F /* MetricsServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */; };
+		5483406042EB0E99638F9A54 /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A022E8C6E766A660037361C9 /* Pods_Random_Pro.framework */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
 		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
@@ -227,6 +227,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		18794B808DC96F0C6DC03020 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
 		1B06E0EA28BF66CD00BD58FB /* Random Pro Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Random Pro Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B06E0F528C0A9D400BD58FB /* NumberScreenInteractorInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractorInputMock.swift; sourceTree = "<group>"; };
 		1B06E0FA28C0B05200BD58FB /* NumberScreenModuleIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenModuleIntegrationTests.swift; sourceTree = "<group>"; };
@@ -360,7 +361,7 @@
 		1BD539A328BA33E2009DA51C /* ListAddItemsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddItemsScreenModel.swift; sourceTree = "<group>"; };
 		1BD539A528BB8031009DA51C /* ListScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenModel.swift; sourceTree = "<group>"; };
 		1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsServiceModel.swift; sourceTree = "<group>"; };
-		59BD7639F1AE426A26E70C09 /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
+		5B5F734798D9107BF42F25EC /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
 		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
@@ -426,8 +427,7 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
-		CACF8F8C43E0B527B9EB8465 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1D10EBC31F355046D4F856E /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
+		A022E8C6E766A660037361C9 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,7 +449,7 @@
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				16A7FEBA563D4948758EF757 /* Pods_Random_Pro.framework in Frameworks */,
+				5483406042EB0E99638F9A54 /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,7 +1042,7 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				CACF8F8C43E0B527B9EB8465 /* Pods_Random_Pro.framework */,
+				A022E8C6E766A660037361C9 /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1618,8 +1618,8 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				59BD7639F1AE426A26E70C09 /* Pods-Random Pro.debug.xcconfig */,
-				F1D10EBC31F355046D4F856E /* Pods-Random Pro.release.xcconfig */,
+				18794B808DC96F0C6DC03020 /* Pods-Random Pro.debug.xcconfig */,
+				5B5F734798D9107BF42F25EC /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2293,13 +2293,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				A18C43094414B02B1378860E /* [CP] Check Pods Manifest.lock */,
+				561D52EE78045994520DFCE5 /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed App Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				CF71E70AD19748B99D42DE77 /* [CP] Embed Pods Frameworks */,
+				54EDB08C3E1A224422254884 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2402,7 +2402,24 @@
 			shellScript = "\n";
 			showEnvVarsInLog = 0;
 		};
-		A18C43094414B02B1378860E /* [CP] Check Pods Manifest.lock */ = {
+		54EDB08C3E1A224422254884 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		561D52EE78045994520DFCE5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2422,23 +2439,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CF71E70AD19748B99D42DE77 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2849,7 +2849,7 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59BD7639F1AE426A26E70C09 /* Pods-Random Pro.debug.xcconfig */;
+			baseConfigurationReference = 18794B808DC96F0C6DC03020 /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2881,7 +2881,7 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1D10EBC31F355046D4F856E /* Pods-Random Pro.release.xcconfig */;
+			baseConfigurationReference = 5B5F734798D9107BF42F25EC /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

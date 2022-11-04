@@ -1,9 +1,9 @@
 PODS:
-  - YandexMobileMetrica/Dynamic (3.17.0):
-    - YandexMobileMetrica/Dynamic/Core (= 3.17.0)
-    - YandexMobileMetrica/Dynamic/Crashes (= 3.17.0)
-  - YandexMobileMetrica/Dynamic/Core (3.17.0)
-  - YandexMobileMetrica/Dynamic/Crashes (3.17.0):
+  - YandexMobileMetrica/Dynamic (4.4.0):
+    - YandexMobileMetrica/Dynamic/Core (= 4.4.0)
+    - YandexMobileMetrica/Dynamic/Crashes (= 4.4.0)
+  - YandexMobileMetrica/Dynamic/Core (4.4.0)
+  - YandexMobileMetrica/Dynamic/Crashes (4.4.0):
     - YandexMobileMetrica/Dynamic/Core
 
 DEPENDENCIES:
@@ -14,7 +14,7 @@ SPEC REPOS:
     - YandexMobileMetrica
 
 SPEC CHECKSUMS:
-  YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
+  YandexMobileMetrica: baf7cea47cb87fc9af963c4f747ce8dd7df3d7c0
 
 PODFILE CHECKSUM: fe9cd33cca1221880f3e28cc81f2bdd19be58b02
 

@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "metrica-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yandexmobile/metrica-sdk-ios",
+      "state" : {
+        "revision" : "615187c0402709da9e1e3ac5dbbbb70efed3b283",
+        "version" : "4.4.0"
+      }
+    },
+    {
       "identity" : "notifications",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/V1taS/Notifications",

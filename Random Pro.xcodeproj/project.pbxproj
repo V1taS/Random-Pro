@@ -109,6 +109,8 @@
 		1B9D455C283BDC7C00A85F25 /* SettingsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4557283BDC7C00A85F25 /* SettingsScreenView.swift */; };
 		1B9D4565283BDDB600A85F25 /* SettingsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4564283BDDB600A85F25 /* SettingsScreenCoordinator.swift */; };
 		1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */; };
+		1BA1784229164D3F00A02F1C /* YandexMobileMetrica in Frameworks */ = {isa = PBXBuildFile; productRef = 1BA1784129164D3F00A02F1C /* YandexMobileMetrica */; };
+		1BA1784429164D3F00A02F1C /* YandexMobileMetricaCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 1BA1784329164D3F00A02F1C /* YandexMobileMetricaCrashes */; };
 		1BA199AD28BBC6FB0036D73C /* ShareScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA199A828BBC6FB0036D73C /* ShareScreenFactory.swift */; };
 		1BA199AE28BBC6FB0036D73C /* ShareScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA199A928BBC6FB0036D73C /* ShareScreenViewController.swift */; };
 		1BA199AF28BBC6FB0036D73C /* ShareScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA199AA28BBC6FB0036D73C /* ShareScreenAssembly.swift */; };
@@ -135,7 +137,6 @@
 		1BD539A628BB8031009DA51C /* ListScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD539A528BB8031009DA51C /* ListScreenModel.swift */; };
 		1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 1BDB1CC92878E31D00F75299 /* Notifications */; };
 		1BF4137F28E0C0A2001F3F0F /* MetricsServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */; };
-		25EC6526FFD7E9FFBB7CAA4B /* Pods_Random_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685836535B03B93B7C459563 /* Pods_Random_Pro.framework */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
 		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
@@ -360,7 +361,6 @@
 		1BD539A328BA33E2009DA51C /* ListAddItemsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddItemsScreenModel.swift; sourceTree = "<group>"; };
 		1BD539A528BB8031009DA51C /* ListScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenModel.swift; sourceTree = "<group>"; };
 		1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsServiceModel.swift; sourceTree = "<group>"; };
-		685836535B03B93B7C459563 /* Pods_Random_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Random_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
 		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
@@ -426,8 +426,6 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
-		8144B456AEBA1CB0777B09CE /* Pods-Random Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.debug.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.debug.xcconfig"; sourceTree = "<group>"; };
-		C24C1A659FC8D5A9E889755A /* Pods-Random Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Random Pro.release.xcconfig"; path = "Target Support Files/Pods-Random Pro/Pods-Random Pro.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,13 +441,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B92E09F281D54A400398966 /* RandomUIKit in Frameworks */,
+				1BA1784229164D3F00A02F1C /* YandexMobileMetrica in Frameworks */,
 				1BCC579127A83CE200DF5ED0 /* CloudKit.framework in Frameworks */,
+				1BA1784429164D3F00A02F1C /* YandexMobileMetricaCrashes in Frameworks */,
 				1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */,
 				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				25EC6526FFD7E9FFBB7CAA4B /* Pods_Random_Pro.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,7 +1041,6 @@
 				1B57F64827883A62005F220C /* AdSupport.framework */,
 				1B6875A725DB614F006E82D4 /* StoreKit.framework */,
 				1B1B501526009FAD00F73A14 /* SwiftUI.framework */,
-				685836535B03B93B7C459563 /* Pods_Random_Pro.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1618,8 +1616,6 @@
 		63571909499D2B3D03E5C196 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8144B456AEBA1CB0777B09CE /* Pods-Random Pro.debug.xcconfig */,
-				C24C1A659FC8D5A9E889755A /* Pods-Random Pro.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2293,13 +2289,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B7F668125D0856300933AD6 /* Build configuration list for PBXNativeTarget "Random Pro" */;
 			buildPhases = (
-				27F50F97B227AB3333F06DA9 /* [CP] Check Pods Manifest.lock */,
 				1B7F666925D0856300933AD6 /* Sources */,
 				1B7F666A25D0856300933AD6 /* Frameworks */,
 				1B7F666B25D0856300933AD6 /* Resources */,
 				1B1B502026009FAD00F73A14 /* Embed Foundation Extensions */,
 				1B225C582619E472001B9124 /* ShellScript */,
-				2A18D49D43F3BED496A9ED1A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2310,6 +2304,8 @@
 				1B92E09E281D54A400398966 /* RandomUIKit */,
 				1B92E0A1281D54BE00398966 /* RandomNetwork */,
 				1BDB1CC92878E31D00F75299 /* Notifications */,
+				1BA1784129164D3F00A02F1C /* YandexMobileMetrica */,
+				1BA1784329164D3F00A02F1C /* YandexMobileMetricaCrashes */,
 			);
 			productName = Random;
 			productReference = 1B7F666D25D0856300933AD6 /* Random Pro.app */;
@@ -2345,9 +2341,10 @@
 			);
 			mainGroup = 1B7F666425D0856300933AD6;
 			packageReferences = (
-				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */,
-				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
+				1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */,
+				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */,
 				1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */,
+				1BA1784029164D3F00A02F1C /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
 			projectDirPath = "";
@@ -2399,47 +2396,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
-			showEnvVarsInLog = 0;
-		};
-		27F50F97B227AB3333F06DA9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Random Pro-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2A18D49D43F3BED496A9ED1A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Random Pro/Pods-Random Pro-frameworks.sh\"\n";
+			shellScript = "\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2850,7 +2807,6 @@
 		};
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8144B456AEBA1CB0777B09CE /* Pods-Random Pro.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2882,7 +2838,6 @@
 		};
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C24C1A659FC8D5A9E889755A /* Pods-Random Pro.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2942,7 +2897,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */ = {
+		1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomUIKit.git";
 			requirement = {
@@ -2950,12 +2905,20 @@
 				kind = branch;
 			};
 		};
-		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */ = {
+		1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/V1taS/RandomNetwork.git";
 			requirement = {
 				branch = main;
 				kind = branch;
+			};
+		};
+		1BA1784029164D3F00A02F1C /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yandexmobile/metrica-sdk-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
 			};
 		};
 		1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */ = {
@@ -2971,13 +2934,23 @@
 /* Begin XCSwiftPackageProductDependency section */
 		1B92E09E281D54A400398966 /* RandomUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit" */;
+			package = 1B92E09D281D54A400398966 /* XCRemoteSwiftPackageReference "RandomUIKit.git" */;
 			productName = RandomUIKit;
 		};
 		1B92E0A1281D54BE00398966 /* RandomNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */;
+			package = 1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork.git" */;
 			productName = RandomNetwork;
+		};
+		1BA1784129164D3F00A02F1C /* YandexMobileMetrica */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BA1784029164D3F00A02F1C /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetrica;
+		};
+		1BA1784329164D3F00A02F1C /* YandexMobileMetricaCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BA1784029164D3F00A02F1C /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */;
+			productName = YandexMobileMetricaCrashes;
 		};
 		1BDB1CC92878E31D00F75299 /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;

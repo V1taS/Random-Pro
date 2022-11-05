@@ -15,5 +15,3 @@ Random Pro это простой генератор для получения с
 - Выбирать случайный контакт из телефонной книжки
 
 ![Logo](https://sosinvitalii.com/wp-content/uploads/2022/05/Monday-02-May-2022-15_43_48.png "Random Pro")
-
-[![Swift](https://github.com/V1taS/Random/actions/workflows/github-actions.yml/badge.svg?branch=main)](https://github.com/V1taS/Random/actions/workflows/github-actions.yml)

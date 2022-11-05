@@ -311,7 +311,6 @@
 		1B7F667025D0856300933AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B7F667225D0856300933AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1B7F667925D0856300933AD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1B7F667E25D0856300933AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Random/System/Info.plist; sourceTree = SOURCE_ROOT; };
 		1B80A00E26D68E68008F8733 /* Random Pro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Random Pro.entitlements"; sourceTree = "<group>"; };
 		1B8EB650267658B0009016BE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		1B8EB652267658B6009016BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -360,6 +359,7 @@
 		1BD539A128BA318F009DA51C /* ListAddItemsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddItemsScreenCoordinator.swift; sourceTree = "<group>"; };
 		1BD539A328BA33E2009DA51C /* ListAddItemsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddItemsScreenModel.swift; sourceTree = "<group>"; };
 		1BD539A528BB8031009DA51C /* ListScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenModel.swift; sourceTree = "<group>"; };
+		1BE180ED2916E0B90084F9E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsServiceModel.swift; sourceTree = "<group>"; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
@@ -1144,7 +1144,7 @@
 		1B7F666425D0856300933AD6 = {
 			isa = PBXGroup;
 			children = (
-				1B7F666F25D0856300933AD6 /* Random */,
+				1B7F666F25D0856300933AD6 /* Random Pro */,
 				1B06E0EB28BF66CD00BD58FB /* Random Pro Tests */,
 				1B7F666E25D0856300933AD6 /* Products */,
 				1B6875A625DB614F006E82D4 /* Frameworks */,
@@ -1160,7 +1160,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1B7F666F25D0856300933AD6 /* Random */ = {
+		1B7F666F25D0856300933AD6 /* Random Pro */ = {
 			isa = PBXGroup;
 			children = (
 				1B96E0E8282046BB00A23880 /* System */,
@@ -1168,7 +1168,7 @@
 				1B96E0E52820468A00A23880 /* ApplicationServices */,
 				1B96E0E42820467C00A23880 /* Navigation */,
 			);
-			path = Random;
+			path = "Random Pro";
 			sourceTree = "<group>";
 		};
 		1B941DD42821757C00D968DF /* KeyboardService */ = {
@@ -1248,8 +1248,8 @@
 				1B7F667025D0856300933AD6 /* AppDelegate.swift */,
 				1B7F667225D0856300933AD6 /* SceneDelegate.swift */,
 				1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */,
-				1B7F667E25D0856300933AD6 /* Info.plist */,
 				1B225C452619E253001B9124 /* GoogleService-Info.plist */,
+				1BE180ED2916E0B90084F9E7 /* Info.plist */,
 				1B325C1525D2CFDF00382F33 /* Localizable.strings */,
 				1B8EB651267658B0009016BE /* Localizable.stringsdict */,
 				1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */,
@@ -2804,14 +2804,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random/System/Random Pro.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 92;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
-				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2835,12 +2835,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random/System/Random Pro.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 92;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
-				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

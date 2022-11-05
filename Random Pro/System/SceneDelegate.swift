@@ -8,11 +8,17 @@
 import UIKit
 import AppTrackingTransparency
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+  
+  // MARK: - Internal property
   
   var window: UIWindow?
   
+  // MARK: - Private property
+  
   private var coordinator: Coordinator?
+  
+  // MARK: - Internal func
   
   func scene(_ scene: UIScene,
              willConnectTo session: UISceneSession,

@@ -19,7 +19,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     FirebaseApp.configure()
     
+    // TODO: - Жду появления Messaging в SPM
+    //    Messaging.messaging().delegate = self
+    //    UIApplication.shared.registerForRemoteNotifications()
     return true
+  }
+  
+  func application(_ application: UIApplication,
+                   didRegisterForRemoteNotificationsWithDeviceToken
+                   deviceToken: Data) {
+    // TODO: - Жду появления Messaging в SPM
+    //    Messaging.messaging().apnsToken = deviceToken
   }
   
   // MARK: UISceneSession Lifecycle
@@ -30,3 +40,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {}
 }
+
+// MARK: - MessagingDelegate
+// TODO: - Жду появления Messaging в SPM
+//extension AppDelegate: MessagingDelegate {
+//  func messaging(
+//    _ messaging: Messaging,
+//    didReceiveRegistrationToken fcmToken: String?
+//  ) {
+//    let tokenDict = ["token": fcmToken ?? ""]
+//    NotificationCenter.default.post(
+//      name: Notification.Name("FCMToken"),
+//      object: nil,
+//      userInfo: tokenDict)
+//  }
+//}

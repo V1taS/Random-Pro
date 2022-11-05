@@ -52,6 +52,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   ///  - Parameter url: Ссылка на приложение
   func shareButtonAction( _ url: URL)
+  
+  /// Главный экран был показан
+  func mainScreenDidAppear()
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
@@ -124,6 +127,12 @@ final class MainScreenViewController: MainScreenModule {
     super.viewWillAppear(animated)
     
     navigationController?.navigationBar.prefersLargeTitles = true
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    moduleOutput?.mainScreenDidAppear()
   }
   
   // MARK: - Internal func

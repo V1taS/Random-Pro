@@ -68,6 +68,10 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func mainScreenDidAppear() {
+    services.permissionService.requestNotification { _ in }
+  }
+  
   func openColors() {
     let colorsScreenCoordinator = ColorsScreenCoordinator(navigationController,
                                                           services)

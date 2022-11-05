@@ -7,6 +7,7 @@
 
 import UIKit
 import AppTrackingTransparency
+import YandexMobileMetricaPush
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -29,6 +30,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     self.coordinator = coordinator
     coordinator.start()
     self.window = window
+    YMPYandexMetricaPush.handleSceneWillConnectToSession(with: connectionOptions)
   }
   
   func sceneDidBecomeActive(_ scene: UIScene) {

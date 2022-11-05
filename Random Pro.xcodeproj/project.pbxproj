@@ -70,9 +70,6 @@
 		1B50065E28A6BDF0009AABF2 /* TeamsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065928A6BDF0009AABF2 /* TeamsScreenView.swift */; };
 		1B50066628A6BE6D009AABF2 /* TeamsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50066528A6BE6D009AABF2 /* TeamsScreenCoordinator.swift */; };
 		1B50E4D22842C19300C7A1D9 /* NumberScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50E4D12842C19300C7A1D9 /* NumberScreenModel.swift */; };
-		1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B57F64827883A62005F220C /* AdSupport.framework */; };
-		1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B57F64A27883A75005F220C /* AppTrackingTransparency.framework */; };
-		1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
 		1B74318F28A79F4F00205C2C /* ListPlayersScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B74318A28A79F4F00205C2C /* ListPlayersScreenFactory.swift */; };
 		1B74319028A79F4F00205C2C /* ListPlayersScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B74318B28A79F4F00205C2C /* ListPlayersScreenViewController.swift */; };
 		1B74319128A79F4F00205C2C /* ListPlayersScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B74318C28A79F4F00205C2C /* ListPlayersScreenAssembly.swift */; };
@@ -123,7 +120,6 @@
 		1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */; };
 		1BBE379028C0DE260087128D /* NumberScreenInteractorOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378F28C0DE260087128D /* NumberScreenInteractorOutputSpy.swift */; };
 		1BCB6ECB28B29F870040F46E /* SettingsScreenTableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB6ECA28B29F870040F46E /* SettingsScreenTableViewType.swift */; };
-		1BCC579127A83CE200DF5ED0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCC579027A83CE200DF5ED0 /* CloudKit.framework */; };
 		1BD25B6D282459B4006661B8 /* MetricsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD25B6C282459B4006661B8 /* MetricsService.swift */; };
 		1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD25B6E28245A80006661B8 /* MetricsnSections.swift */; };
 		1BD5398B28BA1E41009DA51C /* CubesScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5398A28BA1E41009DA51C /* CubesScreenModel.swift */; };
@@ -136,16 +132,10 @@
 		1BD539A428BA33E2009DA51C /* ListAddItemsScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD539A328BA33E2009DA51C /* ListAddItemsScreenModel.swift */; };
 		1BD539A628BB8031009DA51C /* ListScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD539A528BB8031009DA51C /* ListScreenModel.swift */; };
 		1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 1BDB1CC92878E31D00F75299 /* Notifications */; };
-		1BE180F12916E9560084F9E7 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180F02916E9560084F9E7 /* FirebaseAnalytics */; };
-		1BE180F32916E9560084F9E7 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180F22916E9560084F9E7 /* FirebaseAnalyticsOnDeviceConversion */; };
-		1BE180F52916E9560084F9E7 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180F42916E9560084F9E7 /* FirebaseAnalyticsSwift */; };
-		1BE180F72916E9560084F9E7 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180F62916E9560084F9E7 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		1BE180F92916E9560084F9E7 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180F82916E9560084F9E7 /* FirebaseCrashlytics */; };
-		1BE180FB2916E9560084F9E7 /* FirebaseDynamicLinks in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180FA2916E9560084F9E7 /* FirebaseDynamicLinks */; };
-		1BE180FD2916E9560084F9E7 /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180FC2916E9560084F9E7 /* FirebaseInAppMessaging-Beta */; };
-		1BE180FF2916E9560084F9E7 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE180FE2916E9560084F9E7 /* FirebasePerformance */; };
-		1BE181012916E9560084F9E7 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE181002916E9560084F9E7 /* FirebaseRemoteConfig */; };
-		1BE181032916E9560084F9E7 /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE181022916E9560084F9E7 /* FirebaseRemoteConfigSwift */; };
+		1BE55B08291708AA00EF135E /* YandexMobileMetricaPush in Frameworks */ = {isa = PBXBuildFile; productRef = 1BE55B07291708AA00EF135E /* YandexMobileMetricaPush */; };
+		1BE55B0C2917119300EF135E /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B57F64A27883A75005F220C /* AppTrackingTransparency.framework */; };
+		1BE55B0E2917119400EF135E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCC579027A83CE200DF5ED0 /* CloudKit.framework */; };
+		1BE55B102917119600EF135E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
 		1BF4137F28E0C0A2001F3F0F /* MetricsServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
@@ -450,25 +440,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BE180F72916E9560084F9E7 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
-				1BE180F52916E9560084F9E7 /* FirebaseAnalyticsSwift in Frameworks */,
-				1BE181032916E9560084F9E7 /* FirebaseRemoteConfigSwift in Frameworks */,
 				1B92E09F281D54A400398966 /* RandomUIKit in Frameworks */,
-				1BE180F92916E9560084F9E7 /* FirebaseCrashlytics in Frameworks */,
 				1BA1784229164D3F00A02F1C /* YandexMobileMetrica in Frameworks */,
-				1BE180F32916E9560084F9E7 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
-				1BCC579127A83CE200DF5ED0 /* CloudKit.framework in Frameworks */,
 				1BA1784429164D3F00A02F1C /* YandexMobileMetricaCrashes in Frameworks */,
-				1B6875A825DB614F006E82D4 /* StoreKit.framework in Frameworks */,
-				1BE181012916E9560084F9E7 /* FirebaseRemoteConfig in Frameworks */,
-				1BE180FF2916E9560084F9E7 /* FirebasePerformance in Frameworks */,
-				1B57F64B27883A75005F220C /* AppTrackingTransparency.framework in Frameworks */,
+				1BE55B0C2917119300EF135E /* AppTrackingTransparency.framework in Frameworks */,
+				1BE55B0E2917119400EF135E /* CloudKit.framework in Frameworks */,
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
-				1BE180FD2916E9560084F9E7 /* FirebaseInAppMessaging-Beta in Frameworks */,
-				1B57F64927883A62005F220C /* AdSupport.framework in Frameworks */,
-				1BE180F12916E9560084F9E7 /* FirebaseAnalytics in Frameworks */,
+				1BE55B102917119600EF135E /* StoreKit.framework in Frameworks */,
 				1BDB1CCA2878E31D00F75299 /* Notifications in Frameworks */,
-				1BE180FB2916E9560084F9E7 /* FirebaseDynamicLinks in Frameworks */,
+				1BE55B08291708AA00EF135E /* YandexMobileMetricaPush in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2318,16 +2298,7 @@
 				1BDB1CC92878E31D00F75299 /* Notifications */,
 				1BA1784129164D3F00A02F1C /* YandexMobileMetrica */,
 				1BA1784329164D3F00A02F1C /* YandexMobileMetricaCrashes */,
-				1BE180F02916E9560084F9E7 /* FirebaseAnalytics */,
-				1BE180F22916E9560084F9E7 /* FirebaseAnalyticsOnDeviceConversion */,
-				1BE180F42916E9560084F9E7 /* FirebaseAnalyticsSwift */,
-				1BE180F62916E9560084F9E7 /* FirebaseAnalyticsWithoutAdIdSupport */,
-				1BE180F82916E9560084F9E7 /* FirebaseCrashlytics */,
-				1BE180FA2916E9560084F9E7 /* FirebaseDynamicLinks */,
-				1BE180FC2916E9560084F9E7 /* FirebaseInAppMessaging-Beta */,
-				1BE180FE2916E9560084F9E7 /* FirebasePerformance */,
-				1BE181002916E9560084F9E7 /* FirebaseRemoteConfig */,
-				1BE181022916E9560084F9E7 /* FirebaseRemoteConfigSwift */,
+				1BE55B07291708AA00EF135E /* YandexMobileMetricaPush */,
 			);
 			productName = Random;
 			productReference = 1B7F666D25D0856300933AD6 /* Random Pro.app */;
@@ -2367,7 +2338,7 @@
 				1B92E0A0281D54BE00398966 /* XCRemoteSwiftPackageReference "RandomNetwork" */,
 				1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */,
 				1BA1784029164D3F00A02F1C /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
-				1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1BE55B06291708AA00EF135E /* XCRemoteSwiftPackageReference "metrica-push-sdk-ios" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
 			projectDirPath = "";
@@ -2832,7 +2803,6 @@
 		1B7F668225D0856300933AD6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random Pro/System/Random Pro.entitlements";
@@ -2844,6 +2814,7 @@
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MARKETING_VERSION = 722;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
@@ -2859,7 +2830,6 @@
 		1B7F668325D0856300933AD6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random Pro/System/Random Pro.entitlements";
@@ -2869,6 +2839,7 @@
 				EXCLUDED_ARCHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MARKETING_VERSION = 722;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2945,12 +2916,12 @@
 				kind = branch;
 			};
 		};
-		1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		1BE55B06291708AA00EF135E /* XCRemoteSwiftPackageReference "metrica-push-sdk-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			repositoryURL = "https://github.com/yandexmobile/metrica-push-sdk-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2981,55 +2952,10 @@
 			package = 1BDB1CC82878E31D00F75299 /* XCRemoteSwiftPackageReference "Notifications" */;
 			productName = Notifications;
 		};
-		1BE180F02916E9560084F9E7 /* FirebaseAnalytics */ = {
+		1BE55B07291708AA00EF135E /* YandexMobileMetricaPush */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		1BE180F22916E9560084F9E7 /* FirebaseAnalyticsOnDeviceConversion */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsOnDeviceConversion;
-		};
-		1BE180F42916E9560084F9E7 /* FirebaseAnalyticsSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsSwift;
-		};
-		1BE180F62916E9560084F9E7 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		1BE180F82916E9560084F9E7 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		1BE180FA2916E9560084F9E7 /* FirebaseDynamicLinks */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDynamicLinks;
-		};
-		1BE180FC2916E9560084F9E7 /* FirebaseInAppMessaging-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseInAppMessaging-Beta";
-		};
-		1BE180FE2916E9560084F9E7 /* FirebasePerformance */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebasePerformance;
-		};
-		1BE181002916E9560084F9E7 /* FirebaseRemoteConfig */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfig;
-		};
-		1BE181022916E9560084F9E7 /* FirebaseRemoteConfigSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1BE180EF2916E9560084F9E7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfigSwift;
+			package = 1BE55B06291708AA00EF135E /* XCRemoteSwiftPackageReference "metrica-push-sdk-ios" */;
+			productName = YandexMobileMetricaPush;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

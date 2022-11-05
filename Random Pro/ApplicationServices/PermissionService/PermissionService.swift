@@ -31,9 +31,37 @@ protocol PermissionService {
   /// Запрос доступа к Галерее
   ///  - Parameter granted: Доступ разрешен
   func requestPhotos(_ status: ((_ granted: Bool) -> Void)?)
+  
+  /// Запрос доступа к Уведомлениям
+  ///  - Parameter granted: Доступ разрешен
+  func requestNotification(_ granted: @escaping (Bool) -> Void)
+  
+  /// Получить статус уведомлений
+  ///  - Parameter granted: Доступ разрешен
+  func getNotification(status: @escaping (UNAuthorizationStatus) -> Void)
 }
 
 final class PermissionServiceImpl: PermissionService {
+  func getNotification(status: @escaping (UNAuthorizationStatus) -> Void) {
+    let center = UNUserNotificationCenter.current()
+    center.getNotificationSettings { settings in
+      DispatchQueue.main.async {
+        status(settings.authorizationStatus)
+      }
+    }
+  }
+  
+  func requestNotification(_ granted: @escaping (Bool) -> Void) {
+    let center = UNUserNotificationCenter.current()
+    center.requestAuthorization(options: [.alert, .sound, .badge]) { result, _ in
+      DispatchQueue.main.async {
+        granted(result)
+        guard result else { return }
+        UIApplication.shared.registerForRemoteNotifications()
+      }
+    }
+  }
+  
   @available(iOS 14, *)
   func requestIDFA(_ status: ((ATTrackingManager.AuthorizationStatus) -> Void)? = nil) {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

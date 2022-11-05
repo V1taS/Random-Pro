@@ -104,7 +104,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/V1taS/Notifications",
       "state" : {
-        "branch" : "main",
+        "branch" : "master",
         "revision" : "f83fc41da3a9c1e8d84a85d9613b95fce15b9a01"
       }
     },
@@ -122,7 +122,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/V1taS/RandomNetwork.git",
       "state" : {
-        "branch" : "main",
+        "branch" : "master",
         "revision" : "877ba9f4dd20e53dcb949ce2f2da04ff394a7f73"
       }
     },
@@ -131,7 +131,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
-        "branch" : "main",
+        "branch" : "master",
         "revision" : "57499b022fbdbe218a0d9fa66d502ec0a7349b3a"
       }
     },

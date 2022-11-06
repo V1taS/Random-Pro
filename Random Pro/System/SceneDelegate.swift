@@ -17,7 +17,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   // MARK: - Private property
   
-  private var coordinator: Coordinator?
+  private var coordinator: RootCoordinatorProtocol?
   
   // MARK: - Internal func
   
@@ -43,5 +43,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
       }
     }
+  }
+}
+
+// MARK: - Deep links
+
+extension SceneDelegate {
+  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    coordinator?.scene(scene, openURLContexts: URLContexts)
   }
 }

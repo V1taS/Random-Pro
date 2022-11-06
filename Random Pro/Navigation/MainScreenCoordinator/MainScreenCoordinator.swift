@@ -20,7 +20,7 @@ protocol MainScreenCoordinatorInput {
   ///   - deepLinkType: Тип глубокой ссылки
   func scene(_ scene: UIScene,
              openURLContexts URLContexts: Set<UIOpenURLContext>,
-             deepLinkType: DeepLinkType)
+             deepLinkType: DeepLinkType?)
   
   /// События которые отправляем из `текущего координатора` в  `другой координатор`
   var output: MainScreenCoordinatorOutput? { get set }
@@ -75,7 +75,10 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   
   func scene(_ scene: UIScene,
              openURLContexts URLContexts: Set<UIOpenURLContext>,
-             deepLinkType: DeepLinkType) {
+             deepLinkType: DeepLinkType?) {
+    guard let deepLinkType = deepLinkType else {
+      return
+    }
     showScene(from: deepLinkType)
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen" : deepLinkType.rawValue])

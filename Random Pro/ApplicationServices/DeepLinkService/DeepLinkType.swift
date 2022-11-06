@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum DeepLinkType: String {
+enum DeepLinkType: String, CaseIterable {
   
   /// Имя хоста
   static var host: String {

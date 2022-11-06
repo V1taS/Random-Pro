@@ -17,7 +17,7 @@ protocol DeepLinkService {
   ///   - completion: Блок завершения
   func scene(_ scene: UIScene,
              openURLContexts URLContexts: Set<UIOpenURLContext>,
-             completion: (DeepLinkType) -> Void)
+             completion: (DeepLinkType?) -> Void)
 }
 
 final class DeepLinkServiceImpl: DeepLinkService {
@@ -31,11 +31,16 @@ final class DeepLinkServiceImpl: DeepLinkService {
   
   func scene(_ scene: UIScene,
              openURLContexts URLContexts: Set<UIOpenURLContext>,
-             completion: (DeepLinkType) -> Void) {
-    guard let firstUrl = URLContexts.first?.url,
-          let deepLinkStr = deletingPrefix(fullText: firstUrl.absoluteString, prefix: DeepLinkType.host),
-          let deepLinkType = DeepLinkType(rawValue: deepLinkStr) else {
+             completion: (DeepLinkType?) -> Void) {
+    guard let firstUrl = URLContexts.first?.url.absoluteString else {
       return
+    }
+    
+    var deepLinkType: DeepLinkType?
+    DeepLinkType.allCases.forEach { type in
+      if firstUrl.contains(type.rawValue) {
+        deepLinkType = type
+      }
     }
     completion(deepLinkType)
   }

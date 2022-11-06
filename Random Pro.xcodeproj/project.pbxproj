@@ -49,7 +49,6 @@
 		1B10E541282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10E540282453AC00691FA2 /* ObjectUserDefaultsWrapper.swift */; };
 		1B1B5B4727ADDFAF00EF283E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */; };
 		1B224BC428B9996200AC5D97 /* ContactScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B224BC328B9996200AC5D97 /* ContactScreenModel.swift */; };
-		1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B225C452619E253001B9124 /* GoogleService-Info.plist */; };
 		1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */; };
 		1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F626285F926200A88217 /* ListResultScreenFactory.swift */; };
 		1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F627285F926200A88217 /* ListResultScreenViewController.swift */; };
@@ -273,7 +272,6 @@
 		1B1B5B4827ADDFAF00EF283E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B1B5B4A27ADDFB100EF283E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B224BC328B9996200AC5D97 /* ContactScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScreenModel.swift; sourceTree = "<group>"; };
-		1B225C452619E253001B9124 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenModel.swift; sourceTree = "<group>"; };
 		1B31F626285F926200A88217 /* ListResultScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenFactory.swift; sourceTree = "<group>"; };
 		1B31F627285F926200A88217 /* ListResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenViewController.swift; sourceTree = "<group>"; };
@@ -1248,7 +1246,6 @@
 				1B7F667025D0856300933AD6 /* AppDelegate.swift */,
 				1B7F667225D0856300933AD6 /* SceneDelegate.swift */,
 				1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */,
-				1B225C452619E253001B9124 /* GoogleService-Info.plist */,
 				1BE180ED2916E0B90084F9E7 /* Info.plist */,
 				1B325C1525D2CFDF00382F33 /* Localizable.strings */,
 				1B8EB651267658B0009016BE /* Localizable.stringsdict */,
@@ -2367,7 +2364,6 @@
 				1B1B5B4727ADDFAF00EF283E /* InfoPlist.strings in Resources */,
 				1B8EB64F267658B0009016BE /* Localizable.stringsdict in Resources */,
 				1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */,
-				1B225C462619E253001B9124 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

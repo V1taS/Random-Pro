@@ -13,6 +13,15 @@ protocol MainScreenCoordinatorOutput: AnyObject {}
 /// События которые отправляем из `другого координатора` в  `текущий координатор`
 protocol MainScreenCoordinatorInput {
   
+  /// События Deep links
+  ///  - Parameters:
+  ///   - scene: Сцена
+  ///   - URLContexts: Сыылки url
+  ///   - deepLinkType: Тип глубокой ссылки
+  func scene(_ scene: UIScene,
+             openURLContexts URLContexts: Set<UIOpenURLContext>,
+             deepLinkType: DeepLinkType)
+  
   /// События которые отправляем из `текущего координатора` в  `другой координатор`
   var output: MainScreenCoordinatorOutput? { get set }
 }
@@ -62,6 +71,14 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
       self?.showOnboarding()
     }
+  }
+  
+  func scene(_ scene: UIScene,
+             openURLContexts URLContexts: Set<UIOpenURLContext>,
+             deepLinkType: DeepLinkType) {
+    showScene(from: deepLinkType)
+    services.metricsService.track(event: .deepLinks,
+                                  properties: ["screen" : deepLinkType.rawValue])
   }
 }
 
@@ -240,7 +257,7 @@ private extension MainScreenCoordinator {
   
   func showOnboarding() {
     let actualScreens = OnboardingScreenInteractor.getActualScreens()
-
+    
     guard !actualScreens.isEmpty else {
       return
     }
@@ -250,5 +267,49 @@ private extension MainScreenCoordinator {
     onboardingScreenCoordinator.start()
     self.onboardingScreenCoordinator = onboardingScreenCoordinator
     self.services.metricsService.track(event: .onboarding)
+  }
+  
+  func showScene(from deepLinkType: DeepLinkType) {
+    switch deepLinkType {
+    case .settingsScreen:
+      settingButtonAction()
+    case .updateApp:
+      guard let shareAppUrl = Appearance().shareAppUrl else {
+        return
+      }
+      UIApplication.shared.open(shareAppUrl)
+    case .colorsScreen:
+      openColors()
+    case .teamsScreen:
+      openTeams()
+    case .yesOrNoScreen:
+      openYesOrNo()
+    case .characterScreen:
+      openCharacter()
+    case .listScreen:
+      openList()
+    case .coinScreen:
+      openCoin()
+    case .cubeScreen:
+      openCube()
+    case .dateAndTimeScreen:
+      openDateAndTime()
+    case .lotteryScreen:
+      openLottery()
+    case .contactScreen:
+      openContact()
+    case .passwordScreen:
+      openPassword()
+    case .numberScreen:
+      openNumber()
+    }
+  }
+}
+
+// MARK: - Appearance
+
+private extension MainScreenCoordinator {
+  struct Appearance {
+    let shareAppUrl = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956")
   }
 }

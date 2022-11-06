@@ -36,11 +36,18 @@ protocol ApplicationServices {
   
   /// Сервис по работе с локальным хранилищем
   var fileManagerService: FileManagerService { get }
+  
+  /// Сервис по работе с глубокими и универсальными ссылками
+  var deepLinkService: DeepLinkService { get }
 }
 
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
+  var deepLinkService: DeepLinkService {
+    DeepLinkServiceImpl()
+  }
+  
   var fileManagerService: FileManagerService {
     FileManagerImpl()
   }

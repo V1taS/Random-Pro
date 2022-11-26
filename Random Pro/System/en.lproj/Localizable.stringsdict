@@ -26,29 +26,5 @@
 			<string>%d adults</string>
 		</dict>
 	</dict>
-	<key>number_of_nights_in_tour</key>
-	<dict>
-		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@number_of_nights@</string>
-		<key>number_of_nights</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>d</string>
-			<key>zero</key>
-			<string>0 nights</string>
-			<key>one</key>
-			<string>%d night</string>
-			<key>two</key>
-			<string>%d nights</string>
-			<key>few</key>
-			<string>%d nights</string>
-			<key>many</key>
-			<string>%d nights</string>
-			<key>other</key>
-			<string>%d nights</string>
-		</dict>
-	</dict>
 </dict>
 </plist>

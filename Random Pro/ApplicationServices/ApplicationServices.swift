@@ -23,7 +23,7 @@ protocol ApplicationServices {
   var keyboardService: KeyboardService { get }
   
   /// Сервис по работе с сетью
-  var network: NetworkRequestPerformer { get }
+  var networkService: NetworkService { get }
   
   /// Сервис по работе с метриками
   var metricsService: MetricsService { get }
@@ -68,8 +68,7 @@ final class ApplicationServicesImpl: ApplicationServices {
     KeyboardServiceImpl()
   }
   
-  var network: NetworkRequestPerformer {
-    let network: NetworkRequestPerformer = URLSessionRequestPerformer()
-    return network
+  var networkService: NetworkService {
+    NetworkServiceImpl()
   }
 }

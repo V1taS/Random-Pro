@@ -39,6 +39,9 @@ protocol ApplicationServices {
   
   /// Сервис по работе с глубокими и универсальными ссылками
   var deepLinkService: DeepLinkService { get }
+  
+  /// Сервис по работе с тайсером
+  var timerService: TimerService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -70,5 +73,9 @@ final class ApplicationServicesImpl: ApplicationServices {
   
   var networkService: NetworkService {
     NetworkServiceImpl()
+  }
+  
+  var timerService: TimerService {
+    TimerServiceImpl()
   }
 }

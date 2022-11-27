@@ -106,8 +106,4 @@ final class NumberScreenInteractorTests: XCTestCase {
     // Assert
     XCTAssertEqual(emptyModel, recievedModel)
   }
-  
-  func testGivenFullModelWhenGenerateButtonTappedThenSendModelToOutput() {
-    // TODO: -
-  }
 }

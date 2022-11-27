@@ -11,7 +11,7 @@ import XCTest
 @testable import Random_Pro
 
 /// Mock View Input
-final class NumberScreenViewInputMock: UIView & NumberScreenViewInput {
+final class NumberScreenViewInputMock: NumberScreenViewProtocol {
   
   // MARK: - Флаги вызовов функция
   

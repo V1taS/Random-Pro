@@ -61,6 +61,13 @@
 		1B31F641285FB85E00A88217 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F640285FB85E00A88217 /* NotificationService.swift */; };
 		1B325C0E25D2CF8D00382F33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */; };
 		1B325C1325D2CFDF00382F33 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B325C1525D2CFDF00382F33 /* Localizable.strings */; };
+		1B3C87BB29337B15008B8AA6 /* MainScreenInteractorOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87BA29337B15008B8AA6 /* MainScreenInteractorOutputSpy.swift */; };
+		1B3C87BE29337C0D008B8AA6 /* MainScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87BD29337C0D008B8AA6 /* MainScreenInteractorTests.swift */; };
+		1B3C87C0293389B4008B8AA6 /* MainScreenInteractorTests+Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87BF293389B4008B8AA6 /* MainScreenInteractorTests+Methods.swift */; };
+		1B3C87C329338B3E008B8AA6 /* MainScreenInteractorInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87C229338B3E008B8AA6 /* MainScreenInteractorInputMock.swift */; };
+		1B3C87C529338B4F008B8AA6 /* MainScreenFactoryInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87C429338B4F008B8AA6 /* MainScreenFactoryInputMock.swift */; };
+		1B3C87C729338B64008B8AA6 /* MainScreenViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87C629338B64008B8AA6 /* MainScreenViewInputMock.swift */; };
+		1B3C87CA29338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87C929338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift */; };
 		1B412BA728C7DFE60078126F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B412BA628C7DFE60078126F /* FileManager.swift */; };
 		1B4A5C9D28B9261300215064 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9C28B9261300215064 /* PermissionService.swift */; };
 		1B4A5CA028B949F400215064 /* PasswordScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */; };
@@ -288,6 +295,13 @@
 		1B325C0D25D2CF8D00382F33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B325C1725D2CFE300382F33 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1B325C1925D2D18300382F33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1B3C87BA29337B15008B8AA6 /* MainScreenInteractorOutputSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractorOutputSpy.swift; sourceTree = "<group>"; };
+		1B3C87BD29337C0D008B8AA6 /* MainScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractorTests.swift; sourceTree = "<group>"; };
+		1B3C87BF293389B4008B8AA6 /* MainScreenInteractorTests+Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenInteractorTests+Methods.swift"; sourceTree = "<group>"; };
+		1B3C87C229338B3E008B8AA6 /* MainScreenInteractorInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractorInputMock.swift; sourceTree = "<group>"; };
+		1B3C87C429338B4F008B8AA6 /* MainScreenFactoryInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenFactoryInputMock.swift; sourceTree = "<group>"; };
+		1B3C87C629338B64008B8AA6 /* MainScreenViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewInputMock.swift; sourceTree = "<group>"; };
+		1B3C87C929338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModuleIntegrationTests.swift; sourceTree = "<group>"; };
 		1B412BA628C7DFE60078126F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		1B4A5C9C28B9261300215064 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenModel.swift; sourceTree = "<group>"; };
@@ -462,6 +476,7 @@
 		1B06E0EB28BF66CD00BD58FB /* Random Pro Tests */ = {
 			isa = PBXGroup;
 			children = (
+				1B3C87B729337AB9008B8AA6 /* MainScreenModule */,
 				1B06E0F328C0A92200BD58FB /* NumberScreenModule */,
 			);
 			path = "Random Pro Tests";
@@ -470,9 +485,9 @@
 		1B06E0F328C0A92200BD58FB /* NumberScreenModule */ = {
 			isa = PBXGroup;
 			children = (
+				1B06E0F928C0AF7C00BD58FB /* UnitTests */,
 				1BF1D67228C120C100AA5EB7 /* IntegrationTests */,
 				1BBE378D28C0DDC40087128D /* TestsDoubles */,
-				1B06E0F928C0AF7C00BD58FB /* UnitTests */,
 			);
 			path = NumberScreenModule;
 			sourceTree = "<group>";
@@ -951,6 +966,60 @@
 				1B31F640285FB85E00A88217 /* NotificationService.swift */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		1B3C87B729337AB9008B8AA6 /* MainScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B3C87C829338D4E008B8AA6 /* IntegrationTests */,
+				1B3C87BC29337BEF008B8AA6 /* UnitTests */,
+				1B3C87B829337ADC008B8AA6 /* TestsDoubles */,
+			);
+			path = MainScreenModule;
+			sourceTree = "<group>";
+		};
+		1B3C87B829337ADC008B8AA6 /* TestsDoubles */ = {
+			isa = PBXGroup;
+			children = (
+				1B3C87C129338B1A008B8AA6 /* Mocks */,
+				1B3C87B929337AF3008B8AA6 /* Spy */,
+			);
+			path = TestsDoubles;
+			sourceTree = "<group>";
+		};
+		1B3C87B929337AF3008B8AA6 /* Spy */ = {
+			isa = PBXGroup;
+			children = (
+				1B3C87BA29337B15008B8AA6 /* MainScreenInteractorOutputSpy.swift */,
+			);
+			path = Spy;
+			sourceTree = "<group>";
+		};
+		1B3C87BC29337BEF008B8AA6 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				1B3C87BD29337C0D008B8AA6 /* MainScreenInteractorTests.swift */,
+				1B3C87BF293389B4008B8AA6 /* MainScreenInteractorTests+Methods.swift */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		1B3C87C129338B1A008B8AA6 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1B3C87C229338B3E008B8AA6 /* MainScreenInteractorInputMock.swift */,
+				1B3C87C429338B4F008B8AA6 /* MainScreenFactoryInputMock.swift */,
+				1B3C87C629338B64008B8AA6 /* MainScreenViewInputMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		1B3C87C829338D4E008B8AA6 /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				1B3C87C929338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift */,
+			);
+			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
 		1B412BA528C7DFB30078126F /* FileManager */ = {
@@ -1491,8 +1560,8 @@
 		1BBE378D28C0DDC40087128D /* TestsDoubles */ = {
 			isa = PBXGroup;
 			children = (
-				1BBE378E28C0DDE70087128D /* Spy */,
 				1B06E0F428C0A92D00BD58FB /* Mocks */,
+				1BBE378E28C0DDE70087128D /* Spy */,
 			);
 			path = TestsDoubles;
 			sourceTree = "<group>";
@@ -2424,10 +2493,17 @@
 			files = (
 				1B06E0F628C0A9D400BD58FB /* NumberScreenInteractorInputMock.swift in Sources */,
 				1BBE379028C0DE260087128D /* NumberScreenInteractorOutputSpy.swift in Sources */,
+				1B3C87BB29337B15008B8AA6 /* MainScreenInteractorOutputSpy.swift in Sources */,
 				1B06E0FD28C0B39300BD58FB /* NumberScreenFactoryInputMock.swift in Sources */,
 				1BBE378A28C0C10E0087128D /* NumberScreenViewInputMock.swift in Sources */,
+				1B3C87BE29337C0D008B8AA6 /* MainScreenInteractorTests.swift in Sources */,
+				1B3C87CA29338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift in Sources */,
+				1B3C87C729338B64008B8AA6 /* MainScreenViewInputMock.swift in Sources */,
+				1B3C87C329338B3E008B8AA6 /* MainScreenInteractorInputMock.swift in Sources */,
 				1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */,
 				1B06E0FB28C0B05200BD58FB /* NumberScreenModuleIntegrationTests.swift in Sources */,
+				1B3C87C0293389B4008B8AA6 /* MainScreenInteractorTests+Methods.swift in Sources */,
+				1B3C87C529338B4F008B8AA6 /* MainScreenFactoryInputMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2666,7 +2742,7 @@
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "armv7, armv7s, arm64, arm64e, x86_64";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sosinvitalii.Random-Pro-Tests";
@@ -2688,7 +2764,7 @@
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "armv7, armv7s, arm64, arm64e, x86_64";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Random/System/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sosinvitalii.Random-Pro-Tests";

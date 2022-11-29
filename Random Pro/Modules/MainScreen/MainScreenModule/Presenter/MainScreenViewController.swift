@@ -46,6 +46,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Colors`
   func openColors()
   
+  /// Открыть раздел `Bottle`
+  func openBottle()
+  
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
   
@@ -173,6 +176,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openBottle() {
+    moduleOutput?.openBottle()
+  }
+  
   func openColors() {
     moduleOutput?.openColors()
   }

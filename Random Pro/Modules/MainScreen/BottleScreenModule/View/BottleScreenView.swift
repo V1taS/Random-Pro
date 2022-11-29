@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 protocol BottleScreenViewOutput: AnyObject {
   
@@ -28,7 +29,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = .yellow
+    setupDefaultSettings()
   }
   
   required init?(coder: NSCoder) {
@@ -38,7 +39,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
   // MARK: - Private func
   
   private func setupDefaultSettings() {
-    
+    backgroundColor = .yellow
   }
   
   private func setupConstraints() {

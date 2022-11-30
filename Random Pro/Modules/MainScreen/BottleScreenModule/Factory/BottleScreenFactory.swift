@@ -8,10 +8,12 @@
 
 import UIKit
 
+/// Cобытия которые отправляем из Factory в Presenter
 protocol BottleScreenFactoryOutput: AnyObject {
   
 }
 
+/// Cобытия которые отправляем от Presenter к Factory
 protocol BottleScreenFactoryInput {
   
 }

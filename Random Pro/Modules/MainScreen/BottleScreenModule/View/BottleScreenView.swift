@@ -9,10 +9,14 @@
 import UIKit
 import RandomUIKit
 
+/// События которые отправляем из View в Presenter
 protocol BottleScreenViewOutput: AnyObject {
   
+  /// Пользователь нажал на кнопку
+  func generateButtonAction()
 }
 
+/// События которые отправляем от Presenter ко View
 protocol BottleScreenViewInput {
   
 }
@@ -25,11 +29,17 @@ final class BottleScreenView: BottleScreenViewProtocol {
   
   weak var output: BottleScreenViewOutput?
   
+  private let resultLabel = UILabel()
+  private let generateButton = ButtonView()
+  private var bottleImageView = UIImageView()
+  private let bottomImage = UIImage()
+  
   // MARK: - Internal func
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupDefaultSettings()
+    setupConstraints()
   }
   
   required init?(coder: NSCoder) {
@@ -39,11 +49,46 @@ final class BottleScreenView: BottleScreenViewProtocol {
   // MARK: - Private func
   
   private func setupDefaultSettings() {
-    backgroundColor = .yellow
+    let appearance = Appearance()
+    
+    backgroundColor = RandomColor.primaryWhite
+    
+    bottleImageView.image = appearance.nameBottleImage
+    bottleImageView.backgroundColor = .gray
+    bottleImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+    bottleImageView.contentMode = .center
+    
+    bottomImage.withTintColor(.yellow)
+    
+    generateButton.setTitle(appearance.setTextButton, for: .normal)
+    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+  }
+  
+  @objc private func generateButtonAction() {
+
   }
   
   private func setupConstraints() {
+    let appearance = Appearance()
     
+    [generateButton, bottleImageView].forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+      addSubview($0)
+    }
+    
+    NSLayoutConstraint.activate([
+      generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: appearance.middleSize),
+      generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -appearance.middleSize),
+      generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                             constant: -appearance.middleSize),
+      
+      bottleImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      bottleImageView.topAnchor.constraint(equalTo: topAnchor, constant: 100),
+      bottleImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      bottleImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -140)
+    ])
   }
 }
 
@@ -51,6 +96,8 @@ final class BottleScreenView: BottleScreenViewProtocol {
 
 private extension BottleScreenView {
   struct Appearance {
-    
+    let setTextButton = NSLocalizedString("Крутить бутылочку", comment: "")
+    let middleSize: CGFloat = 16
+    let nameBottleImage = UIImage(systemName: "Bottle")
   }
 }

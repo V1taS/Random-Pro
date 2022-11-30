@@ -8,10 +8,12 @@
 
 import UIKit
 
+/// События которые отправляем из Interactor в Presenter
 protocol BottleScreenInteractorOutput: AnyObject {
   
 }
 
+/// События которые отправляем от Presenter к Interactor
 protocol BottleScreenInteractorInput {
   
 }
@@ -21,4 +23,12 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   // MARK: - Internal property
   
   weak var output: BottleScreenInteractorOutput?
+  
+  func startAnimating() {
+    
+  }
+  
+  func stopAnimating() {
+    
+  }
 }

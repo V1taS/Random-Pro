@@ -8,10 +8,12 @@
 
 import UIKit
 
+/// События которые отправляем из `текущего модуля` в  `другой модуль`
 protocol BottleScreenModuleOutput: AnyObject {
   
 }
 
+/// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol BottleScreenModuleInput {
   
   var moduleOutput: BottleScreenModuleOutput? { get set }
@@ -59,6 +61,23 @@ final class BottleScreenViewController: BottleScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setNavigationBar()
+  }
+  
+  // MARK: - Private func
+  
+  private func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.setTitle
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(settingButtonAction))
+  }
+  
+  @objc private func settingButtonAction() {
     
   }
 }
@@ -66,7 +85,9 @@ final class BottleScreenViewController: BottleScreenModule {
 // MARK: - BottleScreenViewOutput
 
 extension BottleScreenViewController: BottleScreenViewOutput {
-  
+  func generateButtonAction() {
+    
+  }
 }
 
 // MARK: - BottleScreenInteractorOutput
@@ -79,4 +100,11 @@ extension BottleScreenViewController: BottleScreenInteractorOutput {
 
 extension BottleScreenViewController: BottleScreenFactoryOutput {
   
+}
+
+extension BottleScreenViewController {
+  struct Appearance {
+    let setTitle = NSLocalizedString("Бутылочка", comment: "")
+    let settingsButtonIcon = UIImage(systemName: "gear")
+  }
 }

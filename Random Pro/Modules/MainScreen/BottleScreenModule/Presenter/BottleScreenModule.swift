@@ -64,6 +64,16 @@ final class BottleScreenViewController: BottleScreenModule {
     setNavigationBar()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.hidesBarsOnTap = true
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    navigationController?.hidesBarsOnTap = false
+  }
+  
   // MARK: - Private func
   
   private func setNavigationBar() {
@@ -86,14 +96,16 @@ final class BottleScreenViewController: BottleScreenModule {
 
 extension BottleScreenViewController: BottleScreenViewOutput {
   func generateButtonAction() {
-    
+    interactor.getContent()
   }
 }
 
 // MARK: - BottleScreenInteractorOutput
 
 extension BottleScreenViewController: BottleScreenInteractorOutput {
-  
+  func didReceive() {
+    generateButtonAction()
+  }
 }
 
 // MARK: - BottleScreenFactoryOutput

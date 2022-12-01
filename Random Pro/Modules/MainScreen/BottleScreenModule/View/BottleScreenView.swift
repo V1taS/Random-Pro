@@ -31,8 +31,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
   
   private let resultLabel = UILabel()
   private let generateButton = ButtonView()
-  private var bottleImageView = UIImageView()
-  private let bottomImage = UIImage()
+  private let bottleImageView = UIImageView()
   
   // MARK: - Internal func
   
@@ -52,20 +51,15 @@ final class BottleScreenView: BottleScreenViewProtocol {
     let appearance = Appearance()
     
     backgroundColor = RandomColor.primaryWhite
-    
+
     bottleImageView.image = appearance.nameBottleImage
-    bottleImageView.backgroundColor = .gray
-    bottleImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
-    bottleImageView.contentMode = .center
-    
-    bottomImage.withTintColor(.yellow)
-    
+   
     generateButton.setTitle(appearance.setTextButton, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
   @objc private func generateButtonAction() {
-
+    bottleImageView.startAnimating()
   }
   
   private func setupConstraints() {
@@ -84,10 +78,10 @@ final class BottleScreenView: BottleScreenViewProtocol {
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -appearance.middleSize),
       
-      bottleImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      bottleImageView.topAnchor.constraint(equalTo: topAnchor, constant: 100),
-      bottleImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      bottleImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -140)
+      bottleImageView.heightAnchor.constraint(equalToConstant: 180),
+      bottleImageView.widthAnchor.constraint(equalToConstant: 60),
+      bottleImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      bottleImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
     ])
   }
 }
@@ -98,6 +92,6 @@ private extension BottleScreenView {
   struct Appearance {
     let setTextButton = NSLocalizedString("Крутить бутылочку", comment: "")
     let middleSize: CGFloat = 16
-    let nameBottleImage = UIImage(systemName: "Bottle")
+    let nameBottleImage = UIImage(named: "Bottle")
   }
 }

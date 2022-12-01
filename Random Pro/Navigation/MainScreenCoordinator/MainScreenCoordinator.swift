@@ -81,7 +81,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     }
     showScene(from: deepLinkType)
     services.metricsService.track(event: .deepLinks,
-                                  properties: ["screen" : deepLinkType.rawValue])
+                                  properties: ["screen": deepLinkType.rawValue])
   }
 }
 

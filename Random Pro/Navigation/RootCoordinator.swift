@@ -39,7 +39,6 @@ final class RootCoordinator: RootCoordinatorProtocol {
   private var mainScreenCoordinator: MainScreenCoordinatorProtocol?
   private let services: ApplicationServices = ApplicationServicesImpl()
   
-  
   // MARK: - Initialization
   
   /// - Parameter window: UIWindow

@@ -83,7 +83,7 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
   }
   
   func textRemove(id: String) {
-    let index = models.firstIndex{ $0.id == id }
+    let index = models.firstIndex { $0.id == id }
     guard let index = index else {
       return
     }

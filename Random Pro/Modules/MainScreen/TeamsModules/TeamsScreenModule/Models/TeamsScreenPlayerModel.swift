@@ -21,7 +21,7 @@ protocol PlayerProtocol {
   var name: String { get }
   
   /// Аватарка игрока
-  var avatar: Data?  { get }
+  var avatar: Data? { get }
   
   /// Смайлик
   var emoji: String? { get }

@@ -182,7 +182,6 @@ private extension OnboardingScreenInteractor {
   }
 }
 
-
 // MARK: - Appearance
 
 private extension OnboardingScreenInteractor {

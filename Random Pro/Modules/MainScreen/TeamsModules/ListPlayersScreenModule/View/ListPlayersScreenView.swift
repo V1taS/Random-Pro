@@ -128,7 +128,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
     let appearance = Appearance()
     
     switch model {
-    case .player(let playerModel, let teamsCount):
+    case let .player(playerModel, teamsCount):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: PlayerInfoTableViewCell.reuseIdentifier
       ) as? PlayerInfoTableViewCell {
@@ -149,7 +149,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
         )
         viewCell = cell
       }
-    case .insets(let inset):
+    case let .insets(inset):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
@@ -192,7 +192,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
       ) as? DividerTableViewCell {
         viewCell = cell
       }
-    case .doubleTitle(let playersCount, let forGameCount):
+    case let .doubleTitle(playersCount, forGameCount):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as? DoubleTitleCell {

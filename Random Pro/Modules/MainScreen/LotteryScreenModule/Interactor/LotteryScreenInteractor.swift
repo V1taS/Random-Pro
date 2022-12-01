@@ -38,7 +38,9 @@ protocol LotteryScreenInteractorInput: AnyObject {
   ///  - rangeStartValue: стартовый textField диапазона
   ///  - rangeEndValue: финальный textField диапазона
   ///  - amountNumberValue: количественный textField
-  func generateContent(rangeStartValue: String?, rangeEndValue: String?,amountNumberValue: String?)
+  func generateContent(rangeStartValue: String?,
+                       rangeEndValue: String?,
+                       amountNumberValue: String?)
 }
 
 final class LotteryScreenInteractor: LotteryScreenInteractorInput {
@@ -88,7 +90,9 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
     let rangeNumberRandom = rangeNumber.shuffled()
     let rangeNumberRandomString = rangeNumberRandom.map { "\($0)"}
     
+    // swiftlint:disable all
     let arrayResult = Array<String>(rangeNumberRandomString.prefix(amountNumberValueInt))
+    // swiftlint:enable all
     let numbersResult = arrayResult.joined(separator: ", ")
     var listResult = model.listResult
     listResult.append(numbersResult)

@@ -95,10 +95,12 @@ extension TeamsScreenView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
   
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    let headerView = collectionView.dequeueReusableSupplementaryView(
+    guard let headerView = collectionView.dequeueReusableSupplementaryView(
       ofKind: kind,
       withReuseIdentifier: CustomDoubleTextHeaderCollectionCell.reuseIdentifier,
-      for: indexPath) as! CustomDoubleTextHeaderCollectionCell
+      for: indexPath) as? CustomDoubleTextHeaderCollectionCell else {
+      return UICollectionReusableView()
+    }
     
     let model = models[indexPath.section]
     headerView.configureCellWith(

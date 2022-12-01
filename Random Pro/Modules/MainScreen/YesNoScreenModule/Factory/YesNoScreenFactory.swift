@@ -34,4 +34,3 @@ final class YesNoScreenFactory: YesNoScreenFactoryInput {
     output?.didReverse(listResult: listResult.reversed())
   }
 }
-

@@ -66,14 +66,14 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
     
     let randonIndex = Int.random(in: 0...1)
     let randomName = appearance.namesCoin[randonIndex]
-    let сoinType: CoinScreenModel.CoinType = randonIndex == .zero ? .eagle : .tails
+    let coinType: CoinScreenModel.CoinType = randonIndex == .zero ? .eagle : .tails
     
     var listResult = model.listResult
     listResult.append(randomName)
     
     let newModel = CoinScreenModel(
       result: randomName,
-      сoinType: сoinType,
+      coinType: coinType,
       listResult: listResult
     )
     
@@ -99,7 +99,7 @@ private extension CoinScreenInteractor {
     } else {
       let model = CoinScreenModel(
         result: Appearance().resultName,
-        сoinType: .none,
+        coinType: .none,
         listResult: []
       )
       self.model = model

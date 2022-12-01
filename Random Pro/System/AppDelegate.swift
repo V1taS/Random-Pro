@@ -47,18 +47,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
   func application(_ application: UIApplication,
-                   didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+                   didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
     self.handlePushNotification(userInfo)
   }
   
   func application(_ application: UIApplication,
-                   didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                   didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
     self.handlePushNotification(userInfo)
     completionHandler(.newData)
   }
   
-  func handlePushNotification(_ userInfo: [AnyHashable : Any]) {
+  func handlePushNotification(_ userInfo: [AnyHashable: Any]) {
     // Track received remote notification.
     // Method [YMMYandexMetrica activateWithApiKey:] should be called before using this method.
     YMPYandexMetricaPush.handleRemoteNotification(userInfo)

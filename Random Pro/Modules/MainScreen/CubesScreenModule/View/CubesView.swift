@@ -69,7 +69,7 @@ private extension CubesView {
     deactivateCubes()
     
     switch type {
-    case .cubesOne(let number):
+    case let .cubesOne(number):
       cubeOneImageView.image = configureCubeImageFrom(number: number)
       
       cubeOneImageView.isHidden = false
@@ -81,7 +81,7 @@ private extension CubesView {
       cubeOneConstraints.forEach {
         $0.isActive = true
       }
-    case .cubesTwo(let numberOne, let numberTwo):
+    case let .cubesTwo(numberOne, numberTwo):
       cubeOneImageView.image = configureCubeImageFrom(number: numberOne)
       cubeOneImageView.isHidden = false
       
@@ -101,7 +101,7 @@ private extension CubesView {
       cubesTwoConstraints.forEach {
         $0.isActive = true
       }
-    case .cubesThree(let numberOne, let numberTwo, let numberThree):
+    case let .cubesThree(numberOne, numberTwo, numberThree):
       cubeOneImageView.image = configureCubeImageFrom(number: numberOne)
       cubeOneImageView.isHidden = false
       
@@ -128,7 +128,7 @@ private extension CubesView {
         $0.isActive = true
       }
       
-    case .cubesFour(let numberOne, let numberTwo, let numberThree, let numberFour):
+    case let .cubesFour(numberOne, numberTwo, numberThree, numberFour):
       cubeOneImageView.image = configureCubeImageFrom(number: numberOne)
       cubeOneImageView.isHidden = false
       
@@ -167,8 +167,7 @@ private extension CubesView {
         $0.isActive = true
       }
       
-    case .cubesFive(let numberOne, let numberTwo, let numberThree,
-                    let numberFour, let numberFive):
+    case let .cubesFive(numberOne, numberTwo, numberThree, numberFour, numberFive):
       cubeOneImageView.image = configureCubeImageFrom(number: numberOne)
       cubeOneImageView.isHidden = false
       
@@ -214,8 +213,7 @@ private extension CubesView {
         $0.isActive = true
       }
       
-    case .cubesSix(let numberOne, let numberTwo, let numberThree,
-                   let numberFour, let numberFive, let numberSix):
+    case let .cubesSix(numberOne, numberTwo, numberThree, numberFour, numberFive, numberSix):
       cubeOneImageView.image = configureCubeImageFrom(number: numberOne)
       cubeOneImageView.isHidden = false
       

@@ -14,7 +14,6 @@ final class MainScreenInteractorOutputSpy: MainScreenInteractorOutput {
   
   var didReceiveModelStub: ((_ model: MainScreenModel) -> Void)?
   
-  
   // MARK: - MainScreenInteractorOutput
   
   func didReceive(model: MainScreenModel) {

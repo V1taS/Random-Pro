@@ -14,7 +14,7 @@ struct CoinScreenModel: UserDefaultsCodable {
   let result: String
   
   /// Индекс изображения монеты
-  let сoinType: CoinType
+  let coinType: CoinType
   
   /// Список результатов
   let listResult: [String]

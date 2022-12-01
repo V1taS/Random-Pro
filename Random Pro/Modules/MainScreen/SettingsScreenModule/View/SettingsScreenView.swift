@@ -97,7 +97,7 @@ extension SettingsScreenView: UITableViewDataSource {
     var viewCell = UITableViewCell()
     
     switch model {
-    case .titleAndSwitcher(title: let title, isEnabled: let isEnabled):
+    case let .titleAndSwitcher(title, isEnabled):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndSwitchCell.reuseIdentifier
       ) as? LabelAndSwitchCell {
@@ -108,7 +108,7 @@ extension SettingsScreenView: UITableViewDataSource {
         }
         viewCell = cell
       }
-    case .titleAndDescription(title: let title, description: let description):
+    case let .titleAndDescription(title, description):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as? DoubleTitleCell {
@@ -116,7 +116,7 @@ extension SettingsScreenView: UITableViewDataSource {
                                secondaryText: description)
         viewCell = cell
       }
-    case .titleAndImage(title: let title, asideImage: let asideImage, _):
+    case let .titleAndImage(title, asideImage, _):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndImageCell.reuseIdentifier
       ) as? LabelAndImageCell {
@@ -125,7 +125,7 @@ extension SettingsScreenView: UITableViewDataSource {
                                imageColor: RandomColor.primaryGray)
         viewCell = cell
       }
-    case .cleanButtonModel(title: let title):
+    case let .cleanButtonModel(title):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: SmallButtonCell.reuseIdentifier
       ) as? SmallButtonCell {
@@ -135,7 +135,7 @@ extension SettingsScreenView: UITableViewDataSource {
         cell.configureCellWith(titleButton: title)
         viewCell = cell
       }
-    case .insets(let inset):
+    case let .insets(inset):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {

@@ -190,4 +190,3 @@ private extension CubesScreenView {
     let result = "?"
   }
 }
-

@@ -85,7 +85,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   }
   
   func updatePlayer(emoji: String, id: String) {
-    let index = models.firstIndex{ $0.id == id }
+    let index = models.firstIndex { $0.id == id }
     guard let index = index else {
       return
     }
@@ -105,7 +105,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   }
   
   func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String) {
-    let index = models.firstIndex{ $0.id == id }
+    let index = models.firstIndex { $0.id == id }
     guard let index = index else {
       return
     }
@@ -145,7 +145,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   }
   
   func playerRemove(id: String) {
-    let index = models.firstIndex{ $0.id == id }
+    let index = models.firstIndex { $0.id == id }
     guard let index = index else {
       return
     }

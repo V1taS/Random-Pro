@@ -36,9 +36,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
     let appearance = Appearance()
     var tableViewModels: [SettingsScreenTableViewType] = []
     switch type {
-    case .teams(generatedTeamsCount: let generatedTeamsCount,
-                allPlayersCount: let allPlayersCount,
-                generatedPlayersCount: let generatedPlayersCount):
+    case let .teams(generatedTeamsCount, allPlayersCount, generatedPlayersCount):
       tableViewModels.append(.titleAndDescription(title: appearance.generatedTeamsCountTitle,
                                                   description: generatedTeamsCount))
       tableViewModels.append(.divider)
@@ -52,9 +50,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                             asideImage: nil))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .number(withoutRepetition: let withoutRepetition,
-                 itemsGenerated: let itemsGenerated,
-                 lastItem: let lastItem):
+    case let .number(withoutRepetition, itemsGenerated, lastItem):
       tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
                                                isEnabled: withoutRepetition))
       tableViewModels.append(.divider)
@@ -71,8 +67,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       }
       
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .yesOrNo(itemsGenerated: let itemsGenerated,
-                  lastItem: let lastItem):
+    case let .yesOrNo(itemsGenerated, lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -85,9 +80,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .letter(withoutRepetition: let withoutRepetition,
-                 itemsGenerated: let itemsGenerated,
-                 lastItem: let lastItem):
+    case let .letter(withoutRepetition, itemsGenerated, lastItem):
       tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
                                                isEnabled: withoutRepetition))
       tableViewModels.append(.divider)
@@ -103,8 +96,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .coin(itemsGenerated: let itemsGenerated,
-               lastItem: let lastItem):
+    case let .coin(itemsGenerated, lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -117,8 +109,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .dateAndTime(itemsGenerated: let itemsGenerated,
-                      lastItem: let lastItem):
+    case let .dateAndTime(itemsGenerated, lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -131,8 +122,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .lottery(itemsGenerated: let itemsGenerated,
-                  lastItem: let lastItem):
+    case let .lottery(itemsGenerated, lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -145,7 +135,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .password(itemsGenerated: let itemsGenerated, _):
+    case let .password(itemsGenerated, _):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -155,7 +145,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .contact(itemsGenerated: let itemsGenerated, _):
+    case let .contact(itemsGenerated, _):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -165,8 +155,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .cube(itemsGenerated: let itemsGenerated,
-               lastItem: let lastItem):
+    case let .cube(itemsGenerated, lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -179,10 +168,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case .list(let withoutRepetition,
-               let generatedTextCount,
-               let allTextCount,
-               let lastItem):
+    case let .list(withoutRepetition, generatedTextCount, allTextCount, lastItem):
       tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
                                                isEnabled: withoutRepetition))
       tableViewModels.append(.divider)

@@ -103,6 +103,7 @@ final class MainScreenInteractorTests: XCTestCase {
     XCTAssertEqual(firstStartAppModel, recievedModel)
   }
   
+  // swiftlint:disable all
   func testGivenDifferentNumberOfSectionsWhenGetContentThenSendModelToOutput() {
     // TODO: -
   }

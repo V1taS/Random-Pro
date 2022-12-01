@@ -48,7 +48,7 @@ final class MetricsServiceImpl: MetricsService {
     increaseCountTapped(event: event)
   }
   
-  func track(event: MetricsSections, properties: [String : String]) {
+  func track(event: MetricsSections, properties: [String: String]) {
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
       print("REPORT ERROR: %@", error.localizedDescription)
     }
@@ -93,7 +93,6 @@ final class MetricsServiceImpl: MetricsService {
     return allCount
   }
 }
-
 
 // MARK: - Private
 

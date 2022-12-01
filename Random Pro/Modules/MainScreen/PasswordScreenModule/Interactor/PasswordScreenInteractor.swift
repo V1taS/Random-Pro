@@ -82,7 +82,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
     if let model = model {
       let newModel = PasswordScreenModel(
         passwordLength: model.passwordLength,
-        result:  model.result,
+        result: model.result,
         listResult: model.listResult,
         switchState: model.switchState
       )
@@ -92,7 +92,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       let appearance = Appearance()
       let newModel = PasswordScreenModel(
         passwordLength: appearance.passwordLength,
-        result:  appearance.resultLabel,
+        result: appearance.resultLabel,
         listResult: [],
         switchState: PasswordScreenModel.SwitchState(
           uppercase: true,
@@ -246,7 +246,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       let appearance = Appearance()
       return PasswordScreenModel(
         passwordLength: appearance.passwordLength,
-        result:  appearance.resultLabel,
+        result: appearance.resultLabel,
         listResult: [],
         switchState: PasswordScreenModel.SwitchState(
           uppercase: true,
@@ -262,7 +262,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
     let appearance = Appearance()
     let newModel = PasswordScreenModel(
       passwordLength: appearance.passwordLength,
-      result:  appearance.resultLabel,
+      result: appearance.resultLabel,
       listResult: [],
       switchState: PasswordScreenModel.SwitchState(
         uppercase: true,

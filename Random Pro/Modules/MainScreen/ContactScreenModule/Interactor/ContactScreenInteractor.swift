@@ -77,7 +77,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
           let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
           do {
             let store = CNContactStore()
-            try store.enumerateContacts(with: request, usingBlock: { (contact, stopPointer) in
+            try store.enumerateContacts(with: request, usingBlock: { (contact, _) in
               listContacts.append(ContactScreenModel.Contact(
                 firstName: contact.givenName,
                 lastName: contact.familyName,

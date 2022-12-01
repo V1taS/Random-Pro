@@ -56,9 +56,9 @@ final class CoinScreenView: CoinScreenViewProtocol {
     resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
     
-    if model.сoinType != .none {
+    if model.coinType != .none {
       let appearance = Appearance()
-      let image = model.сoinType == .eagle ? appearance.eagle : appearance.tails
+      let image = model.coinType == .eagle ? appearance.eagle : appearance.tails
       coinImageView.image = image.withTintColor(RandomColor.primaryGray).withRenderingMode(.alwaysOriginal)
     } else {
       coinImageView.image = nil

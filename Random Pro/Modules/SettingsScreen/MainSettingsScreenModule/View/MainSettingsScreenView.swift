@@ -97,7 +97,7 @@ extension MainSettingsScreenView: UITableViewDataSource {
     var viewCell = UITableViewCell()
     
     switch model {
-    case .titleAndSwitcher(let title, let isEnabled):
+    case let .titleAndSwitcher(title, isEnabled):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndSwitchCell.reuseIdentifier
       ) as? LabelAndSwitchCell {
@@ -108,7 +108,7 @@ extension MainSettingsScreenView: UITableViewDataSource {
         }
         viewCell = cell
       }
-    case .titleAndImage(let title, let asideImage, _):
+    case let .titleAndImage(title, asideImage, _):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LabelAndImageCell.reuseIdentifier
       ) as? LabelAndImageCell {
@@ -117,7 +117,7 @@ extension MainSettingsScreenView: UITableViewDataSource {
                                imageColor: RandomColor.primaryGray)
         viewCell = cell
       }
-    case .insets(let inset):
+    case let .insets(inset):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {

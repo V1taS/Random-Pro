@@ -117,7 +117,7 @@ private extension PasswordGeneratorView {
       
       switchersStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                    constant: -appearance.middleVirticalSpacing),
-      switchersStackView.topAnchor.constraint(equalTo:  settingOptionsLabel.bottomAnchor,
+      switchersStackView.topAnchor.constraint(equalTo: settingOptionsLabel.bottomAnchor,
                                               constant: appearance.middleHorizontalSpacing),
       switchersStackView.widthAnchor.constraint(equalToConstant: appearance.widthAnchor),
       
@@ -191,7 +191,7 @@ private extension PasswordGeneratorView {
     
     lowercaseLettersSwitch.isOn = true
     lowercaseLettersSwitch.addTarget(self,
-                                     action:#selector(lowercaseSwitchValueDidChange(_:)),
+                                     action: #selector(lowercaseSwitchValueDidChange(_:)),
                                      for: .valueChanged)
     
     numbersSwitch.isOn = true

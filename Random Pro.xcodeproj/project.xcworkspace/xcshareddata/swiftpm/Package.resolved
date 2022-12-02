@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "collectionconcurrencykit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JohnSundell/CollectionConcurrencyKit.git",
-      "state" : {
-        "revision" : "b4f23e24b5a1bff301efc5e70871083ca029ff95",
-        "version" : "0.2.0"
-      }
-    },
-    {
       "identity" : "metrica-push-sdk-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/yandexmobile/metrica-push-sdk-ios",
@@ -33,7 +24,7 @@
       "location" : "https://github.com/V1taS/Notifications",
       "state" : {
         "branch" : "master",
-        "revision" : "f83fc41da3a9c1e8d84a85d9613b95fce15b9a01"
+        "revision" : "c40c9f8ac81a828df2a3d55d88780626f91da237"
       }
     },
     {
@@ -42,7 +33,7 @@
       "location" : "https://github.com/V1taS/RandomNetwork.git",
       "state" : {
         "branch" : "master",
-        "revision" : "a637eb817d38a11e5c882e7cc91bcef14d9339a7"
+        "revision" : "88a25b57b01320346dc5ecc3b873854e751725d1"
       }
     },
     {
@@ -51,70 +42,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "57499b022fbdbe218a0d9fa66d502ec0a7349b3a"
-      }
-    },
-    {
-      "identity" : "sourcekitten",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jpsim/SourceKitten.git",
-      "state" : {
-        "revision" : "fc12c0f182c5cf80781dd933b17a82eb98bd7c61",
-        "version" : "0.33.1"
-      }
-    },
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser.git",
-      "state" : {
-        "revision" : "9f39744e025c7d377987f30b03770805dcb0bcd1",
-        "version" : "1.1.4"
-      }
-    },
-    {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
-      "state" : {
-        "revision" : "0b6c22b97f8e9320bca62e82cdbee601cf37ad3f",
-        "version" : "0.50600.1"
-      }
-    },
-    {
-      "identity" : "swiftlint",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/SwiftLint",
-      "state" : {
-        "revision" : "57dc1c9532d660ff547dd8ba2176ad82c1175787",
-        "version" : "0.49.1"
-      }
-    },
-    {
-      "identity" : "swiftytexttable",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/scottrhoyt/SwiftyTextTable.git",
-      "state" : {
-        "revision" : "c6df6cf533d120716bff38f8ff9885e1ce2a4ac3",
-        "version" : "0.9.0"
-      }
-    },
-    {
-      "identity" : "swxmlhash",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/drmohundro/SWXMLHash.git",
-      "state" : {
-        "revision" : "4d0f62f561458cbe1f732171e625f03195151b60",
-        "version" : "7.0.1"
-      }
-    },
-    {
-      "identity" : "yams",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/jpsim/Yams.git",
-      "state" : {
-        "revision" : "01835dc202670b5bb90d07f3eae41867e9ed29f6",
-        "version" : "5.0.1"
+        "revision" : "e745f706db069c71cb20fa6653585777b5f57ebd"
       }
     }
   ],

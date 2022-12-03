@@ -27,17 +27,20 @@ final class MainScreenInteractorInputMock: MainScreenInteractorInput {
   
   func updateSectionsWith(models: [MainScreenModel.Section]) {
     isUpdateSectionsWith = true
-    output?.didReceive(model: MainScreenModel.createBaseModel())
+    output?.didReceive(model: MainScreenModel(isDarkMode: nil,
+                                              allSections: models))
   }
   
   func getContent() {
     isGetContent = true
-    output?.didReceive(model: MainScreenModel.createBaseModel())
+    output?.didReceive(model: MainScreenModel(isDarkMode: nil,
+                                              allSections: []))
   }
   
   func returnModel() -> MainScreenModel {
     isReturnModel = true
-    return MainScreenModel.createBaseModel()
+    return MainScreenModel(isDarkMode: nil,
+                           allSections: [])
   }
   
   func saveDarkModeStatus(_ isEnabled: Bool) {

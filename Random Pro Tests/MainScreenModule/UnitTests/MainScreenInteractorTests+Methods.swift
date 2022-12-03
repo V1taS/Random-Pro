@@ -24,7 +24,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardTeamEng,
           imageSection: appearance.imageCardTeam.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .number:
@@ -33,7 +32,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardNumberEng,
           imageSection: appearance.imageCardNumber.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .yesOrNo:
@@ -42,7 +40,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardYesOrNotEng,
           imageSection: appearance.imageCardYesOrNot.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .letter:
@@ -51,7 +48,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardCharactersEng,
           imageSection: appearance.imageCardCharacters.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .list:
@@ -60,7 +56,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardListEng,
           imageSection: appearance.imageCardList.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .coin:
@@ -69,7 +64,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardCoinEng,
           imageSection: appearance.imageCardCoin.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .cube:
@@ -78,7 +72,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardCubeEng,
           imageSection: appearance.imageCardCube.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .dateAndTime:
@@ -87,7 +80,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardDateAndTimeEng,
           imageSection: appearance.imageCardDateAndTime.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .lottery:
@@ -96,7 +88,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardLotteryEng,
           imageSection: appearance.imageCardLottery.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .contact:
@@ -105,7 +96,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardContactEng,
           imageSection: appearance.imageCardContact.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .password:
@@ -114,7 +104,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardPasswordEng,
           imageSection: appearance.imageCardPassword.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .colors:
@@ -123,7 +112,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleColorsEng,
           imageSection: appearance.imageColors.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       }
@@ -144,7 +132,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardTeam,
           imageSection: appearance.imageCardTeam.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .number:
@@ -153,7 +140,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardNumber,
           imageSection: appearance.imageCardNumber.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .yesOrNo:
@@ -162,7 +148,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardYesOrNot,
           imageSection: appearance.imageCardYesOrNot.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .letter:
@@ -171,7 +156,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardCharacters,
           imageSection: appearance.imageCardCharacters.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .list:
@@ -180,7 +164,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardList,
           imageSection: appearance.imageCardList.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .coin:
@@ -189,7 +172,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardCoin,
           imageSection: appearance.imageCardCoin.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .cube:
@@ -198,7 +180,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardCube,
           imageSection: appearance.imageCardCube.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .dateAndTime:
@@ -207,7 +188,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardDateAndTime,
           imageSection: appearance.imageCardDateAndTime.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .lottery:
@@ -216,7 +196,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardLottery,
           imageSection: appearance.imageCardLottery.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .contact:
@@ -225,7 +204,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardContact,
           imageSection: appearance.imageCardContact.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .password:
@@ -234,7 +212,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleCardPassword,
           imageSection: appearance.imageCardPassword.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       case .colors:
@@ -243,7 +220,6 @@ extension MainScreenInteractorTests {
           isEnabled: true,
           titleSection: appearance.titleColors,
           imageSection: appearance.imageColors.pngData() ?? Data(),
-          isShowADVLabel: false,
           advLabel: .none
         ))
       }

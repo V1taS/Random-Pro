@@ -40,7 +40,7 @@ final class MainScreenInteractorTests: XCTestCase {
   func testGivenFirstStartAppWhenGetContentThenSendModelToOutput() {
     // Arrange
     localSaveModel = nil
-    let firstStartAppModel = MainScreenModel.createBaseModel()
+    let firstStartAppModel = createBaseModelRusLang()
     var recievedModel: MainScreenModel?
     
     // Ожидает выполнения какое-то врея
@@ -62,7 +62,7 @@ final class MainScreenInteractorTests: XCTestCase {
   func testGivenSecondStartWithRusLangAppWhenGetContentThenSendModelToOutput() {
     // Arrange
     localSaveModel = createBaseModelRusLang()
-    let firstStartAppModel = MainScreenModel.createBaseModel()
+    let firstStartAppModel = createBaseModelRusLang()
     var recievedModel: MainScreenModel?
     
     // Ожидает выполнения какое-то врея
@@ -84,7 +84,7 @@ final class MainScreenInteractorTests: XCTestCase {
   func testGivenSecondStartWithEngLangAppWhenGetContentThenSendModelToOutput() {
     // Arrange
     localSaveModel = createBaseModelEngLang()
-    let firstStartAppModel = MainScreenModel.createBaseModel()
+    let firstStartAppModel = createBaseModelRusLang()
     var recievedModel: MainScreenModel?
     
     // Ожидает выполнения какое-то врея

@@ -75,7 +75,6 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
           isEnabled: section.isEnabled,
           titleSection: section.titleSection,
           imageSection: section.imageSection,
-          isShowADVLabel: section.isShowADVLabel,
           advLabel: section.advLabel
         ), at: index
         )
@@ -102,7 +101,6 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
           isEnabled: isEnabled,
           titleSection: section.titleSection,
           imageSection: section.imageSection,
-          isShowADVLabel: section.isShowADVLabel,
           advLabel: section.advLabel
         ), at: index
         )

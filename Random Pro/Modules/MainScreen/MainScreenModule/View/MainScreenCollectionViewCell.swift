@@ -39,8 +39,8 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
     mainCardView.configureWith(
       imageCard: UIImage(data: model.imageSection),
       titleCard: model.titleSection,
-      isShowADVLabel: model.isShowADVLabel,
-      titleADVText: model.advLabel.rawValue
+      isShowADVLabel: model.advLabel != .none,
+      titleADVText: model.advLabel.title
     )
   }
 }

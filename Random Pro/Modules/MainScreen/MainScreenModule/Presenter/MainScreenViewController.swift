@@ -71,6 +71,17 @@ protocol MainScreenModuleInput {
   /// Возвращает модель
   func returnModel() -> MainScreenModel
   
+  /// Убрать лайбл с секции
+  /// - Parameter type: Тип сеции
+  func removeLabelFromSection(type: MainScreenModel.SectionType)
+  
+  /// Добавить лайбл к секции
+  /// - Parameters:
+  ///  - label: Лайбл
+  ///  - for: Тип сеции
+  func addLabel(_ label: MainScreenModel.ADVLabel,
+                for sectionType: MainScreenModel.SectionType)
+  
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: MainScreenModuleOutput? { get set }
 }
@@ -147,6 +158,15 @@ final class MainScreenViewController: MainScreenModule {
   
   func updateSectionsWith(models: [MainScreenModel.Section]) {
     interactor.updateSectionsWith(models: models)
+  }
+  
+  func removeLabelFromSection(type: MainScreenModel.SectionType) {
+    interactor.removeLabelFromSection(type: type)
+  }
+  
+  func addLabel(_ label: MainScreenModel.ADVLabel,
+                for sectionType: MainScreenModel.SectionType) {
+    interactor.addLabel(label, for: sectionType)
   }
 }
 

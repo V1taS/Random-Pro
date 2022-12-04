@@ -31,6 +31,17 @@ protocol MainScreenInteractorInput {
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена
   func saveDarkModeStatus(_ isEnabled: Bool)
+  
+  /// Убрать лайбл с секции
+  /// - Parameter type: Тип сеции
+  func removeLabelFromSection(type: MainScreenModel.SectionType)
+  
+  /// Добавить лайбл к секции
+  /// - Parameters:
+  ///  - label: Лайбл
+  ///  - for: Тип сеции
+  func addLabel(_ label: MainScreenModel.ADVLabel,
+                for sectionType: MainScreenModel.SectionType)
 }
 
 /// Интерактор
@@ -101,11 +112,58 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     )
     self.model = newModel
   }
+  
+  func removeLabelFromSection(type: MainScreenModel.SectionType) {
+    guard let model = model else {
+      return
+    }
+    
+    let newModel = MainScreenModel(
+      isDarkMode: model.isDarkMode,
+      allSections: updatesLabelFromSection(type: type,
+                                           models: model.allSections,
+                                           advLabel: .none)
+    )
+    output?.didReceive(model: newModel)
+    self.model = newModel
+  }
+  
+  func addLabel(_ label: MainScreenModel.ADVLabel,
+                for sectionType: MainScreenModel.SectionType) {
+    guard let model = model else {
+      return
+    }
+    
+    let newModel = MainScreenModel(
+      isDarkMode: model.isDarkMode,
+      allSections: updatesLabelFromSection(type: sectionType,
+                                           models: model.allSections,
+                                           advLabel: label)
+    )
+    output?.didReceive(model: newModel)
+    self.model = newModel
+  }
 }
 
 // MARK: - Private
 
 private extension MainScreenInteractor {
+  func updatesLabelFromSection(type: MainScreenModel.SectionType,
+                               models: [MainScreenModel.Section],
+                               advLabel: MainScreenModel.ADVLabel) -> [MainScreenModel.Section] {
+    return models.map {
+      if $0.type == type {
+        return MainScreenModel.Section(type: $0.type,
+                                       isEnabled: $0.isEnabled,
+                                       titleSection: $0.titleSection,
+                                       imageSection: $0.imageSection,
+                                       advLabel: advLabel)
+      } else {
+        return $0
+      }
+    }
+  }
+  
   func updatesNewSectionForModel(
     models: [MainScreenModel.Section]
   ) -> [MainScreenModel.Section] {

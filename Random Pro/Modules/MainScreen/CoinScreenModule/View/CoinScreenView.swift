@@ -59,7 +59,12 @@ final class CoinScreenView: CoinScreenViewProtocol {
     if model.coinType != .none {
       let appearance = Appearance()
       let image = model.coinType == .eagle ? appearance.eagle : appearance.tails
-      coinImageView.image = image.withTintColor(RandomColor.primaryGray).withRenderingMode(.alwaysOriginal)
+      coinImageView.image = image
+      UIView.transition(with: coinImageView,
+                        duration: Appearance().resulDuration,
+                        options: .transitionFlipFromRight,
+                        animations: nil,
+                        completion: nil)
     } else {
       coinImageView.image = nil
     }
@@ -132,8 +137,9 @@ private extension CoinScreenView {
     let lessVirticalSize: CGFloat = 8
     let height: CGFloat = 200
     let width: CGFloat = 200
+    let resulDuration: CGFloat = 0.5
     
-    let eagle = UIImage(systemName: "b.circle.fill") ?? UIImage()
-    let tails = UIImage(systemName: "b.circle") ?? UIImage()
+    let eagle = UIImage(named: "coin_eagle") ?? UIImage()
+    let tails = UIImage(named: "coin_tails") ?? UIImage()
   }
 }

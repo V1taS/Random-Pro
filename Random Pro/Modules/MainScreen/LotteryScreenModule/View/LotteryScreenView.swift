@@ -70,11 +70,14 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   // MARK: - Internal func
   
   func updateContentWith(model: LotteryScreenModel) {
-    resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
     rangeStartTextField.text = model.rangeStartValue
     rangeEndTextField.text = model.rangeEndValue
     amountNumberTextField.text = model.amountValue
+    
+    resultLabel.text = model.result
+    resultLabel.zoomIn(duration: Appearance().resulDuration,
+                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
 
@@ -244,5 +247,6 @@ private extension LotteryScreenView {
     let minimumScaleFactor: CGFloat = 0.3
     let lessVerticalSpacing: CGFloat = 8
     let scrollResultHeight: CGFloat = 30
+    let resulDuration: CGFloat = 0.2
   }
 }

@@ -75,6 +75,8 @@ final class CubesScreenView: CubesScreenViewProtocol {
     
     resultLabel.isHidden = !plagIsShow
     cubesView.isHidden = plagIsShow
+    cubesView.zoomIn(duration: Appearance().resulDuration,
+                     transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
 
@@ -188,5 +190,6 @@ private extension CubesScreenView {
     let numberSix = "6"
     let titleButton = NSLocalizedString("Бросить кубик(и)", comment: "")
     let result = "?"
+    let resulDuration: CGFloat = 0.2
   }
 }

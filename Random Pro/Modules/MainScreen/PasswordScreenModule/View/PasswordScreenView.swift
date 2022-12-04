@@ -79,6 +79,12 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    passwordGeneratorView.resultTextView.centerVerticalText()
+  }
+  
   // MARK: - Internal func
   
   func setPasswordLength(_ text: String?) {
@@ -93,11 +99,16 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
         return
       }
       
-      self.passwordGeneratorView.resultTextView.attributedText = result
       self.passwordGeneratorView.uppercaseLettersSwitch.isOn = switchState.uppercase
       self.passwordGeneratorView.lowercaseLettersSwitch.isOn = switchState.lowercase
       self.passwordGeneratorView.numbersSwitch.isOn = switchState.numbers
       self.passwordGeneratorView.symbolsSwitch.isOn = switchState.symbols
+      
+      self.passwordGeneratorView.resultTextView.attributedText = result
+      self.passwordGeneratorView.resultTextView.centerVerticalText()
+      self.passwordGeneratorView.resultTextView.zoomIn(duration: Appearance().resulDuration,
+                                                       transformScale: CGAffineTransform(scaleX: .zero,
+                                                                                         y: .zero))
     }
   }
 }
@@ -245,5 +256,6 @@ private extension PasswordScreenView {
     let passwordIndex: Int = 0
     let phraseIndex: Int = 1
     let resultLabel = "?"
+    let resulDuration: CGFloat = 0.2
   }
 }

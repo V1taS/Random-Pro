@@ -98,6 +98,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = bottleScreenCoordinator
     bottleScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .bottle)
     services.metricsService.track(event: .bottleScreen)
   }
   

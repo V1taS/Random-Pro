@@ -14,7 +14,8 @@ What the app can do:
 - Generate lottery combination
 - Pick a random contact from your phone book
 
-![Logo](https://sosinvitalii.com/wp-content/uploads/2022/05/Monday-02-May-2022-15_43_48.png "Random Pro")
+![Logo](https://sosinvitalii.com/wp-content/uploads/2022/12/prev_one.png "Random Pro")
+![Logo](https://sosinvitalii.com/wp-content/uploads/2022/12/prev_two.png "Random Pro")
 
 ## SetUP
 

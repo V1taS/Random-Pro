@@ -60,7 +60,7 @@ final class LetterScreenView: LetterScreenViewProtocol {
     letterSegmentedControl.selectedSegmentIndex = model.languageIndexSegmented
     
     resultLabel.text = model.result
-    resultLabel.zoomIn(duration: Appearance().resultLabelDuration,
+    resultLabel.zoomIn(duration: Appearance().resultDuration,
                        transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
@@ -75,14 +75,14 @@ private extension LetterScreenView {
     resultLabel.font = RandomFont.primaryBold70
     resultLabel.textColor = RandomColor.primaryGray
     
-    generateButton.setTitle(appearance.textButton, for: .normal)
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
-    letterSegmentedControl.insertSegment(withTitle: appearance.russionText,
-                                         at: appearance.rusControl, animated: false)
-    letterSegmentedControl.insertSegment(withTitle: appearance.englishText,
-                                         at: appearance.engControl, animated: false)
-    letterSegmentedControl.selectedSegmentIndex = appearance.rusControl
+    letterSegmentedControl.insertSegment(withTitle: appearance.russionCharacterTitle,
+                                         at: appearance.russionCharacterIndex, animated: false)
+    letterSegmentedControl.insertSegment(withTitle: appearance.englishCharacterTitle,
+                                         at: appearance.englishCharacterIndex, animated: false)
+    letterSegmentedControl.selectedSegmentIndex = appearance.russionCharacterIndex
   }
   
   func setupConstraints() {
@@ -98,22 +98,22 @@ private extension LetterScreenView {
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleHorizontalSize),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleHorizontalSize),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSize),
+                                             constant: -appearance.defaultInset),
       
       letterSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                      constant: appearance.middleHorizontalSize),
+                                                      constant: appearance.defaultInset),
       letterSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                       constant: -appearance.middleHorizontalSize),
+                                                       constant: -appearance.defaultInset),
       letterSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       
       scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
       scrollResult.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                           constant: -appearance.lessVerticalSpacing)
+                                           constant: -appearance.minInset)
     ])
   }
   
@@ -121,12 +121,12 @@ private extension LetterScreenView {
   func generateButtonAction() {
     let appearance = Appearance()
     
-    if letterSegmentedControl.selectedSegmentIndex == appearance.rusControl {
+    if letterSegmentedControl.selectedSegmentIndex == appearance.russionCharacterIndex {
       output?.generateRusButtonAction()
       return
     }
     
-    if letterSegmentedControl.selectedSegmentIndex == appearance.engControl {
+    if letterSegmentedControl.selectedSegmentIndex == appearance.englishCharacterIndex {
       output?.generateEngButtonAction()
       return
     }
@@ -137,14 +137,13 @@ private extension LetterScreenView {
 
 private extension LetterScreenView {
   struct Appearance {
-    let textButton = NSLocalizedString("Сгенерировать букву", comment: "")
-    let russionText = NSLocalizedString("Русские буквы", comment: "")
-    let englishText = NSLocalizedString("Английские буквы", comment: "")
-    let lessVerticalSpacing: CGFloat = 8
-    let middleHorizontalSize: CGFloat = 16
-    let highVirticalSize: CGFloat = 24
-    let engControl: Int = 1
-    let rusControl: Int = 0
-    let resultLabelDuration: CGFloat = 0.2
+    let buttonTitle = NSLocalizedString("Сгенерировать букву", comment: "")
+    let russionCharacterTitle = NSLocalizedString("Русские буквы", comment: "")
+    let englishCharacterTitle = NSLocalizedString("Английские буквы", comment: "")
+    let minInset: CGFloat = 8
+    let defaultInset: CGFloat = 16
+    let englishCharacterIndex: Int = 1
+    let russionCharacterIndex: Int = 0
+    let resultDuration: CGFloat = 0.2
   }
 }

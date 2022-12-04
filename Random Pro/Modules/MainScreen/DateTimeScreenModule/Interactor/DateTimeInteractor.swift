@@ -111,7 +111,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     
     let appearance = Appearance()
     var listResult = model.listResult
-    let randomElementDay = appearance.listDay.shuffled().first ?? ""
+    let randomElementDay = appearance.listDays.shuffled().first ?? ""
     listResult.append(randomElementDay)
     
     let newModel = DateTimeScreenModel(
@@ -128,7 +128,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       return
     }
     
-    let randomElementMonth = Appearance().listMonth.shuffled().first ?? ""
+    let randomElementMonth = Appearance().listMonths.shuffled().first ?? ""
     var listResult = model.listResult
     listResult.append(randomElementMonth)
     
@@ -175,7 +175,7 @@ private extension DateTimeInteractor {
     let randomTimeHours = Int.random(in: 1...12)
     let randomTimeMinets = Int.random(in: 1...59)
     let randomDate = Int.random(in: 1...30)
-    let listDay = [
+    let listDays = [
       NSLocalizedString("Понедельник", comment: ""),
       NSLocalizedString("Вторник", comment: ""),
       NSLocalizedString("Среда", comment: ""),
@@ -185,7 +185,7 @@ private extension DateTimeInteractor {
       NSLocalizedString("Воскресенье", comment: "")
     ]
     
-    let listMonth = [
+    let listMonths = [
       NSLocalizedString("Январь", comment: ""),
       NSLocalizedString("Февраль", comment: ""),
       NSLocalizedString("Март", comment: ""),

@@ -53,20 +53,25 @@ final class CoinScreenView: CoinScreenViewProtocol {
   // MARK: - Internal func
   
   func updateContentWith(model: CoinScreenModel) {
-    resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
     
     if model.coinType != .none {
       let appearance = Appearance()
-      let image = model.coinType == .eagle ? appearance.eagle : appearance.tails
+      let image = model.coinType == .eagle ? appearance.eagleImage : appearance.tailsImage
       coinImageView.image = image
       UIView.transition(with: coinImageView,
-                        duration: Appearance().resulDuration,
+                        duration: Appearance().resultDuration,
                         options: .transitionFlipFromRight,
                         animations: nil,
-                        completion: nil)
+                        completion: { [weak self] _ in
+        guard let self = self else {
+          return
+        }
+        self.resultLabel.text = model.result
+      })
     } else {
       coinImageView.image = nil
+      resultLabel.text = model.result
     }
   }
 }
@@ -82,7 +87,7 @@ private extension CoinScreenView {
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.primaryGray
     
-    generateButton.setTitle(appearance.textButton, for: .normal)
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
     coinImageView.layer.cornerRadius = appearance.cornerRadius
@@ -99,24 +104,24 @@ private extension CoinScreenView {
     NSLayoutConstraint.activate([
       resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                       constant: appearance.lessVirticalSize),
+                                       constant: appearance.minInset),
       
       coinImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
       coinImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      coinImageView.heightAnchor.constraint(equalToConstant: appearance.height),
-      coinImageView.widthAnchor.constraint(equalToConstant: appearance.width),
+      coinImageView.heightAnchor.constraint(equalToConstant: appearance.heightCoinImage),
+      coinImageView.widthAnchor.constraint(equalToConstant: appearance.widthCoinImage),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleHorizontalSize),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleHorizontalSize),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSize),
+                                             constant: -appearance.defaultInset),
       
       scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
       scrollResult.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                           constant: -appearance.lessVirticalSize)
+                                           constant: -appearance.minInset)
     ])
   }
   
@@ -130,16 +135,17 @@ private extension CoinScreenView {
 
 private extension CoinScreenView {
   struct Appearance {
-    let textButton = NSLocalizedString("Сгенерировать", comment: "")
     let cornerRadius: CGFloat = 100
-    let middleHorizontalSize: CGFloat = 16
-    let hightVirticalSize: CGFloat = 24
-    let lessVirticalSize: CGFloat = 8
-    let height: CGFloat = 200
-    let width: CGFloat = 200
-    let resulDuration: CGFloat = 0.5
     
-    let eagle = UIImage(named: "coin_eagle") ?? UIImage()
-    let tails = UIImage(named: "coin_tails") ?? UIImage()
+    let defaultInset: CGFloat = 16
+    let minInset: CGFloat = 8
+    
+    let heightCoinImage: CGFloat = 200
+    let widthCoinImage: CGFloat = 200
+    let resultDuration: CGFloat = 0.5
+    
+    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let eagleImage = UIImage(named: "coin_eagle") ?? UIImage()
+    let tailsImage = UIImage(named: "coin_tails") ?? UIImage()
   }
 }

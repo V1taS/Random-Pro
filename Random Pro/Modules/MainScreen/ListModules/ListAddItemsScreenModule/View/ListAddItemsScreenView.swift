@@ -71,7 +71,7 @@ extension ListAddItemsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let appearance = Appearance()
     let deleteAction = UIContextualAction(style: .destructive,
-                                          title: appearance.deleteTitle) { [weak self] _, _, _ in
+                                          title: appearance.deleteButtonTitle) { [weak self] _, _, _ in
       guard let self = self else {
         return
       }
@@ -84,7 +84,7 @@ extension ListAddItemsScreenView: UITableViewDelegate {
         break
       }
     }
-    deleteAction.image = appearance.deleteImage
+    deleteAction.image = appearance.deleteButtonImage
     return UISwipeActionsConfiguration(actions: [deleteAction])
   }
   
@@ -138,7 +138,7 @@ extension ListAddItemsScreenView: UITableViewDataSource {
         withIdentifier: TextFieldWithButtonCell.reuseIdentifier
       ) as? TextFieldWithButtonCell {
         let checkmarkImage = UIImage(systemName: Appearance().checkmarkImageName,
-                                     withConfiguration: Appearance().largeConfig)
+                                     withConfiguration: Appearance().largeButtonConfig)
         cell.configureCellWith(
           textField: textField,
           textFieldBorderColor: RandomColor.secondaryGray,
@@ -164,7 +164,7 @@ extension ListAddItemsScreenView: UITableViewDataSource {
         withIdentifier: DoubleTitleCell.reuseIdentifier
       ) as? DoubleTitleCell {
         cell.configureCellWith(
-          primaryText: "\(appearance.allTitle): \(textCount)",
+          primaryText: "\(appearance.allItemTitle): \(textCount)",
           primaryTextColor: RandomColor.primaryGray,
           primaryTextFont: RandomFont.primaryMedium10,
           secondaryText: nil,
@@ -265,14 +265,16 @@ private extension ListAddItemsScreenView {
 
 private extension ListAddItemsScreenView {
   struct Appearance {
-    let deleteTitle = NSLocalizedString("Удалить", comment: "")
-    let deleteImage = UIImage(systemName: "trash")
-    let largeConfig = UIImage.SymbolConfiguration(pointSize: 20,
-                                                  weight: .bold,
-                                                  scale: .large)
+    let deleteButtonTitle = NSLocalizedString("Удалить", comment: "")
+    let deleteButtonImage = UIImage(systemName: "trash")
+    let largeButtonConfig = UIImage.SymbolConfiguration(pointSize: 20,
+                                                        weight: .bold,
+                                                        scale: .large)
+    
     let checkmarkImageName = "checkmark.circle.fill"
-    let allTitle = NSLocalizedString("Всего", comment: "")
+    let allItemTitle = NSLocalizedString("Всего", comment: "")
     let textFieldPlaceholder = NSLocalizedString("Добавить", comment: "")
+    
     let maxCharactersTF = 9_999
     let estimatedRowHeight: CGFloat = 44
   }

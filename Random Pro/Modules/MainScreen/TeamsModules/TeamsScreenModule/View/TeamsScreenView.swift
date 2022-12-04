@@ -173,18 +173,18 @@ private extension TeamsScreenView {
     NSLayoutConstraint.activate([
       countTeamsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       countTeamsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                          constant: appearance.middleInset),
+                                                          constant: appearance.defaultInset),
       countTeamsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                           constant: -appearance.middleInset),
+                                                           constant: -appearance.defaultInset),
       
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.middleInset),
+                                           constant: appearance.defaultInset),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.middleInset),
+                                            constant: -appearance.defaultInset),
       
       collectionView.topAnchor.constraint(equalTo: countTeamsSegmentedControl.bottomAnchor,
-                                          constant: appearance.minimumInset),
+                                          constant: appearance.minInset),
       collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
       collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
@@ -226,7 +226,7 @@ private extension TeamsScreenView {
     collectionViewLayout.sectionInset = appearance.sectionInset
     collectionViewLayout.scrollDirection = .vertical
     collectionViewLayout.minimumInteritemSpacing = .zero
-    collectionViewLayout.minimumLineSpacing = appearance.minimumLineSpacing
+    collectionViewLayout.minimumLineSpacing = appearance.defaultInset
     collectionViewLayout.headerReferenceSize = CGSize(width: collectionView.frame.size.width,
                                                       height: appearance.collectionHeaderHeight)
     collectionViewLayout.itemSize = CGSize(width: appearance.cellWidthConstant,
@@ -249,13 +249,14 @@ private extension TeamsScreenView {
     let sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 16, right: 16)
     let cellWidthConstant: CGFloat = 90
     let estimatedRowHeight: CGFloat = 100
+    let collectionHeaderHeight: CGFloat = 32
+    
+    let minInset: CGFloat = 8
+    let defaultInset: CGFloat = 16
+    let selectedSegmentIndex = 2
+    
+    let resultLabelTitle = "?"
     let countTeams = ["1", "2", "3", "4", "5", "6"]
     let countPlayersTitle = NSLocalizedString("Количество", comment: "")
-    let middleInset: CGFloat = 16
-    let minimumInset: CGFloat = 8
-    let resultLabelTitle = "?"
-    let selectedSegmentIndex = 2
-    let minimumLineSpacing: CGFloat = 12
-    let collectionHeaderHeight: CGFloat = 32
   }
 }

@@ -12,8 +12,7 @@ import UIKit
 final class NumberScreenAssembly {
   
   /// Собирает модуль `NumberScreen`
-  /// - Parameter keyboardService: сервис клавиатуры
-  func createModule(keyboardService: KeyboardService) -> NumberScreenModule {
+  func createModule() -> NumberScreenModule {
     let view = NumberScreenView()
     let interactor = NumberScreenInteractor()
     let factory = NumberScreenFactory()
@@ -22,7 +21,6 @@ final class NumberScreenAssembly {
                                                factory: factory)
     
     view.output = presenter
-    view.keyboardService = keyboardService
     interactor.output = presenter
     factory.output = presenter
     return presenter

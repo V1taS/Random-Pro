@@ -169,11 +169,11 @@ private extension MainSettingsScreenView {
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
       tableView.bottomAnchor.constraint(equalTo: stackFeedBack.topAnchor,
-                                        constant: -Appearance().inset.bottom),
+                                        constant: -Appearance().insets.bottom),
       
       stackFeedBack.centerXAnchor.constraint(equalTo: centerXAnchor),
       stackFeedBack.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                            constant: -Appearance().inset.bottom)
+                                            constant: -Appearance().insets.bottom)
     ])
   }
   
@@ -184,11 +184,11 @@ private extension MainSettingsScreenView {
     tableView.backgroundColor = RandomColor.primaryWhite
     
     stackFeedBack.axis = .horizontal
-    stackFeedBack.spacing = appearance.stackFeedBackSpacing
+    stackFeedBack.spacing = appearance.minInset
     
     feedBackLabel.textColor = RandomColor.primaryGray
     feedBackLabel.font = RandomFont.primaryRegular16
-    feedBackLabel.text = appearance.feedbackTitle
+    feedBackLabel.text = appearance.feedbackButtonTitle
     
     feedBackButton.setTitle(appearance.telegram, for: .normal)
     feedBackButton.setTitleColor(RandomColor.primaryBlue, for: .normal)
@@ -227,10 +227,11 @@ private extension MainSettingsScreenView {
 private extension MainSettingsScreenView {
   struct Appearance {
     let estimatedRowHeight: CGFloat = 70
-    let inset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     let cornerRadius: CGFloat = 8
-    let stackFeedBackSpacing: CGFloat = 4
-    let feedbackTitle = NSLocalizedString("Обратная связь", comment: "")
+    let minInset: CGFloat = 4
+    
+    let feedbackButtonTitle = NSLocalizedString("Обратная связь", comment: "")
     let telegram = "@telegram"
   }
 }

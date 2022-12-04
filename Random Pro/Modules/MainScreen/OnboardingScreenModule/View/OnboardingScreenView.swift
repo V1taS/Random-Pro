@@ -132,26 +132,26 @@ private extension OnboardingScreenView {
     
     NSLayoutConstraint.activate([
       scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                      constant: appearance.insetLarge * 2),
+                                      constant: appearance.maxInset * 2),
       scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
       scrollView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.7),
       
       closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                       constant: appearance.insetMiddle),
+                                       constant: appearance.defaultInset),
       closeButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.insetMiddle),
+                                            constant: -appearance.defaultInset),
       
       pageIndicator.bottomAnchor.constraint(equalTo: button.topAnchor,
-                                            constant: -appearance.insetLarge),
+                                            constant: -appearance.maxInset),
       pageIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
       
       button.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                      constant: appearance.insetMiddle),
+                                      constant: appearance.defaultInset),
       button.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                       constant: -appearance.insetMiddle),
+                                       constant: -appearance.defaultInset),
       button.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                     constant: -appearance.insetMiddle),
+                                     constant: -appearance.defaultInset),
       
       stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
       stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -183,7 +183,7 @@ private extension OnboardingScreenView {
                      action: #selector(buttonAction),
                      for: .touchUpInside)
     
-    closeButton.setImage(Appearance().closeButtonIcon, for: .normal)
+    closeButton.setImage(Appearance().closeButtonImage, for: .normal)
     closeButton.addTarget(self,
                           action: #selector(closeButtonction),
                           for: .touchUpInside)
@@ -212,8 +212,9 @@ private extension OnboardingScreenView {
 
 private extension OnboardingScreenView {
   struct Appearance {
-    let insetMiddle: CGFloat = 16
-    let insetLarge: CGFloat = 24
-    let closeButtonIcon = UIImage(systemName: "xmark")
+    let defaultInset: CGFloat = 16
+    let maxInset: CGFloat = 24
+    
+    let closeButtonImage = UIImage(systemName: "xmark")
   }
 }

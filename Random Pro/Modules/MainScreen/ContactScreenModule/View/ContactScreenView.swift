@@ -52,7 +52,7 @@ final class ContactScreenView: ContactScreenViewProtocol {
   
   func setResult(_ text: String?) {
     resultLabel.text = text
-    resultLabel.zoomIn(duration: Appearance().resulDuration,
+    resultLabel.zoomIn(duration: Appearance().resultDuration,
                        transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
@@ -70,7 +70,7 @@ private extension ContactScreenView {
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
     
-    generateButton.setTitle(appearance.titleButton, for: .normal)
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
@@ -84,17 +84,17 @@ private extension ContactScreenView {
     
     NSLayoutConstraint.activate([
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.middleSpacing),
+                                           constant: appearance.defaultInset),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.middleSpacing),
+                                            constant: -appearance.defaultInset),
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleSpacing),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleSpacing),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleSpacing)
+                                             constant: -appearance.defaultInset)
     ])
   }
   
@@ -108,9 +108,10 @@ private extension ContactScreenView {
 
 extension ContactScreenView {
   struct Appearance {
+    let defaultInset: CGFloat = 16
+    let resultDuration: CGFloat = 0.2
+    
     let resultTitle = "?"
-    let titleButton = NSLocalizedString("Сгенерировать", comment: "")
-    let middleSpacing: CGFloat = 16
-    let resulDuration: CGFloat = 0.2
+    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
   }
 }

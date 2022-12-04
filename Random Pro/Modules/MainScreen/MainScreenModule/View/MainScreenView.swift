@@ -180,7 +180,7 @@ private extension MainScreenView {
     collectionView.register(MainScreenCollectionViewCell.self,
                             forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)
     
-    collectionViewLayout.sectionInset = appearance.sectionInset
+    collectionViewLayout.sectionInset = appearance.sectionInsets
     collectionViewLayout.scrollDirection = .vertical
     collectionViewLayout.minimumInteritemSpacing = .zero
     collectionViewLayout.minimumLineSpacing = .zero
@@ -198,7 +198,7 @@ private extension MainScreenView {
   struct Appearance {
     let collectionViewInsets: UIEdgeInsets = .zero
     let estimatedRowHeight: CGFloat = 95
-    let sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    let sectionInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     let cellWidthConstant = UIScreen.main.bounds.width * 0.45
   }
 }

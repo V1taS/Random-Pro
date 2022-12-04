@@ -106,7 +106,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       
       self.passwordGeneratorView.resultTextView.attributedText = result
       self.passwordGeneratorView.resultTextView.centerVerticalText()
-      self.passwordGeneratorView.resultTextView.zoomIn(duration: Appearance().resulDuration,
+      self.passwordGeneratorView.resultTextView.zoomIn(duration: Appearance().resultDuration,
                                                        transformScale: CGAffineTransform(scaleX: .zero,
                                                                                          y: .zero))
     }
@@ -207,7 +207,7 @@ private extension PasswordScreenView {
       }
     )
     
-    genarateButton.setTitle(appearance.setTextButton, for: .normal)
+    genarateButton.setTitle(appearance.buttonTitle, for: .normal)
     genarateButton.addTarget(self, action: #selector(genarateButtonAction), for: .touchUpInside)
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
@@ -230,11 +230,11 @@ private extension PasswordScreenView {
       passwordGeneratorView.bottomAnchor.constraint(equalTo: genarateButton.topAnchor),
       
       genarateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleHorizontalSpacing),
+                                              constant: appearance.defaultInset),
       genarateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleHorizontalSpacing),
+                                               constant: -appearance.defaultInset),
       genarateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSpacing)
+                                             constant: -appearance.defaultInset)
     ])
   }
   
@@ -248,14 +248,12 @@ private extension PasswordScreenView {
 
 private extension PasswordScreenView {
   struct Appearance {
-    let setTextButton = NSLocalizedString("Сгенерировать", comment: "")
-    let generatePassword = NSLocalizedString("Генератор паролей", comment: "")
-    let middleHorizontalSpacing: CGFloat = 16
-    let minVerticalInset: CGFloat = 8
-    let passwordHeightSpacing: CGFloat = 28
-    let passwordIndex: Int = 0
-    let phraseIndex: Int = 1
+    let minInset: CGFloat = 8
+    let defaultInset: CGFloat = 16
+    let maxInset: CGFloat = 28
+    let resultDuration: CGFloat = 0.2
+    
     let resultLabel = "?"
-    let resulDuration: CGFloat = 0.2
+    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
   }
 }

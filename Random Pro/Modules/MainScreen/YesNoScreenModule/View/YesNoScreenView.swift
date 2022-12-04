@@ -57,7 +57,7 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
   
   func set(result: String?) {
     resultLabel.text = result
-    resultLabel.zoomIn(duration: Appearance().resultLabelDuration,
+    resultLabel.zoomIn(duration: Appearance().resultDuration,
                        transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
   
@@ -76,7 +76,7 @@ private extension YesNoScreenView {
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
     
-    generateButton.setTitle(Appearance().setTextButton, for: .normal)
+    generateButton.setTitle(Appearance().buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
@@ -93,16 +93,16 @@ private extension YesNoScreenView {
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleHorizontalSpacing),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleHorizontalSpacing),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSpacing),
+                                             constant: -appearance.defaultInset),
       
       scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
       scrollResult.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                           constant: -appearance.lessVerticalSpacing)
+                                           constant: -appearance.minInset)
     ])
   }
   
@@ -116,10 +116,11 @@ private extension YesNoScreenView {
 
 private extension YesNoScreenView {
   struct Appearance {
-    let setTextButton = NSLocalizedString("Да или Нет", comment: "")
-    let middleHorizontalSpacing: CGFloat = 16
-    let largeVerticalSpacing: CGFloat = 24
-    let lessVerticalSpacing: CGFloat = 8
-    let resultLabelDuration: CGFloat = 0.2
+    let buttonTitle = NSLocalizedString("Да или Нет", comment: "")
+    
+    let defaultInset: CGFloat = 16
+    let maxInset: CGFloat = 24
+    let minInset: CGFloat = 8
+    let resultDuration: CGFloat = 0.2
   }
 }

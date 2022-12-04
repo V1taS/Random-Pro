@@ -106,47 +106,46 @@ private extension PasswordGeneratorView {
     
     NSLayoutConstraint.activate([
       settingOptionsLabel.topAnchor.constraint(equalTo: topAnchor,
-                                               constant: appearance.middleHorizontalSpacing),
+                                               constant: appearance.defaultSpacing),
       settingOptionsLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       
       labelsStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                               constant: appearance.middleVirticalSpacing),
+                                               constant: appearance.defaultSpacing),
       labelsStackView.topAnchor.constraint(equalTo: settingOptionsLabel.bottomAnchor,
-                                           constant: appearance.middleHorizontalSpacing),
-      labelsStackView.widthAnchor.constraint(equalToConstant: appearance.widthAnchorSpacing),
+                                           constant: appearance.defaultSpacing),
+      labelsStackView.widthAnchor.constraint(equalTo: switchersStackView.widthAnchor),
       
       switchersStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                   constant: -appearance.middleVirticalSpacing),
+                                                   constant: -appearance.defaultSpacing),
       switchersStackView.topAnchor.constraint(equalTo: settingOptionsLabel.bottomAnchor,
-                                              constant: appearance.middleHorizontalSpacing),
-      switchersStackView.widthAnchor.constraint(equalToConstant: appearance.widthAnchor),
+                                              constant: appearance.defaultSpacing),
       
       generalStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                constant: appearance.middleHorizontalSpacing),
+                                                constant: appearance.defaultSpacing),
       generalStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                 constant: -appearance.middleHorizontalSpacing),
+                                                 constant: -appearance.defaultSpacing),
       generalStackView.topAnchor.constraint(equalTo: settingOptionsLabel.bottomAnchor,
-                                            constant: appearance.middleHorizontalSpacing),
+                                            constant: appearance.defaultSpacing),
       
       passwordLengthLabel.topAnchor.constraint(equalTo: generalStackView.bottomAnchor,
-                                               constant: appearance.middleHorizontalSpacing),
+                                               constant: appearance.defaultSpacing),
       passwordLengthLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       
       textFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                  constant: appearance.middleHorizontalSpacing),
+                                                  constant: appearance.defaultSpacing),
       textFieldStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                   constant: -appearance.middleHorizontalSpacing),
+                                                   constant: -appearance.defaultSpacing),
       textFieldStackView.topAnchor.constraint(equalTo: passwordLengthLabel.bottomAnchor,
-                                              constant: appearance.middleHorizontalSpacing),
+                                              constant: appearance.defaultSpacing),
       
       resultTextView.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor,
-                                          constant: appearance.lessVerticalSpacing),
+                                          constant: appearance.minSpacing),
       resultTextView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleHorizontalSpacing),
+                                              constant: appearance.defaultSpacing),
       resultTextView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleHorizontalSpacing),
+                                               constant: -appearance.defaultSpacing),
       resultTextView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.lessVerticalSpacing)
+                                             constant: -appearance.minSpacing)
     ])
   }
   
@@ -162,7 +161,7 @@ private extension PasswordGeneratorView {
     
     labelsStackView.axis = .vertical
     labelsStackView.distribution = .fillEqually
-    labelsStackView.spacing = appearance.spacing
+    labelsStackView.spacing = appearance.defaultSpacing
     
     uppercaseLettersLabel.text = appearance.uppercase
     uppercaseLettersLabel.textColor = RandomColor.primaryGray
@@ -181,8 +180,8 @@ private extension PasswordGeneratorView {
     symbolsLabel.font = RandomFont.primaryMedium18
     
     switchersStackView.axis = .vertical
-    switchersStackView.distribution = .fillEqually
-    switchersStackView.spacing = appearance.lessVerticalSpacing
+    switchersStackView.alignment = .trailing
+    switchersStackView.spacing = appearance.minSpacing
     
     uppercaseLettersSwitch.isOn = true
     uppercaseLettersSwitch.addTarget(self,
@@ -209,7 +208,7 @@ private extension PasswordGeneratorView {
     passwordLengthLabel.font = RandomFont.primaryBold18
     
     textFieldStackView.axis = .horizontal
-    textFieldStackView.spacing = appearance.middleHorizontalSpacing
+    textFieldStackView.spacing = appearance.defaultSpacing
     textFieldStackView.distribution = .fillEqually
     
     generalStackView.axis = .horizontal
@@ -261,13 +260,11 @@ private extension PasswordGeneratorView {
     let lovercase = NSLocalizedString("Строчные буквы", comment: "")
     let numbers = NSLocalizedString("Цифры", comment: "")
     let symbols = NSLocalizedString("Символы", comment: "")
-    let spacing: CGFloat = 18
     let rangeStartValue = "9 999"
-    let middleHorizontalSpacing: CGFloat = 16
-    let lessVerticalSpacing: CGFloat = 8
-    let middleVirticalSpacing: CGFloat = 40
-    let largeVerticalSpacing: CGFloat = 26
-    let widthAnchor: CGFloat = 60
+    let defaultSpacing: CGFloat = 16
+    let minSpacing: CGFloat = 8
+    let largeSpacing: CGFloat = 40
+    let midSpacing: CGFloat = 26
     let widthAnchorSpacing: CGFloat = 200
   }
 }

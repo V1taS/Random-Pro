@@ -38,19 +38,19 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
   
   // MARK: - Private property
   
+  private let amountNumberTextField = TextFieldView()
   private let rangeStartTextField = TextFieldView()
   private let rangeEndTextField = TextFieldView()
-  private let amountNumberTextField = TextFieldView()
+
+  private let topTextFieldStackView = UIStackView()
+  private let bottomTextFieldStackView = UIStackView()
   
-  private let rangeTextFieldStackView = UIStackView()
-  private let amountNumberTextFieldStackView = UIStackView()
-  
-  private let resultLabel = UILabel()
+  private let resultTextView = UITextView()
   private let generateButton = ButtonView()
   
   private let betweenRangeLabel = UILabel()
-  private let rangeNumberLabel = UILabel()
   private let amountNumberLabel = UILabel()
+  private let rangeNumberLabel = UILabel()
   
   private let scrollResult = ScrollLabelGradientView()
   
@@ -67,6 +67,12 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    resultTextView.centerVerticalText()
+  }
+  
   // MARK: - Internal func
   
   func updateContentWith(model: LotteryScreenModel) {
@@ -75,8 +81,9 @@ final class LotteryScreenView: LotteryScreenViewProtocol {
     rangeEndTextField.text = model.rangeEndValue
     amountNumberTextField.text = model.amountValue
     
-    resultLabel.text = model.result
-    resultLabel.zoomIn(duration: Appearance().resulDuration,
+    resultTextView.text = model.result
+    resultTextView.centerVerticalText()
+    resultTextView.zoomIn(duration: Appearance().resultDuration,
                        transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
@@ -92,7 +99,7 @@ extension LotteryScreenView: UITextFieldDelegate {
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
-    if range.location >= 7 {
+    if range.location >= 3 {
       return false
     }
     return true
@@ -110,12 +117,18 @@ private extension LotteryScreenView {
     amountNumberTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
     isUserInteractionEnabled = true
     
-    resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.primaryGray
-    resultLabel.textAlignment = .center
-    resultLabel.numberOfLines = appearance.numberOfLines
-    resultLabel.adjustsFontSizeToFitWidth = true
-    resultLabel.minimumScaleFactor = appearance.minimumScaleFactor
+    resultTextView.font = RandomFont.primaryBold50
+    resultTextView.textColor = RandomColor.primaryGray
+    resultTextView.textAlignment = .center
+    resultTextView.isEditable = false
+    resultTextView.backgroundColor = RandomColor.primaryWhite
+    
+    let padding = resultTextView.textContainer.lineFragmentPadding
+    resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,
+                                                      left: -padding,
+                                                      bottom: .zero,
+                                                      right: -padding)
+    resultTextView.centerVerticalText()
     
     rangeStartTextField.placeholder = appearance.startPlaceholder
     rangeStartTextField.keyboardType = .numberPad
@@ -125,17 +138,17 @@ private extension LotteryScreenView {
     rangeEndTextField.keyboardType = .numberPad
     rangeEndTextField.delegate = self
     
-    rangeTextFieldStackView.axis = .horizontal
-    rangeTextFieldStackView.spacing = appearance.spasing
-    rangeTextFieldStackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+    bottomTextFieldStackView.axis = .horizontal
+    bottomTextFieldStackView.spacing = appearance.minInset
+    bottomTextFieldStackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
     
-    amountNumberTextFieldStackView.axis = .horizontal
-    amountNumberTextFieldStackView.spacing = appearance.spasing
+    topTextFieldStackView.axis = .horizontal
+    topTextFieldStackView.spacing = appearance.minInset
     
     amountNumberTextField.setContentHuggingPriority(.defaultLow, for: .horizontal)
     amountNumberLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     
-    generateButton.setTitle(appearance.textButton, for: .normal)
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
     amountNumberLabel.textColor = RandomColor.primaryGray
@@ -153,7 +166,7 @@ private extension LotteryScreenView {
     
     betweenRangeLabel.font = RandomFont.primaryMedium18
     betweenRangeLabel.textColor = RandomColor.primaryGray
-    betweenRangeLabel.text = appearance.dashBetween
+    betweenRangeLabel.text = appearance.separatorTitle
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
@@ -163,60 +176,59 @@ private extension LotteryScreenView {
   func setupConstraints() {
     let appearance = Appearance()
     
-    [amountNumberTextFieldStackView, rangeTextFieldStackView,
-     resultLabel, scrollResult, generateButton].forEach {
+    [topTextFieldStackView, bottomTextFieldStackView,
+     resultTextView, scrollResult, generateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     [amountNumberLabel, amountNumberTextField].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
-      amountNumberTextFieldStackView.addArrangedSubview($0)
+      topTextFieldStackView.addArrangedSubview($0)
     }
     
     [rangeNumberLabel, rangeStartTextField, betweenRangeLabel, rangeEndTextField].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
-      rangeTextFieldStackView.addArrangedSubview($0)
+      bottomTextFieldStackView.addArrangedSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      scrollResult.heightAnchor.constraint(equalToConstant: appearance.scrollResultHeight),
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.middleHorizontalSize),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.middleHorizontalSize),
-      resultLabel.topAnchor.constraint(equalTo: rangeTextFieldStackView.bottomAnchor,
-                                       constant: appearance.middleHorizontalSize),
-      resultLabel.bottomAnchor.constraint(equalTo: scrollResult.topAnchor,
-                                          constant: -appearance.middleHorizontalSize),
+      topTextFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                              constant: appearance.defaultInset),
+      topTextFieldStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                                          constant: appearance.defaultInset),
+      topTextFieldStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                               constant: -appearance.defaultInset),
+      
+      bottomTextFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                       constant: appearance.defaultInset),
+      bottomTextFieldStackView.topAnchor.constraint(equalTo: topTextFieldStackView.bottomAnchor,
+                                                   constant: appearance.defaultInset),
+      bottomTextFieldStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                         constant: -appearance.defaultInset),
+      
+      resultTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.defaultInset),
+      resultTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.defaultInset),
+      resultTextView.topAnchor.constraint(equalTo: bottomTextFieldStackView.bottomAnchor,
+                                       constant: appearance.defaultInset),
+      resultTextView.bottomAnchor.constraint(equalTo: scrollResult.topAnchor,
+                                          constant: -appearance.defaultInset),
       
       rangeStartTextField.widthAnchor.constraint(equalTo: rangeEndTextField.widthAnchor),
-      betweenRangeLabel.widthAnchor.constraint(equalToConstant: appearance.lesswidthAnchorSize),
-      amountNumberLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: appearance.widthAnchorSize),
-      rangeNumberLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: appearance.widthAnchorSize),
+      betweenRangeLabel.widthAnchor.constraint(equalToConstant: appearance.defaultInset),
+      amountNumberLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: appearance.minWidthLabel),
+      rangeNumberLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: appearance.minWidthLabel),
       
       scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
       scrollResult.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                           constant: -appearance.lessVerticalSpacing),
+                                           constant: -appearance.minInset),
       
-      generateButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.middleHorizontalSize),
+      generateButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleHorizontalSize),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSize),
-      
-      amountNumberTextFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                              constant: appearance.middleHorizontalSize),
-      amountNumberTextFieldStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                                          constant: appearance.middleHorizontalSize),
-      amountNumberTextFieldStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                               constant: -appearance.middleHorizontalSize),
-      
-      rangeTextFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                       constant: appearance.middleHorizontalSize),
-      rangeTextFieldStackView.topAnchor.constraint(equalTo: amountNumberTextFieldStackView.bottomAnchor,
-                                                   constant: appearance.middleHorizontalSize),
-      rangeTextFieldStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                        constant: -appearance.middleHorizontalSize)
+                                             constant: -appearance.defaultInset)
     ])
   }
   
@@ -233,20 +245,19 @@ private extension LotteryScreenView {
 private extension LotteryScreenView {
   struct Appearance {
     let startPlaceholder = "1"
+    let separatorTitle = " - "
     let endPlaceholder = "100"
-    let spasing: CGFloat = 8
-    let textButton = NSLocalizedString("Сгенерировать", comment: "")
+    
+    let minInset: CGFloat = 8
+    let defaultInset: CGFloat = 16
+    let maxInset: CGFloat = 24
+    
+    let resultNumberOfLines: Int = 5
+    let resultDuration: CGFloat = 0.2
+    let minWidthLabel: CGFloat = 112
+
+    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
     let textRangeLabel = NSLocalizedString("Диапазон", comment: "")
     let textAmountLabel = NSLocalizedString("Количество", comment: "")
-    let dashBetween = " - "
-    let middleHorizontalSize: CGFloat = 16
-    let largeVerticalSpacing: CGFloat = 24
-    let widthAnchorSize: CGFloat = 112
-    let lesswidthAnchorSize: CGFloat = 12
-    let numberOfLines: Int = 5
-    let minimumScaleFactor: CGFloat = 0.3
-    let lessVerticalSpacing: CGFloat = 8
-    let scrollResultHeight: CGFloat = 30
-    let resulDuration: CGFloat = 0.2
   }
 }

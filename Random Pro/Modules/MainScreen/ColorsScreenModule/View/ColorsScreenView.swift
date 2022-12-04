@@ -69,7 +69,7 @@ private extension ColorsScreenView {
     NSLayoutConstraint.activate([
       colorsSegmentedControl.centerXAnchor.constraint(equalTo: centerXAnchor),
       colorsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                                  constant: appearance.middleInset),
+                                                  constant: appearance.defaultInset),
       
       contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
       contentView.topAnchor.constraint(equalTo: topAnchor),
@@ -80,11 +80,11 @@ private extension ColorsScreenView {
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleInset),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleInset),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleInset)
+                                             constant: -appearance.defaultInset)
     ])
   }
   
@@ -110,13 +110,18 @@ private extension ColorsScreenView {
   
   func showPlugView() {
     resultLabel.isHidden = false
-    contentView.applyGradient(colors: [RandomColor.primaryWhite])
+    UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
+      guard let self = self else {
+        return
+      }
+      self.contentView.applyGradient(colors: [RandomColor.primaryWhite])
+    }
   }
   
   func hidePlugViewWith(colors: [UIColor]) {
     resultLabel.isHidden = true
     
-    UIView.animate(withDuration: Appearance().resulDuration) { [weak self] in
+    UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
       guard let self = self else {
         return
       }
@@ -159,15 +164,16 @@ private extension ColorsScreenView {
 
 private extension ColorsScreenView {
   struct Appearance {
+    let defaultInset: CGFloat = 16
+    let maxInset: CGFloat = 24
+    let resultLabelNumberOfLines = 1
+    let resultDuration: CGFloat = 0.2
+    
+    let resultLabelTitle = "?"
+    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
     let countColors = [
       NSLocalizedString("Градиент", comment: ""),
       NSLocalizedString("Обычный", comment: "")
     ]
-    let middleInset: CGFloat = 16
-    let largeInset: CGFloat = 24
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
-    let resultLabelTitle = "?"
-    let resultLabelNumberOfLines = 1
-    let resulDuration: CGFloat = 0.2
   }
 }

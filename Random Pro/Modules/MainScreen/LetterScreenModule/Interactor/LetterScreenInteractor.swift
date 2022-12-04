@@ -94,8 +94,8 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
     if model.isEnabledWithoutRepetition {
       guard let newModel = generateContentWithoutRepetitionWith(
         model: model,
-        listLetter: appearance.listRussionLetter,
-        languageIndexSegmented: appearance.rusControl
+        listLetter: appearance.listRussionLetters,
+        languageIndexSegmented: appearance.russionCharacterIndex
       ) else {
         configureModel()
         return
@@ -104,8 +104,8 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
       output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
-                                           listLetter: Appearance().listRussionLetter,
-                                           languageIndexSegmented: appearance.rusControl)
+                                           listLetter: Appearance().listRussionLetters,
+                                           languageIndexSegmented: appearance.russionCharacterIndex)
       self.model = newModel
       output?.didReceive(model: newModel)
     }
@@ -122,8 +122,8 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
     if model.isEnabledWithoutRepetition {
       guard let newModel = generateContentWithoutRepetitionWith(
         model: model,
-        listLetter: appearance.listEnglishLetter,
-        languageIndexSegmented: appearance.engControl
+        listLetter: appearance.listEnglishLetters,
+        languageIndexSegmented: appearance.englishCharacterIndex
       ) else {
         assertionFailure("Неудалось получить модель")
         configureModel()
@@ -133,8 +133,8 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
       output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
-                                           listLetter: Appearance().listEnglishLetter,
-                                           languageIndexSegmented: appearance.engControl)
+                                           listLetter: Appearance().listEnglishLetters,
+                                           languageIndexSegmented: appearance.englishCharacterIndex)
       self.model = newModel
       output?.didReceive(model: newModel)
     }
@@ -161,7 +161,7 @@ private extension LetterScreenInteractor {
         result: appearance.result,
         listResult: [],
         isEnabledWithoutRepetition: isOn,
-        languageIndexSegmented: appearance.rusControl
+        languageIndexSegmented: appearance.russionCharacterIndex
       )
       self.model = model
       output?.didReceive(model: model)
@@ -213,16 +213,16 @@ private extension LetterScreenInteractor {
 private extension LetterScreenInteractor {
   struct Appearance {
     let result = "?"
-    let listRussionLetter = [
+    let listRussionLetters = [
       "А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т",
       "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"
     ]
-    let listEnglishLetter = [
+    let listEnglishLetters = [
       "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
       "U", "V", "W", "X", "Y", "Z"
     ]
     let keyUserDefaults = "letter_screen_user_defaults_key"
-    let rusControl: Int = 0
-    let engControl: Int = 1
+    let russionCharacterIndex: Int = 0
+    let englishCharacterIndex: Int = 1
   }
 }

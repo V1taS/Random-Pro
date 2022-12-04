@@ -44,8 +44,8 @@ final class DateTimeView: DateTimeViewProtocol {
   private let resultLabel = UILabel()
   private let scrollResult = ScrollLabelGradientView()
   
-  private let buttonStackViewOne = UIStackView()
-  private let buttonStackViewTwo = UIStackView()
+  private let buttonsTopStackView = UIStackView()
+  private let buttonsBottomStackView = UIStackView()
   private let generateButtonDay = ButtonView()
   private let generateButtonDate = ButtonView()
   private let generateButtonTime = ButtonView()
@@ -70,7 +70,7 @@ final class DateTimeView: DateTimeViewProtocol {
     scrollResult.listLabels = model.listResult
     
     resultLabel.text = model.result
-    resultLabel.zoomIn(duration: Appearance().resulDuration,
+    resultLabel.zoomIn(duration: Appearance().resultDuration,
                        transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
@@ -88,25 +88,25 @@ private extension DateTimeView {
     resultLabel.textColor = RandomColor.primaryGray
     resultLabel.textAlignment = .center
     
-    generateButtonDay.setTitle(appearance.textButtonDay, for: .normal)
+    generateButtonDay.setTitle(appearance.textButtonDayTitle, for: .normal)
     generateButtonDay.addTarget(self, action: #selector(generateButtonDayAction), for: .touchUpInside)
     
-    generateButtonDate.setTitle(appearance.textButtonDate, for: .normal)
+    generateButtonDate.setTitle(appearance.textButtonDateTitle, for: .normal)
     generateButtonDate.addTarget(self, action: #selector(generateButtonDateAction), for: .touchUpInside)
     
-    generateButtonTime.setTitle(appearance.textButtomTime, for: .normal)
+    generateButtonTime.setTitle(appearance.textButtomTimeTitle, for: .normal)
     generateButtonTime.addTarget(self, action: #selector(generateButtonTimeAction), for: .touchUpInside)
     
-    generateButtonMonth.setTitle(appearance.textButtonMonth, for: .normal)
+    generateButtonMonth.setTitle(appearance.textButtonMonthTitle, for: .normal)
     generateButtonMonth.addTarget(self, action: #selector(generateButtonMonthAction), for: .touchUpInside)
     
-    buttonStackViewOne.axis = .horizontal
-    buttonStackViewOne.distribution = .fillEqually
-    buttonStackViewOne.spacing = appearance.lessHorizontalSpacing
+    buttonsTopStackView.axis = .horizontal
+    buttonsTopStackView.distribution = .fillEqually
+    buttonsTopStackView.spacing = appearance.defaultInset
     
-    buttonStackViewTwo.axis = .horizontal
-    buttonStackViewTwo.distribution = .fillEqually
-    buttonStackViewTwo.spacing = appearance.lessHorizontalSpacing
+    buttonsBottomStackView.axis = .horizontal
+    buttonsBottomStackView.distribution = .fillEqually
+    buttonsBottomStackView.spacing = appearance.defaultInset
   }
   
   func setupConstraints() {
@@ -114,15 +114,15 @@ private extension DateTimeView {
     
     [generateButtonDay, generateButtonTime].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
-      buttonStackViewOne.addArrangedSubview($0)
+      buttonsTopStackView.addArrangedSubview($0)
     }
     
     [generateButtonDate, generateButtonMonth].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
-      buttonStackViewTwo.addArrangedSubview($0)
+      buttonsBottomStackView.addArrangedSubview($0)
     }
     
-    [resultLabel, scrollResult, buttonStackViewOne, buttonStackViewTwo].forEach {
+    [resultLabel, scrollResult, buttonsTopStackView, buttonsBottomStackView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -130,28 +130,28 @@ private extension DateTimeView {
     NSLayoutConstraint.activate([
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.middleHorizontalSpacing),
+                                           constant: appearance.defaultInset),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.middleHorizontalSpacing),
+                                            constant: -appearance.defaultInset),
       
-      buttonStackViewOne.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                  constant: appearance.middleHorizontalSpacing),
-      buttonStackViewOne.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                   constant: -appearance.middleHorizontalSpacing),
-      buttonStackViewOne.bottomAnchor.constraint(equalTo: buttonStackViewTwo.topAnchor,
-                                                 constant: -appearance.lessHorizontalSpacing),
+      buttonsTopStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                   constant: appearance.defaultInset),
+      buttonsTopStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                    constant: -appearance.defaultInset),
+      buttonsTopStackView.bottomAnchor.constraint(equalTo: buttonsBottomStackView.topAnchor,
+                                                  constant: -appearance.defaultInset),
       
-      buttonStackViewTwo.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                  constant: appearance.middleHorizontalSpacing),
-      buttonStackViewTwo.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                   constant: -appearance.middleHorizontalSpacing),
-      buttonStackViewTwo.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                                 constant: -appearance.middleHorizontalSpacing),
+      buttonsBottomStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                      constant: appearance.defaultInset),
+      buttonsBottomStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                       constant: -appearance.defaultInset),
+      buttonsBottomStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                     constant: -appearance.defaultInset),
       
       scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
-      scrollResult.bottomAnchor.constraint(equalTo: buttonStackViewOne.topAnchor,
-                                           constant: -appearance.spasing)
+      scrollResult.bottomAnchor.constraint(equalTo: buttonsTopStackView.topAnchor,
+                                           constant: -appearance.minInset)
     ])
   }
   
@@ -180,13 +180,13 @@ private extension DateTimeView {
 
 private extension DateTimeView {
   struct Appearance {
-    let textButtonDay = NSLocalizedString("День", comment: "")
-    let textButtonDate = NSLocalizedString("Дата", comment: "")
-    let textButtomTime = NSLocalizedString("Время", comment: "")
-    let textButtonMonth = NSLocalizedString("Месяц", comment: "")
-    let middleHorizontalSpacing: CGFloat = 16
-    let lessHorizontalSpacing: CGFloat = 16
-    let spasing: CGFloat = 8
-    let resulDuration: CGFloat = 0.2
+    let textButtonDayTitle = NSLocalizedString("День", comment: "")
+    let textButtonDateTitle = NSLocalizedString("Дата", comment: "")
+    let textButtomTimeTitle = NSLocalizedString("Время", comment: "")
+    let textButtonMonthTitle = NSLocalizedString("Месяц", comment: "")
+    
+    let defaultInset: CGFloat = 16
+    let minInset: CGFloat = 8
+    let resultDuration: CGFloat = 0.2
   }
 }

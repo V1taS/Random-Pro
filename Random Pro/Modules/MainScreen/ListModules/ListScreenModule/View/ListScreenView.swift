@@ -61,7 +61,7 @@ final class ListScreenView: ListScreenViewProtocol {
   func updateContentWith(text: String?) {
     resultTextView.text = text
     resultTextView.centerVerticalText()
-    resultTextView.zoomIn(duration: Appearance().resulDuration,
+    resultTextView.zoomIn(duration: Appearance().resultDuration,
                           transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
@@ -86,7 +86,7 @@ private extension ListScreenView {
                                                       right: -padding)
     resultTextView.centerVerticalText()
     
-    generateButton.setTitle(appearance.titleButton, for: .normal)
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
@@ -105,20 +105,20 @@ private extension ListScreenView {
     
     NSLayoutConstraint.activate([
       resultTextView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.mediumSpasing),
+                                              constant: appearance.defaultInset),
       resultTextView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.mediumSpasing),
+                                               constant: -appearance.defaultInset),
       resultTextView.topAnchor.constraint(equalTo: topAnchor,
-                                          constant: appearance.mediumSpasing),
+                                          constant: appearance.defaultInset),
       resultTextView.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                             constant: -appearance.mediumSpasing),
+                                             constant: -appearance.defaultInset),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.mediumSpasing),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.mediumSpasing),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.mediumSpasing)
+                                             constant: -appearance.defaultInset)
     ])
   }
 }
@@ -127,8 +127,9 @@ private extension ListScreenView {
 
 private extension ListScreenView {
   struct Appearance {
-    let titleButton = NSLocalizedString("Сгенерировать", comment: "")
-    let mediumSpasing: CGFloat = 16
-    let resulDuration: CGFloat = 0.2
+    let defaultInset: CGFloat = 16
+    let resultDuration: CGFloat = 0.2
+    
+    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
   }
 }

@@ -58,26 +58,16 @@ final class NumberScreenView: NumberScreenViewProtocol {
   
   weak var output: NumberScreenViewOutput?
   
-  var keyboardService: KeyboardService? {
-    didSet {
-      keyboardService?.keyboardHeightChangeAction = { [weak self] keyboardHeight in
-        self?.scrollView.contentInset = UIEdgeInsets(top: .zero,
-                                                     left: .zero,
-                                                     bottom: keyboardHeight,
-                                                     right: .zero)
-      }
-    }
-  }
-  
   private let rangeStartTextField = TextFieldView()
   private let rangeEndTextField = TextFieldView()
   private let textFieldStackView = UIStackView()
+  
+  private let rangeStartLabel = UILabel()
+  private let rangeEndLabel = UILabel()
+  
   private let resultLabel = UILabel()
   private let scrollResultView = ScrollLabelGradientView()
   private let generateButton = ButtonView()
-  
-  private let scrollView = UIScrollView()
-  private let contentView = UIView()
   
   // MARK: - Initialization
   
@@ -96,7 +86,7 @@ final class NumberScreenView: NumberScreenViewProtocol {
   
   func set(result: String?) {
     resultLabel.text = result
-    resultLabel.zoomIn(duration: Appearance().resultLabelDuration,
+    resultLabel.zoomIn(duration: Appearance().resultDuration,
                        transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
   
@@ -155,11 +145,11 @@ private extension NumberScreenView {
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
     
-    generateButton.setTitle(appearance.setTextButton, for: .normal)
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
     textFieldStackView.axis = .horizontal
-    textFieldStackView.spacing = appearance.spacing
+    textFieldStackView.spacing = appearance.stackInset
     textFieldStackView.distribution = .fillEqually
     
     rangeStartTextField.placeholder = appearance.rangeStartValue
@@ -170,6 +160,14 @@ private extension NumberScreenView {
     rangeEndTextField.delegate = self
     rangeEndTextField.keyboardType = .numberPad
     
+    rangeStartLabel.text = appearance.min
+    rangeStartLabel.textColor = RandomColor.primaryGray
+    rangeStartLabel.font = RandomFont.primaryMedium18
+    
+    rangeEndLabel.text = appearance.max
+    rangeEndLabel.textColor = RandomColor.primaryGray
+    rangeEndLabel.font = RandomFont.primaryMedium18
+    
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
@@ -179,19 +177,9 @@ private extension NumberScreenView {
   func setupConstraints() {
     let appearance = Appearance()
     
-    [scrollView].forEach {
+    [textFieldStackView, resultLabel, scrollResultView, generateButton, rangeStartLabel, rangeEndLabel].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
-    }
-    
-    [contentView].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      scrollView.addSubview($0)
-    }
-    
-    [textFieldStackView, resultLabel, scrollResultView, generateButton].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-      contentView.addSubview($0)
     }
     
     [rangeStartTextField, rangeEndTextField].forEach {
@@ -199,42 +187,38 @@ private extension NumberScreenView {
     }
     
     NSLayoutConstraint.activate([
-      scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      scrollView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      scrollView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+      rangeStartLabel.centerXAnchor.constraint(equalTo: rangeStartTextField.centerXAnchor),
+      rangeStartLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                           constant: appearance.defaultInset),
       
-      contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-      contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-      contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-      contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-      contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-      contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
+      rangeEndLabel.centerXAnchor.constraint(equalTo: rangeEndTextField.centerXAnchor),
+      rangeEndLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                         constant: appearance.defaultInset),
       
-      resultLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+      textFieldStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                  constant: appearance.defaultInset),
+      textFieldStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                   constant: -appearance.defaultInset),
+      textFieldStackView.topAnchor.constraint(equalTo: rangeStartLabel.bottomAnchor,
+                                              constant: appearance.minInset),
+      
+      resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.middleHorizontalSpacing),
+                                           constant: appearance.defaultInset),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.middleHorizontalSpacing),
-      
-      generateButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                              constant: appearance.middleHorizontalSpacing),
-      generateButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                               constant: -appearance.middleHorizontalSpacing),
-      generateButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                             constant: -appearance.middleHorizontalSpacing),
+                                            constant: -appearance.defaultInset),
       
       scrollResultView.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                               constant: -appearance.lessVerticalSpacing),
-      scrollResultView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-      scrollResultView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+                                               constant: -appearance.minInset),
+      scrollResultView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      scrollResultView.trailingAnchor.constraint(equalTo: trailingAnchor),
       
-      textFieldStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                                  constant: appearance.middleHorizontalSpacing),
-      textFieldStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                   constant: -appearance.middleHorizontalSpacing),
-      textFieldStackView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                              constant: appearance.middleVirticalSpacing)
+      generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: appearance.defaultInset),
+      generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -appearance.defaultInset),
+      generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                             constant: -appearance.defaultInset)
     ])
   }
   
@@ -249,14 +233,18 @@ private extension NumberScreenView {
 
 private extension NumberScreenView {
   struct Appearance {
-    let setTextButton = NSLocalizedString("Сгенерировать", comment: "")
-    let spacing: CGFloat = 28
     let rangeStartValue = "1"
     let rangeEndValue = "999 999 999"
-    let middleHorizontalSpacing: CGFloat = 16
-    let lessVerticalSpacing: CGFloat = 8
-    let middleVirticalSpacing: CGFloat = 12
-    let largeVerticalSpacing: CGFloat = 24
-    let resultLabelDuration: CGFloat = 0.2
+    
+    let stackInset: CGFloat = 28
+    let defaultInset: CGFloat = 16
+    let minInset: CGFloat = 8
+    let midInset: CGFloat = 12
+    let maxInset: CGFloat = 24
+    let resultDuration: CGFloat = 0.2
+    
+    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let min = NSLocalizedString("Мин", comment: "")
+    let max = NSLocalizedString("Макс", comment: "")
   }
 }

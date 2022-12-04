@@ -51,10 +51,10 @@ final class BottleScreenView: BottleScreenViewProtocol {
     let appearance = Appearance()
     
     backgroundColor = RandomColor.primaryWhite
-
-    bottleImageView.image = appearance.nameBottleImage
-   
-    generateButton.setTitle(appearance.setTextButton, for: .normal)
+    
+    bottleImageView.image = appearance.bottleImage
+    
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
@@ -72,11 +72,11 @@ final class BottleScreenView: BottleScreenViewProtocol {
     
     NSLayoutConstraint.activate([
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.middleSize),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.middleSize),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.middleSize),
+                                             constant: -appearance.defaultInset),
       
       bottleImageView.heightAnchor.constraint(equalToConstant: 180),
       bottleImageView.widthAnchor.constraint(equalToConstant: 60),
@@ -90,8 +90,8 @@ final class BottleScreenView: BottleScreenViewProtocol {
 
 private extension BottleScreenView {
   struct Appearance {
-    let setTextButton = NSLocalizedString("Крутить бутылочку", comment: "")
-    let middleSize: CGFloat = 16
-    let nameBottleImage = UIImage(named: "Bottle")
+    let buttonTitle = NSLocalizedString("Крутить бутылочку", comment: "")
+    let defaultInset: CGFloat = 16
+    let bottleImage = UIImage(named: "Bottle")
   }
 }

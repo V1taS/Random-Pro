@@ -96,6 +96,8 @@ final class NumberScreenView: NumberScreenViewProtocol {
   
   func set(result: String?) {
     resultLabel.text = result
+    resultLabel.zoomIn(duration: Appearance().resultLabelDuration,
+                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
   
   func set(listResult: [String]) {
@@ -255,5 +257,6 @@ private extension NumberScreenView {
     let lessVerticalSpacing: CGFloat = 8
     let middleVirticalSpacing: CGFloat = 12
     let largeVerticalSpacing: CGFloat = 24
+    let resultLabelDuration: CGFloat = 0.2
   }
 }

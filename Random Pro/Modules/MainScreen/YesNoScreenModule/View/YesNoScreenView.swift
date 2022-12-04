@@ -57,6 +57,8 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
   
   func set(result: String?) {
     resultLabel.text = result
+    resultLabel.zoomIn(duration: Appearance().resultLabelDuration,
+                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
   
   func set(listResult: [String]) {
@@ -118,5 +120,6 @@ private extension YesNoScreenView {
     let middleHorizontalSpacing: CGFloat = 16
     let largeVerticalSpacing: CGFloat = 24
     let lessVerticalSpacing: CGFloat = 8
+    let resultLabelDuration: CGFloat = 0.2
   }
 }

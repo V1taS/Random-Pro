@@ -115,7 +115,14 @@ private extension ColorsScreenView {
   
   func hidePlugViewWith(colors: [UIColor]) {
     resultLabel.isHidden = true
-    contentView.applyGradient(colors: colors)
+    
+    UIView.animate(withDuration: Appearance().resulDuration) { [weak self] in
+      guard let self = self else {
+        return
+      }
+      
+      self.contentView.applyGradient(colors: colors)
+    }
   }
   
   @objc
@@ -161,5 +168,6 @@ private extension ColorsScreenView {
     let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
     let resultLabelTitle = "?"
     let resultLabelNumberOfLines = 1
+    let resulDuration: CGFloat = 0.2
   }
 }

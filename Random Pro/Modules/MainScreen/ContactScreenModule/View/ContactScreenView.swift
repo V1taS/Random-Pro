@@ -52,6 +52,8 @@ final class ContactScreenView: ContactScreenViewProtocol {
   
   func setResult(_ text: String?) {
     resultLabel.text = text
+    resultLabel.zoomIn(duration: Appearance().resulDuration,
+                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
 
@@ -109,5 +111,6 @@ extension ContactScreenView {
     let resultTitle = "?"
     let titleButton = NSLocalizedString("Сгенерировать", comment: "")
     let middleSpacing: CGFloat = 16
+    let resulDuration: CGFloat = 0.2
   }
 }

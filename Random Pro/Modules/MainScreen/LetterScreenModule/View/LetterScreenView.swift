@@ -56,9 +56,12 @@ final class LetterScreenView: LetterScreenViewProtocol {
   // MARK: - Internal func
   
   func updateContentWith(model: LetterScreenModel) {
-    resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
     letterSegmentedControl.selectedSegmentIndex = model.languageIndexSegmented
+    
+    resultLabel.text = model.result
+    resultLabel.zoomIn(duration: Appearance().resultLabelDuration,
+                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
 
@@ -142,5 +145,6 @@ private extension LetterScreenView {
     let highVirticalSize: CGFloat = 24
     let engControl: Int = 1
     let rusControl: Int = 0
+    let resultLabelDuration: CGFloat = 0.2
   }
 }

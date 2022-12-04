@@ -373,7 +373,7 @@ private extension PasswordScreenInteractor {
   struct Appearance {
     let withoutSpaces = " "
     let resultLabel = "?"
-    let passwordLength = "20"
+    let passwordLength = "100"
     let keyUserDefaults = "password_screen_user_defaults_key"
   }
 }

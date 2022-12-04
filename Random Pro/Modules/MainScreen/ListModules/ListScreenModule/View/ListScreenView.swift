@@ -50,10 +50,19 @@ final class ListScreenView: ListScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    resultTextView.centerVerticalText()
+  }
+  
   // MARK: - Internal func
   
   func updateContentWith(text: String?) {
     resultTextView.text = text
+    resultTextView.centerVerticalText()
+    resultTextView.zoomIn(duration: Appearance().resulDuration,
+                          transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
 
@@ -75,6 +84,7 @@ private extension ListScreenView {
                                                       left: -padding,
                                                       bottom: .zero,
                                                       right: -padding)
+    resultTextView.centerVerticalText()
     
     generateButton.setTitle(appearance.titleButton, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
@@ -119,5 +129,6 @@ private extension ListScreenView {
   struct Appearance {
     let titleButton = NSLocalizedString("Сгенерировать", comment: "")
     let mediumSpasing: CGFloat = 16
+    let resulDuration: CGFloat = 0.2
   }
 }

@@ -67,8 +67,11 @@ final class DateTimeView: DateTimeViewProtocol {
   // MARK: - Internal func
   
   func updateContentWith(model: DateTimeScreenModel) {
-    resultLabel.text = model.result
     scrollResult.listLabels = model.listResult
+    
+    resultLabel.text = model.result
+    resultLabel.zoomIn(duration: Appearance().resulDuration,
+                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
 }
 
@@ -184,5 +187,6 @@ private extension DateTimeView {
     let middleHorizontalSpacing: CGFloat = 16
     let lessHorizontalSpacing: CGFloat = 16
     let spasing: CGFloat = 8
+    let resulDuration: CGFloat = 0.2
   }
 }

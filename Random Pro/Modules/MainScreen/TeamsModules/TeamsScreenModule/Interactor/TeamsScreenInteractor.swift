@@ -104,7 +104,7 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
       output?.didReceive(model: model)
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
-                                   allPlayers: [],
+                                   allPlayers: generateFakePlayers(),
                                    teams: [])
       self.model = model
       output?.didReceiveEmptyListTeams()
@@ -121,7 +121,7 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
       self.model = newModel
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
-                                   allPlayers: [],
+                                   allPlayers: generateFakePlayers(),
                                    teams: [])
       self.model = model
     }
@@ -191,11 +191,66 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
 }
 
+// MARK: - Private
+
+private extension TeamsScreenInteractor {
+  func generateFakePlayers() -> [TeamsScreenPlayerModel] {
+    let secondStartApp = UserDefaults.standard.bool(forKey: Appearance().keySecondStartApp)
+    
+    guard !secondStartApp else {
+      return []
+    }
+    UserDefaults.standard.set(true, forKey: Appearance().keySecondStartApp)
+    
+    return (1...16).map {
+      let appearance = Appearance()
+      if $0.isMultiple(of: 3) {
+        let emojiList = ["🔥", "⭐️", "⚽️", "🤑"].shuffled()
+        return TeamsScreenPlayerModel(id: UUID().uuidString,
+                                      name: "\(appearance.player) - \($0)",
+                                      avatar: generationImagePlayer(),
+                                      emoji: emojiList.first,
+                                      state: .teamTwo)
+      } else if $0.isMultiple(of: 16) {
+        return TeamsScreenPlayerModel(id: UUID().uuidString,
+                                      name: "\(appearance.player) - \($0)",
+                                      avatar: generationImagePlayer(),
+                                      emoji: "🔴",
+                                      state: .doesNotPlay)
+      } else {
+        return TeamsScreenPlayerModel(id: UUID().uuidString,
+                                      name: "\(appearance.player) - \($0)",
+                                      avatar: generationImagePlayer(),
+                                      emoji: nil,
+                                      state: .random)
+      }
+    }
+  }
+  
+  func generationImagePlayer() -> Data? {
+    let appearance = Appearance()
+    let genderRandom = Int.random(in: 0...1)
+    
+    if genderRandom == .zero {
+      let randomNumberPlayers = Int.random(in: appearance.rangeImageMalePlayer)
+      return (UIImage(named: "male_player\(randomNumberPlayers)") ?? UIImage()).pngData()
+    } else {
+      let randomNumberPlayers = Int.random(in: appearance.rangeImageFemalePlayer)
+      return (UIImage(named: "female_player\(randomNumberPlayers)") ?? UIImage()).pngData()
+    }
+  }
+}
+
 // MARK: - Appearance
 
 private extension TeamsScreenInteractor {
   struct Appearance {
-    let selectedTeamDefault = 2
+    let selectedTeamDefault = 3
+    let rangeImageMalePlayer = 1...15
+    let rangeImageFemalePlayer = 1...21
+    let player = NSLocalizedString("Игрок", comment: "")
+    
     let keyUserDefaults = "team_screen_user_defaults_key"
+    let keySecondStartApp = "team_screen_second_start_app_key"
   }
 }

@@ -254,7 +254,7 @@ private extension TeamsScreenView {
     let middleInset: CGFloat = 16
     let minimumInset: CGFloat = 8
     let resultLabelTitle = "?"
-    let selectedSegmentIndex = 1
+    let selectedSegmentIndex = 2
     let minimumLineSpacing: CGFloat = 12
     let collectionHeaderHeight: CGFloat = 32
   }

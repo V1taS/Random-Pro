@@ -69,7 +69,14 @@ final class ListScreenInteractor: ListScreenInteractorInput {
     if let model = model {
       output?.didReceiveModel(model)
     } else {
-      let newModel = Appearance().defaultModel
+      let newModel = ListScreenModel(
+        withoutRepetition: true,
+        allItems: generateFakeItems(),
+        tempUniqueItems: [],
+        generetionItems: [],
+        result: Appearance().result
+      )
+      
       self.model = newModel
       output?.didReceiveModel(newModel)
     }
@@ -79,7 +86,13 @@ final class ListScreenInteractor: ListScreenInteractorInput {
     if let model = model {
       return model
     } else {
-      return Appearance().defaultModel
+      return ListScreenModel(
+        withoutRepetition: true,
+        allItems: generateFakeItems(),
+        tempUniqueItems: [],
+        generetionItems: [],
+        result: Appearance().result
+      )
     }
   }
   
@@ -197,17 +210,44 @@ private extension Array where Element: Hashable {
   }
 }
 
+// MARK: - Private
+
+private extension ListScreenInteractor {
+  func generateFakeItems() -> [ListScreenModel.TextModel] {
+    let secondStartApp = UserDefaults.standard.bool(forKey: Appearance().keySecondStartApp)
+    let appearance = Appearance()
+    guard !secondStartApp else {
+      return []
+    }
+    UserDefaults.standard.set(true, forKey: Appearance().keySecondStartApp)
+    
+    let fakeList: [String] = [
+      "\(appearance.football) ⚽️",
+      "\(appearance.cleaning) 🧼",
+      "\(appearance.walk) 🏃🏼‍♀️",
+      "\(appearance.goOnDate) 🥰",
+      "\(appearance.callYourParents) 🤳🏼"
+    ]
+    
+    return fakeList.map {
+      return ListScreenModel.TextModel(id: UUID().uuidString,
+                                       text: $0)
+    }
+  }
+}
+
 // MARK: - Appearance
 
 private extension ListScreenInteractor {
   struct Appearance {
-    let defaultModel = ListScreenModel(
-      withoutRepetition: true,
-      allItems: [],
-      tempUniqueItems: [],
-      generetionItems: [],
-      result: "?"
-    )
     let keyUserDefaults = "list_screen_user_defaults_key"
+    let keySecondStartApp = "list_screen_second_start_app_key"
+    
+    let result = "?"
+    let football = NSLocalizedString("Футбол", comment: "")
+    let cleaning = NSLocalizedString("Уборка", comment: "")
+    let walk = NSLocalizedString("Прогулка", comment: "")
+    let goOnDate = NSLocalizedString("Пойти на свидание", comment: "")
+    let callYourParents = NSLocalizedString("Позвонить родителям", comment: "")
   }
 }

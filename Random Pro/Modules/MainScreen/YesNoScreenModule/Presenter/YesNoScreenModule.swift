@@ -68,7 +68,6 @@ final class YesNoScreenViewController: YesNoScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

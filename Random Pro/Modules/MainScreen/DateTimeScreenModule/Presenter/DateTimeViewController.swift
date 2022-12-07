@@ -78,7 +78,6 @@ final class DateTimeViewController: DateTimeModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

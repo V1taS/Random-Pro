@@ -88,7 +88,6 @@ final class NumberScreenViewController: NumberScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

@@ -79,7 +79,6 @@ final class ContactScreenViewController: ContactScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

@@ -72,7 +72,6 @@ final class CubesScreenViewController: CubesScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

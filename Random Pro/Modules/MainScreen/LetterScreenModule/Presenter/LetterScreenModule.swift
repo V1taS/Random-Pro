@@ -77,7 +77,6 @@ final class LetterScreenViewController: LetterScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

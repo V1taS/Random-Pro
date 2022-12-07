@@ -70,7 +70,6 @@ final class CoinScreenViewController: CoinScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

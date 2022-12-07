@@ -81,7 +81,6 @@ final class LotteryScreenViewController: LotteryScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

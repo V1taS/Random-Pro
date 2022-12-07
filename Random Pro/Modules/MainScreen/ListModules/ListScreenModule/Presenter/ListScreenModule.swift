@@ -94,7 +94,6 @@ final class ListScreenViewController: ListScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   

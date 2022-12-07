@@ -31,7 +31,7 @@ protocol NumberScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol NumberScreenViewInput: AnyObject {
+protocol NumberScreenViewInput {
   
   /// Устанавливаем данные в result
   ///  - Parameter result: результат генерации

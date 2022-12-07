@@ -24,7 +24,7 @@ protocol DateTimeViewOutput: AnyObject {
   func generateButtonMonthAction()
 }
 
-protocol DateTimeViewInput: AnyObject {
+protocol DateTimeViewInput {
   
   /// Обновить контент
   /// - Parameter model: Модель

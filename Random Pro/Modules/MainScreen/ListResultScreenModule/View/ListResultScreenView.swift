@@ -17,7 +17,7 @@ protocol ListResultScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol ListResultScreenViewInput: AnyObject {
+protocol ListResultScreenViewInput {
   
   /// Обновить контент
   ///  - Parameter list: Список результатов

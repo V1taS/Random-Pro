@@ -15,7 +15,7 @@ protocol YesNoScreenViewOutput: AnyObject {
   func generateButtonAction()
 }
 
-protocol YesNoScreenViewInput: AnyObject {
+protocol YesNoScreenViewInput {
   
   /// Устанавливаем данные в result
   ///  - Parameter result: результат генерации

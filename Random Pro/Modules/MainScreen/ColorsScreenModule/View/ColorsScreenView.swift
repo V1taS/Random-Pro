@@ -12,7 +12,7 @@ import RandomUIKit
 protocol ColorsScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
-protocol ColorsScreenViewInput: AnyObject {
+protocol ColorsScreenViewInput {
   
   /// Вернуть изображение с цветом
   func returnImageDataColor() -> Data?

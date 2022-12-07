@@ -21,7 +21,7 @@ protocol NumberScreenFactoryOutput: AnyObject {
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
-protocol NumberScreenFactoryInput: AnyObject {
+protocol NumberScreenFactoryInput {
   
   /// Очистить текст от лишних символов
   ///  - Parameter text: Результат генерации

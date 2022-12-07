@@ -19,7 +19,7 @@ protocol DateTimeInteractorOutput: AnyObject {
   func cleanButtonWasSelected(model: DateTimeScreenModel)
 }
 
-protocol DateTimeInteractorInput: AnyObject {
+protocol DateTimeInteractorInput {
   
   /// Получить данные
   func getContent()

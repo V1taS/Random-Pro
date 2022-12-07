@@ -21,7 +21,7 @@ protocol ListAddItemsScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol ListAddItemsScreenViewInput: AnyObject {
+protocol ListAddItemsScreenViewInput {
   
   /// Обновить контент
   ///  - Parameter models: Массив моделек

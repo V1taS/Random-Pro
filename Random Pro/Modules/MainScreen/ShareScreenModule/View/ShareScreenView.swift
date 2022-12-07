@@ -12,7 +12,7 @@ import RandomUIKit
 protocol ShareScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
-protocol ShareScreenViewInput: AnyObject {
+protocol ShareScreenViewInput {
   
   /// Обновить контент
   ///  - Parameter imageData: Изображение контента

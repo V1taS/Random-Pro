@@ -31,7 +31,7 @@ protocol NumberScreenModuleOutput: AnyObject {
 }
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
-protocol NumberScreenModuleInput: AnyObject {
+protocol NumberScreenModuleInput {
   
   /// Возвращает список результатов
   func returnListResult() -> [String]

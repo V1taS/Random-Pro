@@ -50,7 +50,7 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
   func start() {
     let numberScreenModule = NumberScreenAssembly().createModule()
     self.numberScreenModule = numberScreenModule
-    numberScreenModule.moduleOutput = self
+    self.numberScreenModule?.moduleOutput = self
     navigationController.pushViewController(numberScreenModule, animated: true)
   }
 }

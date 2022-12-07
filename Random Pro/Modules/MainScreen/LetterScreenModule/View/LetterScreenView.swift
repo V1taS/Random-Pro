@@ -18,7 +18,7 @@ protocol LetterScreenViewOutput: AnyObject {
   func generateRusButtonAction()
 }
 
-protocol LetterScreenViewInput: AnyObject {
+protocol LetterScreenViewInput {
   
   /// Обновить контент
   /// - Parameter model: Модель

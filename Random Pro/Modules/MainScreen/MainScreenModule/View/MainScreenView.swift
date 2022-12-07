@@ -49,7 +49,7 @@ protocol MainScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol MainScreenViewInput: AnyObject {
+protocol MainScreenViewInput {
   
   /// Настройка главного экрана
   ///  - Parameter models: Список моделек для ячейки

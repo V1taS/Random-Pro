@@ -23,7 +23,7 @@ protocol MainSettingsScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol MainSettingsScreenViewInput: AnyObject {
+protocol MainSettingsScreenViewInput {
   
   /// Обновить контент
   ///  - Parameter models: Массив моделек

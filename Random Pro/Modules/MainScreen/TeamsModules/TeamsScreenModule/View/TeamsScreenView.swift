@@ -17,7 +17,7 @@ protocol TeamsScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol TeamsScreenViewInput: AnyObject {
+protocol TeamsScreenViewInput {
   
   /// Обновить контент
   /// - Parameters:

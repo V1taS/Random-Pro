@@ -35,7 +35,7 @@ protocol NumberScreenInteractorOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter к Interactor
-protocol NumberScreenInteractorInput: AnyObject {
+protocol NumberScreenInteractorInput {
   
   /// Возвращает основную модель данных
   func returnModel() -> NumberScreenModel

@@ -25,7 +25,7 @@ protocol CustomMainSectionsViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol CustomMainSectionsViewInput: AnyObject {
+protocol CustomMainSectionsViewInput {
   
   /// Обновить контент
   ///  - Parameter models: Массив моделек

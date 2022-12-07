@@ -19,7 +19,7 @@ protocol YesNoScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected(model: YesNoScreenModel)
 }
 
-protocol YesNoScreenModuleInput: AnyObject {
+protocol YesNoScreenModuleInput {
   
   /// Возвращает список результатов
   func returnListResult() -> [String]

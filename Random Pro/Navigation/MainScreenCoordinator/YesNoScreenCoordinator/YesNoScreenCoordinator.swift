@@ -50,7 +50,7 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
   func start() {
     let yesNoScreenModule = YesNoScreenAssembly().createModule()
     self.yesNoScreenModule = yesNoScreenModule
-    yesNoScreenModule.moduleOutput = self
+    self.yesNoScreenModule?.moduleOutput = self
     navigationController.pushViewController(yesNoScreenModule, animated: true)
   }
 }

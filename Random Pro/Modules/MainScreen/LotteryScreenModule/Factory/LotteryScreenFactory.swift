@@ -15,7 +15,7 @@ protocol LotteryScreenFactoryOutput: AnyObject {
   func didReverseListResult(model: LotteryScreenModel)
 }
 
-protocol LotteryScreenFactoryInput: AnyObject {
+protocol LotteryScreenFactoryInput {
   
   /// Переворачивает список результатов
   ///  - Parameter model: Модель

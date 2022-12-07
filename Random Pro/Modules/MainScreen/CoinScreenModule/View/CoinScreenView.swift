@@ -15,7 +15,7 @@ protocol CoinScreenViewOutput: AnyObject {
   func generateButtonAction()
 }
 
-protocol CoinScreenViewInput: AnyObject {
+protocol CoinScreenViewInput {
   
   /// Обновить контент
   /// - Parameter model: Модель

@@ -22,7 +22,7 @@ protocol LetterScreenInteractorOutput: AnyObject {
   func cleanButtonWasSelected(model: LetterScreenModel)
 }
 
-protocol LetterScreenInteractorInput: AnyObject {
+protocol LetterScreenInteractorInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()

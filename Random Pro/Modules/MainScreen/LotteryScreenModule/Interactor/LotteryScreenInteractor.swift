@@ -22,7 +22,7 @@ protocol LotteryScreenInteractorOutput: AnyObject {
   func cleanButtonWasSelected(model: LotteryScreenModel)
 }
 
-protocol LotteryScreenInteractorInput: AnyObject {
+protocol LotteryScreenInteractorInput {
   
   /// Возвращает список результатов
   func returnListResult() -> [String]

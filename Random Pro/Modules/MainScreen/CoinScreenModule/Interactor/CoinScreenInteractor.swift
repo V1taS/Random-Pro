@@ -19,7 +19,7 @@ protocol CoinScreenInteractorOutput: AnyObject {
   func cleanButtonWasSelected(model: CoinScreenModel)
 }
 
-protocol CoinScreenInteractorInput: AnyObject {
+protocol CoinScreenInteractorInput {
   
   /// Получить данные
   func getContent()

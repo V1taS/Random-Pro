@@ -21,7 +21,7 @@ protocol LotteryScreenViewOutput: AnyObject {
                             amountNumberValue: String?)
 }
 
-protocol LotteryScreenViewInput: AnyObject {
+protocol LotteryScreenViewInput {
   
   /// Обновить контент
   /// - Parameter model: Модель

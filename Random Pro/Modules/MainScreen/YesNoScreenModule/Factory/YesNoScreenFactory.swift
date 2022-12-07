@@ -15,7 +15,7 @@ protocol YesNoScreenFactoryOutput: AnyObject {
   func didReverse(listResult: [String])
 }
 
-protocol YesNoScreenFactoryInput: AnyObject {
+protocol YesNoScreenFactoryInput {
   
   /// Переворачивает список результатов
   ///  - Parameter listResult: массив результатов

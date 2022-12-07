@@ -15,7 +15,7 @@ protocol DateTimeFactoryOutput: AnyObject {
   func didReverseListResult(model: DateTimeScreenModel)
 }
 
-protocol DateTimeFactoryInput: AnyObject {
+protocol DateTimeFactoryInput {
   
   /// Переворачивает список результатов
   ///  - Parameter model: Модель

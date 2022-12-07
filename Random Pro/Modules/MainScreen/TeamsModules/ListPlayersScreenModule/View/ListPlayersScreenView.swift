@@ -37,7 +37,7 @@ protocol ListPlayersScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol ListPlayersScreenViewInput: AnyObject {
+protocol ListPlayersScreenViewInput {
   
   /// Обновить контент
   ///  - Parameter models: Массив моделек

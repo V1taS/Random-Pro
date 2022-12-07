@@ -15,7 +15,7 @@ protocol CoinScreenFactoryOutput: AnyObject {
   func didReverseListResult(model: CoinScreenModel)
 }
 
-protocol CoinScreenFactoryInput: AnyObject {
+protocol CoinScreenFactoryInput {
   
   /// Переворачивает список результатов
   ///  - Parameter model: Модель

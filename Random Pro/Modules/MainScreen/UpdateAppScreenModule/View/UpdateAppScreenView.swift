@@ -12,7 +12,7 @@ import RandomUIKit
 protocol UpdateAppScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
-protocol UpdateAppScreenViewInput: AnyObject {}
+protocol UpdateAppScreenViewInput {}
 
 /// Псевдоним протокола UIView & UpdateAppScreenViewInput
 typealias UpdateAppScreenViewProtocol = UIView & UpdateAppScreenViewInput

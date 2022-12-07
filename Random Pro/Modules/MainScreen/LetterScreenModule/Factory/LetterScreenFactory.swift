@@ -14,7 +14,7 @@ protocol LetterScreenFactoryOutput: AnyObject {
   func didReverseListResult(model: LetterScreenModel)
 }
 
-protocol LetterScreenFactoryInput: AnyObject {
+protocol LetterScreenFactoryInput {
   
   /// Переворачивает список результатов
   ///  - Parameter model: Модель

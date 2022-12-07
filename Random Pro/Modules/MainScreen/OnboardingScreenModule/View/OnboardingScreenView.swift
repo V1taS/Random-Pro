@@ -24,7 +24,7 @@ protocol OnboardingScreenViewOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter ко View
-protocol OnboardingScreenViewInput: AnyObject {
+protocol OnboardingScreenViewInput {
   
   /// Установить онбоардинг
   /// - Parameter models: Моделька данных

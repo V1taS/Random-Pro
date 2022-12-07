@@ -9,9 +9,12 @@
 import UIKit
 
 final class BottleScreenAssembly {
-  func createModule() -> BottleScreenModule {
+  
+  /// Собирает модуль `BottleScreen`
+  /// - Returns: Cобранный модуль `BottleScreen`
+  func createModule(timerService: TimerService) -> BottleScreenModule {
     let view = BottleScreenView()
-    let interactor = BottleScreenInteractor()
+    let interactor = BottleScreenInteractor(timerService)
     let factory = BottleScreenFactory()
     let presenter = BottleScreenViewController(moduleView: view,
                                               interactor: interactor,

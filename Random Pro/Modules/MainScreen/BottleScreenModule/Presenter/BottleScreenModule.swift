@@ -63,17 +63,7 @@ final class BottleScreenViewController: BottleScreenModule {
     super.viewDidLoad()
     setNavigationBar()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.hidesBarsOnTap = true
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    navigationController?.hidesBarsOnTap = false
-  }
-  
+
   // MARK: - Private func
   
   private func setNavigationBar() {
@@ -84,39 +74,42 @@ final class BottleScreenViewController: BottleScreenModule {
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
                                                         style: .plain,
                                                         target: self,
-                                                        action: #selector(settingButtonAction))
+                                                        action: #selector(resetButtonAction))
   }
   
-  @objc private func settingButtonAction() {
-    
+  @objc private func resetButtonAction() {
+    moduleView.resetPositionBottle()
   }
 }
 
 // MARK: - BottleScreenViewOutput
 
 extension BottleScreenViewController: BottleScreenViewOutput {
+  
   func generateButtonAction() {
-    interactor.getContent()
+    interactor.generateButtonAction()
   }
 }
 
 // MARK: - BottleScreenInteractorOutput
 
 extension BottleScreenViewController: BottleScreenInteractorOutput {
-  func didReceive() {
-    generateButtonAction()
+  func hapticFeedback() {
+    moduleView.hapticFeedback()
+  }
+  
+  func stopAnimation() {
+    moduleView.stopAnimation()
   }
 }
 
 // MARK: - BottleScreenFactoryOutput
 
-extension BottleScreenViewController: BottleScreenFactoryOutput {
-  
-}
+extension BottleScreenViewController: BottleScreenFactoryOutput {}
 
 extension BottleScreenViewController {
   struct Appearance {
     let setTitle = NSLocalizedString("Бутылочка", comment: "")
-    let settingsButtonIcon = UIImage(systemName: "gear")
+    let settingsButtonIcon = UIImage(systemName: "arrow.counterclockwise")
   }
 }

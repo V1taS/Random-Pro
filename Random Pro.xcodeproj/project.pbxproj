@@ -1274,13 +1274,6 @@
 			path = KeyboardService;
 			sourceTree = "<group>";
 		};
-		1B941DD7282175CB00D968DF /* APICallsNetworking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = APICallsNetworking;
-			sourceTree = "<group>";
-		};
 		1B941DDA2821791A00D968DF /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1322,7 +1315,6 @@
 				1B31F63F285FB83F00A88217 /* NotificationService */,
 				1BD25B6B282459AA006661B8 /* MetricsService */,
 				1B941DDA2821791A00D968DF /* LocalStorage */,
-				1B941DD7282175CB00D968DF /* APICallsNetworking */,
 				1B941DD42821757C00D968DF /* KeyboardService */,
 			);
 			path = ApplicationServices;

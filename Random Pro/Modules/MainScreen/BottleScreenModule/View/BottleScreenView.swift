@@ -19,19 +19,30 @@ protocol BottleScreenViewOutput: AnyObject {
 /// События которые отправляем от Presenter ко View
 protocol BottleScreenViewInput {
   
+  /// Остановка анимации бутылочки
+  func stopAnimation()
+  
+  /// Отклик при вращении бутылочки
+  func hapticFeedback()
+  
+  /// Сброс текущего положения на начальное
+  func resetPositionBottle()
 }
 
 typealias BottleScreenViewProtocol = UIView & BottleScreenViewInput
 
 final class BottleScreenView: BottleScreenViewProtocol {
-  
+
   // MARK: - Internal property
   
   weak var output: BottleScreenViewOutput?
   
+  // MARK: - Internal property
+  
   private let resultLabel = UILabel()
   private let generateButton = ButtonView()
   private let bottleImageView = UIImageView()
+  private var isFirstStart = true
   
   // MARK: - Internal func
   
@@ -45,6 +56,20 @@ final class BottleScreenView: BottleScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func hapticFeedback() {
+    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+  }
+  
+  func stopAnimation() {
+    bottleImageView.pauseRotation()
+    generateButton.set(isEnabled: true)
+  }
+  
+  func resetPositionBottle() {
+    bottleImageView.stopRotation()
+    isFirstStart = true
+  }
+  
   // MARK: - Private func
   
   private func setupDefaultSettings() {
@@ -53,15 +78,23 @@ final class BottleScreenView: BottleScreenViewProtocol {
     backgroundColor = RandomColor.primaryWhite
     
     bottleImageView.image = appearance.bottleImage
-    
+    bottleImageView.contentMode = .scaleAspectFit
+
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
   @objc private func generateButtonAction() {
-    bottleImageView.startAnimating()
+    if isFirstStart {
+      bottleImageView.startRotation(duration: Appearance().sizeInset)
+      isFirstStart = false
+    } else {
+      bottleImageView.resumeRotation()
+    }
+    generateButton.set(isEnabled: false)
+    output?.generateButtonAction()
   }
-  
+
   private func setupConstraints() {
     let appearance = Appearance()
     
@@ -78,10 +111,11 @@ final class BottleScreenView: BottleScreenViewProtocol {
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -appearance.defaultInset),
       
-      bottleImageView.heightAnchor.constraint(equalToConstant: 180),
-      bottleImageView.widthAnchor.constraint(equalToConstant: 60),
-      bottleImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      bottleImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+      bottleImageView.heightAnchor.constraint(equalTo: heightAnchor,
+                                              multiplier: appearance.sizeInset,
+                                              constant: .zero),
+      bottleImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      bottleImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
     ])
   }
 }
@@ -93,5 +127,6 @@ private extension BottleScreenView {
     let buttonTitle = NSLocalizedString("Крутить бутылочку", comment: "")
     let defaultInset: CGFloat = 16
     let bottleImage = UIImage(named: "Bottle")
+    let sizeInset: Double = 0.4
   }
 }

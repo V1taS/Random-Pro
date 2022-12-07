@@ -32,19 +32,19 @@ protocol BottleScreenViewInput {
 typealias BottleScreenViewProtocol = UIView & BottleScreenViewInput
 
 final class BottleScreenView: BottleScreenViewProtocol {
-
+  
   // MARK: - Internal property
   
   weak var output: BottleScreenViewOutput?
   
-  // MARK: - Internal property
+  // MARK: - Private properties
   
   private let resultLabel = UILabel()
   private let generateButton = ButtonView()
   private let bottleImageView = UIImageView()
   private var isFirstStart = true
   
-  // MARK: - Internal func
+  // MARK: - Initialization
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -55,6 +55,8 @@ final class BottleScreenView: BottleScreenViewProtocol {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  // MARK: - Intarnal func
   
   func hapticFeedback() {
     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
@@ -69,33 +71,11 @@ final class BottleScreenView: BottleScreenViewProtocol {
     bottleImageView.stopRotation()
     isFirstStart = true
   }
-  
-  // MARK: - Private func
-  
-  private func setupDefaultSettings() {
-    let appearance = Appearance()
-    
-    backgroundColor = RandomColor.primaryWhite
-    
-    bottleImageView.image = appearance.bottleImage
-    bottleImageView.contentMode = .scaleAspectFit
+}
+// MARK: - Private
 
-    generateButton.setTitle(appearance.buttonTitle, for: .normal)
-    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
-  }
-  
-  @objc private func generateButtonAction() {
-    if isFirstStart {
-      bottleImageView.startRotation(duration: Appearance().sizeInset)
-      isFirstStart = false
-    } else {
-      bottleImageView.resumeRotation()
-    }
-    generateButton.set(isEnabled: false)
-    output?.generateButtonAction()
-  }
-
-  private func setupConstraints() {
+private extension BottleScreenView {
+  func setupConstraints() {
     let appearance = Appearance()
     
     [generateButton, bottleImageView].forEach {
@@ -117,6 +97,30 @@ final class BottleScreenView: BottleScreenViewProtocol {
       bottleImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
       bottleImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
     ])
+  }
+  
+  func setupDefaultSettings() {
+    let appearance = Appearance()
+    
+    backgroundColor = RandomColor.primaryWhite
+    
+    bottleImageView.image = appearance.bottleImage
+    bottleImageView.contentMode = .scaleAspectFit
+    
+    generateButton.setTitle(appearance.buttonTitle, for: .normal)
+    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+  }
+  
+  @objc
+  func generateButtonAction() {
+    if isFirstStart {
+      bottleImageView.startRotation(duration: Appearance().sizeInset)
+      isFirstStart = false
+    } else {
+      bottleImageView.resumeRotation()
+    }
+    generateButton.set(isEnabled: false)
+    output?.generateButtonAction()
   }
 }
 

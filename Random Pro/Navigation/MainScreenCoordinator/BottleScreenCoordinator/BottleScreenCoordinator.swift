@@ -52,6 +52,7 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
     self.bottleScreenModule = bottleScreenModule
     bottleScreenModule.moduleOutput = self
     navigationController.pushViewController(bottleScreenModule, animated: true)
+    services.metricsService.track(event: .bottleScreen)
   }
 }
 

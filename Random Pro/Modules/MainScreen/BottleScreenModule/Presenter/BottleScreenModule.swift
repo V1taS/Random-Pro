@@ -27,7 +27,7 @@ final class BottleScreenViewController: BottleScreenModule {
   
   weak var moduleOutput: BottleScreenModuleOutput?
   
-  // MARK: - Private property
+  // MARK: - Private properties
   
   private let moduleView: BottleScreenViewProtocol
   private let interactor: BottleScreenInteractorInput
@@ -52,7 +52,7 @@ final class BottleScreenViewController: BottleScreenModule {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     super.loadView()
@@ -63,10 +63,13 @@ final class BottleScreenViewController: BottleScreenModule {
     super.viewDidLoad()
     setNavigationBar()
   }
+}
 
-  // MARK: - Private func
+// MARK: - Private
+
+private extension BottleScreenViewController {
   
-  private func setNavigationBar() {
+  func setNavigationBar() {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
@@ -77,7 +80,8 @@ final class BottleScreenViewController: BottleScreenModule {
                                                         action: #selector(resetButtonAction))
   }
   
-  @objc private func resetButtonAction() {
+  @objc
+  func resetButtonAction() {
     moduleView.resetPositionBottle()
   }
 }

@@ -31,7 +31,7 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   
   weak var output: BottleScreenInteractorOutput?
   
-  // MARK: - Private property
+  // MARK: - Private properties
   
   private let bottleImage = UIImageView()
   private let timerService: TimerService

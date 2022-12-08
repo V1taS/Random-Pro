@@ -460,7 +460,6 @@ private extension MainScreenInteractor {
     let titleColors = NSLocalizedString("Цвета", comment: "")
     
     let bottleCardImage = UIImage(systemName: "arrow.triangle.2.circlepath") ?? UIImage()
-    // TODO: - Сделать как NSLocalizedString
-    let titleBottle = "Бутылочка"
+    let titleBottle = NSLocalizedString("Бутылочка", comment: "")
   }
 }

@@ -12,17 +12,17 @@ import UIKit
 protocol BottleScreenInteractorOutput: AnyObject {
 
   /// Остановка анимации бутылочки
-  func stopAnimation()
+  func stopBottleRotation()
   
   /// Вибрация при вращении бутылочки
-  func hapticFeedback()
+  func tactileFeedbackBottleRotates()
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol BottleScreenInteractorInput {
   
   /// Пользователь нажал на кнопку
- func generateButtonAction()
+ func generatesBottleRotationTimeAction()
 }
 
 final class BottleScreenInteractor: BottleScreenInteractorInput {
@@ -33,10 +33,11 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let bottleImage = UIImageView()
+  private let bottleImageView = UIImageView()
   private let timerService: TimerService
   
   // MARK: - Initialization
+  
   /// - Parameters:
   ///   - timerService: время
   init(_ timerService: TimerService) {
@@ -45,16 +46,30 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   
   // MARK: - Internal property
   
-  func generateButtonAction() {
-    let requiredNumberOfLaps = [1, 1.5, 2, 2.5].shuffled().first
-    let randomTime = Double.random(in: 1...5)
-    let totalTime = (requiredNumberOfLaps ?? 2) + randomTime
+  func generatesBottleRotationTimeAction() {
+    let appearance = Appearance()
+    
+    let requiredNumberOfLaps = generateNumberOfLaps(appearance.laps)
+    let randomTime =  Double.random(in: 1...5)
+    let totalTime = (requiredNumberOfLaps) + randomTime
     timerService.startTimerWith(seconds: totalTime,
                                 timerTickAction: { [weak self] _ in
-      self?.output?.hapticFeedback()
+      self?.output?.tactileFeedbackBottleRotates()
     },
                                 timerFinishedAction: { [weak self] in
-      self?.output?.stopAnimation()
+      self?.output?.stopBottleRotation()
     })
+  }
+  
+  // MARK: - Private
+
+  private func generateNumberOfLaps(_ laps: [Double]) -> Double {
+      return laps.shuffled().first ?? .zero
+  }
+}
+
+extension BottleScreenInteractor {
+  struct Appearance {
+    let laps = [1, 1.5, 2, 2.5]
   }
 }

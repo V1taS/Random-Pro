@@ -9,14 +9,10 @@
 import UIKit
 
 /// Cобытия которые отправляем из Factory в Presenter
-protocol BottleScreenFactoryOutput: AnyObject {
-  
-}
+protocol BottleScreenFactoryOutput: AnyObject {}
 
 /// Cобытия которые отправляем от Presenter к Factory
-protocol BottleScreenFactoryInput {
-  
-}
+protocol BottleScreenFactoryInput {}
 
 final class BottleScreenFactory: BottleScreenFactoryInput {
   

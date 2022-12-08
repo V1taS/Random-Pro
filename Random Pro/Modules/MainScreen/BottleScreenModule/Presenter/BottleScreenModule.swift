@@ -9,9 +9,7 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в  `другой модуль`
-protocol BottleScreenModuleOutput: AnyObject {
-  
-}
+protocol BottleScreenModuleOutput: AnyObject {}
 
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol BottleScreenModuleInput {
@@ -55,12 +53,12 @@ final class BottleScreenViewController: BottleScreenModule {
   // MARK: - Life cycle
   
   override func loadView() {
-    super.loadView()
     view = moduleView
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setNavigationBar()
   }
 }
@@ -68,7 +66,6 @@ final class BottleScreenViewController: BottleScreenModule {
 // MARK: - Private
 
 private extension BottleScreenViewController {
-  
   func setNavigationBar() {
     let appearance = Appearance()
     
@@ -90,20 +87,20 @@ private extension BottleScreenViewController {
 
 extension BottleScreenViewController: BottleScreenViewOutput {
   
-  func generateButtonAction() {
-    interactor.generateButtonAction()
+  func bottleRotationButtonAction() {
+    interactor.generatesBottleRotationTimeAction()
   }
 }
 
 // MARK: - BottleScreenInteractorOutput
 
 extension BottleScreenViewController: BottleScreenInteractorOutput {
-  func hapticFeedback() {
-    moduleView.hapticFeedback()
+  func tactileFeedbackBottleRotates() {
+    moduleView.tactileFeedbackBottleRotates()
   }
   
-  func stopAnimation() {
-    moduleView.stopAnimation()
+  func stopBottleRotation() {
+    moduleView.stopBottleRotation()
   }
 }
 

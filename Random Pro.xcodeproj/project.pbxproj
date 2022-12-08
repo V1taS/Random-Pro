@@ -211,6 +211,8 @@
 		6CBFD05A289BC56C005F9104 /* PasswordScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD059289BC56C005F9104 /* PasswordScreenAssembly.swift */; };
 		6CBFD05D289BC775005F9104 /* PasswordScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD05C289BC775005F9104 /* PasswordScreenCoordinator.swift */; };
 		6CBFD05F289C0EE2005F9104 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD05E289C0EE2005F9104 /* PasswordGeneratorView.swift */; };
+		6CCEB1182940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEB1172940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift */; };
+		6CCEB11B2940C83100150668 /* BottleScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEB11A2940C83100150668 /* BottleScreenInteractorTests.swift */; };
 		6CE65F83282D0D5600272D56 /* YesNoScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F82282D0D5600272D56 /* YesNoScreenView.swift */; };
 		6CE65F85282D0DD900272D56 /* YesNoScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F84282D0DD900272D56 /* YesNoScreenModule.swift */; };
 		6CE65F87282D0DE300272D56 /* YesNoScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F86282D0DE300272D56 /* YesNoScreenInteractor.swift */; };
@@ -450,6 +452,8 @@
 		6CBFD059289BC56C005F9104 /* PasswordScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenAssembly.swift; sourceTree = "<group>"; };
 		6CBFD05C289BC775005F9104 /* PasswordScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenCoordinator.swift; sourceTree = "<group>"; };
 		6CBFD05E289C0EE2005F9104 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
+		6CCEB1172940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenInteractorOutputSpy.swift; sourceTree = "<group>"; };
+		6CCEB11A2940C83100150668 /* BottleScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenInteractorTests.swift; sourceTree = "<group>"; };
 		6CE65F82282D0D5600272D56 /* YesNoScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenView.swift; sourceTree = "<group>"; };
 		6CE65F84282D0DD900272D56 /* YesNoScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenModule.swift; sourceTree = "<group>"; };
 		6CE65F86282D0DE300272D56 /* YesNoScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenInteractor.swift; sourceTree = "<group>"; };
@@ -488,6 +492,7 @@
 		1B06E0EB28BF66CD00BD58FB /* Random Pro Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6CCEB1142940C57500150668 /* BottleScreenModule */,
 				1B3C87B729337AB9008B8AA6 /* MainScreenModule */,
 				1B06E0F328C0A92200BD58FB /* NumberScreenModule */,
 			);
@@ -2339,6 +2344,39 @@
 			path = PasswordScreenCoordinator;
 			sourceTree = "<group>";
 		};
+		6CCEB1142940C57500150668 /* BottleScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				6CCEB1152940C59000150668 /* TestsDoubles */,
+			);
+			path = BottleScreenModule;
+			sourceTree = "<group>";
+		};
+		6CCEB1152940C59000150668 /* TestsDoubles */ = {
+			isa = PBXGroup;
+			children = (
+				6CCEB1192940C81900150668 /* UnitTests */,
+				6CCEB1162940C59900150668 /* Spy */,
+			);
+			path = TestsDoubles;
+			sourceTree = "<group>";
+		};
+		6CCEB1162940C59900150668 /* Spy */ = {
+			isa = PBXGroup;
+			children = (
+				6CCEB1172940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift */,
+			);
+			path = Spy;
+			sourceTree = "<group>";
+		};
+		6CCEB1192940C81900150668 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				6CCEB11A2940C83100150668 /* BottleScreenInteractorTests.swift */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
 		6CE65F7B282D0C4F00272D56 /* NumberScreenModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -2563,8 +2601,10 @@
 				1B3C87BE29337C0D008B8AA6 /* MainScreenInteractorTests.swift in Sources */,
 				1B3C87CA29338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift in Sources */,
 				1B3C87C729338B64008B8AA6 /* MainScreenViewInputMock.swift in Sources */,
+				6CCEB1182940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift in Sources */,
 				1B3C87C329338B3E008B8AA6 /* MainScreenInteractorInputMock.swift in Sources */,
 				1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */,
+				6CCEB11B2940C83100150668 /* BottleScreenInteractorTests.swift in Sources */,
 				1B06E0FB28C0B05200BD58FB /* NumberScreenModuleIntegrationTests.swift in Sources */,
 				1B3C87C0293389B4008B8AA6 /* MainScreenInteractorTests+Methods.swift in Sources */,
 				1B3C87C529338B4F008B8AA6 /* MainScreenFactoryInputMock.swift in Sources */,

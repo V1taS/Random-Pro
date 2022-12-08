@@ -31,8 +31,6 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var bottleScreenModule: BottleScreenModule?
-  private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
-  private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -52,7 +50,6 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
     self.bottleScreenModule = bottleScreenModule
     bottleScreenModule.moduleOutput = self
     navigationController.pushViewController(bottleScreenModule, animated: true)
-    services.metricsService.track(event: .bottleScreen)
   }
 }
 

@@ -13,17 +13,17 @@ import RandomUIKit
 protocol BottleScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку
-  func generateButtonAction()
+  func bottleRotationButtonAction()
 }
 
 /// События которые отправляем от Presenter ко View
 protocol BottleScreenViewInput {
   
-  /// Остановка анимации бутылочки
-  func stopAnimation()
+  /// Остановить вращение бутылочки
+  func stopBottleRotation()
   
   /// Отклик при вращении бутылочки
-  func hapticFeedback()
+  func tactileFeedbackBottleRotates()
   
   /// Сброс текущего положения на начальное
   func resetPositionBottle()
@@ -40,7 +40,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
   // MARK: - Private properties
   
   private let resultLabel = UILabel()
-  private let generateButton = ButtonView()
+  private let bottleRotationButton = ButtonView()
   private let bottleImageView = UIImageView()
   private var isFirstStart = true
   
@@ -48,6 +48,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
     setupDefaultSettings()
     setupConstraints()
   }
@@ -58,13 +59,13 @@ final class BottleScreenView: BottleScreenViewProtocol {
   
   // MARK: - Intarnal func
   
-  func hapticFeedback() {
+  func tactileFeedbackBottleRotates() {
     UIImpactFeedbackGenerator(style: .soft).impactOccurred()
   }
   
-  func stopAnimation() {
+  func stopBottleRotation() {
     bottleImageView.pauseRotation()
-    generateButton.set(isEnabled: true)
+    bottleRotationButton.set(isEnabled: true)
   }
   
   func resetPositionBottle() {
@@ -78,21 +79,21 @@ private extension BottleScreenView {
   func setupConstraints() {
     let appearance = Appearance()
     
-    [generateButton, bottleImageView].forEach {
+    [bottleRotationButton, bottleImageView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+      bottleRotationButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
-      generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+      bottleRotationButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                constant: -appearance.defaultInset),
-      generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+      bottleRotationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -appearance.defaultInset),
       
       bottleImageView.heightAnchor.constraint(equalTo: heightAnchor,
-                                              multiplier: appearance.sizeInset,
+                                              multiplier: appearance.bottleHeightMultiplier,
                                               constant: .zero),
       bottleImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
       bottleImageView.centerXAnchor.constraint(equalTo: centerXAnchor)
@@ -107,20 +108,20 @@ private extension BottleScreenView {
     bottleImageView.image = appearance.bottleImage
     bottleImageView.contentMode = .scaleAspectFit
     
-    generateButton.setTitle(appearance.buttonTitle, for: .normal)
-    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    bottleRotationButton.setTitle(appearance.buttonTitle, for: .normal)
+    bottleRotationButton.addTarget(self, action: #selector(bottleRotationButtonAction), for: .touchUpInside)
   }
   
   @objc
-  func generateButtonAction() {
+  func bottleRotationButtonAction() {
     if isFirstStart {
-      bottleImageView.startRotation(duration: Appearance().sizeInset)
+      bottleImageView.startRotation(duration: Appearance().bottleHeightMultiplier)
       isFirstStart = false
     } else {
       bottleImageView.resumeRotation()
     }
-    generateButton.set(isEnabled: false)
-    output?.generateButtonAction()
+    bottleRotationButton.set(isEnabled: false)
+    output?.bottleRotationButtonAction()
   }
 }
 
@@ -131,6 +132,6 @@ private extension BottleScreenView {
     let buttonTitle = NSLocalizedString("Крутить бутылочку", comment: "")
     let defaultInset: CGFloat = 16
     let bottleImage = UIImage(named: "Bottle")
-    let sizeInset: Double = 0.4
+    let bottleHeightMultiplier: Double = 0.4
   }
 }

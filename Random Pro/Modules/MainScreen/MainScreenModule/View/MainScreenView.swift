@@ -46,6 +46,9 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `Colors`
   func openColors()
+  
+  /// Открыть раздел `Bottle`
+  func openBottle()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -124,6 +127,8 @@ extension MainScreenView: UICollectionViewDelegate {
       output?.openPassword()
     case .colors:
       output?.openColors()
+    case .bottle:
+      output?.openBottle()
     }
   }
 }

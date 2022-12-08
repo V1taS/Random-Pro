@@ -78,6 +78,9 @@ struct MainScreenModel: UserDefaultsCodable {
     
     /// Раздел: `Цвета`
     case colors
+    
+    /// Раздел: `Бутылочка`
+    case bottle
   }
   
   // MARK: - ADVLabel

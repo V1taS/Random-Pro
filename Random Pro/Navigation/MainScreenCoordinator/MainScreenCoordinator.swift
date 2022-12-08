@@ -92,6 +92,16 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     services.permissionService.requestNotification { _ in }
   }
   
+  func openBottle() {
+    let bottleScreenCoordinator = BottleScreenCoordinator(navigationController,
+                                                          services)
+    anyCoordinator = bottleScreenCoordinator
+    bottleScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .bottle)
+    services.metricsService.track(event: .bottleScreen)
+  }
+  
   func openColors() {
     let colorsScreenCoordinator = ColorsScreenCoordinator(navigationController,
                                                           services)
@@ -305,6 +315,8 @@ private extension MainScreenCoordinator {
       openPassword()
     case .numberScreen:
       openNumber()
+    case .bottleScreen:
+      openBottle()
     }
   }
 }

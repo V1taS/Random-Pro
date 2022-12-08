@@ -15,8 +15,8 @@ protocol TimerService {
   ///  - seconds: Кол-во секунд в таймере
   ///  - timerTickAction: Экшен на  каждую секунда
   ///  - timerFinishedAction: Экшен на завершение таймера
-  func startTimerWith(seconds: Int,
-                      timerTickAction: ((_ currentTime: Int) -> Void)?,
+  func startTimerWith(seconds: Double,
+                      timerTickAction: ((_ currentTime: Double) -> Void)?,
                       timerFinishedAction: (() -> Void)?)
   
   /// Остановить таймер
@@ -28,9 +28,9 @@ final class TimerServiceImpl: TimerService {
   // MARK: - Private property
   
   private var timer: Timer?
-  private var repeatTime: Int = .zero
+  private var repeatTime: Double = .zero
   private var backgroundDate: Date?
-  private var timerTickAction: ((Int) -> Void)?
+  private var timerTickAction: ((Double) -> Void)?
   private var timerFinishedAction: (() -> Void)?
   
   // MARK: - Initialization
@@ -54,14 +54,14 @@ final class TimerServiceImpl: TimerService {
   
   // MARK: - Internal func
   
-  func startTimerWith(seconds: Int,
-                      timerTickAction: ((_ currentTime: Int) -> Void)? = nil,
+  func startTimerWith(seconds: Double,
+                      timerTickAction: ((_ currentTime: Double) -> Void)? = nil,
                       timerFinishedAction: (() -> Void)? = nil) {
-    repeatTime = seconds
+    repeatTime = seconds * 100
     self.timerTickAction = timerTickAction
     self.timerFinishedAction = timerFinishedAction
     
-    let timer = Timer.scheduledTimer(timeInterval: 1.0,
+    let timer = Timer.scheduledTimer(timeInterval: 0.01,
                                      target: self,
                                      selector: #selector(updateTimer),
                                      userInfo: nil,
@@ -79,7 +79,7 @@ final class TimerServiceImpl: TimerService {
 // MARK: - Private
 
 private extension TimerServiceImpl {
-  func currentTime() -> Int {
+  func currentTime() -> Double {
     repeatTime -= 1
     return repeatTime
   }
@@ -91,7 +91,7 @@ private extension TimerServiceImpl {
       stopTimer()
       timerFinishedAction?()
     } else {
-      timerTickAction?(currentTime)
+      timerTickAction?(currentTime / 100)
     }
   }
   
@@ -105,12 +105,16 @@ private extension TimerServiceImpl {
   @objc
   func appStarted() {
     let appStartDate = Date()
-    if let backgroundDate,
-       let secondsPast = Calendar.current.dateComponents([.second],
-                                                         from: backgroundDate,
-                                                         to: appStartDate).second {
-      repeatTime -= secondsPast
+    guard let backgroundDate = backgroundDate,
+          let nanosecond = Calendar.current.dateComponents([.nanosecond],
+                                                           from: backgroundDate,
+                                                           to: appStartDate).nanosecond else {
+      startTimerWith(seconds: repeatTime)
+      return
     }
+    
+    let secondstime = Double(nanosecond) / 1000000
+    repeatTime -= secondstime
     startTimerWith(seconds: repeatTime)
   }
 }

@@ -283,6 +283,14 @@ private extension MainScreenInteractor {
           imageSection: model.imageSection,
           advLabel: model.advLabel
         ))
+      case .bottle:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleBottle,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
       }
     }
     
@@ -391,6 +399,14 @@ private extension MainScreenInteractor {
           imageSection: appearance.imageColors.pngData() ?? Data(),
           advLabel: .none
         ))
+      case .bottle:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          titleSection: appearance.titleBottle,
+          imageSection: appearance.bottleCardImage.pngData() ?? Data(),
+          advLabel: .new
+        ))
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -442,5 +458,8 @@ private extension MainScreenInteractor {
     
     let imageColors = UIImage(systemName: "photo.on.rectangle.angled") ?? UIImage()
     let titleColors = NSLocalizedString("Цвета", comment: "")
+    
+    let bottleCardImage = UIImage(systemName: "arrow.triangle.2.circlepath") ?? UIImage()
+    let titleBottle = NSLocalizedString("Бутылочка", comment: "")
   }
 }

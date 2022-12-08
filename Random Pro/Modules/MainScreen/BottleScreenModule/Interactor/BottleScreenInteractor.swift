@@ -10,8 +10,8 @@ import UIKit
 
 /// События которые отправляем из Interactor в Presenter
 protocol BottleScreenInteractorOutput: AnyObject {
-
-  /// Остановка анимации бутылочки
+  
+  /// Остановить вращение бутылки
   func stopBottleRotation()
   
   /// Вибрация при вращении бутылочки
@@ -22,7 +22,7 @@ protocol BottleScreenInteractorOutput: AnyObject {
 protocol BottleScreenInteractorInput {
   
   /// Пользователь нажал на кнопку
- func generatesBottleRotationTimeAction()
+  func generatesBottleRotationTimeAction()
 }
 
 final class BottleScreenInteractor: BottleScreenInteractorInput {
@@ -48,11 +48,10 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   
   func generatesBottleRotationTimeAction() {
     let appearance = Appearance()
-    
     let requiredNumberOfLaps = generateNumberOfLaps(appearance.laps)
-    let randomTime =  Double.random(in: 1...5)
-    let totalTime = (requiredNumberOfLaps) + randomTime
-    timerService.startTimerWith(seconds: totalTime,
+    let totalRandomTime = generateRandomTime(requiredNumberOfLaps)
+    
+    timerService.startTimerWith(seconds: totalRandomTime,
                                 timerTickAction: { [weak self] _ in
       self?.output?.tactileFeedbackBottleRotates()
     },
@@ -62,9 +61,14 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   }
   
   // MARK: - Private
-
+  
   private func generateNumberOfLaps(_ laps: [Double]) -> Double {
-      return laps.shuffled().first ?? .zero
+    return laps.shuffled().first ?? .zero
+  }
+  
+  private func generateRandomTime(_ numberOfLaps: Double) -> Double {
+    let randomTime = Double.random(in: 1...5)
+    return numberOfLaps + randomTime
   }
 }
 

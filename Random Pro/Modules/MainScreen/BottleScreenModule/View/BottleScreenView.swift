@@ -71,6 +71,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
   func resetPositionBottle() {
     bottleImageView.stopRotation()
     isFirstStart = true
+    bottleRotationButton.set(isEnabled: true)
   }
 }
 // MARK: - Private

@@ -63,26 +63,6 @@ final class BottleScreenViewController: BottleScreenModule {
   }
 }
 
-// MARK: - Private
-
-private extension BottleScreenViewController {
-  func setNavigationBar() {
-    let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
-    title = appearance.setTitle
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(resetButtonAction))
-  }
-  
-  @objc
-  func resetButtonAction() {
-    moduleView.resetPositionBottle()
-  }
-}
-
 // MARK: - BottleScreenViewOutput
 
 extension BottleScreenViewController: BottleScreenViewOutput {
@@ -108,7 +88,29 @@ extension BottleScreenViewController: BottleScreenInteractorOutput {
 
 extension BottleScreenViewController: BottleScreenFactoryOutput {}
 
-extension BottleScreenViewController {
+// MARK: - Private
+
+private extension BottleScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.setTitle
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(resetButtonAction))
+  }
+  
+  @objc
+  func resetButtonAction() {
+    moduleView.resetPositionBottle()
+  }
+}
+
+// MARK: - Appearance
+
+private extension BottleScreenViewController {
   struct Appearance {
     let setTitle = NSLocalizedString("Бутылочка", comment: "")
     let settingsButtonIcon = UIImage(systemName: "arrow.counterclockwise")

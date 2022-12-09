@@ -72,7 +72,7 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   }
 }
 
-extension BottleScreenInteractor {
+private extension BottleScreenInteractor {
   struct Appearance {
     let laps = [1, 1.5, 2, 2.5]
   }

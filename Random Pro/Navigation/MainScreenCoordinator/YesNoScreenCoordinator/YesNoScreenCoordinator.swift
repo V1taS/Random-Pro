@@ -48,7 +48,7 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var yesNoScreenModule = YesNoScreenAssembly().createModule()
+    let yesNoScreenModule = YesNoScreenAssembly().createModule()
     self.yesNoScreenModule = yesNoScreenModule
     self.yesNoScreenModule?.moduleOutput = self
     navigationController.pushViewController(yesNoScreenModule, animated: true)

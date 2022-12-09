@@ -11,7 +11,7 @@ import UIKit
 
 /// Mock Input
 final class MainScreenInteractorInputMock: MainScreenInteractorInput {
-  
+ 
   // MARK: - Internal properties
   
   weak var output: MainScreenInteractorOutput?
@@ -45,5 +45,14 @@ final class MainScreenInteractorInputMock: MainScreenInteractorInput {
   
   func saveDarkModeStatus(_ isEnabled: Bool) {
     isSaveDarkModeStatus = true
+  }
+  
+  func removeLabelFromSection(type: MainScreenModel.SectionType) {
+    // TODO: write tests
+  }
+  
+  func addLabel(_ label: MainScreenModel.ADVLabel,
+                for sectionType: MainScreenModel.SectionType) {
+    // TODO: write tests
   }
 }

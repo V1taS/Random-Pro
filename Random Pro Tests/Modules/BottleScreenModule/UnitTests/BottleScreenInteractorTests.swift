@@ -31,9 +31,8 @@ final class BottleScreenInteractorTests: XCTestCase {
     super.tearDown()
   }
   
-  func testGivenEmptyModelWhenGetContentThenSendModelToOutput() {
+  func testGivenBottleModelWhenSpinBottleThenSendModelToOutput() {
     // Arrange
-    
     var isStopBottleRotation = false
     
     /// Ожидает выполнения какое-то врея
@@ -47,7 +46,6 @@ final class BottleScreenInteractorTests: XCTestCase {
     }
     
     // Act
-    
     sut.generatesBottleRotationTimeAction()
     wait(for: [expectation], timeout: 2)
     

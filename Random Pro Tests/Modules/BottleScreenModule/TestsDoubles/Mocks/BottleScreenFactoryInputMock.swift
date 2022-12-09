@@ -9,4 +9,9 @@
 import UIKit
 @testable import Random_Pro
 
-final class BottleScreenFactoryInputMock: BottleScreenFactoryInput {}
+final class BottleScreenFactoryInputMock: BottleScreenFactoryInput {
+  
+  // MARK: - Internal properties
+  
+  weak var output: BottleScreenFactoryOutput?
+}

@@ -13,7 +13,7 @@ final class BottleScreenInteractorInputMock: BottleScreenInteractorInput {
   
   // MARK: - Internal properties
   
-  weak var output: MainScreenInteractorOutput?
+  weak var output: BottleScreenInteractorOutput?
   
   // MARK: - Флаги вызовов функция
   

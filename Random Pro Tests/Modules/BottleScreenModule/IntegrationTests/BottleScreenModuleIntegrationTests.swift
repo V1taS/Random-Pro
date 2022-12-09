@@ -31,6 +31,9 @@ final class BottleScreenModuleIntegrationTests: XCTestCase {
     sut = BottleScreenViewController(moduleView: view,
                                      interactor: interactor,
                                      factory: factory)
+    interactor.output = sut
+    factory.output = sut
+    view.output = sut
   }
   
   // MARK: - Освождаем ресурсы

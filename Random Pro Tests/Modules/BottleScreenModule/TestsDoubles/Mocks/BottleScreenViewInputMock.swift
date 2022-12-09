@@ -12,21 +12,15 @@ import XCTest
 
 final class BottleScreenViewInputMock: BottleScreenViewProtocol {
   
+  // MARK: - Internal properties
+  
+  weak var output: BottleScreenViewOutput?
+  
   // MARK: - Флаги вызовов функция
   
   var isStopBottleRotation: Bool = false
   var isTactileFeedbackBottleRotates: Bool = false
   var isResetPositionBottle: Bool = false
-  
-  // MARK: - Init
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
   
   // MARK: - BottleScreenViewInput
   

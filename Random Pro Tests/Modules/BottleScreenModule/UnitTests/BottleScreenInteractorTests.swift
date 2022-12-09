@@ -30,8 +30,8 @@ final class BottleScreenInteractorTests: XCTestCase {
     sut = nil
     super.tearDown()
   }
-  
-  func testGivenBottleModelWhenSpinBottleThenSendModelToOutput() {
+
+  func testGivenRotatingBottleWhenFinishedRandomRotationTimeThenStopBottleRotation() {
     // Arrange
     var isStopBottleRotation = false
     

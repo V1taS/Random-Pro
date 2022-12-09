@@ -114,6 +114,14 @@ extension MainScreenInteractorTests {
           imageSection: appearance.imageColors.pngData() ?? Data(),
           advLabel: .none
         ))
+      case .bottle:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          titleSection: appearance.titleBottleEng,
+          imageSection: appearance.bottleCardImage.pngData() ?? Data(),
+          advLabel: .new
+        ))
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -222,6 +230,14 @@ extension MainScreenInteractorTests {
           imageSection: appearance.imageColors.pngData() ?? Data(),
           advLabel: .none
         ))
+      case .bottle:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          titleSection: appearance.titleBottle,
+          imageSection: appearance.bottleCardImage.pngData() ?? Data(),
+          advLabel: .new
+        ))
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -286,5 +302,9 @@ extension MainScreenInteractorTests {
     let imageColors = UIImage(systemName: "photo.on.rectangle.angled") ?? UIImage()
     let titleColors = "Цвета"
     let titleColorsEng = "Colors"
+    
+    let bottleCardImage = UIImage(systemName: "arrow.triangle.2.circlepath") ?? UIImage()
+    let titleBottle = "Бутылочка"
+    let titleBottleEng = "Bottle"
   }
 }

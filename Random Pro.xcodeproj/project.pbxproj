@@ -167,6 +167,13 @@
 		6C7D4D4B282E558400A086BC /* DateTimeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4A282E558400A086BC /* DateTimeFactory.swift */; };
 		6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4C282E558E00A086BC /* DateTimeAssembly.swift */; };
 		6C7D4D50282E5A1D00A086BC /* DateTimeScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */; };
+		6C933FC3294227FF00E43857 /* BottleScreenInteractorOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C933FC2294227FF00E43857 /* BottleScreenInteractorOutputSpy.swift */; };
+		6C933FC52942293100E43857 /* BottleScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C933FC42942293100E43857 /* BottleScreenInteractorTests.swift */; };
+		6C933FCB2942698000E43857 /* TimerServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C933FCA2942698000E43857 /* TimerServiceMock.swift */; };
+		6C933FCE294338C100E43857 /* BottleScreenInteractorInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C933FCD294338C100E43857 /* BottleScreenInteractorInputMock.swift */; };
+		6C933FD0294338D400E43857 /* BottleScreenFactoryInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C933FCF294338D400E43857 /* BottleScreenFactoryInputMock.swift */; };
+		6C933FD2294338E700E43857 /* BottleScreenViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C933FD1294338E700E43857 /* BottleScreenViewInputMock.swift */; };
+		6C933FD429433BD700E43857 /* BottleScreenModuleIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C933FD329433BD700E43857 /* BottleScreenModuleIntegrationTests.swift */; };
 		6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBCC28339EB900D2E4FA /* CoinScreenView.swift */; };
 		6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBCE28339F5A00D2E4FA /* CoinScreenModule.swift */; };
 		6C98CBD128339FE300D2E4FA /* CoinScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C98CBD028339FE300D2E4FA /* CoinScreenInteractor.swift */; };
@@ -211,8 +218,6 @@
 		6CBFD05A289BC56C005F9104 /* PasswordScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD059289BC56C005F9104 /* PasswordScreenAssembly.swift */; };
 		6CBFD05D289BC775005F9104 /* PasswordScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD05C289BC775005F9104 /* PasswordScreenCoordinator.swift */; };
 		6CBFD05F289C0EE2005F9104 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBFD05E289C0EE2005F9104 /* PasswordGeneratorView.swift */; };
-		6CCEB1182940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEB1172940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift */; };
-		6CCEB11B2940C83100150668 /* BottleScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCEB11A2940C83100150668 /* BottleScreenInteractorTests.swift */; };
 		6CE65F83282D0D5600272D56 /* YesNoScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F82282D0D5600272D56 /* YesNoScreenView.swift */; };
 		6CE65F85282D0DD900272D56 /* YesNoScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F84282D0DD900272D56 /* YesNoScreenModule.swift */; };
 		6CE65F87282D0DE300272D56 /* YesNoScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F86282D0DE300272D56 /* YesNoScreenInteractor.swift */; };
@@ -408,6 +413,13 @@
 		6C7D4D4A282E558400A086BC /* DateTimeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeFactory.swift; sourceTree = "<group>"; };
 		6C7D4D4C282E558E00A086BC /* DateTimeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeAssembly.swift; sourceTree = "<group>"; };
 		6C7D4D4F282E5A1D00A086BC /* DateTimeScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeScreenCoordinator.swift; sourceTree = "<group>"; };
+		6C933FC2294227FF00E43857 /* BottleScreenInteractorOutputSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenInteractorOutputSpy.swift; sourceTree = "<group>"; };
+		6C933FC42942293100E43857 /* BottleScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenInteractorTests.swift; sourceTree = "<group>"; };
+		6C933FCA2942698000E43857 /* TimerServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerServiceMock.swift; sourceTree = "<group>"; };
+		6C933FCD294338C100E43857 /* BottleScreenInteractorInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenInteractorInputMock.swift; sourceTree = "<group>"; };
+		6C933FCF294338D400E43857 /* BottleScreenFactoryInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenFactoryInputMock.swift; sourceTree = "<group>"; };
+		6C933FD1294338E700E43857 /* BottleScreenViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenViewInputMock.swift; sourceTree = "<group>"; };
+		6C933FD329433BD700E43857 /* BottleScreenModuleIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenModuleIntegrationTests.swift; sourceTree = "<group>"; };
 		6C98CBCC28339EB900D2E4FA /* CoinScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenView.swift; sourceTree = "<group>"; };
 		6C98CBCE28339F5A00D2E4FA /* CoinScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenModule.swift; sourceTree = "<group>"; };
 		6C98CBD028339FE300D2E4FA /* CoinScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinScreenInteractor.swift; sourceTree = "<group>"; };
@@ -452,8 +464,6 @@
 		6CBFD059289BC56C005F9104 /* PasswordScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenAssembly.swift; sourceTree = "<group>"; };
 		6CBFD05C289BC775005F9104 /* PasswordScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenCoordinator.swift; sourceTree = "<group>"; };
 		6CBFD05E289C0EE2005F9104 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
-		6CCEB1172940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenInteractorOutputSpy.swift; sourceTree = "<group>"; };
-		6CCEB11A2940C83100150668 /* BottleScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleScreenInteractorTests.swift; sourceTree = "<group>"; };
 		6CE65F82282D0D5600272D56 /* YesNoScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenView.swift; sourceTree = "<group>"; };
 		6CE65F84282D0DD900272D56 /* YesNoScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenModule.swift; sourceTree = "<group>"; };
 		6CE65F86282D0DE300272D56 /* YesNoScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenInteractor.swift; sourceTree = "<group>"; };
@@ -492,9 +502,8 @@
 		1B06E0EB28BF66CD00BD58FB /* Random Pro Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6CCEB1142940C57500150668 /* BottleScreenModule */,
-				1B3C87B729337AB9008B8AA6 /* MainScreenModule */,
-				1B06E0F328C0A92200BD58FB /* NumberScreenModule */,
+				6C933FC92942696700E43857 /* Modules */,
+				6C933FC72942695700E43857 /* Service */,
 			);
 			path = "Random Pro Tests";
 			sourceTree = "<group>";
@@ -1920,6 +1929,50 @@
 			path = DateTimeScreenCoordinator;
 			sourceTree = "<group>";
 		};
+		6C933FC62942669100E43857 /* IntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				6C933FD329433BD700E43857 /* BottleScreenModuleIntegrationTests.swift */,
+			);
+			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
+		6C933FC72942695700E43857 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6C933FC82942696200E43857 /* TimerService */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6C933FC82942696200E43857 /* TimerService */ = {
+			isa = PBXGroup;
+			children = (
+				6C933FCA2942698000E43857 /* TimerServiceMock.swift */,
+			);
+			path = TimerService;
+			sourceTree = "<group>";
+		};
+		6C933FC92942696700E43857 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				6CCEB1142940C57500150668 /* BottleScreenModule */,
+				1B3C87B729337AB9008B8AA6 /* MainScreenModule */,
+				1B06E0F328C0A92200BD58FB /* NumberScreenModule */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		6C933FCC2943379100E43857 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				6C933FCD294338C100E43857 /* BottleScreenInteractorInputMock.swift */,
+				6C933FCF294338D400E43857 /* BottleScreenFactoryInputMock.swift */,
+				6C933FD1294338E700E43857 /* BottleScreenViewInputMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		6C98CBC628339E8700D2E4FA /* CoinScreenModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -2347,6 +2400,8 @@
 		6CCEB1142940C57500150668 /* BottleScreenModule */ = {
 			isa = PBXGroup;
 			children = (
+				6C933FC62942669100E43857 /* IntegrationTests */,
+				6CCEB1192940C81900150668 /* UnitTests */,
 				6CCEB1152940C59000150668 /* TestsDoubles */,
 			);
 			path = BottleScreenModule;
@@ -2355,7 +2410,7 @@
 		6CCEB1152940C59000150668 /* TestsDoubles */ = {
 			isa = PBXGroup;
 			children = (
-				6CCEB1192940C81900150668 /* UnitTests */,
+				6C933FCC2943379100E43857 /* Mocks */,
 				6CCEB1162940C59900150668 /* Spy */,
 			);
 			path = TestsDoubles;
@@ -2364,7 +2419,7 @@
 		6CCEB1162940C59900150668 /* Spy */ = {
 			isa = PBXGroup;
 			children = (
-				6CCEB1172940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift */,
+				6C933FC2294227FF00E43857 /* BottleScreenInteractorOutputSpy.swift */,
 			);
 			path = Spy;
 			sourceTree = "<group>";
@@ -2372,7 +2427,7 @@
 		6CCEB1192940C81900150668 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				6CCEB11A2940C83100150668 /* BottleScreenInteractorTests.swift */,
+				6C933FC42942293100E43857 /* BottleScreenInteractorTests.swift */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -2595,19 +2650,24 @@
 			files = (
 				1B06E0F628C0A9D400BD58FB /* NumberScreenInteractorInputMock.swift in Sources */,
 				1BBE379028C0DE260087128D /* NumberScreenInteractorOutputSpy.swift in Sources */,
+				6C933FD429433BD700E43857 /* BottleScreenModuleIntegrationTests.swift in Sources */,
 				1B3C87BB29337B15008B8AA6 /* MainScreenInteractorOutputSpy.swift in Sources */,
+				6C933FD2294338E700E43857 /* BottleScreenViewInputMock.swift in Sources */,
 				1B06E0FD28C0B39300BD58FB /* NumberScreenFactoryInputMock.swift in Sources */,
 				1BBE378A28C0C10E0087128D /* NumberScreenViewInputMock.swift in Sources */,
 				1B3C87BE29337C0D008B8AA6 /* MainScreenInteractorTests.swift in Sources */,
 				1B3C87CA29338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift in Sources */,
 				1B3C87C729338B64008B8AA6 /* MainScreenViewInputMock.swift in Sources */,
-				6CCEB1182940C5CC00150668 /* BottleScreenInteractorOutputSpy.swift in Sources */,
 				1B3C87C329338B3E008B8AA6 /* MainScreenInteractorInputMock.swift in Sources */,
+				6C933FC3294227FF00E43857 /* BottleScreenInteractorOutputSpy.swift in Sources */,
 				1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */,
-				6CCEB11B2940C83100150668 /* BottleScreenInteractorTests.swift in Sources */,
+				6C933FC52942293100E43857 /* BottleScreenInteractorTests.swift in Sources */,
 				1B06E0FB28C0B05200BD58FB /* NumberScreenModuleIntegrationTests.swift in Sources */,
+				6C933FCE294338C100E43857 /* BottleScreenInteractorInputMock.swift in Sources */,
+				6C933FCB2942698000E43857 /* TimerServiceMock.swift in Sources */,
 				1B3C87C0293389B4008B8AA6 /* MainScreenInteractorTests+Methods.swift in Sources */,
 				1B3C87C529338B4F008B8AA6 /* MainScreenFactoryInputMock.swift in Sources */,
+				6C933FD0294338D400E43857 /* BottleScreenFactoryInputMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -95,6 +95,7 @@ final class CoinScreenViewController: CoinScreenModule {
 extension CoinScreenViewController: CoinScreenViewOutput {
   func generateButtonAction() {
     interactor.generateContentCoin()
+    interactor.playHapticFeedback()
   }
 }
 

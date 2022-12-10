@@ -46,7 +46,8 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var bottleScreenModule = BottleScreenAssembly().createModule(timerService: services.timerService)
+    var bottleScreenModule = BottleScreenAssembly().createModule(timerService: services.timerService,
+                                                                 hapticService: services.hapticService)
     self.bottleScreenModule = bottleScreenModule
     bottleScreenModule.moduleOutput = self
     navigationController.pushViewController(bottleScreenModule, animated: true)

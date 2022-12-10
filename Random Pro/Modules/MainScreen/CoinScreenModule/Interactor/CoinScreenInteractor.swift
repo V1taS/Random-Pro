@@ -32,6 +32,9 @@ protocol CoinScreenInteractorInput {
   
   /// Возвращает список результатов
   func returnListResult() -> [String]
+  
+  /// Запустить обратную связь от моторчика
+  func playHapticFeedback()
 }
 
 final class CoinScreenInteractor: CoinScreenInteractorInput {
@@ -44,6 +47,14 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   
   @ObjectCustomUserDefaultsWrapper<CoinScreenModel>(key: Appearance().keyUserDefaults)
   private var model: CoinScreenModel?
+  private let hapticService: HapticService
+  
+  // MARK: - Initialization
+  
+  /// - Parameter hapticService: Обратная связь от моторчика
+  init(hapticService: HapticService) {
+    self.hapticService = hapticService
+  }
   
   // MARK: - Internal func
   
@@ -87,6 +98,12 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
     } else {
       return []
     }
+  }
+  
+  func playHapticFeedback() {
+    hapticService.play(isRepeat: false,
+                       patternType: .splash,
+                       completion: { _ in })
   }
 }
 

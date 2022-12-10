@@ -87,6 +87,7 @@
 		1B7431AC28A7E86D00205C2C /* TeamsScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7431AB28A7E86D00205C2C /* TeamsScreenModel.swift */; };
 		1B7431B028A8020C00205C2C /* TeamsScreenPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7431AF28A8020C00205C2C /* TeamsScreenPlayerModel.swift */; };
 		1B7431B228A805A800205C2C /* ListPlayersScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7431B128A805A800205C2C /* ListPlayersScreenType.swift */; };
+		1B75D37F294494BB000BB3E1 /* HapticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B75D37E294494BB000BB3E1 /* HapticService.swift */; };
 		1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667025D0856300933AD6 /* AppDelegate.swift */; };
 		1B7F667325D0856300933AD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7F667225D0856300933AD6 /* SceneDelegate.swift */; };
 		1B7F667A25D0856300933AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B7F667925D0856300933AD6 /* Assets.xcassets */; };
@@ -337,6 +338,7 @@
 		1B7431AB28A7E86D00205C2C /* TeamsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenModel.swift; sourceTree = "<group>"; };
 		1B7431AF28A8020C00205C2C /* TeamsScreenPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenPlayerModel.swift; sourceTree = "<group>"; };
 		1B7431B128A805A800205C2C /* ListPlayersScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlayersScreenType.swift; sourceTree = "<group>"; };
+		1B75D37E294494BB000BB3E1 /* HapticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticService.swift; sourceTree = "<group>"; };
 		1B7F666D25D0856300933AD6 /* Random Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Random Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B7F667025D0856300933AD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B7F667225D0856300933AD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1250,6 +1252,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1B75D37D294494B4000BB3E1 /* HapticService */ = {
+			isa = PBXGroup;
+			children = (
+				1B75D37E294494BB000BB3E1 /* HapticService.swift */,
+			);
+			path = HapticService;
+			sourceTree = "<group>";
+		};
 		1B7F666425D0856300933AD6 = {
 			isa = PBXGroup;
 			children = (
@@ -1323,6 +1333,7 @@
 			isa = PBXGroup;
 			children = (
 				1B941DDD282179A200D968DF /* ApplicationServices.swift */,
+				1B75D37D294494B4000BB3E1 /* HapticService */,
 				1BEFBADA2932689D000B002D /* TimerService */,
 				1B1293642917B3D000EDDB71 /* DeepLinkService */,
 				1B4A5C9B28B9260800215064 /* PermissionService */,
@@ -2787,6 +2798,7 @@
 				1B08ADAB28CDDB57007290F3 /* ColorsScreenCoordinator.swift in Sources */,
 				6CA3962E2832533A00F86248 /* LetterScreenCoordinator.swift in Sources */,
 				6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */,
+				1B75D37F294494BB000BB3E1 /* HapticService.swift in Sources */,
 				6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */,
 				1BEFBADC293268A3000B002D /* TimerService.swift in Sources */,
 				1B412BA728C7DFE60078126F /* FileManager.swift in Sources */,
@@ -3079,7 +3091,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "armv7, armv7s, arm64, arm64e, x86_64";
@@ -3087,7 +3099,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.11.0;
+				MARKETING_VERSION = 730.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3106,14 +3118,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 106;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "armv7, armv7s, arm64, arm64e, x86_64";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "armv7, armv7s, arm64, arm64e, x86_64";
 				INFOPLIST_FILE = "$(SRCROOT)/Random Pro/System/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.11.0;
+				MARKETING_VERSION = 730.13.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";

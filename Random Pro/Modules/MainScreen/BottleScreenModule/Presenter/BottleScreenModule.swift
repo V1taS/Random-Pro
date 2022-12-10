@@ -69,18 +69,16 @@ extension BottleScreenViewController: BottleScreenViewOutput {
   
   func bottleRotationButtonAction() {
     interactor.generatesBottleRotationTimeAction()
+    interactor.playHapticFeedback()
   }
 }
 
 // MARK: - BottleScreenInteractorOutput
 
 extension BottleScreenViewController: BottleScreenInteractorOutput {
-  func tactileFeedbackBottleRotates() {
-    moduleView.tactileFeedbackBottleRotates()
-  }
-  
   func stopBottleRotation() {
     moduleView.stopBottleRotation()
+    interactor.stopHapticFeedback()
   }
 }
 
@@ -105,6 +103,7 @@ private extension BottleScreenViewController {
   @objc
   func resetButtonAction() {
     moduleView.resetPositionBottle()
+    interactor.stopHapticFeedback()
   }
 }
 

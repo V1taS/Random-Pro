@@ -13,9 +13,6 @@ protocol BottleScreenInteractorOutput: AnyObject {
   
   /// Остановить вращение бутылки
   func stopBottleRotation()
-  
-  /// Вибрация при вращении бутылочки
-  func tactileFeedbackBottleRotates()
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -23,6 +20,12 @@ protocol BottleScreenInteractorInput {
   
   /// Пользователь нажал на кнопку
   func generatesBottleRotationTimeAction()
+  
+  /// Запустить обратную связь от моторчика
+  func playHapticFeedback()
+  
+  /// Остановить обратную связь от моторчика
+  func stopHapticFeedback()
 }
 
 final class BottleScreenInteractor: BottleScreenInteractorInput {
@@ -35,13 +38,16 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   
   private let bottleImageView = UIImageView()
   private let timerService: TimerService
+  private let hapticService: HapticService
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - timerService: время
-  init(_ timerService: TimerService) {
+  ///   - hapticService: Обратная связь от моторчика
+  init(_ timerService: TimerService, hapticService: HapticService) {
     self.timerService = timerService
+    self.hapticService = hapticService
   }
   
   // MARK: - Internal property
@@ -52,25 +58,36 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
     let totalRandomTime = generateRandomTime(requiredNumberOfLaps)
     
     timerService.startTimerWith(seconds: totalRandomTime,
-                                timerTickAction: { [weak self] _ in
-      self?.output?.tactileFeedbackBottleRotates()
-    },
+                                timerTickAction: nil,
                                 timerFinishedAction: { [weak self] in
       self?.output?.stopBottleRotation()
     })
   }
   
-  // MARK: - Private
+  func playHapticFeedback() {
+    hapticService.play(isRepeat: true,
+                       patternType: .feedingCrocodile) { _ in }
+  }
   
-  private func generateNumberOfLaps(_ laps: [Double]) -> Double {
+  func stopHapticFeedback() {
+    hapticService.stop()
+  }
+}
+
+// MARK: - Private
+
+private extension BottleScreenInteractor {
+  func generateNumberOfLaps(_ laps: [Double]) -> Double {
     return laps.shuffled().first ?? .zero
   }
   
-  private func generateRandomTime(_ numberOfLaps: Double) -> Double {
+  func generateRandomTime(_ numberOfLaps: Double) -> Double {
     let randomTime = Double.random(in: 1...5)
     return numberOfLaps + randomTime
   }
 }
+
+// MARK: - Appearance
 
 private extension BottleScreenInteractor {
   struct Appearance {

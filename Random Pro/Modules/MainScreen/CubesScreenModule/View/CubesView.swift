@@ -50,12 +50,30 @@ final class CubesView: UIView {
   ///  - Parameter type: Тип кубиков
   func updateCubesWith(type: CubesScreenModel.CubesType) {
     self.configureConstraintsWith(type: type)
+    
+    cubeOneImageView.transform = CGAffineTransformRotate(.identity,
+                                                         generateRandomAngle())
+    cubesTwoImageView.transform = CGAffineTransformRotate(.identity,
+                                                          generateRandomAngle())
+    cubesThreeImageView.transform = CGAffineTransformRotate(.identity,
+                                                            generateRandomAngle())
+    cubesFourImageView.transform = CGAffineTransformRotate(.identity,
+                                                           generateRandomAngle())
+    cubesFiveImageView.transform = CGAffineTransformRotate(.identity,
+                                                           generateRandomAngle())
+    cubesSixImageView.transform = CGAffineTransformRotate(.identity,
+                                                          generateRandomAngle())
   }
 }
 
 // MARK: - Private
 
 private extension CubesView {
+  func generateRandomAngle() -> Double {
+    let random = Double.random(in: 1...1_000)
+    return Double(2 * Double.pi * 1000) / Double(random)
+  }
+  
   func configureLayout() {
     [cubeOneImageView, cubesTwoImageView, cubesThreeImageView,
      cubesFourImageView, cubesFiveImageView, cubesSixImageView].forEach {

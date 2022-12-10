@@ -82,7 +82,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
     resultLabel.isHidden = !plagIsShow
     cubesView.isHidden = plagIsShow
     cubesView.zoomIn(duration: Appearance().resultDuration,
-                     transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
+                     transformScale: CGAffineTransform(scaleX: 0.9, y: 0.9))
     generateButton.setTitle(buttonTitle, for: .normal)
   }
 }

@@ -48,7 +48,7 @@ final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let coinScreenModule = CoinScreenAssembly().createModule()
+    let coinScreenModule = CoinScreenAssembly().createModule(hapticService: services.hapticService)
     self.coinScreenModule = coinScreenModule
     self.coinScreenModule?.moduleOutput = self
     navigationController.pushViewController(coinScreenModule, animated: true)

@@ -22,9 +22,6 @@ protocol BottleScreenViewInput {
   /// Остановить вращение бутылочки
   func stopBottleRotation()
   
-  /// Отклик при вращении бутылочки
-  func tactileFeedbackBottleRotates()
-  
   /// Сброс текущего положения на начальное
   func resetPositionBottle()
 }
@@ -58,10 +55,6 @@ final class BottleScreenView: BottleScreenViewProtocol {
   }
   
   // MARK: - Intarnal func
-  
-  func tactileFeedbackBottleRotates() {
-    UIImpactFeedbackGenerator(style: .soft).impactOccurred()
-  }
   
   func stopBottleRotation() {
     bottleImageView.pauseRotation()

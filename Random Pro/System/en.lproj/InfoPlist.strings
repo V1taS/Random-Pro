@@ -6,6 +6,7 @@
   Copyright © 2022 SosinVitalii.com. All rights reserved.
 */
 
-"NSContactsUsageDescription" = "Provide access to randomly generate contacts";
-"NSAppleMusicUsageDescription" = "Please provide access to the music library to generate songs";
+"NSContactsUsageDescription" = "Share your contacts so we can randomly generate them.";
 "NSUserTrackingUsageDescription" = "Can you use your activity data? If you allow, Random Pro's ads on websites and other apps will be more relevant.";
+"NSPhotoLibraryAddUsageDescription" = "Give access to your gallery so you can save ready-made 'Image results' or upload photos to Random Pro for random filtering.";
+"NSPhotoLibraryUsageDescription" = "Give access to your gallery so you can save ready-made 'Image results' or upload photos to Random Pro for random filtering.";

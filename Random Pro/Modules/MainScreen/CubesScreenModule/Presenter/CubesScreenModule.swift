@@ -32,6 +32,10 @@ protocol CubesScreenModuleInput {
   /// Запросить текущую модель
   func returnCurrentModel() -> CubesScreenModel
   
+  /// Показать список генераций результатов
+  /// - Parameter isShow: показать  список генераций результатов
+  func listGenerated(isShow: Bool)
+  
   /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: CubesScreenModuleOutput? { get set }
 }
@@ -92,17 +96,24 @@ final class CubesScreenViewController: CubesScreenModule {
   func cleanButtonAction() {
     interactor.cleanButtonAction()
   }
+  
+  func listGenerated(isShow: Bool) {
+    moduleView.listGenerated(isShow: isShow)
+    interactor.listGenerated(isShow: isShow)
+  }
 }
 
 // MARK: - CubesScreenViewOutput
 
 extension CubesScreenViewController: CubesScreenViewOutput {
-  func updateSelectedCountCubes(_ count: Int) {
-    interactor.updateSelectedCountCubes(count)
+  func updateSelectedCountCubes(_ cubesType: CubesScreenModel.CubesType) {
+    interactor.updateSelectedCountCubes(cubesType)
   }
   
-  func generateButtonAction() {
-    interactor.generateButtonAction()
+  func diceAction(totalValue: Int) {
+    interactor.diceAction(totalValue: totalValue)
+    let listResult = factory.reverseListResult(interactor.returnCurrentModel().listResult)
+    moduleView.updateContentWith(listResult: listResult)
   }
 }
 
@@ -114,11 +125,9 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
   }
   
   func didReceive(model: CubesScreenModel) {
-    moduleView.updateContentWith(selectedCountCubes: model.selectedCountCubes,
-                                 cubesType: model.cubesType,
-                                 listResult: factory.reverseListResult(model.listResult),
-                                 plagIsShow: model.listResult.isEmpty)
+    moduleView.updateContentWith(cubesType: model.cubesType)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+    moduleView.listGenerated(isShow: model.isShowlistGenerated)
   }
 }
 

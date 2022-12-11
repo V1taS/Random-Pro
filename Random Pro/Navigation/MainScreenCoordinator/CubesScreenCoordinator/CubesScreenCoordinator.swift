@@ -60,7 +60,8 @@ final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
 extension CubesScreenCoordinator: CubesScreenModuleOutput {
   func cleanButtonWasSelected() {
     let model = cubesScreenModule?.returnCurrentModel()
-    settingsScreenCoordinator?.setupDefaultsSettings(for: .cube(itemsGenerated: "\(model?.listResult.count ?? .zero)",
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .cube(isShowlistGenerated: model?.isShowlistGenerated ?? true,
+                                                                itemsGenerated: "\(model?.listResult.count ?? .zero)",
                                                                 lastItem: "\(model?.listResult.last ?? "")"))
   }
   
@@ -70,7 +71,8 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .cube(itemsGenerated: "\(model.listResult.count)",
+    settingsScreenCoordinator.setupDefaultsSettings(for: .cube(isShowlistGenerated: model.isShowlistGenerated,
+                                                               itemsGenerated: "\(model.listResult.count)",
                                                                lastItem: "\(model.listResult.last ?? "")"))
   }
   
@@ -86,7 +88,9 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension CubesScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func withoutRepetitionAction(isOn: Bool) {}
+  func withoutRepetitionAction(isOn: Bool) {
+    cubesScreenModule?.listGenerated(isShow: isOn)
+  }
   
   func cleanButtonAction() {
     cubesScreenModule?.cleanButtonAction()

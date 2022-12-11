@@ -155,7 +155,10 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case let .cube(itemsGenerated, lastItem):
+    case let .cube(isShowlistGenerated, itemsGenerated, lastItem):
+      tableViewModels.append(.titleAndSwitcher(title: appearance.numberOfGenerations,
+                                               isEnabled: isShowlistGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
@@ -223,7 +226,7 @@ private extension SettingsScreenFactory {
     let allPlayersCount = NSLocalizedString("Всего игроков",
                                             comment: "")
     let allTextCount = NSLocalizedString("Всего элементов",
-                                            comment: "")
+                                         comment: "")
     let generatedPlayersCount = NSLocalizedString("Cгенерировано игроков",
                                                   comment: "")
     let createListID = "createListID"

@@ -162,6 +162,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = cubesScreenCoordinator
     cubesScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .cube)
     services.metricsService.track(event: .cubeScreen)
   }
   

@@ -13,34 +13,31 @@ struct CubesScreenModel: UserDefaultsCodable {
   /// Список результатов
   let listResult: [String]
   
-  /// Количество кубиков (1-6)
-  let selectedCountCubes: Int
+  /// Показать список результатов
+  let isShowlistGenerated: Bool
   
   /// Тип кубиков
   let cubesType: CubesType
   
   /// Тип кубиков
-  enum CubesType: UserDefaultsCodable {
+  enum CubesType: Int, UserDefaultsCodable {
     
     /// Один кубик
-    case cubesOne(Int)
+    case cubesOne
     
     /// Два кубика
-    case cubesTwo(cubesOne: Int, cubesTwo: Int)
+    case cubesTwo
     
     /// Три кубика
-    case cubesThree(cubesOne: Int, cubesTwo: Int, cubesThree: Int)
+    case cubesThree
     
     /// Четыре кубика
-    case cubesFour(cubesOne: Int, cubesTwo: Int, cubesThree: Int,
-                   cubesFour: Int)
+    case cubesFour
     
     /// Пять кубиков
-    case cubesFive(cubesOne: Int, cubesTwo: Int, cubesThree: Int,
-                   cubesFour: Int, cubesFive: Int)
+    case cubesFive
     
     /// Шесть кубиков
-    case cubesSix(cubesOne: Int, cubesTwo: Int, cubesThree: Int,
-                  cubesFour: Int, cubesFive: Int, cubesSix: Int)
+    case cubesSix
   }
 }

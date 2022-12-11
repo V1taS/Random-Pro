@@ -12,33 +12,35 @@ import RandomUIKit
 /// События которые отправляем из View в Presenter
 protocol CubesScreenViewOutput: AnyObject {
   
-  /// Пользователь нажал на кнопку генерации
-  func generateButtonAction()
-  
   /// Обновить количество кубиков
   ///  - Parameter count: Количество кубиков
-  func updateSelectedCountCubes(_ count: Int)
+  func updateSelectedCountCubes(_ cubesType: CubesScreenModel.CubesType)
+  
+  /// Кубики были подкинуты
+  /// - Parameter totalValue: Сумма всех кубиков
+  func diceAction(totalValue: Int)
 }
 
 /// События которые отправляем от Presenter ко View
 protocol CubesScreenViewInput {
   
   /// Обновить контент
-  ///  - Parameters:
-  ///   - selectedCountCubes: Количество кубиков
-  ///   - cubesType: Тип кубиков
-  ///   - listResult: Список результатов
-  ///   - plagIsShow: Заглушка
-  func updateContentWith(selectedCountCubes: Int,
-                         cubesType: CubesScreenModel.CubesType,
-                         listResult: [String],
-                         plagIsShow: Bool)
+  ///  - Parameter cubesType: Тип кубиков
+  func updateContentWith(cubesType: CubesScreenModel.CubesType)
+  
+  /// Обновить контент
+  ///  - Parameter listResult: Список результатов
+  func updateContentWith(listResult: [String])
+  
+  /// Показать список генераций результатов
+  /// - Parameter isShow: показать  список генераций результатов
+  func listGenerated(isShow: Bool)
 }
 
 typealias CubesScreenViewProtocol = UIView & CubesScreenViewInput
 
 final class CubesScreenView: CubesScreenViewProtocol {
-  
+
   // MARK: - Internal property
   
   weak var output: CubesScreenViewOutput?
@@ -47,9 +49,10 @@ final class CubesScreenView: CubesScreenViewProtocol {
   
   private let cubesSegmentedControl = UISegmentedControl()
   private let scrollResultView = ScrollLabelGradientView()
-  private let resultLabel = UILabel()
   private let generateButton = ButtonView()
   private let cubesView = CubesView()
+  private var totalValueDice: Int = .zero
+  private var counter: Int = .zero
   
   // MARK: - Initialization
   
@@ -65,25 +68,18 @@ final class CubesScreenView: CubesScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(selectedCountCubes: Int,
-                         cubesType: CubesScreenModel.CubesType,
-                         listResult: [String],
-                         plagIsShow: Bool) {
-    let appearance = Appearance()
-    let buttonTitle = selectedCountCubes - 1 == 0 ?
-    appearance.buttonOneCubeTitle :
-    appearance.buttonSomeCubeTitle
-    
-    cubesSegmentedControl.selectedSegmentIndex = selectedCountCubes - 1
-    
+  func updateContentWith(cubesType: CubesScreenModel.CubesType) {
+    cubesSegmentedControl.selectedSegmentIndex = cubesType.rawValue
     cubesView.updateCubesWith(type: cubesType)
+    setButtinTitle()
+  }
+  
+  func updateContentWith(listResult: [String]) {
     scrollResultView.listLabels = listResult
-    
-    resultLabel.isHidden = !plagIsShow
-    cubesView.isHidden = plagIsShow
-    cubesView.zoomIn(duration: Appearance().resultDuration,
-                     transformScale: CGAffineTransform(scaleX: 0.9, y: 0.9))
-    generateButton.setTitle(buttonTitle, for: .normal)
+  }
+  
+  func listGenerated(isShow: Bool) {
+    scrollResultView.isHidden = !isShow
   }
 }
 
@@ -111,18 +107,29 @@ private extension CubesScreenView {
                                     action: #selector(cubesSegmentedAction),
                                     for: .valueChanged)
     
-    resultLabel.text = appearance.result
-    resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.primaryGray
-    resultLabel.textAlignment = .center
-    
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    
+    cubesView.totalValueDiceAction = { [weak self] valueDice in
+      guard let self = self else {
+        return
+      }
+      
+      let countCube = self.cubesSegmentedControl.selectedSegmentIndex + 1
+      self.totalValueDice += valueDice
+      self.counter += 1
+      
+      if countCube == self.counter {
+        self.output?.diceAction(totalValue: self.totalValueDice)
+        self.totalValueDice = .zero
+        self.counter = .zero
+      }
+    }
   }
   
   func setupConstraints() {
     let appearance = Appearance()
     
-    [cubesSegmentedControl, resultLabel, cubesView, scrollResultView, generateButton].forEach {
+    [cubesSegmentedControl, cubesView, scrollResultView, generateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -144,13 +151,6 @@ private extension CubesScreenView {
       cubesView.bottomAnchor.constraint(equalTo: scrollResultView.topAnchor,
                                         constant: -appearance.defaultInset),
       
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.defaultInset),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.defaultInset),
-      resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-      resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
@@ -165,20 +165,25 @@ private extension CubesScreenView {
     ])
   }
   
+  func setButtinTitle() {
+    let appearance = Appearance()
+    let cubeType = CubesScreenModel.CubesType(rawValue: cubesSegmentedControl.selectedSegmentIndex) ?? .cubesTwo
+    let buttonTitle = cubeType == .cubesOne ? appearance.buttonOneCubeTitle : appearance.buttonSomeCubeTitle
+    generateButton.setTitle(buttonTitle, for: .normal)
+  }
+  
   @objc
   func generateButtonAction() {
-    output?.generateButtonAction()
+    cubesView.handleTap()
   }
   
   @objc
   func cubesSegmentedAction() {
-    let appearance = Appearance()
-    output?.updateSelectedCountCubes(cubesSegmentedControl.selectedSegmentIndex + 1)
-    let buttonTitle = cubesSegmentedControl.selectedSegmentIndex == 0 ?
-    appearance.buttonOneCubeTitle :
-    appearance.buttonSomeCubeTitle
+    let cubeType = CubesScreenModel.CubesType(rawValue: cubesSegmentedControl.selectedSegmentIndex) ?? .cubesTwo
     
-    generateButton.setTitle(buttonTitle, for: .normal)
+    output?.updateSelectedCountCubes(cubeType)
+    cubesView.updateCubesWith(type: cubeType)
+    setButtinTitle()
   }
 }
 
@@ -202,9 +207,7 @@ private extension CubesScreenView {
     let numberFour = "4"
     let numberFive = "5"
     let numberSix = "6"
-    
-    let result = "?"
-    
+
     let buttonOneCubeTitle = NSLocalizedString("Бросить кубик", comment: "")
     let buttonSomeCubeTitle = NSLocalizedString("Бросить кубики", comment: "")
     

@@ -357,7 +357,7 @@ private extension MainScreenInteractor {
           isEnabled: true,
           titleSection: appearance.titleCardCube,
           imageSection: appearance.imageCardCube.pngData() ?? Data(),
-          advLabel: .none
+          advLabel: .new
         ))
       case .dateAndTime:
         allSections.append(MainScreenModel.Section(

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "die.one.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -89,6 +89,7 @@ private extension CubesScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
+    scrollResultView.backgroundColor = .clear
     
     cubesSegmentedControl.insertSegment(withTitle: appearance.numberOne,
                                         at: appearance.numberIndexZero, animated: false)
@@ -142,14 +143,10 @@ private extension CubesScreenView {
       cubesSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
                                                  constant: appearance.minInset),
       
-      cubesView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                         constant: appearance.defaultInset),
-      cubesView.topAnchor.constraint(equalTo: cubesSegmentedControl.bottomAnchor,
-                                     constant: appearance.defaultInset),
-      cubesView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                          constant: -appearance.defaultInset),
-      cubesView.bottomAnchor.constraint(equalTo: scrollResultView.topAnchor,
-                                        constant: -appearance.defaultInset),
+      cubesView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      cubesView.topAnchor.constraint(equalTo: cubesSegmentedControl.bottomAnchor),
+      cubesView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      cubesView.bottomAnchor.constraint(equalTo: generateButton.topAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),

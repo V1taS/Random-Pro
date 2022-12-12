@@ -273,7 +273,9 @@ private extension MainScreenViewController {
   
   @objc
   func shareButtonAction() {
-    guard let url = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956") else {
+    guard
+      let url = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен_App_Store", comment: ""))/app/random-pro/id1552813956")
+    else {
       return
     }
     moduleOutput?.shareButtonAction(url)

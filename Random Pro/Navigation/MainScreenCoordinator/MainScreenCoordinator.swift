@@ -337,6 +337,6 @@ private extension MainScreenCoordinator {
 
 private extension MainScreenCoordinator {
   struct Appearance {
-    let shareAppUrl = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен", comment: ""))/app/random-pro/id1552813956")
+    let shareAppUrl = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен_App_Store", comment: ""))/app/random-pro/id1552813956")
   }
 }

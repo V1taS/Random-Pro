@@ -291,6 +291,14 @@ private extension MainScreenInteractor {
           imageSection: model.imageSection,
           advLabel: model.advLabel
         ))
+      case .rockPaperScissors:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          titleSection: appearance.titleRockPaperScissors,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
       }
     }
     
@@ -407,6 +415,14 @@ private extension MainScreenInteractor {
           imageSection: appearance.bottleCardImage.pngData() ?? Data(),
           advLabel: .new
         ))
+      case .rockPaperScissors:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          titleSection: appearance.titleRockPaperScissors,
+          imageSection: appearance.imageRockPaperScissorsScreenView.pngData() ?? Data(),
+          advLabel: .new
+          ))
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -461,5 +477,8 @@ private extension MainScreenInteractor {
     
     let bottleCardImage = UIImage(systemName: "arrow.triangle.2.circlepath") ?? UIImage()
     let titleBottle = NSLocalizedString("Бутылочка", comment: "")
+    
+    let imageRockPaperScissorsScreenView = UIImage(systemName: "hurricane.circle") ?? UIImage()
+    let titleRockPaperScissors = NSLocalizedString("Цу-е-фа", comment: "")
   }
 }

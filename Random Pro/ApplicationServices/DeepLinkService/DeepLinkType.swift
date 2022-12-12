@@ -59,6 +59,9 @@ enum DeepLinkType: String, CaseIterable {
   /// Экран Бутылочка
   case bottleScreen = "bottle_screen"
   
+  /// Экран Камень ножницы бумага
+  case rockPaperScissorsScreen = "rock_paper_scissors_screen"
+  
   // MARK: - Other
   
   /// Обновить приложением

@@ -92,6 +92,15 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     services.permissionService.requestNotification { _ in }
   }
   
+  func openRockPaperScissors() {
+    let rockPaperScissorsScreenCoordinator = RockPaperScissorsScreenCoordinator(navigationController,
+                                                                                services)
+    anyCoordinator = rockPaperScissorsScreenCoordinator
+    rockPaperScissorsScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .rockPaperScissors)
+  }
+  
   func openBottle() {
     let bottleScreenCoordinator = BottleScreenCoordinator(navigationController,
                                                           services)
@@ -318,6 +327,8 @@ private extension MainScreenCoordinator {
       openNumber()
     case .bottleScreen:
       openBottle()
+    case .rockPaperScissorsScreen:
+      openRockPaperScissors()
     }
   }
 }

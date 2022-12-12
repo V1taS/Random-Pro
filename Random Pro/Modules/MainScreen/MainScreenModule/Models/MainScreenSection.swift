@@ -81,6 +81,9 @@ struct MainScreenModel: UserDefaultsCodable {
     
     /// Раздел: `Бутылочка`
     case bottle
+    
+    /// Раздел `Камень, ножницы, бумага`
+    case rockPaperScissors
   }
   
   // MARK: - ADVLabel

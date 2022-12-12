@@ -49,6 +49,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Bottle`
   func openBottle()
   
+  /// Открыть раздел `rockPaperScissors`
+  func openRockPaperScissors()
+  
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
   
@@ -176,6 +179,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openRockPaperScissors() {
+    moduleOutput?.openRockPaperScissors()
+  }
+  
   func openBottle() {
     moduleOutput?.openBottle()
   }

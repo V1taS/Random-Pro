@@ -148,6 +148,12 @@
 		1BE55B102917119600EF135E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
 		1BEFBADC293268A3000B002D /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEFBADB293268A3000B002D /* TimerService.swift */; };
 		1BF4137F28E0C0A2001F3F0F /* MetricsServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */; };
+		6C12706C29473126000D3852 /* RockPaperScissorsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C12706B29473126000D3852 /* RockPaperScissorsScreenView.swift */; };
+		6C12706E29473136000D3852 /* RockPaperScissorsScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C12706D29473136000D3852 /* RockPaperScissorsScreenModule.swift */; };
+		6C12707029473143000D3852 /* RockPaperScissorsScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C12706F29473143000D3852 /* RockPaperScissorsScreenInteractor.swift */; };
+		6C1270722947314C000D3852 /* RockPaperScissorsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1270712947314C000D3852 /* RockPaperScissorsScreenFactory.swift */; };
+		6C1270742947315B000D3852 /* RockPaperScissorsScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1270732947315B000D3852 /* RockPaperScissorsScreenAssembly.swift */; };
+		6C1270772947371E000D3852 /* RockPaperScissorsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1270762947371E000D3852 /* RockPaperScissorsScreenCoordinator.swift */; };
 		6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */; };
 		6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */; };
 		6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */; };
@@ -395,6 +401,12 @@
 		1BE180ED2916E0B90084F9E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BEFBADB293268A3000B002D /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		1BF4137E28E0C0A2001F3F0F /* MetricsServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsServiceModel.swift; sourceTree = "<group>"; };
+		6C12706B29473126000D3852 /* RockPaperScissorsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperScissorsScreenView.swift; sourceTree = "<group>"; };
+		6C12706D29473136000D3852 /* RockPaperScissorsScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperScissorsScreenModule.swift; sourceTree = "<group>"; };
+		6C12706F29473143000D3852 /* RockPaperScissorsScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperScissorsScreenInteractor.swift; sourceTree = "<group>"; };
+		6C1270712947314C000D3852 /* RockPaperScissorsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperScissorsScreenFactory.swift; sourceTree = "<group>"; };
+		6C1270732947315B000D3852 /* RockPaperScissorsScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperScissorsScreenAssembly.swift; sourceTree = "<group>"; };
+		6C1270762947371E000D3852 /* RockPaperScissorsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockPaperScissorsScreenCoordinator.swift; sourceTree = "<group>"; };
 		6C1A0CB72834E8C600A3040E /* LotteryScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenView.swift; sourceTree = "<group>"; };
 		6C1A0CB92834E95200A3040E /* LotteryScreenModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenModule.swift; sourceTree = "<group>"; };
 		6C1A0CBB2834EA0000A3040E /* LotteryScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryScreenInteractor.swift; sourceTree = "<group>"; };
@@ -601,6 +613,7 @@
 		1B0ED19E28D4D8F4001BACF6 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				6C127065294730D6000D3852 /* RockPaperScissorsScreenModule */,
 				6C2320F329361BB700954F39 /* BottleScreenModule */,
 				1B0ED1E528D54DE2001BACF6 /* OnboardingScreenModule */,
 				1B0ED1D228D54460001BACF6 /* UpdateAppScreenModule */,
@@ -1436,6 +1449,7 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				6C12707529473706000D3852 /* RockPaperScissorsScreenCoordinator */,
 				6C2321032936239F00954F39 /* BottleScreenCoordinator */,
 				1B0ED1F528D54E45001BACF6 /* OnboardingScreenCoordinator */,
 				1B0ED1E228D54514001BACF6 /* UpdateAppScreenCoordinator */,
@@ -1732,6 +1746,66 @@
 				1B06E0FA28C0B05200BD58FB /* NumberScreenModuleIntegrationTests.swift */,
 			);
 			path = IntegrationTests;
+			sourceTree = "<group>";
+		};
+		6C127065294730D6000D3852 /* RockPaperScissorsScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				6C12706A2947310E000D3852 /* View */,
+				6C12706929473108000D3852 /* Presenter */,
+				6C127068294730FF000D3852 /* Interactor */,
+				6C127067294730F7000D3852 /* Factory */,
+				6C127066294730EE000D3852 /* Assembly */,
+			);
+			path = RockPaperScissorsScreenModule;
+			sourceTree = "<group>";
+		};
+		6C127066294730EE000D3852 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6C1270732947315B000D3852 /* RockPaperScissorsScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6C127067294730F7000D3852 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				6C1270712947314C000D3852 /* RockPaperScissorsScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		6C127068294730FF000D3852 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6C12706F29473143000D3852 /* RockPaperScissorsScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6C12706929473108000D3852 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6C12706D29473136000D3852 /* RockPaperScissorsScreenModule.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6C12706A2947310E000D3852 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6C12706B29473126000D3852 /* RockPaperScissorsScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6C12707529473706000D3852 /* RockPaperScissorsScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6C1270762947371E000D3852 /* RockPaperScissorsScreenCoordinator.swift */,
+			);
+			path = RockPaperScissorsScreenCoordinator;
 			sourceTree = "<group>";
 		};
 		6C1A0CB12834E88000A3040E /* LotteryScreenModule */ = {
@@ -2698,6 +2772,7 @@
 				1B0ED1DA28D5447B001BACF6 /* UpdateAppScreenAssembly.swift in Sources */,
 				6CA3962528324FC500F86248 /* LetterScreenModule.swift in Sources */,
 				1B08ADA128CDDAD5007290F3 /* ColorsScreenAssembly.swift in Sources */,
+				6C12706E29473136000D3852 /* RockPaperScissorsScreenModule.swift in Sources */,
 				1B0ED1ED28D54E05001BACF6 /* OnboardingScreenAssembly.swift in Sources */,
 				6CBFD056289BC4ED005F9104 /* PasswordScreenInteractor.swift in Sources */,
 				6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */,
@@ -2732,6 +2807,7 @@
 				6CA6201B28B62DE30078C971 /* CubesScreenAssembly.swift in Sources */,
 				6CA6201E28B62DE30078C971 /* CubesScreenView.swift in Sources */,
 				1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */,
+				6C1270772947371E000D3852 /* RockPaperScissorsScreenCoordinator.swift in Sources */,
 				1B0ED1F728D54E5A001BACF6 /* OnboardingScreenCoordinator.swift in Sources */,
 				1B0ED1D928D5447B001BACF6 /* UpdateAppScreenViewController.swift in Sources */,
 				6CA6202028B62DE30078C971 /* CubesScreenFactory.swift in Sources */,
@@ -2764,6 +2840,7 @@
 				1B9D455C283BDC7C00A85F25 /* SettingsScreenView.swift in Sources */,
 				6CA3962328324F3500F86248 /* LetterScreenView.swift in Sources */,
 				6C7D4D45282E556400A086BC /* DateTimeView.swift in Sources */,
+				6C1270742947315B000D3852 /* RockPaperScissorsScreenAssembly.swift in Sources */,
 				1B224BC428B9996200AC5D97 /* ContactScreenModel.swift in Sources */,
 				1BA83CF72879DA42000035E3 /* UserDefaultsCodable.swift in Sources */,
 				6C7662CB287A430A0069C13E /* DateTimeScreenModel.swift in Sources */,
@@ -2797,6 +2874,7 @@
 				1B08AD9F28CDDAD5007290F3 /* ColorsScreenFactory.swift in Sources */,
 				1B08ADAB28CDDB57007290F3 /* ColorsScreenCoordinator.swift in Sources */,
 				6CA3962E2832533A00F86248 /* LetterScreenCoordinator.swift in Sources */,
+				6C12706C29473126000D3852 /* RockPaperScissorsScreenView.swift in Sources */,
 				6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */,
 				1B75D37F294494BB000BB3E1 /* HapticService.swift in Sources */,
 				6C1A0CB82834E8C600A3040E /* LotteryScreenView.swift in Sources */,
@@ -2843,6 +2921,7 @@
 				1B941DE028217FF600D968DF /* UserDefaultsWrapper.swift in Sources */,
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,
 				6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */,
+				6C12707029473143000D3852 /* RockPaperScissorsScreenInteractor.swift in Sources */,
 				6C7662CE287A4B210069C13E /* LotteryScreenModel.swift in Sources */,
 				6C2320FC29361C4200954F39 /* BottleScreenModule.swift in Sources */,
 				1B96E10428204CD000A23880 /* MainScreenCollectionViewCell.swift in Sources */,
@@ -2870,6 +2949,7 @@
 				6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */,
 				6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */,
 				6CA6202F28B633280078C971 /* ContactScreenInteractor.swift in Sources */,
+				6C1270722947314C000D3852 /* RockPaperScissorsScreenFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

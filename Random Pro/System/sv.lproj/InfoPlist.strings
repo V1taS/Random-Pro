@@ -1,0 +1,12 @@
+/*
+  InfoPlist.strings
+  Random Pro
+
+  Created by Vitalii Sosin on 12.01.2022.
+  Copyright © 2022 SosinVitalii.com. All rights reserved.
+*/
+
+"NSContactsUsageDescription" = "Dela dina kontakter så att vi kan generera dem slumpmässigt.";
+"NSUserTrackingUsageDescription" = "Kan du använda din aktivitetsdata? Om du tillåter kommer Random Pros annonser på webbplatser och andra appar att vara mer relevanta.";
+"NSPhotoLibraryAddUsageDescription" = "Ge åtkomst till ditt galleri så att du kan spara färdiga Bildresultat eller ladda upp foton till Random Pro för slumpmässig filtrering.";
+"NSPhotoLibraryUsageDescription" = "Ge åtkomst till ditt galleri så att du kan spara färdiga Bildresultat eller ladda upp foton till Random Pro för slumpmässig filtrering.";

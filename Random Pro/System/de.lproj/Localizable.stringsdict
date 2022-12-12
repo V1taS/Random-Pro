@@ -13,17 +13,17 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>zero</key>
-			<string>0 взрослых</string>
+			<string>0 adults</string>
 			<key>one</key>
-			<string>%d взрослый</string>
+			<string>%d adult</string>
 			<key>two</key>
-			<string>%d взрослых</string>
+			<string>%d adults</string>
 			<key>few</key>
-			<string>%d взрослых</string>
+			<string>%d adults</string>
 			<key>many</key>
-			<string>%d взрослых</string>
+			<string>%d adults</string>
 			<key>other</key>
-			<string>%d взрослых</string>
+			<string>%d adults</string>
 		</dict>
 	</dict>
 </dict>

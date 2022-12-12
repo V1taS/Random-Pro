@@ -4,15 +4,19 @@
 Random Pro is a simple generator for getting random numbers, letters, for all kinds of disputes, for dice games, for getting answers and flipping coins!
 
 What the app can do:
-- Assign players to teams
 - Generate random number
+- Generate random Yes/No
 - Generate random letter
 - Generate your own list
-- toss a coin
-- Throw dice (from 1 to 6 dice)
+- Generate random password
+- Generate random color
 - Generate date and time
 - Generate lottery combination
 - Pick a random contact from your phone book
+- Assign players to teams
+- toss a coin
+- Throw dice (from 1 to 6 dice)
+- Spin the bottle
 
 ![Logo](https://sosinvitalii.com/wp-content/uploads/2022/12/prev_one.png "Random Pro")
 ![Logo](https://sosinvitalii.com/wp-content/uploads/2022/12/prev_two.png "Random Pro")

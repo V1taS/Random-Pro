@@ -97,6 +97,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                                                 services)
     anyCoordinator = rockPaperScissorsScreenCoordinator
     rockPaperScissorsScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .rockPaperScissors)
   }
   
   func openBottle() {

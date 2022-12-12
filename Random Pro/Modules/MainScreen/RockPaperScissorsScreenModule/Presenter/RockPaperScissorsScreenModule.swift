@@ -14,6 +14,7 @@ protocol RockPaperScissorsScreenModuleOutput: AnyObject {}
 /// События которые отправляем из `другого модуля` в  `текущий модуль`
 protocol RockPaperScissorsScreenModuleInput {
   
+  /// События которые отправляем из `текущего модуля` в  `другой модуль`
   var moduleOutput: RockPaperScissorsScreenModuleOutput? { get set }
 }
 

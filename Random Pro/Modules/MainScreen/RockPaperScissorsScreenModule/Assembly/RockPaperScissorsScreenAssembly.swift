@@ -9,6 +9,7 @@
 import UIKit
 
 final class RockPaperScissorsScreenAssembly {
+  
   /// Собирает модуль `RockPaperScissorsScreen`
   /// - Parameters:
   /// - Returns: Cобранный модуль `RockPaperScissorsScreen`

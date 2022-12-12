@@ -14,7 +14,7 @@ What the app can do:
 - Generate lottery combination
 - Pick a random contact from your phone book
 - Assign players to teams
-- toss a coin
+- Toss a coin
 - Throw dice (from 1 to 6 dice)
 - Spin the bottle
 

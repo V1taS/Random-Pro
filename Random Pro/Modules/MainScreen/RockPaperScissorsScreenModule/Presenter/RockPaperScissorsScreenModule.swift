@@ -59,23 +59,57 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setNavigationBar()
   }
 }
 
 // MARK: - RockPaperScissorsScreenViewOutput
 
-extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutput {}
+extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutput {
+  func generateButtonAction() {
+    interactor.getContent()
+  }
+}
 
 // MARK: - RockPaperScissorsScreenInteractorOutput
 
-extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteractorOutput {}
+extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteractorOutput {
+  func didReceive(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
+                  displayingGenerationResultOnRight: RockPaperScissorsScreenModel) {
+    moduleView.updateContentWith(displayingGenerationResultOnLeft: displayingGenerationResultOnLeft,
+                                 displayingGenerationResultOnRight: displayingGenerationResultOnRight)
+  }
+}
 
 // MARK: - RockPaperScissorsScreenFactoryOutput
 
 extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenFactoryOutput {}
 
+// MARK: - Private
+
+private extension RockPaperScissorsScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.setTitle
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(resetCurrentGeneration))
+  }
+  
+  @objc func resetCurrentGeneration() {
+    moduleView.resetCurrentGeneration()
+  }
+}
+
 // MARK: - Appearance
 
 private extension RockPaperScissorsScreenViewController {
-  struct Appearance {}
+  struct Appearance {
+    let setTitle = "Цу-е-фа"
+    let settingsButtonIcon = UIImage(systemName: "arrow.counterclockwise")
+  }
 }

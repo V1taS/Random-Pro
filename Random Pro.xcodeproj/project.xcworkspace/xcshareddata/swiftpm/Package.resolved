@@ -24,7 +24,7 @@
       "location" : "https://github.com/V1taS/Notifications",
       "state" : {
         "branch" : "master",
-        "revision" : "1cf481202f015a9075fd408abcde1e7b1eb1cc17"
+        "revision" : "ebcad1ff6da1e1d323c9c507235dbc2a3059df15"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/V1taS/RandomNetwork.git",
       "state" : {
         "branch" : "master",
-        "revision" : "d1eebd01a982052c773e354520015ba59a461f38"
+        "revision" : "3c008bc11d4c99a6f424d01ae29d137fa950572e"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "fea50f13cbbdcfb1393b033bd37ea52798ae5033"
+        "revision" : "4a7f7fc62b9038a81fadc94c5d4143d612e50eb3"
       }
     }
   ],

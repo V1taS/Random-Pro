@@ -291,7 +291,7 @@ private extension MainScreenViewController {
 
 private extension MainScreenViewController {
   struct Appearance {
-    let title = "Random Pro"
+    let title = NSLocalizedString("Random Pro", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
   }

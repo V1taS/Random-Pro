@@ -292,16 +292,17 @@ private extension MainScreenInteractor {
           advLabel: model.advLabel
         ))
       case .rockPaperScissors:
-        newModel.append(MainScreenModel.Section(
-          type: model.type,
-          isEnabled: model.isEnabled,
-          titleSection: appearance.titleRockPaperScissors,
-          imageSection: model.imageSection,
-          advLabel: model.advLabel
-        ))
+        featureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            titleSection: appearance.titleRockPaperScissors,
+            imageSection: model.imageSection,
+            advLabel: model.advLabel
+          ))
+        }
       }
     }
-    
     return newModel
   }
   
@@ -416,17 +417,25 @@ private extension MainScreenInteractor {
           advLabel: .new
         ))
       case .rockPaperScissors:
-        allSections.append(MainScreenModel.Section(
-          type: section,
-          isEnabled: true,
-          titleSection: appearance.titleRockPaperScissors,
-          imageSection: appearance.imageRockPaperScissorsScreenView.pngData() ?? Data(),
-          advLabel: .new
+        featureSection {
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            titleSection: appearance.titleRockPaperScissors,
+            imageSection: appearance.imageRockPaperScissorsScreenView.pngData() ?? Data(),
+            advLabel: .new
           ))
+        }
       }
     }
     return MainScreenModel(isDarkMode: nil,
                            allSections: allSections)
+  }
+  
+  func featureSection(completion: () -> Void) {
+#if DEBUG
+    completion()
+#endif
   }
 }
 

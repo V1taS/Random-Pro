@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ShareScreenModuleOutput: AnyObject {
   
   /// Кнопка поделиться была нажата
@@ -21,14 +21,14 @@ protocol ShareScreenModuleOutput: AnyObject {
   func requestPhotosError()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol ShareScreenModuleInput {
   
   /// Обновить контент
   ///  - Parameter imageData: Изображение контента
   func updateContentWith(imageData: Data?)
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ShareScreenModuleOutput? { get set }
 }
 

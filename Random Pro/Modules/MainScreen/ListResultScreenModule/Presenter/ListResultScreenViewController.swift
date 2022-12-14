@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListResultScreenModuleOutput: AnyObject {
   
   /// Результат скопирован
@@ -19,14 +19,14 @@ protocol ListResultScreenModuleOutput: AnyObject {
   func shareButtonAction(imageData: Data?)
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol ListResultScreenModuleInput {
   
   /// Установить список результатов
   ///  - Parameter list: Список результатов
   func setContentsFrom(list: [String])
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ListResultScreenModuleOutput? { get set }
 }
 

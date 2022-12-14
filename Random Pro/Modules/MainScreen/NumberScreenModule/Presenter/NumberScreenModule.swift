@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol NumberScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
@@ -30,7 +30,7 @@ protocol NumberScreenModuleOutput: AnyObject {
   func didReceiveRangeError()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol NumberScreenModuleInput {
   
   /// Возвращает список результатов
@@ -43,7 +43,7 @@ protocol NumberScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: NumberScreenModuleOutput? { get set }
 }
 

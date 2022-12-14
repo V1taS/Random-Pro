@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Number`
@@ -63,7 +63,7 @@ protocol MainScreenModuleOutput: AnyObject {
   func mainScreenDidAppear()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol MainScreenModuleInput {
   
   /// Обновить секции главного экрана
@@ -88,7 +88,7 @@ protocol MainScreenModuleInput {
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType)
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: MainScreenModuleOutput? { get set }
 }
 

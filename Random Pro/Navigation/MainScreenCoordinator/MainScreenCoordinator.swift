@@ -7,10 +7,10 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего координатора` в  `другой координатор`
+/// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}
 
-/// События которые отправляем из `другого координатора` в  `текущий координатор`
+/// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol MainScreenCoordinatorInput {
   
   /// События Deep links
@@ -22,7 +22,7 @@ protocol MainScreenCoordinatorInput {
              openURLContexts URLContexts: Set<UIOpenURLContext>,
              deepLinkType: DeepLinkType?)
   
-  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: MainScreenCoordinatorOutput? { get set }
 }
 

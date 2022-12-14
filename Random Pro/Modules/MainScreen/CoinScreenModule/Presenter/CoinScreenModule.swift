@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol CoinScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
@@ -20,7 +20,7 @@ protocol CoinScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected(model: CoinScreenModel)
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol CoinScreenModuleInput {
   
   /// Возвращает список результатов
@@ -29,7 +29,7 @@ protocol CoinScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: CoinScreenModuleOutput? { get set }
 }
 

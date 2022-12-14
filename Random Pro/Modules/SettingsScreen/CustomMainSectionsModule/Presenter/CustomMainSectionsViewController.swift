@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol CustomMainSectionsModuleOutput: AnyObject {
   
   /// Данные были изменены
@@ -18,14 +18,14 @@ protocol CustomMainSectionsModuleOutput: AnyObject {
   func didReceiveError()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol CustomMainSectionsModuleInput {
   
   /// Обновить контент
   /// - Parameter models: Моделька секций
   func updateContentWith(models: [MainScreenModel.Section])
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: CustomMainSectionsModuleOutput? { get set }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListPlayersScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка удалить всех игроков
@@ -18,7 +18,7 @@ protocol ListPlayersScreenModuleOutput: AnyObject {
   func didReceive(players: [TeamsScreenPlayerModel])
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol ListPlayersScreenModuleInput {
   
   /// Удалить всех игроков
@@ -30,7 +30,7 @@ protocol ListPlayersScreenModuleInput {
   ///   - teamsCount: Общее количество игроков
   func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int)
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ListPlayersScreenModuleOutput? { get set }
 }
 

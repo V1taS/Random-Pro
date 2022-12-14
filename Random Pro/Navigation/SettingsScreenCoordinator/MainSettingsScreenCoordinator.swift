@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего координатора` в  `другой координатор`
+/// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainSettingsScreenCoordinatorOutput: AnyObject {
   
   /// Тема приложения была изменена
@@ -20,7 +20,7 @@ protocol MainSettingsScreenCoordinatorOutput: AnyObject {
   func didChanged(models: [MainScreenModel.Section])
 }
 
-/// События которые отправляем из `другого координатора` в  `текущий координатор`
+/// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol MainSettingsScreenCoordinatorInput {
   
   /// Обновить контент
@@ -31,7 +31,7 @@ protocol MainSettingsScreenCoordinatorInput {
   /// - Parameter models: Моделька секций
   func updateContentWith(models: [MainScreenModel.Section])
   
-  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: MainSettingsScreenCoordinatorOutput? { get set }
 }
 

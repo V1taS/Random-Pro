@@ -8,7 +8,7 @@
 import UIKit
 import RandomUIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol TeamsScreenModuleOutput: AnyObject {
   
   /// Список игроков пуст
@@ -26,7 +26,7 @@ protocol TeamsScreenModuleOutput: AnyObject {
   func shareButtonAction(imageData: Data?)
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol TeamsScreenModuleInput {
   
   /// Возвращает текущее количество команд
@@ -51,7 +51,7 @@ protocol TeamsScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: TeamsScreenModuleOutput? { get set }
 }
 

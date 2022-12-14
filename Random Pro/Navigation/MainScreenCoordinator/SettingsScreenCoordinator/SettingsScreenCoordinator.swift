@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего координатора` в  `другой координатор`
+/// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol SettingsScreenCoordinatorOutput: AnyObject {
   
   /// Событие, без повторений
@@ -30,14 +30,14 @@ extension SettingsScreenCoordinatorOutput {
   func createListAction() {}
 }
 
-/// События которые отправляем из `другого координатора` в  `текущий координатор`
+/// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol SettingsScreenCoordinatorInput {
   
   /// Установить настройки по умолчанию
   ///  - Parameter typeObject: Тип отображаемого контента
   func setupDefaultsSettings(for typeObject: SettingsScreenType)
   
-  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: SettingsScreenCoordinatorOutput? { get set }
 }
 

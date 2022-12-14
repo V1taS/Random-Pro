@@ -8,10 +8,10 @@
 import UIKit
 import RandomUIKit
 
-/// События которые отправляем из `текущего координатора` в  `другой координатор`
+/// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol RootCoordinatorOutput: AnyObject {}
 
-/// События которые отправляем из `другого координатора` в  `текущий координатор`
+/// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol RootCoordinatorInput {
   
   /// События Deep links
@@ -20,7 +20,7 @@ protocol RootCoordinatorInput {
   ///   - URLContexts: Сыылки url
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
   
-  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: RootCoordinatorOutput? { get set }
 }
 

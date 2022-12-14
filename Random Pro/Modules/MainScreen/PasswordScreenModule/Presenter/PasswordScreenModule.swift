@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PasswordScreenModuleOutput: AnyObject {
   
   /// Была получена ошибка
@@ -26,7 +26,7 @@ protocol PasswordScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol PasswordScreenModuleInput {
   
   /// Запросить текущую модель
@@ -35,7 +35,7 @@ protocol PasswordScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: PasswordScreenModuleOutput? { get set }
 }
 

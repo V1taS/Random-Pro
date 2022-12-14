@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol LetterScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
@@ -23,7 +23,7 @@ protocol LetterScreenModuleOutput: AnyObject {
   func settingButtonAction(model: LetterScreenModel)
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol LetterScreenModuleInput {
   
   /// Возвращает список результатов
@@ -36,7 +36,7 @@ protocol LetterScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: LetterScreenModuleOutput? { get set }
 }
 

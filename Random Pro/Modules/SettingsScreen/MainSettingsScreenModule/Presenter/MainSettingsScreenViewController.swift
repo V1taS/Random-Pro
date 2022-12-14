@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol MainSettingsScreenModuleOutput: AnyObject {
   
   /// Модуль был закрыт
@@ -24,14 +24,14 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   func feedBackButtonAction()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol MainSettingsScreenModuleInput {
   
   /// Обновить контент
   ///  - Parameter isDarkTheme: Темная тема
   func updateContentWith(isDarkTheme: Bool?)
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: MainSettingsScreenModuleOutput? { get set }
 }
 

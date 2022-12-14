@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol SettingsScreenModuleOutput: AnyObject {
   
   /// Событие, без повторений
@@ -24,14 +24,14 @@ protocol SettingsScreenModuleOutput: AnyObject {
   func createListAction()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol SettingsScreenModuleInput {
   
   /// Установить настройки по умолчанию
   ///  - Parameter typeObject: Тип отображаемого контента
   func setupDefaultsSettings(for typeObject: SettingsScreenType)
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: SettingsScreenModuleOutput? { get set }
 }
 

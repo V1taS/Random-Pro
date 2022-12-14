@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
@@ -32,7 +32,7 @@ protocol ListScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol ListScreenModuleInput {
   
   /// Возвращает текущей модели
@@ -49,7 +49,7 @@ protocol ListScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ListScreenModuleOutput? { get set }
 }
 

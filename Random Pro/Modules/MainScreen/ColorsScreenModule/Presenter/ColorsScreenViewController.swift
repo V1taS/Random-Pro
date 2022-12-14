@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ColorsScreenModuleOutput: AnyObject {
   
   /// Доступ  не получен к Галерее
@@ -18,10 +18,10 @@ protocol ColorsScreenModuleOutput: AnyObject {
   func shareButtonAction(imageData: Data?)
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol ColorsScreenModuleInput {
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ColorsScreenModuleOutput? { get set }
 }
 

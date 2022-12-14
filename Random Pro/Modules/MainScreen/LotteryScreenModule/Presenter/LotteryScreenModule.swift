@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol LotteryScreenModuleOutput: AnyObject {
   
   /// Неправильный диапазон чисел
@@ -27,7 +27,7 @@ protocol LotteryScreenModuleOutput: AnyObject {
   func resultLabelAction(model: LotteryScreenModel)
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol LotteryScreenModuleInput {
   
   /// Возвращает список результатов
@@ -36,7 +36,7 @@ protocol LotteryScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: LotteryScreenModuleOutput? { get set }
 }
 

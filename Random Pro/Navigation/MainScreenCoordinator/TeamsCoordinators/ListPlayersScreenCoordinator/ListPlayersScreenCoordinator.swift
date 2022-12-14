@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего координатора` в  `другой координатор`
+/// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ListPlayersScreenCoordinatorOutput: AnyObject {
   
   /// Были получены игроки
@@ -16,7 +16,7 @@ protocol ListPlayersScreenCoordinatorOutput: AnyObject {
   func didReceive(players: [TeamsScreenPlayerModel])
 }
 
-/// События которые отправляем из `другого координатора` в  `текущий координатор`
+/// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol ListPlayersScreenCoordinatorInput {
   
   /// Обновить контент
@@ -25,7 +25,7 @@ protocol ListPlayersScreenCoordinatorInput {
   ///   - teamsCount: Общее количество игроков
   func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int)
   
-  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: ListPlayersScreenCoordinatorOutput? { get set }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль
+/// События которые отправляем из `текущего модуля` в `другой модуль
 protocol CubesScreenModuleOutput: AnyObject {
   
   /// Результат скопирован
@@ -23,7 +23,7 @@ protocol CubesScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol CubesScreenModuleInput {
   
   /// Событие, кнопка `Очистить` была нажата
@@ -36,7 +36,7 @@ protocol CubesScreenModuleInput {
   /// - Parameter isShow: показать  список генераций результатов
   func listGenerated(isShow: Bool)
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: CubesScreenModuleOutput? { get set }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ContactScreenModuleOutput: AnyObject {
   
   /// Кнопка настройки была нажата
@@ -25,7 +25,7 @@ protocol ContactScreenModuleOutput: AnyObject {
   func cleanButtonWasSelected()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol ContactScreenModuleInput {
   
   /// Событие, кнопка `Очистить` была нажата
@@ -34,7 +34,7 @@ protocol ContactScreenModuleInput {
   /// Запросить текущую модель
   func returnCurrentModel() -> ContactScreenModel
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ContactScreenModuleOutput? { get set }
 }
 

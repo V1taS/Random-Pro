@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего координатора` в  `другой координатор`
+/// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol CustomMainSectionsCoordinatorOutput: AnyObject {
   
   /// Данные были изменены
@@ -16,14 +16,14 @@ protocol CustomMainSectionsCoordinatorOutput: AnyObject {
   func didChanged(models: [MainScreenModel.Section])
 }
 
-/// События которые отправляем из `другого координатора` в  `текущий координатор`
+/// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol CustomMainSectionsCoordinatorInput {
   
   /// Обновить контент
   /// - Parameter models: Моделька секций
   func updateContentWith(models: [MainScreenModel.Section])
   
-  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: CustomMainSectionsCoordinatorOutput? { get set }
 }
 

@@ -24,7 +24,7 @@ protocol YesNoScreenModuleInput {
   /// Возвращает список результатов
   func returnListResult() -> [String]
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: YesNoScreenModuleOutput? { get set }
   
   /// Событие, кнопка `Очистить` была нажата

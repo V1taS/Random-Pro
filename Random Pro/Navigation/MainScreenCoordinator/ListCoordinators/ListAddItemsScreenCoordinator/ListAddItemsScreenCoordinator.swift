@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего координатора` в  `другой координатор`
+/// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ListAddItemsScreenCoordinatorOutput: AnyObject {
   
   /// Были получены данные
@@ -16,14 +16,14 @@ protocol ListAddItemsScreenCoordinatorOutput: AnyObject {
   func didReceiveText(models: [ListAddItemsScreenModel.TextModel])
 }
 
-/// События которые отправляем из `другого координатора` в  `текущий координатор`
+/// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol ListAddItemsScreenCoordinatorInput {
   
   /// Обновить контент
   ///  - Parameter models: Модельки с текстами
   func updateContentWith(models: [ListAddItemsScreenModel.TextModel])
   
-  /// События которые отправляем из `текущего координатора` в  `другой координатор`
+  /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: ListAddItemsScreenCoordinatorOutput? { get set }
 }
 

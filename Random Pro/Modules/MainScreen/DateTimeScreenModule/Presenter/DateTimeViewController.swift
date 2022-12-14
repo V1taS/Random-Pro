@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol DateTimeModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
@@ -24,7 +24,7 @@ protocol DateTimeModuleOutput: AnyObject {
   func resultLabelAction(model: DateTimeScreenModel)
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol DateTimeModuleInput {
   
   /// Возвращает список результатов
@@ -33,7 +33,7 @@ protocol DateTimeModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: DateTimeModuleOutput? { get set }
 }
 

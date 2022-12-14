@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListAddItemsScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка удалить всех игроков
@@ -18,7 +18,7 @@ protocol ListAddItemsScreenModuleOutput: AnyObject {
   func didReceiveText(models: [ListAddItemsScreenModel.TextModel])
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol ListAddItemsScreenModuleInput {
   
   /// Удалить всех игроков
@@ -28,7 +28,7 @@ protocol ListAddItemsScreenModuleInput {
   ///  - Parameter models: Модельки с текстами
   func updateContentWith(models: [ListAddItemsScreenModel.TextModel])
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ListAddItemsScreenModuleOutput? { get set }
 }
 

@@ -7,20 +7,20 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol OnboardingScreenModuleOutput: AnyObject {
   
   /// Закончить онбоардинг
   func onboardingDidFinish()
 }
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol OnboardingScreenModuleInput {
   
   /// Вернуть текущую модель
   func returnCurrentModels() -> [OnboardingScreenModel]
   
-  /// События которые отправляем из `текущего модуля` в  `другой модуль`
+  /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: OnboardingScreenModuleOutput? { get set }
 }
 

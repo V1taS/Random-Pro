@@ -8,10 +8,10 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в  `другой модуль`
+/// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol BottleScreenModuleOutput: AnyObject {}
 
-/// События которые отправляем из `другого модуля` в  `текущий модуль`
+/// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol BottleScreenModuleInput {
   
   var moduleOutput: BottleScreenModuleOutput? { get set }

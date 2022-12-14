@@ -75,6 +75,7 @@ extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutp
 // MARK: - RockPaperScissorsScreenInteractorOutput
 
 extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteractorOutput {
+  
   func didReceive(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
                   displayingGenerationResultOnRight: RockPaperScissorsScreenModel) {
     moduleView.updateContentWith(displayingGenerationResultOnLeft: displayingGenerationResultOnLeft,
@@ -97,10 +98,10 @@ private extension RockPaperScissorsScreenViewController {
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
                                                         style: .plain,
                                                         target: self,
-                                                        action: #selector(resetCurrentGeneration))
+                                                        action: #selector(resetCurrentGenerationAction))
   }
   
-  @objc func resetCurrentGeneration() {
+  @objc func resetCurrentGenerationAction() {
     moduleView.resetCurrentGeneration()
   }
 }
@@ -109,7 +110,7 @@ private extension RockPaperScissorsScreenViewController {
 
 private extension RockPaperScissorsScreenViewController {
   struct Appearance {
-    let setTitle = "Цу-е-фа"
+    let setTitle = NSLocalizedString("Цу-е-фа", comment: "")
     let settingsButtonIcon = UIImage(systemName: "arrow.counterclockwise")
   }
 }

@@ -26,7 +26,7 @@ protocol RockPaperScissorsScreenViewInput {
   func updateContentWith(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
                          displayingGenerationResultOnRight: RockPaperScissorsScreenModel)
   
-  /// Сброс текущей генерации на начальное
+  /// Сброс текущей генерации на начальную
   func resetCurrentGeneration()
 }
 
@@ -37,6 +37,8 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   // MARK: - Internal property
   
   weak var output: RockPaperScissorsScreenViewOutput?
+  
+  // MARK: - Private properties
   
   private let generateButton = ButtonView()
   private let resultLabel = UILabel()
@@ -66,7 +68,9 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   }
   
   func resetCurrentGeneration() {
-    
+    rightResultEmojiLabel.text = "?"
+    leftResultEmojiLabel.text = "?"
+    resultLabel.text = nil
   }
 }
 
@@ -141,7 +145,7 @@ private extension RockPaperScissorsScreenView {
     let systemFont: CGFloat = 120
     let defaultInset: CGFloat = 16
     let maximumInset: CGFloat = 80
-    let lateralInsert: CGFloat = 56
+    let lateralInsert: CGFloat = 48
     let upperInsert: CGFloat = 60
     let upperResultInsert: CGFloat = 48
   }

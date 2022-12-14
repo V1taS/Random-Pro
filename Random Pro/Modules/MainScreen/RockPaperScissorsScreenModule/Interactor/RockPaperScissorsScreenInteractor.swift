@@ -13,8 +13,8 @@ protocol RockPaperScissorsScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameters:
-  ///  - displayingGenerationResultOnLeft: отображение результата генерации слева
-  ///  - displayingGenerationResultOnRight: отображение результата генерации справа
+  ///   - displayingGenerationResultOnLeft: отображение результата генерации слева
+  ///   - displayingGenerationResultOnRight: отображение результата генерации справа
   func didReceive(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
                   displayingGenerationResultOnRight: RockPaperScissorsScreenModel)
 }
@@ -31,6 +31,8 @@ final class RockPaperScissorsScreenInteractor: RockPaperScissorsScreenInteractor
   // MARK: - Internal property
   
   weak var output: RockPaperScissorsScreenInteractorOutput?
+
+  // MARK: - Internal func
   
   func getContent() {
     output?.didReceive(displayingGenerationResultOnLeft: getLeftSideModel(),

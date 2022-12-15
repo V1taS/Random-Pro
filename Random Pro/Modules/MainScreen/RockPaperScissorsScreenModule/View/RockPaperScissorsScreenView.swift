@@ -19,12 +19,12 @@ protocol RockPaperScissorsScreenViewOutput: AnyObject {
 /// События которые отправляем от Presenter ко View
 protocol RockPaperScissorsScreenViewInput {
   
-  ///  Обновить контент 
+  ///  Обновить контент
   ///  - Parameters:
-  ///  - displayingGenerationResultOnLeft: отображение результата генерации слева
-  ///  - displayingGenerationResultOnRight: отображение результата генерации справа
-  func updateContentWith(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
-                         displayingGenerationResultOnRight: RockPaperScissorsScreenModel)
+  ///   - leftSideModel: отображение результата генерации слева
+  ///   - rightSideModel:  отображение результата генерации справа
+  func updateContentWith(leftSideModel: RockPaperScissorsScreenModel,
+                         rightSideModel: RockPaperScissorsScreenModel)
   
   /// Сброс текущей генерации на начальную
   func resetCurrentGeneration()
@@ -60,17 +60,17 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
-                         displayingGenerationResultOnRight: RockPaperScissorsScreenModel) {
-    resultLabel.text = "\(displayingGenerationResultOnLeft.title) / \(displayingGenerationResultOnRight.title)"
-    rightResultEmojiLabel.text = displayingGenerationResultOnRight.emoji
-    leftResultEmojiLabel.text = displayingGenerationResultOnLeft.emoji
+  func updateContentWith(leftSideModel: RockPaperScissorsScreenModel,
+                         rightSideModel: RockPaperScissorsScreenModel) {
+    resultLabel.text = "\(leftSideModel.title) / \(rightSideModel.title)"
+    rightResultEmojiLabel.text = rightSideModel.emoji
+    leftResultEmojiLabel.text = leftSideModel.emoji
   }
   
   func resetCurrentGeneration() {
     rightResultEmojiLabel.text = "?"
     leftResultEmojiLabel.text = "?"
-    resultLabel.text = nil
+    resultLabel.text = ""
   }
 }
 
@@ -84,12 +84,12 @@ private extension RockPaperScissorsScreenView {
     resultLabel.font = RandomFont.primaryMedium24
     resultLabel.textAlignment = .center
     
-    leftResultEmojiLabel.text = appearance.questionLabel
+    leftResultEmojiLabel.text = appearance.questionTitle
     leftResultEmojiLabel.font = .systemFont(ofSize: appearance.systemFont)
     
-    rightResultEmojiLabel.text = appearance.questionLabel
+    rightResultEmojiLabel.text = appearance.questionTitle
     rightResultEmojiLabel.font = .systemFont(ofSize: appearance.systemFont)
-
+    
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
@@ -110,22 +110,16 @@ private extension RockPaperScissorsScreenView {
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
       resultLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                       constant: appearance.upperResultInsert),
+                                       constant: appearance.maxInset),
       
-      leftResultEmojiLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                    constant: appearance.lateralInsert),
-      leftResultEmojiLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                                constant: appearance.upperInsert),
-      leftResultEmojiLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                                   constant: -appearance.maximumInset),
+      leftResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -72),
+      leftResultEmojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      leftResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2, constant: 0),
+      
+      rightResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 72),
+      rightResultEmojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      rightResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2, constant: 0),
 
-      rightResultEmojiLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                      constant: -appearance.lateralInsert),
-      rightResultEmojiLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                                 constant: appearance.upperInsert),
-      rightResultEmojiLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                                    constant: -appearance.maximumInset),
-      
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
@@ -141,12 +135,9 @@ private extension RockPaperScissorsScreenView {
 private extension RockPaperScissorsScreenView {
   struct Appearance {
     let buttonTitle = NSLocalizedString("Cгенерировать", comment: "")
-    let questionLabel = "?"
+    let questionTitle = "?"
     let systemFont: CGFloat = 120
     let defaultInset: CGFloat = 16
-    let maximumInset: CGFloat = 80
-    let lateralInsert: CGFloat = 48
-    let upperInsert: CGFloat = 60
-    let upperResultInsert: CGFloat = 48
+    let maxInset: CGFloat = 48
   }
 }

@@ -13,10 +13,10 @@ protocol RockPaperScissorsScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameters:
-  ///   - displayingGenerationResultOnLeft: отображение результата генерации слева
-  ///   - displayingGenerationResultOnRight: отображение результата генерации справа
-  func didReceive(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
-                  displayingGenerationResultOnRight: RockPaperScissorsScreenModel)
+  ///   - leftSideModel: отображение результата генерации слева
+  ///   - rightSideModel: отображение результата генерации справа
+  func didReceiveResultFor(leftSideModel: RockPaperScissorsScreenModel,
+                           rightSideModel: RockPaperScissorsScreenModel)
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -35,15 +35,14 @@ final class RockPaperScissorsScreenInteractor: RockPaperScissorsScreenInteractor
   // MARK: - Internal func
   
   func getContent() {
-    output?.didReceive(displayingGenerationResultOnLeft: getLeftSideModel(),
-                       displayingGenerationResultOnRight: getRightSideModel())
+    output?.didReceiveResultFor(leftSideModel: getLeftSideModel(),
+                                rightSideModel: getRightSideModel())
   }
 }
 
 // MARK: - Private
 
 private extension RockPaperScissorsScreenInteractor {
-  
   func getLeftSideModel() -> RockPaperScissorsScreenModel {
     RockPaperScissorsScreenModel.allCases.shuffled().first ?? .paper
   }

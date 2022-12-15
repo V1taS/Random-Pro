@@ -10,6 +10,7 @@ import Foundation
 
 enum RockPaperScissorsScreenModel: CaseIterable {
   
+  ///  Названия для обозначения смайлов
   var title: String {
     let appearance = Appearance()
     
@@ -23,6 +24,7 @@ enum RockPaperScissorsScreenModel: CaseIterable {
     }
   }
   
+  ///  Смайлики
   var emoji: String {
     let appearance = Appearance()
     

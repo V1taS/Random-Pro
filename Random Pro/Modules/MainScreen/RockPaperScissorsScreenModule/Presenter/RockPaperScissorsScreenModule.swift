@@ -75,11 +75,10 @@ extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutp
 // MARK: - RockPaperScissorsScreenInteractorOutput
 
 extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteractorOutput {
-  
-  func didReceive(displayingGenerationResultOnLeft: RockPaperScissorsScreenModel,
-                  displayingGenerationResultOnRight: RockPaperScissorsScreenModel) {
-    moduleView.updateContentWith(displayingGenerationResultOnLeft: displayingGenerationResultOnLeft,
-                                 displayingGenerationResultOnRight: displayingGenerationResultOnRight)
+  func didReceiveResultFor(leftSideModel: RockPaperScissorsScreenModel,
+                           rightSideModel: RockPaperScissorsScreenModel) {
+    moduleView.updateContentWith(leftSideModel: leftSideModel,
+                                 rightSideModel: rightSideModel)
   }
 }
 
@@ -95,7 +94,7 @@ private extension RockPaperScissorsScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.setTitle
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.resetButtonIcon,
                                                         style: .plain,
                                                         target: self,
                                                         action: #selector(resetCurrentGenerationAction))
@@ -111,6 +110,6 @@ private extension RockPaperScissorsScreenViewController {
 private extension RockPaperScissorsScreenViewController {
   struct Appearance {
     let setTitle = NSLocalizedString("Цу-е-фа", comment: "")
-    let settingsButtonIcon = UIImage(systemName: "arrow.counterclockwise")
+    let resetButtonIcon = UIImage(systemName: "arrow.counterclockwise")
   }
 }

@@ -56,7 +56,7 @@ final class MainScreenInteractorTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
     
     // Assert
-    XCTAssertEqual(firstStartAppModel, recievedModel)
+    XCTAssertEqual(firstStartAppModel.allSections.count, recievedModel?.allSections.count ?? .zero)
   }
   
   func testGivenSecondStartWithRusLangAppWhenGetContentThenSendModelToOutput() {

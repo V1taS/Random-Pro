@@ -22,7 +22,7 @@ final class BottleScreenInteractorTests: XCTestCase {
   override func setUp() {
     super.setUp()
     
-    sut = BottleScreenInteractor(TimerServiceMock())
+    sut = BottleScreenInteractor(TimerServiceMock(), hapticService: HapticServiceMock())
     sut.output = outputSpy
   }
   
@@ -30,7 +30,7 @@ final class BottleScreenInteractorTests: XCTestCase {
     sut = nil
     super.tearDown()
   }
-
+  
   func testGivenRotatingBottleWhenFinishedRandomRotationTimeThenStopBottleRotation() {
     // Arrange
     var isStopBottleRotation = false

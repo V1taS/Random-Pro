@@ -122,6 +122,16 @@ extension MainScreenInteractorTests {
           imageSection: appearance.bottleCardImage.pngData() ?? Data(),
           advLabel: .new
         ))
+      case .rockPaperScissors:
+        featureSection {
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            titleSection: appearance.titleRockPaperScissorsEng,
+            imageSection: appearance.rockPaperScissorsCardImage.pngData() ?? Data(),
+            advLabel: .new
+          ))
+        }
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -238,10 +248,26 @@ extension MainScreenInteractorTests {
           imageSection: appearance.bottleCardImage.pngData() ?? Data(),
           advLabel: .new
         ))
+      case .rockPaperScissors:
+        featureSection {
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            titleSection: appearance.titleRockPaperScissors,
+            imageSection: appearance.rockPaperScissorsCardImage.pngData() ?? Data(),
+            advLabel: .new
+          ))
+        }
       }
     }
     return MainScreenModel(isDarkMode: nil,
                            allSections: allSections)
+  }
+  
+  func featureSection(completion: () -> Void) {
+#if DEBUG
+    completion()
+#endif
   }
 }
 
@@ -306,5 +332,9 @@ extension MainScreenInteractorTests {
     let bottleCardImage = UIImage(systemName: "arrow.triangle.2.circlepath") ?? UIImage()
     let titleBottle = "Бутылочка"
     let titleBottleEng = "Bottle"
+    
+    let rockPaperScissorsCardImage = UIImage(systemName: "hurricane.circle") ?? UIImage()
+    let titleRockPaperScissors = "Цу-е-фа"
+    let titleRockPaperScissorsEng = "Tsu-e-fa"
   }
 }

@@ -10,7 +10,7 @@ import XCTest
 @testable import Random_Pro
 
 final class BottleScreenModuleIntegrationTests: XCTestCase {
- 
+  
   // MARK: - Private property
   
   // System under test (Тестируемая система)
@@ -51,25 +51,17 @@ final class BottleScreenModuleIntegrationTests: XCTestCase {
   func testGeneratesBottleRotationTimeAction() {
     // Act
     sut.bottleRotationButtonAction()
-
+    
     // Assert
     XCTAssertTrue(interactor.isGeneratesBottleRotationTimeAction)
   }
-
+  
   func testStopBottleRotation() {
     // Act
     sut.stopBottleRotation()
     
     // Assert
     XCTAssertTrue(view.isStopBottleRotation)
-  }
-  
-  func testTactileFeedbackBottleRotates() {
-    // Act
-    sut.tactileFeedbackBottleRotates()
-    
-    // Assert
-    XCTAssertTrue(view.isTactileFeedbackBottleRotates)
   }
   
   func testResetPositionBottleAction() {

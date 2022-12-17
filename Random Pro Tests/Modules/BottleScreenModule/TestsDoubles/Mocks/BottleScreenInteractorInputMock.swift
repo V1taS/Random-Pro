@@ -24,4 +24,12 @@ final class BottleScreenInteractorInputMock: BottleScreenInteractorInput {
   func generatesBottleRotationTimeAction() {
     isGeneratesBottleRotationTimeAction = true
   }
+  
+  func playHapticFeedback() {
+    // MARK: - Добавить тесты
+  }
+  
+  func stopHapticFeedback() {
+    // MARK: - Добавить тесты
+  }
 }

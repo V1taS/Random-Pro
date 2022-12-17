@@ -8,6 +8,7 @@
 
 import Foundation
 import YandexMobileMetrica
+import Firebase
 
 protocol MetricsService {
   
@@ -42,6 +43,8 @@ final class MetricsServiceImpl: MetricsService {
   // MARK: - Internal func
   
   func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
+    
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
       print("REPORT ERROR: %@", error.localizedDescription)
     }
@@ -49,6 +52,8 @@ final class MetricsServiceImpl: MetricsService {
   }
   
   func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
       print("REPORT ERROR: %@", error.localizedDescription)
     }

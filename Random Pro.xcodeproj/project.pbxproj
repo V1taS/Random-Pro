@@ -129,6 +129,7 @@
 		1BA199B928BBC7590036D73C /* ShareScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA199B828BBC7590036D73C /* ShareScreenCoordinator.swift */; };
 		1BA83CF72879DA42000035E3 /* UserDefaultsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */; };
 		1BA83CF92879E991000035E3 /* LetterScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF82879E991000035E3 /* LetterScreenModel.swift */; };
+		1BBABB7F294DF4E3000772AC /* HapticServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBABB7E294DF4E3000772AC /* HapticServiceMock.swift */; };
 		1BBE378A28C0C10E0087128D /* NumberScreenViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */; };
 		1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */; };
 		1BBE379028C0DE260087128D /* NumberScreenInteractorOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378F28C0DE260087128D /* NumberScreenInteractorOutputSpy.swift */; };
@@ -373,6 +374,7 @@
 		1BA199B828BBC7590036D73C /* ShareScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreenCoordinator.swift; sourceTree = "<group>"; };
 		1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsCodable.swift; sourceTree = "<group>"; };
 		1BA83CF82879E991000035E3 /* LetterScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterScreenModel.swift; sourceTree = "<group>"; };
+		1BBABB7E294DF4E3000772AC /* HapticServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticServiceMock.swift; sourceTree = "<group>"; };
 		1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenViewInputMock.swift; sourceTree = "<group>"; };
 		1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractorTests.swift; sourceTree = "<group>"; };
 		1BBE378F28C0DE260087128D /* NumberScreenInteractorOutputSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractorOutputSpy.swift; sourceTree = "<group>"; };
@@ -1626,6 +1628,14 @@
 			path = ShareScreenCoordinator;
 			sourceTree = "<group>";
 		};
+		1BBABB7D294DF4D6000772AC /* HapticService */ = {
+			isa = PBXGroup;
+			children = (
+				1BBABB7E294DF4E3000772AC /* HapticServiceMock.swift */,
+			);
+			path = HapticService;
+			sourceTree = "<group>";
+		};
 		1BBE378D28C0DDC40087128D /* TestsDoubles */ = {
 			isa = PBXGroup;
 			children = (
@@ -2049,6 +2059,7 @@
 		6C933FC72942695700E43857 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				1BBABB7D294DF4D6000772AC /* HapticService */,
 				6C933FC82942696200E43857 /* TimerService */,
 			);
 			path = Service;
@@ -2796,6 +2807,7 @@
 				1B06E0F628C0A9D400BD58FB /* NumberScreenInteractorInputMock.swift in Sources */,
 				1BBE379028C0DE260087128D /* NumberScreenInteractorOutputSpy.swift in Sources */,
 				6C933FD429433BD700E43857 /* BottleScreenModuleIntegrationTests.swift in Sources */,
+				1BBABB7F294DF4E3000772AC /* HapticServiceMock.swift in Sources */,
 				1B3C87BB29337B15008B8AA6 /* MainScreenInteractorOutputSpy.swift in Sources */,
 				6C933FD2294338E700E43857 /* BottleScreenViewInputMock.swift in Sources */,
 				1B06E0FD28C0B39300BD58FB /* NumberScreenFactoryInputMock.swift in Sources */,

@@ -11,8 +11,6 @@ import YandexMobileMetricaPush
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
-  // MARK: - Internal property
-  
   var window: UIWindow?
   
   // MARK: - Private property

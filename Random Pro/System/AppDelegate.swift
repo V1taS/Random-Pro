@@ -60,8 +60,6 @@ extension AppDelegate {
   }
   
   func handlePushNotification(_ userInfo: [AnyHashable: Any]) {
-    // Track received remote notification.
-    // Method [YMMYandexMetrica activateWithApiKey:] should be called before using this method.
     YMPYandexMetricaPush.handleRemoteNotification(userInfo)
   }
 }

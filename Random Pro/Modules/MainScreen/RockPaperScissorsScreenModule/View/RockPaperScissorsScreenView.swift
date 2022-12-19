@@ -68,9 +68,10 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   }
   
   func resetCurrentGeneration() {
-    rightResultEmojiLabel.text = "?"
-    leftResultEmojiLabel.text = "?"
-    resultLabel.text = ""
+    let appearance = Appearance()
+    rightResultEmojiLabel.text = appearance.questionTitle
+    leftResultEmojiLabel.text = appearance.questionTitle
+    resultLabel.text = nil
   }
 }
 
@@ -112,13 +113,19 @@ private extension RockPaperScissorsScreenView {
       resultLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
                                        constant: appearance.maxInset),
       
-      leftResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -72),
+      leftResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
+                                                    constant: -appearance.centerXInset),
       leftResultEmojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      leftResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2, constant: 0),
+      leftResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor,
+                                                   multiplier: appearance.multiplierHeight,
+                                                   constant: .zero),
       
-      rightResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 72),
+      rightResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
+                                                     constant: appearance.centerXInset),
       rightResultEmojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      rightResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.2, constant: 0),
+      rightResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor,
+                                                    multiplier: appearance.multiplierHeight,
+                                                    constant: .zero),
 
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
@@ -139,5 +146,7 @@ private extension RockPaperScissorsScreenView {
     let systemFont: CGFloat = 120
     let defaultInset: CGFloat = 16
     let maxInset: CGFloat = 48
+    let centerXInset: CGFloat = 72
+    let multiplierHeight: Double = 0.2
   }
 }

@@ -143,6 +143,7 @@ final class MainScreenViewController: MainScreenModule {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    interactor.updatesSectionsIsHiddenFT()
     navigationController?.navigationBar.prefersLargeTitles = true
   }
   

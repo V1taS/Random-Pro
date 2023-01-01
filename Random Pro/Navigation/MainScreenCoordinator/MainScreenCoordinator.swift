@@ -61,7 +61,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let mainScreenModule = MainScreenAssembly().createModule()
+    let mainScreenModule = MainScreenAssembly().createModule(services)
     self.mainScreenModule = mainScreenModule
     self.mainScreenModule?.moduleOutput = self
     

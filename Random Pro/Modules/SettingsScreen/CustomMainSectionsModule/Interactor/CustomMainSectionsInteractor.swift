@@ -56,8 +56,9 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
   // MARK: - Internal func
   
   func getContent(models: [MainScreenModel.Section]) {
-    self.models =  models
-    output?.didReceive(models: models)
+    let newModel = models.filter { !$0.isHidden }
+    self.models =  newModel
+    output?.didReceive(models: newModel)
   }
   
   func sectionChanged(_ index: Int, type: MainScreenModel.Section) {
@@ -73,6 +74,7 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.insert(MainScreenModel.Section(
           type: section.type,
           isEnabled: section.isEnabled,
+          isHidden: section.isHidden,
           titleSection: section.titleSection,
           imageSection: section.imageSection,
           advLabel: section.advLabel
@@ -99,6 +101,7 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.insert(MainScreenModel.Section(
           type: section.type,
           isEnabled: isEnabled,
+          isHidden: section.isHidden,
           titleSection: section.titleSection,
           imageSection: section.imageSection,
           advLabel: section.advLabel

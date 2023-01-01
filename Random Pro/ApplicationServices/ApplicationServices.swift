@@ -43,7 +43,11 @@ protocol ApplicationServices {
   /// Сервис по работе с тайсером
   var timerService: TimerService { get }
   
+  /// Сервис виброоткликов
   var hapticService: HapticService { get }
+  
+  /// Сервис фичатогглов
+  var featureToggleServices: FeatureToggleServices { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -83,5 +87,9 @@ final class ApplicationServicesImpl: ApplicationServices {
   
   var hapticService: HapticService {
     HapticServiceImpl()
+  }
+  
+  var featureToggleServices: FeatureToggleServices {
+    FeatureToggleServicesImpl()
   }
 }

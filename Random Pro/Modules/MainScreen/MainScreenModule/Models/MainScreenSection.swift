@@ -27,6 +27,9 @@ struct MainScreenModel: UserDefaultsCodable {
     /// Секция включена
     let isEnabled: Bool
     
+    /// Секция скрыта
+    let isHidden: Bool
+    
     /// Название секции
     let titleSection: String
     

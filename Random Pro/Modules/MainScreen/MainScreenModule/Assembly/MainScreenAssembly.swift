@@ -11,10 +11,11 @@ import UIKit
 final class MainScreenAssembly {
   
   /// Собирает модуль `MainScreen`
+  /// - Parameters:
+  ///  - services: Сервисы приложения
   /// - Returns: Cобранный модуль `MainScreen`
-  func createModule() -> MainScreenModule {
-    
-    let interactor = MainScreenInteractor()
+  func createModule(_ services: ApplicationServices) -> MainScreenModule {
+    let interactor = MainScreenInteractor(services: services)
     let view = MainScreenView()
     let factory = MainScreenFactory()
     let presenter = MainScreenViewController(moduleView: view,

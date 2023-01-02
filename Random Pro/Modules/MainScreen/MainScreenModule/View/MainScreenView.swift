@@ -52,6 +52,9 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `openRockPaperScissors`
   func openRockPaperScissors()
+  
+  /// Открыть раздел `openImageFilters`
+  func openImageFilters()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -134,6 +137,8 @@ extension MainScreenView: UICollectionViewDelegate {
       output?.openBottle()
     case .rockPaperScissors:
       output?.openRockPaperScissors()
+    case .imageFilters:
+      output?.openImageFilters()
     }
   }
 }

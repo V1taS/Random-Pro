@@ -81,6 +81,13 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     services.permissionService.requestNotification { _ in }
   }
   
+  func openImageFilters() {
+    // TODO: - open coordinator
+    
+    mainScreenModule?.removeLabelFromSection(type: .imageFilters)
+    services.metricsService.track(event: .imageFilters)
+  }
+  
   func openRockPaperScissors() {
     let rockPaperScissorsScreenCoordinator = RockPaperScissorsScreenCoordinator(navigationController,
                                                                                 services)
@@ -88,6 +95,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     rockPaperScissorsScreenCoordinator.start()
     
     mainScreenModule?.removeLabelFromSection(type: .rockPaperScissors)
+    services.metricsService.track(event: .rockPaperScissors)
   }
   
   func openBottle() {

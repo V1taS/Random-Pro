@@ -52,6 +52,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `rockPaperScissors`
   func openRockPaperScissors()
   
+  /// Открыть раздел `openImageFilters`
+  func openImageFilters()
+  
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
   
@@ -184,6 +187,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openImageFilters() {
+    moduleOutput?.openImageFilters()
+  }
+  
   func openRockPaperScissors() {
     moduleOutput?.openRockPaperScissors()
   }

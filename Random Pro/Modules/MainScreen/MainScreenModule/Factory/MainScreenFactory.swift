@@ -175,6 +175,17 @@ extension MainScreenFactory {
             advLabel: .new
           ))
         }
+      case .imageFilters:
+        featureSection {
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            isHidden: false,
+            titleSection: appearance.titleImageFilters,
+            imageSection: appearance.imageImageFilters.pngData() ?? Data(),
+            advLabel: .new
+          ))
+        }
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -317,6 +328,17 @@ extension MainScreenFactory {
             advLabel: model.advLabel
           ))
         }
+      case .imageFilters:
+        featureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            isHidden: model.isHidden,
+            titleSection: appearance.titleImageFilters,
+            imageSection: model.imageSection,
+            advLabel: model.advLabel
+          ))
+        }
       }
     }
     return newModel
@@ -453,6 +475,17 @@ extension MainScreenFactory {
             type: model.type,
             isEnabled: model.isEnabled,
             isHidden: featureToggleModel.rockPaperScissors,
+            titleSection: model.titleSection,
+            imageSection: model.imageSection,
+            advLabel: model.advLabel
+          ))
+        }
+      case .imageFilters:
+        featureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            isHidden: featureToggleModel.imageFilters,
             titleSection: model.titleSection,
             imageSection: model.imageSection,
             advLabel: model.advLabel
@@ -604,6 +637,17 @@ extension MainScreenFactory {
             advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.rockPaperScissors) ?? .none
           ))
         }
+      case .imageFilters:
+        featureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            isHidden: model.isHidden,
+            titleSection: model.titleSection,
+            imageSection: model.imageSection,
+            advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.imageFilters) ?? .none
+          ))
+        }
       }
     }
     return newModel
@@ -685,5 +729,8 @@ private extension MainScreenFactory {
     
     let imageRockPaperScissorsScreenView = UIImage(systemName: "hurricane.circle") ?? UIImage()
     let titleRockPaperScissors = NSLocalizedString("Цу-е-фа", comment: "")
+    
+    let imageImageFilters = UIImage(systemName: "timelapse") ?? UIImage()
+    let titleImageFilters = NSLocalizedString("Фильтры", comment: "")
   }
 }

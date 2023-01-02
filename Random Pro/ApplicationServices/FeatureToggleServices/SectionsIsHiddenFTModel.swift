@@ -52,6 +52,9 @@ struct SectionsIsHiddenFTModel {
   /// Раздел `Камень, ножницы, бумага`
   let rockPaperScissors: Bool
   
+  /// Раздел `Филтры изображений`
+  let imageFilters: Bool
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -71,6 +74,7 @@ struct SectionsIsHiddenFTModel {
     colors = (dictionary["colors"] as? Int ?? .zero).boolValue
     bottle = (dictionary["bottle"] as? Int ?? .zero).boolValue
     rockPaperScissors = (dictionary["rockPaperScissors"] as? Int ?? .zero).boolValue
+    imageFilters = (dictionary["rockPaperScissors"] as? Int ?? .zero).boolValue
   }
 }
 

@@ -33,6 +33,8 @@ enum MetricsSections: String {
   case colorsScreen = "Цвета (new version)"
   case onboarding = "Onboarding (new version)"
   case bottleScreen = "Бутылочка (new version)"
+  case rockPaperScissors = "Камень Ножницы Бумага (new version)"
+  case imageFilters = "Фильтр изображений (new version)"
   
   // Настройки главного экрана
   case mainSettingsScreen = "Настройки главного экрана (new version)"

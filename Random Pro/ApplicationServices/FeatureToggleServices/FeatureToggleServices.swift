@@ -13,6 +13,9 @@ protocol FeatureToggleServices {
   
   /// Получить секции, которые надо скрыть из приложения
   func getSectionsIsHiddenFT(completion: @escaping (SectionsIsHiddenFTModel?) -> Void)
+  
+  /// Получить лайблы для ячеек на главном экране
+  func getLabelsFeatureToggle(completion: @escaping (LabelsFeatureToggleModel?) -> Void)
 }
 
 final class FeatureToggleServicesImpl: FeatureToggleServices {
@@ -23,9 +26,29 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
   
   // MARK: - Internal func
   
+  func getLabelsFeatureToggle(completion: @escaping (LabelsFeatureToggleModel?) -> Void) {
+    let appearance = Appearance()
+    
+    cloudDataBase.collection(appearance.labelsFeatureToggleKey).getDocuments { (querySnapshot, error) in
+      guard let documents = querySnapshot?.documents, error == nil else {
+        DispatchQueue.main.async {
+          completion(nil)
+        }
+        return
+      }
+      
+      for document in documents {
+        DispatchQueue.main.async {
+          completion(LabelsFeatureToggleModel(dictionary: document.data()))
+        }
+      }
+    }
+  }
+  
   func getSectionsIsHiddenFT(completion: @escaping (SectionsIsHiddenFTModel?) -> Void) {
     let appearance = Appearance()
-    cloudDataBase.collection(appearance.nameCloudDataBase).getDocuments { (querySnapshot, error) in
+    
+    cloudDataBase.collection(appearance.sectionsIsHiddenFTKey).getDocuments { (querySnapshot, error) in
       guard let documents = querySnapshot?.documents, error == nil else {
         DispatchQueue.main.async {
           completion(nil)
@@ -46,6 +69,7 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
 
 private extension FeatureToggleServicesImpl {
   struct Appearance {
-    let nameCloudDataBase = "IsHiddenFeatureToggles"
+    let sectionsIsHiddenFTKey = "IsHiddenFeatureToggles"
+    let labelsFeatureToggleKey = "LabelsFeatureToggle_hit_new_premium_none"
   }
 }

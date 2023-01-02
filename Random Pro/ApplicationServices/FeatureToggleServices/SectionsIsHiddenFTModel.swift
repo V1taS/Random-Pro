@@ -1,5 +1,5 @@
 //
-//  FeatureToggleModel.swift
+//  SectionsIsHiddenFTModel.swift
 //  Random Pro
 //
 //  Created by Vitalii Sosin on 30.12.2022.
@@ -71,72 +71,6 @@ struct SectionsIsHiddenFTModel {
     colors = (dictionary["colors"] as? Int ?? .zero).boolValue
     bottle = (dictionary["bottle"] as? Int ?? .zero).boolValue
     rockPaperScissors = (dictionary["rockPaperScissors"] as? Int ?? .zero).boolValue
-  }
-  
-  /// - Parameters:
-  ///   - teams: Команды
-  ///   - number: Число
-  ///   - yesOrNo: Да или нет
-  ///   - letter: Буква
-  ///   - list: Список
-  ///   - coin: Монетка
-  ///   - cube: Кубики
-  ///   - dateAndTime: Дата и время
-  ///   - lottery: Лотерея
-  ///   - contact: Контакт
-  ///   - password: Пароли
-  ///   - colors: Цвета
-  ///   - bottle: Бутылочка
-  ///   - rockPaperScissors: Камень ножницы бумага
-  init(teams: Bool,
-       number: Bool,
-       yesOrNo: Bool,
-       letter: Bool,
-       list: Bool,
-       coin: Bool,
-       cube: Bool,
-       dateAndTime: Bool,
-       lottery: Bool,
-       contact: Bool,
-       password: Bool,
-       colors: Bool,
-       bottle: Bool,
-       rockPaperScissors: Bool) {
-    self.teams = teams
-    self.number = number
-    self.yesOrNo = yesOrNo
-    self.letter = letter
-    self.list = list
-    self.coin = coin
-    self.cube = cube
-    self.dateAndTime = dateAndTime
-    self.lottery = lottery
-    self.contact = contact
-    self.password = password
-    self.colors = colors
-    self.bottle = bottle
-    self.rockPaperScissors = rockPaperScissors
-  }
-}
-
-// MARK: - Static func
-
-extension SectionsIsHiddenFTModel {
-  static func allSectionsIsShowModel() -> SectionsIsHiddenFTModel {
-    return SectionsIsHiddenFTModel(teams: false,
-                                   number: false,
-                                   yesOrNo: false,
-                                   letter: false,
-                                   list: false,
-                                   coin: false,
-                                   cube: false,
-                                   dateAndTime: false,
-                                   lottery: false,
-                                   contact: false,
-                                   password: false,
-                                   colors: false,
-                                   bottle: false,
-                                   rockPaperScissors: false)
   }
 }
 

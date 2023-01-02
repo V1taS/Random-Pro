@@ -136,14 +136,18 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    interactor.getContent()
     setupNavBar()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    interactor.updatesSectionsIsHiddenFT()
+    interactor.getContent { [weak self] in
+      self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
+        self?.interactor.updatesLabelsFeatureToggle()
+      }
+    }
+    
     navigationController?.navigationBar.prefersLargeTitles = true
   }
   

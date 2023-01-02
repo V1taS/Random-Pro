@@ -69,6 +69,7 @@
 		1B3C87C529338B4F008B8AA6 /* MainScreenFactoryInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87C429338B4F008B8AA6 /* MainScreenFactoryInputMock.swift */; };
 		1B3C87C729338B64008B8AA6 /* MainScreenViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87C629338B64008B8AA6 /* MainScreenViewInputMock.swift */; };
 		1B3C87CA29338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C87C929338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift */; };
+		1B40BE5C2962C9A300FEBDB6 /* LabelsFeatureToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B40BE5B2962C9A300FEBDB6 /* LabelsFeatureToggleModel.swift */; };
 		1B412BA728C7DFE60078126F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B412BA628C7DFE60078126F /* FileManager.swift */; };
 		1B4A5C9D28B9261300215064 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9C28B9261300215064 /* PermissionService.swift */; };
 		1B4A5CA028B949F400215064 /* PasswordScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */; };
@@ -133,7 +134,7 @@
 		1BB51FA6295F5625003C317D /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BB51FA5295F5625003C317D /* FirebaseDatabaseSwift */; };
 		1BB51FA8295F5625003C317D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BB51FA7295F5625003C317D /* FirebaseFirestoreSwift */; };
 		1BB51FAA295F5625003C317D /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BB51FA9295F5625003C317D /* FirebaseRemoteConfigSwift */; };
-		1BB51FAC295F5CC5003C317D /* FeatureToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB51FAB295F5CC5003C317D /* FeatureToggleModel.swift */; };
+		1BB51FAC295F5CC5003C317D /* SectionsIsHiddenFTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB51FAB295F5CC5003C317D /* SectionsIsHiddenFTModel.swift */; };
 		1BBABB7F294DF4E3000772AC /* HapticServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBABB7E294DF4E3000772AC /* HapticServiceMock.swift */; };
 		1BBE378A28C0C10E0087128D /* NumberScreenViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */; };
 		1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */; };
@@ -319,6 +320,7 @@
 		1B3C87C429338B4F008B8AA6 /* MainScreenFactoryInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenFactoryInputMock.swift; sourceTree = "<group>"; };
 		1B3C87C629338B64008B8AA6 /* MainScreenViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewInputMock.swift; sourceTree = "<group>"; };
 		1B3C87C929338D7A008B8AA6 /* MainScreenModuleIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModuleIntegrationTests.swift; sourceTree = "<group>"; };
+		1B40BE5B2962C9A300FEBDB6 /* LabelsFeatureToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsFeatureToggleModel.swift; sourceTree = "<group>"; };
 		1B412BA628C7DFE60078126F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		1B4A5C9C28B9261300215064 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenModel.swift; sourceTree = "<group>"; };
@@ -380,7 +382,7 @@
 		1BA83CF62879DA42000035E3 /* UserDefaultsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsCodable.swift; sourceTree = "<group>"; };
 		1BA83CF82879E991000035E3 /* LetterScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterScreenModel.swift; sourceTree = "<group>"; };
 		1BB51F9E295F5365003C317D /* FeatureToggleServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleServices.swift; sourceTree = "<group>"; };
-		1BB51FAB295F5CC5003C317D /* FeatureToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleModel.swift; sourceTree = "<group>"; };
+		1BB51FAB295F5CC5003C317D /* SectionsIsHiddenFTModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsIsHiddenFTModel.swift; sourceTree = "<group>"; };
 		1BBABB7E294DF4E3000772AC /* HapticServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticServiceMock.swift; sourceTree = "<group>"; };
 		1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenViewInputMock.swift; sourceTree = "<group>"; };
 		1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractorTests.swift; sourceTree = "<group>"; };
@@ -1643,7 +1645,8 @@
 			isa = PBXGroup;
 			children = (
 				1BB51F9E295F5365003C317D /* FeatureToggleServices.swift */,
-				1BB51FAB295F5CC5003C317D /* FeatureToggleModel.swift */,
+				1BB51FAB295F5CC5003C317D /* SectionsIsHiddenFTModel.swift */,
+				1B40BE5B2962C9A300FEBDB6 /* LabelsFeatureToggleModel.swift */,
 			);
 			path = FeatureToggleServices;
 			sourceTree = "<group>";
@@ -3001,7 +3004,7 @@
 				1B0ED1B728D4EC0C001BACF6 /* MainSettingsScreenModel.swift in Sources */,
 				1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
-				1BB51FAC295F5CC5003C317D /* FeatureToggleModel.swift in Sources */,
+				1BB51FAC295F5CC5003C317D /* SectionsIsHiddenFTModel.swift in Sources */,
 				6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */,
 				1BD539A228BA318F009DA51C /* ListAddItemsScreenCoordinator.swift in Sources */,
 				1B31F641285FB85E00A88217 /* NotificationService.swift in Sources */,
@@ -3041,6 +3044,7 @@
 				6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */,
 				1BD25B6D282459B4006661B8 /* MetricsService.swift in Sources */,
 				1B9D455B283BDC7C00A85F25 /* SettingsScreenInteractor.swift in Sources */,
+				1B40BE5C2962C9A300FEBDB6 /* LabelsFeatureToggleModel.swift in Sources */,
 				1B0ED1EC28D54E05001BACF6 /* OnboardingScreenViewController.swift in Sources */,
 				1B96E0FF282048D000A23880 /* RootCoordinator.swift in Sources */,
 				6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */,

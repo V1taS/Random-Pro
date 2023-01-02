@@ -23,7 +23,7 @@ protocol MainScreenInteractorInput {
   func updateSectionsWith(models: [MainScreenModel.Section])
   
   /// Получаем список ячеек
-  func getContent()
+  func getContent(completion: () -> Void)
   
   /// Возвращает модель
   func returnModel() -> MainScreenModel
@@ -44,7 +44,10 @@ protocol MainScreenInteractorInput {
                 for sectionType: MainScreenModel.SectionType)
   
   /// Обновить модель с фича тогглами
-  func updatesSectionsIsHiddenFT()
+  func updatesSectionsIsHiddenFT(completion: @escaping () -> Void)
+  
+  /// Обновить лайблы у секций на главном экране
+  func updatesLabelsFeatureToggle()
 }
 
 /// Интерактор
@@ -90,7 +93,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     }
   }
   
-  func getContent() {
+  func getContent(completion: () -> Void) {
     if let model = model {
       let newModel = MainScreenModel(
         isDarkMode: model.isDarkMode,
@@ -98,10 +101,12 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       )
       self.model = newModel
       output?.didReceive(model: newModel)
+      completion()
     } else {
       let newModel = MainScreenFactory.createBaseModel()
       model = newModel
       output?.didReceive(model: newModel)
+      completion()
     }
   }
   
@@ -126,9 +131,11 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   func removeLabelFromSection(type: MainScreenModel.SectionType) {
-    guard let model = model else {
-      return
-    }
+    guard let model = model,
+          let section = model.allSections.filter({ $0.type == type }).first,
+          section.advLabel == .new else {
+            return
+          }
     
     let newModel = MainScreenModel(
       isDarkMode: model.isDarkMode,
@@ -156,17 +163,38 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     self.model = newModel
   }
   
-  func updatesSectionsIsHiddenFT() {
+  func updatesSectionsIsHiddenFT(completion: @escaping () -> Void) {
     guard let model = model else {
+      completion()
       return
     }
     
     services.featureToggleServices.getSectionsIsHiddenFT { [weak self] sectionsIsHiddenFTModel in
       guard let sectionsIsHiddenFTModel else {
+        completion()
         return
       }
       let newAllSectionsModel = MainScreenFactory.updatesSectionsIsHiddenFTForModel(models: model.allSections,
                                                                                     featureToggleModel: sectionsIsHiddenFTModel)
+      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
+                                     allSections: newAllSectionsModel)
+      self?.model = newModel
+      self?.output?.didReceive(model: newModel)
+      completion()
+    }
+  }
+  
+  func updatesLabelsFeatureToggle() {
+    guard let model = model else {
+      return
+    }
+    
+    services.featureToggleServices.getLabelsFeatureToggle { [weak self] labelsModel in
+      guard let labelsModel else {
+        return
+      }
+      let newAllSectionsModel = MainScreenFactory.updatesLabelsModel(models: model.allSections,
+                                                                     labelsModel: labelsModel)
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      allSections: newAllSectionsModel)
       self?.model = newModel

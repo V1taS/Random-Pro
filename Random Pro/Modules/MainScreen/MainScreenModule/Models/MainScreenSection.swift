@@ -91,7 +91,7 @@ struct MainScreenModel: UserDefaultsCodable {
   
   // MARK: - ADVLabel
   
-  enum ADVLabel: CaseIterable, UserDefaultsCodable {
+  enum ADVLabel: String, CaseIterable, UserDefaultsCodable {
     
     var title: String {
       let appearance = Appearance()

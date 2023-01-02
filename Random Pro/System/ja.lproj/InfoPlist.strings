@@ -10,3 +10,4 @@
 "NSUserTrackingUsageDescription" = "活動データを使用できますか? 許可すると、ウェブサイトや他のアプリでの Random Pro の広告の関連性が高まります。";
 "NSPhotoLibraryAddUsageDescription" = "ギャラリーへのアクセスを許可して、既製の「画像結果」を保存したり、ランダム フィルタリングのために写真を Random Pro にアップロードしたりできます。";
 "NSPhotoLibraryUsageDescription" = "ギャラリーへのアクセスを許可して、既製の「画像結果」を保存したり、ランダム フィルタリングのために写真を Random Pro にアップロードしたりできます。";
+"NSCameraUsageDescription" = "カメラを共有して、ランダム フィルタリング用の写真を撮影できるようにします。";

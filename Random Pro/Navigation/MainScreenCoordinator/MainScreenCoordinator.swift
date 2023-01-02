@@ -82,7 +82,10 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
   
   func openImageFilters() {
-    // TODO: - open coordinator
+    let imageFiltersScreenCoordinator = ImageFiltersScreenCoordinator(navigationController,
+                                                                      services)
+    anyCoordinator = imageFiltersScreenCoordinator
+    imageFiltersScreenCoordinator.start()
     
     mainScreenModule?.removeLabelFromSection(type: .imageFilters)
     services.metricsService.track(event: .imageFilters)

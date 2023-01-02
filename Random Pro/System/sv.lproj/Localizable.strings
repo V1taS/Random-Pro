@@ -141,4 +141,8 @@
 "Число" = "Nummer";
 "Что-то пошло не так" = "Något gick fel";
 "Январь" = "Januari";
-"Фильтры" = "filter";
+"Фильтры" = "Filter";
+"Изображение из файлов" = "Bild från filer";
+"Изображение из галереи" = "Bild från galleriet";
+"Сделать фото" = "För att göra ett foto";
+"Не удалось загрузить изображение" = "Det gick inte att ladda bilden";

@@ -10,3 +10,4 @@
 "NSUserTrackingUsageDescription" = "Můžete použít údaje o své aktivitě? Pokud to povolíte, reklamy Random Pro na webech a v dalších aplikacích budou relevantnější.";
 "NSPhotoLibraryAddUsageDescription" = "Poskytněte přístup ke své galerii, abyste si mohli uložit hotové „výsledky obrázků“ nebo nahrát fotografie do Random Pro pro náhodné filtrování.";
 "NSPhotoLibraryUsageDescription" = "Poskytněte přístup ke své galerii, abyste si mohli uložit hotové „výsledky obrázků“ nebo nahrát fotografie do Random Pro pro náhodné filtrování.";
+"NSCameraUsageDescription" = "Sdílejte svůj fotoaparát, abyste mohli pořídit fotografii pro náhodné filtrování.";

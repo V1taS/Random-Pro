@@ -16,6 +16,7 @@ enum MetricsSections: String {
   case shareApp = "Поделиться приложением (new version)"
   case shareImage = "Поделиться изображением (new version)"
   case shareColors = "Поделиться Цветом (new version)"
+  case shareImageFilters = "Поделиться (Фильтр изображений) (new version)"
   
   // Категории
   case filmScreen = "Фильмы (new version)"

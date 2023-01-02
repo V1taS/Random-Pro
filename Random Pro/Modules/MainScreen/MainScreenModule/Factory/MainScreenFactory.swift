@@ -463,6 +463,152 @@ extension MainScreenFactory {
     return newModel
   }
   
+  static func updatesLabelsModel(
+    models: [MainScreenModel.Section],
+    labelsModel: LabelsFeatureToggleModel
+  ) -> [MainScreenModel.Section] {
+    var newModel: [MainScreenModel.Section] = []
+    
+    models.forEach { model in
+      if model.advLabel == .new {
+        newModel.append(model)
+        return
+      }
+      
+      switch model.type {
+      case .teams:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.teams) ?? .none
+        ))
+      case .number:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.number) ?? .none
+        ))
+      case .yesOrNo:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.yesOrNo) ?? .none
+        ))
+      case .letter:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.letter) ?? .none
+        ))
+      case .list:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.list) ?? .none
+        ))
+      case .coin:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.coin) ?? .none
+        ))
+      case .cube:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.cube) ?? .none
+        ))
+      case .dateAndTime:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.dateAndTime) ?? .none
+        ))
+      case .lottery:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.lottery) ?? .none
+        ))
+      case .contact:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.contact) ?? .none
+        ))
+      case .password:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.password) ?? .none
+        ))
+      case .colors:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.colors) ?? .none
+        ))
+      case .bottle:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.bottle) ?? .none
+        ))
+      case .rockPaperScissors:
+        featureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            isHidden: model.isHidden,
+            titleSection: model.titleSection,
+            imageSection: model.imageSection,
+            advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.rockPaperScissors) ?? .none
+          ))
+        }
+      }
+    }
+    return newModel
+  }
+  
   static func featureSection(completion: () -> Void) {
 #if DEBUG
     completion()

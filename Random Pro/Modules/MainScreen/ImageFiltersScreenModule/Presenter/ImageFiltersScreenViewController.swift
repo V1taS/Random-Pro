@@ -114,6 +114,7 @@ final class ImageFiltersScreenViewController: ImageFiltersScreenModule {
 extension ImageFiltersScreenViewController: ImageFiltersScreenViewOutput {
   func generateImageFilterFor(image: Data?) {
     factory.generateImageFilterFor(image: image)
+    moduleView.startLoader()
   }
 }
 
@@ -142,10 +143,12 @@ extension ImageFiltersScreenViewController: ImageFiltersScreenInteractorOutput {
 extension ImageFiltersScreenViewController: ImageFiltersScreenFactoryOutput {
   func didReceiveError() {
     moduleOutput?.didReceiveError()
+    moduleView.stopLoader()
   }
   
   func didReceiveNewImage(_ image: Data) {
     moduleView.updateContentImage(image)
+    moduleView.stopLoader()
   }
 }
 

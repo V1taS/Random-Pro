@@ -29,6 +29,12 @@ protocol ImageFiltersScreenViewInput {
   /// Обновить изображение
   /// - Parameter data: Изображение
   func updateContentImage(_ data: Data)
+  
+  /// Запустить анимацию загрузки
+  func startLoader()
+  
+  /// Остановить анимацию загрузки
+  func stopLoader()
 }
 
 /// Псевдоним протокола UIView & ImageFiltersScreenViewInput
@@ -45,6 +51,7 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
   
   private let generateButton = ButtonView()
   private let imageView = UIImageView()
+  private let loaderView = UIActivityIndicatorView(style: .large)
   private var cacheData: Data?
   
   // MARK: - Initialization
@@ -63,7 +70,7 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
   // MARK: - Internal func
   
   func returnImageDataColor() -> Data? {
-    imageView.asImage?.pngData()
+    return imageView.image?.compress(maxKb: 4_194_304)
   }
   
   func uploadContentImage(_ data: Data) {
@@ -73,6 +80,16 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
   
   func updateContentImage(_ data: Data) {
     updateContentWith(data)
+  }
+  
+  func startLoader() {
+    loaderView.isHidden = false
+    loaderView.startAnimating()
+  }
+  
+  func stopLoader() {
+    loaderView.stopAnimating()
+    loaderView.isHidden = true
   }
 }
 
@@ -98,7 +115,7 @@ private extension ImageFiltersScreenView {
   func configureLayout() {
     let appearance = Appearance()
     
-    [imageView, generateButton].forEach {
+    [imageView, generateButton, loaderView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -114,7 +131,10 @@ private extension ImageFiltersScreenView {
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.defaultInset)
+                                             constant: -appearance.defaultInset),
+      
+      loaderView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      loaderView.centerYAnchor.constraint(equalTo: centerYAnchor)
     ])
   }
   
@@ -124,6 +144,7 @@ private extension ImageFiltersScreenView {
     imageView.image = appearance.plugImage
     imageView.contentMode = .scaleAspectFit
     cacheData = appearance.plugImage?.pngData()
+    loaderView.isHidden = true
     
     appearance.plugImage?.getAverageColor { [weak self] averageColor in
       UIView.animate(withDuration: appearance.resultDuration) { [weak self] in

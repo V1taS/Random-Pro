@@ -155,9 +155,10 @@ private extension ImageFiltersScreenFactory {
                     filter: ImageFiltersScreenType,
                     filterValues: [ImageFiltersScreenModel],
                     completion: @escaping (UIImage?) -> Void) {
-    DispatchQueue.global().async {
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      let rotateImage = self?.rotateImage(image: image) ?? UIImage()
       let filter = CIFilter(name: filter.rawValue)
-      let ciInput = CIImage(image: image)
+      let ciInput = CIImage(image: rotateImage)
       filter?.setValue(ciInput, forKey: Appearance().inputImageKey)
       filterValues.forEach {
         filter?.setValue($0.value, forKey: $0.key)
@@ -178,6 +179,17 @@ private extension ImageFiltersScreenFactory {
         completion(UIImage(cgImage: cgImage))
       }
     }
+  }
+  
+  func rotateImage(image: UIImage) -> UIImage? {
+    if image.imageOrientation == UIImage.Orientation.up {
+      return image
+    }
+    UIGraphicsBeginImageContext(image.size)
+    image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+    let copy = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return copy
   }
 }
 

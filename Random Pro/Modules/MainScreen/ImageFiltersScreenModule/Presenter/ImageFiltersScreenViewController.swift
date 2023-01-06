@@ -25,6 +25,9 @@ protocol ImageFiltersScreenModuleOutput: AnyObject {
   
   /// Выбрать изображение
   func addImageButtonAction()
+  
+  /// Получена ошибка
+  func didReceiveError()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -108,7 +111,11 @@ final class ImageFiltersScreenViewController: ImageFiltersScreenModule {
 
 // MARK: - ImageFiltersScreenViewOutput
 
-extension ImageFiltersScreenViewController: ImageFiltersScreenViewOutput {}
+extension ImageFiltersScreenViewController: ImageFiltersScreenViewOutput {
+  func generateImageFilterFor(image: Data?) {
+    factory.generateImageFilterFor(image: image)
+  }
+}
 
 // MARK: - ImageFiltersScreenInteractorOutput
 
@@ -132,7 +139,15 @@ extension ImageFiltersScreenViewController: ImageFiltersScreenInteractorOutput {
 
 // MARK: - ImageFiltersScreenFactoryOutput
 
-extension ImageFiltersScreenViewController: ImageFiltersScreenFactoryOutput {}
+extension ImageFiltersScreenViewController: ImageFiltersScreenFactoryOutput {
+  func didReceiveError() {
+    moduleOutput?.didReceiveError()
+  }
+  
+  func didReceiveNewImage(_ image: Data) {
+    moduleView.updateContentImage(image)
+  }
+}
 
 // MARK: - Private
 

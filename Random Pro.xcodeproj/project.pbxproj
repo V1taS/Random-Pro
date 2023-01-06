@@ -16,6 +16,8 @@
 		1B08ADA228CDDAD5007290F3 /* ColorsScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08AD9D28CDDAD5007290F3 /* ColorsScreenInteractor.swift */; };
 		1B08ADA328CDDAD5007290F3 /* ColorsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08AD9E28CDDAD5007290F3 /* ColorsScreenView.swift */; };
 		1B08ADAB28CDDB57007290F3 /* ColorsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B08ADAA28CDDB57007290F3 /* ColorsScreenCoordinator.swift */; };
+		1B0C1B502968691900B9ABCA /* ImageFiltersScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C1B4F2968691900B9ABCA /* ImageFiltersScreenType.swift */; };
+		1B0C1B522968975000B9ABCA /* ImageFiltersScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0C1B512968975000B9ABCA /* ImageFiltersScreenModel.swift */; };
 		1B0ED1A628D4D9E7001BACF6 /* MainSettingsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A128D4D9E7001BACF6 /* MainSettingsScreenFactory.swift */; };
 		1B0ED1A728D4D9E7001BACF6 /* MainSettingsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A228D4D9E7001BACF6 /* MainSettingsScreenViewController.swift */; };
 		1B0ED1A828D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1A328D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift */; };
@@ -270,6 +272,8 @@
 		1B08AD9D28CDDAD5007290F3 /* ColorsScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreenInteractor.swift; sourceTree = "<group>"; };
 		1B08AD9E28CDDAD5007290F3 /* ColorsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreenView.swift; sourceTree = "<group>"; };
 		1B08ADAA28CDDB57007290F3 /* ColorsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreenCoordinator.swift; sourceTree = "<group>"; };
+		1B0C1B4F2968691900B9ABCA /* ImageFiltersScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFiltersScreenType.swift; sourceTree = "<group>"; };
+		1B0C1B512968975000B9ABCA /* ImageFiltersScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFiltersScreenModel.swift; sourceTree = "<group>"; };
 		1B0ED1A128D4D9E7001BACF6 /* MainSettingsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenFactory.swift; sourceTree = "<group>"; };
 		1B0ED1A228D4D9E7001BACF6 /* MainSettingsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenViewController.swift; sourceTree = "<group>"; };
 		1B0ED1A328D4D9E7001BACF6 /* MainSettingsScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingsScreenAssembly.swift; sourceTree = "<group>"; };
@@ -659,6 +663,15 @@
 			path = ColorsScreenCoordinator;
 			sourceTree = "<group>";
 		};
+		1B0C1B4C296868C400B9ABCA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B0C1B4F2968691900B9ABCA /* ImageFiltersScreenType.swift */,
+				1B0C1B512968975000B9ABCA /* ImageFiltersScreenModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		1B0ED19E28D4D8F4001BACF6 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -979,6 +992,7 @@
 		1B1C172C2962E91F005F34B7 /* ImageFiltersScreenModule */ = {
 			isa = PBXGroup;
 			children = (
+				1B0C1B4C296868C400B9ABCA /* Models */,
 				1B1C173B2962E95E005F34B7 /* Assembly */,
 				1B1C173A2962E958005F34B7 /* Factory */,
 				1B1C17392962E952005F34B7 /* Interactor */,
@@ -3050,6 +3064,7 @@
 				1B96E0F02820483F00A23880 /* MainScreenViewController.swift in Sources */,
 				1B08AD9F28CDDAD5007290F3 /* ColorsScreenFactory.swift in Sources */,
 				1B08ADAB28CDDB57007290F3 /* ColorsScreenCoordinator.swift in Sources */,
+				1B0C1B522968975000B9ABCA /* ImageFiltersScreenModel.swift in Sources */,
 				6CA3962E2832533A00F86248 /* LetterScreenCoordinator.swift in Sources */,
 				6C12706C29473126000D3852 /* RockPaperScissorsScreenView.swift in Sources */,
 				6CA3962B283251AA00F86248 /* LetterScreenAssembly.swift in Sources */,
@@ -3081,6 +3096,7 @@
 				1BA199B928BBC7590036D73C /* ShareScreenCoordinator.swift in Sources */,
 				1B0ED1B728D4EC0C001BACF6 /* MainSettingsScreenModel.swift in Sources */,
 				1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */,
+				1B0C1B502968691900B9ABCA /* ImageFiltersScreenType.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
 				1BB51FAC295F5CC5003C317D /* SectionsIsHiddenFTModel.swift in Sources */,
 				6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */,

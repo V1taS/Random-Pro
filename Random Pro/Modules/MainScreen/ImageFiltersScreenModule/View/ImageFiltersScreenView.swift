@@ -9,7 +9,12 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из View в Presenter
-protocol ImageFiltersScreenViewOutput: AnyObject {}
+protocol ImageFiltersScreenViewOutput: AnyObject {
+  
+  /// Сгенерировать новый фильтр
+  /// - Parameter image: Изображение
+  func generateImageFilterFor(image: Data?)
+}
 
 /// События которые отправляем от Presenter ко View
 protocol ImageFiltersScreenViewInput {
@@ -20,6 +25,10 @@ protocol ImageFiltersScreenViewInput {
   /// Загрузить изображение
   /// - Parameter data: Изображение
   func uploadContentImage(_ data: Data)
+  
+  /// Обновить изображение
+  /// - Parameter data: Изображение
+  func updateContentImage(_ data: Data)
 }
 
 /// Псевдоним протокола UIView & ImageFiltersScreenViewInput
@@ -36,6 +45,7 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
   
   private let generateButton = ButtonView()
   private let imageView = UIImageView()
+  private var cacheData: Data?
   
   // MARK: - Initialization
   
@@ -57,6 +67,19 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
   }
   
   func uploadContentImage(_ data: Data) {
+    cacheData = data
+    updateContentWith(data)
+  }
+  
+  func updateContentImage(_ data: Data) {
+    updateContentWith(data)
+  }
+}
+
+// MARK: - Private
+
+private extension ImageFiltersScreenView {
+  func updateContentWith(_ data: Data) {
     UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
       guard let self = self else {
         return
@@ -71,11 +94,7 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
       }
     }
   }
-}
-
-// MARK: - Private
-
-private extension ImageFiltersScreenView {
+  
   func configureLayout() {
     let appearance = Appearance()
     
@@ -104,6 +123,7 @@ private extension ImageFiltersScreenView {
     backgroundColor = RandomColor.primaryWhite
     imageView.image = appearance.plugImage
     imageView.contentMode = .scaleAspectFit
+    cacheData = appearance.plugImage?.pngData()
     
     appearance.plugImage?.getAverageColor { [weak self] averageColor in
       UIView.animate(withDuration: appearance.resultDuration) { [weak self] in
@@ -117,7 +137,7 @@ private extension ImageFiltersScreenView {
   
   @objc
   func generateButtonAction() {
-    // TODO: -
+    output?.generateImageFilterFor(image: cacheData)
   }
 }
 

@@ -58,17 +58,17 @@ final class ShareScreenView: ShareScreenViewProtocol {
       return
     }
     
-    let colorOne = UIColor(red: CGFloat.random(in: 0...255) / 255,
-                           green: CGFloat.random(in: 0...255) / 255,
-                           blue: CGFloat.random(in: 0...255) / 255,
+    let colorOne = UIColor(red: CGFloat.random(in: 0...1),
+                           green: CGFloat.random(in: 0...1),
+                           blue: CGFloat.random(in: 0...1),
                            alpha: 1)
-    let colorTwo = UIColor(red: CGFloat.random(in: 0...255) / 255,
-                           green: CGFloat.random(in: 0...255) / 255,
-                           blue: CGFloat.random(in: 0...255) / 255,
+    let colorTwo = UIColor(red: CGFloat.random(in: 0...1),
+                           green: CGFloat.random(in: 0...1),
+                           blue: CGFloat.random(in: 0...1),
                            alpha: 1)
-    let colorThree = UIColor(red: CGFloat.random(in: 0...255) / 255,
-                             green: CGFloat.random(in: 0...255) / 255,
-                             blue: CGFloat.random(in: 0...255) / 255,
+    let colorThree = UIColor(red: CGFloat.random(in: 0...1),
+                             green: CGFloat.random(in: 0...1),
+                             blue: CGFloat.random(in: 0...1),
                              alpha: 1)
     
     let image = UIImage(data: imageData)!

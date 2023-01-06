@@ -58,6 +58,14 @@ final class ImageFiltersScreenCoordinator: NSObject, ImageFiltersScreenCoordinat
 // MARK: - ColorsScreenModuleOutput
 
 extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
+  func didReceiveError() {
+    services.notificationService.showNegativeAlertWith(
+      title: Appearance().failedSomeError,
+      glyph: false,
+      active: {}
+    )
+  }
+  
   func addImageButtonAction() {
     openImageFiltersActionSheet()
   }
@@ -225,7 +233,7 @@ private extension ImageFiltersScreenCoordinator {
   func openCameraModule() {
     let imagePickerController = UIImagePickerController()
     imagePickerController.sourceType = .camera
-    imagePickerController.allowsEditing = true
+    imagePickerController.allowsEditing = false
     imagePickerController.delegate = self
     imageFiltersScreenModule?.present(imagePickerController, animated: true, completion: nil)
   }
@@ -241,7 +249,7 @@ private extension ImageFiltersScreenCoordinator {
     } else {
       let imagePickerController = UIImagePickerController()
       imagePickerController.sourceType = .photoLibrary
-      imagePickerController.allowsEditing = true
+      imagePickerController.allowsEditing = false
       imagePickerController.delegate = self
       return imagePickerController
     }
@@ -254,6 +262,7 @@ private extension ImageFiltersScreenCoordinator {
   struct Appearance {
     let allowAccessToGallery = NSLocalizedString("Разрешить доступ к галерее", comment: "")
     let failedLoadImage = NSLocalizedString("Не удалось загрузить изображение", comment: "")
+    let failedSomeError = NSLocalizedString("Ошибка", comment: "")
     
     let chooseFromFile = NSLocalizedString("Изображение из файлов", comment: "")
     let chooseFromGallery = NSLocalizedString("Изображение из галереи", comment: "")

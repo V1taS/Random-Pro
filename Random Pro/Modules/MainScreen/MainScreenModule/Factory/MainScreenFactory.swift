@@ -108,7 +108,7 @@ extension MainScreenFactory {
           isHidden: false,
           titleSection: appearance.titleCardCube,
           imageSection: appearance.imageCardCube.pngData() ?? Data(),
-          advLabel: .new
+          advLabel: .none
         ))
       case .dateAndTime:
         allSections.append(MainScreenModel.Section(

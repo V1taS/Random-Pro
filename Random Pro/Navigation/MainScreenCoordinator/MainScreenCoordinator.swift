@@ -117,6 +117,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = colorsScreenCoordinator
     colorsScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .colors)
     services.metricsService.track(event: .colorsScreen)
   }
   
@@ -126,6 +127,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = teamsScreenCoordinator
     teamsScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .teams)
     services.metricsService.track(event: .teamsScreen)
   }
   
@@ -135,6 +137,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = yesNoScreenCoordinator
     yesNoScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .yesOrNo)
     services.metricsService.track(event: .yesOrNotScreen)
   }
   
@@ -144,6 +147,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = letterScreenCoordinator
     letterScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .letter)
     services.metricsService.track(event: .charactersScreen)
   }
   
@@ -153,6 +157,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = listScreenCoordinator
     listScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .list)
     services.metricsService.track(event: .listScreen)
   }
   
@@ -162,6 +167,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = coinScreenCoordinator
     coinScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .coin)
     services.metricsService.track(event: .coinScreen)
   }
   
@@ -181,6 +187,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = dateTimeScreenCoordinator
     dateTimeScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .dateAndTime)
     services.metricsService.track(event: .dateAndTimeScreen)
   }
   
@@ -190,6 +197,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = lotteryScreenCoordinator
     lotteryScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .lottery)
     services.metricsService.track(event: .lotteryScreen)
   }
   
@@ -199,6 +207,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = contactScreenCoordinator
     contactScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .contact)
     services.metricsService.track(event: .contactScreen)
   }
   
@@ -208,6 +217,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = passwordScreenCoordinator
     passwordScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .password)
     services.metricsService.track(event: .passwordScreen)
   }
   
@@ -217,6 +227,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     anyCoordinator = numberScreenCoordinator
     numberScreenCoordinator.start()
     
+    mainScreenModule?.removeLabelFromSection(type: .number)
     services.metricsService.track(event: .numbersScreen)
   }
   

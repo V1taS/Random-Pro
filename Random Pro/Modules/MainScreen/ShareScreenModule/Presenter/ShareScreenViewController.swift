@@ -17,7 +17,7 @@ protocol ShareScreenModuleOutput: AnyObject {
   /// Модуль был закрыт
   func closeButtonAction()
   
-  /// Доступ  не получен к Галерее
+  /// Доступ к галерее не получен
   func requestPhotosError()
 }
 

@@ -70,7 +70,7 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
   // MARK: - Internal func
   
   func returnImageDataColor() -> Data? {
-    return imageView.image?.compress(maxKb: 10_194_304)
+    return imageView.image?.compress(maxKb: Appearance().maxKbCompress)
   }
   
   func uploadContentImage(_ data: Data) {
@@ -151,7 +151,7 @@ private extension ImageFiltersScreenView {
         self?.backgroundColor = averageColor
       }
     }
-
+    
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
@@ -170,5 +170,6 @@ private extension ImageFiltersScreenView {
     let defaultInset: CGFloat = 16
     let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
     let plugImage = UIImage(named: "image_filters_plug")
+    let maxKbCompress: Double = 10_194_304
   }
 }

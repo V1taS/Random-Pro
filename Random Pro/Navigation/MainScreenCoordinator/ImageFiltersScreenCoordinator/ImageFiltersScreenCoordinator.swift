@@ -66,7 +66,7 @@ extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
     )
   }
   
-  func addImageButtonAction() {
+  func chooseImageButtonAction() {
     openImageFiltersActionSheet()
   }
   
@@ -213,7 +213,6 @@ private extension ImageFiltersScreenCoordinator {
       guard let self = self else { return }
       self.imageFiltersScreenModule?.requestCameraActionSheetStatus()
     }))
-    
     alert.addAction(.init(title: appearance.actionTitleCancel, style: .cancel, handler: { _ in }))
     return alert
   }
@@ -263,7 +262,6 @@ private extension ImageFiltersScreenCoordinator {
     let allowAccessToGallery = NSLocalizedString("Разрешить доступ к галерее", comment: "")
     let failedLoadImage = NSLocalizedString("Не удалось загрузить изображение", comment: "")
     let failedSomeError = NSLocalizedString("Ошибка", comment: "")
-    
     let chooseFromFile = NSLocalizedString("Изображение из файлов", comment: "")
     let chooseFromGallery = NSLocalizedString("Изображение из галереи", comment: "")
     let takePhoto = NSLocalizedString("Сделать фото", comment: "")

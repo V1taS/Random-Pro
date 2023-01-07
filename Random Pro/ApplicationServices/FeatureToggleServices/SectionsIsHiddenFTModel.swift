@@ -52,7 +52,7 @@ struct SectionsIsHiddenFTModel {
   /// Раздел `Камень, ножницы, бумага`
   let rockPaperScissors: Bool
   
-  /// Раздел `Филтры изображений`
+  /// Раздел `Фильтры изображений`
   let imageFilters: Bool
   
   // MARK: - Initialization

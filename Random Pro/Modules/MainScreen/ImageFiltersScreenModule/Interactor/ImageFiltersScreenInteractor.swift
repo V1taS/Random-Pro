@@ -19,7 +19,7 @@ protocol ImageFiltersScreenInteractorOutput: AnyObject {
   /// Доступ получен к Камере
   func requestCameraActionSheetSuccess()
   
-  /// Доступ  не получен к Галерее
+  /// Доступ к галерее не получен
   func requestGalleryError()
 }
 

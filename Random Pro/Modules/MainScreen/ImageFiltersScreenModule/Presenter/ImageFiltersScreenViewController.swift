@@ -10,7 +10,7 @@ import UIKit
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ImageFiltersScreenModuleOutput: AnyObject {
   
-  /// Доступ  не получен к Галерее
+  /// Доступ к галерее не получен
   func requestGalleryError()
   
   /// Кнопка поделиться была нажата
@@ -24,7 +24,7 @@ protocol ImageFiltersScreenModuleOutput: AnyObject {
   func requestCameraActionSheetSuccess()
   
   /// Выбрать изображение
-  func addImageButtonAction()
+  func chooseImageButtonAction()
   
   /// Получена ошибка
   func didReceiveError()
@@ -52,7 +52,7 @@ typealias ImageFiltersScreenModule = UIViewController & ImageFiltersScreenModule
 
 /// Презентер
 final class ImageFiltersScreenViewController: ImageFiltersScreenModule {
-
+  
   // MARK: - Internal properties
   
   weak var moduleOutput: ImageFiltersScreenModuleOutput?
@@ -166,9 +166,9 @@ private extension ImageFiltersScreenViewController {
                                       target: self,
                                       action: #selector(shareButtonAction))
     let addImageButton = UIBarButtonItem(image: appearance.addImageButtonIcon,
-                                      style: .plain,
-                                      target: self,
-                                      action: #selector(addImageButtonAction))
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(chooseImageButtonAction))
     
     navigationItem.rightBarButtonItems = [addImageButton, shareButton]
   }
@@ -179,8 +179,8 @@ private extension ImageFiltersScreenViewController {
   }
   
   @objc
-  func addImageButtonAction() {
-    moduleOutput?.addImageButtonAction()
+  func chooseImageButtonAction() {
+    moduleOutput?.chooseImageButtonAction()
   }
 }
 

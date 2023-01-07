@@ -52,7 +52,7 @@ struct LabelsFeatureToggleModel {
   /// Раздел `Камень, ножницы, бумага`
   let rockPaperScissors: String
   
-  /// Раздел `Филтры изображений`
+  /// Раздел `Фильтры изображений`
   let imageFilters: String
   
   // MARK: - Initialization

@@ -88,7 +88,7 @@ struct MainScreenModel: UserDefaultsCodable {
     /// Раздел `Камень, ножницы, бумага`
     case rockPaperScissors
     
-    /// Раздел `Филтры изображений`
+    /// Раздел `Фильтры изображений`
     case imageFilters
   }
   

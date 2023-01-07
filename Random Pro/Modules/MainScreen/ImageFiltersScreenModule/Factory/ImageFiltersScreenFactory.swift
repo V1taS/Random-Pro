@@ -42,6 +42,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
   
   func generateImageFilterFor(image: Data?) {
     let imageData = image
+    let appearance = Appearance()
     
     if filtersType.isEmpty {
       filtersType = createImageFiltersType()
@@ -72,7 +73,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
     case .colorPosterize:
       let value = NSNumber(value: Int.random(in: 6...12))
       filterValues = [
-        ImageFiltersScreenModel(value: value, key: "inputLevels")
+        ImageFiltersScreenModel(value: value, key: appearance.inputLevels)
       ]
     case .morphologyMaximum:
       filterValues = [
@@ -80,7 +81,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
       ]
     case .gammaAdjust:
       filterValues = [
-        ImageFiltersScreenModel(value: 1.5, key: "inputPower")
+        ImageFiltersScreenModel(value: 1.5, key: appearance.inputPower)
       ]
     case .morphologyMinimum:
       filterValues = [
@@ -99,7 +100,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
       ]
     case .vibrance:
       filterValues = [
-        ImageFiltersScreenModel(value: 1, key: "inputAmount")
+        ImageFiltersScreenModel(value: 1, key: appearance.inputAmount)
       ]
     case .motionBlur:
       let value = NSNumber(value: Int.random(in: 1...3))
@@ -214,5 +215,8 @@ private extension ImageFiltersScreenFactory {
 private extension ImageFiltersScreenFactory {
   struct Appearance {
     let inputImageKey = "inputImage"
+    let inputLevels = "inputLevels"
+    let inputPower = "inputPower"
+    let inputAmount = "inputAmount"
   }
 }

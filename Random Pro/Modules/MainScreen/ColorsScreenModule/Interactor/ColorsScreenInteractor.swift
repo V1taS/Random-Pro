@@ -13,7 +13,7 @@ protocol ColorsScreenInteractorOutput: AnyObject {
   /// Доступ получен к Галерее
   func requestGallerySuccess()
   
-  /// Доступ  не получен к Галерее
+  /// Доступ к галерее не получен
   func requestGalleryError()
 }
 

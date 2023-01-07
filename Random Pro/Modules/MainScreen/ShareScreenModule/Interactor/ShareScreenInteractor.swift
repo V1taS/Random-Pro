@@ -13,7 +13,7 @@ protocol ShareScreenInteractorOutput: AnyObject {
   /// Доступ получен к Галерее
   func requestPhotosSuccess()
   
-  /// Доступ  не получен к Галерее
+  /// Доступ к галерее не получен
   func requestPhotosError()
 }
 

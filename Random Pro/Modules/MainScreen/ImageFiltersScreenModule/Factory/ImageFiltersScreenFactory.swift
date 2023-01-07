@@ -153,7 +153,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
 private extension ImageFiltersScreenFactory {
   func createImageFiltersType() -> [ImageFiltersScreenType] {
     var listImageFiltersType = ImageFiltersScreenType.allCases
-    (1...30).forEach { _ in
+    (1...15).forEach { _ in
       listImageFiltersType.append(.hueAdjust)
     }
     
@@ -161,7 +161,7 @@ private extension ImageFiltersScreenFactory {
       listImageFiltersType.append(.sharpenLuminance)
     }
     
-    (1...20).forEach { _ in
+    (1...15).forEach { _ in
       listImageFiltersType.append(.colorMonochrome)
     }
     return listImageFiltersType.shuffled()

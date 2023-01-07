@@ -70,7 +70,7 @@ final class ImageFiltersScreenView: ImageFiltersScreenViewProtocol {
   // MARK: - Internal func
   
   func returnImageDataColor() -> Data? {
-    return imageView.image?.compress(maxKb: 4_194_304)
+    return imageView.image?.compress(maxKb: 10_194_304)
   }
   
   func uploadContentImage(_ data: Data) {

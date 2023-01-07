@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StoreKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}
@@ -64,6 +65,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
       self?.showOnboarding()
+      self?.rateApp()
     }
   }
   
@@ -331,6 +333,34 @@ private extension MainScreenCoordinator {
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen": deepLinkType.rawValue])
   }
+  
+  func rateApp() {
+    let appearance = Appearance()
+    let appLaunchesCount = UserDefaults.standard.integer(forKey: appearance.rateAppKey) + 1
+    UserDefaults.standard.set(appLaunchesCount, forKey: appearance.rateAppKey)
+    
+    guard appLaunchesCount.isMultiple(of: 30) else {
+      return
+    }
+    
+    guard let scene = UIApplication.shared.foregroundActiveScene else { return }
+    if #available(iOS 14.0, *) {
+      SKStoreReviewController.requestReview(in: scene)
+    } else {
+      // TODO: - Сделать кастомную реализацию для iOS < 14
+      // Note: Replace the XXXXXXXXXX below with the App Store ID for your app
+      // https://apps.apple.com/app/idXXXXXXXXXX?action=write-review"
+    }
+  }
+}
+
+// MARK: - UIApplication
+
+private extension UIApplication {
+  var foregroundActiveScene: UIWindowScene? {
+    connectedScenes
+      .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+  }
 }
 
 // MARK: - Appearance
@@ -338,5 +368,6 @@ private extension MainScreenCoordinator {
 private extension MainScreenCoordinator {
   struct Appearance {
     let shareAppUrl = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен_App_Store", comment: ""))/app/random-pro/id1552813956")
+    let rateAppKey = "rate_app_key"
   }
 }

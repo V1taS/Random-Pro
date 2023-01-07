@@ -176,16 +176,14 @@ extension MainScreenFactory {
           ))
         }
       case .imageFilters:
-        featureSection {
-          allSections.append(MainScreenModel.Section(
-            type: section,
-            isEnabled: true,
-            isHidden: false,
-            titleSection: appearance.titleImageFilters,
-            imageSection: appearance.imageImageFilters.pngData() ?? Data(),
-            advLabel: .new
-          ))
-        }
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          isHidden: false,
+          titleSection: appearance.titleImageFilters,
+          imageSection: appearance.imageImageFilters.pngData() ?? Data(),
+          advLabel: .new
+        ))
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -329,16 +327,14 @@ extension MainScreenFactory {
           ))
         }
       case .imageFilters:
-        featureSection {
-          newModel.append(MainScreenModel.Section(
-            type: model.type,
-            isEnabled: model.isEnabled,
-            isHidden: model.isHidden,
-            titleSection: appearance.titleImageFilters,
-            imageSection: model.imageSection,
-            advLabel: model.advLabel
-          ))
-        }
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: appearance.titleImageFilters,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
       }
     }
     return newModel
@@ -481,16 +477,14 @@ extension MainScreenFactory {
           ))
         }
       case .imageFilters:
-        featureSection {
-          newModel.append(MainScreenModel.Section(
-            type: model.type,
-            isEnabled: model.isEnabled,
-            isHidden: featureToggleModel.imageFilters,
-            titleSection: model.titleSection,
-            imageSection: model.imageSection,
-            advLabel: model.advLabel
-          ))
-        }
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: featureToggleModel.imageFilters,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
       }
     }
     return newModel
@@ -638,16 +632,14 @@ extension MainScreenFactory {
           ))
         }
       case .imageFilters:
-        featureSection {
-          newModel.append(MainScreenModel.Section(
-            type: model.type,
-            isEnabled: model.isEnabled,
-            isHidden: model.isHidden,
-            titleSection: model.titleSection,
-            imageSection: model.imageSection,
-            advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.imageFilters) ?? .none
-          ))
-        }
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.imageFilters) ?? .none
+        ))
       }
     }
     return newModel

@@ -143,7 +143,7 @@ private extension ImageFiltersScreenView {
     backgroundColor = RandomColor.primaryWhite
     imageView.image = appearance.plugImage
     imageView.contentMode = .scaleAspectFit
-    cacheData = appearance.plugImage?.pngData()
+    cacheData = appearance.plugImage?.jpegData(compressionQuality: 1)
     loaderView.isHidden = true
     
     appearance.plugImage?.getAverageColor { [weak self] averageColor in

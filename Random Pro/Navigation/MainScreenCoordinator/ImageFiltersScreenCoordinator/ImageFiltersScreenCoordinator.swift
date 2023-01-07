@@ -142,7 +142,7 @@ extension ImageFiltersScreenCoordinator: PHPickerViewControllerDelegate {
     for item in results {
       item.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, _ in
         guard let image = image as? UIImage,
-              let imageData = image.pngData() else {
+              let imageData = image.jpegData(compressionQuality: 1) else {
           DispatchQueue.main.async {
             self?.services.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
                                                                      glyph: false,

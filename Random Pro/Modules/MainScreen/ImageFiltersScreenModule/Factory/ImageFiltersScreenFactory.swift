@@ -36,7 +36,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
   
   // MARK: - Private properties
   
-  private var filtersType = ImageFiltersScreenType.allCases.shuffled()
+  private lazy var filtersType = createImageFiltersType()
   
   // MARK: - Internal func
   
@@ -44,7 +44,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
     let imageData = image
     
     if filtersType.isEmpty {
-      filtersType = ImageFiltersScreenType.allCases.shuffled()
+      filtersType = createImageFiltersType()
     }
     
     guard let imageData,
@@ -138,7 +138,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
                  filter: imageFilter,
                  filterValues: filterValues) { [weak self] result in
       guard let result,
-            let imageData = result.pngData() else {
+            let imageData = result.jpegData(compressionQuality: 1) else {
         self?.output?.didReceiveError()
         return
       }
@@ -151,6 +151,22 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
 // MARK: - Private
 
 private extension ImageFiltersScreenFactory {
+  func createImageFiltersType() -> [ImageFiltersScreenType] {
+    var listImageFiltersType = ImageFiltersScreenType.allCases
+    (1...30).forEach { _ in
+      listImageFiltersType.append(.hueAdjust)
+    }
+    
+    (1...3).forEach { _ in
+      listImageFiltersType.append(.sharpenLuminance)
+    }
+    
+    (1...20).forEach { _ in
+      listImageFiltersType.append(.colorMonochrome)
+    }
+    return listImageFiltersType.shuffled()
+  }
+  
   func addFilterFor(image: UIImage,
                     filter: ImageFiltersScreenType,
                     filterValues: [ImageFiltersScreenModel],

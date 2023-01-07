@@ -240,7 +240,7 @@ private extension ImageFiltersScreenCoordinator {
   func getGalleryModule() -> UIViewController {
     if #available(iOS 14.0, *) {
       var imagePickerControllerConfig = PHPickerConfiguration(photoLibrary: .shared())
-      imagePickerControllerConfig.selectionLimit = 1
+      imagePickerControllerConfig.selectionLimit = Appearance().selectionLimit
       imagePickerControllerConfig.filter = PHPickerFilter.any(of: [.images])
       let imagePickerController = PHPickerViewController(configuration: imagePickerControllerConfig)
       imagePickerController.delegate = self
@@ -266,5 +266,6 @@ private extension ImageFiltersScreenCoordinator {
     let chooseFromGallery = NSLocalizedString("Изображение из галереи", comment: "")
     let takePhoto = NSLocalizedString("Сделать фото", comment: "")
     let actionTitleCancel = NSLocalizedString("Отмена", comment: "")
+    let selectionLimit = 1
   }
 }

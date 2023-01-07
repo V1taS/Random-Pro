@@ -22,9 +22,9 @@ protocol ImageFiltersScreenFactoryOutput: AnyObject {
 /// Cобытия которые отправляем от Presenter к Factory
 protocol ImageFiltersScreenFactoryInput {
   
-  /// Сгенерировать новый фильтр
+  /// Сгенерировать фильтр для изображения
   /// - Parameter image: Изображение
-  func generateImageFilterFor(image: Data?)
+  func generateFilterFor(image: Data?)
 }
 
 /// Фабрика
@@ -40,7 +40,7 @@ final class ImageFiltersScreenFactory: ImageFiltersScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func generateImageFilterFor(image: Data?) {
+  func generateFilterFor(image: Data?) {
     let imageData = image
     let appearance = Appearance()
     
@@ -202,6 +202,7 @@ private extension ImageFiltersScreenFactory {
     if image.imageOrientation == UIImage.Orientation.up {
       return image
     }
+    
     UIGraphicsBeginImageContext(image.size)
     image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
     let copy = UIGraphicsGetImageFromCurrentImageContext()

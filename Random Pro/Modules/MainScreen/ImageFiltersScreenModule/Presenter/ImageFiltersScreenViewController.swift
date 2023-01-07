@@ -17,10 +17,10 @@ protocol ImageFiltersScreenModuleOutput: AnyObject {
   ///  - Parameter imageData: Изображение Colors
   func shareButtonAction(imageData: Data?)
   
-  /// Доступ получен к Галерее
+  /// Доступ к галерее получен
   func requestGalleryActionSheetSuccess()
   
-  /// Доступ получен к Камере
+  /// Получен доступ к галерее
   func requestCameraActionSheetSuccess()
   
   /// Выбрать изображение
@@ -113,7 +113,7 @@ final class ImageFiltersScreenViewController: ImageFiltersScreenModule {
 
 extension ImageFiltersScreenViewController: ImageFiltersScreenViewOutput {
   func generateImageFilterFor(image: Data?) {
-    factory.generateImageFilterFor(image: image)
+    factory.generateFilterFor(image: image)
     moduleView.startLoader()
   }
 }

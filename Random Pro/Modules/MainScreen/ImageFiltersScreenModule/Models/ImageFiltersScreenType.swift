@@ -10,7 +10,7 @@ import Foundation
 
 enum ImageFiltersScreenType: CaseIterable {
   
-  /// Имя фильтра
+  /// Название фильтра
   var rawValue: String {
     switch self {
     case .chrome:

@@ -10,13 +10,13 @@ import UIKit
 /// События которые отправляем из Interactor в Presenter
 protocol ImageFiltersScreenInteractorOutput: AnyObject {
   
-  /// Доступ получен к Галерее для сохранения фото
+  /// Получен доступ к галерее для сохранения фото
   func requestShareGallerySuccess()
   
-  /// Доступ получен к Галерее
+  /// Получен доступ к галерее
   func requestGalleryActionSheetSuccess()
   
-  /// Доступ получен к Камере
+  /// Получен доступ к камере
   func requestCameraActionSheetSuccess()
   
   /// Доступ к галерее не получен

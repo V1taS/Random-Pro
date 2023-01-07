@@ -101,6 +101,7 @@ private extension ImageFiltersScreenView {
       guard let self = self else {
         return
       }
+      
       let image = UIImage(data: data)
       self.imageView.image = image
       
@@ -153,11 +154,11 @@ private extension ImageFiltersScreenView {
     }
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
-    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    generateButton.addTarget(self, action: #selector(generateButtonColorAction), for: .touchUpInside)
   }
   
   @objc
-  func generateButtonAction() {
+  func generateButtonColorAction() {
     output?.generateImageFilterFor(image: cacheData)
   }
 }

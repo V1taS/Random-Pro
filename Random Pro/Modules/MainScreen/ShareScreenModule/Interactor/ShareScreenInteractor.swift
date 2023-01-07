@@ -10,7 +10,7 @@ import UIKit
 /// События которые отправляем из Interactor в Presenter
 protocol ShareScreenInteractorOutput: AnyObject {
   
-  /// Доступ получен к Галерее
+  /// Получен доступ к галерее
   func requestPhotosSuccess()
   
   /// Доступ к галерее не получен

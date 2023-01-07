@@ -10,11 +10,12 @@ What the app can do:
 - Generate your own list
 - Generate random password
 - Generate random color
+- Generate random filter for image
 - Generate date and time
 - Generate lottery combination
 - Pick a random contact from your phone book
 - Assign players to teams
-- Toss a coin
+- toss a coin
 - Throw dice (from 1 to 6 dice)
 - Spin the bottle
 

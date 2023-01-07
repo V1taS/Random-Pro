@@ -18,6 +18,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   // MARK: - Private property
   
   private var coordinator: RootCoordinatorProtocol?
+  private let services: ApplicationServices = ApplicationServicesImpl()
   
   // MARK: - Internal func
   
@@ -26,7 +27,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
              options connectionOptions: UIScene.ConnectionOptions) {
     guard let scene = scene as? UIWindowScene else { return }
     let window = UIWindow(windowScene: scene)
-    let coordinator = RootCoordinator(window: window)
+    let coordinator = RootCoordinator(window, services)
     self.coordinator = coordinator
     coordinator.start()
     self.window = window
@@ -34,6 +35,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   func sceneDidBecomeActive(_ scene: UIScene) {
+    coordinator?.sceneDidBecomeActive()
+    
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
       if #available(iOS 14, *) {
         switch ATTrackingManager.trackingAuthorizationStatus {
@@ -50,6 +53,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    coordinator?.scene(scene, openURLContexts: URLContexts)
+    services.deepLinkService.eventHandlingWith(urlContexts: URLContexts)
   }
 }

@@ -52,6 +52,9 @@ struct LabelsFeatureToggleModel {
   /// Раздел `Камень, ножницы, бумага`
   let rockPaperScissors: String
   
+  /// Раздел `Фильтры изображений`
+  let imageFilters: String
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -71,5 +74,6 @@ struct LabelsFeatureToggleModel {
     colors = (dictionary["colors"] as? String ?? "")
     bottle = (dictionary["bottle"] as? String ?? "")
     rockPaperScissors = (dictionary["rockPaperScissors"] as? String ?? "")
+    imageFilters = (dictionary["rockPaperScissors"] as? String ?? "")
   }
 }

@@ -141,3 +141,8 @@
 "Число" = "Number";
 "Что-то пошло не так" = "Something went wrong";
 "Январь" = "January";
+"Фильтры" = "Filters";
+"Изображение из файлов" = "Image from files";
+"Изображение из галереи" = "Image from gallery";
+"Сделать фото" = "To make a photo";
+"Не удалось загрузить изображение" = "Failed to load image";

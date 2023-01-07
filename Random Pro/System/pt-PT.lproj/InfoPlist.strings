@@ -10,3 +10,4 @@
 "NSUserTrackingUsageDescription" = "Você pode usar seus dados de atividade? Se você permitir, os anúncios do Random Pro em sites e outros aplicativos serão mais relevantes.";
 "NSPhotoLibraryAddUsageDescription" = "Dê acesso à sua galeria para que você possa salvar 'Resultados de imagem' prontos ou fazer upload de fotos para o Random Pro para filtragem aleatória.";
 "NSPhotoLibraryUsageDescription" = "Dê acesso à sua galeria para que você possa salvar 'Resultados de imagem' prontos ou fazer upload de fotos para o Random Pro para filtragem aleatória.";
+"NSCameraUsageDescription" = "Compartilhe sua câmera para poder tirar uma foto para filtragem aleatória.";

@@ -10,10 +10,10 @@ import UIKit
 /// События которые отправляем из Interactor в Presenter
 protocol ColorsScreenInteractorOutput: AnyObject {
   
-  /// Доступ получен к Галерее
+  /// Доступ к галерее получен
   func requestGallerySuccess()
   
-  /// Доступ  не получен к Галерее
+  /// Доступ к галерее не получен
   func requestGalleryError()
 }
 

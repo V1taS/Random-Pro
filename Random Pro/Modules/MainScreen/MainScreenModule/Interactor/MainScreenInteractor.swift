@@ -134,8 +134,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     guard let model = model,
           let section = model.allSections.filter({ $0.type == type }).first,
           section.advLabel == .new else {
-            return
-          }
+      return
+    }
     
     let newModel = MainScreenModel(
       isDarkMode: model.isDarkMode,

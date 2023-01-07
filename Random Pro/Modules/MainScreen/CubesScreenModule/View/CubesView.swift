@@ -63,7 +63,7 @@ final class CubesView: UIView {
 
 extension CubesView: SCNSceneRendererDelegate {
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-    DispatchQueue.global().sync {
+    DispatchQueue.global(qos: .userInteractive).sync {
       for (num, die) in diceNodes.enumerated() {
         if let pb = die.physicsBody {
           let os = speeds[num]

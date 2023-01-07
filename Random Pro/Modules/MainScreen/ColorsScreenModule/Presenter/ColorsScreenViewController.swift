@@ -10,7 +10,7 @@ import UIKit
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ColorsScreenModuleOutput: AnyObject {
   
-  /// Доступ  не получен к Галерее
+  /// Доступ к галерее не получен
   func requestGalleryError()
   
   /// Кнопка поделиться была нажата

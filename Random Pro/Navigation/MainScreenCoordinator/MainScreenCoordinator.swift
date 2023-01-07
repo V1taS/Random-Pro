@@ -13,14 +13,8 @@ protocol MainScreenCoordinatorOutput: AnyObject {}
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol MainScreenCoordinatorInput {
   
-  /// События Deep links
-  ///  - Parameters:
-  ///   - scene: Сцена
-  ///   - URLContexts: Сыылки url
-  ///   - deepLinkType: Тип глубокой ссылки
-  func scene(_ scene: UIScene,
-             openURLContexts URLContexts: Set<UIOpenURLContext>,
-             deepLinkType: DeepLinkType?)
+  /// Приложение стало активным
+  func sceneDidBecomeActive()
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: MainScreenCoordinatorOutput? { get set }
@@ -73,15 +67,8 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     }
   }
   
-  func scene(_ scene: UIScene,
-             openURLContexts URLContexts: Set<UIOpenURLContext>,
-             deepLinkType: DeepLinkType?) {
-    guard let deepLinkType = deepLinkType else {
-      return
-    }
-    showScene(from: deepLinkType)
-    services.metricsService.track(event: .deepLinks,
-                                  properties: ["screen": deepLinkType.rawValue])
+  func sceneDidBecomeActive() {
+    startDeepLink()
   }
 }
 
@@ -292,7 +279,18 @@ private extension MainScreenCoordinator {
     self.services.metricsService.track(event: .onboarding)
   }
   
-  func showScene(from deepLinkType: DeepLinkType) {
+  func startDeepLink() {
+    services.deepLinkService.startDeepLink { [weak self] deepLinkType in
+      self?.showScreenDeepLinkWith(type: deepLinkType)
+    }
+  }
+  
+  func showScreenDeepLinkWith(type deepLinkType: DeepLinkType) {
+    guard let mainScreenModule else {
+      return
+    }
+    navigationController.popToViewController(mainScreenModule, animated: false)
+    
     switch deepLinkType {
     case .settingsScreen:
       settingButtonAction()
@@ -330,6 +328,8 @@ private extension MainScreenCoordinator {
     case .rockPaperScissorsScreen:
       openRockPaperScissors()
     }
+    services.metricsService.track(event: .deepLinks,
+                                  properties: ["screen": deepLinkType.rawValue])
   }
 }
 

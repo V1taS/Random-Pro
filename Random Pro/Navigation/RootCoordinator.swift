@@ -14,11 +14,8 @@ protocol RootCoordinatorOutput: AnyObject {}
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol RootCoordinatorInput {
   
-  /// События Deep links
-  ///  - Parameters:
-  ///   - scene: Сцена
-  ///   - URLContexts: Сыылки url
-  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
+  /// Приложение стало активным
+  func sceneDidBecomeActive()
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: RootCoordinatorOutput? { get set }
@@ -37,13 +34,17 @@ final class RootCoordinator: RootCoordinatorProtocol {
   private let window: UIWindow
   private let navigationController = UINavigationController()
   private var mainScreenCoordinator: MainScreenCoordinatorProtocol?
-  private let services: ApplicationServices = ApplicationServicesImpl()
+  private let services: ApplicationServices
   
   // MARK: - Initialization
   
-  /// - Parameter window: UIWindow
-  init(window: UIWindow) {
+  /// - Parameters:
+  ///   - window: Окно просмотра
+  ///   - services: Сервисы приложения
+  init(_ window: UIWindow,
+       _ services: ApplicationServices) {
     self.window = window
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -59,9 +60,7 @@ final class RootCoordinator: RootCoordinatorProtocol {
     window.rootViewController = navigationController
   }
   
-  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    services.deepLinkService.scene(scene, openURLContexts: URLContexts) { deepLinkType in
-      mainScreenCoordinator?.scene(scene, openURLContexts: URLContexts, deepLinkType: deepLinkType)
-    }
+  func sceneDidBecomeActive() {
+    mainScreenCoordinator?.sceneDidBecomeActive()
   }
 }

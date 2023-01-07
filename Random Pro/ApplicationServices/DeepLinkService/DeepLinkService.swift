@@ -10,39 +10,45 @@ import UIKit
 
 protocol DeepLinkService {
   
-  /// События Deep links
-  ///  - Parameters:
-  ///   - scene: Сцена
-  ///   - URLContexts: Сыылки url
-  ///   - completion: Блок завершения
-  func scene(_ scene: UIScene,
-             openURLContexts URLContexts: Set<UIOpenURLContext>,
-             completion: (DeepLinkType?) -> Void)
+  /// Обработка события
+  /// - Parameter urlContexts: Сыылки url
+  func eventHandlingWith(urlContexts: Set<UIOpenURLContext>)
+  
+  /// Запустить глубокую ссылку
+  /// - Parameter completion: Возвращает тип ссылки
+  func startDeepLink(completion: @escaping (DeepLinkType) -> Void)
 }
 
 final class DeepLinkServiceImpl: DeepLinkService {
   
   // MARK: - Private property
   
-  private lazy var services: ApplicationServices = ApplicationServicesImpl()
-  private var coordinator: Coordinator?
+  @ObjectCustomUserDefaultsWrapper<DeepLinkType>(key: Appearance().keyUserDefaults)
+  private var deepLinkType: DeepLinkType?
   
   // MARK: - Internal func
   
-  func scene(_ scene: UIScene,
-             openURLContexts URLContexts: Set<UIOpenURLContext>,
-             completion: (DeepLinkType?) -> Void) {
-    guard let firstUrl = URLContexts.first?.url.absoluteString else {
+  func eventHandlingWith(urlContexts: Set<UIOpenURLContext>) {
+    guard let firstUrl = urlContexts.first?.url.absoluteString else {
       return
     }
     
-    var deepLinkType: DeepLinkType?
     DeepLinkType.allCases.forEach { type in
       if firstUrl.contains(type.rawValue) {
         deepLinkType = type
+        return
       }
     }
-    completion(deepLinkType)
+  }
+  
+  func startDeepLink(completion: @escaping (DeepLinkType) -> Void) {
+    guard let deepLinkType else {
+      return
+    }
+    DispatchQueue.main.async {
+      completion(deepLinkType)
+      self.deepLinkType = nil
+    }
   }
 }
 
@@ -54,5 +60,13 @@ private extension DeepLinkServiceImpl {
       return nil
     }
     return String(fullText.dropFirst(prefix.count))
+  }
+}
+
+// MARK: - Appearance
+
+private extension DeepLinkServiceImpl {
+  struct Appearance {
+    let keyUserDefaults = "deep_link_user_defaults_key"
   }
 }

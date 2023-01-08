@@ -213,6 +213,7 @@ private extension MainScreenInteractor {
       if $0.type == type {
         return MainScreenModel.Section(type: $0.type,
                                        isEnabled: $0.isEnabled,
+                                       premiumAccessAllowed: $0.premiumAccessAllowed,
                                        isHidden: $0.isHidden,
                                        titleSection: $0.titleSection,
                                        imageSection: $0.imageSection,

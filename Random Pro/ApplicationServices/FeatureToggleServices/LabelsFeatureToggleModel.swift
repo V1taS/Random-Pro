@@ -74,6 +74,6 @@ struct LabelsFeatureToggleModel {
     colors = (dictionary["colors"] as? String ?? "")
     bottle = (dictionary["bottle"] as? String ?? "")
     rockPaperScissors = (dictionary["rockPaperScissors"] as? String ?? "")
-    imageFilters = (dictionary["rockPaperScissors"] as? String ?? "")
+    imageFilters = (dictionary["imageFilters"] as? String ?? "")
   }
 }

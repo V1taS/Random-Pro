@@ -74,7 +74,7 @@ struct SectionsIsHiddenFTModel {
     colors = (dictionary["colors"] as? Int ?? .zero).boolValue
     bottle = (dictionary["bottle"] as? Int ?? .zero).boolValue
     rockPaperScissors = (dictionary["rockPaperScissors"] as? Int ?? .zero).boolValue
-    imageFilters = (dictionary["rockPaperScissors"] as? Int ?? .zero).boolValue
+    imageFilters = (dictionary["imageFilters"] as? Int ?? .zero).boolValue
   }
 }
 

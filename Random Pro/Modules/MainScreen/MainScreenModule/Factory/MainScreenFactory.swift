@@ -197,7 +197,7 @@ extension MainScreenFactory {
           isHidden: false,
           titleSection: appearance.titleImageFilters,
           imageSection: appearance.imageImageFilters.pngData() ?? Data(),
-          advLabel: .new
+          advLabel: .premium
         ))
       }
     }
@@ -699,6 +699,176 @@ extension MainScreenFactory {
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.imageFilters) ?? .none
+        ))
+      }
+    }
+    return newModel
+  }
+  
+  static func updatesPremiumModel(
+    models: [MainScreenModel.Section],
+    isPremium: Bool
+  ) -> [MainScreenModel.Section] {
+    var newModel: [MainScreenModel.Section] = []
+    
+    models.forEach { model in
+      if model.advLabel == .new {
+        newModel.append(model)
+        return
+      }
+      
+      switch model.type {
+      case .teams:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .number:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .yesOrNo:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .letter:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .list:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .coin:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .cube:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .dateAndTime:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .lottery:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .contact:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .password:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .colors:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .bottle:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .rockPaperScissors:
+        ifDebugFeatureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            premiumAccessAllowed: isPremium,
+            isHidden: model.isHidden,
+            titleSection: model.titleSection,
+            imageSection: model.imageSection,
+            advLabel: model.advLabel
+          ))
+        }
+      case .imageFilters:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
         ))
       }
     }

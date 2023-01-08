@@ -55,6 +55,10 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `openImageFilters`
   func openImageFilters()
+  
+  /// Нет премиум доступа
+  /// - Parameter section: Секция на главном экране
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -107,38 +111,43 @@ final class MainScreenView: MainScreenViewProtocol {
 
 extension MainScreenView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let section = models[indexPath.row].type
-    switch section {
-    case .number:
-      output?.openNumber()
-    case .teams:
-      output?.openTeams()
-    case .yesOrNo:
-      output?.openYesOrNo()
-    case .letter:
-      output?.openCharacter()
-    case .list:
-      output?.openList()
-    case .coin:
-      output?.openCoin()
-    case .cube:
-      output?.openCube()
-    case .dateAndTime:
-      output?.openDateAndTime()
-    case .lottery:
-      output?.openLottery()
-    case .contact:
-      output?.openContact()
-    case .password:
-      output?.openPassword()
-    case .colors:
-      output?.openColors()
-    case .bottle:
-      output?.openBottle()
-    case .rockPaperScissors:
-      output?.openRockPaperScissors()
-    case .imageFilters:
-      output?.openImageFilters()
+    let section = models[indexPath.row]
+    
+    if section.advLabel == .premium && !section.premiumAccessAllowed {
+      output?.noPremiumAccessActionFor(section)
+    } else {
+      switch section.type {
+      case .number:
+        output?.openNumber()
+      case .teams:
+        output?.openTeams()
+      case .yesOrNo:
+        output?.openYesOrNo()
+      case .letter:
+        output?.openCharacter()
+      case .list:
+        output?.openList()
+      case .coin:
+        output?.openCoin()
+      case .cube:
+        output?.openCube()
+      case .dateAndTime:
+        output?.openDateAndTime()
+      case .lottery:
+        output?.openLottery()
+      case .contact:
+        output?.openContact()
+      case .password:
+        output?.openPassword()
+      case .colors:
+        output?.openColors()
+      case .bottle:
+        output?.openBottle()
+      case .rockPaperScissors:
+        output?.openRockPaperScissors()
+      case .imageFilters:
+        output?.openImageFilters()
+      }
     }
   }
 }

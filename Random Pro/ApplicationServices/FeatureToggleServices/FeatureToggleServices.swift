@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseFirestore
+import UIKit
 
 protocol FeatureToggleServices {
   
@@ -16,6 +17,9 @@ protocol FeatureToggleServices {
   
   /// Получить лайблы для ячеек на главном экране
   func getLabelsFeatureToggle(completion: @escaping (LabelsFeatureToggleModel?) -> Void)
+  
+  /// Получить премиум
+  func getPremiumFeatureToggle(completion: @escaping (Bool) -> Void)
 }
 
 final class FeatureToggleServicesImpl: FeatureToggleServices {
@@ -25,6 +29,31 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
   private let cloudDataBase = Firestore.firestore()
   
   // MARK: - Internal func
+  
+  func getPremiumFeatureToggle(completion: @escaping (Bool) -> Void) {
+    let appearance = Appearance()
+    
+    cloudDataBase.collection(appearance.premiumFeatureTogglesKey).getDocuments { (querySnapshot, error) in
+      guard let documents = querySnapshot?.documents,
+            let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString,
+            error == nil else {
+        DispatchQueue.main.async {
+          completion(false)
+        }
+        return
+      }
+      
+      for document in documents {
+        guard let id = PremiumFeatureToggleModel(dictionary: document.data()).id else {
+          continue
+        }
+        
+        DispatchQueue.main.async {
+          completion(identifierForVendor == id)
+        }
+      }
+    }
+  }
   
   func getLabelsFeatureToggle(completion: @escaping (LabelsFeatureToggleModel?) -> Void) {
     let appearance = Appearance()
@@ -71,5 +100,6 @@ private extension FeatureToggleServicesImpl {
   struct Appearance {
     let sectionsIsHiddenFTKey = "IsHiddenFeatureToggles"
     let labelsFeatureToggleKey = "LabelsFeatureToggle_hit_new_premium_none"
+    let premiumFeatureTogglesKey = "PremiumFeatureToggles"
   }
 }

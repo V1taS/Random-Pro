@@ -47,7 +47,10 @@ protocol MainScreenInteractorInput {
   func updatesSectionsIsHiddenFT(completion: @escaping () -> Void)
   
   /// Обновить лайблы у секций на главном экране
-  func updatesLabelsFeatureToggle()
+  func updatesLabelsFeatureToggle(completion: @escaping () -> Void)
+  
+  /// Обновить Premium для пользователя у секций на главном экране
+  func updatesPremiumFeatureToggle(completion: @escaping () -> Void)
 }
 
 /// Интерактор
@@ -184,13 +187,15 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     }
   }
   
-  func updatesLabelsFeatureToggle() {
+  func updatesLabelsFeatureToggle(completion: @escaping () -> Void) {
     guard let model = model else {
+      completion()
       return
     }
     
     services.featureToggleServices.getLabelsFeatureToggle { [weak self] labelsModel in
       guard let labelsModel else {
+        completion()
         return
       }
       let newAllSectionsModel = MainScreenFactory.updatesLabelsModel(models: model.allSections,
@@ -199,6 +204,28 @@ final class MainScreenInteractor: MainScreenInteractorInput {
                                      allSections: newAllSectionsModel)
       self?.model = newModel
       self?.output?.didReceive(model: newModel)
+      completion()
+    }
+  }
+  
+  func updatesPremiumFeatureToggle(completion: @escaping () -> Void) {
+    guard let model = model else {
+      completion()
+      return
+    }
+    
+    services.featureToggleServices.getPremiumFeatureToggle { [weak self] isPremium in
+      guard isPremium else {
+        completion()
+        return
+      }
+      let newAllSectionsModel = MainScreenFactory.updatesPremiumModel(models: model.allSections,
+                                                                      isPremium: isPremium)
+      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
+                                     allSections: newAllSectionsModel)
+      self?.model = newModel
+      self?.output?.didReceive(model: newModel)
+      completion()
     }
   }
 }

@@ -77,6 +77,11 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
+    showAlerForUnlockPremiumtWith(title: Appearance().premiumAccess,
+                                  description: section.type.descriptionForNoPremiumAccess)
+  }
+  
   func mainScreenDidAppear() {
     services.permissionService.requestNotification { _ in }
   }
@@ -374,6 +379,22 @@ private extension MainScreenCoordinator {
       // https://apps.apple.com/app/idXXXXXXXXXX?action=write-review"
     }
   }
+  
+  func showAlerForUnlockPremiumtWith(title: String, description: String) {
+    let appearance = Appearance()
+    let alert = UIAlertController(title: title,
+                                  message: description,
+                                  preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: appearance.cancel,
+                                  style: .cancel,
+                                  handler: { _ in }))
+    alert.addAction(UIAlertAction(title: appearance.unlock,
+                                  style: .default,
+                                  handler: { _ in
+      // TODO: - Показать экран с разблокировкой премиум
+    }))
+    mainScreenModule?.present(alert, animated: true, completion: nil)
+  }
 }
 
 // MARK: - UIApplication
@@ -391,5 +412,8 @@ private extension MainScreenCoordinator {
   struct Appearance {
     let shareAppUrl = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен_App_Store", comment: ""))/app/random-pro/id1552813956")
     let rateAppKey = "rate_app_key"
+    let cancel = NSLocalizedString("Отмена", comment: "")
+    let unlock = NSLocalizedString("Разблокировать", comment: "")
+    let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
   }
 }

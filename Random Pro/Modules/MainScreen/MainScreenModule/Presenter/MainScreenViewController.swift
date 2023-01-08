@@ -64,6 +64,10 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Главный экран был показан
   func mainScreenDidAppear()
+  
+  /// Нет премиум доступа
+  /// - Parameter section: Секция на главном экране
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -147,7 +151,11 @@ final class MainScreenViewController: MainScreenModule {
     
     interactor.getContent { [weak self] in
       self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
-        self?.interactor.updatesLabelsFeatureToggle()
+        self?.interactor.updatesLabelsFeatureToggle { [weak self] in
+          
+          // TODO: - Обновление премиум фичатогглов в самом конце
+          self?.interactor.updatesPremiumFeatureToggle {}
+        }
       }
     }
     
@@ -187,6 +195,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
+    moduleOutput?.noPremiumAccessActionFor(section)
+  }
+  
   func openImageFilters() {
     moduleOutput?.openImageFilters()
   }

@@ -27,6 +27,9 @@ struct MainScreenModel: UserDefaultsCodable {
     /// Секция включена
     let isEnabled: Bool
     
+    /// Разрешен доступ к премиум
+    let premiumAccessAllowed: Bool
+    
     /// Секция скрыта
     let isHidden: Bool
     
@@ -43,6 +46,42 @@ struct MainScreenModel: UserDefaultsCodable {
   // MARK: - MainScreenSection
   
   enum SectionType: CaseIterable, UserDefaultsCodable {
+    
+    /// Описание когда нет премиум доступа
+    var descriptionForNoPremiumAccess: String {
+      switch self {
+      case .teams:
+        return "Какое то описание для Команд"
+      case .number:
+        return "Какое то описание для чисел"
+      case .yesOrNo:
+        return "Какое то описание для да или нет"
+      case .letter:
+        return "Какое то описание для Букв"
+      case .list:
+        return "Какое то описание для Списка"
+      case .coin:
+        return "Какое то описание для Монетки"
+      case .cube:
+        return "Какое то описание для Кубиков"
+      case .dateAndTime:
+        return "Какое то описание для Даты и Времени"
+      case .lottery:
+        return "Какое то описание для Лотереи"
+      case .contact:
+        return "Какое то описание для Контактов"
+      case .password:
+        return "Какое то описание для Паролей"
+      case .colors:
+        return "Какое то описание для Цветов"
+      case .bottle:
+        return "Какое то описание для Бутылочки"
+      case .rockPaperScissors:
+        return "Какое то описание для Камень Ножницы Бумага"
+      case .imageFilters:
+        return "Какое то описание для Фильтров"
+      }
+    }
     
     // MARK: - Cases
     

@@ -40,7 +40,8 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
       imageCard: UIImage(data: model.imageSection),
       titleCard: model.titleSection,
       isShowADVLabel: model.advLabel != .none,
-      titleADVText: model.advLabel.title
+      titleADVText: model.advLabel.title,
+      isDisabled: model.advLabel == .premium && !model.premiumAccessAllowed
     )
   }
 }

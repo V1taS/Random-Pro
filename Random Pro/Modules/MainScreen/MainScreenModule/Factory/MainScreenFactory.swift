@@ -51,6 +51,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardTeam,
           imageSection: appearance.imageCardTeam.pngData() ?? Data(),
@@ -60,6 +61,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardNumber,
           imageSection: appearance.imageCardNumber.pngData() ?? Data(),
@@ -69,6 +71,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardYesOrNot,
           imageSection: appearance.imageCardYesOrNot.pngData() ?? Data(),
@@ -78,6 +81,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardCharacters,
           imageSection: appearance.imageCardCharacters.pngData() ?? Data(),
@@ -87,6 +91,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardList,
           imageSection: appearance.imageCardList.pngData() ?? Data(),
@@ -96,6 +101,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardCoin,
           imageSection: appearance.imageCardCoin.pngData() ?? Data(),
@@ -105,6 +111,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardCube,
           imageSection: appearance.imageCardCube.pngData() ?? Data(),
@@ -114,6 +121,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardDateAndTime,
           imageSection: appearance.imageCardDateAndTime.pngData() ?? Data(),
@@ -123,6 +131,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardLottery,
           imageSection: appearance.imageCardLottery.pngData() ?? Data(),
@@ -132,6 +141,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardContact,
           imageSection: appearance.imageCardContact.pngData() ?? Data(),
@@ -141,6 +151,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardPassword,
           imageSection: appearance.imageCardPassword.pngData() ?? Data(),
@@ -150,6 +161,7 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleColors,
           imageSection: appearance.imageColors.pngData() ?? Data(),
@@ -159,16 +171,18 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleBottle,
           imageSection: appearance.bottleCardImage.pngData() ?? Data(),
           advLabel: .new
         ))
       case .rockPaperScissors:
-        featureSection {
+        ifDebugFeatureSection {
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
+            premiumAccessAllowed: false,
             isHidden: false,
             titleSection: appearance.titleRockPaperScissors,
             imageSection: appearance.imageRockPaperScissorsScreenView.pngData() ?? Data(),
@@ -179,10 +193,11 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
+          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleImageFilters,
           imageSection: appearance.imageImageFilters.pngData() ?? Data(),
-          advLabel: .new
+          advLabel: .premium
         ))
       }
     }
@@ -202,6 +217,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardTeam,
           imageSection: model.imageSection,
@@ -211,6 +227,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardNumber,
           imageSection: model.imageSection,
@@ -220,6 +237,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardYesOrNot,
           imageSection: model.imageSection,
@@ -229,6 +247,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardCharacters,
           imageSection: model.imageSection,
@@ -238,6 +257,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardList,
           imageSection: model.imageSection,
@@ -247,6 +267,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardCoin,
           imageSection: model.imageSection,
@@ -256,6 +277,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardCube,
           imageSection: model.imageSection,
@@ -265,6 +287,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardDateAndTime,
           imageSection: model.imageSection,
@@ -274,6 +297,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardLottery,
           imageSection: model.imageSection,
@@ -283,6 +307,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardContact,
           imageSection: model.imageSection,
@@ -292,6 +317,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleCardPassword,
           imageSection: model.imageSection,
@@ -301,6 +327,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleColors,
           imageSection: model.imageSection,
@@ -310,16 +337,18 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleBottle,
           imageSection: model.imageSection,
           advLabel: model.advLabel
         ))
       case .rockPaperScissors:
-        featureSection {
+        ifDebugFeatureSection {
           newModel.append(MainScreenModel.Section(
             type: model.type,
             isEnabled: model.isEnabled,
+            premiumAccessAllowed: model.premiumAccessAllowed,
             isHidden: model.isHidden,
             titleSection: appearance.titleRockPaperScissors,
             imageSection: model.imageSection,
@@ -330,6 +359,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: appearance.titleImageFilters,
           imageSection: model.imageSection,
@@ -352,7 +382,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.teams,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.teams),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -361,7 +392,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.number,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.number),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -370,7 +402,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.yesOrNo,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.yesOrNo),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -379,7 +412,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.letter,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.letter),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -388,7 +422,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.list,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.list),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -397,7 +432,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.coin,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.coin),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -406,7 +442,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.cube,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.cube),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -415,7 +452,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.dateAndTime,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.dateAndTime),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -424,7 +462,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.lottery,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.lottery),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -433,7 +472,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.contact,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.contact),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -442,7 +482,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.password,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.password),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -451,7 +492,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.colors,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.colors),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -460,17 +502,19 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.bottle,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.bottle),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
         ))
       case .rockPaperScissors:
-        featureSection {
+        ifDebugFeatureSection {
           newModel.append(MainScreenModel.Section(
             type: model.type,
             isEnabled: model.isEnabled,
-            isHidden: featureToggleModel.rockPaperScissors,
+            premiumAccessAllowed: model.premiumAccessAllowed,
+            isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.rockPaperScissors),
             titleSection: model.titleSection,
             imageSection: model.imageSection,
             advLabel: model.advLabel
@@ -480,7 +524,8 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          isHidden: featureToggleModel.imageFilters,
+          premiumAccessAllowed: model.premiumAccessAllowed,
+          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel.imageFilters),
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: model.advLabel
@@ -507,6 +552,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -516,6 +562,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -525,6 +572,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -534,6 +582,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -543,6 +592,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -552,6 +602,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -561,6 +612,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -570,6 +622,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -579,6 +632,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -588,6 +642,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -597,6 +652,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -606,6 +662,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -615,16 +672,18 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
           advLabel: MainScreenModel.ADVLabel(rawValue: labelsModel.bottle) ?? .none
         ))
       case .rockPaperScissors:
-        featureSection {
+        ifDebugFeatureSection {
           newModel.append(MainScreenModel.Section(
             type: model.type,
             isEnabled: model.isEnabled,
+            premiumAccessAllowed: model.premiumAccessAllowed,
             isHidden: model.isHidden,
             titleSection: model.titleSection,
             imageSection: model.imageSection,
@@ -635,6 +694,7 @@ extension MainScreenFactory {
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
+          premiumAccessAllowed: model.premiumAccessAllowed,
           isHidden: model.isHidden,
           titleSection: model.titleSection,
           imageSection: model.imageSection,
@@ -645,9 +705,187 @@ extension MainScreenFactory {
     return newModel
   }
   
-  static func featureSection(completion: () -> Void) {
+  static func updatesPremiumModel(
+    models: [MainScreenModel.Section],
+    isPremium: Bool
+  ) -> [MainScreenModel.Section] {
+    var newModel: [MainScreenModel.Section] = []
+    
+    models.forEach { model in
+      if model.advLabel == .new {
+        newModel.append(model)
+        return
+      }
+      
+      switch model.type {
+      case .teams:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .number:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .yesOrNo:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .letter:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .list:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .coin:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .cube:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .dateAndTime:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .lottery:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .contact:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .password:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .colors:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .bottle:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      case .rockPaperScissors:
+        ifDebugFeatureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            premiumAccessAllowed: isPremium,
+            isHidden: model.isHidden,
+            titleSection: model.titleSection,
+            imageSection: model.imageSection,
+            advLabel: model.advLabel
+          ))
+        }
+      case .imageFilters:
+        newModel.append(MainScreenModel.Section(
+          type: model.type,
+          isEnabled: model.isEnabled,
+          premiumAccessAllowed: isPremium,
+          isHidden: model.isHidden,
+          titleSection: model.titleSection,
+          imageSection: model.imageSection,
+          advLabel: model.advLabel
+        ))
+      }
+    }
+    return newModel
+  }
+  
+  static func ifDebugFeatureSection(completion: () -> Void) {
 #if DEBUG
     completion()
+#endif
+  }
+  
+  static func ifDebugFeatureSectionIsHidden(_ isHidden: Bool) -> Bool {
+#if DEBUG
+    return false
+#else
+    return isHidden
 #endif
   }
 }

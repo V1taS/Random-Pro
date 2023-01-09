@@ -77,7 +77,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // MARK: - Internal func
   
   func updateSectionsWith(models: [MainScreenModel.Section]) {
-    let models = MainScreenFactory.updatesLocalizationTitleSectionForModel(models: models)
+    let models = MainScreenFactory.updatesSectionForModel(models: models)
     
     if let model = model {
       let newModel = MainScreenModel(
@@ -100,7 +100,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     if let model = model {
       let newModel = MainScreenModel(
         isDarkMode: model.isDarkMode,
-        allSections: MainScreenFactory.updatesLocalizationTitleSectionForModel(models: model.allSections)
+        allSections: MainScreenFactory.updatesSectionForModel(models: model.allSections)
       )
       self.model = newModel
       output?.didReceive(model: newModel)
@@ -177,8 +177,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         completion()
         return
       }
-      let newAllSectionsModel = MainScreenFactory.updatesSectionsIsHiddenFTForModel(models: model.allSections,
-                                                                                    featureToggleModel: sectionsIsHiddenFTModel)
+      let newAllSectionsModel = MainScreenFactory.updatesSectionForModel(models: model.allSections,
+                                                                         featureToggleModel: sectionsIsHiddenFTModel)
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      allSections: newAllSectionsModel)
       self?.model = newModel
@@ -198,8 +198,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         completion()
         return
       }
-      let newAllSectionsModel = MainScreenFactory.updatesLabelsModel(models: model.allSections,
-                                                                     labelsModel: labelsModel)
+      let newAllSectionsModel = MainScreenFactory.updatesSectionForModel(models: model.allSections,
+                                                                         labelsModel: labelsModel)
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      allSections: newAllSectionsModel)
       self?.model = newModel
@@ -219,8 +219,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         completion()
         return
       }
-      let newAllSectionsModel = MainScreenFactory.updatesPremiumModel(models: model.allSections,
-                                                                      isPremium: isPremium)
+      let newAllSectionsModel = MainScreenFactory.updatesSectionForModel(models: model.allSections,
+                                                                         isPremium: isPremium)
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      allSections: newAllSectionsModel)
       self?.model = newModel

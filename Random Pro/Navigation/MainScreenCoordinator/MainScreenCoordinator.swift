@@ -70,6 +70,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   }
   
   func sceneDidBecomeActive() {
+    mainScreenModule?.updateSectionsOnMainScreen()
     startDeepLink()
   }
 }

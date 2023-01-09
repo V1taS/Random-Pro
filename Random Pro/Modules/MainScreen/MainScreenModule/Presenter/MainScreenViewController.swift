@@ -94,6 +94,9 @@ protocol MainScreenModuleInput {
   ///  - for: Тип сеции
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType)
+
+  /// Обновить секции на главном экране
+  func updateSectionsOnMainScreen()
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: MainScreenModuleOutput? { get set }
@@ -142,22 +145,13 @@ final class MainScreenViewController: MainScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
+    updateSections()
     setupNavBar()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    interactor.getContent { [weak self] in
-      self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
-        self?.interactor.updatesLabelsFeatureToggle { [weak self] in
-          
-          // TODO: - Обновление премиум фичатогглов в самом конце
-          self?.interactor.updatesPremiumFeatureToggle {}
-        }
-      }
-    }
     
     navigationController?.navigationBar.prefersLargeTitles = true
   }
@@ -189,6 +183,10 @@ final class MainScreenViewController: MainScreenModule {
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType) {
     interactor.addLabel(label, for: sectionType)
+  }
+
+  func updateSectionsOnMainScreen() {
+    updateSections()
   }
 }
 
@@ -279,6 +277,18 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 // MARK: - Private
 
 private extension MainScreenViewController {
+  func updateSections() {
+    interactor.getContent { [weak self] in
+      self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
+        self?.interactor.updatesLabelsFeatureToggle { [weak self] in
+
+          // TODO: - Обновление премиум фичатогглов в самом конце
+          self?.interactor.updatesPremiumFeatureToggle {}
+        }
+      }
+    }
+  }
+
   func setupNavBar() {
     let appearance = Appearance()
     title = appearance.title

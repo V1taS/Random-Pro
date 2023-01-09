@@ -154,6 +154,7 @@ extension MainSettingsScreenView: UITableViewDataSource {
 
 private extension MainSettingsScreenView {
   func configureLayout() {
+    let appearance = Appearance()
     [feedBackLabel, feedBackButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       stackFeedBack.addArrangedSubview($0)
@@ -169,11 +170,14 @@ private extension MainSettingsScreenView {
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
       tableView.bottomAnchor.constraint(equalTo: stackFeedBack.topAnchor,
-                                        constant: -Appearance().insets.bottom),
+                                        constant: -appearance.insets.bottom),
       
-      stackFeedBack.centerXAnchor.constraint(equalTo: centerXAnchor),
+      stackFeedBack.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                             constant: appearance.insets.left),
+      stackFeedBack.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                              constant: -appearance.insets.right),
       stackFeedBack.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                            constant: -Appearance().insets.bottom)
+                                            constant: -appearance.insets.bottom)
     ])
   }
   
@@ -183,14 +187,15 @@ private extension MainSettingsScreenView {
     backgroundColor = RandomColor.primaryWhite
     tableView.backgroundColor = RandomColor.primaryWhite
     
-    stackFeedBack.axis = .horizontal
+    stackFeedBack.axis = .vertical
+    stackFeedBack.alignment = .center
     stackFeedBack.spacing = appearance.minInset
     
     feedBackLabel.textColor = RandomColor.primaryGray
     feedBackLabel.font = RandomFont.primaryRegular16
-    feedBackLabel.text = appearance.feedbackButtonTitle
+    feedBackLabel.text = "\(appearance.feedbackButtonTitle):"
     
-    feedBackButton.setTitle(appearance.telegram, for: .normal)
+    feedBackButton.setTitle(appearance.addressRecipients, for: .normal)
     feedBackButton.setTitleColor(RandomColor.primaryBlue, for: .normal)
     feedBackButton.titleLabel?.font = RandomFont.primaryRegular16
     feedBackButton.addTarget(self,
@@ -232,6 +237,6 @@ private extension MainSettingsScreenView {
     let minInset: CGFloat = 4
     
     let feedbackButtonTitle = NSLocalizedString("Обратная связь", comment: "")
-    let telegram = "@telegram"
+    let addressRecipients = "Random_Pro_support@iCloud.com"
   }
 }

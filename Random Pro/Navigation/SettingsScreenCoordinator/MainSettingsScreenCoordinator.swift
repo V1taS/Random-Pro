@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MessageUI
+import RandomUIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainSettingsScreenCoordinatorOutput: AnyObject {
@@ -37,7 +39,7 @@ protocol MainSettingsScreenCoordinatorInput {
 
 typealias MainSettingsScreenCoordinatorProtocol = MainSettingsScreenCoordinatorInput & Coordinator
 
-final class MainSettingsScreenCoordinator: MainSettingsScreenCoordinatorProtocol {
+final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
@@ -92,11 +94,27 @@ final class MainSettingsScreenCoordinator: MainSettingsScreenCoordinatorProtocol
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
   func feedBackButtonAction() {
-    guard let settingsUrl = URL(string: Appearance().telegramURL) else {
-      return
+    let appearance = Appearance()
+    if MFMailComposeViewController.canSendMail() {
+      let mail = MFMailComposeViewController()
+      let identifierForVendor = "\(appearance.identifierForVendor): \(UIDevice.current.identifierForVendor?.uuidString ?? "")"
+      let modelDevice = "\(appearance.modelDevice): \(UIDevice.current.model)"
+      let nameDevice = "\(appearance.nameDevice): \(UIDevice.current.name)"
+      let systemVersion = "\(appearance.systemVersion): \(UIDevice.current.systemVersion)"
+      let appVersion = "\(appearance.appVersion): \(Bundle.main.appVersionLong)"
+      let messageBody = "/n/n/n-------/n\(identifierForVendor)/n\(modelDevice)/n\(nameDevice)/n\(systemVersion)/n\(appVersion)"
+
+      mail.mailComposeDelegate = self
+      mail.setToRecipients([appearance.addressRecipients])
+      mail.setSubject(appearance.subjectRecipients)
+      mail.setMessageBody(messageBody, isHTML: false)
+      mainSettingsScreenModule?.present(mail, animated: true)
+    } else {
+      services.notificationService.showNegativeAlertWith(title: appearance.emailClientNotFound,
+                                                         glyph: false,
+                                                         active: {})
     }
-    UIApplication.shared.open(settingsUrl)
-    services.metricsService.track(event: .feedBackTG)
+    services.metricsService.track(event: .feedBack)
   }
   
   func customMainSectionsSelected() {
@@ -133,10 +151,27 @@ extension MainSettingsScreenCoordinator: CustomMainSectionsCoordinatorOutput {
   }
 }
 
+// MARK: - MFMailComposeViewControllerDelegate
+
+extension MainSettingsScreenCoordinator: MFMailComposeViewControllerDelegate {
+  func mailComposeController(_ controller: MFMailComposeViewController,
+                             didFinishWith result: MFMailComposeResult,
+                             error: Error?) {
+    controller.dismiss(animated: true, completion: nil)
+  }
+}
+
 // MARK: - Appearance
 
 private extension MainSettingsScreenCoordinator {
   struct Appearance {
-    let telegramURL = "https://t.me/V1taS"
+    let addressRecipients = "Random_Pro_support@iCloud.com"
+    let subjectRecipients = NSLocalizedString("Поддержка приложения Random Pro", comment: "")
+    let identifierForVendor = NSLocalizedString("Идентификатор поставщика", comment: "")
+    let modelDevice = NSLocalizedString("Модель устройства", comment: "")
+    let nameDevice = NSLocalizedString("Имя устройства", comment: "")
+    let systemVersion = NSLocalizedString("Версия системы", comment: "")
+    let appVersion = NSLocalizedString("Версия приложения", comment: "")
+    let emailClientNotFound = NSLocalizedString("Почтовый клиент не найден", comment: "")
   }
 }

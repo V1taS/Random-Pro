@@ -40,7 +40,7 @@ struct RockPaperScissorsScreenModel {
         return appearance.scissorsName
       }
     }
-
+    
     /// Камень
     case rock(Data?)
     

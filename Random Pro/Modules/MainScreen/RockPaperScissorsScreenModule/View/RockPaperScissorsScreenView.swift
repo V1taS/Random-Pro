@@ -14,18 +14,20 @@ protocol RockPaperScissorsScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку
   func generateButtonAction()
+  
+  /// Сброс текущей генерации на начальную
+  func resetGeneration()
 }
 
 /// События которые отправляем от Presenter ко View
 protocol RockPaperScissorsScreenViewInput {
   
   ///  Обновить контент
-  ///  - Parameters:
-  ///   - model: модель RockPaperScissorsScreenModel
+  ///  - Parameter model: модель с данными
   func updateContentWith(model: RockPaperScissorsScreenModel)
   
   /// Сброс текущей генерации на начальную
-  func resetCurrentGeneration()
+  func resetGeneration()
 }
 
 typealias RockPaperScissorsScreenViewProtocol = UIView & RockPaperScissorsScreenViewInput
@@ -90,10 +92,8 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
     }
   }
   
-  func resetCurrentGeneration() {
-    rightImageView.image = nil
-    leftImageView.image = nil
-    scoreLabel.text = nil
+  func resetGeneration() {
+    output?.resetGeneration()
   }
 }
 
@@ -107,13 +107,12 @@ private extension RockPaperScissorsScreenView {
     scoreLabel.font = .systemFont(ofSize: appearance.systemFontScore)
     
     resultImageLeftLabel.textAlignment = .center
-    resultImageLeftLabel.font = .systemFont(ofSize: appearance.systemFont)
+    resultImageLeftLabel.font = .systemFont(ofSize: appearance.systemFontLabel)
     
     resultImageRightLabel.textAlignment = .center
-    resultImageRightLabel.font = .systemFont(ofSize: appearance.systemFont)
-
+    resultImageRightLabel.font = .systemFont(ofSize: appearance.systemFontLabel)
+    
     leftImageView.contentMode = .scaleAspectFill
-
     rightImageView.contentMode = .scaleAspectFill
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
@@ -142,39 +141,39 @@ private extension RockPaperScissorsScreenView {
                                          constant: .zero),
       
       leftImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                    constant: -appearance.centerXInset),
+                                             constant: -appearance.centerXInset),
       leftImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
       leftImageView.heightAnchor.constraint(equalTo: heightAnchor,
-                                                   multiplier: appearance.multiplierHeight,
-                                                  constant: .zero),
+                                            multiplier: appearance.multiplierHeight,
+                                            constant: .zero),
       
       rightImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                     constant: appearance.centerXInset),
+                                              constant: appearance.centerXInset),
       rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
       rightImageView.heightAnchor.constraint(equalTo: heightAnchor,
-                                                    multiplier: appearance.multiplierHeight,
-                                                   constant: .zero),
+                                             multiplier: appearance.multiplierHeight,
+                                             constant: .zero),
       
       resultImageLeftLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                               constant: appearance.minInset),
+                                                    constant: appearance.defaultInset),
       resultImageLeftLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                constant: -appearance.centerXInset),
+                                                    constant: -appearance.centerXInset),
       resultImageLeftLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                                   constant: -appearance.defaultInset),
+                                                   constant: -appearance.fromTopInset),
       
       resultImageRightLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                               constant: appearance.minInset),
+                                                     constant: appearance.defaultInset),
       resultImageRightLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                constant: appearance.centerXInset),
+                                                     constant: appearance.centerXInset),
       resultImageRightLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                                    constant: -appearance.defaultInset),
-
+                                                    constant: -appearance.fromTopInset),
+      
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.minInset),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.minInset),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.minInset)
+                                             constant: -appearance.defaultInset)
     ])
   }
 }
@@ -184,11 +183,11 @@ private extension RockPaperScissorsScreenView {
 private extension RockPaperScissorsScreenView {
   struct Appearance {
     let buttonTitle = NSLocalizedString("Cгенерировать", comment: "")
-    let systemFont: CGFloat = 30
+    let systemFontLabel: CGFloat = 30
     let systemFontScore: CGFloat = 100
-    let minInset: CGFloat = 16
+    let defaultInset: CGFloat = 16
     let maxInset: CGFloat = 200
-    let defaultInset: CGFloat = 120
+    let fromTopInset: CGFloat = 120
     let centerXInset: CGFloat = 96
     let multiplierHeight: Double = 0.1
     let scoreMultiplierHeight: Double = 0.5

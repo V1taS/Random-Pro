@@ -12,6 +12,7 @@ import UIKit
 protocol RockPaperScissorsScreenFactoryOutput: AnyObject {
   
   /// Получен результат генерации модели
+  /// - Parameter model: модель с данными
   func didReceiveGenerate(model: RockPaperScissorsScreenModel)
 }
 
@@ -22,6 +23,7 @@ protocol RockPaperScissorsScreenFactoryInput {
   func generateEmptyModel()
   
   /// Сгенерировать модель RockPaperScissorsScreenModel
+  /// - Parameter model: модель с данными
   func generate(model: RockPaperScissorsScreenModel)
 }
 
@@ -36,10 +38,10 @@ final class RockPaperScissorsScreenFactory: RockPaperScissorsScreenFactoryInput 
   func generateEmptyModel() {
     let appearance = Appearance()
     let model = RockPaperScissorsScreenModel(leftSideScreen: .rock(appearance.rockLeftImage?.pngData()),
-                                        leftSideScore: .zero,
-                                        rightSideScreen: .rock(appearance.rockRightImage?.pngData()),
-                                        rightSideScore: .zero,
-                                             result: appearance.totalResult)
+                                             leftSideScore: .zero,
+                                             rightSideScreen: .rock(appearance.rockRightImage?.pngData()),
+                                             rightSideScore: .zero,
+                                             result: appearance.totalEmptyResult)
     output?.didReceiveGenerate(model: model)
   }
   
@@ -60,9 +62,9 @@ final class RockPaperScissorsScreenFactory: RockPaperScissorsScreenFactoryInput 
     let randomRightSide = randomRightSideList.first ?? .paper(nil)
     
     let newLeftSideScore = model.leftSideScore + generateScore(leftSide: randomLeftSide,
-                                         rightSide: randomRightSide).leftSideScore
+                                                               rightSide: randomRightSide).leftSideScore
     let newRightSideScore = model.rightSideScore + generateScore(leftSide: randomLeftSide,
-                                          rightSide: randomRightSide).rightSideScore
+                                                                 rightSide: randomRightSide).rightSideScore
     let result = generateResult(leftSideScore: newLeftSideScore, rightSideScore: newRightSideScore)
     
     let model = RockPaperScissorsScreenModel(leftSideScreen: randomLeftSide,
@@ -89,13 +91,13 @@ final class RockPaperScissorsScreenFactory: RockPaperScissorsScreenFactoryInput 
     
     if case .rock = leftSide {
       if case .paper = rightSide {
-        return (.zero, appearance.numberOne)
+        return (.zero, appearance.scoreOne)
       }
     }
     
     if case .rock = leftSide {
       if case .scissors = rightSide {
-        return (appearance.numberOne, .zero)
+        return (appearance.scoreOne, .zero)
       }
     }
     
@@ -107,13 +109,13 @@ final class RockPaperScissorsScreenFactory: RockPaperScissorsScreenFactoryInput 
     
     if case .paper = leftSide {
       if case .scissors = rightSide {
-        return (.zero, appearance.numberOne)
+        return (.zero, appearance.scoreOne)
       }
     }
     
     if case .paper = leftSide {
       if case .rock = rightSide {
-        return (appearance.numberOne, .zero)
+        return (appearance.scoreOne, .zero)
       }
     }
     
@@ -125,13 +127,13 @@ final class RockPaperScissorsScreenFactory: RockPaperScissorsScreenFactoryInput 
     
     if case .scissors = leftSide {
       if case .rock = rightSide {
-        return (.zero, appearance.numberOne)
+        return (.zero, appearance.scoreOne)
       }
     }
     
     if case .scissors = leftSide {
       if case .paper = rightSide {
-        return (appearance.numberOne, .zero)
+        return (appearance.scoreOne, .zero)
       }
     }
     return (.zero, .zero)
@@ -147,7 +149,7 @@ extension RockPaperScissorsScreenFactory {
     let rockRightImage = UIImage(named: "rock_right_side")
     let paperRightImage = UIImage(named: "paper_right_side")
     let scissorsRightImage = UIImage(named: "scissors_right_side")
-    let totalResult = "0 : 0"
-    let numberOne = 1
+    let totalEmptyResult = "0 : 0"
+    let scoreOne = 1
   }
 }

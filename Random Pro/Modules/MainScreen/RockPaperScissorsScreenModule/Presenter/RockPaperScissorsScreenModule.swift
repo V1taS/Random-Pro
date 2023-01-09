@@ -21,7 +21,7 @@ protocol RockPaperScissorsScreenModuleInput {
 typealias RockPaperScissorsScreenModule = UIViewController & RockPaperScissorsScreenModuleInput
 
 final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule {
-
+  
   // MARK: - Internal property
   
   weak var moduleOutput: RockPaperScissorsScreenModuleOutput?
@@ -68,6 +68,10 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
 // MARK: - RockPaperScissorsScreenViewOutput
 
 extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutput {
+  func resetGeneration() {
+    factory.generateEmptyModel()
+  }
+  
   func generateButtonAction() {
     interactor.getContent()
   }
@@ -101,15 +105,15 @@ private extension RockPaperScissorsScreenViewController {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
-    title = appearance.setTitle
+    title = appearance.title
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.resetButtonIcon,
                                                         style: .plain,
                                                         target: self,
-                                                        action: #selector(resetCurrentGenerationAction))
+                                                        action: #selector(resetButtonAction))
   }
   
-  @objc func resetCurrentGenerationAction() {
-    moduleView.resetCurrentGeneration()
+  @objc func resetButtonAction() {
+    moduleView.resetGeneration()
   }
 }
 
@@ -117,7 +121,7 @@ private extension RockPaperScissorsScreenViewController {
 
 private extension RockPaperScissorsScreenViewController {
   struct Appearance {
-    let setTitle = NSLocalizedString("Цу-е-фа", comment: "")
+    let title = NSLocalizedString("Цу-е-фа", comment: "")
     let resetButtonIcon = UIImage(systemName: "arrow.counterclockwise")
   }
 }

@@ -12,16 +12,18 @@ import UIKit
 protocol RockPaperScissorsScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
-  ///  - Parameters:
-  ///   - model: модель RockPaperScissorsScreenModel
+  /// - Parameter model: модель с данными
   func didReceive(model: RockPaperScissorsScreenModel)
   
+  /// Создать начальную модель
   func createStartModel()
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol RockPaperScissorsScreenInteractorInput {
   
+  ///  Сохранить модель
+  /// - Parameter model: модель с данными
   func saveModel(model: RockPaperScissorsScreenModel)
   
   /// Получить данные
@@ -37,7 +39,7 @@ final class RockPaperScissorsScreenInteractor: RockPaperScissorsScreenInteractor
   // MARK: - Private property
   
   private var model: RockPaperScissorsScreenModel?
-
+  
   // MARK: - Internal func
   
   func getContent() {

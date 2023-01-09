@@ -61,6 +61,7 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
   func didReceiveRangeError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   
@@ -69,12 +70,14 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   
   func didReceiveRangeEnded() {
     services.notificationService.showNeutralAlertWith(title: Appearance().numberRangeEnded,
                                                       glyph: true,
+                                                      timeout: nil,
                                                       active: {})
   }
   

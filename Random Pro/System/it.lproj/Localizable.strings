@@ -31,7 +31,6 @@
 "Добавили темную тему" = "Aggiunto tema scuro";
 "Добавить" = "Aggiungi a";
 "Добавьте игроков" = "Aggiungi giocatori";
-"домен_App_Store" = "noi";
 "Ж" = "F";
 "Завершить" = "Completo";
 "Звезда" = "Stella";
@@ -152,3 +151,13 @@
 "Ножницы" = "Forbici";
 "Бумага" = "Carta";
 "Цу-е-фа" = "Tsu-e-fa";
+"Поддержка приложения Random Pro" = "Supporto app Random Pro";
+"Идентификатор поставщика" = "ID fornitore";
+"Модель устройства" = "Modello dispositivo";
+"Имя устройства" = "Nome dispositivo";
+"Версия системы" = "Versione del sistema";
+"Версия приложения" = "Versione applicazione";
+"Почтовый клиент не найден" = "Client di posta non trovato";
+"Новая версия" = "Una nuova versione";
+"доступна в App Store" = "disponibile nell'App Store";
+"Нажмите, чтобы обновить приложение" = "Fai clic per aggiornare l'app";

@@ -63,6 +63,7 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   

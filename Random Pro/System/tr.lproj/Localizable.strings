@@ -31,7 +31,6 @@
 "Добавили темную тему" = "Koyu tema eklendi";
 "Добавить" = "Ekle";
 "Добавьте игроков" = "Oyuncu Ekle";
-"домен_App_Store" = "biz";
 "Ж" = "F";
 "Завершить" = "Tamamlandı";
 "Звезда" = "Yıldız";
@@ -152,3 +151,13 @@
 "Ножницы" = "Makas";
 "Бумага" = "Kağıt";
 "Цу-е-фа" = "Tsu-e-fa";
+"Prоддержка приложения Random Pro" = "Random Pro uygulama desteği";
+"Идентификатор поставщика" = "Satıcı Kimliği";
+"Модель устройства" = "Cihaz Modeli";
+"Имя устройства" = "Aygıt adı";
+"Версия системы" = "Sistem sürümü";
+"Версия приложения" = "Uygulama Sürümü";
+"Почтовый клиент не найден" = "E-posta istemcisi bulunamadı";
+"Новая версия" = "Yeni sürüm";
+"доступна в App Store" = "App Store'da mevcuttur";
+"Нажмите, чтобы обновить приложение" = "Uygulamayı güncellemek için tıklayın";

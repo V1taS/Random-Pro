@@ -77,13 +77,17 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func mainScreenModuleDidLoad() {
+    checkIsUpdateAvailable()
+  }
+
+  func mainScreenModuleDidAppear() {
+    services.permissionService.requestNotification { _ in }
+  }
+
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     showAlerForUnlockPremiumtWith(title: Appearance().premiumAccess,
                                   description: section.type.descriptionForNoPremiumAccess)
-  }
-  
-  func mainScreenDidAppear() {
-    services.permissionService.requestNotification { _ in }
   }
   
   func openImageFilters() {
@@ -236,7 +240,12 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     services.metricsService.track(event: .numbersScreen)
   }
   
-  func shareButtonAction(_ url: URL) {
+  func shareButtonAction() {
+    let appearance = Appearance()
+    guard let url = appearance.shareAppUrl else {
+      return
+    }
+
     let objectsToShare = [url]
     let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
     
@@ -287,6 +296,36 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput {
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func checkIsUpdateAvailable() {
+#if !DEBUG
+    let appearance = Appearance()
+    guard let appStoreUrl = appearance.appStoreUrl else {
+      return
+    }
+
+    services.updateAppService.checkIsUpdateAvailable { [weak self] result in
+      switch result {
+      case let .success(model):
+        guard model.isUpdateAvailable else {
+          return
+        }
+
+        let title = """
+\(appearance.newVersionText) \(model.appStoreVersion) \(appearance.availableInAppStoreText).
+\(appearance.clickToUpdateAppText)
+"""
+        self?.services.notificationService.showPositiveAlertWith(title: title,
+                                                                 glyph: false,
+                                                                 timeout: appearance.timeoutNotification,
+                                                                 active: {
+          UIApplication.shared.open(appStoreUrl)
+        })
+      case .failure: break
+      }
+    }
+#endif
+  }
+
   func checkDarkMode() {
     guard let isDarkTheme = mainScreenModule?.returnModel().isDarkMode, let window = window else {
       return
@@ -410,10 +449,16 @@ private extension UIApplication {
 
 private extension MainScreenCoordinator {
   struct Appearance {
-    let shareAppUrl = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен_App_Store", comment: ""))/app/random-pro/id1552813956")
+    let shareAppUrl = URL(string: "https://apps.apple.com/app/random-pro/id1552813956")
+    let appStoreUrl = URL(string: "itms-apps://itunes.apple.com/app/id1552813956")
     let rateAppKey = "rate_app_key"
     let cancel = NSLocalizedString("Отмена", comment: "")
     let unlock = NSLocalizedString("Разблокировать", comment: "")
     let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
+    let timeoutNotification: Double = 10
+
+    let newVersionText = NSLocalizedString("Новая версия", comment: "")
+    let availableInAppStoreText = NSLocalizedString("доступна в App Store", comment: "")
+    let clickToUpdateAppText = NSLocalizedString("Нажмите, чтобы обновить приложение", comment: "")
   }
 }

@@ -59,15 +59,17 @@ protocol MainScreenModuleOutput: AnyObject {
   func settingButtonAction()
   
   /// Кнопка поделиться была нажата
-  ///  - Parameter url: Ссылка на приложение
-  func shareButtonAction( _ url: URL)
+  func shareButtonAction()
   
   /// Главный экран был показан
-  func mainScreenDidAppear()
+  func mainScreenModuleDidAppear()
   
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
+
+  /// Главный экран был загружен
+  func mainScreenModuleDidLoad()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -142,22 +144,18 @@ final class MainScreenViewController: MainScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
+    updateSections()
     setupNavBar()
+    moduleOutput?.mainScreenModuleDidLoad()
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(didBecomeActiveNotification),
+                                           name: UIApplication.didBecomeActiveNotification,
+                                           object: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    interactor.getContent { [weak self] in
-      self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
-        self?.interactor.updatesLabelsFeatureToggle { [weak self] in
-          
-          // TODO: - Обновление премиум фичатогглов в самом конце
-          self?.interactor.updatesPremiumFeatureToggle {}
-        }
-      }
-    }
     
     navigationController?.navigationBar.prefersLargeTitles = true
   }
@@ -165,11 +163,11 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    moduleOutput?.mainScreenDidAppear()
+    moduleOutput?.mainScreenModuleDidAppear()
   }
   
   // MARK: - Internal func
-  
+
   func saveDarkModeStatus(_ isEnabled: Bool) {
     interactor.saveDarkModeStatus(isEnabled)
   }
@@ -279,6 +277,18 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 // MARK: - Private
 
 private extension MainScreenViewController {
+  func updateSections() {
+    interactor.getContent { [weak self] in
+      self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
+        self?.interactor.updatesLabelsFeatureToggle { [weak self] in
+
+          // TODO: - Обновление премиум фичатогглов в самом конце
+          self?.interactor.updatesPremiumFeatureToggle {}
+        }
+      }
+    }
+  }
+
   func setupNavBar() {
     let appearance = Appearance()
     title = appearance.title
@@ -297,17 +307,17 @@ private extension MainScreenViewController {
   
   @objc
   func shareButtonAction() {
-    guard
-      let url = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен_App_Store", comment: ""))/app/random-pro/id1552813956")
-    else {
-      return
-    }
-    moduleOutput?.shareButtonAction(url)
+    moduleOutput?.shareButtonAction()
   }
   
   @objc
   func settingsButtonAction() {
     moduleOutput?.settingButtonAction()
+  }
+
+  @objc
+  func didBecomeActiveNotification() {
+    updateSections()
   }
 }
 

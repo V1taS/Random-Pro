@@ -40,7 +40,7 @@ enum MetricsSections: String {
   // Настройки главного экрана
   case mainSettingsScreen = "Настройки главного экрана (new version)"
   case customMainSections = "Настройка секций на главном экране (new version)"
-  case feedBackTG = "Обратная связь TG (new version)"
+  case feedBack = "Обратная связь на почту (new version)"
   
   // Deep links
   

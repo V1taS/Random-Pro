@@ -77,12 +77,14 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   
   func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
 }

@@ -31,7 +31,6 @@
 "Добавили темную тему" = "Dunkles Design hinzugefügt";
 "Добавить" = "Hinzufügen zu";
 "Добавьте игроков" = "Spieler hinzufügen";
-"домен_App_Store" = "uns";
 "Æ" = "F";
 "Завершить" = "Complete";
 "Звезда" = "Stern";
@@ -152,3 +151,13 @@
 "Разблокировать" = "Entsperren";
 "Премиум доступ" = "Premium-Zugang";
 "Цу-е-фа" = "Tsu-e-fa";
+"Поддержка приложения Random Pro" = "Random Pro-App-Unterstützung";
+"Идентификатор поставщика" = "Lieferanten-ID";
+"Модель устройства" = "Gerätemodell";
+"Имя устройства" = "Gerätename";
+"Версия системы" = "Systemversion";
+"Версия приложения" = "Anwendungsversion";
+"Почтовый клиент не найден" = "E-Mail-Client nicht gefunden";
+"Новая версия" = "Eine neue Version";
+"доступна в App Store" = "verfügbar im App Store";
+"Нажмите, чтобы обновить приложение" = "Klicken, um die App zu aktualisieren";

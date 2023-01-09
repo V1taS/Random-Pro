@@ -62,6 +62,7 @@ extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
     services.notificationService.showNegativeAlertWith(
       title: Appearance().failedSomeError,
       glyph: false,
+      timeout: nil,
       active: {}
     )
   }
@@ -82,6 +83,7 @@ extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
     services.notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,
       glyph: false,
+      timeout: nil,
       active: {
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
           return
@@ -146,6 +148,7 @@ extension ImageFiltersScreenCoordinator: PHPickerViewControllerDelegate {
           DispatchQueue.main.async {
             self?.services.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
                                                                      glyph: false,
+                                                                     timeout: nil,
                                                                      active: {})
           }
           return
@@ -168,6 +171,7 @@ extension ImageFiltersScreenCoordinator: UINavigationControllerDelegate, UIImage
           let imageData = image.jpegData(compressionQuality: 1.0) else {
       services.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
                                                          glyph: false,
+                                                         timeout: nil,
                                                          active: {})
       return
     }
@@ -183,6 +187,7 @@ extension ImageFiltersScreenCoordinator: UIDocumentPickerDelegate {
     guard let url = urls.first, let imageData = try? Data(contentsOf: url) else {
       services.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
                                                          glyph: false,
+                                                         timeout: nil,
                                                          active: {})
       return
     }

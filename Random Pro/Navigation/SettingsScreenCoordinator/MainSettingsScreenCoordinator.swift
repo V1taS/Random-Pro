@@ -100,12 +100,18 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       let identifierForVendor = "\(appearance.identifierForVendor): \(UIDevice.current.identifierForVendor?.uuidString ?? "")"
       let systemVersion = "\(appearance.systemVersion): iOS \(UIDevice.current.systemVersion)"
       let appVersion = "\(appearance.appVersion): \(Bundle.main.appVersionLong)"
-      let messageBody = "/n/n/n/n/n/n/n-------/n\(identifierForVendor)/n\(systemVersion)/n\(appVersion)"
+      let messageBody = """
+
+
+      \(identifierForVendor)
+      \(systemVersion)
+      \(appVersion)
+"""
 
       mail.mailComposeDelegate = self
       mail.setToRecipients([appearance.addressRecipients])
       mail.setSubject(appearance.subjectRecipients)
-      mail.setMessageBody(messageBody, isHTML: true)
+      mail.setMessageBody(messageBody, isHTML: false)
       mainSettingsScreenModule?.present(mail, animated: true)
     } else {
       services.notificationService.showNegativeAlertWith(title: appearance.emailClientNotFound,

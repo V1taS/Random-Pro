@@ -61,6 +61,7 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
     super.viewDidLoad()
     
     setNavigationBar()
+    interactor.getContent()
   }
 }
 
@@ -75,16 +76,23 @@ extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutp
 // MARK: - RockPaperScissorsScreenInteractorOutput
 
 extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteractorOutput {
-  func didReceiveResultFor(leftSideModel: RockPaperScissorsScreenModel,
-                           rightSideModel: RockPaperScissorsScreenModel) {
-    moduleView.updateContentWith(leftSideModel: leftSideModel,
-                                 rightSideModel: rightSideModel)
+  func didReceive(model: RockPaperScissorsScreenModel) {
+    factory.generate(model: model)
+  }
+  
+  func createStartModel() {
+    factory.generateEmptyModel()
   }
 }
 
 // MARK: - RockPaperScissorsScreenFactoryOutput
 
-extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenFactoryOutput {}
+extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenFactoryOutput {
+  func didReceiveGenerate(model: RockPaperScissorsScreenModel) {
+    moduleView.updateContentWith(model: model)
+    interactor.saveModel(model: model)
+  }
+}
 
 // MARK: - Private
 

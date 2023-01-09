@@ -13,14 +13,16 @@ protocol RockPaperScissorsScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameters:
-  ///   - leftSideModel: отображение результата генерации слева
-  ///   - rightSideModel: отображение результата генерации справа
-  func didReceiveResultFor(leftSideModel: RockPaperScissorsScreenModel,
-                           rightSideModel: RockPaperScissorsScreenModel)
+  ///   - model: модель RockPaperScissorsScreenModel
+  func didReceive(model: RockPaperScissorsScreenModel)
+  
+  func createStartModel()
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol RockPaperScissorsScreenInteractorInput {
+  
+  func saveModel(model: RockPaperScissorsScreenModel)
   
   /// Получить данные
   func getContent()
@@ -31,23 +33,26 @@ final class RockPaperScissorsScreenInteractor: RockPaperScissorsScreenInteractor
   // MARK: - Internal property
   
   weak var output: RockPaperScissorsScreenInteractorOutput?
+  
+  // MARK: - Private property
+  
+  private var model: RockPaperScissorsScreenModel?
 
   // MARK: - Internal func
   
   func getContent() {
-    output?.didReceiveResultFor(leftSideModel: getLeftSideModel(),
-                                rightSideModel: getRightSideModel())
+    if let model = model {
+      output?.didReceive(model: model)
+    } else {
+      output?.createStartModel()
+    }
+  }
+  
+  func saveModel(model: RockPaperScissorsScreenModel) {
+    self.model = model
   }
 }
 
 // MARK: - Private
 
-private extension RockPaperScissorsScreenInteractor {
-  func getLeftSideModel() -> RockPaperScissorsScreenModel {
-    RockPaperScissorsScreenModel.allCases.shuffled().first ?? .paper
-  }
-  
-  func getRightSideModel() -> RockPaperScissorsScreenModel {
-    RockPaperScissorsScreenModel.allCases.shuffled().first ?? .scissors
-  }
-}
+private extension RockPaperScissorsScreenInteractor {}

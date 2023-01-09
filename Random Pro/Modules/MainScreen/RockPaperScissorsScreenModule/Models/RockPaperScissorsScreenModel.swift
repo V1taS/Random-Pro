@@ -7,54 +7,57 @@
 //
 
 import Foundation
+import UIKit
 
-enum RockPaperScissorsScreenModel: CaseIterable {
+struct RockPaperScissorsScreenModel {
   
-  ///  Названия для обозначения смайлов
-  var title: String {
-    let appearance = Appearance()
+  /// Левая сторона экрана
+  let leftSideScreen: HandsType
+  
+  /// Отображение счета слева
+  let leftSideScore: Int
+  
+  /// Правая сторона экрана
+  let rightSideScreen: HandsType
+  
+  /// Отображение счета справа
+  let rightSideScore: Int
+  
+  /// Общий результат
+  let result: String
+  
+  enum HandsType: Equatable {
     
-    switch self {
-    case .rock:
-      return appearance.rockName
-    case .paper:
-      return appearance.paperName
-    case .scissors:
-      return appearance.scissorsName
+    ///  Названия для обозначения картинок
+    var title: String {
+      let appearance = Appearance()
+      switch self {
+      case .rock:
+        return appearance.rockName
+      case .paper:
+        return appearance.paperName
+      case .scissors:
+        return appearance.scissorsName
+      }
     }
-  }
-  
-  ///  Смайлики
-  var emoji: String {
-    let appearance = Appearance()
+
+    /// Камень
+    case rock(Data?)
     
-    switch self {
-    case .rock:
-      return appearance.rockEmoji
-    case .paper:
-      return appearance.paperEmoji
-    case .scissors:
-      return appearance.scissorsEmoji
-    }
+    /// Бумага
+    case paper(Data?)
+    
+    /// Ножницы
+    case scissors(Data?)
   }
-  
-  /// Камень
-  case rock
-  
-  /// Бумага
-  case paper
-  
-  /// Ножницы
-  case scissors
 }
 
-extension RockPaperScissorsScreenModel {
+// MARK: - Extension
+
+extension RockPaperScissorsScreenModel.HandsType {
   struct Appearance {
     let rockName = NSLocalizedString("Камень", comment: "")
-    let rockEmoji = "✊🏼"
     let paperName = NSLocalizedString("Бумага", comment: "")
-    let paperEmoji = "✋🏼"
     let scissorsName = NSLocalizedString("Ножницы", comment: "")
-    let scissorsEmoji = "✌🏼"
   }
 }

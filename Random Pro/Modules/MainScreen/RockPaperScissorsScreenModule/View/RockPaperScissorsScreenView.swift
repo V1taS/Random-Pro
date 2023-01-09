@@ -21,10 +21,8 @@ protocol RockPaperScissorsScreenViewInput {
   
   ///  Обновить контент
   ///  - Parameters:
-  ///   - leftSideModel: отображение результата генерации слева
-  ///   - rightSideModel:  отображение результата генерации справа
-  func updateContentWith(leftSideModel: RockPaperScissorsScreenModel,
-                         rightSideModel: RockPaperScissorsScreenModel)
+  ///   - model: модель RockPaperScissorsScreenModel
+  func updateContentWith(model: RockPaperScissorsScreenModel)
   
   /// Сброс текущей генерации на начальную
   func resetCurrentGeneration()
@@ -41,9 +39,11 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   // MARK: - Private properties
   
   private let generateButton = ButtonView()
-  private let resultLabel = UILabel()
-  private let rightResultEmojiLabel = UILabel()
-  private let leftResultEmojiLabel = UILabel()
+  private let scoreLabel = UILabel()
+  private let resultImageLeftLabel = UILabel()
+  private let resultImageRightLabel = UILabel()
+  private let rightImageView = UIImageView()
+  private let leftImageView = UIImageView()
   
   // MARK: - Initialization
   
@@ -60,18 +60,40 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(leftSideModel: RockPaperScissorsScreenModel,
-                         rightSideModel: RockPaperScissorsScreenModel) {
-    resultLabel.text = "\(leftSideModel.title) / \(rightSideModel.title)"
-    rightResultEmojiLabel.text = rightSideModel.emoji
-    leftResultEmojiLabel.text = leftSideModel.emoji
+  func updateContentWith(model: RockPaperScissorsScreenModel) {
+    scoreLabel.text = model.result
+    resultImageLeftLabel.text = model.leftSideScreen.title
+    resultImageRightLabel.text = model.rightSideScreen.title
+    
+    switch model.leftSideScreen {
+    case let .rock(imageData):
+      let image = UIImage(data: imageData ?? Data())
+      leftImageView.image = image
+    case let .paper(imageData):
+      let image = UIImage(data: imageData ?? Data())
+      leftImageView.image = image
+    case let .scissors(imageData):
+      let image = UIImage(data: imageData ?? Data())
+      leftImageView.image = image
+    }
+    
+    switch model.rightSideScreen {
+    case let .rock(imageData):
+      let image = UIImage(data: imageData ?? Data())
+      rightImageView.image = image
+    case let .paper(imageData):
+      let image = UIImage(data: imageData ?? Data())
+      rightImageView.image = image
+    case let .scissors(imageData):
+      let image = UIImage(data: imageData ?? Data())
+      rightImageView.image = image
+    }
   }
   
   func resetCurrentGeneration() {
-    let appearance = Appearance()
-    rightResultEmojiLabel.text = appearance.questionTitle
-    leftResultEmojiLabel.text = appearance.questionTitle
-    resultLabel.text = nil
+    rightImageView.image = nil
+    leftImageView.image = nil
+    scoreLabel.text = nil
   }
 }
 
@@ -82,14 +104,17 @@ private extension RockPaperScissorsScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     
-    resultLabel.font = RandomFont.primaryMedium24
-    resultLabel.textAlignment = .center
+    scoreLabel.font = .systemFont(ofSize: appearance.systemFontScore)
     
-    leftResultEmojiLabel.text = appearance.questionTitle
-    leftResultEmojiLabel.font = .systemFont(ofSize: appearance.systemFont)
+    resultImageLeftLabel.textAlignment = .center
+    resultImageLeftLabel.font = .systemFont(ofSize: appearance.systemFont)
     
-    rightResultEmojiLabel.text = appearance.questionTitle
-    rightResultEmojiLabel.font = .systemFont(ofSize: appearance.systemFont)
+    resultImageRightLabel.textAlignment = .center
+    resultImageRightLabel.font = .systemFont(ofSize: appearance.systemFont)
+
+    leftImageView.contentMode = .scaleAspectFill
+
+    rightImageView.contentMode = .scaleAspectFill
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
@@ -102,37 +127,54 @@ private extension RockPaperScissorsScreenView {
   func setupConstraints() {
     let appearance = Appearance()
     
-    [resultLabel, leftResultEmojiLabel, rightResultEmojiLabel, generateButton].forEach {
+    [scoreLabel, leftImageView, rightImageView,
+     resultImageLeftLabel, resultImageRightLabel, generateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-      resultLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                       constant: appearance.maxInset),
+      scoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+      scoreLabel.centerYAnchor.constraint(equalTo: centerYAnchor,
+                                          constant: -appearance.maxInset),
+      scoreLabel.heightAnchor.constraint(equalTo: heightAnchor,
+                                         multiplier: appearance.scoreMultiplierHeight,
+                                         constant: .zero),
       
-      leftResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
+      leftImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
                                                     constant: -appearance.centerXInset),
-      leftResultEmojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      leftResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor,
+      leftImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      leftImageView.heightAnchor.constraint(equalTo: heightAnchor,
                                                    multiplier: appearance.multiplierHeight,
+                                                  constant: .zero),
+      
+      rightImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
+                                                     constant: appearance.centerXInset),
+      rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      rightImageView.heightAnchor.constraint(equalTo: heightAnchor,
+                                                    multiplier: appearance.multiplierHeight,
                                                    constant: .zero),
       
-      rightResultEmojiLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                     constant: appearance.centerXInset),
-      rightResultEmojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      rightResultEmojiLabel.heightAnchor.constraint(equalTo: heightAnchor,
-                                                    multiplier: appearance.multiplierHeight,
-                                                    constant: .zero),
+      resultImageLeftLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                               constant: appearance.minInset),
+      resultImageLeftLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
+                                                constant: -appearance.centerXInset),
+      resultImageLeftLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
+                                                   constant: -appearance.defaultInset),
+      
+      resultImageRightLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                               constant: appearance.minInset),
+      resultImageRightLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
+                                                constant: appearance.centerXInset),
+      resultImageRightLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
+                                                    constant: -appearance.defaultInset),
 
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.defaultInset),
+                                              constant: appearance.minInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.defaultInset),
+                                               constant: -appearance.minInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.defaultInset)
+                                             constant: -appearance.minInset)
     ])
   }
 }
@@ -142,11 +184,13 @@ private extension RockPaperScissorsScreenView {
 private extension RockPaperScissorsScreenView {
   struct Appearance {
     let buttonTitle = NSLocalizedString("Cгенерировать", comment: "")
-    let questionTitle = "?"
-    let systemFont: CGFloat = 120
-    let defaultInset: CGFloat = 16
-    let maxInset: CGFloat = 48
-    let centerXInset: CGFloat = 72
-    let multiplierHeight: Double = 0.2
+    let systemFont: CGFloat = 30
+    let systemFontScore: CGFloat = 100
+    let minInset: CGFloat = 16
+    let maxInset: CGFloat = 200
+    let defaultInset: CGFloat = 120
+    let centerXInset: CGFloat = 96
+    let multiplierHeight: Double = 0.1
+    let scoreMultiplierHeight: Double = 0.5
   }
 }

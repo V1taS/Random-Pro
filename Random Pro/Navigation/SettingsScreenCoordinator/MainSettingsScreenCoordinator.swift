@@ -98,16 +98,14 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     if MFMailComposeViewController.canSendMail() {
       let mail = MFMailComposeViewController()
       let identifierForVendor = "\(appearance.identifierForVendor): \(UIDevice.current.identifierForVendor?.uuidString ?? "")"
-      let modelDevice = "\(appearance.modelDevice): \(UIDevice.current.model)"
-      let nameDevice = "\(appearance.nameDevice): \(UIDevice.current.name)"
-      let systemVersion = "\(appearance.systemVersion): \(UIDevice.current.systemVersion)"
+      let systemVersion = "\(appearance.systemVersion): iOS \(UIDevice.current.systemVersion)"
       let appVersion = "\(appearance.appVersion): \(Bundle.main.appVersionLong)"
-      let messageBody = "/n/n/n-------/n\(identifierForVendor)/n\(modelDevice)/n\(nameDevice)/n\(systemVersion)/n\(appVersion)"
+      let messageBody = "/n/n/n/n/n/n/n-------/n\(identifierForVendor)/n\(systemVersion)/n\(appVersion)"
 
       mail.mailComposeDelegate = self
       mail.setToRecipients([appearance.addressRecipients])
       mail.setSubject(appearance.subjectRecipients)
-      mail.setMessageBody(messageBody, isHTML: false)
+      mail.setMessageBody(messageBody, isHTML: true)
       mainSettingsScreenModule?.present(mail, animated: true)
     } else {
       services.notificationService.showNegativeAlertWith(title: appearance.emailClientNotFound,
@@ -168,8 +166,6 @@ private extension MainSettingsScreenCoordinator {
     let addressRecipients = "Random_Pro_support@iCloud.com"
     let subjectRecipients = NSLocalizedString("Поддержка приложения Random Pro", comment: "")
     let identifierForVendor = NSLocalizedString("Идентификатор поставщика", comment: "")
-    let modelDevice = NSLocalizedString("Модель устройства", comment: "")
-    let nameDevice = NSLocalizedString("Имя устройства", comment: "")
     let systemVersion = NSLocalizedString("Версия системы", comment: "")
     let appVersion = NSLocalizedString("Версия приложения", comment: "")
     let emailClientNotFound = NSLocalizedString("Почтовый клиент не найден", comment: "")

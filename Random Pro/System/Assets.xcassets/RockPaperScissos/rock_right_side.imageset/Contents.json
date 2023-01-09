@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "rock_right_side.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

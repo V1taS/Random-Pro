@@ -21,7 +21,7 @@ protocol RockPaperScissorsScreenModuleInput {
 typealias RockPaperScissorsScreenModule = UIViewController & RockPaperScissorsScreenModuleInput
 
 final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule {
-
+  
   // MARK: - Internal property
   
   weak var moduleOutput: RockPaperScissorsScreenModuleOutput?
@@ -59,23 +59,69 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setNavigationBar()
+    interactor.getContent()
   }
 }
 
 // MARK: - RockPaperScissorsScreenViewOutput
 
-extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutput {}
+extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenViewOutput {
+  func resetGeneration() {
+    factory.generateEmptyModel()
+  }
+  
+  func generateButtonAction() {
+    interactor.getContent()
+  }
+}
 
 // MARK: - RockPaperScissorsScreenInteractorOutput
 
-extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteractorOutput {}
+extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteractorOutput {
+  func didReceive(model: RockPaperScissorsScreenModel) {
+    factory.generate(model: model)
+  }
+  
+  func createStartModel() {
+    factory.generateEmptyModel()
+  }
+}
 
 // MARK: - RockPaperScissorsScreenFactoryOutput
 
-extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenFactoryOutput {}
+extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenFactoryOutput {
+  func didReceiveGenerate(model: RockPaperScissorsScreenModel) {
+    moduleView.updateContentWith(model: model)
+    interactor.saveModel(model: model)
+  }
+}
+
+// MARK: - Private
+
+private extension RockPaperScissorsScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.resetButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(resetButtonAction))
+  }
+  
+  @objc func resetButtonAction() {
+    moduleView.resetGeneration()
+  }
+}
 
 // MARK: - Appearance
 
 private extension RockPaperScissorsScreenViewController {
-  struct Appearance {}
+  struct Appearance {
+    let title = NSLocalizedString("Цу-е-фа", comment: "")
+    let resetButtonIcon = UIImage(systemName: "arrow.counterclockwise")
+  }
 }

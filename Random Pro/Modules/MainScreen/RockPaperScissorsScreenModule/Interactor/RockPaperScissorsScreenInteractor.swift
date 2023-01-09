@@ -9,14 +9,52 @@
 import UIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol RockPaperScissorsScreenInteractorOutput: AnyObject {}
+protocol RockPaperScissorsScreenInteractorOutput: AnyObject {
+  
+  /// Были получены данные
+  /// - Parameter model: модель с данными
+  func didReceive(model: RockPaperScissorsScreenModel)
+  
+  /// Создать начальную модель
+  func createStartModel()
+}
 
 /// События которые отправляем от Presenter к Interactor
-protocol RockPaperScissorsScreenInteractorInput {}
+protocol RockPaperScissorsScreenInteractorInput {
+  
+  ///  Сохранить модель
+  /// - Parameter model: модель с данными
+  func saveModel(model: RockPaperScissorsScreenModel)
+  
+  /// Получить данные
+  func getContent()
+}
 
 final class RockPaperScissorsScreenInteractor: RockPaperScissorsScreenInteractorInput {
   
   // MARK: - Internal property
   
   weak var output: RockPaperScissorsScreenInteractorOutput?
+  
+  // MARK: - Private property
+  
+  private var model: RockPaperScissorsScreenModel?
+  
+  // MARK: - Internal func
+  
+  func getContent() {
+    if let model = model {
+      output?.didReceive(model: model)
+    } else {
+      output?.createStartModel()
+    }
+  }
+  
+  func saveModel(model: RockPaperScissorsScreenModel) {
+    self.model = model
+  }
 }
+
+// MARK: - Private
+
+private extension RockPaperScissorsScreenInteractor {}

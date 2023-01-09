@@ -88,6 +88,14 @@
 "Поделиться" = "Share this App";
 "Подключить: \n Главный экран -> Настройки -> Темная тема" = "Connect: \n Home screen -> Settings -> Dark theme";
 "Позвонить родителям" = "Call your parents";
+"Камень" = "Rock";
+"Ножницы" = "Scissors";
+"Бумага" = "Paper";
+"Мин" = "Min";
+"Макс" = "Max";
+"Rock" = "Rock";
+"Scissors" = "Scissors";
+"Paper" = "Paper";
 "Пойти на свидание" = "Go on a date";
 "Понедельник" = "Monday";
 "Последняя генерация" = "Latest generation";
@@ -148,3 +156,4 @@
 "Не удалось загрузить изображение" = "Failed to load image";
 "Разблокировать" = "Unlock";
 "Премиум доступ" = "Premium access";
+"Цу-е-фа" = "Tsu-e-fa";

@@ -80,14 +80,24 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func mainScreenModuleDidLoad() {
     checkIsUpdateAvailable()
   }
-
+  
   func mainScreenModuleDidAppear() {
     services.permissionService.requestNotification { _ in }
   }
-
+  
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     showAlerForUnlockPremiumtWith(title: Appearance().premiumAccess,
                                   description: section.type.descriptionForNoPremiumAccess)
+  }
+  
+  func openRaffle() {
+    let raffleScreenCoordinator = RaffleScreenCoordinator(navigationController,
+                                                          services)
+    anyCoordinator = raffleScreenCoordinator
+    raffleScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .raffle)
+    services.metricsService.track(event: .raffle)
   }
   
   func openImageFilters() {
@@ -245,7 +255,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     guard let url = appearance.shareAppUrl else {
       return
     }
-
+    
     let objectsToShare = [url]
     let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
     
@@ -302,16 +312,16 @@ private extension MainScreenCoordinator {
     guard let appStoreUrl = appearance.appStoreUrl else {
       return
     }
-
+    
     services.updateAppService.checkIsUpdateAvailable { [weak self] result in
       switch result {
       case let .success(model):
         guard model.isUpdateAvailable else {
           return
         }
-
+        
         let title = """
-\(appearance.newVersionText) \(model.appStoreVersion) \(appearance.availableInAppStoreText).
+\(appearance.newVersionText) \(appearance.availableInAppStoreText).
 \(appearance.clickToUpdateAppText)
 """
         self?.services.notificationService.showPositiveAlertWith(title: title,
@@ -325,7 +335,7 @@ private extension MainScreenCoordinator {
     }
 #endif
   }
-
+  
   func checkDarkMode() {
     guard let isDarkTheme = mainScreenModule?.returnModel().isDarkMode, let window = window else {
       return
@@ -395,6 +405,8 @@ private extension MainScreenCoordinator {
       openBottle()
     case .rockPaperScissorsScreen:
       openRockPaperScissors()
+    case .raffleScreen:
+      openRaffle()
     }
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen": deepLinkType.rawValue])
@@ -456,7 +468,7 @@ private extension MainScreenCoordinator {
     let unlock = NSLocalizedString("Разблокировать", comment: "")
     let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
     let timeoutNotification: Double = 10
-
+    
     let newVersionText = NSLocalizedString("Новая версия", comment: "")
     let availableInAppStoreText = NSLocalizedString("доступна в App Store", comment: "")
     let clickToUpdateAppText = NSLocalizedString("Нажмите, чтобы обновить приложение", comment: "")

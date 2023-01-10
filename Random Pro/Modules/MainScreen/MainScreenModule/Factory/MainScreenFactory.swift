@@ -201,6 +201,18 @@ extension MainScreenFactory {
             advLabel: .premium
           ))
         }
+      case .raffle:
+        ifDebugFeatureSection {
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            premiumAccessAllowed: false,
+            isHidden: false,
+            titleSection: appearance.titleRaffle,
+            imageSection: appearance.imageRaffle.pngData() ?? Data(),
+            advLabel: .premium
+          ))
+        }
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -387,6 +399,19 @@ extension MainScreenFactory {
                                    oldRawValue: model.advLabel.rawValue)
           ))
         }
+      case .raffle:
+        ifDebugFeatureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
+            isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.raffle) ?? model.isHidden,
+            titleSection: appearance.titleRaffle,
+            imageSection: model.imageSection,
+            advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.raffle,
+                                   oldRawValue: model.advLabel.rawValue)
+          ))
+        }
       }
     }
     return newModel
@@ -485,5 +510,8 @@ private extension MainScreenFactory {
     
     let imageImageFilters = UIImage(systemName: "timelapse") ?? UIImage()
     let titleImageFilters = NSLocalizedString("Фильтры", comment: "")
+
+    let imageRaffle = UIImage(systemName: "gift") ?? UIImage()
+    let titleRaffle = NSLocalizedString("Розыгрыш", comment: "")
   }
 }

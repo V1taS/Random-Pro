@@ -49,7 +49,11 @@ protocol ApplicationServices {
   /// Сервис фичатогглов
   var featureToggleServices: FeatureToggleServices { get }
 
+  /// Сервис проверки обновлений приложения
   var updateAppService: UpdateAppService { get }
+
+  /// Сервис авторизации пользователей
+  var authenticationService: AuthenticationService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -97,5 +101,9 @@ final class ApplicationServicesImpl: ApplicationServices {
 
   var updateAppService: UpdateAppService {
     UpdateAppServiceImpl()
+  }
+
+  var authenticationService: AuthenticationService {
+    AuthenticationServiceImpl()
   }
 }

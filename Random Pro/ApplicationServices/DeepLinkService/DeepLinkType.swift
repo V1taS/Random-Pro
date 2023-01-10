@@ -61,6 +61,8 @@ enum DeepLinkType: String, CaseIterable, UserDefaultsCodable {
   
   /// Экран Камень ножницы бумага
   case rockPaperScissorsScreen = "rock_paper_scissors_screen"
+
+  case raffleScreen = "raffle_screen"
   
   // MARK: - Other
   

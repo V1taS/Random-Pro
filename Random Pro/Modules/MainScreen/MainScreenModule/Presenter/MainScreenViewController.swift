@@ -54,6 +54,9 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `openImageFilters`
   func openImageFilters()
+
+  /// Открыть раздел `raffle`
+  func openRaffle()
   
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
@@ -195,6 +198,10 @@ final class MainScreenViewController: MainScreenModule {
 extension MainScreenViewController: MainScreenViewOutput {
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     moduleOutput?.noPremiumAccessActionFor(section)
+  }
+
+  func openRaffle() {
+    moduleOutput?.openRaffle()
   }
   
   func openImageFilters() {

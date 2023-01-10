@@ -89,6 +89,10 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     showAlerForUnlockPremiumtWith(title: Appearance().premiumAccess,
                                   description: section.type.descriptionForNoPremiumAccess)
   }
+
+  func openRaffle() {
+
+  }
   
   func openImageFilters() {
     let imageFiltersScreenCoordinator = ImageFiltersScreenCoordinator(navigationController,
@@ -395,6 +399,8 @@ private extension MainScreenCoordinator {
       openBottle()
     case .rockPaperScissorsScreen:
       openRockPaperScissors()
+    case .raffleScreen:
+      openRaffle()
     }
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen": deepLinkType.rawValue])

@@ -80,6 +80,8 @@ struct MainScreenModel: UserDefaultsCodable {
         return "Какое то описание для Камень Ножницы Бумага"
       case .imageFilters:
         return "Какое то описание для Фильтров"
+      case .raffle:
+        return "Какое то описание для Розыгрыш"
       }
     }
     
@@ -129,6 +131,9 @@ struct MainScreenModel: UserDefaultsCodable {
     
     /// Раздел `Фильтры изображений`
     case imageFilters
+
+    /// Раздел `Розыгрыш`
+    case raffle
   }
   
   // MARK: - ADVLabel

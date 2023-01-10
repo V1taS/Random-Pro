@@ -55,6 +55,9 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `openImageFilters`
   func openImageFilters()
+
+  /// Открыть раздел `raffle`
+  func openRaffle()
   
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
@@ -147,6 +150,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openRockPaperScissors()
       case .imageFilters:
         output?.openImageFilters()
+      case .raffle:
+        output?.openRaffle()
       }
     }
   }

@@ -18,7 +18,7 @@ import RandomNetwork
 ///
 /// Прочитать про концепцию можно в [статье](https://blog.ploeh.dk/2011/07/28/CompositionRoot/)
 protocol ApplicationServices {
-
+  
   /// Сервис клавиатуры
   var keyboardService: KeyboardService { get }
   
@@ -48,12 +48,15 @@ protocol ApplicationServices {
   
   /// Сервис фичатогглов
   var featureToggleServices: FeatureToggleServices { get }
-
+  
   /// Сервис проверки обновлений приложения
   var updateAppService: UpdateAppService { get }
-
+  
   /// Сервис авторизации пользователей
   var authenticationService: AuthenticationService { get }
+  
+  /// Сервис облачной базы данных
+  var cloudDatabaseService: CloudDatabaseService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -98,12 +101,16 @@ final class ApplicationServicesImpl: ApplicationServices {
   var featureToggleServices: FeatureToggleServices {
     FeatureToggleServicesImpl()
   }
-
+  
   var updateAppService: UpdateAppService {
     UpdateAppServiceImpl()
   }
-
+  
   var authenticationService: AuthenticationService {
     AuthenticationServiceImpl()
+  }
+  
+  var cloudDatabaseService: CloudDatabaseService {
+    CloudDatabaseServiceImpl()
   }
 }

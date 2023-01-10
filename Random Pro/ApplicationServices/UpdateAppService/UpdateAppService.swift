@@ -9,13 +9,17 @@
 import Foundation
 
 protocol UpdateAppService {
-
+  
   /// Проверить доступность нового обновления для приложения
   func checkIsUpdateAvailable(completion: @escaping (Result<UpdateAppServiceModel, UpdateAppServiceError>) -> Void)
 }
 
 final class UpdateAppServiceImpl: UpdateAppService {
+  
+  // MARK: - Private properties
+  
   func checkIsUpdateAvailable(completion: @escaping (Result<UpdateAppServiceModel, UpdateAppServiceError>) -> Void) {
+    let appearance = Appearance()
     guard let info = Bundle.main.infoDictionary,
           let currentDeviceVersion = info["CFBundleShortVersionString"] as? String,
           let identifier = info["CFBundleIdentifier"] as? String,
@@ -32,14 +36,14 @@ final class UpdateAppServiceImpl: UpdateAppService {
           }
           return
         }
-
+        
         guard let data else {
           DispatchQueue.main.async {
             completion(.failure(.invalidData))
           }
           return
         }
-
+        
         do {
           let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any]
           guard let result = (json?["results"] as? [Any])?.first as? [String: Any],
@@ -48,9 +52,14 @@ final class UpdateAppServiceImpl: UpdateAppService {
             return
           }
           DispatchQueue.main.async {
-            completion(.success(UpdateAppServiceModel(isUpdateAvailable: appStoreVersion != currentDeviceVersion,
-                                                      appStoreVersion: appStoreVersion,
-                                                      currentDeviceVersion: currentDeviceVersion)))
+            if UserDefaults.standard.string(forKey: appearance.keyUserDefaults) == appStoreVersion {
+              completion(.failure(.invalidResponse))
+            } else {
+              completion(.success(UpdateAppServiceModel(isUpdateAvailable: appStoreVersion != currentDeviceVersion,
+                                                        appStoreVersion: appStoreVersion,
+                                                        currentDeviceVersion: currentDeviceVersion)))
+            }
+            UserDefaults.standard.set(appStoreVersion, forKey: appearance.keyUserDefaults)
           }
         } catch {
           DispatchQueue.main.async {
@@ -59,5 +68,13 @@ final class UpdateAppServiceImpl: UpdateAppService {
         }
       }.resume()
     }
+  }
+}
+
+// MARK: - Appearance
+
+private extension UpdateAppServiceImpl {
+  struct Appearance {
+    let keyUserDefaults = "update_app_user_defaults_key"
   }
 }

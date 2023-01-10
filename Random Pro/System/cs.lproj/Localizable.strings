@@ -31,7 +31,6 @@
 "Добавили темную тему" = "Přidán tmavý motiv";
 "Добавить" = "Přidat do";
 "Добавьте игроков" = "Přidat hráče";
-"домен_App_Store" = "nás";
 "Ж" = "F";
 "Завершить" = "Dokončeno";
 "Звезда" = "Hvězda";
@@ -159,3 +158,6 @@
 "Версия системы" = "Verze systému";
 "Версия приложения" = "Verze aplikace";
 "Почтовый клиент не найден" = "E-mailový klient nebyl nalezen";
+"Новая версия" = "Nová verze";
+"доступна в App Store" = "dostupné v App Store";
+"Нажмите, чтобы обновить приложение" = "Kliknutím aktualizujte aplikaci";

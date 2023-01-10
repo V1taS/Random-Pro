@@ -63,6 +63,7 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   
@@ -88,6 +89,7 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
   func didReceiveRangeError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
 }

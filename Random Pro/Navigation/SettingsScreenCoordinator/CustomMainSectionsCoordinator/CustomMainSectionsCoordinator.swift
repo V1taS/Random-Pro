@@ -73,6 +73,7 @@ extension CustomMainSectionsCoordinator: CustomMainSectionsModuleOutput {
   func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   

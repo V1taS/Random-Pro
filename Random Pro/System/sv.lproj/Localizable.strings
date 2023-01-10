@@ -31,7 +31,6 @@
 "Добавили темную тему" = "Lägg till mörkt tema";
 "Добавить" = "Lägg till i";
 "Добавьте игроков" = "Lägg till spelare";
-"домен_App_Store" = "oss";
 "Ж" = "F";
 "Завершить" = "Färdig";
 "Звезда" = "Stjärna";
@@ -159,3 +158,6 @@
 "Версия системы" = "Systemversion";
 "Версия приложения" = "Applikationsversion";
 "Почтовый клиент не найден" = "E-postklienten hittades inte";
+"Новая версия" = "En ny version";
+"доступна в App Store" = "tillgänglig i App Store";
+"Нажмите, чтобы обновить приложение" = "Klicka för att uppdatera appen";

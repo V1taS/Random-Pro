@@ -31,7 +31,6 @@
 "Добавили темную тему" = "Thème sombre ajouté";
 "Добавить" = "Ajouter à";
 "Добавьте игроков" = "Ajouter des joueurs";
-"домен_App_Store" = "nous";
 "Æ" = "F";
 "Завершить" = "Complet";
 "Звезда" = "Étoile";
@@ -162,3 +161,6 @@
 "Версия системы" = "Version du système";
 "Версия приложения" = "Version de l'application";
 "Почтовый клиент не найден" = "Client de messagerie introuvable";
+"Новая версия" = "Une nouvelle version";
+"доступна в App Store" = "disponible dans l'App Store";
+"Нажмите, чтобы обновить приложение" = "Cliquez pour mettre à jour l'application";

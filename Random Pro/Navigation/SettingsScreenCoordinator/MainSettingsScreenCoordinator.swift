@@ -116,6 +116,7 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     } else {
       services.notificationService.showNegativeAlertWith(title: appearance.emailClientNotFound,
                                                          glyph: false,
+                                                         timeout: nil,
                                                          active: {})
     }
     services.metricsService.track(event: .feedBack)

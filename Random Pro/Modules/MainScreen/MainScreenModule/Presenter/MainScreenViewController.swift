@@ -59,15 +59,17 @@ protocol MainScreenModuleOutput: AnyObject {
   func settingButtonAction()
   
   /// Кнопка поделиться была нажата
-  ///  - Parameter url: Ссылка на приложение
-  func shareButtonAction( _ url: URL)
+  func shareButtonAction()
   
   /// Главный экран был показан
-  func mainScreenDidAppear()
+  func mainScreenModuleDidAppear()
   
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
+
+  /// Главный экран был загружен
+  func mainScreenModuleDidLoad()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -145,6 +147,7 @@ final class MainScreenViewController: MainScreenModule {
 
     updateSections()
     setupNavBar()
+    moduleOutput?.mainScreenModuleDidLoad()
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(didBecomeActiveNotification),
                                            name: UIApplication.didBecomeActiveNotification,
@@ -160,7 +163,7 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    moduleOutput?.mainScreenDidAppear()
+    moduleOutput?.mainScreenModuleDidAppear()
   }
   
   // MARK: - Internal func
@@ -304,12 +307,7 @@ private extension MainScreenViewController {
   
   @objc
   func shareButtonAction() {
-    guard
-      let url = URL(string: "https://apps.apple.com/\(NSLocalizedString("домен_App_Store", comment: ""))/app/random-pro/id1552813956")
-    else {
-      return
-    }
-    moduleOutput?.shareButtonAction(url)
+    moduleOutput?.shareButtonAction()
   }
   
   @objc

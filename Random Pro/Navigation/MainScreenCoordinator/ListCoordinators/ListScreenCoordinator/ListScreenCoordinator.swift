@@ -66,18 +66,21 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
   func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   
   func didReceiveIsEmptyError() {
     services.notificationService.showNeutralAlertWith(title: Appearance().listElementsIsEmpty,
                                                       glyph: true,
+                                                      timeout: nil,
                                                       active: {})
   }
   
   func didReceiveRangeUniqueItemsError() {
     services.notificationService.showNeutralAlertWith(title: Appearance().uniqueElementsIsOver,
                                                       glyph: true,
+                                                      timeout: nil,
                                                       active: {})
   }
   
@@ -86,6 +89,7 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true,
+                                                       timeout: nil,
                                                        active: {})
   }
   

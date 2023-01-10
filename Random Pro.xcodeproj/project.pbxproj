@@ -251,6 +251,9 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
+		D2B96C6A296D6B31006EFF3E /* UpdateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B96C69296D6B31006EFF3E /* UpdateAppService.swift */; };
+		D2B96C6C296D6C19006EFF3E /* UpdateAppServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B96C6B296D6C19006EFF3E /* UpdateAppServiceError.swift */; };
+		D2B96C6E296D75F6006EFF3E /* UpdateAppServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B96C6D296D75F6006EFF3E /* UpdateAppServiceModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -536,6 +539,9 @@
 		D24A28062947B1A10074D669 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D24A28072947B1A10074D669 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = tr; path = tr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		D24A28082947B1A20074D669 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D2B96C69296D6B31006EFF3E /* UpdateAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppService.swift; sourceTree = "<group>"; };
+		D2B96C6B296D6C19006EFF3E /* UpdateAppServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppServiceError.swift; sourceTree = "<group>"; };
+		D2B96C6D296D75F6006EFF3E /* UpdateAppServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppServiceModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1474,6 +1480,7 @@
 			isa = PBXGroup;
 			children = (
 				1B941DDD282179A200D968DF /* ApplicationServices.swift */,
+				D2B96C68296D6B28006EFF3E /* UpdateAppService */,
 				1BB51F9D295F5346003C317D /* FeatureToggleServices */,
 				1B75D37D294494B4000BB3E1 /* HapticService */,
 				1BEFBADA2932689D000B002D /* TimerService */,
@@ -2751,6 +2758,16 @@
 			path = YesNoScreenCoordinator;
 			sourceTree = "<group>";
 		};
+		D2B96C68296D6B28006EFF3E /* UpdateAppService */ = {
+			isa = PBXGroup;
+			children = (
+				D2B96C69296D6B31006EFF3E /* UpdateAppService.swift */,
+				D2B96C6B296D6C19006EFF3E /* UpdateAppServiceError.swift */,
+				D2B96C6D296D75F6006EFF3E /* UpdateAppServiceModel.swift */,
+			);
+			path = UpdateAppService;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3122,6 +3139,7 @@
 				1B0ED1B328D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift in Sources */,
 				6C2320FA29361C3000954F39 /* BottleScreenView.swift in Sources */,
 				6CA6204428B67ACB0078C971 /* ListScreenFactory.swift in Sources */,
+				D2B96C6E296D75F6006EFF3E /* UpdateAppServiceModel.swift in Sources */,
 				1B50065E28A6BDF0009AABF2 /* TeamsScreenView.swift in Sources */,
 				6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */,
 				1B941DEC2821923C00D968DF /* ObjectCustomUserDefaultsWrapper.swift in Sources */,
@@ -3131,9 +3149,11 @@
 				1B1C173E2962E99B005F34B7 /* ImageFiltersScreenCoordinator.swift in Sources */,
 				1B941DE028217FF600D968DF /* UserDefaultsWrapper.swift in Sources */,
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,
+				D2B96C6C296D6C19006EFF3E /* UpdateAppServiceError.swift in Sources */,
 				6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */,
 				1B1C17352962E93E005F34B7 /* ImageFiltersScreenInteractor.swift in Sources */,
 				6C12707029473143000D3852 /* RockPaperScissorsScreenInteractor.swift in Sources */,
+				D2B96C6A296D6B31006EFF3E /* UpdateAppService.swift in Sources */,
 				6C7662CE287A4B210069C13E /* LotteryScreenModel.swift in Sources */,
 				6C2320FC29361C4200954F39 /* BottleScreenModule.swift in Sources */,
 				1B96E10428204CD000A23880 /* MainScreenCollectionViewCell.swift in Sources */,
@@ -3416,7 +3436,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 118;
+				CURRENT_PROJECT_VERSION = 119;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -3427,7 +3447,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.17.6;
+				MARKETING_VERSION = 730.17.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3450,7 +3470,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 118;
+				CURRENT_PROJECT_VERSION = 119;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -3460,7 +3480,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.17.6;
+				MARKETING_VERSION = 730.17.7;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";

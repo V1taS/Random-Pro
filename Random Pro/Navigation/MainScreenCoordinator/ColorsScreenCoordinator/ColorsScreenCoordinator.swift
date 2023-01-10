@@ -60,6 +60,7 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
     services.notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,
       glyph: false,
+      timeout: nil,
       active: {
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
           return

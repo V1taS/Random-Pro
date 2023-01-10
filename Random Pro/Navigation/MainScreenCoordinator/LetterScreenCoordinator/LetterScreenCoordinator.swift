@@ -83,6 +83,7 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
     services.notificationService.showNeutralAlertWith(
       title: Appearance().lettersRangeEnded,
       glyph: true,
+      timeout: nil,
       active: {}
     )
   }

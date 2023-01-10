@@ -94,9 +94,6 @@ protocol MainScreenModuleInput {
   ///  - for: Тип сеции
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType)
-
-  /// Обновить секции на главном экране
-  func updateSectionsOnMainScreen()
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: MainScreenModuleOutput? { get set }
@@ -148,6 +145,10 @@ final class MainScreenViewController: MainScreenModule {
 
     updateSections()
     setupNavBar()
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(didBecomeActiveNotification),
+                                           name: UIApplication.didBecomeActiveNotification,
+                                           object: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -163,7 +164,7 @@ final class MainScreenViewController: MainScreenModule {
   }
   
   // MARK: - Internal func
-  
+
   func saveDarkModeStatus(_ isEnabled: Bool) {
     interactor.saveDarkModeStatus(isEnabled)
   }
@@ -183,10 +184,6 @@ final class MainScreenViewController: MainScreenModule {
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType) {
     interactor.addLabel(label, for: sectionType)
-  }
-
-  func updateSectionsOnMainScreen() {
-    updateSections()
   }
 }
 
@@ -318,6 +315,11 @@ private extension MainScreenViewController {
   @objc
   func settingsButtonAction() {
     moduleOutput?.settingButtonAction()
+  }
+
+  @objc
+  func didBecomeActiveNotification() {
+    updateSections()
   }
 }
 

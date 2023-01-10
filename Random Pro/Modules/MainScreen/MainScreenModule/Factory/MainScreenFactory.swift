@@ -190,15 +190,17 @@ extension MainScreenFactory {
           ))
         }
       case .imageFilters:
-        allSections.append(MainScreenModel.Section(
-          type: section,
-          isEnabled: true,
-          premiumAccessAllowed: false,
-          isHidden: false,
-          titleSection: appearance.titleImageFilters,
-          imageSection: appearance.imageImageFilters.pngData() ?? Data(),
-          advLabel: .premium
-        ))
+        ifDebugFeatureSection {
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            premiumAccessAllowed: false,
+            isHidden: false,
+            titleSection: appearance.titleImageFilters,
+            imageSection: appearance.imageImageFilters.pngData() ?? Data(),
+            advLabel: .premium
+          ))
+        }
       }
     }
     return MainScreenModel(isDarkMode: nil,
@@ -374,16 +376,18 @@ extension MainScreenFactory {
           ))
         }
       case .imageFilters:
-        newModel.append(MainScreenModel.Section(
-          type: model.type,
-          isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
-          isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
-          titleSection: appearance.titleImageFilters,
-          imageSection: model.imageSection,
-          advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters,
-                                 oldRawValue: model.advLabel.rawValue)
-        ))
+        ifDebugFeatureSection {
+          newModel.append(MainScreenModel.Section(
+            type: model.type,
+            isEnabled: model.isEnabled,
+            premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
+            isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
+            titleSection: appearance.titleImageFilters,
+            imageSection: model.imageSection,
+            advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters,
+                                   oldRawValue: model.advLabel.rawValue)
+          ))
+        }
       }
     }
     return newModel

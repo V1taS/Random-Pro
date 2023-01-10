@@ -219,7 +219,6 @@ extension MainScreenFactory {
     updatesNewSectionForModel(models: models).forEach { model in
       switch model.type {
       case .teams:
-        let type = MainScreenModel.ADVLabel(rawValue: labelsModel?.teams ?? model.advLabel.rawValue) ?? .none
         newModel.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,

@@ -12,6 +12,39 @@ protocol RaffleScreenModuleOutput: AnyObject {
   
   /// Ошибка в авторизации
   func authorizationError()
+  
+  /// Авторизация прошла успешно
+  func authorizationSuccess()
+  
+  /// Ошибка обновления пользовательской информации
+  func updateUserProfileError()
+  
+  /// Информация успешно обновлена
+  func updateUserProfileSuccess()
+  
+  /// Пользователь успешно вышел
+  func signOutSuccess()
+  
+  /// Произошла ошибка при выходе
+  func signOutError()
+  
+  /// Email успешно обновлен
+  func updateEmailSuccess()
+  
+  /// Email не обновлен
+  func updateEmailError()
+  
+  /// Успешное подтверждение почты
+  func verificationEmailSuccess()
+  
+  /// Ошибка в отправке письма для подтверждения почты
+  func verificationEmailError()
+  
+  /// Пользователь успешно удален
+  func deleteUserSuccess()
+  
+  /// Не получилось удалить пользователя
+  func deleteUserError()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -65,6 +98,8 @@ final class RaffleScreenViewController: RaffleScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+//    interactor.getUserProfile()
+    interactor.sendUserVerificationEmail()
   }
 }
 
@@ -79,8 +114,56 @@ extension RaffleScreenViewController: RaffleScreenViewOutput {
 // MARK: - RaffleScreenInteractorOutput
 
 extension RaffleScreenViewController: RaffleScreenInteractorOutput {
+  func didReceiveIsSigned(_ isSigned: Bool) {
+    // TODO: - Пользователь авторизован
+  }
+  
+  func didReceiveUsertWith(model: RaffleScreenModel) {
+    // TODO: - Были получены данные пользователя
+  }
+  
+  func deleteUserSuccess() {
+    moduleOutput?.deleteUserSuccess()
+  }
+  
+  func deleteUserError() {
+    moduleOutput?.deleteUserError()
+  }
+  
+  func verificationEmailSuccess() {
+    moduleOutput?.verificationEmailSuccess()
+  }
+  
+  func verificationEmailError() {
+    moduleOutput?.verificationEmailError()
+  }
+  
+  func updateEmailSuccess() {
+    moduleOutput?.updateEmailSuccess()
+  }
+  
+  func updateEmailError() {
+    moduleOutput?.updateEmailError()
+  }
+  
+  func signOutSuccess() {
+    moduleOutput?.signOutSuccess()
+  }
+  
+  func signOutError() {
+    moduleOutput?.signOutError()
+  }
+  
+  func updateUserProfileSuccess() {
+    moduleOutput?.updateUserProfileSuccess()
+  }
+  
+  func updateUserProfileError() {
+    moduleOutput?.updateUserProfileError()
+  }
+  
   func authorizationSuccess() {
-    
+    moduleOutput?.authorizationSuccess()
   }
   
   func authorizationError() {

@@ -10,9 +10,32 @@ import Foundation
 
 struct AuthenticationServiceFirebaseModel {
   
+  /// Уникальный номер пользователя
+  var uid: String?
+  
   /// Имя пользователя
   let name: String?
   
   /// Электронная почта пользователя
-  let email: String?
+  var email: String?
+  
+  /// Ссылка на аватарку
+  var photoURL: String?
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - name: Имя пользователя
+  ///   - uid: Уникальный номер пользователя
+  ///   - email: Электронная почта пользователя
+  ///   - photoURL: Ссылка на аватарку
+  init(name: String?,
+       uid: String? = nil,
+       email: String? = nil,
+       photoURL: String? = nil) {
+    self.uid = uid
+    self.name = name
+    self.email = email
+    self.photoURL = photoURL
+  }
 }

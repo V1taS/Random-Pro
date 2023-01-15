@@ -56,6 +56,50 @@ final class RaffleScreenCoordinator: RaffleScreenCoordinatorProtocol {
 // MARK: - RaffleScreenModuleOutput
 
 extension RaffleScreenCoordinator: RaffleScreenModuleOutput {
+  func authorizationSuccess() {
+    // TODO: - Показать алерт
+  }
+  
+  func updateUserProfileError() {
+    // TODO: - Показать алерт
+  }
+  
+  func updateUserProfileSuccess() {
+    // TODO: - Показать алерт
+  }
+  
+  func signOutSuccess() {
+    // TODO: - Показать алерт
+  }
+  
+  func signOutError() {
+    // TODO: - Показать алерт
+  }
+  
+  func updateEmailSuccess() {
+    // TODO: - Показать алерт
+  }
+  
+  func updateEmailError() {
+    // TODO: - Показать алерт
+  }
+  
+  func verificationEmailSuccess() {
+    // TODO: - Показать алерт
+  }
+  
+  func verificationEmailError() {
+    // TODO: - Показать алерт
+  }
+  
+  func deleteUserSuccess() {
+    // TODO: - Показать алерт
+  }
+  
+  func deleteUserError() {
+    // TODO: - Показать алерт
+  }
+  
   func authorizationError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().authorizationError,
                                                        glyph: false,

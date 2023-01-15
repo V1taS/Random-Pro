@@ -413,6 +413,8 @@ private extension MainScreenCoordinator {
       openRockPaperScissors()
     case .raffleScreen:
       openRaffle()
+    case .imageFilters:
+      openImageFilters()
     }
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen": deepLinkType.rawValue])

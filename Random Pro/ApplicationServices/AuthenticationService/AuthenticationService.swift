@@ -23,7 +23,7 @@ protocol AuthenticationService {
     completion: (_ nonce: String) -> Void
   )
   
-  /// Зарегистрирован пользователь или нет
+  /// Зарегистрирован пользователь или нет 🔴 Возможно этот метод не нужен, посмотреть в дальнейшем
   /// - Parameters:
   ///  - forUserID: ID пользователя
   ///  - completion: Зарегистрирован пользователь или нет
@@ -36,9 +36,148 @@ protocol AuthenticationService {
   func authFirebaseWith(idTokenString: String,
                         nonce: String,
                         completion: @escaping (Result<AuthenticationServiceFirebaseModel, Error>) -> Void)
+  
+  /// Выйти из авторизованной зоны Firebase
+  /// - Parameter completion: Возвращает результат выполнения
+  func signOutFirebaseWith(completion: @escaping (Result<Void, Error>) -> Void)
+  
+  /// Проверка авторизован пользователь в данный момент или нет в Firebase
+  /// - Parameter completion: Возвращает результат выполнения
+  func checkIsSignedFirebase(completion: @escaping (_ isSigned: Bool) -> Void)
+  
+  /// Получить пользовательские данные (Имя, почта, фото, уникальный номер...)
+  /// - Parameter completion: Возвращает результат выполнения
+  func getUserProfile(completion: @escaping (AuthenticationServiceFirebaseModel?) -> Void)
+  
+  /// Обновить данные пользователя
+  /// - Parameters:
+  ///  - model: Модель для обновления данных
+  ///  - completion: Возвращает результат выполнения
+  func updateUserProfileWith(model: AuthenticationServiceFirebaseModel,
+                             completion: @escaping (Result<Void, Error>) -> Void)
+  
+  /// Обновить почту пользователя
+  /// - Parameters:
+  ///  - email: Почта
+  ///  - completion: Возвращает результат выполнения
+  func updateEmail(_ email: String,
+                   completion: @escaping (Result<Void, Error>) -> Void)
+  
+  /// Подтвердить почту
+  /// - Parameter completion: Возвращает результат выполнения
+  func sendUserVerificationEmail(completion: @escaping (Result<Void, Error>) -> Void)
+  
+  /// Удалить пользователя
+  /// - Parameter completion: Возвращает результат выполнения
+  func deleteUser(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 final class AuthenticationServiceImpl: AuthenticationService {
+  func deleteUser(completion: @escaping (Result<Void, Error>) -> Void) {
+    let user = Auth.auth().currentUser
+    user?.delete { error in
+      if let error {
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
+        return
+      }
+      DispatchQueue.main.async {
+        completion(.success(()))
+      }
+    }
+  }
+  
+  func sendUserVerificationEmail(completion: @escaping (Result<Void, Error>) -> Void) {
+    Auth.auth().currentUser?.sendEmailVerification { error in
+      if let error {
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
+        return
+      }
+      DispatchQueue.main.async {
+        completion(.success(()))
+      }
+    }
+  }
+  
+  func updateEmail(_ email: String,
+                   completion: @escaping (Result<Void, Error>) -> Void) {
+    Auth.auth().currentUser?.updateEmail(to: email) { error in
+      if let error {
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
+        return
+      }
+      DispatchQueue.main.async {
+        completion(.success(()))
+      }
+    }
+  }
+  
+  func updateUserProfileWith(model: AuthenticationServiceFirebaseModel,
+                             completion: @escaping (Result<Void, Error>) -> Void) {
+    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+    
+    if let url = model.photoURL {
+      changeRequest?.photoURL = URL(string: url)
+    }
+    changeRequest?.displayName = model.name
+    
+    changeRequest?.commitChanges { error in
+      if let error {
+        DispatchQueue.main.async {
+          completion(.failure(error))
+        }
+        return
+      }
+      DispatchQueue.main.async {
+        completion(.success(()))
+      }
+    }
+  }
+  
+  func getUserProfile(completion: @escaping (AuthenticationServiceFirebaseModel?) -> Void) {
+    let user = Auth.auth().currentUser
+    guard let user else {
+      DispatchQueue.main.async {
+        completion(nil)
+      }
+      return
+    }
+    
+    DispatchQueue.main.async {
+      completion(AuthenticationServiceFirebaseModel(name: user.displayName,
+                                                    uid: user.uid,
+                                                    email: user.email,
+                                                    photoURL: user.photoURL?.absoluteString))
+    }
+  }
+  
+  func checkIsSignedFirebase(completion: @escaping (_ isSigned: Bool) -> Void) {
+    DispatchQueue.main.async {
+      if Auth.auth().currentUser != nil {
+        completion(true)
+      } else {
+        completion(false)
+      }
+    }
+  }
+  
+  func signOutFirebaseWith(completion: @escaping (Result<Void, Error>) -> Void) {
+    DispatchQueue.main.async {
+      let firebaseAuth = Auth.auth()
+      do {
+        try firebaseAuth.signOut()
+        completion(.success(()))
+      } catch {
+        completion(.failure(error))
+      }
+    }
+  }
+  
   func authFirebaseWith(idTokenString: String,
                         nonce: String,
                         completion: @escaping (Result<AuthenticationServiceFirebaseModel, Error>) -> Void) {

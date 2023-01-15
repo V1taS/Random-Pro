@@ -306,6 +306,16 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput {
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func openPremium() {
+    let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
+                                                            services)
+    anyCoordinator = premiumScreenCoordinator
+    premiumScreenCoordinator.selectPresentType(.present)
+    premiumScreenCoordinator.start()
+    
+    services.metricsService.track(event: .premiumScreen)
+  }
+  
   func checkIsUpdateAvailable() {
     #if !DEBUG
     let appearance = Appearance()
@@ -415,6 +425,8 @@ private extension MainScreenCoordinator {
       openRaffle()
     case .imageFilters:
       openImageFilters()
+    case .premiumScreen:
+      openPremium()
     }
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen": deepLinkType.rawValue])
@@ -449,8 +461,8 @@ private extension MainScreenCoordinator {
                                   handler: { _ in }))
     alert.addAction(UIAlertAction(title: appearance.unlock,
                                   style: .default,
-                                  handler: { _ in
-      // TODO: - Показать экран с разблокировкой премиум
+                                  handler: { [weak self] _ in
+      self?.openPremium()
     }))
     mainScreenModule?.present(alert, animated: true, completion: nil)
   }

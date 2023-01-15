@@ -42,6 +42,9 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
     tableViewModels.append(.titleAndImage(title: appearance.customMainSectionsTitle,
                                           asideImage: nil,
                                           type: .customMainSections))
+    tableViewModels.append(.titleAndImage(title: appearance.premiumTitle,
+                                          asideImage: nil,
+                                          type: .premiumSections))
     output?.didReceive(models: tableViewModels)
   }
 }
@@ -54,5 +57,7 @@ private extension MainSettingsScreenFactory {
                                            comment: "")
     let customMainSectionsTitle = NSLocalizedString("Настройка секций",
                                                     comment: "")
+    let premiumTitle = NSLocalizedString("Премиум",
+                                         comment: "")
   }
 }

@@ -54,6 +54,7 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
   private var modalNavigationController: UINavigationController?
   private var customMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol?
   private var cacheMainScreenSections: [MainScreenModel.Section] = []
+  private var anyCoordinator: Coordinator?
   
   // MARK: - Initialization
   
@@ -93,6 +94,20 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 // MARK: - MainSettingsScreenModuleOutput
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
+  func premiumSectionsSelected() {
+    guard let upperViewController = modalNavigationController else {
+      return
+    }
+    
+    let premiumScreenCoordinator = PremiumScreenCoordinator(upperViewController,
+                                                            services)
+    anyCoordinator = premiumScreenCoordinator
+    premiumScreenCoordinator.selectPresentType(.push)
+    premiumScreenCoordinator.start()
+    
+    services.metricsService.track(event: .premiumScreen)
+  }
+  
   func feedBackButtonAction() {
     let appearance = Appearance()
     if MFMailComposeViewController.canSendMail() {
@@ -107,7 +122,7 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       \(systemVersion)
       \(appVersion)
 """
-
+      
       mail.mailComposeDelegate = self
       mail.setToRecipients([appearance.addressRecipients])
       mail.setSubject(appearance.subjectRecipients)

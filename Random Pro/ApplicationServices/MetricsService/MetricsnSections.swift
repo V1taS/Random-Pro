@@ -46,4 +46,5 @@ enum MetricsSections: String {
   // Deep links
   
   case deepLinks = "DeepLinks"
+  case premiumScreen = "Premium (new version)"
 }

@@ -37,5 +37,8 @@ enum MainSettingsScreenType {
     
     /// Раздел настройки главных секций
     case customMainSections
+    
+    /// Раздел Премиум
+    case premiumSections
   }
 }

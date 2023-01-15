@@ -20,6 +20,9 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
   
+  /// Выбран раздел премиум
+  func premiumSectionsSelected()
+  
   /// Кнопка обратной связи была нажата
   func feedBackButtonAction()
 }
@@ -102,6 +105,10 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
 // MARK: - MainSettingsScreenViewOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
+  func premiumSectionsSelected() {
+    moduleOutput?.premiumSectionsSelected()
+  }
+  
   func feedBackButtonAction() {
     moduleOutput?.feedBackButtonAction()
   }

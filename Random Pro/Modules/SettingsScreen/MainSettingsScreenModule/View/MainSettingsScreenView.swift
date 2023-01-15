@@ -18,6 +18,9 @@ protocol MainSettingsScreenViewOutput: AnyObject {
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
   
+  /// Выбран раздел премиум
+  func premiumSectionsSelected()
+  
   /// Кнопка обратной связи была нажата
   func feedBackButtonAction()
 }
@@ -79,6 +82,8 @@ extension MainSettingsScreenView: UITableViewDelegate {
       switch type {
       case .customMainSections:
         output?.customMainSectionsSelected()
+      case .premiumSections:
+        output?.premiumSectionsSelected()
       }
     default: break
     }

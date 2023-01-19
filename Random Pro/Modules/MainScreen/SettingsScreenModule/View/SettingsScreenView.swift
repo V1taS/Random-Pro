@@ -179,9 +179,9 @@ private extension SettingsScreenView {
     }
     
     NSLayoutConstraint.activate([
-      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.insets.left),
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.defaultInset),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.insets.right),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.defaultInset),
       tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
@@ -209,7 +209,7 @@ private extension SettingsScreenView {
     tableView.separatorStyle = .none
     tableView.tableFooterView = UIView()
     tableView.tableHeaderView = UIView()
-    tableView.contentInset.top = Appearance().insets.top
+    tableView.contentInset.top = Appearance().defaultInset
   }
 }
 
@@ -217,7 +217,7 @@ private extension SettingsScreenView {
 
 private extension SettingsScreenView {
   struct Appearance {
-    let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    let defaultInset: CGFloat = 16
     let cornerRadius: CGFloat = 8
     let createListID = "createListID"
   }

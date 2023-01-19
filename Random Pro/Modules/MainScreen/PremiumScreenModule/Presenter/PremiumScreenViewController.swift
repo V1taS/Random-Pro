@@ -8,7 +8,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol PremiumScreenModuleOutput: AnyObject {}
+protocol PremiumScreenModuleOutput: AnyObject {
+  
+  /// Модуль был закрыт
+  func closeButtonAction()
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol PremiumScreenModuleInput {
@@ -36,6 +40,7 @@ final class PremiumScreenViewController: PremiumScreenModule {
   private let interactor: PremiumScreenInteractorInput
   private let moduleView: PremiumScreenViewProtocol
   private let factory: PremiumScreenFactoryInput
+  private var cacheIsPresent = false
   
   // MARK: - Initialization
   
@@ -65,12 +70,16 @@ final class PremiumScreenViewController: PremiumScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    factory.createListModelWith()
+    navigationItem.largeTitleDisplayMode = .never
+    setNavigationBar()
   }
   
   // MARK: - Internal func
   
   func selectPresentType(_ type: PremiumScreenPresentType) {
     moduleView.selectPresentType(type)
+    cacheIsPresent = type == .present
   }
 }
 
@@ -84,14 +93,40 @@ extension PremiumScreenViewController: PremiumScreenInteractorOutput {}
 
 // MARK: - PremiumScreenFactoryOutput
 
-extension PremiumScreenViewController: PremiumScreenFactoryOutput {}
+extension PremiumScreenViewController: PremiumScreenFactoryOutput {
+  func didReceive(models: [PremiumScreenSectionType]) {
+    moduleView.updateContentWith(models: models)
+  }
+}
 
 // MARK: - Private
 
-private extension PremiumScreenViewController {}
+private extension PremiumScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    title = appearance.title
+    
+    if cacheIsPresent {
+      let closeButton = UIBarButtonItem(image: appearance.closeButtonIcon,
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(closeButtonAction))
+      
+      navigationItem.rightBarButtonItems = [closeButton]
+    }
+  }
+  
+  @objc
+  func closeButtonAction() {
+    moduleOutput?.closeButtonAction()
+  }
+}
 
 // MARK: - Appearance
 
 private extension PremiumScreenViewController {
-  struct Appearance {}
+  struct Appearance {
+    let title = NSLocalizedString("Премиум", comment: "")
+    let closeButtonIcon = UIImage(systemName: "xmark")
+  }
 }

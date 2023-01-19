@@ -153,6 +153,9 @@
 		1BBE378A28C0C10E0087128D /* NumberScreenViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */; };
 		1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */; };
 		1BBE379028C0DE260087128D /* NumberScreenInteractorOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378F28C0DE260087128D /* NumberScreenInteractorOutputSpy.swift */; };
+		1BC179C12975BECA00A8FB95 /* PremiumScreenSectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC179C02975BECA00A8FB95 /* PremiumScreenSectionType.swift */; };
+		1BC179C32975BFC500A8FB95 /* PurchasesCardsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC179C22975BFC500A8FB95 /* PurchasesCardsCellModel.swift */; };
+		1BC179C52975C24600A8FB95 /* PremiumScreenOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC179C42975C24600A8FB95 /* PremiumScreenOnboardingViewModel.swift */; };
 		1BC8F2C5296B402500C3AF89 /* PremiumFeatureToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC8F2C4296B402500C3AF89 /* PremiumFeatureToggleModel.swift */; };
 		1BCB6ECB28B29F870040F46E /* SettingsScreenTableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCB6ECA28B29F870040F46E /* SettingsScreenTableViewType.swift */; };
 		1BD23310296E9F60006FE260 /* UpdateAppFeatureToggleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD2330F296E9F60006FE260 /* UpdateAppFeatureToggleModel.swift */; };
@@ -426,6 +429,9 @@
 		1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenViewInputMock.swift; sourceTree = "<group>"; };
 		1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractorTests.swift; sourceTree = "<group>"; };
 		1BBE378F28C0DE260087128D /* NumberScreenInteractorOutputSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractorOutputSpy.swift; sourceTree = "<group>"; };
+		1BC179C02975BECA00A8FB95 /* PremiumScreenSectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumScreenSectionType.swift; sourceTree = "<group>"; };
+		1BC179C22975BFC500A8FB95 /* PurchasesCardsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesCardsCellModel.swift; sourceTree = "<group>"; };
+		1BC179C42975C24600A8FB95 /* PremiumScreenOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumScreenOnboardingViewModel.swift; sourceTree = "<group>"; };
 		1BC8F2C4296B402500C3AF89 /* PremiumFeatureToggleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumFeatureToggleModel.swift; sourceTree = "<group>"; };
 		1BCB6ECA28B29F870040F46E /* SettingsScreenTableViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenTableViewType.swift; sourceTree = "<group>"; };
 		1BCC579027A83CE200DF5ED0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -1966,6 +1972,9 @@
 			isa = PBXGroup;
 			children = (
 				1BF0616229748D3000DD6C76 /* PremiumScreenPresentType.swift */,
+				1BC179C02975BECA00A8FB95 /* PremiumScreenSectionType.swift */,
+				1BC179C22975BFC500A8FB95 /* PurchasesCardsCellModel.swift */,
+				1BC179C42975C24600A8FB95 /* PremiumScreenOnboardingViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3154,6 +3163,7 @@
 				1B50066628A6BE6D009AABF2 /* TeamsScreenCoordinator.swift in Sources */,
 				1B0ED1D128D501B2001BACF6 /* CustomMainSectionsType.swift in Sources */,
 				1B1C17342962E93E005F34B7 /* ImageFiltersScreenAssembly.swift in Sources */,
+				1BC179C12975BECA00A8FB95 /* PremiumScreenSectionType.swift in Sources */,
 				1B74319028A79F4F00205C2C /* ListPlayersScreenViewController.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				6CA6202D28B6331E0078C971 /* ContactScreenModule.swift in Sources */,
@@ -3261,6 +3271,7 @@
 				1B0ED1C128D4FB3A001BACF6 /* CustomMainSectionsViewController.swift in Sources */,
 				1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */,
 				6C12707A294765FA000D3852 /* RockPaperScissorsScreenModel.swift in Sources */,
+				1BC179C32975BFC500A8FB95 /* PurchasesCardsCellModel.swift in Sources */,
 				1B31F638285F92E600A88217 /* ListResultScreenCoordinator.swift in Sources */,
 				6CA6201F28B62DE30078C971 /* CubesScreenInteractor.swift in Sources */,
 				1BA199B928BBC7590036D73C /* ShareScreenCoordinator.swift in Sources */,
@@ -3322,6 +3333,7 @@
 				1B40BE5C2962C9A300FEBDB6 /* LabelsFeatureToggleModel.swift in Sources */,
 				1B0ED1EC28D54E05001BACF6 /* OnboardingScreenViewController.swift in Sources */,
 				1BA16E26296DC316001B19C6 /* RaffleScreenFactory.swift in Sources */,
+				1BC179C52975C24600A8FB95 /* PremiumScreenOnboardingViewModel.swift in Sources */,
 				1B96E0FF282048D000A23880 /* RootCoordinator.swift in Sources */,
 				6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */,
 				6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */,

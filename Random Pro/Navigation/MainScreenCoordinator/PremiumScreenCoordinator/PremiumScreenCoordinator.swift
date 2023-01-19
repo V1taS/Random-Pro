@@ -36,6 +36,7 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
   private let services: ApplicationServices
   private var premiumScreenModule: PremiumScreenModule?
   private var presentType: PremiumScreenPresentType?
+  private var premiumScreenNavigationController: UINavigationController?
   
   // MARK: - Initialization
   
@@ -55,12 +56,20 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
   }
   
   func start() {
+    guard let presentType else {
+      return
+    }
+    
     let premiumScreenModule = PremiumScreenAssembly().createModule()
     self.premiumScreenModule = premiumScreenModule
     self.premiumScreenModule?.moduleOutput = self
+    premiumScreenModule.selectPresentType(presentType)
     
     if presentType == .present {
-      navigationController.present(premiumScreenModule, animated: true)
+      let premiumScreenNavigationController = UINavigationController(rootViewController: premiumScreenModule)
+      self.premiumScreenNavigationController = premiumScreenNavigationController
+      premiumScreenNavigationController.modalPresentationStyle = .fullScreen
+      navigationController.present(premiumScreenNavigationController, animated: true)
     } else {
       navigationController.pushViewController(premiumScreenModule, animated: true)
     }
@@ -69,7 +78,11 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
 
 // MARK: - PremiumScreenModuleOutput
 
-extension PremiumScreenCoordinator: PremiumScreenModuleOutput {}
+extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
+  func closeButtonAction() {
+    premiumScreenNavigationController?.dismiss(animated: true)
+  }
+}
 
 // MARK: - Appearance
 

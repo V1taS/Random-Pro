@@ -17,10 +17,6 @@ protocol PremiumScreenViewInput {
   /// Обновить контент
   ///  - Parameter models: Массив моделек
   func updateContentWith(models: [PremiumScreenSectionType])
-  
-  /// Выбрать способ показа экрана
-  /// - Parameter type: Тип показа
-  func selectPresentType(_ type: PremiumScreenPresentType)
 }
 
 /// Псевдоним протокола UIView & PremiumScreenViewInput
@@ -58,10 +54,6 @@ final class PremiumScreenView: PremiumScreenViewProtocol {
   }
   
   // MARK: - Internal func
-  
-  func selectPresentType(_ type: PremiumScreenPresentType) {
-    // TODO: -
-  }
   
   func updateContentWith(models: [PremiumScreenSectionType]) {
     self.models = models
@@ -123,26 +115,23 @@ private extension PremiumScreenView {
   }
   
   func applyDefaultBehavior() {
+    let appearance = Appearance()
     backgroundColor = RandomColor.primaryWhite
     tableView.backgroundColor = RandomColor.primaryWhite
     
     dividerView.backgroundColor = UIColor(hexString: ColorToken.secondaryGray.rawValue)
     
-    restorePurchaseButton.setTitle("Восстановить", for: .normal)
+    restorePurchaseButton.setTitle(appearance.restoreTitle, for: .normal)
     restorePurchaseButton.setTitleColor(RandomColor.primaryBlue, for: .normal)
-    mainButton.setTitle("Купить", for: .normal)
-    
-    let termsConditionsKey = "Terms & Conditions"
-    let privacyPolicyKey = "Privacy Policy"
-    let termsAndConditionsLink = "https://sosinvitalii.com/terms-conditions"
-    let privacyPolicyLink = "https://sosinvitalii.com/privacy-policy"
+    mainButton.setTitle(appearance.subscribeTitle, for: .normal)
     
     linkTextView.backgroundColor = .clear
-    linkTextView.text = "Terms & Conditions and Privacy Policy"
+    let termsConditionsAndPrivacyPolicy = "\(appearance.termsConditions) \(appearance.andTitle) \(appearance.privacyPolicy)"
+    linkTextView.text = termsConditionsAndPrivacyPolicy
     linkTextView.addLinks([
-      termsConditionsKey: termsAndConditionsLink,
-      privacyPolicyKey: privacyPolicyLink
-     ])
+      appearance.termsConditions: appearance.termsAndConditionsLink,
+      appearance.privacyPolicy: appearance.privacyPolicyLink
+    ])
     
     bottomContainerView.backgroundColor = RandomColor.primaryWhite
     
@@ -160,7 +149,6 @@ private extension PremiumScreenView {
                        forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
     
     tableView.separatorStyle = .none
-//    tableView.contentInset.top = Appearance().defaultInset
   }
 }
 
@@ -217,5 +205,16 @@ extension PremiumScreenView: UITableViewDataSource {
 private extension PremiumScreenView {
   struct Appearance {
     let defaultInset: CGFloat = 16
+    
+    let termsConditions = NSLocalizedString("Условия", comment: "")
+    let andTitle = NSLocalizedString("и", comment: "")
+    let privacyPolicy = NSLocalizedString("Политика конфиденциальности", comment: "")
+    
+    let buyTitle = NSLocalizedString("Купить", comment: "")
+    let restoreTitle = NSLocalizedString("Восстановить", comment: "")
+    let subscribeTitle = NSLocalizedString("Подписаться", comment: "")
+    
+    let termsAndConditionsLink = "https://sosinvitalii.com/terms-conditions"
+    let privacyPolicyLink = "https://sosinvitalii.com/privacy-policy"
   }
 }

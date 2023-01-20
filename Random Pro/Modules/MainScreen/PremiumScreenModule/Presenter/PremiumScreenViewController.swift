@@ -18,8 +18,8 @@ protocol PremiumScreenModuleOutput: AnyObject {
 protocol PremiumScreenModuleInput {
   
   /// Выбрать способ показа экрана
-  /// - Parameter type: Тип показа
-  func selectPresentType(_ type: PremiumScreenPresentType)
+  /// - Parameter isModalPresentation: Открывается экран снизу вверх
+  func selectIsModalPresentationStyle(_ isModalPresentation: Bool)
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: PremiumScreenModuleOutput? { get set }
@@ -40,7 +40,7 @@ final class PremiumScreenViewController: PremiumScreenModule {
   private let interactor: PremiumScreenInteractorInput
   private let moduleView: PremiumScreenViewProtocol
   private let factory: PremiumScreenFactoryInput
-  private var cacheIsPresent = false
+  private var cacheIsModalPresentation = false
   
   // MARK: - Initialization
   
@@ -71,21 +71,38 @@ final class PremiumScreenViewController: PremiumScreenModule {
     super.viewDidLoad()
     
     factory.createListModelWith()
+    factory.createMainButtonTitleFrom(.monthly,
+                                      amount: "$ 2.55")
     navigationItem.largeTitleDisplayMode = .never
     setNavigationBar()
   }
   
   // MARK: - Internal func
   
-  func selectPresentType(_ type: PremiumScreenPresentType) {
-    moduleView.selectPresentType(type)
-    cacheIsPresent = type == .present
+  func selectIsModalPresentationStyle(_ isModalPresentation: Bool) {
+    cacheIsModalPresentation = isModalPresentation
   }
 }
 
 // MARK: - PremiumScreenViewOutput
 
-extension PremiumScreenViewController: PremiumScreenViewOutput {}
+extension PremiumScreenViewController: PremiumScreenViewOutput {
+  func monthlySubscriptionCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
+    factory.createMainButtonTitleFrom(purchaseType, amount: amount)
+  }
+  
+  func annualSubscriptionCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
+    factory.createMainButtonTitleFrom(purchaseType, amount: amount)
+  }
+  
+  func lifetimeAccessCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
+    factory.createMainButtonTitleFrom(purchaseType, amount: amount)
+  }
+  
+  func didChangePageAction() {
+    // TODO: -
+  }
+}
 
 // MARK: - PremiumScreenInteractorOutput
 
@@ -94,6 +111,10 @@ extension PremiumScreenViewController: PremiumScreenInteractorOutput {}
 // MARK: - PremiumScreenFactoryOutput
 
 extension PremiumScreenViewController: PremiumScreenFactoryOutput {
+  func didReceiveMainButton(title: String?) {
+    moduleView.updateButtonWith(title: title)
+  }
+  
   func didReceive(models: [PremiumScreenSectionType]) {
     moduleView.updateContentWith(models: models)
   }
@@ -106,7 +127,7 @@ private extension PremiumScreenViewController {
     let appearance = Appearance()
     title = appearance.title
     
-    if cacheIsPresent {
+    if cacheIsModalPresentation {
       let closeButton = UIBarButtonItem(image: appearance.closeButtonIcon,
                                         style: .plain,
                                         target: self,

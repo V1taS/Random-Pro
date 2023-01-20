@@ -16,7 +16,7 @@ protocol PremiumScreenCoordinatorInput {
   
   /// Выбрать способ показа экрана
   /// - Parameter type: Тип показа
-  func selectPresentType(_ type: PremiumScreenPresentType)
+  func selectPresentType(_ type: PremiumScreenCoordinator.PremiumScreenPresentType)
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: PremiumScreenCoordinatorOutput? { get set }
@@ -25,6 +25,15 @@ protocol PremiumScreenCoordinatorInput {
 typealias PremiumScreenCoordinatorProtocol = PremiumScreenCoordinatorInput & Coordinator
 
 final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
+  
+  enum PremiumScreenPresentType {
+    
+    /// Модальный показ
+    case present
+    
+    /// Стандартный в навигейшен стеке
+    case push
+  }
   
   // MARK: - Internal property
   
@@ -63,7 +72,7 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
     let premiumScreenModule = PremiumScreenAssembly().createModule()
     self.premiumScreenModule = premiumScreenModule
     self.premiumScreenModule?.moduleOutput = self
-    premiumScreenModule.selectPresentType(presentType)
+    premiumScreenModule.selectIsModalPresentationStyle(presentType == .present)
     
     if presentType == .present {
       let premiumScreenNavigationController = UINavigationController(rootViewController: premiumScreenModule)

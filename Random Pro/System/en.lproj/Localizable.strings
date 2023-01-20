@@ -169,9 +169,19 @@
 "Розыгрыш" = "Raffle";
 "Ошибка авторизации" = "Authorisation Error";
 "Премиум" = "Premium";
-"Купить" = "Buy";
+"Купить" = "Purchase";
 "Подписаться" = "Subscribe";
 "Условия" = "Terms & Conditions";
 "Политика конфиденциальности" = "Privacy Policy";
 "и" = "and";
 "Восстановить" = "Restore";
+
+// TODO: -
+"за" = "for";
+"Ежемесячно" = "Monthly";
+"Ежегодно" = "Yearly";
+"Навсегда" = "Lifetime";
+
+"Самый популярный" = "Most popular";
+"7 дней бесплатно" = "7 days free";
+"Разовая покупка" = "One-Time Purchase";

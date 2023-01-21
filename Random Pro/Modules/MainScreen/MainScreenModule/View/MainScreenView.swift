@@ -55,7 +55,7 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `openImageFilters`
   func openImageFilters()
-
+  
   /// Открыть раздел `raffle`
   func openRaffle()
   
@@ -68,8 +68,8 @@ protocol MainScreenViewOutput: AnyObject {
 protocol MainScreenViewInput {
   
   /// Настройка главного экрана
-  ///  - Parameter models: Список моделек для ячейки
-  func configureCellsWith(models: [MainScreenModel.Section])
+  ///  - Parameter model: Можелька
+  func configureCellsWith(model: MainScreenModel)
 }
 
 /// Псевдоним протокола UIView & MainScreenViewInput
@@ -87,7 +87,7 @@ final class MainScreenView: MainScreenViewProtocol {
   private let collectionViewLayout = UICollectionViewFlowLayout()
   private lazy var collectionView = UICollectionView(frame: .zero,
                                                      collectionViewLayout: collectionViewLayout)
-  private var models: [MainScreenModel.Section] = []
+  private var model: MainScreenModel?
   
   // MARK: - Initialization
   
@@ -104,8 +104,8 @@ final class MainScreenView: MainScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func configureCellsWith(models: [MainScreenModel.Section]) {
-    self.models = models
+  func configureCellsWith(model: MainScreenModel) {
+    self.model = model
     collectionView.reloadData()
   }
 }
@@ -114,9 +114,12 @@ final class MainScreenView: MainScreenViewProtocol {
 
 extension MainScreenView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let section = models[indexPath.row]
+    guard let model else {
+      return
+    }
+    let section = model.allSections[indexPath.row]
     
-    if section.advLabel == .premium && !section.premiumAccessAllowed {
+    if section.advLabel == .premium && !model.isPremium {
       output?.noPremiumAccessActionFor(section)
     } else {
       switch section.type {
@@ -161,18 +164,23 @@ extension MainScreenView: UICollectionViewDelegate {
 
 extension MainScreenView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return models.count
+    guard let model else {
+      return .zero
+    }
+    return model.allSections.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier,
       for: indexPath
-    ) as? MainScreenCollectionViewCell else {
+    ) as? MainScreenCollectionViewCell,
+          let model else {
       return UICollectionViewCell()
     }
-    let section = models[indexPath.row]
-    cell.configureCellWith(model: section)
+    
+    let section = model.allSections[indexPath.row]
+    cell.configureCellWith(model: section, isPremium: model.isPremium)
     return cell
   }
 }

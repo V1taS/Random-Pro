@@ -54,6 +54,7 @@
 		1B1C173E2962E99B005F34B7 /* ImageFiltersScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1C173D2962E99B005F34B7 /* ImageFiltersScreenCoordinator.swift */; };
 		1B224BC428B9996200AC5D97 /* ContactScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B224BC328B9996200AC5D97 /* ContactScreenModel.swift */; };
 		1B235B7C297AB1C700BED353 /* PremiumScreenPurchaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B235B7B297AB1C700BED353 /* PremiumScreenPurchaseType.swift */; };
+		1B235B7F297ABBB400BED353 /* AppPurchasesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B235B7E297ABBB400BED353 /* AppPurchasesService.swift */; };
 		1B250C11286A13C800AA7B59 /* YesNoScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */; };
 		1B2FECF2294DD30900AE6C92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B2FECF1294DD30900AE6C92 /* GoogleService-Info.plist */; };
 		1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F626285F926200A88217 /* ListResultScreenFactory.swift */; };
@@ -266,6 +267,8 @@
 		6CE65F89282D0DEC00272D56 /* YesNoScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */; };
 		6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */; };
 		6CE65F8E282D138900272D56 /* YesNoScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */; };
+		D211F7BA297E9CF000D8D612 /* ApphudSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D211F7B9297E9CF000D8D612 /* ApphudSDK */; };
+		D211FCA6297EB6CF00D8D612 /* AppPurchasesServiceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D211FCA5297EB6CF00D8D612 /* AppPurchasesServiceState.swift */; };
 		D2B96C6A296D6B31006EFF3E /* UpdateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B96C69296D6B31006EFF3E /* UpdateAppService.swift */; };
 		D2B96C6C296D6C19006EFF3E /* UpdateAppServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B96C6B296D6C19006EFF3E /* UpdateAppServiceError.swift */; };
 		D2B96C6E296D75F6006EFF3E /* UpdateAppServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B96C6D296D75F6006EFF3E /* UpdateAppServiceModel.swift */; };
@@ -333,6 +336,7 @@
 		1B1C173D2962E99B005F34B7 /* ImageFiltersScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFiltersScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B224BC328B9996200AC5D97 /* ContactScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactScreenModel.swift; sourceTree = "<group>"; };
 		1B235B7B297AB1C700BED353 /* PremiumScreenPurchaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumScreenPurchaseType.swift; sourceTree = "<group>"; };
+		1B235B7E297ABBB400BED353 /* AppPurchasesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchasesService.swift; sourceTree = "<group>"; };
 		1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenModel.swift; sourceTree = "<group>"; };
 		1B2FECF1294DD30900AE6C92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B31F626285F926200A88217 /* ListResultScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenFactory.swift; sourceTree = "<group>"; };
@@ -537,6 +541,7 @@
 		6CE65F88282D0DEC00272D56 /* YesNoScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenFactory.swift; sourceTree = "<group>"; };
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
+		D211FCA5297EB6CF00D8D612 /* AppPurchasesServiceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchasesServiceState.swift; sourceTree = "<group>"; };
 		D24A27E8294792480074D669 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D24A27E9294792480074D669 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		D24A27EA294792480074D669 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -594,6 +599,7 @@
 				1BA16E44296DE073001B19C6 /* FirebaseDynamicLinks in Frameworks */,
 				1BE55B0E2917119400EF135E /* CloudKit.framework in Frameworks */,
 				1BA16E42296DE073001B19C6 /* FirebaseDatabaseSwift in Frameworks */,
+				D211F7BA297E9CF000D8D612 /* ApphudSDK in Frameworks */,
 				1BA16E48296DE073001B19C6 /* FirebaseRemoteConfigSwift in Frameworks */,
 				1B92E0A2281D54BE00398966 /* RandomNetwork in Frameworks */,
 				1BA16E3E296DE073001B19C6 /* FirebaseAuth in Frameworks */,
@@ -1041,6 +1047,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1B235B7D297ABBAE00BED353 /* AppPurchasesService */ = {
+			isa = PBXGroup;
+			children = (
+				1B235B7E297ABBB400BED353 /* AppPurchasesService.swift */,
+				D211FCA5297EB6CF00D8D612 /* AppPurchasesServiceState.swift */,
+			);
+			path = AppPurchasesService;
+			sourceTree = "<group>";
+		};
 		1B250C0F286A13AC00AA7B59 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1453,6 +1468,7 @@
 			isa = PBXGroup;
 			children = (
 				1B941DDD282179A200D968DF /* ApplicationServices.swift */,
+				1B235B7D297ABBAE00BED353 /* AppPurchasesService */,
 				1BA16E37296DD131001B19C6 /* CloudDatabaseService */,
 				D2B96C6F296D9A18006EFF3E /* AuthenticationService */,
 				D2B96C68296D6B28006EFF3E /* UpdateAppService */,
@@ -2952,6 +2968,7 @@
 				1BA16E45296DE073001B19C6 /* FirebaseFirestoreSwift */,
 				1BA16E47296DE073001B19C6 /* FirebaseRemoteConfigSwift */,
 				1BA16E49296DE073001B19C6 /* FirebaseStorage */,
+				D211F7B9297E9CF000D8D612 /* ApphudSDK */,
 			);
 			productName = Random;
 			productReference = 1B7F666D25D0856300933AD6 /* Random Pro.app */;
@@ -3003,6 +3020,7 @@
 				1BA1784029164D3F00A02F1C /* XCRemoteSwiftPackageReference "metrica-sdk-ios" */,
 				1BE55B06291708AA00EF135E /* XCRemoteSwiftPackageReference "metrica-push-sdk-ios" */,
 				1BA16E3A296DE073001B19C6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D211F7B8297E9CF000D8D612 /* XCRemoteSwiftPackageReference "ApphudSDK" */,
 			);
 			productRefGroup = 1B7F666E25D0856300933AD6 /* Products */;
 			projectDirPath = "";
@@ -3281,6 +3299,7 @@
 				6C2320FA29361C3000954F39 /* BottleScreenView.swift in Sources */,
 				6CA6204428B67ACB0078C971 /* ListScreenFactory.swift in Sources */,
 				D2B96C6E296D75F6006EFF3E /* UpdateAppServiceModel.swift in Sources */,
+				D211FCA6297EB6CF00D8D612 /* AppPurchasesServiceState.swift in Sources */,
 				1B50065E28A6BDF0009AABF2 /* TeamsScreenView.swift in Sources */,
 				6CE65F8B282D0DF800272D56 /* YesNoScreenAssembly.swift in Sources */,
 				1B941DEC2821923C00D968DF /* ObjectCustomUserDefaultsWrapper.swift in Sources */,
@@ -3289,6 +3308,7 @@
 				1BD5398B28BA1E41009DA51C /* CubesScreenModel.swift in Sources */,
 				1B1C173E2962E99B005F34B7 /* ImageFiltersScreenCoordinator.swift in Sources */,
 				1B941DE028217FF600D968DF /* UserDefaultsWrapper.swift in Sources */,
+				1B235B7F297ABBB400BED353 /* AppPurchasesService.swift in Sources */,
 				1BA16E4C296DE1FB001B19C6 /* AuthenticationServiceFirebaseModel.swift in Sources */,
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,
 				D2B96C6C296D6C19006EFF3E /* UpdateAppServiceError.swift in Sources */,
@@ -3722,6 +3742,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		D211F7B8297E9CF000D8D612 /* XCRemoteSwiftPackageReference "ApphudSDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apphud/ApphudSDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3794,6 +3822,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1BE55B06291708AA00EF135E /* XCRemoteSwiftPackageReference "metrica-push-sdk-ios" */;
 			productName = YandexMobileMetricaPush;
+		};
+		D211F7B9297E9CF000D8D612 /* ApphudSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D211F7B8297E9CF000D8D612 /* XCRemoteSwiftPackageReference "ApphudSDK" */;
+			productName = ApphudSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

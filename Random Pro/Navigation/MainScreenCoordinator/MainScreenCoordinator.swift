@@ -77,6 +77,17 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func premiumButtonAction(_ isPremium: Bool) {
+    if isPremium {
+      services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
+                                                         glyph: true,
+                                                         timeout: nil,
+                                                         active: {})
+    } else {
+      openPremium()
+    }
+  }
+  
   func mainScreenModuleDidLoad() {
     checkIsUpdateAvailable()
   }
@@ -291,9 +302,13 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
 }
 
-// MARK: - MainSettingsScreenCoordinatorOutput
+// MARK: - MainSettingsScreenCoordinatorOutput & PremiumScreenCoordinatorOutput
 
-extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput {
+extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScreenCoordinatorOutput {
+  func updateStateForSections() {
+    mainScreenModule?.updateStateForSections()
+  }
+  
   func didChanged(models: [MainScreenModel.Section]) {
     mainScreenModule?.updateSectionsWith(models: models)
   }
@@ -310,6 +325,7 @@ private extension MainScreenCoordinator {
     let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
                                                             services)
     anyCoordinator = premiumScreenCoordinator
+    premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
     
@@ -317,7 +333,7 @@ private extension MainScreenCoordinator {
   }
   
   func checkIsUpdateAvailable() {
-    #if !DEBUG
+#if !DEBUG
     let appearance = Appearance()
     guard let appStoreUrl = appearance.appStoreUrl else {
       return
@@ -349,7 +365,7 @@ private extension MainScreenCoordinator {
         }
       }
     }
-    #endif
+#endif
   }
   
   func checkDarkMode() {
@@ -492,5 +508,8 @@ private extension MainScreenCoordinator {
     let newVersionText = NSLocalizedString("Новая версия", comment: "")
     let availableInAppStoreText = NSLocalizedString("доступна в App Store", comment: "")
     let clickToUpdateAppText = NSLocalizedString("Нажмите, чтобы обновить приложение", comment: "")
+    let premiumAccessActivatedTitle = NSLocalizedString("Премиум доступ активирован", comment: "")
+    
+    let positiveAlertALotOfClicksKey = "main_screen_show_positive_alert_a_lot_of_clicks"
   }
 }

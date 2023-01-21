@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "card_payment_in_process.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

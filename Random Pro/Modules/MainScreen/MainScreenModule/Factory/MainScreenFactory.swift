@@ -11,8 +11,8 @@ import UIKit
 protocol MainScreenFactoryOutput: AnyObject {
   
   /// Были получены модельки
-  ///  - Parameter models: Модельки для главного экрана
-  func didReceive(models: [MainScreenModel.Section])
+  ///  - Parameter model: Моделька с даными
+  func didReceiveNew(model: MainScreenModel)
 }
 
 /// Cобытия которые отправляем от Presenter к Factory
@@ -33,8 +33,11 @@ final class MainScreenFactory: MainScreenFactoryInput {
   // MARK: - Internal func
   
   func createCellsFrom(model: MainScreenModel) {
-    let models: [MainScreenModel.Section] = model.allSections.filter { $0.isEnabled && !$0.isHidden }
-    output?.didReceive(models: models)
+    let allSections: [MainScreenModel.Section] = model.allSections.filter { $0.isEnabled && !$0.isHidden }
+    let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
+                                   isPremium: model.isPremium,
+                                   allSections: allSections)
+    output?.didReceiveNew(model: newModel)
   }
 }
 
@@ -51,7 +54,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardTeam,
           imageSection: appearance.imageCardTeam.pngData() ?? Data(),
@@ -61,7 +63,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardNumber,
           imageSection: appearance.imageCardNumber.pngData() ?? Data(),
@@ -71,7 +72,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardYesOrNot,
           imageSection: appearance.imageCardYesOrNot.pngData() ?? Data(),
@@ -81,7 +81,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardCharacters,
           imageSection: appearance.imageCardCharacters.pngData() ?? Data(),
@@ -91,7 +90,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardList,
           imageSection: appearance.imageCardList.pngData() ?? Data(),
@@ -101,7 +99,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardCoin,
           imageSection: appearance.imageCardCoin.pngData() ?? Data(),
@@ -111,7 +108,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardCube,
           imageSection: appearance.imageCardCube.pngData() ?? Data(),
@@ -121,7 +117,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardDateAndTime,
           imageSection: appearance.imageCardDateAndTime.pngData() ?? Data(),
@@ -131,7 +126,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardLottery,
           imageSection: appearance.imageCardLottery.pngData() ?? Data(),
@@ -141,7 +135,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardContact,
           imageSection: appearance.imageCardContact.pngData() ?? Data(),
@@ -151,7 +144,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleCardPassword,
           imageSection: appearance.imageCardPassword.pngData() ?? Data(),
@@ -161,7 +153,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleColors,
           imageSection: appearance.imageColors.pngData() ?? Data(),
@@ -171,7 +162,6 @@ extension MainScreenFactory {
         allSections.append(MainScreenModel.Section(
           type: section,
           isEnabled: true,
-          premiumAccessAllowed: false,
           isHidden: false,
           titleSection: appearance.titleBottle,
           imageSection: appearance.bottleCardImage.pngData() ?? Data(),
@@ -182,11 +172,10 @@ extension MainScreenFactory {
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
-            premiumAccessAllowed: false,
             isHidden: false,
             titleSection: appearance.titleRockPaperScissors,
             imageSection: appearance.imageRockPaperScissorsScreenView.pngData() ?? Data(),
-            advLabel: .new
+            advLabel: .premium
           ))
         }
       case .imageFilters:
@@ -194,7 +183,6 @@ extension MainScreenFactory {
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
-            premiumAccessAllowed: false,
             isHidden: false,
             titleSection: appearance.titleImageFilters,
             imageSection: appearance.imageImageFilters.pngData() ?? Data(),
@@ -206,7 +194,6 @@ extension MainScreenFactory {
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
-            premiumAccessAllowed: false,
             isHidden: false,
             titleSection: appearance.titleRaffle,
             imageSection: appearance.imageRaffle.pngData() ?? Data(),
@@ -216,25 +203,25 @@ extension MainScreenFactory {
       }
     }
     return MainScreenModel(isDarkMode: nil,
+                           isPremium: false,
                            allSections: allSections)
   }
   
-  static func updatesSectionForModel(
-    models: [MainScreenModel.Section],
+  static func updateModelWith(
+    oldModel: MainScreenModel,
     featureToggleModel: SectionsIsHiddenFTModel? = nil,
     labelsModel: LabelsFeatureToggleModel? = nil,
     isPremium: Bool? = nil
-  ) -> [MainScreenModel.Section] {
+  ) -> MainScreenModel {
     let appearance = Appearance()
-    var newModel: [MainScreenModel.Section] = []
+    var cardSections: [MainScreenModel.Section] = []
     
-    updatesNewSectionForModel(models: models).forEach { model in
+    updatesNewSectionForModel(models: oldModel.allSections).forEach { model in
       switch model.type {
       case .teams:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.teams) ?? model.isHidden,
           titleSection: appearance.titleCardTeam,
           imageSection: model.imageSection,
@@ -242,10 +229,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .number:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.number) ?? model.isHidden,
           titleSection: appearance.titleCardNumber,
           imageSection: model.imageSection,
@@ -253,10 +239,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .yesOrNo:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.yesOrNo) ?? model.isHidden,
           titleSection: appearance.titleCardYesOrNot,
           imageSection: model.imageSection,
@@ -264,10 +249,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .letter:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.letter) ?? model.isHidden,
           titleSection: appearance.titleCardCharacters,
           imageSection: model.imageSection,
@@ -275,10 +259,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .list:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.list) ?? model.isHidden,
           titleSection: appearance.titleCardList,
           imageSection: model.imageSection,
@@ -286,10 +269,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .coin:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.coin) ?? model.isHidden,
           titleSection: appearance.titleCardCoin,
           imageSection: model.imageSection,
@@ -297,10 +279,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .cube:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.cube) ?? model.isHidden,
           titleSection: appearance.titleCardCube,
           imageSection: model.imageSection,
@@ -308,10 +289,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .dateAndTime:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.dateAndTime) ?? model.isHidden,
           titleSection: appearance.titleCardDateAndTime,
           imageSection: model.imageSection,
@@ -319,10 +299,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .lottery:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.lottery) ?? model.isHidden,
           titleSection: appearance.titleCardLottery,
           imageSection: model.imageSection,
@@ -330,10 +309,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .contact:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.contact) ?? model.isHidden,
           titleSection: appearance.titleCardContact,
           imageSection: model.imageSection,
@@ -341,10 +319,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .password:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.password) ?? model.isHidden,
           titleSection: appearance.titleCardPassword,
           imageSection: model.imageSection,
@@ -352,10 +329,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .colors:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.colors) ?? model.isHidden,
           titleSection: appearance.titleColors,
           imageSection: model.imageSection,
@@ -363,10 +339,9 @@ extension MainScreenFactory {
                                  oldRawValue: model.advLabel.rawValue)
         ))
       case .bottle:
-        newModel.append(MainScreenModel.Section(
+        cardSections.append(MainScreenModel.Section(
           type: model.type,
           isEnabled: model.isEnabled,
-          premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
           isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.bottle) ?? model.isHidden,
           titleSection: appearance.titleBottle,
           imageSection: model.imageSection,
@@ -375,10 +350,9 @@ extension MainScreenFactory {
         ))
       case .rockPaperScissors:
         ifDebugFeatureSection {
-          newModel.append(MainScreenModel.Section(
+          cardSections.append(MainScreenModel.Section(
             type: model.type,
             isEnabled: model.isEnabled,
-            premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
             isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.rockPaperScissors) ?? model.isHidden,
             titleSection: appearance.titleRockPaperScissors,
             imageSection: model.imageSection,
@@ -388,10 +362,9 @@ extension MainScreenFactory {
         }
       case .imageFilters:
         ifDebugFeatureSection {
-          newModel.append(MainScreenModel.Section(
+          cardSections.append(MainScreenModel.Section(
             type: model.type,
             isEnabled: model.isEnabled,
-            premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
             isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
             titleSection: appearance.titleImageFilters,
             imageSection: model.imageSection,
@@ -401,10 +374,9 @@ extension MainScreenFactory {
         }
       case .raffle:
         ifDebugFeatureSection {
-          newModel.append(MainScreenModel.Section(
+          cardSections.append(MainScreenModel.Section(
             type: model.type,
             isEnabled: model.isEnabled,
-            premiumAccessAllowed: isPremium ?? model.premiumAccessAllowed,
             isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.raffle) ?? model.isHidden,
             titleSection: appearance.titleRaffle,
             imageSection: model.imageSection,
@@ -414,6 +386,9 @@ extension MainScreenFactory {
         }
       }
     }
+    let newModel = MainScreenModel(isDarkMode: oldModel.isDarkMode,
+                                   isPremium: isPremium ?? oldModel.isPremium,
+                                   allSections: cardSections)
     return newModel
   }
   
@@ -430,11 +405,18 @@ extension MainScreenFactory {
     return isHidden
 #endif
   }
-
-  static func setLabelFrom(featureToggleRawValue: String?, oldRawValue: String) -> MainScreenModel.ADVLabel {
-    let featureToggleLabelType = MainScreenModel.ADVLabel(rawValue: featureToggleRawValue ?? oldRawValue) ?? .none
-    let oldLabelType = MainScreenModel.ADVLabel(rawValue: oldRawValue) ?? .none
-    return oldLabelType == .new ? oldLabelType : featureToggleLabelType
+  
+  static func setLabelFrom(featureToggleRawValue: String?,
+                           oldRawValue: String) -> MainScreenModel.ADVLabel {
+    let currentLabelType = MainScreenModel.ADVLabel(rawValue: oldRawValue) ?? .none
+    let featureToggleLabelType = MainScreenModel.ADVLabel(rawValue: featureToggleRawValue ?? oldRawValue)
+    
+    switch currentLabelType {
+    case .premium:
+      return featureToggleLabelType ?? .premium
+    default:
+      return featureToggleLabelType ?? currentLabelType
+    }
   }
 }
 
@@ -510,7 +492,7 @@ private extension MainScreenFactory {
     
     let imageImageFilters = UIImage(systemName: "timelapse") ?? UIImage()
     let titleImageFilters = NSLocalizedString("Фильтры", comment: "")
-
+    
     let imageRaffle = UIImage(systemName: "gift") ?? UIImage()
     let titleRaffle = NSLocalizedString("Розыгрыш", comment: "")
   }

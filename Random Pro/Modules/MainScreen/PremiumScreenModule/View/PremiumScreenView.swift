@@ -7,6 +7,7 @@
 
 import UIKit
 import RandomUIKit
+import Lottie
 
 /// События которые отправляем из View в Presenter
 protocol PremiumScreenViewOutput: AnyObject {
@@ -34,6 +35,13 @@ protocol PremiumScreenViewOutput: AnyObject {
   
   /// Страница онбординга была изменена
   func didChangePageAction()
+  
+  /// Основная кнопка была нажата
+  /// - Parameter purchaseType: Тип платной услуги
+  func mainButtonAction(_ purchaseType: PremiumScreenPurchaseType)
+  
+  /// Кнопка восстановить была нажата
+  func restorePurchaseButtonAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -46,6 +54,12 @@ protocol PremiumScreenViewInput {
   /// Обновить название кнопки
   /// - Parameter title: Заголовок кнопки
   func updateButtonWith(title: String?)
+  
+  /// Запустить лоадер
+  func startLoader()
+  
+  /// Остановить лоадер
+  func stopLoader()
 }
 
 /// Псевдоним протокола UIView & PremiumScreenViewInput
@@ -62,12 +76,16 @@ final class PremiumScreenView: PremiumScreenViewProtocol {
   
   private let tableView = TableView()
   private var models: [PremiumScreenSectionType] = []
+  private var cachePurchaseType: PremiumScreenPurchaseType = .monthly
   
   private let bottomContainerView = UIView()
   private let dividerView = UIView()
   private let restorePurchaseButton = SmallButtonView()
   private let mainButton = ButtonView()
   private let linkTextView = LinkTextView()
+  
+  private let loaderView = LottieAnimationView(name: Appearance().cardPaymentLoader, bundle: .main)
+  private let loaderLabel = UILabel()
   
   // MARK: - Initialization
   
@@ -92,6 +110,27 @@ final class PremiumScreenView: PremiumScreenViewProtocol {
   func updateButtonWith(title: String?) {
     mainButton.setTitle(title, for: .normal)
   }
+  
+  func startLoader() {
+    addBackgroundBlurWith(.regular, alpha: Appearance().alpha)
+    loaderView.isHidden = false
+    loaderLabel.isHidden = false
+    loaderView.contentMode = .scaleAspectFit
+    loaderView.loopMode = .loop
+    loaderView.animationSpeed = Appearance().animationSpeed
+    loaderView.play()
+    mainButton.set(isEnabled: false)
+    bringSubviewToFront(loaderView)
+    bringSubviewToFront(loaderLabel)
+  }
+  
+  func stopLoader() {
+    removeBackgroundBlur()
+    loaderView.stop()
+    loaderView.isHidden = true
+    loaderLabel.isHidden = true
+    mainButton.set(isEnabled: true)
+  }
 }
 
 // MARK: - Private
@@ -105,22 +144,36 @@ private extension PremiumScreenView {
       bottomContainerView.addSubview($0)
     }
     
-    [tableView, bottomContainerView].forEach {
+    [tableView, bottomContainerView, loaderView, loaderLabel].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
+      loaderView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                          constant: appearance.maxInset),
+      loaderView.centerYAnchor.constraint(equalTo: centerYAnchor,
+                                          constant: -appearance.loaderInset),
+      loaderView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                           constant: -appearance.maxInset),
+      
+      loaderLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                           constant: appearance.maxInset),
+      loaderLabel.centerYAnchor.constraint(equalTo: centerYAnchor,
+                                           constant: appearance.maxInset),
+      loaderLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                            constant: -appearance.maxInset),
+      
       tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      tableView.bottomAnchor.constraint(equalTo: bottomContainerView.topAnchor),
       
       bottomContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      bottomContainerView.topAnchor.constraint(equalTo: tableView.bottomAnchor),
       bottomContainerView.trailingAnchor.constraint(equalTo: trailingAnchor),
       bottomContainerView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
-      dividerView.heightAnchor.constraint(equalToConstant: 0.2),
+      dividerView.heightAnchor.constraint(equalToConstant: appearance.dividerHeight),
       dividerView.leadingAnchor.constraint(equalTo: bottomContainerView.leadingAnchor),
       dividerView.topAnchor.constraint(equalTo: bottomContainerView.topAnchor),
       dividerView.trailingAnchor.constraint(equalTo: bottomContainerView.trailingAnchor),
@@ -128,22 +181,22 @@ private extension PremiumScreenView {
       restorePurchaseButton.leadingAnchor.constraint(equalTo: bottomContainerView.leadingAnchor,
                                                      constant: appearance.defaultInset),
       restorePurchaseButton.topAnchor.constraint(equalTo: dividerView.bottomAnchor,
-                                                 constant: appearance.defaultInset),
+                                                 constant: appearance.minInset),
       restorePurchaseButton.trailingAnchor.constraint(equalTo: bottomContainerView.trailingAnchor,
                                                       constant: -appearance.defaultInset),
       
       mainButton.leadingAnchor.constraint(equalTo: bottomContainerView.leadingAnchor,
                                           constant: appearance.defaultInset),
       mainButton.topAnchor.constraint(equalTo: restorePurchaseButton.bottomAnchor,
-                                      constant: appearance.defaultInset),
+                                      constant: appearance.minInset),
       mainButton.trailingAnchor.constraint(equalTo: bottomContainerView.trailingAnchor,
                                            constant: -appearance.defaultInset),
       
       linkTextView.topAnchor.constraint(equalTo: mainButton.bottomAnchor,
-                                        constant: appearance.defaultInset),
+                                        constant: appearance.minInset),
       linkTextView.centerXAnchor.constraint(equalTo: bottomContainerView.centerXAnchor),
       linkTextView.bottomAnchor.constraint(equalTo: bottomContainerView.bottomAnchor,
-                                           constant: -32)
+                                           constant: -appearance.maxInset)
     ])
   }
   
@@ -167,6 +220,16 @@ private extension PremiumScreenView {
     
     bottomContainerView.backgroundColor = RandomColor.primaryWhite
     
+    mainButton.setTitle(appearance.subscribeTitle, for: .normal)
+    mainButton.addTarget(self, action: #selector(mainButtonAction), for: .touchUpInside)
+    restorePurchaseButton.addTarget(self, action: #selector(restorePurchaseButtonAction), for: .touchUpInside)
+    
+    loaderLabel.textAlignment = .center
+    loaderLabel.font = RandomFont.primaryMedium32
+    loaderLabel.textColor = RandomColor.primaryGray
+    loaderLabel.text = "\(appearance.processingPaymentTitle)..."
+    loaderLabel.numberOfLines = appearance.numberOfLines
+    
     tableView.delegate = self
     tableView.dataSource = self
     tableView.showsVerticalScrollIndicator = false
@@ -181,7 +244,36 @@ private extension PremiumScreenView {
                        forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
     
     tableView.separatorStyle = .none
-    tableView.contentInset.top = Appearance().defaultInset
+    tableView.contentInset.bottom = appearance.defaultInset
+    
+    stopLoader()
+  }
+
+  func updateButtonTitleWith(monthlyAmount: String?,
+                             yearlyAmount: String?,
+                             lifetimeAmount: String?) {
+    let appearance = Appearance()
+    let buttontitle = cachePurchaseType == .lifetime ? appearance.purchaseTitle : appearance.subscribeTitle
+    var amount: String?
+    switch cachePurchaseType {
+    case .monthly:
+      amount = monthlyAmount
+    case .yearly:
+      amount = yearlyAmount
+    case .lifetime:
+      amount = lifetimeAmount
+    }
+    mainButton.setTitle("\(buttontitle) \(appearance.forTitle) \(amount ?? "")", for: .normal)
+  }
+  
+  @objc
+  func mainButtonAction() {
+    output?.mainButtonAction(cachePurchaseType)
+  }
+  
+  @objc
+  func restorePurchaseButtonAction() {
+    output?.restorePurchaseButtonAction()
   }
 }
 
@@ -219,32 +311,39 @@ extension PremiumScreenView: UITableViewDataSource {
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: PurchasesCardsCell.reuseIdentifier
       ) as? PurchasesCardsCell {
+        updateButtonTitleWith(monthlyAmount: centerSideCardAmount,
+                              yearlyAmount: leftSideCardAmount,
+                              lifetimeAmount: rightSideCardAmount)
+
         cell.configureCellWith(
           models: [
             PurchasesCardsCellModel(header: appearance.sevenDaysFreeTitle,
-                                    title: "12",
+                                    title: appearance.yearlyCountTitle,
                                     description: appearance.yearlyTitle,
                                     amount: leftSideCardAmount,
                                     action: { [weak self] in
+                                      self?.cachePurchaseType = .yearly
                                       self?.output?.annualSubscriptionCardSelected(.yearly,
                                                                                    amount: leftSideCardAmount)
                                     }),
             PurchasesCardsCellModel(header: appearance.mostPopularTitle,
-                                    title: "1",
+                                    title: appearance.monthlyCountTitle,
                                     description: appearance.monthlyTitle,
                                     amount: centerSideCardAmount,
                                     action: { [weak self] in
+                                      self?.cachePurchaseType = .monthly
                                       self?.output?.monthlySubscriptionCardSelected(.monthly,
                                                                                     amount: centerSideCardAmount)
                                     }),
             PurchasesCardsCellModel(header: appearance.oneTimePurchaseTitle,
-                                    title: "∞",
+                                    title: appearance.oneTimePCountTitle,
                                     description: appearance.lifetimeTitle,
                                     amount: rightSideCardAmount,
                                     action: { [weak self] in
+                                      self?.cachePurchaseType = .lifetime
                                       self?.output?.lifetimeAccessCardSelected(.lifetime,
                                                                                amount: rightSideCardAmount)
-                                    }),
+                                    })
           ]
         )
         viewCell = cell
@@ -271,7 +370,14 @@ extension PremiumScreenView: UITableViewDataSource {
 
 private extension PremiumScreenView {
   struct Appearance {
+    let minInset: CGFloat = 8
+    let maxInset: CGFloat = 32
+    let loaderInset: CGFloat = 100
     let defaultInset: CGFloat = 16
+    let animationSpeed: CGFloat = 0.5
+    let alpha: CGFloat = 0.7
+    let dividerHeight: CGFloat = 0.2
+    let numberOfLines = 2
     
     let termsConditions = NSLocalizedString("Условия", comment: "")
     let andTitle = NSLocalizedString("и", comment: "")
@@ -283,11 +389,21 @@ private extension PremiumScreenView {
     
     let monthlyTitle = NSLocalizedString("Ежемесячно", comment: "")
     let mostPopularTitle = NSLocalizedString("Самый популярный", comment: "")
-    
+    let monthlyCountTitle = "1"
+
     let yearlyTitle = NSLocalizedString("Ежегодно", comment: "")
     let sevenDaysFreeTitle = NSLocalizedString("7 дней бесплатно", comment: "")
+    let yearlyCountTitle = "12"
     
     let lifetimeTitle = NSLocalizedString("Навсегда", comment: "")
     let oneTimePurchaseTitle = NSLocalizedString("Разовая покупка", comment: "")
+    let oneTimePCountTitle = "∞"
+    
+    let cardPaymentLoader = "card_payment_in_process"
+    let processingPaymentTitle = NSLocalizedString("Обрабатываем платёж", comment: "")
+    
+    let purchaseTitle = NSLocalizedString("Купить", comment: "")
+    let forTitle = NSLocalizedString("за", comment: "")
+    let subscribeTitle = NSLocalizedString("Подписаться", comment: "")
   }
 }

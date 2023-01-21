@@ -7,6 +7,7 @@
 
 import UIKit
 import RandomUIKit
+import StoreKit
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol PremiumScreenFactoryOutput: AnyObject {
@@ -24,7 +25,8 @@ protocol PremiumScreenFactoryOutput: AnyObject {
 protocol PremiumScreenFactoryInput {
   
   /// Создаем модельку для таблички
-  func createListModelWith()
+  /// - Parameter models: Список продуктов
+  func createListModelWith(models: [SKProduct])
   
   /// Создать заголовок для основной кнопки
   /// - Parameters:
@@ -50,11 +52,16 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
     output?.didReceiveMainButton(title: "\(buttontitle) \(appearance.forTitle) \(amount ?? "")")
   }
   
-  func createListModelWith() {
-//    let appearance = Appearance()
+  func createListModelWith(models: [SKProduct]) {
+    let appearance = Appearance()
+    let monthlyProduct = models.filter { $0.productIdentifier == PremiumScreenPurchaseType.monthly.productIdentifiers }.first
+    let yearlyProduct = models.filter { $0.productIdentifier == PremiumScreenPurchaseType.yearly.productIdentifiers }.first
+    let lifetimeProduct = models.filter { $0.productIdentifier == PremiumScreenPurchaseType.lifetime.productIdentifiers }.first
+    
     var tableViewModels: [PremiumScreenSectionType] = []
     
     tableViewModels.append(.onboardingPage([
+      // TODO: - Добавить массив премиум
       OnboardingViewModel.PageModel(title: "Search History",
                                     description: "Transfer obfuscate traffic via encrypted tunnel",
                                     lottieAnimationJSONName: "133506-yoga"),
@@ -66,10 +73,22 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
                                     lottieAnimationJSONName: "133506-yoga"),
     ]))
     
-    tableViewModels.append(.padding(32))
-    
-    tableViewModels.append(.purchasesCards("$ 0.50", "$ 2.55", "$ 50.0"))
+    tableViewModels.append(.padding(appearance.maxInset))
+    tableViewModels.append(.purchasesCards(yearlyProduct?.localizedPrice,
+                                           monthlyProduct?.localizedPrice,
+                                           lifetimeProduct?.localizedPrice))
     output?.didReceive(models: tableViewModels)
+  }
+}
+
+// MARK: - SKProduct
+
+private extension SKProduct {
+  var localizedPrice: String? {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.locale = priceLocale
+    numberFormatter.numberStyle = .currency
+    return numberFormatter.string(from: price)
   }
 }
 
@@ -80,5 +99,6 @@ private extension PremiumScreenFactory {
     let purchaseTitle = NSLocalizedString("Купить", comment: "")
     let forTitle = NSLocalizedString("за", comment: "")
     let subscribeTitle = NSLocalizedString("Подписаться", comment: "")
+    let maxInset: CGFloat = 20
   }
 }

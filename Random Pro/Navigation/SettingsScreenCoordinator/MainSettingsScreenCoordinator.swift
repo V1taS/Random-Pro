@@ -20,6 +20,9 @@ protocol MainSettingsScreenCoordinatorOutput: AnyObject {
   /// Данные были изменены
   ///  - Parameter models: результат генерации
   func didChanged(models: [MainScreenModel.Section])
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
@@ -102,6 +105,7 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     let premiumScreenCoordinator = PremiumScreenCoordinator(upperViewController,
                                                             services)
     anyCoordinator = premiumScreenCoordinator
+    premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.push)
     premiumScreenCoordinator.start()
     
@@ -159,6 +163,14 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
   
   func closeButtonAction() {
     navigationController.dismiss(animated: true)
+  }
+}
+
+// MARK: - PremiumScreenCoordinatorOutput
+
+extension MainSettingsScreenCoordinator: PremiumScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
   }
 }
 

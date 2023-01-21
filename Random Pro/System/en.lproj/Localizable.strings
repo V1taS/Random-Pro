@@ -175,13 +175,31 @@
 "Политика конфиденциальности" = "Privacy Policy";
 "и" = "and";
 "Восстановить" = "Restore";
-
-// TODO: -
 "за" = "for";
 "Ежемесячно" = "Monthly";
 "Ежегодно" = "Yearly";
 "Навсегда" = "Lifetime";
-
 "Самый популярный" = "Most popular";
 "7 дней бесплатно" = "7 days free";
 "Разовая покупка" = "One-Time Purchase";
+"Обрабатываем платёж" = "Processing the payment";
+"Покупка восстановлена" = "Purchase restored";
+"Покупки отсутствуют" = "Purchases are missing";
+"Премиум доступ активирован" = "Premium access activated";
+"Что-то пошло не так" = "Something went wrong";
+"Команды - Можно генерировать рандомный список команд для игры" = "Teams - You can generate a random list of commands for the game";
+"Числа - Можно генерировать рандомные числа" = "Numbers - Can generate random numbers";
+"Да или нет - Можно генерировать рандомный ответ" = "Yes or no - You can generate a random answer";
+"Буквы - Можно генерировать рандомные буквы" = "Letters - Can generate random letters";
+"Список - Можно генерировать рандомный список собственных задач" = "List - You can generate a random list of your own tasks";
+"Монетка - Можно подбрасывать монетку в любое время" = "Coin - You can flip a coin at any time";
+"Кубики - Можно подбрасывать кубики играя в настольную игру" = "Dice - You can roll dice while playing a board game";
+"Дата и время - Можно генерировать рандомную дату и время" = "Date and time - Can generate random date and time";
+"Лотерея - Можно генерировать рандомный лот для участия в лотереи" = "Lottery - You can generate a random lot to participate in the lottery";
+"Контакт - Можно генерировать рандомный контакт из списка" = "Contact - You can generate a random contact from the list";
+"Пароли - Можно генерировать рандомный пароль для регистрации" = "Passwords - You can generate a random password for registration";
+"Цвета - Можно генерировать рандомные цвета фона" = "Colors - Can generate random background colors";
+"Бутылочка - Можно крутить виртуальную бутылочку" = "Bottle - You can twist the virtual bottle";
+"Цуефа - Можно играть в игру Камень, ножницы, бумага с виртуальным другом" = "Tsuefa - You can play Rock, Paper, Scissors with a virtual friend";
+"Фильтры - Можно генерировать рандомный фильтр для фото" = "Filters - You can generate a random filter for a photo";
+"Розыгрыш - Можно участвовать в еженедельном розыгрыше призов, просто нажав кнопку Участвовать" = "Raffle - You can participate in the weekly prize draw by simply clicking the Participate button";

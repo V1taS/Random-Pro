@@ -57,6 +57,9 @@ protocol ApplicationServices {
   
   /// Сервис облачной базы данных
   var cloudDatabaseService: CloudDatabaseService { get }
+  
+  /// Сервис подписок и покупок премиум версии
+  var appPurchasesService: AppPurchasesService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -112,5 +115,9 @@ final class ApplicationServicesImpl: ApplicationServices {
   
   var cloudDatabaseService: CloudDatabaseService {
     CloudDatabaseServiceImpl()
+  }
+  
+  var appPurchasesService: AppPurchasesService {
+    AppPurchasesServiceImpl()
   }
 }

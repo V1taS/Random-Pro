@@ -8,7 +8,19 @@
 
 import Foundation
 
-enum PremiumScreenPurchaseType {
+enum PremiumScreenPurchaseType: CaseIterable {
+  
+  /// ID продукта
+  var productIdentifiers: String {
+    switch self {
+    case .yearly:
+      return "com.sosinvitalii.Random.YearlyPremiumAccess"
+    case .monthly:
+      return "com.sosinvitalii.Random.MonthlyPremiumAccess"
+    case .lifetime:
+      return "com.sosinvitalii.Random.OneTimePurchasePremiumAccess"
+    }
+  }
   
   /// Ежемесячная подписка
   case monthly

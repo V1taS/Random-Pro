@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol PremiumScreenCoordinatorOutput: AnyObject {}
+protocol PremiumScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol PremiumScreenCoordinatorInput {
@@ -69,7 +73,7 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
       return
     }
     
-    let premiumScreenModule = PremiumScreenAssembly().createModule()
+    let premiumScreenModule = PremiumScreenAssembly().createModule(services.appPurchasesService)
     self.premiumScreenModule = premiumScreenModule
     self.premiumScreenModule?.moduleOutput = self
     premiumScreenModule.selectIsModalPresentationStyle(presentType == .present)
@@ -88,13 +92,57 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
 // MARK: - PremiumScreenModuleOutput
 
 extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
+  func didReceiveRestoredSuccess() {
+    services.notificationService.showPositiveAlertWith(title: Appearance().purchaseRestoredTitle,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+
+  func somethingWentWrong() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrongTitle,
+                                                       glyph: false,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+
+  func didReceivePurchasesMissing() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().purchasesMissingTitle,
+                                                       glyph: false,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+
+  func didReceiveSubscriptionPurchaseSuccess() {
+    services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+
+  func didReceiveOneTimePurchaseSuccess() {
+    services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+
   func closeButtonAction() {
     premiumScreenNavigationController?.dismiss(animated: true)
+  }
+
+  func updateStateForSections() {
+    output?.updateStateForSections()
   }
 }
 
 // MARK: - Appearance
 
 private extension PremiumScreenCoordinator {
-  struct Appearance {}
+  struct Appearance {
+    let purchaseRestoredTitle = NSLocalizedString("Покупка восстановлена", comment: "")
+    let somethingWentWrongTitle = NSLocalizedString("Что-то пошло не так", comment: "")
+    let purchasesMissingTitle = NSLocalizedString("Покупки отсутствуют", comment: "")
+    let premiumAccessActivatedTitle = NSLocalizedString("Премиум доступ активирован", comment: "")
+  }
 }

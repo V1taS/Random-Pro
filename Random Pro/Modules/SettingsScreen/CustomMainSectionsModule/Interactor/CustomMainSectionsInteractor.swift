@@ -74,7 +74,6 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.insert(MainScreenModel.Section(
           type: section.type,
           isEnabled: section.isEnabled,
-          premiumAccessAllowed: section.premiumAccessAllowed,
           isHidden: section.isHidden,
           titleSection: section.titleSection,
           imageSection: section.imageSection,
@@ -102,7 +101,6 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.insert(MainScreenModel.Section(
           type: section.type,
           isEnabled: isEnabled,
-          premiumAccessAllowed: section.premiumAccessAllowed,
           isHidden: section.isHidden,
           titleSection: section.titleSection,
           imageSection: section.imageSection,

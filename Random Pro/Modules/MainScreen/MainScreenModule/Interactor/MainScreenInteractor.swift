@@ -19,8 +19,8 @@ protocol MainScreenInteractorOutput: AnyObject {
 protocol MainScreenInteractorInput {
   
   /// Обновить секции главного экрана
-  /// - Parameter models: Список секция
-  func updateSectionsWith(models: [MainScreenModel.Section])
+  /// - Parameter model: Модель данных
+  func updateSectionsWith(model: MainScreenModel)
   
   /// Получаем список ячеек
   func getContent(completion: () -> Void)
@@ -49,7 +49,10 @@ protocol MainScreenInteractorInput {
   /// Обновить лайблы у секций на главном экране
   func updatesLabelsFeatureToggle(completion: @escaping () -> Void)
   
-  /// Обновить Premium для пользователя у секций на главном экране
+  /// Проверка Премиум покупок у пользователя
+  func validatePurchase(completion: @escaping () -> Void)
+  
+  /// Обновить Premium для пользователя у секций на главном экране (Feature Toggle)
   func updatesPremiumFeatureToggle(completion: @escaping () -> Void)
 }
 
@@ -58,7 +61,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   // MARK: - Private properties
   
-  @ObjectCustomUserDefaultsWrapper<MainScreenModel>(key: Appearance().keyUserDefaults)
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().keyUserDefaults)
   private var model: MainScreenModel?
   private let services: ApplicationServices
   
@@ -76,32 +79,15 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   // MARK: - Internal func
   
-  func updateSectionsWith(models: [MainScreenModel.Section]) {
-    let models = MainScreenFactory.updatesSectionForModel(models: models)
-    
-    if let model = model {
-      let newModel = MainScreenModel(
-        isDarkMode: model.isDarkMode,
-        allSections: models
-      )
-      self.model = newModel
-      output?.didReceive(model: newModel)
-    } else {
-      let newModel = MainScreenModel(
-        isDarkMode: nil,
-        allSections: models
-      )
-      self.model = newModel
-      output?.didReceive(model: newModel)
-    }
+  func updateSectionsWith(model: MainScreenModel) {
+    let updateModel = MainScreenFactory.updateModelWith(oldModel: model)
+    self.model = updateModel
+    output?.didReceive(model: updateModel)
   }
   
   func getContent(completion: () -> Void) {
     if let model = model {
-      let newModel = MainScreenModel(
-        isDarkMode: model.isDarkMode,
-        allSections: MainScreenFactory.updatesSectionForModel(models: model.allSections)
-      )
+      let newModel = MainScreenFactory.updateModelWith(oldModel: model)
       self.model = newModel
       output?.didReceive(model: newModel)
       completion()
@@ -128,6 +114,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     }
     let newModel = MainScreenModel(
       isDarkMode: isEnabled,
+      isPremium: model.isPremium,
       allSections: model.allSections
     )
     self.model = newModel
@@ -142,6 +129,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     
     let newModel = MainScreenModel(
       isDarkMode: model.isDarkMode,
+      isPremium: model.isPremium,
       allSections: updatesLabelFromSection(type: type,
                                            models: model.allSections,
                                            advLabel: .none)
@@ -158,6 +146,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     
     let newModel = MainScreenModel(
       isDarkMode: model.isDarkMode,
+      isPremium: model.isPremium,
       allSections: updatesLabelFromSection(type: sectionType,
                                            models: model.allSections,
                                            advLabel: label)
@@ -177,10 +166,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         completion()
         return
       }
-      let newAllSectionsModel = MainScreenFactory.updatesSectionForModel(models: model.allSections,
-                                                                         featureToggleModel: sectionsIsHiddenFTModel)
-      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
-                                     allSections: newAllSectionsModel)
+      let newModel = MainScreenFactory.updateModelWith(oldModel: model,
+                                                       featureToggleModel: sectionsIsHiddenFTModel)
       self?.model = newModel
       self?.output?.didReceive(model: newModel)
       completion()
@@ -198,10 +185,9 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         completion()
         return
       }
-      let newAllSectionsModel = MainScreenFactory.updatesSectionForModel(models: model.allSections,
-                                                                         labelsModel: labelsModel)
-      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
-                                     allSections: newAllSectionsModel)
+      
+      let newModel = MainScreenFactory.updateModelWith(oldModel: model,
+                                                       labelsModel: labelsModel)
       self?.model = newModel
       self?.output?.didReceive(model: newModel)
       completion()
@@ -215,18 +201,45 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     }
     
     services.featureToggleServices.getPremiumFeatureToggle { [weak self] isPremium in
-      guard isPremium else {
+      guard let isPremium else {
         completion()
         return
       }
-      let newAllSectionsModel = MainScreenFactory.updatesSectionForModel(models: model.allSections,
-                                                                         isPremium: isPremium)
-      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
-                                     allSections: newAllSectionsModel)
+      let newModel = MainScreenFactory.updateModelWith(oldModel: model,
+                                                       isPremium: isPremium)
       self?.model = newModel
       self?.output?.didReceive(model: newModel)
       completion()
     }
+  }
+  
+  func validatePurchase(completion: @escaping () -> Void) {
+    guard let model = model else {
+      completion()
+      return
+    }
+    
+    services.appPurchasesService.isValidatePurchase { [weak self] isValidate in
+      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
+                                     isPremium: isValidate,
+                                     allSections: model.allSections)
+      self?.model = newModel
+      self?.output?.didReceive(model: newModel)
+      completion()
+    }
+  }
+}
+
+// MARK: - Private
+
+private extension Date {
+  func localUTC() -> Date {
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss VV"
+    let string = dateFormatter.string(from: date)
+    dateFormatter.timeZone = TimeZone(identifier: "UTC")
+    return dateFormatter.date(from: string)!
   }
 }
 
@@ -240,7 +253,6 @@ private extension MainScreenInteractor {
       if $0.type == type {
         return MainScreenModel.Section(type: $0.type,
                                        isEnabled: $0.isEnabled,
-                                       premiumAccessAllowed: $0.premiumAccessAllowed,
                                        isHidden: $0.isHidden,
                                        titleSection: $0.titleSection,
                                        imageSection: $0.imageSection,

@@ -18,7 +18,7 @@ protocol FeatureToggleServices {
   func getLabelsFeatureToggle(completion: @escaping (LabelsFeatureToggleModel?) -> Void)
   
   /// Получить премиум
-  func getPremiumFeatureToggle(completion: @escaping (Bool) -> Void)
+  func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void)
   
   /// Получить возможность показывать баннер обнови приложение
   func getUpdateAppFeatureToggle(completion: @escaping (_ isUpdateAvailable: Bool) -> Void)
@@ -53,7 +53,7 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
     }
   }
   
-  func getPremiumFeatureToggle(completion: @escaping (Bool) -> Void) {
+  func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void) {
     let appearance = Appearance()
     
     cloudDataBase.collection(appearance.premiumFeatureTogglesKey).getDocuments { (querySnapshot, error) in
@@ -61,20 +61,28 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
             let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString,
             error == nil else {
         DispatchQueue.main.async {
-          completion(false)
+          completion(nil)
         }
         return
       }
       
       for document in documents {
-        guard let id = PremiumFeatureToggleModel(dictionary: document.data()).id else {
+        let model = PremiumFeatureToggleModel(dictionary: document.data())
+        guard let id = model.id,
+              let isPremium = model.isPremium,
+              identifierForVendor == id else {
           continue
         }
         
         DispatchQueue.main.async {
-          completion(identifierForVendor == id)
+          completion(isPremium)
         }
+        return
       }
+      DispatchQueue.main.async {
+        completion(nil)
+      }
+      return
     }
   }
   

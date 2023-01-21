@@ -6,9 +6,28 @@
 //
 
 import UIKit
+import StoreKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PremiumScreenModuleOutput: AnyObject {
+
+  /// Покупка восстановлена
+  func didReceiveRestoredSuccess()
+
+  /// Успешная покупка подписки
+  func didReceiveSubscriptionPurchaseSuccess()
+
+  /// Успешная разовая покупка
+  func didReceiveOneTimePurchaseSuccess()
+
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+
+  /// Что-то пошло не так
+  func somethingWentWrong()
+
+  /// Покупки отсутствуют
+  func didReceivePurchasesMissing()
   
   /// Модуль был закрыт
   func closeButtonAction()
@@ -30,7 +49,7 @@ typealias PremiumScreenModule = UIViewController & PremiumScreenModuleInput
 
 /// Презентер
 final class PremiumScreenViewController: PremiumScreenModule {
-
+  
   // MARK: - Internal properties
   
   weak var moduleOutput: PremiumScreenModuleOutput?
@@ -70,11 +89,15 @@ final class PremiumScreenViewController: PremiumScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    factory.createListModelWith()
-    factory.createMainButtonTitleFrom(.monthly,
-                                      amount: "$ 2.55")
+    factory.createListModelWith(models: [])
     navigationItem.largeTitleDisplayMode = .never
     setNavigationBar()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    interactor.getProducts()
   }
   
   // MARK: - Internal func
@@ -87,6 +110,18 @@ final class PremiumScreenViewController: PremiumScreenModule {
 // MARK: - PremiumScreenViewOutput
 
 extension PremiumScreenViewController: PremiumScreenViewOutput {
+  func mainButtonAction(_ purchaseType: PremiumScreenPurchaseType) {
+    interactor.mainButtonAction(purchaseType)
+  }
+  
+  func restorePurchaseButtonAction() {
+    interactor.restorePurchase()
+  }
+  
+  func didChangePageAction() {
+    // TODO: -
+  }
+  
   func monthlySubscriptionCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
     factory.createMainButtonTitleFrom(purchaseType, amount: amount)
   }
@@ -98,15 +133,47 @@ extension PremiumScreenViewController: PremiumScreenViewOutput {
   func lifetimeAccessCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
     factory.createMainButtonTitleFrom(purchaseType, amount: amount)
   }
-  
-  func didChangePageAction() {
-    // TODO: -
-  }
 }
 
 // MARK: - PremiumScreenInteractorOutput
 
-extension PremiumScreenViewController: PremiumScreenInteractorOutput {}
+extension PremiumScreenViewController: PremiumScreenInteractorOutput {
+  func didReceiveSubscriptionPurchaseSuccess() {
+    moduleOutput?.didReceiveSubscriptionPurchaseSuccess()
+  }
+
+  func didReceiveOneTimePurchaseSuccess() {
+    moduleOutput?.didReceiveOneTimePurchaseSuccess()
+  }
+
+  func somethingWentWrong() {
+    moduleOutput?.somethingWentWrong()
+  }
+
+  func didReceivePurchasesMissing() {
+    moduleOutput?.didReceivePurchasesMissing()
+  }
+
+  func updateStateForSections() {
+    moduleOutput?.updateStateForSections()
+  }
+  
+  func didReceiveRestoredSuccess() {
+    moduleOutput?.didReceiveRestoredSuccess()
+  }
+  
+  func startPaymentProcessing() {
+    moduleView.startLoader()
+  }
+  
+  func stopPaymentProcessing() {
+    moduleView.stopLoader()
+  }
+  
+  func didReceive(models: [SKProduct]) {
+    factory.createListModelWith(models: models)
+  }
+}
 
 // MARK: - PremiumScreenFactoryOutput
 

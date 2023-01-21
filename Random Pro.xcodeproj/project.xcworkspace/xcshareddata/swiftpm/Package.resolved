@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "apphudsdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apphud/ApphudSDK",
+      "state" : {
+        "revision" : "9217783cfdc19c29cc5b82b6c07659ec6df899cd",
+        "version" : "2.8.8"
+      }
+    },
+    {
       "identity" : "boringssl-swiftpm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
@@ -86,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
-        "revision" : "31c914b09949aafd9e91444561466b4b5051034d",
-        "version" : "4.1.0"
+        "revision" : "f262407bfd6bb574ccfdb8a11367cac72804a58a",
+        "version" : "4.1.1"
       }
     },
     {
@@ -123,7 +132,7 @@
       "location" : "https://github.com/V1taS/Notifications",
       "state" : {
         "branch" : "master",
-        "revision" : "ebcad1ff6da1e1d323c9c507235dbc2a3059df15"
+        "revision" : "c24d10cc5545b5c64f8a3c23f32a7e1ead441719"
       }
     },
     {
@@ -150,7 +159,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "34de72bae192d04f9f5fd985ac4980119a23fa01"
+        "revision" : "e7b2a2f041cc72db4028e222ce0f74d157b60007"
       }
     },
     {

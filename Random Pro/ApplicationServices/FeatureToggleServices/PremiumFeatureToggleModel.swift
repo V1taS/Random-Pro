@@ -13,11 +13,22 @@ struct PremiumFeatureToggleModel {
   /// Уникальное ID устройства
   let id: String?
   
+  let isPremium: Bool?
+  
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - dictionary: Словарь с фича тогглами
   init(dictionary: [String: Any]) {
     id = dictionary["id"] as? String
+    isPremium = (dictionary["isPremium"] as? Int ?? .zero).boolValue
+  }
+}
+
+// MARK: - Private func
+
+private extension Int {
+  var boolValue: Bool {
+    return (self as NSNumber).boolValue
   }
 }

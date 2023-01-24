@@ -132,7 +132,7 @@ struct MainScreenModel: UserDefaultsCodable {
     
     /// Раздел `Фильтры изображений`
     case imageFilters
-
+    
     /// Раздел `Розыгрыш`
     case raffle
   }
@@ -174,38 +174,38 @@ private extension MainScreenModel {
     let hit = NSLocalizedString("Хит", comment: "")
     let new = NSLocalizedString("Новое", comment: "")
     let premium = NSLocalizedString("Премиум", comment: "")
-
-    let teamsDescriptionForNoPremiumAccess = NSLocalizedString("Команды - Можно генерировать рандомный список команд для игры",
+    
+    let teamsDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный список команд для игры",
                                                                comment: "")
-    let numberDescriptionForNoPremiumAccess = NSLocalizedString("Числа - Можно генерировать рандомные числа",
+    let numberDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомные числа",
                                                                 comment: "")
-    let yesOrNoDescriptionForNoPremiumAccess = NSLocalizedString("Да или нет - Можно генерировать рандомный ответ",
+    let yesOrNoDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный ответ",
                                                                  comment: "")
-    let letterDescriptionForNoPremiumAccess = NSLocalizedString("Буквы - Можно генерировать рандомные буквы",
+    let letterDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомные буквы",
                                                                 comment: "")
-    let listDescriptionForNoPremiumAccess = NSLocalizedString("Список - Можно генерировать рандомный список собственных задач",
+    let listDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный список собственных задач",
                                                               comment: "")
-    let coinDescriptionForNoPremiumAccess = NSLocalizedString("Монетка - Можно подбрасывать монетку в любое время",
+    let coinDescriptionForNoPremiumAccess = NSLocalizedString("Можно подбрасывать монетку в любое время",
                                                               comment: "")
-    let cubeDescriptionForNoPremiumAccess = NSLocalizedString("Кубики - Можно подбрасывать кубики играя в настольную игру",
+    let cubeDescriptionForNoPremiumAccess = NSLocalizedString("Можно подбрасывать кубики играя в настольную игру",
                                                               comment: "")
-    let dateAndTimeDescriptionForNoPremiumAccess = NSLocalizedString("Дата и время - Можно генерировать рандомную дату и время",
+    let dateAndTimeDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомную дату и время",
                                                                      comment: "")
-    let lotteryDescriptionForNoPremiumAccess = NSLocalizedString("Лотерея - Можно генерировать рандомный лот для участия в лотереи",
+    let lotteryDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный лот для участия в лотереи",
                                                                  comment: "")
-    let contactDescriptionForNoPremiumAccess = NSLocalizedString("Контакт - Можно генерировать рандомный контакт из списка",
+    let contactDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный контакт из списка",
                                                                  comment: "")
-    let passwordDescriptionForNoPremiumAccess = NSLocalizedString("Пароли - Можно генерировать рандомный пароль для регистрации",
+    let passwordDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный пароль для регистрации",
                                                                   comment: "")
-    let colorsDescriptionForNoPremiumAccess = NSLocalizedString("Цвета - Можно генерировать рандомные цвета фона",
+    let colorsDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомные цвета фона",
                                                                 comment: "")
-    let bottleDescriptionForNoPremiumAccess = NSLocalizedString("Бутылочка - Можно крутить виртуальную бутылочку",
+    let bottleDescriptionForNoPremiumAccess = NSLocalizedString("Можно крутить виртуальную бутылочку",
                                                                 comment: "")
-    let rockPaperScissorsDescriptionForNoPremiumAccess = NSLocalizedString("Цуефа - Можно играть в игру Камень, ножницы, бумага с виртуальным другом",
+    let rockPaperScissorsDescriptionForNoPremiumAccess = NSLocalizedString("Можно играть в игру Камень, ножницы, бумага с другом",
                                                                            comment: "")
-    let imageFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Фильтры - Можно генерировать рандомный фильтр для фото",
+    let imageFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный фильтр для фото",
                                                                       comment: "")
-    let raffleFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Розыгрыш - Можно участвовать в еженедельном розыгрыше призов, просто нажав кнопку Участвовать",
+    let raffleFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Можно участвовать в еженедельном розыгрыше призов",
                                                                        comment: "")
   }
 }

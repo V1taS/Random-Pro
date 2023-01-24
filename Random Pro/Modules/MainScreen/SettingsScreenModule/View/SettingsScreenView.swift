@@ -74,7 +74,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 extension SettingsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch models[indexPath.row] {
-    case .titleAndImage(_, _, let id):
+    case let .titleAndChevron(_, id):
       if id == Appearance().createListID {
         output?.createListAction()
       } else {
@@ -116,13 +116,11 @@ extension SettingsScreenView: UITableViewDataSource {
                                secondaryText: description)
         viewCell = cell
       }
-    case let .titleAndImage(title, asideImage, _):
+    case let .titleAndChevron(title, _):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: LabelAndImageCell.reuseIdentifier
-      ) as? LabelAndImageCell {
-        cell.configureCellWith(titleText: title,
-                               imageAside: UIImage(data: asideImage ?? Data()),
-                               imageColor: RandomColor.primaryGray)
+        withIdentifier: LabelAndChevronCell.reuseIdentifier
+      ) as? LabelAndChevronCell {
+        cell.configureCellWith(titleText: title)
         viewCell = cell
       }
     case let .cleanButtonModel(title):
@@ -197,8 +195,8 @@ private extension SettingsScreenView {
                        forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
     tableView.register(DoubleTitleCell.self,
                        forCellReuseIdentifier: DoubleTitleCell.reuseIdentifier)
-    tableView.register(LabelAndImageCell.self,
-                       forCellReuseIdentifier: LabelAndImageCell.reuseIdentifier)
+    tableView.register(LabelAndChevronCell.self,
+                       forCellReuseIdentifier: LabelAndChevronCell.reuseIdentifier)
     tableView.register(SmallButtonCell.self,
                        forCellReuseIdentifier: SmallButtonCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,

@@ -39,13 +39,11 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
     tableViewModels.append(.titleAndSwitcher(title: appearance.darkThemeTitle,
                                              isEnabled: isDarkMode))
     tableViewModels.append(.divider)
-    tableViewModels.append(.titleAndImage(title: appearance.customMainSectionsTitle,
-                                          asideImage: nil,
-                                          type: .customMainSections))
+    tableViewModels.append(.titleAndChevron(title: appearance.customMainSectionsTitle,
+                                            type: .customMainSections))
     tableViewModels.append(.divider)
-    tableViewModels.append(.titleAndImage(title: appearance.premiumTitle,
-                                          asideImage: nil,
-                                          type: .premiumSections))
+    tableViewModels.append(.titleAndChevron(title: appearance.premiumTitle,
+                                            type: .premiumSections))
     output?.didReceive(models: tableViewModels)
   }
 }

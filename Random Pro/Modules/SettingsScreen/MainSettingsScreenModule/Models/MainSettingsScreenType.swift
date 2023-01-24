@@ -22,9 +22,8 @@ enum MainSettingsScreenType {
   /// Секция `Заголовок и иконка сбоку`
   /// - Parameters:
   ///  - title: Заголовок
-  ///  - asideImage: Иконка сбоку
   ///  - type: Тип секции
-  case titleAndImage(title: String, asideImage: Data?, type: SectionType)
+  case titleAndChevron(title: String, type: SectionType)
   
   /// Секция отступа
   case insets(Double)

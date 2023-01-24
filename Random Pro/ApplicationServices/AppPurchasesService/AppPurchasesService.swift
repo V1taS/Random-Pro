@@ -25,7 +25,7 @@ protocol AppPurchasesService {
   /// Восстановить покупки
   /// - Parameter completion: Возвращает результат валидации
   func restorePurchase(completion: @escaping (_ isValidate: Bool) -> Void)
-
+  
   /// Восстановить покупки
   /// - Parameter completion: Возвращает результат валидации
   func isValidatePurchase(completion: @escaping (_ isValidate: Bool) -> Void)
@@ -76,13 +76,5 @@ final class AppPurchasesServiceImpl: AppPurchasesService {
       )
       completion(isSubscription || isNonRenewingPurchase)
     }
-  }
-}
-
-// MARK: - Appearance
-
-private extension AppPurchasesServiceImpl {
-  struct Appearance {
-    let password = "712386ec000e4a38976fdd9d73409478"
   }
 }

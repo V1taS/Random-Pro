@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "5056b15c5acbb90cd214fe4d6138bdf5a740e5a8",
-        "version" : "9.2.0"
+        "revision" : "f6b558e3f801f2cac336b04f615ce111fa9ddaa0",
+        "version" : "9.2.1"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
-        "revision" : "f262407bfd6bb574ccfdb8a11367cac72804a58a",
-        "version" : "4.1.1"
+        "revision" : "440a6eebb8a8ae9c773e9a3e21021b72a74ffbb7",
+        "version" : "4.1.2"
       }
     },
     {
@@ -159,7 +159,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "e7b2a2f041cc72db4028e222ce0f74d157b60007"
+        "revision" : "45f31db0508d5189ecff1e41ea1960dedf8882cd"
       }
     },
     {

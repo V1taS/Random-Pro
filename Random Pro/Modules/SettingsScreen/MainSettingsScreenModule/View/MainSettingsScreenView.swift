@@ -78,7 +78,7 @@ final class MainSettingsScreenView: MainSettingsScreenViewProtocol {
 extension MainSettingsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch models[indexPath.row] {
-    case .titleAndImage(_, _, let type):
+    case let .titleAndChevron(_, type):
       switch type {
       case .customMainSections:
         output?.customMainSectionsSelected()
@@ -113,13 +113,11 @@ extension MainSettingsScreenView: UITableViewDataSource {
         }
         viewCell = cell
       }
-    case let .titleAndImage(title, asideImage, _):
+    case let .titleAndChevron(title, _):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: LabelAndImageCell.reuseIdentifier
-      ) as? LabelAndImageCell {
-        cell.configureCellWith(titleText: title,
-                               imageAside: UIImage(data: asideImage ?? Data()),
-                               imageColor: RandomColor.primaryGray)
+        withIdentifier: LabelAndChevronCell.reuseIdentifier
+      ) as? LabelAndChevronCell {
+        cell.configureCellWith(titleText: title)
         viewCell = cell
       }
     case let .insets(inset):
@@ -215,8 +213,8 @@ private extension MainSettingsScreenView {
     
     tableView.register(LabelAndSwitchCell.self,
                        forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
-    tableView.register(LabelAndImageCell.self,
-                       forCellReuseIdentifier: LabelAndImageCell.reuseIdentifier)
+    tableView.register(LabelAndChevronCell.self,
+                       forCellReuseIdentifier: LabelAndChevronCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
     tableView.register(DividerTableViewCell.self,

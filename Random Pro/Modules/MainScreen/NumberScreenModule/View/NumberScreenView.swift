@@ -136,12 +136,12 @@ extension NumberScreenView: UITextFieldDelegate {
 private extension NumberScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    rangeStartTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
-    rangeEndTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
-    backgroundColor = RandomColor.primaryWhite
+    rangeStartTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
+    rangeEndTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
     
@@ -161,11 +161,11 @@ private extension NumberScreenView {
     rangeEndTextField.keyboardType = .numberPad
     
     rangeStartLabel.text = appearance.min
-    rangeStartLabel.textColor = RandomColor.primaryGray
+    rangeStartLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     rangeStartLabel.font = RandomFont.primaryMedium18
     
     rangeEndLabel.text = appearance.max
-    rangeEndLabel.textColor = RandomColor.primaryGray
+    rangeEndLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     rangeEndLabel.font = RandomFont.primaryMedium18
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))

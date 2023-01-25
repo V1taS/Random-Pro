@@ -138,8 +138,8 @@ extension SettingsScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.primaryWhite
+        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .divider:
@@ -185,8 +185,8 @@ private extension SettingsScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     tableView.delegate = self
     tableView.dataSource = self

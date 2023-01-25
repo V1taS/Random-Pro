@@ -70,10 +70,10 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
 
 private extension YesNoScreenView {
   func setupDefaultSettings() {
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     
     generateButton.setTitle(Appearance().buttonTitle, for: .normal)

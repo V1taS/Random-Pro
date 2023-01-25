@@ -62,11 +62,11 @@ final class ContactScreenView: ContactScreenViewProtocol {
 private extension ContactScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     resultLabel.text = appearance.resultTitle
     resultLabel.font = RandomFont.primaryMedium32
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
     

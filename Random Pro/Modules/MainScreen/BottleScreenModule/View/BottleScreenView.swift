@@ -97,7 +97,7 @@ private extension BottleScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     bottleImageView.image = appearance.bottleImage
     bottleImageView.contentMode = .scaleAspectFit

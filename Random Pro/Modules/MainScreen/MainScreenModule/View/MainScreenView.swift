@@ -210,9 +210,9 @@ private extension MainScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    collectionView.backgroundColor = RandomColor.primaryWhite
+    collectionView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     collectionView.alwaysBounceVertical = true
     collectionView.register(MainScreenCollectionViewCell.self,
                             forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)

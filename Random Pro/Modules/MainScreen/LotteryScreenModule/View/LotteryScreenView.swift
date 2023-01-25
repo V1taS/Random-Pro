@@ -111,17 +111,17 @@ extension LotteryScreenView: UITextFieldDelegate {
 private extension LotteryScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
-    rangeStartTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
-    rangeEndTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
-    amountNumberTextField.layer.borderColor = RandomColor.secondaryGray.cgColor
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    rangeStartTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
+    rangeEndTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
+    amountNumberTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
     isUserInteractionEnabled = true
     
     resultTextView.font = RandomFont.primaryBold50
-    resultTextView.textColor = RandomColor.primaryGray
+    resultTextView.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
-    resultTextView.backgroundColor = RandomColor.primaryWhite
+    resultTextView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     let padding = resultTextView.textContainer.lineFragmentPadding
     resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,
@@ -151,7 +151,7 @@ private extension LotteryScreenView {
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
-    amountNumberLabel.textColor = RandomColor.primaryGray
+    amountNumberLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     amountNumberLabel.font = RandomFont.primaryRegular18
     amountNumberLabel.text = appearance.textAmountLabel + ":"
     
@@ -160,12 +160,12 @@ private extension LotteryScreenView {
     amountNumberTextField.delegate = self
     
     rangeNumberLabel.font = RandomFont.primaryRegular18
-    rangeNumberLabel.textColor = RandomColor.primaryGray
+    rangeNumberLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     rangeNumberLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     rangeNumberLabel.text = appearance.textRangeLabel + ":"
     
     betweenRangeLabel.font = RandomFont.primaryMedium18
-    betweenRangeLabel.textColor = RandomColor.primaryGray
+    betweenRangeLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     betweenRangeLabel.text = appearance.separatorTitle
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))

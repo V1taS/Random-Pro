@@ -154,7 +154,7 @@ private extension PasswordScreenView {
         if characterStr.isNumber {
           passwordAttributed.addAttribute(
             NSAttributedString.Key.foregroundColor,
-            value: RandomColor.primaryBlue,
+            value: RandomColor.only.primaryBlue,
             range: NSRange(location: index, length: 1)
           )
           continue
@@ -163,7 +163,7 @@ private extension PasswordScreenView {
         if characterStr.isSymbols {
           passwordAttributed.addAttribute(
             NSAttributedString.Key.foregroundColor,
-            value: RandomColor.primaryRed,
+            value: RandomColor.only.primaryRed,
             range: NSRange(location: index, length: 1)
           )
           continue
@@ -172,14 +172,14 @@ private extension PasswordScreenView {
         if characterStr.isLowercaseLetters {
           passwordAttributed.addAttribute(
             NSAttributedString.Key.foregroundColor,
-            value: RandomColor.primaryGreen,
+            value: RandomColor.only.primaryGreen,
             range: NSRange(location: index, length: 1)
           )
           continue
         }
         passwordAttributed.addAttribute(
           NSAttributedString.Key.foregroundColor,
-          value: RandomColor.primaryGray,
+          value: RandomColor.darkAndLightTheme.primaryGray,
           range: NSRange(location: index, length: 1)
         )
       }
@@ -189,7 +189,7 @@ private extension PasswordScreenView {
   
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     passwordGeneratorView.passwordLengthTextField.delegate = self
     passwordGeneratorView.configureViewWith(

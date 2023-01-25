@@ -100,7 +100,7 @@ extension ListResultScreenView: UITableViewDataSource {
     
     cell.isHiddenSeparator = false
     cell.configureCellWith(titleText: result,
-                           textColor: RandomColor.primaryGray,
+                           textColor: RandomColor.darkAndLightTheme.primaryGray,
                            textAlignment: .center)
     
     if tableView.isFirst(for: indexPath) {
@@ -153,10 +153,10 @@ private extension ListResultScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     tableView.showsVerticalScrollIndicator = false
-    tableView.separatorColor = RandomColor.secondaryGray
+    tableView.separatorColor = RandomColor.darkAndLightTheme.secondaryGray
     
     contentPlugImage.isHidden = true
     

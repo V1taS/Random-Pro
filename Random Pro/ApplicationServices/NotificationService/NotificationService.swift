@@ -96,8 +96,8 @@ final class NotificationServiceImpl: NotificationService {
     notifications.showAlertWith(
       model: NotificationsModel(
         text: title,
-        textColor: RandomColor.primaryGray,
-        style: .neutral(colorGlyph: RandomColor.primaryGray),
+        textColor: RandomColor.darkAndLightTheme.primaryGray,
+        style: .neutral(colorGlyph: RandomColor.darkAndLightTheme.primaryGray),
         timeout: timeout ?? appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,

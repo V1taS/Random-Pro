@@ -64,7 +64,7 @@ private extension MainScreenCollectionViewCell {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
   }
 }
 

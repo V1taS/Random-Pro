@@ -125,8 +125,8 @@ extension MainSettingsScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.primaryWhite
+        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .divider:
@@ -187,19 +187,19 @@ private extension MainSettingsScreenView {
   func applyDefaultBehavior() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     stackFeedBack.axis = .vertical
     stackFeedBack.alignment = .center
     stackFeedBack.spacing = appearance.minInset
     
-    feedBackLabel.textColor = RandomColor.primaryGray
+    feedBackLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     feedBackLabel.font = RandomFont.primaryRegular16
     feedBackLabel.text = "\(appearance.feedbackButtonTitle):"
     
     feedBackButton.setTitle(appearance.addressRecipients, for: .normal)
-    feedBackButton.setTitleColor(RandomColor.primaryBlue, for: .normal)
+    feedBackButton.setTitleColor(RandomColor.only.primaryBlue, for: .normal)
     feedBackButton.titleLabel?.font = RandomFont.primaryRegular16
     feedBackButton.addTarget(self,
                              action: #selector(feedBackButtonAction),

@@ -71,13 +71,13 @@ final class ListScreenView: ListScreenViewProtocol {
 private extension ListScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    resultTextView.textColor = RandomColor.primaryGray
+    resultTextView.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultTextView.font = RandomFont.primaryMedium32
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
-    resultTextView.backgroundColor = RandomColor.primaryWhite
+    resultTextView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     let padding = resultTextView.textContainer.lineFragmentPadding
     resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,

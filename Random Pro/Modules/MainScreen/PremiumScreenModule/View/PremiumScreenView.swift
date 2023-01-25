@@ -202,13 +202,13 @@ private extension PremiumScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    dividerView.backgroundColor = UIColor(hexString: ColorToken.secondaryGray.rawValue)
+    dividerView.backgroundColor = RandomColor.only.secondaryGray
     
     restorePurchaseButton.setTitle(appearance.restoreTitle, for: .normal)
-    restorePurchaseButton.setTitleColor(RandomColor.primaryBlue, for: .normal)
+    restorePurchaseButton.setTitleColor(RandomColor.only.primaryBlue, for: .normal)
     
     linkTextView.backgroundColor = .clear
     let termsConditionsAndPrivacyPolicy = "\(appearance.termsConditions) \(appearance.andTitle) \(appearance.privacyPolicy)"
@@ -218,7 +218,7 @@ private extension PremiumScreenView {
       appearance.privacyPolicy: appearance.privacyPolicyLink
     ])
     
-    bottomContainerView.backgroundColor = RandomColor.primaryWhite
+    bottomContainerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     mainButton.setTitle(appearance.subscribeTitle, for: .normal)
     mainButton.addTarget(self, action: #selector(mainButtonAction), for: .touchUpInside)
@@ -226,7 +226,7 @@ private extension PremiumScreenView {
     
     loaderLabel.textAlignment = .center
     loaderLabel.font = RandomFont.primaryMedium32
-    loaderLabel.textColor = RandomColor.primaryGray
+    loaderLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     loaderLabel.text = "\(appearance.processingPaymentTitle)..."
     loaderLabel.numberOfLines = appearance.numberOfLines
     

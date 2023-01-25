@@ -118,7 +118,7 @@ extension ListAddItemsScreenView: UITableViewDataSource {
       ) as? CustomTextCell {
         cell.configureCellWith(
           titleText: result.text,
-          textColor: RandomColor.primaryGray,
+          textColor: RandomColor.darkAndLightTheme.primaryGray,
           textFont: RandomFont.primaryMedium18,
           textAlignment: .left
         )
@@ -129,8 +129,8 @@ extension ListAddItemsScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.primaryWhite
+        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .textField:
@@ -141,7 +141,7 @@ extension ListAddItemsScreenView: UITableViewDataSource {
                                      withConfiguration: Appearance().largeButtonConfig)
         cell.configureCellWith(
           textField: textField,
-          textFieldBorderColor: RandomColor.secondaryGray,
+          textFieldBorderColor: RandomColor.darkAndLightTheme.secondaryGray,
           buttonImage: checkmarkImage,
           buttonAction: { [weak self] in
             guard let self = self else {
@@ -165,10 +165,10 @@ extension ListAddItemsScreenView: UITableViewDataSource {
       ) as? DoubleTitleCell {
         cell.configureCellWith(
           primaryText: "\(appearance.allItemTitle): \(textCount)",
-          primaryTextColor: RandomColor.primaryGray,
+          primaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
           primaryTextFont: RandomFont.primaryMedium10,
           secondaryText: nil,
-          secondaryTextColor: RandomColor.primaryGray,
+          secondaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
           secondaryTextFont: RandomFont.primaryMedium10
         )
         viewCell = cell
@@ -223,9 +223,9 @@ private extension ListAddItemsScreenView {
   
   private func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
-    textField.layer.borderColor = RandomColor.secondaryGray.cgColor
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    textField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
     
     textField.placeholder = appearance.textFieldPlaceholder
     textField.delegate = self

@@ -193,7 +193,7 @@ private extension TeamsScreenViewController {
                                          style: .plain,
                                          target: self,
                                          action: #selector(generateButtonAction))
-    generateButton.tintColor = RandomColor.primaryGreen
+    generateButton.tintColor = RandomColor.only.primaryGreen
 
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,

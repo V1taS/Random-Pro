@@ -141,7 +141,7 @@ private extension ImageFiltersScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     imageView.image = appearance.plugImage
     imageView.contentMode = .scaleAspectFit
     cacheData = appearance.plugImage?.jpegData(compressionQuality: 1)

@@ -351,7 +351,7 @@ private extension CubesView {
     scnView.autoenablesDefaultLighting = true
     scnView.delegate = self
     scnView.isPlaying = true
-    scnView.backgroundColor = RandomColor.primaryWhite
+    scnView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
   }
   
   func setupCamera() {
@@ -371,7 +371,7 @@ private extension CubesView {
     let ambientLightNode = SCNNode()
     ambientLightNode.light = SCNLight()
     ambientLightNode.light?.type = .ambient
-    ambientLightNode.light?.color = RandomColor.primaryGray
+    ambientLightNode.light?.color = RandomColor.darkAndLightTheme.primaryGray
     scnScene.rootNode.addChildNode(ambientLightNode)
   }
 }

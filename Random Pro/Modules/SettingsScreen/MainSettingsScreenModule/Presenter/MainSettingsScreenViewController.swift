@@ -20,6 +20,9 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
   
+  /// Выбран раздел выбора иконок
+  func applicationIconSectionsSelected()
+  
   /// Выбран раздел премиум
   func premiumSectionsSelected()
   
@@ -105,6 +108,10 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
 // MARK: - MainSettingsScreenViewOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
+  func applicationIconSectionsSelected() {
+    moduleOutput?.applicationIconSectionsSelected()
+  }
+  
   func premiumSectionsSelected() {
     moduleOutput?.premiumSectionsSelected()
   }

@@ -18,6 +18,9 @@ protocol MainSettingsScreenViewOutput: AnyObject {
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
   
+  /// Выбран раздел выбора иконок
+  func applicationIconSectionsSelected()
+  
   /// Выбран раздел премиум
   func premiumSectionsSelected()
   
@@ -78,12 +81,14 @@ final class MainSettingsScreenView: MainSettingsScreenViewProtocol {
 extension MainSettingsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch models[indexPath.row] {
-    case let .titleAndChevron(_, type):
+    case let .squircleImageAndLabelWithChevronCell(_, _, _, type):
       switch type {
       case .customMainSections:
         output?.customMainSectionsSelected()
       case .premiumSections:
         output?.premiumSectionsSelected()
+      case .applicationIconSections:
+        output?.applicationIconSectionsSelected()
       }
     default: break
     }
@@ -102,22 +107,36 @@ extension MainSettingsScreenView: UITableViewDataSource {
     var viewCell = UITableViewCell()
     
     switch model {
-    case let .titleAndSwitcher(title, isEnabled):
+    case let .squircleImageAndLabelWithSwitch(squircleBGColors,
+                                              leftSideImage,
+                                              title,
+                                              isEnabled):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: LabelAndSwitchCell.reuseIdentifier
-      ) as? LabelAndSwitchCell {
-        cell.configureCellWith(titleText: title,
+        withIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier
+      ) as? SquircleImageAndLabelWithSwitchCell {
+        cell.configureCellWith(squircleBGColors: squircleBGColors,
+                               leftSideImage: UIImage(data: leftSideImage),
+                               leftSideImageColor: RandomColor.only.primaryWhite,
+                               titleText: title,
                                isResultSwitch: isEnabled)
+        
         cell.switchAction = { [weak self] isOn in
           self?.output?.darkThemeChanged(isOn)
         }
         viewCell = cell
       }
-    case let .titleAndChevron(title, _):
+    case let .squircleImageAndLabelWithChevronCell(squircleBGColors,
+                                                   leftSideImage,
+                                                   title,
+                                                   _):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: LabelAndChevronCell.reuseIdentifier
-      ) as? LabelAndChevronCell {
-        cell.configureCellWith(titleText: title)
+        withIdentifier: SquircleImageAndLabelWithChevronCell.reuseIdentifier
+      ) as? SquircleImageAndLabelWithChevronCell {
+        cell.configureCellWith(squircleBGColors: squircleBGColors,
+                               leftSideImage: UIImage(data: leftSideImage),
+                               leftSideImageColor: RandomColor.only.primaryWhite,
+                               titleText: title,
+                               isChevron: true)
         viewCell = cell
       }
     case let .insets(inset):
@@ -211,10 +230,10 @@ private extension MainSettingsScreenView {
     tableView.delegate = self
     tableView.dataSource = self
     
-    tableView.register(LabelAndSwitchCell.self,
-                       forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
-    tableView.register(LabelAndChevronCell.self,
-                       forCellReuseIdentifier: LabelAndChevronCell.reuseIdentifier)
+    tableView.register(SquircleImageAndLabelWithSwitchCell.self,
+                       forCellReuseIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier)
+    tableView.register(SquircleImageAndLabelWithChevronCell.self,
+                       forCellReuseIdentifier: SquircleImageAndLabelWithChevronCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
     tableView.register(DividerTableViewCell.self,

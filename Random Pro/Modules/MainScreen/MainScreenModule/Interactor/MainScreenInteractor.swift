@@ -254,8 +254,6 @@ private extension MainScreenInteractor {
         return MainScreenModel.Section(type: $0.type,
                                        isEnabled: $0.isEnabled,
                                        isHidden: $0.isHidden,
-                                       titleSection: $0.titleSection,
-                                       imageSection: $0.imageSection,
                                        advLabel: advLabel)
       } else {
         return $0

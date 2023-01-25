@@ -108,9 +108,10 @@ extension CustomMainSectionsView: UITableViewDataSource {
     var viewCell = UITableViewCell()
     
     if let cell = tableView.dequeueReusableCell(
-      withIdentifier: LabelAndSwitchCell.reuseIdentifier
-    ) as? LabelAndSwitchCell {
-      cell.configureCellWith(titleText: model.titleSection,
+      withIdentifier: ImageAndLabelWithSwitchCell.reuseIdentifier
+    ) as? ImageAndLabelWithSwitchCell {
+      cell.configureCellWith(leftSideImage: UIImage(data: model.type.imageSection),
+                             titleText: model.type.titleSection,
                              isResultSwitch: model.isEnabled)
       cell.switchAction = { [weak self] isOn in
         self?.output?.sectionChanged(isOn,
@@ -156,8 +157,8 @@ private extension CustomMainSectionsView {
     tableView.dataSource = self
     tableView.isEditing = true
     
-    tableView.register(LabelAndSwitchCell.self,
-                       forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
+    tableView.register(ImageAndLabelWithSwitchCell.self,
+                       forCellReuseIdentifier: ImageAndLabelWithSwitchCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
     tableView.register(DividerTableViewCell.self,

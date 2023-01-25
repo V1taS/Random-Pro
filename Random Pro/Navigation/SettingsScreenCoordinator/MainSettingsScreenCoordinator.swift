@@ -97,6 +97,10 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 // MARK: - MainSettingsScreenModuleOutput
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
+  func applicationIconSectionsSelected() {
+    // TODO: - Открыть экран с выборон иконок для приложения
+  }
+  
   func premiumSectionsSelected() {
     guard let upperViewController = modalNavigationController else {
       return

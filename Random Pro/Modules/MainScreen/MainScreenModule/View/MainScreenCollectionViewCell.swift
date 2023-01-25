@@ -37,8 +37,8 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
   
   func configureCellWith(model: MainScreenModel.Section, isPremium: Bool) {
     mainCardView.configureWith(
-      imageCard: UIImage(data: model.imageSection),
-      titleCard: model.titleSection,
+      imageCard: UIImage(data: model.type.imageSection),
+      titleCard: model.type.titleSection,
       isShowADVLabel: model.advLabel != .none,
       titleADVText: model.advLabel.title,
       isDisabled: model.advLabel == .premium && !isPremium

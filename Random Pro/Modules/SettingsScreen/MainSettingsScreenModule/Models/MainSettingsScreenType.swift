@@ -6,7 +6,7 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - MainSettingsScreenType
 
@@ -15,15 +15,25 @@ enum MainSettingsScreenType {
   
   /// Секция `Заголовок и переключатель`
   /// - Parameters:
+  ///  - squircleBGColors: Фон сквиркла
+  ///  - leftSideImage: Изображение слева
   ///  - title: Заголовок
   ///  - isEnabled: Переключатель
-  case titleAndSwitcher(title: String, isEnabled: Bool)
+  case squircleImageAndLabelWithSwitch(squircleBGColors: [UIColor],
+                                       leftSideImage: Data,
+                                       title: String,
+                                       isEnabled: Bool)
   
   /// Секция `Заголовок и иконка сбоку`
   /// - Parameters:
+  ///  - squircleBGColors: Фон сквиркла
+  ///  - leftSideImage: Изображение слева
   ///  - title: Заголовок
   ///  - type: Тип секции
-  case titleAndChevron(title: String, type: SectionType)
+  case squircleImageAndLabelWithChevronCell(squircleBGColors: [UIColor],
+                                            leftSideImage: Data,
+                                            title: String,
+                                            type: SectionType)
   
   /// Секция отступа
   case insets(Double)
@@ -39,5 +49,8 @@ enum MainSettingsScreenType {
     
     /// Раздел Премиум
     case premiumSections
+    
+    /// Секция выбора иконок
+    case applicationIconSections
   }
 }

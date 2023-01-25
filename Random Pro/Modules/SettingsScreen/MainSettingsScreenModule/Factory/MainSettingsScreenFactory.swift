@@ -34,34 +34,38 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
   // MARK: - Internal func
   
   func createListModelWith(isDarkMode: Bool) {
-    let appearance = Appearance()
-    var tableViewModels: [MainSettingsScreenType] = []
-    
-    tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors: [RandomColor.only.primaryBlue,
-                                                                               RandomColor.only.primaryBlue],
-                                                            leftSideImage: appearance.darkThemeImage,
-                                                            title: appearance.darkThemeTitle,
-                                                            isEnabled: isDarkMode))
-    tableViewModels.append(.divider)
-    tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryOrange,
-                                                                                    RandomColor.only.primaryOrange],
-                                                                 leftSideImage: appearance.customMainSectionsImage,
-                                                                 title: appearance.customMainSectionsTitle,
-                                                                 type: .customMainSections))
-    tableViewModels.append(.divider)
-    tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryGreen,
-                                                                                    RandomColor.only.primaryGreen],
-                                                                 leftSideImage: appearance.applicationIconnImage,
-                                                                 title: appearance.applicationIconTitle,
-                                                                 type: .applicationIconSections))
-    
-    tableViewModels.append(.divider)
-    tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryPurple,
-                                                                                    RandomColor.only.tertiaryBlue],
-                                                                 leftSideImage: appearance.premiumImage,
-                                                                 title: appearance.premiumTitle,
-                                                                 type: .premiumSections))
-    output?.didReceive(models: tableViewModels)
+    DispatchQueue.global(qos: .userInitiated).async {
+      let appearance = Appearance()
+      var tableViewModels: [MainSettingsScreenType] = []
+      
+      tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors: [RandomColor.only.primaryBlue,
+                                                                                 RandomColor.only.primaryBlue],
+                                                              leftSideImageSystemName: appearance.darkThemeImageSystemName,
+                                                              title: appearance.darkThemeTitle,
+                                                              isEnabled: isDarkMode))
+      tableViewModels.append(.divider)
+      tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryOrange,
+                                                                                      RandomColor.only.primaryOrange],
+                                                                   leftSideImageSystemName: appearance.customMainSectionsImageSystemName,
+                                                                   title: appearance.customMainSectionsTitle,
+                                                                   type: .customMainSections))
+      tableViewModels.append(.divider)
+      tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryGreen,
+                                                                                      RandomColor.only.primaryGreen],
+                                                                   leftSideImageSystemName: appearance.applicationIconnImageSystemName,
+                                                                   title: appearance.applicationIconTitle,
+                                                                   type: .applicationIconSections))
+      
+      tableViewModels.append(.divider)
+      tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryPurple,
+                                                                                      RandomColor.only.tertiaryBlue],
+                                                                   leftSideImageSystemName: appearance.premiumImageSystemName,
+                                                                   title: appearance.premiumTitle,
+                                                                   type: .premiumSections))
+      DispatchQueue.main.async { [weak self] in
+        self?.output?.didReceive(models: tableViewModels)
+      }
+    }
   }
 }
 
@@ -69,16 +73,16 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
 
 private extension MainSettingsScreenFactory {
   struct Appearance {
-    let darkThemeImage = UIImage(systemName: "switch.2")?.pngData() ?? Data()
+    let darkThemeImageSystemName = "switch.2"
     let darkThemeTitle = NSLocalizedString("Тёмная тема", comment: "")
     
-    let customMainSectionsImage = UIImage(systemName: "rectangle.grid.2x2")?.pngData() ?? Data()
+    let customMainSectionsImageSystemName = "rectangle.grid.2x2"
     let customMainSectionsTitle = NSLocalizedString("Настройка секций", comment: "")
     
-    let applicationIconnImage = UIImage(systemName: "rectangle.dashed")?.pngData() ?? Data()
+    let applicationIconnImageSystemName = "rectangle.dashed"
     let applicationIconTitle = NSLocalizedString("Иконка приложения", comment: "")
     
-    let premiumImage = UIImage(systemName: "star.fill")?.pngData() ?? Data()
+    let premiumImageSystemName = "star.fill"
     let premiumTitle = NSLocalizedString("Премиум", comment: "")
   }
 }

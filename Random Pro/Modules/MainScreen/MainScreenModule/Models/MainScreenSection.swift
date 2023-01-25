@@ -27,6 +27,12 @@ struct MainScreenModel: UserDefaultsCodable {
     /// Тип секции
     let type: SectionType
     
+    /// Имя изображения секции
+    let imageSectionSystemName: String
+    
+    /// Название  секции
+    let titleSection: String
+    
     /// Секция включена
     let isEnabled: Bool
     

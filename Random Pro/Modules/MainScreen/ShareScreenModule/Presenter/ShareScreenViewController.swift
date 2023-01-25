@@ -47,6 +47,7 @@ final class ShareScreenViewController: ShareScreenModule {
   private let interactor: ShareScreenInteractorInput
   private let moduleView: ShareScreenViewProtocol
   private let factory: ShareScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private var imageDataCache: Data?
   
   // MARK: - Initialization
@@ -135,11 +136,13 @@ private extension ShareScreenViewController {
   @objc
   func closeButtonAction() {
     moduleOutput?.closeButtonAction()
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func shareButtonAction() {
     interactor.requestPhotosStatus()
+    impactFeedback.impactOccurred()
   }
 }
 

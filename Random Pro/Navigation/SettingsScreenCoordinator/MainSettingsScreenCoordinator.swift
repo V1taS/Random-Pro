@@ -98,7 +98,16 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
   func applicationIconSectionsSelected() {
-    // TODO: - Открыть экран с выборон иконок для приложения
+    guard let upperViewController = modalNavigationController else {
+      return
+    }
+    
+    let selecteAppIconScreenCoordinator = SelecteAppIconScreenCoordinator(upperViewController,
+                                                                          services)
+    anyCoordinator = selecteAppIconScreenCoordinator
+    selecteAppIconScreenCoordinator.output = self
+    selecteAppIconScreenCoordinator.start()
+    services.metricsService.track(event: .selecteAppIcon)
   }
   
   func premiumSectionsSelected() {
@@ -196,6 +205,10 @@ extension MainSettingsScreenCoordinator: MFMailComposeViewControllerDelegate {
     controller.dismiss(animated: true, completion: nil)
   }
 }
+
+// MARK: - SelecteAppIconScreenCoordinatorOutput
+
+extension MainSettingsScreenCoordinator: SelecteAppIconScreenCoordinatorOutput {}
 
 // MARK: - Appearance
 

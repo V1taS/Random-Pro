@@ -45,6 +45,7 @@ final class ListResultScreenViewController: ListResultScreenModule {
   private let interactor: ListResultScreenInteractorInput
   private let moduleView: ListResultScreenViewProtocol
   private let factory: ListResultScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private var listCache: [String] = []
   private lazy var shareButton = UIBarButtonItem(image: Appearance().shareButtonIcon,
                                                  style: .plain,
@@ -124,6 +125,7 @@ private extension ListResultScreenViewController {
   func shareButtonAction() {
     moduleView.returnCurrentContentImage { [weak self] dataImage in
       self?.moduleOutput?.shareButtonAction(imageData: dataImage)
+      self?.impactFeedback.impactOccurred()
     }
   }
 }

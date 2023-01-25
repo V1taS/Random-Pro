@@ -30,6 +30,7 @@ final class BottleScreenViewController: BottleScreenModule {
   private let moduleView: BottleScreenViewProtocol
   private let interactor: BottleScreenInteractorInput
   private let factory: BottleScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -104,6 +105,7 @@ private extension BottleScreenViewController {
   func resetButtonAction() {
     moduleView.resetPositionBottle()
     interactor.stopHapticFeedback()
+    impactFeedback.impactOccurred()
   }
 }
 

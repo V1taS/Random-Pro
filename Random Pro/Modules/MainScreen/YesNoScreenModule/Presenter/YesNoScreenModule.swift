@@ -45,6 +45,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
   private let interactor: YesNoScreenInteractorInput
   private let factory: YesNoScreenFactoryInput
   private var cacheModel: YesNoScreenModel?
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -140,6 +141,7 @@ private extension YesNoScreenViewController {
       return
     }
     moduleOutput?.settingButtonAction(model: cacheModel)
+    impactFeedback.impactOccurred()
   }
 }
 

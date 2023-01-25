@@ -143,12 +143,15 @@ private extension PremiumScreenInteractor {
                                      isPremium: true,
                                      allSections: mainScreenModel.allSections)
       self.mainScreenModel = newModel
+      output?.updateStateForSections()
     } else {
-      let model = MainScreenFactory.createBaseModel()
-      let newModel = MainScreenFactory.updateModelWith(oldModel: model, isPremium: true)
-      self.mainScreenModel = newModel
+      MainScreenFactory.createBaseModel { model in
+        MainScreenFactory.updateModelWith(oldModel: model) { [weak self] newModel in
+          self?.mainScreenModel = newModel
+          self?.output?.updateStateForSections()
+        }
+      }
     }
-    output?.updateStateForSections()
   }
 }
 

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "selecte_app_icon_terminal.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

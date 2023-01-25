@@ -54,41 +54,41 @@ extension MainScreenModel {
     }
     
     /// Иконка секции
-    var imageSection: Data {
+    var imageSectionSystemName: String {
       let appearance = Appearance()
       switch self {
       case .teams:
-        return appearance.imageCardTeam?.pngData() ?? Data()
+        return appearance.imageCardTeam
       case .number:
-        return appearance.imageCardNumber?.pngData() ?? Data()
+        return appearance.imageCardNumber
       case .yesOrNo:
-        return appearance.imageCardYesOrNot?.pngData() ?? Data()
+        return appearance.imageCardYesOrNot
       case .letter:
-        return appearance.imageCardCharacters?.pngData() ?? Data()
+        return appearance.imageCardCharacters
       case .list:
-        return appearance.imageCardList?.pngData() ?? Data()
+        return appearance.imageCardList
       case .coin:
-        return appearance.imageCardCoin?.pngData() ?? Data()
+        return appearance.imageCardCoin
       case .cube:
-        return appearance.imageCardCube?.pngData() ?? Data()
+        return appearance.imageCardCube
       case .dateAndTime:
-        return appearance.imageCardDateAndTime?.pngData() ?? Data()
+        return appearance.imageCardDateAndTime
       case .lottery:
-        return appearance.imageCardLottery?.pngData() ?? Data()
+        return appearance.imageCardLottery
       case .contact:
-        return appearance.imageCardContact?.pngData() ?? Data()
+        return appearance.imageCardContact
       case .password:
-        return appearance.imageCardPassword?.pngData() ?? Data()
+        return appearance.imageCardPassword
       case .colors:
-        return appearance.imageColors?.pngData() ?? Data()
+        return appearance.imageColors
       case .bottle:
-        return appearance.bottleCardImage?.pngData() ?? Data()
+        return appearance.bottleCardImage
       case .rockPaperScissors:
-        return appearance.imageRockPaperScissorsScreenView?.pngData() ?? Data()
+        return appearance.imageRockPaperScissorsScreenView
       case .imageFilters:
-        return appearance.imageImageFilters?.pngData() ?? Data()
+        return appearance.imageImageFilters
       case .raffle:
-        return appearance.imageRaffle?.pngData() ?? Data()
+        return appearance.imageRaffle
       }
     }
     

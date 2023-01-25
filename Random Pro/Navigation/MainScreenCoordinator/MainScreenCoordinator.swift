@@ -296,9 +296,12 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     settingsScreenCoordinator.start()
     
-    settingsScreenCoordinator.updateContentWith(isDarkTheme: mainScreenModule.returnModel().isDarkMode)
-    settingsScreenCoordinator.updateContentWith(models: mainScreenModule.returnModel().allSections)
     services.metricsService.track(event: .mainSettingsScreen)
+    
+    mainScreenModule.returnModel { model in
+      settingsScreenCoordinator.updateContentWith(isDarkTheme: model.isDarkMode)
+      settingsScreenCoordinator.updateContentWith(models: model.allSections)
+    }
   }
 }
 
@@ -369,10 +372,12 @@ private extension MainScreenCoordinator {
   }
   
   func checkDarkMode() {
-    guard let isDarkTheme = mainScreenModule?.returnModel().isDarkMode, let window = window else {
-      return
+    mainScreenModule?.returnModel { [weak self] model in
+      guard let self, let isDarkTheme = model.isDarkMode, let window = self.window else {
+        return
+      }
+      window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
     }
-    window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
   }
   
   func showOnboarding() {

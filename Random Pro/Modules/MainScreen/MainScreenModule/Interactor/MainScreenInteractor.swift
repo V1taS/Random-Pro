@@ -23,10 +23,10 @@ protocol MainScreenInteractorInput {
   func updateSectionsWith(model: MainScreenModel)
   
   /// Получаем список ячеек
-  func getContent(completion: () -> Void)
+  func getContent(completion: @escaping () -> Void)
   
   /// Возвращает модель
-  func returnModel() -> MainScreenModel
+  func returnModel(completion: @escaping (MainScreenModel) -> Void)
   
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена
@@ -80,31 +80,35 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // MARK: - Internal func
   
   func updateSectionsWith(model: MainScreenModel) {
-    let updateModel = MainScreenFactory.updateModelWith(oldModel: model)
-    self.model = updateModel
-    output?.didReceive(model: updateModel)
-  }
-  
-  func getContent(completion: () -> Void) {
-    if let model = model {
-      let newModel = MainScreenFactory.updateModelWith(oldModel: model)
-      self.model = newModel
-      output?.didReceive(model: newModel)
-      completion()
-    } else {
-      let newModel = MainScreenFactory.createBaseModel()
-      model = newModel
-      output?.didReceive(model: newModel)
-      completion()
+    MainScreenFactory.updateModelWith(oldModel: model) { [weak self] updateModel in
+      self?.model = updateModel
+      self?.output?.didReceive(model: updateModel)
     }
   }
   
-  func returnModel() -> MainScreenModel {
+  func getContent(completion: @escaping () -> Void) {
     if let model = model {
-      return model
+      MainScreenFactory.updateModelWith(oldModel: model) { [weak self] newModel in
+        self?.model = newModel
+        self?.output?.didReceive(model: newModel)
+        completion()
+      }
     } else {
-      let newModel = MainScreenFactory.createBaseModel()
-      return newModel
+      MainScreenFactory.createBaseModel { [weak self] newModel in
+        self?.model = newModel
+        self?.output?.didReceive(model: newModel)
+        completion()
+      }
+    }
+  }
+  
+  func returnModel(completion: @escaping (MainScreenModel) -> Void) {
+    if let model = model {
+      completion(model)
+    } else {
+      MainScreenFactory.createBaseModel { newModel in
+        completion(newModel)
+      }
     }
   }
   
@@ -127,15 +131,17 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       return
     }
     
-    let newModel = MainScreenModel(
-      isDarkMode: model.isDarkMode,
-      isPremium: model.isPremium,
-      allSections: updatesLabelFromSection(type: type,
-                                           models: model.allSections,
-                                           advLabel: .none)
-    )
-    output?.didReceive(model: newModel)
-    self.model = newModel
+    updatesLabelFromSection(type: type,
+                            models: model.allSections,
+                            advLabel: .none) { [weak self] allSections in
+      let newModel = MainScreenModel(
+        isDarkMode: model.isDarkMode,
+        isPremium: model.isPremium,
+        allSections: allSections
+      )
+      self?.output?.didReceive(model: newModel)
+      self?.model = newModel
+    }
   }
   
   func addLabel(_ label: MainScreenModel.ADVLabel,
@@ -144,15 +150,17 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       return
     }
     
-    let newModel = MainScreenModel(
-      isDarkMode: model.isDarkMode,
-      isPremium: model.isPremium,
-      allSections: updatesLabelFromSection(type: sectionType,
-                                           models: model.allSections,
-                                           advLabel: label)
-    )
-    output?.didReceive(model: newModel)
-    self.model = newModel
+    updatesLabelFromSection(type: sectionType,
+                            models: model.allSections,
+                            advLabel: label) { [weak self] allSections in
+      let newModel = MainScreenModel(
+        isDarkMode: model.isDarkMode,
+        isPremium: model.isPremium,
+        allSections: allSections
+      )
+      self?.output?.didReceive(model: newModel)
+      self?.model = newModel
+    }
   }
   
   func updatesSectionsIsHiddenFT(completion: @escaping () -> Void) {
@@ -166,11 +174,13 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         completion()
         return
       }
-      let newModel = MainScreenFactory.updateModelWith(oldModel: model,
-                                                       featureToggleModel: sectionsIsHiddenFTModel)
-      self?.model = newModel
-      self?.output?.didReceive(model: newModel)
-      completion()
+      
+      MainScreenFactory.updateModelWith(oldModel: model,
+                                        featureToggleModel: sectionsIsHiddenFTModel) { [weak self] newModel in
+        self?.model = newModel
+        self?.output?.didReceive(model: newModel)
+        completion()
+      }
     }
   }
   
@@ -186,11 +196,12 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         return
       }
       
-      let newModel = MainScreenFactory.updateModelWith(oldModel: model,
-                                                       labelsModel: labelsModel)
-      self?.model = newModel
-      self?.output?.didReceive(model: newModel)
-      completion()
+      MainScreenFactory.updateModelWith(oldModel: model,
+                                        labelsModel: labelsModel) { [weak self] newModel in
+        self?.model = newModel
+        self?.output?.didReceive(model: newModel)
+        completion()
+      }
     }
   }
   
@@ -205,11 +216,13 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         completion()
         return
       }
-      let newModel = MainScreenFactory.updateModelWith(oldModel: model,
-                                                       isPremium: isPremium)
-      self?.model = newModel
-      self?.output?.didReceive(model: newModel)
-      completion()
+      
+      MainScreenFactory.updateModelWith(oldModel: model,
+                                        isPremium: isPremium) { [weak self] newModel in
+        self?.model = newModel
+        self?.output?.didReceive(model: newModel)
+        completion()
+      }
     }
   }
   
@@ -248,15 +261,23 @@ private extension Date {
 private extension MainScreenInteractor {
   func updatesLabelFromSection(type: MainScreenModel.SectionType,
                                models: [MainScreenModel.Section],
-                               advLabel: MainScreenModel.ADVLabel) -> [MainScreenModel.Section] {
-    return models.map {
-      if $0.type == type {
-        return MainScreenModel.Section(type: $0.type,
-                                       isEnabled: $0.isEnabled,
-                                       isHidden: $0.isHidden,
-                                       advLabel: advLabel)
-      } else {
-        return $0
+                               advLabel: MainScreenModel.ADVLabel,
+                               completion: @escaping ([MainScreenModel.Section]) -> Void) {
+    DispatchQueue.global(qos: .userInteractive).async {
+      let updatesLabel = models.map {
+        if $0.type == type {
+          return MainScreenModel.Section(type: $0.type,
+                                         imageSectionSystemName: $0.imageSectionSystemName,
+                                         titleSection: $0.titleSection,
+                                         isEnabled: $0.isEnabled,
+                                         isHidden: $0.isHidden,
+                                         advLabel: advLabel)
+        } else {
+          return $0
+        }
+      }
+      DispatchQueue.main.async {
+        completion(updatesLabel)
       }
     }
   }

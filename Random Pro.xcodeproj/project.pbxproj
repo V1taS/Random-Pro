@@ -59,6 +59,13 @@
 		1B295AE329817C63003349FC /* MainScreenModel+SectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AE229817C63003349FC /* MainScreenModel+SectionType.swift */; };
 		1B295AE529817CC0003349FC /* MainScreenModel+ADVLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AE429817CC0003349FC /* MainScreenModel+ADVLabel.swift */; };
 		1B295AE729817CF7003349FC /* MainScreenModel+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AE629817CF7003349FC /* MainScreenModel+Appearance.swift */; };
+		1B295AF32981B30A003349FC /* SelecteAppIconScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AEE2981B30A003349FC /* SelecteAppIconScreenFactory.swift */; };
+		1B295AF42981B30A003349FC /* SelecteAppIconScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AEF2981B30A003349FC /* SelecteAppIconScreenViewController.swift */; };
+		1B295AF52981B30A003349FC /* SelecteAppIconScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AF02981B30A003349FC /* SelecteAppIconScreenAssembly.swift */; };
+		1B295AF62981B30A003349FC /* SelecteAppIconScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AF12981B30A003349FC /* SelecteAppIconScreenInteractor.swift */; };
+		1B295AF72981B30A003349FC /* SelecteAppIconScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AF22981B30A003349FC /* SelecteAppIconScreenView.swift */; };
+		1B295B002981B39F003349FC /* SelecteAppIconScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295AFF2981B39F003349FC /* SelecteAppIconScreenCoordinator.swift */; };
+		1B295B022981B716003349FC /* SelecteAppIconScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B295B012981B716003349FC /* SelecteAppIconScreenType.swift */; };
 		1B2FECF2294DD30900AE6C92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B2FECF1294DD30900AE6C92 /* GoogleService-Info.plist */; };
 		1B31F62B285F926200A88217 /* ListResultScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F626285F926200A88217 /* ListResultScreenFactory.swift */; };
 		1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B31F627285F926200A88217 /* ListResultScreenViewController.swift */; };
@@ -178,6 +185,7 @@
 		1BE55B0C2917119300EF135E /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B57F64A27883A75005F220C /* AppTrackingTransparency.framework */; };
 		1BE55B0E2917119400EF135E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCC579027A83CE200DF5ED0 /* CloudKit.framework */; };
 		1BE55B102917119600EF135E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B6875A725DB614F006E82D4 /* StoreKit.framework */; };
+		1BEBF0CE298485CD00B1CFA7 /* SelecteAppIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEBF0CD298485CD00B1CFA7 /* SelecteAppIconType.swift */; };
 		1BEFBADC293268A3000B002D /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEFBADB293268A3000B002D /* TimerService.swift */; };
 		1BF061542974873D00DD6C76 /* PremiumScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF0614F2974873D00DD6C76 /* PremiumScreenFactory.swift */; };
 		1BF061552974873D00DD6C76 /* PremiumScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF061502974873D00DD6C76 /* PremiumScreenViewController.swift */; };
@@ -344,6 +352,13 @@
 		1B295AE229817C63003349FC /* MainScreenModel+SectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenModel+SectionType.swift"; sourceTree = "<group>"; };
 		1B295AE429817CC0003349FC /* MainScreenModel+ADVLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenModel+ADVLabel.swift"; sourceTree = "<group>"; };
 		1B295AE629817CF7003349FC /* MainScreenModel+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenModel+Appearance.swift"; sourceTree = "<group>"; };
+		1B295AEE2981B30A003349FC /* SelecteAppIconScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconScreenFactory.swift; sourceTree = "<group>"; };
+		1B295AEF2981B30A003349FC /* SelecteAppIconScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconScreenViewController.swift; sourceTree = "<group>"; };
+		1B295AF02981B30A003349FC /* SelecteAppIconScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconScreenAssembly.swift; sourceTree = "<group>"; };
+		1B295AF12981B30A003349FC /* SelecteAppIconScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconScreenInteractor.swift; sourceTree = "<group>"; };
+		1B295AF22981B30A003349FC /* SelecteAppIconScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconScreenView.swift; sourceTree = "<group>"; };
+		1B295AFF2981B39F003349FC /* SelecteAppIconScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconScreenCoordinator.swift; sourceTree = "<group>"; };
+		1B295B012981B716003349FC /* SelecteAppIconScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconScreenType.swift; sourceTree = "<group>"; };
 		1B2FECF1294DD30900AE6C92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1B31F626285F926200A88217 /* ListResultScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenFactory.swift; sourceTree = "<group>"; };
 		1B31F627285F926200A88217 /* ListResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResultScreenViewController.swift; sourceTree = "<group>"; };
@@ -455,6 +470,7 @@
 		1BD539A328BA33E2009DA51C /* ListAddItemsScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAddItemsScreenModel.swift; sourceTree = "<group>"; };
 		1BD539A528BB8031009DA51C /* ListScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenModel.swift; sourceTree = "<group>"; };
 		1BE180ED2916E0B90084F9E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BEBF0CD298485CD00B1CFA7 /* SelecteAppIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelecteAppIconType.swift; sourceTree = "<group>"; };
 		1BEFBADB293268A3000B002D /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		1BF0614F2974873D00DD6C76 /* PremiumScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumScreenFactory.swift; sourceTree = "<group>"; };
 		1BF061502974873D00DD6C76 /* PremiumScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumScreenViewController.swift; sourceTree = "<group>"; };
@@ -723,7 +739,6 @@
 		1B0ED19E28D4D8F4001BACF6 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				1BF0614E2974871900DD6C76 /* PremiumScreenModule */,
 				1BA16E20296DC306001B19C6 /* RaffleScreenModule */,
 				1B1C172C2962E91F005F34B7 /* ImageFiltersScreenModule */,
 				6C127065294730D6000D3852 /* RockPaperScissorsScreenModule */,
@@ -752,6 +767,7 @@
 		1B0ED19F28D4D935001BACF6 /* SettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				1B295AED2981B2A1003349FC /* SelecteAppIconScreenModule */,
 				1B0ED1BA28D4FAEB001BACF6 /* CustomMainSectionsModule */,
 				1B0ED1A028D4D9A7001BACF6 /* MainSettingsScreenModule */,
 			);
@@ -825,6 +841,7 @@
 			children = (
 				1B0ED1B228D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift */,
 				1B0ED1CB28D4FB9E001BACF6 /* CustomMainSectionsCoordinator */,
+				1B295AFE2981B35D003349FC /* SelecteAppIconScreenCoordinator */,
 			);
 			path = SettingsScreenCoordinator;
 			sourceTree = "<group>";
@@ -1062,6 +1079,76 @@
 				1B250C10286A13C800AA7B59 /* YesNoScreenModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1B295AED2981B2A1003349FC /* SelecteAppIconScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B295AFD2981B32F003349FC /* Models */,
+				1B295AFC2981B32A003349FC /* View */,
+				1B295AFB2981B324003349FC /* Presenter */,
+				1B295AFA2981B31E003349FC /* Factory */,
+				1B295AF92981B318003349FC /* Assembly */,
+				1B295AF82981B313003349FC /* Interactor */,
+			);
+			path = SelecteAppIconScreenModule;
+			sourceTree = "<group>";
+		};
+		1B295AF82981B313003349FC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B295AF12981B30A003349FC /* SelecteAppIconScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B295AF92981B318003349FC /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B295AF02981B30A003349FC /* SelecteAppIconScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B295AFA2981B31E003349FC /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B295AEE2981B30A003349FC /* SelecteAppIconScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B295AFB2981B324003349FC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B295AEF2981B30A003349FC /* SelecteAppIconScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B295AFC2981B32A003349FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B295AF22981B30A003349FC /* SelecteAppIconScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B295AFD2981B32F003349FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1B295B012981B716003349FC /* SelecteAppIconScreenType.swift */,
+				1BEBF0CD298485CD00B1CFA7 /* SelecteAppIconType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1B295AFE2981B35D003349FC /* SelecteAppIconScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B295AFF2981B39F003349FC /* SelecteAppIconScreenCoordinator.swift */,
+			);
+			path = SelecteAppIconScreenCoordinator;
 			sourceTree = "<group>";
 		};
 		1B31F625285F923800A88217 /* ListResultScreenModule */ = {
@@ -1458,6 +1545,7 @@
 			children = (
 				1B96E0FD282048D000A23880 /* Coordinator.swift */,
 				1B96E0FC282048D000A23880 /* RootCoordinator.swift */,
+				1B98416C298546E300B1E38B /* SharedScreensCoordinator */,
 				1B96E0FA282048BF00A23880 /* MainScreenCoordinator */,
 				1B0ED1B128D4DA51001BACF6 /* SettingsScreenCoordinator */,
 			);
@@ -1488,6 +1576,7 @@
 		1B96E0E7282046B100A23880 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				1B98416B2985469400B1E38B /* SharedScreens */,
 				1B0ED19F28D4D935001BACF6 /* SettingsScreen */,
 				1B0ED19E28D4D8F4001BACF6 /* MainScreen */,
 			);
@@ -1580,7 +1669,6 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
-				1BF0615F2974880900DD6C76 /* PremiumScreenCoordinator */,
 				1BA16E31296DC3C0001B19C6 /* RaffleScreenCoordinator */,
 				1B1C173C2962E982005F34B7 /* ImageFiltersScreenCoordinator */,
 				6C12707529473706000D3852 /* RockPaperScissorsScreenCoordinator */,
@@ -1603,6 +1691,22 @@
 				6C7D4D4E282E59FA00A086BC /* DateTimeScreenCoordinator */,
 			);
 			path = MainScreenCoordinator;
+			sourceTree = "<group>";
+		};
+		1B98416B2985469400B1E38B /* SharedScreens */ = {
+			isa = PBXGroup;
+			children = (
+				1BF0614E2974871900DD6C76 /* PremiumScreenModule */,
+			);
+			path = SharedScreens;
+			sourceTree = "<group>";
+		};
+		1B98416C298546E300B1E38B /* SharedScreensCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1BF0615F2974880900DD6C76 /* PremiumScreenCoordinator */,
+			);
+			path = SharedScreensCoordinator;
 			sourceTree = "<group>";
 		};
 		1B9D4552283BDC0400A85F25 /* SettingsScreenModule */ = {
@@ -3140,10 +3244,12 @@
 				6CA6203628B636190078C971 /* ContactScreenCoordinator.swift in Sources */,
 				1B7431B228A805A800205C2C /* ListPlayersScreenType.swift in Sources */,
 				1B0ED1A728D4D9E7001BACF6 /* MainSettingsScreenViewController.swift in Sources */,
+				1B295AF52981B30A003349FC /* SelecteAppIconScreenAssembly.swift in Sources */,
 				1BA83CF92879E991000035E3 /* LetterScreenModel.swift in Sources */,
 				6CA3962528324FC500F86248 /* LetterScreenModule.swift in Sources */,
 				1B08ADA128CDDAD5007290F3 /* ColorsScreenAssembly.swift in Sources */,
 				6C12706E29473136000D3852 /* RockPaperScissorsScreenModule.swift in Sources */,
+				1B295AF62981B30A003349FC /* SelecteAppIconScreenInteractor.swift in Sources */,
 				1B0ED1ED28D54E05001BACF6 /* OnboardingScreenAssembly.swift in Sources */,
 				6CBFD056289BC4ED005F9104 /* PasswordScreenInteractor.swift in Sources */,
 				6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */,
@@ -3163,6 +3269,8 @@
 				1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */,
 				1BA16E27296DC316001B19C6 /* RaffleScreenViewController.swift in Sources */,
 				6C98CBD32833A03A00D2E4FA /* CoinScreenFactory.swift in Sources */,
+				1B295B002981B39F003349FC /* SelecteAppIconScreenCoordinator.swift in Sources */,
+				1B295AF72981B30A003349FC /* SelecteAppIconScreenView.swift in Sources */,
 				1B0ED1C428D4FB3A001BACF6 /* CustomMainSectionsView.swift in Sources */,
 				6CA6204928B67D660078C971 /* ListScreenCoordinator.swift in Sources */,
 				6C7D4D4D282E558E00A086BC /* DateTimeAssembly.swift in Sources */,
@@ -3175,6 +3283,7 @@
 				1B295AE329817C63003349FC /* MainScreenModel+SectionType.swift in Sources */,
 				1B9D4558283BDC7C00A85F25 /* SettingsScreenFactory.swift in Sources */,
 				1B50066628A6BE6D009AABF2 /* TeamsScreenCoordinator.swift in Sources */,
+				1B295AF42981B30A003349FC /* SelecteAppIconScreenViewController.swift in Sources */,
 				1B0ED1D128D501B2001BACF6 /* CustomMainSectionsType.swift in Sources */,
 				1B1C17342962E93E005F34B7 /* ImageFiltersScreenAssembly.swift in Sources */,
 				1BC179C12975BECA00A8FB95 /* PremiumScreenSectionType.swift in Sources */,
@@ -3188,6 +3297,7 @@
 				6C1270772947371E000D3852 /* RockPaperScissorsScreenCoordinator.swift in Sources */,
 				1B1C17332962E93E005F34B7 /* ImageFiltersScreenViewController.swift in Sources */,
 				1B0ED1F728D54E5A001BACF6 /* OnboardingScreenCoordinator.swift in Sources */,
+				1B295AF32981B30A003349FC /* SelecteAppIconScreenFactory.swift in Sources */,
 				6CA6202028B62DE30078C971 /* CubesScreenFactory.swift in Sources */,
 				6CA6203E28B679B40078C971 /* ListScreenView.swift in Sources */,
 				1B941DDE282179A200D968DF /* ApplicationServices.swift in Sources */,
@@ -3282,6 +3392,7 @@
 				6CE65F85282D0DD900272D56 /* YesNoScreenModule.swift in Sources */,
 				1B96E10228204BFF00A23880 /* MainScreenSection.swift in Sources */,
 				6CBFD05F289C0EE2005F9104 /* PasswordGeneratorView.swift in Sources */,
+				1BEBF0CE298485CD00B1CFA7 /* SelecteAppIconType.swift in Sources */,
 				1B0ED1C128D4FB3A001BACF6 /* CustomMainSectionsViewController.swift in Sources */,
 				1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */,
 				6C12707A294765FA000D3852 /* RockPaperScissorsScreenModel.swift in Sources */,
@@ -3313,6 +3424,7 @@
 				1B295AE529817CC0003349FC /* MainScreenModel+ADVLabel.swift in Sources */,
 				1B235B7F297ABBB400BED353 /* AppPurchasesService.swift in Sources */,
 				1BA16E4C296DE1FB001B19C6 /* AuthenticationServiceFirebaseModel.swift in Sources */,
+				1B295B022981B716003349FC /* SelecteAppIconScreenType.swift in Sources */,
 				1B9D455A283BDC7C00A85F25 /* SettingsScreenAssembly.swift in Sources */,
 				D2B96C6C296D6C19006EFF3E /* UpdateAppServiceError.swift in Sources */,
 				6C9A9EF2282921F800962062 /* NumberScreenModule.swift in Sources */,

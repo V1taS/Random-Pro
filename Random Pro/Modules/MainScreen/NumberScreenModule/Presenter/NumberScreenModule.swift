@@ -61,6 +61,7 @@ final class NumberScreenViewController: NumberScreenModule {
   private let interactor: NumberScreenInteractorInput
   private let factory: NumberScreenFactoryInput
   private var cacheModel: NumberScreenModel?
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                                 style: .plain,
                                                 target: self,
@@ -198,12 +199,14 @@ private extension NumberScreenViewController {
   @objc
   func copyButtonAction() {
     factory.clearGeneration(text: interactor.returnModel().result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingButtonAction() {
     guard let cacheModel = cacheModel else { return }
     moduleOutput?.settingButtonAction(model: cacheModel)
+    impactFeedback.impactOccurred()
   }
 }
 

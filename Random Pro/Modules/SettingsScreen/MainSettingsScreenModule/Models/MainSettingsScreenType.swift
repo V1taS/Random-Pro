@@ -16,22 +16,22 @@ enum MainSettingsScreenType {
   /// Секция `Заголовок и переключатель`
   /// - Parameters:
   ///  - squircleBGColors: Фон сквиркла
-  ///  - leftSideImage: Изображение слева
+  ///  - leftSideImageSystemName: Изображение слева
   ///  - title: Заголовок
   ///  - isEnabled: Переключатель
   case squircleImageAndLabelWithSwitch(squircleBGColors: [UIColor],
-                                       leftSideImage: Data,
+                                       leftSideImageSystemName: String,
                                        title: String,
                                        isEnabled: Bool)
   
   /// Секция `Заголовок и иконка сбоку`
   /// - Parameters:
   ///  - squircleBGColors: Фон сквиркла
-  ///  - leftSideImage: Изображение слева
+  ///  - leftSideImageSystemName: Изображение слева
   ///  - title: Заголовок
   ///  - type: Тип секции
   case squircleImageAndLabelWithChevronCell(squircleBGColors: [UIColor],
-                                            leftSideImage: Data,
+                                            leftSideImageSystemName: String,
                                             title: String,
                                             type: SectionType)
   

@@ -52,6 +52,7 @@ final class PasswordScreenViewController: PasswordScreenModule {
   private let moduleView: PasswordScreenViewProtocol
   private let interactor: PasswordScreenInteractorInput
   private let factory: PasswordScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                                 style: .plain,
                                                 target: self,
@@ -177,11 +178,13 @@ private extension PasswordScreenViewController {
   @objc
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
+    impactFeedback.impactOccurred()
   }
 }
 

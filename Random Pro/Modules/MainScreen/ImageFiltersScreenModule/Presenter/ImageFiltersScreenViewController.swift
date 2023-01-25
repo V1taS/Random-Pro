@@ -62,6 +62,7 @@ final class ImageFiltersScreenViewController: ImageFiltersScreenModule {
   private let interactor: ImageFiltersScreenInteractorInput
   private let moduleView: ImageFiltersScreenViewProtocol
   private let factory: ImageFiltersScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -176,11 +177,13 @@ private extension ImageFiltersScreenViewController {
   @objc
   func shareButtonAction() {
     interactor.requestShareGalleryStatus()
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func chooseImageButtonAction() {
     moduleOutput?.chooseImageButtonAction()
+    impactFeedback.impactOccurred()
   }
 }
 

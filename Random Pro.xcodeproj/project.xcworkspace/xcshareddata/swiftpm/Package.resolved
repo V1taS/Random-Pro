@@ -150,7 +150,7 @@
       "location" : "https://github.com/V1taS/RandomNetwork.git",
       "state" : {
         "branch" : "master",
-        "revision" : "3c008bc11d4c99a6f424d01ae29d137fa950572e"
+        "revision" : "a269bd74a3453c80055d498d6c62ed34e59572ff"
       }
     },
     {
@@ -159,7 +159,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "093e920235fcbd5c06d085c853a4db69edcf4daa"
+        "revision" : "7ea51193b7c342f816b8268caee7dcde1befdb2b"
       }
     },
     {

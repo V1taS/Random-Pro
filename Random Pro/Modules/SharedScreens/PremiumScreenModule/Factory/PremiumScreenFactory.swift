@@ -77,7 +77,8 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
     tableViewModels.append(.purchasesCards(yearlyProduct?.localizedPrice,
                                            monthlyProduct?.localizedPrice,
                                            lifetimeProduct?.localizedPrice))
-    output?.didReceive(models: tableViewModels)
+    
+    self.output?.didReceive(models: tableViewModels)
   }
 }
 

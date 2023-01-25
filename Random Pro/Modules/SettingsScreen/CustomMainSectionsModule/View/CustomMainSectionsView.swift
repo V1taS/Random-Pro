@@ -110,7 +110,7 @@ extension CustomMainSectionsView: UITableViewDataSource {
     if let cell = tableView.dequeueReusableCell(
       withIdentifier: ImageAndLabelWithSwitchCell.reuseIdentifier
     ) as? ImageAndLabelWithSwitchCell {
-      cell.configureCellWith(leftSideImage: UIImage(data: model.type.imageSection),
+      cell.configureCellWith(leftSideImage: UIImage(systemName: model.type.imageSectionSystemName),
                              titleText: model.type.titleSection,
                              isResultSwitch: model.isEnabled)
       cell.switchAction = { [weak self] isOn in

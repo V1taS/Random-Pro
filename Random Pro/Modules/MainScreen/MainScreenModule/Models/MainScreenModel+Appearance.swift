@@ -6,7 +6,7 @@
 //  Copyright © 2023 SosinVitalii.com. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension MainScreenModel {
   struct Appearance {
@@ -47,52 +47,52 @@ extension MainScreenModel {
     let raffleFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Можно участвовать в еженедельном розыгрыше призов",
                                                                        comment: "")
     
-    let imageCardTeam = UIImage(systemName: "person.circle")
+    let imageCardTeam = "person.circle"
     let titleCardTeam = NSLocalizedString("Команды", comment: "")
     
-    let imageCardNumber = UIImage(systemName: "number")
+    let imageCardNumber = "number"
     let titleCardNumber = NSLocalizedString("Число", comment: "")
     
-    let imageCardYesOrNot = UIImage(systemName: "questionmark.square")
+    let imageCardYesOrNot = "questionmark.square"
     let titleCardYesOrNot = NSLocalizedString("Да или Нет", comment: "")
     
-    let imageCardCharacters = UIImage(systemName: "textbox")
+    let imageCardCharacters = "textbox"
     let titleCardCharacters = NSLocalizedString("Буква", comment: "")
     
-    let imageCardList = UIImage(systemName: "list.bullet.below.rectangle")
+    let imageCardList = "list.bullet.below.rectangle"
     let titleCardList = NSLocalizedString("Список", comment: "")
     
-    let imageCardCoin = UIImage(systemName: "bitcoinsign.circle")
+    let imageCardCoin = "bitcoinsign.circle"
     let titleCardCoin = NSLocalizedString("Монета", comment: "")
     
-    let imageCardCube = UIImage(systemName: "cube")
+    let imageCardCube = "cube"
     let titleCardCube = NSLocalizedString("Кубики", comment: "")
     
-    let imageCardDateAndTime = UIImage(systemName: "calendar")
+    let imageCardDateAndTime = "calendar"
     let titleCardDateAndTime = NSLocalizedString("Дата и время", comment: "")
     
-    let imageCardLottery = UIImage(systemName: "tag")
+    let imageCardLottery = "tag"
     let titleCardLottery = NSLocalizedString("Лотерея", comment: "")
     
-    let imageCardContact = UIImage(systemName: "phone.circle")
+    let imageCardContact = "phone.circle"
     let titleCardContact = NSLocalizedString("Контакт", comment: "")
     
-    let imageCardPassword = UIImage(systemName: "wand.and.stars")
+    let imageCardPassword = "wand.and.stars"
     let titleCardPassword = NSLocalizedString("Пароли", comment: "")
     
-    let imageColors = UIImage(systemName: "photo.on.rectangle.angled")
+    let imageColors = "photo.on.rectangle.angled"
     let titleColors = NSLocalizedString("Цвета", comment: "")
     
-    let bottleCardImage = UIImage(systemName: "arrow.triangle.2.circlepath")
+    let bottleCardImage = "arrow.triangle.2.circlepath"
     let titleBottle = NSLocalizedString("Бутылочка", comment: "")
     
-    let imageRockPaperScissorsScreenView = UIImage(systemName: "hurricane.circle")
+    let imageRockPaperScissorsScreenView = "hurricane.circle"
     let titleRockPaperScissors = NSLocalizedString("Цу-е-фа", comment: "")
     
-    let imageImageFilters = UIImage(systemName: "timelapse")
+    let imageImageFilters = "timelapse"
     let titleImageFilters = NSLocalizedString("Фильтры", comment: "")
     
-    let imageRaffle = UIImage(systemName: "gift")
+    let imageRaffle = "gift"
     let titleRaffle = NSLocalizedString("Розыгрыш", comment: "")
   }
 }

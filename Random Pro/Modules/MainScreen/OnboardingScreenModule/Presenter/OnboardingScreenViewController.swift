@@ -39,6 +39,7 @@ final class OnboardingScreenViewController: OnboardingScreenModule {
   private let interactor: OnboardingScreenInteractorInput
   private let moduleView: OnboardingScreenViewProtocol
   private let factory: OnboardingScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -83,6 +84,7 @@ final class OnboardingScreenViewController: OnboardingScreenModule {
 extension OnboardingScreenViewController: OnboardingScreenViewOutput {
   func didPressCloseButton() {
     moduleOutput?.onboardingDidFinish()
+    impactFeedback.impactOccurred()
   }
   
   func didPressButton(to page: Int) {

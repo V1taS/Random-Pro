@@ -108,14 +108,14 @@ extension MainSettingsScreenView: UITableViewDataSource {
     
     switch model {
     case let .squircleImageAndLabelWithSwitch(squircleBGColors,
-                                              leftSideImage,
+                                              leftSideImageSystemName,
                                               title,
                                               isEnabled):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier
       ) as? SquircleImageAndLabelWithSwitchCell {
         cell.configureCellWith(squircleBGColors: squircleBGColors,
-                               leftSideImage: UIImage(data: leftSideImage),
+                               leftSideImage: UIImage(systemName: leftSideImageSystemName),
                                leftSideImageColor: RandomColor.only.primaryWhite,
                                titleText: title,
                                isResultSwitch: isEnabled)
@@ -126,14 +126,14 @@ extension MainSettingsScreenView: UITableViewDataSource {
         viewCell = cell
       }
     case let .squircleImageAndLabelWithChevronCell(squircleBGColors,
-                                                   leftSideImage,
+                                                   leftSideImageSystemName,
                                                    title,
                                                    _):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: SquircleImageAndLabelWithChevronCell.reuseIdentifier
       ) as? SquircleImageAndLabelWithChevronCell {
         cell.configureCellWith(squircleBGColors: squircleBGColors,
-                               leftSideImage: UIImage(data: leftSideImage),
+                               leftSideImage: UIImage(systemName: leftSideImageSystemName),
                                leftSideImageColor: RandomColor.only.primaryWhite,
                                titleText: title,
                                isChevron: true)

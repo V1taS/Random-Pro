@@ -56,6 +56,7 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   private let interactor: MainSettingsScreenInteractorInput
   private let moduleView: MainSettingsScreenViewProtocol
   private let factory: MainSettingsScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -118,6 +119,7 @@ extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
   
   func feedBackButtonAction() {
     moduleOutput?.feedBackButtonAction()
+    impactFeedback.impactOccurred()
   }
   
   func customMainSectionsSelected() {
@@ -164,6 +166,7 @@ private extension MainSettingsScreenViewController {
   @objc
   func closeButtonAction() {
     moduleOutput?.closeButtonAction()
+    impactFeedback.impactOccurred()
   }
 }
 

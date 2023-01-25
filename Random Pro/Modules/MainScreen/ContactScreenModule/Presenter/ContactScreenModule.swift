@@ -52,6 +52,7 @@ final class ContactScreenViewController: ContactScreenModule {
   private let moduleView: ContactScreenViewProtocol
   private let interactor: ContactScreenInteractorInput
   private let factory: ContactScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                                 style: .plain,
                                                 target: self,
@@ -151,11 +152,13 @@ private extension ContactScreenViewController {
   @objc
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction()
+    impactFeedback.impactOccurred()
   }
 }
 

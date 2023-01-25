@@ -94,7 +94,7 @@ protocol MainScreenModuleInput {
   func saveDarkModeStatus(_ isEnabled: Bool)
   
   /// Возвращает модель
-  func returnModel() -> MainScreenModel
+  func returnModel(completion: @escaping (MainScreenModel) -> Void)
   
   /// Убрать лайбл с секции
   /// - Parameter type: Тип сеции
@@ -126,6 +126,7 @@ final class MainScreenViewController: MainScreenModule {
   private let interactor: MainScreenInteractorInput
   private let moduleView: MainScreenViewProtocol
   private let factory: MainScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -182,16 +183,17 @@ final class MainScreenViewController: MainScreenModule {
     interactor.saveDarkModeStatus(isEnabled)
   }
   
-  func returnModel() -> MainScreenModel {
-    interactor.returnModel()
+  func returnModel(completion: @escaping (MainScreenModel) -> Void) {
+    interactor.returnModel(completion: completion)
   }
   
   func updateSectionsWith(models: [MainScreenModel.Section]) {
-    let model = interactor.returnModel()
-    let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
-                                   isPremium: model.isPremium,
-                                   allSections: models)
-    interactor.updateSectionsWith(model: newModel)
+    interactor.returnModel { [weak self] model in
+      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
+                                     isPremium: model.isPremium,
+                                     allSections: models)
+      self?.interactor.updateSectionsWith(model: newModel)
+    }
   }
   
   func removeLabelFromSection(type: MainScreenModel.SectionType) {
@@ -317,40 +319,51 @@ private extension MainScreenViewController {
   func setupNavBar() {
     let appearance = Appearance()
     title = appearance.title
-    let isPremium = interactor.returnModel().isPremium
-    let premiumName = isPremium ? appearance.isPremiumName : appearance.notPremiumName
     
-    let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
-                                      style: .plain,
-                                      target: self,
-                                      action: #selector(shareButtonAction))
-    
-    let premiumButton = UIBarButtonItem.menuButton(self,
-                                                   action: #selector(premiumButtonAction),
-                                                   imageName: premiumName,
-                                                   size: CGSize(width: 34,
-                                                                height: 28))
-    
-    navigationItem.rightBarButtonItems = [shareButton, premiumButton]
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                       style: .plain,
-                                                       target: self,
-                                                       action: #selector(settingsButtonAction))
+    interactor.returnModel { [weak self] model in
+      guard let self else {
+        return
+      }
+      let isPremium = model.isPremium
+      let premiumName = isPremium ? appearance.isPremiumName : appearance.notPremiumName
+      
+      let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(self.shareButtonAction))
+      
+      let premiumButton = UIBarButtonItem.menuButton(self,
+                                                     action: #selector(self.premiumButtonAction),
+                                                     imageName: premiumName,
+                                                     size: CGSize(width: 34,
+                                                                  height: 28))
+      
+      self.navigationItem.rightBarButtonItems = [shareButton, premiumButton]
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                              style: .plain,
+                                                              target: self,
+                                                              action: #selector(self.settingsButtonAction))
+    }
   }
   
   @objc
   func premiumButtonAction() {
-    moduleOutput?.premiumButtonAction(interactor.returnModel().isPremium)
+    interactor.returnModel { [weak self] model in
+      self?.moduleOutput?.premiumButtonAction(model.isPremium)
+      self?.impactFeedback.impactOccurred()
+    }
   }
   
   @objc
   func shareButtonAction() {
     moduleOutput?.shareButtonAction()
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingsButtonAction() {
     moduleOutput?.settingButtonAction()
+    impactFeedback.impactOccurred()
   }
   
   @objc

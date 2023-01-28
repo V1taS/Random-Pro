@@ -202,8 +202,6 @@
 "Можно играть в игру Камень, ножницы, бумага с другом" = "You can play Rock, Paper, Scissors with a friend";
 "Можно генерировать рандомный фильтр для фото" = "You can generate a random filter for a photo";
 "Можно участвовать в еженедельном розыгрыше призов" = "You can participate in the weekly prize draw";
-// TODO: -
-
 "Иконка приложения" = "Application icon";
 "Основная" = "Main";
 "Малиновый прилив" = "Crimson tide";
@@ -223,4 +221,4 @@
 "Селен" = "Selenium";
 "Можно изменить цвет иконки приложения" = "You can change the color of the application icon";
 "Цвет иконки установлен" = "Icon color set";
-
+"Выбор иконки" = "Icon selection";

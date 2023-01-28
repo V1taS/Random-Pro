@@ -179,16 +179,14 @@ extension MainScreenFactory {
             ))
           }
         case .imageFilters:
-          ifDebugFeatureSection {
-            allSections.append(MainScreenModel.Section(
-              type: section,
-              imageSectionSystemName: section.imageSectionSystemName,
-              titleSection: section.titleSection,
-              isEnabled: true,
-              isHidden: false,
-              advLabel: .premium
-            ))
-          }
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            imageSectionSystemName: section.imageSectionSystemName,
+            titleSection: section.titleSection,
+            isEnabled: true,
+            isHidden: false,
+            advLabel: .premium
+          ))
         case .raffle:
           ifDebugFeatureSection {
             allSections.append(MainScreenModel.Section(
@@ -366,17 +364,15 @@ extension MainScreenFactory {
                 ))
               }
             case .imageFilters:
-              ifDebugFeatureSection {
-                cardSections.append(MainScreenModel.Section(
-                  type: model.type,
-                  imageSectionSystemName: model.imageSectionSystemName,
-                  titleSection: model.titleSection,
-                  isEnabled: model.isEnabled,
-                  isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
-                  advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters,
-                                         oldRawValue: model.advLabel.rawValue)
-                ))
-              }
+              cardSections.append(MainScreenModel.Section(
+                type: model.type,
+                imageSectionSystemName: model.imageSectionSystemName,
+                titleSection: model.titleSection,
+                isEnabled: model.isEnabled,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters,
+                                       oldRawValue: model.advLabel.rawValue)
+              ))
             case .raffle:
               ifDebugFeatureSection {
                 cardSections.append(MainScreenModel.Section(

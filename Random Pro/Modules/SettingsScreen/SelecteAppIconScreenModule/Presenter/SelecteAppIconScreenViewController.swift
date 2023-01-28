@@ -71,7 +71,7 @@ final class SelecteAppIconScreenViewController: SelecteAppIconScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Выбор иконки"
+    title = Appearance().title
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -126,5 +126,7 @@ private extension SelecteAppIconScreenViewController {}
 // MARK: - Appearance
 
 private extension SelecteAppIconScreenViewController {
-  struct Appearance {}
+  struct Appearance {
+    let title = NSLocalizedString("Выбор иконки", comment: "")
+  }
 }

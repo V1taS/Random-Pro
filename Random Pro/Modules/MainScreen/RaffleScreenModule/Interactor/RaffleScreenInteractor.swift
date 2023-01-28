@@ -98,7 +98,7 @@ final class RaffleScreenInteractor: NSObject, RaffleScreenInteractorInput {
   // MARK: - Private properties
   
   private let authenticationService: AuthenticationService
-  @ObjectCustomUserDefaultsWrapper(key: Appearance().keyUserDefaults)
+  @ObjectCustomUserDefaultsWrapper<RaffleScreenModel>(key: Appearance().keyUserDefaults)
   private var model: RaffleScreenModel?
   private var currentNonce: String?
   

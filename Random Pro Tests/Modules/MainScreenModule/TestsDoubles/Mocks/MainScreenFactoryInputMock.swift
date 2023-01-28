@@ -24,6 +24,8 @@ final class MainScreenFactoryInputMock: MainScreenFactoryInput {
   
   func createCellsFrom(model: MainScreenModel) {
     isCreateCellsFrom = true
-    output?.didReceive(models: [])
+    output?.didReceiveNew(model: MainScreenModel(isDarkMode: nil,
+                                                 isPremium: false,
+                                                 allSections: []))
   }
 }

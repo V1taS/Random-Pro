@@ -42,16 +42,11 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   // MARK: - Private properties
   
-  @ObjectCustomUserDefaultsWrapper(key: Appearance().keyUserDefaults)
-  private var model: SelecteAppIconScreenModel?
-  private var isPremium: Bool {
-    @ObjectCustomUserDefaultsWrapper(key: Appearance().mainScreenModelKeyUserDefaults)
-    var mainScreenModel: MainScreenModel?
-    guard let mainScreenModel else {
-      return false
-    }
-    return mainScreenModel.isPremium
-  }
+  @ObjectCustomUserDefaultsWrapper<MainScreenModel>(key: Appearance().mainScreenModelKey)
+  private var mainScreenModel: MainScreenModel?
+  
+  @ObjectCustomUserDefaultsWrapper<SelecteAppIconScreenModel>(key: Appearance().keyUserDefaults)
+  private var appIconScreenModel: SelecteAppIconScreenModel?
   
   // MARK: - Internal properties
   
@@ -61,7 +56,7 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   func updateAppIcon(type: SelecteAppIconType) {
     let newModel = SelecteAppIconScreenModel(selecteAppIconType: type)
-    self.model = newModel
+    appIconScreenModel = newModel
     let appearance = Appearance()
     guard UIApplication.shared.supportsAlternateIcons else {
       output?.somethingWentWrong()
@@ -105,18 +100,13 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   }
   
   func returnIsPremium() -> Bool {
-    return isPremium
+    return mainScreenModel?.isPremium ?? false
   }
   
   /// Получить данные
   func getContent() {
-    if let model {
-      output?.didReceive(selecteIconType: model.selecteAppIconType, isPremium: isPremium)
-    } else {
-      let newModel = SelecteAppIconScreenModel(selecteAppIconType: .defaultIcon)
-      self.model = newModel
-      output?.didReceive(selecteIconType: newModel.selecteAppIconType, isPremium: isPremium)
-    }
+    output?.didReceive(selecteIconType: appIconScreenModel?.selecteAppIconType ?? .defaultIcon,
+                       isPremium: mainScreenModel?.isPremium ?? false)
   }
 }
 
@@ -139,7 +129,7 @@ private extension SelecteAppIconScreenInteractor {
 private extension SelecteAppIconScreenInteractor {
   struct Appearance {
     let keyUserDefaults = "selecte_app_icon_screen_user_defaults_key"
-    let mainScreenModelKeyUserDefaults = "main_screen_user_defaults_key"
+    let mainScreenModelKey = "main_screen_user_defaults_key"
     
     let defaultIcon = "selecte_app_icon_default"
     let blueRaspberryIcon = "selecte_app_icon_blue_raspberry"

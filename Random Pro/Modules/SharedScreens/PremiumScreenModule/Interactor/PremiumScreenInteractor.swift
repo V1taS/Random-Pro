@@ -66,7 +66,7 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   
   private let appPurchasesService: AppPurchasesService
   private var cacheProducts: [ApphudProduct] = []
-  @ObjectCustomUserDefaultsWrapper(key: Appearance().mainScreenKeyUserDefaults)
+  @ObjectCustomUserDefaultsWrapper<MainScreenModel>(key: Appearance().mainScreenKeyUserDefaults)
   private var mainScreenModel: MainScreenModel?
   
   // MARK: - Initialization

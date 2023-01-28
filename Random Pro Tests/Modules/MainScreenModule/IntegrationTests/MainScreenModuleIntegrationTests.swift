@@ -76,7 +76,7 @@ final class MainScreenModuleIntegrationTests: XCTestCase {
   
   func testReturnModel() {
     // Act
-    _ = sut.returnModel()
+    sut.returnModel(completion: { _ in })
     
     // Assert
     XCTAssertTrue(interactor.isReturnModel)

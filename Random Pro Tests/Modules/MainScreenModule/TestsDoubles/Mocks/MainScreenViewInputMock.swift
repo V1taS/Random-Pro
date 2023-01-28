@@ -25,4 +25,8 @@ final class MainScreenViewInputMock: MainScreenViewProtocol {
   func configureCellsWith(models: [MainScreenModel.Section]) {
     isConfigureCellsWith = true
   }
+  
+  func configureCellsWith(model: Random_Pro.MainScreenModel) {
+    // TODO: -
+  }
 }

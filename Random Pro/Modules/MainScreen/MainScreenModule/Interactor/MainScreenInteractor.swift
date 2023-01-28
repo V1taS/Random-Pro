@@ -61,7 +61,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   // MARK: - Private properties
   
-  @ObjectCustomUserDefaultsWrapper(key: Appearance().keyUserDefaults)
+  @ObjectCustomUserDefaultsWrapper<MainScreenModel>(key: Appearance().keyUserDefaults)
   private var model: MainScreenModel?
   private let services: ApplicationServices
   

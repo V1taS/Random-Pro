@@ -11,7 +11,7 @@ import UIKit
 
 /// Mock Input
 final class MainScreenInteractorInputMock: MainScreenInteractorInput {
- 
+
   // MARK: - Internal properties
   
   weak var output: MainScreenInteractorOutput?
@@ -28,18 +28,21 @@ final class MainScreenInteractorInputMock: MainScreenInteractorInput {
   func updateSectionsWith(models: [MainScreenModel.Section]) {
     isUpdateSectionsWith = true
     output?.didReceive(model: MainScreenModel(isDarkMode: nil,
+                                              isPremium: false,
                                               allSections: models))
   }
   
   func getContent() {
     isGetContent = true
     output?.didReceive(model: MainScreenModel(isDarkMode: nil,
+                                              isPremium: false,
                                               allSections: []))
   }
   
   func returnModel() -> MainScreenModel {
     isReturnModel = true
     return MainScreenModel(isDarkMode: nil,
+                           isPremium: false,
                            allSections: [])
   }
   
@@ -54,5 +57,33 @@ final class MainScreenInteractorInputMock: MainScreenInteractorInput {
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType) {
     // TODO: write tests
+  }
+  
+  func updateSectionsWith(model: Random_Pro.MainScreenModel) {
+    // TODO: -
+  }
+  
+  func getContent(completion: @escaping () -> Void) {
+    // TODO: -
+  }
+  
+  func returnModel(completion: @escaping (Random_Pro.MainScreenModel) -> Void) {
+    // TODO: -
+  }
+  
+  func updatesSectionsIsHiddenFT(completion: @escaping () -> Void) {
+    // TODO: -
+  }
+  
+  func updatesLabelsFeatureToggle(completion: @escaping () -> Void) {
+    // TODO: -
+  }
+  
+  func validatePurchase(completion: @escaping () -> Void) {
+    // TODO: -
+  }
+  
+  func updatesPremiumFeatureToggle(completion: @escaping () -> Void) {
+    // TODO: -
   }
 }

@@ -31,6 +31,7 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
   private let moduleView: RockPaperScissorsScreenViewProtocol
   private let interactor: RockPaperScissorsScreenInteractorInput
   private let factory: RockPaperScissorsScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -114,6 +115,7 @@ private extension RockPaperScissorsScreenViewController {
   
   @objc func resetButtonAction() {
     moduleView.resetGeneration()
+    impactFeedback.impactOccurred()
   }
 }
 

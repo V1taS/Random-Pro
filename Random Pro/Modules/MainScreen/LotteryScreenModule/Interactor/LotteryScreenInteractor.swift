@@ -51,7 +51,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<LotteryScreenModel>(key: Appearance().keyUserDefaults)
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().keyUserDefaults)
   private var model: LotteryScreenModel?
   
   // MARK: - Internal func

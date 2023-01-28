@@ -46,8 +46,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndDescription(title: appearance.generatedPlayersCount,
                                                   description: generatedPlayersCount))
       tableViewModels.append(.divider)
-      tableViewModels.append(.titleAndImage(title: appearance.titleAndImageTitle,
-                                            asideImage: nil))
+      tableViewModels.append(.titleAndChevron(title: appearance.titleAndImageTitle))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .number(withoutRepetition, itemsGenerated, lastItem):
@@ -61,8 +60,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       
@@ -75,8 +73,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -91,8 +88,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -104,8 +100,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -117,8 +112,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -130,8 +124,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -140,8 +133,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -150,8 +142,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -166,8 +157,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: lastItem))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(itemsGenerated), itemsGenerated > 0 {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
@@ -184,13 +174,10 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
       tableViewModels.append(.divider)
-      tableViewModels.append(.titleAndImage(title: appearance.createListTitle,
-                                            asideImage: nil,
-                                            id: appearance.createListID))
+      tableViewModels.append(.titleAndChevron(title: appearance.createListTitle, id: appearance.createListID))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(generatedTextCount), itemsGenerated > .zero {
-        tableViewModels.append(.titleAndImage(title: appearance.numberOfGenerations,
-                                              asideImage: nil))
+        tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))

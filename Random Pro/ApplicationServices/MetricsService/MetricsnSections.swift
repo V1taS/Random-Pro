@@ -42,8 +42,10 @@ enum MetricsSections: String {
   case mainSettingsScreen = "Настройки главного экрана (new version)"
   case customMainSections = "Настройка секций на главном экране (new version)"
   case feedBack = "Обратная связь на почту (new version)"
+  case selecteAppIcon = "Выбрать иконку для приложения"
   
   // Deep links
   
   case deepLinks = "DeepLinks"
+  case premiumScreen = "Premium (new version)"
 }

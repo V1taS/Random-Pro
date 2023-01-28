@@ -47,6 +47,7 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
   private let interactor: ListAddItemsScreenInteractorInput
   private let moduleView: ListAddItemsScreenViewProtocol
   private let factory: ListAddItemsScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -147,6 +148,7 @@ private extension ListAddItemsScreenViewController {
   @objc
   func removePlayersButtonAction() {
     moduleOutput?.removeTextsButtonAction()
+    impactFeedback.impactOccurred()
   }
 }
 

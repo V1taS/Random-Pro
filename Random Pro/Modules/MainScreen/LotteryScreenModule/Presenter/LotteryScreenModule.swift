@@ -54,6 +54,7 @@ final class LotteryScreenViewController: LotteryScreenModule {
   private let interactor: LotteryScreenInteractorInput
   private let factory: LotteryScreenFactoryInput
   private var cacheModel: LotteryScreenModel?
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                                 style: .plain,
                                                 target: self,
@@ -163,12 +164,14 @@ private extension LotteryScreenViewController {
       return
     }
     moduleOutput?.resultLabelAction(model: model)
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingButtonAction() {
     guard let cacheModel = cacheModel else { return }
     moduleOutput?.settingButtonAction(model: cacheModel)
+    impactFeedback.impactOccurred()
   }
 }
 

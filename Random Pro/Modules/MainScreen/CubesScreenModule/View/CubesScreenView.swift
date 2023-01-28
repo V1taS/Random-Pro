@@ -88,7 +88,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
 private extension CubesScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     scrollResultView.backgroundColor = .clear
     
     cubesSegmentedControl.insertSegment(withTitle: appearance.numberOne,

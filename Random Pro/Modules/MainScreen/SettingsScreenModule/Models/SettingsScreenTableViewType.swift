@@ -28,9 +28,8 @@ enum SettingsScreenTableViewType {
   /// Секция `Заголовок и иконка сбоку`
   /// - Parameters:
   ///  - title: Заголовок
-  ///  - asideImage: Иконка сбоку
   ///  - id: ID Секции
-  case titleAndImage(title: String, asideImage: Data?, id: String = "")
+  case titleAndChevron(title: String, id: String = "")
   
   /// Кнопка очистеть
   /// - Parameter title: Название кнопки

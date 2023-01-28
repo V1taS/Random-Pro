@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "apphudsdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apphud/ApphudSDK",
+      "state" : {
+        "revision" : "9217783cfdc19c29cc5b82b6c07659ec6df899cd",
+        "version" : "2.8.8"
+      }
+    },
+    {
       "identity" : "boringssl-swiftpm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
@@ -41,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "5056b15c5acbb90cd214fe4d6138bdf5a740e5a8",
-        "version" : "9.2.0"
+        "revision" : "f6b558e3f801f2cac336b04f615ce111fa9ddaa0",
+        "version" : "9.2.1"
       }
     },
     {
@@ -86,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios.git",
       "state" : {
-        "revision" : "a4622b4d6fdbe76cc5487bc27e84029abaf07217",
-        "version" : "4.0.1"
+        "revision" : "440a6eebb8a8ae9c773e9a3e21021b72a74ffbb7",
+        "version" : "4.1.2"
       }
     },
     {
@@ -123,7 +132,7 @@
       "location" : "https://github.com/V1taS/Notifications",
       "state" : {
         "branch" : "master",
-        "revision" : "ebcad1ff6da1e1d323c9c507235dbc2a3059df15"
+        "revision" : "c24d10cc5545b5c64f8a3c23f32a7e1ead441719"
       }
     },
     {
@@ -141,7 +150,7 @@
       "location" : "https://github.com/V1taS/RandomNetwork.git",
       "state" : {
         "branch" : "master",
-        "revision" : "3c008bc11d4c99a6f424d01ae29d137fa950572e"
+        "revision" : "a269bd74a3453c80055d498d6c62ed34e59572ff"
       }
     },
     {
@@ -150,7 +159,7 @@
       "location" : "https://github.com/V1taS/RandomUIKit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "39a59c45e858d426f71f9e2d319a573d3b2f651e"
+        "revision" : "7ea51193b7c342f816b8268caee7dcde1befdb2b"
       }
     },
     {

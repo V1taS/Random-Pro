@@ -162,11 +162,11 @@ private extension OnboardingScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     pageIndicator.hidesForSinglePage = true
-    pageIndicator.currentPageIndicatorTintColor = RandomColor.primaryGray
-    pageIndicator.pageIndicatorTintColor = RandomColor.tertiaryGray
+    pageIndicator.currentPageIndicatorTintColor = RandomColor.darkAndLightTheme.primaryGray
+    pageIndicator.pageIndicatorTintColor = RandomColor.only.tertiaryGray
     pageIndicator.addTarget(self,
                             action: #selector(pageIndicatorAction),
                             for: .valueChanged)

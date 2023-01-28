@@ -102,7 +102,7 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
 private extension RockPaperScissorsScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     scoreLabel.font = .systemFont(ofSize: appearance.systemFontScore)
     

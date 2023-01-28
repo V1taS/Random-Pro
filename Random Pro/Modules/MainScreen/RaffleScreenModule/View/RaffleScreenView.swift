@@ -96,7 +96,7 @@ private extension RaffleScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     loaderView.isHidden = true
     authButton.addTarget(self, action: #selector(actionOnSignInWithApple), for: .touchUpInside)
   }

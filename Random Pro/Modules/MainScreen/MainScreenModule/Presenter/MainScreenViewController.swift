@@ -54,7 +54,7 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `openImageFilters`
   func openImageFilters()
-
+  
   /// Открыть раздел `raffle`
   func openRaffle()
   
@@ -70,9 +70,13 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
-
+  
   /// Главный экран был загружен
   func mainScreenModuleDidLoad()
+  
+  /// Кнопка премиум была нажата
+  /// - Parameter isPremium: Включен премиум
+  func premiumButtonAction(_ isPremium: Bool)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -82,12 +86,15 @@ protocol MainScreenModuleInput {
   /// - Parameter models: Список секция
   func updateSectionsWith(models: [MainScreenModel.Section])
   
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+  
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена
   func saveDarkModeStatus(_ isEnabled: Bool)
   
   /// Возвращает модель
-  func returnModel() -> MainScreenModel
+  func returnModel(completion: @escaping (MainScreenModel) -> Void)
   
   /// Убрать лайбл с секции
   /// - Parameter type: Тип сеции
@@ -119,6 +126,7 @@ final class MainScreenViewController: MainScreenModule {
   private let interactor: MainScreenInteractorInput
   private let moduleView: MainScreenViewProtocol
   private let factory: MainScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -147,7 +155,7 @@ final class MainScreenViewController: MainScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     updateSections()
     setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
@@ -170,17 +178,22 @@ final class MainScreenViewController: MainScreenModule {
   }
   
   // MARK: - Internal func
-
+  
   func saveDarkModeStatus(_ isEnabled: Bool) {
     interactor.saveDarkModeStatus(isEnabled)
   }
   
-  func returnModel() -> MainScreenModel {
-    interactor.returnModel()
+  func returnModel(completion: @escaping (MainScreenModel) -> Void) {
+    interactor.returnModel(completion: completion)
   }
   
   func updateSectionsWith(models: [MainScreenModel.Section]) {
-    interactor.updateSectionsWith(models: models)
+    interactor.returnModel { [weak self] model in
+      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
+                                     isPremium: model.isPremium,
+                                     allSections: models)
+      self?.interactor.updateSectionsWith(model: newModel)
+    }
   }
   
   func removeLabelFromSection(type: MainScreenModel.SectionType) {
@@ -191,6 +204,10 @@ final class MainScreenViewController: MainScreenModule {
                 for sectionType: MainScreenModel.SectionType) {
     interactor.addLabel(label, for: sectionType)
   }
+  
+  func updateStateForSections() {
+    updateSections()
+  }
 }
 
 // MARK: - MainScreenViewOutput
@@ -199,7 +216,7 @@ extension MainScreenViewController: MainScreenViewOutput {
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     moduleOutput?.noPremiumAccessActionFor(section)
   }
-
+  
   func openRaffle() {
     moduleOutput?.openRaffle()
   }
@@ -276,8 +293,8 @@ extension MainScreenViewController: MainScreenInteractorOutput {
 // MARK: - MainScreenFactoryOutput
 
 extension MainScreenViewController: MainScreenFactoryOutput {
-  func didReceive(models: [MainScreenModel.Section]) {
-    moduleView.configureCellsWith(models: models)
+  func didReceiveNew(model: MainScreenModel) {
+    moduleView.configureCellsWith(model: model)
   }
 }
 
@@ -288,43 +305,89 @@ private extension MainScreenViewController {
     interactor.getContent { [weak self] in
       self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
         self?.interactor.updatesLabelsFeatureToggle { [weak self] in
-
-          // TODO: - Обновление премиум фичатогглов в самом конце
-          self?.interactor.updatesPremiumFeatureToggle {}
+          self?.interactor.validatePurchase { [weak self] in
+            self?.interactor.updatesPremiumFeatureToggle { [weak self] in
+              self?.setupNavBar()
+            }
+          }
         }
       }
     }
+    
   }
-
+  
   func setupNavBar() {
     let appearance = Appearance()
     title = appearance.title
     
-    let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
-                                      style: .plain,
-                                      target: self,
-                                      action: #selector(shareButtonAction))
-    
-    navigationItem.rightBarButtonItem = shareButton
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                       style: .plain,
-                                                       target: self,
-                                                       action: #selector(settingsButtonAction))
+    interactor.returnModel { [weak self] model in
+      guard let self else {
+        return
+      }
+      let isPremium = model.isPremium
+      let premiumName = isPremium ? appearance.isPremiumName : appearance.notPremiumName
+      
+      let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(self.shareButtonAction))
+      
+      let premiumButton = UIBarButtonItem.menuButton(self,
+                                                     action: #selector(self.premiumButtonAction),
+                                                     imageName: premiumName,
+                                                     size: CGSize(width: 34,
+                                                                  height: 28))
+      
+      self.navigationItem.rightBarButtonItems = [shareButton, premiumButton]
+      self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                                              style: .plain,
+                                                              target: self,
+                                                              action: #selector(self.settingsButtonAction))
+    }
+  }
+  
+  @objc
+  func premiumButtonAction() {
+    interactor.returnModel { [weak self] model in
+      self?.moduleOutput?.premiumButtonAction(model.isPremium)
+      self?.impactFeedback.impactOccurred()
+    }
   }
   
   @objc
   func shareButtonAction() {
     moduleOutput?.shareButtonAction()
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingsButtonAction() {
     moduleOutput?.settingButtonAction()
+    impactFeedback.impactOccurred()
   }
-
+  
   @objc
   func didBecomeActiveNotification() {
     updateSections()
+  }
+}
+
+// MARK: - UIBarButtonItem
+
+private extension UIBarButtonItem {
+  static func menuButton(_ target: Any?,
+                         action: Selector,
+                         imageName: String,
+                         size: CGSize) -> UIBarButtonItem {
+    let button = UIButton(type: .system)
+    button.setImage(UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
+    button.addTarget(target, action: action, for: .touchUpInside)
+    
+    let menuBarItem = UIBarButtonItem(customView: button)
+    menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+    menuBarItem.customView?.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+    menuBarItem.customView?.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+    return menuBarItem
   }
 }
 
@@ -335,5 +398,9 @@ private extension MainScreenViewController {
     let title = NSLocalizedString("Random Pro", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
+    let premiumButtonIcon = UIImage(systemName: "crown")
+    
+    let notPremiumName = "crown_not_premium"
+    let isPremiumName = "crown_is_premium"
   }
 }

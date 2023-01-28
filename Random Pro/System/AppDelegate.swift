@@ -9,6 +9,7 @@ import UIKit
 import YandexMobileMetrica
 import YandexMobileMetricaPush
 import Firebase
+import ApphudSDK
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
       YMMYandexMetrica.activate(with: configuration)
     }
     FirebaseApp.configure()
+    Apphud.start(apiKey: "app_YENSAYJtWZqqJyG2kMevtnSB4nv5Qf")
     return true
   }
   

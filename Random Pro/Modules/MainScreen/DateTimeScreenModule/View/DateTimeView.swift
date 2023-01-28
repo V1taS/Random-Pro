@@ -81,11 +81,11 @@ private extension DateTimeView {
   func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     
     generateButtonDay.setTitle(appearance.textButtonDayTitle, for: .normal)

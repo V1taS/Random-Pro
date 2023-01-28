@@ -49,6 +49,7 @@ final class CubesScreenViewController: CubesScreenModule {
   private let moduleView: CubesScreenViewProtocol
   private let interactor: CubesScreenInteractorInput
   private let factory: CubesScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                                 style: .plain,
                                                 target: self,
@@ -159,11 +160,13 @@ private extension CubesScreenViewController {
       return
     }
     moduleOutput?.resultCopied(text: result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
+    impactFeedback.impactOccurred()
   }
 }
 

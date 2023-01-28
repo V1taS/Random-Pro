@@ -154,8 +154,8 @@ extension ListPlayersScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.primaryWhite
+        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .textField:
@@ -166,7 +166,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
                                      withConfiguration: Appearance().largeConfig)
         cell.configureCellWith(
           textField: textField,
-          textFieldBorderColor: RandomColor.secondaryGray,
+          textFieldBorderColor: RandomColor.darkAndLightTheme.secondaryGray,
           buttonImage: checkmarkImage,
           listGender: [appearance.male, appearance.female],
           buttonAction: { [weak self] in
@@ -198,10 +198,10 @@ extension ListPlayersScreenView: UITableViewDataSource {
       ) as? DoubleTitleCell {
         cell.configureCellWith(
           primaryText: "\(appearance.allTitle): \(playersCount)",
-          primaryTextColor: RandomColor.primaryGray,
+          primaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
           primaryTextFont: RandomFont.primaryMedium10,
           secondaryText: "\(appearance.forGameTitle): \(forGameCount)",
-          secondaryTextColor: RandomColor.primaryGray,
+          secondaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
           secondaryTextFont: RandomFont.primaryMedium10
         )
         viewCell = cell
@@ -409,9 +409,9 @@ private extension ListPlayersScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
-    textField.layer.borderColor = RandomColor.secondaryGray.cgColor
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    textField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
     
     textField.placeholder = appearance.textFieldPlaceholder
     textField.delegate = self

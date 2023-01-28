@@ -90,11 +90,11 @@ private extension ColorsScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     showPlugView()
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = appearance.resultLabelNumberOfLines
     resultLabel.text = appearance.resultLabelTitle
@@ -114,7 +114,7 @@ private extension ColorsScreenView {
       guard let self = self else {
         return
       }
-      self.contentView.applyGradient(colors: [RandomColor.primaryWhite])
+      self.contentView.applyGradient(colors: [RandomColor.darkAndLightTheme.primaryWhite])
     }
   }
   

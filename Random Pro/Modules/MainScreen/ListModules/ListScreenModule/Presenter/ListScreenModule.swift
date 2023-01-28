@@ -67,6 +67,7 @@ final class ListScreenViewController: ListScreenModule {
   private let moduleView: ListScreenViewProtocol
   private let interactor: ListScreenInteractorInput
   private let factory: ListScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                                 style: .plain,
                                                 target: self,
@@ -182,11 +183,13 @@ private extension ListScreenViewController {
   @objc
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingsButtonAction() {
     moduleOutput?.settingButtonAction()
+    impactFeedback.impactOccurred()
   }
 }
 // MARK: - Appearance

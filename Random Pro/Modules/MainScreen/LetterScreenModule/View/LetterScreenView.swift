@@ -70,10 +70,10 @@ final class LetterScreenView: LetterScreenViewProtocol {
 private extension LetterScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)

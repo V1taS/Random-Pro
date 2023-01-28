@@ -47,6 +47,7 @@ final class CoinScreenViewController: CoinScreenModule {
   private let interactor: CoinScreenInteractorInput
   private let factory: CoinScreenFactoryInput
   private var cacheModel: CoinScreenModel?
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -141,6 +142,7 @@ private extension CoinScreenViewController {
       return
     }
     moduleOutput?.settingButtonAction(model: model)
+    impactFeedback.impactOccurred()
   }
 }
 

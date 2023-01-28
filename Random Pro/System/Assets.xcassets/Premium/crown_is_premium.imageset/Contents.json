@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "crown_is_premium.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

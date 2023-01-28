@@ -85,7 +85,7 @@ private extension OnboardingScreenContainerView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     imageView.contentMode = .scaleAspectFit
     imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -94,12 +94,12 @@ private extension OnboardingScreenContainerView {
     titleLabel.textAlignment = .center
     titleLabel.numberOfLines = .zero
     titleLabel.font = RandomFont.primaryMedium32
-    titleLabel.textColor = RandomColor.primaryGray
+    titleLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     
     descriptionLabel.textAlignment = .center
     descriptionLabel.numberOfLines = .zero
     descriptionLabel.font = RandomFont.primaryRegular24
-    descriptionLabel.textColor = RandomColor.primaryGray
+    descriptionLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
   }
 }
 

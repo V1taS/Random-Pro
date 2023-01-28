@@ -20,6 +20,9 @@ protocol MainSettingsScreenCoordinatorOutput: AnyObject {
   /// Данные были изменены
   ///  - Parameter models: результат генерации
   func didChanged(models: [MainScreenModel.Section])
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
@@ -54,6 +57,7 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
   private var modalNavigationController: UINavigationController?
   private var customMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol?
   private var cacheMainScreenSections: [MainScreenModel.Section] = []
+  private var anyCoordinator: Coordinator?
   
   // MARK: - Initialization
   
@@ -93,6 +97,34 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 // MARK: - MainSettingsScreenModuleOutput
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
+  func applicationIconSectionsSelected() {
+    guard let upperViewController = modalNavigationController else {
+      return
+    }
+    
+    let selecteAppIconScreenCoordinator = SelecteAppIconScreenCoordinator(upperViewController,
+                                                                          services)
+    anyCoordinator = selecteAppIconScreenCoordinator
+    selecteAppIconScreenCoordinator.output = self
+    selecteAppIconScreenCoordinator.start()
+    services.metricsService.track(event: .selecteAppIcon)
+  }
+  
+  func premiumSectionsSelected() {
+    guard let upperViewController = modalNavigationController else {
+      return
+    }
+    
+    let premiumScreenCoordinator = PremiumScreenCoordinator(upperViewController,
+                                                            services)
+    anyCoordinator = premiumScreenCoordinator
+    premiumScreenCoordinator.output = self
+    premiumScreenCoordinator.selectPresentType(.push)
+    premiumScreenCoordinator.start()
+    
+    services.metricsService.track(event: .premiumScreen)
+  }
+  
   func feedBackButtonAction() {
     let appearance = Appearance()
     if MFMailComposeViewController.canSendMail() {
@@ -107,7 +139,7 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       \(systemVersion)
       \(appVersion)
 """
-
+      
       mail.mailComposeDelegate = self
       mail.setToRecipients([appearance.addressRecipients])
       mail.setSubject(appearance.subjectRecipients)
@@ -147,6 +179,14 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
   }
 }
 
+// MARK: - PremiumScreenCoordinatorOutput
+
+extension MainSettingsScreenCoordinator: PremiumScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+}
+
 // MARK: - CustomMainSectionsCoordinatorOutput
 
 extension MainSettingsScreenCoordinator: CustomMainSectionsCoordinatorOutput {
@@ -165,6 +205,10 @@ extension MainSettingsScreenCoordinator: MFMailComposeViewControllerDelegate {
     controller.dismiss(animated: true, completion: nil)
   }
 }
+
+// MARK: - SelecteAppIconScreenCoordinatorOutput
+
+extension MainSettingsScreenCoordinator: SelecteAppIconScreenCoordinatorOutput {}
 
 // MARK: - Appearance
 

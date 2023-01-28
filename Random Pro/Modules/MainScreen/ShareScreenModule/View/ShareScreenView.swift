@@ -127,7 +127,7 @@ private extension ShareScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     imageView.layer.cornerRadius = 16
     imageView.clipsToBounds = true

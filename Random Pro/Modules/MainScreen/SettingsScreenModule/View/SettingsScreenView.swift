@@ -74,7 +74,7 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 extension SettingsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch models[indexPath.row] {
-    case .titleAndImage(_, _, let id):
+    case let .titleAndChevron(_, id):
       if id == Appearance().createListID {
         output?.createListAction()
       } else {
@@ -116,13 +116,11 @@ extension SettingsScreenView: UITableViewDataSource {
                                secondaryText: description)
         viewCell = cell
       }
-    case let .titleAndImage(title, asideImage, _):
+    case let .titleAndChevron(title, _):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: LabelAndImageCell.reuseIdentifier
-      ) as? LabelAndImageCell {
-        cell.configureCellWith(titleText: title,
-                               imageAside: UIImage(data: asideImage ?? Data()),
-                               imageColor: RandomColor.primaryGray)
+        withIdentifier: LabelAndChevronCell.reuseIdentifier
+      ) as? LabelAndChevronCell {
+        cell.configureCellWith(titleText: title)
         viewCell = cell
       }
     case let .cleanButtonModel(title):
@@ -140,8 +138,8 @@ extension SettingsScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.primaryWhite
+        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .divider:
@@ -179,16 +177,16 @@ private extension SettingsScreenView {
     }
     
     NSLayoutConstraint.activate([
-      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.insets.left),
+      tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.defaultInset),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.insets.right),
+      tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.defaultInset),
       tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
-    tableView.backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -197,8 +195,8 @@ private extension SettingsScreenView {
                        forCellReuseIdentifier: LabelAndSwitchCell.reuseIdentifier)
     tableView.register(DoubleTitleCell.self,
                        forCellReuseIdentifier: DoubleTitleCell.reuseIdentifier)
-    tableView.register(LabelAndImageCell.self,
-                       forCellReuseIdentifier: LabelAndImageCell.reuseIdentifier)
+    tableView.register(LabelAndChevronCell.self,
+                       forCellReuseIdentifier: LabelAndChevronCell.reuseIdentifier)
     tableView.register(SmallButtonCell.self,
                        forCellReuseIdentifier: SmallButtonCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,
@@ -209,7 +207,7 @@ private extension SettingsScreenView {
     tableView.separatorStyle = .none
     tableView.tableFooterView = UIView()
     tableView.tableHeaderView = UIView()
-    tableView.contentInset.top = Appearance().insets.top
+    tableView.contentInset.top = Appearance().defaultInset
   }
 }
 
@@ -217,7 +215,7 @@ private extension SettingsScreenView {
 
 private extension SettingsScreenView {
   struct Appearance {
-    let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    let defaultInset: CGFloat = 16
     let cornerRadius: CGFloat = 8
     let createListID = "createListID"
   }

@@ -54,6 +54,7 @@ final class LetterScreenViewController: LetterScreenModule {
   private let interactor: LetterScreenInteractorInput
   private let factory: LetterScreenFactoryInput
   private var cacheModel: LetterScreenModel?
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -159,6 +160,7 @@ private extension LetterScreenViewController {
       return
     }
     moduleOutput?.settingButtonAction(model: model)
+    impactFeedback.impactOccurred()
   }
 }
 

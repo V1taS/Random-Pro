@@ -51,6 +51,7 @@ final class DateTimeViewController: DateTimeModule {
   private let interactor: DateTimeInteractorInput
   private let factory: DateTimeFactoryInput
   private var cacheModel: DateTimeScreenModel?
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                            style: .plain,
                                            target: self,
@@ -167,12 +168,14 @@ private extension DateTimeViewController {
       return
     }
     moduleOutput?.resultLabelAction(model: model)
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingButtonAction() {
     guard let cacheModel = cacheModel else { return }
     moduleOutput?.settingButtonAction(model: cacheModel)
+    impactFeedback.impactOccurred()
   }
 }
 

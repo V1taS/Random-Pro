@@ -70,6 +70,7 @@ final class TeamsScreenViewController: TeamsScreenModule {
   private let interactor: TeamsScreenInteractorInput
   private let moduleView: TeamsScreenViewProtocol
   private let factory: TeamsScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var shareButton = UIBarButtonItem(image: Appearance().shareButtonIcon,
                                                  style: .plain,
                                                  target: self,
@@ -193,7 +194,7 @@ private extension TeamsScreenViewController {
                                          style: .plain,
                                          target: self,
                                          action: #selector(generateButtonAction))
-    generateButton.tintColor = RandomColor.primaryGreen
+    generateButton.tintColor = RandomColor.only.primaryGreen
 
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,
@@ -209,6 +210,7 @@ private extension TeamsScreenViewController {
   func shareButtonAction() {
     moduleView.returnCurrentContentImage { [weak self] imgData in
       self?.moduleOutput?.shareButtonAction(imageData: imgData)
+      self?.impactFeedback.impactOccurred()
     }
   }
   
@@ -219,12 +221,13 @@ private extension TeamsScreenViewController {
     } else {
       factory.createTeamsFrom(model: interactor.returnModel())
     }
-    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    impactFeedback.impactOccurred()
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(players: interactor.returnListPlayers())
+    impactFeedback.impactOccurred()
   }
 }
 

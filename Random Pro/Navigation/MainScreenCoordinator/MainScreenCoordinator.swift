@@ -77,6 +77,17 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func premiumButtonAction(_ isPremium: Bool) {
+    if isPremium {
+      services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
+                                                         glyph: true,
+                                                         timeout: nil,
+                                                         active: {})
+    } else {
+      openPremium()
+    }
+  }
+  
   func mainScreenModuleDidLoad() {
     checkIsUpdateAvailable()
   }
@@ -285,15 +296,22 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     settingsScreenCoordinator.start()
     
-    settingsScreenCoordinator.updateContentWith(isDarkTheme: mainScreenModule.returnModel().isDarkMode)
-    settingsScreenCoordinator.updateContentWith(models: mainScreenModule.returnModel().allSections)
     services.metricsService.track(event: .mainSettingsScreen)
+    
+    mainScreenModule.returnModel { model in
+      settingsScreenCoordinator.updateContentWith(isDarkTheme: model.isDarkMode)
+      settingsScreenCoordinator.updateContentWith(models: model.allSections)
+    }
   }
 }
 
-// MARK: - MainSettingsScreenCoordinatorOutput
+// MARK: - MainSettingsScreenCoordinatorOutput & PremiumScreenCoordinatorOutput
 
-extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput {
+extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScreenCoordinatorOutput {
+  func updateStateForSections() {
+    mainScreenModule?.updateStateForSections()
+  }
+  
   func didChanged(models: [MainScreenModel.Section]) {
     mainScreenModule?.updateSectionsWith(models: models)
   }
@@ -306,8 +324,19 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput {
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func openPremium() {
+    let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
+                                                            services)
+    anyCoordinator = premiumScreenCoordinator
+    premiumScreenCoordinator.output = self
+    premiumScreenCoordinator.selectPresentType(.present)
+    premiumScreenCoordinator.start()
+    
+    services.metricsService.track(event: .premiumScreen)
+  }
+  
   func checkIsUpdateAvailable() {
-    #if !DEBUG
+#if !DEBUG
     let appearance = Appearance()
     guard let appStoreUrl = appearance.appStoreUrl else {
       return
@@ -339,14 +368,16 @@ private extension MainScreenCoordinator {
         }
       }
     }
-    #endif
+#endif
   }
   
   func checkDarkMode() {
-    guard let isDarkTheme = mainScreenModule?.returnModel().isDarkMode, let window = window else {
-      return
+    mainScreenModule?.returnModel { [weak self] model in
+      guard let self, let isDarkTheme = model.isDarkMode, let window = self.window else {
+        return
+      }
+      window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
     }
-    window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
   }
   
   func showOnboarding() {
@@ -415,6 +446,8 @@ private extension MainScreenCoordinator {
       openRaffle()
     case .imageFilters:
       openImageFilters()
+    case .premiumScreen:
+      openPremium()
     }
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen": deepLinkType.rawValue])
@@ -449,8 +482,8 @@ private extension MainScreenCoordinator {
                                   handler: { _ in }))
     alert.addAction(UIAlertAction(title: appearance.unlock,
                                   style: .default,
-                                  handler: { _ in
-      // TODO: - Показать экран с разблокировкой премиум
+                                  handler: { [weak self] _ in
+      self?.openPremium()
     }))
     mainScreenModule?.present(alert, animated: true, completion: nil)
   }
@@ -480,5 +513,8 @@ private extension MainScreenCoordinator {
     let newVersionText = NSLocalizedString("Новая версия", comment: "")
     let availableInAppStoreText = NSLocalizedString("доступна в App Store", comment: "")
     let clickToUpdateAppText = NSLocalizedString("Нажмите, чтобы обновить приложение", comment: "")
+    let premiumAccessActivatedTitle = NSLocalizedString("Премиум доступ активирован", comment: "")
+    
+    let positiveAlertALotOfClicksKey = "main_screen_show_positive_alert_a_lot_of_clicks"
   }
 }

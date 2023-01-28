@@ -105,13 +105,13 @@ extension TeamsScreenView: UICollectionViewDelegate {
     let model = models[indexPath.section]
     headerView.configureCellWith(
       primaryText: model.name,
-      primaryTextColor: RandomColor.primaryGray,
+      primaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
       primaryTextFont: RandomFont.primaryBold18,
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
-      secondaryTextColor: RandomColor.secondaryGray,
+      secondaryTextColor: RandomColor.darkAndLightTheme.secondaryGray,
       secondaryTextFont: RandomFont.primaryRegular18
     )
-    headerView.backgroundColor = RandomColor.primaryWhite
+    headerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     return headerView
   }
 }
@@ -139,7 +139,7 @@ extension TeamsScreenView: UICollectionViewDataSource {
     cell.configureCellWith(
       avatar: UIImage(data: player.avatar ?? Data()),
       name: player.name,
-      nameTextColor: RandomColor.primaryGray,
+      nameTextColor: RandomColor.darkAndLightTheme.primaryGray,
       styleCard: .defaultStyle,
       styleEmoji: .customEmoji(Character(player.emoji ?? " ")),
       isBorder: true,
@@ -198,10 +198,10 @@ private extension TeamsScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
     resultLabel.text = appearance.resultLabelTitle
@@ -214,7 +214,7 @@ private extension TeamsScreenView {
                                          action: #selector(countTeamsSegmentedControlAction),
                                          for: .valueChanged)
     
-    collectionView.backgroundColor = RandomColor.primaryWhite
+    collectionView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     collectionView.showsVerticalScrollIndicator = false
     collectionView.alwaysBounceVertical = true
     collectionView.register(PlayerCollectionViewCell.self,

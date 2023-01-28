@@ -56,9 +56,14 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
   // MARK: - Internal func
   
   func getContent(models: [MainScreenModel.Section]) {
-    let newModel = models.filter { !$0.isHidden }
-    self.models =  newModel
-    output?.didReceive(models: newModel)
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      let newModel = models.filter { !$0.isHidden }
+      self?.models =  newModel
+      
+      DispatchQueue.main.async { [weak self] in
+        self?.output?.didReceive(models: newModel)
+      }
+    }
   }
   
   func sectionChanged(_ index: Int, type: MainScreenModel.Section) {
@@ -73,11 +78,10 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.remove(at: currentIndex)
         newModel.insert(MainScreenModel.Section(
           type: section.type,
-          isEnabled: section.isEnabled,
-          premiumAccessAllowed: section.premiumAccessAllowed,
-          isHidden: section.isHidden,
+          imageSectionSystemName: section.imageSectionSystemName,
           titleSection: section.titleSection,
-          imageSection: section.imageSection,
+          isEnabled: section.isEnabled,
+          isHidden: section.isHidden,
           advLabel: section.advLabel
         ), at: index
         )
@@ -101,11 +105,10 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.remove(at: index)
         newModel.insert(MainScreenModel.Section(
           type: section.type,
-          isEnabled: isEnabled,
-          premiumAccessAllowed: section.premiumAccessAllowed,
-          isHidden: section.isHidden,
+          imageSectionSystemName: section.imageSectionSystemName,
           titleSection: section.titleSection,
-          imageSection: section.imageSection,
+          isEnabled: isEnabled,
+          isHidden: section.isHidden,
           advLabel: section.advLabel
         ), at: index
         )

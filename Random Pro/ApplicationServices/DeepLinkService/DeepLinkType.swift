@@ -72,4 +72,7 @@ enum DeepLinkType: String, CaseIterable, UserDefaultsCodable {
   
   /// Обновить приложением
   case updateApp = "update_app"
+  
+  /// Экран премиум раздела
+  case premiumScreen = "premium_screen"
 }

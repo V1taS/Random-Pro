@@ -35,13 +35,13 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Internal func
   
-  func configureCellWith(model: MainScreenModel.Section) {
+  func configureCellWith(model: MainScreenModel.Section, isPremium: Bool) {
     mainCardView.configureWith(
-      imageCard: UIImage(data: model.imageSection),
+      imageCard: UIImage(systemName: model.imageSectionSystemName),
       titleCard: model.titleSection,
       isShowADVLabel: model.advLabel != .none,
       titleADVText: model.advLabel.title,
-      isDisabled: model.advLabel == .premium && !model.premiumAccessAllowed
+      isDisabled: model.advLabel == .premium && !isPremium
     )
   }
 }
@@ -64,7 +64,7 @@ private extension MainScreenCollectionViewCell {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
   }
 }
 

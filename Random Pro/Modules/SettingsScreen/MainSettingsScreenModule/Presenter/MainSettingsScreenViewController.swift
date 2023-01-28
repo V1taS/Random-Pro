@@ -20,6 +20,12 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
   
+  /// Выбран раздел выбора иконок
+  func applicationIconSectionsSelected()
+  
+  /// Выбран раздел премиум
+  func premiumSectionsSelected()
+  
   /// Кнопка обратной связи была нажата
   func feedBackButtonAction()
 }
@@ -50,6 +56,7 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   private let interactor: MainSettingsScreenInteractorInput
   private let moduleView: MainSettingsScreenViewProtocol
   private let factory: MainSettingsScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -102,8 +109,17 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
 // MARK: - MainSettingsScreenViewOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
+  func applicationIconSectionsSelected() {
+    moduleOutput?.applicationIconSectionsSelected()
+  }
+  
+  func premiumSectionsSelected() {
+    moduleOutput?.premiumSectionsSelected()
+  }
+  
   func feedBackButtonAction() {
     moduleOutput?.feedBackButtonAction()
+    impactFeedback.impactOccurred()
   }
   
   func customMainSectionsSelected() {
@@ -150,6 +166,7 @@ private extension MainSettingsScreenViewController {
   @objc
   func closeButtonAction() {
     moduleOutput?.closeButtonAction()
+    impactFeedback.impactOccurred()
   }
 }
 

@@ -82,10 +82,10 @@ private extension CoinScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.primaryWhite
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.primaryGray
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)

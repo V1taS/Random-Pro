@@ -40,6 +40,7 @@ final class ColorsScreenViewController: ColorsScreenModule {
   private let interactor: ColorsScreenInteractorInput
   private let moduleView: ColorsScreenViewProtocol
   private let factory: ColorsScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -113,6 +114,7 @@ private extension ColorsScreenViewController {
   @objc
   func shareButtonAction() {
     interactor.requestGalleryStatus()
+    impactFeedback.impactOccurred()
   }
 }
 

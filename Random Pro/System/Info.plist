@@ -98,5 +98,173 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+  
+  <key>CFBundleIcons</key>
+  <dict>
+      <key>CFBundlePrimaryIcon</key>
+      <dict>
+          <key>CFBundleIconFiles</key>
+          <array>
+              <string>selecte_app_icon_default</string>
+          </array>
+          <key>UIPrerenderedIcon</key>
+          <false/>
+      </dict>
+      
+      <key>CFBundleAlternateIcons</key>
+      <dict>
+        
+          <key>selecte_app_icon_blue_raspberry</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_blue_raspberry</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_crimson_tide@</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_crimson_tide</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_evening_night</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_evening_night</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_grade_grey</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_grade_grey</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_harvey</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_harvey</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_lithium</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_lithium</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_midnight_city</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_midnight_city</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_moon_purple</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_moon_purple</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_moonlit_asteroid</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_moonlit_asteroid</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_orange_fun</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_orange_fun</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_pure_lust</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_pure_lust</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_selenium</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_selenium</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_terminal</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_terminal</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_summer_dog</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_summer_dog</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_sin_city_red</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_sin_city_red</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+
+      </dict>
+  </dict>
 </dict>
 </plist>

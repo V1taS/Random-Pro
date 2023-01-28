@@ -11,7 +11,7 @@ import UIKit
 // MARK: - SectionType
 
 /// Тип выбранной секции
-enum SelecteAppIconType: CaseIterable {
+enum SelecteAppIconType: UserDefaultsCodable, CaseIterable {
   
   /// Иконка цвета
   var imageName: String {
@@ -171,19 +171,19 @@ private extension SelecteAppIconType {
     let gradeGreyTitle = NSLocalizedString("Серый", comment: "")
     let gradeGreyImage = "selecte_app_icon_grade_grey"
     
-    let summerDogTitle = NSLocalizedString("Летняя собака", comment: "")
+    let summerDogTitle = NSLocalizedString("Летний", comment: "")
     let summerDogImage = "selecte_app_icon_summer_dog"
     
-    let sinCityRedTitle = NSLocalizedString("Красный город грехов", comment: "")
+    let sinCityRedTitle = NSLocalizedString("Красный город", comment: "")
     let sinCityRedImage = "selecte_app_icon_sin_city_red"
     
-    let blueRaspberryTitle = NSLocalizedString("Голубая малина", comment: "")
+    let blueRaspberryTitle = NSLocalizedString("Голубая лагуна", comment: "")
     let blueRaspberryImage = "selecte_app_icon_blue_raspberry"
     
     let eveningNightTitle = NSLocalizedString("Вечерняя ночь", comment: "")
     let eveningNightImage = "selecte_app_icon_evening_night"
     
-    let pureLustTitle = NSLocalizedString("Чистая похоть", comment: "")
+    let pureLustTitle = NSLocalizedString("Горячий шоколад", comment: "")
     let pureLustImage = "selecte_app_icon_pure_lust"
     
     let moonPurpleTitle = NSLocalizedString("Лунный фиолетовый", comment: "")

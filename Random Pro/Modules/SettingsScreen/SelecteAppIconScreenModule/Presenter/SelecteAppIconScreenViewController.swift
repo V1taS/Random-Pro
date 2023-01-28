@@ -8,7 +8,17 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol SelecteAppIconScreenModuleOutput: AnyObject {}
+protocol SelecteAppIconScreenModuleOutput: AnyObject {
+  
+  /// Нет премиум доступа
+  func noPremiumAccessAction()
+  
+  /// Икнока успешно выбрана
+  func iconSelectedSuccessfully()
+  
+  /// Что-то пошло не так
+  func somethingWentWrong()
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol SelecteAppIconScreenModuleInput {
@@ -61,24 +71,45 @@ final class SelecteAppIconScreenViewController: SelecteAppIconScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    factory.createListModel()
     title = "Выбор иконки"
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
+    interactor.getContent()
     navigationItem.largeTitleDisplayMode = .never
   }
 }
 
 // MARK: - SelecteAppIconScreenViewOutput
 
-extension SelecteAppIconScreenViewController: SelecteAppIconScreenViewOutput {}
+extension SelecteAppIconScreenViewController: SelecteAppIconScreenViewOutput {
+  func noPremiumAccessAction() {
+    moduleOutput?.noPremiumAccessAction()
+  }
+  
+  func didSelectImage(type: SelecteAppIconType) {
+    factory.createListModelWith(selectImageType: type, and: interactor.returnIsPremium())
+    interactor.updateAppIcon(type: type)
+  }
+}
 
 // MARK: - SelecteAppIconScreenInteractorOutput
 
-extension SelecteAppIconScreenViewController: SelecteAppIconScreenInteractorOutput {}
+extension SelecteAppIconScreenViewController: SelecteAppIconScreenInteractorOutput {
+  func iconSelectedSuccessfully() {
+    moduleOutput?.iconSelectedSuccessfully()
+  }
+  
+  func somethingWentWrong() {
+    moduleOutput?.somethingWentWrong()
+  }
+  
+  func didReceive(selecteIconType: SelecteAppIconType, isPremium: Bool) {
+    factory.createListModelWith(selectImageType: selecteIconType, and: isPremium)
+  }
+}
 
 // MARK: - SelecteAppIconScreenFactoryOutput
 

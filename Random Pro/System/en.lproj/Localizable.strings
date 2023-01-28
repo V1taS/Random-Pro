@@ -214,10 +214,13 @@
 "Харви" = "Harvey";
 "Залитый лунным светом астероид" = "Moonlit Asteroid";
 "Серый" = "Grade Grey";
-"Летняя собака" = "Summer Dog";
-"Красный город грехов" = "Sin City Red";
-"Голубая малина" = "Blue Raspberry";
+"Летний" = "Summer";
+"Красный город" = "Red city";
+"Голубая лагуна" = "Blue Lagoon";
 "Вечерняя ночь" = "Evening Night";
-"Чистая похоть" = "Pure Lust";
+"Горячий шоколад" = "Hot chocolate";
 "Лунный фиолетовый" = "Moon Purple";
 "Селен" = "Selenium";
+"Можно изменить цвет иконки приложения" = "You can change the color of the application icon";
+"Цвет иконки установлен" = "Icon color set";
+

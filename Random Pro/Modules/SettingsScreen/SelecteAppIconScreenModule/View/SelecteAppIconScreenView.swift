@@ -9,7 +9,15 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из View в Presenter
-protocol SelecteAppIconScreenViewOutput: AnyObject {}
+protocol SelecteAppIconScreenViewOutput: AnyObject {
+  
+  /// Было выбрано изображение
+  /// - Parameter type: Тип изображения
+  func didSelectImage(type: SelecteAppIconType)
+  
+  /// Нет премиум доступа
+  func noPremiumAccessAction()
+}
 
 /// События которые отправляем от Presenter ко View
 protocol SelecteAppIconScreenViewInput {
@@ -68,7 +76,7 @@ private extension SelecteAppIconScreenView {
       tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
       tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+      tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
     ])
   }
   
@@ -100,11 +108,15 @@ private extension SelecteAppIconScreenView {
 
 extension SelecteAppIconScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    switch models[indexPath.row] {
-//    case let .largeImageAndLabelWithCheakmark(isSetCheakmark, isSetLocked, iconType):
-//      break
-//    default: break
-//    }
+    switch models[indexPath.row] {
+    case let .largeImageAndLabelWithCheakmark(_, _, _, isSetLocked, iconType):
+      if isSetLocked {
+        output?.noPremiumAccessAction()
+      } else {
+        output?.didSelectImage(type: iconType)
+      }
+    default: break
+    }
   }
 }
 
@@ -120,7 +132,7 @@ extension SelecteAppIconScreenView: UITableViewDataSource {
     var viewCell = UITableViewCell()
     
     switch model {
-    case let .largeImageAndLabelWithCheakmark(imageName, title, setIsCheakmark, isSetLocked, iconType):
+    case let .largeImageAndLabelWithCheakmark(imageName, title, setIsCheakmark, isSetLocked, _):
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: LargeImageAndLabelWithCheakmarkCell.reuseIdentifier
       ) as? LargeImageAndLabelWithCheakmarkCell {

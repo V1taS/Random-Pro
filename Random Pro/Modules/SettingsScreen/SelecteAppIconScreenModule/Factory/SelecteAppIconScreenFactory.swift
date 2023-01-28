@@ -19,7 +19,7 @@ protocol SelecteAppIconScreenFactoryOutput: AnyObject {
 protocol SelecteAppIconScreenFactoryInput {
   
   /// Создаем модельку для таблички
-  func createListModel()
+  func createListModelWith(selectImageType: SelecteAppIconType, and isPremium: Bool)
 }
 
 /// Фабрика
@@ -31,30 +31,48 @@ final class SelecteAppIconScreenFactory: SelecteAppIconScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModel() {
-    var tableViewModels: [SelecteAppIconScreenType] = []
-    tableViewModels.append(contentsOf: self.configureScreenType())
-    
-    output?.didReceive(models: tableViewModels)
+  func createListModelWith(selectImageType: SelecteAppIconType, and isPremium: Bool) {
+    configureScreenType(selectImageType, and: isPremium) { [weak self] models in
+      self?.output?.didReceive(models: models)
+    }
   }
 }
 
 // MARK: -
 
 private extension SelecteAppIconScreenFactory {
-  func configureScreenType() -> [SelecteAppIconScreenType] {
+  func configureScreenType(_ selectImageType: SelecteAppIconType,
+                           and isPremium: Bool,
+                           completion: ([SelecteAppIconScreenType]) -> Void) {
+    let allImage = SelecteAppIconType.allCases.filter { $0 != .defaultIcon }
     var tableViewModels: [SelecteAppIconScreenType] = []
-    SelecteAppIconType.allCases.forEach {
+    let defaultImage = SelecteAppIconType.defaultIcon
+    
+    tableViewModels.append(.insets(4))
+    tableViewModels.append(.divider)
+    tableViewModels.append(.insets(4))
+    tableViewModels.append(.largeImageAndLabelWithCheakmark(
+      imageName: defaultImage.imageName,
+      title: defaultImage.title,
+      isSetCheakmark: selectImageType == .defaultIcon,
+      isSetLocked: false,
+      iconType: defaultImage
+    ))
+    tableViewModels.append(.insets(4))
+    
+    allImage.forEach {
       tableViewModels.append(.insets(4))
       tableViewModels.append(.divider)
       tableViewModels.append(.insets(4))
-      tableViewModels.append(.largeImageAndLabelWithCheakmark(imageName: $0.imageName,
-                                                              title: $0.title,
-                                                              isSetCheakmark: false,
-                                                              isSetLocked: true,
-                                                              iconType: $0))
+      tableViewModels.append(.largeImageAndLabelWithCheakmark(
+        imageName: $0.imageName,
+        title: $0.title,
+        isSetCheakmark: selectImageType == $0,
+        isSetLocked: !isPremium,
+        iconType: $0
+      ))
       tableViewModels.append(.insets(4))
     }
-    return tableViewModels
+    completion(tableViewModels)
   }
 }

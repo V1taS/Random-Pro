@@ -60,6 +60,8 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   // MARK: - Internal func
   
   func updateAppIcon(type: SelecteAppIconType) {
+    let newModel = SelecteAppIconScreenModel(selecteAppIconType: type)
+    self.model = newModel
     let appearance = Appearance()
     guard UIApplication.shared.supportsAlternateIcons else {
       output?.somethingWentWrong()

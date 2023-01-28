@@ -124,7 +124,7 @@
               <false/>
           </dict>
           
-          <key>selecte_app_icon_crimson_tide@</key>
+          <key>selecte_app_icon_crimson_tide</key>
           <dict>
               <key>CFBundleIconFiles</key>
               <array>

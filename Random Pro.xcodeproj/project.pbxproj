@@ -86,6 +86,12 @@
 		1B412BA728C7DFE60078126F /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B412BA628C7DFE60078126F /* FileManager.swift */; };
 		1B4A5C9D28B9261300215064 /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9C28B9261300215064 /* PermissionService.swift */; };
 		1B4A5CA028B949F400215064 /* PasswordScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */; };
+		1B4F5C0529881B0B0003457E /* FilmsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F5C0029881B0B0003457E /* FilmsScreenFactory.swift */; };
+		1B4F5C0629881B0B0003457E /* FilmsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F5C0129881B0B0003457E /* FilmsScreenViewController.swift */; };
+		1B4F5C0729881B0B0003457E /* FilmsScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F5C0229881B0B0003457E /* FilmsScreenAssembly.swift */; };
+		1B4F5C0829881B0B0003457E /* FilmsScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F5C0329881B0B0003457E /* FilmsScreenInteractor.swift */; };
+		1B4F5C0929881B0B0003457E /* FilmsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F5C0429881B0B0003457E /* FilmsScreenView.swift */; };
+		1B4F5C1229881BEF0003457E /* FilmsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F5C1129881BEF0003457E /* FilmsScreenCoordinator.swift */; };
 		1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065528A6BDF0009AABF2 /* TeamsScreenFactory.swift */; };
 		1B50065B28A6BDF0009AABF2 /* TeamsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065628A6BDF0009AABF2 /* TeamsScreenViewController.swift */; };
 		1B50065C28A6BDF0009AABF2 /* TeamsScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B50065728A6BDF0009AABF2 /* TeamsScreenAssembly.swift */; };
@@ -412,6 +418,12 @@
 		1B412BA628C7DFE60078126F /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		1B4A5C9C28B9261300215064 /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
 		1B4A5C9F28B949F400215064 /* PasswordScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordScreenModel.swift; sourceTree = "<group>"; };
+		1B4F5C0029881B0B0003457E /* FilmsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsScreenFactory.swift; sourceTree = "<group>"; };
+		1B4F5C0129881B0B0003457E /* FilmsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsScreenViewController.swift; sourceTree = "<group>"; };
+		1B4F5C0229881B0B0003457E /* FilmsScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsScreenAssembly.swift; sourceTree = "<group>"; };
+		1B4F5C0329881B0B0003457E /* FilmsScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsScreenInteractor.swift; sourceTree = "<group>"; };
+		1B4F5C0429881B0B0003457E /* FilmsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsScreenView.swift; sourceTree = "<group>"; };
+		1B4F5C1129881BEF0003457E /* FilmsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B50065528A6BDF0009AABF2 /* TeamsScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenFactory.swift; sourceTree = "<group>"; };
 		1B50065628A6BDF0009AABF2 /* TeamsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenViewController.swift; sourceTree = "<group>"; };
 		1B50065728A6BDF0009AABF2 /* TeamsScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsScreenAssembly.swift; sourceTree = "<group>"; };
@@ -803,6 +815,7 @@
 		1B0ED19E28D4D8F4001BACF6 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				1B4F5BFF298722900003457E /* FilmsScreenModule */,
 				1BA16E20296DC306001B19C6 /* RaffleScreenModule */,
 				1B1C172C2962E91F005F34B7 /* ImageFiltersScreenModule */,
 				6C127065294730D6000D3852 /* RockPaperScissorsScreenModule */,
@@ -1361,6 +1374,74 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1B4F5BFF298722900003457E /* FilmsScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				1B4F5C0F29881B890003457E /* Assembly */,
+				1B4F5C0E29881B820003457E /* Factory */,
+				1B4F5C0D29881B760003457E /* Interactor */,
+				1B4F5C0C29881B210003457E /* Presenter */,
+				1B4F5C0B29881B190003457E /* View */,
+				1B4F5C0A29881B120003457E /* Models */,
+			);
+			path = FilmsScreenModule;
+			sourceTree = "<group>";
+		};
+		1B4F5C0A29881B120003457E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1B4F5C0B29881B190003457E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B4F5C0429881B0B0003457E /* FilmsScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B4F5C0C29881B210003457E /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B4F5C0129881B0B0003457E /* FilmsScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B4F5C0D29881B760003457E /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B4F5C0329881B0B0003457E /* FilmsScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B4F5C0E29881B820003457E /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B4F5C0029881B0B0003457E /* FilmsScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B4F5C0F29881B890003457E /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B4F5C0229881B0B0003457E /* FilmsScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B4F5C1029881BD70003457E /* FilmsScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B4F5C1129881BEF0003457E /* FilmsScreenCoordinator.swift */,
+			);
+			path = FilmsScreenCoordinator;
+			sourceTree = "<group>";
+		};
 		1B50065428A6BDCB009AABF2 /* TeamsScreenModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1734,6 +1815,7 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				1B4F5C1029881BD70003457E /* FilmsScreenCoordinator */,
 				1BA16E31296DC3C0001B19C6 /* RaffleScreenCoordinator */,
 				1B1C173C2962E982005F34B7 /* ImageFiltersScreenCoordinator */,
 				6C12707529473706000D3852 /* RockPaperScissorsScreenCoordinator */,
@@ -3513,8 +3595,10 @@
 				1B08ADA128CDDAD5007290F3 /* ColorsScreenAssembly.swift in Sources */,
 				6C12706E29473136000D3852 /* RockPaperScissorsScreenModule.swift in Sources */,
 				1B295AF62981B30A003349FC /* SelecteAppIconScreenInteractor.swift in Sources */,
+				1B4F5C0529881B0B0003457E /* FilmsScreenFactory.swift in Sources */,
 				1B0ED1ED28D54E05001BACF6 /* OnboardingScreenAssembly.swift in Sources */,
 				6CBFD056289BC4ED005F9104 /* PasswordScreenInteractor.swift in Sources */,
+				1B4F5C1229881BEF0003457E /* FilmsScreenCoordinator.swift in Sources */,
 				6C9A9EF62829234F00962062 /* NumberScreenFactory.swift in Sources */,
 				1B31F62E285F926200A88217 /* ListResultScreenInteractor.swift in Sources */,
 				1B50065C28A6BDF0009AABF2 /* TeamsScreenAssembly.swift in Sources */,
@@ -3558,6 +3642,7 @@
 				6CA6201E28B62DE30078C971 /* CubesScreenView.swift in Sources */,
 				1BD25B6F28245A80006661B8 /* MetricsnSections.swift in Sources */,
 				6C1270772947371E000D3852 /* RockPaperScissorsScreenCoordinator.swift in Sources */,
+				1B4F5C0829881B0B0003457E /* FilmsScreenInteractor.swift in Sources */,
 				1B1C17332962E93E005F34B7 /* ImageFiltersScreenViewController.swift in Sources */,
 				1B0ED1F728D54E5A001BACF6 /* OnboardingScreenCoordinator.swift in Sources */,
 				1B295AF32981B30A003349FC /* SelecteAppIconScreenFactory.swift in Sources */,
@@ -3663,6 +3748,7 @@
 				6CA6201F28B62DE30078C971 /* CubesScreenInteractor.swift in Sources */,
 				1BA199B928BBC7590036D73C /* ShareScreenCoordinator.swift in Sources */,
 				1B0ED1B728D4EC0C001BACF6 /* MainSettingsScreenModel.swift in Sources */,
+				1B4F5C0929881B0B0003457E /* FilmsScreenView.swift in Sources */,
 				1B50065A28A6BDF0009AABF2 /* TeamsScreenFactory.swift in Sources */,
 				1B0C1B502968691900B9ABCA /* ImageFiltersScreenType.swift in Sources */,
 				6CA396272832513400F86248 /* LetterScreenInteractor.swift in Sources */,
@@ -3674,6 +3760,7 @@
 				1BF4137F28E0C0A2001F3F0F /* MetricsServiceModel.swift in Sources */,
 				1B0ED1B328D4DA67001BACF6 /* MainSettingsScreenCoordinator.swift in Sources */,
 				6C2320FA29361C3000954F39 /* BottleScreenView.swift in Sources */,
+				1B4F5C0629881B0B0003457E /* FilmsScreenViewController.swift in Sources */,
 				6CA6204428B67ACB0078C971 /* ListScreenFactory.swift in Sources */,
 				D2B96C6E296D75F6006EFF3E /* UpdateAppServiceModel.swift in Sources */,
 				D211FCA6297EB6CF00D8D612 /* AppPurchasesServiceState.swift in Sources */,
@@ -3732,6 +3819,7 @@
 				1BD23310296E9F60006FE260 /* UpdateAppFeatureToggleModel.swift in Sources */,
 				6CA6202F28B633280078C971 /* ContactScreenInteractor.swift in Sources */,
 				6C1270722947314C000D3852 /* RockPaperScissorsScreenFactory.swift in Sources */,
+				1B4F5C0729881B0B0003457E /* FilmsScreenAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

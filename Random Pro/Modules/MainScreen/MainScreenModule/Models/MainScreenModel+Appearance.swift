@@ -46,6 +46,8 @@ extension MainScreenModel {
                                                                       comment: "")
     let raffleFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Можно участвовать в еженедельном розыгрыше призов",
                                                                        comment: "")
+    let filmsDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный фильм",
+                                                               comment: "")
     
     let imageCardTeam = "person.circle"
     let titleCardTeam = NSLocalizedString("Команды", comment: "")
@@ -94,5 +96,8 @@ extension MainScreenModel {
     
     let imageRaffle = "gift"
     let titleRaffle = NSLocalizedString("Розыгрыш", comment: "")
+    
+    let imageFilms = "film"
+    let titleFilms = NSLocalizedString("Фильмы", comment: "")
   }
 }

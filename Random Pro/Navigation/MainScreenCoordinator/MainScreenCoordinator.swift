@@ -64,7 +64,6 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     navigationController.pushViewController(mainScreenModule, animated: true)
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-      self?.showOnboarding()
       self?.rateApp()
     }
   }
@@ -391,6 +390,7 @@ private extension MainScreenCoordinator {
   }
   
   func showOnboarding() {
+    // TODO: - Доработать, на данный момент выключен
     let actualScreens = OnboardingScreenInteractor.getActualScreens()
     
     guard !actualScreens.isEmpty else {

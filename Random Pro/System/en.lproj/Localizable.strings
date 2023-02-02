@@ -222,3 +222,7 @@
 "Можно изменить цвет иконки приложения" = "You can change the color of the application icon";
 "Цвет иконки установлен" = "Icon color set";
 "Выбор иконки" = "Icon selection";
+
+// TODO: -
+"Фильмы" = "Movies";
+"Можно генерировать рандомный фильм" = "Can generate a random movie";

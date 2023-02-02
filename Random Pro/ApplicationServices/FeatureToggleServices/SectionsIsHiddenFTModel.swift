@@ -58,6 +58,9 @@ struct SectionsIsHiddenFTModel {
   /// Раздел `Розыгрыш`
   let raffle: Bool
   
+  /// Раздел `Фильмы`
+  let films: Bool
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -79,6 +82,7 @@ struct SectionsIsHiddenFTModel {
     rockPaperScissors = (dictionary["rockPaperScissors"] as? Int ?? .zero).boolValue
     imageFilters = (dictionary["imageFilters"] as? Int ?? .zero).boolValue
     raffle = (dictionary["raffle"] as? Int ?? .zero).boolValue
+    films = (dictionary["films"] as? Int ?? .zero).boolValue
   }
 }
 

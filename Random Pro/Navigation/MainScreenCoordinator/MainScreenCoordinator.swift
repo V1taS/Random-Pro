@@ -77,6 +77,16 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openFilms() {
+    let filmsScreenCoordinator = FilmsScreenCoordinator(navigationController,
+                                                          services)
+    anyCoordinator = filmsScreenCoordinator
+    filmsScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .films)
+    services.metricsService.track(event: .filmScreen)
+  }
+  
   func premiumButtonAction(_ isPremium: Bool) {
     if isPremium {
       services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
@@ -448,6 +458,8 @@ private extension MainScreenCoordinator {
       openImageFilters()
     case .premiumScreen:
       openPremium()
+    case .filmsScreen:
+      openFilms()
     }
     services.metricsService.track(event: .deepLinks,
                                   properties: ["screen": deepLinkType.rawValue])

@@ -50,14 +50,17 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Bottle`
   func openBottle()
   
-  /// Открыть раздел `openRockPaperScissors`
+  /// Открыть раздел `Rock Paper Scissors`
   func openRockPaperScissors()
   
-  /// Открыть раздел `openImageFilters`
+  /// Открыть раздел `Image Filters`
   func openImageFilters()
   
-  /// Открыть раздел `raffle`
+  /// Открыть раздел `Raffle`
   func openRaffle()
+  
+  /// Открыть раздел `Films`
+  func openFilms()
   
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
@@ -155,6 +158,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openImageFilters()
       case .raffle:
         output?.openRaffle()
+      case .films:
+        output?.openFilms()
       }
     }
   }

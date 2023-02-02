@@ -58,6 +58,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `raffle`
   func openRaffle()
   
+  /// Открыть раздел `Films`
+  func openFilms()
+  
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
   
@@ -213,6 +216,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openFilms() {
+    moduleOutput?.openFilms()
+  }
+  
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     moduleOutput?.noPremiumAccessActionFor(section)
   }

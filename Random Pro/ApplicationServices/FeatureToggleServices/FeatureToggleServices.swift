@@ -66,6 +66,10 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
         return
       }
       
+#if DEBUG
+      print("IdentifierForVendor: \(identifierForVendor)")
+#endif
+      
       for document in documents {
         let model = PremiumFeatureToggleModel(dictionary: document.data())
         guard let id = model.id,

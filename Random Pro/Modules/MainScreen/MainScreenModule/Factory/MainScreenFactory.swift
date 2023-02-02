@@ -234,7 +234,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.teams) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.teams,
@@ -244,7 +244,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.number) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.number,
@@ -254,7 +254,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.yesOrNo) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.yesOrNo,
@@ -264,7 +264,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.letter) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.letter,
@@ -274,7 +274,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.list) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.list,
@@ -284,7 +284,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.coin) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.coin,
@@ -294,7 +294,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.cube) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.cube,
@@ -304,7 +304,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.dateAndTime) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.dateAndTime,
@@ -314,7 +314,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.lottery) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.lottery,
@@ -324,7 +324,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.contact) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.contact,
@@ -334,7 +334,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.password) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.password,
@@ -344,7 +344,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.colors) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.colors,
@@ -354,7 +354,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.bottle) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.bottle,
@@ -365,7 +365,7 @@ extension MainScreenFactory {
                 cardSections.append(MainScreenModel.Section(
                   type: model.type,
                   imageSectionSystemName: model.imageSectionSystemName,
-                  titleSection: model.titleSection,
+                  titleSection: model.type.titleSection,
                   isEnabled: model.isEnabled,
                   isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.rockPaperScissors) ?? model.isHidden,
                   advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors,
@@ -376,7 +376,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters,
@@ -387,7 +387,7 @@ extension MainScreenFactory {
                 cardSections.append(MainScreenModel.Section(
                   type: model.type,
                   imageSectionSystemName: model.imageSectionSystemName,
-                  titleSection: model.titleSection,
+                  titleSection: model.type.titleSection,
                   isEnabled: model.isEnabled,
                   isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.raffle) ?? model.isHidden,
                   advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.raffle,
@@ -398,7 +398,7 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 imageSectionSystemName: model.imageSectionSystemName,
-                titleSection: model.titleSection,
+                titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.raffle) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.raffle,

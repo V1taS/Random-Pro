@@ -222,7 +222,13 @@
 "Можно изменить цвет иконки приложения" = "You can change the color of the application icon";
 "Цвет иконки установлен" = "Icon color set";
 "Выбор иконки" = "Icon selection";
-
-// TODO: -
 "Фильмы" = "Movies";
 "Можно генерировать рандомный фильм" = "Can generate a random movie";
+"Выберите иконку" = "Choose an icon";
+"Измените внешний вид приложения по своему вкусу" = "Change the appearance of the application to your liking";
+"Раздел фильмы" = "Movies section";
+"Откройте доступ к множеству фильмов и наслаждайтесь просмотром" = "Open access to many movies and enjoy watching";
+"Фильтры для фото" = "Photo filters";
+"Улучшайте свои фотографии и добавляйте им уникальность" = "Enhance your photos and add uniqueness to them";
+"Поддержи проект" = "Support the project";
+"Станьте частью сообщества, помогающего нам стремительно развиваться" = "Become part of the community that helps us grow rapidly";

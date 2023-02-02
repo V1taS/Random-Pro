@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "premium_donate.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

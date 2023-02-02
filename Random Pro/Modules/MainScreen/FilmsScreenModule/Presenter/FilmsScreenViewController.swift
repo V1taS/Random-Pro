@@ -8,7 +8,15 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol FilmsScreenModuleOutput: AnyObject {}
+protocol FilmsScreenModuleOutput: AnyObject {
+  
+  /// Что-то пошло не так
+  func somethingWentWrong()
+  
+  /// Проиграть трайлер по ссылке
+  ///  - Parameter url: Ссылка на трейлер
+  func playTrailerActionWith(url: String)
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol FilmsScreenModuleInput {
@@ -62,17 +70,44 @@ final class FilmsScreenViewController: FilmsScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setNavigationBar(isPlayTrailerEnabled: true)
+    interactor.loadFilm()
+    setNavigationBar(isPlayTrailerEnabled: false)
   }
 }
 
 // MARK: - FilmsScreenViewOutput
 
-extension FilmsScreenViewController: FilmsScreenViewOutput {}
+extension FilmsScreenViewController: FilmsScreenViewOutput {
+  func generateMovieAction() {
+    interactor.generateFilm()
+  }
+}
 
 // MARK: - FilmsScreenInteractorOutput
 
-extension FilmsScreenViewController: FilmsScreenInteractorOutput {}
+extension FilmsScreenViewController: FilmsScreenInteractorOutput {
+  func startLoader() {
+    moduleView.startLoader()
+  }
+  
+  func stopLoader() {
+    moduleView.stopLoader()
+  }
+  
+  func didReceiveFilm(model: FilmsScreenModel) {
+    moduleView.updateContentWith(model: model)
+    
+    if moduleView.getFilmName() == nil {
+      setNavigationBar(isPlayTrailerEnabled: false)
+    } else {
+      setNavigationBar(isPlayTrailerEnabled: true)
+    }
+  }
+  
+  func somethingWentWrong() {
+    moduleOutput?.somethingWentWrong()
+  }
+}
 
 // MARK: - FilmsScreenFactoryOutput
 
@@ -99,7 +134,21 @@ private extension FilmsScreenViewController {
   
   @objc
   func playTrailerAction() {
+    guard let filmName = moduleView.getFilmName() else {
+      moduleOutput?.somethingWentWrong()
+      return
+    }
     
+    if interactor.isRuslocale() {
+      let url = factory.createYandexLinkWith(text: filmName)
+      moduleOutput?.playTrailerActionWith(url: url)
+    } else {
+      guard let previewEngtUrl = moduleView.gerPreviewEngtUrl() else {
+        moduleOutput?.somethingWentWrong()
+        return
+      }
+      moduleOutput?.playTrailerActionWith(url: previewEngtUrl)
+    }
     impactFeedback.impactOccurred()
   }
 }

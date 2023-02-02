@@ -46,7 +46,7 @@ final class FilmsScreenCoordinator: FilmsScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let filmsScreenModule = FilmsScreenAssembly().createModule()
+    let filmsScreenModule = FilmsScreenAssembly().createModule(services: services)
     self.filmsScreenModule = filmsScreenModule
     self.filmsScreenModule?.moduleOutput = self
     navigationController.pushViewController(filmsScreenModule, animated: true)
@@ -55,10 +55,28 @@ final class FilmsScreenCoordinator: FilmsScreenCoordinatorProtocol {
 
 // MARK: - FilmsScreenModuleOutput
 
-extension FilmsScreenCoordinator: FilmsScreenModuleOutput {}
+extension FilmsScreenCoordinator: FilmsScreenModuleOutput {
+  func playTrailerActionWith(url: String) {
+    guard let encodedTexts = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+          let filmUrl = URL(string: encodedTexts) else {
+      somethingWentWrong()
+      return
+    }
+    UIApplication.shared.open(filmUrl)
+  }
+  
+  func somethingWentWrong() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                                       glyph: false,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+}
 
 // MARK: - Appearance
 
 private extension FilmsScreenCoordinator {
-  struct Appearance {}
+  struct Appearance {
+    let somethingWentWrong = NSLocalizedString("Что-то пошло не так", comment: "")
+  }
 }

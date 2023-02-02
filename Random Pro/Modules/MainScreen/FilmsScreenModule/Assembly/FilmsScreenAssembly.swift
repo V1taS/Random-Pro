@@ -11,11 +11,12 @@ import UIKit
 final class FilmsScreenAssembly {
   
   /// Собирает модуль `FilmsScreen`
+  /// - Parameter services: Сервисы приложения
   /// - Returns: Cобранный модуль `FilmsScreen`
-  func createModule() -> FilmsScreenModule {
-    let interactor = FilmsScreenInteractor()
+  func createModule(services: ApplicationServices) -> FilmsScreenModule {
     let view = FilmsScreenView()
     let factory = FilmsScreenFactory()
+    let interactor = FilmsScreenInteractor(services: services, factory: factory)
     let presenter = FilmsScreenViewController(moduleView: view, interactor: interactor, factory: factory)
     
     view.output = presenter

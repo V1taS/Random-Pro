@@ -61,23 +61,23 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
     var tableViewModels: [PremiumScreenSectionType] = []
     
     tableViewModels.append(.onboardingPage([
-      // TODO: - Добавить массив премиум
-      OnboardingViewModel.PageModel(title: "Search History",
-                                    description: "Transfer obfuscate traffic via encrypted tunnel",
-                                    lottieAnimationJSONName: "133506-yoga"),
-      OnboardingViewModel.PageModel(title: "Search History",
-                                    description: "Transfer obfuscate traffic via encrypted tunnel",
-                                    lottieAnimationJSONName: "133506-yoga"),
-      OnboardingViewModel.PageModel(title: "Search History",
-                                    description: "Transfer obfuscate traffic via encrypted tunnel",
-                                    lottieAnimationJSONName: "133506-yoga"),
+      OnboardingViewModel.PageModel(title: appearance.chooseIconTitle,
+                                    description: appearance.chooseIconDescription,
+                                    lottieAnimationJSONName: appearance.chooseIconJSONName),
+      OnboardingViewModel.PageModel(title: appearance.filmsTitle,
+                                    description: appearance.filmsDescription,
+                                    lottieAnimationJSONName: appearance.filmsIconJSONName),
+      OnboardingViewModel.PageModel(title: appearance.filtersTitle,
+                                    description: appearance.filtersDescription,
+                                    lottieAnimationJSONName: appearance.filtersIconJSONName),
+      OnboardingViewModel.PageModel(title: appearance.donateTitle,
+                                    description: appearance.donateDescription,
+                                    lottieAnimationJSONName: appearance.donateIconJSONName)
     ]))
-    
     tableViewModels.append(.padding(appearance.maxInset))
     tableViewModels.append(.purchasesCards(yearlyProduct?.localizedPrice,
                                            monthlyProduct?.localizedPrice,
                                            lifetimeProduct?.localizedPrice))
-    
     self.output?.didReceive(models: tableViewModels)
   }
 }
@@ -101,5 +101,21 @@ private extension PremiumScreenFactory {
     let forTitle = NSLocalizedString("за", comment: "")
     let subscribeTitle = NSLocalizedString("Подписаться", comment: "")
     let maxInset: CGFloat = 20
+    
+    let chooseIconTitle = NSLocalizedString("Выберите иконку", comment: "")
+    let chooseIconDescription = NSLocalizedString("Измените внешний вид приложения по своему вкусу", comment: "")
+    let chooseIconJSONName = "premium_icon"
+    
+    let filmsTitle = NSLocalizedString("Раздел фильмы", comment: "")
+    let filmsDescription = NSLocalizedString("Откройте доступ к множеству фильмов и наслаждайтесь просмотром", comment: "")
+    let filmsIconJSONName = "premium_films"
+    
+    let filtersTitle = NSLocalizedString("Фильтры для фото", comment: "")
+    let filtersDescription = NSLocalizedString("Улучшайте свои фотографии и добавляйте им уникальность", comment: "")
+    let filtersIconJSONName = "premium_filters"
+    
+    let donateTitle = NSLocalizedString("Поддержи проект", comment: "")
+    let donateDescription = NSLocalizedString("Станьте частью сообщества, помогающего нам стремительно развиваться", comment: "")
+    let donateIconJSONName = "premium_donate"
   }
 }

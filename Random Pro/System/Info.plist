@@ -263,6 +263,86 @@
               <key>UIPrerenderedIcon</key>
               <false/>
           </dict>
+          
+          <key>selecte_app_icon_queen_necklace</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_queen_necklace</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_marine_fuchsia</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_marine_fuchsia</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_sandy_desert</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_sandy_desert</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_red_lime</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_red_lime</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_heliotrope</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_heliotrope</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_violet_lemon</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_violet_lemon</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_avocado</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_avocado</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
+          
+          <key>selecte_app_icon_frosty_sky</key>
+          <dict>
+              <key>CFBundleIconFiles</key>
+              <array>
+                  <string>selecte_app_icon_frosty_sky</string>
+              </array>
+              <key>UIPrerenderedIcon</key>
+              <false/>
+          </dict>
 
       </dict>
   </dict>

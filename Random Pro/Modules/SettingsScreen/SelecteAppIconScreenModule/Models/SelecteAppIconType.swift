@@ -49,6 +49,22 @@ enum SelecteAppIconType: UserDefaultsCodable, CaseIterable {
       return appearance.moonPurpleImage
     case .selenium:
       return appearance.seleniumImage
+    case .queensNecklace:
+      return appearance.queensNecklaceImage
+    case .marineFuchsia:
+      return appearance.marineFuchsiaImage
+    case .sandyDesert:
+      return appearance.sandyDesertIcon
+    case .redLime:
+      return appearance.redLimeIcon
+    case .heliotrope:
+      return appearance.heliotropeIcon
+    case .violetLemon:
+      return appearance.violetLemonIcon
+    case .avocado:
+      return appearance.avocadoIcon
+    case .frostySky:
+      return appearance.frostySkyIcon
     }
   }
   
@@ -88,14 +104,30 @@ enum SelecteAppIconType: UserDefaultsCodable, CaseIterable {
       return appearance.moonPurpleTitle
     case .selenium:
       return appearance.seleniumTitle
+    case .queensNecklace:
+      return appearance.queensNecklaceTitle
+    case .marineFuchsia:
+      return appearance.marineFuchsiaTitle
+    case .sandyDesert:
+      return appearance.sandyDesertTitle
+    case .redLime:
+      return appearance.redLimeTitle
+    case .heliotrope:
+      return appearance.heliotropeTitle
+    case .violetLemon:
+      return appearance.violetLemonTitle
+    case .avocado:
+      return appearance.avocadoTitle
+    case .frostySky:
+      return appearance.frostySkyTitle
     }
   }
   
   /// Стандартная иконка
   case defaultIcon
   
-  /// Малиновый прилив
-  case crimsonTide
+  /// Гелиотроп
+  case heliotrope
   
   /// Литий
   case lithium
@@ -106,11 +138,26 @@ enum SelecteAppIconType: UserDefaultsCodable, CaseIterable {
   /// Полуночный Город
   case midnightCity
   
+  /// Морская фуксия
+  case marineFuchsia
+  
   /// Терминал
   case terminal
   
+  /// Морозное небо
+  case frostySky
+  
   /// Харви
   case harvey
+  
+  /// Красный город грехов
+  case sinCityRed
+  
+  /// Фиолотово-лимонный
+  case violetLemon
+  
+  /// Малиновый прилив
+  case crimsonTide
   
   /// Залитый лунным светом астероид
   case moonlitAsteroid
@@ -121,23 +168,32 @@ enum SelecteAppIconType: UserDefaultsCodable, CaseIterable {
   /// Летняя собака
   case summerDog
   
-  /// Красный город грехов
-  case sinCityRed
-  
   /// Голубая малина
   case blueRaspberry
   
   /// Вечерняя ночь
   case eveningNight
   
+  /// Красный лайм
+  case redLime
+  
+  /// Песчаная пустыня
+  case sandyDesert
+  
   /// Чистая похоть
   case pureLust
+  
+  /// Авокадо
+  case avocado
   
   /// Лунный фиолетовый
   case moonPurple
   
   /// Селен
   case selenium
+  
+  /// Ожерелье королевы
+  case queensNecklace
 }
 
 // MARK: - Appearance
@@ -191,5 +247,29 @@ private extension SelecteAppIconType {
     
     let seleniumTitle = NSLocalizedString("Селен", comment: "")
     let seleniumImage = "selecte_app_icon_selenium"
+    
+    let queensNecklaceTitle = NSLocalizedString("Ожерелье королевы", comment: "")
+    let queensNecklaceImage = "selecte_app_icon_queen_necklace"
+    
+    let marineFuchsiaTitle = NSLocalizedString("Морская фуксия", comment: "")
+    let marineFuchsiaImage = "selecte_app_icon_marine_fuchsia"
+    
+    let sandyDesertTitle = NSLocalizedString("Песчаная пустыня", comment: "")
+    let sandyDesertIcon = "selecte_app_icon_sandy_desert"
+    
+    let redLimeTitle = NSLocalizedString("Красный лайм", comment: "")
+    let redLimeIcon = "selecte_app_icon_red_lime"
+    
+    let heliotropeTitle = NSLocalizedString("Гелиотроп", comment: "")
+    let heliotropeIcon = "selecte_app_icon_heliotrope"
+    
+    let violetLemonTitle = NSLocalizedString("Фиолотово-лимонный", comment: "")
+    let violetLemonIcon = "selecte_app_icon_violet_lemon"
+    
+    let avocadoTitle = NSLocalizedString("Авокадо", comment: "")
+    let avocadoIcon = "selecte_app_icon_avocado"
+    
+    let frostySkyTitle = NSLocalizedString("Морозное небо", comment: "")
+    let frostySkyIcon = "selecte_app_icon_frosty_sky"
   }
 }

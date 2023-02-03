@@ -96,6 +96,22 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
       setIconWith(name: appearance.moonPurpleIcon)
     case .selenium:
       setIconWith(name: appearance.seleniumIcon)
+    case .queensNecklace:
+      setIconWith(name: appearance.queensNecklaceIcon)
+    case .marineFuchsia:
+      setIconWith(name: appearance.marineFuchsiaIcon)
+    case .sandyDesert:
+      setIconWith(name: appearance.sandyDesertIcon)
+    case .redLime:
+      setIconWith(name: appearance.redLimeIcon)
+    case .heliotrope:
+      setIconWith(name: appearance.heliotropeIcon)
+    case .violetLemon:
+      setIconWith(name: appearance.violetLemonIcon)
+    case .avocado:
+      setIconWith(name: appearance.avocadoIcon)
+    case .frostySky:
+      setIconWith(name: appearance.frostySkyIcon)
     }
   }
   
@@ -147,5 +163,13 @@ private extension SelecteAppIconScreenInteractor {
     let terminalIcon = "selecte_app_icon_terminal"
     let summerDogIcon = "selecte_app_icon_summer_dog"
     let sinCityRedIcon = "selecte_app_icon_sin_city_red"
+    let queensNecklaceIcon = "selecte_app_icon_queen_necklace"
+    let marineFuchsiaIcon = "selecte_app_icon_marine_fuchsia"
+    let sandyDesertIcon = "selecte_app_icon_sandy_desert"
+    let redLimeIcon = "selecte_app_icon_red_lime"
+    let heliotropeIcon = "selecte_app_icon_heliotrope"
+    let violetLemonIcon = "selecte_app_icon_violet_lemon"
+    let avocadoIcon = "selecte_app_icon_avocado"
+    let frostySkyIcon = "selecte_app_icon_frosty_sky"
   }
 }

@@ -40,20 +40,24 @@ final class ListPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var listPlayersScreenModule: ListPlayersScreenModule?
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  init(_ navigationController: UINavigationController) {
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let listPlayersScreenModule = ListPlayersScreenAssembly().createModule()
+    let listPlayersScreenModule = ListPlayersScreenAssembly().createModule(services: services)
     self.listPlayersScreenModule = listPlayersScreenModule
     self.listPlayersScreenModule?.moduleOutput = self
     navigationController.pushViewController(listPlayersScreenModule, animated: true)

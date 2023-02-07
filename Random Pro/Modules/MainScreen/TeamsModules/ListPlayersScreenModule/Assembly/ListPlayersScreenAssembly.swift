@@ -12,15 +12,13 @@ final class ListPlayersScreenAssembly {
   
   /// Собирает модуль `ListPlayersScreen`
   /// - Returns: Cобранный модуль `ListPlayersScreen`
-  func createModule() -> ListPlayersScreenModule {
-    
-    let interactor = ListPlayersScreenInteractor()
+  func createModule(services: ApplicationServices) -> ListPlayersScreenModule {
+    let interactor = ListPlayersScreenInteractor(services: services)
     let view = ListPlayersScreenView()
     let factory = ListPlayersScreenFactory()
     let presenter = ListPlayersScreenViewController(moduleView: view,
                                                     interactor: interactor,
                                                     factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

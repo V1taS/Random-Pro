@@ -47,6 +47,11 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
                                                   description: generatedPlayersCount))
       tableViewModels.append(.divider)
       tableViewModels.append(.titleAndChevron(title: appearance.titleAndImageTitle))
+      
+      tableViewModels.append(.divider)
+      tableViewModels.append(.titleAndChevron(title: appearance.chooseCardStyle,
+                                              id: .playerCardSelection))
+      
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .number(withoutRepetition, itemsGenerated, lastItem):
@@ -174,7 +179,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
                                                   description: lastItem))
       tableViewModels.append(.divider)
-      tableViewModels.append(.titleAndChevron(title: appearance.createListTitle, id: appearance.createListID))
+      tableViewModels.append(.titleAndChevron(title: appearance.createListTitle, id: .createList))
       tableViewModels.append(.divider)
       if let itemsGenerated = Int(generatedTextCount), itemsGenerated > .zero {
         tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
@@ -216,6 +221,8 @@ private extension SettingsScreenFactory {
                                          comment: "")
     let generatedPlayersCount = NSLocalizedString("Cгенерировано игроков",
                                                   comment: "")
-    let createListID = "createListID"
+    
+    let chooseCardStyle = NSLocalizedString("Выбрать стиль карточки",
+                                            comment: "")
   }
 }

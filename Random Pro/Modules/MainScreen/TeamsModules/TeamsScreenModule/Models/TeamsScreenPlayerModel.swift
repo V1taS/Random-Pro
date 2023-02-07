@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RandomUIKit
 
 /// Протокол игрока
 protocol PlayerProtocol {
@@ -21,13 +22,16 @@ protocol PlayerProtocol {
   var name: String { get }
   
   /// Аватарка игрока
-  var avatar: Data? { get }
+  var avatar: String { get }
   
   /// Смайлик
   var emoji: String? { get }
   
   /// Состояние игрока
   var state: PlayerState { get }
+  
+  /// Стиль карточки
+  var style: PlayerView.StyleCard { get }
 }
 
 /// Протокол состояния игрока
@@ -73,13 +77,16 @@ struct TeamsScreenPlayerModel: PlayerProtocol, UserDefaultsCodable {
   let name: String
   
   /// Аватарка игрока
-  let avatar: Data?
+  let avatar: String
   
   /// Смайлик
   let emoji: String?
   
   /// Состояние игрока
   let state: PlayerState
+  
+  /// Стиль карточки
+  let style: PlayerView.StyleCard
   
   // MARK: - PlayerState
 

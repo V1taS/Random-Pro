@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol LotteryScreenCoordinatorOutput: AnyObject {}
+protocol LotteryScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol LotteryScreenCoordinatorInput {
@@ -75,7 +79,7 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
   }
   
   func settingButtonAction(model: LotteryScreenModel) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -97,6 +101,10 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension LotteryScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+  
   func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator

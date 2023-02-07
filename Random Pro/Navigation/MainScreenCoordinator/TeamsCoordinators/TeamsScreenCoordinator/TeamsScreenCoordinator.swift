@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol TeamsScreenCoordinatorOutput: AnyObject {}
+protocol TeamsScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol TeamsScreenCoordinatorInput {
@@ -85,7 +89,7 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
   }
   
   func settingButtonAction(players: [TeamsScreenPlayerModel]) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -101,8 +105,12 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension TeamsScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+  
   func listOfObjectsAction() {
-    let listPlayersScreenCoordinator = ListPlayersScreenCoordinator(navigationController)
+    let listPlayersScreenCoordinator = ListPlayersScreenCoordinator(navigationController, services)
     self.listPlayersScreenCoordinator = listPlayersScreenCoordinator
     self.listPlayersScreenCoordinator?.start()
     self.listPlayersScreenCoordinator?.output = self

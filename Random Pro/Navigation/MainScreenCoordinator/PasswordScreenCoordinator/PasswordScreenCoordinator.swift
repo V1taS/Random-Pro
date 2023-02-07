@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol PasswordScreenCoordinatorOutput: AnyObject {}
+protocol PasswordScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol PasswordScreenCoordinatorInput {
@@ -63,7 +67,7 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
   }
   
   func settingButtonAction(model: PasswordScreenModel) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -92,6 +96,10 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension PasswordScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+  
   func withoutRepetitionAction(isOn: Bool) {}
   
   func cleanButtonAction() {

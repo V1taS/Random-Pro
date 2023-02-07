@@ -138,7 +138,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
         }
         
         cell.configureCellWith(
-          avatar: UIImage(data: playerModel.avatar ?? Data()),
+          avatar: UIImage(named: playerModel.avatar),
           namePlayer: playerModel.name,
           nameTeam: statePlayer,
           emoji: Character(playerModel.emoji ?? "⚪️"),

@@ -15,7 +15,7 @@ final class TeamsScreenAssembly {
   func createModule(services: ApplicationServices) -> TeamsScreenModule {
     let interactor = TeamsScreenInteractor(services: services)
     let view = TeamsScreenView()
-    let factory = TeamsScreenFactory()
+    let factory = TeamsScreenFactory(services: services)
     let presenter = TeamsScreenViewController(moduleView: view,
                                               interactor: interactor,
                                               factory: factory)

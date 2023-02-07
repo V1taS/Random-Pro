@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol CubesScreenCoordinatorOutput: AnyObject {}
+protocol CubesScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol CubesScreenCoordinatorInput {
@@ -66,7 +70,7 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
   }
   
   func settingButtonAction(model: CubesScreenModel) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -89,6 +93,10 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension CubesScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+  
   func withoutRepetitionAction(isOn: Bool) {
     cubesScreenModule?.listGenerated(isShow: isOn)
   }

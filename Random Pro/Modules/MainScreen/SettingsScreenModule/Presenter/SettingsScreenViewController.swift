@@ -22,6 +22,9 @@ protocol SettingsScreenModuleOutput: AnyObject {
   
   /// Событие, кнопка `Создать список` была нажата
   func createListAction()
+  
+  /// Событие, кнопка `Выбора карточки игрока` была нажата
+  func playerCardSelectionAction()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -93,6 +96,10 @@ final class SettingsScreenViewController: SettingsScreenModule {
 // MARK: - SettingsScreenViewOutput
 
 extension SettingsScreenViewController: SettingsScreenViewOutput {
+  func playerCardSelectionAction() {
+    moduleOutput?.playerCardSelectionAction()
+  }
+  
   func createListAction() {
     moduleOutput?.createListAction()
   }

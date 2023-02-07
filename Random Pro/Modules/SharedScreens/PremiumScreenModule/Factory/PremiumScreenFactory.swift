@@ -73,6 +73,9 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
       OnboardingViewModel.PageModel(title: appearance.filtersTitle,
                                     description: appearance.filtersDescription,
                                     lottieAnimationJSONName: appearance.filtersIconJSONName),
+      OnboardingViewModel.PageModel(title: appearance.playerCardSelectionTitle,
+                                    description: appearance.playerCardSelectionDescription,
+                                    lottieAnimationJSONName: appearance.playerCardSelectionIconJSONName),
       OnboardingViewModel.PageModel(title: appearance.donateTitle,
                                     description: appearance.donateDescription,
                                     lottieAnimationJSONName: appearance.donateIconJSONName)
@@ -124,5 +127,9 @@ private extension PremiumScreenFactory {
     let syncTitle = NSLocalizedString("Синхронизируйте", comment: "")
     let syncDescription = NSLocalizedString("Получите доступ к своим данным со всех ваших устройств", comment: "")
     let syncIconJSONName = "premium_sync"
+    
+    let playerCardSelectionTitle = NSLocalizedString("Раздел команды", comment: "")
+    let playerCardSelectionDescription = NSLocalizedString("Выберите уникальный стиль карточек", comment: "")
+    let playerCardSelectionIconJSONName = "premium_player_card_selection"
   }
 }

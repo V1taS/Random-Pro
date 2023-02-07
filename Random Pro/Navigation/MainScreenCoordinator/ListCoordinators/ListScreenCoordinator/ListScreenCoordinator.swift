@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol ListScreenCoordinatorOutput: AnyObject {}
+protocol ListScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol ListScreenCoordinatorInput {
@@ -94,7 +98,7 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
   }
   
   func settingButtonAction() {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -106,6 +110,10 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+  
   func withoutRepetitionAction(isOn: Bool) {
     listScreenModule?.updateWithoutRepetition(isOn)
   }

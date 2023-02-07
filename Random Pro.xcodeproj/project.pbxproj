@@ -39,6 +39,12 @@
 		1B0ED1D128D501B2001BACF6 /* CustomMainSectionsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B0ED1D028D501B2001BACF6 /* CustomMainSectionsType.swift */; };
 		1B1293662917B3F900EDDB71 /* DeepLinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1293652917B3F900EDDB71 /* DeepLinkService.swift */; };
 		1B1293682917B45B00EDDB71 /* DeepLinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1293672917B45B00EDDB71 /* DeepLinkType.swift */; };
+		1B150A372992CCF800853DEF /* PlayerCardSelectionScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B150A322992CCF800853DEF /* PlayerCardSelectionScreenFactory.swift */; };
+		1B150A382992CCF800853DEF /* PlayerCardSelectionScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B150A332992CCF800853DEF /* PlayerCardSelectionScreenViewController.swift */; };
+		1B150A392992CCF800853DEF /* PlayerCardSelectionScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B150A342992CCF800853DEF /* PlayerCardSelectionScreenAssembly.swift */; };
+		1B150A3A2992CCF800853DEF /* PlayerCardSelectionScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B150A352992CCF800853DEF /* PlayerCardSelectionScreenInteractor.swift */; };
+		1B150A3B2992CCF800853DEF /* PlayerCardSelectionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B150A362992CCF800853DEF /* PlayerCardSelectionScreenView.swift */; };
+		1B150A432992D90600853DEF /* PlayerCardSelectionScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B150A422992D90600853DEF /* PlayerCardSelectionScreenCoordinator.swift */; };
 		1B1B5B4727ADDFAF00EF283E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1B1B5B4927ADDFAF00EF283E /* InfoPlist.strings */; };
 		1B1C17322962E93E005F34B7 /* ImageFiltersScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1C172D2962E93E005F34B7 /* ImageFiltersScreenFactory.swift */; };
 		1B1C17332962E93E005F34B7 /* ImageFiltersScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1C172E2962E93E005F34B7 /* ImageFiltersScreenViewController.swift */; };
@@ -195,6 +201,7 @@
 		1BA83CF92879E991000035E3 /* LetterScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA83CF82879E991000035E3 /* LetterScreenModel.swift */; };
 		1BB51F9F295F5365003C317D /* FeatureToggleServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB51F9E295F5365003C317D /* FeatureToggleServices.swift */; };
 		1BB51FAC295F5CC5003C317D /* SectionsIsHiddenFTModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB51FAB295F5CC5003C317D /* SectionsIsHiddenFTModel.swift */; };
+		1BB7F3272993EF3A00E73B41 /* PlayerCardSelectionScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB7F3262993EF3A00E73B41 /* PlayerCardSelectionScreenModel.swift */; };
 		1BBABB7F294DF4E3000772AC /* HapticServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBABB7E294DF4E3000772AC /* HapticServiceMock.swift */; };
 		1BBE378A28C0C10E0087128D /* NumberScreenViewInputMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */; };
 		1BBE378C28C0DAF60087128D /* NumberScreenInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */; };
@@ -382,6 +389,12 @@
 		1B0ED1D028D501B2001BACF6 /* CustomMainSectionsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMainSectionsType.swift; sourceTree = "<group>"; };
 		1B1293652917B3F900EDDB71 /* DeepLinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkService.swift; sourceTree = "<group>"; };
 		1B1293672917B45B00EDDB71 /* DeepLinkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkType.swift; sourceTree = "<group>"; };
+		1B150A322992CCF800853DEF /* PlayerCardSelectionScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardSelectionScreenFactory.swift; sourceTree = "<group>"; };
+		1B150A332992CCF800853DEF /* PlayerCardSelectionScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardSelectionScreenViewController.swift; sourceTree = "<group>"; };
+		1B150A342992CCF800853DEF /* PlayerCardSelectionScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardSelectionScreenAssembly.swift; sourceTree = "<group>"; };
+		1B150A352992CCF800853DEF /* PlayerCardSelectionScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardSelectionScreenInteractor.swift; sourceTree = "<group>"; };
+		1B150A362992CCF800853DEF /* PlayerCardSelectionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardSelectionScreenView.swift; sourceTree = "<group>"; };
+		1B150A422992D90600853DEF /* PlayerCardSelectionScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardSelectionScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B1B501526009FAD00F73A14 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		1B1B5B4827ADDFAF00EF283E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1B1B5B4A27ADDFB100EF283E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -535,6 +548,7 @@
 		1BA83CF82879E991000035E3 /* LetterScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterScreenModel.swift; sourceTree = "<group>"; };
 		1BB51F9E295F5365003C317D /* FeatureToggleServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureToggleServices.swift; sourceTree = "<group>"; };
 		1BB51FAB295F5CC5003C317D /* SectionsIsHiddenFTModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsIsHiddenFTModel.swift; sourceTree = "<group>"; };
+		1BB7F3262993EF3A00E73B41 /* PlayerCardSelectionScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCardSelectionScreenModel.swift; sourceTree = "<group>"; };
 		1BBABB7E294DF4E3000772AC /* HapticServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticServiceMock.swift; sourceTree = "<group>"; };
 		1BBE378928C0C10E0087128D /* NumberScreenViewInputMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenViewInputMock.swift; sourceTree = "<group>"; };
 		1BBE378B28C0DAF60087128D /* NumberScreenInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberScreenInteractorTests.swift; sourceTree = "<group>"; };
@@ -1031,6 +1045,67 @@
 			path = DeepLinkService;
 			sourceTree = "<group>";
 		};
+		1B150A312992CCBD00853DEF /* PlayerCardSelectionScreenModules */ = {
+			isa = PBXGroup;
+			children = (
+				1BB7F3252993EF2500E73B41 /* Models */,
+				1B150A402992CD2100853DEF /* Assembly */,
+				1B150A3F2992CD1900853DEF /* Factory */,
+				1B150A3E2992CD1000853DEF /* Interactor */,
+				1B150A3D2992CD0B00853DEF /* Presenter */,
+				1B150A3C2992CD0200853DEF /* View */,
+			);
+			path = PlayerCardSelectionScreenModules;
+			sourceTree = "<group>";
+		};
+		1B150A3C2992CD0200853DEF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B150A362992CCF800853DEF /* PlayerCardSelectionScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B150A3D2992CD0B00853DEF /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				1B150A332992CCF800853DEF /* PlayerCardSelectionScreenViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		1B150A3E2992CD1000853DEF /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				1B150A352992CCF800853DEF /* PlayerCardSelectionScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		1B150A3F2992CD1900853DEF /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				1B150A322992CCF800853DEF /* PlayerCardSelectionScreenFactory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		1B150A402992CD2100853DEF /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				1B150A342992CCF800853DEF /* PlayerCardSelectionScreenAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		1B150A412992D8F200853DEF /* PlayerCardSelectionScreenCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				1B150A422992D90600853DEF /* PlayerCardSelectionScreenCoordinator.swift */,
+			);
+			path = PlayerCardSelectionScreenCoordinator;
+			sourceTree = "<group>";
+		};
 		1B1C172C2962E91F005F34B7 /* ImageFiltersScreenModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1487,6 +1562,7 @@
 		1B74318828A79CE400205C2C /* TeamsModules */ = {
 			isa = PBXGroup;
 			children = (
+				1B150A312992CCBD00853DEF /* PlayerCardSelectionScreenModules */,
 				1B74318928A79F2800205C2C /* ListPlayersScreenModule */,
 				1B50065428A6BDCB009AABF2 /* TeamsScreenModule */,
 			);
@@ -1766,6 +1842,7 @@
 			isa = PBXGroup;
 			children = (
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
+				1B150A412992D8F200853DEF /* PlayerCardSelectionScreenCoordinator */,
 				1B4F5C1029881BD70003457E /* FilmsScreenCoordinator */,
 				1BA16E31296DC3C0001B19C6 /* RaffleScreenCoordinator */,
 				1B1C173C2962E982005F34B7 /* ImageFiltersScreenCoordinator */,
@@ -2198,6 +2275,14 @@
 				1BD2330F296E9F60006FE260 /* UpdateAppFeatureToggleModel.swift */,
 			);
 			path = FeatureToggleServices;
+			sourceTree = "<group>";
+		};
+		1BB7F3252993EF2500E73B41 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1BB7F3262993EF3A00E73B41 /* PlayerCardSelectionScreenModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1BBABB7D294DF4D6000772AC /* HapticService */ = {
@@ -3653,6 +3738,7 @@
 				6CBFD05A289BC56C005F9104 /* PasswordScreenAssembly.swift in Sources */,
 				1B9D4565283BDDB600A85F25 /* SettingsScreenCoordinator.swift in Sources */,
 				6CA6203628B636190078C971 /* ContactScreenCoordinator.swift in Sources */,
+				1B150A3B2992CCF800853DEF /* PlayerCardSelectionScreenView.swift in Sources */,
 				1B7431B228A805A800205C2C /* ListPlayersScreenType.swift in Sources */,
 				1B0ED1A728D4D9E7001BACF6 /* MainSettingsScreenViewController.swift in Sources */,
 				1B295AF52981B30A003349FC /* SelecteAppIconScreenAssembly.swift in Sources */,
@@ -3689,6 +3775,7 @@
 				6C7D4D49282E557B00A086BC /* DateTimeInteractor.swift in Sources */,
 				6C232105293623B600954F39 /* BottleScreenCoordinator.swift in Sources */,
 				1BF061572974873D00DD6C76 /* PremiumScreenInteractor.swift in Sources */,
+				1B150A382992CCF800853DEF /* PlayerCardSelectionScreenViewController.swift in Sources */,
 				1B1C17322962E93E005F34B7 /* ImageFiltersScreenFactory.swift in Sources */,
 				1B31F62D285F926200A88217 /* ListResultScreenAssembly.swift in Sources */,
 				6C98CBCF28339F5A00D2E4FA /* CoinScreenModule.swift in Sources */,
@@ -3701,6 +3788,7 @@
 				1BC179C12975BECA00A8FB95 /* PremiumScreenSectionType.swift in Sources */,
 				1B07C4B4299550A1006BB8A2 /* KeychainWrapper.swift in Sources */,
 				1B74319028A79F4F00205C2C /* ListPlayersScreenViewController.swift in Sources */,
+				1B150A392992CCF800853DEF /* PlayerCardSelectionScreenAssembly.swift in Sources */,
 				1B7F667125D0856300933AD6 /* AppDelegate.swift in Sources */,
 				6CA6202D28B6331E0078C971 /* ContactScreenModule.swift in Sources */,
 				1BD539A628BB8031009DA51C /* ListScreenModel.swift in Sources */,
@@ -3716,6 +3804,7 @@
 				6CA6202028B62DE30078C971 /* CubesScreenFactory.swift in Sources */,
 				6CA6203E28B679B40078C971 /* ListScreenView.swift in Sources */,
 				1B941DDE282179A200D968DF /* ApplicationServices.swift in Sources */,
+				1B150A3A2992CCF800853DEF /* PlayerCardSelectionScreenInteractor.swift in Sources */,
 				1B96E0F12820483F00A23880 /* MainScreenAssembly.swift in Sources */,
 				1BD539A428BA33E2009DA51C /* ListAddItemsScreenModel.swift in Sources */,
 				1BA199AD28BBC6FB0036D73C /* ShareScreenFactory.swift in Sources */,
@@ -3747,6 +3836,7 @@
 				6C7D4D45282E556400A086BC /* DateTimeView.swift in Sources */,
 				6C1270742947315B000D3852 /* RockPaperScissorsScreenAssembly.swift in Sources */,
 				1B224BC428B9996200AC5D97 /* ContactScreenModel.swift in Sources */,
+				1B150A372992CCF800853DEF /* PlayerCardSelectionScreenFactory.swift in Sources */,
 				1BA83CF72879DA42000035E3 /* UserDefaultsCodable.swift in Sources */,
 				6C7662CB287A430A0069C13E /* DateTimeScreenModel.swift in Sources */,
 				1B08ADA228CDDAD5007290F3 /* ColorsScreenInteractor.swift in Sources */,
@@ -3775,6 +3865,7 @@
 				1BF061612974883500DD6C76 /* PremiumScreenCoordinator.swift in Sources */,
 				1B50065D28A6BDF0009AABF2 /* TeamsScreenInteractor.swift in Sources */,
 				1B96E0F02820483F00A23880 /* MainScreenViewController.swift in Sources */,
+				1BB7F3272993EF3A00E73B41 /* PlayerCardSelectionScreenModel.swift in Sources */,
 				1B08AD9F28CDDAD5007290F3 /* ColorsScreenFactory.swift in Sources */,
 				1B08ADAB28CDDB57007290F3 /* ColorsScreenCoordinator.swift in Sources */,
 				1B0C1B522968975000B9ABCA /* ImageFiltersScreenModel.swift in Sources */,
@@ -3856,6 +3947,7 @@
 				1BF061582974873D00DD6C76 /* PremiumScreenView.swift in Sources */,
 				1B0ED1CF28D50199001BACF6 /* CustomMainSectionsModel.swift in Sources */,
 				1B50065B28A6BDF0009AABF2 /* TeamsScreenViewController.swift in Sources */,
+				1B150A432992D90600853DEF /* PlayerCardSelectionScreenCoordinator.swift in Sources */,
 				6CA6203128B633310078C971 /* ContactScreenFactory.swift in Sources */,
 				1BA16E2A296DC316001B19C6 /* RaffleScreenView.swift in Sources */,
 				6CA6201C28B62DE30078C971 /* CubesScreenModule.swift in Sources */,
@@ -4122,7 +4214,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 138;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -4133,7 +4225,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.19.4;
+				MARKETING_VERSION = 730.20.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4156,7 +4248,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 137;
+				CURRENT_PROJECT_VERSION = 138;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4166,7 +4258,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.19.4;
+				MARKETING_VERSION = 730.20.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";

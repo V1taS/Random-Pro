@@ -22,6 +22,9 @@ protocol SettingsScreenCoordinatorOutput: AnyObject {
   
   /// Событие, кнопка `Создать список` была нажата
   func createListAction()
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
 }
 
 /// Расширение протокола
@@ -52,14 +55,19 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var settingsScreenModule: SettingsScreenModule?
+  private var anyCoordinator: Coordinator?
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  init(_ navigationController: UINavigationController) {
+  ///   - services: Сервисы приложения
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
+    self.services = services
   }
   
   // MARK: - Internal func
@@ -83,6 +91,10 @@ extension SettingsScreenCoordinator {
 // MARK: - SettingsScreenModuleOutput
 
 extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
+  func playerCardSelectionAction() {
+    openPlayerCardSelectionScreenCoordinator()
+  }
+  
   func createListAction() {
     output?.createListAction()
   }
@@ -98,4 +110,31 @@ extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
   func cleanButtonAction() {
     output?.cleanButtonAction()
   }
+}
+
+// MARK: - PlayerCardSelectionScreenCoordinatorOutput
+
+extension SettingsScreenCoordinator: PlayerCardSelectionScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+}
+
+// MARK: - Private
+
+private extension SettingsScreenCoordinator {
+  func openPlayerCardSelectionScreenCoordinator() {
+    let playerCardSelectionScreenCoordinator = PlayerCardSelectionScreenCoordinator(navigationController,
+                                                                                    services)
+    anyCoordinator = playerCardSelectionScreenCoordinator
+    playerCardSelectionScreenCoordinator.output = self
+    playerCardSelectionScreenCoordinator.start()
+    services.metricsService.track(event: .premiumPlayerCardSelection)
+  }
+}
+
+// MARK: - Appearance
+
+private extension SettingsScreenCoordinator {
+  struct Appearance {}
 }

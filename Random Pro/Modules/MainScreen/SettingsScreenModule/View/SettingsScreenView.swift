@@ -18,11 +18,14 @@ protocol SettingsScreenViewOutput: AnyObject {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// Событие, кнопка `Список чисел` была нажата
+  /// Событие, кнопка `Список объектов` была нажата
   func listOfObjectsAction()
   
   /// Событие, кнопка `Создать список` была нажата
   func createListAction()
+  
+  /// Событие, кнопка `Выбора карточки игрока` была нажата
+  func playerCardSelectionAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -74,11 +77,14 @@ final class SettingsScreenView: SettingsScreenViewProtocol {
 extension SettingsScreenView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch models[indexPath.row] {
-    case let .titleAndChevron(_, id):
-      if id == Appearance().createListID {
-        output?.createListAction()
-      } else {
+    case let .titleAndChevron(_, actionId):
+      switch actionId {
+      case .listOfObjects:
         output?.listOfObjectsAction()
+      case .createList:
+        output?.createListAction()
+      case .playerCardSelection:
+        output?.playerCardSelectionAction()
       }
     default: break
     }
@@ -217,6 +223,5 @@ private extension SettingsScreenView {
   struct Appearance {
     let defaultInset: CGFloat = 16
     let cornerRadius: CGFloat = 8
-    let createListID = "createListID"
   }
 }

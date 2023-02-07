@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из Interactor в Presenter
 protocol TeamsScreenInteractorOutput: AnyObject {
@@ -59,6 +60,9 @@ protocol TeamsScreenInteractorInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  /// Обновить стиль
+  func updateStyle()
 }
 
 /// Интерактор
@@ -71,6 +75,11 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private var stylePlayerCard: PlayerView.StyleCard {
+    storageService.playerCardSelectionScreenModel?.filter({
+      $0.playerCardSelection
+    }).first?.style ?? .defaultStyle
+  }
   
   // MARK: - Initialization
   
@@ -81,6 +90,41 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   // MARK: - Internal func
+  
+  func updateStyle() {
+    guard let model = storageService.teamsScreenModel else {
+      return
+    }
+    
+    let allPlayers: [TeamsScreenPlayerModel] = model.allPlayers.map {
+      return TeamsScreenPlayerModel(id: $0.id,
+                                    name: $0.name,
+                                    avatar: $0.avatar,
+                                    emoji: $0.emoji,
+                                    state: $0.state,
+                                    style: stylePlayerCard)
+    }
+    
+    let teams = model.teams.map { team in
+      let playersTeam = team.players.map { playersTeam in
+        return TeamsScreenPlayerModel(id: playersTeam.id,
+                                      name: playersTeam.name,
+                                      avatar: playersTeam.avatar,
+                                      emoji: playersTeam.emoji,
+                                      state: playersTeam.state,
+                                      style: stylePlayerCard)
+      }
+      return TeamsScreenModel.Team(name: team.name,
+                                   players: playersTeam)
+    }
+    
+    let newModel = TeamsScreenModel(
+      selectedTeam: model.selectedTeam,
+      allPlayers: allPlayers,
+      teams: teams
+    )
+    output?.didReceive(model: newModel)
+  }
   
   func updateTeams(count: Int) {
     guard let model = storageService.teamsScreenModel else {
@@ -219,33 +263,36 @@ private extension TeamsScreenInteractor {
                                       name: "\(appearance.player) - \($0)",
                                       avatar: generationImagePlayer(),
                                       emoji: emojiList.first,
-                                      state: .teamTwo)
+                                      state: .teamTwo,
+                                      style: stylePlayerCard)
       } else if $0.isMultiple(of: 16) {
         return TeamsScreenPlayerModel(id: UUID().uuidString,
                                       name: "\(appearance.player) - \($0)",
                                       avatar: generationImagePlayer(),
                                       emoji: "🔴",
-                                      state: .doesNotPlay)
+                                      state: .doesNotPlay,
+                                      style: stylePlayerCard)
       } else {
         return TeamsScreenPlayerModel(id: UUID().uuidString,
                                       name: "\(appearance.player) - \($0)",
                                       avatar: generationImagePlayer(),
                                       emoji: nil,
-                                      state: .random)
+                                      state: .random,
+                                      style: stylePlayerCard)
       }
     }
   }
   
-  func generationImagePlayer() -> Data? {
+  func generationImagePlayer() -> String {
     let appearance = Appearance()
     let genderRandom = Int.random(in: 0...1)
     
     if genderRandom == .zero {
       let randomNumberPlayers = Int.random(in: appearance.rangeImageMalePlayer)
-      return (UIImage(named: "male_player\(randomNumberPlayers)") ?? UIImage()).pngData()
+      return "male_player\(randomNumberPlayers)"
     } else {
       let randomNumberPlayers = Int.random(in: appearance.rangeImageFemalePlayer)
-      return (UIImage(named: "female_player\(randomNumberPlayers)") ?? UIImage()).pngData()
+      return "female_player\(randomNumberPlayers)"
     }
   }
 }
@@ -258,7 +305,6 @@ private extension TeamsScreenInteractor {
     let rangeImageMalePlayer = 1...15
     let rangeImageFemalePlayer = 1...21
     let player = NSLocalizedString("Игрок", comment: "")
-    
     let keySecondStartApp = "team_screen_second_start_app_key"
   }
 }

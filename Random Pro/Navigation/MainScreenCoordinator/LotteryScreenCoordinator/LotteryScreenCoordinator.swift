@@ -48,7 +48,7 @@ final class LotteryScreenCoordinator: LotteryScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let lotteryScreenModule = LotteryScreenAssembly().createModule()
+    let lotteryScreenModule = LotteryScreenAssembly().createModule(services: services)
     self.lotteryScreenModule = lotteryScreenModule
     self.lotteryScreenModule?.moduleOutput = self
     navigationController.pushViewController(lotteryScreenModule, animated: true)

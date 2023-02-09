@@ -16,7 +16,6 @@ final class MainScreenModuleIntegrationTests: XCTestCase {
   
   // System under test (Тестируемая система)
   private var sut: MainScreenViewController!
-  @ObjectCustomUserDefaultsWrapper<MainScreenModel>(key: Appearance().keyUserDefaults)
   private var localSaveModel: MainScreenModel?
   
   private var interactor: MainScreenInteractorInputMock!

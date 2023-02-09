@@ -11,9 +11,11 @@ import UIKit
 final class ListScreenAssembly {
   
   /// Собирает модуль `ListScreen`
-  func createModule() -> ListScreenModule {
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  func createModule(services: ApplicationServices) -> ListScreenModule {
     let view = ListScreenView()
-    let interactor = ListScreenInteractor()
+    let interactor = ListScreenInteractor(services: services)
     let factory = ListScreenFactory()
     let presenter = ListScreenViewController(moduleView: view,
                                              interactor: interactor,

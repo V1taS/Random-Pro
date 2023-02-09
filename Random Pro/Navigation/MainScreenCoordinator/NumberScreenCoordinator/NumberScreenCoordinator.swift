@@ -48,7 +48,7 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let numberScreenModule = NumberScreenAssembly().createModule()
+    let numberScreenModule = NumberScreenAssembly().createModule(services)
     self.numberScreenModule = numberScreenModule
     self.numberScreenModule?.moduleOutput = self
     navigationController.pushViewController(numberScreenModule, animated: true)

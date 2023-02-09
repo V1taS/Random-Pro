@@ -24,7 +24,7 @@ final class NumberScreenInteractorTests: XCTestCase {
   override func setUp() {
     super.setUp()
     
-    sut = NumberScreenInteractor()
+    sut = NumberScreenInteractor(services: ApplicationServicesImpl())
     sut.output = outputSpy
   }
   

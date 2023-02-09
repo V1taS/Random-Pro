@@ -50,7 +50,7 @@ final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProt
   // MARK: - Internal func
   
   func start() {
-    let selecteAppIconScreenModule = SelecteAppIconScreenAssembly().createModule()
+    let selecteAppIconScreenModule = SelecteAppIconScreenAssembly().createModule(services: services)
     self.selecteAppIconScreenModule = selecteAppIconScreenModule
     self.selecteAppIconScreenModule?.moduleOutput = self
     navigationController.pushViewController(selecteAppIconScreenModule, animated: true)

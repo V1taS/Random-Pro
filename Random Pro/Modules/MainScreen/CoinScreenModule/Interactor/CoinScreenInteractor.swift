@@ -45,23 +45,26 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<CoinScreenModel>(key: Appearance().keyUserDefaults)
-  private var model: CoinScreenModel?
   private let hapticService: HapticService
+  private var storageService: StorageService
   
   // MARK: - Initialization
   
-  /// - Parameter hapticService: Обратная связь от моторчика
-  init(hapticService: HapticService) {
+  /// - Parameters:
+  ///  - hapticService: Обратная связь от моторчика
+  ///  - services: Сервисы приложения
+  init(hapticService: HapticService,
+       services: ApplicationServices) {
     self.hapticService = hapticService
+    storageService = services.storageService
   }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    model = nil
+    storageService.coinScreenModel = nil
     getContent()
-    guard let model = model else { return }
+    guard let model = storageService.coinScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
@@ -71,7 +74,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   
   func generateContentCoin() {
     let appearance = Appearance()
-    guard let model = model else {
+    guard let model = storageService.coinScreenModel else {
       return
     }
     
@@ -88,12 +91,12 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
       listResult: listResult
     )
     
-    self.model = newModel
+    self.storageService.coinScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = model {
+    if let model = storageService.coinScreenModel {
       return model.listResult
     } else {
       return []
@@ -111,7 +114,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
 
 private extension CoinScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = model {
+    if let model = storageService.coinScreenModel {
       output?.didReceive(model: model)
     } else {
       let model = CoinScreenModel(
@@ -119,7 +122,7 @@ private extension CoinScreenInteractor {
         coinType: .none,
         listResult: []
       )
-      self.model = model
+      self.storageService.coinScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -134,6 +137,5 @@ private extension CoinScreenInteractor {
       NSLocalizedString("Орел", comment: ""),
       NSLocalizedString("Решка", comment: "")
     ]
-    let keyUserDefaults = "coin_screen_user_defaults_key"
   }
 }

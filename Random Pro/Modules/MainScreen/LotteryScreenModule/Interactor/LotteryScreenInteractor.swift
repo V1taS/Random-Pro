@@ -51,15 +51,22 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<LotteryScreenModel>(key: Appearance().keyUserDefaults)
-  private var model: LotteryScreenModel?
+  private var storageService: StorageService
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    model = nil
+    storageService.lotteryScreenModel = nil
     getContent()
-    guard let model = model else { return }
+    guard let model = storageService.lotteryScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
@@ -82,7 +89,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
       return
     }
     
-    guard let model = model else {
+    guard let model = storageService.lotteryScreenModel else {
       return
     }
     
@@ -104,12 +111,12 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
       result: numbersResult,
       listResult: listResult
     )
-    self.model = newModel
+    self.storageService.lotteryScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = model {
+    if let model = storageService.lotteryScreenModel {
       return model.listResult
     } else {
       return []
@@ -121,7 +128,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
 
 private extension LotteryScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = model {
+    if let model = storageService.lotteryScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
@@ -132,7 +139,7 @@ private extension LotteryScreenInteractor {
         result: appearance.result,
         listResult: []
       )
-      self.model = model
+      self.storageService.lotteryScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -146,6 +153,5 @@ private extension LotteryScreenInteractor {
     let startTextFieldValue = "1"
     let amountTextFieldValue = "6"
     let endTextFieldValue = "49"
-    let keyUserDefaults = "lottery_screen_user_defaults_key"
   }
 }

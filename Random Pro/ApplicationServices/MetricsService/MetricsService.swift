@@ -37,8 +37,13 @@ final class MetricsServiceImpl: MetricsService {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<[MetricsSections.RawValue: Int]>(key: Appearance().keyUserDefaults)
-  private var dictionaryCountTapped: [MetricsSections.RawValue: Int]?
+  private var dictionaryCountTapped: [MetricsSections.RawValue: Int]? {
+    get {
+      StorageServiceImpl().dictionaryCountTappedModel
+    } set {
+      StorageServiceImpl().dictionaryCountTappedModel = newValue
+    }
+  }
   
   // MARK: - Internal func
   
@@ -119,7 +124,5 @@ private extension MetricsServiceImpl {
 // MARK: - Appearance
 
 private extension MetricsServiceImpl {
-  struct Appearance {
-    let keyUserDefaults = "metrics_service_user_defaults_key"
-  }
+  struct Appearance {}
 }

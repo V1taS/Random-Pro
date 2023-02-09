@@ -42,11 +42,15 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   // MARK: - Private properties
   
-  @ObjectCustomUserDefaultsWrapper<MainScreenModel>(key: Appearance().mainScreenModelKey)
-  private var mainScreenModel: MainScreenModel?
+  private var storageService: StorageService
   
-  @ObjectCustomUserDefaultsWrapper<SelecteAppIconScreenModel>(key: Appearance().keyUserDefaults)
-  private var appIconScreenModel: SelecteAppIconScreenModel?
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
   
   // MARK: - Internal properties
   
@@ -56,7 +60,7 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   func updateAppIcon(type: SelecteAppIconType) {
     let newModel = SelecteAppIconScreenModel(selecteAppIconType: type)
-    appIconScreenModel = newModel
+    storageService.appIconScreenModel = newModel
     let appearance = Appearance()
     guard UIApplication.shared.supportsAlternateIcons else {
       output?.somethingWentWrong()
@@ -116,13 +120,13 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   }
   
   func returnIsPremium() -> Bool {
-    return mainScreenModel?.isPremium ?? false
+    return storageService.isPremium
   }
   
   /// Получить данные
   func getContent() {
-    output?.didReceive(selecteIconType: appIconScreenModel?.selecteAppIconType ?? .defaultIcon,
-                       isPremium: mainScreenModel?.isPremium ?? false)
+    output?.didReceive(selecteIconType: storageService.appIconScreenModel?.selecteAppIconType ?? .defaultIcon,
+                       isPremium: storageService.isPremium)
   }
 }
 
@@ -144,9 +148,6 @@ private extension SelecteAppIconScreenInteractor {
 
 private extension SelecteAppIconScreenInteractor {
   struct Appearance {
-    let keyUserDefaults = "selecte_app_icon_screen_user_defaults_key"
-    let mainScreenModelKey = "main_screen_user_defaults_key"
-    
     let defaultIcon = "selecte_app_icon_default"
     let blueRaspberryIcon = "selecte_app_icon_blue_raspberry"
     let crimsonTideIcon = "selecte_app_icon_crimson_tide"

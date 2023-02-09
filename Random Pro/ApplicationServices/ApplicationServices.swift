@@ -60,6 +60,8 @@ protocol ApplicationServices {
   
   /// Сервис подписок и покупок премиум версии
   var appPurchasesService: AppPurchasesService { get }
+  
+  var storageService: StorageService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -119,5 +121,9 @@ final class ApplicationServicesImpl: ApplicationServices {
   
   var appPurchasesService: AppPurchasesService {
     AppPurchasesServiceImpl()
+  }
+  
+  var storageService: StorageService {
+    StorageServiceImpl()
   }
 }

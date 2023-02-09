@@ -48,7 +48,8 @@ final class ContactScreenCoordinator: ContactScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var contactScreenModule = ContactScreenAssembly().createModule(permissionService: services.permissionService)
+    var contactScreenModule = ContactScreenAssembly().createModule(permissionService: services.permissionService,
+                                                                   storageService: services.storageService)
     self.contactScreenModule = contactScreenModule
     contactScreenModule.moduleOutput = self
     navigationController.pushViewController(contactScreenModule, animated: true)

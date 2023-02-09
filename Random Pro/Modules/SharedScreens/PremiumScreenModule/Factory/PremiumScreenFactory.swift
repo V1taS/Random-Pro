@@ -64,6 +64,9 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
       OnboardingViewModel.PageModel(title: appearance.chooseIconTitle,
                                     description: appearance.chooseIconDescription,
                                     lottieAnimationJSONName: appearance.chooseIconJSONName),
+      OnboardingViewModel.PageModel(title: appearance.syncTitle,
+                                    description: appearance.syncDescription,
+                                    lottieAnimationJSONName: appearance.syncIconJSONName),
       OnboardingViewModel.PageModel(title: appearance.filmsTitle,
                                     description: appearance.filmsDescription,
                                     lottieAnimationJSONName: appearance.filmsIconJSONName),
@@ -114,8 +117,12 @@ private extension PremiumScreenFactory {
     let filtersDescription = NSLocalizedString("Улучшайте свои фотографии и добавляйте им уникальность", comment: "")
     let filtersIconJSONName = "premium_filters"
     
-    let donateTitle = NSLocalizedString("Поддержи проект", comment: "")
+    let donateTitle = NSLocalizedString("Поддержите проект", comment: "")
     let donateDescription = NSLocalizedString("Станьте частью сообщества, помогающего нам стремительно развиваться", comment: "")
     let donateIconJSONName = "premium_donate"
+    
+    let syncTitle = NSLocalizedString("Синхронизируйте", comment: "")
+    let syncDescription = NSLocalizedString("Получите доступ к своим данным со всех ваших устройств", comment: "")
+    let syncIconJSONName = "premium_sync"
   }
 }

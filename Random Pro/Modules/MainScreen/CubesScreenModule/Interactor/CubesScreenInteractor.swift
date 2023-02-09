@@ -52,13 +52,20 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<CubesScreenModel>(key: Appearance().keyUserDefaults)
-  private var model: CubesScreenModel?
+  private var storageService: StorageService
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
   
   // MARK: - Internal func
   
   func listGenerated(isShow: Bool) {
-    guard let model = model else {
+    guard let model = storageService.cubesScreenModel else {
       return
     }
     
@@ -67,11 +74,11 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
       isShowlistGenerated: isShow,
       cubesType: model.cubesType
     )
-    self.model = newModel
+    self.storageService.cubesScreenModel = newModel
   }
   
   func updateSelectedCountCubes(_ cubesType: CubesScreenModel.CubesType) {
-    guard let model = model else {
+    guard let model = storageService.cubesScreenModel else {
       return
     }
     
@@ -80,11 +87,11 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
       isShowlistGenerated: model.isShowlistGenerated,
       cubesType: cubesType
     )
-    self.model = newModel
+    self.storageService.cubesScreenModel = newModel
   }
   
   func diceAction(totalValue: Int) {
-    guard let model = model else {
+    guard let model = storageService.cubesScreenModel else {
       return
     }
     
@@ -96,22 +103,21 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
       isShowlistGenerated: model.isShowlistGenerated,
       cubesType: model.cubesType
     )
-    self.model = newModel
+    self.storageService.cubesScreenModel = newModel
   }
   
   func getContent() {
-    cleanOldModelFirstStart()
-    if let model = model {
+    if let model = storageService.cubesScreenModel {
       output?.didReceive(model: model)
     } else {
       let newModel = Appearance().cubesModelDefault
-      self.model = newModel
+      self.storageService.cubesScreenModel = newModel
       output?.didReceive(model: newModel)
     }
   }
   
   func returnCurrentModel() -> CubesScreenModel {
-    if let model = model {
+    if let model = storageService.cubesScreenModel {
       return model
     } else {
       return Appearance().cubesModelDefault
@@ -119,20 +125,9 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   }
   
   func cleanButtonAction() {
-    model = nil
+    storageService.cubesScreenModel = nil
     getContent()
     output?.cleanButtonWasSelected()
-  }
-}
-
-// MARK: - Private
-
-private extension CubesScreenInteractor {
-  func cleanOldModelFirstStart() {
-    if !UserDefaults.standard.bool(forKey: Appearance().keyFirstStartUserDefaults) {
-      model = nil
-      UserDefaults.standard.set(true, forKey: Appearance().keyFirstStartUserDefaults)
-    }
   }
 }
 
@@ -140,8 +135,6 @@ private extension CubesScreenInteractor {
 
 private extension CubesScreenInteractor {
   struct Appearance {
-    let keyUserDefaults = "cubes_screen_user_defaults_key"
-    let keyFirstStartUserDefaults = "cubes_screen_first_start_user_defaults_key"
     let cubesModelDefault = CubesScreenModel(
       listResult: [],
       isShowlistGenerated: true,

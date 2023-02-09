@@ -48,7 +48,7 @@ final class LetterScreenCoordinator: LetterScreenCoordinatorProtocol {
   // MARK: - Internal property
   
   func start() {
-    let letterScreenModule = LetterScreenAssembly().createModule()
+    let letterScreenModule = LetterScreenAssembly().createModule(services: services)
     self.letterScreenModule = letterScreenModule
     self.letterScreenModule?.moduleOutput = self
     navigationController.pushViewController(letterScreenModule, animated: true)

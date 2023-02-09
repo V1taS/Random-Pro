@@ -11,15 +11,18 @@ import UIKit
 final class CoinScreenAssembly {
   
   /// Создает  модуль `CoinScreen`
-  /// - Parameter hapticService: Обратная связь от моторчика
-  func createModule(hapticService: HapticService) -> CoinScreenModule {
+  /// - Parameters:
+  ///  - hapticService: Обратная связь от моторчика
+  ///  - services: Сервисы приложения
+  func createModule(hapticService: HapticService,
+                    services: ApplicationServices) -> CoinScreenModule {
     let view = CoinScreenView()
-    let interactor = CoinScreenInteractor(hapticService: hapticService)
+    let interactor = CoinScreenInteractor(hapticService: hapticService,
+                                          services: services)
     let factory = CoinScreenFactory()
     let presenter = CoinScreenViewController(moduleView: view,
                                              interactor: interactor,
                                              factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

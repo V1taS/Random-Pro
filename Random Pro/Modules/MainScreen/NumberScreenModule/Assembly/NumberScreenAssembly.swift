@@ -12,14 +12,15 @@ import UIKit
 final class NumberScreenAssembly {
   
   /// Собирает модуль `NumberScreen`
-  func createModule() -> NumberScreenModule {
+  /// - Parameters:
+  ///  - services: Сервисы приложения
+  func createModule(_ services: ApplicationServices) -> NumberScreenModule {
     let view = NumberScreenView()
-    let interactor = NumberScreenInteractor()
+    let interactor = NumberScreenInteractor(services: services)
     let factory = NumberScreenFactory()
     let presenter = NumberScreenViewController(moduleView: view,
                                                interactor: interactor,
                                                factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

@@ -9,11 +9,12 @@
 import UIKit
 
 final class ContactScreenAssembly {
-  
   /// Собирает модуль `ContactScreen`
-  func createModule(permissionService: PermissionService) -> ContactScreenModule {
+  func createModule(permissionService: PermissionService,
+                    storageService: StorageService) -> ContactScreenModule {
     let view = ContactScreenView()
-    let interactor = ContactScreenInteractor(permissionService: permissionService)
+    let interactor = ContactScreenInteractor(permissionService: permissionService,
+                                             storageService: storageService)
     let factory = ContactScreenFactory()
     let presenter = ContactScreenViewController(moduleView: view,
                                               interactor: interactor,

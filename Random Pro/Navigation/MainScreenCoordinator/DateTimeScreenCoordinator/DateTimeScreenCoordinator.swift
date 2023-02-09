@@ -48,7 +48,7 @@ final class DateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let dateTimeScreenModule = DateTimeAssembly().createModule()
+    let dateTimeScreenModule = DateTimeAssembly().createModule(services: services)
     self.dateTimeScreenModule = dateTimeScreenModule
     self.dateTimeScreenModule?.moduleOutput = self
     navigationController.pushViewController(dateTimeScreenModule, animated: true)

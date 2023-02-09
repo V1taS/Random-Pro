@@ -11,14 +11,13 @@ import UIKit
 final class DateTimeAssembly {
   
   /// Собирает модуль `DateTimeScreen`
-  func createModule() -> DateTimeModule {
+  func createModule(services: ApplicationServices) -> DateTimeModule {
     let view = DateTimeView()
-    let interactor = DateTimeInteractor()
+    let interactor = DateTimeInteractor(services: services)
     let factory = DateTimeFactory()
     let presenter = DateTimeViewController(moduleView: view,
                                            interactor: interactor,
                                            factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

@@ -48,18 +48,21 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   // MARK: - Private property
   
   private let permissionService: PermissionService
-  @ObjectCustomUserDefaultsWrapper<ContactScreenModel>(key: Appearance().keyUserDefaults)
-  private var model: ContactScreenModel?
+  private var storageService: StorageService
   
-  /// - Parameter permissionService: Сервис запросов доступа
-  init(permissionService: PermissionService) {
+  /// - Parameters:
+  ///  - permissionService: Сервис запросов доступа
+  ///  - storageService: Сервис сохранения данных
+  init(permissionService: PermissionService,
+       storageService: StorageService) {
     self.permissionService = permissionService
+    self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func getContent() {
-    if let model = self.model {
+    if let model = storageService.contactScreenModel {
       self.output?.didReceive(model: model)
     } else {
       permissionService.requestContactStore { [weak self] granted, error in
@@ -93,7 +96,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
           listResult: [],
           result: Appearance().resultLabel
         )
-        self.model = newModel
+        self.storageService.contactScreenModel = newModel
         self.output?.didReceive(model: newModel)
       }
     }
@@ -101,7 +104,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   
   func generateButtonAction() {
     guard
-      let model = model,
+      let model = storageService.contactScreenModel,
       let contact = model.allContacts.shuffled().first
     else {
       return
@@ -115,19 +118,19 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
       listResult: listResult,
       result: result
     )
-    self.model = newModel
+    self.storageService.contactScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnCurrentModel() -> ContactScreenModel {
-    guard let model = model else {
+    guard let model = storageService.contactScreenModel else {
       return ContactScreenModel(allContacts: [], listResult: [], result: Appearance().resultLabel)
     }
     return model
   }
   
   func cleanButtonAction() {
-    self.model = nil
+    self.storageService.contactScreenModel = nil
     getContent()
     output?.cleanButtonWasSelected()
   }
@@ -138,6 +141,5 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
 private extension ContactScreenInteractor {
   struct Appearance {
     let resultLabel = "?"
-    let keyUserDefaults = "contact_screen_user_defaults_key"
   }
 }

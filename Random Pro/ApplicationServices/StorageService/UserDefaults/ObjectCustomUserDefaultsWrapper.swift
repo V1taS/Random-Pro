@@ -12,14 +12,11 @@ import Foundation
 ///
 /// Пример использования
 ///
-/// `@ObjectCustomUserDefaultsWrapper<T>(key: "Уникальный ключ")private var object: T?`
+/// `@ObjectCustomUserDefaultsWrapper(key: "Уникальный ключ")private var object: T?`
 ///
 
-/// Сгруппировали нужные протоколы
-typealias ObjectCustomUserDefaultsProtocol = Equatable & Encodable & Decodable
-
 @propertyWrapper
-struct ObjectCustomUserDefaultsWrapper<T: ObjectCustomUserDefaultsProtocol> {
+struct ObjectCustomUserDefaultsWrapper<T: UserDefaultsCodable> {
   
   // MARK: - Internal property
   
@@ -27,8 +24,7 @@ struct ObjectCustomUserDefaultsWrapper<T: ObjectCustomUserDefaultsProtocol> {
     get {
       let object: T? = UserDefaultsWrapper.objectCustom(for: key)
       return object
-    }
-    set {
+    } set {
       UserDefaultsWrapper.setCustom(newValue, for: key)
     }
   }

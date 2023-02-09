@@ -21,10 +21,10 @@ protocol PremiumScreenInteractorOutput: AnyObject {
   
   /// Успешная покупка подписки
   func didReceiveSubscriptionPurchaseSuccess()
-
+  
   /// Успешная разовая покупка
   func didReceiveOneTimePurchaseSuccess()
-
+  
   /// Начало оплаты
   func startPaymentProcessing()
   
@@ -33,10 +33,10 @@ protocol PremiumScreenInteractorOutput: AnyObject {
   
   /// Обновить секции на главном экране
   func updateStateForSections()
-
+  
   /// Что-то пошло не так
   func somethingWentWrong()
-
+  
   /// Покупки отсутствуют
   func didReceivePurchasesMissing()
 }
@@ -66,14 +66,17 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   
   private let appPurchasesService: AppPurchasesService
   private var cacheProducts: [ApphudProduct] = []
-  @ObjectCustomUserDefaultsWrapper<MainScreenModel>(key: Appearance().mainScreenKeyUserDefaults)
-  private var mainScreenModel: MainScreenModel?
+  private var storageService: StorageService
   
   // MARK: - Initialization
   
-  /// - Parameter appPurchasesService: Сервис работы с подписками
-  init(_ appPurchasesService: AppPurchasesService) {
+  /// - Parameters:
+  ///  - appPurchasesService: Сервис работы с подписками
+  ///  - services: Сервисы приложения
+  init(_ appPurchasesService: AppPurchasesService,
+       services: ApplicationServices) {
     self.appPurchasesService = appPurchasesService
+    storageService = services.storageService
   }
   
   // MARK: - Internal func
@@ -95,14 +98,14 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   
   func mainButtonAction(_ purchaseType: PremiumScreenPurchaseType) {
     output?.startPaymentProcessing()
-
+    
     let products = cacheProducts.filter { $0.productId == purchaseType.productIdentifiers }
     guard let product = products.first else {
       output?.somethingWentWrong()
       output?.stopPaymentProcessing()
       return
     }
-
+    
     appPurchasesService.purchaseWith(product) { [weak self] result in
       switch result {
       case .successfulSubscriptionPurchase:
@@ -122,7 +125,7 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
     appPurchasesService.getProducts { [weak self] products in
       if let products {
         self?.cacheProducts = products
-
+        
         let skProducts = products.compactMap {
           return $0.skProduct
         }
@@ -138,16 +141,16 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
 
 private extension PremiumScreenInteractor {
   func activatePremium() {
-    if let mainScreenModel {
+    if let mainScreenModel = storageService.mainScreenModel {
       let newModel = MainScreenModel(isDarkMode: mainScreenModel.isDarkMode,
                                      isPremium: true,
                                      allSections: mainScreenModel.allSections)
-      self.mainScreenModel = newModel
+      self.storageService.mainScreenModel = newModel
       output?.updateStateForSections()
     } else {
       MainScreenFactory.createBaseModel { model in
         MainScreenFactory.updateModelWith(oldModel: model) { [weak self] newModel in
-          self?.mainScreenModel = newModel
+          self?.storageService.mainScreenModel = newModel
           self?.output?.updateStateForSections()
         }
       }
@@ -158,7 +161,5 @@ private extension PremiumScreenInteractor {
 // MARK: - Appearance
 
 private extension PremiumScreenInteractor {
-  struct Appearance {
-    let mainScreenKeyUserDefaults = "main_screen_user_defaults_key"
-  }
+  struct Appearance {}
 }

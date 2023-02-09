@@ -12,15 +12,13 @@ final class TeamsScreenAssembly {
   
   /// Собирает модуль `TeamsScreen`
   /// - Returns: Cобранный модуль `TeamsScreen`
-  func createModule() -> TeamsScreenModule {
-    
-    let interactor = TeamsScreenInteractor()
+  func createModule(services: ApplicationServices) -> TeamsScreenModule {
+    let interactor = TeamsScreenInteractor(services: services)
     let view = TeamsScreenView()
     let factory = TeamsScreenFactory()
     let presenter = TeamsScreenViewController(moduleView: view,
                                               interactor: interactor,
                                               factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

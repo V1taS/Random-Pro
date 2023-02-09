@@ -49,7 +49,7 @@ final class ListScreenCoordinator: ListScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var listScreenModule = ListScreenAssembly().createModule()
+    var listScreenModule = ListScreenAssembly().createModule(services: services)
     self.listScreenModule = listScreenModule
     listScreenModule.moduleOutput = self
     navigationController.pushViewController(listScreenModule, animated: true)

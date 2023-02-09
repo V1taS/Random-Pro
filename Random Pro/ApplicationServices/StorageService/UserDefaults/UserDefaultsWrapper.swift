@@ -9,18 +9,6 @@
 import UIKit
 
 enum UserDefaultsWrapper {
-  
-  /// Универсальная функция, сохраняет любые `СТАНДАРТНЫЕ` объекты. Например: `Int, Double, String, [Float]...`
-  static func set<T>(_ object: T, for key: String) {
-    UserDefaults.standard.set(object, forKey: key)
-  }
-  
-  /// Универсальная функция, получает любые `СТАНДАРТНЫЕ` объекты. Например: `Int, Double, String, [Float]...`
-  static func object<T>(for key: String) -> T? {
-    guard let item = UserDefaults.standard.data(forKey: key) else { return nil }
-    return item as? T
-  }
-  
   /// Универсальная функция, сохраняет любые `НЕ СТАНДАРТНЫЕ` объекты. Например: `UIImage, SelfType, Data...`
   static func setCustom<T: Equatable & Encodable>(_ object: T, for key: String) {
     let encoder = JSONEncoder()

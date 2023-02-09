@@ -13,9 +13,9 @@ final class CubesScreenAssembly {
   
   /// Собирает модуль `CubesScreen`
   /// - Returns: Cобранный модуль `CubesScreen`
-  func createModule() -> CubesScreenModule {
+  func createModule(services: ApplicationServices) -> CubesScreenModule {
     let view = CubesScreenView()
-    let interactor = CubesScreenInteractor()
+    let interactor = CubesScreenInteractor(services: services)
     let factory = CubesScreenFactory()
     let presenter = CubesScreenViewController(moduleView: view,
                                               interactor: interactor,

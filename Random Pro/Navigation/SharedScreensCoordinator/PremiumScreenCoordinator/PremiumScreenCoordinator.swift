@@ -73,7 +73,8 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
       return
     }
     
-    let premiumScreenModule = PremiumScreenAssembly().createModule(services.appPurchasesService)
+    let premiumScreenModule = PremiumScreenAssembly().createModule(services.appPurchasesService,
+                                                                   services: services)
     self.premiumScreenModule = premiumScreenModule
     self.premiumScreenModule?.moduleOutput = self
     premiumScreenModule.selectIsModalPresentationStyle(presentType == .present)

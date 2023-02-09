@@ -11,14 +11,13 @@ import UIKit
 final class YesNoScreenAssembly {
   
   /// Собирает модуль `YesNoScreen`
-  func createModule() -> YesNoScreenModule {
+  func createModule(services: ApplicationServices) -> YesNoScreenModule {
     let view = YesNoScreenView()
-    let interactor = YesNoScreenInteractor()
+    let interactor = YesNoScreenInteractor(services: services)
     let factory = YesNoScreenFactory()
     let presenter = YesNoScreenViewController(moduleView: view,
                                               interactor: interactor,
                                               factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

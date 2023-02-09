@@ -23,8 +23,13 @@ final class DeepLinkServiceImpl: DeepLinkService {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<DeepLinkType>(key: Appearance().keyUserDefaults)
-  private var deepLinkType: DeepLinkType?
+  private var deepLinkType: DeepLinkType? {
+    get {
+      StorageServiceImpl().deepLinkModel
+    } set {
+      StorageServiceImpl().deepLinkModel = newValue
+    }
+  }
   
   // MARK: - Internal func
   
@@ -66,7 +71,5 @@ private extension DeepLinkServiceImpl {
 // MARK: - Appearance
 
 private extension DeepLinkServiceImpl {
-  struct Appearance {
-    let keyUserDefaults = "deep_link_user_defaults_key"
-  }
+  struct Appearance {}
 }

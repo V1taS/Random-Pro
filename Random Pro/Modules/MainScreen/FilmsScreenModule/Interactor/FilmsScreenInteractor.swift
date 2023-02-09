@@ -47,10 +47,9 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper(key: Appearance().keyUserDefaults)
-  private var filmsModels: [FilmsScreenModel]?
   private let factory: FilmsScreenFactoryInput
   private let services: ApplicationServices
+  private var storageService: StorageService
   
   // MARK: - Initialization
   
@@ -61,6 +60,7 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
        factory: FilmsScreenFactoryInput) {
     self.services = services
     self.factory = factory
+    storageService = services.storageService
   }
   
   // MARK: - Internal func
@@ -85,11 +85,11 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   
   func loadFilm() {
     if isRuslocale() {
-      if filmsModels == nil {
+      if storageService.filmsScreenModel == nil {
         loadRusFilms {}
       }
     } else {
-      if filmsModels == nil {
+      if storageService.filmsScreenModel == nil {
         loadEngFilms {}
       }
     }
@@ -103,7 +103,7 @@ private extension FilmsScreenInteractor {
     output?.startLoader()
     loadListEngFilmsDto { [weak self] filmsModelsDTO in
       self?.loadEngImageWith(filmsEngDTO: filmsModelsDTO) { [weak self] filmsModels in
-        self?.filmsModels = filmsModels
+        self?.storageService.filmsScreenModel = filmsModels
         completion()
         self?.output?.stopLoader()
       }
@@ -114,7 +114,7 @@ private extension FilmsScreenInteractor {
     output?.startLoader()
     loadListRusFilmsDto { [weak self] filmsModelsDTO in
       self?.loadRusImageWith(filmsRusDTO: filmsModelsDTO) { [weak self] filmsModels in
-        self?.filmsModels = filmsModels
+        self?.storageService.filmsScreenModel = filmsModels
         completion()
         self?.output?.stopLoader()
       }
@@ -122,7 +122,7 @@ private extension FilmsScreenInteractor {
   }
   
   func getEngFilms() {
-    if let filmsModels, filmsModels.isEmpty {
+    if let filmsModels = storageService.filmsScreenModel, filmsModels.isEmpty {
       loadEngFilms { [weak self] in
         guard let filmModel = self?.getGenerateRusFilms() else {
           self?.output?.somethingWentWrong()
@@ -140,7 +140,7 @@ private extension FilmsScreenInteractor {
   }
   
   func getRusFilms() {
-    if let filmsModels, filmsModels.isEmpty {
+    if let filmsModels = storageService.filmsScreenModel, filmsModels.isEmpty {
       loadRusFilms { [weak self] in
         guard let filmModel = self?.getGenerateRusFilms() else {
           self?.output?.somethingWentWrong()
@@ -235,11 +235,11 @@ private extension FilmsScreenInteractor {
   }
   
   func getGenerateRusFilms() -> FilmsScreenModel? {
-    filmsModels?.shuffle()
-    guard let filmModel = filmsModels?.first else {
+    storageService.filmsScreenModel?.shuffle()
+    guard let filmModel = storageService.filmsScreenModel?.first else {
       return nil
     }
-    filmsModels?.removeFirst()
+    storageService.filmsScreenModel?.removeFirst()
     return filmModel
   }
   
@@ -326,7 +326,6 @@ private extension FilmsScreenInteractor {
     let rusAPIKey = "f835989c-b489-4624-9209-6d93bfead535"
     let rusHeaderAPIKey = "X-API-KEY"
     let rusRegionCode = "RU"
-    let keyUserDefaults = "films_screen_user_defaults_key"
     
     let engFilmUrl = "https://most-popular-movies-right-now-daily-update.p.rapidapi.com/"
     let engAPIKey = "f7321a82d8msh8cd3d6fb5db3824p1bef63jsn40adb1a66d30"

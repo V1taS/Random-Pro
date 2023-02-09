@@ -11,10 +11,13 @@ import UIKit
 final class PremiumScreenAssembly {
   
   /// Собирает модуль `PremiumScreen`
-  /// - Parameter appPurchasesService: Сервис работы с подписками
+  /// - Parameters:
+  ///  - appPurchasesService: Сервис работы с подписками
+  ///  - services: Сервисы приложения
   /// - Returns: Cобранный модуль `PremiumScreen`
-  func createModule(_ appPurchasesService: AppPurchasesService) -> PremiumScreenModule {
-    let interactor = PremiumScreenInteractor(appPurchasesService)
+  func createModule(_ appPurchasesService: AppPurchasesService,
+                    services: ApplicationServices) -> PremiumScreenModule {
+    let interactor = PremiumScreenInteractor(appPurchasesService, services: services)
     let view = PremiumScreenView()
     let factory = PremiumScreenFactory()
     let presenter = PremiumScreenViewController(moduleView: view,

@@ -12,8 +12,8 @@ final class SelecteAppIconScreenAssembly {
   
   /// Собирает модуль `SelecteAppIconScreen`
   /// - Returns: Cобранный модуль `SelecteAppIconScreen`
-  func createModule() -> SelecteAppIconScreenModule {
-    let interactor = SelecteAppIconScreenInteractor()
+  func createModule(services: ApplicationServices) -> SelecteAppIconScreenModule {
+    let interactor = SelecteAppIconScreenInteractor(services: services)
     let view = SelecteAppIconScreenView()
     let factory = SelecteAppIconScreenFactory()
     let presenter = SelecteAppIconScreenViewController(moduleView: view,

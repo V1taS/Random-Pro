@@ -11,14 +11,13 @@ import UIKit
 final class LotteryScreenAssembly {
   
   /// Собирает модуль `LotteryScreen`
-  func createModule() -> LotteryScreenModule {
+  func createModule(services: ApplicationServices) -> LotteryScreenModule {
     let view = LotteryScreenView()
-    let interactor = LotteryScreenInteractor()
+    let interactor = LotteryScreenInteractor(services: services)
     let factory = LotteryScreenFactory()
     let presenter = LotteryScreenViewController(moduleView: view,
                                                 interactor: interactor,
                                                 factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

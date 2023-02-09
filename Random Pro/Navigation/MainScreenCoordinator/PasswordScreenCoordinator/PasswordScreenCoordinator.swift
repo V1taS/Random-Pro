@@ -48,7 +48,7 @@ final class PasswordScreenCoordinator: PasswordScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var passwordScreenModule = PasswordScreenAssembly().createModule()
+    var passwordScreenModule = PasswordScreenAssembly().createModule(services: services)
     self.passwordScreenModule = passwordScreenModule
     passwordScreenModule.moduleOutput = self
     navigationController.pushViewController(passwordScreenModule, animated: true)

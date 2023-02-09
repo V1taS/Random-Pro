@@ -36,7 +36,6 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   private let services: ApplicationServices
   private var anyCoordinator: Coordinator?
   private var settingsScreenCoordinator: MainSettingsScreenCoordinatorProtocol?
-  private var onboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol?
   private let window: UIWindow?
   
   // MARK: - Initialization
@@ -387,21 +386,6 @@ private extension MainScreenCoordinator {
       }
       window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
     }
-  }
-  
-  func showOnboarding() {
-    // TODO: - Доработать, на данный момент выключен
-    let actualScreens = OnboardingScreenInteractor.getActualScreens()
-    
-    guard !actualScreens.isEmpty else {
-      return
-    }
-    
-    let onboardingScreenCoordinator = OnboardingScreenCoordinator(self.navigationController,
-                                                                  self.services)
-    onboardingScreenCoordinator.start()
-    self.onboardingScreenCoordinator = onboardingScreenCoordinator
-    self.services.metricsService.track(event: .onboarding)
   }
   
   func startDeepLink() {

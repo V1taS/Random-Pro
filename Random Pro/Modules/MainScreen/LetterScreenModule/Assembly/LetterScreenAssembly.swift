@@ -11,14 +11,13 @@ import UIKit
 final class LetterScreenAssembly {
   
   /// Собирает модуль `LetterScreen`
-  func createModule() -> LetterScreenModule {
+  func createModule(services: ApplicationServices) -> LetterScreenModule {
     let view = LetterScreenView()
-    let interactor = LetterScreenInteractor()
+    let interactor = LetterScreenInteractor(services: services)
     let factory = LetterScreenFactory()
     let presenter = LetterScreenViewController(moduleView: view,
                                                interactor: interactor,
                                                factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

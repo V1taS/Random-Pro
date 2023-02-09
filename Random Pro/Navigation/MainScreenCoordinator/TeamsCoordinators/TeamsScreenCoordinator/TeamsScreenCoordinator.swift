@@ -49,7 +49,7 @@ final class TeamsScreenCoordinator: TeamsScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let teamsScreenModule = TeamsScreenAssembly().createModule()
+    let teamsScreenModule = TeamsScreenAssembly().createModule(services: services)
     self.teamsScreenModule = teamsScreenModule
     self.teamsScreenModule?.moduleOutput = self
     navigationController.pushViewController(teamsScreenModule, animated: true)

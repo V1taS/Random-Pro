@@ -48,7 +48,7 @@ final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var cubesScreenModule = CubesScreenAssembly().createModule()
+    var cubesScreenModule = CubesScreenAssembly().createModule(services: services)
     self.cubesScreenModule = cubesScreenModule
     cubesScreenModule.moduleOutput = self
     navigationController.pushViewController(cubesScreenModule, animated: true)

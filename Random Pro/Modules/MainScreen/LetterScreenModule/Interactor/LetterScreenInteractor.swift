@@ -52,20 +52,27 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<LetterScreenModel>(key: Appearance().keyUserDefaults)
-  private var model: LetterScreenModel?
+  private var storageService: StorageService
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    model = nil
+    storageService.letterScreenModel = nil
     getContent()
-    guard let model = model else { return }
+    guard let model = storageService.letterScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
   func withoutRepetitionAction(isOn: Bool) {
-    guard let model = model else {
+    guard let model = storageService.letterScreenModel else {
       configureModel(withWithoutRepetition: isOn)
       return
     }
@@ -76,7 +83,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
       isEnabledWithoutRepetition: isOn,
       languageIndexSegmented: model.languageIndexSegmented
     )
-    self.model = modelNew
+    self.storageService.letterScreenModel = modelNew
     getContent()
   }
   
@@ -86,7 +93,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
   
   func generateContentRusLetter() {
     let appearance = Appearance()
-    guard let model = model else {
+    guard let model = storageService.letterScreenModel else {
       configureModel()
       return
     }
@@ -100,20 +107,20 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
         configureModel()
         return
       }
-      self.model = newModel
+      self.storageService.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
                                            listLetter: Appearance().listRussionLetters,
                                            languageIndexSegmented: appearance.russionCharacterIndex)
-      self.model = newModel
+      self.storageService.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     }
   }
   
   func generateContentEngLetter() {
     let appearance = Appearance()
-    guard let model = model else {
+    guard let model = storageService.letterScreenModel else {
       assertionFailure("Неудалось получить модель")
       configureModel()
       return
@@ -129,19 +136,19 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
         configureModel()
         return
       }
-      self.model = newModel
+      self.storageService.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
                                            listLetter: Appearance().listEnglishLetters,
                                            languageIndexSegmented: appearance.englishCharacterIndex)
-      self.model = newModel
+      self.storageService.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     }
   }
   
   func returnListResult() -> [String] {
-    if let model = model {
+    if let model = storageService.letterScreenModel {
       return model.listResult
     } else {
       return []
@@ -153,7 +160,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
 
 private extension LetterScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = model {
+    if let model = storageService.letterScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
@@ -163,7 +170,7 @@ private extension LetterScreenInteractor {
         isEnabledWithoutRepetition: isOn,
         languageIndexSegmented: appearance.russionCharacterIndex
       )
-      self.model = model
+      self.storageService.letterScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -221,7 +228,6 @@ private extension LetterScreenInteractor {
       "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
       "U", "V", "W", "X", "Y", "Z"
     ]
-    let keyUserDefaults = "letter_screen_user_defaults_key"
     let russionCharacterIndex: Int = 0
     let englishCharacterIndex: Int = 1
   }

@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "premium_sync.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

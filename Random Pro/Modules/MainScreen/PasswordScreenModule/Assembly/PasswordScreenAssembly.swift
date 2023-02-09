@@ -13,9 +13,9 @@ final class PasswordScreenAssembly {
   
   /// Собирает модуль `PasswordScreen`
   /// - Returns: Cобранный модуль `PasswordScreen`
-  func createModule() -> PasswordScreenModule {
+  func createModule(services: ApplicationServices) -> PasswordScreenModule {
     let view = PasswordScreenView()
-    let interactor = PasswordScreenInteractor()
+    let interactor = PasswordScreenInteractor(services: services)
     let factory = PasswordScreenFactory()
     let presenter = PasswordScreenViewController(moduleView: view,
                                                  interactor: interactor,

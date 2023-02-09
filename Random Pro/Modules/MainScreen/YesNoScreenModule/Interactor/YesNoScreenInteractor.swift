@@ -42,32 +42,39 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   
   // MARK: - Private property
   
-  @ObjectCustomUserDefaultsWrapper<YesNoScreenModel>(key: Appearance().keyUserDefaults)
-  private var model: YesNoScreenModel?
+  private var storageService: StorageService
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
   
   // MARK: - Initarnal func
   
   func cleanButtonAction() {
-    model = nil
+    storageService.yesNoScreenModel = nil
     getContent()
-    guard let model = model else { return }
+    guard let model = storageService.yesNoScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
   func getContent() {
-    if let model = model {
+    if let model = storageService.yesNoScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
       let model = YesNoScreenModel(result: appearance.result,
                                    listResult: [])
-      self.model = model
+      self.storageService.yesNoScreenModel = model
       output?.didReceive(model: model)
     }
   }
   
   func generateContent() {
-    guard let model = model else {
+    guard let model = storageService.yesNoScreenModel else {
       return
     }
     
@@ -77,12 +84,12 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
     listResult.append(randomElementYesOrNo)
     let newModel = YesNoScreenModel(result: randomElementYesOrNo,
                                     listResult: listResult)
-    self.model = newModel
+    self.storageService.yesNoScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = model {
+    if let model = storageService.yesNoScreenModel {
       return model.listResult
     } else {
       return []
@@ -99,6 +106,5 @@ private extension YesNoScreenInteractor {
       NSLocalizedString("Нет", comment: "")
     ]
     let result = "?"
-    let keyUserDefaults = "yes_no_screen_user_defaults_key"
   }
 }

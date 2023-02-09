@@ -98,16 +98,19 @@ final class RaffleScreenInteractor: NSObject, RaffleScreenInteractorInput {
   // MARK: - Private properties
   
   private let authenticationService: AuthenticationService
-  @ObjectCustomUserDefaultsWrapper<RaffleScreenModel>(key: Appearance().keyUserDefaults)
-  private var model: RaffleScreenModel?
   private var currentNonce: String?
+  private var storageService: StorageService
   
   // MARK: - Initialization
   
   /// Инициализатор
-  /// - Parameter authenticationService: Сервис авторизации пользователей
-  init(authenticationService: AuthenticationService) {
+  /// - Parameters:
+  ///  - authenticationService: Сервис авторизации пользователей
+  ///  - storageService: Сервис хранения данных
+  init(authenticationService: AuthenticationService,
+       storageService: StorageService) {
     self.authenticationService = authenticationService
+    self.storageService = storageService
   }
   
   // MARK: - Internal func
@@ -176,7 +179,7 @@ final class RaffleScreenInteractor: NSObject, RaffleScreenInteractorInput {
   }
   
   func getUserProfile() {
-    if let model {
+    if let model = storageService.raffleScreenModel {
       output?.didReceiveUsertWith(model: model)
     } else {
       authenticationService.getUserProfile { [weak self] result in
@@ -185,7 +188,7 @@ final class RaffleScreenInteractor: NSObject, RaffleScreenInteractorInput {
                                          identifier: result?.uid,
                                          fullName: result?.name,
                                          email: result?.email)
-        self?.model = newModel
+        self?.storageService.raffleScreenModel = newModel
         self?.output?.didReceiveUsertWith(model: newModel)
       }
     }
@@ -251,7 +254,6 @@ extension RaffleScreenInteractor: ASAuthorizationControllerPresentationContextPr
 
 private extension RaffleScreenInteractor {
   struct Appearance {
-    let keyUserDefaults = "raffle_screen_user_defaults_key"
     let defaultAvatar = Data()
   }
 }

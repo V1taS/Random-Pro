@@ -11,10 +11,14 @@ import UIKit
 final class RaffleScreenAssembly {
   
   /// Собирает модуль `RaffleScreen`
-  /// - Parameter authenticationService: Сервис авторизации пользователей
+  /// - Parameters:
+  ///  - authenticationService: Сервис авторизации пользователей
+  ///  - storageService: Сервис хранения данных
   /// - Returns: Cобранный модуль `RaffleScreen`
-  func createModule(authenticationService: AuthenticationService) -> RaffleScreenModule {
-    let interactor = RaffleScreenInteractor(authenticationService: authenticationService)
+  func createModule(authenticationService: AuthenticationService,
+                    storageService: StorageService) -> RaffleScreenModule {
+    let interactor = RaffleScreenInteractor(authenticationService: authenticationService,
+                                            storageService: storageService)
     let view = RaffleScreenView()
     let factory = RaffleScreenFactory()
     let presenter = RaffleScreenViewController(moduleView: view,

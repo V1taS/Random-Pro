@@ -46,7 +46,8 @@ final class RaffleScreenCoordinator: RaffleScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let raffleScreenModule = RaffleScreenAssembly().createModule(authenticationService: services.authenticationService)
+    let raffleScreenModule = RaffleScreenAssembly().createModule(authenticationService: services.authenticationService,
+                                                                 storageService: services.storageService)
     self.raffleScreenModule = raffleScreenModule
     self.raffleScreenModule?.moduleOutput = self
     navigationController.pushViewController(raffleScreenModule, animated: true)

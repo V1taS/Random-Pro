@@ -50,6 +50,13 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   private let factory: FilmsScreenFactoryInput
   private let services: ApplicationServices
   private var storageService: StorageService
+  private var filmsScreenModel: [FilmsScreenModel] = [] {
+    didSet {
+      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+        self?.storageService.filmsScreenModel = self?.filmsScreenModel
+      }
+    }
+  }
   
   // MARK: - Initialization
   
@@ -61,6 +68,7 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
     self.services = services
     self.factory = factory
     storageService = services.storageService
+    filmsScreenModel = services.storageService.filmsScreenModel ?? []
   }
   
   // MARK: - Internal func
@@ -85,11 +93,11 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   
   func loadFilm() {
     if isRuslocale() {
-      if storageService.filmsScreenModel == nil {
+      if services.storageService.filmsScreenModel == nil {
         loadRusFilms {}
       }
     } else {
-      if storageService.filmsScreenModel == nil {
+      if services.storageService.filmsScreenModel == nil {
         loadEngFilms {}
       }
     }
@@ -103,7 +111,7 @@ private extension FilmsScreenInteractor {
     output?.startLoader()
     loadListEngFilmsDto { [weak self] filmsModelsDTO in
       self?.loadEngImageWith(filmsEngDTO: filmsModelsDTO) { [weak self] filmsModels in
-        self?.storageService.filmsScreenModel = filmsModels
+        self?.filmsScreenModel = filmsModels
         completion()
         self?.output?.stopLoader()
       }
@@ -114,7 +122,7 @@ private extension FilmsScreenInteractor {
     output?.startLoader()
     loadListRusFilmsDto { [weak self] filmsModelsDTO in
       self?.loadRusImageWith(filmsRusDTO: filmsModelsDTO) { [weak self] filmsModels in
-        self?.storageService.filmsScreenModel = filmsModels
+        self?.filmsScreenModel = filmsModels
         completion()
         self?.output?.stopLoader()
       }
@@ -122,7 +130,7 @@ private extension FilmsScreenInteractor {
   }
   
   func getEngFilms() {
-    if let filmsModels = storageService.filmsScreenModel, filmsModels.isEmpty {
+    if filmsScreenModel.isEmpty {
       loadEngFilms { [weak self] in
         guard let filmModel = self?.getGenerateRusFilms() else {
           self?.output?.somethingWentWrong()
@@ -140,7 +148,7 @@ private extension FilmsScreenInteractor {
   }
   
   func getRusFilms() {
-    if let filmsModels = storageService.filmsScreenModel, filmsModels.isEmpty {
+    if filmsScreenModel.isEmpty {
       loadRusFilms { [weak self] in
         guard let filmModel = self?.getGenerateRusFilms() else {
           self?.output?.somethingWentWrong()
@@ -235,11 +243,11 @@ private extension FilmsScreenInteractor {
   }
   
   func getGenerateRusFilms() -> FilmsScreenModel? {
-    storageService.filmsScreenModel?.shuffle()
-    guard let filmModel = storageService.filmsScreenModel?.first else {
+    filmsScreenModel.shuffle()
+    guard let filmModel = filmsScreenModel.first else {
       return nil
     }
-    storageService.filmsScreenModel?.removeFirst()
+    filmsScreenModel.removeFirst()
     return filmModel
   }
   

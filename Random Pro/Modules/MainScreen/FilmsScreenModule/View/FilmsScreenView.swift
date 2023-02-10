@@ -7,6 +7,7 @@
 
 import UIKit
 import RandomUIKit
+import Lottie
 
 /// События которые отправляем из View в Presenter
 protocol FilmsScreenViewOutput: AnyObject {
@@ -48,7 +49,7 @@ final class FilmsScreenView: FilmsScreenViewProtocol {
   // MARK: - Private properties
   
   private let filmsView = FilmView()
-  private let activityIndicator = UIActivityIndicatorView(style: .large)
+  private let activityIndicator = LottieAnimationView(name: Appearance().loaderImage)
   private var cacheFilmsName: String?
   private var cacheTrailerEngFilmsUrl: String?
   
@@ -86,13 +87,13 @@ final class FilmsScreenView: FilmsScreenViewProtocol {
   
   func startLoader() {
     activityIndicator.isHidden = false
-    activityIndicator.startAnimating()
+    activityIndicator.play()
     filmsView.setButtonIsEnabled(false)
   }
   
   func stopLoader() {
     activityIndicator.isHidden = true
-    activityIndicator.stopAnimating()
+    activityIndicator.stop()
     filmsView.setButtonIsEnabled(true)
   }
   
@@ -121,14 +122,19 @@ private extension FilmsScreenView {
       filmsView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
       activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-      activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
+      activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+      activityIndicator.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5)
     ])
   }
   
   func applyDefaultBehavior() {
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     filmsView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    
     activityIndicator.isHidden = true
+    activityIndicator.contentMode = .scaleAspectFit
+    activityIndicator.loopMode = .loop
+    activityIndicator.animationSpeed = Appearance().animationSpeed
     
     filmsView.configureWith(backgroundImage: nil,
                             title: nil,
@@ -145,5 +151,7 @@ private extension FilmsScreenView {
 private extension FilmsScreenView {
   struct Appearance {
     let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let loaderImage = "films_loader"
+    let animationSpeed: CGFloat = 0.5
   }
 }

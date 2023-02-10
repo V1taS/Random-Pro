@@ -237,7 +237,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.teams) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.teams)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.teams ?? model.advLabel.rawValue)
               ))
             case .number:
               cardSections.append(MainScreenModel.Section(
@@ -246,7 +246,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.number) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.number)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.number ?? model.advLabel.rawValue)
               ))
             case .yesOrNo:
               cardSections.append(MainScreenModel.Section(
@@ -255,7 +255,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.yesOrNo) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.yesOrNo)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.yesOrNo ?? model.advLabel.rawValue)
               ))
             case .letter:
               cardSections.append(MainScreenModel.Section(
@@ -264,7 +264,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.letter) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.letter)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.letter ?? model.advLabel.rawValue)
               ))
             case .list:
               cardSections.append(MainScreenModel.Section(
@@ -273,7 +273,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.list) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.list)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.list ?? model.advLabel.rawValue)
               ))
             case .coin:
               cardSections.append(MainScreenModel.Section(
@@ -282,7 +282,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.coin) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.coin)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.coin ?? model.advLabel.rawValue)
               ))
             case .cube:
               cardSections.append(MainScreenModel.Section(
@@ -291,7 +291,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.cube) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.cube)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.cube ?? model.advLabel.rawValue)
               ))
             case .dateAndTime:
               cardSections.append(MainScreenModel.Section(
@@ -300,7 +300,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.dateAndTime) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.dateAndTime)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.dateAndTime ?? model.advLabel.rawValue)
               ))
             case .lottery:
               cardSections.append(MainScreenModel.Section(
@@ -309,7 +309,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.lottery) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.lottery)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.lottery ?? model.advLabel.rawValue)
               ))
             case .contact:
               cardSections.append(MainScreenModel.Section(
@@ -318,7 +318,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.contact) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.contact)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.contact ?? model.advLabel.rawValue)
               ))
             case .password:
               cardSections.append(MainScreenModel.Section(
@@ -327,7 +327,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.password) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.password)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.password ?? model.advLabel.rawValue)
               ))
             case .colors:
               cardSections.append(MainScreenModel.Section(
@@ -336,7 +336,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.colors) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.colors)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.colors ?? model.advLabel.rawValue)
               ))
             case .bottle:
               cardSections.append(MainScreenModel.Section(
@@ -345,7 +345,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.bottle) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.bottle)
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.bottle ?? model.advLabel.rawValue)
               ))
             case .rockPaperScissors:
               ifDebugFeatureSection {
@@ -355,7 +355,7 @@ extension MainScreenFactory {
                   titleSection: model.type.titleSection,
                   isEnabled: model.isEnabled,
                   isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.rockPaperScissors) ?? model.isHidden,
-                  advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors,
+                  advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors ?? model.advLabel.rawValue,
                                          oldADVLabel: .premium)
                 ))
               }
@@ -366,7 +366,7 @@ extension MainScreenFactory {
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
             case .raffle:
@@ -377,7 +377,7 @@ extension MainScreenFactory {
                   titleSection: model.type.titleSection,
                   isEnabled: model.isEnabled,
                   isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.raffle) ?? model.isHidden,
-                  advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.raffle,
+                  advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.raffle ?? model.advLabel.rawValue,
                                          oldADVLabel: .premium)
                 ))
               }
@@ -387,8 +387,8 @@ extension MainScreenFactory {
                 imageSectionSystemName: model.imageSectionSystemName,
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.raffle) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.raffle,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.films) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.films ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
             }

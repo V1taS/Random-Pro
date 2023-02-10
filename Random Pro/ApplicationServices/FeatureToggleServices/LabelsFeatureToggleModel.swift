@@ -58,6 +58,9 @@ struct LabelsFeatureToggleModel {
   /// Раздел `Розыгрыш`
   let raffle: String
   
+  /// Раздел `Фильмы`
+  let films: String
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -79,5 +82,6 @@ struct LabelsFeatureToggleModel {
     rockPaperScissors = (dictionary["rockPaperScissors"] as? String ?? "")
     imageFilters = (dictionary["imageFilters"] as? String ?? "")
     raffle = (dictionary["raffle"] as? String ?? "")
+    films = (dictionary["films"] as? String ?? "")
   }
 }

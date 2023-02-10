@@ -58,6 +58,9 @@ protocol StorageService {
   /// Модель для выбора иконки
   var appIconScreenModel: SelecteAppIconScreenModel? { get set }
   
+  /// Модель для выбора карточки игрока
+  var playerCardSelectionScreenModel: [PlayerCardSelectionScreenModel]? { get set }
+  
   /// Модель для глубоких ссылок
   var deepLinkModel: DeepLinkType? { get set }
   
@@ -208,6 +211,15 @@ final class StorageServiceImpl: StorageService {
     }
   }
   
+  var playerCardSelectionScreenModel: [PlayerCardSelectionScreenModel]? {
+    get {
+      isPremium ? playerCardSelectionModelKeychain : playerCardSelectionModelUserDefaults
+    } set {
+      playerCardSelectionModelUserDefaults = newValue
+      playerCardSelectionModelKeychain = newValue
+    }
+  }
+  
   var deepLinkModel: DeepLinkType? {
     get {
       deepLinkModelUserDefaults
@@ -331,6 +343,13 @@ final class StorageServiceImpl: StorageService {
   @ObjectCustomKeychainWrapper(key: Appearance().appIconScreenModelKeyUserDefaults)
   private var appIconScreenModelKeychain: SelecteAppIconScreenModel?
   
+  // MARK: - Player card selection model
+  
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().playerCardSelectionModelKeyUserDefaults)
+  private var playerCardSelectionModelUserDefaults: [PlayerCardSelectionScreenModel]?
+  @ObjectCustomKeychainWrapper(key: Appearance().playerCardSelectionModelKeyUserDefaults)
+  private var playerCardSelectionModelKeychain: [PlayerCardSelectionScreenModel]?
+  
   // MARK: - DeepLink model
   
   @ObjectCustomUserDefaultsWrapper(key: Appearance().deepLinkModelKeyUserDefaults)
@@ -369,5 +388,6 @@ private extension StorageServiceImpl {
     let appIconScreenModelKeyUserDefaults = "selecte_app_icon_screen_user_defaults_key"
     let deepLinkModelKeyUserDefaults = "deep_link_user_defaults_key"
     let dictionaryCountTappedKeyUserDefaults = "metrics_service_user_defaults_key"
+    let playerCardSelectionModelKeyUserDefaults = "player_card_selection_screen_user_defaults_key"
   }
 }

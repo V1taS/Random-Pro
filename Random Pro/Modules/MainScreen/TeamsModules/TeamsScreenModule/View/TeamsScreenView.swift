@@ -137,13 +137,10 @@ extension TeamsScreenView: UICollectionViewDataSource {
     
     let player = models[indexPath.section].players[indexPath.row]
     cell.configureCellWith(
-      avatar: UIImage(data: player.avatar ?? Data()),
+      avatar: UIImage(named: player.avatar),
       name: player.name,
-      nameTextColor: RandomColor.darkAndLightTheme.primaryGray,
-      styleCard: .defaultStyle,
-      styleEmoji: .customEmoji(Character(player.emoji ?? " ")),
-      isBorder: true,
-      isShadow: true
+      styleCard: player.style,
+      styleEmoji: .customEmoji(Character(player.emoji ?? " "))
     )
     return cell
   }

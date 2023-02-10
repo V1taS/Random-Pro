@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol DateTimeScreenCoordinatorOutput: AnyObject {}
+protocol DateTimeScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol DateTimeScreenCoordinatorInput {
@@ -75,7 +79,7 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
   }
   
   func settingButtonAction(model: DateTimeScreenModel) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -90,6 +94,10 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension DateTimeScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+  
   func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator

@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol NumberScreenCoordinatorOutput: AnyObject {}
+protocol NumberScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol NumberScreenCoordinatorInput {
@@ -90,7 +94,7 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
   }
   
   func settingButtonAction(model: NumberScreenModel) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -106,6 +110,10 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+  
   func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator

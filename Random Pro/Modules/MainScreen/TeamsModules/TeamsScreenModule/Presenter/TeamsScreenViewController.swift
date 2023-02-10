@@ -109,6 +109,12 @@ final class TeamsScreenViewController: TeamsScreenModule {
     shareButton.isEnabled = !interactor.returnListTeams().isEmpty
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    interactor.updateStyle()
+  }
+  
   // MARK: - Internal func
   
   func updateContentWith(players: [TeamsScreenPlayerModel]) {

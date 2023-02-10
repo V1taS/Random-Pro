@@ -67,6 +67,9 @@ protocol ApplicationServices {
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
+  
+  // MARK: - Internal property
+  
   var deepLinkService: DeepLinkService {
     DeepLinkServiceImpl()
   }
@@ -124,6 +127,10 @@ final class ApplicationServicesImpl: ApplicationServices {
   }
   
   var storageService: StorageService {
-    StorageServiceImpl()
+    return storageServiceImpl
   }
+  
+  // MARK: - Private property
+  
+  let storageServiceImpl = StorageServiceImpl()
 }

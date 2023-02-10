@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из Interactor в Presenter
 protocol ListPlayersScreenInteractorOutput: AnyObject {
@@ -72,6 +73,20 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   private var models: [TeamsScreenPlayerModel] = []
   private var defaultTeamsCount = Appearance().defaultTeamsCount
   private var genderIndex = Appearance().genderMaleIndex
+  private var storageService: StorageService
+  private var stylePlayerCard: PlayerView.StyleCard {
+    storageService.playerCardSelectionScreenModel?.filter({
+      $0.playerCardSelection
+    }).first?.style ?? .defaultStyle
+  }
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
   
   // MARK: - Internal func
   
@@ -95,7 +110,8 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
       name: models[index].name,
       avatar: models[index].avatar,
       emoji: emoji,
-      state: models[index].state
+      state: models[index].state,
+      style: stylePlayerCard
     )
     
     models.remove(at: index)
@@ -115,7 +131,8 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
       name: models[index].name,
       avatar: models[index].avatar,
       emoji: models[index].emoji,
-      state: state
+      state: state,
+      style: stylePlayerCard
     )
     
     models.remove(at: index)
@@ -135,9 +152,10 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
     let player = TeamsScreenPlayerModel(
       id: UUID().uuidString,
       name: name,
-      avatar: generationImagePlayer()?.pngData(),
+      avatar: generationImagePlayer(),
       emoji: nil,
-      state: .random
+      state: .random,
+      style: stylePlayerCard
     )
     
     models.append(player)
@@ -171,15 +189,15 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
 // MARK: - Private
 
 private extension ListPlayersScreenInteractor {
-  func generationImagePlayer() -> UIImage? {
+  func generationImagePlayer() -> String {
     let appearance = Appearance()
     
     if genderIndex == appearance.genderMaleIndex {
       let randomNumberPlayers = Int.random(in: Appearance().rangeImageMalePlayer)
-      return UIImage(named: "male_player\(randomNumberPlayers)")
+      return "male_player\(randomNumberPlayers)"
     } else {
       let randomNumberPlayers = Int.random(in: Appearance().rangeImageFemalePlayer)
-      return UIImage(named: "female_player\(randomNumberPlayers)")
+      return "female_player\(randomNumberPlayers)"
     }
   }
 }

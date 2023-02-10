@@ -29,7 +29,7 @@ enum SettingsScreenTableViewType {
   /// - Parameters:
   ///  - title: Заголовок
   ///  - id: ID Секции
-  case titleAndChevron(title: String, id: String = "")
+  case titleAndChevron(title: String, id: IdAction = .listOfObjects)
   
   /// Кнопка очистеть
   /// - Parameter title: Название кнопки
@@ -40,4 +40,17 @@ enum SettingsScreenTableViewType {
   
   /// Разделитель
   case divider
+  
+  /// Ид экшена
+  enum IdAction {
+    
+    /// Список объектов
+    case listOfObjects
+    
+    /// Создать список
+    case createList
+    
+    /// Пользователь выбрал изменить карточку игрока в секции "Команды"
+    case playerCardSelection
+  }
 }

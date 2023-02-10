@@ -1,40 +1,40 @@
 //
-//  SelecteAppIconScreenCoordinator.swift
+//  PlayerCardSelectionScreenCoordinator.swift
 //  Random Pro
 //
-//  Created by Vitalii Sosin on 25.01.2023.
+//  Created by Vitalii Sosin on 07.02.2023.
 //  Copyright © 2023 SosinVitalii.com. All rights reserved.
 //
 
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol SelecteAppIconScreenCoordinatorOutput: AnyObject {
+protocol PlayerCardSelectionScreenCoordinatorOutput: AnyObject {
   
   /// Обновить секции на главном экране
   func updateStateForSections()
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
-protocol SelecteAppIconScreenCoordinatorInput {
+protocol PlayerCardSelectionScreenCoordinatorInput {
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
-  var output: SelecteAppIconScreenCoordinatorOutput? { get set }
+  var output: PlayerCardSelectionScreenCoordinatorOutput? { get set }
 }
 
-typealias SelecteAppIconScreenCoordinatorProtocol = SelecteAppIconScreenCoordinatorInput & Coordinator
+typealias PlayerCardSelectionScreenCoordinatorProtocol = PlayerCardSelectionScreenCoordinatorInput & Coordinator
 
-final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProtocol {
+final class PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoordinatorProtocol {
   
-  // MARK: - Internal variables
+  // MARK: - Internal property
   
-  weak var output: SelecteAppIconScreenCoordinatorOutput?
+  weak var output: PlayerCardSelectionScreenCoordinatorOutput?
   
-  // MARK: - Private variables
+  // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private var selecteAppIconScreenModule: SelecteAppIconScreenModule?
   private let services: ApplicationServices
+  private var playerCardSelectionScreenModule: PlayerCardSelectionScreenModule?
   private var anyCoordinator: Coordinator?
   
   // MARK: - Initialization
@@ -51,26 +51,19 @@ final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProt
   // MARK: - Internal func
   
   func start() {
-    let selecteAppIconScreenModule = SelecteAppIconScreenAssembly().createModule(services: services)
-    self.selecteAppIconScreenModule = selecteAppIconScreenModule
-    self.selecteAppIconScreenModule?.moduleOutput = self
-    navigationController.pushViewController(selecteAppIconScreenModule, animated: true)
+    let playerCardSelectionScreenModule = PlayerCardSelectionScreenAssembly().createModule(services: services)
+    self.playerCardSelectionScreenModule = playerCardSelectionScreenModule
+    self.playerCardSelectionScreenModule?.moduleOutput = self
+    navigationController.pushViewController(playerCardSelectionScreenModule, animated: true)
   }
 }
 
-// MARK: - SelecteAppIconScreenModuleOutput
+// MARK: - PlayerCardSelectionScreenModuleOutput
 
-extension SelecteAppIconScreenCoordinator: SelecteAppIconScreenModuleOutput {
-  func iconSelectedSuccessfully() {
-    services.notificationService.showPositiveAlertWith(title: Appearance().iconSelectedSuccessfullyTitle,
+extension PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenModuleOutput {
+  func didSelectStyleSuccessfully() {
+    services.notificationService.showPositiveAlertWith(title: Appearance().setCardStyleTitle,
                                                        glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
-  }
-  
-  func somethingWentWrong() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: false,
                                                        timeout: nil,
                                                        active: {})
   }
@@ -78,13 +71,13 @@ extension SelecteAppIconScreenCoordinator: SelecteAppIconScreenModuleOutput {
   func noPremiumAccessAction() {
     let appearance = Appearance()
     showAlerForUnlockPremiumtWith(title: appearance.premiumAccess,
-                                  description: appearance.chooseIconForAppTitle)
+                                  description: appearance.chooseCardStyleTitle)
   }
 }
 
 // MARK: - PremiumScreenCoordinatorOutput
 
-extension SelecteAppIconScreenCoordinator: PremiumScreenCoordinatorOutput {
+extension PlayerCardSelectionScreenCoordinator: PremiumScreenCoordinatorOutput {
   func updateStateForSections() {
     output?.updateStateForSections()
   }
@@ -92,7 +85,7 @@ extension SelecteAppIconScreenCoordinator: PremiumScreenCoordinatorOutput {
 
 // MARK: - Private
 
-private extension SelecteAppIconScreenCoordinator {
+private extension PlayerCardSelectionScreenCoordinator {
   func showAlerForUnlockPremiumtWith(title: String, description: String) {
     let appearance = Appearance()
     let alert = UIAlertController(title: title,
@@ -106,7 +99,7 @@ private extension SelecteAppIconScreenCoordinator {
                                   handler: { [weak self] _ in
       self?.openPremium()
     }))
-    selecteAppIconScreenModule?.present(alert, animated: true, completion: nil)
+    playerCardSelectionScreenModule?.present(alert, animated: true, completion: nil)
   }
   
   func openPremium() {
@@ -123,13 +116,12 @@ private extension SelecteAppIconScreenCoordinator {
 
 // MARK: - Appearance
 
-private extension SelecteAppIconScreenCoordinator {
+private extension PlayerCardSelectionScreenCoordinator {
   struct Appearance {
-    let somethingWentWrong = NSLocalizedString("Что-то пошло не так", comment: "")
+    let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
+    let chooseCardStyleTitle = NSLocalizedString("Можно изменить стиль карточки", comment: "")
+    let setCardStyleTitle = NSLocalizedString("Установлено", comment: "")
     let cancel = NSLocalizedString("Отмена", comment: "")
     let unlock = NSLocalizedString("Разблокировать", comment: "")
-    let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
-    let chooseIconForAppTitle = NSLocalizedString("Можно изменить цвет иконки приложения", comment: "")
-    let iconSelectedSuccessfullyTitle = NSLocalizedString("Цвет иконки установлен", comment: "")
   }
 }

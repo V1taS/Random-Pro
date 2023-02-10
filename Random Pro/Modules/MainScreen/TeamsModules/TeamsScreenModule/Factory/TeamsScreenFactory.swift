@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol TeamsScreenFactoryOutput: AnyObject {
@@ -30,10 +31,30 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
   
   weak var output: TeamsScreenFactoryOutput?
   
+  // MARK: - Private property
+  
+  private var storageService: StorageService
+  private var stylePlayerCard: PlayerView.StyleCard {
+    storageService.playerCardSelectionScreenModel?.filter({
+      $0.playerCardSelection
+    }).first?.style ?? .defaultStyle
+  }
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
+  
   // MARK: - Internal func
   
   func createTeamsFrom(model: TeamsScreenModel) {
-    DispatchQueue.global(qos: .userInteractive).async {
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard let self else {
+        return
+      }
       let appearance = Appearance()
       var teams: [TeamsScreenModel.Team] = []
       let allPlayers = model.allPlayers.map { result -> TeamsScreenPlayerModel in
@@ -48,7 +69,8 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
           name: result.name,
           avatar: result.avatar,
           emoji: emoji,
-          state: result.state
+          state: result.state,
+          style: self.stylePlayerCard
         )
       }
       
@@ -60,9 +82,11 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
         let plugPlayer = TeamsScreenPlayerModel(
           id: "",
           name: "",
-          avatar: nil,
+          avatar: "",
           emoji: nil,
-          state: .doesNotPlay)
+          state: .doesNotPlay,
+          style: self.stylePlayerCard
+        )
         
         playersWithoutTeamsFiltered.append(plugPlayer)
         playersFiltered.append(plugPlayer)

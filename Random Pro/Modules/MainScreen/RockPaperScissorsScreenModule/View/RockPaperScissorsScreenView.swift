@@ -113,7 +113,7 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
 private extension RockPaperScissorsScreenView {
   func startShakeHands() {
     let appearance = Appearance()
-    
+    generateButton.set(isEnabled: false)
     resultImageLeftLabel.text = nil
     resultImageRightLabel.text = nil
     leftImageView.image = UIImage(named: appearance.rockLeftImageName)
@@ -122,6 +122,7 @@ private extension RockPaperScissorsScreenView {
     shakeHandsFor(view: leftImageView, completion: {})
     shakeHandsFor(view: rightImageView, completion: { [weak self] in
       self?.output?.generateButtonAction()
+      self?.generateButton.set(isEnabled: true)
     })
     
     if let interfaceStyle, interfaceStyle == .dark {

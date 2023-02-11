@@ -23,8 +23,11 @@ protocol RockPaperScissorsScreenViewOutput: AnyObject {
 protocol RockPaperScissorsScreenViewInput {
   
   ///  Обновить контент
-  ///  - Parameter model: модель с данными
-  func updateContentWith(model: RockPaperScissorsScreenModel)
+  ///  - Parameters:
+  ///   - model: модель с данными
+  ///   - style: Светлая или Темная тема
+  func updateContentWith(model: RockPaperScissorsScreenModel,
+                         style: UIUserInterfaceStyle)
   
   /// Сброс текущей генерации на начальную
   func resetGeneration()
@@ -46,6 +49,7 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   private let resultImageRightLabel = UILabel()
   private let rightImageView = UIImageView()
   private let leftImageView = UIImageView()
+  private var interfaceStyle: UIUserInterfaceStyle?
   
   // MARK: - Initialization
   
@@ -62,33 +66,40 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(model: RockPaperScissorsScreenModel) {
-    scoreLabel.text = model.result
-    resultImageLeftLabel.text = model.leftSideScreen.title
-    resultImageRightLabel.text = model.rightSideScreen.title
+  func updateContentWith(model: RockPaperScissorsScreenModel,
+                         style: UIUserInterfaceStyle) {
+    let appearance = Appearance()
+    interfaceStyle = style
+    scoreLabel.text = model.resultTitle
+    resultImageLeftLabel.text = model.leftSide.handsType.title
+    resultImageRightLabel.text = model.rightSide.handsType.title
     
-    switch model.leftSideScreen {
-    case let .rock(imageData):
-      let image = UIImage(data: imageData ?? Data())
-      leftImageView.image = image
-    case let .paper(imageData):
-      let image = UIImage(data: imageData ?? Data())
-      leftImageView.image = image
-    case let .scissors(imageData):
-      let image = UIImage(data: imageData ?? Data())
-      leftImageView.image = image
+    switch model.leftSide.handsType {
+    case .rock:
+      leftImageView.image = UIImage(named: appearance.rockLeftImageName)
+    case .paper:
+      leftImageView.image = UIImage(named: appearance.paperLeftImageName)
+    case .scissors:
+      leftImageView.image = UIImage(named: appearance.scissorsLeftImageName)
     }
     
-    switch model.rightSideScreen {
-    case let .rock(imageData):
-      let image = UIImage(data: imageData ?? Data())
-      rightImageView.image = image
-    case let .paper(imageData):
-      let image = UIImage(data: imageData ?? Data())
-      rightImageView.image = image
-    case let .scissors(imageData):
-      let image = UIImage(data: imageData ?? Data())
-      rightImageView.image = image
+    switch model.rightSide.handsType {
+    case .rock:
+      rightImageView.image = UIImage(named: appearance.rockRightImageName)
+    case .paper:
+      rightImageView.image = UIImage(named: appearance.paperRightImageName)
+    case .scissors:
+      rightImageView.image = UIImage(named: appearance.scissorsRightImageName)
+    }
+    
+    if style == .dark {
+      leftImageView.setImageColor(color: RandomColor.only.primaryWhite)
+      rightImageView.setImageColor(color: RandomColor.only.primaryWhite)
+    }
+    
+    if model.resultType == .initial {
+      resultImageLeftLabel.text = nil
+      resultImageRightLabel.text = nil
     }
   }
   
@@ -100,6 +111,40 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
 // MARK: - Private
 
 private extension RockPaperScissorsScreenView {
+  func startShakeHands() {
+    let appearance = Appearance()
+    
+    resultImageLeftLabel.text = nil
+    resultImageRightLabel.text = nil
+    leftImageView.image = UIImage(named: appearance.rockLeftImageName)
+    rightImageView.image = UIImage(named: appearance.rockRightImageName)
+    
+    shakeHandsFor(view: leftImageView, completion: {})
+    shakeHandsFor(view: rightImageView, completion: { [weak self] in
+      self?.output?.generateButtonAction()
+    })
+    
+    if let interfaceStyle, interfaceStyle == .dark {
+      leftImageView.setImageColor(color: RandomColor.only.primaryWhite)
+      rightImageView.setImageColor(color: RandomColor.only.primaryWhite)
+    }
+  }
+  
+  func shakeHandsFor(view: UIView, completion: @escaping (() -> Void)) {
+    CATransaction.begin()
+    let animation = CABasicAnimation(keyPath: "position")
+    animation.duration = 0.2
+    animation.repeatCount = 2
+    animation.autoreverses = true
+    animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x,
+                                                   y: view.center.y - 10))
+    animation.toValue = NSValue(cgPoint: CGPoint(x: view.center.x,
+                                                 y: view.center.y + 10))
+    CATransaction.setCompletionBlock(completion)
+    view.layer.add(animation, forKey: "position")
+    CATransaction.commit()
+  }
+  
   func setupDefaultSettings() {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
@@ -112,15 +157,15 @@ private extension RockPaperScissorsScreenView {
     resultImageRightLabel.textAlignment = .center
     resultImageRightLabel.font = .systemFont(ofSize: appearance.systemFontLabel)
     
-    leftImageView.contentMode = .scaleAspectFill
-    rightImageView.contentMode = .scaleAspectFill
+    leftImageView.contentMode = .scaleAspectFit
+    rightImageView.contentMode = .scaleAspectFit
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
   @objc func generateButtonAction() {
-    output?.generateButtonAction()
+    startShakeHands()
   }
   
   func setupConstraints() {
@@ -140,19 +185,15 @@ private extension RockPaperScissorsScreenView {
                                          multiplier: appearance.scoreMultiplierHeight,
                                          constant: .zero),
       
-      leftImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                             constant: -appearance.centerXInset),
+      leftImageView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                             constant: 24),
       leftImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      leftImageView.heightAnchor.constraint(equalTo: heightAnchor,
-                                            multiplier: appearance.multiplierHeight,
-                                            constant: .zero),
+      leftImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
       
-      rightImageView.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                              constant: appearance.centerXInset),
+      rightImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -24),
       rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      rightImageView.heightAnchor.constraint(equalTo: heightAnchor,
-                                             multiplier: appearance.multiplierHeight,
-                                             constant: .zero),
+      rightImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
       
       resultImageLeftLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                     constant: appearance.defaultInset),
@@ -191,5 +232,13 @@ private extension RockPaperScissorsScreenView {
     let centerXInset: CGFloat = 96
     let multiplierHeight: Double = 0.1
     let scoreMultiplierHeight: Double = 0.5
+    
+    let rockLeftImageName = "rock_left"
+    let paperLeftImageName = "paper_left"
+    let scissorsLeftImageName = "scissors_left"
+    
+    let rockRightImageName = "rock_right"
+    let paperRightImageName = "paper_right"
+    let scissorsRightImageName = "scissors_right"
   }
 }

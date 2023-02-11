@@ -168,16 +168,14 @@ extension MainScreenFactory {
             advLabel: .new
           ))
         case .rockPaperScissors:
-          ifDebugFeatureSection {
-            allSections.append(MainScreenModel.Section(
-              type: section,
-              imageSectionSystemName: section.imageSectionSystemName,
-              titleSection: section.titleSection,
-              isEnabled: true,
-              isHidden: false,
-              advLabel: .premium
-            ))
-          }
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            imageSectionSystemName: section.imageSectionSystemName,
+            titleSection: section.titleSection,
+            isEnabled: true,
+            isHidden: false,
+            advLabel: .premium
+          ))
         case .imageFilters:
           allSections.append(MainScreenModel.Section(
             type: section,
@@ -348,17 +346,15 @@ extension MainScreenFactory {
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.bottle ?? model.advLabel.rawValue)
               ))
             case .rockPaperScissors:
-              ifDebugFeatureSection {
-                cardSections.append(MainScreenModel.Section(
-                  type: model.type,
-                  imageSectionSystemName: model.imageSectionSystemName,
-                  titleSection: model.type.titleSection,
-                  isEnabled: model.isEnabled,
-                  isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.rockPaperScissors) ?? model.isHidden,
-                  advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors ?? model.advLabel.rawValue,
-                                         oldADVLabel: .premium)
-                ))
-              }
+              cardSections.append(MainScreenModel.Section(
+                type: model.type,
+                imageSectionSystemName: model.imageSectionSystemName,
+                titleSection: model.type.titleSection,
+                isEnabled: model.isEnabled,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.rockPaperScissors) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors ?? model.advLabel.rawValue,
+                                       oldADVLabel: .premium)
+              ))
             case .imageFilters:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,

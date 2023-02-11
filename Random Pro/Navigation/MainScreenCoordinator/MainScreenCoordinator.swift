@@ -137,6 +137,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     
     mainScreenModule?.removeLabelFromSection(type: .rockPaperScissors)
     services.metricsService.track(event: .rockPaperScissors)
+    
+    rockPaperScissorsScreenCoordinator.interface(style: window?.overrideUserInterfaceStyle)
   }
   
   func openBottle() {

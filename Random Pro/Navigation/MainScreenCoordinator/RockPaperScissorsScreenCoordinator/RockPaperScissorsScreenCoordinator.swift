@@ -14,6 +14,10 @@ protocol RockPaperScissorsScreenCoordinatorOutput: AnyObject {}
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol RockPaperScissorsScreenCoordinatorInput {
   
+  /// Стиль интерфейса
+  /// - Parameter style: Темный или Светлый режим
+  func interface(style: UIUserInterfaceStyle?)
+  
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: RockPaperScissorsScreenCoordinatorOutput? { get set }
 }
@@ -51,7 +55,15 @@ final class RockPaperScissorsScreenCoordinator: RockPaperScissorsScreenCoordinat
     rockPaperScissorsScreenModule.moduleOutput = self
     navigationController.pushViewController(rockPaperScissorsScreenModule, animated: true)
   }
+  
+  func interface(style: UIUserInterfaceStyle?) {
+    rockPaperScissorsScreenModule?.interface(style: style)
+  }
 }
+
+// MARK: - Private
+
+extension RockPaperScissorsScreenCoordinator {}
 
 // MARK: - RockPaperScissorsScreenModuleOutput
 

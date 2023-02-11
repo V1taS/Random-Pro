@@ -7,26 +7,52 @@
 //
 
 import Foundation
-import UIKit
 
 struct RockPaperScissorsScreenModel {
   
-  /// Левая сторона экрана
-  let leftSideScreen: HandsType
-  
-  /// Отображение счета слева
-  let leftSideScore: Int
-  
-  /// Правая сторона экрана
-  let rightSideScreen: HandsType
-  
-  /// Отображение счета справа
-  let rightSideScore: Int
-  
   /// Общий результат
-  let result: String
+  let resultTitle: String
   
-  enum HandsType: Equatable {
+  /// Тип результата
+  let resultType: ResultType
+  
+  /// Левая сторона
+  let leftSide: HandsModel
+  
+  /// Правая сторона
+  let rightSide: HandsModel
+  
+  // MARK: - HandsModel
+  
+  struct HandsModel {
+    
+    /// Тип руки
+    let handsType: HandsType
+    
+    /// Отображение счета
+    let score: Int
+  }
+  
+  // MARK: - HandsType
+  
+  enum ResultType {
+    
+    /// Победила левая сторона
+    case winLeftSide
+    
+    /// Победила правая сторона
+    case winRightSide
+    
+    /// Ничья
+    case draw
+    
+    /// Начальный результат
+    case initial
+  }
+  
+  // MARK: - HandsType
+  
+  enum HandsType {
     
     ///  Названия для обозначения картинок
     var title: String {
@@ -42,13 +68,13 @@ struct RockPaperScissorsScreenModel {
     }
     
     /// Камень
-    case rock(Data?)
+    case rock
     
     /// Бумага
-    case paper(Data?)
+    case paper
     
     /// Ножницы
-    case scissors(Data?)
+    case scissors
   }
 }
 

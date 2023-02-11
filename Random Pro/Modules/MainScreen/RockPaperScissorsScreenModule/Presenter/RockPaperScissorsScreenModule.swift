@@ -14,6 +14,10 @@ protocol RockPaperScissorsScreenModuleOutput: AnyObject {}
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol RockPaperScissorsScreenModuleInput {
   
+  /// Стиль интерфейса
+  /// - Parameter style: Темный или Светлый режим
+  func interface(style: UIUserInterfaceStyle?)
+  
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: RockPaperScissorsScreenModuleOutput? { get set }
 }
@@ -32,6 +36,7 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
   private let interactor: RockPaperScissorsScreenInteractorInput
   private let factory: RockPaperScissorsScreenFactoryInput
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private var interfaceStyle: UIUserInterfaceStyle?
   
   // MARK: - Initialization
   
@@ -52,7 +57,7 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Life cycle
   
   override func loadView() {
     view = moduleView
@@ -63,6 +68,12 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
     
     setNavigationBar()
     interactor.getContent()
+  }
+  
+  // MARK: - Internal func
+  
+  func interface(style: UIUserInterfaceStyle?) {
+    self.interfaceStyle = style
   }
 }
 
@@ -94,7 +105,8 @@ extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenInteract
 
 extension RockPaperScissorsScreenViewController: RockPaperScissorsScreenFactoryOutput {
   func didReceiveGenerate(model: RockPaperScissorsScreenModel) {
-    moduleView.updateContentWith(model: model)
+    moduleView.updateContentWith(model: model,
+                                 style: interfaceStyle ?? .light)
     interactor.saveModel(model: model)
   }
 }

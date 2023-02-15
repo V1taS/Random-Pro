@@ -44,8 +44,6 @@ extension MainScreenModel {
                                                                            comment: "")
     let imageFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный фильтр для фото",
                                                                       comment: "")
-    let raffleFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Можно участвовать в еженедельном розыгрыше призов",
-                                                                       comment: "")
     let filmsDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный фильм",
                                                                comment: "")
     
@@ -93,9 +91,6 @@ extension MainScreenModel {
     
     let imageImageFilters = "timelapse"
     let titleImageFilters = NSLocalizedString("Фильтры", comment: "")
-    
-    let imageRaffle = "gift"
-    let titleRaffle = NSLocalizedString("Розыгрыш", comment: "")
     
     let imageFilms = "film"
     let titleFilms = NSLocalizedString("Фильмы", comment: "")

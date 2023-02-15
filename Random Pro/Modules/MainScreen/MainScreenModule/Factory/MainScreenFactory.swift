@@ -185,17 +185,6 @@ extension MainScreenFactory {
             isHidden: false,
             advLabel: .premium
           ))
-        case .raffle:
-          ifDebugFeatureSection {
-            allSections.append(MainScreenModel.Section(
-              type: section,
-              imageSectionSystemName: section.imageSectionSystemName,
-              titleSection: section.titleSection,
-              isEnabled: true,
-              isHidden: false,
-              advLabel: .premium
-            ))
-          }
         case .films:
           allSections.append(MainScreenModel.Section(
             type: section,
@@ -365,18 +354,6 @@ extension MainScreenFactory {
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
-            case .raffle:
-              ifDebugFeatureSection {
-                cardSections.append(MainScreenModel.Section(
-                  type: model.type,
-                  imageSectionSystemName: model.imageSectionSystemName,
-                  titleSection: model.type.titleSection,
-                  isEnabled: model.isEnabled,
-                  isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.raffle) ?? model.isHidden,
-                  advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.raffle ?? model.advLabel.rawValue,
-                                         oldADVLabel: .premium)
-                ))
-              }
             case .films:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,

@@ -22,9 +22,6 @@ protocol StorageService {
   /// Модель для фильмов
   var filmsScreenModel: [FilmsScreenModel]? { get set }
   
-  /// Модель для розыгрышей
-  var raffleScreenModel: RaffleScreenModel? { get set }
-  
   /// Модель для списка
   var listScreenModel: ListScreenModel? { get set }
   
@@ -100,15 +97,6 @@ final class StorageServiceImpl: StorageService {
     } set {
       filmsScreenModelsUserDefaults = newValue
       filmsScreenModelsKeychain = newValue
-    }
-  }
-  
-  var raffleScreenModel: RaffleScreenModel? {
-    get {
-      isPremium ? raffleScreenModelKeychain : raffleScreenModelUserDefaults
-    } set {
-      raffleScreenModelUserDefaults = newValue
-      raffleScreenModelKeychain = newValue
     }
   }
   
@@ -259,13 +247,6 @@ final class StorageServiceImpl: StorageService {
   @ObjectCustomKeychainWrapper(key: Appearance().filmsScreenModelsKeyUserDefaults)
   private var filmsScreenModelsKeychain: [FilmsScreenModel]?
   
-  // MARK: - Raffle model
-  
-  @ObjectCustomUserDefaultsWrapper(key: Appearance().raffleScreenModelKeyUserDefaults)
-  private var raffleScreenModelUserDefaults: RaffleScreenModel?
-  @ObjectCustomKeychainWrapper(key: Appearance().raffleScreenModelKeyUserDefaults)
-  private var raffleScreenModelKeychain: RaffleScreenModel?
-  
   // MARK: - List model
   
   @ObjectCustomUserDefaultsWrapper(key: Appearance().listScreenModelKeyUserDefaults)
@@ -374,7 +355,6 @@ private extension StorageServiceImpl {
     let mainScreenKeyUserDefaults = "main_screen_user_defaults_key"
     let numberScreenKeyUserDefaults = "number_screen_user_defaults_key"
     let filmsScreenModelsKeyUserDefaults = "films_screen_user_defaults_key"
-    let raffleScreenModelKeyUserDefaults = "raffle_screen_user_defaults_key"
     let listScreenModelKeyUserDefaults = "list_screen_user_defaults_key"
     let contactScreenModelKeyUserDefaults = "contact_screen_user_defaults_key"
     let cubesScreenModelKeyUserDefaults = "cubes_screen_user_defaults_key"

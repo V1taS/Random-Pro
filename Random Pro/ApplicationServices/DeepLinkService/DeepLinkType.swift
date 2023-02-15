@@ -64,9 +64,6 @@ enum DeepLinkType: String, CaseIterable, UserDefaultsCodable {
   
   /// Раздел `Фильтры изображений`
   case imageFilters = "image_filters"
-
-  /// Раздел `Розыгрыш`
-  case raffleScreen = "raffle_screen"
   
   /// Раздел `Фильмы`
   case filmsScreen = "films_screen"

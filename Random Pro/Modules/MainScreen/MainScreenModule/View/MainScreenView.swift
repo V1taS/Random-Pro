@@ -56,9 +56,6 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Image Filters`
   func openImageFilters()
   
-  /// Открыть раздел `Raffle`
-  func openRaffle()
-  
   /// Открыть раздел `Films`
   func openFilms()
   
@@ -156,8 +153,6 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openRockPaperScissors()
       case .imageFilters:
         output?.openImageFilters()
-      case .raffle:
-        output?.openRaffle()
       case .films:
         output?.openFilms()
       }

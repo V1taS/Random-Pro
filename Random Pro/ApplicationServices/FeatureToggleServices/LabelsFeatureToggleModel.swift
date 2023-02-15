@@ -54,9 +54,6 @@ struct LabelsFeatureToggleModel {
   
   /// Раздел `Фильтры изображений`
   let imageFilters: String
-
-  /// Раздел `Розыгрыш`
-  let raffle: String
   
   /// Раздел `Фильмы`
   let films: String
@@ -81,7 +78,6 @@ struct LabelsFeatureToggleModel {
     bottle = (dictionary["bottle"] as? String ?? "")
     rockPaperScissors = (dictionary["rockPaperScissors"] as? String ?? "")
     imageFilters = (dictionary["imageFilters"] as? String ?? "")
-    raffle = (dictionary["raffle"] as? String ?? "")
     films = (dictionary["films"] as? String ?? "")
   }
 }

@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "rock_paper_scissos_hand_shake.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

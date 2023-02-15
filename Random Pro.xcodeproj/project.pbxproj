@@ -172,13 +172,6 @@
 		1B9D455C283BDC7C00A85F25 /* SettingsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4557283BDC7C00A85F25 /* SettingsScreenView.swift */; };
 		1B9D4565283BDDB600A85F25 /* SettingsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4564283BDDB600A85F25 /* SettingsScreenCoordinator.swift */; };
 		1B9D4568283BEF9000A85F25 /* SettingsScreenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */; };
-		1BA16E26296DC316001B19C6 /* RaffleScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E21296DC316001B19C6 /* RaffleScreenFactory.swift */; };
-		1BA16E27296DC316001B19C6 /* RaffleScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E22296DC316001B19C6 /* RaffleScreenViewController.swift */; };
-		1BA16E28296DC316001B19C6 /* RaffleScreenAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E23296DC316001B19C6 /* RaffleScreenAssembly.swift */; };
-		1BA16E29296DC316001B19C6 /* RaffleScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E24296DC316001B19C6 /* RaffleScreenInteractor.swift */; };
-		1BA16E2A296DC316001B19C6 /* RaffleScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E25296DC316001B19C6 /* RaffleScreenView.swift */; };
-		1BA16E33296DC3D0001B19C6 /* RaffleScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E32296DC3D0001B19C6 /* RaffleScreenCoordinator.swift */; };
-		1BA16E36296DCB71001B19C6 /* RaffleScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E35296DCB71001B19C6 /* RaffleScreenModel.swift */; };
 		1BA16E39296DD137001B19C6 /* CloudDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA16E38296DD137001B19C6 /* CloudDatabaseService.swift */; };
 		1BA16E3C296DE073001B19C6 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1BA16E3B296DE073001B19C6 /* FirebaseAnalyticsSwift */; };
 		1BA16E3E296DE073001B19C6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1BA16E3D296DE073001B19C6 /* FirebaseAuth */; };
@@ -529,13 +522,6 @@
 		1B9D4557283BDC7C00A85F25 /* SettingsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenView.swift; sourceTree = "<group>"; };
 		1B9D4564283BDDB600A85F25 /* SettingsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCoordinator.swift; sourceTree = "<group>"; };
 		1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenType.swift; sourceTree = "<group>"; };
-		1BA16E21296DC316001B19C6 /* RaffleScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleScreenFactory.swift; sourceTree = "<group>"; };
-		1BA16E22296DC316001B19C6 /* RaffleScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleScreenViewController.swift; sourceTree = "<group>"; };
-		1BA16E23296DC316001B19C6 /* RaffleScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleScreenAssembly.swift; sourceTree = "<group>"; };
-		1BA16E24296DC316001B19C6 /* RaffleScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleScreenInteractor.swift; sourceTree = "<group>"; };
-		1BA16E25296DC316001B19C6 /* RaffleScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleScreenView.swift; sourceTree = "<group>"; };
-		1BA16E32296DC3D0001B19C6 /* RaffleScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleScreenCoordinator.swift; sourceTree = "<group>"; };
-		1BA16E35296DCB71001B19C6 /* RaffleScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleScreenModel.swift; sourceTree = "<group>"; };
 		1BA16E38296DD137001B19C6 /* CloudDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudDatabaseService.swift; sourceTree = "<group>"; };
 		1BA16E4B296DE1FB001B19C6 /* AuthenticationServiceFirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceFirebaseModel.swift; sourceTree = "<group>"; };
 		1BA199A828BBC6FB0036D73C /* ShareScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreenFactory.swift; sourceTree = "<group>"; };
@@ -683,9 +669,6 @@
 		6CE65F8A282D0DF800272D56 /* YesNoScreenAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenAssembly.swift; sourceTree = "<group>"; };
 		6CE65F8D282D138900272D56 /* YesNoScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoScreenCoordinator.swift; sourceTree = "<group>"; };
 		D211FCA5297EB6CF00D8D612 /* AppPurchasesServiceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPurchasesServiceState.swift; sourceTree = "<group>"; };
-		D24A27E8294792480074D669 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		D24A27E9294792480074D669 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
-		D24A27EA294792480074D669 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D24A27EB2947A7F60074D669 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D24A27EC2947A7F70074D669 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		D24A27ED2947A7F70074D669 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -862,7 +845,6 @@
 				1B96E0E92820481F00A23880 /* MainScreenModule */,
 				6CE65F7B282D0C4F00272D56 /* NumberScreenModule */,
 				1B4F5BFF298722900003457E /* FilmsScreenModule */,
-				1BA16E20296DC306001B19C6 /* RaffleScreenModule */,
 				1B1C172C2962E91F005F34B7 /* ImageFiltersScreenModule */,
 				6C127065294730D6000D3852 /* RockPaperScissorsScreenModule */,
 				6C2320F329361BB700954F39 /* BottleScreenModule */,
@@ -1844,7 +1826,6 @@
 				1B96E0FB282048D000A23880 /* MainScreenCoordinator.swift */,
 				1B150A412992D8F200853DEF /* PlayerCardSelectionScreenCoordinator */,
 				1B4F5C1029881BD70003457E /* FilmsScreenCoordinator */,
-				1BA16E31296DC3C0001B19C6 /* RaffleScreenCoordinator */,
 				1B1C173C2962E982005F34B7 /* ImageFiltersScreenCoordinator */,
 				6C12707529473706000D3852 /* RockPaperScissorsScreenCoordinator */,
 				6C2321032936239F00954F39 /* BottleScreenCoordinator */,
@@ -2124,75 +2105,6 @@
 			children = (
 				1BCB6ECA28B29F870040F46E /* SettingsScreenTableViewType.swift */,
 				1B9D4567283BEF9000A85F25 /* SettingsScreenType.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		1BA16E20296DC306001B19C6 /* RaffleScreenModule */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E34296DCB5F001B19C6 /* Models */,
-				1BA16E30296DC35F001B19C6 /* View */,
-				1BA16E2F296DC355001B19C6 /* Presenter */,
-				1BA16E2E296DC348001B19C6 /* Interactor */,
-				1BA16E2D296DC330001B19C6 /* Factory */,
-				1BA16E2C296DC328001B19C6 /* Assembly */,
-			);
-			path = RaffleScreenModule;
-			sourceTree = "<group>";
-		};
-		1BA16E2C296DC328001B19C6 /* Assembly */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E23296DC316001B19C6 /* RaffleScreenAssembly.swift */,
-			);
-			path = Assembly;
-			sourceTree = "<group>";
-		};
-		1BA16E2D296DC330001B19C6 /* Factory */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E21296DC316001B19C6 /* RaffleScreenFactory.swift */,
-			);
-			path = Factory;
-			sourceTree = "<group>";
-		};
-		1BA16E2E296DC348001B19C6 /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E24296DC316001B19C6 /* RaffleScreenInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		1BA16E2F296DC355001B19C6 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E22296DC316001B19C6 /* RaffleScreenViewController.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		1BA16E30296DC35F001B19C6 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E25296DC316001B19C6 /* RaffleScreenView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		1BA16E31296DC3C0001B19C6 /* RaffleScreenCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E32296DC3D0001B19C6 /* RaffleScreenCoordinator.swift */,
-			);
-			path = RaffleScreenCoordinator;
-			sourceTree = "<group>";
-		};
-		1BA16E34296DCB5F001B19C6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				1BA16E35296DCB71001B19C6 /* RaffleScreenModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3559,7 +3471,6 @@
 				en,
 				ru,
 				Base,
-				"zh-Hant",
 				es,
 				de,
 				it,
@@ -3765,7 +3676,6 @@
 				1BB51F9F295F5365003C317D /* FeatureToggleServices.swift in Sources */,
 				6C7D4D47282E557100A086BC /* DateTimeViewController.swift in Sources */,
 				1B31F62C285F926200A88217 /* ListResultScreenViewController.swift in Sources */,
-				1BA16E27296DC316001B19C6 /* RaffleScreenViewController.swift in Sources */,
 				6C98CBD32833A03A00D2E4FA /* CoinScreenFactory.swift in Sources */,
 				1B295B002981B39F003349FC /* SelecteAppIconScreenCoordinator.swift in Sources */,
 				1B295AF72981B30A003349FC /* SelecteAppIconScreenView.swift in Sources */,
@@ -3816,9 +3726,7 @@
 				6C98CBCD28339EB900D2E4FA /* CoinScreenView.swift in Sources */,
 				1B96E0EF2820483F00A23880 /* MainScreenFactory.swift in Sources */,
 				6CBFD05D289BC775005F9104 /* PasswordScreenCoordinator.swift in Sources */,
-				1BA16E29296DC316001B19C6 /* RaffleScreenInteractor.swift in Sources */,
 				1BC5EBD3298C1DFC00CAF0A8 /* FilmsScreenEngModelDTO.swift in Sources */,
-				1BA16E36296DCB71001B19C6 /* RaffleScreenModel.swift in Sources */,
 				6C1A0CBE2834EA4800A3040E /* LotteryScreenFactory.swift in Sources */,
 				1B96E0FE282048D000A23880 /* MainScreenCoordinator.swift in Sources */,
 				6C1A0CBA2834E95200A3040E /* LotteryScreenModule.swift in Sources */,
@@ -3877,7 +3785,6 @@
 				1BEFBADC293268A3000B002D /* TimerService.swift in Sources */,
 				1B412BA728C7DFE60078126F /* FileManagerService.swift in Sources */,
 				1B50E4D22842C19300C7A1D9 /* NumberScreenModel.swift in Sources */,
-				1BA16E33296DC3D0001B19C6 /* RaffleScreenCoordinator.swift in Sources */,
 				6C23210029361C5800954F39 /* BottleScreenFactory.swift in Sources */,
 				6C7D4D4B282E558400A086BC /* DateTimeFactory.swift in Sources */,
 				1BA199AE28BBC6FB0036D73C /* ShareScreenViewController.swift in Sources */,
@@ -3941,7 +3848,6 @@
 				1B96E10428204CD000A23880 /* MainScreenCollectionViewCell.swift in Sources */,
 				1B86907E2945D53100030F3E /* CubesView.swift in Sources */,
 				1B9D4559283BDC7C00A85F25 /* SettingsScreenViewController.swift in Sources */,
-				1BA16E28296DC316001B19C6 /* RaffleScreenAssembly.swift in Sources */,
 				6C1A0CBC2834EA0000A3040E /* LotteryScreenInteractor.swift in Sources */,
 				D2B96C71296D9A21006EFF3E /* AuthenticationService.swift in Sources */,
 				1BF061582974873D00DD6C76 /* PremiumScreenView.swift in Sources */,
@@ -3949,7 +3855,6 @@
 				1B50065B28A6BDF0009AABF2 /* TeamsScreenViewController.swift in Sources */,
 				1B150A432992D90600853DEF /* PlayerCardSelectionScreenCoordinator.swift in Sources */,
 				6CA6203128B633310078C971 /* ContactScreenFactory.swift in Sources */,
-				1BA16E2A296DC316001B19C6 /* RaffleScreenView.swift in Sources */,
 				6CA6201C28B62DE30078C971 /* CubesScreenModule.swift in Sources */,
 				1B96E100282048D000A23880 /* Coordinator.swift in Sources */,
 				1B07C4B629955190006BB8A2 /* ObjectCustomKeychainWrapper.swift in Sources */,
@@ -3968,7 +3873,6 @@
 				1B9A722929894B36006D66D0 /* FilmsScreenRusType.swift in Sources */,
 				1B40BE5C2962C9A300FEBDB6 /* LabelsFeatureToggleModel.swift in Sources */,
 				1B295AE729817CF7003349FC /* MainScreenModel+Appearance.swift in Sources */,
-				1BA16E26296DC316001B19C6 /* RaffleScreenFactory.swift in Sources */,
 				1B96E0FF282048D000A23880 /* RootCoordinator.swift in Sources */,
 				6C1A0CC32834EC2E00A3040E /* LotteryScreenCoordinator.swift in Sources */,
 				6C9A9EF02829214100962062 /* NumberScreenView.swift in Sources */,
@@ -3995,7 +3899,6 @@
 			children = (
 				1B1B5B4827ADDFAF00EF283E /* en */,
 				1B1B5B4A27ADDFB100EF283E /* ru */,
-				D24A27EA294792480074D669 /* zh-Hant */,
 				D24A27ED2947A7F70074D669 /* es */,
 				D24A27FF2947B0550074D669 /* de */,
 				D24A28022947B0A20074D669 /* it */,
@@ -4009,7 +3912,6 @@
 			children = (
 				1B325C1725D2CFE300382F33 /* ru */,
 				1B325C1925D2D18300382F33 /* en */,
-				D24A27E8294792480074D669 /* zh-Hant */,
 				D24A27EB2947A7F60074D669 /* es */,
 				D24A27FD2947B0540074D669 /* de */,
 				D24A28002947B0A20074D669 /* it */,
@@ -4023,7 +3925,6 @@
 			children = (
 				1B8EB650267658B0009016BE /* ru */,
 				1B8EB652267658B6009016BE /* en */,
-				D24A27E9294792480074D669 /* zh-Hant */,
 				D24A27EC2947A7F70074D669 /* es */,
 				D24A27FE2947B0540074D669 /* de */,
 				D24A28012947B0A20074D669 /* it */,
@@ -4214,7 +4115,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
@@ -4225,7 +4126,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.20.6;
+				MARKETING_VERSION = 730.21.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4248,7 +4149,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "Random Pro/System/Random Pro.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 144;
+				CURRENT_PROJECT_VERSION = 145;
 				DEVELOPMENT_TEAM = 34VDSPZYU9;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4258,7 +4159,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				MARKETING_VERSION = 730.20.6;
+				MARKETING_VERSION = 730.21.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sosinvitalii.Random;
 				PRODUCT_NAME = "$(TARGET_NAME)";

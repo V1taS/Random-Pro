@@ -48,8 +48,6 @@ extension MainScreenModel {
         return appearance.titleRockPaperScissors
       case .imageFilters:
         return appearance.titleImageFilters
-      case .raffle:
-        return appearance.titleRaffle
       case .films:
         return appearance.titleFilms
       }
@@ -89,8 +87,6 @@ extension MainScreenModel {
         return appearance.imageRockPaperScissorsScreenView
       case .imageFilters:
         return appearance.imageImageFilters
-      case .raffle:
-        return appearance.imageRaffle
       case .films:
         return appearance.imageFilms
       }
@@ -130,8 +126,6 @@ extension MainScreenModel {
         return appearance.rockPaperScissorsDescriptionForNoPremiumAccess
       case .imageFilters:
         return appearance.imageFiltersDescriptionForNoPremiumAccess
-      case .raffle:
-        return appearance.raffleFiltersDescriptionForNoPremiumAccess
       case .films:
         return appearance.filmsDescriptionForNoPremiumAccess
       }
@@ -183,9 +177,6 @@ extension MainScreenModel {
     
     /// Раздел `Фильтры изображений`
     case imageFilters
-    
-    /// Раздел `Розыгрыш`
-    case raffle
     
     /// Раздел `Фильмы`
     case films

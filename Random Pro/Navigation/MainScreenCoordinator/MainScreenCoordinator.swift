@@ -109,16 +109,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                   description: section.type.descriptionForNoPremiumAccess)
   }
   
-  func openRaffle() {
-    let raffleScreenCoordinator = RaffleScreenCoordinator(navigationController,
-                                                          services)
-    anyCoordinator = raffleScreenCoordinator
-    raffleScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .raffle)
-    services.metricsService.track(event: .raffle)
-  }
-  
   func openImageFilters() {
     let imageFiltersScreenCoordinator = ImageFiltersScreenCoordinator(navigationController,
                                                                       services)
@@ -438,8 +428,6 @@ private extension MainScreenCoordinator {
       openBottle()
     case .rockPaperScissorsScreen:
       openRockPaperScissors()
-    case .raffleScreen:
-      openRaffle()
     case .imageFilters:
       openImageFilters()
     case .premiumScreen:

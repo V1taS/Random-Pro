@@ -8,6 +8,7 @@
 
 import UIKit
 import RandomUIKit
+import Lottie
 
 /// События которые отправляем из View в Presenter
 protocol RockPaperScissorsScreenViewOutput: AnyObject {
@@ -50,6 +51,10 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   private let rightImageView = UIImageView()
   private let leftImageView = UIImageView()
   private var interfaceStyle: UIUserInterfaceStyle?
+  
+  private let leftYouWinAnimationView = LottieAnimationView(name: Appearance().youWinImage)
+  private let rightYouWinAnimationView = LottieAnimationView(name: Appearance().youWinImage)
+  private let handShakeAnimationView = LottieAnimationView(name: Appearance().handShakeImage)
   
   // MARK: - Initialization
   
@@ -97,10 +102,18 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
       rightImageView.setImageColor(color: RandomColor.only.primaryWhite)
     }
     
-    if model.resultType == .initial {
+    switch model.resultType {
+    case .winLeftSide:
+      startLeftYouWinAnimation()
+    case .winRightSide:
+      startRightYouWinAnimation()
+    case .draw:
+      startHandShakeAnimation()
+    case .initial:
       resultImageLeftLabel.text = nil
       resultImageRightLabel.text = nil
     }
+    generateButton.set(isEnabled: true)
   }
   
   func resetGeneration() {
@@ -111,6 +124,36 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
 // MARK: - Private
 
 private extension RockPaperScissorsScreenView {
+  func startHandShakeAnimation() {
+    handShakeAnimationView.isHidden = false
+    handShakeAnimationView.play()
+  }
+  
+  func stopHandShakeAnimation() {
+    handShakeAnimationView.isHidden = true
+    handShakeAnimationView.stop()
+  }
+  
+  func startLeftYouWinAnimation() {
+    leftYouWinAnimationView.isHidden = false
+    leftYouWinAnimationView.play()
+  }
+  
+  func stopLeftYouWinAnimation() {
+    leftYouWinAnimationView.isHidden = true
+    leftYouWinAnimationView.stop()
+  }
+  
+  func startRightYouWinAnimation() {
+    rightYouWinAnimationView.isHidden = false
+    rightYouWinAnimationView.play()
+  }
+  
+  func stopRightYouWinAnimation() {
+    rightYouWinAnimationView.isHidden = true
+    rightYouWinAnimationView.stop()
+  }
+  
   func startShakeHands() {
     let appearance = Appearance()
     generateButton.set(isEnabled: false)
@@ -122,7 +165,6 @@ private extension RockPaperScissorsScreenView {
     shakeHandsFor(view: leftImageView, completion: {})
     shakeHandsFor(view: rightImageView, completion: { [weak self] in
       self?.output?.generateButtonAction()
-      self?.generateButton.set(isEnabled: true)
     })
     
     if let interfaceStyle, interfaceStyle == .dark {
@@ -159,56 +201,84 @@ private extension RockPaperScissorsScreenView {
     resultImageRightLabel.font = .systemFont(ofSize: appearance.systemFontLabel)
     
     leftImageView.contentMode = .scaleAspectFit
+    leftImageView.scalesLargeContentImage = true
+    leftImageView.clipsToBounds = true
+    
     rightImageView.contentMode = .scaleAspectFit
+    rightImageView.scalesLargeContentImage = true
+    rightImageView.clipsToBounds = true
+    
+    leftYouWinAnimationView.isHidden = true
+    leftYouWinAnimationView.contentMode = .scaleAspectFill
+    leftYouWinAnimationView.loopMode = .playOnce
+    leftYouWinAnimationView.animationSpeed = Appearance().animationSpeed
+    
+    rightYouWinAnimationView.isHidden = true
+    rightYouWinAnimationView.contentMode = .scaleAspectFill
+    rightYouWinAnimationView.loopMode = .playOnce
+    rightYouWinAnimationView.animationSpeed = Appearance().animationSpeed
+    
+    handShakeAnimationView.isHidden = true
+    handShakeAnimationView.contentMode = .scaleAspectFill
+    handShakeAnimationView.loopMode = .playOnce
+    handShakeAnimationView.animationSpeed = 1
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
   }
   
-  @objc func generateButtonAction() {
-    startShakeHands()
-  }
-  
   func setupConstraints() {
     let appearance = Appearance()
     
-    [scoreLabel, leftImageView, rightImageView,
-     resultImageLeftLabel, resultImageRightLabel, generateButton].forEach {
+    [scoreLabel, leftImageView, rightImageView, resultImageLeftLabel, resultImageRightLabel, generateButton,
+     leftYouWinAnimationView, rightYouWinAnimationView, handShakeAnimationView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
       scoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-      scoreLabel.centerYAnchor.constraint(equalTo: centerYAnchor,
-                                          constant: -appearance.maxInset),
-      scoreLabel.heightAnchor.constraint(equalTo: heightAnchor,
-                                         multiplier: appearance.scoreMultiplierHeight,
-                                         constant: .zero),
+      scoreLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                      constant: UIScreen.main.bounds.height * 0.1),
+      
+      leftYouWinAnimationView.trailingAnchor.constraint(equalTo: scoreLabel.leadingAnchor,
+                                                        constant: 40),
+      leftYouWinAnimationView.bottomAnchor.constraint(equalTo: scoreLabel.topAnchor,
+                                                      constant: 40),
+      leftYouWinAnimationView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2),
+      leftYouWinAnimationView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2),
+      
+      rightYouWinAnimationView.leadingAnchor.constraint(equalTo: scoreLabel.trailingAnchor,
+                                                        constant: -40),
+      rightYouWinAnimationView.bottomAnchor.constraint(equalTo: scoreLabel.topAnchor,
+                                                       constant: 40),
+      rightYouWinAnimationView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2),
+      rightYouWinAnimationView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.2),
+      
+      handShakeAnimationView.centerXAnchor.constraint(equalTo: scoreLabel.centerXAnchor),
+      handShakeAnimationView.bottomAnchor.constraint(equalTo: scoreLabel.topAnchor,
+                                                     constant: 52),
+      handShakeAnimationView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.3),
+      handShakeAnimationView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.3),
       
       leftImageView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                              constant: 24),
       leftImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
       leftImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
+      leftImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
       
       rightImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                constant: -24),
       rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
       rightImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
+      rightImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
       
-      resultImageLeftLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                    constant: appearance.defaultInset),
-      resultImageLeftLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                    constant: -appearance.centerXInset),
-      resultImageLeftLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                                   constant: -appearance.fromTopInset),
+      resultImageLeftLabel.centerXAnchor.constraint(equalTo: leftImageView.centerXAnchor),
+      resultImageLeftLabel.topAnchor.constraint(equalTo: leftImageView.bottomAnchor,
+                                                constant: 16),
       
-      resultImageRightLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                     constant: appearance.defaultInset),
-      resultImageRightLabel.centerXAnchor.constraint(equalTo: centerXAnchor,
-                                                     constant: appearance.centerXInset),
-      resultImageRightLabel.bottomAnchor.constraint(equalTo: generateButton.topAnchor,
-                                                    constant: -appearance.fromTopInset),
+      resultImageRightLabel.centerXAnchor.constraint(equalTo: rightImageView.centerXAnchor),
+      resultImageRightLabel.centerYAnchor.constraint(equalTo: resultImageLeftLabel.centerYAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
@@ -218,21 +288,26 @@ private extension RockPaperScissorsScreenView {
                                              constant: -appearance.defaultInset)
     ])
   }
+  
+  @objc func generateButtonAction() {
+    startShakeHands()
+    stopLeftYouWinAnimation()
+    stopRightYouWinAnimation()
+    stopHandShakeAnimation()
+  }
 }
 
 // MARK: - Appearance
 
 private extension RockPaperScissorsScreenView {
   struct Appearance {
-    let buttonTitle = NSLocalizedString("Cгенерировать", comment: "")
+    let buttonTitle = NSLocalizedString("Играть", comment: "")
     let systemFontLabel: CGFloat = 30
     let systemFontScore: CGFloat = 100
     let defaultInset: CGFloat = 16
     let maxInset: CGFloat = 200
     let fromTopInset: CGFloat = 120
     let centerXInset: CGFloat = 96
-    let multiplierHeight: Double = 0.1
-    let scoreMultiplierHeight: Double = 0.5
     
     let rockLeftImageName = "rock_left"
     let paperLeftImageName = "paper_left"
@@ -241,5 +316,8 @@ private extension RockPaperScissorsScreenView {
     let rockRightImageName = "rock_right"
     let paperRightImageName = "paper_right"
     let scissorsRightImageName = "scissors_right"
+    let youWinImage = "rock_paper_scissos_cup_winner"
+    let handShakeImage = "rock_paper_scissos_hand_shake"
+    let animationSpeed: CGFloat = 0.5
   }
 }

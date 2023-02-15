@@ -55,9 +55,6 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `openImageFilters`
   func openImageFilters()
   
-  /// Открыть раздел `raffle`
-  func openRaffle()
-  
   /// Открыть раздел `Films`
   func openFilms()
   
@@ -222,10 +219,6 @@ extension MainScreenViewController: MainScreenViewOutput {
   
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     moduleOutput?.noPremiumAccessActionFor(section)
-  }
-  
-  func openRaffle() {
-    moduleOutput?.openRaffle()
   }
   
   func openImageFilters() {

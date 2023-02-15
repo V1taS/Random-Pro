@@ -118,6 +118,9 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
   
   func resetGeneration() {
     output?.resetGeneration()
+    stopHandShakeAnimation()
+    stopLeftYouWinAnimation()
+    stopRightYouWinAnimation()
   }
 }
 

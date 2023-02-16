@@ -7,6 +7,7 @@
 
 import UIKit
 import StoreKit
+import RandomNetwork
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}
@@ -64,6 +65,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
       self?.rateApp()
+      self?.services.metricsService.sendPostBackYandexMetrics()
     }
   }
   

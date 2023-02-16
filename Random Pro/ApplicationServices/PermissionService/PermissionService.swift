@@ -8,6 +8,7 @@
 
 import UIKit
 import AppTrackingTransparency
+import AdSupport
 import Contacts
 import Photos
 
@@ -17,6 +18,9 @@ protocol PermissionService {
   ///  - Parameter status: Статус ответа пользователя
   @available(iOS 14, *)
   func requestIDFA(_ status: ((ATTrackingManager.AuthorizationStatus) -> Void)?)
+  
+  /// Получить рекламный ID
+  func getIDFA() -> String
   
   /// Запрос доступа к контактам
   ///  - Parameters:
@@ -78,6 +82,10 @@ final class PermissionServiceImpl: PermissionService {
       @unknown default: break
       }
     }
+  }
+  
+  func getIDFA() -> String {
+    return ASIdentifierManager.shared().advertisingIdentifier.uuidString
   }
   
   func requestContactStore(_ status: ((_ granted: Bool, _ error: Error?) -> Void)? = nil) {

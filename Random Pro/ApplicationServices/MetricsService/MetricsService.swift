@@ -32,9 +32,6 @@ protocol MetricsService {
   
   /// Получаем общее количество нажатий на все события
   func getAllCountTapped() -> Int?
-  
-  /// Отправить метрико о том что приложение было установлено
-  func sendPostBackYandexMetrics()
 }
 
 final class MetricsServiceImpl: MetricsService {
@@ -50,38 +47,6 @@ final class MetricsServiceImpl: MetricsService {
   }
   
   // MARK: - Internal func
-  
-  func sendPostBackYandexMetrics() {
-    let currentDate = Date()
-    let iso8601DateFormatter = ISO8601DateFormatter()
-    iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-    let currentDateString = iso8601DateFormatter.string(from: currentDate)
-    
-    NetworkServiceImpl().performRequestWith(
-      urlString: "http://yabs.yandex.ru/postback",
-      queryItems: [
-        URLQueryItem(name: "package-name",
-                     value: "com.sosinvitalii.Random"),
-        URLQueryItem(name: "click-time",
-                     value: currentDateString),
-        URLQueryItem(name: "reqid",
-                     value: UUID().uuidString),
-        URLQueryItem(name: "install_datetime",
-                     value: currentDateString),
-        URLQueryItem(name: "idfa",
-                     value: PermissionServiceImpl().getIDFA()),
-        URLQueryItem(name: "os",
-                     value: "ios"),
-        URLQueryItem(name: "os_version",
-                     value: UIDevice.current.systemVersion),
-        URLQueryItem(name: "tracker_device_id",
-                     value: UIDevice.current.identifierForVendor?.uuidString ?? ""),
-        URLQueryItem(name: "event-link-type",
-                     value: "install")
-      ],
-      httpMethod: .get,
-      headers: []) { _ in }
-  }
   
   func track(event: MetricsSections) {
     Analytics.logEvent(event.rawValue, parameters: nil)

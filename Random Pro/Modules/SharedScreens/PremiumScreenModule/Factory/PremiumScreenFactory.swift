@@ -138,7 +138,7 @@ private extension PremiumScreenFactory {
     let playerCardSelectionIconJSONName = "premium_player_card_selection"
     
     let rockPaperScissosTitle = NSLocalizedString("Раздел Цу-е-фа", comment: "")
-    let rockPaperScissosDescription = NSLocalizedString("Сыграйте в популярную игру Камень, Ножницы, Бумага", comment: "")
+    let rockPaperScissosDescription = NSLocalizedString("Выберите случайным образом камень, ножницы или бумагу", comment: "")
     let rockPaperScissosIconJSONName = "premium_rock_paper_scissos"
   }
 }

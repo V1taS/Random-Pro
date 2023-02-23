@@ -10,6 +10,13 @@ Random Pro.xcworkspace/xcuserdata/v1tas.xcuserdatad/xcdebugger/Breakpoints_v2.xc
 *.xcscmblueprint
 *.xccheckout
 
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+
 ## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
 build/
 .build/
@@ -23,6 +30,25 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
 ## Obj-C/Swift specific
 *.hmap
@@ -52,6 +78,17 @@ Pods/
 Dependencies/
 .accio/
 
+### Projects ###
+*.xcodeproj
+*.xcworkspace
+
+### Tuist derived files ###
+graph.dot
+Derived/
+
+### Tuist managed dependencies ###
+Tuist/Dependencies
+
 # fastlane
 # It is recommended to not store the screenshots in the git repo.
 # Instead, use fastlane to re-generate the screenshots whenever they are needed.
@@ -62,3 +99,4 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+graph.png

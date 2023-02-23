@@ -1,0 +1,11 @@
+//
+//  {{ name }}ViewController.swift
+//  {{ name }}
+//
+//  Created by {{ author }} on {{ date }}.
+//  Copyright © {{ year }} {{ company }}. All rights reserved.
+//
+
+import UIKit
+
+public final class {{ name }}ViewController: UIViewController {}

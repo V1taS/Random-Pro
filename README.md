@@ -37,7 +37,7 @@ brew install swiftlint
 
 Homebrew is usefull to manage binary dependencies
 ```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 Run brew doctor to get brew errors and wornings
@@ -79,3 +79,5 @@ Check current ruby version.
 ```
 ruby -v
 ```
+
+[![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io)

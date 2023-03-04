@@ -7,7 +7,6 @@
 
 import UIKit
 import RandomUIKit
-import ApplicationInterface
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol TeamsScreenFactoryOutput: AnyObject {

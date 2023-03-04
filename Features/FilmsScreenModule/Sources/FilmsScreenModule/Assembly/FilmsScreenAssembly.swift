@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `FilmsScreen`
 public final class FilmsScreenAssembly {

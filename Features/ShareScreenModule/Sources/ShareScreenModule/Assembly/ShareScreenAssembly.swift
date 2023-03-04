@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `ShareScreen`
 public final class ShareScreenAssembly {

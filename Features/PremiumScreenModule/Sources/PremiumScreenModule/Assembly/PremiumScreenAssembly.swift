@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `PremiumScreen`
 public final class PremiumScreenAssembly {

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `TeamsScreen`
 public final class TeamsScreenAssembly {

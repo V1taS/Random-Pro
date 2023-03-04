@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 /// Модель Teams
 struct TeamsScreenModel: Codable, TeamsScreenModelProtocol {

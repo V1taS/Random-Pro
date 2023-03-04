@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 import CoinScreenModule
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
@@ -39,7 +38,6 @@ final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   private var coinScreenModule: CoinScreenModule?
@@ -48,11 +46,8 @@ final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func

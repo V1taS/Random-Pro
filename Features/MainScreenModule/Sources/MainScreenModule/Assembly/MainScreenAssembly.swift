@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `MainScreen`
 public final class MainScreenAssembly {

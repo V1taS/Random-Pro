@@ -8,7 +8,6 @@
 import UIKit
 import StoreKit
 import MainScreenModule
-import ApplicationInterface
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}

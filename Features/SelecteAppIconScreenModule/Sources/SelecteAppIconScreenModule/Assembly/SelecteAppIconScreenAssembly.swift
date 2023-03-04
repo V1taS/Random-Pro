@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `SelecteAppIconScreen`
 public final class SelecteAppIconScreenAssembly {

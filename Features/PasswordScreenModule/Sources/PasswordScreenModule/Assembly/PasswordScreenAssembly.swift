@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `PasswordScreen`
 public final class PasswordScreenAssembly {

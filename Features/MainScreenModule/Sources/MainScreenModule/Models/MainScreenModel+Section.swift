@@ -8,9 +8,6 @@
 
 import Foundation
 
-import Foundation
-import ApplicationInterface
-
 extension MainScreenModel {
   
   // MARK: - Section

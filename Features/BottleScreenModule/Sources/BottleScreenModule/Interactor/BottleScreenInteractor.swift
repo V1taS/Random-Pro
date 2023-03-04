@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// События которые отправляем из Interactor в Presenter
 protocol BottleScreenInteractorOutput: AnyObject {
@@ -38,15 +37,15 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   // MARK: - Private properties
   
   private let bottleImageView = UIImageView()
-  private let timerService: TimerServiceProtocol
-  private let hapticService: HapticServiceProtocol
+  private let timerService: BottleScreenTimerServiceProtocol
+  private let hapticService: BottleScreenHapticServiceProtocol
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - timerService: время
   ///   - hapticService: Обратная связь от моторчика
-  init(_ timerService: TimerServiceProtocol, hapticService: HapticServiceProtocol) {
+  init(_ timerService: BottleScreenTimerServiceProtocol, hapticService: BottleScreenHapticServiceProtocol) {
     self.timerService = timerService
     self.hapticService = hapticService
   }

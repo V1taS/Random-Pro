@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import TimerService
 import BottleScreenModule
+import HapticService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol BottleScreenCoordinatorOutput: AnyObject {}
@@ -30,25 +32,23 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
-  private var bottleScreenModule: BottleScreenModule?
+  private var bottleScreenModule: BottleModuleInput?
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    var bottleScreenModule = BottleScreenAssembly().createModule(timerService: services.timerService,
-                                                                 hapticService: services.hapticService)
+    var bottleScreenModule = BottleScreenAssembly().createModule(
+      timerService: TimerServiceImpl(),
+      hapticService: BottleScreenHapticServiceAdapter(HapticServiceImpl())
+    )
     self.bottleScreenModule = bottleScreenModule
     bottleScreenModule.moduleOutput = self
     navigationController.pushViewController(bottleScreenModule, animated: true)
@@ -58,3 +58,7 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
 // MARK: - BottleScreenModuleOutput
 
 extension BottleScreenCoordinator: BottleScreenModuleOutput {}
+
+// MARK: - Adapter TimerService
+
+extension TimerServiceImpl: BottleScreenTimerServiceProtocol {}

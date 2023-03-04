@@ -6,7 +6,7 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-import ApplicationInterface
+import Foundation
 
 /// Сборщик `NumberScreen`
 public final class NumberScreenAssembly {

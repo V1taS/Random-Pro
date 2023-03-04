@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `CubesScreen`
 public final class CubesScreenAssembly {

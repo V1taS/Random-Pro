@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 public final class YesNoScreenAssembly {
   

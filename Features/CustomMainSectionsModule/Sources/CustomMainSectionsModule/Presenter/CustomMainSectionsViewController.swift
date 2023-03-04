@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 public protocol CustomMainSectionsModuleOutput: AnyObject {

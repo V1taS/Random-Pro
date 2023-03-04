@@ -8,7 +8,6 @@
 
 import UIKit
 import ListScreenModule
-import ApplicationInterface
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ListAddItemsScreenCoordinatorOutput: AnyObject {

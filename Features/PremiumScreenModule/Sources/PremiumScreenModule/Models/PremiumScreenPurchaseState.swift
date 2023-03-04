@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 enum PremiumScreenPurchaseState: AppPurchasesServiceStateProtocol {
   /// Успешная покупка подписки

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 /// Сборщик `PlayerCardSelectionScreen`
 public final class PlayerCardSelectionScreenAssembly {

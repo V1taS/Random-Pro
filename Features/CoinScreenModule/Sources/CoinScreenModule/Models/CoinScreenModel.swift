@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 // MARK: - CoinScreenModel
 

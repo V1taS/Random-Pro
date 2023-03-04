@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 /// Шаблоны запуска обратной связи от моторчика
 enum CoinScreenPatternType: HapticServicePatternTypeProtocol {

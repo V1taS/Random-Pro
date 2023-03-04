@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 public final class BottleScreenAssembly {
   
@@ -18,8 +17,8 @@ public final class BottleScreenAssembly {
   ///   - timerService: время
   ///   - hapticService: Обратная связь от моторчика
   /// - Returns: Cобранный модуль `BottleScreen`
-  public func createModule(timerService: TimerServiceProtocol,
-                           hapticService: HapticServiceProtocol) -> BottleScreenModule {
+  public func createModule(timerService: BottleScreenTimerServiceProtocol,
+                           hapticService: BottleScreenHapticServiceProtocol) -> BottleModuleInput {
     let view = BottleScreenView()
     let interactor = BottleScreenInteractor(timerService, hapticService: hapticService)
     let factory = BottleScreenFactory()

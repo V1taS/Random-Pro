@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 public protocol YesNoScreenModuleOutput: AnyObject {
   

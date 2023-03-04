@@ -6,8 +6,6 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-import ApplicationInterface
-
 // MARK: - ListAddItemsScreenModel
 
 /// Моделька для таблички

@@ -7,7 +7,6 @@
 
 import UIKit
 import RandomUIKit
-import ApplicationInterface
 
 /// События которые отправляем из Interactor в Presenter
 protocol TeamsScreenInteractorOutput: AnyObject {

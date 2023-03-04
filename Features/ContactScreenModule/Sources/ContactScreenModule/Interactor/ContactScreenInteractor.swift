@@ -8,7 +8,6 @@
 
 import UIKit
 import Contacts
-import ApplicationInterface
 
 /// События которые отправляем из Interactor в Presenter
 protocol ContactScreenInteractorOutput: AnyObject {

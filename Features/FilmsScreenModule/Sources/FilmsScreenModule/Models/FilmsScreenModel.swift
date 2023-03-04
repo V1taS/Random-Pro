@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 struct FilmsScreenModel: Codable, FilmsScreenModelProtocol {
   

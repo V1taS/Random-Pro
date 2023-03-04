@@ -9,7 +9,6 @@
 import UIKit
 import MessageUI
 import RandomUIKit
-import ApplicationInterface
 import MainSettingsScreenModule
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`

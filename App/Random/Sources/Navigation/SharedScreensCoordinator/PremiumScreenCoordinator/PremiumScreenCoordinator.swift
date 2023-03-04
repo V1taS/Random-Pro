@@ -8,7 +8,6 @@
 
 import UIKit
 import PremiumScreenModule
-import ApplicationInterface
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol PremiumScreenCoordinatorOutput: AnyObject {

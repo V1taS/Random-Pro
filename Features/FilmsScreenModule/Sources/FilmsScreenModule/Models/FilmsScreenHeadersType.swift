@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 /// Тип хедера
 public enum FilmsScreenHeadersType: HeadersTypeProtocol {

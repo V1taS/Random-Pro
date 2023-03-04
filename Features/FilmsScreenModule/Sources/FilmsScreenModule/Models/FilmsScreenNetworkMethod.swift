@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 /// HTTP-метод сетевого запроса
 public enum FilmsScreenNetworkMethod: NetworkMethodProtocol {

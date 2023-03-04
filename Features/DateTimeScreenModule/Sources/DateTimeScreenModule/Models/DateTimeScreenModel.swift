@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 struct DateTimeScreenModel: Codable, DateTimeScreenModelProtocol {
   

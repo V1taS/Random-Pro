@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 struct SelecteAppIconScreenModel: Codable, SelecteAppIconScreenModelProtocol {
   

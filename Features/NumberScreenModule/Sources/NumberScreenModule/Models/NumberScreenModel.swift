@@ -8,9 +8,6 @@
 
 import Foundation
 
-import Foundation
-import ApplicationInterface
-
 struct NumberScreenModel: Codable, NumberScreenModelProtocol {
   
   /// Начало диапазона

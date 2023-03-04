@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol MainScreenFactoryOutput: AnyObject {

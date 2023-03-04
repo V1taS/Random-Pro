@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 public final class ContactScreenAssembly {
   
@@ -15,7 +14,7 @@ public final class ContactScreenAssembly {
   
   /// Собирает модуль `ContactScreen`
   public func createModule(permissionService: PermissionServiceProtocol,
-                    storageService: StorageServiceProtocol) -> ContactScreenModule {
+                           storageService: StorageServiceProtocol) -> ContactScreenModule {
     let view = ContactScreenView()
     let interactor = ContactScreenInteractor(permissionService: permissionService,
                                              storageService: storageService)

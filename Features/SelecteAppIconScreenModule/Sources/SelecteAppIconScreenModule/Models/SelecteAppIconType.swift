@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 // MARK: - SectionType
 

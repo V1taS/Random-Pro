@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 /// Сборщик `ImageFiltersScreen`
 public final class ImageFiltersScreenAssembly {

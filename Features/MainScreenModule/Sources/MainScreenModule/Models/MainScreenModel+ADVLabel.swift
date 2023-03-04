@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 extension MainScreenModel {
   // MARK: - ADVLabel

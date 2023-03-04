@@ -7,7 +7,6 @@
 
 import UIKit
 import RandomUIKit
-import ApplicationInterface
 
 /// События которые отправляем из View в Presenter
 protocol CustomMainSectionsViewOutput: AnyObject {

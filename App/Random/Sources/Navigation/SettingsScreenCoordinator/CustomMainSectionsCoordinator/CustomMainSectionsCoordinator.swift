@@ -8,7 +8,6 @@
 
 import UIKit
 import CustomMainSectionsModule
-import ApplicationInterface
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol CustomMainSectionsCoordinatorOutput: AnyObject {

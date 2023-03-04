@@ -8,7 +8,6 @@
 
 import UIKit
 import LotteryScreenModule
-import ApplicationInterface
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol LotteryScreenCoordinatorOutput: AnyObject {

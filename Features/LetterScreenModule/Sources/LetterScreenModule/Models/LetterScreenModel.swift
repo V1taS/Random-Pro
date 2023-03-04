@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 struct LetterScreenModel: Codable, LetterScreenModelProtocol {
   

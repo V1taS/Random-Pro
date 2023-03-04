@@ -17,9 +17,9 @@ public protocol BottleScreenModuleInput {
   var moduleOutput: BottleScreenModuleOutput? { get set }
 }
 
-public typealias BottleScreenModule = UIViewController & BottleScreenModuleInput
+public typealias BottleModuleInput = UIViewController & BottleScreenModuleInput
 
-final class BottleScreenViewController: BottleScreenModule {
+final class BottleScreenViewController: BottleModuleInput {
   
   // MARK: - Internal property
   

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ApplicationInterface
 
 /// Сборщик `ListPlayersScreen`
 public final class ListPlayersScreenAssembly {

@@ -8,9 +8,6 @@
 
 import Foundation
 
-import Foundation
-import ApplicationInterface
-
 // MARK: - PasswordScreenModel
 
 struct PasswordScreenModel: Codable, PasswordScreenModelProtocol {

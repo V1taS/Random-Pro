@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ApplicationInterface
 
 public final class CoinScreenAssembly {
   
@@ -18,7 +17,7 @@ public final class CoinScreenAssembly {
   ///  - hapticService: Обратная связь от моторчика
   ///  - storageService: Хранения данных
   public func createModule(hapticService: HapticServiceProtocol,
-                    storageService: StorageServiceProtocol) -> CoinScreenModule {
+                           storageService: StorageServiceProtocol) -> CoinScreenModule {
     let view = CoinScreenView()
     let interactor = CoinScreenInteractor(hapticService: hapticService,
                                           storageService: storageService)

@@ -76,11 +76,6 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
       OnboardingViewModel.PageModel(title: appearance.playerCardSelectionTitle,
                                     description: appearance.playerCardSelectionDescription,
                                     lottieAnimationJSONName: appearance.playerCardSelectionIconJSONName),
-      
-      OnboardingViewModel.PageModel(title: appearance.rockPaperScissosTitle,
-                                    description: appearance.rockPaperScissosDescription,
-                                    lottieAnimationJSONName: appearance.rockPaperScissosIconJSONName),
-      
       OnboardingViewModel.PageModel(title: appearance.donateTitle,
                                     description: appearance.donateDescription,
                                     lottieAnimationJSONName: appearance.donateIconJSONName)
@@ -137,6 +132,7 @@ private extension PremiumScreenFactory {
     let playerCardSelectionDescription = NSLocalizedString("Выберите уникальный стиль карточек", comment: "")
     let playerCardSelectionIconJSONName = "premium_player_card_selection"
     
+    // TODO: - Не понятно что с этим разделом делать, аппл не пропустили
     let rockPaperScissosTitle = NSLocalizedString("Раздел Цу-е-фа", comment: "")
     let rockPaperScissosDescription = NSLocalizedString("Выберите случайным образом камень, ножницы или бумагу", comment: "")
     let rockPaperScissosIconJSONName = "premium_rock_paper_scissos"

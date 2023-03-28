@@ -61,7 +61,7 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
-  func noPremiumAccessActionFor(_ section: MainScreenSectionProtocol)
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -114,12 +114,12 @@ final class MainScreenView: MainScreenViewProtocol {
 
 extension MainScreenView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard let model,
-          let section = (model.allSections[indexPath.row] as? MainScreenModel.Section),
-          let advLabel = section.advLabel as? MainScreenModel.ADVLabel,
-          let sectionType = section.type as? MainScreenModel.SectionType else {
+    guard let model else {
       return
     }
+    let section = model.allSections[indexPath.row]
+    let advLabel = section.advLabel
+    let sectionType = section.type
     
     if advLabel == .premium && !model.isPremium {
       output?.noPremiumAccessActionFor(section)
@@ -181,10 +181,7 @@ extension MainScreenView: UICollectionViewDataSource {
       return UICollectionViewCell()
     }
     
-    guard let section = (model.allSections[indexPath.row] as? MainScreenModel.Section) else {
-      return UICollectionViewCell()
-    }
-    
+    let section = model.allSections[indexPath.row]
     cell.configureCellWith(model: section, isPremium: model.isPremium)
     return cell
   }

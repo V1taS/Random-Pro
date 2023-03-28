@@ -8,6 +8,7 @@
 
 import UIKit
 import YesNoScreenModule
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol YesNoScreenCoordinatorOutput: AnyObject {
@@ -38,7 +39,6 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var yesNoScreenModule: YesNoScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
@@ -47,17 +47,14 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let yesNoScreenModule = YesNoScreenAssembly().createModule(storageService: services.storageService)
+    let yesNoScreenModule = YesNoScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.yesNoScreenModule = yesNoScreenModule
     self.yesNoScreenModule?.moduleOutput = self
     navigationController.pushViewController(yesNoScreenModule, animated: true)
@@ -67,15 +64,15 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
 // MARK: - YesNoScreenModuleOutput
 
 extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
-  func cleanButtonWasSelected(model: YesNoScreenModelProtocol) {
+  func cleanButtonWasSelected(model: YesNoScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .yesOrNo(
       itemsGenerated: "\(model.listResult.count)",
       lastItem: model.result
     ))
   }
   
-  func settingButtonAction(model: YesNoScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: YesNoScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -101,7 +98,7 @@ extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -117,3 +114,7 @@ extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension YesNoScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: YesNoScreenStorageServiceProtocol {}

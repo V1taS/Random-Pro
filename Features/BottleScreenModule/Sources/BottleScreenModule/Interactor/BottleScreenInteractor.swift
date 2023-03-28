@@ -65,8 +65,7 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   }
   
   func playHapticFeedback() {
-    hapticService.play(isRepeat: true,
-                       patternType: BottleScreenPatternType.feedingCrocodile) { _ in }
+    hapticService.play(isRepeat: true) { _ in }
   }
   
   func stopHapticFeedback() {

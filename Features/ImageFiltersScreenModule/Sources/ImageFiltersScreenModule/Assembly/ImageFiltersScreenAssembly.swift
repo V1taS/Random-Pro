@@ -15,7 +15,7 @@ public final class ImageFiltersScreenAssembly {
   /// Собирает модуль `ImageFiltersScreen`
   /// - Parameter permissionService: Сервис по работе с разрешениями
   /// - Returns: Cобранный модуль `ImageFiltersScreen`
-  public func createModule(permissionService: PermissionServiceProtocol) -> ImageFiltersScreenModule {
+  public func createModule(permissionService: ImageFiltersPermissionServiceProtocol) -> ImageFiltersScreenModule {
     let interactor = ImageFiltersScreenInteractor(permissionService: permissionService)
     let view = ImageFiltersScreenView()
     let factory = ImageFiltersScreenFactory()

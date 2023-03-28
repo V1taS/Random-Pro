@@ -8,6 +8,8 @@
 
 import UIKit
 import LotteryScreenModule
+import NotificationService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol LotteryScreenCoordinatorOutput: AnyObject {
@@ -41,23 +43,20 @@ final class LotteryScreenCoordinator: LotteryScreenCoordinatorProtocol {
   private var lotteryScreenModule: LotteryScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private let services: ApplicationServices
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let lotteryScreenModule = LotteryScreenAssembly().createModule(storageService: services.storageService)
+    let lotteryScreenModule = LotteryScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.lotteryScreenModule = lotteryScreenModule
     self.lotteryScreenModule?.moduleOutput = self
     navigationController.pushViewController(lotteryScreenModule, animated: true)
@@ -67,24 +66,24 @@ final class LotteryScreenCoordinator: LotteryScreenCoordinatorProtocol {
 // MARK: - LotteryScreenModuleOutput
 
 extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
-  func resultLabelAction(model: LotteryScreenModelProtocol) {
+  func resultLabelAction(model: LotteryScreenModel) {
     UIPasteboard.general.string = model.result
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
-  func cleanButtonWasSelected(model: LotteryScreenModelProtocol) {
+  func cleanButtonWasSelected(model: LotteryScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .lottery(
       itemsGenerated: "\(model.listResult.count)",
       lastItem: model.result
     ))
   }
   
-  func settingButtonAction(model: LotteryScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: LotteryScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -96,10 +95,10 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
   }
   
   func didReceiveRangeError() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
 }
 
@@ -115,7 +114,7 @@ extension LotteryScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -133,6 +132,10 @@ extension LotteryScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension LotteryScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: LotteryScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

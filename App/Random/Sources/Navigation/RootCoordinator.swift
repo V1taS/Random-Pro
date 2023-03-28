@@ -33,25 +33,20 @@ final class RootCoordinator: RootCoordinatorProtocol {
   private let window: UIWindow
   private let navigationController = UINavigationController()
   private var mainScreenCoordinator: MainScreenCoordinatorProtocol?
-  private let services: ApplicationServices
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - window: Окно просмотра
-  ///   - services: Сервисы приложения
-  init(_ window: UIWindow,
-       _ services: ApplicationServices) {
+  init(_ window: UIWindow) {
     self.window = window
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
     let mainScreenCoordinator = MainScreenCoordinator(window,
-                                                      navigationController,
-                                                      services)
+                                                      navigationController)
     self.mainScreenCoordinator = mainScreenCoordinator
     mainScreenCoordinator.start()
     

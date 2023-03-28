@@ -13,7 +13,7 @@ enum ListAddItemsScreenModel: Codable, Equatable {
   
   /// Секция Текста
   /// - Parameter textModel: Моделька для текста
-  case text(TextModel)
+  case text(ListScreenModel.TextModel)
   
   /// Секция отступа
   case insets(Double)
@@ -29,24 +29,4 @@ enum ListAddItemsScreenModel: Codable, Equatable {
   ///  - textCount: Всего текста
   ///  - textForGeneratedCount: Все текста, для генерации
   case doubleTitle(textCount: Int, textForGeneratedCount: Int?)
-  
-  /// Моделька текста
-  struct TextModel: Codable, Equatable, ListScreenTextModelProtocol {
-    
-    /// ID текста
-    let id: String
-    
-    /// Значение текста
-    let text: String?
-  }
-}
-
-// MARK: - toCodable
-
-extension [ListScreenTextModelProtocol] {
-  func toCodable() -> [ListAddItemsScreenModel.TextModel] {
-    self.map {
-      return ListAddItemsScreenModel.TextModel(id: $0.id, text: $0.text)
-    }
-  }
 }

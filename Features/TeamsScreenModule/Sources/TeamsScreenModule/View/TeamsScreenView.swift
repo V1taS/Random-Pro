@@ -23,7 +23,7 @@ protocol TeamsScreenViewInput {
   /// - Parameters:
   ///  - models: Список команд
   ///  - teamsCount: Количество команд
-  func updateContentWith(models: [TeamsScreenTeamModelProtocol], teamsCount: Int)
+  func updateContentWith(models: [TeamsScreenModel.Team], teamsCount: Int)
   
   /// Показать заглушка
   ///  - Parameter isShow: Показать заглушку
@@ -49,7 +49,7 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
   private lazy var collectionView = UICollectionView(frame: .zero,
                                                      collectionViewLayout: collectionViewLayout)
   private let countTeamsSegmentedControl = UISegmentedControl(items: Appearance().countTeams)
-  private var models: [TeamsScreenTeamModelProtocol] = []
+  private var models: [TeamsScreenModel.Team] = []
   private let resultLabel = UILabel()
   private let contentPlugImage = UIImageView()
   
@@ -68,7 +68,7 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(models: [TeamsScreenTeamModelProtocol], teamsCount: Int) {
+  func updateContentWith(models: [TeamsScreenModel.Team], teamsCount: Int) {
     self.models = models
     countTeamsSegmentedControl.selectedSegmentIndex = teamsCount - 1
     collectionView.reloadData()
@@ -138,7 +138,7 @@ extension TeamsScreenView: UICollectionViewDataSource {
     let player = models[indexPath.section].players[indexPath.row]
     var styleCard: PlayerView.StyleCard
     
-    switch (player.style as? TeamsScreenPlayerModel.StyleCard) ?? .defaultStyle {
+    switch player.style {
     case .defaultStyle:
       styleCard = .defaultStyle
     case .darkGreen:

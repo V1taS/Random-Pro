@@ -9,16 +9,4 @@
 @testable import SelecteAppIconScreenModule
 import XCTest
 
-final class SelecteAppIconScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class SelecteAppIconScreenModuleTests: XCTestCase {}

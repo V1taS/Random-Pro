@@ -33,13 +33,13 @@ final class ColorsScreenInteractor: ColorsScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let permissionService: PermissionServiceProtocol
+  private let permissionService: ColorsScreenPermissionServiceProtocol
   
   // MARK: - Initialization
   
   /// Инициализатор
   /// - Parameter permissionService: Сервис по работе с разрешениями
-  init(permissionService: PermissionServiceProtocol) {
+  init(permissionService: ColorsScreenPermissionServiceProtocol) {
     self.permissionService = permissionService
   }
   

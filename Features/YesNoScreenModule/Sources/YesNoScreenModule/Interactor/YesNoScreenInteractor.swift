@@ -42,41 +42,49 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
+  private var storageService: YesNoScreenStorageServiceProtocol
+  private var yesNoScreenModel: YesNoScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().yesNoScreenModelKeyUserDefaults,
+                                 to: YesNoScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().yesNoScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения данных
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: YesNoScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Initarnal func
   
   func cleanButtonAction() {
-    storageService.yesNoScreenModel = nil
+    yesNoScreenModel = nil
     getContent()
-    guard let model = storageService.yesNoScreenModel?.toCodable() else {
+    guard let model = yesNoScreenModel else {
       return
     }
     output?.cleanButtonWasSelected(model: model)
   }
   
   func getContent() {
-    if let model = storageService.yesNoScreenModel?.toCodable() {
+    if let model = yesNoScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
       let model = YesNoScreenModel(result: appearance.result,
                                    listResult: [])
-      self.storageService.yesNoScreenModel = model
+      self.yesNoScreenModel = model
       output?.didReceive(model: model)
     }
   }
   
   func generateContent() {
-    guard let model = storageService.yesNoScreenModel else {
+    guard let model = yesNoScreenModel else {
       return
     }
     
@@ -86,12 +94,12 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
     listResult.append(randomElementYesOrNo)
     let newModel = YesNoScreenModel(result: randomElementYesOrNo,
                                     listResult: listResult)
-    self.storageService.yesNoScreenModel = newModel
+    self.yesNoScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.yesNoScreenModel {
+    if let model = yesNoScreenModel {
       return model.listResult
     } else {
       return []
@@ -108,5 +116,6 @@ private extension YesNoScreenInteractor {
       NSLocalizedString("Нет", comment: "")
     ]
     let result = "?"
+    let yesNoScreenModelKeyUserDefaults = "yes_no_screen_user_defaults_key"
   }
 }

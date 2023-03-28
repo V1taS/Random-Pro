@@ -15,7 +15,7 @@ public final class ListScreenAssembly {
   /// Собирает модуль `ListScreen`
   /// - Parameters:
   ///   - storageService: Сервис хранения данных
-  public func createModule(storageService: StorageServiceProtocol) -> ListScreenModule {
+  public func createModule(storageService: ListScreenStorageServiceProtocol) -> ListScreenModule {
     let view = ListScreenView()
     let interactor = ListScreenInteractor(storageService: storageService)
     let factory = ListScreenFactory()

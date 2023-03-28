@@ -22,7 +22,6 @@ public final class SettingsScreenAssembly {
     let presenter = SettingsScreenViewController(interactor: interactor,
                                                  moduleView: view,
                                                  factory: factory)
-    
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

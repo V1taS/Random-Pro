@@ -18,7 +18,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   // MARK: - Private property
   
   private var coordinator: RootCoordinatorProtocol?
-  private let services: ApplicationServices = ApplicationServicesImpl()
   
   // MARK: - Internal func
   
@@ -27,7 +26,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
              options connectionOptions: UIScene.ConnectionOptions) {
     guard let scene = scene as? UIWindowScene else { return }
     let window = UIWindow(windowScene: scene)
-    let coordinator = RootCoordinator(window, services)
+    let coordinator = RootCoordinator(window)
     self.coordinator = coordinator
     coordinator.start()
     self.window = window
@@ -52,7 +51,5 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // MARK: - Deep links
 
 extension SceneDelegate {
-  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    services.deepLinkService.eventHandlingWith(urlContexts: URLContexts)
-  }
+  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {}
 }

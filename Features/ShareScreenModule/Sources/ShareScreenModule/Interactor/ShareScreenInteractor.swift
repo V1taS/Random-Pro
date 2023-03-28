@@ -33,13 +33,13 @@ final class ShareScreenInteractor: ShareScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let permissionService: PermissionServiceProtocol
+  private let permissionService: ShareScreenPermissionServiceProtocol
   
   // MARK: - Initialization
   
   /// Инициализатор
   /// - Parameter permissionService: Сервис по работе с разрешениями
-  init(permissionService: PermissionServiceProtocol) {
+  init(permissionService: ShareScreenPermissionServiceProtocol) {
     self.permissionService = permissionService
   }
   

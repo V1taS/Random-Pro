@@ -33,22 +33,22 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
-  private var stylePlayerCard: TeamsScreenPlayerModel.StyleCard {
-    guard let card = storageService.playerCardSelectionScreenModel?.filter({
+  private var storageService: TeamsScreeStorageServiceProtocol
+  private var stylePlayerCard: PlayerCardSelectionScreenModel.StyleCard {
+    guard let card = storageService.getDataWith(key: Appearance().playerCardSelectionModelKeyUserDefaults,
+                                                to: [PlayerCardSelectionScreenModel].self)?.filter({
       $0.playerCardSelection
-    }).first,
-          let style = card.style as? TeamsScreenPlayerModel.StyleCard else {
+    }).first else {
       return .defaultStyle
     }
-    return style
+    return card.style
   }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: TeamsScreeStorageServiceProtocol) {
     self.storageService = storageService
   }
   
@@ -56,11 +56,11 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
   
   func createTeamsFrom(model: TeamsScreenModel) {
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      guard let self,
-            let modelAllPlayers = model.allPlayers as? [TeamsScreenPlayerModel]else {
+      guard let self else {
         return
       }
       
+      let modelAllPlayers = model.allPlayers
       let appearance = Appearance()
       var teams: [TeamsScreenModel.Team] = []
       let allPlayers = modelAllPlayers.map { result -> TeamsScreenPlayerModel in
@@ -75,19 +75,19 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
           name: result.name,
           avatar: result.avatar,
           emoji: emoji,
-          state: (result.state as? TeamsScreenPlayerModel.PlayerState) ?? .random,
+          state: result.state,
           style: self.stylePlayerCard
         )
       }
       
       var playersFiltered = allPlayers.shuffled().filter {
-        $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay
+        $0.state != .doesNotPlay
       }
       let playersWithTeamsFiltered = playersFiltered.filter {
-        $0.state as? TeamsScreenPlayerModel.PlayerState != .random
+        $0.state != .random
       }
       var playersWithoutTeamsFiltered = playersFiltered.filter {
-        $0.state as? TeamsScreenPlayerModel.PlayerState == .random
+        $0.state == .random
       }
       
       while playersFiltered.count % model.selectedTeam != .zero {
@@ -113,7 +113,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       var currentTeam = 1
       
       for player in playersWithTeamsFiltered {
-        let playerState = (player.state as? TeamsScreenPlayerModel.PlayerState) ?? .random
+        let playerState = player.state
         if playerState == .teamOne {
           teamOnePlayers.append(player)
           continue
@@ -275,7 +275,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       if !teamOnePlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 1",
-          players: teamOnePlayers.filter { $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay }
+          players: teamOnePlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
@@ -283,7 +283,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       if !teamTwoPlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 2",
-          players: teamTwoPlayers.filter { $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay }
+          players: teamTwoPlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
@@ -291,7 +291,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       if !teamThreePlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 3",
-          players: teamThreePlayers.filter { $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay }
+          players: teamThreePlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
@@ -299,7 +299,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       if !teamFourPlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 4",
-          players: teamFourPlayers.filter { $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay }
+          players: teamFourPlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
@@ -307,7 +307,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       if !teamFivePlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 5",
-          players: teamFivePlayers.filter { $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay }
+          players: teamFivePlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
@@ -315,7 +315,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       if !teamSixPlayers.isEmpty {
         let team = TeamsScreenModel.Team(
           name: appearance.teamTitle + " - 6",
-          players: teamSixPlayers.filter { $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay }
+          players: teamSixPlayers.filter { $0.state != .doesNotPlay }
         )
         teams.append(team)
       }
@@ -331,5 +331,6 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
 private extension TeamsScreenFactory {
   struct Appearance {
     let teamTitle = NSLocalizedString("Команда", comment: "")
+    let playerCardSelectionModelKeyUserDefaults = "player_card_selection_screen_user_defaults_key"
   }
 }

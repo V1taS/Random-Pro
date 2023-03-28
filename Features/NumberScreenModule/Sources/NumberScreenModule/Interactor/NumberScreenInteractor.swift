@@ -81,29 +81,37 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   // MARK: - Private property
   
   private lazy var numberFormatter = NumberFormatter()
-  private var storageService: StorageServiceProtocol
+  private var storageService: NumberScreenStorageServiceProtocol
+  private var numberScreenModel: NumberScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().numberScreenKeyUserDefaults,
+                                 to: NumberScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().numberScreenKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения данных
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: NumberScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    storageService.numberScreenModel = nil
+    numberScreenModel = nil
     getContent()
-    guard let model = storageService.numberScreenModel?.toCodable() else {
+    guard let model = numberScreenModel else {
       return
     }
     output?.cleanButtonWasSelected(model: model)
   }
   
   func withoutRepetitionAction(isOn: Bool) {
-    guard let model = storageService.numberScreenModel else {
+    guard let model = numberScreenModel else {
       configureModel(withWithoutRepetition: isOn)
       return
     }
@@ -114,7 +122,7 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
       listResult: model.listResult,
       isEnabledWithoutRepetition: isOn
     )
-    storageService.numberScreenModel = modelNew
+    numberScreenModel = modelNew
     getContent()
   }
   
@@ -139,18 +147,18 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
     let randomNumber = Int.random(in: rangeStartValueNum...rangeEndValueNum)
     var listResult: [String] = []
     
-    if let model = storageService.numberScreenModel {
+    if let model = numberScreenModel {
       listResult = model.listResult.map { $0.replacingOccurrences(of: appearance.withoutSpaces, with: "") }
     }
     
     // Срабатывает если включенно "Без повторений"
-    if let model = storageService.numberScreenModel, model.isEnabledWithoutRepetition {
+    if let model = numberScreenModel, model.isEnabledWithoutRepetition {
       guard let modelWithoutRepetition = generateContentWithoutRepetition(listResult: listResult,
                                                                           rangeStartValueNum: rangeStartValueNum,
                                                                           rangeEndValueNum: rangeEndValueNum) else {
         return
       }
-      storageService.numberScreenModel = modelWithoutRepetition
+      numberScreenModel = modelWithoutRepetition
       getContent()
     } else {
       listResult.append(String(randomNumber))
@@ -160,9 +168,9 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
         rangeEndValue: formatter(text: rangeEndValue),
         result: formatter(text: String(randomNumber)) ?? "",
         listResult: listResult.map { formatter(text: String($0)) ?? "" },
-        isEnabledWithoutRepetition: storageService.numberScreenModel?.isEnabledWithoutRepetition ?? false
+        isEnabledWithoutRepetition: numberScreenModel?.isEnabledWithoutRepetition ?? false
       )
-      storageService.numberScreenModel = model
+      numberScreenModel = model
       getContent()
     }
   }
@@ -178,7 +186,7 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.numberScreenModel {
+    if let model = numberScreenModel {
       return model.listResult
     } else {
       return []
@@ -187,7 +195,7 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   
   func returnModel() -> NumberScreenModel {
     let appearance = Appearance()
-    if let model = storageService.numberScreenModel?.toCodable() {
+    if let model = numberScreenModel {
       return model
     } else {
       let model = NumberScreenModel(
@@ -223,7 +231,7 @@ private extension NumberScreenInteractor {
         rangeEndValue: formatter(text: "\(rangeEndValueNum)"),
         result: formatter(text: String(randomNumber)) ?? "",
         listResult: listResult.map { formatter(text: String($0)) ?? "" },
-        isEnabledWithoutRepetition: storageService.numberScreenModel?.isEnabledWithoutRepetition ?? false
+        isEnabledWithoutRepetition: numberScreenModel?.isEnabledWithoutRepetition ?? false
       )
     } else {
       output?.didReceiveRangeEnded()
@@ -232,7 +240,7 @@ private extension NumberScreenInteractor {
   }
   
   func configureModel(withWithoutRepetition isOn: Bool) {
-    if let model = storageService.numberScreenModel?.toCodable() {
+    if let model = numberScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
@@ -243,7 +251,7 @@ private extension NumberScreenInteractor {
         listResult: [],
         isEnabledWithoutRepetition: isOn
       )
-      storageService.numberScreenModel = model
+      numberScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -277,5 +285,6 @@ private extension NumberScreenInteractor {
     let rangeStartValue = "1"
     let rangeEndValue = "10"
     let result = "?"
+    let numberScreenKeyUserDefaults = "number_screen_user_defaults_key"
   }
 }

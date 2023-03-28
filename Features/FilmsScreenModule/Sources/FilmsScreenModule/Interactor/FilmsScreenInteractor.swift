@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomNetwork
 
 /// События которые отправляем из Interactor в Presenter
 protocol FilmsScreenInteractorOutput: AnyObject {
@@ -47,13 +48,21 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   // MARK: - Private property
   
   private let factory: FilmsScreenFactoryInput
-  private var storageService: StorageServiceProtocol
-  private let networkService: NetworkServiceProtocol
+  private var storageService: FilmsScreenStorageServiceProtocol
+  private let networkService: NetworkService
   private var filmsScreenModel: [FilmsScreenModel] = [] {
     didSet {
       DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-        self?.storageService.filmsScreenModel = self?.filmsScreenModel
+        self?.storageService.saveData(self?.filmsScreenModel, key: Appearance().filmsScreenModelsKeyUserDefaults)
       }
+    }
+  }
+  private var filmsScreenModelStorage: [FilmsScreenModel]? {
+    get {
+      storageService.getDataWith(key: Appearance().filmsScreenModelsKeyUserDefaults,
+                                 to: [FilmsScreenModel].self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().filmsScreenModelsKeyUserDefaults)
     }
   }
   
@@ -63,8 +72,8 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   ///  - storageService: Сервис хранения данных
   ///  - networkService: Сервис работы с сетью
   ///  - factory: фабрика
-  init(storageService: StorageServiceProtocol,
-       networkService: NetworkServiceProtocol,
+  init(storageService: FilmsScreenStorageServiceProtocol,
+       networkService: NetworkService,
        factory: FilmsScreenFactoryInput) {
     self.storageService = storageService
     self.networkService = networkService
@@ -93,11 +102,11 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   
   func loadFilm() {
     if isRuslocale() {
-      if storageService.filmsScreenModel == nil {
+      if filmsScreenModelStorage == nil {
         loadRusFilms {}
       }
     } else {
-      if storageService.filmsScreenModel == nil {
+      if filmsScreenModelStorage == nil {
         loadEngFilms {}
       }
     }
@@ -175,10 +184,10 @@ private extension FilmsScreenInteractor {
       self?.networkService.performRequestWith(
         urlString: appearance.engFilmUrl,
         queryItems: [],
-        httpMethod: FilmsScreenNetworkMethod.get,
+        httpMethod: .get,
         headers: [
-          FilmsScreenHeadersType.additionalHeaders(setValue: headers),
-          FilmsScreenHeadersType.contentTypeJson
+          .additionalHeaders(setValue: headers),
+          .contentTypeJson
         ]
       ) { [weak self] result in
         switch result {
@@ -217,10 +226,10 @@ private extension FilmsScreenInteractor {
                        value: "\(Int.random(in: 1...randomFilmeType.pageMaxCount))"),
           
         ],
-        httpMethod: FilmsScreenNetworkMethod.get,
+        httpMethod: .get,
         headers: [
-          FilmsScreenHeadersType.additionalHeaders(setValue: headers),
-          FilmsScreenHeadersType.contentTypeJson
+          .additionalHeaders(setValue: headers),
+          .contentTypeJson
         ]
       ) { [weak self] result in
         switch result {
@@ -266,7 +275,7 @@ private extension FilmsScreenInteractor {
       filmsEngDTO.forEach { modelDTO in
         self.networkService.performRequestWith(urlString: self.factory.createBestQualityFrom(url: modelDTO.img),
                                                queryItems: [],
-                                               httpMethod: FilmsScreenNetworkMethod.get,
+                                               httpMethod: .get,
                                                headers: []) { [weak self] result in
           guard let self else {
             return
@@ -301,7 +310,7 @@ private extension FilmsScreenInteractor {
       filmsRusDTO.forEach { modelDTO in
         self.networkService.performRequestWith(urlString: modelDTO.posterUrl,
                                                queryItems: [],
-                                               httpMethod: FilmsScreenNetworkMethod.get,
+                                               httpMethod: .get,
                                                headers: []) { [weak self] result in
           guard let self else {
             return
@@ -341,5 +350,6 @@ private extension FilmsScreenInteractor {
     
     let engAPIHost = "most-popular-movies-right-now-daily-update.p.rapidapi.com"
     let engHeaderAPIHost = "X-RapidAPI-Host"
+    let filmsScreenModelsKeyUserDefaults = "films_screen_user_defaults_key"
   }
 }

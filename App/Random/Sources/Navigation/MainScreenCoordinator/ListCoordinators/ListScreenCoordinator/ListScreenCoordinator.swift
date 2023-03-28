@@ -8,6 +8,8 @@
 
 import UIKit
 import ListScreenModule
+import NotificationService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ListScreenCoordinatorOutput: AnyObject {
@@ -38,27 +40,24 @@ final class ListScreenCoordinator: ListScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var listScreenModule: ListScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   private var listAddItemsScreenCoordinator: ListAddItemsScreenCoordinatorProtocol?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    var listScreenModule = ListScreenAssembly().createModule(storageService: services.storageService)
+    var listScreenModule = ListScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.listScreenModule = listScreenModule
     listScreenModule.moduleOutput = self
     navigationController.pushViewController(listScreenModule, animated: true)
@@ -73,37 +72,37 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
   }
   
   func didReceiveError() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func didReceiveIsEmptyError() {
-    services.notificationService.showNeutralAlertWith(title: Appearance().listElementsIsEmpty,
-                                                      glyph: true,
-                                                      timeout: nil,
-                                                      active: {})
+    notificationService.showNeutralAlertWith(title: Appearance().listElementsIsEmpty,
+                                             glyph: true,
+                                             timeout: nil,
+                                             active: {})
   }
   
   func didReceiveRangeUniqueItemsError() {
-    services.notificationService.showNeutralAlertWith(title: Appearance().uniqueElementsIsOver,
-                                                      glyph: true,
-                                                      timeout: nil,
-                                                      active: {})
+    notificationService.showNeutralAlertWith(title: Appearance().uniqueElementsIsOver,
+                                             glyph: true,
+                                             timeout: nil,
+                                             active: {})
   }
   
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func settingButtonAction() {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -144,7 +143,7 @@ extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -157,7 +156,7 @@ extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListAddItemsScreenCoordinatorOutput
 
 extension ListScreenCoordinator: ListAddItemsScreenCoordinatorOutput {
-  func didReceiveText(models: [ListScreenTextModelProtocol]) {
+  func didReceiveText(models: [ListScreenModel.TextModel]) {
     listScreenModule?.updateContentWith(models: models)
     updateSettingsScreenContent()
   }
@@ -183,6 +182,10 @@ private extension ListScreenCoordinator {
     ))
   }
 }
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: ListScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

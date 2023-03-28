@@ -8,6 +8,8 @@
 
 import UIKit
 import NumberScreenModule
+import NotificationService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol NumberScreenCoordinatorOutput: AnyObject {
@@ -38,26 +40,23 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var numberScreenModule: NumberScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let numberScreenModule = NumberScreenAssembly().createModule(storageService: services.storageService)
+    let numberScreenModule = NumberScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.numberScreenModule = numberScreenModule
     self.numberScreenModule?.moduleOutput = self
     navigationController.pushViewController(numberScreenModule, animated: true)
@@ -68,29 +67,29 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
   func didReceiveRangeError() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func resultLabelAction(text: String?) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func didReceiveRangeEnded() {
-    services.notificationService.showNeutralAlertWith(title: Appearance().numberRangeEnded,
-                                                      glyph: true,
-                                                      timeout: nil,
-                                                      active: {})
+    notificationService.showNeutralAlertWith(title: Appearance().numberRangeEnded,
+                                             glyph: true,
+                                             timeout: nil,
+                                             active: {})
   }
   
-  func cleanButtonWasSelected(model: NumberScreenModelProtocol) {
+  func cleanButtonWasSelected(model: NumberScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .number(
       withoutRepetition: model.isEnabledWithoutRepetition,
       itemsGenerated: "\(model.listResult.count)",
@@ -98,8 +97,8 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
     ))
   }
   
-  func settingButtonAction(model: NumberScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: NumberScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -124,7 +123,7 @@ extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -144,6 +143,10 @@ extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension NumberScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: NumberScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

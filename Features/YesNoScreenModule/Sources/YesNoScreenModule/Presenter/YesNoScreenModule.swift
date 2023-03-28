@@ -12,11 +12,11 @@ public protocol YesNoScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: YesNoScreenModelProtocol)
+  func settingButtonAction(model: YesNoScreenModel)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
-  func cleanButtonWasSelected(model: YesNoScreenModelProtocol)
+  func cleanButtonWasSelected(model: YesNoScreenModel)
 }
 
 public protocol YesNoScreenModuleInput {

@@ -17,7 +17,7 @@ public protocol CubesScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: CubesScreenModelProtocol)
+  func settingButtonAction(model: CubesScreenModel)
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -30,7 +30,7 @@ public protocol CubesScreenModuleInput {
   func cleanButtonAction()
   
   /// Запросить текущую модель
-  func returnCurrentModel() -> CubesScreenModelProtocol
+  func returnCurrentModel() -> CubesScreenModel
   
   /// Показать список генераций результатов
   /// - Parameter isShow: показать  список генераций результатов
@@ -90,7 +90,7 @@ final class CubesScreenViewController: CubesScreenModule {
   
   // MARK: - Internal func
   
-  func returnCurrentModel() -> CubesScreenModelProtocol {
+  func returnCurrentModel() -> CubesScreenModel {
     interactor.returnCurrentModel()
   }
   
@@ -126,7 +126,7 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
   }
   
   func didReceive(model: CubesScreenModel) {
-    moduleView.updateContentWith(cubesType: (model.cubesType as? CubesScreenModel.CubesType) ?? .cubesTwo)
+    moduleView.updateContentWith(cubesType: model.cubesType)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
     moduleView.listGenerated(isShow: model.isShowlistGenerated)
   }

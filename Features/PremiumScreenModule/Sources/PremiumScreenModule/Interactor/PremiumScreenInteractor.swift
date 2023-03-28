@@ -67,14 +67,14 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let appPurchasesService: AppPurchasesServiceProtocol
-  private var cacheProducts: [ApphudProductProtocol] = []
+  private let appPurchasesService: PremiumScreenAppPurchasesServiceProtocol
+  private var cacheProducts: [PremiumScreenApphudProductProtocol] = []
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///  - appPurchasesService: Сервис работы с подписками
-  init(appPurchasesService: AppPurchasesServiceProtocol) {
+  init(appPurchasesService: PremiumScreenAppPurchasesServiceProtocol) {
     self.appPurchasesService = appPurchasesService
   }
   
@@ -105,7 +105,7 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
       return
     }
 
-    appPurchasesService.purchaseWith(product) { [weak self] result in
+    appPurchasesService.purchaseWithForPremium(product) { [weak self] result in
       guard let purchaseState = result as? PremiumScreenPurchaseState else {
         return
       }
@@ -124,7 +124,7 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   }
   
   func getProducts() {
-    appPurchasesService.getProducts { [weak self] products in
+    appPurchasesService.getProductsForPremium { [weak self] products in
       if let products {
         self?.cacheProducts = products
         

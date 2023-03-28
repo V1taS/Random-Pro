@@ -8,6 +8,8 @@
 
 import UIKit
 import FilmsScreenModule
+import NotificationService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol FilmsScreenCoordinatorOutput: AnyObject {}
@@ -30,25 +32,21 @@ final class FilmsScreenCoordinator: FilmsScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var filmsScreenModule: FilmsScreenModule?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let filmsScreenModule = FilmsScreenAssembly().createModule(storageService: services.storageService,
-                                                               networkService: services.networkService)
+    let filmsScreenModule = FilmsScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.filmsScreenModule = filmsScreenModule
     self.filmsScreenModule?.moduleOutput = self
     navigationController.pushViewController(filmsScreenModule, animated: true)
@@ -68,12 +66,16 @@ extension FilmsScreenCoordinator: FilmsScreenModuleOutput {
   }
   
   func somethingWentWrong() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: false,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                              glyph: false,
+                                              timeout: nil,
+                                              active: {})
   }
 }
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: FilmsScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

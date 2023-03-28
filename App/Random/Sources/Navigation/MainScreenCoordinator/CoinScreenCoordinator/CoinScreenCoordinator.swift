@@ -8,6 +8,8 @@
 
 import UIKit
 import CoinScreenModule
+import HapticService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol CoinScreenCoordinatorOutput: AnyObject {
@@ -53,8 +55,10 @@ final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let coinScreenModule = CoinScreenAssembly().createModule(hapticService: services.hapticService,
-                                                             storageService: services.storageService)
+    let coinScreenModule = CoinScreenAssembly().createModule(
+      hapticService: HapticServiceImpl(),
+      storageService: StorageServiceImpl()
+    )
     self.coinScreenModule = coinScreenModule
     self.coinScreenModule?.moduleOutput = self
     navigationController.pushViewController(coinScreenModule, animated: true)
@@ -64,15 +68,15 @@ final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
 // MARK: - CoinScreenModuleOutput
 
 extension CoinScreenCoordinator: CoinScreenModuleOutput {
-  func cleanButtonWasSelected(model: CoinScreenModelProtocol) {
+  func cleanButtonWasSelected(model: CoinScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .coin(
       itemsGenerated: "\(model.listResult.count)",
       lastItem: model.result
     ))
   }
   
-  func settingButtonAction(model: CoinScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: CoinScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -96,7 +100,7 @@ extension CoinScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -114,3 +118,11 @@ extension CoinScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension CoinScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: CoinScreenStorageServiceProtocol {}
+
+// MARK: - Adapter TimerService
+
+extension HapticServiceImpl: CoinScreenHapticServiceProtocol {}

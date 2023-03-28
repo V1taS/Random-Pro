@@ -51,22 +51,30 @@ final class DateTimeInteractor: DateTimeInteractorInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
+  private var storageService: DateTimeScreenStorageServiceProtocol
+  private var dateTimeScreenModel: DateTimeScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().dateTimeScreenModelKeyUserDefaults,
+                                 to: DateTimeScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().dateTimeScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - services: Сервисы приложения
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: DateTimeScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    storageService.dateTimeScreenModel = nil
+    dateTimeScreenModel = nil
     getContent()
-    guard let model = storageService.dateTimeScreenModel?.toCodable() else { return }
+    guard let model = dateTimeScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
@@ -75,7 +83,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
   }
   
   func generateContentDate() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -88,12 +96,12 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func generateContentTime() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -107,12 +115,12 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func generateContentDay() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -126,12 +134,12 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func generateContentMonth() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -144,12 +152,12 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.dateTimeScreenModel {
+    if let model = dateTimeScreenModel {
       return model.listResult
     } else {
       return []
@@ -161,14 +169,14 @@ final class DateTimeInteractor: DateTimeInteractorInput {
 
 private extension DateTimeInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = storageService.dateTimeScreenModel?.toCodable() {
+    if let model = dateTimeScreenModel {
       output?.didReceive(model: model)
     } else {
       let model = DateTimeScreenModel(
         result: Appearance().result,
         listResult: []
       )
-      self.storageService.dateTimeScreenModel = model
+      self.dateTimeScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -206,5 +214,6 @@ private extension DateTimeInteractor {
       NSLocalizedString("Ноябрь", comment: ""),
       NSLocalizedString("Декабрь", comment: ""),
     ]
+    let dateTimeScreenModelKeyUserDefaults = "date_time_screen_user_defaults_key"
   }
 }

@@ -14,7 +14,7 @@ public final class TeamsScreenAssembly {
   
   /// Собирает модуль `TeamsScreen`
   /// - Returns: Cобранный модуль `TeamsScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> TeamsScreenModule {
+  public func createModule(storageService: TeamsScreeStorageServiceProtocol) -> TeamsScreenModule {
     let interactor = TeamsScreenInteractor(storageService: storageService)
     let view = TeamsScreenView()
     let factory = TeamsScreenFactory(storageService: storageService)

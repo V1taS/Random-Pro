@@ -7,6 +7,9 @@
 
 import UIKit
 import SettingsScreenModule
+import YandexMobileMetrica
+import FirebaseAnalytics
+import MetricsService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol SettingsScreenCoordinatorOutput: AnyObject {
@@ -32,12 +35,6 @@ protocol SettingsScreenCoordinatorOutput: AnyObject {
   func updateMainScreenWith(isPremium: Bool)
 }
 
-/// Расширение протокола
-extension SettingsScreenCoordinatorOutput {
-  
-  func createListAction() {}
-}
-
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol SettingsScreenCoordinatorInput {
   
@@ -60,7 +57,6 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var settingsScreenModule: SettingsScreenModule?
   private var anyCoordinator: Coordinator?
   
@@ -68,11 +64,8 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
@@ -91,6 +84,12 @@ extension SettingsScreenCoordinator {
   func setupDefaultsSettings(for typeObject: SettingsScreenType) {
     settingsScreenModule?.setupDefaultsSettings(for: typeObject)
   }
+}
+
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension SettingsScreenCoordinatorOutput {
+  func createListAction() {}
 }
 
 // MARK: - SettingsScreenModuleOutput
@@ -133,14 +132,32 @@ extension SettingsScreenCoordinator: PlayerCardSelectionScreenCoordinatorOutput 
 
 private extension SettingsScreenCoordinator {
   func openPlayerCardSelectionScreenCoordinator() {
-    let playerCardSelectionScreenCoordinator = PlayerCardSelectionScreenCoordinator(navigationController,
-                                                                                    services)
+    let playerCardSelectionScreenCoordinator = PlayerCardSelectionScreenCoordinator(navigationController)
     anyCoordinator = playerCardSelectionScreenCoordinator
     playerCardSelectionScreenCoordinator.output = self
     playerCardSelectionScreenCoordinator.start()
     
-    // TODO: - 🔴
-//    services.metricsService.track(event: .premiumPlayerCardSelection)
+    track(event: .premiumPlayerCardSelection)
+  }
+}
+
+// MARK: - Private
+
+private extension SettingsScreenCoordinator {
+  func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+  
+  func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
   }
 }
 

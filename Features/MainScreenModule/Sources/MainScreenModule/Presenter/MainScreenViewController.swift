@@ -69,7 +69,7 @@ public protocol MainScreenModuleOutput: AnyObject {
   
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
-  func noPremiumAccessActionFor(_ section: MainScreenSectionProtocol)
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
   
   /// Главный экран был загружен
   func mainScreenModuleDidLoad()
@@ -84,7 +84,7 @@ public protocol MainScreenModuleInput {
   
   /// Обновить секции главного экрана
   /// - Parameter models: Список секция
-  func updateSectionsWith(models: [MainScreenSectionProtocol])
+  func updateSectionsWith(models: [MainScreenModel.Section])
   
   /// Обновить секции на главном экране
   func updateStateForSections()
@@ -94,18 +94,18 @@ public protocol MainScreenModuleInput {
   func saveDarkModeStatus(_ isEnabled: Bool)
   
   /// Возвращает модель
-  func returnModel(completion: @escaping (MainScreenModelProtocol) -> Void)
+  func returnModel(completion: @escaping (MainScreenModel) -> Void)
   
   /// Убрать лайбл с секции
   /// - Parameter type: Тип сеции
-  func removeLabelFromSection(type: MainScreenSectionTypeProtocol)
+  func removeLabelFromSection(type: MainScreenModel.SectionType)
   
   /// Добавить лайбл к секции
   /// - Parameters:
   ///  - label: Лайбл
   ///  - for: Тип сеции
-  func addLabel(_ label: MainScreenADVLabelProtocol,
-                for sectionType: MainScreenSectionTypeProtocol)
+  func addLabel(_ label: MainScreenModel.ADVLabel,
+                for sectionType: MainScreenModel.SectionType)
   
   /// Обновить главный экран
   /// - Parameter isPremium: Премиум включен
@@ -191,13 +191,12 @@ final class MainScreenViewController: MainScreenModule {
     interactor.saveDarkModeStatus(isEnabled)
   }
   
-  func returnModel(completion: @escaping (MainScreenModelProtocol) -> Void) {
+  func returnModel(completion: @escaping (MainScreenModel) -> Void) {
     interactor.returnModel(completion: completion)
   }
   
-  func updateSectionsWith(models: [MainScreenSectionProtocol]) {
+  func updateSectionsWith(models: [MainScreenModel.Section]) {
     interactor.returnModel { [weak self] model in
-      let models = (models as? [MainScreenModel.Section]) ?? []
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      isPremium: model.isPremium,
                                      allSections: models)
@@ -205,19 +204,12 @@ final class MainScreenViewController: MainScreenModule {
     }
   }
   
-  func removeLabelFromSection(type: MainScreenSectionTypeProtocol) {
-    guard let type = type as? MainScreenModel.SectionType else {
-      return
-    }
+  func removeLabelFromSection(type: MainScreenModel.SectionType) {
     interactor.removeLabelFromSection(type: type)
   }
   
-  func addLabel(_ label: MainScreenADVLabelProtocol,
-                for sectionType: MainScreenSectionTypeProtocol) {
-    guard let label = label as? MainScreenModel.ADVLabel,
-          let sectionType = sectionType as? MainScreenModel.SectionType else {
-      return
-    }
+  func addLabel(_ label: MainScreenModel.ADVLabel,
+                for sectionType: MainScreenModel.SectionType) {
     interactor.addLabel(label, for: sectionType)
   }
   
@@ -233,7 +225,7 @@ extension MainScreenViewController: MainScreenViewOutput {
     moduleOutput?.openFilms()
   }
   
-  func noPremiumAccessActionFor(_ section: MainScreenSectionProtocol) {
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     moduleOutput?.noPremiumAccessActionFor(section)
   }
   

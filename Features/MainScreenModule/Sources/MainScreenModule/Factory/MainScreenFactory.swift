@@ -33,8 +33,7 @@ final class MainScreenFactory: MainScreenFactoryInput {
   // MARK: - Internal func
   
   func createCellsFrom(model: MainScreenModel) {
-    let modelAllSections = (model.allSections as? [MainScreenModel.Section]) ?? []
-    let allSections: [MainScreenModel.Section] = modelAllSections.filter { $0.isEnabled && !$0.isHidden }
+    let allSections: [MainScreenModel.Section] = model.allSections.filter { $0.isEnabled && !$0.isHidden }
     let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                    isPremium: model.isPremium,
                                    allSections: allSections)
@@ -208,18 +207,17 @@ extension MainScreenFactory {
   
   static func updateModelWith(
     oldModel: MainScreenModel,
-    featureToggleModel: SectionsIsHiddenFTModelProtocol? = nil,
-    labelsModel: LabelsFeatureToggleModelProtocol? = nil,
+    featureToggleModel: MainScreenSectionsIsHiddenFTModelProtocol? = nil,
+    labelsModel: MainScreenLabelsFeatureToggleModelProtocol? = nil,
     isPremium: Bool? = nil,
     completion: @escaping (MainScreenModel) -> Void) {
       DispatchQueue.global(qos: .userInteractive).async {
-        let oldModelAllSections: [MainScreenModel.Section] = (oldModel.allSections as? [MainScreenModel.Section]) ?? []
-        updatesNewSectionForModel(models: oldModelAllSections) { updatesNewSections in
+        updatesNewSectionForModel(models: oldModel.allSections) { updatesNewSections in
           var cardSections: [MainScreenModel.Section] = []
           
           updatesNewSections.forEach { model in
-            let sectionType = (model.type as? MainScreenModel.SectionType) ?? .bottle
-            let advLabel = (model.advLabel as? MainScreenModel.ADVLabel) ?? .none
+            let sectionType = model.type
+            let advLabel = model.advLabel
             switch sectionType {
             case .teams:
               cardSections.append(MainScreenModel.Section(
@@ -413,12 +411,11 @@ private extension MainScreenFactory {
     completion: @escaping ([MainScreenModel.Section]) -> Void
   ) {
     createBaseModel { baseModel in
-      let allSections = (baseModel.allSections as? [MainScreenModel.Section]) ?? []
       var newModel = models
       
-      for section in allSections { 
+      for section in baseModel.allSections {
         let oldSections = models.filter {
-          $0.type as? MainScreenModel.SectionType == section.type as? MainScreenModel.SectionType
+          $0.type == section.type
         }
         if oldSections.isEmpty {
           newModel.append(section)

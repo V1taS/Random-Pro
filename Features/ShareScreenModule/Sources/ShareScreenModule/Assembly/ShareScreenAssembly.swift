@@ -15,7 +15,7 @@ public final class ShareScreenAssembly {
   /// Собирает модуль `ShareScreen`
   /// - Parameter permissionService: Сервис по работе с разрешениями
   /// - Returns: Cобранный модуль `ShareScreen`
-  public func createModule(permissionService: PermissionServiceProtocol) -> ShareScreenModule {
+  public func createModule(permissionService: ShareScreenPermissionServiceProtocol) -> ShareScreenModule {
     let interactor = ShareScreenInteractor(permissionService: permissionService)
     let view = ShareScreenView()
     let factory = ShareScreenFactory()

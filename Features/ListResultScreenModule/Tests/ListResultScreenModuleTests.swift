@@ -9,16 +9,4 @@
 @testable import ListResultScreenModule
 import XCTest
 
-final class ListResultScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class ListResultScreenModuleTests: XCTestCase {}

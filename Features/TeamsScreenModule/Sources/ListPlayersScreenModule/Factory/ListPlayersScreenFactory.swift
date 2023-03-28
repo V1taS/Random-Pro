@@ -52,7 +52,7 @@ private extension ListPlayersScreenFactory {
     tableViewModels.append(.insets(appearance.minimumInset))
     
     if !players.isEmpty {
-      let forGameCount = players.filter { $0.state as? TeamsScreenPlayerModel.PlayerState != .doesNotPlay }
+      let forGameCount = players.filter { $0.state != .doesNotPlay }
       tableViewModels.append(.doubleTitle(playersCount: players.count,
                                           forGameCount: forGameCount.count))
       tableViewModels.append(.divider)

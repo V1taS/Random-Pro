@@ -8,6 +8,11 @@
 
 import UIKit
 import SelecteAppIconScreenModule
+import NotificationService
+import StorageService
+import YandexMobileMetrica
+import FirebaseAnalytics
+import MetricsService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol SelecteAppIconScreenCoordinatorOutput: AnyObject {
@@ -39,24 +44,21 @@ final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProt
   
   private let navigationController: UINavigationController
   private var selecteAppIconScreenModule: SelecteAppIconScreenModule?
-  private let services: ApplicationServices
   private var anyCoordinator: Coordinator?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let selecteAppIconScreenModule = SelecteAppIconScreenAssembly().createModule(storageService: services.storageService)
+    let selecteAppIconScreenModule = SelecteAppIconScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.selecteAppIconScreenModule = selecteAppIconScreenModule
     self.selecteAppIconScreenModule?.moduleOutput = self
     navigationController.pushViewController(selecteAppIconScreenModule, animated: true)
@@ -67,17 +69,17 @@ final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProt
 
 extension SelecteAppIconScreenCoordinator: SelecteAppIconScreenModuleOutput {
   func iconSelectedSuccessfully() {
-    services.notificationService.showPositiveAlertWith(title: Appearance().iconSelectedSuccessfullyTitle,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().iconSelectedSuccessfullyTitle,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func somethingWentWrong() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: false,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                              glyph: false,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func noPremiumAccessAction() {
@@ -119,17 +121,34 @@ private extension SelecteAppIconScreenCoordinator {
   }
   
   func openPremium() {
-    let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
-                                                            services)
+    let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController)
     anyCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
+    track(event: .premiumScreen)
+  }
+  
+  func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
     
-    // TODO: - 🔴
-//    services.metricsService.track(event: .premiumScreen)
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+  
+  func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
   }
 }
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: SelecteAppIconScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

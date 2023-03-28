@@ -9,16 +9,4 @@
 @testable import ShareScreenModule
 import XCTest
 
-final class ShareScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class ShareScreenModuleTests: XCTestCase {}

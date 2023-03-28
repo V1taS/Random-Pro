@@ -45,13 +45,13 @@ final class ImageFiltersScreenInteractor: ImageFiltersScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let permissionService: PermissionServiceProtocol
+  private let permissionService: ImageFiltersPermissionServiceProtocol
   
   // MARK: - Initialization
   
   /// Инициализатор
   /// - Parameter permissionService: Сервис по работе с разрешениями
-  init(permissionService: PermissionServiceProtocol) {
+  init(permissionService: ImageFiltersPermissionServiceProtocol) {
     self.permissionService = permissionService
   }
   

@@ -8,6 +8,8 @@
 
 import UIKit
 import TeamsScreenModule
+import StorageService
+import NotificationService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol TeamsScreenCoordinatorOutput: AnyObject {
@@ -38,27 +40,24 @@ final class TeamsScreenCoordinator: TeamsScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var teamsScreenModule: TeamsScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol?
   private var shareScreenCoordinator: ShareScreenCoordinatorProtocol?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let teamsScreenModule = TeamsScreenAssembly().createModule(storageService: services.storageService)
+    let teamsScreenModule = TeamsScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.teamsScreenModule = teamsScreenModule
     self.teamsScreenModule?.moduleOutput = self
     navigationController.pushViewController(teamsScreenModule, animated: true)
@@ -69,8 +68,7 @@ final class TeamsScreenCoordinator: TeamsScreenCoordinatorProtocol {
 
 extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
   func shareButtonAction(imageData: Data?) {
-    let shareScreenCoordinator = ShareScreenCoordinator(navigationController,
-                                                        services)
+    let shareScreenCoordinator = ShareScreenCoordinator(navigationController)
     self.shareScreenCoordinator = shareScreenCoordinator
     self.shareScreenCoordinator?.output = self
     shareScreenCoordinator.start()
@@ -87,14 +85,14 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
   }
   
   func listPlayersIsEmpty() {
-    services.notificationService.showNeutralAlertWith(title: Appearance().addPlayersTitle,
-                                                      glyph: false,
-                                                      timeout: nil,
-                                                      active: {})
+    notificationService.showNeutralAlertWith(title: Appearance().addPlayersTitle,
+                                             glyph: false,
+                                             timeout: nil,
+                                             active: {})
   }
   
-  func settingButtonAction(players: [TeamsScreenPlayerModelProtocol]) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(players: [TeamsScreenPlayerModel]) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -119,7 +117,7 @@ extension TeamsScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listPlayersScreenCoordinator = ListPlayersScreenCoordinator(navigationController, services)
+    let listPlayersScreenCoordinator = ListPlayersScreenCoordinator(navigationController)
     self.listPlayersScreenCoordinator = listPlayersScreenCoordinator
     self.listPlayersScreenCoordinator?.start()
     self.listPlayersScreenCoordinator?.output = self
@@ -141,7 +139,7 @@ extension TeamsScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListPlayersScreenCoordinatorOutput
 
 extension TeamsScreenCoordinator: ListPlayersScreenCoordinatorOutput {
-  func didReceive(players: [TeamsScreenPlayerModelProtocol]) {
+  func didReceive(players: [TeamsScreenPlayerModel]) {
     guard let teamsScreenModule = teamsScreenModule else {
       return
     }

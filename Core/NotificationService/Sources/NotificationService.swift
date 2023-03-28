@@ -10,68 +10,14 @@ import UIKit
 import RandomUIKit
 import Notifications
 
-protocol NotificationService {
-  
-  /// Показать позитивное уведомление
-  ///  - Parameters:
-  ///   - title: Заголовок уведомления
-  ///   - glyph: Включена или выключена иконка
-  ///   - timeout: Продолжительность показа
-  ///   - active: Действие на кнопку
-  func showPositiveAlertWith(title: String,
-                             glyph: Bool,
-                             timeout: Double?,
-                             active: (() -> Void)?)
-  
-  /// Показать нейтральное уведомление
-  ///  - Parameters:
-  ///   - title: Заголовок уведомления
-  ///   - glyph: Включена или выключена иконка
-  ///   - timeout: Продолжительность показа
-  ///   - active: Действие на кнопку
-  func showNeutralAlertWith(title: String,
-                            glyph: Bool,
-                            timeout: Double?,
-                            active: (() -> Void)?)
-  
-  /// Показать негативное уведомление
-  ///  - Parameters:
-  ///   - title: Заголовок уведомления
-  ///   - glyph: Включена или выключена иконка
-  ///   - timeout: Продолжительность показа
-  ///   - active: Действие на кнопку
-  func showNegativeAlertWith(title: String,
-                             glyph: Bool,
-                             timeout: Double?,
-                             active: (() -> Void)?)
-  
-  /// Показать настраиваемое уведомление
-  ///  - Parameters:
-  ///   - title: Заголовок уведомления
-  ///   - textColor: Цвет текста
-  ///   - glyph: Включена или выключена иконка
-  ///   - timeout: Продолжительность показа
-  ///   - backgroundColor: Фон уведомления
-  ///   - imageGlyph: Иконка слева
-  ///   - colorGlyph: Цвет иконки
-  ///   - active: Действие на кнопку
-  func showCustomAlertWith(title: String,
-                           textColor: UIColor?,
-                           glyph: Bool,
-                           timeout: Double?,
-                           backgroundColor: UIColor?,
-                           imageGlyph: UIImage?,
-                           colorGlyph: UIColor?,
-                           active: (() -> Void)?)
-}
-
-final class NotificationServiceImpl: NotificationService {
+public final class NotificationServiceImpl {
+  public init() {}
   private let notifications = Notifications()
   
-  func showPositiveAlertWith(title: String,
-                             glyph: Bool,
-                             timeout: Double?,
-                             active: (() -> Void)?) {
+  public func showPositiveAlertWith(title: String,
+                                    glyph: Bool,
+                                    timeout: Double?,
+                                    active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(
@@ -87,10 +33,10 @@ final class NotificationServiceImpl: NotificationService {
     )
   }
   
-  func showNeutralAlertWith(title: String,
-                            glyph: Bool,
-                            timeout: Double?,
-                            active: (() -> Void)?) {
+  public func showNeutralAlertWith(title: String,
+                                   glyph: Bool,
+                                   timeout: Double?,
+                                   active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(
@@ -106,10 +52,10 @@ final class NotificationServiceImpl: NotificationService {
     )
   }
   
-  func showNegativeAlertWith(title: String,
-                             glyph: Bool,
-                             timeout: Double?,
-                             active: (() -> Void)?) {
+  public func showNegativeAlertWith(title: String,
+                                    glyph: Bool,
+                                    timeout: Double?,
+                                    active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(
@@ -125,14 +71,14 @@ final class NotificationServiceImpl: NotificationService {
     )
   }
   
-  func showCustomAlertWith(title: String,
-                           textColor: UIColor?,
-                           glyph: Bool,
-                           timeout: Double?,
-                           backgroundColor: UIColor?,
-                           imageGlyph: UIImage?,
-                           colorGlyph: UIColor?,
-                           active: (() -> Void)?) {
+  public func showCustomAlertWith(title: String,
+                                  textColor: UIColor?,
+                                  glyph: Bool,
+                                  timeout: Double?,
+                                  backgroundColor: UIColor?,
+                                  imageGlyph: UIImage?,
+                                  colorGlyph: UIColor?,
+                                  active: (() -> Void)?) {
     let appearance = Appearance()
     
     notifications.showAlertWith(

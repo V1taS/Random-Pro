@@ -12,18 +12,18 @@ protocol ListAddItemsScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: Модельки с текстами
-  func didReceiveText(models: [ListAddItemsScreenModel.TextModel])
+  func didReceiveText(models: [ListScreenModel.TextModel])
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol ListAddItemsScreenInteractorInput {
   
   /// Возвращает текущий список моделек с текстом
-  func returnCurrentListTextModel() -> [ListAddItemsScreenModel.TextModel]
+  func returnCurrentListTextModel() -> [ListScreenModel.TextModel]
   
   /// Обновить контент
   ///  - Parameter models: Модельки с текстами
-  func updateContentWith(models: [ListAddItemsScreenModel.TextModel])
+  func updateContentWith(models: [ListScreenModel.TextModel])
   
   /// Получить данные
   func getContent()
@@ -49,7 +49,7 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private var models: [ListAddItemsScreenModel.TextModel] = []
+  private var models: [ListScreenModel.TextModel] = []
   
   // MARK: - Internal func
   
@@ -57,11 +57,11 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
     output?.didReceiveText(models: models)
   }
   
-  func updateContentWith(models: [ListAddItemsScreenModel.TextModel]) {
+  func updateContentWith(models: [ListScreenModel.TextModel]) {
     self.models = models
   }
   
-  func returnCurrentListTextModel() -> [ListAddItemsScreenModel.TextModel] {
+  func returnCurrentListTextModel() -> [ListScreenModel.TextModel] {
     return models
   }
   
@@ -73,7 +73,7 @@ final class ListAddItemsScreenInteractor: ListAddItemsScreenInteractorInput {
       return
     }
     
-    let textModel = ListAddItemsScreenModel.TextModel(
+    let textModel = ListScreenModel.TextModel(
       id: UUID().uuidString,
       text: text
     )

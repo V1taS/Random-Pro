@@ -117,11 +117,10 @@ extension PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenInte
 extension PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenFactoryOutput {
   func didGenerated(models: [PlayerCardSelectionScreenModel]) {
     let cardSelection = models.filter({ $0.playerCardSelection }).first?.style
-    let styleCard = (cardSelection as? PlayerCardSelectionScreenModel.StyleCard) ?? .defaultStyle
     moduleView.updateContentWith(models: models)
     var modelStyle: PlayerView.StyleCard
     
-    switch styleCard {
+    switch cardSelection {
     case .defaultStyle:
       modelStyle = .defaultStyle
     case .darkGreen:
@@ -138,6 +137,8 @@ extension PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenFact
       modelStyle = .darkPink
     case .darkYellow:
       modelStyle = .darkYellow
+    case .none:
+      modelStyle = .defaultStyle
     }
     interactor.savePlayerCardStyle(modelStyle, with: models)
   }

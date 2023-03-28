@@ -9,7 +9,7 @@
 import Foundation
 import ApphudSDK
 
-public final class AppPurchasesServiceImpl: AppPurchasesServiceProtocol {
+public final class AppPurchasesServiceImpl {
   
   // MARK: - Public func
   
@@ -17,15 +17,15 @@ public final class AppPurchasesServiceImpl: AppPurchasesServiceProtocol {
   
   // MARK: - Public func
   
-  public func getProducts(completion: @escaping ([ApphudProductProtocol]?) -> Void) {
+  public func getProducts(completion: @escaping ([ApphudProductModel]?) -> Void) {
     Apphud.paywalls.map { (paywalls) in
       DispatchQueue.main.async {
         let paywall = paywalls.first(where: { $0.identifier == "PremiumAccess" })
         let products = paywall?.products.map {
           return ApphudProductModel(productId: $0.productId,
-                                    name: $0.name,
                                     store: $0.store,
                                     skProduct: $0.skProduct,
+                                    name: $0.name,
                                     paywallIdentifier: $0.paywallIdentifier)
         }
         completion(products)
@@ -33,11 +33,11 @@ public final class AppPurchasesServiceImpl: AppPurchasesServiceProtocol {
     }
   }
   
-  public func purchaseWith(_ product: ApphudProductProtocol,
-                           completion: @escaping (AppPurchasesServiceStateProtocol) -> Void) {
+  public func purchaseWith(_ product: ApphudProductModel,
+                           completion: @escaping (AppPurchasesServiceState) -> Void) {
     let product = ApphudProductDecodeModel(productId: product.productId,
-                                           name: product.name,
                                            store: product.store,
+                                           name: product.name,
                                            id: product.paywallIdentifier)
     let encoder = JSONEncoder()
     let productData = (try? encoder.encode(product)) ?? Data()

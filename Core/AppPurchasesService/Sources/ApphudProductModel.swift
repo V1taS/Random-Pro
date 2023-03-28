@@ -9,7 +9,7 @@
 import Foundation
 import StoreKit
 
-public struct ApphudProductModel: ApphudProductProtocol {
+public struct ApphudProductModel {
   public var productId: String
   public var name: String?
   public var store: String
@@ -17,14 +17,14 @@ public struct ApphudProductModel: ApphudProductProtocol {
   public var paywallIdentifier: String?
   
   public init(productId: String,
-              name: String? = nil,
               store: String,
               skProduct: SKProduct?,
+              name: String? = nil,
               paywallIdentifier: String? = nil) {
     self.productId = productId
-    self.name = name
     self.store = store
     self.skProduct = skProduct
+    self.name = name
     self.paywallIdentifier = paywallIdentifier
   }
 }

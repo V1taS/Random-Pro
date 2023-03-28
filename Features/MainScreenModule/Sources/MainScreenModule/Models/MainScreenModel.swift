@@ -10,70 +10,222 @@ import UIKit
 
 // MARK: - MainScreenModel
 
-struct MainScreenModel: Codable, MainScreenModelProtocol, Equatable {
+public struct MainScreenModel: Codable, Equatable {
+  public var isDarkMode: Bool?
+  public var isPremium: Bool
+  public var allSections: [Section]
   
-  var isDarkMode: Bool?
-  var isPremium: Bool
-  var allSections: [MainScreenSectionProtocol]
+  // MARK: - Section
   
-  // MARK: - Initialization
-  
-  init(isDarkMode: Bool?, isPremium: Bool, allSections: [Section]) {
-    self.isDarkMode = isDarkMode
-    self.isPremium = isPremium
-    self.allSections = allSections
+  public struct Section: Codable, Equatable {
+    public var type: SectionType
+    public var imageSectionSystemName: String
+    public var titleSection: String
+    public var isEnabled: Bool
+    public var isHidden: Bool
+    public var advLabel: ADVLabel
   }
   
-  // MARK: - Initialization `Decode`
+  // MARK: - SectionType
   
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    isDarkMode = try container.decode(Bool.self, forKey: .isDarkMode)
-    isPremium = try container.decode(Bool.self, forKey: .isPremium)
-    allSections = try container.decode([Section].self, forKey: .allSections)
-  }
-  
-  // MARK: - Func `Encode`
-  
-  func encode(to encoder: Encoder) throws {
-    var container = encoder.container(keyedBy: CodingKeys.self)
-    try container.encode(isDarkMode, forKey: .isDarkMode)
-    try container.encode(isPremium, forKey: .isPremium)
-    let allSections = allSections.compactMap { $0 as? Section }
-    try container.encode(allSections, forKey: .allSections)
-  }
-  
-  // MARK: - CodingKeys
-  
-  enum CodingKeys: CodingKey {
-    case isDarkMode
-    case isPremium
-    case allSections
-  }
-  
-  // MARK: - Equatable
-  
-  static func == (lhs: MainScreenModel, rhs: MainScreenModel) -> Bool {
-    return lhs.isDarkMode == rhs.isDarkMode &&
-    lhs.isPremium == rhs.isPremium &&
-    lhs.allSections as? [MainScreenModel.Section] == rhs.allSections as? [MainScreenModel.Section]
-  }
-}
-
-// MARK: - toCodable
-
-extension MainScreenModelProtocol {
-  func toCodable() -> MainScreenModel? {
-    let newAllSections: [MainScreenModel.Section] = allSections.map { section in
-      MainScreenModel.Section(type: (section.type as? MainScreenModel.SectionType) ?? .bottle,
-                              imageSectionSystemName: section.imageSectionSystemName,
-                              titleSection: section.titleSection,
-                              isEnabled: section.isEnabled,
-                              isHidden: section.isHidden,
-                              advLabel: (section.advLabel as? MainScreenModel.ADVLabel) ?? .none)
+  public enum SectionType: CaseIterable, Codable, Equatable {
+    
+    /// Название секции
+    var titleSection: String {
+      let appearance = Appearance()
+      switch self {
+      case .teams:
+        return appearance.titleCardTeam
+      case .number:
+        return appearance.titleCardNumber
+      case .yesOrNo:
+        return appearance.titleCardYesOrNot
+      case .letter:
+        return appearance.titleCardCharacters
+      case .list:
+        return appearance.titleCardList
+      case .coin:
+        return appearance.titleCardCoin
+      case .cube:
+        return appearance.titleCardCube
+      case .dateAndTime:
+        return appearance.titleCardDateAndTime
+      case .lottery:
+        return appearance.titleCardLottery
+      case .contact:
+        return appearance.titleCardContact
+      case .password:
+        return appearance.titleCardPassword
+      case .colors:
+        return appearance.titleColors
+      case .bottle:
+        return appearance.titleBottle
+      case .rockPaperScissors:
+        return appearance.titleRockPaperScissors
+      case .imageFilters:
+        return appearance.titleImageFilters
+      case .films:
+        return appearance.titleFilms
+      }
     }
-    return MainScreenModel(isDarkMode: isDarkMode,
-                           isPremium: isPremium,
-                           allSections: newAllSections)
+    
+    /// Иконка секции
+    public var imageSectionSystemName: String {
+      let appearance = Appearance()
+      switch self {
+      case .teams:
+        return appearance.imageCardTeam
+      case .number:
+        return appearance.imageCardNumber
+      case .yesOrNo:
+        return appearance.imageCardYesOrNot
+      case .letter:
+        return appearance.imageCardCharacters
+      case .list:
+        return appearance.imageCardList
+      case .coin:
+        return appearance.imageCardCoin
+      case .cube:
+        return appearance.imageCardCube
+      case .dateAndTime:
+        return appearance.imageCardDateAndTime
+      case .lottery:
+        return appearance.imageCardLottery
+      case .contact:
+        return appearance.imageCardContact
+      case .password:
+        return appearance.imageCardPassword
+      case .colors:
+        return appearance.imageColors
+      case .bottle:
+        return appearance.bottleCardImage
+      case .rockPaperScissors:
+        return appearance.imageRockPaperScissorsScreenView
+      case .imageFilters:
+        return appearance.imageImageFilters
+      case .films:
+        return appearance.imageFilms
+      }
+    }
+    
+    /// Описание когда нет премиум доступа
+    public var descriptionForNoPremiumAccess: String {
+      let appearance = Appearance()
+      switch self {
+      case .teams:
+        return appearance.teamsDescriptionForNoPremiumAccess
+      case .number:
+        return appearance.numberDescriptionForNoPremiumAccess
+      case .yesOrNo:
+        return appearance.yesOrNoDescriptionForNoPremiumAccess
+      case .letter:
+        return appearance.letterDescriptionForNoPremiumAccess
+      case .list:
+        return appearance.listDescriptionForNoPremiumAccess
+      case .coin:
+        return appearance.coinDescriptionForNoPremiumAccess
+      case .cube:
+        return appearance.cubeDescriptionForNoPremiumAccess
+      case .dateAndTime:
+        return appearance.dateAndTimeDescriptionForNoPremiumAccess
+      case .lottery:
+        return appearance.lotteryDescriptionForNoPremiumAccess
+      case .contact:
+        return appearance.contactDescriptionForNoPremiumAccess
+      case .password:
+        return appearance.passwordDescriptionForNoPremiumAccess
+      case .colors:
+        return appearance.colorsDescriptionForNoPremiumAccess
+      case .bottle:
+        return appearance.bottleDescriptionForNoPremiumAccess
+      case .rockPaperScissors:
+        return appearance.rockPaperScissorsDescriptionForNoPremiumAccess
+      case .imageFilters:
+        return appearance.imageFiltersDescriptionForNoPremiumAccess
+      case .films:
+        return appearance.filmsDescriptionForNoPremiumAccess
+      }
+    }
+    
+    // MARK: - Cases
+    
+    /// Раздел: `Команды`
+    case teams
+    
+    /// Раздел: `Число`
+    case number
+    
+    /// Раздел: `Да или Нет`
+    case yesOrNo
+    
+    /// Раздел: `Буква`
+    case letter
+    
+    /// Раздел: `Список`
+    case list
+    
+    /// Раздел: `Монета`
+    case coin
+    
+    /// Раздел: `Кубики`
+    case cube
+    
+    /// Раздел: `Дата и Время`
+    case dateAndTime
+    
+    /// Раздел: `Лотерея`
+    case lottery
+    
+    /// Раздел: `Контакты`
+    case contact
+    
+    /// Раздел: `Пароли`
+    case password
+    
+    /// Раздел: `Цвета`
+    case colors
+    
+    /// Раздел: `Бутылочка`
+    case bottle
+    
+    /// Раздел `Камень, ножницы, бумага`
+    case rockPaperScissors
+    
+    /// Раздел `Фильтры изображений`
+    case imageFilters
+    
+    /// Раздел `Фильмы`
+    case films
+  }
+  
+  // MARK: - ADVLabel
+  
+  public enum ADVLabel: String, CaseIterable, Codable, Equatable {
+    
+    var title: String {
+      let appearance = Appearance()
+      switch self {
+      case .hit:
+        return appearance.hit
+      case .new:
+        return appearance.new
+      case .premium:
+        return appearance.premium
+      case .none:
+        return ""
+      }
+    }
+    
+    /// Лайбл: `ХИТ`
+    case hit
+    
+    /// Лайбл: `НОВОЕ`
+    case new
+    
+    /// Лайбл: `ПРЕМИУМ`
+    case premium
+    
+    /// Лайбл: `Пусто`
+    case none
   }
 }

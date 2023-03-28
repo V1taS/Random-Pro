@@ -47,7 +47,7 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
   func start() {
     var bottleScreenModule = BottleScreenAssembly().createModule(
       timerService: TimerServiceImpl(),
-      hapticService: BottleScreenHapticServiceAdapter(HapticServiceImpl())
+      hapticService: HapticServiceImpl(patternType: .feedingCrocodile)
     )
     self.bottleScreenModule = bottleScreenModule
     bottleScreenModule.moduleOutput = self
@@ -62,3 +62,7 @@ extension BottleScreenCoordinator: BottleScreenModuleOutput {}
 // MARK: - Adapter TimerService
 
 extension TimerServiceImpl: BottleScreenTimerServiceProtocol {}
+
+// MARK: - Adapter HapticService
+
+extension HapticServiceImpl: BottleScreenHapticServiceProtocol {}

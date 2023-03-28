@@ -8,6 +8,11 @@
 
 import UIKit
 import TeamsScreenModule
+import NotificationService
+import StorageService
+import YandexMobileMetrica
+import FirebaseAnalytics
+import MetricsService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol PlayerCardSelectionScreenCoordinatorOutput: AnyObject {
@@ -38,25 +43,24 @@ final class PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoord
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var playerCardSelectionScreenModule: PlayerCardSelectionScreenModule?
   private var anyCoordinator: Coordinator?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let playerCardSelectionScreenModule = PlayerCardSelectionScreenAssembly().createModule(storageService: services.storageService)
+    let playerCardSelectionScreenModule = PlayerCardSelectionScreenAssembly().createModule(
+      storageService: StorageServiceImpl()
+    )
     self.playerCardSelectionScreenModule = playerCardSelectionScreenModule
     self.playerCardSelectionScreenModule?.moduleOutput = self
     navigationController.pushViewController(playerCardSelectionScreenModule, animated: true)
@@ -67,10 +71,10 @@ final class PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoord
 
 extension PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenModuleOutput {
   func didSelectStyleSuccessfully() {
-    services.notificationService.showPositiveAlertWith(title: Appearance().setCardStyleTitle,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().setCardStyleTitle,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func noPremiumAccessAction() {
@@ -112,15 +116,37 @@ private extension PlayerCardSelectionScreenCoordinator {
   }
   
   func openPremium() {
-    let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
-                                                            services)
+    let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController)
     anyCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
     
-    // TODO: - 🔴
-//    services.metricsService.track(event: .premiumScreen)
+    track(event: .premiumScreen)
+  }
+}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: TeamsScreeStorageServiceProtocol {}
+
+// MARK: - Private
+
+private extension PlayerCardSelectionScreenCoordinator {
+  func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+  
+  func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
   }
 }
 

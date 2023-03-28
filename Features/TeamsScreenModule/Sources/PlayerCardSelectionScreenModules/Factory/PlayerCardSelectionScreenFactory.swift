@@ -87,7 +87,7 @@ final class PlayerCardSelectionScreenFactory: PlayerCardSelectionScreenFactoryIn
     }
     
     models.forEach { model in
-      let modelStyle = (model.style as? PlayerCardSelectionScreenModel.StyleCard) ?? .defaultStyle
+      let modelStyle = model.style
       if modelStyle == styleCard {
         newModels.append(.init(id: model.id,
                                name: appearance.mockPlayer,

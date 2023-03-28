@@ -36,7 +36,7 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
   // MARK: - Internal func
   
   func configureCellWith(model: MainScreenModel.Section, isPremium: Bool) {
-    let advLabel = (model.advLabel as? MainScreenModel.ADVLabel) ?? .none
+    let advLabel = model.advLabel
     mainCardView.configureWith(
       imageCard: UIImage(systemName: model.imageSectionSystemName),
       titleCard: model.titleSection,

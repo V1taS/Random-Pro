@@ -10,42 +10,14 @@ import Foundation
 
 // MARK: - StorageServiceProtocol
 
-public protocol StorageServiceProtocol {
+public protocol ListScreenStorageServiceProtocol {
   
   /// Активирован премиум в приложении
   var isPremium: Bool { get }
   
-  /// Модель для списка
-  var listScreenModel: ListScreenModelProtocol? { get set }
-}
-
-// MARK: - ListScreenModelProtocol
-
-public protocol ListScreenModelProtocol {
+  /// Сохранить данные
+  func saveData<T: Codable>(_ data: T, key: String)
   
-  /// Без повторений
-  var withoutRepetition: Bool { get }
-  
-  /// Спсиок элементов для показа
-  var allItems: [ListScreenTextModelProtocol] { get }
-  
-  /// Временное хранилище для уникальных элементов
-  var tempUniqueItems: [ListScreenTextModelProtocol] { get }
-  
-  /// Спсиок сгенерированных элементов
-  var generetionItems: [String] { get }
-  
-  /// Результат генерации
-  var result: String { get }
-}
-
-// MARK: - ListScreenTextModelProtocol
-
-public protocol ListScreenTextModelProtocol {
-  
-  /// ID текста
-  var id: String { get }
-  
-  /// Значение текста
-  var text: String? { get }
+  /// Получить данные
+  func getDataWith<ResponseType: Codable>(key: String, to _: ResponseType.Type) -> ResponseType?
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AppPurchasesServiceState: AppPurchasesServiceStateProtocol {
+public enum AppPurchasesServiceState {
 
   /// Успешная покупка подписки
   case successfulSubscriptionPurchase

@@ -9,16 +9,4 @@
 @testable import NumberScreenModule
 import XCTest
 
-final class NumberScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class NumberScreenModuleTests: XCTestCase {}

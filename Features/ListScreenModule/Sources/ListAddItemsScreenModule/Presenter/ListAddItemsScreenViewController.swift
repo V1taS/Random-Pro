@@ -15,7 +15,7 @@ public protocol ListAddItemsScreenModuleOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: Модельки с текстами
-  func didReceiveText(models: [ListScreenTextModelProtocol])
+  func didReceiveText(models: [ListScreenModel.TextModel])
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -26,7 +26,7 @@ public protocol ListAddItemsScreenModuleInput {
   
   /// Обновить контент
   ///  - Parameter models: Модельки с текстами
-  func updateContentWith(models: [ListScreenTextModelProtocol])
+  func updateContentWith(models: [ListScreenModel.TextModel])
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ListAddItemsScreenModuleOutput? { get set }
@@ -92,8 +92,8 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
     interactor.removeAllText()
   }
   
-  func updateContentWith(models: [ListScreenTextModelProtocol]) {
-    interactor.updateContentWith(models: models.toCodable())
+  func updateContentWith(models: [ListScreenModel.TextModel]) {
+    interactor.updateContentWith(models: models)
   }
 }
 
@@ -112,7 +112,7 @@ extension ListAddItemsScreenViewController: ListAddItemsScreenViewOutput {
 // MARK: - ListAddItemsScreenInteractorOutput
 
 extension ListAddItemsScreenViewController: ListAddItemsScreenInteractorOutput {
-  func didReceiveText(models: [ListAddItemsScreenModel.TextModel]) {
+  func didReceiveText(models: [ListScreenModel.TextModel]) {
     factory.createListModelFrom(models: models)
   }
 }

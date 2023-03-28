@@ -46,4 +46,3 @@ public protocol UpdateAppServiceModelProtocol {
   /// Текущая версия на устройстве
   var currentDeviceVersion: String { get }
 }
-

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Шаблоны запуска обратной связи от моторчика
-enum BottleScreenPatternType: BottleScreenPatternHapticTypeProtocol {
+enum BottleScreenPatternType {
   
   /// Два тактильных события
   case slice

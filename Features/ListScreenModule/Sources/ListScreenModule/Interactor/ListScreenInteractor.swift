@@ -53,27 +53,35 @@ protocol ListScreenInteractorInput {
 }
 
 final class ListScreenInteractor: ListScreenInteractorInput {
-
+  
   // MARK: - Internal property
   
   weak var output: ListScreenInteractorOutput?
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
+  private var storageService: ListScreenStorageServiceProtocol
+  private var listScreenModel: ListScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().listScreenModelKeyUserDefaults,
+                                 to: ListScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().listScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - services: Сервисы приложения
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: ListScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func getContent() {
-    if let model = storageService.listScreenModel?.toCodable() {
+    if let model = listScreenModel {
       output?.didReceiveModel(model)
     } else {
       let newModel = ListScreenModel(
@@ -84,13 +92,13 @@ final class ListScreenInteractor: ListScreenInteractorInput {
         result: Appearance().result
       )
       
-      self.storageService.listScreenModel = newModel
+      self.listScreenModel = newModel
       output?.didReceiveModel(newModel)
     }
   }
   
   func returnCurrentModel() -> ListScreenModel {
-    if let model = storageService.listScreenModel?.toCodable() {
+    if let model = listScreenModel {
       return model
     } else {
       return ListScreenModel(
@@ -104,46 +112,46 @@ final class ListScreenInteractor: ListScreenInteractorInput {
   }
   
   func updateContentWith(models: [ListScreenModel.TextModel]) {
-    guard let model = storageService.listScreenModel?.toCodable() else {
+    guard let model = listScreenModel else {
       output?.didReceiveError()
       return
     }
     let newModel = ListScreenModel(
       withoutRepetition: model.withoutRepetition,
       allItems: models,
-      tempUniqueItems: (model.tempUniqueItems as? [ListScreenModel.TextModel]) ?? [],
+      tempUniqueItems: model.tempUniqueItems,
       generetionItems: model.generetionItems,
       result: model.result
     )
-    self.storageService.listScreenModel = newModel
+    self.listScreenModel = newModel
   }
   
   func updateWithoutRepetition(_ value: Bool) {
-    guard let model = storageService.listScreenModel?.toCodable() else {
+    guard let model = listScreenModel else {
       output?.didReceiveError()
       return
     }
     let newModel = ListScreenModel(
       withoutRepetition: value,
-      allItems: (model.allItems as? [ListScreenModel.TextModel]) ?? [],
-      tempUniqueItems: (model.tempUniqueItems as? [ListScreenModel.TextModel]) ?? [],
+      allItems: model.allItems,
+      tempUniqueItems: model.tempUniqueItems,
       generetionItems: model.generetionItems,
       result: model.result
     )
-    self.storageService.listScreenModel = newModel
+    self.listScreenModel = newModel
   }
   
   func generateButtonAction() {
-    guard let model = storageService.listScreenModel?.toCodable(),
-          let modelAllItems = model.allItems as? [ListScreenModel.TextModel],
-          let modelTempUniqueItems = model.tempUniqueItems as? [ListScreenModel.TextModel] else {
+    guard let model = listScreenModel else {
       output?.didReceiveIsEmptyError()
       return
     }
+    let modelAllItems = model.allItems
+    let modelTempUniqueItems = model.tempUniqueItems
     
     if model.withoutRepetition {
       let uniqueItems: [ListScreenModel.TextModel] = modelAllItems.difference(from: modelTempUniqueItems)
-
+      
       guard let randomItem = uniqueItems.shuffled().first else {
         output?.didReceiveRangeUniqueItemsError()
         return
@@ -165,7 +173,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
           generetionItems: generetionItems,
           result: randomItem.text ?? ""
         )
-        self.storageService.listScreenModel = newModel
+        self.listScreenModel = newModel
         output?.didReceiveModel(newModel)
       }
     } else {
@@ -186,17 +194,17 @@ final class ListScreenInteractor: ListScreenInteractorInput {
         generetionItems: generetionItems,
         result: randomItem.text ?? ""
       )
-      self.storageService.listScreenModel = newModel
+      self.listScreenModel = newModel
       output?.didReceiveModel(newModel)
     }
   }
   
   func cleanButtonAction() {
-    guard let model = storageService.listScreenModel,
-          let modelAllItems = model.allItems as? [ListScreenModel.TextModel] else {
+    guard let model = listScreenModel else {
       return
     }
     
+    let modelAllItems = model.allItems
     let newModel = ListScreenModel(
       withoutRepetition: model.withoutRepetition,
       allItems: modelAllItems,
@@ -204,7 +212,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
       generetionItems: [],
       result: "?"
     )
-    self.storageService.listScreenModel = newModel
+    self.listScreenModel = newModel
     output?.didReceiveModel(newModel)
     output?.cleanButtonWasSelected()
   }
@@ -258,5 +266,6 @@ private extension ListScreenInteractor {
     let walk = NSLocalizedString("Прогулка", comment: "")
     let goOnDate = NSLocalizedString("Пойти на свидание", comment: "")
     let callYourParents = NSLocalizedString("Позвонить родителям", comment: "")
+    let listScreenModelKeyUserDefaults = "list_screen_user_defaults_key"
   }
 }

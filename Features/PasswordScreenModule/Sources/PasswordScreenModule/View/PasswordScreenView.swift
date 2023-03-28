@@ -50,7 +50,7 @@ protocol PasswordScreenViewInput {
   ///   - resultClassic: Результат генерации
   ///   - switchState: Состояние тумблеров
   func set(resultClassic: String?,
-           switchState: PasswordScreenSwitchStateProtocol)
+           switchState: PasswordScreenModel.SwitchState)
 }
 
 typealias PasswordScreenViewProtocol = UIView & PasswordScreenViewInput
@@ -92,7 +92,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
   }
   
   func set(resultClassic: String?,
-           switchState: PasswordScreenSwitchStateProtocol) {
+           switchState: PasswordScreenModel.SwitchState) {
     let appearance = Appearance()
     setColorFor(password: resultClassic ?? appearance.resultLabel) { [weak self] result in
       guard let self = self else {

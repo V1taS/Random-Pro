@@ -13,7 +13,7 @@ public final class DateTimeAssembly {
   public init() {}
   
   /// Собирает модуль `DateTimeScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> DateTimeModule {
+  public func createModule(storageService: DateTimeScreenStorageServiceProtocol) -> DateTimeModule {
     let view = DateTimeView()
     let interactor = DateTimeInteractor(storageService: storageService)
     let factory = DateTimeFactory()

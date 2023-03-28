@@ -15,12 +15,12 @@ public struct ApphudProductDecodeModel: Codable {
   public var id: String?
   
   public init(productId: String,
-              name: String? = nil,
               store: String,
+              name: String? = nil,
               id: String? = nil) {
     self.productId = productId
-    self.name = name
     self.store = store
+    self.name = name
     self.id = id
   }
   

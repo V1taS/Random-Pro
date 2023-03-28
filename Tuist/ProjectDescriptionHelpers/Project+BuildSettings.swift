@@ -134,7 +134,11 @@ public let targetBuildIOSSettings: Settings = .settings(
     "MTL_ENABLE_DEBUG_INFO": "INCLUDE_SOURCE",
     "ONLY_ACTIVE_ARCH": "YES",
     "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "DEBUG",
-    "SWIFT_OPTIMIZATION_LEVEL": "-Onone"
+    "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
+    "OTHER_LDFLAGS": [
+      "$(OTHER_LDFLAGS)",
+      "-ObjC"
+    ]
   ],
   release: [
     "DEBUG_INFORMATION_FORMAT": "dwarf-with-dsym",
@@ -145,6 +149,10 @@ public let targetBuildIOSSettings: Settings = .settings(
     "ONLY_ACTIVE_ARCH": "NO",
     "SWIFT_COMPILATION_MODE": "wholemodule",
     "SWIFT_OPTIMIZATION_LEVEL": "-O",
-    "VALIDATE_PRODUCT": "YES"
+    "VALIDATE_PRODUCT": "YES",
+    "OTHER_LDFLAGS": [
+      "$(OTHER_LDFLAGS)",
+      "-ObjC"
+    ]
   ]
 )

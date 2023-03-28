@@ -8,32 +8,20 @@
 
 import Foundation
 
-struct LotteryScreenModel: Codable, LotteryScreenModelProtocol {
+public struct LotteryScreenModel: Codable {
   
   /// Начало диапазона
-  let rangeStartValue: String?
+  public let rangeStartValue: String?
   
   /// Конец диапазона
-  let rangeEndValue: String?
+  public let rangeEndValue: String?
   
   /// Количество цифр
-  let amountValue: String?
+  public let amountValue: String?
   
   /// Результат генерации
-  let result: String
+  public let result: String
   
   /// Список результатов
-  let listResult: [String]
-}
-
-// MARK: - toCodable
-
-extension LotteryScreenModelProtocol {
-  func toCodable() -> LotteryScreenModel? {
-    return LotteryScreenModel(rangeStartValue: rangeStartValue,
-                              rangeEndValue: rangeEndValue,
-                              amountValue: amountValue,
-                              result: result,
-                              listResult: listResult)
-  }
+  public let listResult: [String]
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomNetwork
 
 /// Сборщик `FilmsScreen`
 public final class FilmsScreenAssembly {
@@ -14,14 +15,12 @@ public final class FilmsScreenAssembly {
   
   /// Собирает модуль `FilmsScreen`
   /// - Parameter storageService: Сервис хранения данных
-  /// - Parameter networkService: Сервис работы с сетью
   /// - Returns: Cобранный модуль `FilmsScreen`
-  public func createModule(storageService: StorageServiceProtocol,
-                           networkService: NetworkServiceProtocol) -> FilmsScreenModule {
+  public func createModule(storageService: FilmsScreenStorageServiceProtocol) -> FilmsScreenModule {
     let view = FilmsScreenView()
     let factory = FilmsScreenFactory()
     let interactor = FilmsScreenInteractor(storageService: storageService,
-                                           networkService: networkService,
+                                           networkService: NetworkServiceImpl(),
                                            factory: factory)
     let presenter = FilmsScreenViewController(moduleView: view, interactor: interactor, factory: factory)
     

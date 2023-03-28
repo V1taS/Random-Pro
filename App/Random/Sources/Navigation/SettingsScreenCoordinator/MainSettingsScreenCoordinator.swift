@@ -9,7 +9,13 @@
 import UIKit
 import MessageUI
 import RandomUIKit
-import MainSettingsScreenModule
+import MainScreenModule
+import AppPurchasesService
+import StorageService
+import NotificationService
+import MetricsService
+import YandexMobileMetrica
+import FirebaseAnalytics
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainSettingsScreenCoordinatorOutput: AnyObject {
@@ -20,7 +26,7 @@ protocol MainSettingsScreenCoordinatorOutput: AnyObject {
   
   /// Данные были изменены
   ///  - Parameter models: результат генерации
-  func didChanged(models: [MainScreenSectionProtocol])
+  func didChanged(models: [MainScreenModel.Section])
   
   /// Обновить секции на главном экране
   func updateStateForSections()
@@ -39,7 +45,7 @@ protocol MainSettingsScreenCoordinatorInput {
   
   /// Обновить контент
   /// - Parameter models: Моделька секций
-  func updateContentWith(models: [MainScreenSectionProtocol])
+  func updateContentWith(models: [MainScreenModel.Section])
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: MainSettingsScreenCoordinatorOutput? { get set }
@@ -57,25 +63,22 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
   
   private let navigationController: UINavigationController
   private var mainSettingsScreenModule: MainSettingsScreenModule?
-  private let services: ApplicationServices
   private let window: UIWindow?
   private var modalNavigationController: UINavigationController?
   private var customMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol?
-  private var cacheMainScreenSections: [MainScreenSectionProtocol] = []
+  private var cacheMainScreenSections: [MainScreenModel.Section] = []
   private var anyCoordinator: Coordinator?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - window: Окно просмотра
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
   init(_ window: UIWindow?,
-       _ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+       _ navigationController: UINavigationController) {
     self.window = window
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
@@ -94,7 +97,7 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
     mainSettingsScreenModule?.updateContentWith(isDarkTheme: isDarkTheme)
   }
   
-  func updateContentWith(models: [MainScreenSectionProtocol]) {
+  func updateContentWith(models: [MainScreenModel.Section]) {
     cacheMainScreenSections = models
   }
 }
@@ -107,14 +110,11 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       return
     }
     
-    let selecteAppIconScreenCoordinator = SelecteAppIconScreenCoordinator(upperViewController,
-                                                                          services)
+    let selecteAppIconScreenCoordinator = SelecteAppIconScreenCoordinator(upperViewController)
     anyCoordinator = selecteAppIconScreenCoordinator
     selecteAppIconScreenCoordinator.output = self
     selecteAppIconScreenCoordinator.start()
-    
-    // TODO: - 🔴
-//    services.metricsService.track(event: .selecteAppIcon)
+    track(event: .selecteAppIcon)
   }
   
   func premiumSectionsSelected() {
@@ -122,15 +122,12 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       return
     }
     
-    let premiumScreenCoordinator = PremiumScreenCoordinator(upperViewController,
-                                                            services)
+    let premiumScreenCoordinator = PremiumScreenCoordinator(upperViewController)
     anyCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.push)
     premiumScreenCoordinator.start()
-    
-    // TODO: - 🔴
-//    services.metricsService.track(event: .premiumScreen)
+    track(event: .premiumScreen)
   }
   
   func feedBackButtonAction() {
@@ -154,14 +151,12 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       mail.setMessageBody(messageBody, isHTML: false)
       mainSettingsScreenModule?.present(mail, animated: true)
     } else {
-      services.notificationService.showNegativeAlertWith(title: appearance.emailClientNotFound,
-                                                         glyph: false,
-                                                         timeout: nil,
-                                                         active: {})
+      notificationService.showNegativeAlertWith(title: appearance.emailClientNotFound,
+                                                glyph: false,
+                                                timeout: nil,
+                                                active: {})
     }
-    
-    // TODO: - 🔴
-//    services.metricsService.track(event: .feedBack)
+    track(event: .feedBack)
   }
   
   func customMainSectionsSelected() {
@@ -169,16 +164,13 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       return
     }
     
-    let customMainSectionsCoordinator = CustomMainSectionsCoordinator(upperViewController,
-                                                                      services)
+    let customMainSectionsCoordinator = CustomMainSectionsCoordinator(upperViewController)
     self.customMainSectionsCoordinator = customMainSectionsCoordinator
     customMainSectionsCoordinator.output = self
     customMainSectionsCoordinator.start()
     
     customMainSectionsCoordinator.updateContentWith(models: cacheMainScreenSections)
-    
-    // TODO: - 🔴
-//    services.metricsService.track(event: .customMainSections)
+    track(event: .customMainSections)
   }
   
   func darkThemeChanged(_ isEnabled: Bool) {
@@ -206,7 +198,7 @@ extension MainSettingsScreenCoordinator: PremiumScreenCoordinatorOutput {
 // MARK: - CustomMainSectionsCoordinatorOutput
 
 extension MainSettingsScreenCoordinator: CustomMainSectionsCoordinatorOutput {
-  func didChanged(models: [MainScreenSectionProtocol]) {
+  func didChanged(models: [MainScreenModel.Section]) {
     output?.didChanged(models: models)
     cacheMainScreenSections = models
   }
@@ -225,6 +217,26 @@ extension MainSettingsScreenCoordinator: MFMailComposeViewControllerDelegate {
 // MARK: - SelecteAppIconScreenCoordinatorOutput
 
 extension MainSettingsScreenCoordinator: SelecteAppIconScreenCoordinatorOutput {}
+
+// MARK: - Private
+
+private extension MainSettingsScreenCoordinator {
+  func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+  
+  func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+}
 
 // MARK: - Appearance
 

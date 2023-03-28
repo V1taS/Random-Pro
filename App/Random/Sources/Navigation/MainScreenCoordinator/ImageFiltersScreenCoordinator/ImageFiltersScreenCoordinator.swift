@@ -10,6 +10,12 @@ import UIKit
 import MobileCoreServices
 import PhotosUI
 import ImageFiltersScreenModule
+import NotificationService
+import FileManagerService
+import PermissionService
+import YandexMobileMetrica
+import FirebaseAnalytics
+import MetricsService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ImageFiltersScreenCoordinatorOutput: AnyObject {}
@@ -32,24 +38,22 @@ final class ImageFiltersScreenCoordinator: NSObject, ImageFiltersScreenCoordinat
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var imageFiltersScreenModule: ImageFiltersScreenModule?
+  private let notificationService = NotificationServiceImpl()
+  private let fileManagerService = FileManagerImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let imageFiltersScreenModule = ImageFiltersScreenAssembly().createModule(permissionService: services.permissionService)
+    let imageFiltersScreenModule = ImageFiltersScreenAssembly().createModule(permissionService: PermissionServiceImpl())
     self.imageFiltersScreenModule = imageFiltersScreenModule
     self.imageFiltersScreenModule?.moduleOutput = self
     navigationController.pushViewController(imageFiltersScreenModule, animated: true)
@@ -60,7 +64,7 @@ final class ImageFiltersScreenCoordinator: NSObject, ImageFiltersScreenCoordinat
 
 extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
   func didReceiveError() {
-    services.notificationService.showNegativeAlertWith(
+    notificationService.showNegativeAlertWith(
       title: Appearance().failedSomeError,
       glyph: false,
       timeout: nil,
@@ -81,7 +85,7 @@ extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
   }
   
   func requestGalleryError() {
-    services.notificationService.showNegativeAlertWith(
+    notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,
       glyph: false,
       timeout: nil,
@@ -97,9 +101,9 @@ extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
   func shareButtonAction(imageData: Data?) {
     guard
       let imageData = imageData,
-      let imageFile = services.fileManagerService.saveObjectWith(fileName: "Random",
-                                                                 fileExtension: ".png",
-                                                                 data: imageData)
+      let imageFile = fileManagerService.saveObjectWith(fileName: "Random",
+                                                        fileExtension: ".png",
+                                                        data: imageData)
     else {
       return
     }
@@ -133,9 +137,7 @@ extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
     }
     
     imageFiltersScreenModule?.present(activityViewController, animated: true, completion: nil)
-    
-    // TODO: - 🔴
-//    services.metricsService.track(event: .shareImageFilters)
+    track(event: .shareImageFilters)
   }
 }
 
@@ -149,10 +151,10 @@ extension ImageFiltersScreenCoordinator: PHPickerViewControllerDelegate {
         guard let image = image as? UIImage,
               let imageData = image.jpegData(compressionQuality: 1) else {
           DispatchQueue.main.async {
-            self?.services.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
-                                                                     glyph: false,
-                                                                     timeout: nil,
-                                                                     active: {})
+            self?.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
+                                                            glyph: false,
+                                                            timeout: nil,
+                                                            active: {})
           }
           return
         }
@@ -172,10 +174,10 @@ extension ImageFiltersScreenCoordinator: UINavigationControllerDelegate, UIImage
                              didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
     guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
           let imageData = image.jpegData(compressionQuality: 1.0) else {
-      services.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
-                                                         glyph: false,
-                                                         timeout: nil,
-                                                         active: {})
+      notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
+                                                glyph: false,
+                                                timeout: nil,
+                                                active: {})
       return
     }
     imageFiltersScreenModule?.uploadContentImage(imageData)
@@ -188,10 +190,10 @@ extension ImageFiltersScreenCoordinator: UINavigationControllerDelegate, UIImage
 extension ImageFiltersScreenCoordinator: UIDocumentPickerDelegate {
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
     guard let url = urls.first, let imageData = try? Data(contentsOf: url) else {
-      services.notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
-                                                         glyph: false,
-                                                         timeout: nil,
-                                                         active: {})
+      notificationService.showNegativeAlertWith(title: Appearance().failedLoadImage,
+                                                glyph: false,
+                                                timeout: nil,
+                                                active: {})
       return
     }
     imageFiltersScreenModule?.uploadContentImage(imageData)
@@ -261,7 +263,27 @@ private extension ImageFiltersScreenCoordinator {
       return imagePickerController
     }
   }
+  
+  func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+  
+  func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
 }
+
+// MARK: - Adapter PermissionService
+
+extension PermissionServiceImpl: ImageFiltersPermissionServiceProtocol {}
 
 // MARK: - Appearance
 

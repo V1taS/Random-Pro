@@ -8,6 +8,8 @@
 
 import UIKit
 import PasswordScreenModule
+import NotificationService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol PasswordScreenCoordinatorOutput: AnyObject {
@@ -38,8 +40,8 @@ final class PasswordScreenCoordinator: PasswordScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var passwordScreenModule: PasswordScreenModule?
+  private let notificationService = NotificationServiceImpl()
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -47,17 +49,14 @@ final class PasswordScreenCoordinator: PasswordScreenCoordinatorProtocol {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    var passwordScreenModule = PasswordScreenAssembly().createModule(storageService: services.storageService)
+    var passwordScreenModule = PasswordScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.passwordScreenModule = passwordScreenModule
     passwordScreenModule.moduleOutput = self
     navigationController.pushViewController(passwordScreenModule, animated: true)
@@ -71,8 +70,8 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
                                                                     lastItem: model?.result ?? ""))
   }
   
-  func settingButtonAction(model: PasswordScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: PasswordScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -84,17 +83,17 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func didReceiveError() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
 }
 
@@ -116,7 +115,7 @@ extension PasswordScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -128,6 +127,10 @@ extension PasswordScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension PasswordScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: PasswordScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

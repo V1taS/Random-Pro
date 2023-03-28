@@ -18,9 +18,9 @@ public final class MainScreenAssembly {
   ///   - storageService: Сервис хранения данных
   ///   - appPurchasesService: Сервис покупок
   /// - Returns: Cобранный модуль `MainScreen`
-  public func createModule(featureToggleServices: FeatureToggleServicesProtocol,
-                           storageService: StorageServiceProtocol,
-                           appPurchasesService: AppPurchasesServiceProtocol) -> MainScreenModule {
+  public func createModule(featureToggleServices: MainScreenFeatureToggleServicesProtocol,
+                           storageService: MainScreenStorageServiceProtocol,
+                           appPurchasesService: MainScreenAppPurchasesServiceProtocol) -> MainScreenModule {
     let interactor = MainScreenInteractor(featureToggleServices: featureToggleServices,
                                           storageService: storageService,
                                           appPurchasesService: appPurchasesService)

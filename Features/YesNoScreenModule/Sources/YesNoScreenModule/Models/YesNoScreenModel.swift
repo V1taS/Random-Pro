@@ -8,20 +8,11 @@
 
 import Foundation
 
-struct YesNoScreenModel: Codable, YesNoScreenModelProtocol {
+public struct YesNoScreenModel: Codable {
   
   /// Результат генерации
-  let result: String
+  public let result: String
   
   /// Список результатов
-  let listResult: [String]
-}
-
-// MARK: - toCodable
-
-extension YesNoScreenModelProtocol {
-  func toCodable() -> YesNoScreenModel? {
-    return YesNoScreenModel(result: result,
-                            listResult: listResult)
-  }
+  public let listResult: [String]
 }

@@ -74,29 +74,38 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
-  private var stylePlayerCard: TeamsScreenPlayerModel.StyleCard {
-    guard let card = storageService.playerCardSelectionScreenModel?.filter({
+  private var storageService: TeamsScreeStorageServiceProtocol
+  private var teamsScreenModel: TeamsScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().teamsScreenModelKeyUserDefaults,
+                                 to: TeamsScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().teamsScreenModelKeyUserDefaults)
+    }
+  }
+  
+  private var stylePlayerCard: PlayerCardSelectionScreenModel.StyleCard {
+    guard let card = storageService.getDataWith(key: Appearance().playerCardSelectionModelKeyUserDefaults,
+                                                to: [PlayerCardSelectionScreenModel].self)?.filter({
       $0.playerCardSelection
-    }).first,
-          let style = card.style as? TeamsScreenPlayerModel.StyleCard else {
+    }).first  else {
       return .defaultStyle
     }
-    return style
+    return card.style
   }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: TeamsScreeStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func updateStyle() {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return
     }
     
@@ -105,7 +114,7 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
                                     name: $0.name,
                                     avatar: $0.avatar,
                                     emoji: $0.emoji,
-                                    state: ($0.state as? TeamsScreenPlayerModel.PlayerState) ?? .random,
+                                    state: $0.state,
                                     style: stylePlayerCard)
     }
     
@@ -115,7 +124,7 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
                                       name: playersTeam.name,
                                       avatar: playersTeam.avatar,
                                       emoji: playersTeam.emoji,
-                                      state: (playersTeam.state as? TeamsScreenPlayerModel.PlayerState) ?? .random,
+                                      state: playersTeam.state,
                                       style: stylePlayerCard)
       }
       return TeamsScreenModel.Team(name: team.name,
@@ -131,72 +140,68 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func updateTeams(count: Int) {
-    guard let model = storageService.teamsScreenModel?.toCodable(),
-    let modelAllPlayers = model.allPlayers as? [TeamsScreenPlayerModel],
-    let modelTeams = model.teams as? [TeamsScreenModel.Team] else {
+    guard let model = teamsScreenModel else {
       return
     }
     
     let newModel = TeamsScreenModel(
       selectedTeam: count,
-      allPlayers: modelAllPlayers,
-      teams: modelTeams
+      allPlayers: model.allPlayers,
+      teams: model.teams
     )
-    self.storageService.teamsScreenModel = newModel
+    self.teamsScreenModel = newModel
   }
   
   func updateList(teams: [TeamsScreenModel.Team]) {
-    guard let model = storageService.teamsScreenModel?.toCodable(),
-          let modelAllPlayers = model.allPlayers as? [TeamsScreenPlayerModel] else {
+    guard let model = teamsScreenModel else {
       return
     }
     
     let newModel = TeamsScreenModel(
       selectedTeam: model.selectedTeam,
-      allPlayers: modelAllPlayers,
+      allPlayers: model.allPlayers,
       teams: teams
     )
-    self.storageService.teamsScreenModel = newModel
+    self.teamsScreenModel = newModel
   }
   
   func getContent() {
-    if let model = storageService.teamsScreenModel?.toCodable() {
+    if let model = teamsScreenModel {
       output?.didReceive(model: model)
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
                                    allPlayers: generateFakePlayers(),
                                    teams: [])
-      self.storageService.teamsScreenModel = model
+      self.teamsScreenModel = model
       output?.didReceiveEmptyListTeams()
     }
   }
   
   func updateContentWith(players: [TeamsScreenPlayerModel]) {
-    if let model = storageService.teamsScreenModel?.toCodable(),
-       let modelTeams = model.teams as? [TeamsScreenModel.Team] {
+    if let model = teamsScreenModel {
       let newModel = TeamsScreenModel(
         selectedTeam: model.selectedTeam,
         allPlayers: players,
-        teams: modelTeams
+        teams: model.teams
       )
-      self.storageService.teamsScreenModel = newModel
+      self.teamsScreenModel = newModel
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
                                    allPlayers: generateFakePlayers(),
                                    teams: [])
-      self.storageService.teamsScreenModel = model
+      self.teamsScreenModel = model
     }
   }
   
   func returnCountTeams() -> Int {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return .zero
     }
     return model.teams.count
   }
   
   func returnGeneratedCountPlayers() -> Int {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return .zero
     }
     
@@ -209,23 +214,21 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func returnListTeams() -> [TeamsScreenModel.Team] {
-    guard let model = storageService.teamsScreenModel,
-          let modelTeams = model.teams as? [TeamsScreenModel.Team] else {
+    guard let model = teamsScreenModel  else {
       return []
     }
-    return modelTeams
+    return model.teams
   }
   
   func returnListPlayers() -> [TeamsScreenPlayerModel] {
-    guard let model = storageService.teamsScreenModel,
-          let modelAllPlayers = model.allPlayers as? [TeamsScreenPlayerModel] else {
+    guard let model = teamsScreenModel  else {
       return []
     }
-    return modelAllPlayers
+    return model.allPlayers
   }
   
   func returnModel() -> TeamsScreenModel {
-    if let model = storageService.teamsScreenModel?.toCodable() {
+    if let model = teamsScreenModel {
       return model
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
@@ -236,21 +239,22 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func returnSelectedTeam() -> Int {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return .zero
     }
     return model.selectedTeam
   }
   
   func cleanButtonAction() {
-    guard let model = storageService.teamsScreenModel,
-          let modelAllPlayers = model.allPlayers as? [TeamsScreenPlayerModel] else {
+    guard let model = teamsScreenModel else {
       return
     }
+    
+    let modelAllPlayers = model.allPlayers
     let newModel = TeamsScreenModel(selectedTeam: model.selectedTeam,
                                     allPlayers: modelAllPlayers,
                                     teams: [])
-    self.storageService.teamsScreenModel = newModel
+    self.teamsScreenModel = newModel
     output?.cleanButtonWasSelected()
   }
 }
@@ -317,5 +321,7 @@ private extension TeamsScreenInteractor {
     let rangeImageFemalePlayer = 1...21
     let player = NSLocalizedString("Игрок", comment: "")
     let keySecondStartApp = "team_screen_second_start_app_key"
+    let teamsScreenModelKeyUserDefaults = "team_screen_user_defaults_key"
+    let playerCardSelectionModelKeyUserDefaults = "player_card_selection_screen_user_defaults_key"
   }
 }

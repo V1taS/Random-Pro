@@ -8,6 +8,8 @@
 
 import UIKit
 import DateTimeScreenModule
+import NotificationService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol DateTimeScreenCoordinatorOutput: AnyObject {
@@ -39,25 +41,22 @@ final class DateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol {
   
   private let navigationController: UINavigationController
   private var dateTimeScreenModule: DateTimeModule?
+  private let notificationService = NotificationServiceImpl()
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private let services: ApplicationServices
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let dateTimeScreenModule = DateTimeAssembly().createModule(storageService: services.storageService)
+    let dateTimeScreenModule = DateTimeAssembly().createModule(storageService: StorageServiceImpl())
     self.dateTimeScreenModule = dateTimeScreenModule
     self.dateTimeScreenModule?.moduleOutput = self
     navigationController.pushViewController(dateTimeScreenModule, animated: true)
@@ -67,24 +66,24 @@ final class DateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol {
 // MARK: - DateTimeModuleOutput
 
 extension DateTimeScreenCoordinator: DateTimeModuleOutput {
-  func resultLabelAction(model: DateTimeScreenModelProtocol) {
+  func resultLabelAction(model: DateTimeScreenModel) {
     UIPasteboard.general.string = model.result
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
-  func cleanButtonWasSelected(model: DateTimeScreenModelProtocol) {
+  func cleanButtonWasSelected(model: DateTimeScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .dateAndTime(
       itemsGenerated: "\(model.listResult.count)",
       lastItem: model.result
     ))
   }
   
-  func settingButtonAction(model: DateTimeScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: DateTimeScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -108,7 +107,7 @@ extension DateTimeScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -126,6 +125,10 @@ extension DateTimeScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension DateTimeScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: DateTimeScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

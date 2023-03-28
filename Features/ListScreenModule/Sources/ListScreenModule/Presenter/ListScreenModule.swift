@@ -36,11 +36,11 @@ public protocol ListScreenModuleOutput: AnyObject {
 public protocol ListScreenModuleInput {
   
   /// Возвращает текущей модели
-  func returnCurrentModel() -> ListScreenModelProtocol
+  func returnCurrentModel() -> ListScreenModel
   
   /// Обновить контент
   ///  - Parameter models: Модельки с текстами
-  func updateContentWith(models: [ListScreenTextModelProtocol])
+  func updateContentWith(models: [ListScreenModel.TextModel])
   
   /// Обновить контент
   ///  - Parameter value: Без повторений
@@ -108,14 +108,11 @@ final class ListScreenViewController: ListScreenModule {
   
   // MARK: - Internal func
   
-  func returnCurrentModel() -> ListScreenModelProtocol {
+  func returnCurrentModel() -> ListScreenModel {
     interactor.returnCurrentModel()
   }
   
-  func updateContentWith(models: [ListScreenTextModelProtocol]) {
-    guard let models = models as? [ListScreenModel.TextModel] else {
-      return
-    }
+  func updateContentWith(models: [ListScreenModel.TextModel]) {
     interactor.updateContentWith(models: models)
   }
   

@@ -8,6 +8,8 @@
 
 import UIKit
 import LetterScreenModule
+import StorageService
+import NotificationService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol LetterScreenCoordinatorOutput: AnyObject {
@@ -41,23 +43,20 @@ final class LetterScreenCoordinator: LetterScreenCoordinatorProtocol {
   private var letterScreenModule: LetterScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private let services: ApplicationServices
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal property
   
   func start() {
-    let letterScreenModule = LetterScreenAssembly().createModule(storageService: services.storageService)
+    let letterScreenModule = LetterScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.letterScreenModule = letterScreenModule
     self.letterScreenModule?.moduleOutput = self
     navigationController.pushViewController(letterScreenModule, animated: true)
@@ -67,7 +66,7 @@ final class LetterScreenCoordinator: LetterScreenCoordinatorProtocol {
 // MARK: - LetterScreenModuleOutput
 
 extension LetterScreenCoordinator: LetterScreenModuleOutput {
-  func cleanButtonWasSelected(model: LetterScreenModelProtocol) {
+  func cleanButtonWasSelected(model: LetterScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .letter(
       withoutRepetition: model.isEnabledWithoutRepetition,
       itemsGenerated: "\(model.listResult.count)",
@@ -75,8 +74,8 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
     ))
   }
   
-  func settingButtonAction(model: LetterScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: LetterScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -89,7 +88,7 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
   }
   
   func didReceiveRangeEnded() {
-    services.notificationService.showNeutralAlertWith(
+    notificationService.showNeutralAlertWith(
       title: Appearance().lettersRangeEnded,
       glyph: true,
       timeout: nil,
@@ -110,7 +109,7 @@ extension LetterScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -130,6 +129,10 @@ extension LetterScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension LetterScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: LetterScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

@@ -9,16 +9,4 @@
 @testable import LetterScreenModule
 import XCTest
 
-final class LetterScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class LetterScreenModuleTests: XCTestCase {}

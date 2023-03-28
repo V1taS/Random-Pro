@@ -8,6 +8,8 @@
 
 import UIKit
 import PremiumScreenModule
+import NotificationService
+import AppPurchasesService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol PremiumScreenCoordinatorOutput: AnyObject {
@@ -51,20 +53,17 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var premiumScreenModule: PremiumScreenModule?
   private var presentType: PremiumScreenPresentType?
   private var premiumScreenNavigationController: UINavigationController?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
@@ -78,7 +77,7 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
       return
     }
     
-    let premiumScreenModule = PremiumScreenAssembly().createModule(appPurchasesService: services.appPurchasesService)
+    let premiumScreenModule = PremiumScreenAssembly().createModule(appPurchasesService: AppPurchasesServiceImpl())
     self.premiumScreenModule = premiumScreenModule
     self.premiumScreenModule?.moduleOutput = self
     premiumScreenModule.selectIsModalPresentationStyle(presentType == .present)
@@ -102,46 +101,70 @@ extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
   }
   
   func didReceiveRestoredSuccess() {
-    services.notificationService.showPositiveAlertWith(title: Appearance().purchaseRestoredTitle,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().purchaseRestoredTitle,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
-
+  
   func somethingWentWrong() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrongTitle,
-                                                       glyph: false,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrongTitle,
+                                              glyph: false,
+                                              timeout: nil,
+                                              active: {})
   }
-
+  
   func didReceivePurchasesMissing() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().purchasesMissingTitle,
-                                                       glyph: false,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().purchasesMissingTitle,
+                                              glyph: false,
+                                              timeout: nil,
+                                              active: {})
   }
-
+  
   func didReceiveSubscriptionPurchaseSuccess() {
-    services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
-
+  
   func didReceiveOneTimePurchaseSuccess() {
-    services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
-
+  
   func closeButtonAction() {
     premiumScreenNavigationController?.dismiss(animated: true)
   }
-
+  
   func updateStateForSections() {
     output?.updateStateForSections()
+  }
+}
+
+// MARK: - Adapter ApphudProductModel
+
+extension ApphudProductModel: PremiumScreenApphudProductProtocol {}
+
+// MARK: - Adapter AppPurchasesServiceState
+
+extension AppPurchasesServiceState: PremiumScreenAppPurchasesServiceStateProtocol {}
+
+// MARK: - Adapter AppPurchasesService
+
+extension AppPurchasesServiceImpl: PremiumScreenAppPurchasesServiceProtocol {
+  public func getProductsForPremium(completion: @escaping ([PremiumScreenApphudProductProtocol]?) -> Void) {
+    getProducts(completion: completion)
+  }
+  
+  public func purchaseWithForPremium(_ product: PremiumScreenApphudProductProtocol,
+                                     completion: @escaping (PremiumScreenAppPurchasesServiceStateProtocol) -> Void) {
+    guard let product = product as? ApphudProductModel else {
+      return
+    }
+    purchaseWith(product, completion: completion)
   }
 }
 

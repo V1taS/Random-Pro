@@ -13,7 +13,7 @@ public final class LetterScreenAssembly {
   public init() {}
   
   /// Собирает модуль `LetterScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> LetterScreenModule {
+  public func createModule(storageService: LetterScreenStorageServiceProtocol) -> LetterScreenModule {
     let view = LetterScreenView()
     let interactor = LetterScreenInteractor(storageService: storageService)
     let factory = LetterScreenFactory()

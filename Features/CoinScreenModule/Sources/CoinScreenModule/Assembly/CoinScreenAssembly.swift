@@ -16,8 +16,8 @@ public final class CoinScreenAssembly {
   /// - Parameters:
   ///  - hapticService: Обратная связь от моторчика
   ///  - storageService: Хранения данных
-  public func createModule(hapticService: HapticServiceProtocol,
-                           storageService: StorageServiceProtocol) -> CoinScreenModule {
+  public func createModule(hapticService: CoinScreenHapticServiceProtocol,
+                           storageService: CoinScreenStorageServiceProtocol) -> CoinScreenModule {
     let view = CoinScreenView()
     let interactor = CoinScreenInteractor(hapticService: hapticService,
                                           storageService: storageService)

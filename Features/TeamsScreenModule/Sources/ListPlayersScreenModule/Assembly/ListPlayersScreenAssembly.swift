@@ -14,7 +14,7 @@ public final class ListPlayersScreenAssembly {
   
   /// Собирает модуль `ListPlayersScreen`
   /// - Returns: Cобранный модуль `ListPlayersScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> ListPlayersScreenModule {
+  public func createModule(storageService: TeamsScreeStorageServiceProtocol) -> ListPlayersScreenModule {
     let interactor = ListPlayersScreenInteractor(storageService: storageService)
     let view = ListPlayersScreenView()
     let factory = ListPlayersScreenFactory()

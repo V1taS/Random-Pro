@@ -34,4 +34,3 @@ public protocol FileManagerServiceProtocol {
   /// - Returns: Путь до файла `URL`
   func deleteObjectWith(fileURL: URL, isRemoved: ((Bool) -> Void)?)
 }
-

@@ -143,7 +143,7 @@ extension PlayerCardSelectionScreenView: UICollectionViewDataSource {
     }
     
     let model = models[indexPath.row]
-    let modelStyle = (model.style as? PlayerCardSelectionScreenModel.StyleCard) ?? .defaultStyle
+    let modelStyle = model.style
     var styleCard: PlayerView.StyleCard
     
     switch modelStyle {

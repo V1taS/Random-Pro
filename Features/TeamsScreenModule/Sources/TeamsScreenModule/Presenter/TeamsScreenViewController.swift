@@ -16,7 +16,7 @@ public protocol TeamsScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter players: список игроков
-  func settingButtonAction(players: [TeamsScreenPlayerModelProtocol])
+  func settingButtonAction(players: [TeamsScreenPlayerModel])
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -33,20 +33,20 @@ public protocol TeamsScreenModuleInput {
   func returnGeneratedCountTeams() -> Int
   
   /// Возвращает список команд
-  func returnListTeams() -> [TeamsScreenTeamModelProtocol]
+  func returnListTeams() -> [TeamsScreenModel.Team]
   
   /// Возвращает сколько выбрано команд
   func returnSelectedTeam() -> Int
   
   /// Возвращает список игроков
-  func returnListPlayers() -> [TeamsScreenPlayerModelProtocol]
+  func returnListPlayers() -> [TeamsScreenPlayerModel]
   
   /// Количество сгенерированных игроков
   func returnGeneratedCountPlayers() -> Int
   
   /// Обновить список игроков
   ///  - Parameter players: Список игроков
-  func updateContentWith(players: [TeamsScreenPlayerModelProtocol])
+  func updateContentWith(players: [TeamsScreenPlayerModel])
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
@@ -117,10 +117,7 @@ final class TeamsScreenViewController: TeamsScreenModule {
   
   // MARK: - Internal func
   
-  func updateContentWith(players: [TeamsScreenPlayerModelProtocol]) {
-    guard let players = players as? [TeamsScreenPlayerModel] else {
-      return
-    }
+  func updateContentWith(players: [TeamsScreenPlayerModel]) {
     interactor.updateContentWith(players: players)
   }
   
@@ -128,11 +125,11 @@ final class TeamsScreenViewController: TeamsScreenModule {
     interactor.returnCountTeams()
   }
   
-  func returnListTeams() -> [TeamsScreenTeamModelProtocol] {
+  func returnListTeams() -> [TeamsScreenModel.Team] {
     interactor.returnListTeams()
   }
   
-  func returnListPlayers() -> [TeamsScreenPlayerModelProtocol] {
+  func returnListPlayers() -> [TeamsScreenPlayerModel] {
     interactor.returnListPlayers()
   }
   

@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum PremiumScreenPurchaseState: AppPurchasesServiceStateProtocol {
+public enum PremiumScreenPurchaseState: PremiumScreenAppPurchasesServiceStateProtocol {
   /// Успешная покупка подписки
-case successfulSubscriptionPurchase
+  case successfulSubscriptionPurchase
   
   /// Успешная разовая покупка
-case successfulOneTimePurchase
+  case successfulOneTimePurchase
   
   /// Что-то пошло не так
-case somethingWentWrong
+  case somethingWentWrong
 }

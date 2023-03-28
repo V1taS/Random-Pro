@@ -9,21 +9,4 @@
 @testable import TeamsScreenModule
 import XCTest
 
-final class TeamsScreenModuleUITests: XCTestCase {
-  let app = XCUIApplication()
-  override func setUpWithError() throws {
-    super.setUp()
-    continueAfterFailure = false
-    app.launchArguments += ["UITesting"]
-    app.launch()
-    print(app.debugDescription)
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class TeamsScreenModuleUITests: XCTestCase {}

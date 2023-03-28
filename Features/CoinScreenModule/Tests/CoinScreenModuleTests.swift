@@ -9,16 +9,4 @@
 @testable import CoinScreenModule
 import XCTest
 
-final class CoinScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class CoinScreenModuleTests: XCTestCase {}

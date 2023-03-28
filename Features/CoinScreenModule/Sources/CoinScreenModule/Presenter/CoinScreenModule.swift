@@ -13,11 +13,11 @@ public protocol CoinScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: CoinScreenModelProtocol)
+  func settingButtonAction(model: CoinScreenModel)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
-  func cleanButtonWasSelected(model: CoinScreenModelProtocol)
+  func cleanButtonWasSelected(model: CoinScreenModel)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`

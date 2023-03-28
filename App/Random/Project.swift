@@ -33,16 +33,22 @@ let project = Project(
       dependencies: [
         // External
         .external(name: "YandexMobileMetricaPush"),
+        .external(name: "YandexMobileMetrica"),
         .external(name: "Notifications"),
         .external(name: "RandomNetwork"),
+        .external(name: "FirebaseAnalytics"),
+        .external(name: "FirebaseFirestore"),
+        .external(name: "FirebaseAuth"),
         
         // Core
         .project(target: appPurchasesService,
                  path: .relativeToRoot("\(corePath)/\(appPurchasesService)")),
           .project(target: deepLinkService,
                    path: .relativeToRoot("\(corePath)/\(deepLinkService)")),
-        .project(target: firebaseService,
-                 path: .relativeToRoot("\(corePath)/\(firebaseService)")),
+        .project(target: metricsService,
+                 path: .relativeToRoot("\(corePath)/\(metricsService)")),
+        .project(target: featureToggleServices,
+                 path: .relativeToRoot("\(corePath)/\(featureToggleServices)")),
         .project(target: fileManagerService,
                  path: .relativeToRoot("\(corePath)/\(fileManagerService)")),
         .project(target: hapticService,
@@ -71,8 +77,6 @@ let project = Project(
                  path: .relativeToRoot("\(featuresPath)/\(contactScreenModule)")),
         .project(target: cubesScreenModule,
                  path: .relativeToRoot("\(featuresPath)/\(cubesScreenModule)")),
-        .project(target: customMainSectionsModule,
-                 path: .relativeToRoot("\(featuresPath)/\(customMainSectionsModule)")),
         .project(target: dateTimeScreenModule,
                  path: .relativeToRoot("\(featuresPath)/\(dateTimeScreenModule)")),
         .project(target: filmsScreenModule,
@@ -89,8 +93,6 @@ let project = Project(
                  path: .relativeToRoot("\(featuresPath)/\(lotteryScreenModule)")),
         .project(target: mainScreenModule,
                  path: .relativeToRoot("\(featuresPath)/\(mainScreenModule)")),
-        .project(target: mainSettingsScreenModule,
-                 path: .relativeToRoot("\(featuresPath)/\(mainSettingsScreenModule)")),
         .project(target: numberScreenModule,
                  path: .relativeToRoot("\(featuresPath)/\(numberScreenModule)")),
         .project(target: passwordScreenModule,
@@ -115,31 +117,7 @@ let project = Project(
       environment: [:],
       launchArguments: [],
       additionalFiles: []
-    ),
-    Target(
-      name: "\(appName)Tests",
-      platform: .iOS,
-      product: .unitTests,
-      bundleId: "\(reverseOrganizationName).\(appName)Tests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["Tests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(appName)")
-      ]),
-    Target(
-      name: "\(appName)UITests",
-      platform: .iOS,
-      product: .uiTests,
-      bundleId: "\(reverseOrganizationName).\(appName)UITests",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
-      infoPlist: .default,
-      sources: ["UITests/**"],
-      resources: [],
-      dependencies: [
-        .target(name: "\(appName)")
-      ])
+    )
   ],
   schemes: [mainIOSScheme],
   fileHeaderTemplate: nil,

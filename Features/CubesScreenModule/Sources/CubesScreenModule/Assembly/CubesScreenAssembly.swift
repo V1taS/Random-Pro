@@ -15,7 +15,7 @@ public final class CubesScreenAssembly {
   
   /// Собирает модуль `CubesScreen`
   /// - Returns: Cобранный модуль `CubesScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> CubesScreenModule {
+  public func createModule(storageService: CubesScreenStorageServiceProtocol) -> CubesScreenModule {
     let view = CubesScreenView()
     let interactor = CubesScreenInteractor(storageService: storageService)
     let factory = CubesScreenFactory()

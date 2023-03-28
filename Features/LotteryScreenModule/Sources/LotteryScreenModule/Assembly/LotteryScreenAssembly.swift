@@ -13,7 +13,7 @@ public final class LotteryScreenAssembly {
   public init() {}
   
   /// Собирает модуль `LotteryScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> LotteryScreenModule {
+  public func createModule(storageService: LotteryScreenStorageServiceProtocol) -> LotteryScreenModule {
     let view = LotteryScreenView()
     let interactor = LotteryScreenInteractor(storageService: storageService)
     let factory = LotteryScreenFactory()

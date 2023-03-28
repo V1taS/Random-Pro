@@ -32,7 +32,7 @@ public protocol ContactScreenModuleInput {
   func cleanButtonAction()
   
   /// Запросить текущую модель
-  func returnCurrentModel() -> ContactScreenModelProtocol
+  func returnCurrentModel() -> ContactScreenModel
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: ContactScreenModuleOutput? { get set }
@@ -93,7 +93,7 @@ final class ContactScreenViewController: ContactScreenModule {
   
   // MARK: - Internal func
   
-  func returnCurrentModel() -> ContactScreenModelProtocol {
+  func returnCurrentModel() -> ContactScreenModel {
     interactor.returnCurrentModel()
   }
   

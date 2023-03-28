@@ -43,4 +43,3 @@ public protocol PermissionServiceProtocol {
   ///  - Parameter granted: Доступ разрешен
   func getNotification(status: @escaping (UNAuthorizationStatus) -> Void)
 }
-

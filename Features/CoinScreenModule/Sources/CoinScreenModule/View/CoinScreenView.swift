@@ -54,7 +54,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
   
   func updateContentWith(model: CoinScreenModel) {
     scrollResult.listLabels = model.listResult
-    let modelCoinType = (model.coinType as? CoinScreenModel.CoinType) ?? .none
+    let modelCoinType = model.coinType
     
     if modelCoinType != .none {
       let appearance = Appearance()

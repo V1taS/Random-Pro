@@ -13,7 +13,7 @@ public final class YesNoScreenAssembly {
   public init() {}
   
   /// Собирает модуль `YesNoScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> YesNoScreenModule {
+  public func createModule(storageService: YesNoScreenStorageServiceProtocol) -> YesNoScreenModule {
     let view = YesNoScreenView()
     let interactor = YesNoScreenInteractor(storageService: storageService)
     let factory = YesNoScreenFactory()

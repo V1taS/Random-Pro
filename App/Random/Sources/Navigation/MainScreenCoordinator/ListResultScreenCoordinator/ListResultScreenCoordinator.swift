@@ -7,6 +7,7 @@
 
 import UIKit
 import ListResultScreenModule
+import NotificationService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ListResultScreenCoordinatorOutput: AnyObject { }
@@ -33,19 +34,16 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
   // MARK: - Private variables
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var listResultScreenModule: ListResultScreenModule?
   private var shareScreenCoordinator: ShareScreenCoordinatorProtocol?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
@@ -66,8 +64,7 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
 
 extension ListResultScreenCoordinator: ListResultScreenModuleOutput {
   func shareButtonAction(imageData: Data?) {
-    let shareScreenCoordinator = ShareScreenCoordinator(navigationController,
-                                                        services)
+    let shareScreenCoordinator = ShareScreenCoordinator(navigationController)
     self.shareScreenCoordinator = shareScreenCoordinator
     self.shareScreenCoordinator?.output = self
     shareScreenCoordinator.start()
@@ -78,10 +75,10 @@ extension ListResultScreenCoordinator: ListResultScreenModuleOutput {
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
 }
 

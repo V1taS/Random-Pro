@@ -73,28 +73,36 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
   // MARK: - Private property
   
   private lazy var numberFormatter = NumberFormatter()
-  private var storageService: StorageServiceProtocol
+  private var storageService: PasswordScreenStorageServiceProtocol
+  private var passwordScreenModel: PasswordScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().passwordScreenModelKeyUserDefaults,
+                                 to: PasswordScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().passwordScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения данных
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: PasswordScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func getContent() {
-    if let model = storageService.passwordScreenModel?.toCodable(),
-       let switchState = model.switchState as? PasswordScreenModel.SwitchState {
+    if let model = passwordScreenModel {
+      let switchState = model.switchState
       let newModel = PasswordScreenModel(
         passwordLength: model.passwordLength,
         result: model.result,
         listResult: model.listResult,
         switchState: switchState
       )
-      self.storageService.passwordScreenModel = newModel
+      self.passwordScreenModel = newModel
       output?.didReceive(model: newModel)
     } else {
       let appearance = Appearance()
@@ -109,7 +117,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
           symbols: true
         )
       )
-      self.storageService.passwordScreenModel = newModel
+      self.passwordScreenModel = newModel
       output?.didReceive(model: newModel)
     }
   }
@@ -118,22 +126,22 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
     let rangeStart = formatter(text: text)
     output?.didReceivePasswordLength(text: rangeStart)
     
-    guard let model = storageService.passwordScreenModel?.toCodable(),
-          let switchState = model.switchState as? PasswordScreenModel.SwitchState else {
+    guard let model = passwordScreenModel else {
       return
     }
     
+    let switchState = model.switchState
     let newModel = PasswordScreenModel(
       passwordLength: text,
       result: model.result,
       listResult: model.listResult,
       switchState: switchState
     )
-    self.storageService.passwordScreenModel = newModel
+    self.passwordScreenModel = newModel
   }
   
   func uppercaseSwitchAction(status: Bool) {
-    guard let model = storageService.passwordScreenModel else {
+    guard let model = passwordScreenModel else {
       return
     }
     
@@ -148,11 +156,11 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         symbols: model.switchState.symbols
       )
     )
-    self.storageService.passwordScreenModel = newModel
+    self.passwordScreenModel = newModel
   }
   
   func lowercaseSwitchAction(status: Bool) {
-    guard let model = storageService.passwordScreenModel else {
+    guard let model = passwordScreenModel else {
       return
     }
     
@@ -167,11 +175,11 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         symbols: model.switchState.symbols
       )
     )
-    self.storageService.passwordScreenModel = newModel
+    self.passwordScreenModel = newModel
   }
   
   func numbersSwitchAction(status: Bool) {
-    guard let model = storageService.passwordScreenModel else {
+    guard let model = passwordScreenModel else {
       return
     }
     
@@ -186,11 +194,11 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         symbols: model.switchState.symbols
       )
     )
-    self.storageService.passwordScreenModel = newModel
+    self.passwordScreenModel = newModel
   }
   
   func symbolsSwitchAction(status: Bool) {
-    guard let model = storageService.passwordScreenModel else {
+    guard let model = passwordScreenModel else {
       return
     }
     
@@ -205,12 +213,12 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         symbols: status
       )
     )
-    self.storageService.passwordScreenModel = newModel
+    self.passwordScreenModel = newModel
   }
   
   func generateButtonAction(passwordLength: String?) {
     guard
-      let model = storageService.passwordScreenModel,
+      let model = passwordScreenModel,
       let passwordLengthInt = Int((passwordLength ?? "").replacingOccurrences(of: Appearance().withoutSpaces, with: ""))
     else {
       output?.didReceiveError()
@@ -242,14 +250,14 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
             symbols: model.switchState.symbols
           )
         )
-        self.storageService.passwordScreenModel = newModel
+        self.passwordScreenModel = newModel
         self.output?.didReceive(model: newModel)
       }
     )
   }
   
   func returnCurrentModel() -> PasswordScreenModel {
-    if let model = storageService.passwordScreenModel?.toCodable() {
+    if let model = passwordScreenModel {
       return model
     } else {
       let appearance = Appearance()
@@ -280,7 +288,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         symbols: true
       )
     )
-    self.storageService.passwordScreenModel = newModel
+    self.passwordScreenModel = newModel
     output?.didReceive(model: newModel)
     output?.cleanButtonWasSelected()
   }
@@ -383,5 +391,6 @@ private extension PasswordScreenInteractor {
     let withoutSpaces = " "
     let resultLabel = "?"
     let passwordLength = "100"
+    let passwordScreenModelKeyUserDefaults = "password_screen_user_defaults_key"
   }
 }

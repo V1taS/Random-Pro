@@ -14,7 +14,7 @@ public final class PlayerCardSelectionScreenAssembly {
   
   /// Собирает модуль `PlayerCardSelectionScreen`
   /// - Returns: Cобранный модуль `PlayerCardSelectionScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> PlayerCardSelectionScreenModule {
+  public func createModule(storageService: TeamsScreeStorageServiceProtocol) -> PlayerCardSelectionScreenModule {
     let interactor = PlayerCardSelectionScreenInteractor(storageService: storageService)
     let view = PlayerCardSelectionScreenView()
     let factory = PlayerCardSelectionScreenFactory()

@@ -8,28 +8,17 @@
 
 import Foundation
 
-struct LetterScreenModel: Codable, LetterScreenModelProtocol {
+public struct LetterScreenModel: Codable {
   
   /// Результат генерации
-  let result: String
+  public let result: String
   
   /// Список результатов
-  let listResult: [String]
+  public let listResult: [String]
   
   /// Без повторений
-  let isEnabledWithoutRepetition: Bool
+  public let isEnabledWithoutRepetition: Bool
   
   /// Индекс выбранного языка
-  let languageIndexSegmented: Int
-}
-
-// MARK: - toCodable
-
-extension LetterScreenModelProtocol {
-  func toCodable() -> LetterScreenModel? {
-    return LetterScreenModel(result: result,
-                             listResult: listResult,
-                             isEnabledWithoutRepetition: isEnabledWithoutRepetition,
-                             languageIndexSegmented: languageIndexSegmented)
-  }
+  public let languageIndexSegmented: Int
 }

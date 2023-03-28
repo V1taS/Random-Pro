@@ -8,6 +8,12 @@
 
 import UIKit
 import ShareScreenModule
+import NotificationService
+import FileManagerService
+import PermissionService
+import YandexMobileMetrica
+import FirebaseAnalytics
+import MetricsService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ShareScreenCoordinatorOutput: AnyObject {}
@@ -34,24 +40,22 @@ final class ShareScreenCoordinator: ShareScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var shareScreenModule: ShareScreenModule?
+  private let notificationService = NotificationServiceImpl()
+  private let fileManagerService = FileManagerImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let shareScreenModule = ShareScreenAssembly().createModule(permissionService: services.permissionService)
+    let shareScreenModule = ShareScreenAssembly().createModule(permissionService: PermissionServiceImpl())
     self.shareScreenModule = shareScreenModule
     self.shareScreenModule?.moduleOutput = self
     let navController = UINavigationController(rootViewController: shareScreenModule)
@@ -67,7 +71,7 @@ final class ShareScreenCoordinator: ShareScreenCoordinatorProtocol {
 
 extension ShareScreenCoordinator: ShareScreenModuleOutput {
   func requestPhotosError() {
-    services.notificationService.showNegativeAlertWith(
+    notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,
       glyph: false,
       timeout: nil,
@@ -83,9 +87,9 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
   func shareButtonAction(imageData: Data?) {
     guard
       let imageData = imageData,
-      let imageFile = services.fileManagerService.saveObjectWith(fileName: "Random",
-                                                                 fileExtension: ".png",
-                                                                 data: imageData)
+      let imageFile = fileManagerService.saveObjectWith(fileName: "Random",
+                                                        fileExtension: ".png",
+                                                        data: imageData)
     else {
       return
     }
@@ -119,13 +123,35 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
     }
     
     shareScreenModule?.present(activityViewController, animated: true, completion: nil)
-    
-    // TODO: - 🔴
-//    services.metricsService.track(event: .shareImage)
+    track(event: .shareImage)
   }
   
   func closeButtonAction() {
     navigationController.dismiss(animated: true)
+  }
+}
+
+// MARK: - Adapter PermissionService
+
+extension PermissionServiceImpl: ShareScreenPermissionServiceProtocol {}
+
+// MARK: - Private
+
+private extension ShareScreenCoordinator {
+  func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+  
+  func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
   }
 }
 

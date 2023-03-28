@@ -52,29 +52,37 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
+  private var storageService: LetterScreenStorageServiceProtocol
+  private var letterScreenModel: LetterScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().letterScreenModelKeyUserDefaults,
+                                 to: LetterScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().letterScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - services: Сервисы приложения
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: LetterScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    storageService.letterScreenModel = nil
+    letterScreenModel = nil
     getContent()
-    guard let model = storageService.letterScreenModel?.toCodable() else {
+    guard let model = letterScreenModel else {
       return
     }
     output?.cleanButtonWasSelected(model: model)
   }
   
   func withoutRepetitionAction(isOn: Bool) {
-    guard let model = storageService.letterScreenModel else {
+    guard let model = letterScreenModel else {
       configureModel(withWithoutRepetition: isOn)
       return
     }
@@ -85,7 +93,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
       isEnabledWithoutRepetition: isOn,
       languageIndexSegmented: model.languageIndexSegmented
     )
-    self.storageService.letterScreenModel = modelNew
+    self.letterScreenModel = modelNew
     getContent()
   }
   
@@ -95,7 +103,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
   
   func generateContentRusLetter() {
     let appearance = Appearance()
-    guard let model = storageService.letterScreenModel?.toCodable() else {
+    guard let model = letterScreenModel else {
       configureModel()
       return
     }
@@ -109,20 +117,20 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
         configureModel()
         return
       }
-      self.storageService.letterScreenModel = newModel
+      self.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
                                            listLetter: Appearance().listRussionLetters,
                                            languageIndexSegmented: appearance.russionCharacterIndex)
-      self.storageService.letterScreenModel = newModel
+      self.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     }
   }
   
   func generateContentEngLetter() {
     let appearance = Appearance()
-    guard let model = storageService.letterScreenModel?.toCodable() else {
+    guard let model = letterScreenModel else {
       assertionFailure("Неудалось получить модель")
       configureModel()
       return
@@ -138,19 +146,19 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
         configureModel()
         return
       }
-      self.storageService.letterScreenModel = newModel
+      self.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     } else {
       let newModel = generateRandomContent(model: model,
                                            listLetter: Appearance().listEnglishLetters,
                                            languageIndexSegmented: appearance.englishCharacterIndex)
-      self.storageService.letterScreenModel = newModel
+      self.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     }
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.letterScreenModel {
+    if let model = letterScreenModel {
       return model.listResult
     } else {
       return []
@@ -162,7 +170,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
 
 private extension LetterScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = storageService.letterScreenModel?.toCodable() {
+    if let model = letterScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
@@ -172,7 +180,7 @@ private extension LetterScreenInteractor {
         isEnabledWithoutRepetition: isOn,
         languageIndexSegmented: appearance.russionCharacterIndex
       )
-      self.storageService.letterScreenModel = model
+      self.letterScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -232,5 +240,6 @@ private extension LetterScreenInteractor {
     ]
     let russionCharacterIndex: Int = 0
     let englishCharacterIndex: Int = 1
+    let letterScreenModelKeyUserDefaults = "letter_screen_user_defaults_key"
   }
 }

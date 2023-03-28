@@ -13,14 +13,14 @@ public protocol LetterScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
-  func cleanButtonWasSelected(model: LetterScreenModelProtocol)
+  func cleanButtonWasSelected(model: LetterScreenModel)
   
   /// Диапазон чисел закончился
   func didReceiveRangeEnded()
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: LetterScreenModelProtocol)
+  func settingButtonAction(model: LetterScreenModel)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`

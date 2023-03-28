@@ -13,15 +13,15 @@ public protocol DateTimeModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: DateTimeScreenModelProtocol)
+  func settingButtonAction(model: DateTimeScreenModel)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
-  func cleanButtonWasSelected(model: DateTimeScreenModelProtocol)
+  func cleanButtonWasSelected(model: DateTimeScreenModel)
   
   /// Было нажатие на результат генерации
   ///  - Parameter model: Результат генерации
-  func resultLabelAction(model: DateTimeScreenModelProtocol)
+  func resultLabelAction(model: DateTimeScreenModel)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`

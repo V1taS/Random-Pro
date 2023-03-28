@@ -45,16 +45,24 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   
   // MARK: - Private property
   
-  private let hapticService: HapticServiceProtocol
-  private var storageService: StorageServiceProtocol
+  private let hapticService: CoinScreenHapticServiceProtocol
+  private var storageService: CoinScreenStorageServiceProtocol
+  private var coinScreenModel: CoinScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().coinScreenModelKeyUserDefaults,
+                                 to: CoinScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().coinScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///  - hapticService: Обратная связь от моторчика
   ///  - services: Сервисы приложения
-  init(hapticService: HapticServiceProtocol,
-       storageService: StorageServiceProtocol) {
+  init(hapticService: CoinScreenHapticServiceProtocol,
+       storageService: CoinScreenStorageServiceProtocol) {
     self.hapticService = hapticService
     self.storageService = storageService
   }
@@ -62,9 +70,9 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    storageService.coinScreenModel = nil
+    coinScreenModel = nil
     getContent()
-    guard let model = storageService.coinScreenModel?.toCodable() else {
+    guard let model = coinScreenModel else {
       return
     }
     output?.cleanButtonWasSelected(model: model)
@@ -76,7 +84,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   
   func generateContentCoin() {
     let appearance = Appearance()
-    guard let model = storageService.coinScreenModel else {
+    guard let model = coinScreenModel else {
       return
     }
     
@@ -93,12 +101,12 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.coinScreenModel = newModel
+    self.coinScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.coinScreenModel {
+    if let model = coinScreenModel {
       return model.listResult
     } else {
       return []
@@ -106,9 +114,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   }
   
   func playHapticFeedback() {
-    hapticService.play(isRepeat: false,
-                       patternType: CoinScreenPatternType.splash,
-                       completion: { _ in })
+    hapticService.play(isRepeat: false, completion: { _ in })
   }
 }
 
@@ -116,7 +122,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
 
 private extension CoinScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = storageService.coinScreenModel?.toCodable() {
+    if let model = coinScreenModel {
       output?.didReceive(model: model)
     } else {
       let model = CoinScreenModel(
@@ -124,7 +130,7 @@ private extension CoinScreenInteractor {
         coinType: .none,
         listResult: []
       )
-      self.storageService.coinScreenModel = model
+      self.coinScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -139,5 +145,6 @@ private extension CoinScreenInteractor {
       NSLocalizedString("Орел", comment: ""),
       NSLocalizedString("Решка", comment: "")
     ]
+    let coinScreenModelKeyUserDefaults = "coin_screen_user_defaults_key"
   }
 }

@@ -14,7 +14,7 @@ public final class SelecteAppIconScreenAssembly {
   
   /// Собирает модуль `SelecteAppIconScreen`
   /// - Returns: Cобранный модуль `SelecteAppIconScreen`
-  public func createModule(storageService: StorageServiceProtocol) -> SelecteAppIconScreenModule {
+  public func createModule(storageService: SelecteAppIconScreenStorageServiceProtocol) -> SelecteAppIconScreenModule {
     let interactor = SelecteAppIconScreenInteractor(storageService: storageService)
     let view = SelecteAppIconScreenView()
     let factory = SelecteAppIconScreenFactory()

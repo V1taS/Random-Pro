@@ -15,7 +15,7 @@ public final class ColorsScreenAssembly {
   /// Собирает модуль `ColorsScreen`
   /// - Parameter permissionService: Сервис по работе с разрешениями
   /// - Returns: Cобранный модуль `ColorsScreen`
-  public func createModule(permissionService: PermissionServiceProtocol) -> ColorsScreenModule {
+  public func createModule(permissionService: ColorsScreenPermissionServiceProtocol) -> ColorsScreenModule {
     let interactor = ColorsScreenInteractor(permissionService: permissionService)
     let view = ColorsScreenView()
     let factory = ColorsScreenFactory()

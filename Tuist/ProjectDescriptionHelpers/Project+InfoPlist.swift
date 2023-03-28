@@ -48,7 +48,7 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
       ])
     ]),
     "IPHONEOS_DEPLOYMENT_TARGET": .string("13.0"),
-    "CFBundleExecutable": .string("Random Pro"),
+    "CFBundleExecutable": .string("Random"),
     "TAB_WIDTH": .string("2"),
     "INDENT_WIDTH": .string("2"),
     "DEVELOPMENT_TEAM": .string("34VDSPZYU9"),

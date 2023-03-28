@@ -14,7 +14,7 @@ protocol ListAddItemsScreenCoordinatorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameter models: Модельки с текстами
-  func didReceiveText(models: [ListScreenTextModelProtocol])
+  func didReceiveText(models: [ListScreenModel.TextModel])
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
@@ -22,7 +22,7 @@ protocol ListAddItemsScreenCoordinatorInput {
   
   /// Обновить контент
   ///  - Parameter models: Модельки с текстами
-  func updateContentWith(models: [ListScreenTextModelProtocol])
+  func updateContentWith(models: [ListScreenModel.TextModel])
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: ListAddItemsScreenCoordinatorOutput? { get set }
@@ -58,7 +58,7 @@ final class ListAddItemsScreenCoordinator: ListAddItemsScreenCoordinatorProtocol
     navigationController.pushViewController(listAddItemsScreenModule, animated: true)
   }
   
-  func updateContentWith(models: [ListScreenTextModelProtocol]) {
+  func updateContentWith(models: [ListScreenModel.TextModel]) {
     listAddItemsScreenModule?.updateContentWith(models: models)
   }
 }
@@ -70,7 +70,7 @@ extension ListAddItemsScreenCoordinator: ListAddItemsScreenModuleOutput {
     removeTextAlert()
   }
   
-  func didReceiveText(models: [ListScreenTextModelProtocol]) {
+  func didReceiveText(models: [ListScreenModel.TextModel]) {
     output?.didReceiveText(models: models)
   }
 }

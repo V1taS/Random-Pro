@@ -16,7 +16,7 @@ public final class NumberScreenAssembly {
   /// Собирает модуль `NumberScreen`
   /// - Parameters:
   ///  - storageService: Сервис хранения данных
-  public func createModule(storageService: StorageServiceProtocol) -> NumberScreenModule {
+  public func createModule(storageService: NumberScreenStorageServiceProtocol) -> NumberScreenModule {
     let view = NumberScreenView()
     let interactor = NumberScreenInteractor(storageService: storageService)
     let factory = NumberScreenFactory()

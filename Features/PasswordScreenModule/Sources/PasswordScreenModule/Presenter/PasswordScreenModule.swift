@@ -20,7 +20,7 @@ public protocol PasswordScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: PasswordScreenModelProtocol)
+  func settingButtonAction(model: PasswordScreenModel)
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -30,7 +30,7 @@ public protocol PasswordScreenModuleOutput: AnyObject {
 public protocol PasswordScreenModuleInput {
   
   /// Запросить текущую модель
-  func returnCurrentModel() -> PasswordScreenModelProtocol
+  func returnCurrentModel() -> PasswordScreenModel
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
@@ -93,7 +93,7 @@ final class PasswordScreenViewController: PasswordScreenModule {
   
   // MARK: - Internal func
   
-  func returnCurrentModel() -> PasswordScreenModelProtocol {
+  func returnCurrentModel() -> PasswordScreenModel {
     interactor.returnCurrentModel()
   }
   

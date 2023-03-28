@@ -12,7 +12,7 @@ import CoreHaptics
 public final class HapticServiceImpl: HapticServiceProtocol {
 
   /// Ошибки запуска обратной связи от моторчика
-  public enum HapticError: HapticServiceErrorProtocol {
+  public enum HapticError: Error {
     
     /// Обратную связь от моторчика не поддерживается
     case notSupported
@@ -28,7 +28,7 @@ public final class HapticServiceImpl: HapticServiceProtocol {
   }
   
   /// Шаблоны запуска обратной связи от моторчика
-  public enum PatternType: HapticServicePatternTypeProtocol {
+  public enum PatternType {
     
     /// Два тактильных события
     case slice
@@ -45,33 +45,32 @@ public final class HapticServiceImpl: HapticServiceProtocol {
   private var hapticEngine: CHHapticEngine?
   private let hapticCapability = CHHapticEngine.capabilitiesForHardware()
   private var isStopHaptic = false
+  private let patternType: PatternType
   
   // MARK: - Init
   
-  public init(hapticEngine: CHHapticEngine? = nil, isStopHaptic: Bool = false) {
+  public init(hapticEngine: CHHapticEngine? = nil,
+              isStopHaptic: Bool = false,
+              patternType: HapticServiceImpl.PatternType = .splash) {
     self.hapticEngine = hapticEngine
     self.isStopHaptic = isStopHaptic
+    self.patternType = patternType
   }
   
   // MARK: - Public property
   
   public func play(isRepeat: Bool,
-                   patternType: HapticServicePatternTypeProtocol,
                    completion: (Result<Void, Error>) -> Void) {
     isStopHaptic = false
     createHapticEngine { [weak self] createResult in
       switch createResult {
       case .success:
-        guard let patternType = patternType as? HapticServiceImpl.PatternType else {
-          completion(.failure(HapticError.notSupported))
-          return
-        }
         getPatternFrom(patternType: patternType) { [weak self] patternResult in
           switch patternResult {
           case let .success(pattern):
             playPattern(pattern, isRepeat: isRepeat) { [weak self] in
               if isRepeat && !(self?.isStopHaptic ?? true) {
-                self?.play(isRepeat: isRepeat, patternType: patternType) { _ in }
+                self?.play(isRepeat: isRepeat) { _ in }
               }
             } completion: { playResult in
               switch playResult {

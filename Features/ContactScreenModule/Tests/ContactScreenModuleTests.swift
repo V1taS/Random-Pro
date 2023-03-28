@@ -9,16 +9,4 @@
 @testable import ContactScreenModule
 import XCTest
 
-final class ContactScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class ContactScreenModuleTests: XCTestCase {}

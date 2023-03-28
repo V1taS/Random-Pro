@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import CustomMainSectionsModule
+import MainScreenModule
+import NotificationService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol CustomMainSectionsCoordinatorOutput: AnyObject {
   
   /// Данные были изменены
   ///  - Parameter models: результат генерации
-  func didChanged(models: [MainScreenSectionProtocol])
+  func didChanged(models: [MainScreenModel.Section])
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
@@ -22,7 +23,7 @@ protocol CustomMainSectionsCoordinatorInput {
   
   /// Обновить контент
   /// - Parameter models: Моделька секций
-  func updateContentWith(models: [MainScreenSectionProtocol])
+  func updateContentWith(models: [MainScreenModel.Section])
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: CustomMainSectionsCoordinatorOutput? { get set }
@@ -40,17 +41,14 @@ final class CustomMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol
   
   private let navigationController: UINavigationController
   private var customMainSectionsModule: CustomMainSectionsModule?
-  private let services: ApplicationServices
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
@@ -63,7 +61,7 @@ final class CustomMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol
     navigationController.pushViewController(customMainSectionsModule, animated: true)
   }
   
-  func updateContentWith(models: [MainScreenSectionProtocol]) {
+  func updateContentWith(models: [MainScreenModel.Section]) {
     customMainSectionsModule?.updateContentWith(models: models)
   }
 }
@@ -72,13 +70,13 @@ final class CustomMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol
 
 extension CustomMainSectionsCoordinator: CustomMainSectionsModuleOutput {
   func didReceiveError() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
-  func didChanged(models: [MainScreenSectionProtocol]) {
+  func didChanged(models: [MainScreenModel.Section]) {
     output?.didChanged(models: models)
   }
 }

@@ -8,20 +8,11 @@
 
 import Foundation
 
-struct DateTimeScreenModel: Codable, DateTimeScreenModelProtocol {
+public struct DateTimeScreenModel: Codable {
   
   /// Результат генерации
-  let result: String
+  public let result: String
   
   /// Список результатов
-  let listResult: [String]
-}
-
-// MARK: - toCodable
-
-extension DateTimeScreenModelProtocol {
-  func toCodable() -> DateTimeScreenModel? {
-    return DateTimeScreenModel(result: result,
-                               listResult: listResult)
-  }
+  public let listResult: [String]
 }

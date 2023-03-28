@@ -8,32 +8,20 @@
 
 import Foundation
 
-struct NumberScreenModel: Codable, NumberScreenModelProtocol {
+public struct NumberScreenModel: Codable {
   
   /// Начало диапазона
-  let rangeStartValue: String?
+  public let rangeStartValue: String?
   
   /// Конец диапазона
-  let rangeEndValue: String?
+  public let rangeEndValue: String?
   
   /// Результат генерации
-  let result: String
+  public let result: String
   
   /// Список результатов
-  let listResult: [String]
+  public let listResult: [String]
   
   /// Без повторений
-  let isEnabledWithoutRepetition: Bool
-}
-
-// MARK: - toCodable
-
-extension NumberScreenModelProtocol {
-  func toCodable() -> NumberScreenModel {
-    return NumberScreenModel(rangeStartValue: rangeStartValue,
-                             rangeEndValue: rangeEndValue,
-                             result: result,
-                             listResult: listResult,
-                             isEnabledWithoutRepetition: isEnabledWithoutRepetition)
-  }
+  public let isEnabledWithoutRepetition: Bool
 }

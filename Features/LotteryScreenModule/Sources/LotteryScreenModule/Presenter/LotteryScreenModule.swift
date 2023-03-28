@@ -16,15 +16,15 @@ public protocol LotteryScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: LotteryScreenModelProtocol)
+  func settingButtonAction(model: LotteryScreenModel)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
-  func cleanButtonWasSelected(model: LotteryScreenModelProtocol)
+  func cleanButtonWasSelected(model: LotteryScreenModel)
   
   /// Было нажатие на результат генерации
   ///  - Parameter model: Результат генерации
-  func resultLabelAction(model: LotteryScreenModelProtocol)
+  func resultLabelAction(model: LotteryScreenModel)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`

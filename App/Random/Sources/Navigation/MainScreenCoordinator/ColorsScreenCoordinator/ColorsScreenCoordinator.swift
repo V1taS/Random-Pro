@@ -8,6 +8,12 @@
 
 import UIKit
 import ColorsScreenModule
+import PermissionService
+import NotificationService
+import FileManagerService
+import YandexMobileMetrica
+import FirebaseAnalytics
+import MetricsService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ColorsScreenCoordinatorOutput: AnyObject {}
@@ -30,24 +36,22 @@ final class ColorsScreenCoordinator: ColorsScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var colorsScreenModule: ColorsScreenModule?
+  private let notificationService = NotificationServiceImpl()
+  private let fileManagerService = FileManagerImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let colorsScreenModule = ColorsScreenAssembly().createModule(permissionService: services.permissionService)
+    let colorsScreenModule = ColorsScreenAssembly().createModule(permissionService: PermissionServiceImpl())
     self.colorsScreenModule = colorsScreenModule
     self.colorsScreenModule?.moduleOutput = self
     navigationController.pushViewController(colorsScreenModule, animated: true)
@@ -58,7 +62,7 @@ final class ColorsScreenCoordinator: ColorsScreenCoordinatorProtocol {
 
 extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
   func requestGalleryError() {
-    services.notificationService.showNegativeAlertWith(
+    notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,
       glyph: false,
       timeout: nil,
@@ -74,9 +78,9 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
   func shareButtonAction(imageData: Data?) {
     guard
       let imageData = imageData,
-      let imageFile = services.fileManagerService.saveObjectWith(fileName: "Random",
-                                                                 fileExtension: ".png",
-                                                                 data: imageData)
+      let imageFile = fileManagerService.saveObjectWith(fileName: "Random",
+                                                        fileExtension: ".png",
+                                                        data: imageData)
     else {
       return
     }
@@ -110,9 +114,31 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
     }
     
     colorsScreenModule?.present(activityViewController, animated: true, completion: nil)
+    track(event: .shareColors)
+  }
+}
+
+// MARK: - Adapter PermissionService
+
+extension PermissionServiceImpl: ColorsScreenPermissionServiceProtocol {}
+
+// MARK: - Private
+
+private extension ColorsScreenCoordinator {
+  func track(event: MetricsSections) {
+    Analytics.logEvent(event.rawValue, parameters: nil)
     
-    // TODO: - 🔴
-//    services.metricsService.track(event: .shareColors)
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
+  }
+  
+  func track(event: MetricsSections, properties: [String: String]) {
+    Analytics.logEvent(event.rawValue, parameters: properties)
+    
+    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      print("REPORT ERROR: %@", error.localizedDescription)
+    }
   }
 }
 

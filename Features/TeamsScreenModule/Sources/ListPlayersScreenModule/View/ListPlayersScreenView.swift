@@ -133,7 +133,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
         withIdentifier: PlayerInfoTableViewCell.reuseIdentifier
       ) as? PlayerInfoTableViewCell {
         var statePlayer: String? = playerModel.state.localizedName
-        if playerModel.state as? TeamsScreenPlayerModel.PlayerState == .random {
+        if playerModel.state == .random {
           statePlayer = nil
         }
         

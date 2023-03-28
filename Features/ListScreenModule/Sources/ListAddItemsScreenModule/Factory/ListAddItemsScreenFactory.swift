@@ -20,7 +20,7 @@ protocol ListAddItemsScreenFactoryInput {
   
   /// Создаем модельку для таблички
   ///  - Parameter models: Список моделек с текстом
-  func createListModelFrom(models: [ListAddItemsScreenModel.TextModel])
+  func createListModelFrom(models: [ListScreenModel.TextModel])
 }
 
 /// Фабрика
@@ -32,7 +32,7 @@ final class ListAddItemsScreenFactory: ListAddItemsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModelFrom(models: [ListAddItemsScreenModel.TextModel]) {
+  func createListModelFrom(models: [ListScreenModel.TextModel]) {
     output?.didReceive(models: createListFrom(models: models))
   }
 }
@@ -40,7 +40,7 @@ final class ListAddItemsScreenFactory: ListAddItemsScreenFactoryInput {
 // MARK: - Private
 
 private extension ListAddItemsScreenFactory {
-  func createListFrom(models: [ListAddItemsScreenModel.TextModel]) -> [ListAddItemsScreenModel] {
+  func createListFrom(models: [ListScreenModel.TextModel]) -> [ListAddItemsScreenModel] {
     let appearance = Appearance()
     var tableViewModels: [ListAddItemsScreenModel] = []
     var textCount: Int = .zero
@@ -57,7 +57,7 @@ private extension ListAddItemsScreenFactory {
     
     models.reversed().forEach {
       textCount += appearance.increase
-      tableViewModels.append(.text(ListAddItemsScreenModel.TextModel(
+      tableViewModels.append(.text(ListScreenModel.TextModel(
         id: $0.id,
         text: $0.text
       )))

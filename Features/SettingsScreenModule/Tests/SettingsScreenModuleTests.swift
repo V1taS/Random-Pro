@@ -9,16 +9,4 @@
 @testable import SettingsScreenModule
 import XCTest
 
-final class SettingsScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class SettingsScreenModuleTests: XCTestCase {}

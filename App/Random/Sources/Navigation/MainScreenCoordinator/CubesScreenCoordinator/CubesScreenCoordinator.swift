@@ -8,6 +8,8 @@
 
 import UIKit
 import CubesScreenModule
+import StorageService
+import NotificationService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol CubesScreenCoordinatorOutput: AnyObject {
@@ -38,8 +40,8 @@ final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var cubesScreenModule: CubesScreenModule?
+  private let notificationService = NotificationServiceImpl()
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -47,17 +49,14 @@ final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    var cubesScreenModule = CubesScreenAssembly().createModule(storageService: services.storageService)
+    var cubesScreenModule = CubesScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.cubesScreenModule = cubesScreenModule
     cubesScreenModule.moduleOutput = self
     navigationController.pushViewController(cubesScreenModule, animated: true)
@@ -74,8 +73,8 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
                                                                 lastItem: "\(model?.listResult.last ?? "")"))
   }
   
-  func settingButtonAction(model: CubesScreenModelProtocol) {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+  func settingButtonAction(model: CubesScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -88,10 +87,10 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
 }
 
@@ -115,7 +114,7 @@ extension CubesScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -127,6 +126,10 @@ extension CubesScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension CubesScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: CubesScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

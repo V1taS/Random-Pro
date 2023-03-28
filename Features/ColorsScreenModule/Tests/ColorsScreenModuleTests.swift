@@ -9,16 +9,4 @@
 @testable import ColorsScreenModule
 import XCTest
 
-final class ColorsScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class ColorsScreenModuleTests: XCTestCase {}

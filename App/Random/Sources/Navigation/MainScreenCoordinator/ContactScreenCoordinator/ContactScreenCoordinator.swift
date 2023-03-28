@@ -8,6 +8,9 @@
 
 import UIKit
 import ContactScreenModule
+import NotificationService
+import PermissionService
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ContactScreenCoordinatorOutput: AnyObject {
@@ -38,27 +41,24 @@ final class ContactScreenCoordinator: ContactScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var contactScreenModule: ContactScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
+  private let notificationService = NotificationServiceImpl()
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    var contactScreenModule = ContactScreenAssembly().createModule(permissionService: services.permissionService,
-                                                                   storageService: services.storageService)
+    var contactScreenModule = ContactScreenAssembly().createModule(permissionService: PermissionServiceImpl(),
+                                                                   storageService: StorageServiceImpl())
     self.contactScreenModule = contactScreenModule
     contactScreenModule.moduleOutput = self
     navigationController.pushViewController(contactScreenModule, animated: true)
@@ -79,21 +79,21 @@ extension ContactScreenCoordinator: ContactScreenModuleOutput {
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
-    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func didReceiveError() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
-                                                       glyph: true,
-                                                       timeout: nil,
-                                                       active: {})
+    notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                              glyph: true,
+                                              timeout: nil,
+                                              active: {})
   }
   
   func settingButtonAction() {
-    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
@@ -123,7 +123,7 @@ extension ContactScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func listOfObjectsAction() {
-    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
@@ -135,6 +135,14 @@ extension ContactScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension ContactScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Adapter PermissionService
+
+extension PermissionServiceImpl: ContactScreenPermissionServiceProtocol {}
+
+// MARK: - Adapter StorageService
+
+extension StorageServiceImpl: ContactScreenStorageServiceProtocol {}
 
 // MARK: - Appearance
 

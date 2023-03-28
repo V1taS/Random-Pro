@@ -36,7 +36,7 @@ protocol PlayerCardSelectionScreenInteractorInput {
   ///  - style: Стиль карточки
   ///  - models: Модель данных
   func savePlayerCardStyle(_ style: PlayerView.StyleCard,
-                           with models: [PlayerCardSelectionScreenModelProtocol])
+                           with models: [PlayerCardSelectionScreenModel])
 }
 
 /// Интерактор
@@ -48,13 +48,21 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
+  private var storageService: TeamsScreeStorageServiceProtocol
+  private var playerCardSelectionScreenModel: [PlayerCardSelectionScreenModel]? {
+    get {
+      storageService.getDataWith(key: Appearance().playerCardSelectionModelKeyUserDefaults,
+                                 to: [PlayerCardSelectionScreenModel].self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().playerCardSelectionModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис сохранения даных
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: TeamsScreeStorageServiceProtocol) {
     self.storageService = storageService
   }
   
@@ -65,9 +73,9 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
   }
   
   func savePlayerCardStyle(_ style: PlayerView.StyleCard,
-                           with models: [PlayerCardSelectionScreenModelProtocol]) {
-    guard (storageService.playerCardSelectionScreenModel) != nil else {
-      storageService.playerCardSelectionScreenModel = models
+                           with models: [PlayerCardSelectionScreenModel]) {
+    guard (playerCardSelectionScreenModel) != nil else {
+      playerCardSelectionScreenModel = models
       return
     }
     
@@ -97,11 +105,11 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
         name: $0.name,
         avatar: $0.avatar,
         style: $0.style,
-        playerCardSelection: ($0.style as? PlayerCardSelectionScreenModel.StyleCard) ?? .defaultStyle == styleCard,
+        playerCardSelection: $0.style == styleCard,
         isPremium: $0.isPremium
       )
     }
-    storageService.playerCardSelectionScreenModel = newModel
+    playerCardSelectionScreenModel = newModel
   }
   
   func getContent() {
@@ -112,7 +120,7 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
       return
     }
     
-    if let model = storageService.playerCardSelectionScreenModel?.toCodable() {
+    if let model = playerCardSelectionScreenModel {
       output?.didReceive(models: model, isPremium: isPremium)
     } else {
       output?.didReceiveEmptyModelWith(isPremium: isPremium)
@@ -123,5 +131,7 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
 // MARK: - Appearance
 
 private extension PlayerCardSelectionScreenInteractor {
-  struct Appearance {}
+  struct Appearance {
+    let playerCardSelectionModelKeyUserDefaults = "player_card_selection_screen_user_defaults_key"
+  }
 }

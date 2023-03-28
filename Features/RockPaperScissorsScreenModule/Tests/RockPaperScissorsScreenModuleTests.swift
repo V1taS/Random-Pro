@@ -9,16 +9,4 @@
 @testable import RockPaperScissorsScreenModule
 import XCTest
 
-final class RockPaperScissorsScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class RockPaperScissorsScreenModuleTests: XCTestCase {}

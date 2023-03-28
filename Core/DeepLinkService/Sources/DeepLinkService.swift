@@ -8,20 +8,11 @@
 
 import UIKit
 
-public final class DeepLinkServiceImpl: DeepLinkServiceProtocol {
+public final class DeepLinkServiceImpl {
 
   // MARK: - Private property
   
   private var deepLinkType: DeepLinkType?
-  
-  // MARK: 🔴 - Подумать над логикой
-  //  {
-  //    get {
-  //      StorageServiceImpl().deepLinkModel
-  //    } set {
-  //      StorageServiceImpl().deepLinkModel = newValue
-  //    }
-  //  }
   
   // MARK: - Init
   
@@ -44,7 +35,7 @@ public final class DeepLinkServiceImpl: DeepLinkServiceProtocol {
     }
   }
   
-  public func startDeepLink(completion: @escaping (DeepLinkTypeProtocol) -> Void) {
+  public func startDeepLink(completion: @escaping (DeepLinkType) -> Void) {
     guard let deepLinkType else {
       return
     }

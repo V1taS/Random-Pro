@@ -63,7 +63,7 @@ protocol ListPlayersScreenInteractorInput {
 
 /// Интерактор
 final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
-
+  
   // MARK: - Internal properties
   
   weak var output: ListPlayersScreenInteractorOutput?
@@ -73,22 +73,23 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
   private var models: [TeamsScreenPlayerModel] = []
   private var defaultTeamsCount = Appearance().defaultTeamsCount
   private var genderIndex = Appearance().genderMaleIndex
-  private var storageService: StorageServiceProtocol
-  private var stylePlayerCard: TeamsScreenPlayerModel.StyleCard {
-    guard let card = storageService.playerCardSelectionScreenModel?.filter({
+  private var storageService: TeamsScreeStorageServiceProtocol
+  
+  private var stylePlayerCard: PlayerCardSelectionScreenModel.StyleCard {
+    guard let card = storageService.getDataWith(key: Appearance().playerCardSelectionModelKeyUserDefaults,
+                                                to: [PlayerCardSelectionScreenModel].self)?.filter({
       $0.playerCardSelection
-    }).first,
-          let style = card.style as? TeamsScreenPlayerModel.StyleCard else {
+    }).first else {
       return .defaultStyle
     }
-    return style
+    return card.style
   }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения данных
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: TeamsScreeStorageServiceProtocol) {
     self.storageService = storageService
   }
   
@@ -114,7 +115,7 @@ final class ListPlayersScreenInteractor: ListPlayersScreenInteractorInput {
       name: models[index].name,
       avatar: models[index].avatar,
       emoji: emoji,
-      state: (models[index].state as? TeamsScreenPlayerModel.PlayerState) ?? .random,
+      state: models[index].state,
       style: stylePlayerCard
     )
     
@@ -215,5 +216,6 @@ private extension ListPlayersScreenInteractor {
     let defaultTeamsCount = 2
     let genderMaleIndex = 0
     let genderFemaleIndex = 1
+    let playerCardSelectionModelKeyUserDefaults = "player_card_selection_screen_user_defaults_key"
   }
 }

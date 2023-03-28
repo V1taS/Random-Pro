@@ -13,8 +13,8 @@ public final class ContactScreenAssembly {
   public init() {}
   
   /// Собирает модуль `ContactScreen`
-  public func createModule(permissionService: PermissionServiceProtocol,
-                           storageService: StorageServiceProtocol) -> ContactScreenModule {
+  public func createModule(permissionService: ContactScreenPermissionServiceProtocol,
+                           storageService: ContactScreenStorageServiceProtocol) -> ContactScreenModule {
     let view = ContactScreenView()
     let interactor = ContactScreenInteractor(permissionService: permissionService,
                                              storageService: storageService)

@@ -65,9 +65,18 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private var storageService: StorageServiceProtocol
-  private let featureToggleServices: FeatureToggleServicesProtocol
-  private let appPurchasesService: AppPurchasesServiceProtocol
+  private var storageService: MainScreenStorageServiceProtocol
+  private var mainScreenModel: MainScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().mainScreenKeyUserDefaults,
+                                 to: MainScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().mainScreenKeyUserDefaults)
+    }
+  }
+  
+  private let featureToggleServices: MainScreenFeatureToggleServicesProtocol
+  private let appPurchasesService: MainScreenAppPurchasesServiceProtocol
   
   // MARK: - Internal properties
   
@@ -79,9 +88,9 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   ///   - featureToggleServices: Сервис фича тогглов
   ///   - storageService: Сервис хранения данных
   ///   - appPurchasesService: Сервис покупок
-  init(featureToggleServices: FeatureToggleServicesProtocol,
-       storageService: StorageServiceProtocol,
-       appPurchasesService: AppPurchasesServiceProtocol) {
+  init(featureToggleServices: MainScreenFeatureToggleServicesProtocol,
+       storageService: MainScreenStorageServiceProtocol,
+       appPurchasesService: MainScreenAppPurchasesServiceProtocol) {
     self.featureToggleServices = featureToggleServices
     self.storageService = storageService
     self.appPurchasesService = appPurchasesService
@@ -90,33 +99,33 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // MARK: - Internal func
   
   func updateMainScreenWith(isPremium: Bool) {
-    guard let model = storageService.mainScreenModel?.toCodable() else {
+    guard let model = mainScreenModel else {
       return
     }
     MainScreenFactory.updateModelWith(oldModel: model,
                                       isPremium: isPremium) { [weak self] newModel in
-      self?.storageService.mainScreenModel = newModel
+      self?.mainScreenModel = newModel
       self?.output?.didReceive(model: newModel)
     }
   }
   
   func updateSectionsWith(model: MainScreenModel) {
     MainScreenFactory.updateModelWith(oldModel: model) { [weak self] updateModel in
-      self?.storageService.mainScreenModel = updateModel
+      self?.mainScreenModel = updateModel
       self?.output?.didReceive(model: updateModel)
     }
   }
   
   func getContent(completion: @escaping () -> Void) {
-    if let model = storageService.mainScreenModel?.toCodable() {
+    if let model = mainScreenModel {
       MainScreenFactory.updateModelWith(oldModel: model) { [weak self] newModel in
-        self?.storageService.mainScreenModel = newModel
+        self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
       }
     } else {
       MainScreenFactory.createBaseModel { [weak self] newModel in
-        self?.storageService.mainScreenModel = newModel
+        self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
       }
@@ -124,7 +133,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   func returnModel(completion: @escaping (MainScreenModel) -> Void) {
-    if let model = storageService.mainScreenModel?.toCodable() {
+    if let model = mainScreenModel {
       completion(model)
     } else {
       MainScreenFactory.createBaseModel { newModel in
@@ -134,27 +143,25 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   func saveDarkModeStatus(_ isEnabled: Bool) {
-    guard let model = storageService.mainScreenModel else {
+    guard let model = mainScreenModel else {
       return
     }
     let newModel = MainScreenModel(
       isDarkMode: isEnabled,
       isPremium: model.isPremium,
-      allSections: (model.allSections as? [MainScreenModel.Section]) ?? []
+      allSections: model.allSections
     )
-    storageService.mainScreenModel = newModel
+    mainScreenModel = newModel
   }
   
   func removeLabelFromSection(type: MainScreenModel.SectionType) {
-    guard let model = storageService.mainScreenModel,
-          let allSections = model.allSections as? [MainScreenModel.Section],
-          let section = allSections.filter({ $0.type as? MainScreenModel.SectionType == type }).first,
-          section.advLabel as? MainScreenModel.ADVLabel == .new else {
+    guard let model = mainScreenModel,
+          let section = model.allSections.filter({ $0.type == type }).first,
+          section.advLabel == .new else {
       return
     }
-    
     updatesLabelFromSection(type: type,
-                            models: allSections,
+                            models: model.allSections,
                             advLabel: .none) { [weak self] allSections in
       let newModel = MainScreenModel(
         isDarkMode: model.isDarkMode,
@@ -162,19 +169,18 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         allSections: allSections
       )
       self?.output?.didReceive(model: newModel)
-      self?.storageService.mainScreenModel = newModel
+      self?.mainScreenModel = newModel
     }
   }
   
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType) {
-    guard let model = storageService.mainScreenModel,
-          let allSections = model.allSections as? [MainScreenModel.Section] else {
+    guard let model = mainScreenModel else {
       return
     }
     
     updatesLabelFromSection(type: sectionType,
-                            models: allSections,
+                            models: model.allSections,
                             advLabel: label) { [weak self] allSections in
       let newModel = MainScreenModel(
         isDarkMode: model.isDarkMode,
@@ -182,17 +188,17 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         allSections: allSections
       )
       self?.output?.didReceive(model: newModel)
-      self?.storageService.mainScreenModel = newModel
+      self?.mainScreenModel = newModel
     }
   }
   
   func updatesSectionsIsHiddenFT(completion: @escaping () -> Void) {
-    guard let model = storageService.mainScreenModel?.toCodable() else {
+    guard let model = mainScreenModel else {
       completion()
       return
     }
     
-    featureToggleServices.getSectionsIsHiddenFT { [weak self] sectionsIsHiddenFTModel in
+    featureToggleServices.getSectionsIsHiddenFTForMain { [weak self] sectionsIsHiddenFTModel in
       guard let sectionsIsHiddenFTModel else {
         completion()
         return
@@ -200,7 +206,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       
       MainScreenFactory.updateModelWith(oldModel: model,
                                         featureToggleModel: sectionsIsHiddenFTModel) { [weak self] newModel in
-        self?.storageService.mainScreenModel = newModel
+        self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
       }
@@ -208,12 +214,12 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   func updatesLabelsFeatureToggle(completion: @escaping () -> Void) {
-    guard let model = storageService.mainScreenModel?.toCodable() else {
+    guard let model = mainScreenModel else {
       completion()
       return
     }
     
-    featureToggleServices.getLabelsFeatureToggle { [weak self] labelsModel in
+    featureToggleServices.getLabelsFeatureToggleForMain { [weak self] labelsModel in
       guard let labelsModel else {
         completion()
         return
@@ -221,7 +227,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       
       MainScreenFactory.updateModelWith(oldModel: model,
                                         labelsModel: labelsModel) { [weak self] newModel in
-        self?.storageService.mainScreenModel = newModel
+        self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
       }
@@ -229,7 +235,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   func updatesPremiumFeatureToggle(completion: @escaping () -> Void) {
-    guard let model = storageService.mainScreenModel?.toCodable() else {
+    guard let model = mainScreenModel else {
       completion()
       return
     }
@@ -242,7 +248,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       
       MainScreenFactory.updateModelWith(oldModel: model,
                                         isPremium: isPremium) { [weak self] newModel in
-        self?.storageService.mainScreenModel = newModel
+        self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
       }
@@ -250,8 +256,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   func validatePurchase(completion: @escaping () -> Void) {
-    guard let model = storageService.mainScreenModel?.toCodable(),
-          let allSections = model.allSections as? [MainScreenModel.Section] else {
+    guard let model = mainScreenModel else {
       completion()
       return
     }
@@ -259,8 +264,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     appPurchasesService.isValidatePurchase { [weak self] isValidate in
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      isPremium: isValidate,
-                                     allSections: allSections)
-      self?.storageService.mainScreenModel = newModel
+                                     allSections: model.allSections)
+      self?.mainScreenModel = newModel
       self?.output?.didReceive(model: newModel)
       completion()
     }
@@ -289,8 +294,8 @@ private extension MainScreenInteractor {
                                completion: @escaping ([MainScreenModel.Section]) -> Void) {
     DispatchQueue.global(qos: .userInteractive).async {
       let updatesLabel = models.map {
-        if $0.type as? MainScreenModel.SectionType == type {
-          return MainScreenModel.Section(type: ($0.type as? MainScreenModel.SectionType) ?? .bottle,
+        if $0.type == type {
+          return MainScreenModel.Section(type: $0.type,
                                          imageSectionSystemName: $0.imageSectionSystemName,
                                          titleSection: $0.titleSection,
                                          isEnabled: $0.isEnabled,
@@ -310,5 +315,7 @@ private extension MainScreenInteractor {
 // MARK: - Appearance
 
 private extension MainScreenInteractor {
-  struct Appearance {}
+  struct Appearance {
+    let mainScreenKeyUserDefaults = "main_screen_user_defaults_key"
+  }
 }

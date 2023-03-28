@@ -8,13 +8,14 @@
 
 import UIKit
 import TeamsScreenModule
+import StorageService
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol ListPlayersScreenCoordinatorOutput: AnyObject {
   
   /// Были получены игроки
   ///  - Parameter players: Список игроков
-  func didReceive(players: [TeamsScreenPlayerModelProtocol])
+  func didReceive(players: [TeamsScreenPlayerModel])
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
@@ -24,7 +25,7 @@ protocol ListPlayersScreenCoordinatorInput {
   ///  - Parameters:
   ///   - models: Модели игроков
   ///   - teamsCount: Общее количество игроков
-  func updateContentWith(models: [TeamsScreenPlayerModelProtocol], teamsCount: Int)
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int)
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: ListPlayersScreenCoordinatorOutput? { get set }
@@ -41,30 +42,26 @@ final class ListPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol {
   // MARK: - Private property
   
   private let navigationController: UINavigationController
-  private let services: ApplicationServices
   private var listPlayersScreenModule: ListPlayersScreenModule?
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - navigationController: UINavigationController
-  ///   - services: Сервисы приложения
-  init(_ navigationController: UINavigationController,
-       _ services: ApplicationServices) {
+  init(_ navigationController: UINavigationController) {
     self.navigationController = navigationController
-    self.services = services
   }
   
   // MARK: - Internal func
   
   func start() {
-    let listPlayersScreenModule = ListPlayersScreenAssembly().createModule(storageService: services.storageService)
+    let listPlayersScreenModule = ListPlayersScreenAssembly().createModule(storageService: StorageServiceImpl())
     self.listPlayersScreenModule = listPlayersScreenModule
     self.listPlayersScreenModule?.moduleOutput = self
     navigationController.pushViewController(listPlayersScreenModule, animated: true)
   }
   
-  func updateContentWith(models: [TeamsScreenPlayerModelProtocol], teamsCount: Int) {
+  func updateContentWith(models: [TeamsScreenPlayerModel], teamsCount: Int) {
     listPlayersScreenModule?.updateContentWith(models: models, teamsCount: teamsCount)
   }
 }
@@ -76,7 +73,7 @@ extension ListPlayersScreenCoordinator: ListPlayersScreenModuleOutput {
     removePlayersAlert()
   }
   
-  func didReceive(players: [TeamsScreenPlayerModelProtocol]) {
+  func didReceive(players: [TeamsScreenPlayerModel]) {
     output?.didReceive(players: players)
   }
 }

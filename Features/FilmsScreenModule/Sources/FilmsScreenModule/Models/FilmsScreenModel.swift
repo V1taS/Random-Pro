@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FilmsScreenModel: Codable, FilmsScreenModelProtocol {
+struct FilmsScreenModel: Codable {
   
   /// Название фильма
   let name: String
@@ -21,18 +21,4 @@ struct FilmsScreenModel: Codable, FilmsScreenModelProtocol {
   
   /// Ссылка на трейлер зарубежных фильмов
   var previewEngtUrl: String?
-}
-
-// MARK: - toCodable
-
-extension [FilmsScreenModelProtocol] {
-  func toCodable() -> [FilmsScreenModel] {
-    let models = self.map {
-      return FilmsScreenModel(name: $0.name,
-                              description: $0.description,
-                              image: $0.image,
-                              previewEngtUrl: $0.previewEngtUrl)
-    }
-    return models
-  }
 }

@@ -33,7 +33,7 @@ final class CoinScreenFactory: CoinScreenFactoryInput {
   func reverseListResultFrom(model: CoinScreenModel) {
     let newModel = CoinScreenModel(
       result: model.result,
-      coinType: (model.coinType as? CoinScreenModel.CoinType) ?? .none,
+      coinType: model.coinType,
       listResult: model.listResult.reversed()
     )
     output?.didReverseListResult(model: newModel)

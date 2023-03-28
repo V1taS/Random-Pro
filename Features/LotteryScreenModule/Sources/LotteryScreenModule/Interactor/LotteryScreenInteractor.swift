@@ -51,22 +51,30 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageServiceProtocol
+  private var storageService: LotteryScreenStorageServiceProtocol
+  private var lotteryScreenModel: LotteryScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().lotteryScreenModelKeyUserDefaults,
+                                 to: LotteryScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().lotteryScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения данных
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: LotteryScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    storageService.lotteryScreenModel = nil
+    lotteryScreenModel = nil
     getContent()
-    guard let model = storageService.lotteryScreenModel?.toCodable() else { return }
+    guard let model = lotteryScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
@@ -89,7 +97,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
       return
     }
     
-    guard let model = storageService.lotteryScreenModel else {
+    guard let model = lotteryScreenModel else {
       return
     }
     
@@ -111,12 +119,12 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
       result: numbersResult,
       listResult: listResult
     )
-    self.storageService.lotteryScreenModel = newModel
+    self.lotteryScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.lotteryScreenModel {
+    if let model = lotteryScreenModel {
       return model.listResult
     } else {
       return []
@@ -128,7 +136,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
 
 private extension LotteryScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = storageService.lotteryScreenModel?.toCodable() {
+    if let model = lotteryScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
@@ -139,7 +147,7 @@ private extension LotteryScreenInteractor {
         result: appearance.result,
         listResult: []
       )
-      self.storageService.lotteryScreenModel = model
+      self.lotteryScreenModel = model
       output?.didReceive(model: model)
     }
   }
@@ -153,5 +161,6 @@ private extension LotteryScreenInteractor {
     let startTextFieldValue = "1"
     let amountTextFieldValue = "6"
     let endTextFieldValue = "49"
+    let lotteryScreenModelKeyUserDefaults = "lottery_screen_user_defaults_key"
   }
 }

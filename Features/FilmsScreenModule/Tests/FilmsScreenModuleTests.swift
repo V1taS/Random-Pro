@@ -9,16 +9,4 @@
 @testable import FilmsScreenModule
 import XCTest
 
-final class FilmsScreenModuleTests: XCTestCase {
-  override func setUpWithError() throws {
-    super.setUp()
-  }
-  override func tearDownWithError() throws {
-    super.tearDown()
-  }
-  func testApp() {
-    // Given
-    // When
-    // Then
-  }
-}
+final class FilmsScreenModuleTests: XCTestCase {}

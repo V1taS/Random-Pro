@@ -16,7 +16,7 @@ public final class PremiumScreenAssembly {
   /// - Parameters:
   ///  - appPurchasesService: Сервис работы с подписками
   /// - Returns: Cобранный модуль `PremiumScreen`
-  public func createModule(appPurchasesService: AppPurchasesServiceProtocol) -> PremiumScreenModule {
+  public func createModule(appPurchasesService: PremiumScreenAppPurchasesServiceProtocol) -> PremiumScreenModule {
     let interactor = PremiumScreenInteractor(appPurchasesService: appPurchasesService)
     let view = PremiumScreenView()
     let factory = PremiumScreenFactory()

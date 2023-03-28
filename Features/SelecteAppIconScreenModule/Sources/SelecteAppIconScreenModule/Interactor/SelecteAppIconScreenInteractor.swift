@@ -42,13 +42,21 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   // MARK: - Private properties
   
-  private var storageService: StorageServiceProtocol
+  private var storageService: SelecteAppIconScreenStorageServiceProtocol
+  private var appIconScreenModel: SelecteAppIconScreenModel? {
+    get {
+      storageService.getDataWith(key: Appearance().appIconScreenModelKeyUserDefaults,
+                                 to: SelecteAppIconScreenModel.self)
+    } set {
+      storageService.saveData(newValue, key: Appearance().appIconScreenModelKeyUserDefaults)
+    }
+  }
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - storageService: Сервис хранения данных
-  init(storageService: StorageServiceProtocol) {
+  init(storageService: SelecteAppIconScreenStorageServiceProtocol) {
     self.storageService = storageService
   }
   
@@ -60,7 +68,7 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   func updateAppIcon(type: SelecteAppIconType) {
     let newModel = SelecteAppIconScreenModel(selecteAppIconType: type)
-    storageService.appIconScreenModel = newModel
+    appIconScreenModel = newModel
     let appearance = Appearance()
     guard UIApplication.shared.supportsAlternateIcons else {
       output?.somethingWentWrong()
@@ -125,7 +133,7 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   /// Получить данные
   func getContent() {
-    let selecteAppIconType = (storageService.appIconScreenModel?.selecteAppIconType as? SelecteAppIconType) ?? .defaultIcon
+    let selecteAppIconType = appIconScreenModel?.selecteAppIconType ?? .defaultIcon
     output?.didReceive(selecteIconType: selecteAppIconType,
                        isPremium: storageService.isPremium)
   }
@@ -173,5 +181,6 @@ private extension SelecteAppIconScreenInteractor {
     let violetLemonIcon = "selecte_app_icon_violet_lemon"
     let avocadoIcon = "selecte_app_icon_avocado"
     let frostySkyIcon = "selecte_app_icon_frosty_sky"
+    let appIconScreenModelKeyUserDefaults = "selecte_app_icon_screen_user_defaults_key"
   }
 }

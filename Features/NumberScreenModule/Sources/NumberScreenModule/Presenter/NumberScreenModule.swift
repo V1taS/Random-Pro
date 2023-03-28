@@ -13,11 +13,11 @@ public protocol NumberScreenModuleOutput: AnyObject {
   
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
-  func settingButtonAction(model: NumberScreenModelProtocol)
+  func settingButtonAction(model: NumberScreenModel)
   
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
-  func cleanButtonWasSelected(model: NumberScreenModelProtocol)
+  func cleanButtonWasSelected(model: NumberScreenModel)
   
   /// Диапазон чисел закончился
   func didReceiveRangeEnded()

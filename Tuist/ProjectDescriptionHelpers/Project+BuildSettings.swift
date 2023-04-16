@@ -129,7 +129,8 @@ public let targetBuildIOSSettings: Settings = .settings(
     "CODE_SIGN_STYLE": "Manual",
     "CODE_SIGN_IDENTITY": "Apple Distribution: Vitalii Sosin (34VDSPZYU9)",
     "PROVISIONING_PROFILE_SPECIFIER": "2b13b9a2-ca3a-4f26-87af-5cff92df441e",
-    "TARGETED_DEVICE_FAMILY": "1,2"
+    "TARGETED_DEVICE_FAMILY": "1,2",
+    "ENABLE_TARGET_PARALLELIZATION": "YES"
   ],
   debug: [
     "DEBUG_INFORMATION_FORMAT": "dwarf",

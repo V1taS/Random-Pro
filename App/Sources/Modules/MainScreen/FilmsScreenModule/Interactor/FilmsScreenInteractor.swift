@@ -331,12 +331,12 @@ private extension FilmsScreenInteractor {
   struct Appearance {
     let rusDomenKinopoisk = "https://kinopoiskapiunofficial.tech"
     let rusEndPoint = "/api/v2.2/films/top"
-    let rusAPIKey = "f835989c-b489-4624-9209-6d93bfead535"
+    let rusAPIKey = Secrets.apiKeyKinopoisk
     let rusHeaderAPIKey = "X-API-KEY"
     let rusRegionCode = "RU"
     
     let engFilmUrl = "https://most-popular-movies-right-now-daily-update.p.rapidapi.com/"
-    let engAPIKey = "f7321a82d8msh8cd3d6fb5db3824p1bef63jsn40adb1a66d30"
+    let engAPIKey = Secrets.apiKeyMostPopularMovies
     let engHeaderAPIKey = "X-RapidAPI-Key"
     
     let engAPIHost = "most-popular-movies-right-now-daily-update.p.rapidapi.com"

@@ -4,9 +4,9 @@ import Foundation
 
 /// Info plist
 // Сборке для App store
-public let marketingVersion = "730.21.30"
+public let marketingVersion = "730.21.5"
 // С каждой сборкой увеличиваем на 1
-public let currentProjectVersion = "147"
+public let currentProjectVersion = "150"
 
 /// App
 public let organizationName = "SosinVitalii.com"

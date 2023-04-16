@@ -49,7 +49,9 @@ public let projectBuildIOSSettings: Settings = .settings(
     "GCC_WARN_UNUSED_VARIABLE": "YES",
     "IPHONEOS_DEPLOYMENT_TARGET": "13.0",
     "MTL_FAST_MATH": "YES",
-    "SDKROOT": "iphoneos"
+    "SDKROOT": "iphoneos",
+    "TARGETED_DEVICE_FAMILY": "1,2",
+    "ENABLE_TARGET_PARALLELIZATION": "YES"
   ],
   debug: [
     "DEBUG_INFORMATION_FORMAT": "dwarf",
@@ -126,7 +128,8 @@ public let targetBuildIOSSettings: Settings = .settings(
     "DEVELOPMENT_TEAM": "34VDSPZYU9",
     "CODE_SIGN_STYLE": "Manual",
     "CODE_SIGN_IDENTITY": "Apple Distribution: Vitalii Sosin (34VDSPZYU9)",
-    "PROVISIONING_PROFILE_SPECIFIER": "2b13b9a2-ca3a-4f26-87af-5cff92df441e"
+    "PROVISIONING_PROFILE_SPECIFIER": "2b13b9a2-ca3a-4f26-87af-5cff92df441e",
+    "TARGETED_DEVICE_FAMILY": "1,2"
   ],
   debug: [
     "DEBUG_INFORMATION_FORMAT": "dwarf",

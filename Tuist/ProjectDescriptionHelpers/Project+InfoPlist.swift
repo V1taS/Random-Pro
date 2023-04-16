@@ -11,6 +11,7 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
     "DISPLAY_NAME": .string("Random Pro"),
     "UISupportsDocumentBrowser": .boolean(true),
     "CFBundleAllowMixedLocalizations": .boolean(true),
+    "NSUserTrackingUsageDescription": .string("We use user data to provide more personalized content and improve your app experience."),
     "CFBundleURLTypes": .array([
       .dictionary([
         "CFBundleTypeRole": .string("Editor"),

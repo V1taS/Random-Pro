@@ -94,3 +94,7 @@ Check current ruby version.
 ruby -v
 ```
 [![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io)
+[![Fastlane badge](https://img.shields.io/badge/Powered%20by-Fastlane-orange)](https://fastlane.tools)
+[![Viper badge](https://img.shields.io/badge/Architecture-Viper-green)](https://github.com/strongself/The-Book-of-VIPER)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/V1taS/Random-Pro)](https://github.com/V1taS/Random-Pro/releases)
+[![GitHub stars](https://img.shields.io/github/stars/V1taS/Random-Pro?style=social)](https://github.com/V1taS/Random-Pro/stargazers)

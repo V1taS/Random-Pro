@@ -64,7 +64,12 @@ jobs:
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
-    
+
+    - name: Run Danger
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: bundle exec danger
+
     - name: Tuist fetch
       run: |
         tuist fetch

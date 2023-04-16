@@ -31,16 +31,14 @@ Install binary dependencies
 brew install swiftlint
 ```
 
-### Fetch dependencies
+### Start project
 
-Fetch dependencies for Random
+Download dependencies
 ```
 tuist fetch
 ```
 
-### Generate project
-
-Generate project
+Generate and run project
 ```
 tuist generate
 ```

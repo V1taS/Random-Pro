@@ -31,6 +31,20 @@ Install binary dependencies
 brew install swiftlint
 ```
 
+### Fetch dependencies
+
+Fetch dependencies for Random
+```
+tuist fetch
+```
+
+### Generate project
+
+Generate project
+```
+tuist generate
+```
+
 ## SetUP on a clean mac
 
 ### Homebrew installation
@@ -79,3 +93,4 @@ Check current ruby version.
 ```
 ruby -v
 ```
+[![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io)

@@ -1,0 +1,26 @@
+//
+//  AppDelegate.swift
+//  {{ name }}Example
+//
+//  Created by {{ author }} on {{ date }}.
+//  Copyright © {{ year }} {{ company }}. All rights reserved.
+//
+
+import UIKit
+@UIApplicationMain
+class AppDelegate: NSObject, UIApplicationDelegate {
+  
+  var window: UIWindow?
+  
+  private let appController = AppController()
+  
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    let viewController = {{ name }}ViewController()
+    window.rootViewController = viewController
+    window.makeKeyAndVisible()
+    self.window = window
+    return true
+  }
+}

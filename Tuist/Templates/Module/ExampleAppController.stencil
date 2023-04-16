@@ -1,0 +1,11 @@
+//
+//  ExampleAppController.swift
+//  {{ name }}Example
+//
+//  Created by {{ author }} on {{ date }}.
+//  Copyright © {{ year }} {{ company }}. All rights reserved.
+//
+
+import Foundation
+
+final class ExampleAppController: UIViewController {}

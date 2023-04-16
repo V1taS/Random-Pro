@@ -31,7 +31,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     self.coordinator = coordinator
     coordinator.start()
     self.window = window
-    print("Ошибка для теста, большой отступ")
     YMPYandexMetricaPush.handleSceneWillConnectToSession(with: connectionOptions)
   }
   

@@ -21,6 +21,7 @@ let project = Project(
       resources: [
         "\(appPath)/Resources/**/*",
       ],
+      entitlements: .relativeToRoot("\(appPath)/Entity/Random.entitlements"),
       scripts: [
         scriptSwiftLint
       ],

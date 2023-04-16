@@ -9,7 +9,7 @@
 import Foundation
 
 // TODO: - Настроить выгрузку в App Store на CI/CD и секреты переместить в Git Secrets
-struct Secrets {
+struct SecretsAPI {
   static let apiKeyYandexMetrica = "b4921e71-faf2-4bd3-8bea-e033a76457ae"
   static let apiKeyApphud = "app_YENSAYJtWZqqJyG2kMevtnSB4nv5Qf"
   static let apiKeyKinopoisk = "f835989c-b489-4624-9209-6d93bfead535"

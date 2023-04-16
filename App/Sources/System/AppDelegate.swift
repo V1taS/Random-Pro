@@ -16,11 +16,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    if let configuration = YMMYandexMetricaConfiguration.init(apiKey: Secrets.apiKeyYandexMetrica) {
+    if let configuration = YMMYandexMetricaConfiguration.init(apiKey: SecretsAPI.apiKeyYandexMetrica) {
       YMMYandexMetrica.activate(with: configuration)
     }
     FirebaseApp.configure()
-    Apphud.start(apiKey: Secrets.apiKeyApphud)
+    Apphud.start(apiKey: SecretsAPI.apiKeyApphud)
     return true
   }
   

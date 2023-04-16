@@ -22,15 +22,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install python-telegram-bot
 
-    - name: Send Telegram notification
-      env:
-        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      run: |
-        python send_telegram.py "🚀 New pull request created! 🚀
-        Author: ${{ github.actor }}
-        Branch: ${{ github.head_ref }}
-        Pull Request URL: ${{ github.event.pull_request.html_url }}"
+    #- name: Send Telegram notification
+      #env:
+        #TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        #TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      #run: |
+        #python send_telegram.py "🚀 New pull request created! 🚀
+        #Author: ${{ github.actor }}
+        #Branch: ${{ github.head_ref }}
+        #Pull Request URL: ${{ github.event.pull_request.html_url }}"
 
     - name: Import certificate and provisioning profile
       env:
@@ -78,18 +78,30 @@ jobs:
       run: |
         tuist generate
 
-    - name: Build and sign the app
-      env:
-        DEVELOPMENT_TEAM: "34VDSPZYU9"
+    - name: Build and archive the app
       run: |
-        xcodebuild -workspace Random.xcworkspace \
-                   -scheme Random \
-                   -sdk iphoneos \
-                   -configuration Release \
-                   -derivedDataPath derived_data \
-                   build \
-                   CODE_SIGN_STYLE=Manual \
-                   DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM \
-                   PROVISIONING_PROFILE_SPECIFIER=$PROVISIONING_PROFILE_UUID \
-                   CODE_SIGN_IDENTITY="Apple Distribution: Vitalii Sosin (34VDSPZYU9)" \
-                   CODE_SIGNING_ALLOWED=NO
+        bundle exec fastlane build
+      env:
+        APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+        PROVISIONING_PROFILE_UUID: ${{ env.PROVISIONING_PROFILE_UUID }}
+        SIGNING_CERTIFICATE: ${{ secrets.SIGNING_CERTIFICATE }}
+
+    - name: Upload to App Store Connect
+      run: |
+        bundle exec fastlane upload_app_to_app_store
+      env:
+        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+        APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
+        APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+        PROVISIONING_PROFILE_UUID: ${{ env.PROVISIONING_PROFILE_UUID }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+        APP_STORE_CONNECT_TEAM_NAME: ${{ secrets.APP_STORE_CONNECT_TEAM_NAME }}
+        ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
+        ITC_TEAM_NAME: ${{ secrets.ITC_TEAM_NAME }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+
+    - name: Clean up App Store Connect API key
+      run: |
+        rm -f /tmp/AuthKey.p8

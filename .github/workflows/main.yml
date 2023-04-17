@@ -92,4 +92,4 @@ jobs:
                    DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM \
                    PROVISIONING_PROFILE_SPECIFIER=$PROVISIONING_PROFILE_UUID \
                    CODE_SIGN_IDENTITY="Apple Distribution: Vitalii Sosin (34VDSPZYU9)" \
-                   CODE_SIGNING_ALLOWED=NO
+                   CODE_SIGNING_ALLOWED=YES

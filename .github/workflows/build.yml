@@ -1,4 +1,4 @@
-name: Build and sign iOS app
+name: Build Random Pro
 
 on:
   pull_request:

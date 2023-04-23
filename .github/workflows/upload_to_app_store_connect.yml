@@ -1,4 +1,4 @@
-name: Build and sign iOS app
+name: Upload to App Store Connect
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 jobs:
   upload_to_app_store_connect:
     runs-on: macos-latest
+    if: "!contains(github.event.head_commit.message, 'Update versions')"
 
     steps:
     - name: Checkout repository
@@ -60,14 +61,21 @@ jobs:
       run: |
         tuist fetch
 
-    - name: Increase app version and build number
+    - name: Download App versions from SosinVitalii.com server
       run: |
-        current_version=$MARKETING_VERSION
-        current_build_number=$CURRENT_PROJECT_VERSION
-        new_version=$(echo "$current_version" | awk -F. -v OFS=. '{$NF++; print}')
-        new_build_number=$((current_build_number + 1))
-        echo "MARKETING_VERSION=$new_version" >> $GITHUB_ENV
-        echo "CURRENT_PROJECT_VERSION=$new_build_number" >> $GITHUB_ENV
+        curl --ssl-reqd --insecure --user ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} -O "ftp://${{ secrets.FTP_SERVER }}/versions.json"
+
+    - name: Increase App version and build number
+      run: |
+        python update_version_and_build_number.py
+
+    - name: Update marketing and current project version in Project
+      run: |
+        python update_appearance_versions.py
+
+    - name: Upload App versions to SosinVitalii.com server
+      run: |
+        curl --ssl-reqd --insecure --user ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} -T "./versions.json" "ftp://${{ secrets.FTP_SERVER }}/versions.json"
 
     - name: Tuist generate
       run: |
@@ -113,22 +121,27 @@ jobs:
       run: |
         rm -f /tmp/AuthKey.p8
 
+    - name: Get MARKETING_VERSION and CURRENT_PROJECT_VERSION
+      run: |
+        echo "MARKETING_VERSION=$(jq -r '.marketing_version' versions.json)" >> $GITHUB_ENV
+        echo "CURRENT_PROJECT_VERSION=$(jq -r '.current_project_version' versions.json)" >> $GITHUB_ENV
+
     - name: Create and push Release git tag
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "GitHub Actions Bot"
         git checkout ${GITHUB_HEAD_REF}
-        git tag "v${MARKETING_VERSION}"
+        git tag "v${{ env.MARKETING_VERSION }}"
         git push --tags
       env:
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
-    - name: Send Telegram notification "Новый выпуск готов к регрессу"
+    - name: Send Telegram notification "New Release"
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python send_telegram.py "😍 Release iOS ${{ secrets.MARKETING_VERSION }} 😍
+        python send_telegram.py "😍 Release iOS ${{ env.MARKETING_VERSION }} 😍
         Автор: ${{ github.actor }}
-        Сборка в TestFlight: ${{ secrets.MARKETING_VERSION }}/${{ secrets.CURRENT_PROJECT_VERSION }}
+        Сборка в TestFlight: ${{ env.MARKETING_VERSION }}/${{ env.CURRENT_PROJECT_VERSION }}
         Ссылка на сборку для регресса: https://testflight.apple.com/join/YHo8FcTp"

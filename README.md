@@ -95,4 +95,5 @@ ruby -v
 [![Fastlane badge](https://img.shields.io/badge/Powered%20by-Fastlane-orange)](https://fastlane.tools)
 [![Viper badge](https://img.shields.io/badge/Architecture-Viper-green)](https://github.com/strongself/The-Book-of-VIPER)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/V1taS/Random-Pro)](https://github.com/V1taS/Random-Pro/releases)
+[![Build and sign iOS app](https://github.com/V1taS/Random-Pro/actions/workflows/upload_to_app_store_connect.yml/badge.svg)](https://github.com/V1taS/Random-Pro/actions/workflows/upload_to_app_store_connect.yml)
 [![GitHub stars](https://img.shields.io/github/stars/V1taS/Random-Pro?style=social)](https://github.com/V1taS/Random-Pro/stargazers)

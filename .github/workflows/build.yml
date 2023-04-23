@@ -10,10 +10,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.x
 
@@ -22,7 +22,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install python-telegram-bot
 
-    - name: Send Telegram notification
+    - name: Send Telegram notification "Новый МР создан"
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -78,18 +78,22 @@ jobs:
       run: |
         tuist generate
 
-    - name: Build and sign the app
-      env:
-        DEVELOPMENT_TEAM: "34VDSPZYU9"
+    - name: Build and archive the app
       run: |
-        xcodebuild -workspace Random.xcworkspace \
-                   -scheme Random \
-                   -sdk iphoneos \
-                   -configuration Release \
-                   -derivedDataPath derived_data \
-                   build \
-                   CODE_SIGN_STYLE=Manual \
-                   DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM \
-                   PROVISIONING_PROFILE_SPECIFIER=$PROVISIONING_PROFILE_UUID \
-                   CODE_SIGN_IDENTITY="Apple Distribution: Vitalii Sosin (34VDSPZYU9)" \
-                   CODE_SIGNING_ALLOWED=NO
+        bundle exec fastlane build
+      env:
+        APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+        PROVISIONING_PROFILE_UUID: ${{ env.PROVISIONING_PROFILE_UUID }}
+        SIGNING_CERTIFICATE: ${{ secrets.SIGNING_CERTIFICATE }}
+
+    - name: Upload App build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Random
+        path: "Random.ipa"
+
+    - name: Upload dSYM build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Random.app.dSYM
+        path: "Random.app.dSYM.zip"

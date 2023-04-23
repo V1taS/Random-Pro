@@ -3,10 +3,10 @@ import ProjectDescription
 
 public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
   return .dictionary([
-    "MARKETING_VERSION": .string("\(marketingVersion)"),
-    "CFBundleShortVersionString": .string("\(marketingVersion)"),
-    "CFBundleVersion": .string("\(currentProjectVersion)"),
-    "CURRENT_PROJECT_VERSION": .string("\(currentProjectVersion)"),
+    "MARKETING_VERSION": .string(ProcessInfo.processInfo.environment["MARKETING_VERSION"] ?? "\(marketingVersion)"),
+    "CFBundleShortVersionString": .string(ProcessInfo.processInfo.environment["MARKETING_VERSION"] ?? "\(marketingVersion)"),
+    "CFBundleVersion": .string(ProcessInfo.processInfo.environment["CURRENT_PROJECT_VERSION"] ?? "\(currentProjectVersion)"),
+    "CURRENT_PROJECT_VERSION": .string(ProcessInfo.processInfo.environment["CURRENT_PROJECT_VERSION"] ?? "\(currentProjectVersion)"),
     "PRODUCT_BUNDLE_IDENTIFIER": .string("com.sosinvitalii.Random"),
     "DISPLAY_NAME": .string("Random Pro"),
     "UISupportsDocumentBrowser": .boolean(true),

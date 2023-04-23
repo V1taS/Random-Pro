@@ -10,10 +10,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v3
       with:
         python-version: 3.x
 
@@ -22,15 +22,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install python-telegram-bot
 
-    #- name: Send Telegram notification
-      #env:
-        #TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        #TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-      #run: |
-        #python send_telegram.py "🚀 New pull request created! 🚀
-        #Author: ${{ github.actor }}
-        #Branch: ${{ github.head_ref }}
-        #Pull Request URL: ${{ github.event.pull_request.html_url }}"
+    - name: Send Telegram notification "Новый МР создан"
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        python send_telegram.py "🚀 New pull request created! 🚀
+        Author: ${{ github.actor }}
+        Branch: ${{ github.head_ref }}
+        Pull Request URL: ${{ github.event.pull_request.html_url }}"
 
     - name: Import certificate and provisioning profile
       env:
@@ -86,22 +86,14 @@ jobs:
         PROVISIONING_PROFILE_UUID: ${{ env.PROVISIONING_PROFILE_UUID }}
         SIGNING_CERTIFICATE: ${{ secrets.SIGNING_CERTIFICATE }}
 
-    - name: Upload to App Store Connect
-      run: |
-        bundle exec fastlane upload_app_to_app_store
-      env:
-        APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-        APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-        APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_KEY }}
-        APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
-        PROVISIONING_PROFILE_UUID: ${{ env.PROVISIONING_PROFILE_UUID }}
-        APPLE_ID: ${{ secrets.APPLE_ID }}
-        APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
-        APP_STORE_CONNECT_TEAM_NAME: ${{ secrets.APP_STORE_CONNECT_TEAM_NAME }}
-        ITC_TEAM_ID: ${{ secrets.ITC_TEAM_ID }}
-        ITC_TEAM_NAME: ${{ secrets.ITC_TEAM_NAME }}
-        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+    - name: Upload App build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Random
+        path: "Random.ipa"
 
-    - name: Clean up App Store Connect API key
-      run: |
-        rm -f /tmp/AuthKey.p8
+    - name: Upload dSYM build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Random.app.dSYM
+        path: "Random.app.dSYM.zip"

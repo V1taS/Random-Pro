@@ -128,7 +128,7 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python send_telegram.py "📱 Новый выпуск iOS ${{ secrets.MARKETING_VERSION }} готов к регрессу 📱
+        python send_telegram.py "😍 Release iOS ${{ secrets.MARKETING_VERSION }} 😍
         Автор: ${{ github.actor }}
         Сборка в TestFlight: ${{ secrets.MARKETING_VERSION }}/${{ secrets.CURRENT_PROJECT_VERSION }}
-        Ссылка на сборку: https://testflight.apple.com/join/YHo8FcTp"
+        Ссылка на сборку для регресса: https://testflight.apple.com/join/YHo8FcTp"

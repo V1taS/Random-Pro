@@ -29,6 +29,7 @@ What the app can do:
 Install binary dependencies
 ```
 brew install swiftlint
+curl -Ls https://install.tuist.io | bash
 ```
 
 ### Start project

@@ -13,51 +13,51 @@
 - 1.6 Нейминг методов исходя из их сайд-эффектов в первую очередь, если они есть.
 
 Хорошо:
-\```swift
+```
 func printFullName() {
   print("\(firstName) \(lastName)")
 }
-\```
+```
 Плохо:
-\```swift
+```swift
 func fullName() {
   print("\(firstName) \(lastName)")
 }
-\```
+```
 - 1.7 Приоритетность ясности в отношении краткости (однозначность восприятия).
 
 Хорошо:
-\```swift
+```swift
 presenter.showAlert()
-\```
+```
 Плохо:
-\```swift
+```swift
 presenter.show() // Из названия не ясно, что покажет презентер
-\```
+```
 - 1.8 Префиксы функций/свойств не должны нести ложный характер.
 
 Хорошо:
-\```swift
+```swift
 // func
 serverService.getLists(with id: Type) // Загрузка списка
 factory.makeCoordinator(with transport: Transportable) -> DigestCoordinatorOutput // Создаём координатор
 // property
 output.addressList // Получаем значение напрямую из свойства
-\```
+```
 Плохо:
-\```swift
+```swift
 // func
 serverService.lists(with id: Type)
 factory.getCoordinator(with transport: Transportable) -> DigestCoordinatorOutput // Под капотом происходит создание координатора, а не получение его извне
 // property
 output.getAddressList // Получаем значение напрямую из свойства, а не откуда-то извне
-\```
+```
 
 - 1.9 Не использовать в нейминге названия паттернов, если сущность не является применением этого паттерна.
 - 1.10 Лучше использовать термины, которые не удивляют экспертов или путают начинающих. (напр. не называть паттерном то, что им не является).
 
 Хорошо:
-\```swift
+```swift
 final class ElementsFactory {
   func makeElements() -> [Element] {
     var elements: [Element] = []
@@ -65,9 +65,9 @@ final class ElementsFactory {
     return elements
   }
 }
-\```
+```
 Плохо:
-\```swift
+```swift
 // Данный класс не соответсвует паттерну Builder и может ввести в заблуждение своим названием
 final class ElementsBuilder {
   func build() -> [Element] {
@@ -76,45 +76,45 @@ final class ElementsBuilder {
     return elements
   }
 }
-\```
+```
 - 1.11 Нейминг объявления типов и протоколов в UpperCamelCase, всё остальное в lowerCamelCase.
 
 Хорошо:
-\```swift
+```swift
 let user = User()
 user.printFullName()
-\```
+```
 Плохо:
-\```swift
+```swift
 let User = user()
 User.PrintFullName()
-\```
+```
 - 1.12 По возможности избегать аббревиатур. Если использование аббревиатуры необходимо, то аббревиатуру писать заглавными буквами. Если название начинается с аббревиатуры, то пишем её маленькими буквами.
 
 Хорошо:
-\```swift
+```swift
 let mainViewController: UIViewController
 let id: String
 let documentID: String
-\```
+```
 Плохо:
-\```swift
+```swift
 let mainVC: UIViewController
 let ID: String
 let documentId: String
-\```
+```
 - 1.13 Нейминг исходя из роли, но не из типа переменной или свойства. Название типа можно добавлять, если это помогает лучшему пониманию.
 
 Хорошо:
-\```swift
+```swift
 let personAge: Int
 let cityPopulation: Int
-\```
+```
 Плохо:
-\```swift
+```swift
 let age: Int
 let population: Int
-\```
+```
 
 ## 2. Структура кода
 
@@ -124,22 +124,22 @@ let population: Int
 - 2.4 Объявляйте переменные и константы ближе к месту их использования.
 
 Хорошо:
-\```swift
+```swift
 func calculateArea() -> Double {
   let width = 10.0
   let height = 20.0
   return width * height
 }
-\```
+```
 Плохо:
-\```swift
+```swift
 let width = 10.0
 let height = 20.0
 
 func calculateArea() -> Double {
   return width * height
 }
-\```
+```
 
 - 2.5 Избегайте дублирования кода. Если вы заметили, что один и тот же фрагмент кода используется в нескольких местах, рассмотрите возможность его выделения в отдельную функцию или компонент.
 
@@ -151,7 +151,7 @@ func calculateArea() -> Double {
 - 3.4 Документируйте функции, классы и протоколы, когда это необходимо, используя стандартные форматы комментирования.
 
 Пример:
-\```swift
+```swift
 /**
  Функция для конвертации температуры из градусов Цельсия в градусы Фаренгейта.
 
@@ -161,7 +161,7 @@ func calculateArea() -> Double {
 func convertToFahrenheit(celsius: Double) -> Double {
   return (celsius * 9/5) + 32
 }
-\```
+```
 
 ## 4. Тестирование и отладка
 
@@ -171,11 +171,11 @@ func convertToFahrenheit(celsius: Double) -> Double {
 - 4.4 При написании тестов, используйте названия функций, которые описывают, что именно вы тестируете. Это поможет при дальнейшем чтении и поддержке тестов.
 
 Пример:
-\```swift
+```swift
 func testConvertToMilesValidKilometersReturnsMiles() {
   // Тестируем конвертацию километров в мили
 }
-\```
+```
 
 - 4.5 Используйте XCTAssert и другие проверки для сравнения ожидаемых результатов с реальными.
 
@@ -197,11 +197,11 @@ func testConvertToMilesValidKilometersReturnsMiles() {
 - 7.2 Не игнорируйте ошибки и исключения. Вместо этого обрабатывайте их корректно, выводите сообщения об ошибках и предоставляйте пользователю возможность исправить проблему или повторить операцию.
 
 Пример обработки ошибок:
-\```swift
+```swift
 do {
   try performOperation()
 } catch let error {
   print("Ошибка: \(error)")
   showAlert(with: "Произошла ошибка", message: error.localizedDescription)
 }
-\```
+```

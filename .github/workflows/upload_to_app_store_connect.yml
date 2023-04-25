@@ -67,11 +67,11 @@ jobs:
 
     - name: Increase App version and build number
       run: |
-        python update_version_and_build_number.py
+        python Scripts/update_version_and_build_number.py
 
     - name: Update marketing and current project version in Project
       run: |
-        python update_appearance_versions.py
+        python Scripts/update_appearance_versions.py
 
     - name: Upload App versions to SosinVitalii.com server
       run: |
@@ -141,7 +141,7 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python send_telegram.py "😍 Release iOS ${{ env.MARKETING_VERSION }} 😍
+        python Scripts/send_telegram.py "😍 Release iOS ${{ env.MARKETING_VERSION }} 😍
         Автор: ${{ github.actor }}
         Сборка в TestFlight: ${{ env.MARKETING_VERSION }}/${{ env.CURRENT_PROJECT_VERSION }}
         Ссылка на сборку для регресса: https://testflight.apple.com/join/YHo8FcTp"

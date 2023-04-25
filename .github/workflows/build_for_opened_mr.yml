@@ -2,7 +2,7 @@ name: Build Random Pro
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened]
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python send_telegram.py "🚀 New pull request created! 🚀
+        python Scripts/send_telegram.py "🚀 New pull request created! 🚀
         Author: ${{ github.actor }}
         Branch: ${{ github.head_ref }}
         Pull Request URL: ${{ github.event.pull_request.html_url }}"

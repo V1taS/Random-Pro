@@ -28,6 +28,9 @@ protocol NumberScreenViewOutput: AnyObject {
   /// - Parameters:
   ///  - text: Значение для текстового поля
   func rangeEndDidChange(_ text: String?)
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -172,6 +175,15 @@ private extension NumberScreenView {
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
     isUserInteractionEnabled = true
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelAction)
+    resultLabel.isUserInteractionEnabled = true
+  }
+  
+  @objc func resultAction() {
+    output?.resultLabelAction()
   }
   
   func setupConstraints() {

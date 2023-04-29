@@ -117,6 +117,10 @@ final class NumberScreenViewController: NumberScreenModule {
 // MARK: - NumberScreenViewOutput
 
 extension NumberScreenViewController: NumberScreenViewOutput {
+  func resultLabelAction() {
+    moduleOutput?.resultLabelAction(text: interactor.returnModel().result)
+  }
+  
   func rangeStartDidChange(_ text: String?) {
     interactor.rangeStartDidChange(text)
   }

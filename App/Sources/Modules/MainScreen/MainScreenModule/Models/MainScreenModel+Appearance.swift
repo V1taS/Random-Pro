@@ -90,7 +90,7 @@ extension MainScreenModel {
     let titleRockPaperScissors = NSLocalizedString("Цу-е-фа", comment: "")
     
     let imageImageFilters = "timelapse"
-    let titleImageFilters = NSLocalizedString("Фильтры", comment: "")
+    let titleImageFilters = NSLocalizedString("Фотофильтры", comment: "")
     
     let imageFilms = "film"
     let titleFilms = NSLocalizedString("Фильмы", comment: "")

@@ -191,7 +191,7 @@ private extension ImageFiltersScreenViewController {
 
 private extension ImageFiltersScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Фильтры", comment: "")
+    let title = NSLocalizedString("Фотофильтры", comment: "")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     let addImageButtonIcon = UIImage(systemName: "plus")
   }

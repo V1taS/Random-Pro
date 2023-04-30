@@ -21,9 +21,6 @@ protocol DateTimeInteractorOutput: AnyObject {
 
 protocol DateTimeInteractorInput {
   
-  /// Возвращает основную модель данных
-  func returnModel() -> DateTimeScreenModel
-  
   /// Получить данные
   func getContent()
   
@@ -156,16 +153,6 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       return model.listResult
     } else {
       return []
-    }
-  }
-  
-  func returnModel() -> DateTimeScreenModel {
-    let appearance = Appearance()
-    if let model = storageService.dateTimeScreenModel {
-      return model
-    } else {
-      let model = DateTimeScreenModel(result: appearance.result, listResult: appearance.listDays)
-      return model
     }
   }
 }

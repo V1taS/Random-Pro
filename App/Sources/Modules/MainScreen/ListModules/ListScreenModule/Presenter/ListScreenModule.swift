@@ -17,7 +17,7 @@ protocol ListScreenModuleOutput: AnyObject {
   
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
-  func resultCopied(text: String)
+  func resultCopied(text: String?)
   
   /// Была получена ошибка
   func didReceiveError()
@@ -132,8 +132,8 @@ extension ListScreenViewController: ListScreenViewOutput {
     interactor.generateButtonAction()
   }
   
-  func resultLabelAction() {
-    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+  func resultLabelAction(text: String?) {
+    moduleOutput?.resultCopied(text: text)
   }
 }
 

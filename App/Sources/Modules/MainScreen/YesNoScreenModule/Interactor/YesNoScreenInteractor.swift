@@ -24,9 +24,6 @@ protocol YesNoScreenInteractorInput {
   /// Возвращает список результатов
   func returnListResult() -> [String]
   
-  /// Возвращает основную модель данных
-  func returnModel() -> YesNoScreenModel
-  
   /// Получить данные
   func getContent()
   
@@ -96,19 +93,6 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
       return model.listResult
     } else {
       return []
-    }
-  }
-  
-  func returnModel() -> YesNoScreenModel {
-    let appearance = Appearance()
-    if let model = storageService.yesNoScreenModel {
-      return model
-    } else {
-      let model = YesNoScreenModel(
-        result: appearance.result,
-        listResult: []
-      )
-      return model
     }
   }
 }

@@ -35,9 +35,6 @@ protocol CoinScreenInteractorInput {
   
   /// Запустить обратную связь от моторчика
   func playHapticFeedback()
-  
-  /// Возвращает основную модель данных
-  func returnModel() -> CoinScreenModel
 }
 
 final class CoinScreenInteractor: CoinScreenInteractorInput {
@@ -110,22 +107,6 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
     hapticService.play(isRepeat: false,
                        patternType: .splash,
                        completion: { _ in })
-  }
-  
-  func returnModel() -> CoinScreenModel {
-    let appearance = Appearance()
-    if let model = storageService.coinScreenModel {
-      return model
-    } else {
-      let randonIndex = Int.random(in: 0...1)
-      let coinType: CoinScreenModel.CoinType = randonIndex == .zero ? .eagle : .tails
-      let model = CoinScreenModel(
-        result: appearance.resultName,
-        coinType: coinType,
-        listResult: appearance.namesCoin
-      )
-      return model
-    }
   }
 }
 

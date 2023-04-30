@@ -103,8 +103,8 @@ extension CoinScreenViewController: CoinScreenViewOutput {
     interactor.playHapticFeedback()
   }
   
-  func resultLabelAction() {
-    moduleOutput?.resultLabelAction(text: interactor.returnModel().result)
+  func resultLabelAction(text: String?) {
+    moduleOutput?.resultLabelAction(text: text)
   }
 }
 

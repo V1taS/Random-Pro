@@ -24,9 +24,6 @@ protocol LetterScreenInteractorOutput: AnyObject {
 
 protocol LetterScreenInteractorInput {
   
-  /// Возвращает основную модель данных
-  func returnModel() -> LetterScreenModel
-  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
@@ -155,20 +152,6 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
       return model.listResult
     } else {
       return []
-    }
-  }
-  func returnModel() -> LetterScreenModel {
-    let appearance = Appearance()
-    if let model = storageService.letterScreenModel {
-      return model
-    } else {
-      let model = LetterScreenModel(
-        result: appearance.result,
-        listResult: [],
-        isEnabledWithoutRepetition: false,
-        languageIndexSegmented: 0
-      )
-      return model
     }
   }
 }

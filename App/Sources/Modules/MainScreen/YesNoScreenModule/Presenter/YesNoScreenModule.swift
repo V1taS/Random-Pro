@@ -100,8 +100,8 @@ extension YesNoScreenViewController: YesNoScreenViewOutput {
     interactor.generateContent()
   }
   
-  func resultLabelAction() {
-    moduleOutput?.resultLabelAction(text: interactor.returnModel().result)
+  func resultLabelAction(text: String?) {
+    moduleOutput?.resultLabelAction(text: text)
   }
 }
 

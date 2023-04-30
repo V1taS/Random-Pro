@@ -16,6 +16,9 @@ protocol LetterScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку и происходит генерация  'Русских букв'
   func generateRusButtonAction()
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 protocol LetterScreenViewInput {
@@ -83,6 +86,11 @@ private extension LetterScreenView {
     letterSegmentedControl.insertSegment(withTitle: appearance.englishCharacterTitle,
                                          at: appearance.englishCharacterIndex, animated: false)
     letterSegmentedControl.selectedSegmentIndex = appearance.russionCharacterIndex
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelAction)
+    resultLabel.isUserInteractionEnabled = true
   }
   
   func setupConstraints() {
@@ -130,6 +138,11 @@ private extension LetterScreenView {
       output?.generateEngButtonAction()
       return
     }
+  }
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction()
   }
 }
 

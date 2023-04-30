@@ -80,6 +80,15 @@ extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
       lastItem: model.result
     ))
   }
+  
+  func resultLabelAction(text: String?) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
@@ -108,3 +117,11 @@ extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension YesNoScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Appearance
+
+private extension YesNoScreenCoordinator {
+  struct Appearance {
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+  }
+}

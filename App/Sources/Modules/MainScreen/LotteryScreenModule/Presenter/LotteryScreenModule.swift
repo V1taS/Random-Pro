@@ -111,6 +111,11 @@ extension LotteryScreenViewController: LotteryScreenViewOutput {
     interactor.generateContent(rangeStartValue: rangeStartValue,
                                rangeEndValue: rangeEndValue, amountNumberValue: amountNumberValue)
   }
+  
+  func resultLabelAction() {
+    guard let cacheModel = cacheModel else { return }
+    moduleOutput?.resultLabelAction(model: cacheModel)
+  }
 }
 
 // MARK: - LotteryScreenInteractorOutput

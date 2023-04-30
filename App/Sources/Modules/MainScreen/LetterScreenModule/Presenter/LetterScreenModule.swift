@@ -21,6 +21,10 @@ protocol LetterScreenModuleOutput: AnyObject {
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
   func settingButtonAction(model: LetterScreenModel)
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -111,6 +115,10 @@ extension LetterScreenViewController: LetterScreenViewOutput {
   
   func generateRusButtonAction() {
     interactor.generateContentRusLetter()
+  }
+  
+  func resultLabelAction() {
+    moduleOutput?.resultLabelAction(text: interactor.returnModel().result)
   }
 }
 

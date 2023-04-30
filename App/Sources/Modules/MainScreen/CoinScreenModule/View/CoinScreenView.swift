@@ -13,6 +13,9 @@ protocol CoinScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку генерации
   func generateButtonAction()
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 protocol CoinScreenViewInput {
@@ -91,6 +94,11 @@ private extension CoinScreenView {
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
     coinImageView.layer.cornerRadius = appearance.cornerRadius
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelAction)
+    resultLabel.isUserInteractionEnabled = true
   }
   
   func setupConstraints() {
@@ -128,6 +136,11 @@ private extension CoinScreenView {
   @objc
   func generateButtonAction() {
     output?.generateButtonAction()
+  }
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction()
   }
 }
 

@@ -131,6 +131,10 @@ extension ListScreenViewController: ListScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
   }
+  
+  func resultLabelAction() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+  }
 }
 
 // MARK: - ListScreenInteractorOutput

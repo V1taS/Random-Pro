@@ -31,6 +31,9 @@ protocol ListScreenInteractorOutput: AnyObject {
 /// События которые отправляем из Presenter к Interactor
 protocol ListScreenInteractorInput {
   
+  /// Возвращает основную модель данных
+  func returnModel() -> ListScreenModel
+  
   /// Получить данные
   func getContent()
   
@@ -204,6 +207,22 @@ final class ListScreenInteractor: ListScreenInteractorInput {
     self.storageService.listScreenModel = newModel
     output?.didReceiveModel(newModel)
     output?.cleanButtonWasSelected()
+  }
+  
+  func returnModel() -> ListScreenModel {
+    let appearance = Appearance()
+    if let model = storageService.listScreenModel {
+      return model
+    } else {
+      let model = ListScreenModel(
+        withoutRepetition: false,
+        allItems: [],
+        tempUniqueItems: [],
+        generetionItems: [],
+        result: appearance.result
+      )
+      return model
+    }
   }
 }
 

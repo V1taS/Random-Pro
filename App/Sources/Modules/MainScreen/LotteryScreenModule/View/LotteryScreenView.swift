@@ -19,6 +19,9 @@ protocol LotteryScreenViewOutput: AnyObject {
   func generateButtonAction(rangeStartValue: String?,
                             rangeEndValue: String?,
                             amountNumberValue: String?)
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 protocol LotteryScreenViewInput {
@@ -171,6 +174,11 @@ private extension LotteryScreenView {
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultTextView.addGestureRecognizer(resultLabelAction)
+    resultTextView.isUserInteractionEnabled = true
   }
   
   func setupConstraints() {
@@ -237,6 +245,11 @@ private extension LotteryScreenView {
     output?.generateButtonAction(rangeStartValue: rangeStartTextField.text,
                                  rangeEndValue: rangeEndTextField.text,
                                  amountNumberValue: amountNumberTextField.text)
+  }
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction()
   }
 }
 

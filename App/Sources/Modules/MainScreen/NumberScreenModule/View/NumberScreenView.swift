@@ -182,7 +182,8 @@ private extension NumberScreenView {
     resultLabel.isUserInteractionEnabled = true
   }
   
-  @objc func resultAction() {
+  @objc
+  func resultAction() {
     output?.resultLabelAction()
   }
   

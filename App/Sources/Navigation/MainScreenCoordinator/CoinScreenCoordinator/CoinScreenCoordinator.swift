@@ -81,6 +81,15 @@ extension CoinScreenCoordinator: CoinScreenModuleOutput {
       lastItem: model.result
     ))
   }
+  
+  func resultLabelAction(text: String?) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
@@ -109,3 +118,11 @@ extension CoinScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - ListResultScreenCoordinatorOutput
 
 extension CoinScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Appearance
+
+private extension CoinScreenCoordinator {
+  struct Appearance {
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+  }
+}

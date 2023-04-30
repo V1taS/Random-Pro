@@ -14,6 +14,10 @@ protocol ListScreenViewOutput: AnyObject {
   
   /// Кнопка генерации была нажата
   func generateButtonAction()
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
 }
 
 /// События которые отправляем из Presenter во View
@@ -88,11 +92,21 @@ private extension ListScreenView {
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultTextView.addGestureRecognizer(resultLabelAction)
+    resultTextView.isUserInteractionEnabled = true
   }
   
   @objc
   func generateButtonAction() {
     output?.generateButtonAction()
+  }
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction(text: resultTextView.text)
   }
   
   func setupConstraints() {

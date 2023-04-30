@@ -14,6 +14,9 @@ protocol ContactScreenViewOutput: AnyObject {
   
   /// Кнопка нажата пользователем
   func generateButtonAction()
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -72,6 +75,11 @@ private extension ContactScreenView {
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelAction)
+    resultLabel.isUserInteractionEnabled = true
   }
   
   func setupConstraints() {
@@ -101,6 +109,11 @@ private extension ContactScreenView {
   @objc
   func generateButtonAction() {
     output?.generateButtonAction()
+  }
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction()
   }
 }
 

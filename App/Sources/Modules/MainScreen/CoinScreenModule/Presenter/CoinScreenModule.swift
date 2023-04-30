@@ -18,6 +18,10 @@ protocol CoinScreenModuleOutput: AnyObject {
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
   func cleanButtonWasSelected(model: CoinScreenModel)
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -97,6 +101,10 @@ extension CoinScreenViewController: CoinScreenViewOutput {
   func generateButtonAction() {
     interactor.generateContentCoin()
     interactor.playHapticFeedback()
+  }
+  
+  func resultLabelAction(text: String?) {
+    moduleOutput?.resultLabelAction(text: text)
   }
 }
 

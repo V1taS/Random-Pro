@@ -104,6 +104,11 @@ final class DateTimeViewController: DateTimeModule {
 // MARK: - DateTimeViewOutput
 
 extension DateTimeViewController: DateTimeViewOutput {
+  func resultLabelAction() {
+    guard let cacheModel = cacheModel else { return }
+    moduleOutput?.resultLabelAction(model: cacheModel)
+  }
+  
   func generateButtonDayAction() {
     interactor.generateContentDay()
   }

@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    environment:
+      name: build_for_opened_mr
 
     steps:
     - name: Checkout repository

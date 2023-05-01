@@ -13,6 +13,10 @@ protocol YesNoScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку
   func generateButtonAction()
+  
+  /// Было нажатие на результат генерации
+  /// - Parameter text: результат генерации
+  func resultLabelAction(text: String?)
 }
 
 protocol YesNoScreenViewInput {
@@ -78,6 +82,11 @@ private extension YesNoScreenView {
     
     generateButton.setTitle(Appearance().buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelAction)
+    resultLabel.isUserInteractionEnabled = true
   }
   
   func setupConstraints() {
@@ -109,6 +118,11 @@ private extension YesNoScreenView {
   @objc
   func generateButtonAction() {
     output?.generateButtonAction()
+  }
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction(text: resultLabel.text)
   }
 }
 

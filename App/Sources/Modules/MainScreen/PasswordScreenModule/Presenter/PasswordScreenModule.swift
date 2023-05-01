@@ -128,6 +128,10 @@ extension PasswordScreenViewController: PasswordScreenViewOutput {
   func symbolsSwitchAction(status: Bool) {
     interactor.symbolsSwitchAction(status: status)
   }
+  
+  func resultLabelAction() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+  }
 }
 
 // MARK: - PasswordScreenFactoryOutput

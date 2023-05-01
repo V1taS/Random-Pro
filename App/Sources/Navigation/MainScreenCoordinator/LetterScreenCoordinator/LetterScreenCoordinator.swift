@@ -83,6 +83,15 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
     ))
   }
   
+  func resultLabelAction(text: String?) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+  
   func didReceiveRangeEnded() {
     services.notificationService.showNeutralAlertWith(
       title: Appearance().lettersRangeEnded,
@@ -127,5 +136,6 @@ extension LetterScreenCoordinator: ListResultScreenCoordinatorOutput {}
 private extension LetterScreenCoordinator {
   struct Appearance {
     let lettersRangeEnded = NSLocalizedString("Диапазон букв закончился", comment: "")
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
   }
 }

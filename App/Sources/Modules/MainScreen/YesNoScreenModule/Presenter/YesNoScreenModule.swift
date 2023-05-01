@@ -17,6 +17,10 @@ protocol YesNoScreenModuleOutput: AnyObject {
   /// Кнопка очистить была нажата
   /// - Parameter model: результат генерации
   func cleanButtonWasSelected(model: YesNoScreenModel)
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
 }
 
 protocol YesNoScreenModuleInput {
@@ -94,6 +98,10 @@ final class YesNoScreenViewController: YesNoScreenModule {
 extension YesNoScreenViewController: YesNoScreenViewOutput {
   func generateButtonAction() {
     interactor.generateContent()
+  }
+  
+  func resultLabelAction(text: String?) {
+    moduleOutput?.resultLabelAction(text: text)
   }
 }
 

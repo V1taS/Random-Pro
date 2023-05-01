@@ -36,6 +36,9 @@ protocol PasswordScreenViewOutput: AnyObject {
   /// Кнопка нажата пользователем
   /// - Parameter passwordLength: Длина пароля
   func generateButtonAction(passwordLength: String?)
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -214,6 +217,11 @@ private extension PasswordScreenView {
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
     isUserInteractionEnabled = true
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    passwordGeneratorView.resultTextView.addGestureRecognizer(resultLabelAction)
+    passwordGeneratorView.resultTextView.isUserInteractionEnabled = true
   }
   
   func setupConstraints() {
@@ -241,6 +249,11 @@ private extension PasswordScreenView {
   @objc
   func genarateButtonAction() {
     output?.generateButtonAction(passwordLength: passwordGeneratorView.passwordLengthTextField.text)
+  }
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction()
   }
 }
 

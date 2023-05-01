@@ -88,7 +88,7 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
                                                       active: {})
   }
   
-  func resultCopied(text: String) {
+  func resultCopied(text: String?) {
     UIPasteboard.general.string = text
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,

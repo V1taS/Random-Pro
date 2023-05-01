@@ -71,6 +71,15 @@ extension FilmsScreenCoordinator: FilmsScreenModuleOutput {
                                                        timeout: nil,
                                                        active: {})
   }
+  
+  func resultLabelAction(text: String?) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
 }
 
 // MARK: - Appearance
@@ -78,5 +87,6 @@ extension FilmsScreenCoordinator: FilmsScreenModuleOutput {
 private extension FilmsScreenCoordinator {
   struct Appearance {
     let somethingWentWrong = NSLocalizedString("Что-то пошло не так", comment: "")
+    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
   }
 }

@@ -50,6 +50,10 @@ final class YesNoScreenViewController: YesNoScreenModule {
   private let factory: YesNoScreenFactoryInput
   private var cacheModel: YesNoScreenModel?
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -80,6 +84,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
     super.viewDidLoad()
     interactor.getContent()
     setupNavBar()
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
   
   // MARK: - Initernal func
@@ -100,8 +105,11 @@ extension YesNoScreenViewController: YesNoScreenViewOutput {
     interactor.generateContent()
   }
   
-  func resultLabelAction(text: String?) {
-    moduleOutput?.resultLabelAction(text: text)
+  func resultLabelAction() {
+    guard let result = cacheModel?.result, result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultLabelAction(text: result)
   }
 }
 
@@ -117,6 +125,7 @@ extension YesNoScreenViewController: YesNoScreenInteractorOutput {
     cacheModel = model
     moduleView.set(result: model.result)
     factory.reverse(listResult: model.listResult)
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
 }
 
@@ -137,10 +146,20 @@ private extension YesNoScreenViewController {
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
     
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+      ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    guard let model = cacheModel else { return }
+    moduleOutput?.resultLabelAction(text: model.result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
@@ -159,5 +178,7 @@ private extension YesNoScreenViewController {
   struct Appearance {
     let title = NSLocalizedString("Да или Нет", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

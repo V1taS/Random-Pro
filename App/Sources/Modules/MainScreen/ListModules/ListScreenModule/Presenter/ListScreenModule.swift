@@ -132,8 +132,12 @@ extension ListScreenViewController: ListScreenViewOutput {
     interactor.generateButtonAction()
   }
   
-  func resultLabelAction(text: String?) {
-    moduleOutput?.resultCopied(text: text)
+  func resultLabelAction() {
+    let res = interactor.returnCurrentModel().result
+    guard res != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultCopied(text: res)
   }
 }
 
@@ -203,5 +207,6 @@ private extension ListScreenViewController {
     let settingsButtonIcon = UIImage(systemName: "gear")
     let title = NSLocalizedString("Список", comment: "")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

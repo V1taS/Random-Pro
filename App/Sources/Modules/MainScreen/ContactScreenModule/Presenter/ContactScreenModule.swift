@@ -110,7 +110,11 @@ extension ContactScreenViewController: ContactScreenViewOutput {
   }
   
   func resultLabelAction() {
-    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+    let result = interactor.returnCurrentModel().result
+    guard result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultCopied(text: result)
   }
 }
 
@@ -173,5 +177,6 @@ extension ContactScreenViewController {
     let settingsButtonIcon = UIImage(systemName: "gear")
     let title = NSLocalizedString("Контакты", comment: "")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

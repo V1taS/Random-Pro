@@ -17,7 +17,7 @@ protocol ListScreenViewOutput: AnyObject {
   
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
-  func resultLabelAction(text: String?)
+  func resultLabelAction()
 }
 
 /// События которые отправляем из Presenter во View
@@ -106,7 +106,7 @@ private extension ListScreenView {
   
   @objc
   func resultAction() {
-    output?.resultLabelAction(text: resultTextView.text)
+    output?.resultLabelAction()
   }
   
   func setupConstraints() {

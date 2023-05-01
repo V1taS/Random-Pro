@@ -52,6 +52,10 @@ final class CoinScreenViewController: CoinScreenModule {
   private let factory: CoinScreenFactoryInput
   private var cacheModel: CoinScreenModel?
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -82,6 +86,7 @@ final class CoinScreenViewController: CoinScreenModule {
     super.viewDidLoad()
     interactor.getContent()
     setNavigationBar()
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
   
   // MARK: - Internal func
@@ -103,8 +108,11 @@ extension CoinScreenViewController: CoinScreenViewOutput {
     interactor.playHapticFeedback()
   }
   
-  func resultLabelAction(text: String?) {
-    moduleOutput?.resultLabelAction(text: text)
+  func resultLabelAction() {
+    guard let result = cacheModel?.result, result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultLabelAction(text: result)
   }
 }
 
@@ -119,6 +127,7 @@ extension CoinScreenViewController: CoinScreenInteractorOutput {
   func didReceive(model: CoinScreenModel) {
     cacheModel = model
     factory.reverseListResultFrom(model: model)
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
 }
 
@@ -138,10 +147,20 @@ private extension CoinScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingsButtonAction))
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingsButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    guard let model = cacheModel else { return }
+    moduleOutput?.resultLabelAction(text: model.result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
@@ -160,5 +179,7 @@ private extension CoinScreenViewController {
   struct Appearance {
     let title =  NSLocalizedString("Орел или Pешка", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

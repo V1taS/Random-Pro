@@ -19,7 +19,7 @@ protocol LetterScreenViewOutput: AnyObject {
   
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
-  func resultLabelAction(text: String?)
+  func resultLabelAction()
 }
 
 protocol LetterScreenViewInput {
@@ -143,7 +143,7 @@ private extension LetterScreenView {
   
   @objc
   func resultAction() {
-    output?.resultLabelAction(text: resultLabel.text)
+    output?.resultLabelAction()
   }
 }
 

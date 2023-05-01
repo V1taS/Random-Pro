@@ -113,7 +113,9 @@ extension LotteryScreenViewController: LotteryScreenViewOutput {
   }
   
   func resultLabelAction() {
-    guard let cacheModel = cacheModel else { return }
+    guard let cacheModel = cacheModel, cacheModel.result != "?" else {
+      return
+    }
     moduleOutput?.resultLabelAction(model: cacheModel)
   }
 }

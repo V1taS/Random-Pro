@@ -143,4 +143,7 @@ jobs:
       run: |
         python Scripts/send_telegram.py "😍 Release iOS ${{ env.MARKETING_VERSION }} 😍
         Автор: ${{ github.actor }}
-        Сборка №: ${{ env.MARKETING_VERSION }}/${{ env.CURRENT_PROJECT_VERSION }}"
+        Сборка №: ${{ env.MARKETING_VERSION }}/${{ env.CURRENT_PROJECT_VERSION }}
+        
+        Для тестирования релизных сборок отправьте свой Apple ID (example@iCloud.com) пользователю @V1taS
+        "

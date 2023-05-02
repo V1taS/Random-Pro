@@ -53,9 +53,9 @@ final class CoinScreenViewController: CoinScreenModule {
   private var cacheModel: CoinScreenModel?
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(copyButtonAction))
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   

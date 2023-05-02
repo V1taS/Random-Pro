@@ -50,9 +50,9 @@ final class YesNoScreenViewController: YesNoScreenModule {
   private let factory: YesNoScreenFactoryInput
   private var cacheModel: YesNoScreenModel?
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-  private var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                            style: .plain,
-                                           target: YesNoScreenViewController.self,
+                                           target: self,
                                            action: #selector(copyButtonAction))
   
   // MARK: - Initialization

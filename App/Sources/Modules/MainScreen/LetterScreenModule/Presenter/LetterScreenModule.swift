@@ -59,10 +59,10 @@ final class LetterScreenViewController: LetterScreenModule {
   private let factory: LetterScreenFactoryInput
   private var cacheModel: LetterScreenModel?
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
-                                                style: .plain,
-                                                target: self,
-                                                action: #selector(copyButtonAction))
+  private var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                           style: .plain,
+                                           target: LetterScreenViewController.self,
+                                           action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   

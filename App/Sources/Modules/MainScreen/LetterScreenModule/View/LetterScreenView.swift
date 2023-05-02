@@ -18,7 +18,6 @@ protocol LetterScreenViewOutput: AnyObject {
   func generateRusButtonAction()
   
   /// Было нажатие на результат генерации
-  ///  - Parameter text: Результат генерации
   func resultLabelAction()
 }
 

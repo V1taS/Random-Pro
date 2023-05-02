@@ -133,11 +133,11 @@ extension ListScreenViewController: ListScreenViewOutput {
   }
   
   func resultLabelAction() {
-    let res = interactor.returnCurrentModel().result
-    guard res != Appearance().defaultResult else {
+    let result = interactor.returnCurrentModel().result
+    guard result != Appearance().defaultResult else {
       return
     }
-    moduleOutput?.resultCopied(text: res)
+    moduleOutput?.resultCopied(text: result)
   }
 }
 

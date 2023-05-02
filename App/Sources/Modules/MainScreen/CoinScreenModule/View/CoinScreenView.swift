@@ -15,7 +15,6 @@ protocol CoinScreenViewOutput: AnyObject {
   func generateButtonAction()
   
   /// Было нажатие на результат генерации
-  ///  - Parameter text: Результат генерации
   func resultLabelAction()
 }
 

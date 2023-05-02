@@ -15,7 +15,6 @@ protocol YesNoScreenViewOutput: AnyObject {
   func generateButtonAction()
   
   /// Было нажатие на результат генерации
-  /// - Parameter text: результат генерации
   func resultLabelAction()
 }
 

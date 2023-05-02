@@ -105,8 +105,10 @@ final class DateTimeViewController: DateTimeModule {
 
 extension DateTimeViewController: DateTimeViewOutput {
   func resultLabelAction() {
-    guard let cacheModel = cacheModel else { return }
-    moduleOutput?.resultLabelAction(model: cacheModel)
+    guard let model = cacheModel, model.result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultLabelAction(model: model)
   }
   
   func generateButtonDayAction() {
@@ -191,5 +193,6 @@ private extension DateTimeViewController {
     let title = NSLocalizedString("Дата и время", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

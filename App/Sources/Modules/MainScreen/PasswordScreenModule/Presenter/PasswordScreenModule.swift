@@ -130,7 +130,11 @@ extension PasswordScreenViewController: PasswordScreenViewOutput {
   }
   
   func resultLabelAction() {
-    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+    let result = interactor.returnCurrentModel().result
+    guard result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultCopied(text: result)
   }
 }
 
@@ -199,5 +203,6 @@ private extension PasswordScreenViewController {
     let title = NSLocalizedString("Пароли", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

@@ -15,8 +15,7 @@ protocol YesNoScreenViewOutput: AnyObject {
   func generateButtonAction()
   
   /// Было нажатие на результат генерации
-  /// - Parameter text: результат генерации
-  func resultLabelAction(text: String?)
+  func resultLabelAction()
 }
 
 protocol YesNoScreenViewInput {
@@ -122,7 +121,7 @@ private extension YesNoScreenView {
   
   @objc
   func resultAction() {
-    output?.resultLabelAction(text: resultLabel.text)
+    output?.resultLabelAction()
   }
 }
 

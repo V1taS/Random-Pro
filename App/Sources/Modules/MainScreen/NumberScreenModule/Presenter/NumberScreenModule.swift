@@ -118,7 +118,10 @@ final class NumberScreenViewController: NumberScreenModule {
 
 extension NumberScreenViewController: NumberScreenViewOutput {
   func resultLabelAction() {
-    moduleOutput?.resultLabelAction(text: interactor.returnModel().result)
+    guard let result = cacheModel?.result, result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultLabelAction(text: result)
   }
   
   func rangeStartDidChange(_ text: String?) {
@@ -221,5 +224,6 @@ private extension NumberScreenViewController {
     let title = NSLocalizedString("Число", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

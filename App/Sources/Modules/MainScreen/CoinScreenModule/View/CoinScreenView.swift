@@ -15,8 +15,7 @@ protocol CoinScreenViewOutput: AnyObject {
   func generateButtonAction()
   
   /// Было нажатие на результат генерации
-  ///  - Parameter text: Результат генерации
-  func resultLabelAction(text: String?)
+  func resultLabelAction()
 }
 
 protocol CoinScreenViewInput {
@@ -141,7 +140,7 @@ private extension CoinScreenView {
   
   @objc
   func resultAction() {
-    output?.resultLabelAction(text: resultLabel.text)
+    output?.resultLabelAction()
   }
 }
 

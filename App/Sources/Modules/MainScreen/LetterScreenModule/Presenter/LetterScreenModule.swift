@@ -59,6 +59,10 @@ final class LetterScreenViewController: LetterScreenModule {
   private let factory: LetterScreenFactoryInput
   private var cacheModel: LetterScreenModel?
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -89,6 +93,7 @@ final class LetterScreenViewController: LetterScreenModule {
     super.viewDidLoad()
     setNavigationBar()
     interactor.getContent()
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
   
   // MARK: - Internal func
@@ -117,8 +122,11 @@ extension LetterScreenViewController: LetterScreenViewOutput {
     interactor.generateContentRusLetter()
   }
   
-  func resultLabelAction(text: String?) {
-    moduleOutput?.resultLabelAction(text: text)
+  func resultLabelAction() {
+    guard let result = cacheModel?.result, result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultLabelAction(text: result)
   }
 }
 
@@ -133,6 +141,7 @@ extension LetterScreenViewController: LetterScreenInteractorOutput {
   func didReceive(model: LetterScreenModel) {
     cacheModel = model
     factory.reverseListResultFrom(model: model)
+    copyButton.isEnabled = !interactor.returnListResult().isEmpty
   }
   
   func didReceiveRangeEnded() {
@@ -156,10 +165,20 @@ private extension LetterScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(settingButtonAction))
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      copyButton
+    ]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    guard let model = cacheModel else { return }
+    moduleOutput?.resultLabelAction(text: model.result)
+    impactFeedback.impactOccurred()
   }
   
   @objc
@@ -178,5 +197,7 @@ private extension LetterScreenViewController {
   struct Appearance {
     let title = NSLocalizedString("Буква", comment: "")
     let settingsButtonIcon = UIImage(systemName: "gear")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

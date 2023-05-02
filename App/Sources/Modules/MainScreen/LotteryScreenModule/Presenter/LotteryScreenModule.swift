@@ -113,7 +113,9 @@ extension LotteryScreenViewController: LotteryScreenViewOutput {
   }
   
   func resultLabelAction() {
-    guard let cacheModel = cacheModel else { return }
+    guard let cacheModel = cacheModel, cacheModel.result != Appearance().defaultResult else {
+      return
+    }
     moduleOutput?.resultLabelAction(model: cacheModel)
   }
 }
@@ -187,5 +189,6 @@ private extension LotteryScreenViewController {
     let settingsButtonIcon = UIImage(systemName: "gear")
     let title = NSLocalizedString("Лотерея", comment: "")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
 }

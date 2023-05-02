@@ -78,6 +78,8 @@ private extension ColorsScreenView {
       
       resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.padding),
+      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.padding),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
@@ -119,7 +121,7 @@ private extension ColorsScreenView {
   }
   
   func hidePlugViewWith(colors: [UIColor]) {
-    resultLabel.isHidden = true
+    resultLabel.isHidden = false
     
     UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
       guard let self = self else {
@@ -166,8 +168,9 @@ private extension ColorsScreenView {
   struct Appearance {
     let defaultInset: CGFloat = 16
     let maxInset: CGFloat = 24
-    let resultLabelNumberOfLines = 1
+    let resultLabelNumberOfLines = 0
     let resultDuration: CGFloat = 0.2
+    let padding: CGFloat = 16
     
     let resultLabelTitle = "?"
     let buttonTitle = RandomStrings.Localizable.generate
@@ -175,5 +178,13 @@ private extension ColorsScreenView {
       RandomStrings.Localizable.gradient,
       RandomStrings.Localizable.regular
     ]
+  }
+}
+
+private extension ColorsScreenView {
+  func updateResultText(text: String) {
+    resultLabel.text = text
+    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryWhite
   }
 }

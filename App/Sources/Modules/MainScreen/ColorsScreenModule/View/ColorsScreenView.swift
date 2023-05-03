@@ -153,13 +153,27 @@ private extension ColorsScreenView {
         colorTwo,
         colorThree
       ])
+      updateResultText(text: convertToHex(colors: [
+        colorOne,
+        colorTwo,
+        colorThree
+      ]))
     } else {
       hidePlugViewWith(colors: [colorOne, colorOne])
+      updateResultText(text: convertToHex(colors: [
+        colorOne
+      ]))
     }
   }
   
   @objc
   func colorsSegmentedControlSegmentedControlAction() {}
+  
+  func updateResultText(text: String) {
+    resultLabel.text = text
+    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryWhite
+  }
 }
 
 // MARK: - Appearance
@@ -178,13 +192,5 @@ private extension ColorsScreenView {
       RandomStrings.Localizable.gradient,
       RandomStrings.Localizable.regular
     ]
-  }
-}
-
-private extension ColorsScreenView {
-  func updateResultText(text: String) {
-    resultLabel.text = text
-    resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryWhite
   }
 }

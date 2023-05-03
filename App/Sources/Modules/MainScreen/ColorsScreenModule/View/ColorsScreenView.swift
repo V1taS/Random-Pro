@@ -76,10 +76,9 @@ private extension ColorsScreenView {
       contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
       contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
-      resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.padding),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.padding),
+      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.defaultInset),
+      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.defaultInset),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
@@ -166,14 +165,14 @@ private extension ColorsScreenView {
     }
   }
   
-  @objc
-  func colorsSegmentedControlSegmentedControlAction() {}
-  
   func updateResultText(text: String) {
     resultLabel.text = text
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryWhite
   }
+  
+  @objc
+  func colorsSegmentedControlSegmentedControlAction() {}
 }
 
 // MARK: - Appearance
@@ -181,10 +180,11 @@ private extension ColorsScreenView {
 private extension ColorsScreenView {
   struct Appearance {
     let defaultInset: CGFloat = 16
+    let minInset: CGFloat = 8
+    let midInset: CGFloat = 16
     let maxInset: CGFloat = 24
     let resultLabelNumberOfLines = 0
     let resultDuration: CGFloat = 0.2
-    let padding: CGFloat = 16
     
     let resultLabelTitle = "?"
     let buttonTitle = RandomStrings.Localizable.generate

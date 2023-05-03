@@ -90,6 +90,8 @@ private extension CubesScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     scrollResultView.backgroundColor = .clear
+    generateButton.backgroundColor = .clear
+    cubesSegmentedControl.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     cubesSegmentedControl.insertSegment(withTitle: appearance.numberOne,
                                         at: appearance.numberIndexZero, animated: false)
@@ -130,7 +132,7 @@ private extension CubesScreenView {
   func setupConstraints() {
     let appearance = Appearance()
     
-    [cubesSegmentedControl, cubesView, scrollResultView, generateButton].forEach {
+    [cubesView, scrollResultView, generateButton, cubesSegmentedControl].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -144,9 +146,9 @@ private extension CubesScreenView {
                                                  constant: appearance.minInset),
       
       cubesView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      cubesView.topAnchor.constraint(equalTo: cubesSegmentedControl.bottomAnchor),
+      cubesView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       cubesView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      cubesView.bottomAnchor.constraint(equalTo: generateButton.topAnchor),
+      cubesView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),

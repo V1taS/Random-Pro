@@ -127,6 +127,8 @@ private extension CubesView {
     
     let geometryNode = SCNNode(geometry: geometry)
     geometryNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+    geometryNode.physicsBody?.collisionBitMask = 1
+    geometryNode.physicsBody?.contactTestBitMask = 1
     geometryNode.position = position
     reposition(geometryNode, to: position, with: normal)
     return geometryNode
@@ -220,37 +222,27 @@ private extension CubesView {
     setupLight()
     
     scnScene.physicsWorld.speed = 3
+    let wallSize = CGSize(width: 50.0, height: 50.0)
     
-    var panel = wall(at: SCNVector3(0, 12, 0),
-                     with: SCNVector3Make(0, -1, 0),
-                     sized: CGSize(width: 50.0,
-                                   height: 50.0))
-    scnScene.rootNode.addChildNode(panel)
-    panel = wall(at: SCNVector3(0, -8, 0),
-                 with: SCNVector3Make(0, 1, 0),
-                 sized: CGSize(width: 50.0,
-                               height: 50.0))
-    scnScene.rootNode.addChildNode(panel)
-    panel = wall(at: SCNVector3(10, -8, 0),
-                 with: SCNVector3Make(-1, 0, 0),
-                 sized: CGSize(width: 50.0, height:
-                                50.0))
-    scnScene.rootNode.addChildNode(panel)
-    panel = wall(at: SCNVector3(-10, -8, 0),
-                 with: SCNVector3Make(1, 0, 0),
-                 sized: CGSize(width: 50.0,
-                               height: 50.0))
-    scnScene.rootNode.addChildNode(panel)
-    panel = wall(at: SCNVector3(0, -8, 15),
-                 with: SCNVector3Make(0, 0, -1),
-                 sized: CGSize(width: 50.0,
-                               height: 50.0))
-    scnScene.rootNode.addChildNode(panel)
-    panel = wall(at: SCNVector3(0, -8, -15),
-                 with: SCNVector3Make(0, 0, 1),
-                 sized: CGSize(width: 50.0,
-                               height: 50.0))
-    scnScene.rootNode.addChildNode(panel)
+    let walls = [
+      // верхняя стена X,Y,Z
+      (position: SCNVector3(0, 13, 0), normal: SCNVector3Make(0, -1, 0)),
+      // нижняя стена X,Y,Z
+      (position: SCNVector3(0, -8, 0), normal: SCNVector3Make(0, 1, 0)),
+      // правая стена X,Y,Z
+      (position: SCNVector3(7, -8, 0), normal: SCNVector3Make(-1, 0, 0)),
+      // левая стена X,Y,Z
+      (position: SCNVector3(-7, -8, 0), normal: SCNVector3Make(1, 0, 0)),
+      // задняя стена X,Y,Z
+      (position: SCNVector3(0, -8, 11), normal: SCNVector3Make(0, 0, -1)),
+      // передняя стена X,Y,Z
+      (position: SCNVector3(0, -8, -11), normal: SCNVector3Make(0, 0, 1))
+    ]
+    
+    for wall in walls {
+      let panel = self.wall(at: wall.position, with: wall.normal, sized: wallSize)
+      scnScene.rootNode.addChildNode(panel)
+    }
   }
   
   func addCubes(type: CubesScreenModel.CubesType) {
@@ -366,13 +358,20 @@ private extension CubesView {
     lightNode.light = SCNLight()
     lightNode.light?.type = .omni
     lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-    scnScene.rootNode.addChildNode(lightNode)
     
     let ambientLightNode = SCNNode()
     ambientLightNode.light = SCNLight()
     ambientLightNode.light?.type = .ambient
-    ambientLightNode.light?.color = RandomColor.darkAndLightTheme.primaryGray
+    ambientLightNode.light?.color = RandomColor.only.primaryRed
     scnScene.rootNode.addChildNode(ambientLightNode)
+    
+    let rotatingNode = SCNNode()
+    scnScene.rootNode.addChildNode(rotatingNode)
+    rotatingNode.addChildNode(lightNode)
+    
+    let lightOrbit = SCNAction.rotateBy(x: 0, y: CGFloat(2 * Double.pi), z: 0, duration: 10)
+    let repeatLightOrbit = SCNAction.repeatForever(lightOrbit)
+    rotatingNode.runAction(repeatLightOrbit)
   }
 }
 

@@ -16,6 +16,10 @@ protocol ColorsScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   ///  - Parameter imageData: Изображение Colors
   func shareButtonAction(imageData: Data?)
+  
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -41,6 +45,10 @@ final class ColorsScreenViewController: ColorsScreenModule {
   private let moduleView: ColorsScreenViewProtocol
   private let factory: ColorsScreenFactoryInput
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -76,7 +84,11 @@ final class ColorsScreenViewController: ColorsScreenModule {
 
 // MARK: - ColorsScreenViewOutput
 
-extension ColorsScreenViewController: ColorsScreenViewOutput {}
+extension ColorsScreenViewController: ColorsScreenViewOutput {
+  func resultLabelAction(text: String) {
+    moduleOutput?.resultCopied(text: text)
+  }
+}
 
 // MARK: - ColorsScreenInteractorOutput
 
@@ -108,7 +120,13 @@ private extension ColorsScreenViewController {
                                       target: self,
                                       action: #selector(shareButtonAction))
     
-    navigationItem.rightBarButtonItems = [shareButton]
+    navigationItem.rightBarButtonItems = [shareButton, copyButton]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    moduleView.copyResult()
+    impactFeedback.impactOccurred()
   }
   
   @objc

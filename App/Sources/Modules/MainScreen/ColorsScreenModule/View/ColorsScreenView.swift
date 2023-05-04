@@ -9,13 +9,21 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из View в Presenter
-protocol ColorsScreenViewOutput: AnyObject {}
+protocol ColorsScreenViewOutput: AnyObject {
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String)
+}
 
 /// События которые отправляем от Presenter ко View
 protocol ColorsScreenViewInput {
   
   /// Вернуть изображение с цветом
   func returnImageDataColor() -> Data?
+  
+  /// Скопировать результат генерации
+  func copyResult()
 }
 
 /// Псевдоним протокола UIView & ColorsScreenViewInput
@@ -52,6 +60,13 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
   
   func returnImageDataColor() -> Data? {
     contentView.asImage?.pngData()
+  }
+  
+  func copyResult() {
+    guard resultLabel.text != Appearance().resultLabelTitle else {
+      return
+    }
+    output?.resultLabelAction(text: resultLabel.text ?? Appearance().resultLabelTitle)
   }
 }
 
@@ -107,6 +122,11 @@ private extension ColorsScreenView {
     colorsSegmentedControl.addTarget(self,
                                      action: #selector(colorsSegmentedControlSegmentedControlAction),
                                      for: .valueChanged)
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelAction)
+    resultLabel.isUserInteractionEnabled = true
   }
   
   func showPlugView() {
@@ -173,6 +193,14 @@ private extension ColorsScreenView {
   
   @objc
   func colorsSegmentedControlSegmentedControlAction() {}
+  
+  @objc
+  func resultAction() {
+    guard resultLabel.text != Appearance().resultLabelTitle else {
+      return
+    }
+    output?.resultLabelAction(text: resultLabel.text ?? Appearance().resultLabelTitle)
+  }
 }
 
 // MARK: - Appearance

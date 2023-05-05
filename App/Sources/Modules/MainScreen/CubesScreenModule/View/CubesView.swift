@@ -379,12 +379,12 @@ private extension CubesView {
 
 private extension CubesView {
   struct Appearance {
-    let cubeOneImage = UIImage(named: "die.one") ?? UIImage()
-    let cubesTwoImage = UIImage(named: "die.two") ?? UIImage()
-    let cubesThreeImage = UIImage(named: "die.three") ?? UIImage()
-    let cubesFourImage = UIImage(named: "die.four") ?? UIImage()
-    let cubesFiveImage = UIImage(named: "die.five") ?? UIImage()
-    let cubesSixImage = UIImage(named: "die.six") ?? UIImage()
+    let cubeOneImage = RandomAsset.dieOne.image
+    let cubesTwoImage = RandomAsset.dieTwo.image
+    let cubesThreeImage = RandomAsset.dieThree.image
+    let cubesFourImage = RandomAsset.dieFour.image
+    let cubesFiveImage = RandomAsset.dieFive.image
+    let cubesSixImage = RandomAsset.dieSix.image
     
     let oneHundredSpacing: CGFloat = 100
     let fiftySpacing: CGFloat = 50

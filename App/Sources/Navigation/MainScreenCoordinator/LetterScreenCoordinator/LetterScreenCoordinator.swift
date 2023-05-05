@@ -135,7 +135,7 @@ extension LetterScreenCoordinator: ListResultScreenCoordinatorOutput {}
 
 private extension LetterScreenCoordinator {
   struct Appearance {
-    let lettersRangeEnded = NSLocalizedString("Диапазон букв закончился", comment: "")
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+    let lettersRangeEnded = RandomStrings.Localizable.alphabetRangeEnded
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

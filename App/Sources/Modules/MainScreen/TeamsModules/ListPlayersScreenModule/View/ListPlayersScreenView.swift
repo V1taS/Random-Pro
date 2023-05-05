@@ -457,10 +457,10 @@ private extension ListPlayersScreenView {
                                                   scale: .large)
     let checkmarkImageName = "checkmark.circle.fill"
     let deleteImage = UIImage(systemName: "trash")
-    let allTitle = NSLocalizedString("Всего", comment: "")
-    let forGameTitle = NSLocalizedString("На игру", comment: "")
-    let deleteTitle = NSLocalizedString("Удалить", comment: "")
-    let textFieldPlaceholder = NSLocalizedString("Имя игрока", comment: "")
+    let allTitle = RandomStrings.Localizable.total
+    let forGameTitle = RandomStrings.Localizable.onGame
+    let deleteTitle = RandomStrings.Localizable.remove
+    let textFieldPlaceholder = RandomStrings.Localizable.playerName
     let maxCharactersTF = 20
     let estimatedRowHeight: CGFloat = 70
     
@@ -468,7 +468,7 @@ private extension ListPlayersScreenView {
     
     let contentMenuRandomImage = UIImage(systemName: "die.face.5")
     let contentMenuDoesNotPlayImage = UIImage(systemName: "xmark.circle.fill")
-    let contentMenuStatePlayer = NSLocalizedString("Статус игрока", comment: "")
+    let contentMenuStatePlayer = RandomStrings.Localizable.statusOfPlayer
     
     let contentMenuTeamOne = 1
     let contentMenuTeamOneImage = UIImage(systemName: "1.square")
@@ -490,39 +490,39 @@ private extension ListPlayersScreenView {
     
     // Emoji menu
     
-    let emojiMenuTitle = NSLocalizedString("Реакции", comment: "")
+    let emojiMenuTitle = RandomStrings.Localizable.reactions
     
-    let emojiMenuFlameTitle = NSLocalizedString("Огонь", comment: "")
+    let emojiMenuFlameTitle = RandomStrings.Localizable.fire
     let emojiMenuFlameImage = UIImage(systemName: "flame")
     
-    let emojiMenuStarTitle = NSLocalizedString("Звезда", comment: "")
+    let emojiMenuStarTitle = RandomStrings.Localizable.star
     let emojiMenuStarImage = UIImage(systemName: "star")
     
-    let emojiMenuBallTitle = NSLocalizedString("Мяч", comment: "")
+    let emojiMenuBallTitle = RandomStrings.Localizable.ball
     let emojiMenuBallImage = UIImage(systemName: "circle.dashed.inset.filled")
     
-    let emojiMenuTshirtTitle = NSLocalizedString("Форма", comment: "")
+    let emojiMenuTshirtTitle = RandomStrings.Localizable.shape
     let emojiMenuTshirtImage = UIImage(systemName: "tshirt")
     
-    let emojiMenuRedTitle = NSLocalizedString("Красный", comment: "")
+    let emojiMenuRedTitle = RandomStrings.Localizable.red
     let emojiMenuRedImage = UIImage(systemName: "eyedropper")
     
-    let emojiMenuGreenTitle = NSLocalizedString("Зеленый", comment: "")
+    let emojiMenuGreenTitle = RandomStrings.Localizable.green
     let emojiMenuGreenImage = UIImage(systemName: "eyedropper")
     
-    let emojiMenuPillsTitle = NSLocalizedString("Таблетка", comment: "")
+    let emojiMenuPillsTitle = RandomStrings.Localizable.tablet
     let emojiMenuPillsImage = UIImage(systemName: "pills")
     
-    let emojiMenuAirplaneTitle = NSLocalizedString("Самолет", comment: "")
+    let emojiMenuAirplaneTitle = RandomStrings.Localizable.plane
     let emojiMenuAirplaneImage = UIImage(systemName: "airplane.departure")
     
-    let emojiMenuMoneyTitle = NSLocalizedString("Деньги", comment: "")
+    let emojiMenuMoneyTitle = RandomStrings.Localizable.money
     let emojiMenuMoneyImage = UIImage(systemName: "dollarsign.circle")
     
-    let emojiMenuReactionTitle = NSLocalizedString("Удалить реакцию", comment: "")
+    let emojiMenuReactionTitle = RandomStrings.Localizable.removeReaction
     let emojiMenuReactionImage = UIImage(systemName: "trash")
     
-    let male = NSLocalizedString("М", comment: "")
-    let female = NSLocalizedString("Ж", comment: "")
+    let male = RandomStrings.Localizable.m
+    let female = RandomStrings.Localizable.f
   }
 }

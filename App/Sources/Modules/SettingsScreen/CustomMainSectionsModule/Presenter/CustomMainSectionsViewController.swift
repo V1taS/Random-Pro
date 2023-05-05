@@ -130,6 +130,6 @@ private extension CustomMainSectionsViewController {
 
 private extension CustomMainSectionsViewController {
   struct Appearance {
-    let title = NSLocalizedString("Настройка секций", comment: "")
+    let title = RandomStrings.Localizable.sectionSettings
   }
 }

@@ -135,6 +135,6 @@ private extension PlayerCardSelectionScreenViewController {
 
 private extension PlayerCardSelectionScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Стиль карточки", comment: "")
+    let title = RandomStrings.Localizable.cardStyle
   }
 }

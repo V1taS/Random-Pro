@@ -200,7 +200,7 @@ private extension PasswordScreenViewController {
 
 private extension PasswordScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Пароли", comment: "")
+    let title = RandomStrings.Localizable.passwords
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"

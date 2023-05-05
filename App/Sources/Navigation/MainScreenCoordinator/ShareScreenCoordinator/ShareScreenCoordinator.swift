@@ -130,6 +130,6 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
 
 private extension ShareScreenCoordinator {
   struct Appearance {
-    let allowAccessToGallery = NSLocalizedString("Разрешить доступ к галерее", comment: "")
+    let allowAccessToGallery = RandomStrings.Localizable.allowGalleryAccess
   }
 }

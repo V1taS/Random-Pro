@@ -304,7 +304,7 @@ private extension RockPaperScissorsScreenView {
 
 private extension RockPaperScissorsScreenView {
   struct Appearance {
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
     let systemFontLabel: CGFloat = 30
     let systemFontScore: CGFloat = 100
     let defaultInset: CGFloat = 16
@@ -312,15 +312,15 @@ private extension RockPaperScissorsScreenView {
     let fromTopInset: CGFloat = 120
     let centerXInset: CGFloat = 96
     
-    let rockLeftImageName = "rock_left"
-    let paperLeftImageName = "paper_left"
-    let scissorsLeftImageName = "scissors_left"
+    let rockLeftImageName = RandomAsset.rockLeft.name
+    let paperLeftImageName = RandomAsset.paperLeft.name
+    let scissorsLeftImageName = RandomAsset.scissorsLeft.name
     
-    let rockRightImageName = "rock_right"
-    let paperRightImageName = "paper_right"
-    let scissorsRightImageName = "scissors_right"
-    let youWinImage = "rock_paper_scissos_cup_winner"
-    let handShakeImage = "rock_paper_scissos_hand_shake"
+    let rockRightImageName = RandomAsset.rockRight.name
+    let paperRightImageName = RandomAsset.paperRight.name
+    let scissorsRightImageName = RandomAsset.scissorsRight.name
+    let youWinImage = RandomAsset.rockPaperScissosCupWinner.name
+    let handShakeImage = RandomAsset.rockPaperScissosHandShake.name
     let animationSpeed: CGFloat = 0.5
   }
 }

@@ -133,6 +133,6 @@ extension SettingsScreenViewController: SettingsScreenFactoryOutput {
 
 private extension SettingsScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Настройки", comment: "")
+    let title = RandomStrings.Localizable.settings
   }
 }

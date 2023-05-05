@@ -57,11 +57,10 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
     "LSSupportsOpeningDocumentsInPlace": .boolean(true),
     "CFBundleLocalizations": .array([
       .string("en"),
+      .string("ru"),
       .string("de"),
       .string("es"),
-      .string("it"),
-      .string("ru"),
-      .string("tr")
+      .string("it")
     ]),
     "CODE_SIGN_STYLE": .string("Automatic"),
     "CODE_SIGN_IDENTITY": .string("iPhone Developer"),

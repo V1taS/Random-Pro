@@ -269,8 +269,8 @@ private extension LotteryScreenView {
     let resultDuration: CGFloat = 0.2
     let minWidthLabel: CGFloat = 112
 
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
-    let textRangeLabel = NSLocalizedString("Диапазон", comment: "")
-    let textAmountLabel = NSLocalizedString("Количество", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
+    let textRangeLabel = RandomStrings.Localizable.range
+    let textAmountLabel = RandomStrings.Localizable.numberOf
   }
 }

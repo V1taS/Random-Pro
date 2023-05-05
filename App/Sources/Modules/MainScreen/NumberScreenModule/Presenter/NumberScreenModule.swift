@@ -221,7 +221,7 @@ private extension NumberScreenViewController {
 
 private extension NumberScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Число", comment: "")
+    let title = RandomStrings.Localizable.number
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"

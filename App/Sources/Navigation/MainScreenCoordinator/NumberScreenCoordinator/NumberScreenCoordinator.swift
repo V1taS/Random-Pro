@@ -140,8 +140,8 @@ extension NumberScreenCoordinator: ListResultScreenCoordinatorOutput {}
 
 private extension NumberScreenCoordinator {
   struct Appearance {
-    let numberRangeEnded = NSLocalizedString("Диапазон чисел закончился", comment: "")
-    let numberRangeError = NSLocalizedString("Неверно задан диапазон", comment: "")
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+    let numberRangeEnded = RandomStrings.Localizable.numberRangeEnded
+    let numberRangeError = RandomStrings.Localizable.incorrectRange
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

@@ -174,7 +174,7 @@ private extension MainSettingsScreenViewController {
 
 private extension MainSettingsScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Настройки", comment: "")
+    let title = RandomStrings.Localizable.settings
     let closeButtonIcon = UIImage(systemName: "xmark")
   }
 }

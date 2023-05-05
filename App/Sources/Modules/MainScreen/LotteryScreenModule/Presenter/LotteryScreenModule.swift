@@ -187,7 +187,7 @@ private extension LotteryScreenViewController {
 private extension LotteryScreenViewController {
   struct Appearance {
     let settingsButtonIcon = UIImage(systemName: "gear")
-    let title = NSLocalizedString("Лотерея", comment: "")
+    let title = RandomStrings.Localizable.lottery
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"
   }

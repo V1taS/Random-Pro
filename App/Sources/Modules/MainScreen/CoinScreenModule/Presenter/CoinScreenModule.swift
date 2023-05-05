@@ -177,7 +177,7 @@ private extension CoinScreenViewController {
 
 private extension CoinScreenViewController {
   struct Appearance {
-    let title =  NSLocalizedString("Орел или Pешка", comment: "")
+    let title =  RandomStrings.Localizable.eagleOrTail
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"

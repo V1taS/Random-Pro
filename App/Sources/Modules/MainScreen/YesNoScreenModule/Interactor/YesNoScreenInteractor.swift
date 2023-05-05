@@ -102,8 +102,8 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
 private extension YesNoScreenInteractor {
   struct Appearance {
     let listResult = [
-      NSLocalizedString("Да", comment: ""),
-      NSLocalizedString("Нет", comment: "")
+      RandomStrings.Localizable.yes,
+      RandomStrings.Localizable.no
     ]
     let result = "?"
   }

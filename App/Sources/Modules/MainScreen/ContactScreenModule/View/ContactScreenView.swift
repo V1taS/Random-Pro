@@ -125,6 +125,6 @@ extension ContactScreenView {
     let resultDuration: CGFloat = 0.2
     
     let resultTitle = "?"
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
   }
 }

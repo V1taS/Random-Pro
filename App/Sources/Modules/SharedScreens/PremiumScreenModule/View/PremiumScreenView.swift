@@ -379,31 +379,31 @@ private extension PremiumScreenView {
     let dividerHeight: CGFloat = 0.2
     let numberOfLines = 2
     
-    let termsConditions = NSLocalizedString("Условия", comment: "")
-    let andTitle = NSLocalizedString("и", comment: "")
-    let privacyPolicy = NSLocalizedString("Политика конфиденциальности", comment: "")
-    let restoreTitle = NSLocalizedString("Восстановить", comment: "")
+    let termsConditions = RandomStrings.Localizable.terms
+    let andTitle = RandomStrings.Localizable.and
+    let privacyPolicy = RandomStrings.Localizable.privacyPolicy
+    let restoreTitle = RandomStrings.Localizable.restore
     
     let termsAndConditionsLink = "https://sosinvitalii.com/terms-conditions"
     let privacyPolicyLink = "https://sosinvitalii.com/privacy-policy"
     
-    let monthlyTitle = NSLocalizedString("Ежемесячно", comment: "")
-    let mostPopularTitle = NSLocalizedString("Самый популярный", comment: "")
+    let monthlyTitle = RandomStrings.Localizable.monthly
+    let mostPopularTitle = RandomStrings.Localizable.mostPopular
     let monthlyCountTitle = "1"
 
-    let yearlyTitle = NSLocalizedString("Ежегодно", comment: "")
-    let sevenDaysFreeTitle = NSLocalizedString("7 дней бесплатно", comment: "")
+    let yearlyTitle = RandomStrings.Localizable.annually
+    let sevenDaysFreeTitle = RandomStrings.Localizable.sevenDaysFree
     let yearlyCountTitle = "12"
     
-    let lifetimeTitle = NSLocalizedString("Навсегда", comment: "")
-    let oneTimePurchaseTitle = NSLocalizedString("Разовая покупка", comment: "")
+    let lifetimeTitle = RandomStrings.Localizable.forever
+    let oneTimePurchaseTitle = RandomStrings.Localizable.oneTimePurchase
     let oneTimePCountTitle = "∞"
     
-    let cardPaymentLoader = "card_payment_in_process"
-    let processingPaymentTitle = NSLocalizedString("Обрабатываем платёж", comment: "")
+    let cardPaymentLoader = RandomAsset.cardPaymentInProcess.name
+    let processingPaymentTitle = RandomStrings.Localizable.processingPayment
     
-    let purchaseTitle = NSLocalizedString("Купить", comment: "")
-    let forTitle = NSLocalizedString("за", comment: "")
-    let subscribeTitle = NSLocalizedString("Подписаться", comment: "")
+    let purchaseTitle = RandomStrings.Localizable.buy
+    let forTitle = RandomStrings.Localizable.for
+    let subscribeTitle = RandomStrings.Localizable.subscribe
   }
 }

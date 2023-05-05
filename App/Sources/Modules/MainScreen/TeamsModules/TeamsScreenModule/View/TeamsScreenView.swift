@@ -254,6 +254,6 @@ private extension TeamsScreenView {
     
     let resultLabelTitle = "?"
     let countTeams = ["1", "2", "3", "4", "5", "6"]
-    let countPlayersTitle = NSLocalizedString("Количество", comment: "")
+    let countPlayersTitle = RandomStrings.Localizable.numberOf
   }
 }

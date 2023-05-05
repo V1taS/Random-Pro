@@ -395,12 +395,12 @@ private extension UIBarButtonItem {
 
 private extension MainScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Random Pro", comment: "")
+    let title = RandomStrings.Localizable.randomPro
     let settingsButtonIcon = UIImage(systemName: "gear")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     let premiumButtonIcon = UIImage(systemName: "crown")
     
-    let notPremiumName = "crown_not_premium"
-    let isPremiumName = "crown_is_premium"
+    let notPremiumName = RandomAsset.crownNotPremium.name
+    let isPremiumName = RandomAsset.crownIsPremium.name
   }
 }

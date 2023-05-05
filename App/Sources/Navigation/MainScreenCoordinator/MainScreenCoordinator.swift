@@ -492,15 +492,15 @@ private extension MainScreenCoordinator {
     let shareAppUrl = URL(string: "https://apps.apple.com/app/random-pro/id1552813956")
     let appStoreUrl = URL(string: "itms-apps://itunes.apple.com/app/id1552813956")
     let rateAppKey = "rate_app_key"
-    let cancel = NSLocalizedString("Отмена", comment: "")
-    let unlock = NSLocalizedString("Разблокировать", comment: "")
-    let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
+    let cancel = RandomStrings.Localizable.cancel
+    let unlock = RandomStrings.Localizable.unlock
+    let premiumAccess = RandomStrings.Localizable.premiumAccess
     let timeoutNotification: Double = 10
     
-    let newVersionText = NSLocalizedString("Новая версия", comment: "")
-    let availableInAppStoreText = NSLocalizedString("доступна в App Store", comment: "")
-    let clickToUpdateAppText = NSLocalizedString("Нажмите, чтобы обновить приложение", comment: "")
-    let premiumAccessActivatedTitle = NSLocalizedString("Премиум доступ активирован", comment: "")
+    let newVersionText = RandomStrings.Localizable.newVersion
+    let availableInAppStoreText = RandomStrings.Localizable.availableInAppStore
+    let clickToUpdateAppText = RandomStrings.Localizable.clickToUpdateApp
+    let premiumAccessActivatedTitle = RandomStrings.Localizable.premiumAccessActivated
     
     let positiveAlertALotOfClicksKey = "main_screen_show_positive_alert_a_lot_of_clicks"
   }

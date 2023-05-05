@@ -258,7 +258,7 @@ private extension MainSettingsScreenView {
     let cornerRadius: CGFloat = 8
     let minInset: CGFloat = 4
     
-    let feedbackButtonTitle = NSLocalizedString("Обратная связь", comment: "")
+    let feedbackButtonTitle = RandomStrings.Localizable.feedback
     let addressRecipients = "Random_Pro_support@iCloud.com"
   }
 }

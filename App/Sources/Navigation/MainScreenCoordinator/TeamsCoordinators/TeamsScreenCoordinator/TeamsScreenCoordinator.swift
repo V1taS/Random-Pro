@@ -156,6 +156,6 @@ extension TeamsScreenCoordinator: ShareScreenCoordinatorOutput {}
 
 private extension TeamsScreenCoordinator {
   struct Appearance {
-    let addPlayersTitle = NSLocalizedString("Добавьте игроков", comment: "")
+    let addPlayersTitle = RandomStrings.Localizable.addPlayers
   }
 }

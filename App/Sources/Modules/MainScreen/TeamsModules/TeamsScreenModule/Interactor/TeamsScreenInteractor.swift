@@ -304,7 +304,7 @@ private extension TeamsScreenInteractor {
     let selectedTeamDefault = 3
     let rangeImageMalePlayer = 1...15
     let rangeImageFemalePlayer = 1...21
-    let player = NSLocalizedString("Игрок", comment: "")
+    let player = RandomStrings.Localizable.player
     let keySecondStartApp = "team_screen_second_start_app_key"
   }
 }

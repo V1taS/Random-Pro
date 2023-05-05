@@ -146,8 +146,8 @@ struct TeamsScreenPlayerModel: PlayerProtocol, UserDefaultsCodable {
 
 private extension TeamsScreenPlayerModel {
   struct Appearance {
-    let randomTitle = NSLocalizedString("Рандом", comment: "")
-    let doesNotPlayTitle = NSLocalizedString("Не играет", comment: "")
-    let teamTitle = NSLocalizedString("Команда", comment: "")
+    let randomTitle = RandomStrings.Localizable.random
+    let doesNotPlayTitle = RandomStrings.Localizable.notPlaying
+    let teamTitle = RandomStrings.Localizable.team
   }
 }

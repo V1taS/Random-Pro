@@ -74,15 +74,15 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
 private extension MainSettingsScreenFactory {
   struct Appearance {
     let darkThemeImageSystemName = "switch.2"
-    let darkThemeTitle = NSLocalizedString("Тёмная тема", comment: "")
+    let darkThemeTitle = RandomStrings.Localizable.darkTheme
     
     let customMainSectionsImageSystemName = "rectangle.grid.2x2"
-    let customMainSectionsTitle = NSLocalizedString("Настройка секций", comment: "")
+    let customMainSectionsTitle = RandomStrings.Localizable.sectionSettings
     
     let applicationIconnImageSystemName = "rectangle.dashed"
-    let applicationIconTitle = NSLocalizedString("Иконка приложения", comment: "")
+    let applicationIconTitle = RandomStrings.Localizable.appIcon
     
     let premiumImageSystemName = "star.fill"
-    let premiumTitle = NSLocalizedString("Премиум", comment: "")
+    let premiumTitle = RandomStrings.Localizable.premium
   }
 }

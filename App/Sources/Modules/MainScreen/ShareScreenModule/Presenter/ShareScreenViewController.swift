@@ -152,6 +152,6 @@ private extension ShareScreenViewController {
   struct Appearance {
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     let closeButtonIcon = UIImage(systemName: "xmark")
-    let title = NSLocalizedString("Поделиться изображением", comment: "")
+    let title = RandomStrings.Localizable.shareImage
   }
 }

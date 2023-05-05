@@ -215,10 +215,10 @@ extension MainSettingsScreenCoordinator: SelecteAppIconScreenCoordinatorOutput {
 private extension MainSettingsScreenCoordinator {
   struct Appearance {
     let addressRecipients = "Random_Pro_support@iCloud.com"
-    let subjectRecipients = NSLocalizedString("Поддержка приложения Random Pro", comment: "")
-    let identifierForVendor = NSLocalizedString("Идентификатор поставщика", comment: "")
-    let systemVersion = NSLocalizedString("Версия системы", comment: "")
-    let appVersion = NSLocalizedString("Версия приложения", comment: "")
-    let emailClientNotFound = NSLocalizedString("Почтовый клиент не найден", comment: "")
+    let subjectRecipients = RandomStrings.Localizable.randomProAppSupport
+    let identifierForVendor = RandomStrings.Localizable.vendorIdentifier
+    let systemVersion = RandomStrings.Localizable.systemVersion
+    let appVersion = RandomStrings.Localizable.appVersion
+    let emailClientNotFound = RandomStrings.Localizable.emailClientNotFound
   }
 }

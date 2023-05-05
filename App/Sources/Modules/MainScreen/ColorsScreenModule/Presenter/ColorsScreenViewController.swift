@@ -123,6 +123,6 @@ private extension ColorsScreenViewController {
 private extension ColorsScreenViewController {
   struct Appearance {
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
-    let title = NSLocalizedString("Цвета", comment: "")
+    let title = RandomStrings.Localizable.colors
   }
 }

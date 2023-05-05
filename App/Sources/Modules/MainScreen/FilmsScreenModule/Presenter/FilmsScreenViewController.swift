@@ -176,7 +176,7 @@ private extension UIBarButtonItem {
 
 private extension FilmsScreenViewController {
   struct Appearance {
-    let playTrailerImageEnabledName = "play_trailer_enabled"
-    let playTrailerImageDisabledName = "play_trailer_disabled"
+    let playTrailerImageEnabledName = RandomAsset.playTrailerEnabled.name
+    let playTrailerImageDisabledName = RandomAsset.playTrailerDisabled.name
   }
 }

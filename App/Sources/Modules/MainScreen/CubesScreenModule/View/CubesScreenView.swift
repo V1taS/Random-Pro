@@ -207,8 +207,8 @@ private extension CubesScreenView {
     let numberFive = "5"
     let numberSix = "6"
 
-    let buttonOneCubeTitle = NSLocalizedString("Бросить кубик", comment: "")
-    let buttonSomeCubeTitle = NSLocalizedString("Бросить кубики", comment: "")
+    let buttonOneCubeTitle = RandomStrings.Localizable.rollADice
+    let buttonSomeCubeTitle = RandomStrings.Localizable.rollDices
     
     let resultDuration: CGFloat = 0.2
   }

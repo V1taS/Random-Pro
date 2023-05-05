@@ -118,10 +118,10 @@ private extension PlayerCardSelectionScreenCoordinator {
 
 private extension PlayerCardSelectionScreenCoordinator {
   struct Appearance {
-    let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
-    let chooseCardStyleTitle = NSLocalizedString("Можно изменить стиль карточки", comment: "")
-    let setCardStyleTitle = NSLocalizedString("Установлено", comment: "")
-    let cancel = NSLocalizedString("Отмена", comment: "")
-    let unlock = NSLocalizedString("Разблокировать", comment: "")
+    let premiumAccess = RandomStrings.Localizable.premiumAccess
+    let chooseCardStyleTitle = RandomStrings.Localizable.changeCardStyle
+    let setCardStyleTitle = RandomStrings.Localizable.installed
+    let cancel = RandomStrings.Localizable.cancel
+    let unlock = RandomStrings.Localizable.unlock
   }
 }

@@ -175,7 +175,7 @@ private extension ContactScreenViewController {
 extension ContactScreenViewController {
   struct Appearance {
     let settingsButtonIcon = UIImage(systemName: "gear")
-    let title = NSLocalizedString("Контакты", comment: "")
+    let title = RandomStrings.Localizable.contacts
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"
   }

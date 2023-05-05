@@ -148,29 +148,29 @@ private extension SelecteAppIconScreenInteractor {
 
 private extension SelecteAppIconScreenInteractor {
   struct Appearance {
-    let defaultIcon = "selecte_app_icon_default"
-    let blueRaspberryIcon = "selecte_app_icon_blue_raspberry"
-    let crimsonTideIcon = "selecte_app_icon_crimson_tide"
-    let eveningNightIcon = "selecte_app_icon_evening_night"
-    let gradeGreyIcon = "selecte_app_icon_grade_grey"
-    let harveyIcon = "selecte_app_icon_harvey"
-    let lithiumIcon = "selecte_app_icon_lithium"
-    let midnightCityIcon = "selecte_app_icon_midnight_city"
-    let moonPurpleIcon = "selecte_app_icon_moon_purple"
-    let moonlitAsteroidIcon = "selecte_app_icon_moonlit_asteroid"
-    let orangeFunIcon = "selecte_app_icon_orange_fun"
-    let pureLustIcon = "selecte_app_icon_pure_lust"
-    let seleniumIcon = "selecte_app_icon_selenium"
-    let terminalIcon = "selecte_app_icon_terminal"
-    let summerDogIcon = "selecte_app_icon_summer_dog"
-    let sinCityRedIcon = "selecte_app_icon_sin_city_red"
-    let queensNecklaceIcon = "selecte_app_icon_queen_necklace"
-    let marineFuchsiaIcon = "selecte_app_icon_marine_fuchsia"
-    let sandyDesertIcon = "selecte_app_icon_sandy_desert"
-    let redLimeIcon = "selecte_app_icon_red_lime"
-    let heliotropeIcon = "selecte_app_icon_heliotrope"
-    let violetLemonIcon = "selecte_app_icon_violet_lemon"
-    let avocadoIcon = "selecte_app_icon_avocado"
-    let frostySkyIcon = "selecte_app_icon_frosty_sky"
+    let defaultIcon = RandomAsset.selecteAppIconDefault.name
+    let blueRaspberryIcon = RandomAsset.selecteAppIconBlueRaspberry.name
+    let crimsonTideIcon = RandomAsset.selecteAppIconCrimsonTide.name
+    let eveningNightIcon = RandomAsset.selecteAppIconEveningNight.name
+    let gradeGreyIcon = RandomAsset.selecteAppIconGradeGrey.name
+    let harveyIcon = RandomAsset.selecteAppIconHarvey.name
+    let lithiumIcon = RandomAsset.selecteAppIconLithium.name
+    let midnightCityIcon = RandomAsset.selecteAppIconMidnightCity.name
+    let moonPurpleIcon = RandomAsset.selecteAppIconMoonPurple.name
+    let moonlitAsteroidIcon = RandomAsset.selecteAppIconMoonlitAsteroid.name
+    let orangeFunIcon = RandomAsset.selecteAppIconOrangeFun.name
+    let pureLustIcon = RandomAsset.selecteAppIconPureLust.name
+    let seleniumIcon = RandomAsset.selecteAppIconSelenium.name
+    let terminalIcon = RandomAsset.selecteAppIconTerminal.name
+    let summerDogIcon = RandomAsset.selecteAppIconSummerDog.name
+    let sinCityRedIcon = RandomAsset.selecteAppIconSinCityRed.name
+    let queensNecklaceIcon = RandomAsset.selecteAppIconQueenNecklace.name
+    let marineFuchsiaIcon = RandomAsset.selecteAppIconMarineFuchsia.name
+    let sandyDesertIcon = RandomAsset.selecteAppIconSandyDesert.name
+    let redLimeIcon = RandomAsset.selecteAppIconRedLime.name
+    let heliotropeIcon = RandomAsset.selecteAppIconHeliotrope.name
+    let violetLemonIcon = RandomAsset.selecteAppIconVioletLemon.name
+    let avocadoIcon = RandomAsset.selecteAppIconAvocado.name
+    let frostySkyIcon = RandomAsset.selecteAppIconFrostySky.name
   }
 }

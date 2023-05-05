@@ -267,6 +267,6 @@ private extension PasswordScreenView {
     let resultDuration: CGFloat = 0.2
     
     let resultLabel = "?"
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
   }
 }

@@ -143,6 +143,6 @@ private extension ListScreenView {
     let defaultInset: CGFloat = 16
     let resultDuration: CGFloat = 0.2
     
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
   }
 }

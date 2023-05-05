@@ -176,7 +176,7 @@ private extension YesNoScreenViewController {
 
 private extension YesNoScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Да или Нет", comment: "")
+    let title = RandomStrings.Localizable.yesOrNo
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"

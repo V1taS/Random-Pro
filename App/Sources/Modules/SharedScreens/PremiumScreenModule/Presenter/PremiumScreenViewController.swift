@@ -214,7 +214,7 @@ private extension PremiumScreenViewController {
 
 private extension PremiumScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Премиум", comment: "")
+    let title = RandomStrings.Localizable.premium
     let closeButtonIcon = UIImage(systemName: "xmark")
   }
 }

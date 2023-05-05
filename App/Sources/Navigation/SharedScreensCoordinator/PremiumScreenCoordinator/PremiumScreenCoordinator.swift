@@ -141,9 +141,9 @@ extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
 
 private extension PremiumScreenCoordinator {
   struct Appearance {
-    let purchaseRestoredTitle = NSLocalizedString("Покупка восстановлена", comment: "")
-    let somethingWentWrongTitle = NSLocalizedString("Что-то пошло не так", comment: "")
-    let purchasesMissingTitle = NSLocalizedString("Покупки отсутствуют", comment: "")
-    let premiumAccessActivatedTitle = NSLocalizedString("Премиум доступ активирован", comment: "")
+    let purchaseRestoredTitle = RandomStrings.Localizable.purchaseRestored
+    let somethingWentWrongTitle = RandomStrings.Localizable.somethingWentWrong
+    let purchasesMissingTitle = RandomStrings.Localizable.noPurchasesFound
+    let premiumAccessActivatedTitle = RandomStrings.Localizable.premiumAccessActivated
   }
 }

@@ -124,7 +124,7 @@ extension PasswordScreenCoordinator: ListResultScreenCoordinatorOutput {}
 
 private extension PasswordScreenCoordinator {
   struct Appearance {
-    let somethingWentWrong = NSLocalizedString("Что-то пошло не так", comment: "")
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+    let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

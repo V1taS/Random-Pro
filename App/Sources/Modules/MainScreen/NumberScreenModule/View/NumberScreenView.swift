@@ -256,8 +256,8 @@ private extension NumberScreenView {
     let maxInset: CGFloat = 24
     let resultDuration: CGFloat = 0.2
     
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
-    let min = NSLocalizedString("Мин", comment: "")
-    let max = NSLocalizedString("Макс", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
+    let min = RandomStrings.Localizable.min
+    let max = RandomStrings.Localizable.max
   }
 }

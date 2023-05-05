@@ -82,8 +82,8 @@ struct RockPaperScissorsScreenModel {
 
 extension RockPaperScissorsScreenModel.HandsType {
   struct Appearance {
-    let rockName = NSLocalizedString("Камень", comment: "")
-    let paperName = NSLocalizedString("Бумага", comment: "")
-    let scissorsName = NSLocalizedString("Ножницы", comment: "")
+    let rockName = RandomStrings.Localizable.stone
+    let paperName = RandomStrings.Localizable.paper
+    let scissorsName = RandomStrings.Localizable.scissors
   }
 }

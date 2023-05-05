@@ -104,8 +104,8 @@ private extension ListPlayersScreenCoordinator {
 
 private extension ListPlayersScreenCoordinator {
   struct Appearance {
-    let removePlayersTitle = NSLocalizedString("Удалить добавленных игроков", comment: "")
-    let removePlayersYes = NSLocalizedString("Да", comment: "")
-    let removePlayersCancel = NSLocalizedString("Отмена", comment: "")
+    let removePlayersTitle = RandomStrings.Localizable.removeAddedPlayers
+    let removePlayersYes = RandomStrings.Localizable.yes
+    let removePlayersCancel = RandomStrings.Localizable.cancel
   }
 }

@@ -114,7 +114,7 @@ private extension PlayerCardSelectionScreenFactory {}
 
 private extension PlayerCardSelectionScreenFactory {
   struct Appearance {
-    let mockPlayer = NSLocalizedString("Игрок", comment: "")
+    let mockPlayer = RandomStrings.Localizable.player
     let mockImagePlayer = "male_player4"
   }
 }

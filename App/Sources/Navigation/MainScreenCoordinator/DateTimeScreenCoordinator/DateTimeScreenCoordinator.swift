@@ -122,6 +122,6 @@ extension DateTimeScreenCoordinator: ListResultScreenCoordinatorOutput {}
 
 private extension DateTimeScreenCoordinator {
   struct Appearance {
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

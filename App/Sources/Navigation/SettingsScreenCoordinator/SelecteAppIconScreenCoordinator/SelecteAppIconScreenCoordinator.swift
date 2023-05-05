@@ -125,11 +125,11 @@ private extension SelecteAppIconScreenCoordinator {
 
 private extension SelecteAppIconScreenCoordinator {
   struct Appearance {
-    let somethingWentWrong = NSLocalizedString("Что-то пошло не так", comment: "")
-    let cancel = NSLocalizedString("Отмена", comment: "")
-    let unlock = NSLocalizedString("Разблокировать", comment: "")
-    let premiumAccess = NSLocalizedString("Премиум доступ", comment: "")
-    let chooseIconForAppTitle = NSLocalizedString("Можно изменить цвет иконки приложения", comment: "")
-    let iconSelectedSuccessfullyTitle = NSLocalizedString("Цвет иконки установлен", comment: "")
+    let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
+    let cancel = RandomStrings.Localizable.cancel
+    let unlock = RandomStrings.Localizable.unlock
+    let premiumAccess = RandomStrings.Localizable.premiumAccess
+    let chooseIconForAppTitle = RandomStrings.Localizable.canChangeAppIconColor
+    let iconSelectedSuccessfullyTitle = RandomStrings.Localizable.iconColorSet
   }
 }

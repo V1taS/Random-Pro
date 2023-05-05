@@ -265,15 +265,15 @@ private extension ListAddItemsScreenView {
 
 private extension ListAddItemsScreenView {
   struct Appearance {
-    let deleteButtonTitle = NSLocalizedString("Удалить", comment: "")
+    let deleteButtonTitle = RandomStrings.Localizable.remove
     let deleteButtonImage = UIImage(systemName: "trash")
     let largeButtonConfig = UIImage.SymbolConfiguration(pointSize: 20,
                                                         weight: .bold,
                                                         scale: .large)
     
     let checkmarkImageName = "checkmark.circle.fill"
-    let allItemTitle = NSLocalizedString("Всего", comment: "")
-    let textFieldPlaceholder = NSLocalizedString("Добавить", comment: "")
+    let allItemTitle = RandomStrings.Localizable.total
+    let textFieldPlaceholder = RandomStrings.Localizable.add
     
     let maxCharactersTF = 9_999
     let estimatedRowHeight: CGFloat = 44

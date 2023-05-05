@@ -150,9 +150,9 @@ private extension LetterScreenView {
 
 private extension LetterScreenView {
   struct Appearance {
-    let buttonTitle = NSLocalizedString("Сгенерировать букву", comment: "")
-    let russionCharacterTitle = NSLocalizedString("Русские буквы", comment: "")
-    let englishCharacterTitle = NSLocalizedString("Английские буквы", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generateLetter
+    let russionCharacterTitle = RandomStrings.Localizable.russianLetters
+    let englishCharacterTitle = RandomStrings.Localizable.englishLetters
     let minInset: CGFloat = 8
     let defaultInset: CGFloat = 16
     let englishCharacterIndex: Int = 1

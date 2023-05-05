@@ -129,7 +129,7 @@ private extension YesNoScreenView {
 
 private extension YesNoScreenView {
   struct Appearance {
-    let buttonTitle = NSLocalizedString("Да или Нет", comment: "")
+    let buttonTitle = RandomStrings.Localizable.yesOrNo
     
     let defaultInset: CGFloat = 16
     let maxInset: CGFloat = 24

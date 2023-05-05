@@ -156,7 +156,7 @@ private extension ListAddItemsScreenViewController {
 
 private extension ListAddItemsScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Список", comment: "")
+    let title = RandomStrings.Localizable.list
     let removePlayersButtonIcon = UIImage(systemName: "trash")
   }
 }

@@ -10,89 +10,73 @@ import Foundation
 
 extension MainScreenModel {
   struct Appearance {
-    let hit = NSLocalizedString("Хит", comment: "")
-    let new = NSLocalizedString("Новое", comment: "")
-    let premium = NSLocalizedString("Премиум", comment: "")
+    let hit = RandomStrings.Localizable.hit
+    let new = RandomStrings.Localizable.new
+    let premium = RandomStrings.Localizable.premium
     
-    let teamsDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный список команд для игры",
-                                                               comment: "")
-    let numberDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомные числа",
-                                                                comment: "")
-    let yesOrNoDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный ответ",
-                                                                 comment: "")
-    let letterDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомные буквы",
-                                                                comment: "")
-    let listDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный список собственных задач",
-                                                              comment: "")
-    let coinDescriptionForNoPremiumAccess = NSLocalizedString("Можно подбрасывать монетку в любое время",
-                                                              comment: "")
-    let cubeDescriptionForNoPremiumAccess = NSLocalizedString("Можно подбрасывать кубики играя в настольную игру",
-                                                              comment: "")
-    let dateAndTimeDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомную дату и время",
-                                                                     comment: "")
-    let lotteryDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный лот для участия в лотереи",
-                                                                 comment: "")
-    let contactDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный контакт из списка",
-                                                                 comment: "")
-    let passwordDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный пароль для регистрации",
-                                                                  comment: "")
-    let colorsDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомные цвета фона",
-                                                                comment: "")
-    let bottleDescriptionForNoPremiumAccess = NSLocalizedString("Можно крутить виртуальную бутылочку",
-                                                                comment: "")
-    let rockPaperScissorsDescriptionForNoPremiumAccess = NSLocalizedString("Можно играть в игру Камень, ножницы, бумага с другом",
-                                                                           comment: "")
-    let imageFiltersDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный фильтр для фото",
-                                                                      comment: "")
-    let filmsDescriptionForNoPremiumAccess = NSLocalizedString("Можно генерировать рандомный фильм",
-                                                               comment: "")
+    let teamsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTeamList
+    let numberDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNumbers
+    let yesOrNoDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomAnswer
+    let letterDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomLetters
+    let listDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTaskList
+    let coinDescriptionForNoPremiumAccess = RandomStrings.Localizable.flipCoinAnytime
+    let cubeDescriptionForNoPremiumAccess = RandomStrings.Localizable.rollDiceForBoardGames
+    let dateAndTimeDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomDateTime
+    let lotteryDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomLotteryTicket
+    let contactDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomContact
+    let passwordDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPassword
+    let colorsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomBackgroundColors
+    let bottleDescriptionForNoPremiumAccess = RandomStrings.Localizable.canSpinVirtualBottle
+    let rockPaperScissorsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canPlayRockPaperScissors
+    let imageFiltersDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPhotoFilter
+    let filmsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomMovie
     
     let imageCardTeam = "person.circle"
-    let titleCardTeam = NSLocalizedString("Команды", comment: "")
+    let titleCardTeam = RandomStrings.Localizable.teams
     
     let imageCardNumber = "number"
-    let titleCardNumber = NSLocalizedString("Число", comment: "")
+    let titleCardNumber = RandomStrings.Localizable.number
     
     let imageCardYesOrNot = "questionmark.square"
-    let titleCardYesOrNot = NSLocalizedString("Да или Нет", comment: "")
+    let titleCardYesOrNot = RandomStrings.Localizable.yesOrNo
     
     let imageCardCharacters = "textbox"
-    let titleCardCharacters = NSLocalizedString("Буква", comment: "")
+    let titleCardCharacters = RandomStrings.Localizable.letter
     
     let imageCardList = "list.bullet.below.rectangle"
-    let titleCardList = NSLocalizedString("Список", comment: "")
+    let titleCardList = RandomStrings.Localizable.list
     
     let imageCardCoin = "bitcoinsign.circle"
-    let titleCardCoin = NSLocalizedString("Монета", comment: "")
+    let titleCardCoin = RandomStrings.Localizable.coin
     
     let imageCardCube = "cube"
-    let titleCardCube = NSLocalizedString("Кубики", comment: "")
+    let titleCardCube = RandomStrings.Localizable.cubes
     
     let imageCardDateAndTime = "calendar"
-    let titleCardDateAndTime = NSLocalizedString("Дата и время", comment: "")
+    let titleCardDateAndTime = RandomStrings.Localizable.dateAndTime
     
     let imageCardLottery = "tag"
-    let titleCardLottery = NSLocalizedString("Лотерея", comment: "")
+    let titleCardLottery = RandomStrings.Localizable.lottery
     
     let imageCardContact = "phone.circle"
-    let titleCardContact = NSLocalizedString("Контакт", comment: "")
+    let titleCardContact = RandomStrings.Localizable.contact
     
     let imageCardPassword = "wand.and.stars"
-    let titleCardPassword = NSLocalizedString("Пароли", comment: "")
+    let titleCardPassword = RandomStrings.Localizable.passwords
     
     let imageColors = "photo.on.rectangle.angled"
-    let titleColors = NSLocalizedString("Цвета", comment: "")
+    let titleColors = RandomStrings.Localizable.colors
     
     let bottleCardImage = "arrow.triangle.2.circlepath"
-    let titleBottle = NSLocalizedString("Бутылочка", comment: "")
+    let titleBottle = RandomStrings.Localizable.bottle
     
     let imageRockPaperScissorsScreenView = "hurricane.circle"
-    let titleRockPaperScissors = NSLocalizedString("Цу-е-фа", comment: "")
+    let titleRockPaperScissors = RandomStrings.Localizable.tsuEFa
     
     let imageImageFilters = "timelapse"
-    let titleImageFilters = NSLocalizedString("Фотофильтры", comment: "")
+    let titleImageFilters = RandomStrings.Localizable.photoFilters
     
     let imageFilms = "film"
-    let titleFilms = NSLocalizedString("Фильмы", comment: "")
+    let titleFilms = RandomStrings.Localizable.movies
   }
 }

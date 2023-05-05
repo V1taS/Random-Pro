@@ -103,38 +103,38 @@ private extension SKProduct {
 
 private extension PremiumScreenFactory {
   struct Appearance {
-    let purchaseTitle = NSLocalizedString("Купить", comment: "")
-    let forTitle = NSLocalizedString("за", comment: "")
-    let subscribeTitle = NSLocalizedString("Подписаться", comment: "")
+    let purchaseTitle = RandomStrings.Localizable.buy
+    let forTitle = RandomStrings.Localizable.for
+    let subscribeTitle = RandomStrings.Localizable.subscribe
     let maxInset: CGFloat = 20
     
-    let chooseIconTitle = NSLocalizedString("Выберите иконку", comment: "")
-    let chooseIconDescription = NSLocalizedString("Измените внешний вид приложения по своему вкусу", comment: "")
+    let chooseIconTitle = RandomStrings.Localizable.selectIcon
+    let chooseIconDescription = RandomStrings.Localizable.customizeAppAppearance
     let chooseIconJSONName = "premium_icon"
     
-    let filmsTitle = NSLocalizedString("Раздел фильмы", comment: "")
-    let filmsDescription = NSLocalizedString("Откройте доступ к множеству фильмов и наслаждайтесь просмотром", comment: "")
+    let filmsTitle = RandomStrings.Localizable.moviesSection
+    let filmsDescription = RandomStrings.Localizable.accessToMovies
     let filmsIconJSONName = "premium_films"
     
-    let filtersTitle = NSLocalizedString("Фильтры для фото", comment: "")
-    let filtersDescription = NSLocalizedString("Улучшайте свои фотографии и добавляйте им уникальность", comment: "")
+    let filtersTitle = RandomStrings.Localizable.photoFilters
+    let filtersDescription = RandomStrings.Localizable.improvePhotos
     let filtersIconJSONName = "premium_filters"
     
-    let donateTitle = NSLocalizedString("Поддержите проект", comment: "")
-    let donateDescription = NSLocalizedString("Станьте частью сообщества, помогающего нам стремительно развиваться", comment: "")
+    let donateTitle = RandomStrings.Localizable.supportProject
+    let donateDescription = RandomStrings.Localizable.joinCommunity
     let donateIconJSONName = "premium_donate"
     
-    let syncTitle = NSLocalizedString("Синхронизируйте", comment: "")
-    let syncDescription = NSLocalizedString("Получите доступ к своим данным со всех ваших устройств", comment: "")
+    let syncTitle = RandomStrings.Localizable.sync
+    let syncDescription = RandomStrings.Localizable.accessData
     let syncIconJSONName = "premium_sync"
     
-    let playerCardSelectionTitle = NSLocalizedString("Раздел команды", comment: "")
-    let playerCardSelectionDescription = NSLocalizedString("Выберите уникальный стиль карточек", comment: "")
+    let playerCardSelectionTitle = RandomStrings.Localizable.teamSection
+    let playerCardSelectionDescription = RandomStrings.Localizable.uniqueCardStyle
     let playerCardSelectionIconJSONName = "premium_player_card_selection"
     
     // TODO: - Не понятно что с этим разделом делать, аппл не пропустили
-    let rockPaperScissosTitle = NSLocalizedString("Раздел Цу-е-фа", comment: "")
-    let rockPaperScissosDescription = NSLocalizedString("Выберите случайным образом камень, ножницы или бумагу", comment: "")
+    let rockPaperScissosTitle = RandomStrings.Localizable.sectionTsuefa
+    let rockPaperScissosDescription = RandomStrings.Localizable.randomRps
     let rockPaperScissosIconJSONName = "premium_rock_paper_scissos"
   }
 }

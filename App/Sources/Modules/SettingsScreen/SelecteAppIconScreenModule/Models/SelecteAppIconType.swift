@@ -200,76 +200,76 @@ enum SelecteAppIconType: UserDefaultsCodable, CaseIterable {
 
 private extension SelecteAppIconType {
   struct Appearance {
-    let mainIconTitle = NSLocalizedString("Основная", comment: "")
+    let mainIconTitle = RandomStrings.Localizable.main
     let mainIconImage = "selecte_app_icon_default"
     
-    let crimsonTideTitle = NSLocalizedString("Малиновый прилив", comment: "")
+    let crimsonTideTitle = RandomStrings.Localizable.raspberryTide
     let crimsonTideImage = "selecte_app_icon_crimson_tide"
     
-    let lithiumTitle = NSLocalizedString("Литий", comment: "")
+    let lithiumTitle = RandomStrings.Localizable.lithium
     let lithiumImage =  "selecte_app_icon_lithium"
     
-    let orangeFunTitle = NSLocalizedString("Оранжевое удовольствие", comment: "")
+    let orangeFunTitle = RandomStrings.Localizable.orangePleasure
     let orangeFunImage = "selecte_app_icon_orange_fun"
     
-    let midnightCityTitle = NSLocalizedString("Полуночный Город", comment: "")
+    let midnightCityTitle = RandomStrings.Localizable.midnightCity
     let midnightCityImage = "selecte_app_icon_midnight_city"
     
-    let terminalTitle = NSLocalizedString("Терминал", comment: "")
+    let terminalTitle = RandomStrings.Localizable.terminal
     let terminalImage = "selecte_app_icon_terminal"
     
-    let harveyTitle = NSLocalizedString("Харви", comment: "")
+    let harveyTitle = RandomStrings.Localizable.harvey
     let harveyImage = "selecte_app_icon_harvey"
     
-    let moonlitAsteroidTitle = NSLocalizedString("Залитый лунным светом астероид", comment: "")
+    let moonlitAsteroidTitle = RandomStrings.Localizable.moonlitAsteroid
     let moonlitAsteroidImage = "selecte_app_icon_moonlit_asteroid"
     
-    let gradeGreyTitle = NSLocalizedString("Серый", comment: "")
+    let gradeGreyTitle = RandomStrings.Localizable.gray
     let gradeGreyImage = "selecte_app_icon_grade_grey"
     
-    let summerDogTitle = NSLocalizedString("Летний", comment: "")
+    let summerDogTitle = RandomStrings.Localizable.summer
     let summerDogImage = "selecte_app_icon_summer_dog"
     
-    let sinCityRedTitle = NSLocalizedString("Красный город", comment: "")
+    let sinCityRedTitle = RandomStrings.Localizable.redCity
     let sinCityRedImage = "selecte_app_icon_sin_city_red"
     
-    let blueRaspberryTitle = NSLocalizedString("Голубая лагуна", comment: "")
+    let blueRaspberryTitle = RandomStrings.Localizable.blueLagoon
     let blueRaspberryImage = "selecte_app_icon_blue_raspberry"
     
-    let eveningNightTitle = NSLocalizedString("Вечерняя ночь", comment: "")
+    let eveningNightTitle = RandomStrings.Localizable.eveningNight
     let eveningNightImage = "selecte_app_icon_evening_night"
     
-    let pureLustTitle = NSLocalizedString("Горячий шоколад", comment: "")
+    let pureLustTitle = RandomStrings.Localizable.hotChocolate
     let pureLustImage = "selecte_app_icon_pure_lust"
     
-    let moonPurpleTitle = NSLocalizedString("Лунный фиолетовый", comment: "")
+    let moonPurpleTitle = RandomStrings.Localizable.moonlitViolet
     let moonPurpleImage = "selecte_app_icon_moon_purple"
     
-    let seleniumTitle = NSLocalizedString("Селен", comment: "")
+    let seleniumTitle = RandomStrings.Localizable.selen
     let seleniumImage = "selecte_app_icon_selenium"
     
-    let queensNecklaceTitle = NSLocalizedString("Ожерелье королевы", comment: "")
+    let queensNecklaceTitle = RandomStrings.Localizable.queenNecklace
     let queensNecklaceImage = "selecte_app_icon_queen_necklace"
     
-    let marineFuchsiaTitle = NSLocalizedString("Морская фуксия", comment: "")
+    let marineFuchsiaTitle = RandomStrings.Localizable.seaFuchsia
     let marineFuchsiaImage = "selecte_app_icon_marine_fuchsia"
     
-    let sandyDesertTitle = NSLocalizedString("Песчаная пустыня", comment: "")
+    let sandyDesertTitle = RandomStrings.Localizable.sandyDesert
     let sandyDesertIcon = "selecte_app_icon_sandy_desert"
     
-    let redLimeTitle = NSLocalizedString("Красный лайм", comment: "")
+    let redLimeTitle = RandomStrings.Localizable.redLime
     let redLimeIcon = "selecte_app_icon_red_lime"
     
-    let heliotropeTitle = NSLocalizedString("Гелиотроп", comment: "")
+    let heliotropeTitle = RandomStrings.Localizable.heliotrope
     let heliotropeIcon = "selecte_app_icon_heliotrope"
     
-    let violetLemonTitle = NSLocalizedString("Фиолотово-лимонный", comment: "")
+    let violetLemonTitle = RandomStrings.Localizable.violetLemon
     let violetLemonIcon = "selecte_app_icon_violet_lemon"
     
-    let avocadoTitle = NSLocalizedString("Авокадо", comment: "")
+    let avocadoTitle = RandomStrings.Localizable.avocado
     let avocadoIcon = "selecte_app_icon_avocado"
     
-    let frostySkyTitle = NSLocalizedString("Морозное небо", comment: "")
+    let frostySkyTitle = RandomStrings.Localizable.frostySky
     let frostySkyIcon = "selecte_app_icon_frosty_sky"
   }
 }

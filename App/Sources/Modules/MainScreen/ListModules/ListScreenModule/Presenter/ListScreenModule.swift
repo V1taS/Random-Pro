@@ -205,7 +205,7 @@ private extension ListScreenViewController {
 private extension ListScreenViewController {
   struct Appearance {
     let settingsButtonIcon = UIImage(systemName: "gear")
-    let title = NSLocalizedString("Список", comment: "")
+    let title = RandomStrings.Localizable.list
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"
   }

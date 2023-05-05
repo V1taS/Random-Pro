@@ -186,9 +186,9 @@ private extension ListScreenCoordinator {
 
 private extension ListScreenCoordinator {
   struct Appearance {
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
-    let listElementsIsEmpty = NSLocalizedString("Список элементов пуст", comment: "")
-    let uniqueElementsIsOver = NSLocalizedString("Список уникальных элементов закончился", comment: "")
-    let somethingWentWrong = NSLocalizedString("Что-то пошло не так", comment: "")
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
+    let listElementsIsEmpty = RandomStrings.Localizable.listOfElementsEmpty
+    let uniqueElementsIsOver = RandomStrings.Localizable.listOfUniqueElementsEnded
+    let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
   }
 }

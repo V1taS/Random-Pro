@@ -241,7 +241,7 @@ private extension TeamsScreenViewController {
 
 private extension TeamsScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Команды", comment: "")
+    let title = RandomStrings.Localizable.teams
     let settingsButtonIcon = UIImage(systemName: "gear")
     let generateButtonIcon = UIImage(systemName: "forward.end.fill")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")

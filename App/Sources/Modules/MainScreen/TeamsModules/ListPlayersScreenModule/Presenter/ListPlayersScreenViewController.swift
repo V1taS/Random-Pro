@@ -174,7 +174,7 @@ private extension ListPlayersScreenViewController {
 
 private extension ListPlayersScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Список игроков", comment: "")
+    let title = RandomStrings.Localizable.listOfPlayers
     let removePlayersButtonIcon = UIImage(systemName: "trash")
   }
 }

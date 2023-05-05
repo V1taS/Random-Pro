@@ -123,6 +123,6 @@ extension CoinScreenCoordinator: ListResultScreenCoordinatorOutput {}
 
 private extension CoinScreenCoordinator {
   struct Appearance {
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

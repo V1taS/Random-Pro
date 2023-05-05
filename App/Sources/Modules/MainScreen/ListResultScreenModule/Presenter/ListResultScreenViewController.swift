@@ -134,7 +134,7 @@ private extension ListResultScreenViewController {
 
 private extension ListResultScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Список результатов", comment: "")
+    let title = RandomStrings.Localizable.listOfResults
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
   }
 }

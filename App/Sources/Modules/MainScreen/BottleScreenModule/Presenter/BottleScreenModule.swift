@@ -113,7 +113,7 @@ private extension BottleScreenViewController {
 
 private extension BottleScreenViewController {
   struct Appearance {
-    let setTitle = NSLocalizedString("Бутылочка", comment: "")
+    let setTitle = RandomStrings.Localizable.bottle
     let settingsButtonIcon = UIImage(systemName: "arrow.counterclockwise")
   }
 }

@@ -135,7 +135,7 @@ private extension RockPaperScissorsScreenViewController {
 
 private extension RockPaperScissorsScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Цу-е-фа", comment: "")
+    let title = RandomStrings.Localizable.tsuEFa
     let resetButtonIcon = UIImage(systemName: "arrow.counterclockwise")
   }
 }

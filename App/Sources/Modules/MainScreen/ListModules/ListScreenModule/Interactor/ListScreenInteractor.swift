@@ -250,10 +250,10 @@ private extension ListScreenInteractor {
     let keySecondStartApp = "list_screen_second_start_app_key"
     
     let result = "?"
-    let football = NSLocalizedString("Футбол", comment: "")
-    let cleaning = NSLocalizedString("Уборка", comment: "")
-    let walk = NSLocalizedString("Прогулка", comment: "")
-    let goOnDate = NSLocalizedString("Пойти на свидание", comment: "")
-    let callYourParents = NSLocalizedString("Позвонить родителям", comment: "")
+    let football = RandomStrings.Localizable.football
+    let cleaning = RandomStrings.Localizable.cleaning
+    let walk = RandomStrings.Localizable.walk
+    let goOnDate = RandomStrings.Localizable.goOnADate
+    let callYourParents = RandomStrings.Localizable.callParents
   }
 }

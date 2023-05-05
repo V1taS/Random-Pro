@@ -196,33 +196,17 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
 
 private extension SettingsScreenFactory {
   struct Appearance {
-    let withoutRepetitionTitle = NSLocalizedString("Без повторений",
-                                                   comment: "")
-    let countGeneratedTitle = NSLocalizedString("Cгенерировано",
-                                                comment: "")
-    let latestGeneration = NSLocalizedString("Последняя генерация",
-                                             comment: "")
-    let cleanButtonTitle = NSLocalizedString("Очистить",
-                                             comment: "")
-    
-    let numberOfGenerations = NSLocalizedString("Список результатов",
-                                                comment: "")
-    let titleAndImageTitle = NSLocalizedString("Список игроков",
-                                               comment: "")
-    
-    let createListTitle = NSLocalizedString("Создать список",
-                                            comment: "")
-    
-    let generatedTeamsCountTitle = NSLocalizedString("Cгенерировано команд",
-                                                     comment: "")
-    let allPlayersCount = NSLocalizedString("Всего игроков",
-                                            comment: "")
-    let allTextCount = NSLocalizedString("Всего элементов",
-                                         comment: "")
-    let generatedPlayersCount = NSLocalizedString("Cгенерировано игроков",
-                                                  comment: "")
-    
-    let chooseCardStyle = NSLocalizedString("Выбрать стиль карточки",
-                                            comment: "")
+    let withoutRepetitionTitle = RandomStrings.Localizable.noRepetitions
+    let countGeneratedTitle = RandomStrings.Localizable.generated
+    let latestGeneration = RandomStrings.Localizable.lastGeneration
+    let cleanButtonTitle = RandomStrings.Localizable.clean
+    let numberOfGenerations = RandomStrings.Localizable.listOfResults
+    let titleAndImageTitle = RandomStrings.Localizable.listOfPlayers
+    let createListTitle = RandomStrings.Localizable.createList
+    let generatedTeamsCountTitle = RandomStrings.Localizable.generatedTeams
+    let allPlayersCount = RandomStrings.Localizable.totalPlayers
+    let allTextCount = RandomStrings.Localizable.totalElements
+    let generatedPlayersCount = RandomStrings.Localizable.generatedPlayers
+    let chooseCardStyle = RandomStrings.Localizable.selectCardStyle
   }
 }

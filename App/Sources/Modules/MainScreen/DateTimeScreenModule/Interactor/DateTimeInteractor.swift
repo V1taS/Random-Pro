@@ -183,28 +183,28 @@ private extension DateTimeInteractor {
     let randomTimeMinets = Int.random(in: 1...59)
     let randomDate = Int.random(in: 1...30)
     let listDays = [
-      NSLocalizedString("Понедельник", comment: ""),
-      NSLocalizedString("Вторник", comment: ""),
-      NSLocalizedString("Среда", comment: ""),
-      NSLocalizedString("Четверг", comment: ""),
-      NSLocalizedString("Пятница", comment: ""),
-      NSLocalizedString("Суббота", comment: ""),
-      NSLocalizedString("Воскресенье", comment: "")
+      RandomStrings.Localizable.monday,
+      RandomStrings.Localizable.tuesday,
+      RandomStrings.Localizable.wednesday,
+      RandomStrings.Localizable.thursday,
+      RandomStrings.Localizable.friday,
+      RandomStrings.Localizable.saturday,
+      RandomStrings.Localizable.sunday
     ]
     
     let listMonths = [
-      NSLocalizedString("Январь", comment: ""),
-      NSLocalizedString("Февраль", comment: ""),
-      NSLocalizedString("Март", comment: ""),
-      NSLocalizedString("Апрель", comment: ""),
-      NSLocalizedString("Май", comment: ""),
-      NSLocalizedString("Июнь", comment: ""),
-      NSLocalizedString("Июль", comment: ""),
-      NSLocalizedString("Август", comment: ""),
-      NSLocalizedString("Сентябрь", comment: ""),
-      NSLocalizedString("Октябрь", comment: ""),
-      NSLocalizedString("Ноябрь", comment: ""),
-      NSLocalizedString("Декабрь", comment: ""),
+      RandomStrings.Localizable.january,
+      RandomStrings.Localizable.february,
+      RandomStrings.Localizable.march,
+      RandomStrings.Localizable.april,
+      RandomStrings.Localizable.may,
+      RandomStrings.Localizable.june,
+      RandomStrings.Localizable.july,
+      RandomStrings.Localizable.august,
+      RandomStrings.Localizable.september,
+      RandomStrings.Localizable.october,
+      RandomStrings.Localizable.november,
+      RandomStrings.Localizable.december
     ]
   }
 }

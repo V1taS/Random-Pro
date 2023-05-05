@@ -195,7 +195,7 @@ private extension LetterScreenViewController {
 
 private extension LetterScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Буква", comment: "")
+    let title = RandomStrings.Localizable.letter
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"

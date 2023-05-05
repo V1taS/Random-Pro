@@ -304,7 +304,7 @@ private extension RockPaperScissorsScreenView {
 
 private extension RockPaperScissorsScreenView {
   struct Appearance {
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
     let systemFontLabel: CGFloat = 30
     let systemFontScore: CGFloat = 100
     let defaultInset: CGFloat = 16

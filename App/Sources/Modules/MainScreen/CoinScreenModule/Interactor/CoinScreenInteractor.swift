@@ -134,8 +134,8 @@ private extension CoinScreenInteractor {
   struct Appearance {
     let resultName = "?"
     let namesCoin = [
-      NSLocalizedString("Орел", comment: ""),
-      NSLocalizedString("Решка", comment: "")
+      RandomStrings.Localizable.eagle,
+      RandomStrings.Localizable.tails
     ]
   }
 }

@@ -92,6 +92,6 @@ extension ListResultScreenCoordinator: ShareScreenCoordinatorOutput {}
 
 private extension ListResultScreenCoordinator {
   struct Appearance {
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

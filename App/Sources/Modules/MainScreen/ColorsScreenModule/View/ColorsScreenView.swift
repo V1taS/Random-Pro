@@ -170,10 +170,10 @@ private extension ColorsScreenView {
     let resultDuration: CGFloat = 0.2
     
     let resultLabelTitle = "?"
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
     let countColors = [
-      NSLocalizedString("Градиент", comment: ""),
-      NSLocalizedString("Обычный", comment: "")
+      RandomStrings.Localizable.gradient,
+      RandomStrings.Localizable.regular
     ]
   }
 }

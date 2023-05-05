@@ -193,10 +193,10 @@ private extension DateTimeView {
 
 private extension DateTimeView {
   struct Appearance {
-    let textButtonDayTitle = NSLocalizedString("День", comment: "")
-    let textButtonDateTitle = NSLocalizedString("Дата", comment: "")
-    let textButtomTimeTitle = NSLocalizedString("Время", comment: "")
-    let textButtonMonthTitle = NSLocalizedString("Месяц", comment: "")
+    let textButtonDayTitle = RandomStrings.Localizable.day
+    let textButtonDateTitle = RandomStrings.Localizable.date
+    let textButtomTimeTitle = RandomStrings.Localizable.time
+    let textButtonMonthTitle = RandomStrings.Localizable.month
     
     let defaultInset: CGFloat = 16
     let minInset: CGFloat = 8

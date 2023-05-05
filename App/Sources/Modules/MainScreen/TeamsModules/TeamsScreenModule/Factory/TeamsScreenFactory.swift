@@ -317,6 +317,6 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
 
 private extension TeamsScreenFactory {
   struct Appearance {
-    let teamTitle = NSLocalizedString("Команда", comment: "")
+    let teamTitle = RandomStrings.Localizable.team
   }
 }

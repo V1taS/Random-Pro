@@ -264,13 +264,13 @@ private extension ImageFiltersScreenCoordinator {
 
 private extension ImageFiltersScreenCoordinator {
   struct Appearance {
-    let allowAccessToGallery = NSLocalizedString("Разрешить доступ к галерее", comment: "")
-    let failedLoadImage = NSLocalizedString("Не удалось загрузить изображение", comment: "")
-    let failedSomeError = NSLocalizedString("Ошибка", comment: "")
-    let chooseFromFile = NSLocalizedString("Изображение из файлов", comment: "")
-    let chooseFromGallery = NSLocalizedString("Изображение из галереи", comment: "")
-    let takePhoto = NSLocalizedString("Сделать фото", comment: "")
-    let actionTitleCancel = NSLocalizedString("Отмена", comment: "")
+    let allowAccessToGallery = RandomStrings.Localizable.allowGalleryAccess
+    let failedLoadImage = RandomStrings.Localizable.failedToLoadImage
+    let failedSomeError = RandomStrings.Localizable.error
+    let chooseFromFile = RandomStrings.Localizable.imageFromFiles
+    let chooseFromGallery = RandomStrings.Localizable.imageFromGallery
+    let takePhoto = RandomStrings.Localizable.takePhoto
+    let actionTitleCancel = RandomStrings.Localizable.cancel
     let selectionLimit = 1
   }
 }

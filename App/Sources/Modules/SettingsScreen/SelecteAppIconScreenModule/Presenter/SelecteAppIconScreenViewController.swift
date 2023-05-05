@@ -127,6 +127,6 @@ private extension SelecteAppIconScreenViewController {}
 
 private extension SelecteAppIconScreenViewController {
   struct Appearance {
-    let title = NSLocalizedString("Выбор иконки", comment: "")
+    let title = RandomStrings.Localizable.chooseIcon
   }
 }

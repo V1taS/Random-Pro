@@ -86,6 +86,6 @@ extension CustomMainSectionsCoordinator: CustomMainSectionsModuleOutput {
 
 private extension CustomMainSectionsCoordinator {
   struct Appearance {
-    let somethingWentWrong = NSLocalizedString("Что-то пошло не так", comment: "")
+    let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
   }
 }

@@ -150,7 +150,7 @@ private extension FilmsScreenView {
 
 private extension FilmsScreenView {
   struct Appearance {
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
     let loaderImage = "films_loader"
     let animationSpeed: CGFloat = 0.5
   }

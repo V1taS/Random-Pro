@@ -169,7 +169,7 @@ private extension ImageFiltersScreenView {
   struct Appearance {
     let resultDuration: CGFloat = 0.2
     let defaultInset: CGFloat = 16
-    let buttonTitle = NSLocalizedString("Сгенерировать", comment: "")
+    let buttonTitle = RandomStrings.Localizable.generate
     let plugImage = UIImage(named: "image_filters_plug")
     let maxKbCompress: Double = 10_194_304
   }

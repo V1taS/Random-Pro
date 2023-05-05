@@ -190,7 +190,7 @@ private extension DateTimeViewController {
 
 private extension DateTimeViewController {
   struct Appearance {
-    let title = NSLocalizedString("Дата и время", comment: "")
+    let title = RandomStrings.Localizable.dateAndTime
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"

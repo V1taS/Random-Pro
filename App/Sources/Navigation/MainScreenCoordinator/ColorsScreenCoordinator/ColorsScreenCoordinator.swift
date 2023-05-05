@@ -117,6 +117,6 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
 
 private extension ColorsScreenCoordinator {
   struct Appearance {
-    let allowAccessToGallery = NSLocalizedString("Разрешить доступ к галерее", comment: "")
+    let allowAccessToGallery = RandomStrings.Localizable.allowGalleryAccess
   }
 }

@@ -98,8 +98,8 @@ private extension ListAddItemsScreenCoordinator {
 
 private extension ListAddItemsScreenCoordinator {
   struct Appearance {
-    let removeTextTitle = NSLocalizedString("Удалить элементы из списка", comment: "")
-    let removeTextYes = NSLocalizedString("Да", comment: "")
-    let removeTextCancel = NSLocalizedString("Отмена", comment: "")
+    let removeTextTitle = RandomStrings.Localizable.removeItemsFromList
+    let removeTextYes = RandomStrings.Localizable.yes
+    let removeTextCancel = RandomStrings.Localizable.cancel
   }
 }

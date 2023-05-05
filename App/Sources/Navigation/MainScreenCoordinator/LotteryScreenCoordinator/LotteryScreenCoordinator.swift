@@ -129,7 +129,7 @@ extension LotteryScreenCoordinator: ListResultScreenCoordinatorOutput {}
 
 private extension LotteryScreenCoordinator {
   struct Appearance {
-    let numberRangeError = NSLocalizedString("Неверно задан диапазон", comment: "")
-    let copiedToClipboard = NSLocalizedString("Скопировано в буфер", comment: "")
+    let numberRangeError = RandomStrings.Localizable.incorrectRange
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

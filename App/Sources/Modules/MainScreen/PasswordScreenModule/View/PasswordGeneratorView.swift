@@ -254,12 +254,12 @@ private extension PasswordGeneratorView {
 
 private extension PasswordGeneratorView {
   struct Appearance {
-    let parameters = NSLocalizedString("Параметры", comment: "")
-    let longPassword = NSLocalizedString("Длина пароля", comment: "")
-    let uppercase = NSLocalizedString("Прописные буквы", comment: "")
-    let lovercase = NSLocalizedString("Строчные буквы", comment: "")
-    let numbers = NSLocalizedString("Цифры", comment: "")
-    let symbols = NSLocalizedString("Символы", comment: "")
+    let parameters = RandomStrings.Localizable.parameters
+    let longPassword = RandomStrings.Localizable.passwordLength
+    let uppercase = RandomStrings.Localizable.uppercaseLetters
+    let lovercase = RandomStrings.Localizable.lowercaseLetters
+    let numbers = RandomStrings.Localizable.numbers
+    let symbols = RandomStrings.Localizable.symbols
     let rangeStartValue = "9 999"
     let defaultSpacing: CGFloat = 16
     let minSpacing: CGFloat = 8

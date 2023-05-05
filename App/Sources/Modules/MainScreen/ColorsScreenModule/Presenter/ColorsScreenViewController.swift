@@ -77,7 +77,7 @@ final class ColorsScreenViewController: ColorsScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    copyButton.isEnabled = false
     setNavigationBar()
   }
 }
@@ -85,6 +85,11 @@ final class ColorsScreenViewController: ColorsScreenModule {
 // MARK: - ColorsScreenViewOutput
 
 extension ColorsScreenViewController: ColorsScreenViewOutput {
+  
+  func setCopyButtonEnabled(_ enabled: Bool) {
+    copyButton.isEnabled = enabled
+  }
+  
   func resultLabelAction(text: String) {
     guard text != Appearance().defaultResult else {
       return

@@ -14,6 +14,10 @@ protocol ColorsScreenViewOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
   func resultLabelAction(text: String)
+  
+  /// Активировать кнопку копирования
+  ///  - Parameter enabled: Состояние кнопки
+  func setCopyButtonEnabled(enabled: Bool)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -186,6 +190,8 @@ private extension ColorsScreenView {
     resultLabel.text = text
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.only.primaryWhite
+    let isEnabled = (resultLabel.text != Appearance().resultLabelTitle)
+    output?.setCopyButtonEnabled(enabled: isEnabled)
   }
   
   @objc

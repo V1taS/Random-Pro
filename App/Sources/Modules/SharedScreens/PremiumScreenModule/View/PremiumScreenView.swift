@@ -399,7 +399,7 @@ private extension PremiumScreenView {
     let oneTimePurchaseTitle = RandomStrings.Localizable.oneTimePurchase
     let oneTimePCountTitle = "∞"
     
-    let cardPaymentLoader = "card_payment_in_process"
+    let cardPaymentLoader = RandomAsset.cardPaymentInProcess.name
     let processingPaymentTitle = RandomStrings.Localizable.processingPayment
     
     let purchaseTitle = RandomStrings.Localizable.buy

@@ -144,10 +144,10 @@ private extension ImageFiltersScreenView {
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     imageView.image = appearance.plugImage
     imageView.contentMode = .scaleAspectFit
-    cacheData = appearance.plugImage?.jpegData(compressionQuality: 1)
+    cacheData = appearance.plugImage.jpegData(compressionQuality: 1)
     loaderView.isHidden = true
     
-    appearance.plugImage?.getAverageColor { [weak self] averageColor in
+    appearance.plugImage.getAverageColor { [weak self] averageColor in
       UIView.animate(withDuration: appearance.resultDuration) { [weak self] in
         self?.backgroundColor = averageColor
       }
@@ -170,7 +170,7 @@ private extension ImageFiltersScreenView {
     let resultDuration: CGFloat = 0.2
     let defaultInset: CGFloat = 16
     let buttonTitle = RandomStrings.Localizable.generate
-    let plugImage = UIImage(named: "image_filters_plug")
+    let plugImage = RandomAsset.imageFiltersPlug.image
     let maxKbCompress: Double = 10_194_304
   }
 }

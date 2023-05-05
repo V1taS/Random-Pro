@@ -110,31 +110,31 @@ private extension PremiumScreenFactory {
     
     let chooseIconTitle = RandomStrings.Localizable.selectIcon
     let chooseIconDescription = RandomStrings.Localizable.customizeAppAppearance
-    let chooseIconJSONName = "premium_icon"
+    let chooseIconJSONName = RandomAsset.premiumIcon.name
     
     let filmsTitle = RandomStrings.Localizable.moviesSection
     let filmsDescription = RandomStrings.Localizable.accessToMovies
-    let filmsIconJSONName = "premium_films"
+    let filmsIconJSONName = RandomAsset.premiumFilms.name
     
     let filtersTitle = RandomStrings.Localizable.photoFilters
     let filtersDescription = RandomStrings.Localizable.improvePhotos
-    let filtersIconJSONName = "premium_filters"
+    let filtersIconJSONName = RandomAsset.premiumFilters.name
     
     let donateTitle = RandomStrings.Localizable.supportProject
     let donateDescription = RandomStrings.Localizable.joinCommunity
-    let donateIconJSONName = "premium_donate"
+    let donateIconJSONName = RandomAsset.premiumDonate.name
     
     let syncTitle = RandomStrings.Localizable.sync
     let syncDescription = RandomStrings.Localizable.accessData
-    let syncIconJSONName = "premium_sync"
+    let syncIconJSONName = RandomAsset.premiumSync.name
     
     let playerCardSelectionTitle = RandomStrings.Localizable.teamSection
     let playerCardSelectionDescription = RandomStrings.Localizable.uniqueCardStyle
-    let playerCardSelectionIconJSONName = "premium_player_card_selection"
+    let playerCardSelectionIconJSONName = RandomAsset.premiumPlayerCardSelection.name
     
     // TODO: - Не понятно что с этим разделом делать, аппл не пропустили
     let rockPaperScissosTitle = RandomStrings.Localizable.sectionTsuefa
     let rockPaperScissosDescription = RandomStrings.Localizable.randomRps
-    let rockPaperScissosIconJSONName = "premium_rock_paper_scissos"
+    let rockPaperScissosIconJSONName = RandomAsset.premiumRockPaperScissos
   }
 }

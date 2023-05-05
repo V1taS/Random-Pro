@@ -125,7 +125,7 @@ private extension BottleScreenView {
   struct Appearance {
     let buttonTitle = RandomStrings.Localizable.spinTheBottle
     let defaultInset: CGFloat = 16
-    let bottleImage = UIImage(named: "Bottle")
+    let bottleImage = RandomAsset.bottle.image
     let bottleHeightMultiplier: Double = 0.4
   }
 }

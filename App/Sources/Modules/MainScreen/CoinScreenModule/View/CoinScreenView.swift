@@ -158,7 +158,7 @@ private extension CoinScreenView {
     let resultDuration: CGFloat = 0.5
     
     let buttonTitle = RandomStrings.Localizable.generate
-    let eagleImage = UIImage(named: "coin_eagle") ?? UIImage()
-    let tailsImage = UIImage(named: "coin_tails") ?? UIImage()
+    let eagleImage = RandomAsset.coinEagle.image
+    let tailsImage = RandomAsset.coinTails.image
   }
 }

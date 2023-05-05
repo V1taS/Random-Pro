@@ -400,7 +400,7 @@ private extension MainScreenViewController {
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     let premiumButtonIcon = UIImage(systemName: "crown")
     
-    let notPremiumName = "crown_not_premium"
-    let isPremiumName = "crown_is_premium"
+    let notPremiumName = RandomAsset.crownNotPremium.name
+    let isPremiumName = RandomAsset.crownIsPremium.name
   }
 }

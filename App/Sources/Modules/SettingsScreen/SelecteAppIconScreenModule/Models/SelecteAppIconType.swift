@@ -201,75 +201,75 @@ enum SelecteAppIconType: UserDefaultsCodable, CaseIterable {
 private extension SelecteAppIconType {
   struct Appearance {
     let mainIconTitle = RandomStrings.Localizable.main
-    let mainIconImage = "selecte_app_icon_default"
+    let mainIconImage = RandomAsset.selecteAppIconDefault.name
     
     let crimsonTideTitle = RandomStrings.Localizable.raspberryTide
-    let crimsonTideImage = "selecte_app_icon_crimson_tide"
+    let crimsonTideImage = RandomAsset.selecteAppIconCrimsonTide.name
     
     let lithiumTitle = RandomStrings.Localizable.lithium
-    let lithiumImage =  "selecte_app_icon_lithium"
+    let lithiumImage =  RandomAsset.selecteAppIconLithium.name
     
     let orangeFunTitle = RandomStrings.Localizable.orangePleasure
-    let orangeFunImage = "selecte_app_icon_orange_fun"
+    let orangeFunImage = RandomAsset.selecteAppIconOrangeFun.name
     
     let midnightCityTitle = RandomStrings.Localizable.midnightCity
-    let midnightCityImage = "selecte_app_icon_midnight_city"
+    let midnightCityImage = RandomAsset.selecteAppIconMidnightCity.name
     
     let terminalTitle = RandomStrings.Localizable.terminal
-    let terminalImage = "selecte_app_icon_terminal"
+    let terminalImage = RandomAsset.selecteAppIconTerminal.name
     
     let harveyTitle = RandomStrings.Localizable.harvey
-    let harveyImage = "selecte_app_icon_harvey"
+    let harveyImage = RandomAsset.selecteAppIconHarvey.name
     
     let moonlitAsteroidTitle = RandomStrings.Localizable.moonlitAsteroid
-    let moonlitAsteroidImage = "selecte_app_icon_moonlit_asteroid"
+    let moonlitAsteroidImage = RandomAsset.selecteAppIconMoonlitAsteroid.name
     
     let gradeGreyTitle = RandomStrings.Localizable.gray
-    let gradeGreyImage = "selecte_app_icon_grade_grey"
+    let gradeGreyImage = RandomAsset.selecteAppIconGradeGrey.name
     
     let summerDogTitle = RandomStrings.Localizable.summer
-    let summerDogImage = "selecte_app_icon_summer_dog"
+    let summerDogImage = RandomAsset.selecteAppIconSummerDog.name
     
     let sinCityRedTitle = RandomStrings.Localizable.redCity
-    let sinCityRedImage = "selecte_app_icon_sin_city_red"
+    let sinCityRedImage = RandomAsset.selecteAppIconSinCityRed.name
     
     let blueRaspberryTitle = RandomStrings.Localizable.blueLagoon
-    let blueRaspberryImage = "selecte_app_icon_blue_raspberry"
+    let blueRaspberryImage = RandomAsset.selecteAppIconBlueRaspberry.name
     
     let eveningNightTitle = RandomStrings.Localizable.eveningNight
-    let eveningNightImage = "selecte_app_icon_evening_night"
+    let eveningNightImage = RandomAsset.selecteAppIconEveningNight.name
     
     let pureLustTitle = RandomStrings.Localizable.hotChocolate
-    let pureLustImage = "selecte_app_icon_pure_lust"
+    let pureLustImage = RandomAsset.selecteAppIconPureLust.name
     
     let moonPurpleTitle = RandomStrings.Localizable.moonlitViolet
-    let moonPurpleImage = "selecte_app_icon_moon_purple"
+    let moonPurpleImage = RandomAsset.selecteAppIconMoonPurple.name
     
     let seleniumTitle = RandomStrings.Localizable.selen
-    let seleniumImage = "selecte_app_icon_selenium"
+    let seleniumImage = RandomAsset.selecteAppIconSelenium.name
     
     let queensNecklaceTitle = RandomStrings.Localizable.queenNecklace
-    let queensNecklaceImage = "selecte_app_icon_queen_necklace"
+    let queensNecklaceImage = RandomAsset.selecteAppIconQueenNecklace.name
     
     let marineFuchsiaTitle = RandomStrings.Localizable.seaFuchsia
-    let marineFuchsiaImage = "selecte_app_icon_marine_fuchsia"
+    let marineFuchsiaImage = RandomAsset.selecteAppIconMarineFuchsia.name
     
     let sandyDesertTitle = RandomStrings.Localizable.sandyDesert
-    let sandyDesertIcon = "selecte_app_icon_sandy_desert"
+    let sandyDesertIcon = RandomAsset.selecteAppIconSandyDesert.name
     
     let redLimeTitle = RandomStrings.Localizable.redLime
-    let redLimeIcon = "selecte_app_icon_red_lime"
+    let redLimeIcon = RandomAsset.selecteAppIconRedLime.name
     
     let heliotropeTitle = RandomStrings.Localizable.heliotrope
-    let heliotropeIcon = "selecte_app_icon_heliotrope"
+    let heliotropeIcon = RandomAsset.selecteAppIconHeliotrope.name
     
     let violetLemonTitle = RandomStrings.Localizable.violetLemon
-    let violetLemonIcon = "selecte_app_icon_violet_lemon"
+    let violetLemonIcon = RandomAsset.selecteAppIconVioletLemon.name
     
     let avocadoTitle = RandomStrings.Localizable.avocado
-    let avocadoIcon = "selecte_app_icon_avocado"
+    let avocadoIcon = RandomAsset.selecteAppIconAvocado.name
     
     let frostySkyTitle = RandomStrings.Localizable.frostySky
-    let frostySkyIcon = "selecte_app_icon_frosty_sky"
+    let frostySkyIcon = RandomAsset.selecteAppIconFrostySky.name
   }
 }

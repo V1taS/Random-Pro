@@ -151,7 +151,7 @@ private extension FilmsScreenView {
 private extension FilmsScreenView {
   struct Appearance {
     let buttonTitle = RandomStrings.Localizable.generate
-    let loaderImage = "films_loader"
+    let loaderImage = RandomAsset.filmsLoader.name
     let animationSpeed: CGFloat = 0.5
   }
 }

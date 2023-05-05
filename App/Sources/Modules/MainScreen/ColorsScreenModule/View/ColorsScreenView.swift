@@ -63,9 +63,6 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
   }
   
   func copyResult() {
-    guard resultLabel.text != Appearance().resultLabelTitle else {
-      return
-    }
     output?.resultLabelAction(text: resultLabel.text ?? Appearance().resultLabelTitle)
   }
 }
@@ -188,7 +185,7 @@ private extension ColorsScreenView {
   func updateResultText(text: String) {
     resultLabel.text = text
     resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryWhite
+    resultLabel.textColor = RandomColor.only.primaryWhite
   }
   
   @objc
@@ -196,9 +193,6 @@ private extension ColorsScreenView {
   
   @objc
   func resultAction() {
-    guard resultLabel.text != Appearance().resultLabelTitle else {
-      return
-    }
     output?.resultLabelAction(text: resultLabel.text ?? Appearance().resultLabelTitle)
   }
 }

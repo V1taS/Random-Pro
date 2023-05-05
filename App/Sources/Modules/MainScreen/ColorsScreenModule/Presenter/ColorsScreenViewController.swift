@@ -86,6 +86,9 @@ final class ColorsScreenViewController: ColorsScreenModule {
 
 extension ColorsScreenViewController: ColorsScreenViewOutput {
   func resultLabelAction(text: String) {
+    guard text != Appearance().defaultResult else {
+      return
+    }
     moduleOutput?.resultCopied(text: text)
   }
 }
@@ -126,7 +129,6 @@ private extension ColorsScreenViewController {
   @objc
   func copyButtonAction() {
     moduleView.copyResult()
-    impactFeedback.impactOccurred()
   }
   
   @objc

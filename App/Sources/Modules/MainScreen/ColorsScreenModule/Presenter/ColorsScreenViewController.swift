@@ -86,7 +86,7 @@ final class ColorsScreenViewController: ColorsScreenModule {
 
 extension ColorsScreenViewController: ColorsScreenViewOutput {
   
-  func setCopyButtonEnabled(_ enabled: Bool) {
+  func setCopyButtonEnabled(enabled: Bool) {
     copyButton.isEnabled = enabled
   }
   
@@ -148,6 +148,8 @@ private extension ColorsScreenViewController {
 private extension ColorsScreenViewController {
   struct Appearance {
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let title = RandomStrings.Localizable.colors
+    let defaultResult = "?"
   }
 }

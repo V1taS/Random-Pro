@@ -127,5 +127,6 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
 private extension ColorsScreenCoordinator {
   struct Appearance {
     let allowAccessToGallery = RandomStrings.Localizable.allowGalleryAccess
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

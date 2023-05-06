@@ -70,6 +70,14 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
     )
   }
   
+  func resultCopied(text: String) {
+    UIPasteboard.general.string = text
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+  
   func shareButtonAction(imageData: Data?) {
     guard
       let imageData = imageData,
@@ -118,5 +126,6 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
 private extension ColorsScreenCoordinator {
   struct Appearance {
     let allowAccessToGallery = RandomStrings.Localizable.allowGalleryAccess
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

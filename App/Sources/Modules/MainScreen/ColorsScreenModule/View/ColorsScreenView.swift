@@ -9,13 +9,25 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из View в Presenter
-protocol ColorsScreenViewOutput: AnyObject {}
+protocol ColorsScreenViewOutput: AnyObject {
+  
+  /// Было нажатие на результат генерации
+  ///  - Parameter text: Результат генерации
+  func resultLabelAction(text: String?)
+  
+  /// Была нажата кнопка сгенерировать результат
+  ///  - Parameter text: Результат генерации
+  func generateResultButtonPressed(text: String?)
+}
 
 /// События которые отправляем от Presenter ко View
 protocol ColorsScreenViewInput {
   
   /// Вернуть изображение с цветом
   func returnImageDataColor() -> Data?
+  
+  /// Вернуть результат генерации
+  func getResult() -> String?
 }
 
 /// Псевдоним протокола UIView & ColorsScreenViewInput
@@ -53,6 +65,10 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
   func returnImageDataColor() -> Data? {
     contentView.asImage?.pngData()
   }
+  
+  func getResult() -> String? {
+    return resultLabel.text
+  }
 }
 
 // MARK: - Private
@@ -76,8 +92,9 @@ private extension ColorsScreenView {
       contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
       contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
-      resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: appearance.defaultInset),
+      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -appearance.defaultInset),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
@@ -106,10 +123,15 @@ private extension ColorsScreenView {
     colorsSegmentedControl.addTarget(self,
                                      action: #selector(colorsSegmentedControlSegmentedControlAction),
                                      for: .valueChanged)
+    
+    let resultLabelGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                              action: #selector(resultAction))
+    resultLabelGestureRecognizer.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelGestureRecognizer)
+    resultLabel.isUserInteractionEnabled = true
   }
   
   func showPlugView() {
-    resultLabel.isHidden = false
     UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
       guard let self = self else {
         return
@@ -119,8 +141,6 @@ private extension ColorsScreenView {
   }
   
   func hidePlugViewWith(colors: [UIColor]) {
-    resultLabel.isHidden = true
-    
     UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
       guard let self = self else {
         return
@@ -151,13 +171,33 @@ private extension ColorsScreenView {
         colorTwo,
         colorThree
       ])
+      updateResultText(text: convertToHex(colors: [
+        colorOne,
+        colorTwo,
+        colorThree
+      ]))
     } else {
       hidePlugViewWith(colors: [colorOne, colorOne])
+      updateResultText(text: convertToHex(colors: [
+        colorOne
+      ]))
     }
+    output?.generateResultButtonPressed(text: resultLabel.text)
+  }
+  
+  func updateResultText(text: String) {
+    resultLabel.text = text
+    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.textColor = RandomColor.only.primaryWhite
   }
   
   @objc
   func colorsSegmentedControlSegmentedControlAction() {}
+  
+  @objc
+  func resultAction() {
+    output?.resultLabelAction(text: resultLabel.text)
+  }
 }
 
 // MARK: - Appearance
@@ -165,8 +205,10 @@ private extension ColorsScreenView {
 private extension ColorsScreenView {
   struct Appearance {
     let defaultInset: CGFloat = 16
+    let minInset: CGFloat = 8
+    let midInset: CGFloat = 16
     let maxInset: CGFloat = 24
-    let resultLabelNumberOfLines = 1
+    let resultLabelNumberOfLines = 0
     let resultDuration: CGFloat = 0.2
     
     let resultLabelTitle = "?"

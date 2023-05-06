@@ -16,6 +16,10 @@ protocol ColorsScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   ///  - Parameter imageData: Изображение Colors
   func shareButtonAction(imageData: Data?)
+  
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -30,7 +34,7 @@ typealias ColorsScreenModule = UIViewController & ColorsScreenModuleInput
 
 /// Презентер
 final class ColorsScreenViewController: ColorsScreenModule {
-
+  
   // MARK: - Internal properties
   
   weak var moduleOutput: ColorsScreenModuleOutput?
@@ -41,6 +45,10 @@ final class ColorsScreenViewController: ColorsScreenModule {
   private let moduleView: ColorsScreenViewProtocol
   private let factory: ColorsScreenFactoryInput
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
+                                                style: .plain,
+                                                target: self,
+                                                action: #selector(copyButtonAction))
   
   // MARK: - Initialization
   
@@ -69,14 +77,28 @@ final class ColorsScreenViewController: ColorsScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    copyButton.isEnabled = false
     setNavigationBar()
   }
 }
 
 // MARK: - ColorsScreenViewOutput
 
-extension ColorsScreenViewController: ColorsScreenViewOutput {}
+extension ColorsScreenViewController: ColorsScreenViewOutput {
+  func generateResultButtonPressed(text: String?) {
+    guard let text, text != Appearance().defaultResult else {
+      return
+    }
+    copyButton.isEnabled = true
+  }
+  
+  func resultLabelAction(text: String?) {
+    guard let text, text != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultCopied(text: text)
+  }
+}
 
 // MARK: - ColorsScreenInteractorOutput
 
@@ -108,7 +130,18 @@ private extension ColorsScreenViewController {
                                       target: self,
                                       action: #selector(shareButtonAction))
     
-    navigationItem.rightBarButtonItems = [shareButton]
+    navigationItem.rightBarButtonItems = [shareButton, copyButton]
+  }
+  
+  @objc
+  func copyButtonAction() {
+    let result = moduleView.getResult()
+    guard result != Appearance().defaultResult else {
+      return
+    }
+    copyButton.isEnabled = true
+    moduleOutput?.resultCopied(text: result ?? Appearance().defaultResult)
+    impactFeedback.impactOccurred()
   }
   
   @objc
@@ -123,6 +156,8 @@ private extension ColorsScreenViewController {
 private extension ColorsScreenViewController {
   struct Appearance {
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let title = RandomStrings.Localizable.colors
+    let defaultResult = "?"
   }
 }

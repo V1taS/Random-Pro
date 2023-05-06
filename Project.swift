@@ -16,16 +16,17 @@ let project = Project(
       deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
       infoPlist: getMainIOSInfoPlist(),
       sources: [
-        "\(appPath)/Sources/**/*",
+        "\(rootPath)/\(appPath)/Sources/**/*",
       ],
       resources: [
-        "\(appPath)/Resources/**/*",
+        "\(rootPath)/\(appPath)/Resources/**/*",
       ],
-      entitlements: .relativeToRoot("\(appPath)/Entity/Random.entitlements"),
+      entitlements: .relativeToRoot("\(rootPath)/\(appPath)/Entity/Random.entitlements"),
       scripts: [
         scriptSwiftLint
       ],
       dependencies: [
+        .target(name: "\(widgetName)"),
         .external(name: "RandomUIKit"),
         .external(name: "RandomNetwork"),
         .external(name: "Notifications"),
@@ -38,6 +39,27 @@ let project = Project(
         .external(name: "FirebaseAuth")
       ],
       settings: targetBuildIOSSettings
+    ),
+    Target(
+      name: widgetName,
+      platform: .iOS,
+      product: .appExtension,
+      bundleId: "\(reverseOrganizationName).\(appName).\(widgetName)",
+      deploymentTarget: .iOS(targetVersion: "14.0", devices: [.iphone, .ipad]),
+      infoPlist: .extendingDefault(with: [
+        "CFBundleDisplayName": "$(PRODUCT_NAME)",
+        "NSExtension": [
+          "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
+        ]
+      ]),
+      sources: [
+        "\(rootPath)/\(widgetPath)/\(widgetName)/Sources/**/*",
+      ],
+      resources: [
+        "\(rootPath)/\(widgetPath)/\(widgetName)/Resources/**/*",
+      ],
+      scripts: [],
+      dependencies: []
     )
   ],
   schemes: [mainIOSScheme]

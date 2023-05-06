@@ -13,7 +13,11 @@ protocol ColorsScreenViewOutput: AnyObject {
   
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
-  func resultLabelAction(text: String)
+  func resultLabelAction(text: String?)
+  
+  /// Была нажата кнопка сгенерировать результат
+  ///  - Parameter text: Результат генерации
+  func generateResultButtonPressed(text: String?)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -120,9 +124,10 @@ private extension ColorsScreenView {
                                      action: #selector(colorsSegmentedControlSegmentedControlAction),
                                      for: .valueChanged)
     
-    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
-    resultLabelAction.cancelsTouchesInView = false
-    resultLabel.addGestureRecognizer(resultLabelAction)
+    let resultLabelGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                              action: #selector(resultAction))
+    resultLabelGestureRecognizer.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelGestureRecognizer)
     resultLabel.isUserInteractionEnabled = true
   }
   
@@ -177,6 +182,7 @@ private extension ColorsScreenView {
         colorOne
       ]))
     }
+    output?.generateResultButtonPressed(text: resultLabel.text)
   }
   
   func updateResultText(text: String) {
@@ -190,7 +196,7 @@ private extension ColorsScreenView {
   
   @objc
   func resultAction() {
-    output?.resultLabelAction(text: resultLabel.text ?? Appearance().resultLabelTitle)
+    output?.resultLabelAction(text: resultLabel.text)
   }
 }
 

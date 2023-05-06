@@ -34,7 +34,7 @@ typealias ColorsScreenModule = UIViewController & ColorsScreenModuleInput
 
 /// Презентер
 final class ColorsScreenViewController: ColorsScreenModule {
-
+  
   // MARK: - Internal properties
   
   weak var moduleOutput: ColorsScreenModuleOutput?
@@ -85,12 +85,15 @@ final class ColorsScreenViewController: ColorsScreenModule {
 // MARK: - ColorsScreenViewOutput
 
 extension ColorsScreenViewController: ColorsScreenViewOutput {
-//  func copyButton(enabled: Bool) {
-//    copyButton.isEnabled = enabled
-//  }
+  func generateResultButtonPressed(text: String?) {
+    guard let text, text != Appearance().defaultResult else {
+      return
+    }
+    copyButton.isEnabled = true
+  }
   
-  func resultLabelAction(text: String) {
-    guard text != Appearance().defaultResult else {
+  func resultLabelAction(text: String?) {
+    guard let text, text != Appearance().defaultResult else {
       return
     }
     moduleOutput?.resultCopied(text: text)
@@ -132,13 +135,13 @@ private extension ColorsScreenViewController {
   
   @objc
   func copyButtonAction() {
-    impactFeedback.impactOccurred()
     let result = moduleView.getResult()
     guard result != Appearance().defaultResult else {
-        return
+      return
     }
     copyButton.isEnabled = true
     moduleOutput?.resultCopied(text: result ?? Appearance().defaultResult)
+    impactFeedback.impactOccurred()
   }
   
   @objc

@@ -14,14 +14,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Import certificate and provisioning profile
+    - name: Import certificate and provisioning profiles
       env:
         IOS_CERTIFICATE: ${{ secrets.IOS_CERTIFICATE }}
         IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
+        RANDOM_YES_NO_WIDGET_PROFILE: ${{ secrets.RANDOM_YES_NO_WIDGET_PROFILE }}
         KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
       run: |
         echo "$IOS_CERTIFICATE" | base64 --decode > /tmp/Certificate.p12
         echo "$IOS_PROVISIONING_PROFILE" | base64 --decode > /tmp/Profile.mobileprovision
+        echo "$RANDOM_YES_NO_WIDGET_PROFILE" | base64 --decode > /tmp/RandomYesNoWidgetProfile.mobileprovision
         security create-keychain -p "$KEYCHAIN_PASSWORD" ~/Library/Keychains/build.keychain
         security default-keychain -s ~/Library/Keychains/build.keychain
         security unlock-keychain -p "$KEYCHAIN_PASSWORD" ~/Library/Keychains/build.keychain
@@ -30,8 +32,11 @@ jobs:
         security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" ~/Library/Keychains/build.keychain
         mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
         cp /tmp/Profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+        cp /tmp/RandomYesNoWidgetProfile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
         PROVISIONING_PROFILE_UUID=$(grep -a -A 1 "UUID" /tmp/Profile.mobileprovision | tail -1 | awk -F '<string>' '{print $2}' | awk -F '</string>' '{print $1}')
+        RANDOM_YES_NO_WIDGET_PROFILE_UUID=$(grep -a -A 1 "UUID" /tmp/RandomYesNoWidgetProfile.mobileprovision | tail -1 | awk -F '<string>' '{print $2}' | awk -F '</string>' '{print $1}')
         echo "PROVISIONING_PROFILE_UUID=$PROVISIONING_PROFILE_UUID" >> $GITHUB_ENV
+        echo "RANDOM_YES_NO_WIDGET_PROFILE_UUID=$RANDOM_YES_NO_WIDGET_PROFILE_UUID" >> $GITHUB_ENV
 
     - name: Set up Tuist
       run: |

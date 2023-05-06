@@ -6,6 +6,7 @@ import ProjectDescriptionHelpers
 let project = Project(
   name: appName,
   organizationName: organizationName,
+  options: .options(automaticSchemesOptions: .disabled),
   settings: projectBuildIOSSettings,
   targets: [
     Target(
@@ -13,19 +14,20 @@ let project = Project(
       platform: .iOS,
       product: .app,
       bundleId: "\(reverseOrganizationName).\(appName)",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
+      deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
       infoPlist: getMainIOSInfoPlist(),
       sources: [
-        "\(appPath)/Sources/**/*",
+        "\(rootPath)/\(appPath)/Sources/**/*",
       ],
       resources: [
-        "\(appPath)/Resources/**/*",
+        "\(rootPath)/\(appPath)/Resources/**/*",
       ],
-      entitlements: .relativeToRoot("\(appPath)/Entity/Random.entitlements"),
+      entitlements: .relativeToRoot("\(rootPath)/\(appPath)/Entity/Random.entitlements"),
       scripts: [
         scriptSwiftLint
       ],
       dependencies: [
+        .target(name: "\(widgetName)"),
         .external(name: "RandomUIKit"),
         .external(name: "RandomNetwork"),
         .external(name: "Notifications"),
@@ -38,7 +40,24 @@ let project = Project(
         .external(name: "FirebaseAuth")
       ],
       settings: targetBuildIOSSettings
+    ),
+    Target(
+      name: widgetName,
+      platform: .iOS,
+      product: .appExtension,
+      bundleId: "\(reverseOrganizationName).\(appName).\(widgetName)",
+      deploymentTarget: .iOS(targetVersion: "14.0", devices: [.iphone, .ipad]),
+      infoPlist: getWidgetIOSInfoPlist(),
+      sources: [
+        "\(rootPath)/\(widgetPath)/\(widgetName)/Sources/**/*",
+      ],
+      resources: [
+        "\(rootPath)/\(widgetPath)/\(widgetName)/Resources/**/*",
+      ],
+      scripts: [],
+      dependencies: [],
+      settings: targetWidgetIOSSettings
     )
   ],
-  schemes: [mainIOSScheme]
+  schemes: [mainIOSScheme, yesNoWidgetScheme]
 )

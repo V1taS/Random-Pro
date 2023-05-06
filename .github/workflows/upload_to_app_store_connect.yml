@@ -1,12 +1,9 @@
 name: Upload to App Store Connect
 
-# on:
-#   push:
-#     branches:
-#       - master
 on:
-  pull_request:
-    types: [opened, synchronize]
+  push:
+    branches:
+      - master
 
 jobs:
   upload_to_app_store_connect:

@@ -1,8 +1,8 @@
 name: Build Random Pro
 
-on:
-  pull_request:
-    types: [opened, synchronize]
+# on:
+#   pull_request:
+#     types: [opened, synchronize]
 
 jobs:
   build:

@@ -8,7 +8,8 @@ public func getWidgetIOSInfoPlist() -> ProjectDescription.InfoPlist {
     "CFBundleIdentifier": .string("\(reverseOrganizationName).\(appName).\(widgetName)"),
     "CFBundleShortVersionString": .string("\(marketingVersion)"),
     "CFBundleVersion": .string("\(currentProjectVersion)"),
-    "CFBundlePackageType": .string("WGRP"),
+    "CFBundleExecutable": .string("$(EXECUTABLE_NAME)"),
+    "CFBundleName": .string("YesNoWidget"),
     "NSExtension": .dictionary([
       "NSExtensionAttributes": .dictionary([
         "UNNotificationExtensionCategory": .string("CATEGORY_IDENTIFIER")
@@ -22,9 +23,6 @@ public func getWidgetIOSInfoPlist() -> ProjectDescription.InfoPlist {
       .string("es"),
       .string("it")
     ]),
-    "CFBundleInfoDictionaryVersion": .string("6.0"),
-    "DTPlatformName": .string("iphoneos"),
-    "DTSDKName": .string("iphoneos14.0"),
     "MinimumOSVersion": .string("14.0")
   ])
 }

@@ -6,6 +6,7 @@ import ProjectDescriptionHelpers
 let project = Project(
   name: appName,
   organizationName: organizationName,
+  options: .options(automaticSchemesOptions: .disabled),
   settings: projectBuildIOSSettings,
   targets: [
     Target(
@@ -13,7 +14,7 @@ let project = Project(
       platform: .iOS,
       product: .app,
       bundleId: "\(reverseOrganizationName).\(appName)",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: .iphone),
+      deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
       infoPlist: getMainIOSInfoPlist(),
       sources: [
         "\(rootPath)/\(appPath)/Sources/**/*",
@@ -46,12 +47,7 @@ let project = Project(
       product: .appExtension,
       bundleId: "\(reverseOrganizationName).\(appName).\(widgetName)",
       deploymentTarget: .iOS(targetVersion: "14.0", devices: [.iphone, .ipad]),
-      infoPlist: .extendingDefault(with: [
-        "CFBundleDisplayName": "$(PRODUCT_NAME)",
-        "NSExtension": [
-          "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
-        ]
-      ]),
+      infoPlist: getWidgetIOSInfoPlist(),
       sources: [
         "\(rootPath)/\(widgetPath)/\(widgetName)/Sources/**/*",
       ],
@@ -59,8 +55,9 @@ let project = Project(
         "\(rootPath)/\(widgetPath)/\(widgetName)/Resources/**/*",
       ],
       scripts: [],
-      dependencies: []
+      dependencies: [],
+      settings: targetWidgetIOSSettings
     )
   ],
-  schemes: [mainIOSScheme]
+  schemes: [mainIOSScheme, yesNoWidgetScheme]
 )

@@ -85,10 +85,9 @@ final class ColorsScreenViewController: ColorsScreenModule {
 // MARK: - ColorsScreenViewOutput
 
 extension ColorsScreenViewController: ColorsScreenViewOutput {
-  
-  func setCopyButtonEnabled(enabled: Bool) {
-    copyButton.isEnabled = enabled
-  }
+//  func copyButton(enabled: Bool) {
+//    copyButton.isEnabled = enabled
+//  }
   
   func resultLabelAction(text: String) {
     guard text != Appearance().defaultResult else {
@@ -133,7 +132,13 @@ private extension ColorsScreenViewController {
   
   @objc
   func copyButtonAction() {
-    moduleView.copyResult()
+    impactFeedback.impactOccurred()
+    let result = moduleView.getResult()
+    guard result != Appearance().defaultResult else {
+        return
+    }
+    copyButton.isEnabled = true
+    moduleOutput?.resultCopied(text: result ?? Appearance().defaultResult)
   }
   
   @objc

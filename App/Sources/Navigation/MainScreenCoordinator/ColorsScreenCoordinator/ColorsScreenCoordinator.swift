@@ -72,7 +72,6 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
   
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
-    UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true,
                                                        timeout: nil,

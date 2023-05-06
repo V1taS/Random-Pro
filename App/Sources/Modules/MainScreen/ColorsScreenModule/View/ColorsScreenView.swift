@@ -14,10 +14,6 @@ protocol ColorsScreenViewOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
   func resultLabelAction(text: String)
-  
-  /// Активировать кнопку копирования
-  ///  - Parameter enabled: Состояние кнопки
-  func setCopyButtonEnabled(enabled: Bool)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -26,8 +22,8 @@ protocol ColorsScreenViewInput {
   /// Вернуть изображение с цветом
   func returnImageDataColor() -> Data?
   
-  /// Скопировать результат генерации
-  func copyResult()
+  /// Вернуть результат генерации
+  func getResult() -> String?
 }
 
 /// Псевдоним протокола UIView & ColorsScreenViewInput
@@ -66,8 +62,8 @@ final class ColorsScreenView: ColorsScreenViewProtocol {
     contentView.asImage?.pngData()
   }
   
-  func copyResult() {
-    output?.resultLabelAction(text: resultLabel.text ?? Appearance().resultLabelTitle)
+  func getResult() -> String? {
+    return resultLabel.text
   }
 }
 
@@ -131,7 +127,6 @@ private extension ColorsScreenView {
   }
   
   func showPlugView() {
-    resultLabel.isHidden = false
     UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
       guard let self = self else {
         return
@@ -141,8 +136,6 @@ private extension ColorsScreenView {
   }
   
   func hidePlugViewWith(colors: [UIColor]) {
-    resultLabel.isHidden = false
-    
     UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
       guard let self = self else {
         return
@@ -190,8 +183,6 @@ private extension ColorsScreenView {
     resultLabel.text = text
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.only.primaryWhite
-    let isEnabled = (resultLabel.text != Appearance().resultLabelTitle)
-    output?.setCopyButtonEnabled(enabled: isEnabled)
   }
   
   @objc

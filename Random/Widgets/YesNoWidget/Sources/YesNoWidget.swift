@@ -7,61 +7,93 @@
 
 import WidgetKit
 import SwiftUI
+import RandomUIKit
+import Foundation
 
 struct Provider: TimelineProvider {
+
   func placeholder(in context: Context) -> SimpleEntry {
-    SimpleEntry(date: Date())
+    SimpleEntry(date: Date(), result: "-")
   }
-  
+
   func getSnapshot(in context: Context,
                    completion: @escaping (SimpleEntry) -> Void) {
-    let entry = SimpleEntry(date: Date())
+    let entry = SimpleEntry(date: Date(), result: "")
     completion(entry)
   }
-  
+
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-    var entries: [SimpleEntry] = []
-    
-    // Generate a timeline consisting of five entries an hour apart, starting from the current date.
     let currentDate = Date()
-    for hourOffset in 0 ..< 5 {
-      let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-      let entry = SimpleEntry(date: entryDate)
-      entries.append(entry)
-    }
-    
-    let timeline = Timeline(entries: entries, policy: .atEnd)
+
+    let viewModel = YesNoViewModel()
+    viewModel.generateResult()
+
+    let entry = SimpleEntry(date: currentDate, result: viewModel.result)
+
+    let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
+    let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
     completion(timeline)
   }
 }
 
 struct SimpleEntry: TimelineEntry {
   let date: Date
+  let result: String
 }
 
 struct YesNoWidgetEntryView: View {
+  @Environment(\.widgetFamily) var widgetFamily
   var entry: Provider.Entry
-  
+
   var body: some View {
-    Text(entry.date, style: .time)
+    switch widgetFamily {
+    case .systemSmall:
+      smallWidgetView
+    default:
+      smallWidgetView
+    }
+  }
+
+  var smallWidgetView: some View {
+    VStack {
+      Spacer()
+      Text(entry.result)
+        .modifier(ResultLabelModifier(fontSize: 60))
+      Spacer()
+      VStack {
+        Text(NSLocalizedString("last_update", comment: ""))
+          .modifier(ResultLabelModifier(fontSize: 10))
+        Text(lastUpdateText(for: entry.date))
+          .modifier(ResultLabelModifier(fontSize: 10))
+      }
+      .padding(.bottom)
+    }
+  }
+
+  func lastUpdateText(for date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH:mm"
+    let timeString = dateFormatter.string(from: date)
+    return String(format: timeString)
   }
 }
 
 struct YesNoWidget: Widget {
   let kind: String = "YesNoWidget"
-  
+
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       YesNoWidgetEntryView(entry: entry)
     }
     .configurationDisplayName("My Widget")
     .description("This is an example widget.")
+    .supportedFamilies([.systemSmall])
   }
 }
 
 struct YesNoWidget_Previews: PreviewProvider {
   static var previews: some View {
-    YesNoWidgetEntryView(entry: SimpleEntry(date: Date()))
-      .previewContext(WidgetPreviewContext(family: .systemSmall))
+      YesNoWidgetEntryView(entry: SimpleEntry(date: Date(), result: "?"))
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
   }
 }

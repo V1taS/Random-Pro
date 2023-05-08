@@ -55,7 +55,9 @@ let project = Project(
         "\(rootPath)/\(widgetPath)/\(widgetName)/Resources/**/*",
       ],
       scripts: [],
-      dependencies: [],
+      dependencies: [
+        .external(name: "RandomUIKit")
+      ],
       settings: targetWidgetIOSSettings
     )
   ],

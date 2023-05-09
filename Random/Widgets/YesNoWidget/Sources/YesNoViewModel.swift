@@ -8,12 +8,13 @@
 
 import Foundation
 
-class YesNoViewModel: ObservableObject {
-    @Published var result: String = ""
-
-    func generateResult() {
-        let answers = ["yes", "no"]
-        let randomIndex = Int.random(in: 0..<answers.count)
-        result = NSLocalizedString(answers[randomIndex], comment: "")
-    }
+final class YesNoViewModel: ObservableObject {
+  @Published var result: String = ""
+  
+  func generateResult() {
+    let answers = [YesNoWidgetStrings.yes,
+                   YesNoWidgetStrings.no]
+    let randomIndex = Int.random(in: 0..<answers.count)
+    result = answers[randomIndex]
+  }
 }

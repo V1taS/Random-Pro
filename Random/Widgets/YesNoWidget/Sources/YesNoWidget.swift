@@ -8,28 +8,27 @@
 import WidgetKit
 import SwiftUI
 import RandomUIKit
-import Foundation
 
 struct Provider: TimelineProvider {
-
+  
   func placeholder(in context: Context) -> SimpleEntry {
     SimpleEntry(date: Date(), result: "-")
   }
-
+  
   func getSnapshot(in context: Context,
                    completion: @escaping (SimpleEntry) -> Void) {
     let entry = SimpleEntry(date: Date(), result: "")
     completion(entry)
   }
-
+  
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
     let currentDate = Date()
-
+    
     let viewModel = YesNoViewModel()
     viewModel.generateResult()
-
+    
     let entry = SimpleEntry(date: currentDate, result: viewModel.result)
-
+    
     let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
     let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
     completion(timeline)
@@ -44,7 +43,7 @@ struct SimpleEntry: TimelineEntry {
 struct YesNoWidgetEntryView: View {
   @Environment(\.widgetFamily) var widgetFamily
   var entry: Provider.Entry
-
+  
   var body: some View {
     switch widgetFamily {
     case .systemSmall:
@@ -53,7 +52,7 @@ struct YesNoWidgetEntryView: View {
       smallWidgetView
     }
   }
-
+  
   var smallWidgetView: some View {
     VStack {
       Spacer()
@@ -69,7 +68,7 @@ struct YesNoWidgetEntryView: View {
       .padding(.bottom)
     }
   }
-
+  
   func lastUpdateText(for date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
@@ -80,7 +79,7 @@ struct YesNoWidgetEntryView: View {
 
 struct YesNoWidget: Widget {
   let kind: String = "YesNoWidget"
-
+  
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in
       YesNoWidgetEntryView(entry: entry)
@@ -93,7 +92,7 @@ struct YesNoWidget: Widget {
 
 struct YesNoWidget_Previews: PreviewProvider {
   static var previews: some View {
-      YesNoWidgetEntryView(entry: SimpleEntry(date: Date(), result: "?"))
-        .previewContext(WidgetPreviewContext(family: .systemSmall))
+    YesNoWidgetEntryView(entry: SimpleEntry(date: Date(), result: "?"))
+      .previewContext(WidgetPreviewContext(family: .systemSmall))
   }
 }

@@ -22,7 +22,7 @@ struct ResultLabelModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.system(size: CGFloat(fontSize), weight: .bold))
-      .foregroundColor(Color(RandomColor.darkAndLightTheme.primaryGray))
+      .foregroundColor(Color(RandomColor.darkAndLightTheme.primaryWhite))
       .multilineTextAlignment(.center)
   }
 }

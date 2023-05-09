@@ -55,6 +55,9 @@ struct YesNoWidgetEntryView: View {
   
   var smallWidgetView: some View {
     VStack {
+      Text(YesNoWidgetStrings.updatedEvery15Min)
+        .modifier(ResultLabelModifier(fontSize: 8))
+        .padding(.top)
       Spacer()
       Text(entry.result)
         .modifier(ResultLabelModifier(fontSize: 60))
@@ -67,6 +70,8 @@ struct YesNoWidgetEntryView: View {
       }
       .padding(.bottom)
     }
+    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+    .gradientBackgroundStyle()
   }
   
   func lastUpdateText(for date: Date) -> String {

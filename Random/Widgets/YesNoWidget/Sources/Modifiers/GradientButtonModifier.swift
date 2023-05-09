@@ -28,7 +28,7 @@ struct GradientButtonModifier: ViewModifier {
       .foregroundColor(.white)
       .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
       .frame(height: 52)
-      .background(LinearGradient(gradient: Gradient(colors: gradientBackground), startPoint: .topLeading, endPoint: .bottomTrailing))
+      .background(LinearGradient(gradient: Gradient(colors: gradientBackground), startPoint: .top, endPoint: .bottom))
       .cornerRadius(8)
       .opacity(isPressed ? 0.9 : 1)
       .scaleEffect(isPressed ? 0.95 : 1)

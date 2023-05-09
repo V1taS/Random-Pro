@@ -60,7 +60,7 @@ struct YesNoWidgetEntryView: View {
         .modifier(ResultLabelModifier(fontSize: 60))
       Spacer()
       VStack {
-        Text(NSLocalizedString("last_update", comment: ""))
+        Text(YesNoWidgetStrings.lastUpdate)
           .modifier(ResultLabelModifier(fontSize: 10))
         Text(lastUpdateText(for: entry.date))
           .modifier(ResultLabelModifier(fontSize: 10))

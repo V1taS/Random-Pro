@@ -1,0 +1,82 @@
+//
+//  MainScreenModel+Appearance.swift
+//  Random Pro
+//
+//  Created by Vitalii Sosin on 25.01.2023.
+//  Copyright © 2023 SosinVitalii.com. All rights reserved.
+//
+
+import Foundation
+
+extension MainScreenModel {
+  struct Appearance {
+    let hit = RandomStrings.Localizable.hit
+    let new = RandomStrings.Localizable.new
+    let premium = RandomStrings.Localizable.premium
+    
+    let teamsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTeamList
+    let numberDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNumbers
+    let yesOrNoDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomAnswer
+    let letterDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomLetters
+    let listDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTaskList
+    let coinDescriptionForNoPremiumAccess = RandomStrings.Localizable.flipCoinAnytime
+    let cubeDescriptionForNoPremiumAccess = RandomStrings.Localizable.rollDiceForBoardGames
+    let dateAndTimeDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomDateTime
+    let lotteryDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomLotteryTicket
+    let contactDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomContact
+    let passwordDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPassword
+    let colorsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomBackgroundColors
+    let bottleDescriptionForNoPremiumAccess = RandomStrings.Localizable.canSpinVirtualBottle
+    let rockPaperScissorsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canPlayRockPaperScissors
+    let imageFiltersDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPhotoFilter
+    let filmsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomMovie
+    
+    let imageCardTeam = "person.circle"
+    let titleCardTeam = RandomStrings.Localizable.teams
+    
+    let imageCardNumber = "number"
+    let titleCardNumber = RandomStrings.Localizable.number
+    
+    let imageCardYesOrNot = "questionmark.square"
+    let titleCardYesOrNot = RandomStrings.Localizable.yesOrNo
+    
+    let imageCardCharacters = "textbox"
+    let titleCardCharacters = RandomStrings.Localizable.letter
+    
+    let imageCardList = "list.bullet.below.rectangle"
+    let titleCardList = RandomStrings.Localizable.list
+    
+    let imageCardCoin = "bitcoinsign.circle"
+    let titleCardCoin = RandomStrings.Localizable.coin
+    
+    let imageCardCube = "cube"
+    let titleCardCube = RandomStrings.Localizable.cubes
+    
+    let imageCardDateAndTime = "calendar"
+    let titleCardDateAndTime = RandomStrings.Localizable.dateAndTime
+    
+    let imageCardLottery = "tag"
+    let titleCardLottery = RandomStrings.Localizable.lottery
+    
+    let imageCardContact = "phone.circle"
+    let titleCardContact = RandomStrings.Localizable.contact
+    
+    let imageCardPassword = "wand.and.stars"
+    let titleCardPassword = RandomStrings.Localizable.passwords
+    
+    let imageColors = "photo.on.rectangle.angled"
+    let titleColors = RandomStrings.Localizable.colors
+    
+    let bottleCardImage = "arrow.triangle.2.circlepath"
+    let titleBottle = RandomStrings.Localizable.bottle
+    
+    let imageRockPaperScissorsScreenView = "hurricane.circle"
+    let titleRockPaperScissors = RandomStrings.Localizable.tsuEFa
+    
+    let imageImageFilters = "timelapse"
+    let titleImageFilters = RandomStrings.Localizable.photoFilters
+    
+    let imageFilms = "film"
+    let titleFilms = RandomStrings.Localizable.movies
+  }
+}

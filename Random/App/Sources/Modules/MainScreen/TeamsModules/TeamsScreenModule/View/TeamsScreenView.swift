@@ -14,6 +14,10 @@ protocol TeamsScreenViewOutput: AnyObject {
   /// Обновить количество команд
   ///  - Parameter count: Количество команд
   func updateTeams(count: Int)
+    
+  /// Обновить название команды
+  ///  - Parameter name: Название команды
+  func updateNameTeam(name: String, players: [TeamsScreenPlayerModel])
 }
 
 /// События которые отправляем от Presenter ко View
@@ -111,8 +115,10 @@ extension TeamsScreenView: UICollectionViewDelegate {
       primaryTextFont: RandomFont.primaryBold18,
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: RandomColor.darkAndLightTheme.secondaryGray,
-      secondaryTextFont: RandomFont.primaryRegular18
-    )
+      secondaryTextFont: RandomFont.primaryRegular18) {
+          self.output?.updateNameTeam(name: "New name", players: model.players)
+          self.reloadInputViews()
+      }
     headerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     return headerView
   }

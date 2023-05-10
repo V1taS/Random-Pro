@@ -35,6 +35,8 @@ protocol TeamsScreenInteractorInput {
   /// Обновить количество команд
   ///  - Parameter count: Количество команд
   func updateTeams(count: Int)
+    
+    func updateNameTeam(name: String, players: [TeamsScreenPlayerModel])
   
   /// Обновить список команд
   ///  - Parameter teams: Список команд
@@ -138,6 +140,20 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
     )
     self.storageService.teamsScreenModel = newModel
   }
+    
+    func updateNameTeam(name: String, players: [TeamsScreenPlayerModel]) {
+      guard let model = storageService.teamsScreenModel else {
+        return
+      }
+        let model2 = [TeamsScreenModel.Team(name: name, players: players)]
+      let newModel = TeamsScreenModel(
+        selectedTeam: model.selectedTeam,
+        allPlayers: model.allPlayers,
+        teams: model2
+      )
+        print("!!!!!!!!!!newModel", newModel)
+      self.storageService.teamsScreenModel = newModel
+    }
   
   func updateList(teams: [TeamsScreenModel.Team]) {
     guard let model = storageService.teamsScreenModel else {

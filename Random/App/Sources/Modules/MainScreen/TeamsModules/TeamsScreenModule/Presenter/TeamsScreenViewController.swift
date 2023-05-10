@@ -152,6 +152,10 @@ extension TeamsScreenViewController: TeamsScreenViewOutput {
   func updateTeams(count: Int) {
     interactor.updateTeams(count: count)
   }
+    
+    func updateNameTeam(name: String, players: [TeamsScreenPlayerModel]) {
+        interactor.updateNameTeam(name: name, players: players)
+    }
 }
 
 // MARK: - TeamsScreenInteractorOutput

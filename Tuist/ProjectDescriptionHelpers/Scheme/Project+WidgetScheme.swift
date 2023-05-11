@@ -5,7 +5,7 @@ import ProjectDescription
 
 public let yesNoWidgetScheme = Scheme(
   name: widgetName,
-  hidden: false,
+  hidden: true,
   buildAction: .buildAction(targets: ["\(widgetName)"]),
   runAction: .runAction(
     arguments: Arguments(environment: [

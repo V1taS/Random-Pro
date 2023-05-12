@@ -152,10 +152,29 @@ extension TeamsScreenViewController: TeamsScreenViewOutput {
   func updateTeams(count: Int) {
     interactor.updateTeams(count: count)
   }
-    
-    func updateNameTeam(name: String, players: [TeamsScreenPlayerModel]) {
-        interactor.updateNameTeam(name: name, players: players)
+  
+#warning("Update Name Team Presenter")
+  func showAlert(oldName: String) {
+    let alertController = UIAlertController(title: "Change team's name", message: "", preferredStyle: .alert)
+    alertController.addTextField { (textField: UITextField!) -> Void in
+      textField.text = oldName
     }
+    let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ in
+      if let textField = alertController.textFields?[0] {
+        guard let newName = textField.text else { return }
+        if newName.isEmpty {
+          alertController.dismiss(animated: false)
+        } else {
+          self.updateNameTeam(oldName: oldName, newName: newName)
+        }
+      }
+    })
+    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+    alertController.addAction(cancelAction)
+    alertController.addAction(saveAction)
+    alertController.preferredAction = saveAction
+    self.present(alertController, animated: true, completion: nil)
+  }
 }
 
 // MARK: - TeamsScreenInteractorOutput
@@ -239,6 +258,10 @@ private extension TeamsScreenViewController {
     moduleOutput?.settingButtonAction(players: interactor.returnListPlayers())
     impactFeedback.impactOccurred()
   }
+  
+  func updateNameTeam(oldName: String, newName: String) {
+    self.interactor.updateNameTeam(oldName: oldName, newName: newName)
+  }
 }
 
 // MARK: - Appearance
@@ -249,5 +272,14 @@ private extension TeamsScreenViewController {
     let settingsButtonIcon = UIImage(systemName: "gear")
     let generateButtonIcon = UIImage(systemName: "forward.end.fill")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
+  }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension TeamsScreenViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }

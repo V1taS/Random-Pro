@@ -13,12 +13,13 @@ final class PasswordGeneratorView: UIView {
   // MARK: - Internal properties
   
   let passwordLengthTextField = TextFieldView()
-  let resultTextView = UITextView()
+  let resultTextView = TextView()
   
   let uppercaseLettersSwitch = UISwitch()
   let lowercaseLettersSwitch = UISwitch()
   let numbersSwitch = UISwitch()
   let symbolsSwitch = UISwitch()
+  var resultLabelAction: (() -> Void)?
   
   var crackTimeisHidden: Bool = true {
     didSet {
@@ -126,7 +127,7 @@ private extension PasswordGeneratorView {
     }
     
     [settingOptionsLabel, labelsStackView, switchersStackView, passwordLengthLabel, textFieldStackView,
-     resultTextView, generalStackView, crackTimeLabel, crackTimeSlider].forEach {
+     generalStackView, crackTimeLabel, crackTimeSlider, resultTextView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -180,10 +181,10 @@ private extension PasswordGeneratorView {
       crackTimeSlider.topAnchor.constraint(equalTo: crackTimeLabel.bottomAnchor,
                                            constant: appearance.minSpacing / 2),
       crackTimeSlider.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.defaultSpacing),
+                                               constant: appearance.defaultSpacing),
       crackTimeSlider.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.defaultSpacing),
-
+                                                constant: -appearance.defaultSpacing),
+      
       resultTextView.topAnchor.constraint(equalTo: crackTimeSlider.bottomAnchor),
       resultTextView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultSpacing),
@@ -268,17 +269,15 @@ private extension PasswordGeneratorView {
     passwordLengthTextField.placeholder = appearance.rangeStartValue
     passwordLengthTextField.keyboardType = .numberPad
     
-    resultTextView.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultTextView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     resultTextView.font = RandomFont.primaryMedium24
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
+    resultTextView.isSelectable = false
     
-    let padding = resultTextView.textContainer.lineFragmentPadding
-    resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,
-                                                      left: -padding,
-                                                      bottom: .zero,
-                                                      right: -padding)
+    resultTextView.onTextTap = { [weak self] in
+      self?.resultLabelAction?()
+    }
   }
   
   @objc

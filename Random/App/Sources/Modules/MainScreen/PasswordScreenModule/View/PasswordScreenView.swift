@@ -92,12 +92,6 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    passwordGeneratorView.resultTextView.centerVerticalText()
-  }
-  
   // MARK: - Internal func
   
   func setPasswordLength(_ text: String?) {
@@ -119,9 +113,7 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       
       self.passwordGeneratorView.resultTextView.attributedText = result
       self.passwordGeneratorView.resultTextView.centerVerticalText()
-      self.passwordGeneratorView.resultTextView.zoomIn(duration: Appearance().resultDuration,
-                                                       transformScale: CGAffineTransform(scaleX: .zero,
-                                                                                         y: .zero))
+      
       if let password = resultClassic, password != appearance.resultLabel {
         self.output?.calculateCrackTime(password: password)
         self.passwordGeneratorView.crackTimeisHidden = false
@@ -215,6 +207,10 @@ private extension PasswordScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
+    passwordGeneratorView.resultLabelAction = { [weak self] in
+      self?.output?.resultLabelAction()
+    }
+    
     passwordGeneratorView.passwordLengthTextField.delegate = self
     passwordGeneratorView.configureViewWith(
       uppercaseSwitchAction: { [weak self] status in
@@ -238,11 +234,6 @@ private extension PasswordScreenView {
     tap.cancelsTouchesInView = false
     addGestureRecognizer(tap)
     isUserInteractionEnabled = true
-    
-    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
-    resultLabelAction.cancelsTouchesInView = false
-    passwordGeneratorView.resultTextView.addGestureRecognizer(resultLabelAction)
-    passwordGeneratorView.resultTextView.isUserInteractionEnabled = true
   }
   
   func setupConstraints() {
@@ -270,11 +261,6 @@ private extension PasswordScreenView {
   @objc
   func genarateButtonAction() {
     output?.generateButtonAction(passwordLength: passwordGeneratorView.passwordLengthTextField.text)
-  }
-  
-  @objc
-  func resultAction() {
-    output?.resultLabelAction()
   }
 }
 

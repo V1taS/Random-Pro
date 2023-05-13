@@ -50,6 +50,35 @@ final class PasswordGeneratorView: UIView {
     }
   }
   
+  var crackTimeisHidden: Bool = true {
+    didSet {
+      crackTimeLabel.isHidden = crackTimeisHidden
+      crackTimeSlider.isHidden = crackTimeisHidden
+    }
+  }
+  
+  var crackTimeTitle: String? {
+    didSet {
+      crackTimeLabel.text = crackTimeTitle
+    }
+  }
+  
+  var crackTimeStrengthValue: Float = .zero {
+    didSet {
+      crackTimeSlider.value = crackTimeStrengthValue
+      switch crackTimeStrengthValue {
+      case 0.0...0.4:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryRed
+      case 0.4...0.7:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryYellow
+      case 0.7...1.0:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryGreen
+      default:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryGray
+      }
+    }
+  }
+  
   // MARK: - Private properties
   
   private let settingOptionsLabel = UILabel()

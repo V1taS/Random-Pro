@@ -38,7 +38,7 @@ final class ListScreenView: ListScreenViewProtocol {
   
   // MARK: - Private property
   
-  private let resultTextView = UITextView()
+  private let resultTextView = TextView()
   private let generateButton = ButtonView()
   
   // MARK: - Initialization
@@ -55,7 +55,7 @@ final class ListScreenView: ListScreenViewProtocol {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    
+
     resultTextView.centerVerticalText()
   }
   
@@ -80,22 +80,15 @@ private extension ListScreenView {
     resultTextView.font = RandomFont.primaryMedium32
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
+    resultTextView.isSelectable = false
     resultTextView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    
-    let padding = resultTextView.textContainer.lineFragmentPadding
-    resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,
-                                                      left: -padding,
-                                                      bottom: .zero,
-                                                      right: -padding)
     resultTextView.centerVerticalText()
+    resultTextView.onTextTap = { [weak self] in
+      self?.resultAction()
+    }
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
-    
-    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
-    resultLabelAction.cancelsTouchesInView = false
-    resultTextView.addGestureRecognizer(resultLabelAction)
-    resultTextView.isUserInteractionEnabled = true
   }
   
   @objc

@@ -123,10 +123,10 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
                                                        transformScale: CGAffineTransform(scaleX: .zero,
                                                                                          y: .zero))
       if let password = resultClassic, password != appearance.resultLabel {
-        output?.calculateCrackTime(password: password)
-        passwordGeneratorView.crackTimeisHidden = false
+        self.output?.calculateCrackTime(password: password)
+        self.passwordGeneratorView.crackTimeisHidden = false
       } else {
-        passwordGeneratorView.crackTimeisHidden = true
+        self.passwordGeneratorView.crackTimeisHidden = true
       }
     }
   }

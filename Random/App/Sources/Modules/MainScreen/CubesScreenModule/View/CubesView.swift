@@ -63,15 +63,19 @@ final class CubesView: UIView {
 
 extension CubesView: SCNSceneRendererDelegate {
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-    DispatchQueue.global(qos: .userInteractive).sync {
+    DispatchQueue.global(qos: .userInteractive).sync { [weak self] in
+      guard let self else {
+        return
+      }
+      
       for (num, die) in diceNodes.enumerated() {
         if let pb = die.physicsBody {
+          guard speeds.indices.contains(num) else {
+            continue
+          }
           let os = speeds[num]
           if !os.isZero && pb.velocity.isZero {
-            DispatchQueue.main.async { [weak self] in
-              guard let self = self else {
-                return
-              }
+            DispatchQueue.main.async {
               self.totalValueDiceAction?(self.boxUpIndex(n: die.presentation) + 1)
             }
           }
@@ -93,6 +97,13 @@ extension SCNVector3 {
 // MARK: - Private
 
 private extension CubesView {
+  func randomPosition() -> SCNVector3 {
+      let x = Float.random(in: -5...5)
+      let y = Float.random(in: 0...10)
+      let z = Float.random(in: -5...5)
+      return SCNVector3(x, y, z)
+  }
+  
   func reposition(_ node: SCNNode, to position: SCNVector3, with normal: SCNVector3) {
     let transVector1 = SCNVector3Make(1, 0, 0)
     let transVector2 = SCNVector3Make(0, 1, 0)
@@ -268,47 +279,47 @@ private extension CubesView {
     
     switch type {
     case .cubesOne:
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 0), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
       speeds.append(SCNVector3(0, 0, 0))
     case .cubesTwo:
-      diceNodes.append(createDie(position: SCNVector3(4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 0), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
     case .cubesThree:
-      diceNodes.append(createDie(position: SCNVector3(-4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 0), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
     case .cubesFour:
-      diceNodes.append(createDie(position: SCNVector3(-4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, -4), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
     case .cubesFive:
-      diceNodes.append(createDie(position: SCNVector3(-4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, -4), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 4), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
     case .cubesSix:
-      diceNodes.append(createDie(position: SCNVector3(-4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(4, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 0), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, -4), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 4), sides: sides))
-      diceNodes.append(createDie(position: SCNVector3(0, 0, 8), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
+      diceNodes.append(createDie(position: randomPosition(), sides: sides))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))
       speeds.append(SCNVector3(0, 0, 0))

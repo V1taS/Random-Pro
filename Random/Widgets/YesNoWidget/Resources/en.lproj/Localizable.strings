@@ -1,1 +1,5 @@
-
+"no" = "No";
+"yes" = "Yes";
+"yes_or_no" = "Yes or No";
+"last_update" = "Last update at";
+"updated_every_15_min" = "Updated every 15 min";

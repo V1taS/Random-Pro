@@ -480,6 +480,6 @@ private extension PasswordScreenInteractor {
   struct Appearance {
     let withoutSpaces = " "
     let resultLabel = "?"
-    let passwordLength = "8"
+    let passwordLength = "7"
   }
 }

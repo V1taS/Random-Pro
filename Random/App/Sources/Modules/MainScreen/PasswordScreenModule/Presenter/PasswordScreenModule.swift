@@ -105,6 +105,10 @@ final class PasswordScreenViewController: PasswordScreenModule {
 // MARK: - PasswordScreenViewOutput
 
 extension PasswordScreenViewController: PasswordScreenViewOutput {
+  func calculateCrackTime(password: String) {
+    interactor.calculateCrackTime(password: password)
+  }
+  
   func generateButtonAction(passwordLength: String?) {
     interactor.generateButtonAction(passwordLength: passwordLength)
   }
@@ -145,6 +149,10 @@ extension PasswordScreenViewController: PasswordScreenFactoryOutput {}
 // MARK: - PasswordScreenInteractorOutput
 
 extension PasswordScreenViewController: PasswordScreenInteractorOutput {
+  func didReceiveCrackTime(text: String, strengthValue: Float) {
+    moduleView.updateCrackTime(text: text, strengthValue: strengthValue)
+  }
+  
   func cleanButtonWasSelected() {
     moduleOutput?.cleanButtonWasSelected()
   }

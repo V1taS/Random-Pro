@@ -37,8 +37,9 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
     DispatchQueue.global(qos: .userInitiated).async {
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
-      
-      tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors: [RandomColor.only.primaryBlue,
+
+     // tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors:
+      tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(squircleBGColors: [RandomColor.only.primaryBlue,
                                                                                  RandomColor.only.primaryBlue],
                                                               leftSideImageSystemName: appearance.darkThemeImageSystemName,
                                                               title: appearance.darkThemeTitle,

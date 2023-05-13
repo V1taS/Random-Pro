@@ -107,24 +107,61 @@ extension MainSettingsScreenView: UITableViewDataSource {
     var viewCell = UITableViewCell()
     
     switch model {
-    case let .squircleImageAndLabelWithSwitch(squircleBGColors,
+
+    case let .squircleImageAndLabelWithSegmentedControl(squircleBGColors,
                                               leftSideImageSystemName,
                                               title,
                                               isEnabled):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier
-      ) as? SquircleImageAndLabelWithSwitchCell {
-        cell.configureCellWith(squircleBGColors: squircleBGColors,
-                               leftSideImage: UIImage(systemName: leftSideImageSystemName),
-                               leftSideImageColor: RandomColor.only.primaryWhite,
-                               titleText: title,
-                               isResultSwitch: isEnabled)
-        
-        cell.switchAction = { [weak self] isOn in
-          self?.output?.darkThemeChanged(isOn)
-        }
+        withIdentifier: SquircleImageAndLabelWithSegmentedControlCell.reuseIdentifier
+      ) as? SquircleImageAndLabelWithSegmentedControlCell {
+        cell.configureCellWith(
+          squircleBGColors: squircleBGColors,
+          leftSideImage: UIImage(systemName: leftSideImageSystemName),
+          leftSideImageColor: RandomColor.only.primaryWhite,
+          titleText: title,
+          listOfInterfaceMode: ["Светлая", "Темная"],
+          interfaceModeValueChanged: { [weak self] index in
+            guard let self = self else {
+              return
+            }
+
+
+//            switch index {
+//            case 0:
+//              return (self.output?.darkThemeChanged(true))!
+//            case 1:
+//              return (self.output?.darkThemeChanged(false))!
+//            default:
+//              return (self.output?.darkThemeChanged(false))!
+//            }
+
+
+//            self?.output?.darkThemeChanged(isOn)
+
+          }
+        )
         viewCell = cell
       }
+
+//    case let .squircleImageAndLabelWithSwitch(squircleBGColors,
+//                                              leftSideImageSystemName,
+//                                              title,
+//                                              isEnabled):
+//      if let cell = tableView.dequeueReusableCell(
+//        withIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier
+//      ) as? SquircleImageAndLabelWithSwitchCell {
+//        cell.configureCellWith(squircleBGColors: squircleBGColors,
+//                               leftSideImage: UIImage(systemName: leftSideImageSystemName),
+//                               leftSideImageColor: RandomColor.only.primaryWhite,
+//                               titleText: title,
+//                               isResultSwitch: isEnabled)
+//
+//        cell.switchAction = { [weak self] isOn in
+//          self?.output?.darkThemeChanged(isOn)
+//        }
+//        viewCell = cell
+//      }
     case let .squircleImageAndLabelWithChevronCell(squircleBGColors,
                                                    leftSideImageSystemName,
                                                    title,
@@ -229,9 +266,11 @@ private extension MainSettingsScreenView {
     tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
-    
-    tableView.register(SquircleImageAndLabelWithSwitchCell.self,
-                       forCellReuseIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier)
+
+    tableView.register(SquircleImageAndLabelWithSegmentedControlCell.self,
+                       forCellReuseIdentifier: SquircleImageAndLabelWithSegmentedControlCell.reuseIdentifier)
+//    tableView.register(SquircleImageAndLabelWithSwitchCell.self,
+//                       forCellReuseIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier)
     tableView.register(SquircleImageAndLabelWithChevronCell.self,
                        forCellReuseIdentifier: SquircleImageAndLabelWithChevronCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,

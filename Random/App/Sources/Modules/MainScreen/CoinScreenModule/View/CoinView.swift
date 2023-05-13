@@ -1,9 +1,9 @@
 //
-//  CubesView.swift
-//  Random Pro
+//  CoinView.swift
+//  Random
 //
-//  Created by Vitalii Sosin on 11.12.2022.
-//  Copyright © 2022 SosinVitalii.com. All rights reserved.
+//  Created by Vitalii Sosin on 13.05.2023.
+//  Copyright © 2023 SosinVitalii.com. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import RandomUIKit
 import SceneKit
 import QuartzCore
 
-final class CubesView: UIView {
+final class CoinView: UIView {
   
   // MARK: - Internal properties
   
@@ -32,6 +32,7 @@ final class CubesView: UIView {
     
     setupView()
     setupScene()
+    addCubes()
   }
   
   required init?(coder: NSCoder) {
@@ -39,12 +40,6 @@ final class CubesView: UIView {
   }
   
   // MARK: - Internal func
-  
-  /// Обновляет экран с кубиками
-  ///  - Parameter type: Тип кубиков
-  func updateCubesWith(type: CubesScreenModel.CubesType) {
-    addCubes(type: type)
-  }
   
   /// Обработать нажатие
   func handleTap() {
@@ -61,21 +56,17 @@ final class CubesView: UIView {
 
 // MARK: - SCNSceneRendererDelegate
 
-extension CubesView: SCNSceneRendererDelegate {
+extension CoinView: SCNSceneRendererDelegate {
   func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-    DispatchQueue.global(qos: .userInteractive).sync { [weak self] in
-      guard let self else {
-        return
-      }
-      
+    DispatchQueue.global(qos: .userInteractive).sync {
       for (num, die) in diceNodes.enumerated() {
         if let pb = die.physicsBody {
-          guard speeds.indices.contains(num) else {
-            continue
-          }
           let os = speeds[num]
           if !os.isZero && pb.velocity.isZero {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+              guard let self = self else {
+                return
+              }
               self.totalValueDiceAction?(self.boxUpIndex(n: die.presentation) + 1)
             }
           }
@@ -96,14 +87,7 @@ private extension SCNVector3 {
 
 // MARK: - Private
 
-private extension CubesView {
-  func randomPosition() -> SCNVector3 {
-      let x = Float.random(in: -5...5)
-      let y = Float.random(in: 0...10)
-      let z = Float.random(in: -5...5)
-      return SCNVector3(x, y, z)
-  }
-  
+private extension CoinView {
   func reposition(_ node: SCNNode, to position: SCNVector3, with normal: SCNVector3) {
     let transVector1 = SCNVector3Make(1, 0, 0)
     let transVector2 = SCNVector3Make(0, 1, 0)
@@ -145,22 +129,14 @@ private extension CubesView {
     return geometryNode
   }
   
-  func createDie(position: SCNVector3, sides: [UIImage]) -> SCNNode {
-    let geometry = SCNBox(width: 2.3, height: 2.3, length: 2.3, chamferRadius: 0.1)
+  func createCoin(position: SCNVector3, sides: [UIImage]) -> SCNNode {
+    let geometry = SCNCylinder(radius: 2, height: 0.1)
     
     let material1 = SCNMaterial()
     material1.diffuse.contents = sides[0]
     let material2 = SCNMaterial()
     material2.diffuse.contents = sides[1]
-    let material3 = SCNMaterial()
-    material3.diffuse.contents = sides[2]
-    let material4 = SCNMaterial()
-    material4.diffuse.contents = sides[3]
-    let material5 = SCNMaterial()
-    material5.diffuse.contents = sides[4]
-    let material6 = SCNMaterial()
-    material6.diffuse.contents = sides[5]
-    geometry.materials = [material1, material2, material3, material4, material5, material6]
+    geometry.materials = [material1, material2]
     
     let node = SCNNode(geometry: geometry)
     node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
@@ -233,7 +209,7 @@ private extension CubesView {
     setupLight()
     
     scnScene.physicsWorld.speed = 3
-    let wallSize = CGSize(width: 50.0, height: 50.0)
+    let wallSize = CGSize(width: 100.0, height: 100.0)
     
     let walls = [
       // верхняя стена X,Y,Z
@@ -256,7 +232,7 @@ private extension CubesView {
     }
   }
   
-  func addCubes(type: CubesScreenModel.CubesType) {
+  func addCubes() {
     let appearance = Appearance()
     
     if !diceNodes.isEmpty {
@@ -270,63 +246,11 @@ private extension CubesView {
     
     let sides = [
       appearance.cubeOneImage,
-      appearance.cubesTwoImage,
-      appearance.cubesThreeImage,
-      appearance.cubesFourImage,
-      appearance.cubesFiveImage,
-      appearance.cubesSixImage,
+      appearance.cubesTwoImage
     ]
     
-    switch type {
-    case .cubesOne:
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      speeds.append(SCNVector3(0, 0, 0))
-    case .cubesTwo:
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-    case .cubesThree:
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-    case .cubesFour:
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-    case .cubesFive:
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-    case .cubesSix:
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      diceNodes.append(createDie(position: randomPosition(), sides: sides))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-      speeds.append(SCNVector3(0, 0, 0))
-    }
+    diceNodes.append(createCoin(position: SCNVector3(0, 0, 0), sides: sides))
+    speeds.append(SCNVector3(0, 0, 0))
     
     let torque = SCNVector4(1, 2, -1, 1)
     for die in diceNodes {
@@ -373,7 +297,7 @@ private extension CubesView {
     let ambientLightNode = SCNNode()
     ambientLightNode.light = SCNLight()
     ambientLightNode.light?.type = .ambient
-    ambientLightNode.light?.color = RandomColor.only.primaryRed
+    ambientLightNode.light?.color = RandomColor.only.primaryYellow
     scnScene.rootNode.addChildNode(ambientLightNode)
     
     let rotatingNode = SCNNode()
@@ -388,14 +312,10 @@ private extension CubesView {
 
 // MARK: - Appearance
 
-private extension CubesView {
+private extension CoinView {
   struct Appearance {
-    let cubeOneImage = RandomAsset.dieOne.image
-    let cubesTwoImage = RandomAsset.dieTwo.image
-    let cubesThreeImage = RandomAsset.dieThree.image
-    let cubesFourImage = RandomAsset.dieFour.image
-    let cubesFiveImage = RandomAsset.dieFive.image
-    let cubesSixImage = RandomAsset.dieSix.image
+    let cubeOneImage = RandomAsset.coinEagle.image
+    let cubesTwoImage = RandomAsset.coinTails.image
     
     let oneHundredSpacing: CGFloat = 100
     let fiftySpacing: CGFloat = 50

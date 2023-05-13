@@ -19,10 +19,16 @@ enum MainSettingsScreenType {
   ///  - leftSideImageSystemName: Изображение слева
   ///  - title: Заголовок
   ///  - isEnabled: Переключатель
-  case squircleImageAndLabelWithSwitch(squircleBGColors: [UIColor],
-                                       leftSideImageSystemName: String,
-                                       title: String,
-                                       isEnabled: Bool)
+
+  case squircleImageAndLabelWithSegmentedControl(squircleBGColors: [UIColor],
+                                                 leftSideImageSystemName: String,
+                                                 title: String,
+                                                 isEnabled: Bool?)
+
+//  case squircleImageAndLabelWithSwitch(squircleBGColors: [UIColor],
+//                                       leftSideImageSystemName: String,
+//                                       title: String,
+//                                       isEnabled: Bool)
   
   /// Секция `Заголовок и иконка сбоку`
   /// - Parameters:

@@ -12,5 +12,5 @@ import Foundation
 struct MainSettingsScreenModel {
   
   /// Темная тема включена
-  let isDarkMode: Bool
+  let isDarkMode: Bool?
 }

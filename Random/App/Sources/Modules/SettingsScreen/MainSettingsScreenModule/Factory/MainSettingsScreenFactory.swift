@@ -21,7 +21,7 @@ protocol MainSettingsScreenFactoryInput {
   
   /// Создаем модельку для таблички
   ///  - Parameter isDarkMode: Текущей цвет темы
-  func createListModelWith(isDarkMode: Bool)
+  func createListModelWith(isDarkMode: Bool?)
 }
 
 /// Фабрика
@@ -33,12 +33,13 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModelWith(isDarkMode: Bool) {
+  func createListModelWith(isDarkMode: Bool?) {
     DispatchQueue.global(qos: .userInitiated).async {
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
-      
-      tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors: [RandomColor.only.primaryBlue,
+
+     // tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors:
+      tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(squircleBGColors: [RandomColor.only.primaryBlue,
                                                                                  RandomColor.only.primaryBlue],
                                                               leftSideImageSystemName: appearance.darkThemeImageSystemName,
                                                               title: appearance.darkThemeTitle,
@@ -73,8 +74,10 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
 
 private extension MainSettingsScreenFactory {
   struct Appearance {
-    let darkThemeImageSystemName = "switch.2"
-    let darkThemeTitle = RandomStrings.Localizable.darkTheme
+   // let darkThemeImageSystemName = "switch.2"
+    let darkThemeImageSystemName = "paintbrush.fill"
+    let darkThemeTitle = "Тема" // пока зафиксил
+    //let darkThemeTitle = RandomStrings.Localizable.darkTheme
     
     let customMainSectionsImageSystemName = "rectangle.grid.2x2"
     let customMainSectionsTitle = RandomStrings.Localizable.sectionSettings

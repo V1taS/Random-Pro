@@ -20,6 +20,35 @@ final class PasswordGeneratorView: UIView {
   let numbersSwitch = UISwitch()
   let symbolsSwitch = UISwitch()
   
+  var crackTimeisHidden: Bool = true {
+    didSet {
+      crackTimeLabel.isHidden = crackTimeisHidden
+      crackTimeSlider.isHidden = crackTimeisHidden
+    }
+  }
+  
+  var crackTimeTitle: String? {
+    didSet {
+      crackTimeLabel.text = crackTimeTitle
+    }
+  }
+  
+  var crackTimeStrengthValue: Float = .zero {
+    didSet {
+      crackTimeSlider.value = crackTimeStrengthValue
+      switch crackTimeStrengthValue {
+      case 0.0...0.4:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryRed
+      case 0.4...0.7:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryYellow
+      case 0.7...1.0:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryGreen
+      default:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryGray
+      }
+    }
+  }
+  
   // MARK: - Private properties
   
   private let settingOptionsLabel = UILabel()
@@ -34,6 +63,9 @@ final class PasswordGeneratorView: UIView {
   private let switchersStackView = UIStackView()
   private let textFieldStackView = UIStackView()
   private let generalStackView = UIStackView()
+  
+  private let crackTimeLabel = UILabel()
+  private let crackTimeSlider = ColorSlider()
   
   private var uppercaseSwitchAction: ((Bool) -> Void)?
   private var lowercaseSwitchAction: ((Bool) -> Void)?
@@ -93,8 +125,8 @@ private extension PasswordGeneratorView {
       textFieldStackView.addArrangedSubview($0)
     }
     
-    [settingOptionsLabel, labelsStackView, switchersStackView,
-     passwordLengthLabel, textFieldStackView, resultTextView, generalStackView].forEach {
+    [settingOptionsLabel, labelsStackView, switchersStackView, passwordLengthLabel, textFieldStackView,
+     resultTextView, generalStackView, crackTimeLabel, crackTimeSlider].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -138,8 +170,21 @@ private extension PasswordGeneratorView {
       textFieldStackView.topAnchor.constraint(equalTo: passwordLengthLabel.bottomAnchor,
                                               constant: appearance.defaultSpacing),
       
-      resultTextView.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor,
-                                          constant: appearance.minSpacing),
+      crackTimeLabel.topAnchor.constraint(equalTo: textFieldStackView.bottomAnchor,
+                                          constant: appearance.defaultSpacing),
+      crackTimeLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: appearance.defaultSpacing),
+      crackTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -appearance.defaultSpacing),
+      
+      crackTimeSlider.topAnchor.constraint(equalTo: crackTimeLabel.bottomAnchor,
+                                           constant: appearance.minSpacing / 2),
+      crackTimeSlider.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: appearance.defaultSpacing),
+      crackTimeSlider.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -appearance.defaultSpacing),
+
+      resultTextView.topAnchor.constraint(equalTo: crackTimeSlider.bottomAnchor),
       resultTextView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultSpacing),
       resultTextView.trailingAnchor.constraint(equalTo: trailingAnchor,
@@ -151,6 +196,13 @@ private extension PasswordGeneratorView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
+    
+    crackTimeLabel.font = RandomFont.primaryBold18
+    crackTimeLabel.numberOfLines = 2
+    crackTimeLabel.textAlignment = .center
+    crackTimeLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    crackTimeisHidden = true
+    
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     passwordLengthTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
     

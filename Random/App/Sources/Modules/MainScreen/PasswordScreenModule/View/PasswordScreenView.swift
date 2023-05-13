@@ -39,6 +39,10 @@ protocol PasswordScreenViewOutput: AnyObject {
   
   /// Было нажатие на результат генерации
   func resultLabelAction()
+  
+  /// Расчитать время взлома пароля
+  /// - Parameter password: Пароль
+  func calculateCrackTime(password: String)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -54,6 +58,12 @@ protocol PasswordScreenViewInput {
   ///   - switchState: Состояние тумблеров
   func set(resultClassic: String?,
            switchState: PasswordScreenModel.SwitchState)
+  
+  /// Устанавливаем время взлома  и силу пароля в слайдере
+  /// - Parameters:
+  ///  - text: Текст с количеством дней
+  ///  - strengthValue: Сила пароля
+  func updateCrackTime(text: String, strengthValue: Float)
 }
 
 typealias PasswordScreenViewProtocol = UIView & PasswordScreenViewInput
@@ -112,7 +122,18 @@ final class PasswordScreenView: PasswordScreenViewProtocol {
       self.passwordGeneratorView.resultTextView.zoomIn(duration: Appearance().resultDuration,
                                                        transformScale: CGAffineTransform(scaleX: .zero,
                                                                                          y: .zero))
+      if let password = resultClassic, password != appearance.resultLabel {
+        self.output?.calculateCrackTime(password: password)
+        self.passwordGeneratorView.crackTimeisHidden = false
+      } else {
+        self.passwordGeneratorView.crackTimeisHidden = true
+      }
     }
+  }
+  
+  func updateCrackTime(text: String, strengthValue: Float) {
+    passwordGeneratorView.crackTimeTitle = text
+    passwordGeneratorView.crackTimeStrengthValue = strengthValue
   }
 }
 

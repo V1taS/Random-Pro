@@ -2,28 +2,84 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>number_of_adults_in_tour</key>
+	<key>century_count</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@number_of_adults@</string>
-		<key>number_of_adults</key>
+		<string>%#@century_count_values@</string>
+		<key>century_count_values</key>
 		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
+			<key>few</key>
+			<string>%d века</string>
+			<key>many</key>
+			<string>%d веков</string>
+			<key>one</key>
+			<string>%d век</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>zero</key>
-			<string>0 взрослых</string>
-			<key>one</key>
-			<string>%d взрослый</string>
-			<key>two</key>
-			<string>%d взрослых</string>
-			<key>few</key>
-			<string>%d взрослых</string>
-			<key>many</key>
-			<string>%d взрослых</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
 			<key>other</key>
-			<string>%d взрослых</string>
+			<string>%d веков</string>
+		</dict>
+	</dict>
+	<key>years_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@years_count_values@</string>
+		<key>years_count_values</key>
+		<dict>
+			<key>many</key>
+			<string>%d лет</string>
+			<key>few</key>
+			<string>%d года</string>
+			<key>one</key>
+			<string>%d год</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>other</key>
+			<string>%d лет</string>
+		</dict>
+	</dict>
+	<key>months_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@months_count_values@</string>
+		<key>months_count_values</key>
+		<dict>
+			<key>many</key>
+			<string>%d месяцев</string>
+			<key>few</key>
+			<string>%d месяца</string>
+			<key>one</key>
+			<string>%d месяц</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>other</key>
+			<string>%d месяцев</string>
+		</dict>
+	</dict>
+	<key>days_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days_count_values@</string>
+		<key>days_count_values</key>
+		<dict>
+			<key>many</key>
+			<string>%d дней</string>
+			<key>few</key>
+			<string>%d дня</string>
+			<key>one</key>
+			<string>%d день</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>other</key>
+			<string>%d дней</string>
 		</dict>
 	</dict>
 </dict>

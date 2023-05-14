@@ -52,6 +52,7 @@ final class MetricsServiceImpl: MetricsService {
     Analytics.logEvent(event.rawValue, parameters: nil)
     
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
+      // swiftlint:disable:next no_print
       print("REPORT ERROR: %@", error.localizedDescription)
     }
     increaseCountTapped(event: event)
@@ -61,6 +62,7 @@ final class MetricsServiceImpl: MetricsService {
     Analytics.logEvent(event.rawValue, parameters: properties)
     
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
+      // swiftlint:disable:next no_print
       print("REPORT ERROR: %@", error.localizedDescription)
     }
     increaseCountTapped(event: event)

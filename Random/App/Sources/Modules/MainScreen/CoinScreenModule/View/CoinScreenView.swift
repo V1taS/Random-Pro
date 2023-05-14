@@ -12,10 +12,14 @@ import RandomUIKit
 protocol CoinScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку генерации
-  func generateButtonAction()
+  func playHapticFeedbackAction()
   
   /// Было нажатие на результат генерации
   func resultLabelAction()
+  
+  /// Сохранить данные
+  ///  - Parameter model: результат генерации
+  func saveData(model: CoinScreenModel)
 }
 
 protocol CoinScreenViewInput {
@@ -23,6 +27,13 @@ protocol CoinScreenViewInput {
   /// Обновить контент
   /// - Parameter model: Модель
   func updateContentWith(model: CoinScreenModel)
+  
+  /// Показать список генераций результатов
+  /// - Parameter isShow: показать  список генераций результатов
+  func listGenerated(isShow: Bool)
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
 }
 
 typealias CoinScreenViewProtocol = UIView & CoinScreenViewInput
@@ -38,7 +49,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
   private let resultLabel = UILabel()
   private let scrollResult = ScrollLabelGradientView()
   private let generateButton = ButtonView()
-  private let coinImageView = UIImageView()
+  private let coinView = CoinView()
   
   // MARK: - Initialization
   
@@ -57,25 +68,15 @@ final class CoinScreenView: CoinScreenViewProtocol {
   
   func updateContentWith(model: CoinScreenModel) {
     scrollResult.listLabels = model.listResult
-    
-    if model.coinType != .none {
-      let appearance = Appearance()
-      let image = model.coinType == .eagle ? appearance.eagleImage : appearance.tailsImage
-      coinImageView.image = image
-      UIView.transition(with: coinImageView,
-                        duration: Appearance().resultDuration,
-                        options: .transitionFlipFromRight,
-                        animations: nil,
-                        completion: { [weak self] _ in
-        guard let self = self else {
-          return
-        }
-        self.resultLabel.text = model.result
-      })
-    } else {
-      coinImageView.image = nil
-      resultLabel.text = model.result
-    }
+  }
+  
+  func listGenerated(isShow: Bool) {
+    scrollResult.isHidden = !isShow
+    resultLabel.isHidden = !isShow
+  }
+  
+  func cleanButtonAction() {
+    resultLabel.text = ""
   }
 }
 
@@ -84,7 +85,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
 private extension CoinScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    
+    scrollResult.backgroundColor = .clear
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold50
@@ -93,18 +94,36 @@ private extension CoinScreenView {
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
-    coinImageView.layer.cornerRadius = appearance.cornerRadius
-    
     let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
     resultLabelAction.cancelsTouchesInView = false
     resultLabel.addGestureRecognizer(resultLabelAction)
     resultLabel.isUserInteractionEnabled = true
+    
+    coinView.totalValueCoinAction = { [weak self] coinResultType in
+      guard let self else {
+        return
+      }
+      
+      let coinResultText = coinResultType == .eagle ? RandomStrings.Localizable.eagle : RandomStrings.Localizable.tails
+      self.resultLabel.text = coinResultText
+      self.scrollResult.listLabels.insert(coinResultText, at: .zero)
+      self.output?.saveData(model: CoinScreenModel(
+        result: coinResultText,
+        isShowlistGenerated: !self.scrollResult.isHidden,
+        coinType: coinResultType,
+        listResult: self.scrollResult.listLabels.compactMap({ $0 }))
+      )
+    }
+    
+    coinView.feedbackGeneratorAction = { [weak self] in
+      self?.output?.playHapticFeedbackAction()
+    }
   }
   
   func setupConstraints() {
     let appearance = Appearance()
     
-    [resultLabel, generateButton, coinImageView, scrollResult].forEach {
+    [coinView, resultLabel, generateButton, scrollResult].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -114,10 +133,10 @@ private extension CoinScreenView {
       resultLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
                                        constant: appearance.minInset),
       
-      coinImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      coinImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      coinImageView.heightAnchor.constraint(equalToConstant: appearance.heightCoinImage),
-      coinImageView.widthAnchor.constraint(equalToConstant: appearance.widthCoinImage),
+      coinView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      coinView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      coinView.trailingAnchor.constraint(equalTo: trailingAnchor),
+      coinView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),
@@ -135,7 +154,9 @@ private extension CoinScreenView {
   
   @objc
   func generateButtonAction() {
-    output?.generateButtonAction()
+    output?.playHapticFeedbackAction()
+    resultLabel.text = ""
+    coinView.handleTap()
   }
   
   @objc

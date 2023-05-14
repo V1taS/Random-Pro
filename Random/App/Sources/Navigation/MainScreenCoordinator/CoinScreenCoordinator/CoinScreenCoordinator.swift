@@ -65,6 +65,7 @@ final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
 extension CoinScreenCoordinator: CoinScreenModuleOutput {
   func cleanButtonWasSelected(model: CoinScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .coin(
+      isShowlistGenerated: model.isShowlistGenerated,
       itemsGenerated: "\(model.listResult.count)",
       lastItem: model.result
     ))
@@ -77,6 +78,7 @@ extension CoinScreenCoordinator: CoinScreenModuleOutput {
     self.settingsScreenCoordinator?.start()
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .coin(
+      isShowlistGenerated: model.isShowlistGenerated,
       itemsGenerated: "\(model.listResult.count)",
       lastItem: model.result
     ))
@@ -105,14 +107,16 @@ extension CoinScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    listResultScreenCoordinator.setContentsFrom(list: coinScreenModule?.returnListResult() ?? [])
+    listResultScreenCoordinator.setContentsFrom(list: coinScreenModule?.returnModel()?.listResult ?? [])
   }
   
   func cleanButtonAction() {
     coinScreenModule?.cleanButtonAction()
   }
   
-  func withoutRepetitionAction(isOn: Bool) {}
+  func withoutRepetitionAction(isOn: Bool) {
+    coinScreenModule?.listGenerated(isShow: isOn)
+  }
 }
 
 // MARK: - ListResultScreenCoordinatorOutput

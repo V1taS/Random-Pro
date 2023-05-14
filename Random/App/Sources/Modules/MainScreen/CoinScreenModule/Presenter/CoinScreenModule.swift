@@ -27,11 +27,15 @@ protocol CoinScreenModuleOutput: AnyObject {
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol CoinScreenModuleInput {
   
-  /// Возвращает список результатов
-  func returnListResult() -> [String]
+  /// Возвращает Модель данных
+  func returnModel() -> CoinScreenModel?
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  /// Показать список генераций результатов
+  /// - Parameter isShow: показать  список генераций результатов
+  func listGenerated(isShow: Bool)
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: CoinScreenModuleOutput? { get set }
@@ -50,7 +54,6 @@ final class CoinScreenViewController: CoinScreenModule {
   private let moduleView: CoinScreenViewProtocol
   private let interactor: CoinScreenInteractorInput
   private let factory: CoinScreenFactoryInput
-  private var cacheModel: CoinScreenModel?
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private lazy var copyButton = UIBarButtonItem(image: Appearance().copyButtonIcon,
                                                 style: .plain,
@@ -86,30 +89,41 @@ final class CoinScreenViewController: CoinScreenModule {
     super.viewDidLoad()
     interactor.getContent()
     setNavigationBar()
-    copyButton.isEnabled = !interactor.returnListResult().isEmpty
+    
+    let listResult = interactor.returnModel()?.listResult ?? []
+    copyButton.isEnabled = !listResult.isEmpty
   }
   
   // MARK: - Internal func
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
+    moduleView.cleanButtonAction()
   }
   
-  func returnListResult() -> [String] {
-    interactor.returnListResult()
+  func returnModel() -> CoinScreenModel? {
+    interactor.returnModel()
+  }
+  
+  func listGenerated(isShow: Bool) {
+    moduleView.listGenerated(isShow: isShow)
   }
 }
 
 // MARK: - CoinScreenViewOutput
 
 extension CoinScreenViewController: CoinScreenViewOutput {
+  func saveData(model: CoinScreenModel) {
+    interactor.saveData(model: model)
+  }
+  
   func generateButtonAction() {
-    interactor.generateContentCoin()
     interactor.playHapticFeedback()
   }
   
   func resultLabelAction() {
-    guard let result = cacheModel?.result, result != Appearance().defaultResult else {
+    guard let result = interactor.returnModel()?.result,
+          result != Appearance().defaultResult else {
       return
     }
     moduleOutput?.resultLabelAction(text: result)
@@ -120,14 +134,13 @@ extension CoinScreenViewController: CoinScreenViewOutput {
 
 extension CoinScreenViewController: CoinScreenInteractorOutput {
   func cleanButtonWasSelected(model: CoinScreenModel) {
-    cacheModel = model
     moduleOutput?.cleanButtonWasSelected(model: model)
   }
   
   func didReceive(model: CoinScreenModel) {
-    cacheModel = model
     factory.reverseListResultFrom(model: model)
-    copyButton.isEnabled = !interactor.returnListResult().isEmpty
+    let listResult = interactor.returnModel()?.listResult ?? []
+    copyButton.isEnabled = !listResult.isEmpty
   }
 }
 
@@ -158,14 +171,14 @@ private extension CoinScreenViewController {
   
   @objc
   func copyButtonAction() {
-    guard let model = cacheModel else { return }
+    guard let model = interactor.returnModel() else { return }
     moduleOutput?.resultLabelAction(text: model.result)
     impactFeedback.impactOccurred()
   }
   
   @objc
   func settingsButtonAction() {
-    guard let model = cacheModel else {
+    guard let model = interactor.returnModel() else {
       return
     }
     moduleOutput?.settingButtonAction(model: model)

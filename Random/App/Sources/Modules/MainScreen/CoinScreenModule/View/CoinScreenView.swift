@@ -16,6 +16,10 @@ protocol CoinScreenViewOutput: AnyObject {
   
   /// Было нажатие на результат генерации
   func resultLabelAction()
+  
+  /// Сохранить данные
+  ///  - Parameter model: результат генерации
+  func saveData(model: CoinScreenModel)
 }
 
 protocol CoinScreenViewInput {
@@ -23,6 +27,13 @@ protocol CoinScreenViewInput {
   /// Обновить контент
   /// - Parameter model: Модель
   func updateContentWith(model: CoinScreenModel)
+  
+  /// Показать список генераций результатов
+  /// - Parameter isShow: показать  список генераций результатов
+  func listGenerated(isShow: Bool)
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
 }
 
 typealias CoinScreenViewProtocol = UIView & CoinScreenViewInput
@@ -57,25 +68,15 @@ final class CoinScreenView: CoinScreenViewProtocol {
   
   func updateContentWith(model: CoinScreenModel) {
     scrollResult.listLabels = model.listResult
-    
-//    if model.coinType != .none {
-//      let appearance = Appearance()
-//      let image = model.coinType == .eagle ? appearance.eagleImage : appearance.tailsImage
-//      coinImageView.image = image
-//      UIView.transition(with: coinImageView,
-//                        duration: Appearance().resultDuration,
-//                        options: .transitionFlipFromRight,
-//                        animations: nil,
-//                        completion: { [weak self] _ in
-//        guard let self = self else {
-//          return
-//        }
-//        self.resultLabel.text = model.result
-//      })
-//    } else {
-//      coinImageView.image = nil
-//      resultLabel.text = model.result
-//    }
+  }
+  
+  func listGenerated(isShow: Bool) {
+    scrollResult.isHidden = !isShow
+    resultLabel.isHidden = !isShow
+  }
+  
+  func cleanButtonAction() {
+    resultLabel.text = ""
   }
 }
 
@@ -97,6 +98,23 @@ private extension CoinScreenView {
     resultLabelAction.cancelsTouchesInView = false
     resultLabel.addGestureRecognizer(resultLabelAction)
     resultLabel.isUserInteractionEnabled = true
+    
+    coinView.totalValueCoinAction = { [weak self] coinResultType in
+      guard let self else {
+        return
+      }
+      
+      let coinResultText = coinResultType == .eagle ? RandomStrings.Localizable.eagle : RandomStrings.Localizable.tails
+      self.resultLabel.text = coinResultText
+      self.scrollResult.listLabels.insert(coinResultText, at: .zero)
+      self.output?.saveData(model: CoinScreenModel(
+        result: coinResultText,
+        isShowlistGenerated: !self.scrollResult.isHidden,
+        coinType: coinResultType,
+        listResult: self.scrollResult.listLabels.compactMap({ $0 }))
+      )
+      print(!self.scrollResult.isHidden)
+    }
   }
   
   func setupConstraints() {
@@ -134,6 +152,7 @@ private extension CoinScreenView {
   @objc
   func generateButtonAction() {
     output?.generateButtonAction()
+    resultLabel.text = ""
     coinView.handleTap()
   }
   

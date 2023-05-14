@@ -15,14 +15,14 @@ final class CoinView: UIView {
   
   // MARK: - Internal properties
   
-  var totalValueDiceAction: ((Int) -> Void)?
+  var totalValueCoinAction: ((CoinScreenModel.CoinType) -> Void)?
   
   // MARK: - Private properties
   
   private var scnView = SCNView()
   private var scnScene = SCNScene()
   private var cameraNode = SCNNode()
-  private var diceNodes: [SCNNode] = []
+  private var coinNodes: [SCNNode] = []
   private var speeds: [SCNVector3] = []
   
   // MARK: - Initialization
@@ -32,7 +32,7 @@ final class CoinView: UIView {
     
     setupView()
     setupScene()
-    addCubes()
+    addCoins()
   }
   
   required init?(coder: NSCoder) {
@@ -47,41 +47,10 @@ final class CoinView: UIView {
     let torque = setTorque()
     let force = setForce()
     
-    for die in diceNodes {
-      die.physicsBody?.applyTorque(torque, asImpulse: true)
-      die.physicsBody?.applyForce(force, asImpulse: true)
+    for coin in coinNodes {
+      coin.physicsBody?.applyTorque(torque, asImpulse: true)
+      coin.physicsBody?.applyForce(force, asImpulse: true)
     }
-  }
-}
-
-// MARK: - SCNSceneRendererDelegate
-
-extension CoinView: SCNSceneRendererDelegate {
-  func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-    DispatchQueue.global(qos: .userInteractive).sync {
-      for (num, die) in diceNodes.enumerated() {
-        if let pb = die.physicsBody {
-          let os = speeds[num]
-          if !os.isZero && pb.velocity.isZero {
-            DispatchQueue.main.async { [weak self] in
-              guard let self = self else {
-                return
-              }
-              self.totalValueDiceAction?(self.boxUpIndex(n: die.presentation) + 1)
-            }
-          }
-          speeds[num] = pb.velocity
-        }
-      }
-    }
-  }
-}
-
-// MARK: - SCNVector3
-
-private extension SCNVector3 {
-  var isZero: Bool {
-    return self.x == .zero && self.y == .zero && self.z == .zero
   }
 }
 
@@ -112,25 +81,92 @@ private extension CoinView {
     node.position = position
   }
   
+  func setTorque() -> SCNVector4 {
+    let route = CGFloat.random(in: 2...4)
+    return SCNVector4(-route, 0, -2, 2)
+  }
+  
+  func setForce() -> SCNVector3 {
+    let tapStrong = CGFloat.random(in: 10...14)
+    return SCNVector3(0, tapStrong, 0)
+  }
+  
+  func setupScene() {
+    let appearance = Appearance()
+    scnView.scene = scnScene
+    setupCamera()
+    setupLight()
+    
+    scnScene.physicsWorld.speed = 3
+    scnScene.physicsWorld.gravity = SCNVector3(x: 0, y: -9.8, z: 0)
+    scnScene.physicsWorld.timeStep = 1.0 / 60.0
+    scnScene.physicsWorld.contactDelegate = self
+    
+    let wallSize = CGSize(width: 50.0, height: 50.0)
+    
+    let walls = [
+      // верхняя стена X,Y,Z
+      (position: SCNVector3(0, 7, 0),
+       normal: SCNVector3Make(0, -1, 0),
+       name: appearance.positionTop),
+      // нижняя стена X,Y,Z
+      (position: SCNVector3(0, -7, 0),
+       normal: SCNVector3Make(0, 1, 0),
+       name: appearance.positionFloor),
+      // правая стена X,Y,Z
+      (position: SCNVector3(7, 0, 0),
+       normal: SCNVector3Make(-1, 0, 0),
+       name: appearance.positionRight),
+      // левая стена X,Y,Z
+      (position: SCNVector3(-7, 0, 0),
+       normal: SCNVector3Make(1, 0, 0),
+       name: appearance.positionLeft),
+      // задняя стена X,Y,Z
+      (position: SCNVector3(0, 0, 7),
+       normal: SCNVector3Make(0, 0, -1),
+       name: appearance.positionBack),
+      // передняя стена X,Y,Z
+      (position: SCNVector3(0, 0, -7),
+       normal: SCNVector3Make(0, 0, 1),
+       name: appearance.positionFront)
+    ]
+    
+    for wall in walls {
+      let panel = self.wall(at: wall.position, with: wall.normal, sized: wallSize, name: wall.name)
+      scnScene.rootNode.addChildNode(panel)
+    }
+  }
+  
   func wall(at position: SCNVector3,
             with normal: SCNVector3,
             sized size: CGSize,
+            name: String,
             color: UIColor = .clear) -> SCNNode {
-    let geometry = SCNPlane(width: size.width, height: size.height)
+    let geometry = SCNBox(width: size.width, height: size.height, length: 0.2, chamferRadius: 0)
     geometry.materials.first?.diffuse.contents = color
     geometry.materials.first?.isDoubleSided = true
     
+    let shape = SCNPhysicsShape(geometry: geometry, options: nil)
+    let wallBody = SCNPhysicsBody(type: .static, shape: shape)
+    wallBody.restitution = 0.4
+    wallBody.friction = 0.8
+    wallBody.collisionBitMask = 1
+    wallBody.contactTestBitMask = 1
+    wallBody.categoryBitMask = 1
+    
     let geometryNode = SCNNode(geometry: geometry)
-    geometryNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+    geometryNode.name = name
+    geometryNode.physicsBody = wallBody
     geometryNode.physicsBody?.collisionBitMask = 1
     geometryNode.physicsBody?.contactTestBitMask = 1
+    
     geometryNode.position = position
     reposition(geometryNode, to: position, with: normal)
     return geometryNode
   }
   
   func createCoin(position: SCNVector3, sides: [UIImage]) -> SCNNode {
-    let geometry = SCNCylinder(radius: 2, height: 0.1)
+    let geometry = SCNCylinder(radius: 2.2, height: 0.2)
     
     let material1 = SCNMaterial()
     material1.diffuse.contents = sides[0]
@@ -138,8 +174,22 @@ private extension CoinView {
     material2.diffuse.contents = sides[1]
     geometry.materials = [material1, material2]
     
+    let shape = SCNPhysicsShape(geometry: geometry, options: nil)
+    let coinBody = SCNPhysicsBody(type: .dynamic, shape: shape)
     let node = SCNNode(geometry: geometry)
-    node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+    
+    coinBody.restitution = 0.4
+    coinBody.friction = 1
+    coinBody.mass = 1.0
+    coinBody.collisionBitMask = 1
+    coinBody.contactTestBitMask = 1
+    coinBody.velocityFactor = SCNVector3(x: 1.0, y: 1.0, z: 1.0)
+    coinBody.angularVelocityFactor = SCNVector3(x: 1.0, y: 1.0, z: 1.0)
+    coinBody.categoryBitMask = 1
+    
+    node.physicsBody = coinBody
+    node.physicsBody?.collisionBitMask = 1
+    node.physicsBody?.contactTestBitMask = 1
     node.position = position
     return node
   }
@@ -195,66 +245,33 @@ private extension CoinView {
     return bestIndex
   }
   
-  func setTorque() -> SCNVector4 {
-    return SCNVector4(2, 4, -2, 2)
-  }
-  
-  func setForce() -> SCNVector3 {
-    return SCNVector3(1, 24, 2)
-  }
-  
-  func setupScene() {
-    scnView.scene = scnScene
-    setupCamera()
-    setupLight()
-    
-    scnScene.physicsWorld.speed = 3
-    let wallSize = CGSize(width: 100.0, height: 100.0)
-    
-    let walls = [
-      // верхняя стена X,Y,Z
-      (position: SCNVector3(0, 13, 0), normal: SCNVector3Make(0, -1, 0)),
-      // нижняя стена X,Y,Z
-      (position: SCNVector3(0, -8, 0), normal: SCNVector3Make(0, 1, 0)),
-      // правая стена X,Y,Z
-      (position: SCNVector3(7, -8, 0), normal: SCNVector3Make(-1, 0, 0)),
-      // левая стена X,Y,Z
-      (position: SCNVector3(-7, -8, 0), normal: SCNVector3Make(1, 0, 0)),
-      // задняя стена X,Y,Z
-      (position: SCNVector3(0, -8, 11), normal: SCNVector3Make(0, 0, -1)),
-      // передняя стена X,Y,Z
-      (position: SCNVector3(0, -8, -11), normal: SCNVector3Make(0, 0, 1))
-    ]
-    
-    for wall in walls {
-      let panel = self.wall(at: wall.position, with: wall.normal, sized: wallSize)
-      scnScene.rootNode.addChildNode(panel)
-    }
-  }
-  
-  func addCubes() {
+  func addCoins() {
     let appearance = Appearance()
     
-    if !diceNodes.isEmpty {
-      for die in diceNodes {
+    if !coinNodes.isEmpty {
+      for die in coinNodes {
         die.removeFromParentNode()
       }
     }
     
-    diceNodes = []
+    coinNodes = []
     speeds = []
     
     let sides = [
-      appearance.cubeOneImage,
-      appearance.cubesTwoImage
+      appearance.coinEagleImage,
+      appearance.coinTailsImage
     ]
     
-    diceNodes.append(createCoin(position: SCNVector3(0, 0, 0), sides: sides))
+    let coinNode = createCoin(position: SCNVector3(0, 1, 0), sides: sides)
+    coinNode.name = Appearance().coinNodeName
+    coinNodes.append(coinNode)
     speeds.append(SCNVector3(0, 0, 0))
     
-    let torque = SCNVector4(1, 2, -1, 1)
-    for die in diceNodes {
+    let torque = setTorque()
+    let force = setForce()
+    for die in coinNodes {
       die.physicsBody?.applyTorque(torque, asImpulse: true)
+      die.physicsBody?.applyForce(force, asImpulse: true)
       scnScene.rootNode.addChildNode(die)
     }
   }
@@ -283,7 +300,7 @@ private extension CoinView {
   
   func setupCamera() {
     cameraNode.camera = SCNCamera()
-    cameraNode.position = SCNVector3(x: 0, y: 20, z: 2)
+    cameraNode.position = SCNVector3(x: 0, y: 12, z: 2)
     cameraNode.rotation = SCNVector4(1, 0, 0, -Float.pi / 2)
     scnScene.rootNode.addChildNode(cameraNode)
   }
@@ -293,12 +310,6 @@ private extension CoinView {
     lightNode.light = SCNLight()
     lightNode.light?.type = .omni
     lightNode.position = SCNVector3(x: 0, y: 10, z: 10)
-    
-    let ambientLightNode = SCNNode()
-    ambientLightNode.light = SCNLight()
-    ambientLightNode.light?.type = .ambient
-    ambientLightNode.light?.color = RandomColor.only.primaryYellow
-    scnScene.rootNode.addChildNode(ambientLightNode)
     
     let rotatingNode = SCNNode()
     scnScene.rootNode.addChildNode(rotatingNode)
@@ -310,21 +321,77 @@ private extension CoinView {
   }
 }
 
+// MARK: - SCNPhysicsContactDelegate
+
+extension CoinView: SCNPhysicsContactDelegate {
+  func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+    let appearance = Appearance()
+    if (contact.nodeA.name == appearance.coinNodeName && contact.nodeB.name == appearance.positionFloor) ||
+        (contact.nodeA.name == appearance.positionFloor && contact.nodeB.name == appearance.coinNodeName) ||
+        (contact.nodeA.name == appearance.coinNodeName && contact.nodeB.name == appearance.positionLeft) ||
+        (contact.nodeA.name == appearance.positionLeft && contact.nodeB.name == appearance.coinNodeName) ||
+        (contact.nodeA.name == appearance.coinNodeName && contact.nodeB.name == appearance.positionRight) ||
+        (contact.nodeA.name == appearance.positionRight && contact.nodeB.name == appearance.coinNodeName) ||
+        (contact.nodeA.name == appearance.coinNodeName && contact.nodeB.name == appearance.positionFront) ||
+        (contact.nodeA.name == appearance.positionFront && contact.nodeB.name == appearance.coinNodeName) ||
+        (contact.nodeA.name == appearance.coinNodeName && contact.nodeB.name == appearance.positionBack) ||
+        (contact.nodeA.name == appearance.positionBack && contact.nodeB.name == appearance.coinNodeName) {
+      // TODO: - Сделать feedback generator
+    }
+  }
+}
+
+// MARK: - SCNSceneRendererDelegate
+
+extension CoinView: SCNSceneRendererDelegate {
+  func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+    DispatchQueue.global(qos: .userInteractive).sync { [weak self] in
+      guard let self else {
+        return
+      }
+      
+      for (num, coin) in coinNodes.enumerated() {
+        if let pb = coin.physicsBody {
+          guard speeds.indices.contains(num) else {
+            continue
+          }
+          
+          let os = speeds[num]
+          if !os.isZero && pb.velocity.isZero {
+            DispatchQueue.main.async {
+              let resultCoin = self.boxUpIndex(n: coin.presentation)
+              self.totalValueCoinAction?(resultCoin == 5 ? .eagle : .tails)
+            }
+          }
+          speeds[num] = pb.velocity
+        }
+      }
+    }
+  }
+}
+
+// MARK: - SCNVector3
+
+private extension SCNVector3 {
+  var isZero: Bool {
+    return self.x == .zero && self.y == .zero && self.z == .zero
+  }
+}
+
 // MARK: - Appearance
 
 private extension CoinView {
   struct Appearance {
-    let cubeOneImage = RandomAsset.coinEagle.image
-    let cubesTwoImage = RandomAsset.coinTails.image
+    let coinEagleImage = RandomAsset.coinEagle.image
+    let coinTailsImage = RandomAsset.coinTails.image
     
-    let oneHundredSpacing: CGFloat = 100
-    let fiftySpacing: CGFloat = 50
-    let pointSize: CGFloat = 70
-    let numberOne: Int = 1
-    let numberTwo: Int = 2
-    let numberThree: Int = 3
-    let numberFour: Int = 4
-    let numberFive: Int = 5
-    let numberSix: Int = 6
+    let positionTop = "Top"
+    let positionFloor = "Floor"
+    let positionRight = "Right"
+    let positionLeft = "Left"
+    let positionBack = "Back"
+    let positionFront = "Front"
+    
+    let coinNodeName = "Coin"
   }
 }

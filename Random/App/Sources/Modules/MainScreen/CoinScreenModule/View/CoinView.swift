@@ -16,6 +16,7 @@ final class CoinView: UIView {
   // MARK: - Internal properties
   
   var totalValueCoinAction: ((CoinScreenModel.CoinType) -> Void)?
+  var feedbackGeneratorAction: (() -> Void)?
   
   // MARK: - Private properties
   
@@ -336,7 +337,7 @@ extension CoinView: SCNPhysicsContactDelegate {
         (contact.nodeA.name == appearance.positionFront && contact.nodeB.name == appearance.coinNodeName) ||
         (contact.nodeA.name == appearance.coinNodeName && contact.nodeB.name == appearance.positionBack) ||
         (contact.nodeA.name == appearance.positionBack && contact.nodeB.name == appearance.coinNodeName) {
-      // TODO: - Сделать feedback generator
+      feedbackGeneratorAction?()
     }
   }
 }

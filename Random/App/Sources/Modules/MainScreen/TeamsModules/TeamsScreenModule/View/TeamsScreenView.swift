@@ -94,7 +94,9 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
 extension TeamsScreenView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {}
   
-  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+  func collectionView(_ collectionView: UICollectionView,
+                      viewForSupplementaryElementOfKind kind: String,
+                      at indexPath: IndexPath) -> UICollectionReusableView {
     guard let headerView = collectionView.dequeueReusableSupplementaryView(
       ofKind: kind,
       withReuseIdentifier: CustomDoubleTextHeaderCollectionCell.reuseIdentifier,

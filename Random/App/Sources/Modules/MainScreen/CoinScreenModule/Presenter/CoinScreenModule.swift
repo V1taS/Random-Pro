@@ -117,7 +117,7 @@ extension CoinScreenViewController: CoinScreenViewOutput {
     interactor.saveData(model: model)
   }
   
-  func generateButtonAction() {
+  func playHapticFeedbackAction() {
     interactor.playHapticFeedback()
   }
   

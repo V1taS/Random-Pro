@@ -12,7 +12,7 @@ import RandomUIKit
 protocol CoinScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку генерации
-  func generateButtonAction()
+  func playHapticFeedbackAction()
   
   /// Было нажатие на результат генерации
   func resultLabelAction()
@@ -113,7 +113,10 @@ private extension CoinScreenView {
         coinType: coinResultType,
         listResult: self.scrollResult.listLabels.compactMap({ $0 }))
       )
-      print(!self.scrollResult.isHidden)
+    }
+    
+    coinView.feedbackGeneratorAction = { [weak self] in
+      self?.output?.playHapticFeedbackAction()
     }
   }
   
@@ -151,7 +154,7 @@ private extension CoinScreenView {
   
   @objc
   func generateButtonAction() {
-    output?.generateButtonAction()
+    output?.playHapticFeedbackAction()
     resultLabel.text = ""
     coinView.handleTap()
   }

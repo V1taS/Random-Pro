@@ -67,6 +67,7 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
       }
       
 #if DEBUG
+      // swiftlint:disable:next no_print
       print("IdentifierForVendor: \(identifierForVendor)")
 #endif
       

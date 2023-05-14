@@ -24,17 +24,18 @@ protocol CoinScreenInteractorInput {
   /// Получить данные
   func getContent()
   
-  /// Создать новые данные генерации
-  func generateContentCoin()
-  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
-  /// Возвращает список результатов
-  func returnListResult() -> [String]
+  /// Возвращает Модель данных
+  func returnModel() -> CoinScreenModel?
   
   /// Запустить обратную связь от моторчика
   func playHapticFeedback()
+  
+  /// Сохранить данные
+  ///  - Parameter model: результат генерации
+  func saveData(model: CoinScreenModel)
 }
 
 final class CoinScreenInteractor: CoinScreenInteractorInput {
@@ -61,6 +62,10 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   
   // MARK: - Internal func
   
+  func saveData(model: CoinScreenModel) {
+    storageService.coinScreenModel = model
+  }
+  
   func cleanButtonAction() {
     storageService.coinScreenModel = nil
     getContent()
@@ -72,35 +77,8 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
     configureModel()
   }
   
-  func generateContentCoin() {
-    let appearance = Appearance()
-    guard let model = storageService.coinScreenModel else {
-      return
-    }
-    
-    let randonIndex = Int.random(in: 0...1)
-    let randomName = appearance.namesCoin[randonIndex]
-    let coinType: CoinScreenModel.CoinType = randonIndex == .zero ? .eagle : .tails
-    
-    var listResult = model.listResult
-    listResult.append(randomName)
-    
-    let newModel = CoinScreenModel(
-      result: randomName,
-      coinType: coinType,
-      listResult: listResult
-    )
-    
-    self.storageService.coinScreenModel = newModel
-    output?.didReceive(model: newModel)
-  }
-  
-  func returnListResult() -> [String] {
-    if let model = storageService.coinScreenModel {
-      return model.listResult
-    } else {
-      return []
-    }
+  func returnModel() -> CoinScreenModel? {
+    storageService.coinScreenModel
   }
   
   func playHapticFeedback() {
@@ -119,6 +97,7 @@ private extension CoinScreenInteractor {
     } else {
       let model = CoinScreenModel(
         result: Appearance().resultName,
+        isShowlistGenerated: true,
         coinType: .none,
         listResult: []
       )

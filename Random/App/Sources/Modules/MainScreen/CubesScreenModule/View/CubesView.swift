@@ -88,7 +88,7 @@ extension CubesView: SCNSceneRendererDelegate {
 
 // MARK: - SCNVector3
 
-extension SCNVector3 {
+private extension SCNVector3 {
   var isZero: Bool {
     return self.x == .zero && self.y == .zero && self.z == .zero
   }

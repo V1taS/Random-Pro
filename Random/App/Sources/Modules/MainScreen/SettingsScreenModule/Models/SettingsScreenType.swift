@@ -33,7 +33,7 @@ enum SettingsScreenType {
   case list(withoutRepetition: Bool, generatedTextCount: String, allTextCount: String, lastItem: String)
   
   /// Раздел: `Монета`
-  case coin(itemsGenerated: String, lastItem: String)
+  case coin(isShowlistGenerated: Bool, itemsGenerated: String, lastItem: String)
   
   /// Раздел: `Кубики`
   case cube(isShowlistGenerated: Bool, itemsGenerated: String, lastItem: String)

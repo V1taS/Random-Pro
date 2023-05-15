@@ -59,6 +59,9 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Films`
   func openFilms()
   
+  /// Открыть раздел `NickName`
+  func openNickName()
+  
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
@@ -155,6 +158,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openImageFilters()
       case .films:
         output?.openFilms()
+      case .nickName:
+        output?.openNickName()
       }
     }
   }

@@ -76,6 +76,16 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openNickName() {
+    let nickNameScreenCoordinator = NickNameScreenCoordinator(navigationController,
+                                                              services)
+    anyCoordinator = nickNameScreenCoordinator
+    nickNameScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .nickName)
+   
+  }
+  
   func openFilms() {
     let filmsScreenCoordinator = FilmsScreenCoordinator(navigationController,
                                                           services)

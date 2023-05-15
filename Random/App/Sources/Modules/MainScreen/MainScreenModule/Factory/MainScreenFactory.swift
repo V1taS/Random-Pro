@@ -196,6 +196,15 @@ extension MainScreenFactory {
             isHidden: false,
             advLabel: .premium
           ))
+        case .nickName:
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            imageSectionSystemName: section.imageSectionSystemName,
+            titleSection: section.titleSection,
+            isEnabled: true,
+            isHidden: false,
+            advLabel: .none
+          ))
         }
       }
       
@@ -367,6 +376,16 @@ extension MainScreenFactory {
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.films) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.films ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
+              ))
+            case .nickName:
+              cardSections.append(MainScreenModel.Section(
+                type: model.type,
+                imageSectionSystemName: model.imageSectionSystemName,
+                titleSection: model.type.titleSection,
+                isEnabled: model.isEnabled,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.films) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.films ?? model.advLabel.rawValue,
+                                       oldADVLabel: .none)
               ))
             }
           }

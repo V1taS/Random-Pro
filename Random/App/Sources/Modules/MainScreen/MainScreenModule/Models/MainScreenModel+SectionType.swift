@@ -88,6 +88,8 @@ extension MainScreenModel {
         return appearance.titleImageFilters
       case .films:
         return appearance.titleFilms
+      case .nickName:
+        return appearance.titleNickName
       }
     }
     
@@ -127,6 +129,8 @@ extension MainScreenModel {
         return appearance.imageImageFilters
       case .films:
         return appearance.imageFilms
+      case .nickName:
+        return appearance.imageNickName
       }
     }
     
@@ -166,6 +170,8 @@ extension MainScreenModel {
         return appearance.imageFiltersDescriptionForNoPremiumAccess
       case .films:
         return appearance.filmsDescriptionForNoPremiumAccess
+      case .nickName:
+        return appearance.nickNameDescriptionForNoPremiumAccess
       }
     }
     
@@ -218,5 +224,8 @@ extension MainScreenModel {
     
     /// Раздел `Фильмы`
     case films
+    
+    /// Раздел `Никнейм`
+    case nickName
   }
 }

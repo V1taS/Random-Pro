@@ -58,6 +58,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Films`
   func openFilms()
   
+  /// Открыть раздел `NickName`
+  func openNickName()
+  
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
   
@@ -227,6 +230,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openNickName() {
+    moduleOutput?.openNickName()
+  }
+  
   func openFilms() {
     moduleOutput?.openFilms()
   }

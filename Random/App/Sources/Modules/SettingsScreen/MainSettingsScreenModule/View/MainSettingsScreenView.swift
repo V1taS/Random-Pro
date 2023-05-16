@@ -13,7 +13,7 @@ protocol MainSettingsScreenViewOutput: AnyObject {
   
   /// Тема приложения была изменена
   /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool)
+  func darkThemeChanged(_ isEnabled: Bool?)
   
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
@@ -120,27 +120,26 @@ extension MainSettingsScreenView: UITableViewDataSource {
           leftSideImage: UIImage(systemName: leftSideImageSystemName),
           leftSideImageColor: RandomColor.only.primaryWhite,
           titleText: title,
-          listOfInterfaceMode: ["Светлая", "Темная"],
+          listOfInterfaceMode: ["Светлая", "Темная", "Авто"],
           interfaceModeValueChanged: { [weak self] index in
             guard let self = self else {
               return
             }
 
 
-//            switch index {
-//            case 0:
-//              return (self.output?.darkThemeChanged(true))!
-//            case 1:
-//              return (self.output?.darkThemeChanged(false))!
-//            default:
-//              return (self.output?.darkThemeChanged(false))!
-//            }
-
-
-//            self?.output?.darkThemeChanged(isOn)
-
+            switch index {
+            case 0:
+              return (self.output?.darkThemeChanged(false))!
+            case 1:
+              return (self.output?.darkThemeChanged(true))!
+            default:
+              return (self.output?.darkThemeChanged(nil))!
+            }
           }
+
         )
+
+
         viewCell = cell
       }
 
@@ -300,4 +299,30 @@ private extension MainSettingsScreenView {
     let feedbackButtonTitle = RandomStrings.Localizable.feedback
     let addressRecipients = "Random_Pro_support@iCloud.com"
   }
+}
+
+
+public func configureCellWith(squircleBGColors: [UIColor],
+                              squircleBGAlpha: CGFloat = 1,
+                              leftSideImage: UIImage?,
+                              leftSideImageColor: UIColor?,
+                              titleText: String?,
+                              startSelectedSegmentIndex: Int = .zero,
+                              listOfInterfaceMode: [String],
+                              interfaceModeValueChanged: ((_ selectedSegmentIndex: Int) -> Void)? = nil) {
+  titleLabel.text = titleText
+  leftSideImageView.image = leftSideImage
+  leftSideImageView.setImageColor(color: leftSideImageColor ?? RandomColor.darkAndLightTheme.primaryGray)
+  leftSideSquircleView.applyGradient(colors: squircleBGColors,
+                                     alpha: squircleBGAlpha)
+
+  if segmentedInterfaceMode.numberOfSegments == .zero {
+    listOfInterfaceMode.enumerated().forEach { index, title in
+      segmentedInterfaceMode.insertSegment(withTitle: title, at: index, animated: false)
+    }
+  }
+
+  segmentedInterfaceMode.selectedSegmentIndex = startSelectedSegmentIndex
+
+  self.interfaceThemeChanged = interfaceModeValueChanged
 }

@@ -91,7 +91,7 @@ protocol MainScreenModuleInput {
   
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена
-  func saveDarkModeStatus(_ isEnabled: Bool)
+  func saveDarkModeStatus(_ isEnabled: Bool?)
   
   /// Возвращает модель
   func returnModel(completion: @escaping (MainScreenModel) -> Void)
@@ -179,7 +179,7 @@ final class MainScreenViewController: MainScreenModule {
   
   // MARK: - Internal func
   
-  func saveDarkModeStatus(_ isEnabled: Bool) {
+  func saveDarkModeStatus(_ isEnabled: Bool?) {
     interactor.saveDarkModeStatus(isEnabled)
   }
   

@@ -33,7 +33,11 @@ struct GradientButtonModifier: ViewModifier {
       .opacity(isPressed ? 0.9 : 1)
       .scaleEffect(isPressed ? 0.95 : 1)
       .animation(.easeInOut(duration: 0.2), value: isPressed)
-      .simultaneousGesture(LongPressGesture(minimumDuration: .infinity).onChanged { _ in isPressed = true }.onEnded { _ in isPressed = false })
+      .simultaneousGesture(LongPressGesture(minimumDuration: .infinity).onChanged { _ in
+        isPressed = true
+      }.onEnded { _ in
+        isPressed = false
+      })
   }
 }
 

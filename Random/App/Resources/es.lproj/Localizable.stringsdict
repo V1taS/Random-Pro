@@ -2,28 +2,84 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>number_of_adults_in_tour</key>
+	<key>century_count</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@number_of_adults@</string>
-		<key>number_of_adults</key>
+		<string>%#@century_count_values@</string>
+		<key>century_count_values</key>
 		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
+			<key>few</key>
+			<string>%d siglo</string>
+			<key>many</key>
+			<string>%d siglos</string>
+			<key>one</key>
+			<string>%d siglo</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
-			<key>zero</key>
-			<string>0 adults</string>
-			<key>one</key>
-			<string>%d adult</string>
-			<key>two</key>
-			<string>%d adults</string>
-			<key>few</key>
-			<string>%d adults</string>
-			<key>many</key>
-			<string>%d adults</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
 			<key>other</key>
-			<string>%d adults</string>
+			<string>%d siglos</string>
+		</dict>
+	</dict>
+	<key>years_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@years_count_values@</string>
+		<key>years_count_values</key>
+		<dict>
+			<key>many</key>
+			<string>%d años</string>
+			<key>few</key>
+			<string>%d del año</string>
+			<key>one</key>
+			<string>%d año</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>other</key>
+			<string>%d años</string>
+		</dict>
+	</dict>
+	<key>months_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@months_count_values@</string>
+		<key>months_count_values</key>
+		<dict>
+			<key>many</key>
+			<string>%d meses</string>
+			<key>few</key>
+			<string>%d meses</string>
+			<key>one</key>
+			<string>%d mes</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>other</key>
+			<string>%d meses</string>
+		</dict>
+	</dict>
+	<key>days_count</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@days_count_values@</string>
+		<key>days_count_values</key>
+		<dict>
+			<key>many</key>
+			<string>%d días</string>
+			<key>few</key>
+			<string>%d días</string>
+			<key>one</key>
+			<string>%d día</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>other</key>
+			<string>%d días</string>
 		</dict>
 	</dict>
 </dict>

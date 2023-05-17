@@ -11,7 +11,7 @@ import UIKit
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PasswordScreenModuleOutput: AnyObject {
   
-  /// Была получена ошибка
+  /// Была получена ошибка из-за слишком короткой длины пароля
   func didReceiveErrorWithCountOfCharacters()
   
   /// Результат скопирован

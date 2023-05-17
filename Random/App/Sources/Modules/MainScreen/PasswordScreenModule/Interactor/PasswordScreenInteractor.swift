@@ -19,7 +19,7 @@ protocol PasswordScreenInteractorOutput: AnyObject {
   ///  - Parameter model: результат генерации
   func didReceive(model: PasswordScreenModel)
   
-  /// Была получена ошибка
+  /// Была получена ошибка из-за слишком короткой длины пароля
   func didReceiveErrorWithCountOfCharacters()
   
   /// Кнопка очистить была нажата
@@ -399,7 +399,6 @@ private extension PasswordScreenInteractor {
           self.output?.didReceiveErrorWithCountOfCharacters()
         }
         return
-
       }
       
       var resultCharacters: [Character] = []

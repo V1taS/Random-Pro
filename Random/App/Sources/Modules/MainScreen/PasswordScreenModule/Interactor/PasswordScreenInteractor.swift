@@ -393,10 +393,10 @@ private extension PasswordScreenInteractor {
                         symbols: Bool,
                         passwordLength: Int,
                         completion: @escaping (String) -> Void) {
-    DispatchQueue.global(qos: .userInteractive).async {
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
       guard passwordLength >= 4 else {
         DispatchQueue.main.async {
-          self.output?.didReceiveErrorWithCountOfCharacters()
+          self?.output?.didReceiveErrorWithCountOfCharacters()
         }
         return
       }

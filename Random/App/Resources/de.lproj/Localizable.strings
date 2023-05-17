@@ -241,4 +241,4 @@
 "yes_or_no" = "Ja oder Nein";
 "crack_time" = "Crack-Zeit";
 "centuries" = "Jahrhunderte";
-"at_least_4_characters_for_password" = "Mindestens 4 Zeichen für das Passwort";
+"at_least_4_characters_for_password" = "Das Passwort ist zu kurz. Mindestens 4 Zeichen erforderlich.";

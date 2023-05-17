@@ -12,7 +12,7 @@ import UIKit
 protocol PasswordScreenModuleOutput: AnyObject {
   
   /// Была получена ошибка
-  func didReceiveError()
+  func didReceiveErrorWithCountOfCharacters()
   
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
@@ -157,8 +157,8 @@ extension PasswordScreenViewController: PasswordScreenInteractorOutput {
     moduleOutput?.cleanButtonWasSelected()
   }
   
-  func didReceiveError() {
-    moduleOutput?.didReceiveError()
+  func didReceiveErrorWithCountOfCharacters() {
+    moduleOutput?.didReceiveErrorWithCountOfCharacters()
   }
   
   func didReceive(model: PasswordScreenModel) {

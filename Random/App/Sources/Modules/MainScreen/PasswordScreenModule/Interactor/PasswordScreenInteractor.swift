@@ -20,7 +20,7 @@ protocol PasswordScreenInteractorOutput: AnyObject {
   func didReceive(model: PasswordScreenModel)
   
   /// Была получена ошибка
-  func didReceiveError()
+  func didReceiveErrorWithCountOfCharacters()
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -221,11 +221,8 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       let model = storageService.passwordScreenModel,
       let passwordLengthInt = Int((passwordLength ?? "").replacingOccurrences(of: Appearance().withoutSpaces, with: ""))
     else {
-      output?.didReceiveError()
+      output?.didReceiveErrorWithCountOfCharacters()
       return
-    }
-    if passwordLengthInt < 4 {
-      output?.didReceiveError()
     }
     
     generatePassword(
@@ -397,7 +394,13 @@ private extension PasswordScreenInteractor {
                         passwordLength: Int,
                         completion: @escaping (String) -> Void) {
     DispatchQueue.global(qos: .userInteractive).async {
-      guard passwordLength >= 4 else { return }
+      guard passwordLength >= 4 else {
+        DispatchQueue.main.async {
+          self.output?.didReceiveErrorWithCountOfCharacters()
+        }
+        return
+
+      }
       
       var resultCharacters: [Character] = []
       

@@ -190,6 +190,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case .films: break
+    case .nickname: break
     }
     output?.didReceive(models: tableViewModels)
   }

@@ -28,6 +28,7 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var nickNameScreenModule: NickNameScreenModule?
+  private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -43,7 +44,7 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var nickNameScreenModule = NickNameScreenAssembly().createModule()
+    var nickNameScreenModule = NickNameScreenAssembly().createModule(services: services)
     
     self.nickNameScreenModule = nickNameScreenModule
     nickNameScreenModule.moduleOutput = self
@@ -53,4 +54,28 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
 
 // MARK: - NickNameScreenModuleOutput
 
-extension NickNameScreenCoordinator: NickNameScreenModuleOutput {}
+extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
+  func cleanButtonWasSelected() {}
+  
+  func settingButtonAction(model: NickNameScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    
+    settingsScreenCoordinator.setupDefaultsSettings(for: .nickname(result: model.result,
+                                                                   indexSegmented: model.indexSegmented))
+  }
+}
+
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension NickNameScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func withoutRepetitionAction(isOn: Bool) {}
+  
+  func cleanButtonAction() {}
+  
+  func listOfObjectsAction() {}
+  
+  func updateStateForSections() {}
+}

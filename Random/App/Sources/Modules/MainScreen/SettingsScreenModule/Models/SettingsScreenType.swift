@@ -14,6 +14,9 @@ enum SettingsScreenType {
   
   // MARK: - Cases
   
+  /// Раздел: `Никнейм`
+  case nickname(result: String, indexSegmented: Int)
+  
   /// Раздел: `Фильмы`
   case films
   

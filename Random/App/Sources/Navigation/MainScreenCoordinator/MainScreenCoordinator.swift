@@ -83,7 +83,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     nickNameScreenCoordinator.start()
     
     mainScreenModule?.removeLabelFromSection(type: .nickName)
-   
+    services.metricsService.track(event: .nicknameScreen)
   }
   
   func openFilms() {

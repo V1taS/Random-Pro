@@ -12,11 +12,13 @@ final class NickNameScreenAssembly {
   
   /// Собирает модуль `NickNameScreen`
   /// - Returns: Cобранный модуль `NickNameScreen`
-  func createModule() -> NickNameScreenModule {
-    let interactor = NickNameScreenInteractor()
+  func createModule(services: ApplicationServices) -> NickNameScreenModule {
+    let interactor = NickNameScreenInteractor(services: services)
     let view = NickNameScreenView()
     let factory = NickNameScreenFactory()
-    let presenter = NickNameScreenViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = NickNameScreenViewController(moduleView: view,
+                                               interactor: interactor,
+                                               factory: factory)
     
     view.output = presenter
     interactor.output = presenter

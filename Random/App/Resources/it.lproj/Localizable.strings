@@ -241,3 +241,4 @@
 "yes_or_no" = "Sì o no";
 "crack_time" = "tempo di crepa";
 "centuries" = "secoli";
+"at_least_4_characters_for_password" = "Almeno 4 caratteri per la password";

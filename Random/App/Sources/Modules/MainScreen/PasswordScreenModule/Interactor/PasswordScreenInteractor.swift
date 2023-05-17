@@ -224,6 +224,9 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       output?.didReceiveError()
       return
     }
+    if passwordLengthInt < 4 {
+      output?.didReceiveError()
+    }
     
     generatePassword(
       capitalLetters: model.switchState.uppercase,

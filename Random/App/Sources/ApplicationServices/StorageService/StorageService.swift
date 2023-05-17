@@ -22,6 +22,9 @@ protocol StorageService {
   /// Модель для фильмов
   var filmsScreenModel: [FilmsScreenModel]? { get set }
   
+  /// Модель для никнейм
+  var nickNameScreenModel: NickNameScreenModel? { get set }
+  
   /// Модель для списка
   var listScreenModel: ListScreenModel? { get set }
   
@@ -66,7 +69,7 @@ protocol StorageService {
 }
 
 final class StorageServiceImpl: StorageService {
-  
+
   // MARK: - Internal property
   
   var isPremium: Bool {
@@ -79,6 +82,15 @@ final class StorageServiceImpl: StorageService {
     } set {
       mainScreenModelUserDefaults = newValue
       mainScreenModelKeychain = newValue
+    }
+  }
+  
+  var nickNameScreenModel: NickNameScreenModel? {
+    get {
+      isPremium ? nickNameScreenModelKeychain : nickNameScreenModelUserDefaults
+    } set {
+      nickNameScreenModelUserDefaults = newValue
+      nickNameScreenModelKeychain = newValue
     }
   }
   
@@ -233,6 +245,13 @@ final class StorageServiceImpl: StorageService {
   @ObjectCustomKeychainWrapper(key: Appearance().mainScreenKeyUserDefaults)
   private var mainScreenModelKeychain: MainScreenModel?
   
+  // MARK: - NickName model
+  
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().nickNameScreenKeyUserDefaults)
+  private var nickNameScreenModelUserDefaults: NickNameScreenModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().nickNameScreenKeyUserDefaults)
+  private var nickNameScreenModelKeychain: NickNameScreenModel?
+  
   // MARK: - Number model
   
   @ObjectCustomUserDefaultsWrapper(key: Appearance().numberScreenKeyUserDefaults)
@@ -355,6 +374,7 @@ private extension StorageServiceImpl {
     let mainScreenKeyUserDefaults = "main_screen_user_defaults_key"
     let numberScreenKeyUserDefaults = "number_screen_user_defaults_key"
     let filmsScreenModelsKeyUserDefaults = "films_screen_user_defaults_key"
+    let nickNameScreenKeyUserDefaults = "nick_name_screen_user_defaults_key"
     let listScreenModelKeyUserDefaults = "list_screen_user_defaults_key"
     let contactScreenModelKeyUserDefaults = "contact_screen_user_defaults_key"
     let cubesScreenModelKeyUserDefaults = "cubes_screen_user_defaults_key"

@@ -241,6 +241,7 @@
 "yes_or_no" = "Да или Нет";
 "crack_time" = "Время взлома";
 "centuries" = "веков";
+"at_least_4_characters_for_password" = "Минимум 4 символа для пароля";
 "save" = "Сохранить";
 "changeTeamName" = "Введите новое название команды";
 "crack_time" = "Время взлома";

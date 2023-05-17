@@ -241,6 +241,7 @@
 "yes_or_no" = "Ja oder Nein";
 "crack_time" = "Crack-Zeit";
 "centuries" = "Jahrhunderte";
+"at_least_4_characters_for_password" = "Mindestens 4 Zeichen für das Passwort";
 "save" = "Speichern";
 "changeTeamName" = "Geben Sie einen neuen Namen für den Befehl ein";
 "crack_time" = "Crack-Zeit";

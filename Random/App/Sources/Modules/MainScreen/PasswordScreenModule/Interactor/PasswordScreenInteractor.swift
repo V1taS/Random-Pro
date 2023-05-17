@@ -19,8 +19,8 @@ protocol PasswordScreenInteractorOutput: AnyObject {
   ///  - Parameter model: результат генерации
   func didReceive(model: PasswordScreenModel)
   
-  /// Была получена ошибка
-  func didReceiveError()
+  /// Была получена ошибка из-за слишком короткой длины пароля
+  func didReceiveErrorWithCountOfCharacters()
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
@@ -221,7 +221,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       let model = storageService.passwordScreenModel,
       let passwordLengthInt = Int((passwordLength ?? "").replacingOccurrences(of: Appearance().withoutSpaces, with: ""))
     else {
-      output?.didReceiveError()
+      output?.didReceiveErrorWithCountOfCharacters()
       return
     }
     
@@ -393,8 +393,13 @@ private extension PasswordScreenInteractor {
                         symbols: Bool,
                         passwordLength: Int,
                         completion: @escaping (String) -> Void) {
-    DispatchQueue.global(qos: .userInteractive).async {
-      guard passwordLength >= 4 else { return }
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard passwordLength >= 4 else {
+        DispatchQueue.main.async {
+          self?.output?.didReceiveErrorWithCountOfCharacters()
+        }
+        return
+      }
       
       var resultCharacters: [Character] = []
       

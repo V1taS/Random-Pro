@@ -18,18 +18,13 @@ enum MainSettingsScreenType {
   ///  - squircleBGColors: Фон сквиркла
   ///  - leftSideImageSystemName: Изображение слева
   ///  - title: Заголовок
-  ///  - isEnabled: Переключатель
+  ///  - startSelectedSegmentIndex: Первоначальный индекс выбранного элемента у SelectedControll
 
   case squircleImageAndLabelWithSegmentedControl(squircleBGColors: [UIColor],
                                                  leftSideImageSystemName: String,
                                                  title: String,
-                                                 isEnabled: Bool?)
+                                                 startSelectedSegmentIndex: Int)
 
-//  case squircleImageAndLabelWithSwitch(squircleBGColors: [UIColor],
-//                                       leftSideImageSystemName: String,
-//                                       title: String,
-//                                       isEnabled: Bool)
-  
   /// Секция `Заголовок и иконка сбоку`
   /// - Parameters:
   ///  - squircleBGColors: Фон сквиркла

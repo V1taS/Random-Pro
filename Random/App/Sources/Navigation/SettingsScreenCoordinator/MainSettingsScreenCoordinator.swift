@@ -177,9 +177,8 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
       window?.overrideUserInterfaceStyle = .light
     default:
       window?.overrideUserInterfaceStyle = .dark
-
     }
-   // window?.overrideUserInterfaceStyle = isEnabled ? .dark : .light
+
     output?.darkThemeChanged(isEnabled)
   }
   

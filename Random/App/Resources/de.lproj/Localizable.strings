@@ -239,3 +239,5 @@
 "wednesday" = "Mittwoch";
 "yes" = "Ja";
 "yes_or_no" = "Ja oder Nein";
+"save" = "Speichern";
+"changeTeamName" = "Geben Sie einen neuen Namen für den Befehl ein";

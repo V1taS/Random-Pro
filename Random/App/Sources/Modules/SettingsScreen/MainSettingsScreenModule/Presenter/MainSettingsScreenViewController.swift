@@ -98,11 +98,10 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   // MARK: - Internal func
   
   func updateContentWith(isDarkTheme: Bool?) {
-    if let result = isDarkTheme {
-      interactor.getContentWith(isDarkMode: result)
-    } else {
-      interactor.getContentWith(isDarkMode: isDarkMode)
+    guard #available(iOS 13.0, *) else {
+      return interactor.getContentWith(isDarkMode: false)
     }
+    interactor.getContentWith(isDarkMode: isDarkTheme)
   }
 }
 

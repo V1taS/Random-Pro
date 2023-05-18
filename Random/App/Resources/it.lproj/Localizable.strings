@@ -11,9 +11,11 @@
 "april" = "aprile";
 "august" = "agosto";
 "authorization_error" = "errore di autorizzazione";
+"auto" = "Auto";
 "available_in_app_store" = "disponibile su App Store";
 "avocado" = "avocado";
 "ball" = "Palla";
+"black" = "Buio";
 "blue_lagoon" = "Laguna Blu";
 "bottle" = "Bottiglia";
 "buy" = "Acquista";
@@ -222,6 +224,7 @@
 "teams" = "Squadre";
 "terminal" = "terminale";
 "terms" = "condizioni";
+"theme" = "Tema";
 "thursday" = "giovedì";
 "time" = "Tempo";
 "to" = "prima";
@@ -237,6 +240,7 @@
 "violet_lemon" = "Viola-limone";
 "walk" = "Passeggiata";
 "wednesday" = "Mercoledì";
+"white" = "Luminosa";
 "yes" = "Sì";
 "yes_or_no" = "Sì o no";
 "crack_time" = "tempo di crepa";

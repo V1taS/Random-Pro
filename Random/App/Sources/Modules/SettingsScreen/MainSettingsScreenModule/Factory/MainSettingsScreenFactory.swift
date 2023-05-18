@@ -37,13 +37,20 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
     DispatchQueue.global(qos: .userInitiated).async {
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
+      
+      let startSegmentIndex = {
+        guard let darkMode = isDarkMode else {
+          return 0
+        }
 
-     // tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors:
+        return darkMode ? 1 : 2
+      }()
+
       tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(squircleBGColors: [RandomColor.only.primaryBlue,
-                                                                                 RandomColor.only.primaryBlue],
-                                                              leftSideImageSystemName: appearance.darkThemeImageSystemName,
-                                                              title: appearance.darkThemeTitle,
-                                                              isEnabled: isDarkMode))
+                                                                                           RandomColor.only.primaryBlue],
+                                                                        leftSideImageSystemName: appearance.darkThemeImageSystemName,
+                                                                        title: appearance.darkThemeTitle,
+                                                                        startSelectedSegmentIndex: startSegmentIndex))
       tableViewModels.append(.divider)
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryOrange,
                                                                                       RandomColor.only.primaryOrange],
@@ -74,10 +81,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
 
 private extension MainSettingsScreenFactory {
   struct Appearance {
-   // let darkThemeImageSystemName = "switch.2"
     let darkThemeImageSystemName = "paintbrush.fill"
-    let darkThemeTitle = "Тема" // пока зафиксил
-    //let darkThemeTitle = RandomStrings.Localizable.darkTheme
+    let darkThemeTitle = RandomStrings.Localizable.theme
     
     let customMainSectionsImageSystemName = "rectangle.grid.2x2"
     let customMainSectionsTitle = RandomStrings.Localizable.sectionSettings

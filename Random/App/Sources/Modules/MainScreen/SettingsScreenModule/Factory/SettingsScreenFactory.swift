@@ -97,7 +97,10 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.divider)
       }
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case let .coin(itemsGenerated, lastItem):
+    case let .coin(isShowlistGenerated, itemsGenerated, lastItem):
+      tableViewModels.append(.titleAndSwitcher(title: appearance.numberOfGenerations,
+                                               isEnabled: isShowlistGenerated))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)

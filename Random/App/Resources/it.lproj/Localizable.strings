@@ -241,3 +241,6 @@
 "yes_or_no" = "Sì o no";
 "save" = "Mantenere";
 "changeTeamName" = "Inserisci un nuovo nome di squadra";
+"crack_time" = "tempo di crepa";
+"centuries" = "secoli";
+"at_least_4_characters_for_password" = "La password è troppo breve. Minimo 4 caratteri richiesti.";

@@ -19,11 +19,17 @@ protocol PasswordScreenInteractorOutput: AnyObject {
   ///  - Parameter model: результат генерации
   func didReceive(model: PasswordScreenModel)
   
-  /// Была получена ошибка
-  func didReceiveError()
+  /// Была получена ошибка из-за слишком короткой длины пароля
+  func didReceiveErrorWithCountOfCharacters()
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Было получено время взлома  и силу пароля в слайдере
+  /// - Parameters:
+  ///  - text: Текст с количеством дней
+  ///  - strengthValue: Сила пароля
+  func didReceiveCrackTime(text: String, strengthValue: Float)
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -62,6 +68,10 @@ protocol PasswordScreenInteractorInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  /// Расчитать время взлома пароля
+  /// - Parameter password: Пароль
+  func calculateCrackTime(password: String)
 }
 
 final class PasswordScreenInteractor: PasswordScreenInteractorInput {
@@ -211,7 +221,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       let model = storageService.passwordScreenModel,
       let passwordLengthInt = Int((passwordLength ?? "").replacingOccurrences(of: Appearance().withoutSpaces, with: ""))
     else {
-      output?.didReceiveError()
+      output?.didReceiveErrorWithCountOfCharacters()
       return
     }
     
@@ -282,19 +292,114 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
     output?.didReceive(model: newModel)
     output?.cleanButtonWasSelected()
   }
+  
+  func calculateCrackTime(password: String) {
+    calculateCrackTime(password: password) { [weak self] result in
+      let countTimeText: String
+      let strengthValue: Float
+      
+      switch result {
+      case let .days(value):
+        countTimeText = RandomStrings.Localizable.daysCount(value)
+        strengthValue = Float.random(in: 0.1...0.2)
+      case let .months(value):
+        countTimeText = RandomStrings.Localizable.monthsCount(value)
+        strengthValue = Float.random(in: 0.2...0.4)
+      case let .years(value):
+        countTimeText = RandomStrings.Localizable.yearsCount(value)
+        if value < 5 {
+          strengthValue = Float.random(in: 0.4...0.6)
+        } else if value > 5 && value < 10 {
+          strengthValue = Float.random(in: 0.6...0.8)
+        } else {
+          strengthValue = 1
+        }
+      case let .centuries(value):
+        countTimeText = RandomStrings.Localizable.centuryCount(value)
+        strengthValue = 1
+      case let .overmuch(value):
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        let formattedValue = (formatter.string(from: NSNumber(value: value))) ?? ""
+        countTimeText = "\(formattedValue) \(RandomStrings.Localizable.centuries)"
+        strengthValue = 1
+      }
+      
+      let replacedCommaTimeText = countTimeText.replacingOccurrences(of: ",", with: " ")
+      let replacedDashTimeText = replacedCommaTimeText.replacingOccurrences(of: "-", with: "")
+      let crackTimeText = "\(RandomStrings.Localizable.crackTime): \n\(replacedDashTimeText)"
+      self?.output?.didReceiveCrackTime(text: crackTimeText, strengthValue: strengthValue)
+    }
+  }
 }
 
 // MARK: - Private
 
 private extension PasswordScreenInteractor {
+  func calculateCrackTime(password: String, completion: @escaping (PasswordScreenCrackTimeType) -> Void) {
+    DispatchQueue.global(qos: .userInteractive).async {
+      let passwordLength = Double(password.count)
+      // количество уникальных символов в пароле
+      var charsetSize = Double(Set(password).count)
+      // средняя скорость взлома
+      let attemptsPerSecond = 10_000_000.0
+      
+      // Проверка на наличие различных типов символов
+      let hasLowercase = password.rangeOfCharacter(from: .lowercaseLetters)
+      let hasUppercase = password.rangeOfCharacter(from: .uppercaseLetters)
+      let hasDigits = password.rangeOfCharacter(from: .decimalDigits)
+      let hasSpecialCharacters = password.rangeOfCharacter(from: CharacterSet.alphanumerics.inverted)
+      
+      // Увеличиваем общее количество символов на основе этих критериев
+      if hasLowercase != nil { charsetSize += 26 }
+      if hasUppercase != nil { charsetSize += 26 }
+      if hasDigits != nil { charsetSize += 10 }
+      // предполагаем, что доступно 32 специальных символа
+      if hasSpecialCharacters != nil { charsetSize += 32 }
+      let possibleCombinations = pow(charsetSize, passwordLength)
+      let seconds = possibleCombinations / attemptsPerSecond
+      let days = seconds / (60 * 60 * 24)
+      
+      DispatchQueue.main.async {
+        if days <= 30 {
+          completion(.days(lround(days)))
+        } else {
+          
+          let months = days / 30
+          if months <= 12 {
+            completion(.months(lround(months)))
+          } else {
+            let years = months / 12
+            if years > 1_000_000 {
+              let centuries = years / 100
+              if centuries > 922_337_203_685_477 {
+                completion(.overmuch(lround(centuries)))
+              } else {
+                completion(.centuries(lround(centuries)))
+              }
+            } else {
+              completion(.years(lround(years)))
+            }
+          }
+        }
+      }
+    }
+  }
+  
   func generatePassword(capitalLetters: Bool,
                         numbers: Bool,
                         lowerCase: Bool,
                         symbols: Bool,
                         passwordLength: Int,
                         completion: @escaping (String) -> Void) {
-    DispatchQueue.global(qos: .userInteractive).async {
-      guard passwordLength >= 4 else { return }
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      guard passwordLength >= 4 else {
+        DispatchQueue.main.async {
+          self?.output?.didReceiveErrorWithCountOfCharacters()
+        }
+        return
+      }
       
       var resultCharacters: [Character] = []
       
@@ -380,6 +485,6 @@ private extension PasswordScreenInteractor {
   struct Appearance {
     let withoutSpaces = " "
     let resultLabel = "?"
-    let passwordLength = "100"
+    let passwordLength = "7"
   }
 }

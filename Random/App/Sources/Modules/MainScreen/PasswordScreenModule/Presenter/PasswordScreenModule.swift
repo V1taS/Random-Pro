@@ -11,8 +11,8 @@ import UIKit
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PasswordScreenModuleOutput: AnyObject {
   
-  /// Была получена ошибка
-  func didReceiveError()
+  /// Была получена ошибка из-за слишком короткой длины пароля
+  func didReceiveErrorWithCountOfCharacters()
   
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
@@ -105,6 +105,10 @@ final class PasswordScreenViewController: PasswordScreenModule {
 // MARK: - PasswordScreenViewOutput
 
 extension PasswordScreenViewController: PasswordScreenViewOutput {
+  func calculateCrackTime(password: String) {
+    interactor.calculateCrackTime(password: password)
+  }
+  
   func generateButtonAction(passwordLength: String?) {
     interactor.generateButtonAction(passwordLength: passwordLength)
   }
@@ -145,12 +149,16 @@ extension PasswordScreenViewController: PasswordScreenFactoryOutput {}
 // MARK: - PasswordScreenInteractorOutput
 
 extension PasswordScreenViewController: PasswordScreenInteractorOutput {
+  func didReceiveCrackTime(text: String, strengthValue: Float) {
+    moduleView.updateCrackTime(text: text, strengthValue: strengthValue)
+  }
+  
   func cleanButtonWasSelected() {
     moduleOutput?.cleanButtonWasSelected()
   }
   
-  func didReceiveError() {
-    moduleOutput?.didReceiveError()
+  func didReceiveErrorWithCountOfCharacters() {
+    moduleOutput?.didReceiveErrorWithCountOfCharacters()
   }
   
   func didReceive(model: PasswordScreenModel) {

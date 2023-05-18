@@ -241,3 +241,6 @@
 "yes_or_no" = "Sí o No";
 "save" = "Guardar";
 "changeTeamName" = "Introduzca un nuevo nombre de equipo";
+"crack_time" = "tiempo de crack";
+"centuries" = "siglos";
+"at_least_4_characters_for_password" = "La contraseña es demasiado corta. Mínimo 4 caracteres requeridos.";

@@ -16,8 +16,10 @@ protocol TeamsScreenViewOutput: AnyObject {
   func updateTeams(count: Int)
     
   /// Показать алерт для обновления названия команды
-  ///  - Parameter oldName: старое название команды
-    func showAlert(oldName: String)
+  /// - Parameters:
+  ///  - id: id команды
+  ///  - oldName: старое название команды
+    func showAlert(id: String, oldName: String)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -107,7 +109,6 @@ extension TeamsScreenView: UICollectionViewDelegate {
       for: indexPath) as? CustomDoubleTextHeaderCollectionCell else {
       return UICollectionReusableView()
     }
-#warning("Update Name Team View")
     let model = models[indexPath.section]
     headerView.configureCellWith(
       primaryText: model.name,
@@ -116,7 +117,7 @@ extension TeamsScreenView: UICollectionViewDelegate {
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: RandomColor.darkAndLightTheme.secondaryGray,
       secondaryTextFont: RandomFont.primaryRegular18) {
-        self.output?.showAlert(oldName: model.name)
+        self.output?.showAlert(id: model.id, oldName: model.name)
       }
     headerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     return headerView

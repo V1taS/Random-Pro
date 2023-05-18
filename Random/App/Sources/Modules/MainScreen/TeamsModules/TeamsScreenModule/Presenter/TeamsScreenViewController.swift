@@ -24,6 +24,11 @@ protocol TeamsScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   ///  - Parameter imageData: Изображение контента
   func shareButtonAction(imageData: Data?)
+  
+  /// - Parameters:
+  ///   - idTeam: id команды
+  ///   - oldName: старое название команды
+  func showTeamRenameAlert(idTeam: String, oldName: String)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -50,6 +55,9 @@ protocol TeamsScreenModuleInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  ///  Событие, кнопка `Сохранить` была нажата
+  func renameTeamAlertAction(id: String, newName: String)
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: TeamsScreenModuleOutput? { get set }
@@ -144,6 +152,10 @@ final class TeamsScreenViewController: TeamsScreenModule {
   func cleanButtonAction() {
     interactor.cleanButtonAction()
   }
+  
+  func renameTeamAlertAction(id: String, newName: String) {
+    interactor.updateNameTeam(id: id, newName: newName)
+  }
 }
 
 // MARK: - TeamsScreenViewOutput
@@ -153,27 +165,8 @@ extension TeamsScreenViewController: TeamsScreenViewOutput {
     interactor.updateTeams(count: count)
   }
   
-#warning("Update Name Team Presenter")
-  func showAlert(oldName: String) {
-    let alertController = UIAlertController(title: "Change team's name", message: "", preferredStyle: .alert)
-    alertController.addTextField { (textField: UITextField!) -> Void in
-      textField.text = oldName
-    }
-    let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ in
-      if let textField = alertController.textFields?[0] {
-        guard let newName = textField.text else { return }
-        if newName.isEmpty {
-          alertController.dismiss(animated: false)
-        } else {
-          self.updateNameTeam(oldName: oldName, newName: newName)
-        }
-      }
-    })
-    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-    alertController.addAction(cancelAction)
-    alertController.addAction(saveAction)
-    alertController.preferredAction = saveAction
-    self.present(alertController, animated: true, completion: nil)
+  func showAlert(id: String, oldName: String) {
+    moduleOutput?.showTeamRenameAlert(idTeam: id, oldName: oldName)
   }
 }
 
@@ -259,9 +252,9 @@ private extension TeamsScreenViewController {
     impactFeedback.impactOccurred()
   }
   
-  func updateNameTeam(oldName: String, newName: String) {
-    self.interactor.updateNameTeam(oldName: oldName, newName: newName)
-  }
+//  func updateNameTeam(id: String, newName: String) {
+//    self.interactor.updateNameTeam(id: id, newName: newName)
+//  }
 }
 
 // MARK: - Appearance

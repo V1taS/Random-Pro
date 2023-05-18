@@ -38,9 +38,9 @@ protocol TeamsScreenInteractorInput {
   
   /// Обновить наименование команды
   /// - Parameters:
-  ///   - oldName: Старое название команды
+  ///   - id: id команды
   ///   - newName: Новое название команды
-  func updateNameTeam(oldName: String, newName: String)
+  func updateNameTeam(id: String, newName: String)
   
   /// Обновить список команд
   ///  - Parameter teams: Список команд
@@ -120,7 +120,8 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
                                       state: playersTeam.state,
                                       style: stylePlayerCard)
       }
-      return TeamsScreenModel.Team(name: team.name,
+      return TeamsScreenModel.Team(id: team.id,
+                                   name: team.name,
                                    players: playersTeam)
     }
     
@@ -144,27 +145,28 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
     )
     self.storageService.teamsScreenModel = newModel
   }
-  #warning("Update Name Team Interactor")
-    func updateNameTeam(oldName: String, newName: String) {
-      guard let model = storageService.teamsScreenModel else {
-        return
-      }
-      var newMod: [TeamsScreenModel.Team] = []
-      model.teams.forEach {
-        if $0.name == oldName {
-          let new = TeamsScreenModel.Team(name: newName,
-                                          players: $0.players)
-          newMod.append(new)
-        } else {
-          newMod.append($0)
-        }
-      }
-      let newModel = TeamsScreenModel(selectedTeam: model.selectedTeam,
-                                 allPlayers: model.allPlayers,
-                                 teams: newMod)
-      print("!!!!!!!!!!newModel", newModel)
-      self.storageService.teamsScreenModel = newModel
+  
+  func updateNameTeam(id: String, newName: String) {
+    guard let model = storageService.teamsScreenModel else {
+      return
     }
+    var newMod: [TeamsScreenModel.Team] = []
+    model.teams.forEach {
+      if $0.id == id {
+        let new = TeamsScreenModel.Team(id: $0.id,
+                                        name: newName,
+                                        players: $0.players)
+        newMod.append(new)
+      } else {
+        newMod.append($0)
+      }
+    }
+    let newModel = TeamsScreenModel(selectedTeam: model.selectedTeam,
+                                    allPlayers: model.allPlayers,
+                                    teams: newMod)
+    self.storageService.teamsScreenModel = newModel
+    self.output?.didReceive(model: newModel)
+  }
   
   func updateList(teams: [TeamsScreenModel.Team]) {
     guard let model = storageService.teamsScreenModel else {

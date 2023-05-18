@@ -100,6 +100,32 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
       generatedPlayersCount: "\(teamsScreenModule?.returnGeneratedCountPlayers() ?? .zero)"
     ))
   }
+  
+  func showTeamRenameAlert(idTeam: String, oldName: String) {
+    let appearance = Appearance()
+    let alert = UIAlertController(title: appearance.changeTeamName,
+                                  message: "",
+                                  preferredStyle: .alert)
+    alert.addTextField { (textField: UITextField!) -> Void in
+      textField.text = oldName
+    }
+    alert.addAction(UIAlertAction(title: appearance.cancel,
+                                  style: .cancel,
+                                  handler: { _ in }))
+    alert.addAction(UIAlertAction(title: appearance.save,
+                                  style: .default,
+                                  handler: { [weak self] _ in
+      if let textField = alert.textFields?[0] {
+        guard let newName = textField.text else { return }
+        if newName.isEmpty {
+          alert.dismiss(animated: false)
+        } else {
+          self?.teamsScreenModule?.renameTeamAlertAction(id: idTeam, newName: newName)
+        }
+      }
+    }))
+    teamsScreenModule?.present(alert, animated: true, completion: nil)
+  }
 }
 
 // MARK: - SettingsScreenCoordinatorOutput
@@ -157,5 +183,8 @@ extension TeamsScreenCoordinator: ShareScreenCoordinatorOutput {}
 private extension TeamsScreenCoordinator {
   struct Appearance {
     let addPlayersTitle = RandomStrings.Localizable.addPlayers
+    let changeTeamName = RandomStrings.Localizable.changeTeamName
+    let save = RandomStrings.Localizable.save
+    let cancel = RandomStrings.Localizable.cancel
   }
 }

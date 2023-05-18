@@ -66,7 +66,7 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
 
 private extension NickNameScreenView {
   func configureLayout() {
-    let appearance = Appearance()
+//    let appearance = Appearance()
     
     [resultLabel, inscriptionsSegmentedControl, generateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
@@ -74,16 +74,24 @@ private extension NickNameScreenView {
     }
     
     NSLayoutConstraint.activate([
-      resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                           constant: 16),
+      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                            constant: -16),
       
-      inscriptionsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      inscriptionsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+      inscriptionsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                            constant: 16),
+      inscriptionsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                             constant: -16),
       inscriptionsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       
-      generateButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-      generateButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
+      generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                              constant: 16),
+      generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                               constant: -16),
+      generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                             constant: -16),
     ])
   }
   
@@ -91,9 +99,10 @@ private extension NickNameScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
+    resultLabel.numberOfLines = 2
     resultLabel.text = "?"
     
     inscriptionsSegmentedControl.insertSegment(withTitle: appearance.shortTitle,

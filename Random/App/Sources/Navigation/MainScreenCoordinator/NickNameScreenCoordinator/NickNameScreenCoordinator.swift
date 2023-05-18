@@ -8,7 +8,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol NickNameScreenCoordinatorOutput: AnyObject {}
+protocol NickNameScreenCoordinatorOutput: AnyObject {
+  
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol NickNameScreenCoordinatorInput {
@@ -29,6 +33,7 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
   private let services: ApplicationServices
   private var nickNameScreenModule: NickNameScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
+  private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -45,7 +50,6 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
   
   func start() {
     var nickNameScreenModule = NickNameScreenAssembly().createModule(services: services)
-    
     self.nickNameScreenModule = nickNameScreenModule
     nickNameScreenModule.moduleOutput = self
     navigationController.pushViewController(nickNameScreenModule, animated: true)
@@ -55,7 +59,11 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
 // MARK: - NickNameScreenModuleOutput
 
 extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
-  func cleanButtonWasSelected() {}
+  func cleanButtonWasSelected() {
+    let model = nickNameScreenModule?.returnCurrentModel()
+    settingsScreenCoordinator?.setupDefaultsSettings(for: .nickname(itemsGenerated: "\(model?.listResult.count ?? .zero)",
+                                                                    lastItem: model?.result ?? ""))
+  }
   
   func settingButtonAction(model: NickNameScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
@@ -63,8 +71,19 @@ extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
     
-    settingsScreenCoordinator.setupDefaultsSettings(for: .nickname(result: model.result,
-                                                                   indexSegmented: model.indexSegmented))
+    settingsScreenCoordinator.setupDefaultsSettings(
+      for: .nickname(itemsGenerated: "\(model.listResult.count)",
+                     lastItem: model.result)
+    )
+  }
+  
+  func resultCopied(text: String) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
   }
 }
 
@@ -73,9 +92,32 @@ extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
 extension NickNameScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
   
-  func cleanButtonAction() {}
+  func cleanButtonAction() {
+    nickNameScreenModule?.cleanButtonAction()
+  }
   
-  func listOfObjectsAction() {}
+  func listOfObjectsAction() {
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    self.listResultScreenCoordinator = listResultScreenCoordinator
+    self.listResultScreenCoordinator?.output = self
+    self.listResultScreenCoordinator?.start()
+    
+    listResultScreenCoordinator.setContentsFrom(list: nickNameScreenModule?.returnCurrentModel().listResult ?? [])
+  }
   
-  func updateStateForSections() {}
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+}
+
+// MARK: - ListResultScreenCoordinatorOutput
+
+extension NickNameScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
+// MARK: - Appearance
+
+private extension NickNameScreenCoordinator {
+  struct Appearance {
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
+  }
 }

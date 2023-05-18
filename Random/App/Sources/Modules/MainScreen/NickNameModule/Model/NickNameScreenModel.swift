@@ -13,12 +13,6 @@ struct NickNameScreenModel: UserDefaultsCodable {
   /// Результат генерации
   let result: String
   
-  /// Индекс выбранной ячейки
-  let indexSegmented: Int
-  
   /// Список результатов
   let listResult: [String]
-  
-  /// Без повторений
-  let isEnabledWithoutRepetition: Bool
 }

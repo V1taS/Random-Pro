@@ -16,6 +16,10 @@ protocol NickNameScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Результат скопирован
+  ///  - Parameter text: Результат генерации
+  func resultCopied(text: String)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -81,16 +85,18 @@ final class NickNameScreenViewController: NickNameScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     setNavigationBar()
-    
+
     // TODO: - Запускаешь лоадер
     // TODO: - Запрашиваешь данные
     interactor.getContent()
-    
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
   // MARK: - Internal func
 
-  func cleanButtonAction() {}
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
+  }
   
   func returnCurrentModel() -> NickNameScreenModel {
     interactor.returnCurrentModel()
@@ -112,8 +118,13 @@ extension NickNameScreenViewController: NickNameScreenViewOutput {
 // MARK: - NickNameScreenInteractorOutput
 
 extension NickNameScreenViewController: NickNameScreenInteractorOutput {
+  func cleanButtonWasSelected() {
+    moduleOutput?.cleanButtonWasSelected()
+  }
+  
   func didReceive(nick: String?) {
     moduleView.set(result: nick)
+    copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
   func contentLoadedSuccessfully() {
@@ -143,7 +154,10 @@ private extension NickNameScreenViewController {
   }
   
   @objc
-  func copyButtonAction() {}
+  func copyButtonAction() {
+    moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
+    impactFeedback.impactOccurred()
+  }
   
   @objc
   func settingButtonAction() {

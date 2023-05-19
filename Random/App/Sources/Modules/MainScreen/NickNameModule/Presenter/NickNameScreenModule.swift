@@ -86,9 +86,9 @@ final class NickNameScreenViewController: NickNameScreenModule {
     super.viewDidLoad()
     setNavigationBar()
 
-    // TODO: - Запускаешь лоадер
-    // TODO: - Запрашиваешь данные
+    startLoader()
     interactor.getContent()
+    contentLoadedSuccessfully()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
@@ -118,6 +118,14 @@ extension NickNameScreenViewController: NickNameScreenViewOutput {
 // MARK: - NickNameScreenInteractorOutput
 
 extension NickNameScreenViewController: NickNameScreenInteractorOutput {
+  func startLoader() {
+    moduleView.startLoader()
+  }
+  
+  func stopLoader() {
+    moduleView.stopLoader()
+  }
+  
   func cleanButtonWasSelected() {
     moduleOutput?.cleanButtonWasSelected()
   }
@@ -128,7 +136,7 @@ extension NickNameScreenViewController: NickNameScreenInteractorOutput {
   }
   
   func contentLoadedSuccessfully() {
-    // TODO: - Останавливаем лоадер
+    moduleView.stopLoader()
   }
 }
 

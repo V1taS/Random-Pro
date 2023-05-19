@@ -19,6 +19,12 @@ protocol NickNameScreenInteractorOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Запустить доадер
+  func startLoader()
+  
+  /// Остановить лоадер
+  func stopLoader()
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -64,14 +70,12 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   
   func getContent() {
     // TODO: - Сделать запрос в сеть для получения списка ников
-    //    sleep(3)
+        sleep(3)
     let someArray = ["Пьяная белка", "Ангел-Предохранитель", "[SуперМэнка]", "Йожик", "ZEFIRKA:)", "Apple", "кот",
                      "милое олицетворение зла", "your_problem", "Blackkiller", "!B-DOG!", "!Dead|LeGioN| Бабушка",
-                     "Darya", "ChupaChups", "CHLENIX|ON", "Ты", "Swit", "Pig"]
+                     "Darya", "ChupaChupssssssssss", "CHLENIX|ON", "Ты", "Swit", "Pig"]
     
     casheNicks = someArray
-    output?.contentLoadedSuccessfully()
-    
     if let model = storageService.nickNameScreenModel {
       output?.didReceive(nick: model.result)
     } else {
@@ -85,6 +89,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   }
   
   func generateShortButtonAction() {
+    output?.startLoader()
     var filterArray = casheNicks.filter { $0.count <= 6 }
     filterArray.shuffle()
     let result = filterArray.first ?? ""
@@ -98,6 +103,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
       
       storageService.nickNameScreenModel = newModel
       output?.didReceive(nick: result)
+      output?.stopLoader()
     } else {
       let newModel = NickNameScreenModel(result: result,
                                          listResult: [result])
@@ -106,7 +112,24 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   }
   
   func generatePopularButtonAction() {
-    output?.didReceive(nick: casheNicks.shuffled().first)
+    output?.startLoader()
+    var result = casheNicks.shuffled().first ?? ""
+
+    if let model = storageService.nickNameScreenModel {
+      var currentListResult = model.listResult
+      currentListResult.append(result)
+      
+      let newModel = NickNameScreenModel(result: result,
+                                         listResult: currentListResult)
+      
+      storageService.nickNameScreenModel = newModel
+      output?.didReceive(nick: result)
+      output?.stopLoader()
+    } else {
+      let newModel = NickNameScreenModel(result: result,
+                                         listResult: [result])
+      storageService.nickNameScreenModel = newModel
+    }
   }
 
   func returnCurrentModel() -> NickNameScreenModel {

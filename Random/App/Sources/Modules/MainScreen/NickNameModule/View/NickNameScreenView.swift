@@ -7,6 +7,7 @@
 
 import UIKit
 import RandomUIKit
+import Lottie
 
 /// События которые отправляем из View в Presenter
 protocol NickNameScreenViewOutput: AnyObject {
@@ -24,6 +25,12 @@ protocol NickNameScreenViewInput {
   /// Устанавливаем данные в result
   ///  - Parameter result: результат генерации
   func set(result: String?)
+  
+  /// Запустить доадер
+  func startLoader()
+  
+  /// Остановить лоадер
+  func stopLoader()
 }
 
 /// Псевдоним протокола UIView & NickNameScreenViewInput
@@ -41,6 +48,7 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
   private let resultLabel = UILabel()
   private let inscriptionsSegmentedControl = UISegmentedControl()
   private let generateButton = ButtonView()
+  private let activityIndicator = LottieAnimationView(name: Appearance().loaderImage)
   
   // MARK: - Initialization
   
@@ -60,15 +68,25 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
   func set(result: String?) {
     resultLabel.text = result
   }
+  
+  func startLoader() {
+    activityIndicator.isHidden = false
+    activityIndicator.play()
+  }
+  
+  func stopLoader() {
+    activityIndicator.isHidden = true
+    activityIndicator.stop()
+  }
 }
 
 // MARK: - Private
 
 private extension NickNameScreenView {
   func configureLayout() {
-//    let appearance = Appearance()
+    let appearance = Appearance()
     
-    [resultLabel, inscriptionsSegmentedControl, generateButton].forEach {
+    [resultLabel, inscriptionsSegmentedControl, generateButton, activityIndicator].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -76,22 +94,26 @@ private extension NickNameScreenView {
     NSLayoutConstraint.activate([
       resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: 16),
+                                           constant: appearance.defaultInset),
       resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -16),
+                                            constant: -appearance.defaultInset),
       
       inscriptionsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                            constant: 16),
+                                                            constant: appearance.defaultInset),
       inscriptionsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                             constant: -16),
+                                                             constant: -appearance.defaultInset),
       inscriptionsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: 16),
+                                              constant: appearance.defaultInset),
       generateButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -16),
+                                               constant: -appearance.defaultInset),
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -16),
+                                             constant: -appearance.defaultInset),
+      
+      activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+      activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+      activityIndicator.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5)
     ])
   }
   
@@ -102,8 +124,7 @@ private extension NickNameScreenView {
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
-    resultLabel.numberOfLines = 2
-    resultLabel.text = "?"
+    resultLabel.numberOfLines = 3
     
     inscriptionsSegmentedControl.insertSegment(withTitle: appearance.shortTitle,
                                          at: appearance.shortTitleIndex, animated: false)
@@ -113,6 +134,11 @@ private extension NickNameScreenView {
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    
+    activityIndicator.isHidden = true
+    activityIndicator.contentMode = .scaleAspectFit
+    activityIndicator.loopMode = .loop
+    activityIndicator.animationSpeed = Appearance().animationSpeed
   }
   
   @objc func generateButtonAction() {
@@ -138,6 +164,9 @@ private extension NickNameScreenView {
     let shortTitleIndex = 0
     let popularTitle = "Популярный"
     let popularTitleIndex = 1
-    let buttonTitle = "Сгенерировать"
+    let buttonTitle = RandomStrings.Localizable.generate
+    let loaderImage = RandomAsset.filmsLoader.name
+    let animationSpeed: CGFloat = 0.5
+    let defaultInset: CGFloat = 16
   }
 }

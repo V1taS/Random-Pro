@@ -17,9 +17,9 @@ protocol TeamsScreenViewOutput: AnyObject {
     
   /// Показать алерт для обновления названия команды
   /// - Parameters:
-  ///  - id: id команды
-  ///  - oldName: старое название команды
-    func showAlert(id: String, oldName: String)
+  ///   - name: название команды
+  ///   - id: id команды
+    func showAlert(name: String, id: String)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -27,8 +27,8 @@ protocol TeamsScreenViewInput {
   
   /// Обновить контент
   /// - Parameters:
-  ///  - models: Список команд
-  ///  - teamsCount: Количество команд
+  ///   - models: Список команд
+  ///   - teamsCount: Количество команд
   func updateContentWith(models: [TeamsScreenModel.Team], teamsCount: Int)
   
   /// Показать заглушка
@@ -116,8 +116,9 @@ extension TeamsScreenView: UICollectionViewDelegate {
       primaryTextFont: RandomFont.primaryBold18,
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: RandomColor.darkAndLightTheme.secondaryGray,
-      secondaryTextFont: RandomFont.primaryRegular18) {
-        self.output?.showAlert(id: model.id, oldName: model.name)
+      secondaryTextFont: RandomFont.primaryRegular18,
+      editImage: UIImage(systemName: "pencil")) {
+        self.output?.showAlert(name: model.name, id: model.id)
       }
     headerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     return headerView

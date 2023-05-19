@@ -38,9 +38,9 @@ protocol TeamsScreenInteractorInput {
   
   /// Обновить наименование команды
   /// - Parameters:
+  ///   - name: новое название команды
   ///   - id: id команды
-  ///   - newName: Новое название команды
-  func updateNameTeam(id: String, newName: String)
+  func updateNameTeam(name: String, id: String)
   
   /// Обновить список команд
   ///  - Parameter teams: Список команд
@@ -146,24 +146,24 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
     self.storageService.teamsScreenModel = newModel
   }
   
-  func updateNameTeam(id: String, newName: String) {
+  func updateNameTeam(name: String, id: String) {
     guard let model = storageService.teamsScreenModel else {
       return
     }
-    var newMod: [TeamsScreenModel.Team] = []
+    var listTeams: [TeamsScreenModel.Team] = []
     model.teams.forEach {
       if $0.id == id {
-        let new = TeamsScreenModel.Team(id: $0.id,
-                                        name: newName,
+        let teamWithNewName = TeamsScreenModel.Team(id: $0.id,
+                                        name: name,
                                         players: $0.players)
-        newMod.append(new)
+        listTeams.append(teamWithNewName)
       } else {
-        newMod.append($0)
+        listTeams.append($0)
       }
     }
     let newModel = TeamsScreenModel(selectedTeam: model.selectedTeam,
                                     allPlayers: model.allPlayers,
-                                    teams: newMod)
+                                    teams: listTeams)
     self.storageService.teamsScreenModel = newModel
     self.output?.didReceive(model: newModel)
   }

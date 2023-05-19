@@ -85,8 +85,8 @@ extension PasswordScreenCoordinator: PasswordScreenModuleOutput {
                                                        active: {})
   }
   
-  func didReceiveError() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+  func didReceiveErrorWithCountOfCharacters() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().atLeastFourCharactersForPassword,
                                                        glyph: true,
                                                        timeout: nil,
                                                        active: {})
@@ -124,7 +124,7 @@ extension PasswordScreenCoordinator: ListResultScreenCoordinatorOutput {}
 
 private extension PasswordScreenCoordinator {
   struct Appearance {
-    let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
+    let atLeastFourCharactersForPassword = RandomStrings.Localizable.atLeast4CharactersForPassword
     let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

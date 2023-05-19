@@ -106,6 +106,7 @@
 "last_generation" = "Última generación";
 "length_of_password" = "Introduzca la longitud de la contraseña";
 "letter" = "Letra";
+"light" = "Luminosa";
 "list" = "Lista";
 "list_of_cubes" = "lista de dados";
 "list_of_elements_empty" = "la Lista de elementos está vacía";
@@ -240,7 +241,6 @@
 "violet_lemon" = "violeta-limón";
 "walk" = "caminar";
 "wednesday" = "Miércoles";
-"white" = "Luminosa";
 "yes" = "Sí";
 "yes_or_no" = "Sí o No";
 "crack_time" = "tiempo de crack";

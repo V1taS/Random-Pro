@@ -106,6 +106,7 @@
 "last_generation" = "Letzte Generation";
 "length_of_password" = "Passwortlänge eingeben";
 "letter" = "Buchstabe";
+"light" = "Helle";
 "list" = "Liste";
 "list_of_cubes" = "Liste der Würfel";
 "list_of_elements_empty" = "Die Liste der Elemente ist leer";
@@ -240,7 +241,6 @@
 "violet_lemon" = "Violett-Zitrone";
 "walk" = "Spaziergang";
 "wednesday" = "Mittwoch";
-"white" = "Helle";
 "yes" = "Ja";
 "yes_or_no" = "Ja oder Nein";
 "crack_time" = "Crack-Zeit";

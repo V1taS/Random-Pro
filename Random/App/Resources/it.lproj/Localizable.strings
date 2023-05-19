@@ -106,6 +106,7 @@
 "last_generation" = "ultima generazione";
 "length_of_password" = "Inserisci la lunghezza della password";
 "letter" = "lettera";
+"light" = "Luminosa";
 "list" = "Elenco";
 "list_of_cubes" = "elenco dei dadi";
 "list_of_elements_empty" = "L'elenco degli elementi è vuoto";
@@ -240,7 +241,6 @@
 "violet_lemon" = "Viola-limone";
 "walk" = "Passeggiata";
 "wednesday" = "Mercoledì";
-"white" = "Luminosa";
 "yes" = "Sì";
 "yes_or_no" = "Sì o no";
 "crack_time" = "tempo di crepa";

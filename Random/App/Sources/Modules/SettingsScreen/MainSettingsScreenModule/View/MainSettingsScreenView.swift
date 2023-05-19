@@ -283,6 +283,5 @@ private extension MainSettingsScreenView {
 
     let systemTheme = RandomStrings.Localizable.auto
     let blackTheme = RandomStrings.Localizable.black
-    let whiteTheme = RandomStrings.Localizable.white
-  }
+    let whiteTheme = RandomStrings.Localizable.light  }
 }

@@ -106,6 +106,7 @@
 "last_generation" = "Последняя генерация";
 "length_of_password" = "Введите длину пароля";
 "letter" = "Буква";
+"light" = "Cветлая";
 "list" = "Список";
 "list_of_cubes" = "Список кубиков";
 "list_of_elements_empty" = "Список элементов пуст";
@@ -240,7 +241,6 @@
 "violet_lemon" = "Фиолотово-лимонный";
 "walk" = "Прогулка";
 "wednesday" = "Среда";
-"white" = "Cветлая";
 "yes" = "Да";
 "yes_or_no" = "Да или Нет";
 "crack_time" = "Время взлома";

@@ -15,7 +15,6 @@
 "available_in_app_store" = "available in the App Store";
 "avocado" = "Avocado";
 "ball" = "Ball";
-"black" = "Black";
 "blue_lagoon" = "Blue lagoon";
 "bottle" = "Bottle";
 "buy" = "Buy";
@@ -47,6 +46,7 @@
 "create_list" = "Create a list";
 "cubes" = "Cubes";
 "customize_app_appearance" = "Change the appearance of the application to your liking";
+"dark" = "Dark";
 "dark_theme" = "Dark theme";
 "date" = "Date";
 "date_and_time" = "Date and time";

@@ -15,7 +15,6 @@
 "available_in_app_store" = "доступна в App Store";
 "avocado" = "Авокадо";
 "ball" = "Мяч";
-"black" = "Темная";
 "blue_lagoon" = "Голубая лагуна";
 "bottle" = "Бутылочка";
 "buy" = "Купить";
@@ -47,6 +46,7 @@
 "create_list" = "Создать список";
 "cubes" = "Кубики";
 "customize_app_appearance" = "Измените внешний вид приложения по своему вкусу";
+"dark" = "Темная";
 "dark_theme" = "Тёмная тема";
 "date" = "Дата";
 "date_and_time" = "Дата и время";

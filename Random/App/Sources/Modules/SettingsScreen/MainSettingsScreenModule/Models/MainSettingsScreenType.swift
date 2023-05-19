@@ -19,7 +19,6 @@ enum MainSettingsScreenType {
   ///  - leftSideImageSystemName: Изображение слева
   ///  - title: Заголовок
   ///  - startSelectedSegmentIndex: Первоначальный индекс выбранного элемента у SelectedControll
-
   case squircleImageAndLabelWithSegmentedControl(squircleBGColors: [UIColor],
                                                  leftSideImageSystemName: String,
                                                  title: String,

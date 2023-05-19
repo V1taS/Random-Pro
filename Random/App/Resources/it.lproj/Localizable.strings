@@ -15,7 +15,6 @@
 "available_in_app_store" = "disponibile su App Store";
 "avocado" = "avocado";
 "ball" = "Palla";
-"black" = "Buio";
 "blue_lagoon" = "Laguna Blu";
 "bottle" = "Bottiglia";
 "buy" = "Acquista";
@@ -47,6 +46,7 @@
 "create_list" = "Crea lista";
 "cubes" = "Cubi";
 "customize_app_appearance" = "cambia l'aspetto dell'app a tuo piacimento";
+"dark" = "Buio";
 "dark_theme" = "Tema scuro";
 "date" = "Data";
 "date_and_time" = "data e ora";

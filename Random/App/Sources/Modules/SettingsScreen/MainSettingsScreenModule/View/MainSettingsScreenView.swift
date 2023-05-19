@@ -282,6 +282,7 @@ private extension MainSettingsScreenView {
     let addressRecipients = "Random_Pro_support@iCloud.com"
 
     let systemTheme = RandomStrings.Localizable.auto
-    let blackTheme = RandomStrings.Localizable.black
-    let whiteTheme = RandomStrings.Localizable.light  }
+    let blackTheme = RandomStrings.Localizable.dark
+    let whiteTheme = RandomStrings.Localizable.light
+  }
 }

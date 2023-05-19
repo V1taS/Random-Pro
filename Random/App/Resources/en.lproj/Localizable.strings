@@ -240,7 +240,7 @@
 "yes" = "Yes";
 "yes_or_no" = "Yes or No";
 "save" = "Save";
-"changeTeamName" = "Enter a new team name";
+"change_team_name" = "Enter a new team name";
 "crack_time" = "Crack time";
 "centuries" = "centuries";
 "at_least_4_characters_for_password" = "The password is too short. Minimum 4 characters required.";

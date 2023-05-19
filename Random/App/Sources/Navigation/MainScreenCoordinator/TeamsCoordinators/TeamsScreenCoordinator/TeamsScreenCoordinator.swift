@@ -101,13 +101,13 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
     ))
   }
   
-  func showTeamRenameAlert(idTeam: String, oldName: String) {
+  func showTeamRenameAlert(name: String, id: String) {
     let appearance = Appearance()
     let alert = UIAlertController(title: appearance.changeTeamName,
                                   message: "",
                                   preferredStyle: .alert)
-    alert.addTextField { (textField: UITextField!) -> Void in
-      textField.text = oldName
+    alert.addTextField { textField in
+      textField.text = name
     }
     alert.addAction(UIAlertAction(title: appearance.cancel,
                                   style: .cancel,
@@ -115,12 +115,12 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
     alert.addAction(UIAlertAction(title: appearance.save,
                                   style: .default,
                                   handler: { [weak self] _ in
-      if let textField = alert.textFields?[0] {
+      if let textField = alert.textFields?.first {
         guard let newName = textField.text else { return }
         if newName.isEmpty {
           alert.dismiss(animated: false)
         } else {
-          self?.teamsScreenModule?.renameTeamAlertAction(id: idTeam, newName: newName)
+          self?.teamsScreenModule?.renameTeamAlertAction(name: newName, id: id)
         }
       }
     }))

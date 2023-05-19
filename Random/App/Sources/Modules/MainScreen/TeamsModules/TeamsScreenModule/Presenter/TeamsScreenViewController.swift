@@ -26,9 +26,9 @@ protocol TeamsScreenModuleOutput: AnyObject {
   func shareButtonAction(imageData: Data?)
   
   /// - Parameters:
-  ///   - idTeam: id команды
-  ///   - oldName: старое название команды
-  func showTeamRenameAlert(idTeam: String, oldName: String)
+  ///   - name: название команды
+  ///   - id: id команды
+  func showTeamRenameAlert(name: String, id: String)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -57,7 +57,10 @@ protocol TeamsScreenModuleInput {
   func cleanButtonAction()
   
   ///  Событие, кнопка `Сохранить` была нажата
-  func renameTeamAlertAction(id: String, newName: String)
+  /// - Parameters:
+  ///   - name: название команды
+  ///   - id: id команды
+  func renameTeamAlertAction(name: String, id: String)
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: TeamsScreenModuleOutput? { get set }
@@ -153,8 +156,8 @@ final class TeamsScreenViewController: TeamsScreenModule {
     interactor.cleanButtonAction()
   }
   
-  func renameTeamAlertAction(id: String, newName: String) {
-    interactor.updateNameTeam(id: id, newName: newName)
+  func renameTeamAlertAction(name: String, id: String) {
+    interactor.updateNameTeam(name: name, id: id)
   }
 }
 
@@ -165,8 +168,8 @@ extension TeamsScreenViewController: TeamsScreenViewOutput {
     interactor.updateTeams(count: count)
   }
   
-  func showAlert(id: String, oldName: String) {
-    moduleOutput?.showTeamRenameAlert(idTeam: id, oldName: oldName)
+  func showAlert(name: String, id: String) {
+    moduleOutput?.showTeamRenameAlert(name: name, id: id)
   }
 }
 
@@ -251,10 +254,6 @@ private extension TeamsScreenViewController {
     moduleOutput?.settingButtonAction(players: interactor.returnListPlayers())
     impactFeedback.impactOccurred()
   }
-  
-//  func updateNameTeam(id: String, newName: String) {
-//    self.interactor.updateNameTeam(id: id, newName: newName)
-//  }
 }
 
 // MARK: - Appearance

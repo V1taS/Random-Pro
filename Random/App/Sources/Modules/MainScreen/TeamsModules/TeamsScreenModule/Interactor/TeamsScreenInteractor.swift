@@ -153,10 +153,10 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
     var listTeams: [TeamsScreenModel.Team] = []
     model.teams.forEach {
       if $0.id == id {
-        let teamWithNewName = TeamsScreenModel.Team(id: $0.id,
-                                        name: name,
-                                        players: $0.players)
-        listTeams.append(teamWithNewName)
+        let teamName = TeamsScreenModel.Team(id: $0.id,
+                                             name: name,
+                                             players: $0.players)
+        listTeams.append(teamName)
       } else {
         listTeams.append($0)
       }

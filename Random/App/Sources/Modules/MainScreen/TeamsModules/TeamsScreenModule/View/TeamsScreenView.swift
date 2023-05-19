@@ -19,7 +19,7 @@ protocol TeamsScreenViewOutput: AnyObject {
   /// - Parameters:
   ///   - name: название команды
   ///   - id: id команды
-    func showAlert(name: String, id: String)
+  func showAlert(name: String, id: String)
 }
 
 /// События которые отправляем от Presenter ко View

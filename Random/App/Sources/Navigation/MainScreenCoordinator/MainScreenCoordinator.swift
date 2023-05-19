@@ -317,7 +317,7 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScr
     mainScreenModule?.updateSectionsWith(models: models)
   }
   
-  func darkThemeChanged(_ isEnabled: Bool) {
+  func applyDarkTheme(_ isEnabled: Bool?) {
     mainScreenModule?.saveDarkModeStatus(isEnabled)
   }
 }

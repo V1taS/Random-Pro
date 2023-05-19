@@ -11,6 +11,7 @@
 "april" = "April";
 "august" = "August";
 "authorization_error" = "error de autorización";
+"auto" = "Auto";
 "available_in_app_store" = "disponible en la App Store";
 "avocado" = "Aguacate";
 "ball" = "Bola";
@@ -45,6 +46,7 @@
 "create_list" = "Crear lista";
 "cubes" = "Cubitos";
 "customize_app_appearance" = "Cambia el aspecto de la aplicación a tu gusto";
+"dark" = "Cerrado";
 "dark_theme" = "Tema oscuro";
 "date" = "fecha";
 "date_and_time" = "fecha y hora";
@@ -104,6 +106,7 @@
 "last_generation" = "Última generación";
 "length_of_password" = "Introduzca la longitud de la contraseña";
 "letter" = "Letra";
+"light" = "Luminosa";
 "list" = "Lista";
 "list_of_cubes" = "lista de dados";
 "list_of_elements_empty" = "la Lista de elementos está vacía";
@@ -222,6 +225,7 @@
 "teams" = "Equipos";
 "terminal" = "Terminal";
 "terms" = "Condiciones";
+"theme" = "Tema";
 "thursday" = "Jueves";
 "time" = "Time";
 "to" = "Antes";

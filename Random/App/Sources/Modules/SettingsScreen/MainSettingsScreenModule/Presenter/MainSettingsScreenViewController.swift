@@ -15,7 +15,7 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   
   /// Тема приложения была изменена
   /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool)
+  func applyDarkTheme(_ isEnabled: Bool?)
   
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
@@ -98,11 +98,10 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   // MARK: - Internal func
   
   func updateContentWith(isDarkTheme: Bool?) {
-    if let result = isDarkTheme {
-      interactor.getContentWith(isDarkMode: result)
-    } else {
-      interactor.getContentWith(isDarkMode: isDarkMode)
+    guard #available(iOS 13.0, *) else {
+      return interactor.getContentWith(isDarkMode: false)
     }
+    interactor.getContentWith(isDarkMode: isDarkTheme)
   }
 }
 
@@ -126,8 +125,8 @@ extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
     moduleOutput?.customMainSectionsSelected()
   }
   
-  func darkThemeChanged(_ isEnabled: Bool) {
-    moduleOutput?.darkThemeChanged(isEnabled)
+  func applyDarkTheme(_ isEnabled: Bool?) {
+    moduleOutput?.applyDarkTheme(isEnabled)
     interactor.darkThemeChanged(isEnabled)
   }
 }

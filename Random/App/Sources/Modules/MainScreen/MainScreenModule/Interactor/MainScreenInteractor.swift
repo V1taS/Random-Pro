@@ -30,7 +30,7 @@ protocol MainScreenInteractorInput {
   
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена
-  func saveDarkModeStatus(_ isEnabled: Bool)
+  func saveDarkModeStatus(_ isEnabled: Bool?)
   
   /// Убрать лайбл с секции
   /// - Parameter type: Тип сеции
@@ -112,7 +112,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     }
   }
   
-  func saveDarkModeStatus(_ isEnabled: Bool) {
+  func saveDarkModeStatus(_ isEnabled: Bool?) {
     guard let model = storageService.mainScreenModel else {
       return
     }

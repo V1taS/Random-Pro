@@ -13,7 +13,7 @@ protocol MainSettingsScreenViewOutput: AnyObject {
   
   /// Тема приложения была изменена
   /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool)
+  func applyDarkTheme(_ isEnabled: Bool?)
   
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
@@ -105,26 +105,46 @@ extension MainSettingsScreenView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
     var viewCell = UITableViewCell()
+    let appearance = Appearance()
     
     switch model {
-    case let .squircleImageAndLabelWithSwitch(squircleBGColors,
-                                              leftSideImageSystemName,
-                                              title,
-                                              isEnabled):
+
+    case let .squircleImageAndLabelWithSegmentedControl(squircleBGColors,
+                                                        leftSideImageSystemName,
+                                                        title,
+                                                        startSelectedSegmentIndex):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier
-      ) as? SquircleImageAndLabelWithSwitchCell {
-        cell.configureCellWith(squircleBGColors: squircleBGColors,
-                               leftSideImage: UIImage(systemName: leftSideImageSystemName),
-                               leftSideImageColor: RandomColor.only.primaryWhite,
-                               titleText: title,
-                               isResultSwitch: isEnabled)
-        
-        cell.switchAction = { [weak self] isOn in
-          self?.output?.darkThemeChanged(isOn)
-        }
+        withIdentifier: SquircleImageAndLabelWithSegmentedControlCell.reuseIdentifier
+      ) as? SquircleImageAndLabelWithSegmentedControlCell {
+        cell.configureCellWith(
+          squircleBGColors: squircleBGColors,
+          leftSideImage: UIImage(systemName: leftSideImageSystemName),
+          leftSideImageColor: RandomColor.only.primaryWhite,
+          titleText: title,
+          startSelectedSegmentIndex: startSelectedSegmentIndex,
+          listOfItemsInSegmentedControl: [
+            appearance.systemTheme,
+            appearance.blackTheme,
+            appearance.whiteTheme
+          ],
+          segmentControlValueChanged: { [weak self] index in
+            guard let self else {
+              return
+            }
+
+            switch index {
+            case 1:
+              self.output?.applyDarkTheme(true)
+            case 2:
+              self.output?.applyDarkTheme(false)
+            default:
+              self.output?.applyDarkTheme(nil)
+            }
+          }
+        )
         viewCell = cell
       }
+
     case let .squircleImageAndLabelWithChevronCell(squircleBGColors,
                                                    leftSideImageSystemName,
                                                    title,
@@ -229,9 +249,9 @@ private extension MainSettingsScreenView {
     tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
-    
-    tableView.register(SquircleImageAndLabelWithSwitchCell.self,
-                       forCellReuseIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier)
+
+    tableView.register(SquircleImageAndLabelWithSegmentedControlCell.self,
+                       forCellReuseIdentifier: SquircleImageAndLabelWithSegmentedControlCell.reuseIdentifier)
     tableView.register(SquircleImageAndLabelWithChevronCell.self,
                        forCellReuseIdentifier: SquircleImageAndLabelWithChevronCell.reuseIdentifier)
     tableView.register(CustomPaddingCell.self,
@@ -260,5 +280,9 @@ private extension MainSettingsScreenView {
     
     let feedbackButtonTitle = RandomStrings.Localizable.feedback
     let addressRecipients = "Random_Pro_support@iCloud.com"
+
+    let systemTheme = RandomStrings.Localizable.auto
+    let blackTheme = RandomStrings.Localizable.dark
+    let whiteTheme = RandomStrings.Localizable.light
   }
 }

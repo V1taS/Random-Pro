@@ -11,6 +11,7 @@
 "april" = "aprile";
 "august" = "agosto";
 "authorization_error" = "errore di autorizzazione";
+"auto" = "Auto";
 "available_in_app_store" = "disponibile su App Store";
 "avocado" = "avocado";
 "ball" = "Palla";
@@ -45,6 +46,7 @@
 "create_list" = "Crea lista";
 "cubes" = "Cubi";
 "customize_app_appearance" = "cambia l'aspetto dell'app a tuo piacimento";
+"dark" = "Buio";
 "dark_theme" = "Tema scuro";
 "date" = "Data";
 "date_and_time" = "data e ora";
@@ -104,6 +106,7 @@
 "last_generation" = "ultima generazione";
 "length_of_password" = "Inserisci la lunghezza della password";
 "letter" = "lettera";
+"light" = "Luminosa";
 "list" = "Elenco";
 "list_of_cubes" = "elenco dei dadi";
 "list_of_elements_empty" = "L'elenco degli elementi è vuoto";
@@ -222,6 +225,7 @@
 "teams" = "Squadre";
 "terminal" = "terminale";
 "terms" = "condizioni";
+"theme" = "Tema";
 "thursday" = "giovedì";
 "time" = "Tempo";
 "to" = "prima";

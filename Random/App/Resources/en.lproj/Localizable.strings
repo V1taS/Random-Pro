@@ -11,6 +11,7 @@
 "april" = "April";
 "august" = "August";
 "authorization_error" = "Authorization error";
+"auto" = "Auto";
 "available_in_app_store" = "available in the App Store";
 "avocado" = "Avocado";
 "ball" = "Ball";
@@ -45,6 +46,7 @@
 "create_list" = "Create a list";
 "cubes" = "Cubes";
 "customize_app_appearance" = "Change the appearance of the application to your liking";
+"dark" = "Dark";
 "dark_theme" = "Dark theme";
 "date" = "Date";
 "date_and_time" = "Date and time";
@@ -104,6 +106,7 @@
 "last_generation" = "Last generation";
 "length_of_password" = "Enter password length";
 "letter" = "Letter";
+"light" = "Light";
 "list" = "List";
 "list_of_cubes" = "List of dice";
 "list_of_elements_empty" = "List of items is empty";
@@ -222,6 +225,7 @@
 "teams" = "Teams";
 "terminal" = "Terminal";
 "terms" = "Conditions";
+"theme" = "Theme";
 "thursday" = "Thursday";
 "time" = "Time";
 "to" = "To";

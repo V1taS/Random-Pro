@@ -15,7 +15,7 @@ protocol MainSettingsScreenCoordinatorOutput: AnyObject {
   
   /// Тема приложения была изменена
   /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool)
+  func applyDarkTheme(_ isEnabled: Bool?)
   
   /// Данные были изменены
   ///  - Parameter models: результат генерации
@@ -169,9 +169,17 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     services.metricsService.track(event: .customMainSections)
   }
   
-  func darkThemeChanged(_ isEnabled: Bool) {
-    window?.overrideUserInterfaceStyle = isEnabled ? .dark : .light
-    output?.darkThemeChanged(isEnabled)
+  func applyDarkTheme(_ isEnabled: Bool?) {
+    switch isEnabled {
+    case nil:
+      window?.overrideUserInterfaceStyle = .unspecified
+    case false:
+      window?.overrideUserInterfaceStyle = .light
+    default:
+      window?.overrideUserInterfaceStyle = .dark
+    }
+
+    output?.applyDarkTheme(isEnabled)
   }
   
   func closeButtonAction() {

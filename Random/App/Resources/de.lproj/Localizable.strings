@@ -11,6 +11,7 @@
 "april" = "April";
 "august" = "August";
 "authorization_error" = "Autorisierungsfehler";
+"auto" = "Auto";
 "available_in_app_store" = "verfügbar im App Store";
 "avocado" = "Avocado";
 "ball" = "Ball";
@@ -45,6 +46,7 @@
 "create_list" = "Liste erstellen";
 "cubes" = "Würfel";
 "customize_app_appearance" = "Ändern Sie das Aussehen der App nach Ihren Wünschen";
+"dark" = "Dunkle";
 "dark_theme" = "Dunkles Thema";
 "date" = "Datum";
 "date_and_time" = "Datum und Uhrzeit";
@@ -104,6 +106,7 @@
 "last_generation" = "Letzte Generation";
 "length_of_password" = "Passwortlänge eingeben";
 "letter" = "Buchstabe";
+"light" = "Helle";
 "list" = "Liste";
 "list_of_cubes" = "Liste der Würfel";
 "list_of_elements_empty" = "Die Liste der Elemente ist leer";
@@ -222,6 +225,7 @@
 "teams" = "Mannschaften";
 "terminal" = "Terminal";
 "terms" = "Bedingungen";
+"theme" = "Thema";
 "thursday" = "Donnerstag";
 "time" = "Zeit";
 "to" = "Bis";

@@ -21,7 +21,7 @@ protocol MainSettingsScreenFactoryInput {
   
   /// Создаем модельку для таблички
   ///  - Parameter isDarkMode: Текущей цвет темы
-  func createListModelWith(isDarkMode: Bool)
+  func createListModelWith(isDarkMode: Bool?)
 }
 
 /// Фабрика
@@ -33,16 +33,23 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModelWith(isDarkMode: Bool) {
+  func createListModelWith(isDarkMode: Bool?) {
     DispatchQueue.global(qos: .userInitiated).async {
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
       
-      tableViewModels.append(.squircleImageAndLabelWithSwitch(squircleBGColors: [RandomColor.only.primaryBlue,
-                                                                                 RandomColor.only.primaryBlue],
-                                                              leftSideImageSystemName: appearance.darkThemeImageSystemName,
-                                                              title: appearance.darkThemeTitle,
-                                                              isEnabled: isDarkMode))
+      var startSegmentIndex: Int {
+        guard let isDarkMode else {
+          return 0
+        }
+        return isDarkMode ? 1 : 2
+      }
+      
+      tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(squircleBGColors: [RandomColor.only.primaryBlue,
+                                                                                           RandomColor.only.primaryBlue],
+                                                                        leftSideImageSystemName: appearance.darkThemeImageSystemName,
+                                                                        title: appearance.darkThemeTitle,
+                                                                        startSelectedSegmentIndex: startSegmentIndex))
       tableViewModels.append(.divider)
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryOrange,
                                                                                       RandomColor.only.primaryOrange],
@@ -73,8 +80,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
 
 private extension MainSettingsScreenFactory {
   struct Appearance {
-    let darkThemeImageSystemName = "switch.2"
-    let darkThemeTitle = RandomStrings.Localizable.darkTheme
+    let darkThemeImageSystemName = "paintbrush.fill"
+    let darkThemeTitle = RandomStrings.Localizable.theme
     
     let customMainSectionsImageSystemName = "rectangle.grid.2x2"
     let customMainSectionsTitle = RandomStrings.Localizable.sectionSettings

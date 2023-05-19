@@ -20,11 +20,11 @@ protocol MainSettingsScreenInteractorInput {
   
   /// Получить данные
   ///  - Parameter isDarkMode: Включить темную тему
-  func getContentWith(isDarkMode: Bool)
+  func getContentWith(isDarkMode: Bool?)
   
   /// Тема приложения была изменена
   /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool)
+  func darkThemeChanged(_ isEnabled: Bool?)
 }
 
 /// Интерактор
@@ -40,12 +40,12 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   
   // MARK: - Internal func
   
-  func darkThemeChanged(_ isEnabled: Bool) {
+  func darkThemeChanged(_ isEnabled: Bool?) {
     let newModel = MainSettingsScreenModel(isDarkMode: isEnabled)
     model = newModel
   }
   
-  func getContentWith(isDarkMode: Bool) {
+  func getContentWith(isDarkMode: Bool?) {
     if let model = model {
       output?.didReceive(model: model)
     } else {

@@ -21,19 +21,6 @@ final class PasswordGeneratorView: UIView {
   let symbolsSwitch = UISwitch()
   var resultLabelAction: (() -> Void)?
   
-  var crackTimeisHidden: Bool = true {
-    didSet {
-      crackTimeLabel.isHidden = crackTimeisHidden
-      crackTimeSlider.isHidden = crackTimeisHidden
-    }
-  }
-  
-  var crackTimeTitle: String? {
-    didSet {
-      crackTimeLabel.text = crackTimeTitle
-    }
-  }
-  
   var crackTimeStrengthValue: Float = .zero {
     didSet {
       crackTimeSlider.value = crackTimeStrengthValue
@@ -47,6 +34,19 @@ final class PasswordGeneratorView: UIView {
       default:
         crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryGray
       }
+    }
+  }
+  
+  var crackTimeisHidden: Bool = true {
+    didSet {
+      crackTimeLabel.isHidden = crackTimeisHidden
+      crackTimeSlider.isHidden = crackTimeisHidden
+    }
+  }
+  
+  var crackTimeTitle: String? {
+    didSet {
+      crackTimeLabel.text = crackTimeTitle
     }
   }
   

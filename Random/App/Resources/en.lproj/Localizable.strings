@@ -106,6 +106,7 @@
 "last_generation" = "Last generation";
 "length_of_password" = "Enter password length";
 "letter" = "Letter";
+"light" = "Light";
 "list" = "List";
 "list_of_cubes" = "List of dice";
 "list_of_elements_empty" = "List of items is empty";
@@ -240,7 +241,6 @@
 "violet_lemon" = "Violet-lemon";
 "walk" = "Walk";
 "wednesday" = "Wednesday";
-"white" = "White";
 "yes" = "Yes";
 "yes_or_no" = "Yes or No";
 "crack_time" = "Crack time";

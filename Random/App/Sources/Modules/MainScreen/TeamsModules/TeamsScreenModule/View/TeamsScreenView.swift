@@ -14,6 +14,12 @@ protocol TeamsScreenViewOutput: AnyObject {
   /// Обновить количество команд
   ///  - Parameter count: Количество команд
   func updateTeams(count: Int)
+    
+  /// Показать алерт для обновления названия команды
+  /// - Parameters:
+  ///   - name: название команды
+  ///   - id: id команды
+  func showAlert(name: String, id: String)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -21,8 +27,8 @@ protocol TeamsScreenViewInput {
   
   /// Обновить контент
   /// - Parameters:
-  ///  - models: Список команд
-  ///  - teamsCount: Количество команд
+  ///   - models: Список команд
+  ///   - teamsCount: Количество команд
   func updateContentWith(models: [TeamsScreenModel.Team], teamsCount: Int)
   
   /// Показать заглушка
@@ -103,7 +109,7 @@ extension TeamsScreenView: UICollectionViewDelegate {
       for: indexPath) as? CustomDoubleTextHeaderCollectionCell else {
       return UICollectionReusableView()
     }
-    
+    let appearance = Appearance()
     let model = models[indexPath.section]
     headerView.configureCellWith(
       primaryText: model.name,
@@ -111,8 +117,10 @@ extension TeamsScreenView: UICollectionViewDelegate {
       primaryTextFont: RandomFont.primaryBold18,
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: RandomColor.darkAndLightTheme.secondaryGray,
-      secondaryTextFont: RandomFont.primaryRegular18
-    )
+      secondaryTextFont: RandomFont.primaryRegular18,
+      editImage: appearance.renameTeamButton) {
+        self.output?.showAlert(name: model.name, id: model.id)
+      }
     headerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     return headerView
   }
@@ -257,5 +265,6 @@ private extension TeamsScreenView {
     let resultLabelTitle = "?"
     let countTeams = ["1", "2", "3", "4", "5", "6"]
     let countPlayersTitle = RandomStrings.Localizable.numberOf
+    let renameTeamButton = UIImage(systemName: "pencil")
   }
 }

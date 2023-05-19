@@ -25,6 +25,9 @@ struct TeamsScreenModel: UserDefaultsCodable {
   /// Модель команды
   struct Team: UserDefaultsCodable {
     
+    /// id команды
+    var id = UUID().uuidString
+    
     /// Название команды
     let name: String
     

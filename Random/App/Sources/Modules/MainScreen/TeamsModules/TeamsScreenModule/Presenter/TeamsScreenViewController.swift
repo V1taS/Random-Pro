@@ -24,6 +24,11 @@ protocol TeamsScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   ///  - Parameter imageData: Изображение контента
   func shareButtonAction(imageData: Data?)
+  
+  /// - Parameters:
+  ///   - name: название команды
+  ///   - id: id команды
+  func showTeamRenameAlert(name: String, id: String)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -50,6 +55,12 @@ protocol TeamsScreenModuleInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  ///  Событие, кнопка `Сохранить` была нажата
+  /// - Parameters:
+  ///   - name: название команды
+  ///   - id: id команды
+  func renameTeamAlertAction(name: String, id: String)
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: TeamsScreenModuleOutput? { get set }
@@ -144,6 +155,10 @@ final class TeamsScreenViewController: TeamsScreenModule {
   func cleanButtonAction() {
     interactor.cleanButtonAction()
   }
+  
+  func renameTeamAlertAction(name: String, id: String) {
+    interactor.updateNameTeam(name: name, id: id)
+  }
 }
 
 // MARK: - TeamsScreenViewOutput
@@ -151,6 +166,10 @@ final class TeamsScreenViewController: TeamsScreenModule {
 extension TeamsScreenViewController: TeamsScreenViewOutput {
   func updateTeams(count: Int) {
     interactor.updateTeams(count: count)
+  }
+  
+  func showAlert(name: String, id: String) {
+    moduleOutput?.showTeamRenameAlert(name: name, id: id)
   }
 }
 

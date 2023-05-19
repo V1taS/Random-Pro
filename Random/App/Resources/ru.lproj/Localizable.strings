@@ -237,12 +237,14 @@
 "unique_card_style" = "Выберите уникальный стиль карточек";
 "unlock" = "Разблокировать";
 "uppercase_letters" = "Прописные буквы";
-"vendor_identifier" = "Идентификатор поставщика";
+"vendor_identifier" = "Идентийфикатор поставщика";
 "violet_lemon" = "Фиолотово-лимонный";
 "walk" = "Прогулка";
 "wednesday" = "Среда";
 "yes" = "Да";
 "yes_or_no" = "Да или Нет";
+"save" = "Сохранить";
+"change_team_name" = "Введите новое название команды";
 "crack_time" = "Время взлома";
 "centuries" = "веков";
 "at_least_4_characters_for_password" = "Пароль слишком короткий. Необходимо минимум 4 символа.";

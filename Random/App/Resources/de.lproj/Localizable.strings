@@ -243,6 +243,8 @@
 "wednesday" = "Mittwoch";
 "yes" = "Ja";
 "yes_or_no" = "Ja oder Nein";
+"save" = "Speichern";
+"change_team_name" = "Geben Sie einen neuen Namen für den Befehl ein";
 "crack_time" = "Crack-Zeit";
 "centuries" = "Jahrhunderte";
 "at_least_4_characters_for_password" = "Das Passwort ist zu kurz. Mindestens 4 Zeichen erforderlich.";

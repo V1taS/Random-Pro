@@ -15,7 +15,7 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   
   /// Тема приложения была изменена
   /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool?)
+  func applyDarkTheme(_ isEnabled: Bool?)
   
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
@@ -125,8 +125,8 @@ extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
     moduleOutput?.customMainSectionsSelected()
   }
   
-  func darkThemeChanged(_ isEnabled: Bool?) {
-    moduleOutput?.darkThemeChanged(isEnabled)
+  func applyDarkTheme(_ isEnabled: Bool?) {
+    moduleOutput?.applyDarkTheme(isEnabled)
     interactor.darkThemeChanged(isEnabled)
   }
 }

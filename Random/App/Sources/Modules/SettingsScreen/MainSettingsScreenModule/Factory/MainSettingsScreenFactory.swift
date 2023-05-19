@@ -38,14 +38,13 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
       
-      let startSegmentIndex = {
-        guard let darkMode = isDarkMode else {
+      var startSegmentIndex: Int {
+        guard let isDarkMode else {
           return 0
         }
-
-        return darkMode ? 1 : 2
-      }()
-
+        return isDarkMode ? 1 : 2
+      }
+      
       tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(squircleBGColors: [RandomColor.only.primaryBlue,
                                                                                            RandomColor.only.primaryBlue],
                                                                         leftSideImageSystemName: appearance.darkThemeImageSystemName,

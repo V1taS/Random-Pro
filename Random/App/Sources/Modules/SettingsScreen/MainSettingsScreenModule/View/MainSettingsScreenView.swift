@@ -13,7 +13,7 @@ protocol MainSettingsScreenViewOutput: AnyObject {
   
   /// Тема приложения была изменена
   /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool?)
+  func applyDarkTheme(_ isEnabled: Bool?)
   
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
@@ -128,17 +128,17 @@ extension MainSettingsScreenView: UITableViewDataSource {
             appearance.whiteTheme
           ],
           segmentControlValueChanged: { [weak self] index in
-            guard let self = self else {
+            guard let self else {
               return
             }
 
             switch index {
             case 1:
-              self.output?.darkThemeChanged(true)
+              self.output?.applyDarkTheme(true)
             case 2:
-              self.output?.darkThemeChanged(false)
+              self.output?.applyDarkTheme(false)
             default:
-              self.output?.darkThemeChanged(nil)
+              self.output?.applyDarkTheme(nil)
             }
           }
         )

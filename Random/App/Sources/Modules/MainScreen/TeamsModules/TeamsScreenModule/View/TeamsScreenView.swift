@@ -109,6 +109,7 @@ extension TeamsScreenView: UICollectionViewDelegate {
       for: indexPath) as? CustomDoubleTextHeaderCollectionCell else {
       return UICollectionReusableView()
     }
+    let appearance = Appearance()
     let model = models[indexPath.section]
     headerView.configureCellWith(
       primaryText: model.name,
@@ -117,7 +118,7 @@ extension TeamsScreenView: UICollectionViewDelegate {
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: RandomColor.darkAndLightTheme.secondaryGray,
       secondaryTextFont: RandomFont.primaryRegular18,
-      editImage: UIImage(systemName: "pencil")) {
+      editImage: appearance.renameTeamButton) {
         self.output?.showAlert(name: model.name, id: model.id)
       }
     headerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
@@ -264,5 +265,6 @@ private extension TeamsScreenView {
     let resultLabelTitle = "?"
     let countTeams = ["1", "2", "3", "4", "5", "6"]
     let countPlayersTitle = RandomStrings.Localizable.numberOf
+    let renameTeamButton = UIImage(systemName: "pencil")
   }
 }

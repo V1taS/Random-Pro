@@ -266,12 +266,3 @@ private extension TeamsScreenViewController {
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
   }
 }
-
-// MARK: - UITextFieldDelegate
-
-extension TeamsScreenViewController: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
-  }
-}

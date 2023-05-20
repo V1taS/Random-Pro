@@ -9,66 +9,10 @@
 import Foundation
 import RandomUIKit
 
-/// Протокол игрока
-protocol PlayerProtocol {
-  
-  /// Состояние игрока
-  associatedtype PlayerState = PlayerStateProtocol
-  
-  /// Уникальный номер игрока
-  var id: String { get }
-  
-  /// Имя игрока
-  var name: String { get }
-  
-  /// Аватарка игрока
-  var avatar: String { get }
-  
-  /// Смайлик
-  var emoji: String? { get }
-  
-  /// Состояние игрока
-  var state: PlayerState { get }
-  
-  /// Стиль карточки
-  var style: PlayerView.StyleCard { get }
-}
-
-/// Протокол состояния игрока
-protocol PlayerStateProtocol {
-  
-  /// Стандартное состояние
-  static var random: Self { get }
-  
-  /// Не играет
-  static var doesNotPlay: Self { get }
-  
-  /// Явно в команду номер 1
-  static var teamOne: Self { get }
-  
-  /// Явно в команду номер 2
-  static var teamTwo: Self { get }
-  
-  /// Явно в команду номер 3
-  static var teamThree: Self { get }
-  
-  /// Явно в команду номер 4
-  static var teamFour: Self { get }
-  
-  /// Явно в команду номер 5
-  static var teamFive: Self { get }
-  
-  /// Явно в команду номер 6
-  static var teamSix: Self { get }
-  
-  /// Описание каждого состояния
-  var localizedName: String { get }
-}
-
 // MARK: - Player
 
 /// Модель игрока
-struct TeamsScreenPlayerModel: PlayerProtocol, UserDefaultsCodable {
+struct TeamsScreenPlayerModel: UserDefaultsCodable {
   
   /// Уникальный номер игрока
   var id: String
@@ -91,7 +35,7 @@ struct TeamsScreenPlayerModel: PlayerProtocol, UserDefaultsCodable {
   // MARK: - PlayerState
 
   /// Состояние игрока
-  enum PlayerState: PlayerStateProtocol, UserDefaultsCodable {
+  enum PlayerState: UserDefaultsCodable {
     
     /// Состояние по умолчанию
     case random

@@ -24,7 +24,7 @@ protocol TeamsScreenCoordinatorInput {
 
 typealias TeamsScreenCoordinatorProtocol = TeamsScreenCoordinatorInput & Coordinator
 
-final class TeamsScreenCoordinator: TeamsScreenCoordinatorProtocol {
+final class TeamsScreenCoordinator: NSObject, TeamsScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
@@ -108,6 +108,7 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
                                   preferredStyle: .alert)
     alert.addTextField { textField in
       textField.text = name
+      textField.delegate = self
     }
     alert.addAction(UIAlertAction(title: appearance.cancel,
                                   style: .cancel,
@@ -177,6 +178,20 @@ extension TeamsScreenCoordinator: ListPlayersScreenCoordinatorOutput {
 // MARK: - ShareScreenCoordinatorOutput
 
 extension TeamsScreenCoordinator: ShareScreenCoordinatorOutput {}
+
+// MARK: - UITextFieldDelegate
+
+extension TeamsScreenCoordinator: UITextFieldDelegate {
+  func textField(_ textField: UITextField,
+                 shouldChangeCharactersIn range: NSRange,
+                 replacementString string: String) -> Bool {
+    
+    if range.location >= 15 {
+      return false
+    }
+    return true
+  }
+}
 
 // MARK: - Appearance
 

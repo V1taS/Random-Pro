@@ -13,4 +13,7 @@ struct MainSettingsScreenModel {
   
   /// Темная тема включена
   let isDarkMode: Bool?
+  
+  /// Премиум включен
+  let isPremium: Bool
 }

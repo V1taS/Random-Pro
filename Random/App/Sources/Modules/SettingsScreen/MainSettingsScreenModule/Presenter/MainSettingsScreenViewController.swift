@@ -17,6 +17,10 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   /// - Parameter isEnabled: Темная тема включена
   func applyDarkTheme(_ isEnabled: Bool?)
   
+  /// Премиум режим включен
+  /// - Parameter isEnabled: Премиум режим включен
+  func applyPremium(_ isEnabled: Bool)
+  
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
   
@@ -34,8 +38,8 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
 protocol MainSettingsScreenModuleInput {
   
   /// Обновить контент
-  ///  - Parameter isDarkTheme: Темная тема
-  func updateContentWith(isDarkTheme: Bool?)
+  ///  - Parameter model: Модель данных
+  func updateContentWith(model: MainSettingsScreenModel)
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: MainSettingsScreenModuleOutput? { get set }
@@ -97,17 +101,18 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   
   // MARK: - Internal func
   
-  func updateContentWith(isDarkTheme: Bool?) {
-    guard #available(iOS 13.0, *) else {
-      return interactor.getContentWith(isDarkMode: false)
-    }
-    interactor.getContentWith(isDarkMode: isDarkTheme)
+  func updateContentWith(model: MainSettingsScreenModel) {
+    factory.createListModelWith(model: model)
   }
 }
 
 // MARK: - MainSettingsScreenViewOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
+  func applyPremium(_ isEnabled: Bool) {
+    moduleOutput?.applyPremium(isEnabled)
+  }
+  
   func applicationIconSectionsSelected() {
     moduleOutput?.applicationIconSectionsSelected()
   }
@@ -127,17 +132,12 @@ extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
   
   func applyDarkTheme(_ isEnabled: Bool?) {
     moduleOutput?.applyDarkTheme(isEnabled)
-    interactor.darkThemeChanged(isEnabled)
   }
 }
 
 // MARK: - MainSettingsScreenInteractorOutput
 
-extension MainSettingsScreenViewController: MainSettingsScreenInteractorOutput {
-  func didReceive(model: MainSettingsScreenModel) {
-    factory.createListModelWith(isDarkMode: model.isDarkMode)
-  }
-}
+extension MainSettingsScreenViewController: MainSettingsScreenInteractorOutput {}
 
 // MARK: - MainSettingsScreenFactoryOutput
 

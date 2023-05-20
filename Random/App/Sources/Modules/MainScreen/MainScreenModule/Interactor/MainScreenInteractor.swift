@@ -32,6 +32,10 @@ protocol MainScreenInteractorInput {
   /// - Parameter isEnabled: Темная тема включена
   func saveDarkModeStatus(_ isEnabled: Bool?)
   
+  /// Сохранить премиум режим
+  /// - Parameter isEnabled: Сохранить премиум режим
+  func savePremium(_ isEnabled: Bool)
+  
   /// Убрать лайбл с секции
   /// - Parameter type: Тип сеции
   func removeLabelFromSection(type: MainScreenModel.SectionType)
@@ -122,6 +126,19 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       allSections: model.allSections
     )
     storageService.mainScreenModel = newModel
+  }
+  
+  func savePremium(_ isEnabled: Bool) {
+    guard let model = storageService.mainScreenModel else {
+      return
+    }
+    let newModel = MainScreenModel(
+      isDarkMode: model.isDarkMode,
+      isPremium: isEnabled,
+      allSections: model.allSections
+    )
+    storageService.mainScreenModel = newModel
+    output?.didReceive(model: newModel)
   }
   
   func removeLabelFromSection(type: MainScreenModel.SectionType) {

@@ -20,8 +20,8 @@ protocol MainSettingsScreenFactoryOutput: AnyObject {
 protocol MainSettingsScreenFactoryInput {
   
   /// Создаем модельку для таблички
-  ///  - Parameter isDarkMode: Текущей цвет темы
-  func createListModelWith(isDarkMode: Bool?)
+  ///  - Parameter model: Модель данных
+  func createListModelWith(model: MainSettingsScreenModel)
 }
 
 /// Фабрика
@@ -33,42 +33,64 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModelWith(isDarkMode: Bool?) {
+  func createListModelWith(model: MainSettingsScreenModel) {
     DispatchQueue.global(qos: .userInitiated).async {
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
       
       var startSegmentIndex: Int {
-        guard let isDarkMode else {
+        guard let isDarkMode = model.isDarkMode else {
           return 0
         }
         return isDarkMode ? 1 : 2
       }
       
-      tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(squircleBGColors: [RandomColor.only.primaryBlue,
-                                                                                           RandomColor.only.primaryBlue],
-                                                                        leftSideImageSystemName: appearance.darkThemeImageSystemName,
-                                                                        title: appearance.darkThemeTitle,
-                                                                        startSelectedSegmentIndex: startSegmentIndex))
-      tableViewModels.append(.divider)
-      tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryOrange,
-                                                                                      RandomColor.only.primaryOrange],
-                                                                   leftSideImageSystemName: appearance.customMainSectionsImageSystemName,
-                                                                   title: appearance.customMainSectionsTitle,
-                                                                   type: .customMainSections))
-      tableViewModels.append(.divider)
-      tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryGreen,
-                                                                                      RandomColor.only.primaryGreen],
-                                                                   leftSideImageSystemName: appearance.applicationIconnImageSystemName,
-                                                                   title: appearance.applicationIconTitle,
-                                                                   type: .applicationIconSections))
+#if DEBUG
+      tableViewModels.append(.squircleImageAndLabelWithSwitchControl(
+        squircleBGColors: [RandomColor.only.primaryRed,
+                           RandomColor.only.primaryPink],
+        leftSideImage: appearance.primiumDEBUGImage,
+        leftSideImageColor: RandomColor.only.primaryWhite,
+        titleText: appearance.primiumDEBUGTitle,
+        isResultSwitch: model.isPremium
+      ))
+#endif
       
+      tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(
+        squircleBGColors: [RandomColor.only.primaryBlue,
+                           RandomColor.only.primaryBlue],
+        leftSideImageSystemName: appearance.darkThemeImageSystemName,
+        title: appearance.darkThemeTitle,
+        startSelectedSegmentIndex: startSegmentIndex
+      ))
       tableViewModels.append(.divider)
-      tableViewModels.append(.squircleImageAndLabelWithChevronCell(squircleBGColors: [RandomColor.only.primaryPurple,
-                                                                                      RandomColor.only.tertiaryBlue],
-                                                                   leftSideImageSystemName: appearance.premiumImageSystemName,
-                                                                   title: appearance.premiumTitle,
-                                                                   type: .premiumSections))
+      
+      tableViewModels.append(.squircleImageAndLabelWithChevronCell(
+        squircleBGColors: [RandomColor.only.primaryOrange,
+                           RandomColor.only.primaryOrange],
+        leftSideImageSystemName: appearance.customMainSectionsImageSystemName,
+        title: appearance.customMainSectionsTitle,
+        type: .customMainSections
+      ))
+      tableViewModels.append(.divider)
+      
+      tableViewModels.append(.squircleImageAndLabelWithChevronCell(
+        squircleBGColors: [RandomColor.only.primaryGreen,
+                           RandomColor.only.primaryGreen],
+        leftSideImageSystemName: appearance.applicationIconnImageSystemName,
+        title: appearance.applicationIconTitle,
+        type: .applicationIconSections
+      ))
+      tableViewModels.append(.divider)
+      
+      tableViewModels.append(.squircleImageAndLabelWithChevronCell(
+        squircleBGColors: [RandomColor.only.primaryPurple,
+                           RandomColor.only.tertiaryBlue],
+        leftSideImageSystemName: appearance.premiumImageSystemName,
+        title: appearance.premiumTitle,
+        type: .premiumSections
+      ))
+      
       DispatchQueue.main.async { [weak self] in
         self?.output?.didReceive(models: tableViewModels)
       }
@@ -91,5 +113,8 @@ private extension MainSettingsScreenFactory {
     
     let premiumImageSystemName = "star.fill"
     let premiumTitle = RandomStrings.Localizable.premium
+    
+    let primiumDEBUGImage = UIImage(systemName: "p.square")
+    let primiumDEBUGTitle = RandomStrings.Localizable.premium
   }
 }

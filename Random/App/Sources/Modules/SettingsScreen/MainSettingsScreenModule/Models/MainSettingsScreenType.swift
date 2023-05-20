@@ -23,7 +23,21 @@ enum MainSettingsScreenType {
                                                  leftSideImageSystemName: String,
                                                  title: String,
                                                  startSelectedSegmentIndex: Int)
-
+  
+  /// Секция `Заголовок и переключатель`
+  /// - Parameters:
+  ///  - squircleBGColors: Squircle цвет фона
+  ///  - squircleBGAlpha: Squircle прозрачность
+  ///  - leftSideImage: Картинка слева в squircle
+  ///  - leftSideImageColor: Цвет картинки слева
+  ///  - titleText: Заголовок у ячейки
+  ///  - isResultSwitch: Значение у переключателя
+  case squircleImageAndLabelWithSwitchControl(squircleBGColors: [UIColor],
+                                              leftSideImage: UIImage?,
+                                              leftSideImageColor: UIColor?,
+                                              titleText: String?,
+                                              isResultSwitch: Bool)
+  
   /// Секция `Заголовок и иконка сбоку`
   /// - Parameters:
   ///  - squircleBGColors: Фон сквиркла

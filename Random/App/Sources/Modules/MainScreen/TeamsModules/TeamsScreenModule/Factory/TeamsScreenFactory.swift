@@ -107,7 +107,7 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       var playersWithoutTeams = allPlayers.filter { $0.state == .random }
       
       // Distribute players who have chosen their team
-      var newTeams: [TeamsScreenModel.Team] = teams.map { oldTeam in
+      let newTeams: [TeamsScreenModel.Team] = teams.map { oldTeam in
         // Filter playersWithTeams for those whose state matches the team's index
         let index = teams.firstIndex(of: oldTeam) ?? .zero
         let relevantState: TeamsScreenPlayerModel.PlayerState

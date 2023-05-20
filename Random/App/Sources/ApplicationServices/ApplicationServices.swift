@@ -71,7 +71,7 @@ final class ApplicationServicesImpl: ApplicationServices {
   // MARK: - Internal property
   
   var deepLinkService: DeepLinkService {
-    DeepLinkServiceImpl()
+    deepLinkServiceImpl
   }
   
   var fileManagerService: FileManagerService {
@@ -95,7 +95,7 @@ final class ApplicationServicesImpl: ApplicationServices {
   }
   
   var networkService: NetworkService {
-    NetworkServiceImpl()
+    networkServiceImpl
   }
   
   var timerService: TimerService {
@@ -133,4 +133,6 @@ final class ApplicationServicesImpl: ApplicationServices {
   // MARK: - Private property
   
   let storageServiceImpl = StorageServiceImpl()
+  let deepLinkServiceImpl = DeepLinkServiceImpl()
+  let networkServiceImpl = NetworkServiceImpl()
 }

@@ -59,7 +59,7 @@ protocol StorageService {
   var playerCardSelectionScreenModel: [PlayerCardSelectionScreenModel]? { get set }
   
   /// Модель для глубоких ссылок
-  var deepLinkModel: DeepLinkType? { get set }
+  var deepLinkModel: MainScreenModel.SectionType? { get set }
   
   /// Модель для метрик
   var dictionaryCountTappedModel: [MetricsSections.RawValue: Int]? { get set }
@@ -208,7 +208,7 @@ final class StorageServiceImpl: StorageService {
     }
   }
   
-  var deepLinkModel: DeepLinkType? {
+  var deepLinkModel: MainScreenModel.SectionType? {
     get {
       deepLinkModelUserDefaults
     } set {
@@ -334,7 +334,7 @@ final class StorageServiceImpl: StorageService {
   // MARK: - DeepLink model
   
   @ObjectCustomUserDefaultsWrapper(key: Appearance().deepLinkModelKeyUserDefaults)
-  private var deepLinkModelUserDefaults: DeepLinkType?
+  private var deepLinkModelUserDefaults: MainScreenModel.SectionType?
   
   // MARK: - Metrics sections model
   

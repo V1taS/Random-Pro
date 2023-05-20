@@ -56,6 +56,7 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
                                                      collectionViewLayout: collectionViewLayout)
   private let countTeamsSegmentedControl = UISegmentedControl(items: Appearance().countTeams)
   private var models: [TeamsScreenModel.Team] = []
+  private var isShowEditImage = true
   private let resultLabel = UILabel()
   private let contentPlugImage = UIImageView()
   
@@ -87,10 +88,15 @@ final class TeamsScreenView: TeamsScreenViewProtocol {
   
   func returnCurrentContentImage(completion: @escaping (Data?) -> Void) {
     showContentPlug()
+    isShowEditImage = false
+    collectionView.reloadData()
+    
     return collectionView.screenShotFullContent { [weak self] screenshot in
       let imgData = screenshot?.pngData()
       completion(imgData)
       self?.hideContentPlug()
+      self?.isShowEditImage = true
+      self?.collectionView.reloadData()
     }
   }
 }
@@ -109,8 +115,9 @@ extension TeamsScreenView: UICollectionViewDelegate {
       for: indexPath) as? CustomDoubleTextHeaderCollectionCell else {
       return UICollectionReusableView()
     }
-    let appearance = Appearance()
+    
     let model = models[indexPath.section]
+    
     headerView.configureCellWith(
       primaryText: model.name,
       primaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
@@ -118,7 +125,7 @@ extension TeamsScreenView: UICollectionViewDelegate {
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: RandomColor.darkAndLightTheme.secondaryGray,
       secondaryTextFont: RandomFont.primaryRegular18,
-      editImage: appearance.renameTeamButton) {
+      editImage: isShowEditImage ? Appearance().renameTeamButton : nil) {
         self.output?.showAlert(name: model.name, id: model.id)
       }
     headerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite

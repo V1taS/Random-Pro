@@ -55,257 +55,96 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
       guard let self else {
         return
       }
+      
       let appearance = Appearance()
+      
+      // Initialize teams array
       var teams: [TeamsScreenModel.Team] = []
-      let allPlayers = model.allPlayers.map { result -> TeamsScreenPlayerModel in
-        var emoji: String?
-        
-        if result.emoji != "⚪️" {
-          emoji = result.emoji
+      if model.teams.isEmpty {
+        // If teams do not exist, create new teams
+        for numberTeam in 1...model.selectedTeam {
+          teams.append(TeamsScreenModel.Team(
+            id: UUID().uuidString,
+            name: appearance.teamTitle + " - \(numberTeam)",
+            players: []
+          ))
         }
-        
+      } else {
+        // If teams exist, use the existing teams up to the selected team count
+        if model.teams.count > model.selectedTeam {
+          // If the number of existing teams is more than the selected count,
+          // use the first selectedTeam number of teams
+          teams = Array(model.teams.prefix(model.selectedTeam))
+        } else {
+          // Otherwise use all the existing teams
+          teams = model.teams
+          // And if there are fewer existing teams than the selected count, create additional teams
+          let additionalTeamCount = model.selectedTeam - model.teams.count
+          for numberTeam in 1..<additionalTeamCount + 1 {
+            teams.append(TeamsScreenModel.Team(
+              id: UUID().uuidString,
+              name: appearance.teamTitle + " - \(model.teams.count + numberTeam)",
+              players: []
+            ))
+          }
+        }
+      }
+      
+      // Prepare the players
+      let allPlayers = model.allPlayers.map { result in
         return TeamsScreenPlayerModel(
           id: result.id,
           name: result.name,
           avatar: result.avatar,
-          emoji: emoji,
+          emoji: result.emoji != "⚪️" ? result.emoji : nil,
           state: result.state,
           style: self.stylePlayerCard
         )
+      }.shuffled().filter { $0.state != .doesNotPlay }
+      
+      // Separate players who have chosen their team and those who have not
+      let playersWithTeams = allPlayers.filter { $0.state != .random }
+      var playersWithoutTeams = allPlayers.filter { $0.state == .random }
+      
+      // Distribute players who have chosen their team
+      var newTeams: [TeamsScreenModel.Team] = teams.map { oldTeam in
+        // Filter playersWithTeams for those whose state matches the team's index
+        let index = teams.firstIndex(of: oldTeam) ?? .zero
+        let relevantState: TeamsScreenPlayerModel.PlayerState
+        switch index {
+        case 0: relevantState = .teamOne
+        case 1: relevantState = .teamTwo
+        case 2: relevantState = .teamThree
+        case 3: relevantState = .teamFour
+        case 4: relevantState = .teamFive
+        case 5: relevantState = .teamSix
+        default: relevantState = .random
+        }
+        let newPlayers = playersWithTeams.filter { $0.state == relevantState }
+        return TeamsScreenModel.Team(id: oldTeam.id, name: oldTeam.name, players: newPlayers)
+      }
+      teams = newTeams
+      
+      // Create a mutable copy of teams
+      var tempTeams = teams.map { team in
+        return (id: team.id, name: team.name, players: team.players)
       }
       
-      var playersFiltered = allPlayers.shuffled().filter { $0.state != .doesNotPlay }
-      let playersWithTeamsFiltered = playersFiltered.filter { $0.state != .random }
-      var playersWithoutTeamsFiltered = playersFiltered.filter { $0.state == .random }
-      
-      while playersFiltered.count % model.selectedTeam != .zero {
-        let plugPlayer = TeamsScreenPlayerModel(
-          id: "",
-          name: "",
-          avatar: "",
-          emoji: nil,
-          state: .doesNotPlay,
-          style: self.stylePlayerCard
-        )
-        
-        playersWithoutTeamsFiltered.append(plugPlayer)
-        playersFiltered.append(plugPlayer)
-      }
-      
-      var teamOnePlayers: [TeamsScreenPlayerModel] = []
-      var teamTwoPlayers: [TeamsScreenPlayerModel] = []
-      var teamThreePlayers: [TeamsScreenPlayerModel] = []
-      var teamFourPlayers: [TeamsScreenPlayerModel] = []
-      var teamFivePlayers: [TeamsScreenPlayerModel] = []
-      var teamSixPlayers: [TeamsScreenPlayerModel] = []
-      var currentTeam = 1
-      
-      for player in playersWithTeamsFiltered {
-        if player.state == .teamOne {
-          teamOnePlayers.append(player)
-          continue
-        }
-        
-        if player.state == .teamTwo {
-          teamTwoPlayers.append(player)
-          continue
-        }
-        
-        if player.state == .teamThree {
-          teamThreePlayers.append(player)
-          continue
-        }
-        
-        if player.state == .teamFour {
-          teamFourPlayers.append(player)
-          continue
-        }
-        
-        if player.state == .teamFive {
-          teamFivePlayers.append(player)
-          continue
-        }
-        
-        if player.state == .teamSix {
-          teamSixPlayers.append(player)
-          continue
+      // Distribute players who have not chosen their team
+      while !playersWithoutTeams.isEmpty {
+        for index in tempTeams.indices where !playersWithoutTeams.isEmpty {
+          tempTeams[index].players.append(playersWithoutTeams.removeFirst())
         }
       }
       
-      for player in playersWithoutTeamsFiltered {
-        if model.selectedTeam == 1 {
-          teamOnePlayers.append(player)
-          continue
-        }
-        
-        if model.selectedTeam == 2 {
-          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
-            teamOnePlayers.append(player)
-            currentTeam = 2
-            continue
-          }
-          
-          teamTwoPlayers.append(player)
-          currentTeam = 1
-          continue
-        }
-        
-        if model.selectedTeam == 3 {
-          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
-            teamOnePlayers.append(player)
-            currentTeam = 2
-            continue
-          }
-          
-          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
-            teamTwoPlayers.append(player)
-            currentTeam = 3
-            continue
-          }
-          
-          teamThreePlayers.append(player)
-          currentTeam = 1
-          continue
-        }
-        
-        if model.selectedTeam == 4 {
-          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
-            teamOnePlayers.append(player)
-            currentTeam = 2
-            continue
-          }
-          
-          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
-            teamTwoPlayers.append(player)
-            currentTeam = 3
-            continue
-          }
-          
-          if teamThreePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 3 {
-            teamThreePlayers.append(player)
-            currentTeam = 4
-            continue
-          }
-          
-          teamFourPlayers.append(player)
-          currentTeam = 1
-          continue
-        }
-        
-        if model.selectedTeam == 5 {
-          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
-            teamOnePlayers.append(player)
-            currentTeam = 2
-            continue
-          }
-          
-          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
-            teamTwoPlayers.append(player)
-            currentTeam = 3
-            continue
-          }
-          
-          if teamThreePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 3 {
-            teamThreePlayers.append(player)
-            currentTeam = 4
-            continue
-          }
-          
-          if teamFourPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 4 {
-            teamFourPlayers.append(player)
-            currentTeam = 5
-            continue
-          }
-          
-          teamFivePlayers.append(player)
-          currentTeam = 1
-          continue
-        }
-        
-        if model.selectedTeam == 6 {
-          if teamOnePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 1 {
-            teamOnePlayers.append(player)
-            currentTeam = 2
-            continue
-          }
-          
-          if teamTwoPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 2 {
-            teamTwoPlayers.append(player)
-            currentTeam = 3
-            continue
-          }
-          
-          if teamThreePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 3 {
-            teamThreePlayers.append(player)
-            currentTeam = 4
-            continue
-          }
-          
-          if teamFourPlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 4 {
-            teamFourPlayers.append(player)
-            currentTeam = 5
-            continue
-          }
-          
-          if teamFivePlayers.count < playersFiltered.count / model.selectedTeam && currentTeam == 5 {
-            teamFivePlayers.append(player)
-            currentTeam = 6
-            continue
-          }
-          
-          teamSixPlayers.append(player)
-          currentTeam = 1
-          continue
-        }
+      // Create a new model with updated teams
+      teams = tempTeams.map { team in
+        return TeamsScreenModel.Team(id: team.id, name: team.name, players: team.players)
       }
       
-      if !teamOnePlayers.isEmpty {
-        let team = TeamsScreenModel.Team(
-          name: appearance.teamTitle + " - 1",
-          players: teamOnePlayers.filter { $0.state != .doesNotPlay }
-        )
-        teams.append(team)
-      }
+      // Filter out teams without players
+      teams = teams.filter { !$0.players.isEmpty }
       
-      if !teamTwoPlayers.isEmpty {
-        let team = TeamsScreenModel.Team(
-          name: appearance.teamTitle + " - 2",
-          players: teamTwoPlayers.filter { $0.state != .doesNotPlay }
-        )
-        teams.append(team)
-      }
-      
-      if !teamThreePlayers.isEmpty {
-        let team = TeamsScreenModel.Team(
-          name: appearance.teamTitle + " - 3",
-          players: teamThreePlayers.filter { $0.state != .doesNotPlay }
-        )
-        teams.append(team)
-      }
-      
-      if !teamFourPlayers.isEmpty {
-        let team = TeamsScreenModel.Team(
-          name: appearance.teamTitle + " - 4",
-          players: teamFourPlayers.filter { $0.state != .doesNotPlay }
-        )
-        teams.append(team)
-      }
-      
-      if !teamFivePlayers.isEmpty {
-        let team = TeamsScreenModel.Team(
-          name: appearance.teamTitle + " - 5",
-          players: teamFivePlayers.filter { $0.state != .doesNotPlay }
-        )
-        teams.append(team)
-      }
-      
-      if !teamSixPlayers.isEmpty {
-        let team = TeamsScreenModel.Team(
-          name: appearance.teamTitle + " - 6",
-          players: teamSixPlayers.filter { $0.state != .doesNotPlay }
-        )
-        teams.append(team)
-      }
       DispatchQueue.main.async { [weak self] in
         self?.output?.didReceive(teams: teams)
       }

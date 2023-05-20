@@ -101,6 +101,8 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     checkIsUpdateAvailable()
   }
   
+  func mainScreenModuleWillAppear() {}
+  
   func mainScreenModuleDidAppear() {
     services.permissionService.requestNotification { _ in }
   }
@@ -382,62 +384,49 @@ private extension MainScreenCoordinator {
   }
   
   func startDeepLink() {
-    services.deepLinkService.startDeepLink { [weak self] deepLinkType in
-      self?.showScreenDeepLinkWith(type: deepLinkType)
-    }
-  }
-  
-  func showScreenDeepLinkWith(type deepLinkType: DeepLinkType) {
-    guard let mainScreenModule else {
+    guard let deepLinkType = services.deepLinkService.deepLinkType else {
       return
     }
-    navigationController.popToViewController(mainScreenModule, animated: false)
     
     switch deepLinkType {
-    case .settingsScreen:
-      settingButtonAction()
-    case .updateApp:
-      guard let shareAppUrl = Appearance().shareAppUrl else {
-        return
-      }
-      UIApplication.shared.open(shareAppUrl)
-    case .colorsScreen:
-      openColors()
-    case .teamsScreen:
+    case .teams:
       openTeams()
-    case .yesOrNoScreen:
-      openYesOrNo()
-    case .characterScreen:
-      openCharacter()
-    case .listScreen:
-      openList()
-    case .coinScreen:
-      openCoin()
-    case .cubeScreen:
-      openCube()
-    case .dateAndTimeScreen:
-      openDateAndTime()
-    case .lotteryScreen:
-      openLottery()
-    case .contactScreen:
-      openContact()
-    case .passwordScreen:
-      openPassword()
-    case .numberScreen:
+    case .number:
       openNumber()
-    case .bottleScreen:
+    case .yesOrNo:
+      openYesOrNo()
+    case .letter:
+      openCharacter()
+    case .list:
+      openList()
+    case .coin:
+      openCoin()
+    case .cube:
+      openCube()
+    case .dateAndTime:
+      openDateAndTime()
+    case .lottery:
+      openLottery()
+    case .contact:
+      openContact()
+    case .password:
+      openPassword()
+    case .colors:
+      openColors()
+    case .bottle:
       openBottle()
-    case .rockPaperScissorsScreen:
+    case .rockPaperScissors:
       openRockPaperScissors()
     case .imageFilters:
       openImageFilters()
-    case .premiumScreen:
-      openPremium()
-    case .filmsScreen:
+    case .films:
       openFilms()
     }
+    
+    var deepLinkService: DeepLinkService = services.deepLinkService
+    deepLinkService.deepLinkType = nil
     services.metricsService.track(event: .deepLinks,
-                                  properties: ["screen": deepLinkType.rawValue])
+                                  properties: ["screen": deepLinkType.deepLinkEndPoint])
   }
   
   func rateApp() {

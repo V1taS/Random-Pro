@@ -14,21 +14,27 @@ protocol DeepLinkService {
   /// - Parameter urlContexts: Сыылки url
   func eventHandlingWith(urlContexts: Set<UIOpenURLContext>)
   
-  /// Запустить глубокую ссылку
-  /// - Parameter completion: Возвращает тип ссылки
-  func startDeepLink(completion: @escaping (DeepLinkType) -> Void)
+  /// Получен определенный тип диплинка
+  var deepLinkType: MainScreenModel.SectionType? { get set }
 }
 
 final class DeepLinkServiceImpl: DeepLinkService {
   
-  // MARK: - Private property
+  // MARK: - Internal property
   
-  private var deepLinkType: DeepLinkType? {
+  var deepLinkType: MainScreenModel.SectionType? {
     get {
       StorageServiceImpl().deepLinkModel
     } set {
       StorageServiceImpl().deepLinkModel = newValue
     }
+  }
+  
+  // MARK: - Private property
+  
+  /// Имя хоста
+  private var host: String {
+    return "random://"
   }
   
   // MARK: - Internal func
@@ -38,33 +44,12 @@ final class DeepLinkServiceImpl: DeepLinkService {
       return
     }
     
-    DeepLinkType.allCases.forEach { type in
-      if firstUrl.contains(type.rawValue) {
+    MainScreenModel.SectionType.allCases.forEach { type in
+      if firstUrl.contains(type.deepLinkEndPoint) {
         deepLinkType = type
         return
       }
     }
-  }
-  
-  func startDeepLink(completion: @escaping (DeepLinkType) -> Void) {
-    guard let deepLinkType else {
-      return
-    }
-    DispatchQueue.main.async {
-      completion(deepLinkType)
-      self.deepLinkType = nil
-    }
-  }
-}
-
-// MARK: - Private
-
-private extension DeepLinkServiceImpl {
-  func deletingPrefix(fullText: String, prefix: String) -> String? {
-    guard fullText.hasPrefix(prefix) else {
-      return nil
-    }
-    return String(fullText.dropFirst(prefix.count))
   }
 }
 

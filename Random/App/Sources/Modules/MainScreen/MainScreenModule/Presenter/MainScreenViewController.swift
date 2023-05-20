@@ -67,6 +67,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Главный экран был показан
   func mainScreenModuleDidAppear()
   
+  /// Главный экран будет показан
+  func mainScreenModuleWillAppear()
+  
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
@@ -169,6 +172,7 @@ final class MainScreenViewController: MainScreenModule {
     super.viewWillAppear(animated)
     
     navigationController?.navigationBar.prefersLargeTitles = true
+    moduleOutput?.mainScreenModuleWillAppear()
   }
   
   override func viewDidAppear(_ animated: Bool) {

@@ -96,6 +96,10 @@ protocol MainScreenModuleInput {
   /// - Parameter isEnabled: Темная тема включена
   func saveDarkModeStatus(_ isEnabled: Bool?)
   
+  /// Сохранить премиум режим
+  /// - Parameter isEnabled: Сохранить премиум режим
+  func savePremium(_ isEnabled: Bool)
+  
   /// Возвращает модель
   func returnModel(completion: @escaping (MainScreenModel) -> Void)
   
@@ -130,6 +134,7 @@ final class MainScreenViewController: MainScreenModule {
   private let moduleView: MainScreenViewProtocol
   private let factory: MainScreenFactoryInput
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private var isPremiumDEBUG: Bool?
   
   // MARK: - Initialization
   
@@ -185,6 +190,11 @@ final class MainScreenViewController: MainScreenModule {
   
   func saveDarkModeStatus(_ isEnabled: Bool?) {
     interactor.saveDarkModeStatus(isEnabled)
+  }
+  
+  func savePremium(_ isEnabled: Bool) {
+    interactor.savePremium(isEnabled)
+    isPremiumDEBUG = isEnabled
   }
   
   func returnModel(completion: @escaping (MainScreenModel) -> Void) {
@@ -310,8 +320,12 @@ private extension MainScreenViewController {
       self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
         self?.interactor.updatesLabelsFeatureToggle { [weak self] in
           self?.interactor.validatePurchase { [weak self] in
-            self?.interactor.updatesPremiumFeatureToggle { [weak self] in
+            if self?.isPremiumDEBUG != nil {
               self?.setupNavBar()
+            } else {
+              self?.interactor.updatesPremiumFeatureToggle { [weak self] in
+                self?.setupNavBar()
+              }
             }
           }
         }

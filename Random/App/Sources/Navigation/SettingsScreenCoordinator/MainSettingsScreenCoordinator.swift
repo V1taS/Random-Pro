@@ -17,6 +17,10 @@ protocol MainSettingsScreenCoordinatorOutput: AnyObject {
   /// - Parameter isEnabled: Темная тема включена
   func applyDarkTheme(_ isEnabled: Bool?)
   
+  /// Премиум режим включен
+  /// - Parameter isEnabled: Премиум режим включен
+  func applyPremium(_ isEnabled: Bool)
+  
   /// Данные были изменены
   ///  - Parameter models: результат генерации
   func didChanged(models: [MainScreenModel.Section])
@@ -29,8 +33,8 @@ protocol MainSettingsScreenCoordinatorOutput: AnyObject {
 protocol MainSettingsScreenCoordinatorInput {
   
   /// Обновить контент
-  ///  - Parameter isDarkTheme: Темная тема
-  func updateContentWith(isDarkTheme: Bool?)
+  ///  - Parameter model: Модель данных
+  func updateContentWith(model: MainSettingsScreenModel)
   
   /// Обновить контент
   /// - Parameter models: Моделька секций
@@ -85,8 +89,8 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
     navigationController.present(modalNavigationController, animated: true)
   }
   
-  func updateContentWith(isDarkTheme: Bool?) {
-    mainSettingsScreenModule?.updateContentWith(isDarkTheme: isDarkTheme)
+  func updateContentWith(model: MainSettingsScreenModel) {
+    mainSettingsScreenModule?.updateContentWith(model: model)
   }
   
   func updateContentWith(models: [MainScreenModel.Section]) {
@@ -97,6 +101,10 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 // MARK: - MainSettingsScreenModuleOutput
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
+  func applyPremium(_ isEnabled: Bool) {
+    output?.applyPremium(isEnabled)
+  }
+  
   func applicationIconSectionsSelected() {
     guard let upperViewController = modalNavigationController else {
       return
@@ -178,7 +186,7 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     default:
       window?.overrideUserInterfaceStyle = .dark
     }
-
+    
     output?.applyDarkTheme(isEnabled)
   }
   

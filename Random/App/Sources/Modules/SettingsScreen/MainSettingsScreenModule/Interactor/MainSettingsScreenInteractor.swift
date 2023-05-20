@@ -8,24 +8,10 @@
 import UIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol MainSettingsScreenInteractorOutput: AnyObject {
-  
-  /// Были получены данные
-  ///  - Parameter model: результат генерации
-  func didReceive(model: MainSettingsScreenModel)
-}
+protocol MainSettingsScreenInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol MainSettingsScreenInteractorInput {
-  
-  /// Получить данные
-  ///  - Parameter isDarkMode: Включить темную тему
-  func getContentWith(isDarkMode: Bool?)
-  
-  /// Тема приложения была изменена
-  /// - Parameter isEnabled: Темная тема включена
-  func darkThemeChanged(_ isEnabled: Bool?)
-}
+protocol MainSettingsScreenInteractorInput {}
 
 /// Интерактор
 final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
@@ -34,25 +20,7 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   
   weak var output: MainSettingsScreenInteractorOutput?
   
-  // MARK: - Private property
-  
-  private var model: MainSettingsScreenModel?
-  
   // MARK: - Internal func
-  
-  func darkThemeChanged(_ isEnabled: Bool?) {
-    let newModel = MainSettingsScreenModel(isDarkMode: isEnabled)
-    model = newModel
-  }
-  
-  func getContentWith(isDarkMode: Bool?) {
-    if let model = model {
-      output?.didReceive(model: model)
-    } else {
-      let newModel = MainSettingsScreenModel(isDarkMode: isDarkMode)
-      output?.didReceive(model: newModel)
-    }
-  }
 }
 
 // MARK: - Appearance

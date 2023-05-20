@@ -15,6 +15,10 @@ protocol MainSettingsScreenViewOutput: AnyObject {
   /// - Parameter isEnabled: Темная тема включена
   func applyDarkTheme(_ isEnabled: Bool?)
   
+  /// Премиум режим включен
+  /// - Parameter isEnabled: Премиум режим включен
+  func applyPremium(_ isEnabled: Bool)
+  
   /// Выбран раздел настройки главного экрана
   func customMainSectionsSelected()
   
@@ -174,6 +178,27 @@ extension MainSettingsScreenView: UITableViewDataSource {
       ) as? DividerTableViewCell {
         viewCell = cell
       }
+    case let .squircleImageAndLabelWithSwitchControl(
+      squircleBGColors,
+      leftSideImage,
+      leftSideImageColor,
+      titleText,
+      isResultSwitch):
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier
+      ) as? SquircleImageAndLabelWithSwitchCell {
+        cell.configureCellWith(
+          squircleBGColors: squircleBGColors,
+          leftSideImage: leftSideImage,
+          leftSideImageColor: leftSideImageColor,
+          titleText: titleText,
+          isResultSwitch: isResultSwitch
+        )
+        cell.switchAction = { [weak self] isPremium in
+          self?.output?.applyPremium(isPremium)
+        }
+        viewCell = cell
+      }
     }
     
     if tableView.isFirst(for: indexPath) {
@@ -249,7 +274,9 @@ private extension MainSettingsScreenView {
     tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
-
+    
+    tableView.register(SquircleImageAndLabelWithSwitchCell.self,
+                       forCellReuseIdentifier: SquircleImageAndLabelWithSwitchCell.reuseIdentifier)
     tableView.register(SquircleImageAndLabelWithSegmentedControlCell.self,
                        forCellReuseIdentifier: SquircleImageAndLabelWithSegmentedControlCell.reuseIdentifier)
     tableView.register(SquircleImageAndLabelWithChevronCell.self,
@@ -258,6 +285,7 @@ private extension MainSettingsScreenView {
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
     tableView.register(DividerTableViewCell.self,
                        forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
+    
     tableView.tableFooterView = UIView()
     tableView.tableHeaderView = UIView()
     tableView.showsVerticalScrollIndicator = false

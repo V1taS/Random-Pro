@@ -302,7 +302,10 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     services.metricsService.track(event: .mainSettingsScreen)
     
     mainScreenModule.returnModel { model in
-      settingsScreenCoordinator.updateContentWith(isDarkTheme: model.isDarkMode)
+      settingsScreenCoordinator.updateContentWith(model: MainSettingsScreenModel(
+        isDarkMode: model.isDarkMode,
+        isPremium: model.isPremium
+      ))
       settingsScreenCoordinator.updateContentWith(models: model.allSections)
     }
   }
@@ -311,6 +314,10 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
 // MARK: - MainSettingsScreenCoordinatorOutput & PremiumScreenCoordinatorOutput
 
 extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScreenCoordinatorOutput {
+  func applyPremium(_ isEnabled: Bool) {
+    mainScreenModule?.savePremium(isEnabled)
+  }
+  
   func updateStateForSections() {
     mainScreenModule?.updateStateForSections()
   }

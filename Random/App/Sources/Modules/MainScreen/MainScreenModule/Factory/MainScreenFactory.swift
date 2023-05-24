@@ -203,7 +203,7 @@ extension MainScreenFactory {
             titleSection: section.titleSection,
             isEnabled: true,
             isHidden: false,
-            advLabel: .none
+            advLabel: .premium
           ))
         }
       }
@@ -383,9 +383,9 @@ extension MainScreenFactory {
                 imageSectionSystemName: model.imageSectionSystemName,
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.films) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.films ?? model.advLabel.rawValue,
-                                       oldADVLabel: .none)
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.nickname) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.nickname ?? model.advLabel.rawValue,
+                                       oldADVLabel: .premium)
               ))
             }
           }

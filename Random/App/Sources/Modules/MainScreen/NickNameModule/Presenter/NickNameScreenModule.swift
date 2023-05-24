@@ -20,6 +20,9 @@ protocol NickNameScreenModuleOutput: AnyObject {
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
   func resultCopied(text: String)
+  
+  /// Что-то пошло не так
+  func somethingWentWrong()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -85,15 +88,14 @@ final class NickNameScreenViewController: NickNameScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     setNavigationBar()
-
-    startLoader()
+    
+    moduleView.startLoader()
     interactor.getContent()
-    contentLoadedSuccessfully()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
   // MARK: - Internal func
-
+  
   func cleanButtonAction() {
     interactor.cleanButtonAction()
   }
@@ -106,6 +108,14 @@ final class NickNameScreenViewController: NickNameScreenModule {
 // MARK: - NickNameScreenViewOutput
 
 extension NickNameScreenViewController: NickNameScreenViewOutput {
+  func resultLabelAction() {
+    let result = interactor.returnCurrentModel().result
+    guard result != Appearance().defaultResult else {
+      return
+    }
+    moduleOutput?.resultCopied(text: result)
+  }
+  
   func generateShortButtonAction() {
     interactor.generateShortButtonAction()
   }
@@ -118,12 +128,9 @@ extension NickNameScreenViewController: NickNameScreenViewOutput {
 // MARK: - NickNameScreenInteractorOutput
 
 extension NickNameScreenViewController: NickNameScreenInteractorOutput {
-  func startLoader() {
-    moduleView.startLoader()
-  }
-  
-  func stopLoader() {
+  func somethingWentWrong() {
     moduleView.stopLoader()
+    moduleOutput?.somethingWentWrong()
   }
   
   func cleanButtonWasSelected() {
@@ -131,12 +138,9 @@ extension NickNameScreenViewController: NickNameScreenInteractorOutput {
   }
   
   func didReceive(nick: String?) {
+    moduleView.stopLoader()
     moduleView.set(result: nick)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
-  }
-  
-  func contentLoadedSuccessfully() {
-    moduleView.stopLoader()
   }
 }
 
@@ -173,13 +177,14 @@ private extension NickNameScreenViewController {
     impactFeedback.impactOccurred()
   }
 }
-  
-  // MARK: - Appearance
-  
-  private extension NickNameScreenViewController {
-    struct Appearance {
-      let title = "Никнейм"
-      let settingsButtonIcon = UIImage(systemName: "gear")
-      let copyButtonIcon = UIImage(systemName: "doc.on.doc")
-    }
+
+// MARK: - Appearance
+
+private extension NickNameScreenViewController {
+  struct Appearance {
+    let title = RandomStrings.Localizable.nickname
+    let settingsButtonIcon = UIImage(systemName: "gear")
+    let copyButtonIcon = UIImage(systemName: "doc.on.doc")
+    let defaultResult = "?"
   }
+}

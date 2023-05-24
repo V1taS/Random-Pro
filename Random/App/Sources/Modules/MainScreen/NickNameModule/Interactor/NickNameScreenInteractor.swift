@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomNetwork
 
 /// События которые отправляем из Interactor в Presenter
 protocol NickNameScreenInteractorOutput: AnyObject {
@@ -14,17 +15,11 @@ protocol NickNameScreenInteractorOutput: AnyObject {
   ///  - Parameter nick: никнейм
   func didReceive(nick: String?)
   
-  /// Были загружены данные
-  func contentLoadedSuccessfully()
+  /// Что-то пошло не так
+  func somethingWentWrong()
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
-  
-  /// Запустить доадер
-  func startLoader()
-  
-  /// Остановить лоадер
-  func stopLoader()
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -56,6 +51,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private var networkService: NetworkService
   private var casheNicks: [String] = []
   
   // MARK: - Initialization
@@ -64,32 +60,54 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    networkService = services.networkService
   }
   
   // MARK: - Internal func
   
   func getContent() {
-    // TODO: - Сделать запрос в сеть для получения списка ников
-        sleep(3)
-    let someArray = ["Пьяная белка", "Ангел-Предохранитель", "[SуперМэнка]", "Йожик", "ZEFIRKA:)", "Apple", "кот",
-                     "милое олицетворение зла", "your_problem", "Blackkiller", "!B-DOG!", "!Dead|LeGioN| Бабушка",
-                     "Darya", "ChupaChupssssssssss", "CHLENIX|ON", "Ты", "Swit", "Pig"]
+    let appearance = Appearance()
     
-    casheNicks = someArray
-    if let model = storageService.nickNameScreenModel {
-      output?.didReceive(nick: model.result)
-    } else {
-      let newModel = NickNameScreenModel(
-        result: Appearance().result,
-        listResult: []
-      )
-      output?.didReceive(nick: newModel.result)
-      storageService.nickNameScreenModel = newModel
-    }
+    let host = appearance.host
+    let apiVersion = appearance.apiVersion
+    let endPoint = appearance.endPoint
+    let apiKey = appearance.apiKey
+    let valueType = appearance.valueType
+    
+    networkService.performRequestWith(
+      urlString: host + apiVersion + endPoint,
+      queryItems: [],
+      httpMethod: .get,
+      headers: [
+        .contentTypeJson,
+        .additionalHeaders(setValue: [valueType: apiKey])
+      ]) { [weak self] result in
+        DispatchQueue.main.async {
+          switch result {
+          case let .success(data):
+            if let listNicks = self?.networkService.map(data, to: [String].self) {
+              self?.casheNicks = listNicks
+              if let model = self?.storageService.nickNameScreenModel {
+                self?.output?.didReceive(nick: model.result)
+              } else {
+                let newModel = NickNameScreenModel(
+                  result: Appearance().result,
+                  listResult: []
+                )
+                self?.output?.didReceive(nick: newModel.result)
+                self?.storageService.nickNameScreenModel = newModel
+              }
+            } else {
+              self?.output?.somethingWentWrong()
+            }
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
   }
   
   func generateShortButtonAction() {
-    output?.startLoader()
     var filterArray = casheNicks.filter { $0.count <= 6 }
     filterArray.shuffle()
     let result = filterArray.first ?? ""
@@ -103,7 +121,6 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
       
       storageService.nickNameScreenModel = newModel
       output?.didReceive(nick: result)
-      output?.stopLoader()
     } else {
       let newModel = NickNameScreenModel(result: result,
                                          listResult: [result])
@@ -112,9 +129,8 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   }
   
   func generatePopularButtonAction() {
-    output?.startLoader()
-    var result = casheNicks.shuffled().first ?? ""
-
+    let result = casheNicks.shuffled().first ?? ""
+    
     if let model = storageService.nickNameScreenModel {
       var currentListResult = model.listResult
       currentListResult.append(result)
@@ -124,14 +140,13 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
       
       storageService.nickNameScreenModel = newModel
       output?.didReceive(nick: result)
-      output?.stopLoader()
     } else {
       let newModel = NickNameScreenModel(result: result,
                                          listResult: [result])
       storageService.nickNameScreenModel = newModel
     }
   }
-
+  
   func returnCurrentModel() -> NickNameScreenModel {
     if let model = storageService.nickNameScreenModel {
       return model
@@ -159,5 +174,10 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
 private extension NickNameScreenInteractor {
   struct Appearance {
     let result = "?"
+    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
+    let apiVersion = "/api/v1"
+    let endPoint = "/nickname"
+    let apiKey = "api_key"
+    let valueType = "4t2AceLVaSW88H8wJ1f6"
   }
 }

@@ -25,6 +25,8 @@ typealias NickNameScreenCoordinatorProtocol = NickNameScreenCoordinatorInput & C
 
 final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
   
+  // MARK: - Internal property
+  
   weak var output: NickNameScreenCoordinatorOutput?
   
   // MARK: - Private variables
@@ -59,6 +61,13 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
 // MARK: - NickNameScreenModuleOutput
 
 extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
+  func somethingWentWrong() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                                       glyph: false,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+  
   func cleanButtonWasSelected() {
     let model = nickNameScreenModule?.returnCurrentModel()
     settingsScreenCoordinator?.setupDefaultsSettings(for: .nickname(itemsGenerated: "\(model?.listResult.count ?? .zero)",
@@ -119,5 +128,6 @@ extension NickNameScreenCoordinator: ListResultScreenCoordinatorOutput {}
 private extension NickNameScreenCoordinator {
   struct Appearance {
     let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
+    let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
   }
 }

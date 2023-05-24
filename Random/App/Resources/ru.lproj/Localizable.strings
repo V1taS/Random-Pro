@@ -76,6 +76,7 @@
 "generate" = "Сгенерировать";
 "generate_letter" = "Сгенерировать букву";
 "generate_random_answer" = "Можно генерировать рандомный ответ";
+"generate_random_nickname" = "Можно генерировать рандомный никнейм";
 "generate_random_date_time" = "Можно генерировать рандомную дату и время";
 "generate_random_letters" = "Можно генерировать рандомные буквы";
 "generate_random_numbers" = "Можно генерировать рандомные числа";
@@ -248,4 +249,7 @@
 "change_team_name" = "Введите новое название команды";
 "crack_time" = "Время взлома";
 "centuries" = "веков";
+"short" = "Короткий";
+"popular" = "Популярный";
+"nickname" = "Никнейм";
 "at_least_4_characters_for_password" = "Пароль слишком короткий. Необходимо минимум 4 символа.";

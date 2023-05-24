@@ -30,7 +30,7 @@ extension MainScreenModel {
     let rockPaperScissorsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canPlayRockPaperScissors
     let imageFiltersDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPhotoFilter
     let filmsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomMovie
-    let nickNameDescriptionForNoPremiumAccess = RandomStrings.Localizable.nickname
+    let nickNameDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNickname
     
     let imageCardTeam = "person.circle"
     let titleCardTeam = RandomStrings.Localizable.teams

@@ -17,6 +17,9 @@ protocol NickNameScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку и происходит генерация  'Популярных никнеймов'
   func generatePopularButtonAction()
+  
+  /// Было нажатие на результат генерации
+  func resultLabelAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -48,7 +51,7 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
   private let resultLabel = UILabel()
   private let inscriptionsSegmentedControl = UISegmentedControl()
   private let generateButton = ButtonView()
-  private let activityIndicator = LottieAnimationView(name: Appearance().loaderImage)
+  private let lottieAnimationView = LottieAnimationView(name: Appearance().loaderImage)
   
   // MARK: - Initialization
   
@@ -67,16 +70,20 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
   
   func set(result: String?) {
     resultLabel.text = result
+    resultLabel.zoomIn(duration: Appearance().resultDuration,
+                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
   }
   
   func startLoader() {
-    activityIndicator.isHidden = false
-    activityIndicator.play()
+    lottieAnimationView.isHidden = false
+    lottieAnimationView.play()
+    generateButton.set(isEnabled: false)
   }
   
   func stopLoader() {
-    activityIndicator.isHidden = true
-    activityIndicator.stop()
+    lottieAnimationView.isHidden = true
+    lottieAnimationView.stop()
+    generateButton.set(isEnabled: true)
   }
 }
 
@@ -86,7 +93,7 @@ private extension NickNameScreenView {
   func configureLayout() {
     let appearance = Appearance()
     
-    [resultLabel, inscriptionsSegmentedControl, generateButton, activityIndicator].forEach {
+    [resultLabel, inscriptionsSegmentedControl, generateButton, lottieAnimationView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -111,9 +118,9 @@ private extension NickNameScreenView {
       generateButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
                                              constant: -appearance.defaultInset),
       
-      activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-      activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
-      activityIndicator.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5)
+      lottieAnimationView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      lottieAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      lottieAnimationView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5)
     ])
   }
   
@@ -124,21 +131,35 @@ private extension NickNameScreenView {
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
-    resultLabel.numberOfLines = 3
+    resultLabel.numberOfLines = appearance.numberOfLines
     
     inscriptionsSegmentedControl.insertSegment(withTitle: appearance.shortTitle,
-                                         at: appearance.shortTitleIndex, animated: false)
+                                               at: appearance.shortTitleIndex, animated: false)
     inscriptionsSegmentedControl.insertSegment(withTitle: appearance.popularTitle,
-                                         at: appearance.popularTitleIndex, animated: false)
+                                               at: appearance.popularTitleIndex, animated: false)
     inscriptionsSegmentedControl.selectedSegmentIndex = appearance.shortTitleIndex
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
-    activityIndicator.isHidden = true
-    activityIndicator.contentMode = .scaleAspectFit
-    activityIndicator.loopMode = .loop
-    activityIndicator.animationSpeed = Appearance().animationSpeed
+    lottieAnimationView.isHidden = true
+    lottieAnimationView.contentMode = .scaleAspectFit
+    lottieAnimationView.loopMode = .loop
+    lottieAnimationView.animationSpeed = Appearance().animationSpeed
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
+    tap.cancelsTouchesInView = false
+    addGestureRecognizer(tap)
+    isUserInteractionEnabled = true
+    
+    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    resultLabelAction.cancelsTouchesInView = false
+    resultLabel.addGestureRecognizer(resultLabelAction)
+    resultLabel.isUserInteractionEnabled = true
+  }
+  
+  @objc func resultAction() {
+    output?.resultLabelAction()
   }
   
   @objc func generateButtonAction() {
@@ -160,13 +181,15 @@ private extension NickNameScreenView {
 
 private extension NickNameScreenView {
   struct Appearance {
-    let shortTitle = "Короткий"
+    let shortTitle = RandomStrings.Localizable.short
     let shortTitleIndex = 0
-    let popularTitle = "Популярный"
+    let popularTitle = RandomStrings.Localizable.popular
     let popularTitleIndex = 1
     let buttonTitle = RandomStrings.Localizable.generate
     let loaderImage = RandomAsset.filmsLoader.name
     let animationSpeed: CGFloat = 0.5
     let defaultInset: CGFloat = 16
+    let resultDuration: CGFloat = 0.2
+    let numberOfLines: Int = 2
   }
 }

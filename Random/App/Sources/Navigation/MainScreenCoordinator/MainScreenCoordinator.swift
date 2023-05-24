@@ -438,6 +438,8 @@ private extension MainScreenCoordinator {
       openImageFilters()
     case .films:
       openFilms()
+    case .nickName:
+      openNickName()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

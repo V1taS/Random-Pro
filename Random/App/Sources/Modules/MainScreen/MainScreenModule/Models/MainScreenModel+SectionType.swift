@@ -49,6 +49,8 @@ extension MainScreenModel {
         return "image_filters"
       case .films:
         return "films_screen"
+      case .nickName:
+        return "nick_name"
       }
     }
     

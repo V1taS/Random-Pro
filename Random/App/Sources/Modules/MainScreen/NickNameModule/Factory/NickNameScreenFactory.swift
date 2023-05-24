@@ -19,8 +19,7 @@ final class NickNameScreenFactory: NickNameScreenFactoryInput {
   // MARK: - Internal properties
   
   weak var output: NickNameScreenFactoryOutput?
-  
-  // MARK: - Internal func
+
 }
 
 // MARK: - Appearance

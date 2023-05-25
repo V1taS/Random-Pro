@@ -72,7 +72,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
     let apiKey = appearance.apiKey
-    let valueType = appearance.valueType
+    let valueType = appearance.apiValue
     
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
@@ -178,6 +178,6 @@ private extension NickNameScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/nickname"
     let apiKey = "api_key"
-    let valueType = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = "4t2AceLVaSW88H8wJ1f6"
   }
 }

@@ -383,8 +383,8 @@ extension MainScreenFactory {
                 imageSectionSystemName: model.imageSectionSystemName,
                 titleSection: model.type.titleSection,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.nickname) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.nickname ?? model.advLabel.rawValue,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.nickName) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.nickName ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
             }

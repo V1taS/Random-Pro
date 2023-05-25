@@ -59,7 +59,7 @@ struct LabelsFeatureToggleModel {
   let films: String
   
   /// Раздел `Никнейм`
-  let nickname: String
+  let nickName: String
   
   // MARK: - Initialization
   
@@ -82,6 +82,6 @@ struct LabelsFeatureToggleModel {
     rockPaperScissors = (dictionary["rockPaperScissors"] as? String ?? "")
     imageFilters = (dictionary["imageFilters"] as? String ?? "")
     films = (dictionary["films"] as? String ?? "")
-    nickname = (dictionary["nickname"] as? String ?? "")
+    nickName = (dictionary["nickName"] as? String ?? "")
   }
 }

@@ -11,14 +11,15 @@ import UIKit
 final class NickNameScreenAssembly {
   
   /// Собирает модуль `NickNameScreen`
+  /// - Parameter services: Сервисы приложения
   /// - Returns: Cобранный модуль `NickNameScreen`
   func createModule(services: ApplicationServices) -> NickNameScreenModule {
     let interactor = NickNameScreenInteractor(services: services)
     let view = NickNameScreenView()
     let factory = NickNameScreenFactory()
     let presenter = NickNameScreenViewController(moduleView: view,
-                                               interactor: interactor,
-                                               factory: factory)
+                                                 interactor: interactor,
+                                                 factory: factory)
     
     view.output = presenter
     interactor.output = presenter

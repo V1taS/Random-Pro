@@ -251,5 +251,4 @@
 "centuries" = "centuries";
 "short" = "Short";
 "popular" = "Popular";
-"nickname" = "Nickname";
 "at_least_4_characters_for_password" = "The password is too short. Minimum 4 characters required.";

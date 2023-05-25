@@ -72,7 +72,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
     let apiKey = appearance.apiKey
-    let valueType = appearance.apiValue
+    let apiValue = appearance.apiValue
     
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
@@ -80,7 +80,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
       httpMethod: .get,
       headers: [
         .contentTypeJson,
-        .additionalHeaders(setValue: [valueType: apiKey])
+        .additionalHeaders(setValue: [apiValue: apiKey])
       ]) { [weak self] result in
         DispatchQueue.main.async {
           switch result {
@@ -108,7 +108,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   }
   
   func generateShortButtonAction() {
-    var filterArray = casheNicks.filter { $0.count <= 6 }
+    var filterArray = casheNicks.filter { $0.count <= 5 }
     filterArray.shuffle()
     let result = filterArray.first ?? ""
     

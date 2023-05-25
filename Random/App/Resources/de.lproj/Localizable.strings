@@ -76,6 +76,7 @@
 "generate" = "Generieren";
 "generate_letter" = "Buchstabe generieren";
 "generate_random_answer" = "Es ist möglich, eine zufällige Antwort zu generieren";
+"generate_random_nickname" = "Sie können einen zufälligen Spitznamen generieren";
 "generate_random_date_time" = "Ein zufälliges Datum und eine zufällige Uhrzeit können generiert werden";
 "generate_random_letters" = "Es können zufällige Buchstaben generiert werden";
 "generate_random_numbers" = "Es können Zufallszahlen generiert werden";
@@ -148,6 +149,7 @@
 "number_of_teams" = "Anzahl der Befehle";
 "number_range_ended" = "Der Zahlenbereich ist abgelaufen";
 "numbers" = "Zahlen";
+"nickname" = "Spitzname";
 "october" = "Oktober";
 "ok" = "Ok";
 "on_game" = "Pro Spiel";
@@ -247,4 +249,6 @@
 "change_team_name" = "Geben Sie einen neuen Namen für den Befehl ein";
 "crack_time" = "Crack-Zeit";
 "centuries" = "Jahrhunderte";
+"short" = "Kurz";
+"popular" = "Beliebt";
 "at_least_4_characters_for_password" = "Das Passwort ist zu kurz. Mindestens 4 Zeichen erforderlich.";

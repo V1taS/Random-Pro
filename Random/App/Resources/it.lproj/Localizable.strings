@@ -76,6 +76,7 @@
 "generate" = "generare";
 "generate_letter" = "genera lettera";
 "generate_random_answer" = "è possibile generare una risposta casuale";
+"generate_random_nickname" = "Puoi generare un soprannome casuale";
 "generate_random_date_time" = "è possibile generare una data e un'ora casuali";
 "generate_random_letters" = "è possibile generare lettere casuali";
 "generate_random_numbers" = "è possibile generare numeri casuali";
@@ -148,6 +149,7 @@
 "number_of_teams" = "numero di comandi";
 "number_range_ended" = "L'intervallo di numeri è terminato";
 "numbers" = "numeri";
+"nickname" = "Soprannome";
 "october" = "Ottobre";
 "ok" = "OK";
 "on_game" = "sul gioco";
@@ -247,4 +249,6 @@
 "change_team_name" = "Inserisci un nuovo nome di squadra";
 "crack_time" = "tempo di crepa";
 "centuries" = "secoli";
+"short" = "Corto";
+"popular" = "Popolare";
 "at_least_4_characters_for_password" = "La password è troppo breve. Minimo 4 caratteri richiesti.";

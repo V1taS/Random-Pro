@@ -67,12 +67,9 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   
   func getContent() {
     let appearance = Appearance()
-    
     let host = appearance.host
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
-    let apiKey = appearance.apiKey
-    let apiValue = appearance.apiValue
     
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
@@ -80,7 +77,9 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
       httpMethod: .get,
       headers: [
         .contentTypeJson,
-        .additionalHeaders(setValue: [apiValue: apiKey])
+        .additionalHeaders(set: [
+          (key: appearance.apiKey, value: appearance.apiValue)
+        ])
       ]) { [weak self] result in
         DispatchQueue.main.async {
           switch result {

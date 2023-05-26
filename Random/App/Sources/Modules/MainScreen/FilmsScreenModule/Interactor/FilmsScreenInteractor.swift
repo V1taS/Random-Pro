@@ -166,77 +166,73 @@ private extension FilmsScreenInteractor {
   }
   
   func loadListEngFilmsDto(completion: @escaping ([FilmsScreenEngModelDTO]) -> Void) {
-    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      let appearance = Appearance()
-      let headers: [String: String] = [
-        appearance.engAPIKey: appearance.engHeaderAPIKey,
-        appearance.engAPIHost: appearance.engHeaderAPIHost
+    let appearance = Appearance()
+    
+    services.networkService.performRequestWith(
+      urlString: appearance.engFilmUrl,
+      queryItems: [],
+      httpMethod: .get,
+      headers: [
+        .additionalHeaders(set: [
+          (key: appearance.engHeaderAPIKey, value: appearance.engAPIKey),
+          (key: appearance.engHeaderAPIHost, value: appearance.engAPIHost)
+        ]),
+        .contentTypeJson
       ]
-      self?.services.networkService.performRequestWith(
-        urlString: appearance.engFilmUrl,
-        queryItems: [],
-        httpMethod: .get,
-        headers: [
-          .additionalHeaders(setValue: headers),
-          .contentTypeJson
-        ]
-      ) { [weak self] result in
-        switch result {
-        case let .success(data):
-          DispatchQueue.main.async {
-            guard let model = self?.services.networkService.map(data, to: [FilmsScreenEngModelDTO].self) else {
-              self?.output?.somethingWentWrong()
-              return
-            }
-            completion(model)
-          }
-        case .failure:
-          DispatchQueue.main.async {
-            completion([])
+    ) { [weak self] result in
+      switch result {
+      case let .success(data):
+        DispatchQueue.main.async {
+          guard let model = self?.services.networkService.map(data, to: [FilmsScreenEngModelDTO].self) else {
             self?.output?.somethingWentWrong()
+            return
           }
+          completion(model)
+        }
+      case .failure:
+        DispatchQueue.main.async {
+          completion([])
+          self?.output?.somethingWentWrong()
         }
       }
     }
   }
   
   func loadListRusFilmsDto(completion: @escaping ([FilmsScreenRusModelDTO.Film]) -> Void) {
-    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      let appearance = Appearance()
-      let urlString = "\(appearance.rusDomenKinopoisk)\(appearance.rusEndPoint)"
-      let headers: [String: String] = [
-        appearance.rusAPIKey: appearance.rusHeaderAPIKey
+    let appearance = Appearance()
+    let urlString = "\(appearance.rusDomenKinopoisk)\(appearance.rusEndPoint)"
+    let randomFilmeType = FilmsScreenRusType.allCases.shuffled().first ?? .top250Best
+    
+    services.networkService.performRequestWith(
+      urlString: urlString,
+      queryItems: [
+        URLQueryItem(name: "type",
+                     value: randomFilmeType.rawvalue),
+        URLQueryItem(name: "page",
+                     value: "\(Int.random(in: 1...randomFilmeType.pageMaxCount))"),
+        
+      ],
+      httpMethod: .get,
+      headers: [
+        .additionalHeaders(set: [
+          (key: appearance.rusHeaderAPIKey, value: appearance.rusAPIKey)
+        ]),
+        .contentTypeJson
       ]
-      let randomFilmeType = FilmsScreenRusType.allCases.shuffled().first ?? .top250Best
-      self?.services.networkService.performRequestWith(
-        urlString: urlString,
-        queryItems: [
-          URLQueryItem(name: "type",
-                       value: randomFilmeType.rawvalue),
-          URLQueryItem(name: "page",
-                       value: "\(Int.random(in: 1...randomFilmeType.pageMaxCount))"),
-          
-        ],
-        httpMethod: .get,
-        headers: [
-          .additionalHeaders(setValue: headers),
-          .contentTypeJson
-        ]
-      ) { [weak self] result in
-        switch result {
-        case let .success(data):
-          DispatchQueue.main.async {
-            guard let model = self?.services.networkService.map(data, to: FilmsScreenRusModelDTO.self) else {
-              self?.output?.somethingWentWrong()
-              return
-            }
-            completion(model.films)
-          }
-        case .failure:
-          DispatchQueue.main.async {
-            completion([])
+    ) { [weak self] result in
+      switch result {
+      case let .success(data):
+        DispatchQueue.main.async {
+          guard let model = self?.services.networkService.map(data, to: FilmsScreenRusModelDTO.self) else {
             self?.output?.somethingWentWrong()
+            return
           }
+          completion(model.films)
+        }
+      case .failure:
+        DispatchQueue.main.async {
+          completion([])
+          self?.output?.somethingWentWrong()
         }
       }
     }
@@ -259,26 +255,23 @@ private extension FilmsScreenInteractor {
       dispatchGroup.enter()
     }
     
-    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      guard let self else {
-        return
-      }
-      filmsEngDTO.forEach { modelDTO in
-        self.services.networkService.performRequestWith(urlString: self.factory.createBestQualityFrom(url: modelDTO.img),
-                                                        queryItems: [],
-                                                        httpMethod: .get,
-                                                        headers: []) { [weak self] result in
-          guard let self else {
-            return
-          }
-          switch result {
-          case let .success(imageData):
-            let model = self.factory.createEngFilmsModelFrom(modelDTO,
-                                                             image: imageData)
-            filmsModels.append(model)
-            dispatchGroup.leave()
-          case .failure:
-            dispatchGroup.leave()
+    filmsEngDTO.forEach { modelDTO in
+      self.services.networkService.performRequestWith(urlString: self.factory.createBestQualityFrom(url: modelDTO.img),
+                                                      queryItems: [],
+                                                      httpMethod: .get,
+                                                      headers: []) { [weak self] result in
+        guard let self else {
+          return
+        }
+        switch result {
+        case let .success(imageData):
+          let model = self.factory.createEngFilmsModelFrom(modelDTO,
+                                                           image: imageData)
+          filmsModels.append(model)
+          dispatchGroup.leave()
+        case .failure:
+          dispatchGroup.leave()
+          DispatchQueue.main.async {
             self.output?.somethingWentWrong()
           }
         }
@@ -297,23 +290,23 @@ private extension FilmsScreenInteractor {
       dispatchGroup.enter()
     }
     
-    DispatchQueue.global(qos: .userInteractive).async {
-      filmsRusDTO.forEach { modelDTO in
-        self.services.networkService.performRequestWith(urlString: modelDTO.posterUrl,
-                                                        queryItems: [],
-                                                        httpMethod: .get,
-                                                        headers: []) { [weak self] result in
-          guard let self else {
-            return
-          }
-          switch result {
-          case let .success(imageData):
-            let model = self.factory.createRusFilmsModelFrom(modelDTO,
-                                                             image: imageData)
-            filmsModels.append(model)
-            dispatchGroup.leave()
-          case .failure:
-            dispatchGroup.leave()
+    filmsRusDTO.forEach { modelDTO in
+      self.services.networkService.performRequestWith(urlString: modelDTO.posterUrl,
+                                                      queryItems: [],
+                                                      httpMethod: .get,
+                                                      headers: []) { [weak self] result in
+        guard let self else {
+          return
+        }
+        switch result {
+        case let .success(imageData):
+          let model = self.factory.createRusFilmsModelFrom(modelDTO,
+                                                           image: imageData)
+          filmsModels.append(model)
+          dispatchGroup.leave()
+        case .failure:
+          dispatchGroup.leave()
+          DispatchQueue.main.async {
             self.output?.somethingWentWrong()
           }
         }

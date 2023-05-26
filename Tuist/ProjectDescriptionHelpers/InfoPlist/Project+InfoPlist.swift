@@ -106,10 +106,10 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
     "DTXcodeBuild": .string("14C18"),
     "NSPhotoLibraryAddUsageDescription": .string("Please provide access to the Photo Library"),
     "UISupportedInterfaceOrientations~ipad": .array([
-      .string("UIInterfaceOrientationPortrait"),
-      .string("UIInterfaceOrientationPortraitUpsideDown"),
-      .string("UIInterfaceOrientationLandscapeLeft"),
-      .string("UIInterfaceOrientationLandscapeRight")
+      .string("UIInterfaceOrientationPortrait")
+    ]),
+    "UISupportedInterfaceOrientations": .array([
+      .string("UIInterfaceOrientationPortrait")
     ]),
     "UIStatusBarHidden": .boolean(false),
     "CFBundleIcons": .dictionary([

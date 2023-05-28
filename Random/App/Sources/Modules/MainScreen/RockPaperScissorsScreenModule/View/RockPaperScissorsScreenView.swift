@@ -128,33 +128,39 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
 
 private extension RockPaperScissorsScreenView {
   func startHandShakeAnimation() {
-    handShakeAnimationView.isHidden = false
-    handShakeAnimationView.play()
+    // Выключаю часть функционала, что бы apple не считал это азартной игрой
+//    handShakeAnimationView.isHidden = false
+//    handShakeAnimationView.play()
   }
   
   func stopHandShakeAnimation() {
-    handShakeAnimationView.isHidden = true
-    handShakeAnimationView.stop()
+    // Выключаю часть функционала, что бы apple не считал это азартной игрой
+//    handShakeAnimationView.isHidden = true
+//    handShakeAnimationView.stop()
   }
   
   func startLeftYouWinAnimation() {
-    leftYouWinAnimationView.isHidden = false
-    leftYouWinAnimationView.play()
+    // Выключаю часть функционала, что бы apple не считал это азартной игрой
+//    leftYouWinAnimationView.isHidden = false
+//    leftYouWinAnimationView.play()
   }
   
   func stopLeftYouWinAnimation() {
-    leftYouWinAnimationView.isHidden = true
-    leftYouWinAnimationView.stop()
+    // Выключаю часть функционала, что бы apple не считал это азартной игрой
+//    leftYouWinAnimationView.isHidden = true
+//    leftYouWinAnimationView.stop()
   }
   
   func startRightYouWinAnimation() {
-    rightYouWinAnimationView.isHidden = false
-    rightYouWinAnimationView.play()
+    // Выключаю часть функционала, что бы apple не считал это азартной игрой
+//    rightYouWinAnimationView.isHidden = false
+//    rightYouWinAnimationView.play()
   }
   
   func stopRightYouWinAnimation() {
-    rightYouWinAnimationView.isHidden = true
-    rightYouWinAnimationView.stop()
+    // Выключаю часть функционала, что бы apple не считал это азартной игрой
+//    rightYouWinAnimationView.isHidden = true
+//    rightYouWinAnimationView.stop()
   }
   
   func startShakeHands() {
@@ -197,6 +203,13 @@ private extension RockPaperScissorsScreenView {
     
     scoreLabel.font = .systemFont(ofSize: appearance.systemFontScore)
     
+    // Выключаю часть функционала, что бы apple не считал это азартной игрой
+    scoreLabel.isHidden = true
+    leftImageView.isHidden = true
+    leftYouWinAnimationView.isHidden = true
+    resultImageLeftLabel.isHidden = true
+    rightYouWinAnimationView.isHidden = true
+    
     resultImageLeftLabel.textAlignment = .center
     resultImageLeftLabel.font = .systemFont(ofSize: appearance.systemFontLabel)
     
@@ -210,13 +223,11 @@ private extension RockPaperScissorsScreenView {
     rightImageView.contentMode = .scaleAspectFit
     rightImageView.scalesLargeContentImage = true
     rightImageView.clipsToBounds = true
-    
-    leftYouWinAnimationView.isHidden = true
+
     leftYouWinAnimationView.contentMode = .scaleAspectFill
     leftYouWinAnimationView.loopMode = .playOnce
     leftYouWinAnimationView.animationSpeed = Appearance().animationSpeed
     
-    rightYouWinAnimationView.isHidden = true
     rightYouWinAnimationView.contentMode = .scaleAspectFill
     rightYouWinAnimationView.loopMode = .playOnce
     rightYouWinAnimationView.animationSpeed = Appearance().animationSpeed
@@ -270,18 +281,18 @@ private extension RockPaperScissorsScreenView {
       leftImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
       leftImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
       
-      rightImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -24),
-      rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      rightImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
-      rightImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.4),
+      rightImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      rightImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -50),
+      rightImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.6),
+      rightImageView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.6),
       
       resultImageLeftLabel.centerXAnchor.constraint(equalTo: leftImageView.centerXAnchor),
       resultImageLeftLabel.topAnchor.constraint(equalTo: leftImageView.bottomAnchor,
                                                 constant: 16),
       
       resultImageRightLabel.centerXAnchor.constraint(equalTo: rightImageView.centerXAnchor),
-      resultImageRightLabel.centerYAnchor.constraint(equalTo: resultImageLeftLabel.centerYAnchor),
+      resultImageRightLabel.topAnchor.constraint(equalTo: rightImageView.bottomAnchor,
+                                                     constant: 16),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),

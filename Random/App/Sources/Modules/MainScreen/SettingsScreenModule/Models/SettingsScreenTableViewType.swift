@@ -16,6 +16,18 @@ enum SettingsScreenTableViewType {
   /// Секция `Заголовок и переключатель`
   /// - Parameters:
   ///  - title: Заголовок
+  ///  - listOfItems: Список элементов
+  ///  - startSelectedSegmentIndex: Выбранный элемент
+  ///  - valueChanged: Действие на изменение языка
+  case labelWithSegmentedControl(title: String,
+                                 listOfItems: [String],
+                                 startSelectedSegmentIndex: Int,
+                                 valueChanged: ((_ index: Int) -> Void)?
+  )
+  
+  /// Секция `Заголовок и переключатель`
+  /// - Parameters:
+  ///  - title: Заголовок
   ///  - isEnabled: Переключатель
   case titleAndSwitcher(title: String, isEnabled: Bool)
   

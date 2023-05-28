@@ -4,9 +4,9 @@ let dependencies = Dependencies(
   swiftPackageManager: SwiftPackageManagerDependencies(
     [
       .remote(url: "https://github.com/V1taS/RandomUIKit.git",
-              requirement: .exact("1.9")),
+              requirement: .exact("1.14")),
       .remote(url: "https://github.com/V1taS/RandomNetwork.git",
-              requirement: .exact("1.2")),
+              requirement: .exact("1.3")),
       .remote(url: "https://github.com/V1taS/Notifications",
               requirement: .exact("1.0")),
       .remote(url: "https://github.com/evgenyneu/keychain-swift.git",

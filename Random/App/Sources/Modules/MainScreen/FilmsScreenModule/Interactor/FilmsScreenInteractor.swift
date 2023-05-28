@@ -7,6 +7,7 @@
 
 import UIKit
 import RandomNetwork
+import RandomUIKit
 
 /// События которые отправляем из Interactor в Presenter
 protocol FilmsScreenInteractorOutput: AnyObject {
@@ -74,11 +75,14 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   // MARK: - Internal func
   
   func isRuslocale() -> Bool {
-    let appearance = Appearance()
-    let locale = Locale.current
-    if locale.regionCode == appearance.rusRegionCode {
+    guard let localeType = getCurrentLocaleType() else {
+      return false
+    }
+    
+    switch localeType {
+    case .ru:
       return true
-    } else {
+    default:
       return false
     }
   }
@@ -326,7 +330,6 @@ private extension FilmsScreenInteractor {
     let rusEndPoint = "/api/v2.2/films/top"
     let rusAPIKey = SecretsAPI.apiKeyKinopoisk
     let rusHeaderAPIKey = "X-API-KEY"
-    let rusRegionCode = "RU"
     
     let engFilmUrl = "https://most-popular-movies-right-now-daily-update.p.rapidapi.com/"
     let engAPIKey = SecretsAPI.apiKeyMostPopularMovies

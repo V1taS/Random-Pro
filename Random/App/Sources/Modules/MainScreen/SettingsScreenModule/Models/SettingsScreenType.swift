@@ -17,6 +17,13 @@ enum SettingsScreenType {
   /// Раздел: `Никнейм`
   case nickname(itemsGenerated: String, lastItem: String)
   
+  /// Раздел: `Никнейм`
+  case names(itemsGenerated: String,
+             lastItem: String,
+             currentCountry: String,
+             listOfItems: [String],
+             valueChanged: ((_ index: Int) -> Void)?)
+  
   /// Раздел: `Фильмы`
   case films
   

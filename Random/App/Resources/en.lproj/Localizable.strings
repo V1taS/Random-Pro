@@ -77,6 +77,7 @@
 "generate_letter" = "Generate a letter";
 "generate_random_answer" = "You can generate a random response";
 "generate_random_nickname" = "You can generate a random nickname";
+"generate_random_names" = "You can generate a random name";
 "generate_random_date_time" = "You can generate a random date and time";
 "generate_random_letters" = "Random letters can be generated";
 "generate_random_numbers" = "Random numbers can be generated";
@@ -252,3 +253,8 @@
 "short" = "Short";
 "popular" = "Popular";
 "at_least_4_characters_for_password" = "The password is too short. Minimum 4 characters required.";
+"names" = "Names";
+"male" = "Male";
+"female" = "Female";
+"select_language" = "Select language";
+"select_country" = "Choose the country";

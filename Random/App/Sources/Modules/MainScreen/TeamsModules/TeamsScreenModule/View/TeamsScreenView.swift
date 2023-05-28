@@ -185,7 +185,8 @@ private extension TeamsScreenView {
     }
     
     NSLayoutConstraint.activate([
-      countTeamsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      countTeamsSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                                      constant: appearance.defaultInset / 2),
       countTeamsSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                           constant: appearance.defaultInset),
       countTeamsSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,

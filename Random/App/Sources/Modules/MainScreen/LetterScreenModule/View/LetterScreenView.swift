@@ -116,7 +116,8 @@ private extension LetterScreenView {
                                                       constant: appearance.defaultInset),
       letterSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                        constant: -appearance.defaultInset),
-      letterSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+      letterSegmentedControl.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+                                                  constant: appearance.defaultInset / 2),
       
       scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
       scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),

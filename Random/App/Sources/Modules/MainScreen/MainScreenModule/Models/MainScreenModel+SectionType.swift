@@ -53,6 +53,8 @@ extension MainScreenModel {
         return "nick_name"
       case .names:
         return "names"
+      case .congratulations:
+        return "congratulations"
       }
     }
     
@@ -96,6 +98,8 @@ extension MainScreenModel {
         return appearance.titleNickName
       case .names:
         return appearance.titleNames
+      case .congratulations:
+        return appearance.titleCongratulations
       }
     }
     
@@ -139,6 +143,8 @@ extension MainScreenModel {
         return appearance.imageNickName
       case .names:
         return appearance.imageNames
+      case .congratulations:
+        return appearance.imageCongratulations
       }
     }
     
@@ -182,6 +188,8 @@ extension MainScreenModel {
         return appearance.nickNameDescriptionForNoPremiumAccess
       case .names:
         return appearance.namesDescriptionForNoPremiumAccess
+      case .congratulations:
+        return appearance.congratulationsDescriptionForNoPremiumAccess
       }
     }
     
@@ -240,5 +248,8 @@ extension MainScreenModel {
     
     /// Раздел генерации имен
     case names
+    
+    /// Раздел поздравлений
+    case congratulations
   }
 }

@@ -78,6 +78,7 @@
 "generate_random_answer" = "Можно генерировать рандомный ответ";
 "generate_random_nickname" = "Можно генерировать рандомный никнейм";
 "generate_random_names" = "Можно генерировать рандомное имя";
+"generate_random_congratulations" = "Можно генерировать рандомное поздравление";
 "generate_random_date_time" = "Можно генерировать рандомную дату и время";
 "generate_random_letters" = "Можно генерировать рандомные буквы";
 "generate_random_numbers" = "Можно генерировать рандомные числа";
@@ -258,3 +259,8 @@
 "female" = "Женские";
 "select_language" = "Выбрать язык";
 "select_country" = "Выбрать страну";
+"congratulations" = "Поздравления";
+"birthday" = "День рождения";
+"new_year" = "Новый год";
+"wedding" = "Свадьба";
+"anniversary" = "Юбилей";

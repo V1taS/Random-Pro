@@ -78,6 +78,7 @@
 "generate_random_answer" = "You can generate a random response";
 "generate_random_nickname" = "You can generate a random nickname";
 "generate_random_names" = "You can generate a random name";
+"generate_random_congratulations" = "You can generate random greetings";
 "generate_random_date_time" = "You can generate a random date and time";
 "generate_random_letters" = "Random letters can be generated";
 "generate_random_numbers" = "Random numbers can be generated";
@@ -258,3 +259,8 @@
 "female" = "Female";
 "select_language" = "Select language";
 "select_country" = "Choose the country";
+"congratulations" = "Congratulations";
+"birthday" = "Birthday";
+"new_year" = "New Year";
+"wedding" = "Wedding";
+"anniversary" = "Anniversary";

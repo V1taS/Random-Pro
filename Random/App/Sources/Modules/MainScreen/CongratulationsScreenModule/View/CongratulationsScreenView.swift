@@ -1,5 +1,5 @@
 //
-//  NamesScreenView.swift
+//  CongratulationsScreenView.swift
 //  Random
 //
 //  Created by Vitalii Sosin on 28.05.2023.
@@ -10,7 +10,7 @@ import RandomUIKit
 import Lottie
 
 /// События которые отправляем из View в Presenter
-protocol NamesScreenViewOutput: AnyObject {
+protocol CongratulationsScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку генерации имени
   func generateButtonAction()
@@ -18,19 +18,19 @@ protocol NamesScreenViewOutput: AnyObject {
   /// Было нажатие на результат генерации
   func resultLabelAction()
   
-  /// Пол имени изменился
-  /// - Parameter type: Пол имени
-  func segmentedControlValueDidChange(type: NamesScreenModel.Gender)
+  /// Тип поздравления изменился
+  /// - Parameter type: Тип поздравления
+  func segmentedControlValueDidChange(type: CongratulationsScreenModel.CongratulationsType)
 }
 
 /// События которые отправляем от Presenter ко View
-protocol NamesScreenViewInput {
+protocol CongratulationsScreenViewInput {
   
   /// Устанавливаем данные в result
   ///  - Parameters:
   ///   - result: результат генерации
-  ///   - gender: пол имени
-  func set(result: String?, gender: NamesScreenModel.Gender)
+  ///   - type: Тип поздравления
+  func set(result: String?, type: CongratulationsScreenModel.CongratulationsType)
   
   /// Запустить доадер
   func startLoader()
@@ -39,15 +39,15 @@ protocol NamesScreenViewInput {
   func stopLoader()
 }
 
-/// Псевдоним протокола UIView & NamesScreenViewInput
-typealias NamesScreenViewProtocol = UIView & NamesScreenViewInput
+/// Псевдоним протокола UIView & CongratulationsScreenViewInput
+typealias CongratulationsScreenViewProtocol = UIView & CongratulationsScreenViewInput
 
 /// View для экрана
-final class NamesScreenView: NamesScreenViewProtocol {
+final class CongratulationsScreenView: CongratulationsScreenViewProtocol {
   
   // MARK: - Internal properties
   
-  weak var output: NamesScreenViewOutput?
+  weak var output: CongratulationsScreenViewOutput?
   
   // MARK: - Private properties
   
@@ -56,6 +56,7 @@ final class NamesScreenView: NamesScreenViewProtocol {
   private let generateButton = ButtonView()
   private let lottieAnimationView = LottieAnimationView(name: Appearance().loaderImage)
   private var isResultAnimate = true
+  private var listCongratulations = CongratulationsScreenModel.CongratulationsType.allCases
   
   // MARK: - Initialization
   
@@ -72,7 +73,9 @@ final class NamesScreenView: NamesScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func set(result: String?, gender: NamesScreenModel.Gender) {
+  func set(result: String?, type: CongratulationsScreenModel.CongratulationsType) {
+    let fontSize = Appearance().result == result ? RandomFont.primaryBold50 : RandomFont.primaryBold24
+    resultLabel.font = fontSize
     resultLabel.text = result
     
     if isResultAnimate {
@@ -80,18 +83,14 @@ final class NamesScreenView: NamesScreenViewProtocol {
                          transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
     }
     
-    switch gender {
-    case .male:
-      guard segmentedControl.selectedSegmentIndex != Appearance().maleTitleIndex else {
-        return
-      }
-      segmentedControl.selectedSegmentIndex = Appearance().maleTitleIndex
-    case .female:
-      guard segmentedControl.selectedSegmentIndex != Appearance().femaleTitleIndex else {
-        return
-      }
-      segmentedControl.selectedSegmentIndex = Appearance().femaleTitleIndex
+    guard listCongratulations.indices.contains(segmentedControl.selectedSegmentIndex) else {
+      return
     }
+    let currentSegmentedControl = listCongratulations[segmentedControl.selectedSegmentIndex]
+    guard currentSegmentedControl != type else {
+      return
+    }
+    segmentedControl.selectedSegmentIndex = type.index
   }
   
   func startLoader() {
@@ -109,7 +108,7 @@ final class NamesScreenView: NamesScreenViewProtocol {
 
 // MARK: - Private
 
-private extension NamesScreenView {
+private extension CongratulationsScreenView {
   func configureLayout() {
     let appearance = Appearance()
     
@@ -149,18 +148,18 @@ private extension NamesScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = RandomFont.primaryBold24
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
     
-    segmentedControl.insertSegment(withTitle: appearance.maleTitle,
-                                   at: appearance.maleTitleIndex,
-                                   animated: false)
-    segmentedControl.insertSegment(withTitle: appearance.femaleTitle,
-                                   at: appearance.femaleTitleIndex,
-                                   animated: false)
-    segmentedControl.selectedSegmentIndex = appearance.maleTitleIndex
+    listCongratulations.forEach {
+      segmentedControl.insertSegment(withTitle: $0.title,
+                                     at: $0.index,
+                                     animated: false)
+    }
+    
+    segmentedControl.selectedSegmentIndex = .zero
     segmentedControl.addTarget(self,
                                action: #selector(segmentedControlValueDidChange),
                                for: .valueChanged)
@@ -184,18 +183,13 @@ private extension NamesScreenView {
   
   @objc
   func segmentedControlValueDidChange() {
-    let appearance = Appearance()
     isResultAnimate = false
     
-    if segmentedControl.selectedSegmentIndex == appearance.maleTitleIndex {
-      output?.segmentedControlValueDidChange(type: .male)
+    guard listCongratulations.indices.contains(segmentedControl.selectedSegmentIndex) else {
       return
     }
-    
-    if segmentedControl.selectedSegmentIndex == appearance.femaleTitleIndex {
-      output?.segmentedControlValueDidChange(type: .female)
-      return
-    }
+    let currentSegmentedControl = listCongratulations[segmentedControl.selectedSegmentIndex]
+    output?.segmentedControlValueDidChange(type: currentSegmentedControl)
   }
   
   @objc
@@ -212,19 +206,14 @@ private extension NamesScreenView {
 
 // MARK: - Appearance
 
-private extension NamesScreenView {
+private extension CongratulationsScreenView {
   struct Appearance {
-    let maleTitle = RandomStrings.Localizable.male
-    let maleTitleIndex = 0
-    
-    let femaleTitle = RandomStrings.Localizable.female
-    let femaleTitleIndex = 1
-    
     let buttonTitle = RandomStrings.Localizable.generate
     let loaderImage = RandomAsset.filmsLoader.name
     
     let animationSpeed: CGFloat = 0.5
     let defaultInset: CGFloat = 16
     let resultDuration: CGFloat = 0.2
+    let result = "?"
   }
 }

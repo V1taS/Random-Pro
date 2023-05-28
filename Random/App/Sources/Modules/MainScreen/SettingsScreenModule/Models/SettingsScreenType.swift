@@ -24,6 +24,13 @@ enum SettingsScreenType {
              listOfItems: [String],
              valueChanged: ((_ index: Int) -> Void)?)
   
+  /// Раздел: `Gоздравлений`
+  case congratulations(itemsGenerated: String,
+                       lastItem: String,
+                       currentCountry: String,
+                       listOfItems: [String],
+                       valueChanged: ((_ index: Int) -> Void)?)
+  
   /// Раздел: `Фильмы`
   case films
   

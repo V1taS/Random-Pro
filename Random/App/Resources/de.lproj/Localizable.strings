@@ -78,6 +78,7 @@
 "generate_random_answer" = "Es ist möglich, eine zufällige Antwort zu generieren";
 "generate_random_nickname" = "Sie können einen zufälligen Spitznamen generieren";
 "generate_random_names" = "Sie können einen zufälligen Namen generieren";
+"generate_random_congratulations" = "Sie können zufällige Begrüßungen generieren";
 "generate_random_date_time" = "Ein zufälliges Datum und eine zufällige Uhrzeit können generiert werden";
 "generate_random_letters" = "Es können zufällige Buchstaben generiert werden";
 "generate_random_numbers" = "Es können Zufallszahlen generiert werden";
@@ -258,3 +259,8 @@
 "female" = "Weiblich";
 "select_language" = "Sprache auswählen";
 "select_country" = "Wählen Sie das Land";
+"congratulations" = "Glückwunsch";
+"birthday" = "Geburtstag";
+"new_year" = "Neues Jahr";
+"wedding" = "Hochzeit";
+"anniversary" = "Jubiläum";

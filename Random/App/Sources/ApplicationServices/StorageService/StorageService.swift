@@ -25,6 +25,9 @@ protocol StorageService {
   /// Модель для никнейм
   var nickNameScreenModel: NickNameScreenModel? { get set }
   
+  /// Модель для поздравлений
+  var congratulationsScreenModel: CongratulationsScreenModel? { get set }
+  
   /// Модель для генерации имен
   var namesScreenModel: NamesScreenModel? { get set }
   
@@ -94,6 +97,15 @@ final class StorageServiceImpl: StorageService {
     } set {
       nickNameScreenModelUserDefaults = newValue
       nickNameScreenModelKeychain = newValue
+    }
+  }
+  
+  var congratulationsScreenModel: CongratulationsScreenModel? {
+    get {
+      isPremium ? congratulationsScreenModelKeychain : congratulationsScreenModelUserDefaults
+    } set {
+      congratulationsScreenModelUserDefaults = newValue
+      congratulationsScreenModelKeychain = newValue
     }
   }
   
@@ -271,6 +283,13 @@ final class StorageServiceImpl: StorageService {
   @ObjectCustomKeychainWrapper(key: Appearance().namesScreenKeyUserDefaults)
   private var namesScreenModelKeychain: NamesScreenModel?
   
+  // MARK: - Congratulations model
+  
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().congratulationsScreenKeyUserDefaults)
+  private var congratulationsScreenModelUserDefaults: CongratulationsScreenModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().congratulationsScreenKeyUserDefaults)
+  private var congratulationsScreenModelKeychain: CongratulationsScreenModel?
+  
   // MARK: - Number model
   
   @ObjectCustomUserDefaultsWrapper(key: Appearance().numberScreenKeyUserDefaults)
@@ -409,5 +428,6 @@ private extension StorageServiceImpl {
     let dictionaryCountTappedKeyUserDefaults = "metrics_service_user_defaults_key"
     let playerCardSelectionModelKeyUserDefaults = "player_card_selection_screen_user_defaults_key"
     let namesScreenKeyUserDefaults = "names_screen_user_defaults_key"
+    let congratulationsScreenKeyUserDefaults = "congratulations_screen_user_defaults_key"
   }
 }

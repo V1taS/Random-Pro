@@ -37,6 +37,7 @@ enum MetricsSections: String {
   case rockPaperScissors = "Камень Ножницы Бумага (new version)"
   case imageFilters = "Фильтр изображений (new version)"
   case nickNameScreen = "Никнейм (new version)"
+  case names = "Раздел имена (new version)"
   
   // Настройки главного экрана
   case mainSettingsScreen = "Настройки главного экрана (new version)"

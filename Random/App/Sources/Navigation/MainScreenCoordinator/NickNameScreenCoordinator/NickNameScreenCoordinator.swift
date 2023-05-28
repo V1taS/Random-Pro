@@ -8,11 +8,7 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol NickNameScreenCoordinatorOutput: AnyObject {
-  
-  /// Обновить секции на главном экране
-  func updateStateForSections()
-}
+protocol NickNameScreenCoordinatorOutput: AnyObject {}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol NickNameScreenCoordinatorInput {
@@ -99,6 +95,7 @@ extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
 
 extension NickNameScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
+  func updateStateForSections() {}
   
   func cleanButtonAction() {
     nickNameScreenModule?.cleanButtonAction()
@@ -111,10 +108,6 @@ extension NickNameScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator?.start()
     
     listResultScreenCoordinator.setContentsFrom(list: nickNameScreenModule?.returnCurrentModel().listResult ?? [])
-  }
-  
-  func updateStateForSections() {
-    output?.updateStateForSections()
   }
 }
 

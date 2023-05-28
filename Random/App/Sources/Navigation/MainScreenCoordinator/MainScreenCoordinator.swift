@@ -76,6 +76,16 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openNames() {
+    let namesScreenCoordinator = NamesScreenCoordinator(navigationController,
+                                                        services)
+    anyCoordinator = namesScreenCoordinator
+    namesScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .names)
+    services.metricsService.track(event: .names)
+  }
+  
   func openNickName() {
     let nickNameScreenCoordinator = NickNameScreenCoordinator(navigationController,
                                                               services)
@@ -440,6 +450,8 @@ private extension MainScreenCoordinator {
       openFilms()
     case .nickName:
       openNickName()
+    case .names:
+      openNames()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

@@ -1,8 +1,8 @@
 //
-//  NickNameScreenView.swift
+//  NamesScreenView.swift
 //  Random
 //
-//  Created by Tatyana Sosina on 15.05.2023.
+//  Created by Vitalii Sosin on 28.05.2023.
 //
 
 import UIKit
@@ -10,24 +10,27 @@ import RandomUIKit
 import Lottie
 
 /// События которые отправляем из View в Presenter
-protocol NickNameScreenViewOutput: AnyObject {
+protocol NamesScreenViewOutput: AnyObject {
   
-  /// Пользователь нажал на кнопку и происходит генерация 'Коротких никнеймов'
-  func generateShortButtonAction()
-  
-  /// Пользователь нажал на кнопку и происходит генерация  'Популярных никнеймов'
-  func generatePopularButtonAction()
+  /// Пользователь нажал на кнопку генерации имени
+  func generateButtonAction()
   
   /// Было нажатие на результат генерации
   func resultLabelAction()
+  
+  /// Пол имени изменился
+  /// - Parameter type: Пол имени
+  func segmentedControlValueDidChange(type: NamesScreenModel.Gender)
 }
 
 /// События которые отправляем от Presenter ко View
-protocol NickNameScreenViewInput {
+protocol NamesScreenViewInput {
   
   /// Устанавливаем данные в result
-  ///  - Parameter result: результат генерации
-  func set(result: String?)
+  ///  - Parameters:
+  ///   - result: результат генерации
+  ///   - gender: пол имени
+  func set(result: String?, gender: NamesScreenModel.Gender)
   
   /// Запустить доадер
   func startLoader()
@@ -36,15 +39,15 @@ protocol NickNameScreenViewInput {
   func stopLoader()
 }
 
-/// Псевдоним протокола UIView & NickNameScreenViewInput
-typealias NickNameScreenViewProtocol = UIView & NickNameScreenViewInput
+/// Псевдоним протокола UIView & NamesScreenViewInput
+typealias NamesScreenViewProtocol = UIView & NamesScreenViewInput
 
 /// View для экрана
-final class NickNameScreenView: NickNameScreenViewProtocol {
+final class NamesScreenView: NamesScreenViewProtocol {
   
   // MARK: - Internal properties
   
-  weak var output: NickNameScreenViewOutput?
+  weak var output: NamesScreenViewOutput?
   
   // MARK: - Private properties
   
@@ -52,6 +55,7 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
   private let segmentedControl = UISegmentedControl()
   private let generateButton = ButtonView()
   private let lottieAnimationView = LottieAnimationView(name: Appearance().loaderImage)
+  private var isResultAnimate = true
   
   // MARK: - Initialization
   
@@ -68,10 +72,26 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func set(result: String?) {
+  func set(result: String?, gender: NamesScreenModel.Gender) {
     resultLabel.text = result
-    resultLabel.zoomIn(duration: Appearance().resultDuration,
-                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
+    
+    if isResultAnimate {
+      resultLabel.zoomIn(duration: Appearance().resultDuration,
+                         transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
+    }
+    
+    switch gender {
+    case .male:
+      guard segmentedControl.selectedSegmentIndex != Appearance().maleTitleIndex else {
+        return
+      }
+      segmentedControl.selectedSegmentIndex = Appearance().maleTitleIndex
+    case .female:
+      guard segmentedControl.selectedSegmentIndex != Appearance().femaleTitleIndex else {
+        return
+      }
+      segmentedControl.selectedSegmentIndex = Appearance().femaleTitleIndex
+    }
   }
   
   func startLoader() {
@@ -89,7 +109,7 @@ final class NickNameScreenView: NickNameScreenViewProtocol {
 
 // MARK: - Private
 
-private extension NickNameScreenView {
+private extension NamesScreenView {
   func configureLayout() {
     let appearance = Appearance()
     
@@ -132,60 +152,77 @@ private extension NickNameScreenView {
     resultLabel.font = RandomFont.primaryBold50
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
-    resultLabel.numberOfLines = appearance.numberOfLines
+    resultLabel.numberOfLines = .zero
     
-    segmentedControl.insertSegment(withTitle: appearance.shortTitle,
-                                   at: appearance.shortTitleIndex, animated: false)
-    segmentedControl.insertSegment(withTitle: appearance.popularTitle,
-                                   at: appearance.popularTitleIndex, animated: false)
-    segmentedControl.selectedSegmentIndex = appearance.shortTitleIndex
+    segmentedControl.insertSegment(withTitle: appearance.maleTitle,
+                                   at: appearance.maleTitleIndex, animated: false)
+    segmentedControl.insertSegment(withTitle: appearance.femaleTitle,
+                                   at: appearance.femaleTitleIndex, animated: false)
+    segmentedControl.selectedSegmentIndex = appearance.maleTitleIndex
+    segmentedControl.addTarget(self,
+                               action: #selector(segmentedControlValueDidChange),
+                               for: .valueChanged)
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
-    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    generateButton.addTarget(self,
+                             action: #selector(generateButtonAction),
+                             for: .touchUpInside)
     
     lottieAnimationView.isHidden = true
     lottieAnimationView.contentMode = .scaleAspectFit
     lottieAnimationView.loopMode = .loop
     lottieAnimationView.animationSpeed = Appearance().animationSpeed
     
-    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
+    let resultLabelAction = UITapGestureRecognizer(target: self,
+                                                   action: #selector(resultAction))
     resultLabelAction.cancelsTouchesInView = false
     resultLabel.addGestureRecognizer(resultLabelAction)
     resultLabel.isUserInteractionEnabled = true
   }
   
-  @objc func resultAction() {
+  @objc
+  func segmentedControlValueDidChange() {
+    let appearance = Appearance()
+    isResultAnimate = false
+    
+    if segmentedControl.selectedSegmentIndex == appearance.maleTitleIndex {
+      output?.segmentedControlValueDidChange(type: .male)
+      return
+    }
+    
+    if segmentedControl.selectedSegmentIndex == appearance.femaleTitleIndex {
+      output?.segmentedControlValueDidChange(type: .female)
+      return
+    }
+  }
+  
+  @objc
+  func resultAction() {
     output?.resultLabelAction()
   }
   
-  @objc func generateButtonAction() {
-    let appearance = Appearance()
-    
-    if segmentedControl.selectedSegmentIndex == appearance.shortTitleIndex {
-      output?.generateShortButtonAction()
-      return
-    }
-    
-    if segmentedControl.selectedSegmentIndex == appearance.popularTitleIndex {
-      output?.generatePopularButtonAction()
-      return
-    }
+  @objc
+  func generateButtonAction() {
+    isResultAnimate = true
+    output?.generateButtonAction()
   }
 }
 
 // MARK: - Appearance
 
-private extension NickNameScreenView {
+private extension NamesScreenView {
   struct Appearance {
-    let shortTitle = RandomStrings.Localizable.short
-    let shortTitleIndex = 0
-    let popularTitle = RandomStrings.Localizable.popular
-    let popularTitleIndex = 1
+    let maleTitle = RandomStrings.Localizable.male
+    let maleTitleIndex = 0
+    
+    let femaleTitle = RandomStrings.Localizable.female
+    let femaleTitleIndex = 1
+    
     let buttonTitle = RandomStrings.Localizable.generate
     let loaderImage = RandomAsset.filmsLoader.name
+    
     let animationSpeed: CGFloat = 0.5
     let defaultInset: CGFloat = 16
     let resultDuration: CGFloat = 0.2
-    let numberOfLines: Int = 2
   }
 }

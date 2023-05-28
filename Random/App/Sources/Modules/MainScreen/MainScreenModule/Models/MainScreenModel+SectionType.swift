@@ -51,6 +51,8 @@ extension MainScreenModel {
         return "films_screen"
       case .nickName:
         return "nick_name"
+      case .names:
+        return "names"
       }
     }
     
@@ -92,6 +94,8 @@ extension MainScreenModel {
         return appearance.titleFilms
       case .nickName:
         return appearance.titleNickName
+      case .names:
+        return appearance.titleNames
       }
     }
     
@@ -133,6 +137,8 @@ extension MainScreenModel {
         return appearance.imageFilms
       case .nickName:
         return appearance.imageNickName
+      case .names:
+        return appearance.imageNames
       }
     }
     
@@ -174,6 +180,8 @@ extension MainScreenModel {
         return appearance.filmsDescriptionForNoPremiumAccess
       case .nickName:
         return appearance.nickNameDescriptionForNoPremiumAccess
+      case .names:
+        return appearance.namesDescriptionForNoPremiumAccess
       }
     }
     
@@ -229,5 +237,8 @@ extension MainScreenModel {
     
     /// Раздел `Никнейм`
     case nickName
+    
+    /// Раздел генерации имен
+    case names
   }
 }

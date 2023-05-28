@@ -154,6 +154,20 @@ extension SettingsScreenView: UITableViewDataSource {
       ) as? DividerTableViewCell {
         viewCell = cell
       }
+    case let .labelWithSegmentedControl(title, listOfItems, startSelectedSegmentIndex, valueChanged):
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: LabelWithSegmentedControlCell.reuseIdentifier
+      ) as? LabelWithSegmentedControlCell {
+        cell.configureCellWith(
+          titleText: title,
+          startSelectedSegmentIndex: startSelectedSegmentIndex,
+          listOfItemsInSegmentedControl: listOfItems,
+          segmentControlValueChanged: { index in
+            valueChanged?(index)
+          }
+        )
+        viewCell = cell
+      }
     }
     
     if tableView.isFirst(for: indexPath) {
@@ -209,6 +223,8 @@ private extension SettingsScreenView {
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
     tableView.register(DividerTableViewCell.self,
                        forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
+    tableView.register(LabelWithSegmentedControlCell.self,
+                       forCellReuseIdentifier: LabelWithSegmentedControlCell.reuseIdentifier)
     
     tableView.separatorStyle = .none
     tableView.tableFooterView = UIView()

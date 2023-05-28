@@ -61,6 +61,9 @@ struct SectionsIsHiddenFTModel {
   /// Раздел `Никнейм`
   let nickName: Bool
   
+  /// Раздел `Имена`
+  let names: Bool
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -83,6 +86,7 @@ struct SectionsIsHiddenFTModel {
     imageFilters = (dictionary["imageFilters"] as? Int ?? .zero).boolValue
     films = (dictionary["films"] as? Int ?? .zero).boolValue
     nickName = (dictionary["nickName"] as? Int ?? .zero).boolValue
+    names = (dictionary["names"] as? Int ?? .zero).boolValue
   }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol FilmsScreenCoordinatorOutput: AnyObject {}
@@ -56,14 +57,16 @@ final class FilmsScreenCoordinator: FilmsScreenCoordinatorProtocol {
 // MARK: - FilmsScreenModuleOutput
 
 extension FilmsScreenCoordinator: FilmsScreenModuleOutput {
-  func playTrailerActionWith(url: String) {
-    guard let encodedTexts = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-          let filmUrl = URL(string: encodedTexts) else {
-      somethingWentWrong()
-      return
+    func playTrailerActionWith(url: String) {
+        guard let encodedTexts = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let filmUrl = URL(string: encodedTexts) else {
+          somethingWentWrong()
+          return
+        }
+        
+        let safariViewController = SFSafariViewController(url: filmUrl)
+        navigationController.present(safariViewController, animated: true, completion: nil)
     }
-    UIApplication.shared.open(filmUrl)
-  }
   
   func somethingWentWrong() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,

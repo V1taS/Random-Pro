@@ -37,7 +37,8 @@ let project = Project(
         .external(name: "YandexMobileMetrica"),
         .external(name: "FirebaseAnalytics"),
         .external(name: "FirebaseFirestore"),
-        .external(name: "FirebaseAuth")
+        .external(name: "FirebaseAuth"),
+        .external(name: "GoogleMobileAds")
       ],
       settings: targetBuildIOSSettings
     ),

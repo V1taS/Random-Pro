@@ -39,6 +39,15 @@ final class RockPaperScissorsScreenInteractor: RockPaperScissorsScreenInteractor
   // MARK: - Private property
   
   private var model: RockPaperScissorsScreenModel?
+  private let buttonCounterService: ButtonCounterService
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    buttonCounterService = services.buttonCounterService
+  }
   
   // MARK: - Internal func
   
@@ -48,6 +57,7 @@ final class RockPaperScissorsScreenInteractor: RockPaperScissorsScreenInteractor
     } else {
       output?.createStartModel()
     }
+    buttonCounterService.onButtonClick()
   }
   
   func saveModel(model: RockPaperScissorsScreenModel) {

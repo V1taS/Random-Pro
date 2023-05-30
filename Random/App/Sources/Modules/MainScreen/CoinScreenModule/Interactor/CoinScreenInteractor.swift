@@ -48,6 +48,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   
   private let hapticService: HapticService
   private var storageService: StorageService
+  private var buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -58,6 +59,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
        services: ApplicationServices) {
     self.hapticService = hapticService
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -84,7 +86,9 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   func playHapticFeedback() {
     hapticService.play(isRepeat: false,
                        patternType: .splash,
-                       completion: { _ in })
+                       completion: { [weak self] _ in
+      self?.buttonCounterService.onButtonClick()
+    })
   }
 }
 

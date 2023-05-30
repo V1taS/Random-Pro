@@ -11,11 +11,10 @@ import UIKit
 final class ColorsScreenAssembly {
   
   /// Собирает модуль `ColorsScreen`
-  /// - Parameter permissionService: Сервис по работе с разрешениями
+  /// - Parameter services: Сервисы приложения
   /// - Returns: Cобранный модуль `ColorsScreen`
-  func createModule(permissionService: PermissionService) -> ColorsScreenModule {
-    
-    let interactor = ColorsScreenInteractor(permissionService: permissionService)
+  func createModule(services: ApplicationServices) -> ColorsScreenModule {
+    let interactor = ColorsScreenInteractor(services: services)
     let view = ColorsScreenView()
     let factory = ColorsScreenFactory()
     let presenter = ColorsScreenViewController(moduleView: view,

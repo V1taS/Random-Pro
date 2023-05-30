@@ -53,6 +53,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -60,6 +61,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -116,6 +118,7 @@ final class LetterScreenInteractor: LetterScreenInteractorInput {
       self.storageService.letterScreenModel = newModel
       output?.didReceive(model: newModel)
     }
+    buttonCounterService.onButtonClick()
   }
   
   func generateContentEngLetter() {

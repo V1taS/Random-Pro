@@ -46,7 +46,7 @@ final class ColorsScreenCoordinator: ColorsScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    let colorsScreenModule = ColorsScreenAssembly().createModule(permissionService: services.permissionService)
+    let colorsScreenModule = ColorsScreenAssembly().createModule(services: services)
     self.colorsScreenModule = colorsScreenModule
     self.colorsScreenModule?.moduleOutput = self
     navigationController.pushViewController(colorsScreenModule, animated: true)

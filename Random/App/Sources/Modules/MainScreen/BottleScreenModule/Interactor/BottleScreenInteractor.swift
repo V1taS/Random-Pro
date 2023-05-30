@@ -37,17 +37,14 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   // MARK: - Private properties
   
   private let bottleImageView = UIImageView()
-  private let timerService: TimerService
-  private let hapticService: HapticService
+  private let services: ApplicationServices
   
   // MARK: - Initialization
   
   /// - Parameters:
-  ///   - timerService: время
-  ///   - hapticService: Обратная связь от моторчика
-  init(_ timerService: TimerService, hapticService: HapticService) {
-    self.timerService = timerService
-    self.hapticService = hapticService
+  ///   - services: Сервисы приложения
+  init(_ services: ApplicationServices) {
+    self.services = services
   }
   
   // MARK: - Internal property
@@ -57,20 +54,21 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
     let requiredNumberOfLaps = generateNumberOfLaps(appearance.laps)
     let totalRandomTime = generateRandomTime(requiredNumberOfLaps)
     
-    timerService.startTimerWith(seconds: totalRandomTime,
-                                timerTickAction: nil,
-                                timerFinishedAction: { [weak self] in
+    services.timerService.startTimerWith(seconds: totalRandomTime,
+                                         timerTickAction: nil,
+                                         timerFinishedAction: { [weak self] in
       self?.output?.stopBottleRotation()
+      self?.services.buttonCounterService.onButtonClick()
     })
   }
   
   func playHapticFeedback() {
-    hapticService.play(isRepeat: true,
-                       patternType: .feedingCrocodile) { _ in }
+    services.hapticService.play(isRepeat: true,
+                                patternType: .feedingCrocodile) { _ in }
   }
   
   func stopHapticFeedback() {
-    hapticService.stop()
+    services.hapticService.stop()
   }
 }
 

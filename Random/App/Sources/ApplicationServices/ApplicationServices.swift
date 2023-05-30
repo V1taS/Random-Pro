@@ -61,7 +61,11 @@ protocol ApplicationServices {
   /// Сервис подписок и покупок премиум версии
   var appPurchasesService: AppPurchasesService { get }
   
+  /// Сервис хранения данных
   var storageService: StorageService { get }
+  
+  /// Сервис считает количество нажатий на кнопки
+  var buttonCounterService: ButtonCounterService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -130,9 +134,14 @@ final class ApplicationServicesImpl: ApplicationServices {
     return storageServiceImpl
   }
   
+  var buttonCounterService: ButtonCounterService {
+    buttonCounterServiceImpl
+  }
+  
   // MARK: - Private property
   
   let storageServiceImpl = StorageServiceImpl()
   let deepLinkServiceImpl = DeepLinkServiceImpl()
   let networkServiceImpl = NetworkServiceImpl()
+  let buttonCounterServiceImpl = ButtonCounterServiceImpl()
 }

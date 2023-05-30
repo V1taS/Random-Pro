@@ -3,6 +3,12 @@ import ProjectDescription
 
 public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
   return .dictionary([
+    "GADApplicationIdentifier": .string("\(adMobAppID)"),
+    "SKAdNetworkItems": .array([
+      .dictionary([
+        "SKAdNetworkIdentifier": .string("\(identifiersGoogleSKAdNetwork)"),
+      ])
+    ]),
     "MARKETING_VERSION": .string("\(marketingVersion)"),
     "CFBundleShortVersionString": .string("\(marketingVersion)"),
     "CFBundleVersion": .string("\(currentProjectVersion)"),

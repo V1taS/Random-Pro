@@ -84,6 +84,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
   
   private lazy var numberFormatter = NumberFormatter()
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -91,6 +92,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -224,6 +226,7 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
       output?.didReceiveErrorWithCountOfCharacters()
       return
     }
+    buttonCounterService.onButtonClick()
     
     generatePassword(
       capitalLetters: model.switchState.uppercase,

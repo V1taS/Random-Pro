@@ -43,6 +43,7 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -50,6 +51,7 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Initarnal func
@@ -86,6 +88,7 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
                                     listResult: listResult)
     self.storageService.yesNoScreenModel = newModel
     output?.didReceive(model: newModel)
+    buttonCounterService.onButtonClick()
   }
   
   func returnListResult() -> [String] {

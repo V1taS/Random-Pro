@@ -53,6 +53,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -60,6 +61,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -104,6 +106,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
       cubesType: model.cubesType
     )
     self.storageService.cubesScreenModel = newModel
+    buttonCounterService.onButtonClick()
   }
   
   func getContent() {

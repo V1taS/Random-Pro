@@ -34,6 +34,10 @@ protocol ImageFiltersScreenInteractorInput {
   
   /// Запрос доступа к Камере через шторку
   func requestCameraActionSheetStatus()
+  
+  /// Сгенерировать новый фильтр
+  /// - Parameter image: Изображение
+  func generateImageFilterFor(image: Data?)
 }
 
 /// Интерактор
@@ -45,17 +49,21 @@ final class ImageFiltersScreenInteractor: ImageFiltersScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let permissionService: PermissionService
+  private let services: ApplicationServices
   
   // MARK: - Initialization
   
   /// Инициализатор
-  /// - Parameter permissionService: Сервис по работе с разрешениями
-  init(permissionService: PermissionService) {
-    self.permissionService = permissionService
+  /// - Parameter services: Сервисы приложения
+  init(services: ApplicationServices) {
+    self.services = services
   }
   
   // MARK: - Internal func
+  
+  func generateImageFilterFor(image: Data?) {
+    services.buttonCounterService.onButtonClick()
+  }
   
   func requestShareGalleryStatus() {
     permissionGallery { [weak self] granted in
@@ -80,7 +88,7 @@ final class ImageFiltersScreenInteractor: ImageFiltersScreenInteractorInput {
   }
   
   func requestCameraActionSheetStatus() {
-    permissionService.requestCamera { [weak self] granted in
+    services.permissionService.requestCamera { [weak self] granted in
       switch granted {
       case true:
         self?.output?.requestCameraActionSheetSuccess()
@@ -95,7 +103,7 @@ final class ImageFiltersScreenInteractor: ImageFiltersScreenInteractorInput {
 
 private extension ImageFiltersScreenInteractor {
   func permissionGallery(completion: @escaping (Bool) -> Void) {
-    permissionService.requestPhotos { granted in
+    services.permissionService.requestPhotos { granted in
       completion(granted)
     }
   }

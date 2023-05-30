@@ -82,6 +82,7 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   
   private lazy var numberFormatter = NumberFormatter()
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -89,6 +90,7 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -123,6 +125,7 @@ final class NumberScreenInteractor: NumberScreenInteractorInput {
   func generateContent(firstTextFieldValue: String?,
                        secondTextFieldValue: String?) {
     let appearance = Appearance()
+    buttonCounterService.onButtonClick()
     
     let rangeStartValue = (firstTextFieldValue ?? "").replacingOccurrences(of: appearance.withoutSpaces, with: "")
     let rangeStartValueNum = Int(rangeStartValue) ?? .zero

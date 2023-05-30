@@ -11,14 +11,15 @@ import UIKit
 final class ImageFiltersScreenAssembly {
   
   /// Собирает модуль `ImageFiltersScreen`
-  /// - Parameter permissionService: Сервис по работе с разрешениями
+  /// - Parameter services: Сервисы приложения
   /// - Returns: Cобранный модуль `ImageFiltersScreen`
-  func createModule(permissionService: PermissionService) -> ImageFiltersScreenModule {
-    let interactor = ImageFiltersScreenInteractor(permissionService: permissionService)
+  func createModule(services: ApplicationServices) -> ImageFiltersScreenModule {
+    let interactor = ImageFiltersScreenInteractor(services: services)
     let view = ImageFiltersScreenView()
     let factory = ImageFiltersScreenFactory()
-    let presenter = ImageFiltersScreenViewController(moduleView: view, interactor: interactor, factory: factory)
-    
+    let presenter = ImageFiltersScreenViewController(moduleView: view,
+                                                     interactor: interactor,
+                                                     factory: factory)
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

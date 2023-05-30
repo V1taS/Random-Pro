@@ -69,6 +69,9 @@ protocol TeamsScreenInteractorInput {
   
   /// Обновить стиль
   func updateStyle()
+  
+  /// Кнопка сгенерировать была нажата
+  func generateButtonAction()
 }
 
 /// Интерактор
@@ -81,6 +84,7 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   private var stylePlayerCard: PlayerView.StyleCard {
     storageService.playerCardSelectionScreenModel?.filter({
       $0.playerCardSelection
@@ -93,9 +97,14 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
+  
+  func generateButtonAction() {
+    buttonCounterService.onButtonClick()
+  }
   
   func updateStyle() {
     guard let model = storageService.teamsScreenModel else {

@@ -50,7 +50,7 @@ final class RockPaperScissorsScreenCoordinator: RockPaperScissorsScreenCoordinat
   // MARK: - Internal func
   
   func start() {
-    var rockPaperScissorsScreenModule = RockPaperScissorsScreenAssembly().createModule()
+    var rockPaperScissorsScreenModule = RockPaperScissorsScreenAssembly().createModule(services: services)
     self.rockPaperScissorsScreenModule = rockPaperScissorsScreenModule
     rockPaperScissorsScreenModule.moduleOutput = self
     navigationController.pushViewController(rockPaperScissorsScreenModule, animated: true)

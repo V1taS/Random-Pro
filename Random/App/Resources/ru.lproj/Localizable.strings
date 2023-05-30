@@ -266,3 +266,5 @@
 "anniversary" = "Юбилей";
 "sec" = "сек";
 "advertising" = "Реклама";
+"disable_ads_title" = "Без рекламы";
+"disable_ads_description" = "Отключите рекламу для комфортного использования приложения";

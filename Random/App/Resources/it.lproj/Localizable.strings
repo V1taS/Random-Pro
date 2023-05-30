@@ -266,3 +266,5 @@
 "anniversary" = "Anniversario";
 "sec" = "sec";
 "advertising" = "Pubblicità";
+"disable_ads_title" = "Senza pubblicità";
+"disable_ads_description" = "Disabilita gli annunci per un comodo utilizzo dell'applicazione";

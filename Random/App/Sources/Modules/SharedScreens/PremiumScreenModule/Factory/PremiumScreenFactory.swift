@@ -54,9 +54,15 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
   
   func createListModelWith(models: [SKProduct]) {
     let appearance = Appearance()
-    let monthlyProduct = models.filter { $0.productIdentifier == PremiumScreenPurchaseType.monthly.productIdentifiers }.first
-    let yearlyProduct = models.filter { $0.productIdentifier == PremiumScreenPurchaseType.yearly.productIdentifiers }.first
-    let lifetimeProduct = models.filter { $0.productIdentifier == PremiumScreenPurchaseType.lifetime.productIdentifiers }.first
+    let monthlyProduct = models.filter {
+      $0.productIdentifier == PremiumScreenPurchaseType.monthly.productIdentifiers
+    }.first
+    let yearlyProduct = models.filter {
+      $0.productIdentifier == PremiumScreenPurchaseType.yearly.productIdentifiers
+    }.first
+    let lifetimeProduct = models.filter {
+      $0.productIdentifier == PremiumScreenPurchaseType.lifetime.productIdentifiers
+    }.first
     
     var tableViewModels: [PremiumScreenSectionType] = []
     
@@ -76,6 +82,9 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
       OnboardingViewModel.PageModel(title: appearance.playerCardSelectionTitle,
                                     description: appearance.playerCardSelectionDescription,
                                     lottieAnimationJSONName: appearance.playerCardSelectionIconJSONName),
+      OnboardingViewModel.PageModel(title: appearance.advTitle,
+                                    description: appearance.advDescription,
+                                    lottieAnimationJSONName: appearance.advIconJSONName),
       OnboardingViewModel.PageModel(title: appearance.donateTitle,
                                     description: appearance.donateDescription,
                                     lottieAnimationJSONName: appearance.donateIconJSONName)
@@ -136,5 +145,9 @@ private extension PremiumScreenFactory {
     let rockPaperScissosTitle = RandomStrings.Localizable.sectionTsuefa
     let rockPaperScissosDescription = RandomStrings.Localizable.randomRps
     let rockPaperScissosIconJSONName = RandomAsset.premiumRockPaperScissos
+    
+    let advTitle = RandomStrings.Localizable.disableAdsTitle
+    let advDescription = RandomStrings.Localizable.disableAdsDescription
+    let advIconJSONName = RandomAsset.premiumAdv.name
   }
 }

@@ -52,6 +52,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   
   private var storageService: StorageService
   private var networkService: NetworkService
+  private let buttonCounterService: ButtonCounterService
   private var casheNicks: [String] = []
   
   // MARK: - Initialization
@@ -61,6 +62,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   init(services: ApplicationServices) {
     storageService = services.storageService
     networkService = services.networkService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -125,6 +127,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
                                          listResult: [result])
       storageService.nickNameScreenModel = newModel
     }
+    buttonCounterService.onButtonClick()
   }
   
   func generatePopularButtonAction() {
@@ -144,6 +147,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
                                          listResult: [result])
       storageService.nickNameScreenModel = newModel
     }
+    buttonCounterService.onButtonClick()
   }
   
   func returnCurrentModel() -> NickNameScreenModel {

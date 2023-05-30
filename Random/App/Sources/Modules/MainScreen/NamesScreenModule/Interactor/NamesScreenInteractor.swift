@@ -61,6 +61,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   private var storageService: StorageService
   private var networkService: NetworkService
   private var casheNames: [String] = []
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -69,6 +70,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   init(services: ApplicationServices) {
     storageService = services.storageService
     networkService = services.networkService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -120,6 +122,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
       gender: model.gender
     )
     output?.didReceive(name: result, gender: model.gender ?? .male)
+    buttonCounterService.onButtonClick()
   }
   
   func segmentedControlValueDidChange(type: NamesScreenModel.Gender) {

@@ -247,6 +247,7 @@ private extension TeamsScreenViewController {
       factory.createTeamsFrom(model: interactor.returnModel())
     }
     impactFeedback.impactOccurred()
+    interactor.generateButtonAction()
   }
   
   @objc

@@ -90,6 +90,7 @@ extension ColorsScreenViewController: ColorsScreenViewOutput {
       return
     }
     copyButton.isEnabled = true
+    interactor.generateResultButtonPressed(text: text)
   }
   
   func resultLabelAction(text: String?) {

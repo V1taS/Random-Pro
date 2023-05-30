@@ -303,7 +303,8 @@ private extension RockPaperScissorsScreenView {
     ])
   }
   
-  @objc func generateButtonAction() {
+  @objc
+  func generateButtonAction() {
     startShakeHands()
     stopLeftYouWinAnimation()
     stopRightYouWinAnimation()

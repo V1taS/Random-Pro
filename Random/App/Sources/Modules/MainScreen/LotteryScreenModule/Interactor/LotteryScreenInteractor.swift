@@ -52,6 +52,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -59,6 +60,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -75,6 +77,8 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   }
   
   func generateContent(rangeStartValue: String?, rangeEndValue: String?, amountNumberValue: String?) {
+    buttonCounterService.onButtonClick()
+    
     let rangeStartValue = rangeStartValue ?? ""
     let rangeStartValueNumber = Int(rangeStartValue) ?? .zero
     

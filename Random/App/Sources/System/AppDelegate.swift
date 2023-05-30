@@ -10,6 +10,7 @@ import YandexMobileMetrica
 import YandexMobileMetricaPush
 import Firebase
 import ApphudSDK
+import GoogleMobileAds
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     FirebaseApp.configure()
     Apphud.start(apiKey: SecretsAPI.apiKeyApphud)
+    GADMobileAds.sharedInstance().start(completionHandler: nil)
     return true
   }
   

@@ -52,6 +52,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -59,6 +60,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -90,6 +92,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     
     self.storageService.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
+    buttonCounterService.onButtonClick()
   }
   
   func generateContentTime() {
@@ -109,6 +112,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     
     self.storageService.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
+    buttonCounterService.onButtonClick()
   }
   
   func generateContentDay() {
@@ -128,6 +132,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     
     self.storageService.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
+    buttonCounterService.onButtonClick()
   }
   
   func generateContentMonth() {
@@ -146,6 +151,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
     
     self.storageService.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
+    buttonCounterService.onButtonClick()
   }
   
   func returnListResult() -> [String] {

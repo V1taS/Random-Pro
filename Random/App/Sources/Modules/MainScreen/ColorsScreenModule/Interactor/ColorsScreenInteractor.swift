@@ -22,6 +22,10 @@ protocol ColorsScreenInteractorInput {
   
   /// Запрос доступа к Галерее
   func requestGalleryStatus()
+  
+  /// Была нажата кнопка сгенерировать результат
+  ///  - Parameter text: Результат генерации
+  func generateResultButtonPressed(text: String?)
 }
 
 /// Интерактор
@@ -33,20 +37,24 @@ final class ColorsScreenInteractor: ColorsScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let permissionService: PermissionService
+  private let services: ApplicationServices
   
   // MARK: - Initialization
   
   /// Инициализатор
-  /// - Parameter permissionService: Сервис по работе с разрешениями
-  init(permissionService: PermissionService) {
-    self.permissionService = permissionService
+  /// - Parameter services: Сервисы приложения
+  init(services: ApplicationServices) {
+    self.services = services
+  }
+  
+  func generateResultButtonPressed(text: String?) {
+    services.buttonCounterService.onButtonClick()
   }
   
   // MARK: - Internal func
   
   func requestGalleryStatus() {
-    permissionService.requestPhotos { [weak self] granted in
+    services.permissionService.requestPhotos { [weak self] granted in
       switch granted {
       case true:
         self?.output?.requestGallerySuccess()

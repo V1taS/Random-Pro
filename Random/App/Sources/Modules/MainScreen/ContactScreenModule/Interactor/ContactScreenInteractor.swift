@@ -49,14 +49,14 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   
   private let permissionService: PermissionService
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   /// - Parameters:
-  ///  - permissionService: Сервис запросов доступа
-  ///  - storageService: Сервис сохранения данных
-  init(permissionService: PermissionService,
-       storageService: StorageService) {
-    self.permissionService = permissionService
-    self.storageService = storageService
+  ///  - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    self.permissionService = services.permissionService
+    self.storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -120,6 +120,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
     )
     self.storageService.contactScreenModel = newModel
     output?.didReceive(model: newModel)
+    buttonCounterService.onButtonClick()
   }
   
   func returnCurrentModel() -> ContactScreenModel {

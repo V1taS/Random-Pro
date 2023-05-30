@@ -15,9 +15,9 @@ final class BottleScreenAssembly {
   ///   - timerService: время
   ///   - hapticService: Обратная связь от моторчика
   /// - Returns: Cобранный модуль `BottleScreen`
-  func createModule(timerService: TimerService, hapticService: HapticService) -> BottleScreenModule {
+  func createModule(_ services: ApplicationServices) -> BottleScreenModule {
     let view = BottleScreenView()
-    let interactor = BottleScreenInteractor(timerService, hapticService: hapticService)
+    let interactor = BottleScreenInteractor(services)
     let factory = BottleScreenFactory()
     let presenter = BottleScreenViewController(moduleView: view,
                                               interactor: interactor,

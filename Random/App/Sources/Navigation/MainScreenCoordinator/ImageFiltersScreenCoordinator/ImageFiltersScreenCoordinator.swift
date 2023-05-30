@@ -48,7 +48,7 @@ final class ImageFiltersScreenCoordinator: NSObject, ImageFiltersScreenCoordinat
   // MARK: - Internal func
   
   func start() {
-    let imageFiltersScreenModule = ImageFiltersScreenAssembly().createModule(permissionService: services.permissionService)
+    let imageFiltersScreenModule = ImageFiltersScreenAssembly().createModule(services: services)
     self.imageFiltersScreenModule = imageFiltersScreenModule
     self.imageFiltersScreenModule?.moduleOutput = self
     navigationController.pushViewController(imageFiltersScreenModule, animated: true)

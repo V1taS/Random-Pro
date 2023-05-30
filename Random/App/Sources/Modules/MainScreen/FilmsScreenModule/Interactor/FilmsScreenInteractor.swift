@@ -93,6 +93,7 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
     } else {
       getEngFilms()
     }
+    services.buttonCounterService.onButtonClick()
   }
   
   func loadFilm() {

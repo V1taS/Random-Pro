@@ -61,6 +61,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
+  private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
   
@@ -68,6 +69,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -138,6 +140,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
       output?.didReceiveIsEmptyError()
       return
     }
+    buttonCounterService.onButtonClick()
     
     if model.withoutRepetition {
       let uniqueItems: [ListScreenModel.TextModel] = model.allItems.difference(from: model.tempUniqueItems)

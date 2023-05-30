@@ -13,9 +13,9 @@ final class RockPaperScissorsScreenAssembly {
   /// Собирает модуль `RockPaperScissorsScreen`
   /// - Parameters:
   /// - Returns: Cобранный модуль `RockPaperScissorsScreen`
-  func createModule() -> RockPaperScissorsScreenModule {
+  func createModule(services: ApplicationServices) -> RockPaperScissorsScreenModule {
     let view = RockPaperScissorsScreenView()
-    let interactor = RockPaperScissorsScreenInteractor()
+    let interactor = RockPaperScissorsScreenInteractor(services: services)
     let factory = RockPaperScissorsScreenFactory()
     let presenter = RockPaperScissorsScreenViewController(moduleView: view,
                                                           interactor: interactor,

@@ -38,6 +38,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   private var anyCoordinator: Coordinator?
   private var settingsScreenCoordinator: MainSettingsScreenCoordinatorProtocol?
   private let window: UIWindow?
+  private lazy var advGoogleScreenCoordinator = ADVGoogleScreenCoordinator(navigationController, services)
   
   // MARK: - Initialization
   
@@ -66,6 +67,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
       self?.rateApp()
     }
+    setupAdvertising()
   }
   
   func sceneDidBecomeActive() {
@@ -364,6 +366,19 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScr
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func setupAdvertising() {
+    var buttonCounterService = services.buttonCounterService
+    
+    buttonCounterService.clickResponse = { [weak self] clickCount in
+      self?.mainScreenModule?.returnModel(completion: { mainModel in
+        guard !mainModel.isPremium, clickCount.isMultiple(of: Appearance().advertisingCount) else {
+          return
+        }
+        self?.advGoogleScreenCoordinator.start()
+      })
+    }
+  }
+  
   func openPremium() {
     let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
                                                             services)
@@ -535,5 +550,6 @@ private extension MainScreenCoordinator {
     let premiumAccessActivatedTitle = RandomStrings.Localizable.premiumAccessActivated
     
     let positiveAlertALotOfClicksKey = "main_screen_show_positive_alert_a_lot_of_clicks"
+    let advertisingCount = 15
   }
 }

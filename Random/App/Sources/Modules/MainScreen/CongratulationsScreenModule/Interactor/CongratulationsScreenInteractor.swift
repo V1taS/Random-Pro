@@ -60,6 +60,7 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
   
   private var storageService: StorageService
   private var networkService: NetworkService
+  private var buttonCounterService: ButtonCounterService
   private var casheCongratulations: [String] = []
   
   // MARK: - Initialization
@@ -69,6 +70,7 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
   init(services: ApplicationServices) {
     storageService = services.storageService
     networkService = services.networkService
+    buttonCounterService = services.buttonCounterService
   }
   
   // MARK: - Internal func
@@ -120,6 +122,7 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
       type: model.type
     )
     output?.didReceive(name: result, type: model.type ?? .birthday)
+    buttonCounterService.onButtonClick()
   }
   
   func cleanButtonAction() {

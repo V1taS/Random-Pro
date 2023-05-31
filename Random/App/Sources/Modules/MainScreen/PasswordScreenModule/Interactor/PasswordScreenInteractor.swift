@@ -298,41 +298,34 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
   
   func calculateCrackTime(password: String) {
     calculateCrackTime(password: password) { [weak self] result in
+      guard let self = self else {
+        return
+      }
+
+      let strengthValue = self.getStrengthValue(for: result)
       let countTimeText: String
-      let strengthValue: Float
-      
+
       switch result {
       case let .days(value):
         countTimeText = RandomStrings.Localizable.daysCount(value)
-        strengthValue = Float.random(in: 0.1...0.2)
       case let .months(value):
         countTimeText = RandomStrings.Localizable.monthsCount(value)
-        strengthValue = Float.random(in: 0.2...0.4)
       case let .years(value):
         countTimeText = RandomStrings.Localizable.yearsCount(value)
-        if value < 5 {
-          strengthValue = Float.random(in: 0.4...0.6)
-        } else if value > 5 && value < 10 {
-          strengthValue = Float.random(in: 0.6...0.8)
-        } else {
-          strengthValue = 1
-        }
       case let .centuries(value):
         countTimeText = RandomStrings.Localizable.centuryCount(value)
-        strengthValue = 1
       case let .overmuch(value):
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.groupingSeparator = " "
         let formattedValue = (formatter.string(from: NSNumber(value: value))) ?? ""
         countTimeText = "\(formattedValue) \(RandomStrings.Localizable.centuries)"
-        strengthValue = 1
       }
       
       let replacedCommaTimeText = countTimeText.replacingOccurrences(of: ",", with: " ")
       let replacedDashTimeText = replacedCommaTimeText.replacingOccurrences(of: "-", with: "")
       let crackTimeText = "\(RandomStrings.Localizable.crackTime): \n\(replacedDashTimeText)"
-      self?.output?.didReceiveCrackTime(text: crackTimeText, strengthValue: strengthValue)
+      self.output?.didReceiveCrackTime(text: crackTimeText, strengthValue: strengthValue)
     }
   }
 }
@@ -340,6 +333,24 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
 // MARK: - Private
 
 private extension PasswordScreenInteractor {
+  func getStrengthValue(for passwordCrackTimeType: PasswordScreenCrackTimeType) -> Float {
+
+    switch passwordCrackTimeType {
+    case let .days(value):
+      return 0.1 + Float(value) / 300
+    case let .months(value):
+      return 0.2 + Float(value) / 60
+    case let .years(value):
+      return 0.4 + Float(value) / 250
+    case let .centuries(value):
+      return value < 139_999
+      ? 0.8 + (Float(value) / 700_000)
+      : 1
+    case .overmuch:
+      return 1
+    }
+  }
+
   func calculateCrackTime(password: String, completion: @escaping (PasswordScreenCrackTimeType) -> Void) {
     DispatchQueue.global(qos: .userInteractive).async {
       let passwordLength = Double(password.count)
@@ -374,7 +385,7 @@ private extension PasswordScreenInteractor {
             completion(.months(lround(months)))
           } else {
             let years = months / 12
-            if years > 1_000_000 {
+            if years > 100 {
               let centuries = years / 100
               if centuries > 922_337_203_685_477 {
                 completion(.overmuch(lround(centuries)))

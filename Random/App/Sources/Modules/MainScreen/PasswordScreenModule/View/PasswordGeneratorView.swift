@@ -23,10 +23,12 @@ final class PasswordGeneratorView: UIView {
   
   var crackTimeStrengthValue: Float = .zero {
     didSet {
-      crackTimeSlider.value = crackTimeStrengthValue
+      crackTimeSlider.setValue(crackTimeStrengthValue, animated: true)
       switch crackTimeStrengthValue {
-      case 0.0...0.4:
+      case 0.0...0.2:
         crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryRed
+      case 0.2...0.4:
+        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryOrange
       case 0.4...0.7:
         crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryYellow
       case 0.7...1.0:

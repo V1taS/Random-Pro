@@ -322,7 +322,8 @@ final class PasswordScreenInteractor: PasswordScreenInteractorInput {
         countTimeText = "\(formattedValue) \(RandomStrings.Localizable.centuries)"
       }
       
-      let replacedCommaTimeText = countTimeText.replacingOccurrences(of: ",", with: " ")
+      let replacedDotTimeText = countTimeText.replacingOccurrences(of: ".", with: " ")
+      let replacedCommaTimeText = replacedDotTimeText.replacingOccurrences(of: ",", with: " ")
       let replacedDashTimeText = replacedCommaTimeText.replacingOccurrences(of: "-", with: "")
       let crackTimeText = "\(RandomStrings.Localizable.crackTime): \n\(replacedDashTimeText)"
       self.output?.didReceiveCrackTime(text: crackTimeText, strengthValue: strengthValue)

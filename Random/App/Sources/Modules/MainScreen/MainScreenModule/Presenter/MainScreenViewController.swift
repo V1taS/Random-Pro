@@ -64,6 +64,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Names`
   func openNames()
   
+  /// Открыть раздел `Добрые дела`
+  func openGoodDeeds()
+  
   /// Открыть раздел `Поздравления`
   func openCongratulations()
   
@@ -236,6 +239,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openGoodDeeds() {
+    moduleOutput?.openGoodDeeds()
+  }
+  
   func openCongratulations() {
     moduleOutput?.openCongratulations()
   }

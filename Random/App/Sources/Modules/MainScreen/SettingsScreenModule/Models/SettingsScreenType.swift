@@ -17,6 +17,9 @@ enum SettingsScreenType {
   /// Раздел: `Никнейм`
   case nickname(itemsGenerated: String, lastItem: String)
   
+  /// Раздел: `Добрые дела`
+  case goodDeedsS(itemsGenerated: String, lastItem: String)
+  
   /// Раздел: `Никнейм`
   case names(itemsGenerated: String,
              lastItem: String,

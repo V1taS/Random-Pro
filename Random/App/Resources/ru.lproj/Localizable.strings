@@ -268,3 +268,5 @@
 "advertising" = "Реклама";
 "disable_ads_title" = "Без рекламы";
 "disable_ads_description" = "Отключите рекламу для комфортного использования приложения";
+"good_deeds" = "Добрые дела";
+"generate_random_names_good_deeds" = "Можно генерировать рандомные добрые дела";

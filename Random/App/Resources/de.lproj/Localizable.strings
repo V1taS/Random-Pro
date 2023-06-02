@@ -268,3 +268,5 @@
 "advertising" = "Werbung";
 "disable_ads_title" = "Ohne Werbung";
 "disable_ads_description" = "Deaktivieren Sie Werbung, um die Anwendung bequem nutzen zu können";
+"good_deeds" = "Gute Taten";
+"generate_random_names_good_deeds" = "Kann zufällige gute Taten hervorrufen";

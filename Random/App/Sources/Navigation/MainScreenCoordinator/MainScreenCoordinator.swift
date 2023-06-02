@@ -78,6 +78,15 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openGoodDeeds() {
+    let goodDeedsScreenCoordinator = GoodDeedsScreenCoordinator(navigationController, services)
+    anyCoordinator = goodDeedsScreenCoordinator
+    goodDeedsScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .goodDeeds)
+    services.metricsService.track(event: .goodDeeds)
+  }
+  
   func openCongratulations() {
     let congratulationsScreenCoordinator = CongratulationsScreenCoordinator(navigationController,
                                                                             services)
@@ -479,6 +488,8 @@ private extension MainScreenCoordinator {
       openNames()
     case .congratulations:
       openCongratulations()
+    case .goodDeeds:
+      openGoodDeeds()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

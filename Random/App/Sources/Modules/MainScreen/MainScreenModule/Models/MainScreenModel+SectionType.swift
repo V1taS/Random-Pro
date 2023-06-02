@@ -55,6 +55,8 @@ extension MainScreenModel {
         return "names"
       case .congratulations:
         return "congratulations"
+      case .goodDeeds:
+        return "good_deeds"
       }
     }
     
@@ -100,6 +102,8 @@ extension MainScreenModel {
         return appearance.titleNames
       case .congratulations:
         return appearance.titleCongratulations
+      case .goodDeeds:
+        return appearance.titleGoodDeeds
       }
     }
     
@@ -145,6 +149,8 @@ extension MainScreenModel {
         return appearance.imageNames
       case .congratulations:
         return appearance.imageCongratulations
+      case .goodDeeds:
+        return appearance.imageGoodDeeds
       }
     }
     
@@ -190,6 +196,8 @@ extension MainScreenModel {
         return appearance.namesDescriptionForNoPremiumAccess
       case .congratulations:
         return appearance.congratulationsDescriptionForNoPremiumAccess
+      case .goodDeeds:
+        return appearance.goodDeedsDescriptionForNoPremiumAccess
       }
     }
     
@@ -251,5 +259,8 @@ extension MainScreenModel {
     
     /// Раздел поздравлений
     case congratulations
+    
+    /// Раздел "Хорошие дела"
+    case goodDeeds
   }
 }

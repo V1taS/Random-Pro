@@ -229,6 +229,13 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case let .goodDeedsS(itemsGenerated, _):
+      tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
+                                                  description: itemsGenerated))
+      tableViewModels.append(.divider)
+      tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
+      tableViewModels.append(.divider)
+      tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     }
     output?.didReceive(models: tableViewModels)
   }

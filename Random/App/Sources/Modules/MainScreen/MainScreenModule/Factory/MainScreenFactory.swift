@@ -221,6 +221,15 @@ extension MainScreenFactory {
             isHidden: false,
             advLabel: .premium
           ))
+        case .goodDeeds:
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            imageSectionSystemName: section.imageSectionSystemName,
+            titleSection: section.titleSection,
+            isEnabled: true,
+            isHidden: false,
+            advLabel: .premium
+          ))
         }
       }
       
@@ -419,6 +428,16 @@ extension MainScreenFactory {
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.congratulations) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.congratulations ?? model.advLabel.rawValue,
+                                       oldADVLabel: .premium)
+              ))
+            case .goodDeeds:
+              cardSections.append(MainScreenModel.Section(
+                type: model.type,
+                imageSectionSystemName: model.imageSectionSystemName,
+                titleSection: model.type.titleSection,
+                isEnabled: model.isEnabled,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.goodDeeds) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.goodDeeds ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
             }

@@ -268,3 +268,5 @@
 "advertising" = "Publicidad";
 "disable_ads_title" = "sin publicidad";
 "disable_ads_description" = "Deshabilite los anuncios para un uso cómodo de la aplicación";
+"good_deeds" = "Buenas acciones";
+"generate_random_names_good_deeds" = "Puede generar buenas obras al azar";

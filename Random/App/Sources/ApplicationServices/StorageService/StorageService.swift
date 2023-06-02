@@ -61,6 +61,9 @@ protocol StorageService {
   /// Модель для Да / Нет
   var yesNoScreenModel: YesNoScreenModel? { get set }
   
+  /// Модель Хорошие дела
+  var goodDeedsScreenModel: GoodDeedsScreenModel? { get set }
+  
   /// Модель для выбора иконки
   var appIconScreenModel: SelecteAppIconScreenModel? { get set }
   
@@ -226,6 +229,15 @@ final class StorageServiceImpl: StorageService {
     }
   }
   
+  var goodDeedsScreenModel: GoodDeedsScreenModel? {
+    get {
+      isPremium ? goodDeedsScreenModelKeychain : goodDeedsScreenModelUserDefaults
+    } set {
+      goodDeedsScreenModelUserDefaults = newValue
+      goodDeedsScreenModelKeychain = newValue
+    }
+  }
+  
   var appIconScreenModel: SelecteAppIconScreenModel? {
     get {
       isPremium ? appIconScreenModelKeychain : appIconScreenModelUserDefaults
@@ -289,6 +301,13 @@ final class StorageServiceImpl: StorageService {
   private var congratulationsScreenModelUserDefaults: CongratulationsScreenModel?
   @ObjectCustomKeychainWrapper(key: Appearance().congratulationsScreenKeyUserDefaults)
   private var congratulationsScreenModelKeychain: CongratulationsScreenModel?
+  
+  // MARK: - GoodDeeds model
+  
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().goodDeedsScreenKeyUserDefaults)
+  private var goodDeedsScreenModelUserDefaults: GoodDeedsScreenModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().goodDeedsScreenKeyUserDefaults)
+  private var goodDeedsScreenModelKeychain: GoodDeedsScreenModel?
   
   // MARK: - Number model
   
@@ -429,5 +448,6 @@ private extension StorageServiceImpl {
     let playerCardSelectionModelKeyUserDefaults = "player_card_selection_screen_user_defaults_key"
     let namesScreenKeyUserDefaults = "names_screen_user_defaults_key"
     let congratulationsScreenKeyUserDefaults = "congratulations_screen_user_defaults_key"
+    let goodDeedsScreenKeyUserDefaults = "good_deeds_screen_user_defaults_key"
   }
 }

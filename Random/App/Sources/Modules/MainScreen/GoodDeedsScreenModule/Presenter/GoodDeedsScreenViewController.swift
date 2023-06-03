@@ -34,6 +34,9 @@ protocol GoodDeedsScreenModuleInput {
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
+  /// Установить новый язык
+  func setNewLanguage(language: GoodDeedsScreenModel.Language)
+  
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: GoodDeedsScreenModuleOutput? { get set }
 }
@@ -101,6 +104,10 @@ final class GoodDeedsScreenViewController: GoodDeedsScreenModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
+  }
+  
+  func setNewLanguage(language: GoodDeedsScreenModel.Language) {
+    interactor.setNewLanguage(language: language)
   }
 }
 

@@ -229,7 +229,13 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case let .goodDeedsS(itemsGenerated, _):
+    case let .goodDeedsS(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
+      let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+                                                        listOfItems: listOfItems,
+                                                        startSelectedSegmentIndex: index,
+                                                        valueChanged: valueChanged))
+      tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
       tableViewModels.append(.divider)

@@ -275,3 +275,5 @@
 "easy" = "Facile";
 "hard" = "Difficile";
 "answer" = "Risposta";
+"joke" = "Scherzo";
+"generate_random_joke" = "Puoi generare battute casuali";

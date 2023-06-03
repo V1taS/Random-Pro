@@ -12,7 +12,7 @@ final class GoodDeedsScreenAssembly {
   
   /// Собирает модуль `GoodDeedsScreen`
   /// - Returns: Cобранный модуль `GoodDeedsScreen`
-  func createModule(services: ApplicationServices) -> GoodDeedsScreenModule {
+  func createModule(_ services: ApplicationServices) -> GoodDeedsScreenModule {
     let interactor = GoodDeedsScreenInteractor(services: services)
     let view = GoodDeedsScreenView()
     let factory = GoodDeedsScreenFactory()

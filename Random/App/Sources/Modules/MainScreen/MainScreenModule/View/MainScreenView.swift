@@ -65,6 +65,9 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Names`
   func openNames()
   
+  /// Открыть раздел `Joke`
+  func openJoke()
+  
   /// Открыть раздел `Поздравления`
   func openCongratulations()
   
@@ -180,6 +183,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openGoodDeeds()
       case .riddles:
         output?.openRiddles()
+      case .joke:
+        output?.openJoke()
       }
     }
   }

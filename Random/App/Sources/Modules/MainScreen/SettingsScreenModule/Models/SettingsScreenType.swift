@@ -17,12 +17,19 @@ enum SettingsScreenType {
   /// Раздел: `Никнейм`
   case nickname(itemsGenerated: String, lastItem: String)
   
+  /// Раздел: `Анекдоты`
+  case joke(itemsGenerated: String,
+            lastItem: String,
+            currentCountry: String,
+            listOfItems: [String],
+            valueChanged: ((_ index: Int) -> Void)?)
+  
   /// Раздел: `Добрые дела`
-  case goodDeedsS(itemsGenerated: String,
-                  lastItem: String,
-                  currentCountry: String,
-                  listOfItems: [String],
-                  valueChanged: ((_ index: Int) -> Void)?)
+  case goodDeeds(itemsGenerated: String,
+                 lastItem: String,
+                 currentCountry: String,
+                 listOfItems: [String],
+                 valueChanged: ((_ index: Int) -> Void)?)
   
   /// Раздел: `Загадки`
   case riddles(itemsGenerated: String,

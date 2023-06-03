@@ -275,3 +275,5 @@
 "easy" = "Einfach";
 "hard" = "Hart";
 "answer" = "Antworten";
+"joke" = "Scherzen";
+"generate_random_joke" = "Sie können zufällige Witze generieren";

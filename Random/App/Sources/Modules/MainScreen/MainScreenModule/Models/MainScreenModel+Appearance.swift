@@ -95,8 +95,12 @@ extension MainScreenModel {
     let titleGoodDeeds = RandomStrings.Localizable.goodDeeds
     let goodDeedsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNamesGoodDeeds
     
-    let imageRiddles = "questionmark.circle"
+    let imageRiddles = "lightbulb"
     let titleRiddles = RandomStrings.Localizable.riddles
     let riddlesDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNamesRiddles
+    
+    let imageJoke = "flame"
+    let titleJoke = RandomStrings.Localizable.joke
+    let jokeDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomJoke
   }
 }

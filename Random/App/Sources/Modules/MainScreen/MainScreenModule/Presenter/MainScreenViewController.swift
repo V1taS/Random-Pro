@@ -61,6 +61,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `NickName`
   func openNickName()
   
+  /// Открыть раздел `Joke`
+  func openJoke()
+  
   /// Открыть раздел `Names`
   func openNames()
   
@@ -242,6 +245,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openJoke() {
+    moduleOutput?.openJoke()
+  }
+  
   func openRiddles() {
     moduleOutput?.openRiddles()
   }

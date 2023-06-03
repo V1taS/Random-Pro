@@ -275,3 +275,5 @@
 "easy" = "Easy";
 "hard" = "Hard";
 "answer" = "Answer";
+"joke" = "Joke";
+"generate_random_joke" = "You can generate random jokes";

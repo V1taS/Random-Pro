@@ -67,6 +67,9 @@ protocol StorageService {
   /// Модель Хорошие дела
   var goodDeedsScreenModel: GoodDeedsScreenModel? { get set }
   
+  /// Модель Анекдоты
+  var jokeGeneratorScreenModel: JokeGeneratorScreenModel? { get set }
+  
   /// Модель для выбора иконки
   var appIconScreenModel: SelecteAppIconScreenModel? { get set }
   
@@ -268,6 +271,15 @@ final class StorageServiceImpl: StorageService {
     }
   }
   
+  var jokeGeneratorScreenModel: JokeGeneratorScreenModel? {
+    get {
+      isPremium ? jokeScreenModelKeychain : jokeScreenModelUserDefaults
+    } set {
+      jokeScreenModelUserDefaults = newValue
+      jokeScreenModelKeychain = newValue
+    }
+  }
+  
   var deepLinkModel: MainScreenModel.SectionType? {
     get {
       deepLinkModelUserDefaults
@@ -285,6 +297,13 @@ final class StorageServiceImpl: StorageService {
   }
   
   // MARK: - Private property
+  
+  // MARK: - Riddles model
+  
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().jokeScreenKeyUserDefaults)
+  private var jokeScreenModelUserDefaults: JokeGeneratorScreenModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().jokeScreenKeyUserDefaults)
+  private var jokeScreenModelKeychain: JokeGeneratorScreenModel?
   
   // MARK: - Riddles model
   
@@ -469,5 +488,6 @@ private extension StorageServiceImpl {
     let congratulationsScreenKeyUserDefaults = "congratulations_screen_user_defaults_key"
     let goodDeedsScreenKeyUserDefaults = "good_deeds_screen_user_defaults_key"
     let riddlesScreenKeyUserDefaults = "riddles_screen_user_defaults_key"
+    let jokeScreenKeyUserDefaults = "joke_screen_user_defaults_key"
   }
 }

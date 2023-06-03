@@ -1,19 +1,20 @@
 //
-//  GoodDeedsScreenCoordinator.swift
+//  JokeGeneratorScreenCoordinator.swift
 //  Random
 //
-//  Created by Vitalii Sosin on 02.06.2023.
+//  Created by Vitalii Sosin on 03.06.2023.
+//  Copyright © 2023 SosinVitalii.com. All rights reserved.
 //
 
 import UIKit
 import RandomUIKit
 
-final class GoodDeedsScreenCoordinator: Coordinator {
+final class JokeGeneratorScreenCoordinator: Coordinator {
   
   // MARK: - Private variables
   
   private let navigationController: UINavigationController
-  private var goodDeedsScreenModule: GoodDeedsScreenModule?
+  private var jokeGeneratorScreenModule: JokeGeneratorScreenModule?
   private let services: ApplicationServices
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
@@ -32,21 +33,25 @@ final class GoodDeedsScreenCoordinator: Coordinator {
   // MARK: - Internal func
   
   func start() {
-    var goodDeedsScreenModule = GoodDeedsScreenAssembly().createModule(services)
-    self.goodDeedsScreenModule = goodDeedsScreenModule
-    goodDeedsScreenModule.moduleOutput = self
-    navigationController.pushViewController(goodDeedsScreenModule, animated: true)
+    var jokeGeneratorScreenModule = JokeGeneratorScreenAssembly().createModule(services)
+    self.jokeGeneratorScreenModule = jokeGeneratorScreenModule
+    jokeGeneratorScreenModule.moduleOutput = self
+    navigationController.pushViewController(jokeGeneratorScreenModule, animated: true)
   }
 }
 
+// MARK: - ListResultScreenCoordinatorOutput
+
+extension JokeGeneratorScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
 // MARK: - SettingsScreenCoordinatorOutput
 
-extension GoodDeedsScreenCoordinator: SettingsScreenCoordinatorOutput {
+extension JokeGeneratorScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
   func updateStateForSections() {}
   
   func cleanButtonAction() {
-    goodDeedsScreenModule?.cleanButtonAction()
+    jokeGeneratorScreenModule?.cleanButtonAction()
   }
   
   func listOfObjectsAction() {
@@ -56,19 +61,15 @@ extension GoodDeedsScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator?.start()
     
     listResultScreenCoordinator.setContentsFrom(
-      list: goodDeedsScreenModule?.returnCurrentModel().listResult ?? []
+      list: jokeGeneratorScreenModule?.returnCurrentModel().listResult ?? []
     )
   }
 }
 
-// MARK: - ListResultScreenCoordinatorOutput
+// MARK: - JokeGeneratorScreenModuleOutput
 
-extension GoodDeedsScreenCoordinator: ListResultScreenCoordinatorOutput {}
-
-// MARK: - GoodDeedsScreenModuleOutput
-
-extension GoodDeedsScreenCoordinator: GoodDeedsScreenModuleOutput {
-  func settingButtonAction(model: GoodDeedsScreenModel) {
+extension JokeGeneratorScreenCoordinator: JokeGeneratorScreenModuleOutput {
+  func settingButtonAction(model: JokeGeneratorScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
@@ -99,9 +100,9 @@ extension GoodDeedsScreenCoordinator: GoodDeedsScreenModuleOutput {
 
 // MARK: - Private
 
-private extension GoodDeedsScreenCoordinator {
+private extension JokeGeneratorScreenCoordinator {
   func setupDefaultsSettings() {
-    guard let model = goodDeedsScreenModule?.returnCurrentModel(),
+    guard let model = jokeGeneratorScreenModule?.returnCurrentModel(),
           let language = model.language,
           let settingsScreenCoordinator else {
       return
@@ -122,7 +123,7 @@ private extension GoodDeedsScreenCoordinator {
     }
     
     settingsScreenCoordinator.setupDefaultsSettings(
-      for: .goodDeeds(
+      for: .joke(
         itemsGenerated: "\(model.listResult.count)",
         lastItem: "\(model.result)",
         currentCountry: currentCountry,
@@ -133,14 +134,14 @@ private extension GoodDeedsScreenCoordinator {
             return
           }
           
-          let language: GoodDeedsScreenModel.Language
+          let language: JokeGeneratorScreenModel.Language
           switch country {
           case .ru:
             language = .ru
           default:
             language = .en
           }
-          self?.goodDeedsScreenModule?.setNewLanguage(language: language)
+          self?.jokeGeneratorScreenModule?.setNewLanguage(language: language)
         }
       )
     )
@@ -149,7 +150,7 @@ private extension GoodDeedsScreenCoordinator {
 
 // MARK: - Appearance
 
-private extension GoodDeedsScreenCoordinator {
+private extension JokeGeneratorScreenCoordinator {
   struct Appearance {
     let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
     let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong

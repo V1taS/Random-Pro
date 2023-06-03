@@ -16,6 +16,9 @@ struct GoodDeedsScreenModel: UserDefaultsCodable {
   /// Список результатов
   let listResult: [String]
   
+  /// Язык для генерации имени
+  let language: Language?
+  
   // MARK: - Language
   
   enum Language: String, CaseIterable, UserDefaultsCodable {

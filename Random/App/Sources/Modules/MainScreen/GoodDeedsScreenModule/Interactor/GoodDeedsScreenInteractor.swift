@@ -37,6 +37,9 @@ protocol GoodDeedsScreenInteractorInput {
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  /// Установить новый язык
+  func setNewLanguage(language: GoodDeedsScreenModel.Language)
 }
 
 /// Интерактор
@@ -70,21 +73,21 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
     let host = appearance.host
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
-    let model = storageService.goodDeedsScreenModel ?? returnCurrentModel()
     
-    if storageService.goodDeedsScreenModel == nil {
-      storageService.goodDeedsScreenModel = returnCurrentModel()
-    }
+    let newModel = GoodDeedsScreenModel(
+      result: Appearance().result,
+      listResult: [],
+      language: getDefaultLanguage()
+    )
     
-    let language: GoodDeedsScreenModel.Language
-    let currentRegionType = getCurrentLocaleType() ?? .us
+    let model = storageService.goodDeedsScreenModel ?? newModel
+    let language = model.language ?? getDefaultLanguage()
     
-    switch currentRegionType {
-    case .ru:
-      language = .ru
-    default:
-      language = .en
-    }
+    storageService.goodDeedsScreenModel = GoodDeedsScreenModel(
+      result: model.result,
+      listResult: model.listResult,
+      language: language
+    )
     
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
@@ -126,7 +129,8 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
     
     storageService.goodDeedsScreenModel = GoodDeedsScreenModel(
       result: result,
-      listResult: listResult
+      listResult: listResult,
+      language: model.language
     )
     output?.didReceive(text: result)
     buttonCounterService.onButtonClick()
@@ -139,7 +143,8 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
       let appearance = Appearance()
       return GoodDeedsScreenModel(
         result: appearance.result,
-        listResult: []
+        listResult: [],
+        language: getDefaultLanguage()
       )
     }
   }
@@ -147,10 +152,43 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
   func cleanButtonAction() {
     let appearance = Appearance()
     let newModel = GoodDeedsScreenModel(result: appearance.result,
-                                        listResult: [])
+                                        listResult: [],
+                                        language: getDefaultLanguage())
     self.storageService.goodDeedsScreenModel = newModel
     output?.didReceive(text: newModel.result)
     output?.cleanButtonWasSelected()
+  }
+  
+  func setNewLanguage(language: GoodDeedsScreenModel.Language) {
+    guard let model = storageService.goodDeedsScreenModel else {
+      output?.somethingWentWrong()
+      return
+    }
+    
+    let newModel = GoodDeedsScreenModel(
+      result: model.result,
+      listResult: model.listResult,
+      language: language
+    )
+    storageService.goodDeedsScreenModel = newModel
+    getContent()
+  }
+}
+
+// MARK: - Private
+
+private extension GoodDeedsScreenInteractor {
+  func getDefaultLanguage() -> GoodDeedsScreenModel.Language {
+    let language: GoodDeedsScreenModel.Language
+    let localeType = getCurrentLocaleType() ?? .us
+    
+    switch localeType {
+    case .ru:
+      language = .ru
+    default:
+      language = .en
+    }
+    return language
   }
 }
 

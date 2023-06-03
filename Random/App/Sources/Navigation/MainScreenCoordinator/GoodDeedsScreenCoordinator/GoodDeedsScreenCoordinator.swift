@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 final class GoodDeedsScreenCoordinator: Coordinator {
   
@@ -101,14 +102,46 @@ extension GoodDeedsScreenCoordinator: GoodDeedsScreenModuleOutput {
 private extension GoodDeedsScreenCoordinator {
   func setupDefaultsSettings() {
     guard let model = goodDeedsScreenModule?.returnCurrentModel(),
+          let language = model.language,
           let settingsScreenCoordinator else {
       return
+    }
+    
+    let listCountry = [
+      LocaleType.us.rawValue,
+      LocaleType.ru.rawValue
+      
+    ]
+    let currentCountry: String
+    
+    switch language {
+    case .en:
+      currentCountry = LocaleType.us.rawValue
+    case .ru:
+      currentCountry = LocaleType.ru.rawValue
     }
     
     settingsScreenCoordinator.setupDefaultsSettings(
       for: .goodDeedsS(
         itemsGenerated: "\(model.listResult.count)",
-        lastItem: "\(model.result)"
+        lastItem: "\(model.result)",
+        currentCountry: currentCountry,
+        listOfItems: listCountry,
+        valueChanged: { [weak self] index in
+          guard listCountry.indices.contains(index),
+                let country = LocaleType.init(rawValue: listCountry[index]) else {
+            return
+          }
+          
+          let language: GoodDeedsScreenModel.Language
+          switch country {
+          case .ru:
+            language = .ru
+          default:
+            language = .en
+          }
+          self?.goodDeedsScreenModule?.setNewLanguage(language: language)
+        }
       )
     )
   }

@@ -270,3 +270,8 @@
 "disable_ads_description" = "Disable ads for comfortable use of the application";
 "good_deeds" = "Good deeds";
 "generate_random_names_good_deeds" = "Can generate random good deeds";
+"riddles" = "Riddles";
+"generate_random_names_riddles" = "Can generate random riddles";
+"easy" = "Easy";
+"hard" = "Hard";
+"answer" = "Answer";

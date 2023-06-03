@@ -71,6 +71,9 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Добрые дела`
   func openGoodDeeds()
   
+  /// Открыть раздел `Загадки`
+  func openRiddles()
+  
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
@@ -175,6 +178,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openCongratulations()
       case .goodDeeds:
         output?.openGoodDeeds()
+      case .riddles:
+        output?.openRiddles()
       }
     }
   }

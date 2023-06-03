@@ -110,8 +110,8 @@ private extension GoodDeedsScreenCoordinator {
     let listCountry = [
       LocaleType.us.rawValue,
       LocaleType.ru.rawValue
-      
     ]
+    
     let currentCountry: String
     
     switch language {

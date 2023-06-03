@@ -270,3 +270,8 @@
 "disable_ads_description" = "Deshabilite los anuncios para un uso cómodo de la aplicación";
 "good_deeds" = "Buenas acciones";
 "generate_random_names_good_deeds" = "Puede generar buenas obras al azar";
+"riddles" = "Rompecabezas";
+"generate_random_names_riddles" = "Puede generar rompecabezas aleatorios";
+"easy" = "Fácil";
+"hard" = "Duro";
+"answer" = "Respuesta";

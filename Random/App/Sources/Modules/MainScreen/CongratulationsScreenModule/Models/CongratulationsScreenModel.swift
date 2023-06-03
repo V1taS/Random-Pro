@@ -42,7 +42,7 @@ struct CongratulationsScreenModel: UserDefaultsCodable {
     case es
   }
   
-  // MARK: - Gender
+  // MARK: - CongratulationsType
   
   enum CongratulationsType: String, CaseIterable, UserDefaultsCodable {
     

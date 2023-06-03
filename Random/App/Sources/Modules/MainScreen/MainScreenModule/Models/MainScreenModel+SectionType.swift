@@ -57,6 +57,8 @@ extension MainScreenModel {
         return "congratulations"
       case .goodDeeds:
         return "good_deeds"
+      case .riddles:
+        return "riddles"
       }
     }
     
@@ -104,6 +106,8 @@ extension MainScreenModel {
         return appearance.titleCongratulations
       case .goodDeeds:
         return appearance.titleGoodDeeds
+      case .riddles:
+        return appearance.titleRiddles
       }
     }
     
@@ -151,6 +155,8 @@ extension MainScreenModel {
         return appearance.imageCongratulations
       case .goodDeeds:
         return appearance.imageGoodDeeds
+      case .riddles:
+        return appearance.imageRiddles
       }
     }
     
@@ -198,6 +204,8 @@ extension MainScreenModel {
         return appearance.congratulationsDescriptionForNoPremiumAccess
       case .goodDeeds:
         return appearance.goodDeedsDescriptionForNoPremiumAccess
+      case .riddles:
+        return appearance.riddlesDescriptionForNoPremiumAccess
       }
     }
     
@@ -262,5 +270,8 @@ extension MainScreenModel {
     
     /// Раздел "Хорошие дела"
     case goodDeeds
+    
+    /// Раздел "Загадки"
+    case riddles
   }
 }

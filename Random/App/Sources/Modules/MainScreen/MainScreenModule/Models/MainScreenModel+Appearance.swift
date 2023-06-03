@@ -38,7 +38,7 @@ extension MainScreenModel {
     let imageCardNumber = "number"
     let titleCardNumber = RandomStrings.Localizable.number
     
-    let imageCardYesOrNot = "questionmark.square"
+    let imageCardYesOrNot = "y.square"
     let titleCardYesOrNot = RandomStrings.Localizable.yesOrNo
     
     let imageCardCharacters = "textbox"
@@ -94,5 +94,9 @@ extension MainScreenModel {
     let imageGoodDeeds = "hand.thumbsup"
     let titleGoodDeeds = RandomStrings.Localizable.goodDeeds
     let goodDeedsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNamesGoodDeeds
+    
+    let imageRiddles = "questionmark.circle"
+    let titleRiddles = RandomStrings.Localizable.riddles
+    let riddlesDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNamesRiddles
   }
 }

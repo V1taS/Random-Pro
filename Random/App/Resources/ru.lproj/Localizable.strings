@@ -270,3 +270,8 @@
 "disable_ads_description" = "Отключите рекламу для комфортного использования приложения";
 "good_deeds" = "Добрые дела";
 "generate_random_names_good_deeds" = "Можно генерировать рандомные добрые дела";
+"riddles" = "Загадки";
+"generate_random_names_riddles" = "Можно генерировать рандомные загадки";
+"easy" = "Легко";
+"hard" = "Сложно";
+"answer" = "Ответ";

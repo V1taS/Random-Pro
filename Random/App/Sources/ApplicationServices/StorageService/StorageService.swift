@@ -28,6 +28,9 @@ protocol StorageService {
   /// Модель для поздравлений
   var congratulationsScreenModel: CongratulationsScreenModel? { get set }
   
+  /// Модель для Загадок
+  var riddlesScreenModel: RiddlesScreenModel? { get set }
+  
   /// Модель для генерации имен
   var namesScreenModel: NamesScreenModel? { get set }
   
@@ -78,7 +81,7 @@ protocol StorageService {
 }
 
 final class StorageServiceImpl: StorageService {
-
+  
   // MARK: - Internal property
   
   var isPremium: Bool {
@@ -220,6 +223,15 @@ final class StorageServiceImpl: StorageService {
     }
   }
   
+  var riddlesScreenModel: RiddlesScreenModel? {
+    get {
+      isPremium ? riddlesScreenModelKeychain : riddlesScreenModelUserDefaults
+    } set {
+      riddlesScreenModelKeychain = newValue
+      riddlesScreenModelUserDefaults = newValue
+    }
+  }
+  
   var yesNoScreenModel: YesNoScreenModel? {
     get {
       isPremium ? yesNoScreenModelKeychain : yesNoScreenModelUserDefaults
@@ -273,6 +285,13 @@ final class StorageServiceImpl: StorageService {
   }
   
   // MARK: - Private property
+  
+  // MARK: - Riddles model
+  
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().riddlesScreenKeyUserDefaults)
+  private var riddlesScreenModelUserDefaults: RiddlesScreenModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().riddlesScreenKeyUserDefaults)
+  private var riddlesScreenModelKeychain: RiddlesScreenModel?
   
   // MARK: - Main model
   
@@ -449,5 +468,6 @@ private extension StorageServiceImpl {
     let namesScreenKeyUserDefaults = "names_screen_user_defaults_key"
     let congratulationsScreenKeyUserDefaults = "congratulations_screen_user_defaults_key"
     let goodDeedsScreenKeyUserDefaults = "good_deeds_screen_user_defaults_key"
+    let riddlesScreenKeyUserDefaults = "riddles_screen_user_defaults_key"
   }
 }

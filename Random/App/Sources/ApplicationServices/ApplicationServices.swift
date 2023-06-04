@@ -79,23 +79,23 @@ final class ApplicationServicesImpl: ApplicationServices {
   }
   
   var fileManagerService: FileManagerService {
-    FileManagerImpl()
+    fileManagerImpl
   }
   
   var permissionService: PermissionService {
-    PermissionServiceImpl()
+    permissionServiceImpl
   }
   
   var notificationService: NotificationService {
-    NotificationServiceImpl()
+    notificationServiceImpl
   }
   
   var metricsService: MetricsService {
-    MetricsServiceImpl()
+    metricsServiceImpl
   }
   
   var keyboardService: KeyboardService {
-    KeyboardServiceImpl()
+    keyboardServiceImpl
   }
   
   var networkService: NetworkService {
@@ -103,35 +103,35 @@ final class ApplicationServicesImpl: ApplicationServices {
   }
   
   var timerService: TimerService {
-    TimerServiceImpl()
+    timerServiceImpl
   }
   
   var hapticService: HapticService {
-    HapticServiceImpl()
+    hapticServiceImpl
   }
   
   var featureToggleServices: FeatureToggleServices {
-    FeatureToggleServicesImpl()
+    featureToggleServicesImpl
   }
   
   var updateAppService: UpdateAppService {
-    UpdateAppServiceImpl()
+    updateAppServiceImpl
   }
   
   var authenticationService: AuthenticationService {
-    AuthenticationServiceImpl()
+    authenticationServiceImpl
   }
   
   var cloudDatabaseService: CloudDatabaseService {
-    CloudDatabaseServiceImpl()
+    cloudDatabaseServiceImpl
   }
   
   var appPurchasesService: AppPurchasesService {
-    AppPurchasesServiceImpl()
+    appPurchasesServiceImpl
   }
   
   var storageService: StorageService {
-    return storageServiceImpl
+    storageServiceImpl
   }
   
   var buttonCounterService: ButtonCounterService {
@@ -144,4 +144,16 @@ final class ApplicationServicesImpl: ApplicationServices {
   let deepLinkServiceImpl = DeepLinkServiceImpl()
   let networkServiceImpl = NetworkServiceImpl()
   let buttonCounterServiceImpl = ButtonCounterServiceImpl()
+  let hapticServiceImpl = HapticServiceImpl()
+  let timerServiceImpl = TimerServiceImpl()
+  let appPurchasesServiceImpl = AppPurchasesServiceImpl()
+  let cloudDatabaseServiceImpl = CloudDatabaseServiceImpl()
+  let authenticationServiceImpl = AuthenticationServiceImpl()
+  let updateAppServiceImpl = UpdateAppServiceImpl()
+  let featureToggleServicesImpl = FeatureToggleServicesImpl()
+  let keyboardServiceImpl = KeyboardServiceImpl()
+  let metricsServiceImpl = MetricsServiceImpl()
+  let notificationServiceImpl = NotificationServiceImpl()
+  let permissionServiceImpl = PermissionServiceImpl()
+  let fileManagerImpl = FileManagerImpl()
 }

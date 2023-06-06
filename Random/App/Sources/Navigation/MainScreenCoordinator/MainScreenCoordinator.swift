@@ -78,6 +78,16 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openGifts() {
+    let giftsScreenCoordinator = GiftsScreenCoordinator(navigationController, services)
+    
+    anyCoordinator = giftsScreenCoordinator
+    giftsScreenCoordinator.start()
+
+    mainScreenModule?.removeLabelFromSection(type: .gifts)
+    services.metricsService.track(event: .gifts)
+  }
+  
   func openJoke() {
     let jokeGeneratorScreenCoordinator = JokeGeneratorScreenCoordinator(navigationController,
                                                                         services)
@@ -514,6 +524,8 @@ private extension MainScreenCoordinator {
       openRiddles()
     case .joke:
       openJoke()
+    case .gifts:
+      openGifts()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

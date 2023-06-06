@@ -75,6 +75,9 @@ struct SectionsIsHiddenFTModel {
   
   /// Раздел `Анекдотов`
   let joke: Bool
+
+  /// Раздел `Подарки`
+  let gifts: Bool
   
   // MARK: - Initialization
   
@@ -103,6 +106,7 @@ struct SectionsIsHiddenFTModel {
     goodDeeds = (dictionary["goodDeeds"] as? Int ?? .zero).boolValue
     riddles = (dictionary["riddles"] as? Int ?? .zero).boolValue
     joke = (dictionary["joke"] as? Int ?? .zero).boolValue
+    gifts = (dictionary["gifts"] as? Int ?? .zero).boolValue
   }
 }
 

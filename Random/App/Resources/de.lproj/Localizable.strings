@@ -80,6 +80,7 @@
 "generate_random_names" = "Sie können einen zufälligen Namen generieren";
 "generate_random_congratulations" = "Sie können zufällige Begrüßungen generieren";
 "generate_random_date_time" = "Ein zufälliges Datum und eine zufällige Uhrzeit können generiert werden";
+"generate_random_gifts" = "Es ist möglich, zufällige Geschenke zu generieren";
 "generate_random_letters" = "Es können zufällige Buchstaben generiert werden";
 "generate_random_numbers" = "Es können Zufallszahlen generiert werden";
 "generate_random_task_list" = "Es ist möglich, eine zufällige Liste eigener Aufgaben zu generieren";
@@ -88,6 +89,7 @@
 "generated_players" = "Spieler generiert";
 "generated_teams" = "Erzeugte Befehle";
 "generation_result" = "Erzeugungsergebnis";
+"gifts" = "Geschenke";
 "go_on_a_date" = "Ein Date haben";
 "gradient" = "Gradient";
 "gray" = "Grau";

@@ -42,6 +42,7 @@ enum MetricsSections: String {
   case goodDeeds = "Раздел добрые дела (new version)"
   case riddles = "Раздел Загадки (new version)"
   case joke = "Раздел Анекдотов (new version)"
+  case gifts = "Раздел Подарков (new version)"
   
   // Настройки главного экрана
   case mainSettingsScreen = "Настройки главного экрана (new version)"

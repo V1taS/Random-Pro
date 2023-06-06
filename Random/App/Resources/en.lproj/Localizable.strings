@@ -80,6 +80,7 @@
 "generate_random_names" = "You can generate a random name";
 "generate_random_congratulations" = "You can generate random greetings";
 "generate_random_date_time" = "You can generate a random date and time";
+"generate_random_gifts" = "You can generate random gifts";
 "generate_random_letters" = "Random letters can be generated";
 "generate_random_numbers" = "Random numbers can be generated";
 "generate_random_task_list" = "You can generate a random list of your own tasks";
@@ -88,6 +89,7 @@
 "generated_players" = "Players generated";
 "generated_teams" = "Commands generated";
 "generation_result" = "Generation result";
+"gifts" = "Gifts";
 "go_on_a_date" = "Go on a date";
 "gradient" = "Gradient";
 "gray" = "Gray";

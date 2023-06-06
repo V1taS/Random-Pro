@@ -102,5 +102,9 @@ extension MainScreenModel {
     let imageJoke = "flame"
     let titleJoke = RandomStrings.Localizable.joke
     let jokeDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomJoke
+
+    let imageGifts = "gift"
+    let titleGifts = RandomStrings.Localizable.gifts
+    let giftsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomGifts
   }
 }

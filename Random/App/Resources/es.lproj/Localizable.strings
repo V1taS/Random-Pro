@@ -80,6 +80,7 @@
 "generate_random_congratulations" = "Puedes generar saludos aleatorios";
 "generate_random_names" = "Puedes generar un nombre aleatorio";
 "generate_random_date_time" = "se puede generar una fecha y hora aleatorias";
+"generate_random_gifts" = "Se pueden generar regalos aleatorios";
 "generate_random_letters" = "se pueden generar letras aleatorias";
 "generate_random_numbers" = "Se pueden generar números aleatorios";
 "generate_random_task_list" = "puede generar una lista aleatoria de sus propias tareas";
@@ -88,6 +89,7 @@
 "generated_players" = "generado por los jugadores";
 "generated_teams" = "comandos Generados";
 "generation_result" = "Resultado de la generación";
+"gifts" = "Objetos de regalo";
 "go_on_a_date" = "Tener una cita";
 "gradient" = "Degradado";
 "gray" = "Gris";

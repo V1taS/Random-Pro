@@ -75,6 +75,9 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Загадки`
   func openRiddles()
+
+  // Открыть раздел `Подарки`
+  func openGifts()
   
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
@@ -245,6 +248,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openGifts() {
+    moduleOutput?.openGifts()
+  }
+
   func openJoke() {
     moduleOutput?.openJoke()
   }

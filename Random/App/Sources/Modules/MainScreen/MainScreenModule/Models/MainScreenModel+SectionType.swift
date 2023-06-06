@@ -61,6 +61,8 @@ extension MainScreenModel {
         return "riddles"
       case .joke:
         return "joke"
+      case .gifts:
+        return "gifts"
       }
     }
     
@@ -112,6 +114,8 @@ extension MainScreenModel {
         return appearance.titleRiddles
       case .joke:
         return appearance.titleJoke
+      case .gifts:
+        return appearance.titleGifts
       }
     }
     
@@ -163,6 +167,8 @@ extension MainScreenModel {
         return appearance.imageRiddles
       case .joke:
         return appearance.imageJoke
+      case .gifts:
+        return appearance.imageGifts
       }
     }
     
@@ -214,6 +220,8 @@ extension MainScreenModel {
         return appearance.riddlesDescriptionForNoPremiumAccess
       case .joke:
         return appearance.jokeDescriptionForNoPremiumAccess
+      case .gifts:
+        return appearance.giftsDescriptionForNoPremiumAccess
       }
     }
     
@@ -284,5 +292,8 @@ extension MainScreenModel {
     
     /// Раздел "Анекдоты"
     case joke
+
+    /// Раздел "Подарки"
+    case gifts
   }
 }

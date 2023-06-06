@@ -23,7 +23,6 @@ protocol GiftsScreenModuleOutput: AnyObject {
 
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
-  
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`

@@ -16,7 +16,7 @@ struct GiftsScreenModel: UserDefaultsCodable {
   /// Список результатов
   let listResult: [String]
 
-  /// Язык для генерации имени
+  /// Язык для генерации подарка
   let language: Language?
 
   /// Пол для генерации подарка
@@ -24,7 +24,7 @@ struct GiftsScreenModel: UserDefaultsCodable {
 
   // MARK: - Language
 
-  enum Language: String, CaseIterable, UserDefaultsCodable {
+  enum Language: String, UserDefaultsCodable {
 
     /// Английский
     case en

@@ -42,7 +42,7 @@ protocol GiftsScreenInteractorInput {
   func cleanButtonAction()
 
   /// Пол подарка изменился
-  /// - Parameter gender: пол подарка
+  /// - Parameter type: пол подарка
   func segmentedControlValueDidChange(type: GiftsScreenModel.Gender?)
 
   /// Установить новый язык

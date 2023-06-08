@@ -258,6 +258,14 @@ extension MainScreenFactory {
             advLabel: .premium
           ))
         case .slogans:
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            imageSectionSystemName: section.imageSectionSystemName,
+            titleSection: section.titleSection,
+            isEnabled: true,
+            isHidden: false,
+            advLabel: .premium
+          ))
         case .quotes:
           allSections.append(MainScreenModel.Section(
             type: section,
@@ -515,6 +523,16 @@ extension MainScreenFactory {
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.slogans) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.slogans ?? model.advLabel.rawValue,
+                                       oldADVLabel: .premium)
+              ))
+            case .quotes:
+              cardSections.append(MainScreenModel.Section(
+                type: model.type,
+                imageSectionSystemName: model.imageSectionSystemName,
+                titleSection: model.type.titleSection,
+                isEnabled: model.isEnabled,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.quotes) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.quotes ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
             }

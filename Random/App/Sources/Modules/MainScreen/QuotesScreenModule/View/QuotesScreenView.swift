@@ -155,6 +155,6 @@ private extension QuotesScreenView {
     let animationSpeed: CGFloat = 0.5
     let defaultInset: CGFloat = 16
     let resultDuration: CGFloat = 0.2
-    let numberOfLines: Int = 2
+    let numberOfLines: Int = 0
   }
 }

@@ -279,3 +279,5 @@
 "answer" = "Risposta";
 "joke" = "Scherzo";
 "generate_random_joke" = "Puoi generare battute casuali";
+"quotes" = "Citazioni";
+"generate_random_qoute" = "Può generare citazioni casuali";

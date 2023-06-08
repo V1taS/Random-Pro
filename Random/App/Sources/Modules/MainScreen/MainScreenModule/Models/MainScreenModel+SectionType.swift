@@ -63,6 +63,8 @@ extension MainScreenModel {
         return "joke"
       case .gifts:
         return "gifts"
+      case .quotes:
+        return "quotes"
       }
     }
     
@@ -116,6 +118,8 @@ extension MainScreenModel {
         return appearance.titleJoke
       case .gifts:
         return appearance.titleGifts
+      case .quotes:
+        return appearance.titleQuotes
       }
     }
     
@@ -169,6 +173,8 @@ extension MainScreenModel {
         return appearance.imageJoke
       case .gifts:
         return appearance.imageGifts
+      case .quotes:
+        return appearance.imageQuotes
       }
     }
     
@@ -222,6 +228,8 @@ extension MainScreenModel {
         return appearance.jokeDescriptionForNoPremiumAccess
       case .gifts:
         return appearance.giftsDescriptionForNoPremiumAccess
+      case .quotes:
+        return appearance.quotesDescriptionForNoPremiumAccess
       }
     }
     
@@ -295,5 +303,8 @@ extension MainScreenModel {
 
     /// Раздел "Подарки"
     case gifts
+    
+    /// Раздел "Цитаты"
+    case quotes
   }
 }

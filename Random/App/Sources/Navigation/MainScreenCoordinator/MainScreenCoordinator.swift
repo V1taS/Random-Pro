@@ -78,6 +78,12 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openQuotes() {
+    let quotesScreenCoordinator = QuotesScreenCoordinator(navigationController)
+    anyCoordinator = quotesScreenCoordinator
+    quotesScreenCoordinator.start()
+  }
+  
   func openGifts() {
     let giftsScreenCoordinator = GiftsScreenCoordinator(navigationController, services)
     
@@ -526,6 +532,8 @@ private extension MainScreenCoordinator {
       openJoke()
     case .gifts:
       openGifts()
+    case .quotes:
+      openQuotes()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

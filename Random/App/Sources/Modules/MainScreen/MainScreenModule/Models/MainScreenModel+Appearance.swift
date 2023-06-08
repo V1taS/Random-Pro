@@ -106,5 +106,9 @@ extension MainScreenModel {
     let imageGifts = "gift"
     let titleGifts = RandomStrings.Localizable.gifts
     let giftsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomGifts
+    
+    let imageQuotes = "text.quote"
+    let titleQuotes = RandomStrings.Localizable.quotes
+    let quotesDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomQoute
   }
 }

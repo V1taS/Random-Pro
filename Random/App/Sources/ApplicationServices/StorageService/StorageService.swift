@@ -72,6 +72,9 @@ protocol StorageService {
   
   /// Модель Анекдоты
   var jokeGeneratorScreenModel: JokeGeneratorScreenModel? { get set }
+
+  /// Модель Слонаны
+  var slogansScreenModel: SlogansScreenModel? { get set }
   
   /// Модель для выбора иконки
   var appIconScreenModel: SelecteAppIconScreenModel? { get set }
@@ -291,6 +294,15 @@ final class StorageServiceImpl: StorageService {
       jokeScreenModelKeychain = newValue
     }
   }
+
+  var slogansScreenModel: SlogansScreenModel? {
+    get {
+      isPremium ? slogansScreenModelKeychain : slogansScreenModelUserDefaults
+    } set {
+      slogansScreenModelUserDefaults = newValue
+      slogansScreenModelKeychain = newValue
+    }
+  }
   
   var deepLinkModel: MainScreenModel.SectionType? {
     get {
@@ -309,8 +321,15 @@ final class StorageServiceImpl: StorageService {
   }
   
   // MARK: - Private property
+
+  // MARK: - Slogans model
+
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().slogansScreenKeyUserDefaults)
+  private var slogansScreenModelUserDefaults: SlogansScreenModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().slogansScreenKeyUserDefaults)
+  private var slogansScreenModelKeychain: SlogansScreenModel?
   
-  // MARK: - Riddles model
+  // MARK: - Joke model
   
   @ObjectCustomUserDefaultsWrapper(key: Appearance().jokeScreenKeyUserDefaults)
   private var jokeScreenModelUserDefaults: JokeGeneratorScreenModel?
@@ -509,5 +528,6 @@ private extension StorageServiceImpl {
     let riddlesScreenKeyUserDefaults = "riddles_screen_user_defaults_key"
     let jokeScreenKeyUserDefaults = "joke_screen_user_defaults_key"
     let giftsScreenKeyUserDefaults = "gifts_screen_user_defaults_key"
+    let slogansScreenKeyUserDefaults = "slogans_screen_user_defaults_key"
   }
 }

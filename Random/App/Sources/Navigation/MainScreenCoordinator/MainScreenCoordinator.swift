@@ -97,7 +97,17 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     mainScreenModule?.removeLabelFromSection(type: .joke)
     services.metricsService.track(event: .joke)
   }
-  
+
+  func openSlogans() {
+    let slogansScreenCoordinator = SlogansScreenCoordinator(navigationController,
+                                                            services)
+    anyCoordinator = slogansScreenCoordinator
+    slogansScreenCoordinator.start()
+
+    mainScreenModule?.removeLabelFromSection(type: .slogans)
+    services.metricsService.track(event: .slogans)
+  }
+
   func openRiddles() {
     let riddlesScreenCoordinator = RiddlesScreenCoordinator(navigationController,
                                                             services)
@@ -526,6 +536,8 @@ private extension MainScreenCoordinator {
       openJoke()
     case .gifts:
       openGifts()
+    case .slogans:
+      openSlogans()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

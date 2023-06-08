@@ -83,6 +83,7 @@
 "generate_random_gifts" = "Можно генерировать рандомные подарки";
 "generate_random_letters" = "Можно генерировать рандомные буквы";
 "generate_random_numbers" = "Можно генерировать рандомные числа";
+"generate_random_slogans" = "Можно генерировать рандомные слоганы";
 "generate_random_task_list" = "Можно генерировать рандомный список собственных задач";
 "generate_random_team_list" = "Можно генерировать рандомный список команд для игры";
 "generated" = "Cгенерировано";
@@ -212,6 +213,7 @@
 "share" = "Поделиться";
 "share_image" = "Поделиться изображением";
 "something_went_wrong" = "Что-то пошло не так";
+"slogans" = "Cлоганы";
 "spin_the_bottle" = "Крутить бутылочку";
 "star" = "Звезда";
 "status_of_player" = "Статус игрока";

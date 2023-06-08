@@ -106,5 +106,9 @@ extension MainScreenModel {
     let imageGifts = "gift"
     let titleGifts = RandomStrings.Localizable.gifts
     let giftsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomGifts
+
+    let imageSlogans = "character.bubble"
+    let titleSlogans = RandomStrings.Localizable.slogans
+    let slogansDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomSlogans
   }
 }

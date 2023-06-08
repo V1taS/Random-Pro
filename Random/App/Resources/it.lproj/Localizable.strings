@@ -83,6 +83,7 @@
 "generate_random_gifts" = "È possibile generare regali casuali";
 "generate_random_letters" = "è possibile generare lettere casuali";
 "generate_random_numbers" = "è possibile generare numeri casuali";
+"generate_random_slogans" = "È possibile generare slogan casuali";
 "generate_random_task_list" = "è possibile generare un elenco casuale delle proprie attività";
 "generate_random_team_list" = "è possibile generare un elenco casuale di squadre per il gioco";
 "generated" = "generato";
@@ -212,6 +213,7 @@
 "share" = "Condividi";
 "share_image" = "Condividi immagine";
 "something_went_wrong" = "qualcosa è andato storto";
+"slogans" = "Slogan";
 "spin_the_bottle" = "girare la bottiglia";
 "star" = "Stella";
 "status_of_player" = "stato Giocatore";

@@ -12,8 +12,8 @@ final class QuotesScreenAssembly {
   
   /// Собирает модуль `QuotesScreen`
   /// - Returns: Cобранный модуль `QuotesScreen`
-  func createModule() -> QuotesScreenModule {
-    let interactor = QuotesScreenInteractor()
+  func createModule(services: ApplicationServices) -> QuotesScreenModule {
+    let interactor = QuotesScreenInteractor(services: services)
     let view = QuotesScreenView()
     let factory = QuotesScreenFactory()
     let presenter = QuotesScreenViewController(moduleView: view, interactor: interactor, factory: factory)

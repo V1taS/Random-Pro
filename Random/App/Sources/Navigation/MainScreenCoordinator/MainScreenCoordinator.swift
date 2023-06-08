@@ -79,9 +79,12 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
   func openQuotes() {
-    let quotesScreenCoordinator = QuotesScreenCoordinator(navigationController)
+    let quotesScreenCoordinator = QuotesScreenCoordinator(navigationController, services)
     anyCoordinator = quotesScreenCoordinator
     quotesScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .quotes)
+    services.metricsService.track(event: .quotes)
   }
   
   func openGifts() {

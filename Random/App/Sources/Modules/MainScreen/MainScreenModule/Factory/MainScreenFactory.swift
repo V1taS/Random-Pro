@@ -258,6 +258,7 @@ extension MainScreenFactory {
             advLabel: .premium
           ))
         case .slogans:
+        case .quotes:
           allSections.append(MainScreenModel.Section(
             type: section,
             imageSectionSystemName: section.imageSectionSystemName,

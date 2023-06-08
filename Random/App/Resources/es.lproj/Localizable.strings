@@ -281,3 +281,5 @@
 "answer" = "Respuesta";
 "joke" = "Broma";
 "generate_random_joke" = "Puedes generar chistes aleatorios";
+"quotes" = "Citas";
+"generate_random_qoute" = "Puede generar cotizaciones aleatorias";

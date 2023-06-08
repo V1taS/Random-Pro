@@ -82,6 +82,8 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `Слоганы`
   func openSlogans()
+  /// Открыть раздел `Цитаты`
+  func openQuotes()
   
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
@@ -195,6 +197,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openGifts()
       case .slogans:
         output?.openSlogans()
+      case .quotes:
+        output?.openQuotes()
       }
     }
   }

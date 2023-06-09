@@ -281,3 +281,5 @@
 "answer" = "Answer";
 "joke" = "Joke";
 "generate_random_joke" = "You can generate random jokes";
+"quotes" = "Quotes";
+"generate_random_qoute" = "You can generate random quotes";

@@ -65,6 +65,8 @@ extension MainScreenModel {
         return "gifts"
       case .slogans:
         return "slogans"
+      case .quotes:
+        return "quotes"
       }
     }
     
@@ -120,6 +122,8 @@ extension MainScreenModel {
         return appearance.titleGifts
       case .slogans:
         return appearance.titleSlogans
+      case .quotes:
+        return appearance.titleQuotes
       }
     }
     
@@ -175,6 +179,8 @@ extension MainScreenModel {
         return appearance.imageGifts
       case .slogans:
         return appearance.imageSlogans
+      case .quotes:
+        return appearance.imageQuotes
       }
     }
     
@@ -230,6 +236,8 @@ extension MainScreenModel {
         return appearance.giftsDescriptionForNoPremiumAccess
       case .slogans:
         return appearance.slogansDescriptionForNoPremiumAccess
+      case .quotes:
+        return appearance.quotesDescriptionForNoPremiumAccess
       }
     }
     
@@ -306,5 +314,8 @@ extension MainScreenModel {
 
     /// Раздел "Слоганы"
     case slogans
+    
+    /// Раздел "Цитаты"
+    case quotes
   }
 }

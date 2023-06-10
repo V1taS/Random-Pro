@@ -278,7 +278,7 @@ private extension MainScreenView {
 private extension MainScreenView {
   struct Appearance {
     let collectionViewInsets: UIEdgeInsets = .zero
-    let estimatedRowHeight: CGFloat = 95
+    let estimatedRowHeight: CGFloat = 90
     let sectionInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     let cellWidthConstant = UIScreen.main.bounds.width * 0.45
   }

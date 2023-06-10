@@ -20,6 +20,9 @@ protocol CoinScreenViewOutput: AnyObject {
   /// Сохранить данные
   ///  - Parameter model: результат генерации
   func saveData(model: CoinScreenModel)
+  
+  /// Была нажата кнопку генерации
+  func generateButtonAction()
 }
 
 protocol CoinScreenViewInput {
@@ -155,6 +158,7 @@ private extension CoinScreenView {
   @objc
   func generateButtonAction() {
     output?.playHapticFeedbackAction()
+    output?.generateButtonAction()
     resultLabel.text = ""
     coinView.handleTap()
   }

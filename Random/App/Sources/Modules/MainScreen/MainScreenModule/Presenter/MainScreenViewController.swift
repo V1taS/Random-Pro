@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol MainScreenModuleOutput: AnyObject {
@@ -205,6 +206,7 @@ final class MainScreenViewController: MainScreenModule {
     
     navigationController?.navigationBar.prefersLargeTitles = true
     moduleOutput?.mainScreenModuleWillAppear()
+    setupNavBar()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -222,6 +224,7 @@ final class MainScreenViewController: MainScreenModule {
   func savePremium(_ isEnabled: Bool) {
     interactor.savePremium(isEnabled)
     isPremiumDEBUG = isEnabled
+    setupNavBar()
   }
   
   func returnModel(completion: @escaping (MainScreenModel) -> Void) {
@@ -406,18 +409,16 @@ private extension MainScreenViewController {
         return
       }
       let isPremium = model.isPremium
-      let premiumName = isPremium ? appearance.isPremiumName : appearance.notPremiumName
+      let style: PremiumButtonView.Style = isPremium ? .premium : .nonPremium
       
       let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
                                         style: .plain,
                                         target: self,
                                         action: #selector(self.shareButtonAction))
       
-      let premiumButton = UIBarButtonItem.menuButton(self,
-                                                     action: #selector(self.premiumButtonAction),
-                                                     imageName: premiumName,
-                                                     size: CGSize(width: 34,
-                                                                  height: 28))
+      let premiumButton = UIBarButtonItem.premiumButton(self,
+                                                        action: #selector(self.premiumButtonAction),
+                                                        style: style)
       
       self.navigationItem.rightBarButtonItems = [shareButton, premiumButton]
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
@@ -456,18 +457,14 @@ private extension MainScreenViewController {
 // MARK: - UIBarButtonItem
 
 private extension UIBarButtonItem {
-  static func menuButton(_ target: Any?,
-                         action: Selector,
-                         imageName: String,
-                         size: CGSize) -> UIBarButtonItem {
-    let button = UIButton(type: .system)
-    button.setImage(UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
+  static func premiumButton(_ target: Any?,
+                            action: Selector,
+                            style: PremiumButtonView.Style) -> UIBarButtonItem {
+    let button = PremiumButtonView()
     button.addTarget(target, action: action, for: .touchUpInside)
+    button.configureWith(title: RandomStrings.Localizable.premium, style: style)
     
     let menuBarItem = UIBarButtonItem(customView: button)
-    menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
-    menuBarItem.customView?.heightAnchor.constraint(equalToConstant: size.height).isActive = true
-    menuBarItem.customView?.widthAnchor.constraint(equalToConstant: size.width).isActive = true
     return menuBarItem
   }
 }
@@ -479,7 +476,6 @@ private extension MainScreenViewController {
     let title = RandomStrings.Localizable.randomPro
     let settingsButtonIcon = UIImage(systemName: "gear")
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
-    let premiumButtonIcon = UIImage(systemName: "crown")
     
     let notPremiumName = RandomAsset.crownNotPremium.name
     let isPremiumName = RandomAsset.crownIsPremium.name

@@ -36,10 +36,22 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
   // MARK: - Internal func
   
   func configureCellWith(model: MainScreenModel.Section, isPremium: Bool) {
+    let isShowADVLabel: Bool
+    
+    switch model.advLabel {
+    case .hit, .new:
+      isShowADVLabel = true
+    case .premium, .none:
+      isShowADVLabel = false
+    }
+    
+    let imageCardConfig = UIImage.SymbolConfiguration(pointSize: Appearance().imageCardSize, weight: .regular)
+    let imageCard = UIImage(systemName: model.imageSectionSystemName, withConfiguration: imageCardConfig)
+    
     mainCardView.configureWith(
-      imageCard: UIImage(systemName: model.imageSectionSystemName),
+      imageCard: imageCard,
       titleCard: model.titleSection,
-      isShowADVLabel: model.advLabel != .none,
+      isShowADVLabel: isShowADVLabel,
       titleADVText: model.advLabel.title,
       isDisabled: model.advLabel == .premium && !isPremium
     )
@@ -71,5 +83,7 @@ private extension MainScreenCollectionViewCell {
 // MARK: - Appearance
 
 private extension MainScreenCollectionViewCell {
-  struct Appearance {}
+  struct Appearance {
+    let imageCardSize: CGFloat = 32
+  }
 }

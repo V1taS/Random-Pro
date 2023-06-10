@@ -70,26 +70,28 @@ final class ADVGoogleScreenView: ADVGoogleScreenViewProtocol {
   // MARK: - Internal func
   
   func setNativeAd(_ nativeAd: GADNativeAd) {
-    nativeAdView.nativeAd = nativeAd
-    headlineView.text = nativeAd.headline
-    descriptionView.text = nativeAd.body
-    mediaView.mediaContent = nativeAd.mediaContent
-    nativeAdView.mediaView = mediaView
-    
-    if let callToActionView = nativeAd.callToAction {
-      callToActionButton.setTitle(callToActionView, for: .normal)
+    DispatchQueue.main.async { [weak self] in
+      self?.nativeAdView.nativeAd = nativeAd
+      self?.headlineView.text = nativeAd.headline
+      self?.descriptionView.text = nativeAd.body
+      self?.mediaView.mediaContent = nativeAd.mediaContent
+      self?.nativeAdView.mediaView = self?.mediaView
+      
+      if let callToActionView = nativeAd.callToAction {
+        self?.callToActionButton.setTitle(callToActionView, for: .normal)
+      }
+      
+      if let starRating = nativeAd.starRating {
+        self?.starRatingView.text = "\(starRating.doubleValue)/5"
+      }
+      
+      self?.nativeAdView.adChoicesView = self?.adChoicesView
+      self?.nativeAdView.headlineView = self?.headlineView
+      self?.nativeAdView.bodyView = self?.descriptionView
+      self?.nativeAdView.mediaView = self?.mediaView
+      self?.nativeAdView.callToActionView = self?.callToActionButton
+      self?.nativeAdView.starRatingView = self?.starRatingView
     }
-    
-    if let starRating = nativeAd.starRating {
-      starRatingView.text = "\(starRating.doubleValue)/5"
-    }
-    
-    nativeAdView.adChoicesView = adChoicesView
-    nativeAdView.headlineView = headlineView
-    nativeAdView.bodyView = descriptionView
-    nativeAdView.mediaView = mediaView
-    nativeAdView.callToActionView = callToActionButton
-    nativeAdView.starRatingView = starRatingView
   }
   
   func startLoader() {

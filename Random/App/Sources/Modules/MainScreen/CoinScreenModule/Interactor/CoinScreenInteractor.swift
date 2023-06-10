@@ -36,6 +36,9 @@ protocol CoinScreenInteractorInput {
   /// Сохранить данные
   ///  - Parameter model: результат генерации
   func saveData(model: CoinScreenModel)
+  
+  /// Была нажата кнопку генерации
+  func generateButtonAction()
 }
 
 final class CoinScreenInteractor: CoinScreenInteractorInput {
@@ -83,12 +86,16 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
     storageService.coinScreenModel
   }
   
+  func generateButtonAction() {
+    buttonCounterService.onButtonClick()
+  }
+  
   func playHapticFeedback() {
-    hapticService.play(isRepeat: false,
-                       patternType: .splash,
-                       completion: { [weak self] _ in
-      self?.buttonCounterService.onButtonClick()
-    })
+    DispatchQueue.main.async { [weak self] in
+      self?.hapticService.play(isRepeat: false,
+                               patternType: .splash,
+                               completion: {_ in })
+    }
   }
 }
 

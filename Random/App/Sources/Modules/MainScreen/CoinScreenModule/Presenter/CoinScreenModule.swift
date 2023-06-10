@@ -113,6 +113,10 @@ final class CoinScreenViewController: CoinScreenModule {
 // MARK: - CoinScreenViewOutput
 
 extension CoinScreenViewController: CoinScreenViewOutput {
+  func generateButtonAction() {
+    interactor.generateButtonAction()
+  }
+  
   func saveData(model: CoinScreenModel) {
     interactor.saveData(model: model)
   }

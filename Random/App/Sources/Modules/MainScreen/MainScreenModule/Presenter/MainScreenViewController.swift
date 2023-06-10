@@ -411,7 +411,7 @@ private extension MainScreenViewController {
       let isPremium = model.isPremium
       let style: PremiumButtonView.Style = isPremium ? .premium : .nonPremium
       
-      let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
+      _ = UIBarButtonItem(image: appearance.shareButtonIcon,
                                         style: .plain,
                                         target: self,
                                         action: #selector(self.shareButtonAction))
@@ -420,7 +420,7 @@ private extension MainScreenViewController {
                                                         action: #selector(self.premiumButtonAction),
                                                         style: style)
       
-      self.navigationItem.rightBarButtonItems = [shareButton, premiumButton]
+      self.navigationItem.rightBarButtonItems = [premiumButton]
       self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
                                                               style: .plain,
                                                               target: self,

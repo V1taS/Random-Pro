@@ -46,6 +46,7 @@
 "create_list" = "Crear lista";
 "cubes" = "Cubitos";
 "customize_app_appearance" = "Cambia el aspecto de la aplicación a tu gusto";
+"dare" = "Atrévete";
 "dark" = "Cerrado";
 "dark_theme" = "Tema oscuro";
 "date" = "fecha";
@@ -86,6 +87,7 @@
 "generate_random_slogans" = "Es posible generar eslóganes aleatorios";
 "generate_random_task_list" = "puede generar una lista aleatoria de sus propias tareas";
 "generate_random_team_list" = "se puede generar una lista aleatoria de comandos para un juego";
+"generate_random_truth_or_dare" = "Es posible generar una verdad o acción aleatoria";
 "generated" = "Generated";
 "generated_players" = "generado por los jugadores";
 "generated_teams" = "comandos Generados";
@@ -240,6 +242,8 @@
 "total" = "Total";
 "total_elements" = "total de elementos";
 "total_players" = "total de jugadores";
+"truth_or_dare" = "La verdad o la acción";
+"truth" = "Verdad";
 "tsu_e_fa" = "Tsu-e-fa";
 "tuesday" = "Martes";
 "unique_card_style" = "Elige un estilo de tarjeta único";

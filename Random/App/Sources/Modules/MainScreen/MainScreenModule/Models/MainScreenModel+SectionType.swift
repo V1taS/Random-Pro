@@ -65,6 +65,8 @@ extension MainScreenModel {
         return "gifts"
       case .slogans:
         return "slogans"
+      case .truthOrDare:
+        return "truth_or_dare"
       case .quotes:
         return "quotes"
       case .fortuneWheel:
@@ -128,6 +130,8 @@ extension MainScreenModel {
         return appearance.titleQuotes
       case .fortuneWheel:
         return appearance.titleFortuneWheel
+      case .truthOrDare:
+        return appearance.titleTruthOrDare
       }
     }
     
@@ -187,6 +191,8 @@ extension MainScreenModel {
         return appearance.imageQuotes
       case .fortuneWheel:
         return appearance.imageFortuneWheel
+      case .truthOrDare:
+        return appearance.imageTruthOrDare
       }
     }
     
@@ -242,6 +248,8 @@ extension MainScreenModel {
         return appearance.giftsDescriptionForNoPremiumAccess
       case .slogans:
         return appearance.slogansDescriptionForNoPremiumAccess
+      case .truthOrDare:
+        return appearance.truthOrDareDescriptionForNoPremiumAccess
       case .quotes:
         return appearance.quotesDescriptionForNoPremiumAccess
       case .fortuneWheel:
@@ -322,6 +330,9 @@ extension MainScreenModel {
 
     /// Раздел "Слоганы"
     case slogans
+
+    /// Раздел "Правда или действие"
+    case truthOrDare
     
     /// Раздел "Цитаты"
     case quotes

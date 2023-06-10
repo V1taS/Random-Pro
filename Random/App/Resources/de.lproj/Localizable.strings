@@ -46,6 +46,7 @@
 "create_list" = "Liste erstellen";
 "cubes" = "Würfel";
 "customize_app_appearance" = "Ändern Sie das Aussehen der App nach Ihren Wünschen";
+"dare" = "Wagen";
 "dark" = "Dunkle";
 "dark_theme" = "Dunkles Thema";
 "date" = "Datum";
@@ -86,6 +87,7 @@
 "generate_random_slogans" = "Es ist möglich, zufällige Slogans zu generieren";
 "generate_random_task_list" = "Es ist möglich, eine zufällige Liste eigener Aufgaben zu generieren";
 "generate_random_team_list" = "Es ist möglich, eine zufällige Liste von Befehlen für das Spiel zu generieren";
+"generate_random_truth_or_dare" = "Es ist möglich, eine zufällige Wahrheit oder Aktion zu erzeugen";
 "generated" = "Generiert";
 "generated_players" = "Spieler generiert";
 "generated_teams" = "Erzeugte Befehle";
@@ -240,6 +242,8 @@
 "total" = "Total";
 "total_elements" = "Gesamtelemente";
 "total_players" = "Gesamtspieler";
+"truth_or_dare" = "Wahrheit oder Wagen";
+"truth" = "Wahrheit";
 "tsu_e_fa" = "Zu-e-fa";
 "tuesday" = "Dienstag";
 "unique_card_style" = "Wählen Sie einen einzigartigen Kartenstil";

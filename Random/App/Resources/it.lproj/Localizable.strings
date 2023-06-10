@@ -46,6 +46,7 @@
 "create_list" = "Crea lista";
 "cubes" = "Cubi";
 "customize_app_appearance" = "cambia l'aspetto dell'app a tuo piacimento";
+"dare" = "Osare";
 "dark" = "Buio";
 "dark_theme" = "Tema scuro";
 "date" = "Data";
@@ -86,6 +87,7 @@
 "generate_random_slogans" = "È possibile generare slogan casuali";
 "generate_random_task_list" = "è possibile generare un elenco casuale delle proprie attività";
 "generate_random_team_list" = "è possibile generare un elenco casuale di squadre per il gioco";
+"generate_random_truth_or_dare" = "È possibile generare una verità o un'azione casuale";
 "generated" = "generato";
 "generated_players" = "giocatori generati";
 "generated_teams" = "comandi generati";
@@ -236,6 +238,8 @@
 "theme" = "Tema";
 "thursday" = "giovedì";
 "time" = "Tempo";
+"truth_or_dare" = "Obbligo o verità";
+"truth" = "Verità";
 "to" = "prima";
 "total" = "totale";
 "total_elements" = "elementi totali";

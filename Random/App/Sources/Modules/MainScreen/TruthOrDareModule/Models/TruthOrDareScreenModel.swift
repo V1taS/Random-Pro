@@ -15,4 +15,32 @@ struct TruthOrDareScreenModel: UserDefaultsCodable {
 
   /// Список результатов
   let listResult: [String]
+
+  /// Язык для генерации имени
+  let language: Language?
+
+  /// Тип результата: правда или действие
+  let type: TruthOrDareType?
+
+  // MARK: - Language
+
+  enum Language: String, UserDefaultsCodable {
+
+    /// Английский
+    case en
+
+    /// Русский
+    case ru
+  }
+
+  // MARK: - Type
+
+  enum TruthOrDareType: String, UserDefaultsCodable {
+
+    /// Правда
+    case truth
+
+    /// Действие
+    case dare
+  }
 }

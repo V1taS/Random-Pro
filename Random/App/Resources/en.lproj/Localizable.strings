@@ -46,6 +46,7 @@
 "create_list" = "Create a list";
 "cubes" = "Cubes";
 "customize_app_appearance" = "Change the appearance of the application to your liking";
+"dare" = "Dare";
 "dark" = "Dark";
 "dark_theme" = "Dark theme";
 "date" = "Date";
@@ -86,6 +87,7 @@
 "generate_random_slogans" = "Random slogans can be generated";
 "generate_random_task_list" = "You can generate a random list of your own tasks";
 "generate_random_team_list" = "A random list of commands for the game can be generated";
+"generate_random_truth_or_dare" = "You can generate a random truth or dare";
 "generated" = "Generated";
 "generated_players" = "Players generated";
 "generated_teams" = "Commands generated";
@@ -240,6 +242,8 @@
 "total" = "Total";
 "total_elements" = "Total elements";
 "total_players" = "Total players";
+"truth_or_dare" = "Truth or Dare";
+"truth" = "Truth";
 "tsu_e_fa" = "Tsu-e-fa";
 "tuesday" = "Tuesday";
 "unique_card_style" = "Choose a unique style of cards";

@@ -147,6 +147,15 @@ final class StorageServiceImpl: StorageService {
       namesScreenModelKeychain = newValue
     }
   }
+
+  var truthOrDareScreenModel: TruthOrDareScreenModel? {
+    get {
+      isPremium ? truthOrDareScreenModelKeychain : truthOrDareScreenModelUserDefaults
+    } set {
+      truthOrDareScreenModelUserDefaults = newValue
+      truthOrDareScreenModelKeychain = newValue
+    }
+  }
   
   var numberScreenModel: NumberScreenModel? {
     get {
@@ -401,6 +410,13 @@ final class StorageServiceImpl: StorageService {
   private var namesScreenModelUserDefaults: NamesScreenModel?
   @ObjectCustomKeychainWrapper(key: Appearance().namesScreenKeyUserDefaults)
   private var namesScreenModelKeychain: NamesScreenModel?
+
+  // MARK: - TruthOrDare model
+
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().truthOrDareScreenKeyUserDefaults)
+  private var truthOrDareScreenModelUserDefaults: TruthOrDareScreenModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().truthOrDareScreenKeyUserDefaults)
+  private var truthOrDareScreenModelKeychain: TruthOrDareScreenModel?
   
   // MARK: - Congratulations model
   
@@ -567,6 +583,7 @@ private extension StorageServiceImpl {
     let jokeScreenKeyUserDefaults = "joke_screen_user_defaults_key"
     let giftsScreenKeyUserDefaults = "gifts_screen_user_defaults_key"
     let slogansScreenKeyUserDefaults = "slogans_screen_user_defaults_key"
+    let truthOrDareScreenKeyUserDefaults = "truth_or_dare_screen_user_defaults_key"
     let quoteScreenKeyUserDefaults = "quote_screen_user_defaults_key"
     let fortuneWheelScreenKeyUserDefaults = "fortune_wheel_user_defaults_key"
   }

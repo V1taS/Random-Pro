@@ -110,6 +110,10 @@ extension MainScreenModel {
     let imageSlogans = "character.bubble"
     let titleSlogans = RandomStrings.Localizable.slogans
     let slogansDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomSlogans
+
+    let imageTruthOrDare = "arrow.left.and.right.righttriangle.left.righttriangle.right"
+    let titleTruthOrDare = RandomStrings.Localizable.truthOrDare
+    let truthOrDareDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTruthOrDare
     
     let imageQuotes = "text.quote"
     let titleQuotes = RandomStrings.Localizable.quotes

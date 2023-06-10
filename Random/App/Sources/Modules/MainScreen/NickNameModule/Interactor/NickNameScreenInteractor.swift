@@ -179,7 +179,7 @@ private extension NickNameScreenInteractor {
     let result = "?"
     let host = "https://sonorous-seat-386117.ew.r.appspot.com"
     let apiVersion = "/api/v1"
-    let endPoint = "/quotes"
+    let endPoint = "/nickname"
     let apiKey = "api_key"
     let apiValue = "4t2AceLVaSW88H8wJ1f6"
   }

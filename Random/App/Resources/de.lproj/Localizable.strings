@@ -283,3 +283,5 @@
 "generate_random_joke" = "Sie können zufällige Witze generieren";
 "quotes" = "Zitate";
 "generate_random_qoute" = "Kann zufällige Angebote generieren";
+"fortune_wheel" = "Glücksrad";
+"generate_fortune_wheel" = "Sie können das Glücksrad drehen";

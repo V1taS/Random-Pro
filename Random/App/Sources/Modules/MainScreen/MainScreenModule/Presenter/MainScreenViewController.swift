@@ -80,8 +80,11 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Загадки`
   func openRiddles()
 
-  // Открыть раздел `Подарки`
+  /// Открыть раздел `Подарки`
   func openGifts()
+  
+  /// Открыть раздел `Колесо фортуны`
+  func openFortuneWheel()
   
   /// Открыть раздел `Цитаты`
   func openQuotes()
@@ -257,6 +260,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openFortuneWheel() {
+    moduleOutput?.openFortuneWheel()
+  }
+  
   func openQuotes() {
     moduleOutput?.openQuotes()
   }

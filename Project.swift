@@ -38,7 +38,8 @@ let project = Project(
         .external(name: "FirebaseAnalytics"),
         .external(name: "FirebaseFirestore"),
         .external(name: "FirebaseAuth"),
-        .external(name: "GoogleMobileAds")
+        .external(name: "GoogleMobileAds"),
+        .external(name: "RandomWheel")
       ],
       settings: targetBuildIOSSettings
     ),

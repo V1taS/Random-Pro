@@ -46,11 +46,12 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
     }
     
     let imageCardConfig = UIImage.SymbolConfiguration(pointSize: Appearance().imageCardSize, weight: .regular)
-    let imageCard = UIImage(systemName: model.imageSectionSystemName, withConfiguration: imageCardConfig)
+    let imageCard = UIImage(systemName: model.type.imageSectionSystemName,
+                            withConfiguration: imageCardConfig)
     
     mainCardView.configureWith(
       imageCard: imageCard,
-      titleCard: model.titleSection,
+      titleCard: model.type.titleSection,
       isShowADVLabel: isShowADVLabel,
       titleADVText: model.advLabel.title,
       isDisabled: model.advLabel == .premium && !isPremium

@@ -40,6 +40,9 @@ protocol StorageService {
   /// Модель для списка
   var listScreenModel: ListScreenModel? { get set }
   
+  /// Модель для колеса фортуны
+  var fortuneWheelModel: FortuneWheelModel? { get set }
+  
   /// Модель для контактов
   var contactScreenModel: ContactScreenModel? { get set }
   
@@ -316,6 +319,15 @@ final class StorageServiceImpl: StorageService {
     }
   }
   
+  var fortuneWheelModel: FortuneWheelModel? {
+    get {
+      isPremium ? fortuneWheelScreenModelKeychain : fortuneWheelScreenModelUserDefaults
+    } set {
+      fortuneWheelScreenModelUserDefaults = newValue
+      fortuneWheelScreenModelKeychain = newValue
+    }
+  }
+  
   var deepLinkModel: MainScreenModel.SectionType? {
     get {
       deepLinkModelUserDefaults
@@ -333,6 +345,13 @@ final class StorageServiceImpl: StorageService {
   }
   
   // MARK: - Private property
+  
+  // MARK: - FortuneWheel model
+
+  @ObjectCustomUserDefaultsWrapper(key: Appearance().fortuneWheelScreenKeyUserDefaults)
+  private var fortuneWheelScreenModelUserDefaults: FortuneWheelModel?
+  @ObjectCustomKeychainWrapper(key: Appearance().fortuneWheelScreenKeyUserDefaults)
+  private var fortuneWheelScreenModelKeychain: FortuneWheelModel?
 
   // MARK: - Slogans model
 
@@ -549,5 +568,6 @@ private extension StorageServiceImpl {
     let giftsScreenKeyUserDefaults = "gifts_screen_user_defaults_key"
     let slogansScreenKeyUserDefaults = "slogans_screen_user_defaults_key"
     let quoteScreenKeyUserDefaults = "quote_screen_user_defaults_key"
+    let fortuneWheelScreenKeyUserDefaults = "fortune_wheel_user_defaults_key"
   }
 }

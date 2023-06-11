@@ -67,6 +67,8 @@ extension MainScreenModel {
         return "slogans"
       case .quotes:
         return "quotes"
+      case .fortuneWheel:
+        return "fortuneWheel"
       }
     }
     
@@ -124,6 +126,8 @@ extension MainScreenModel {
         return appearance.titleSlogans
       case .quotes:
         return appearance.titleQuotes
+      case .fortuneWheel:
+        return appearance.titleFortuneWheel
       }
     }
     
@@ -181,6 +185,8 @@ extension MainScreenModel {
         return appearance.imageSlogans
       case .quotes:
         return appearance.imageQuotes
+      case .fortuneWheel:
+        return appearance.imageFortuneWheel
       }
     }
     
@@ -238,6 +244,8 @@ extension MainScreenModel {
         return appearance.slogansDescriptionForNoPremiumAccess
       case .quotes:
         return appearance.quotesDescriptionForNoPremiumAccess
+      case .fortuneWheel:
+        return appearance.fortuneWheelDescriptionForNoPremiumAccess
       }
     }
     
@@ -317,5 +325,8 @@ extension MainScreenModel {
     
     /// Раздел "Цитаты"
     case quotes
+    
+    /// Раздел "Колесо Фортуны"
+    case fortuneWheel
   }
 }

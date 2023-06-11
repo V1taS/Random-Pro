@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomWheel
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol FortuneWheelFactoryOutput: AnyObject {}

@@ -13,7 +13,7 @@ final class FortuneWheelAssembly {
   /// Собирает модуль `FortuneWheel`
   /// - Returns: Cобранный модуль `FortuneWheel`
   func createModule(services: ApplicationServices) -> FortuneWheelModule {
-    let interactor = FortuneWheelInteractor()
+    let interactor = FortuneWheelInteractor(services: services)
     let view = FortuneWheelView()
     let factory = FortuneWheelFactory()
     let presenter = FortuneWheelViewController(moduleView: view,

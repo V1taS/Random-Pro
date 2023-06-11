@@ -62,6 +62,8 @@ final class FortuneWheelViewController: FortuneWheelModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    interactor.getContent()
+    setNavigationBar()
   }
 }
 
@@ -71,7 +73,11 @@ extension FortuneWheelViewController: FortuneWheelViewOutput {}
 
 // MARK: - FortuneWheelInteractorOutput
 
-extension FortuneWheelViewController: FortuneWheelInteractorOutput {}
+extension FortuneWheelViewController: FortuneWheelInteractorOutput {
+  func didReceive(model: FortuneWheelModel) {
+    moduleView.setupFortuneWheelWith(model: model)
+  }
+}
 
 // MARK: - FortuneWheelFactoryOutput
 

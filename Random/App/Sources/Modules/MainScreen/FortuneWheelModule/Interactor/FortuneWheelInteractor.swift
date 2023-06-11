@@ -8,10 +8,20 @@
 import UIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol FortuneWheelInteractorOutput: AnyObject {}
+protocol FortuneWheelInteractorOutput: AnyObject {
+  
+  /// Были получены данные
+  ///  - Parameters:
+  ///   - model: Модель данных
+  func didReceive(model: FortuneWheelModel)
+}
 
 /// События которые отправляем от Presenter к Interactor
-protocol FortuneWheelInteractorInput {}
+protocol FortuneWheelInteractorInput {
+  
+  /// Получить данные
+  func getContent()
+}
 
 /// Интерактор
 final class FortuneWheelInteractor: FortuneWheelInteractorInput {
@@ -20,7 +30,63 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   
   weak var output: FortuneWheelInteractorOutput?
   
+  // MARK: - Private property
+  
+  private var storageService: StorageService
+  private var buttonCounterService: ButtonCounterService
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+    buttonCounterService = services.buttonCounterService
+  }
+  
   // MARK: - Internal func
+  
+  func getContent() {
+    let model = FortuneWheelModel(
+      result: nil,
+      listResult: [],
+      style: .regular,
+      sections: [],
+      selectedSection: .init(
+        title: "Секция вопросов",
+        icon: nil,
+        objects: [
+          .init(title: "$1",
+                description: nil,
+                image: nil),
+          .init(title: "$2",
+                description: nil,
+                image: nil),
+          .init(title: "LOSE",
+                description: nil,
+                image: nil),
+          .init(title: "$3",
+                description: nil,
+                image: nil),
+          .init(title: "$4",
+                description: nil,
+                image: nil),
+          .init(title: "$5",
+                description: nil,
+                image: nil),
+          .init(title: "$6",
+                description: nil,
+                image: nil),
+          .init(title: "$7",
+                description: nil,
+                image: nil),
+          .init(title: "$8",
+                description: nil,
+                image: nil),
+        ])
+    )
+    output?.didReceive(model: model)
+  }
 }
 
 // MARK: - Appearance

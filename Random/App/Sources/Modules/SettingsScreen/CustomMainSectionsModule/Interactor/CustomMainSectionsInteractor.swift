@@ -78,8 +78,6 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.remove(at: currentIndex)
         newModel.insert(MainScreenModel.Section(
           type: section.type,
-          imageSectionSystemName: section.imageSectionSystemName,
-          titleSection: section.titleSection,
           isEnabled: section.isEnabled,
           isHidden: section.isHidden,
           advLabel: section.advLabel
@@ -105,8 +103,6 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
         newModel.remove(at: index)
         newModel.insert(MainScreenModel.Section(
           type: section.type,
-          imageSectionSystemName: section.imageSectionSystemName,
-          titleSection: section.titleSection,
           isEnabled: isEnabled,
           isHidden: section.isHidden,
           advLabel: section.advLabel

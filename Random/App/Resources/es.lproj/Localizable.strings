@@ -283,3 +283,5 @@
 "generate_random_joke" = "Puedes generar chistes aleatorios";
 "quotes" = "Citas";
 "generate_random_qoute" = "Puede generar cotizaciones aleatorias";
+"fortune_wheel" = "Rueda de la fortuna";
+"generate_fortune_wheel" = "Puedes girar la rueda de la fortuna";

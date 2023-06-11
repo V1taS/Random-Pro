@@ -283,3 +283,5 @@
 "generate_random_joke" = "Puoi generare battute casuali";
 "quotes" = "Citazioni";
 "generate_random_qoute" = "Può generare citazioni casuali";
+"fortune_wheel" = "Ruota della fortuna";
+"generate_fortune_wheel" = "Puoi girare la ruota della fortuna";

@@ -85,6 +85,9 @@ struct LabelsFeatureToggleModel {
   /// Раздел `Цитаты`
   let quotes: String
   
+  /// Раздел `Колесо фортуны`
+  let fortuneWheel: String
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -115,5 +118,6 @@ struct LabelsFeatureToggleModel {
     gifts = (dictionary["gifts"] as? String ?? "")
     slogans = (dictionary["slogans"] as? String ?? "")
     quotes = (dictionary["quotes"] as? String ?? "")
+    fortuneWheel = (dictionary["fortuneWheel"] as? String ?? "")
   }
 }

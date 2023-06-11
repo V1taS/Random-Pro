@@ -78,6 +78,15 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openFortuneWheel() {
+    let fortuneWheelCoordinator = FortuneWheelCoordinator(navigationController, services)
+    anyCoordinator = fortuneWheelCoordinator
+    fortuneWheelCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .fortuneWheel)
+    services.metricsService.track(event: .fortuneWheel)
+  }
+  
   func openQuotes() {
     let quotesScreenCoordinator = QuotesScreenCoordinator(navigationController, services)
     anyCoordinator = quotesScreenCoordinator
@@ -549,6 +558,8 @@ private extension MainScreenCoordinator {
       openSlogans()
     case .quotes:
       openQuotes()
+    case .fortuneWheel:
+      openFortuneWheel()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

@@ -284,8 +284,6 @@ private extension MainScreenInteractor {
       let updatesLabel = models.map {
         if $0.type == type {
           return MainScreenModel.Section(type: $0.type,
-                                         imageSectionSystemName: $0.imageSectionSystemName,
-                                         titleSection: $0.titleSection,
                                          isEnabled: $0.isEnabled,
                                          isHidden: $0.isHidden,
                                          advLabel: advLabel)

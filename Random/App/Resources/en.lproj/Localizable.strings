@@ -283,3 +283,5 @@
 "generate_random_joke" = "You can generate random jokes";
 "quotes" = "Quotes";
 "generate_random_qoute" = "You can generate random quotes";
+"fortune_wheel" = "Fortune Wheel";
+"generate_fortune_wheel" = "You can spin the wheel of fortune";

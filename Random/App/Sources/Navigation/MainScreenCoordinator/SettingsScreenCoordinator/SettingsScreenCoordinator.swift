@@ -29,8 +29,9 @@ protocol SettingsScreenCoordinatorOutput: AnyObject {
 
 /// Расширение протокола
 extension SettingsScreenCoordinatorOutput {
-  
   func createListAction() {}
+  func withoutRepetitionAction(isOn: Bool) {}
+  func updateStateForSections() {}
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`

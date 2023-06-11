@@ -68,7 +68,7 @@ extension MainScreenModel {
     let imageColors = "photo.on.rectangle.angled"
     let titleColors = RandomStrings.Localizable.colors
     
-    let bottleCardImage = "arrow.triangle.2.circlepath"
+    let bottleCardImage = "medical.thermometer"
     let titleBottle = RandomStrings.Localizable.bottle
     
     let imageRockPaperScissorsScreenView = "hurricane.circle"
@@ -114,5 +114,9 @@ extension MainScreenModel {
     let imageQuotes = "text.quote"
     let titleQuotes = RandomStrings.Localizable.quotes
     let quotesDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomQoute
+    
+    let imageFortuneWheel = "arrow.triangle.2.circlepath"
+    let titleFortuneWheel = RandomStrings.Localizable.fortuneWheel
+    let fortuneWheelDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateFortuneWheel
   }
 }

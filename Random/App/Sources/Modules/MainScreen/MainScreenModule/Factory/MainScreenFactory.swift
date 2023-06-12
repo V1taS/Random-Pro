@@ -461,8 +461,8 @@ extension MainScreenFactory {
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.names) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.names ?? model.advLabel.rawValue,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.truthOrDare) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.truthOrDare ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
             }

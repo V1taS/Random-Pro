@@ -180,7 +180,7 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
 private extension JokeGeneratorScreenInteractor {
   func getDefaultLanguage() -> JokeGeneratorScreenModel.Language {
     let language: JokeGeneratorScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
     case .ru:

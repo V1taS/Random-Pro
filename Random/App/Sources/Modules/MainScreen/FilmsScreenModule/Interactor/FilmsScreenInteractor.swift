@@ -75,7 +75,7 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   // MARK: - Internal func
   
   func isRuslocale() -> Bool {
-    guard let localeType = getCurrentLocaleType() else {
+    guard let localeType = CountryType.getCurrentCountryType() else {
       return false
     }
     

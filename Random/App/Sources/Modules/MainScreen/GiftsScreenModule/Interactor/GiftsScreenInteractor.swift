@@ -217,7 +217,7 @@ private extension GiftsScreenInteractor {
 
   func getDefaultLanguage() -> GiftsScreenModel.Language {
     let language: GiftsScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
 
     switch localeType {
     case .ru:

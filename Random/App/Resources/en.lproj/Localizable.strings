@@ -46,7 +46,6 @@
 "create_list" = "Create a list";
 "cubes" = "Cubes";
 "customize_app_appearance" = "Change the appearance of the application to your liking";
-"dare" = "Dare";
 "dark" = "Dark";
 "dark_theme" = "Dark theme";
 "date" = "Date";
@@ -242,8 +241,6 @@
 "total" = "Total";
 "total_elements" = "Total elements";
 "total_players" = "Total players";
-"truth_or_dare" = "Truth or Dare";
-"truth" = "Truth";
 "tsu_e_fa" = "Tsu-e-fa";
 "tuesday" = "Tuesday";
 "unique_card_style" = "Choose a unique style of cards";
@@ -289,3 +286,6 @@
 "generate_random_qoute" = "You can generate random quotes";
 "fortune_wheel" = "Fortune wheel";
 "generate_fortune_wheel" = "You can spin the wheel of fortune";
+"truth" = "Truth";
+"dare" = "Dare";
+"or" = "or";

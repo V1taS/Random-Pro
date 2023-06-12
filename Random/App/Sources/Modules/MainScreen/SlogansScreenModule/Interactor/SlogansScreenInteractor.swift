@@ -180,7 +180,7 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
 private extension SlogansScreenInteractor {
   func getDefaultLanguage() -> SlogansScreenModel.Language {
     let language: SlogansScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
 
     switch localeType {
     case .ru:

@@ -46,7 +46,6 @@
 "create_list" = "Liste erstellen";
 "cubes" = "Würfel";
 "customize_app_appearance" = "Ändern Sie das Aussehen der App nach Ihren Wünschen";
-"dare" = "Wagen";
 "dark" = "Dunkle";
 "dark_theme" = "Dunkles Thema";
 "date" = "Datum";
@@ -242,8 +241,6 @@
 "total" = "Total";
 "total_elements" = "Gesamtelemente";
 "total_players" = "Gesamtspieler";
-"truth_or_dare" = "Wahrheit oder Pflicht";
-"truth" = "Wahrheit";
 "tsu_e_fa" = "Zu-e-fa";
 "tuesday" = "Dienstag";
 "unique_card_style" = "Wählen Sie einen einzigartigen Kartenstil";
@@ -289,3 +286,6 @@
 "generate_random_qoute" = "Kann zufällige Angebote generieren";
 "fortune_wheel" = "Glücksrad";
 "generate_fortune_wheel" = "Sie können das Glücksrad drehen";
+"truth" = "Wahrheit";
+"or" = "oder";
+"dare" = "Wagen";

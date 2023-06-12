@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RandomUIKit
 
 extension MainScreenModel {
   
@@ -131,7 +132,15 @@ extension MainScreenModel {
       case .fortuneWheel:
         return appearance.titleFortuneWheel
       case .truthOrDare:
-        return appearance.titleTruthOrDare
+        if let languageType = LanguageType.getCurrentLanguageType() {
+          switch languageType {
+          case .ru:
+            return appearance.titleTruthOrDareRu
+          default:
+            return appearance.titleTruthOrDareOther
+          }
+        }
+        return appearance.titleTruthOrDareOther
       }
     }
     

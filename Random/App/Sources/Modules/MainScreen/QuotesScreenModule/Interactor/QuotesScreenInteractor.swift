@@ -180,7 +180,7 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
 private extension QuotesScreenInteractor {
   func getDefaultLanguage() -> QuoteScreenModel.Language {
     let language: QuoteScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
     case .ru:

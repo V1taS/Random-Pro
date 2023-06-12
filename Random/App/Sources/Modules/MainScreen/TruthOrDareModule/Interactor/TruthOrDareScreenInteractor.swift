@@ -217,7 +217,7 @@ private extension TruthOrDareScreenInteractor {
   
   func getDefaultLanguage() -> TruthOrDareScreenModel.Language {
     let language: TruthOrDareScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
     case .ru:

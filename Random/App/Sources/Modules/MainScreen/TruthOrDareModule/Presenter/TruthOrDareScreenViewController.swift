@@ -188,7 +188,7 @@ private extension TruthOrDareScreenViewController {
 
 private extension TruthOrDareScreenViewController {
   struct Appearance {
-    let title = RandomStrings.Localizable.truthOrDare
+    let title = "\(RandomStrings.Localizable.truth) \(RandomStrings.Localizable.or) \(RandomStrings.Localizable.dare)"
     let settingsButtonIcon = UIImage(systemName: "gear")
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
     let defaultResult = "?"

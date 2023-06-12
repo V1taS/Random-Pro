@@ -46,7 +46,6 @@
 "create_list" = "Crear lista";
 "cubes" = "Cubitos";
 "customize_app_appearance" = "Cambia el aspecto de la aplicación a tu gusto";
-"dare" = "Atrévete";
 "dark" = "Cerrado";
 "dark_theme" = "Tema oscuro";
 "date" = "fecha";
@@ -242,8 +241,6 @@
 "total" = "Total";
 "total_elements" = "total de elementos";
 "total_players" = "total de jugadores";
-"truth_or_dare" = "Verdad o reto";
-"truth" = "Verdad";
 "tsu_e_fa" = "Tsu-e-fa";
 "tuesday" = "Martes";
 "unique_card_style" = "Elige un estilo de tarjeta único";
@@ -289,3 +286,6 @@
 "generate_random_qoute" = "Puede generar cotizaciones aleatorias";
 "fortune_wheel" = "Rueda de la fortuna";
 "generate_fortune_wheel" = "Puedes girar la rueda de la fortuna";
+"truth" = "Verdad";
+"or" = "o";
+"dare" = "Atrévete";

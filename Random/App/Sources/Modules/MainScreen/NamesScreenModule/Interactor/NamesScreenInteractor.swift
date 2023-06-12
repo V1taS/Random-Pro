@@ -217,7 +217,7 @@ private extension NamesScreenInteractor {
   
   func getDefaultLanguage() -> NamesScreenModel.Language {
     let language: NamesScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
     case .de:

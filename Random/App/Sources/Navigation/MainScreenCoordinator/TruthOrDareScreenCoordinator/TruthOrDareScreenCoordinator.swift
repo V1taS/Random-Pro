@@ -14,7 +14,7 @@ protocol TruthOrDareScreenCoordinatorOutput: AnyObject {}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol TruthOrDareScreenCoordinatorInput {
-
+  
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: TruthOrDareScreenCoordinatorOutput? { get set }
 }
@@ -22,21 +22,21 @@ protocol TruthOrDareScreenCoordinatorInput {
 typealias TruthOrDareScreenCoordinatorProtocol = TruthOrDareScreenCoordinatorInput & Coordinator
 
 final class TruthOrDareScreenCoordinator: TruthOrDareScreenCoordinatorProtocol {
-
+  
   // MARK: - Internal variables
-
+  
   weak var output: TruthOrDareScreenCoordinatorOutput?
-
+  
   // MARK: - Private property
-
+  
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var truthOrDareScreenModule: TruthOrDareScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-
+  
   // MARK: - Initialization
-
+  
   /// - Parameters:
   ///   - navigationController: UINavigationController
   ///   - services: Сервисы приложения
@@ -45,9 +45,9 @@ final class TruthOrDareScreenCoordinator: TruthOrDareScreenCoordinatorProtocol {
     self.navigationController = navigationController
     self.services = services
   }
-
+  
   // MARK: - Internal func
-
+  
   func start() {
     var truthOrDareScreenModule = TruthOrDareScreenAssembly().createModule(services: services)
     self.truthOrDareScreenModule = truthOrDareScreenModule
@@ -64,10 +64,10 @@ extension TruthOrDareScreenCoordinator: TruthOrDareScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
-
+    
     setupDefaultsSettings()
   }
-
+  
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
@@ -75,14 +75,14 @@ extension TruthOrDareScreenCoordinator: TruthOrDareScreenModuleOutput {
                                                        timeout: nil,
                                                        active: {})
   }
-
+  
   func somethingWentWrong() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: false,
                                                        timeout: nil,
                                                        active: {})
   }
-
+  
   func cleanButtonWasSelected() {
     setupDefaultsSettings()
   }
@@ -93,17 +93,17 @@ extension TruthOrDareScreenCoordinator: TruthOrDareScreenModuleOutput {
 extension TruthOrDareScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
   func updateStateForSections() {}
-
+  
   func cleanButtonAction() {
     truthOrDareScreenModule?.cleanButtonAction()
   }
-
+  
   func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
-
+    
     listResultScreenCoordinator.setContentsFrom(list: truthOrDareScreenModule?.returnCurrentModel().listResult ?? [])
   }
 }
@@ -121,21 +121,21 @@ private extension TruthOrDareScreenCoordinator {
           let settingsScreenCoordinator else {
       return
     }
-
+    
     let listCountry = [
-      LocaleType.us.rawValue,
-      LocaleType.ru.rawValue
+      CountryType.us.rawValue,
+      CountryType.ru.rawValue
     ]
-
+    
     let currentCountry: String
-
+    
     switch language {
     case .en:
-      currentCountry = LocaleType.us.rawValue
+      currentCountry = CountryType.us.rawValue
     default:
       currentCountry = language.rawValue
     }
-
+    
     settingsScreenCoordinator.setupDefaultsSettings(
       for: .truthOrDare(
         itemsGenerated: "\(model.listResult.count)",
@@ -144,10 +144,10 @@ private extension TruthOrDareScreenCoordinator {
         listOfItems: listCountry,
         valueChanged: { [weak self] index in
           guard listCountry.indices.contains(index),
-                let country = LocaleType.init(rawValue: listCountry[index]) else {
+                let country = CountryType.init(rawValue: listCountry[index]) else {
             return
           }
-
+          
           let language: TruthOrDareScreenModel.Language
           switch country {
           case .ru:
@@ -155,7 +155,7 @@ private extension TruthOrDareScreenCoordinator {
           default:
             language = .en
           }
-
+          
           self?.truthOrDareScreenModule?.setNewLanguage(language: language)
         }
       )

@@ -109,17 +109,17 @@ private extension QuotesScreenCoordinator {
     }
     
     let listCountry = [
-      LocaleType.us.rawValue,
-      LocaleType.ru.rawValue
+      CountryType.us.rawValue,
+      CountryType.ru.rawValue
     ]
     
     let currentCountry: String
     
     switch language {
     case .en:
-      currentCountry = LocaleType.us.rawValue
+      currentCountry = CountryType.us.rawValue
     case .ru:
-      currentCountry = LocaleType.ru.rawValue
+      currentCountry = CountryType.ru.rawValue
     }
     
     settingsScreenCoordinator.setupDefaultsSettings(
@@ -130,7 +130,7 @@ private extension QuotesScreenCoordinator {
         listOfItems: listCountry,
         valueChanged: { [weak self] index in
           guard listCountry.indices.contains(index),
-                let country = LocaleType.init(rawValue: listCountry[index]) else {
+                let country = CountryType.init(rawValue: listCountry[index]) else {
             return
           }
           

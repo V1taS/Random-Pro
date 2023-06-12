@@ -46,7 +46,6 @@
 "create_list" = "Crea lista";
 "cubes" = "Cubi";
 "customize_app_appearance" = "cambia l'aspetto dell'app a tuo piacimento";
-"dare" = "Osare";
 "dark" = "Buio";
 "dark_theme" = "Tema scuro";
 "date" = "Data";
@@ -238,8 +237,6 @@
 "theme" = "Tema";
 "thursday" = "giovedì";
 "time" = "Tempo";
-"truth_or_dare" = "Obbligo o verità";
-"truth" = "Verità";
 "to" = "prima";
 "total" = "totale";
 "total_elements" = "elementi totali";
@@ -289,3 +286,6 @@
 "generate_random_qoute" = "Può generare citazioni casuali";
 "fortune_wheel" = "Ruota della fortuna";
 "generate_fortune_wheel" = "Puoi girare la ruota della fortuna";
+"truth" = "Verità";
+"or" = "o";
+"dare" = "Osare";

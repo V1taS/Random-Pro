@@ -86,6 +86,7 @@
 "generate_random_slogans" = "Можно генерировать рандомные слоганы";
 "generate_random_task_list" = "Можно генерировать рандомный список собственных задач";
 "generate_random_team_list" = "Можно генерировать рандомный список команд для игры";
+"generate_random_truth_or_dare" = "Можно генерировать рандомную правду или действие";
 "generated" = "Cгенерировано";
 "generated_players" = "Cгенерировано игроков";
 "generated_teams" = "Cгенерировано команд";
@@ -285,3 +286,6 @@
 "generate_random_qoute" = "Можно генерировать рандомные цитаты";
 "fortune_wheel" = "Колесо фортуны";
 "generate_fortune_wheel" = "Можно крутить колесо фортуны";
+"truth" = "Правда";
+"or" = "или";
+"dare" = "Действие";

@@ -1,8 +1,8 @@
 //
-//  RiddlesScreenCoordinator.swift
+//  TruthOrDareScreenCoordinator.swift
 //  Random
 //
-//  Created by Vitalii Sosin on 03.06.2023.
+//  Created by Artem Pavlov on 09.06.2023.
 //  Copyright © 2023 SosinVitalii.com. All rights reserved.
 //
 
@@ -10,28 +10,28 @@ import UIKit
 import RandomUIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol RiddlesScreenCoordinatorOutput: AnyObject {}
+protocol TruthOrDareScreenCoordinatorOutput: AnyObject {}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
-protocol RiddlesScreenCoordinatorInput {
+protocol TruthOrDareScreenCoordinatorInput {
   
   /// События которые отправляем из `текущего координатора` в `другой координатор`
-  var output: RiddlesScreenCoordinatorOutput? { get set }
+  var output: TruthOrDareScreenCoordinatorOutput? { get set }
 }
 
-typealias RiddlesScreenCoordinatorProtocol = RiddlesScreenCoordinatorInput & Coordinator
+typealias TruthOrDareScreenCoordinatorProtocol = TruthOrDareScreenCoordinatorInput & Coordinator
 
-final class RiddlesScreenCoordinator: RiddlesScreenCoordinatorProtocol {
+final class TruthOrDareScreenCoordinator: TruthOrDareScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
-  weak var output: RiddlesScreenCoordinatorOutput?
+  weak var output: TruthOrDareScreenCoordinatorOutput?
   
   // MARK: - Private property
   
   private let navigationController: UINavigationController
   private let services: ApplicationServices
-  private var riddlesScreenModule: RiddlesScreenModule?
+  private var truthOrDareScreenModule: TruthOrDareScreenModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -49,21 +49,17 @@ final class RiddlesScreenCoordinator: RiddlesScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var riddlesScreenModule = RiddlesScreenAssembly().createModule(services)
-    self.riddlesScreenModule = riddlesScreenModule
-    riddlesScreenModule.moduleOutput = self
-    navigationController.pushViewController(riddlesScreenModule, animated: true)
+    var truthOrDareScreenModule = TruthOrDareScreenAssembly().createModule(services: services)
+    self.truthOrDareScreenModule = truthOrDareScreenModule
+    truthOrDareScreenModule.moduleOutput = self
+    navigationController.pushViewController(truthOrDareScreenModule, animated: true)
   }
 }
 
-// MARK: - RiddlesScreenModuleOutput
+// MARK: - TruthOrDareScreenModuleOutput
 
-extension RiddlesScreenCoordinator: RiddlesScreenModuleOutput {
-  func infoButtonAction(text: String) {
-    showAlerWith(title: Appearance().answer, description: text)
-  }
-  
-  func settingButtonAction(model: RiddlesScreenModel) {
+extension TruthOrDareScreenCoordinator: TruthOrDareScreenModuleOutput {
+  func settingButtonAction(model: TruthOrDareScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
@@ -92,18 +88,14 @@ extension RiddlesScreenCoordinator: RiddlesScreenModuleOutput {
   }
 }
 
-// MARK: - ListResultScreenCoordinatorOutput
-
-extension RiddlesScreenCoordinator: ListResultScreenCoordinatorOutput {}
-
 // MARK: - SettingsScreenCoordinatorOutput
 
-extension RiddlesScreenCoordinator: SettingsScreenCoordinatorOutput {
+extension TruthOrDareScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
   func updateStateForSections() {}
   
   func cleanButtonAction() {
-    riddlesScreenModule?.cleanButtonAction()
+    truthOrDareScreenModule?.cleanButtonAction()
   }
   
   func listOfObjectsAction() {
@@ -112,32 +104,19 @@ extension RiddlesScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
     
-    let listResult = riddlesScreenModule?.returnCurrentModel().listResult.compactMap {
-      return "\($0.question)\n\n\(RandomStrings.Localizable.answer): \($0.answer)"
-    }
-    
-    listResultScreenCoordinator.setContentsFrom(
-      list: listResult ?? []
-    )
+    listResultScreenCoordinator.setContentsFrom(list: truthOrDareScreenModule?.returnCurrentModel().listResult ?? [])
   }
 }
 
+// MARK: - ListResultScreenCoordinatorOutput
+
+extension TruthOrDareScreenCoordinator: ListResultScreenCoordinatorOutput {}
+
 // MARK: - Private
 
-private extension RiddlesScreenCoordinator {
-  func showAlerWith(title: String, description: String) {
-    let appearance = Appearance()
-    let alert = UIAlertController(title: title,
-                                  message: description,
-                                  preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: appearance.ok,
-                                  style: .cancel,
-                                  handler: { _ in }))
-    riddlesScreenModule?.present(alert, animated: true, completion: nil)
-  }
-  
+private extension TruthOrDareScreenCoordinator {
   func setupDefaultsSettings() {
-    guard let model = riddlesScreenModule?.returnCurrentModel(),
+    guard let model = truthOrDareScreenModule?.returnCurrentModel(),
           let language = model.language,
           let settingsScreenCoordinator else {
       return
@@ -153,12 +132,12 @@ private extension RiddlesScreenCoordinator {
     switch language {
     case .en:
       currentCountry = CountryType.us.rawValue
-    case .ru:
-      currentCountry = CountryType.ru.rawValue
+    default:
+      currentCountry = language.rawValue
     }
     
     settingsScreenCoordinator.setupDefaultsSettings(
-      for: .riddles(
+      for: .truthOrDare(
         itemsGenerated: "\(model.listResult.count)",
         lastItem: "\(model.result)",
         currentCountry: currentCountry,
@@ -169,14 +148,15 @@ private extension RiddlesScreenCoordinator {
             return
           }
           
-          let language: RiddlesScreenModel.Language
+          let language: TruthOrDareScreenModel.Language
           switch country {
           case .ru:
             language = .ru
           default:
             language = .en
           }
-          self?.riddlesScreenModule?.setNewLanguage(language: language)
+          
+          self?.truthOrDareScreenModule?.setNewLanguage(language: language)
         }
       )
     )
@@ -185,12 +165,9 @@ private extension RiddlesScreenCoordinator {
 
 // MARK: - Appearance
 
-private extension RiddlesScreenCoordinator {
+private extension TruthOrDareScreenCoordinator {
   struct Appearance {
     let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
     let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
-    let cancel = RandomStrings.Localizable.cancel
-    let ok = RandomStrings.Localizable.ok
-    let answer = RandomStrings.Localizable.answer
   }
 }

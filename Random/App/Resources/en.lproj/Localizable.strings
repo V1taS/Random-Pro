@@ -86,6 +86,7 @@
 "generate_random_slogans" = "Random slogans can be generated";
 "generate_random_task_list" = "You can generate a random list of your own tasks";
 "generate_random_team_list" = "A random list of commands for the game can be generated";
+"generate_random_truth_or_dare" = "You can generate a random truth or dare";
 "generated" = "Generated";
 "generated_players" = "Players generated";
 "generated_teams" = "Commands generated";
@@ -285,3 +286,6 @@
 "generate_random_qoute" = "You can generate random quotes";
 "fortune_wheel" = "Fortune wheel";
 "generate_fortune_wheel" = "You can spin the wheel of fortune";
+"truth" = "Truth";
+"dare" = "Dare";
+"or" = "or";

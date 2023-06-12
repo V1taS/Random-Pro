@@ -5,7 +5,7 @@
 //  Created by Artem Pavlov on 05.06.2023.
 //
 
-import UIKit
+import Foundation
 import RandomNetwork
 import RandomUIKit
 
@@ -217,7 +217,7 @@ private extension GiftsScreenInteractor {
 
   func getDefaultLanguage() -> GiftsScreenModel.Language {
     let language: GiftsScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
 
     switch localeType {
     case .ru:

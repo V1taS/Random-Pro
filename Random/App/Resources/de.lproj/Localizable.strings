@@ -86,6 +86,7 @@
 "generate_random_slogans" = "Es ist möglich, zufällige Slogans zu generieren";
 "generate_random_task_list" = "Es ist möglich, eine zufällige Liste eigener Aufgaben zu generieren";
 "generate_random_team_list" = "Es ist möglich, eine zufällige Liste von Befehlen für das Spiel zu generieren";
+"generate_random_truth_or_dare" = "Es ist möglich, eine zufällige Wahrheit oder Aktion zu erzeugen";
 "generated" = "Generiert";
 "generated_players" = "Spieler generiert";
 "generated_teams" = "Erzeugte Befehle";
@@ -285,3 +286,6 @@
 "generate_random_qoute" = "Kann zufällige Angebote generieren";
 "fortune_wheel" = "Glücksrad";
 "generate_fortune_wheel" = "Sie können das Glücksrad drehen";
+"truth" = "Wahrheit";
+"or" = "oder";
+"dare" = "Wagen";

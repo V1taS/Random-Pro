@@ -222,7 +222,7 @@ private extension RiddlesScreenInteractor {
   
   func getDefaultLanguage() -> RiddlesScreenModel.Language {
     let language: RiddlesScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
     case .ru:

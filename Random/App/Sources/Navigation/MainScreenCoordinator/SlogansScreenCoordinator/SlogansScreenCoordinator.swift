@@ -10,17 +10,17 @@ import UIKit
 import RandomUIKit
 
 final class SlogansScreenCoordinator: Coordinator {
-
+  
   // MARK: - Private variables
-
+  
   private let navigationController: UINavigationController
   private var slogansScreenModule: SlogansScreenModule?
   private let services: ApplicationServices
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-
+  
   // MARK: - Initialization
-
+  
   /// - Parameters:
   ///   - navigationController: UINavigationController
   ///   - services: Сервисы приложения
@@ -29,9 +29,9 @@ final class SlogansScreenCoordinator: Coordinator {
     self.navigationController = navigationController
     self.services = services
   }
-
+  
   // MARK: - Internal func
-
+  
   func start() {
     var slogansScreenModule = SlogansScreenAssembly().createModule(services)
     self.slogansScreenModule = slogansScreenModule
@@ -49,17 +49,17 @@ extension SlogansScreenCoordinator: ListResultScreenCoordinatorOutput {}
 extension SlogansScreenCoordinator: SettingsScreenCoordinatorOutput {
   func withoutRepetitionAction(isOn: Bool) {}
   func updateStateForSections() {}
-
+  
   func cleanButtonAction() {
     slogansScreenModule?.cleanButtonAction()
   }
-
+  
   func listOfObjectsAction() {
     let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
-
+    
     listResultScreenCoordinator.setContentsFrom(
       list: slogansScreenModule?.returnCurrentModel().listResult ?? []
     )
@@ -74,10 +74,10 @@ extension SlogansScreenCoordinator: SlogansScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
-
+    
     setupDefaultsSettings()
   }
-
+  
   func resultCopied(text: String) {
     UIPasteboard.general.string = text
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
@@ -85,14 +85,14 @@ extension SlogansScreenCoordinator: SlogansScreenModuleOutput {
                                                        timeout: nil,
                                                        active: {})
   }
-
+  
   func somethingWentWrong() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: false,
                                                        timeout: nil,
                                                        active: {})
   }
-
+  
   func cleanButtonWasSelected() {
     setupDefaultsSettings()
   }
@@ -107,21 +107,21 @@ private extension SlogansScreenCoordinator {
           let settingsScreenCoordinator else {
       return
     }
-
+    
     let listCountry = [
-      LocaleType.us.rawValue,
-      LocaleType.ru.rawValue
+      CountryType.us.rawValue,
+      CountryType.ru.rawValue
     ]
-
+    
     let currentCountry: String
-
+    
     switch language {
     case .en:
-      currentCountry = LocaleType.us.rawValue
+      currentCountry = CountryType.us.rawValue
     case .ru:
-      currentCountry = LocaleType.ru.rawValue
+      currentCountry = CountryType.ru.rawValue
     }
-
+    
     settingsScreenCoordinator.setupDefaultsSettings(
       for: .slogans(
         itemsGenerated: "\(model.listResult.count)",
@@ -130,10 +130,10 @@ private extension SlogansScreenCoordinator {
         listOfItems: listCountry,
         valueChanged: { [weak self] index in
           guard listCountry.indices.contains(index),
-                let country = LocaleType.init(rawValue: listCountry[index]) else {
+                let country = CountryType.init(rawValue: listCountry[index]) else {
             return
           }
-
+          
           let language: SlogansScreenModel.Language
           switch country {
           case .ru:

@@ -1,22 +1,22 @@
 //
-//  NamesScreenInteractor.swift
+//  TruthOrDareScreenInteractor.swift
 //  Random
 //
-//  Created by Vitalii Sosin on 28.05.2023.
+//  Created by Artem Pavlov on 09.06.2023.
 //
 
-import UIKit
+import Foundation
 import RandomNetwork
 import RandomUIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol NamesScreenInteractorOutput: AnyObject {
+protocol TruthOrDareScreenInteractorOutput: AnyObject {
   
   /// Были получены данные
   ///  - Parameters:
-  ///   - name: Имя
-  ///   - gender: Пол имени
-  func didReceive(name: String?, gender: NamesScreenModel.Gender)
+  ///   - data: данные с правдой или действием
+  ///   - type: тип генерации: правда или действие
+  func didReceive(data: String?, type: TruthOrDareScreenModel.TruthOrDareType)
   
   /// Что-то пошло не так
   func somethingWentWrong()
@@ -26,41 +26,41 @@ protocol NamesScreenInteractorOutput: AnyObject {
 }
 
 /// События которые отправляем от Presenter к Interactor
-protocol NamesScreenInteractorInput {
+protocol TruthOrDareScreenInteractorInput {
   
   /// Получить данные
-  /// - Parameter gender: Пол для имени
-  func getContent(gender: NamesScreenModel.Gender?)
+  /// - Parameter type: тип генерации: правда или действие
+  func getContent(type: TruthOrDareScreenModel.TruthOrDareType?)
   
-  /// Пользователь нажал на кнопку генерации женского имени
+  /// Пользователь нажал на кнопку генерации
   func generateButtonAction()
   
   /// Запросить текущую модель
-  func returnCurrentModel() -> NamesScreenModel
+  func returnCurrentModel() -> TruthOrDareScreenModel
   
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
   
   /// Пол имени изменился
-  /// - Parameter type: Пол имени
-  func segmentedControlValueDidChange(type: NamesScreenModel.Gender)
+  /// - Parameter type: тип генерации: правда или действие
+  func segmentedControlValueDidChange(type: TruthOrDareScreenModel.TruthOrDareType)
   
   /// Установить новый язык
-  func setNewLanguage(language: NamesScreenModel.Language)
+  func setNewLanguage(language: TruthOrDareScreenModel.Language)
 }
 
 /// Интерактор
-final class NamesScreenInteractor: NamesScreenInteractorInput {
+final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
   
   // MARK: - Internal properties
   
-  weak var output: NamesScreenInteractorOutput?
+  weak var output: TruthOrDareScreenInteractorOutput?
   
   // MARK: - Private property
   
   private var storageService: StorageService
   private var networkService: NetworkService
-  private var casheNames: [String] = []
+  private var casheTruthOrDare: [String] = []
   private let buttonCounterService: ButtonCounterService
   
   // MARK: - Initialization
@@ -75,30 +75,30 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   
   // MARK: - Internal func
   
-  func getContent(gender: NamesScreenModel.Gender?) {
-    let newModel = NamesScreenModel(
+  func getContent(type: TruthOrDareScreenModel.TruthOrDareType?) {
+    let newModel = TruthOrDareScreenModel(
       result: Appearance().result,
       listResult: [],
       language: getDefaultLanguage(),
-      gender: .male
+      type: .truth
     )
-    let model = storageService.namesScreenModel ?? newModel
-    let gender = gender ?? (model.gender ?? .male)
+    let model = storageService.truthOrDareScreenModel ?? newModel
+    let typeTruthOrDare = type ?? (model.type ?? .truth)
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.namesScreenModel = NamesScreenModel(
+    storageService.truthOrDareScreenModel = TruthOrDareScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language,
-      gender: gender
+      type: typeTruthOrDare
     )
     
-    fetchListNames(gender: gender,
-                   language: language) { [weak self] result in
+    fetchListTruthOrDare(type: typeTruthOrDare,
+                         language: language) { [weak self] result in
       switch result {
-      case let .success(listNames):
-        self?.casheNames = listNames
-        self?.output?.didReceive(name: model.result, gender: gender)
+      case let .success(listTruthOrDare):
+        self?.casheTruthOrDare = listTruthOrDare
+        self?.output?.didReceive(data: model.result, type: typeTruthOrDare)
       case .failure:
         self?.output?.somethingWentWrong()
       }
@@ -106,8 +106,8 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    guard let model = storageService.namesScreenModel,
-          let result = casheNames.shuffled().first else {
+    guard let model = storageService.truthOrDareScreenModel,
+          let result = casheTruthOrDare.shuffled().first else {
       output?.somethingWentWrong()
       return
     }
@@ -115,68 +115,68 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.namesScreenModel = NamesScreenModel(
+    storageService.truthOrDareScreenModel = TruthOrDareScreenModel(
       result: result,
       listResult: listResult,
       language: model.language,
-      gender: model.gender
+      type: model.type
     )
-    output?.didReceive(name: result, gender: model.gender ?? .male)
+    output?.didReceive(data: result, type: model.type ?? .truth)
     buttonCounterService.onButtonClick()
   }
   
-  func segmentedControlValueDidChange(type: NamesScreenModel.Gender) {
-    getContent(gender: type)
+  func segmentedControlValueDidChange(type: TruthOrDareScreenModel.TruthOrDareType) {
+    getContent(type: type)
   }
   
-  func setNewLanguage(language: NamesScreenModel.Language) {
-    guard let model = storageService.namesScreenModel else {
+  func setNewLanguage(language: TruthOrDareScreenModel.Language) {
+    guard let model = storageService.truthOrDareScreenModel else {
       output?.somethingWentWrong()
       return
     }
     
-    let newModel = NamesScreenModel(
+    let newModel = TruthOrDareScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language,
-      gender: model.gender
+      type: model.type
     )
-    storageService.namesScreenModel = newModel
-    getContent(gender: nil)
+    storageService.truthOrDareScreenModel = newModel
+    getContent(type: nil)
   }
   
-  func returnCurrentModel() -> NamesScreenModel {
-    if let model = storageService.namesScreenModel {
+  func returnCurrentModel() -> TruthOrDareScreenModel {
+    if let model = storageService.truthOrDareScreenModel {
       return model
     } else {
-      return NamesScreenModel(
+      return TruthOrDareScreenModel(
         result: Appearance().result,
         listResult: [],
         language: getDefaultLanguage(),
-        gender: .male
+        type: .truth
       )
     }
   }
   
   func cleanButtonAction() {
-    let newModel = NamesScreenModel(
+    let newModel = TruthOrDareScreenModel(
       result: Appearance().result,
       listResult: [],
       language: getDefaultLanguage(),
-      gender: .male
+      type: .truth
     )
-    self.storageService.namesScreenModel = newModel
-    output?.didReceive(name: newModel.result, gender: newModel.gender ?? .male)
+    self.storageService.truthOrDareScreenModel = newModel
+    output?.didReceive(data: newModel.result, type: newModel.type ?? .truth)
     output?.cleanButtonWasSelected()
   }
 }
 
 // MARK: - Private
 
-private extension NamesScreenInteractor {
-  func fetchListNames(gender: NamesScreenModel.Gender,
-                      language: NamesScreenModel.Language,
-                      completion: @escaping (Result<[String], Error>) -> Void) {
+private extension TruthOrDareScreenInteractor {
+  func fetchListTruthOrDare(type: TruthOrDareScreenModel.TruthOrDareType,
+                            language: TruthOrDareScreenModel.Language,
+                            completion: @escaping (Result<[String], Error>) -> Void) {
     let appearance = Appearance()
     let host = appearance.host
     let apiVersion = appearance.apiVersion
@@ -185,7 +185,7 @@ private extension NamesScreenInteractor {
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
-        .init(name: "gender", value: gender.rawValue),
+        .init(name: "type", value: type.rawValue),
         .init(name: "language", value: language.rawValue)
       ],
       httpMethod: .get,
@@ -203,11 +203,11 @@ private extension NamesScreenInteractor {
         
         switch result {
         case let .success(data):
-          guard let listNames = self.networkService.map(data, to: [String].self) else {
+          guard let listTruthOrDare = self.networkService.map(data, to: [String].self) else {
             completion(.failure(NetworkError.mappingError))
             return
           }
-          completion(.success(listNames))
+          completion(.success(listTruthOrDare))
         case let .failure(error):
           completion(.failure(error))
         }
@@ -215,21 +215,15 @@ private extension NamesScreenInteractor {
     }
   }
   
-  func getDefaultLanguage() -> NamesScreenModel.Language {
-    let language: NamesScreenModel.Language
+  func getDefaultLanguage() -> TruthOrDareScreenModel.Language {
+    let language: TruthOrDareScreenModel.Language
     let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
-    case .de:
-      language = .de
-    case .us:
-      language = .en
-    case .it:
-      language = .it
     case .ru:
       language = .ru
-    case .es:
-      language = .es
+    default:
+      language = .en
     }
     return language
   }
@@ -237,12 +231,12 @@ private extension NamesScreenInteractor {
 
 // MARK: - Appearance
 
-private extension NamesScreenInteractor {
+private extension TruthOrDareScreenInteractor {
   struct Appearance {
     let result = "?"
     let host = "https://sonorous-seat-386117.ew.r.appspot.com"
     let apiVersion = "/api/v1"
-    let endPoint = "/names"
+    let endPoint = "/truthOrDare"
     let apiKey = "api_key"
     let apiValue = "4t2AceLVaSW88H8wJ1f6"
   }

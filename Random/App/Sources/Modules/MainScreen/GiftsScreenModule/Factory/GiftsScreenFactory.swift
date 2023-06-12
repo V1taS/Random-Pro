@@ -5,7 +5,7 @@
 //  Created by Artem Pavlov on 05.06.2023.
 //
 
-import UIKit
+import Foundation
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol GiftsScreenFactoryOutput: AnyObject {}

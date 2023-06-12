@@ -180,7 +180,7 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
 private extension GoodDeedsScreenInteractor {
   func getDefaultLanguage() -> GoodDeedsScreenModel.Language {
     let language: GoodDeedsScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
     case .ru:

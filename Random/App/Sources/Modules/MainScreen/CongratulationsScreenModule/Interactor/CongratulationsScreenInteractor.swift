@@ -217,7 +217,7 @@ private extension CongratulationsScreenInteractor {
   
   func getDefaultLanguage() -> CongratulationsScreenModel.Language {
     let language: CongratulationsScreenModel.Language
-    let localeType = getCurrentLocaleType() ?? .us
+    let localeType = CountryType.getCurrentCountryType() ?? .us
     
     switch localeType {
     case .de:

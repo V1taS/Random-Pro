@@ -174,7 +174,17 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     mainScreenModule?.removeLabelFromSection(type: .nickName)
     services.metricsService.track(event: .nickNameScreen)
   }
-  
+
+  func openTruthOrDare() {
+    let truthOrDareScreenCoordinator = TruthOrDareScreenCoordinator(navigationController,
+                                                              services)
+    anyCoordinator = truthOrDareScreenCoordinator
+    truthOrDareScreenCoordinator.start()
+
+    mainScreenModule?.removeLabelFromSection(type: .truthOrDare)
+    services.metricsService.track(event: .truthOrDare)
+  }
+
   func openFilms() {
     let filmsScreenCoordinator = FilmsScreenCoordinator(navigationController,
                                                         services)
@@ -556,6 +566,8 @@ private extension MainScreenCoordinator {
       openGifts()
     case .slogans:
       openSlogans()
+    case .truthOrDare:
+      openTruthOrDare()
     case .quotes:
       openQuotes()
     case .fortuneWheel:

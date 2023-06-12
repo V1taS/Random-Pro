@@ -122,12 +122,12 @@ private extension NamesScreenCoordinator {
       return
     }
     
-    let listCountry = LocaleType.allCases.compactMap { $0.rawValue }
+    let listCountry = CountryType.allCases.compactMap { $0.rawValue }
     let currentCountry: String
     
     switch language {
     case .en:
-      currentCountry = LocaleType.us.rawValue
+      currentCountry = CountryType.us.rawValue
     default:
       currentCountry = language.rawValue
     }
@@ -139,9 +139,9 @@ private extension NamesScreenCoordinator {
         currentCountry: currentCountry,
         listOfItems: listCountry,
         valueChanged: { [weak self] index in
-          let listCountry = LocaleType.allCases.compactMap { $0.rawValue }
+          let listCountry = CountryType.allCases.compactMap { $0.rawValue }
           guard listCountry.indices.contains(index),
-                let country = LocaleType.init(rawValue: listCountry[index]) else {
+                let country = CountryType.init(rawValue: listCountry[index]) else {
             return
           }
           

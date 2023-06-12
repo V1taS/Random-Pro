@@ -88,6 +88,9 @@ struct SectionsIsHiddenFTModel {
   /// Раздел `Колесо фортуны`
   let fortuneWheel: Bool
   
+  /// Раздел `Правда или действие`
+  let truthOrDare: Bool
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -119,6 +122,7 @@ struct SectionsIsHiddenFTModel {
     slogans = (dictionary["slogans"] as? Int ?? .zero).boolValue
     quotes = (dictionary["quotes"] as? Int ?? .zero).boolValue
     fortuneWheel = (dictionary["fortuneWheel"] as? Int ?? .zero).boolValue
+    truthOrDare = (dictionary["truthOrDare"] as? Int ?? .zero).boolValue
   }
 }
 

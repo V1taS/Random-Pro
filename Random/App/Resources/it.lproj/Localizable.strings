@@ -86,6 +86,7 @@
 "generate_random_slogans" = "È possibile generare slogan casuali";
 "generate_random_task_list" = "è possibile generare un elenco casuale delle proprie attività";
 "generate_random_team_list" = "è possibile generare un elenco casuale di squadre per il gioco";
+"generate_random_truth_or_dare" = "È possibile generare una verità o un'azione casuale";
 "generated" = "generato";
 "generated_players" = "giocatori generati";
 "generated_teams" = "comandi generati";
@@ -285,3 +286,6 @@
 "generate_random_qoute" = "Può generare citazioni casuali";
 "fortune_wheel" = "Ruota della fortuna";
 "generate_fortune_wheel" = "Puoi girare la ruota della fortuna";
+"truth" = "Verità";
+"or" = "o";
+"dare" = "Osare";

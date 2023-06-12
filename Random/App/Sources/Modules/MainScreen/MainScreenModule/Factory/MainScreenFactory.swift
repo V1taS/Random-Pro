@@ -232,6 +232,13 @@ extension MainScreenFactory {
             isHidden: false,
             advLabel: .premium
           ))
+        case .truthOrDare:
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            isHidden: false,
+            advLabel: .premium
+          ))
         }
       }
       
@@ -448,6 +455,14 @@ extension MainScreenFactory {
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.fortuneWheel) ?? model.isHidden,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.fortuneWheel ?? model.advLabel.rawValue,
+                                       oldADVLabel: .premium)
+              ))
+            case .truthOrDare:
+              cardSections.append(MainScreenModel.Section(
+                type: model.type,
+                isEnabled: model.isEnabled,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.truthOrDare) ?? model.isHidden,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.truthOrDare ?? model.advLabel.rawValue,
                                        oldADVLabel: .premium)
               ))
             }

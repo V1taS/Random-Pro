@@ -85,6 +85,9 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `Цитаты`
   func openQuotes()
+
+  /// Открыть раздел `Правда или дело`
+  func openTruthOrDare()
   
   /// Открыть раздел `Колесо фортуны`
   func openFortuneWheel()
@@ -205,6 +208,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openQuotes()
       case .fortuneWheel:
         output?.openFortuneWheel()
+      case .truthOrDare:
+        output?.openTruthOrDare()
       }
     }
   }

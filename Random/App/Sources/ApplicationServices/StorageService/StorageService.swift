@@ -82,6 +82,9 @@ protocol StorageService {
   /// Модель Цитаты
   var quoteGeneratorScreenModel: QuoteScreenModel? { get set }
   
+  /// Модель Правда или действие
+  var truthOrDareScreenModel: TruthOrDareScreenModel? { get set }
+  
   /// Модель для выбора иконки
   var appIconScreenModel: SelecteAppIconScreenModel? { get set }
   

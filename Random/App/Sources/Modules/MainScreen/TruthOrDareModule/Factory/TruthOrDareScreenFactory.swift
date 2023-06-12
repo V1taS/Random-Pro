@@ -5,7 +5,7 @@
 //  Created by Artem Pavlov on 09.06.2023.
 //
 
-import UIKit
+import Foundation
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol TruthOrDareScreenFactoryOutput: AnyObject {}
@@ -19,8 +19,6 @@ final class TruthOrDareScreenFactory: TruthOrDareScreenFactoryInput {
   // MARK: - Internal properties
   
   weak var output: TruthOrDareScreenFactoryOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance

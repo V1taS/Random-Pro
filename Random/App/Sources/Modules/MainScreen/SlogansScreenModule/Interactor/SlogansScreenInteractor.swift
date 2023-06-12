@@ -5,7 +5,7 @@
 //  Created by Artem Pavlov on 08.06.2023.
 //
 
-import UIKit
+import Foundation
 import RandomUIKit
 import RandomNetwork
 

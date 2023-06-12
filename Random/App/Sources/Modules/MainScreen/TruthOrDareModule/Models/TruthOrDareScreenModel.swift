@@ -9,37 +9,37 @@
 import Foundation
 
 struct TruthOrDareScreenModel: UserDefaultsCodable {
-
+  
   /// Результат генерации
   let result: String
-
+  
   /// Список результатов
   let listResult: [String]
-
+  
   /// Язык для генерации имени
   let language: Language?
-
+  
   /// Тип результата: правда или действие
   let type: TruthOrDareType?
-
+  
   // MARK: - Language
-
+  
   enum Language: String, UserDefaultsCodable {
-
+    
     /// Английский
     case en
-
+    
     /// Русский
     case ru
   }
-
-  // MARK: - Type
-
+  
+  // MARK: - TruthOrDareType
+  
   enum TruthOrDareType: String, UserDefaultsCodable {
-
+    
     /// Правда
     case truth
-
+    
     /// Действие
     case dare
   }

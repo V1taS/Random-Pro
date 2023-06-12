@@ -88,6 +88,9 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Цитаты`
   func openQuotes()
+
+  /// Открыть раздел `Правда или дело`
+  func openTruthOrDare()
   
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
@@ -262,6 +265,8 @@ final class MainScreenViewController: MainScreenModule {
 extension MainScreenViewController: MainScreenViewOutput {
   func openFortuneWheel() {
     moduleOutput?.openFortuneWheel()
+  func openTruthOrDare() {
+    moduleOutput?.openTruthOrDare()
   }
   
   func openQuotes() {

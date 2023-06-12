@@ -32,7 +32,7 @@ protocol TruthOrDareScreenViewInput {
   ///   - type: тип генерации (правда или действие)
   func set(result: String?, type: TruthOrDareScreenModel.TruthOrDareType)
 
-  /// Запустить доадер
+  /// Запустить лоадер
   func startLoader()
 
   /// Остановить лоадер
@@ -154,13 +154,13 @@ private extension TruthOrDareScreenView {
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
 
-    segmentedControl.insertSegment(withTitle: appearance.maleTitle,
-                                   at: appearance.maleTitleIndex,
+    segmentedControl.insertSegment(withTitle: appearance.truthTitle,
+                                   at: appearance.truthTitleIndex,
                                    animated: false)
-    segmentedControl.insertSegment(withTitle: appearance.femaleTitle,
-                                   at: appearance.femaleTitleIndex,
+    segmentedControl.insertSegment(withTitle: appearance.dareTitle,
+                                   at: appearance.dareTitleIndex,
                                    animated: false)
-    segmentedControl.selectedSegmentIndex = appearance.maleTitleIndex
+    segmentedControl.selectedSegmentIndex = appearance.truthTitleIndex
     segmentedControl.addTarget(self,
                                action: #selector(segmentedControlValueDidChange),
                                for: .valueChanged)

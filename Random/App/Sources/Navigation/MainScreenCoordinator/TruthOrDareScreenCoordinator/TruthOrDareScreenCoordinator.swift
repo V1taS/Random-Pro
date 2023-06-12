@@ -122,7 +122,11 @@ private extension TruthOrDareScreenCoordinator {
       return
     }
 
-    let listCountry = LocaleType.allCases.compactMap { $0.rawValue }
+    let listCountry = [
+      LocaleType.us.rawValue,
+      LocaleType.ru.rawValue
+    ]
+
     let currentCountry: String
 
     switch language {
@@ -133,13 +137,12 @@ private extension TruthOrDareScreenCoordinator {
     }
 
     settingsScreenCoordinator.setupDefaultsSettings(
-      for: .names(
+      for: .truthOrDare(
         itemsGenerated: "\(model.listResult.count)",
         lastItem: "\(model.result)",
         currentCountry: currentCountry,
         listOfItems: listCountry,
         valueChanged: { [weak self] index in
-          let listCountry = LocaleType.allCases.compactMap { $0.rawValue }
           guard listCountry.indices.contains(index),
                 let country = LocaleType.init(rawValue: listCountry[index]) else {
             return
@@ -147,16 +150,10 @@ private extension TruthOrDareScreenCoordinator {
 
           let language: TruthOrDareScreenModel.Language
           switch country {
-          case .de:
-            language = .de
-          case .us:
-            language = .en
-          case .it:
-            language = .it
           case .ru:
             language = .ru
-          case .es:
-            language = .es
+          default:
+            language = .en
           }
 
           self?.truthOrDareScreenModule?.setNewLanguage(language: language)

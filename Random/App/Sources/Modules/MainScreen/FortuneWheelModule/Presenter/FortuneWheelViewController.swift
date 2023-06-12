@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomWheel
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol FortuneWheelModuleOutput: AnyObject {}

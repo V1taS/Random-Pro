@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomWheel
 
 /// События которые отправляем из Interactor в Presenter
 protocol FortuneWheelInteractorOutput: AnyObject {
@@ -49,7 +50,14 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   func getContent() {
     let model = FortuneWheelModel(
       result: nil,
-      listResult: [],
+      listResult: [
+        .init(title: "$1",
+              description: nil,
+              image: nil),
+        .init(title: "$1",
+              description: nil,
+              image: nil),
+      ],
       style: .regular,
       sections: [],
       selectedSection: .init(
@@ -83,11 +91,17 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
           .init(title: "$8",
                 description: nil,
                 image: nil),
-        ])
+        ]),
+      isEnabledSound: true,
+      isEnabledFeedback: true
     )
     output?.didReceive(model: model)
   }
 }
+
+// MARK: - Private
+
+private extension FortuneWheelInteractor {}
 
 // MARK: - Appearance
 

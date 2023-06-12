@@ -18,11 +18,13 @@ extension FortuneWheelModel {
   var slices: [Slice] {
     switch style {
     case .regular:
-      let objects = selectedSection.objects
-      return objects.compactMap {
-        Slice(contents: [
-          .text(text: $0.title, preferences: titlePreferences)
+      return selectedSection.objects.enumerated().compactMap { index, object in
+        var slice = Slice(contents: [
+          .text(text: object.title, preferences: titlePreferences)
         ])
+        let colorIndex = index % wheelColors.count
+        slice.backgroundColor = wheelColors[colorIndex]
+        return slice
       }
     }
   }

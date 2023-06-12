@@ -68,7 +68,7 @@ extension MainScreenModel {
     let imageColors = "photo.on.rectangle.angled"
     let titleColors = RandomStrings.Localizable.colors
     
-    let bottleCardImage = "medical.thermometer"
+    let bottleCardImage = "escape"
     let titleBottle = RandomStrings.Localizable.bottle
     
     let imageRockPaperScissorsScreenView = "hurricane.circle"

@@ -24,7 +24,7 @@ extension FortuneWheelModel {
           defaultColor: RandomColor.only.primaryWhite
         ),
         font: RandomFont.primaryMedium32,
-        verticalOffset: 16
+        verticalOffset: 0
       )
       textPreferences.orientation = .vertical
       textPreferences.alignment = .center

@@ -23,8 +23,8 @@ extension FortuneWheelModel {
                                                          verticalOffset: -30)
       let spin = SFWConfiguration.SpinButtonPreferences(size: CGSize(width: 64, height: 64))
       
-      let sliceColorType = SFWConfiguration.ColorType.customPatternColors(colors: wheelColors,
-                                                                          defaultColor: .red)
+      let sliceColorType = SFWConfiguration.ColorType.customPatternColors(colors: nil,
+                                                                          defaultColor: .clear)
       
       let slicePreferences = SFWConfiguration.SlicePreferences(
         backgroundColorType: sliceColorType,

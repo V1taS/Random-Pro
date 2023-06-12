@@ -283,5 +283,5 @@
 "generate_random_joke" = "Можно генерировать рандомные анекдоты";
 "quotes" = "Цитаты";
 "generate_random_qoute" = "Можно генерировать рандомные цитаты";
-"fortune_wheel" = "Колесо Фортуны";
+"fortune_wheel" = "Колесо фортуны";
 "generate_fortune_wheel" = "Можно крутить колесо фортуны";

@@ -265,6 +265,8 @@ final class MainScreenViewController: MainScreenModule {
 extension MainScreenViewController: MainScreenViewOutput {
   func openFortuneWheel() {
     moduleOutput?.openFortuneWheel()
+  }
+
   func openTruthOrDare() {
     moduleOutput?.openTruthOrDare()
   }

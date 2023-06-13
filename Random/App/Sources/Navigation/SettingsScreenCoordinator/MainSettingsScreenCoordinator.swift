@@ -101,6 +101,10 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 // MARK: - MainSettingsScreenModuleOutput
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
+  func shareButtonSelected() {
+    
+  }
+
   func applyPremium(_ isEnabled: Bool) {
     output?.applyPremium(isEnabled)
   }

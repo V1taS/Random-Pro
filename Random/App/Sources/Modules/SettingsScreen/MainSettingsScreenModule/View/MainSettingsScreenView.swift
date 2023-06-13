@@ -30,6 +30,9 @@ protocol MainSettingsScreenViewOutput: AnyObject {
   
   /// Кнопка обратной связи была нажата
   func feedBackButtonAction()
+
+  /// Кнопка поделиться была нажата
+  func shareButtonSelected()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -93,6 +96,8 @@ extension MainSettingsScreenView: UITableViewDelegate {
         output?.premiumSectionsSelected()
       case .applicationIconSections:
         output?.applicationIconSectionsSelected()
+      case .shareSections:
+        output?.shareButtonSelected()
       }
     default: break
     }

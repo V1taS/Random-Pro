@@ -32,6 +32,9 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   
   /// Кнопка обратной связи была нажата
   func feedBackButtonAction()
+
+  /// Кнопка поделиться была нажата
+  func shareButtonSelected()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -109,6 +112,10 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
 // MARK: - MainSettingsScreenViewOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
+  func shareButtonSelected() {
+
+  }
+
   func applyPremium(_ isEnabled: Bool) {
     moduleOutput?.applyPremium(isEnabled)
   }

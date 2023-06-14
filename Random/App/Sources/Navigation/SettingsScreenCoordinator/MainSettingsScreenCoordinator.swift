@@ -102,7 +102,26 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
   func shareButtonSelected() {
-    
+    let appearance = Appearance()
+    guard let url = appearance.shareAppUrl else {
+      return
+    }
+
+    let objectsToShare = [url]
+    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      if let popup = activityVC.popoverPresentationController {
+        popup.sourceView = mainSettingsScreenModule?.view
+        popup.sourceRect = CGRect(x: (mainSettingsScreenModule?.view.frame.size.width ?? .zero) / 2,
+                                  y: (mainSettingsScreenModule?.view.frame.size.height ?? .zero) / 4,
+                                  width: .zero,
+                                  height: .zero)
+      }
+    }
+
+    mainSettingsScreenModule?.present(activityVC, animated: true, completion: nil)
+    services.metricsService.track(event: .shareApp)
   }
 
   func applyPremium(_ isEnabled: Bool) {
@@ -240,5 +259,6 @@ private extension MainSettingsScreenCoordinator {
     let systemVersion = RandomStrings.Localizable.systemVersion
     let appVersion = RandomStrings.Localizable.appVersion
     let emailClientNotFound = RandomStrings.Localizable.emailClientNotFound
+    let shareAppUrl = URL(string: "https://apps.apple.com/app/random-pro/id1552813956")
   }
 }

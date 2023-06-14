@@ -113,7 +113,7 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
 
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
   func shareButtonSelected() {
-
+    moduleOutput?.shareButtonSelected()
   }
 
   func applyPremium(_ isEnabled: Bool) {

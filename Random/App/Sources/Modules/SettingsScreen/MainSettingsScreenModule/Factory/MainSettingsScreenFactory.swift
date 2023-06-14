@@ -127,5 +127,6 @@ private extension MainSettingsScreenFactory {
     let primiumDEBUGTitle = RandomStrings.Localizable.premium
 
     let shareImageSystemName = "square.and.arrow.up"
-    let shareTitle = RandomStrings.Localizable.share  }
+    let shareTitle = RandomStrings.Localizable.share
+  }
 }

@@ -66,5 +66,8 @@ enum MainSettingsScreenType {
     
     /// Секция выбора иконок
     case applicationIconSections
+
+    /// Секция поделиться
+    case shareSections
   }
 }

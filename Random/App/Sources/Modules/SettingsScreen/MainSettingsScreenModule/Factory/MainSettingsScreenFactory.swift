@@ -90,7 +90,16 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
         title: appearance.premiumTitle,
         type: .premiumSections
       ))
-      
+      tableViewModels.append(.divider)
+
+      tableViewModels.append(.squircleImageAndLabelWithChevronCell(
+        squircleBGColors: [RandomColor.only.primaryPink,
+                           RandomColor.only.primaryPink],
+        leftSideImageSystemName: appearance.shareImageSystemName,
+        title: appearance.shareTitle,
+        type: .shareSections
+      ))
+
       DispatchQueue.main.async { [weak self] in
         self?.output?.didReceive(models: tableViewModels)
       }
@@ -116,5 +125,8 @@ private extension MainSettingsScreenFactory {
     
     let primiumDEBUGImage = UIImage(systemName: "p.square")
     let primiumDEBUGTitle = RandomStrings.Localizable.premium
+
+    let shareImageSystemName = "square.and.arrow.up"
+    let shareTitle = RandomStrings.Localizable.share
   }
 }

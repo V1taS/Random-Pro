@@ -112,8 +112,11 @@ extension MainScreenModel {
     let slogansDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomSlogans
 
     let imageTruthOrDare = "arrow.left.and.right.righttriangle.left.righttriangle.right"
-    let titleTruthOrDareRu = "\(RandomStrings.Localizable.truth) \(RandomStrings.Localizable.or)\n\(RandomStrings.Localizable.dare)"
-    let titleTruthOrDareOther = "\(RandomStrings.Localizable.truth) \(RandomStrings.Localizable.or) \(RandomStrings.Localizable.dare)"
+    static let titleTruth = RandomStrings.Localizable.truth
+    static let titleOr = RandomStrings.Localizable.or
+    static let titleDareLowercased = RandomStrings.Localizable.dare.lowercased()
+    let titleTruthOrDareRu = "\(titleTruth) \(titleOr)\n\(titleDareLowercased)"
+    let titleTruthOrDareOther = "\(titleTruth) \(titleOr) \(titleDareLowercased)"
     let truthOrDareDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTruthOrDare
     
     let imageQuotes = "text.quote"

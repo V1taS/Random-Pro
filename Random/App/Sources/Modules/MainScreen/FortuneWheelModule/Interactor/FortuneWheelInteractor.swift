@@ -15,13 +15,22 @@ protocol FortuneWheelInteractorOutput: AnyObject {
   ///  - Parameters:
   ///   - model: Модель данных
   func didReceive(model: FortuneWheelModel)
+  
+  /// Кнопка очистить была нажата
+  func cleanButtonWasSelected()
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol FortuneWheelInteractorInput {
   
+  /// Запросить текущую модель
+  func returnCurrentModel() -> FortuneWheelModel
+  
   /// Получить данные
   func getContent()
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
 }
 
 /// Интерактор
@@ -47,64 +56,67 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   
   // MARK: - Internal func
   
-  func getContent() {
-    let model = FortuneWheelModel(
-      result: nil,
-      listResult: [
-        .init(title: "$1",
-              description: nil,
-              image: nil),
-        .init(title: "$1",
-              description: nil,
-              image: nil),
-      ],
-      style: .regular,
-      sections: [],
-      selectedSection: .init(
-        title: "Секция вопросов",
-        icon: nil,
-        objects: [
-          .init(title: "$1",
-                description: nil,
-                image: nil),
-          .init(title: "$2",
-                description: nil,
-                image: nil),
-          .init(title: "LOSE",
-                description: nil,
-                image: nil),
-          .init(title: "$3",
-                description: nil,
-                image: nil),
-          .init(title: "$4",
-                description: nil,
-                image: nil),
-          .init(title: "$5",
-                description: nil,
-                image: nil),
-          .init(title: "$6",
-                description: nil,
-                image: nil),
-          .init(title: "$7",
-                description: nil,
-                image: nil),
-          .init(title: "$8",
-                description: nil,
-                image: nil),
-        ]),
-      isEnabledSound: true,
-      isEnabledFeedback: true
+  func cleanButtonAction() {
+    let model = returnCurrentModel()
+    let newModel = FortuneWheelModel(
+      result: Appearance().result,
+      listResult: [],
+      style: model.style,
+      sections: model.sections,
+      selectedSection: model.selectedSection,
+      isEnabledSound: model.isEnabledSound,
+      isEnabledFeedback: model.isEnabledFeedback,
+      isEnabledListResult: model.isEnabledListResult
     )
-    output?.didReceive(model: model)
+    self.storageService.fortuneWheelModel = newModel
+    output?.didReceive(model: newModel)
+    output?.cleanButtonWasSelected()
+  }
+  
+  func getContent() {
+    output?.didReceive(model: returnCurrentModel())
+  }
+  
+  func returnCurrentModel() -> FortuneWheelModel {
+    if let model = storageService.fortuneWheelModel {
+      return model
+    } else {
+      return getDefaultFortuneWheelModel()
+    }
   }
 }
 
 // MARK: - Private
 
-private extension FortuneWheelInteractor {}
+private extension FortuneWheelInteractor {
+  func getDefaultFortuneWheelModel() -> FortuneWheelModel {
+    return FortuneWheelModel(
+      result: Appearance().result,
+      listResult: [],
+      style: .regular,
+      sections: getDefaultSection(),
+      selectedSection: getDefaultSection()[0],
+      isEnabledSound: true,
+      isEnabledFeedback: true,
+      isEnabledListResult: true
+    )
+  }
+  
+  func getDefaultSection() -> [FortuneWheelModel.Section] {
+    return FortuneWheelModel.MockSection.allCases.map {
+      return FortuneWheelModel.Section(
+        title: $0.title,
+        icon: $0.icon,
+        objects: $0.objects
+      )
+    }
+  }
+}
 
 // MARK: - Appearance
 
 private extension FortuneWheelInteractor {
-  struct Appearance {}
+  struct Appearance {
+    let result = "?"
+  }
 }

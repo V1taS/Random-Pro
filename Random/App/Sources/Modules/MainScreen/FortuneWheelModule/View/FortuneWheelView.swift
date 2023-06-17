@@ -79,7 +79,7 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
       fortuneWheel.centerCollisionSound = appearance.wheelSoundTick
     }
     
-    scrollResult.listLabels = model.listResult.compactMap { $0.title }
+    scrollResult.listLabels = model.listResult.compactMap { $0 }
     configureLayout(fortuneWheel: fortuneWheel)
     applyDefaultBehavior()
     

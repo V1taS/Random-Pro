@@ -19,8 +19,18 @@ extension FortuneWheelModel {
     switch style {
     case .regular:
       return selectedSection.objects.enumerated().compactMap { index, object in
+        let preferences = LinePreferences(
+          colorType: SFWConfiguration.ColorType.customPatternColors(
+            colors: nil,
+            defaultColor: RandomColor.only.primaryGreen
+          ),
+          height: 1,
+          verticalOffset: 14
+        )
+
         var slice = Slice(contents: [
-          .text(text: object.title, preferences: titlePreferences)
+          .text(text: object, preferences: titlePreferences),
+          .line(preferences: preferences)
         ])
         let colorIndex = index % wheelColors.count
         slice.backgroundColor = wheelColors[colorIndex]

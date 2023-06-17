@@ -32,6 +32,9 @@ struct FortuneWheelModel: UserDefaultsCodable {
   /// Включение обратной тактильной связи
   let isEnabledFeedback: Bool
   
+  /// Включение списка результатов на главном экране
+  let isEnabledListResult: Bool
+  
   // MARK: - Section
   
   struct Section: UserDefaultsCodable {

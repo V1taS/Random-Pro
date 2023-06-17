@@ -168,6 +168,21 @@ extension SettingsScreenView: UITableViewDataSource {
         )
         viewCell = cell
       }
+    case let .titleAndSwitcherAction(title, value):
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: LabelAndSwitchCell.reuseIdentifier
+      ) as? LabelAndSwitchCell {
+        cell.configureCellWith(titleText: title,
+                               isResultSwitch: value.isEnabled)
+        cell.switchAction = { isOn in
+          value.completion?(isOn)
+        }
+        viewCell = cell
+      }
+    case .imageAndLabelWithButtonBigCell:
+      break
+    case let .customTextCell(titleText, textColor, textAlignment):
+      break
     }
     
     if tableView.isFirst(for: indexPath) {
@@ -225,6 +240,10 @@ private extension SettingsScreenView {
                        forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
     tableView.register(LabelWithSegmentedControlCell.self,
                        forCellReuseIdentifier: LabelWithSegmentedControlCell.reuseIdentifier)
+    tableView.register(ImageAndLabelWithButtonBigCell.self,
+                       forCellReuseIdentifier: ImageAndLabelWithButtonBigCell.reuseIdentifier)
+    tableView.register(CustomTextCell.self,
+                       forCellReuseIdentifier: CustomTextCell.reuseIdentifier)
     
     tableView.separatorStyle = .none
     tableView.tableFooterView = UIView()

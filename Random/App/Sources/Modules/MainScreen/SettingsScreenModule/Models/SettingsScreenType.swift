@@ -14,6 +14,13 @@ enum SettingsScreenType {
   
   // MARK: - Cases
   
+  /// Раздел: `Колесо удачи`
+  case fortuneWheel((isEnabled: Bool, completion: ((_ isSound: Bool) -> Void)?),
+                    (isEnabled: Bool, completion: ((_ isHapticFeedback: Bool) -> Void)?),
+                    (isEnabled: Bool, completion: ((_ isShowListResult: Bool) -> Void)?),
+                    itemsGenerated: String,
+                    lastItem: String)
+  
   /// Раздел: `Никнейм`
   case nickname(itemsGenerated: String, lastItem: String)
 

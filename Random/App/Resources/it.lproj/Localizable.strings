@@ -296,3 +296,5 @@
 "green" = "Verde";
 "yellow" = "Giallo";
 "orange" = "Arancia";
+"sound" = "Suono";
+"haptic_feedback" = "Feedback tattile";

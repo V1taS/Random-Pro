@@ -9,10 +9,23 @@ import UIKit
 import RandomWheel
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol FortuneWheelModuleOutput: AnyObject {}
+protocol FortuneWheelModuleOutput: AnyObject {
+  
+  /// Была нажата кнопка (настройки)
+  func settingButtonAction()
+  
+  /// Кнопка очистить была нажата
+  func cleanButtonWasSelected()
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol FortuneWheelModuleInput {
+  
+  /// Событие, кнопка `Очистить` была нажата
+  func cleanButtonAction()
+  
+  /// Запросить текущую модель
+  func returnCurrentModel() -> FortuneWheelModel
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: FortuneWheelModuleOutput? { get set }
@@ -23,7 +36,7 @@ typealias FortuneWheelModule = UIViewController & FortuneWheelModuleInput
 
 /// Презентер
 final class FortuneWheelViewController: FortuneWheelModule {
-  
+
   // MARK: - Internal properties
   
   weak var moduleOutput: FortuneWheelModuleOutput?
@@ -66,6 +79,16 @@ final class FortuneWheelViewController: FortuneWheelModule {
     interactor.getContent()
     setNavigationBar()
   }
+  
+  // MARK: - Internal func
+  
+  func returnCurrentModel() -> FortuneWheelModel {
+    interactor.returnCurrentModel()
+  }
+  
+  func cleanButtonAction() {
+    interactor.cleanButtonAction()
+  }
 }
 
 // MARK: - FortuneWheelViewOutput
@@ -75,6 +98,10 @@ extension FortuneWheelViewController: FortuneWheelViewOutput {}
 // MARK: - FortuneWheelInteractorOutput
 
 extension FortuneWheelViewController: FortuneWheelInteractorOutput {
+  func cleanButtonWasSelected() {
+    moduleOutput?.cleanButtonWasSelected()
+  }
+  
   func didReceive(model: FortuneWheelModel) {
     moduleView.setupFortuneWheelWith(model: model)
   }
@@ -102,7 +129,7 @@ private extension FortuneWheelViewController {
   
   @objc
   func settingButtonAction() {
-    // TODO: -
+    moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
   }
 }

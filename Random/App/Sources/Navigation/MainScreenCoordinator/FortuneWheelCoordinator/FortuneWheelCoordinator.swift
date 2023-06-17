@@ -58,13 +58,37 @@ final class FortuneWheelCoordinator: FortuneWheelCoordinatorProtocol {
 
 // MARK: - FortuneWheelModuleOutput
 
-extension FortuneWheelCoordinator: FortuneWheelModuleOutput {}
+extension FortuneWheelCoordinator: FortuneWheelModuleOutput {
+  func cleanButtonWasSelected() {
+    setupDefaultsSettings()
+  }
+  
+  func settingButtonAction() {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    
+    setupDefaultsSettings()
+  }
+}
 
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension FortuneWheelCoordinator: SettingsScreenCoordinatorOutput {
-  func cleanButtonAction() {}
-  func listOfObjectsAction() {}
+  func cleanButtonAction() {
+    fortuneWheelModule?.cleanButtonAction()
+  }
+  func listOfObjectsAction() {
+    let listResultScreenCoordinator = ListResultScreenCoordinator(navigationController, services)
+    self.listResultScreenCoordinator = listResultScreenCoordinator
+    self.listResultScreenCoordinator?.output = self
+    self.listResultScreenCoordinator?.start()
+    
+    listResultScreenCoordinator.setContentsFrom(
+      list: fortuneWheelModule?.returnCurrentModel().listResult ?? []
+    )
+  }
 }
 
 // MARK: - ListResultScreenCoordinatorOutput
@@ -73,7 +97,30 @@ extension FortuneWheelCoordinator: ListResultScreenCoordinatorOutput {}
 
 // MARK: - Private
 
-private extension FortuneWheelCoordinator {}
+private extension FortuneWheelCoordinator {
+  func setupDefaultsSettings() {
+    guard let model = fortuneWheelModule?.returnCurrentModel(),
+          let settingsScreenCoordinator else {
+      return
+    }
+    
+    settingsScreenCoordinator.setupDefaultsSettings(
+      for: .fortuneWheel(
+        (model.isEnabledSound, { isSound in
+          // TODO: -
+        }),
+        (model.isEnabledFeedback, { isFeedback in
+          // TODO: -
+        }),
+        (model.isEnabledListResult, { isListResult in
+          // TODO: -
+        }),
+        itemsGenerated: "\(model.listResult.count)",
+        lastItem: model.result ?? ""
+      )
+    )
+  }
+}
 
 // MARK: - Appearance
 

@@ -289,3 +289,12 @@
 "truth" = "Wahrheit";
 "or" = "oder";
 "dare" = "Wagen";
+"pass" = "Passieren";
+"what_color" = "Welche Farbe";
+"red" = "Rot";
+"blue" = "Blau";
+"green" = "Grün";
+"yellow" = "Gelb";
+"orange" = "Orange";
+"sound" = "Klang";
+"haptic_feedback" = "Haptisches Feedback";

@@ -6,12 +6,29 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - SettingsScreenTableViewType
 
 /// Моделька для таблички
 enum SettingsScreenTableViewType {
+  
+  case imageAndLabelWithButtonBigCell(
+    leftSideEmoji: Character?,
+    titleText: String?,
+    rightButtonImage: UIImage?,
+    actionCell: (() -> Void)?,
+    actionButton: (() -> Void)?
+  )
+  
+  /// Секция `Кастомный текст`
+  /// - Parameters:
+  ///  - titleText: Заголовок
+  ///  - textColor: Цвет текста
+  ///  - textAlignment: Выравнивание
+  case customTextCell(titleText: String?,
+                      textColor: UIColor?,
+                      textAlignment: NSTextAlignment)
   
   /// Секция `Заголовок и переключатель`
   /// - Parameters:
@@ -30,6 +47,13 @@ enum SettingsScreenTableViewType {
   ///  - title: Заголовок
   ///  - isEnabled: Переключатель
   case titleAndSwitcher(title: String, isEnabled: Bool)
+  
+  /// Секция `Заголовок и переключатель`
+  /// - Parameters:
+  ///  - title: Заголовок
+  ///  - isEnabled: Результат
+  case titleAndSwitcherAction(title: String,
+                              (isEnabled: Bool, completion: ((_ isEnabled: Bool) -> Void)?))
   
   /// Секция `Заголовок и описание`
   /// - Parameters:

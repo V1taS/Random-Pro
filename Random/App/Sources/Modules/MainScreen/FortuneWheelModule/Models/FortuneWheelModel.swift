@@ -12,10 +12,10 @@ import UIKit
 struct FortuneWheelModel: UserDefaultsCodable {
   
   /// Результат генерации
-  let result: Object?
+  let result: String?
   
   /// Список результатов
-  let listResult: [Object]
+  let listResult: [String]
   
   /// Стиль колеса удачи
   let style: Style
@@ -32,6 +32,9 @@ struct FortuneWheelModel: UserDefaultsCodable {
   /// Включение обратной тактильной связи
   let isEnabledFeedback: Bool
   
+  /// Включение списка результатов на главном экране
+  let isEnabledListResult: Bool
+  
   // MARK: - Section
   
   struct Section: UserDefaultsCodable {
@@ -39,25 +42,11 @@ struct FortuneWheelModel: UserDefaultsCodable {
     /// Низвание секции
     let title: String
     
-    /// Иконка секции
-    let icon: Data?
+    /// Смайлик секции
+    let icon: String?
     
     /// Объекты
-    let objects: [Object]
-  }
-  
-  // MARK: - Object
-  
-  struct Object: UserDefaultsCodable {
-    
-    /// Заголовок
-    let title: String
-    
-    /// Описание
-    let description: String?
-    
-    /// Изображение
-    let image: Data?
+    let objects: [String]
   }
   
   // MARK: - Style
@@ -66,5 +55,19 @@ struct FortuneWheelModel: UserDefaultsCodable {
     
     /// Обычный
     case regular
+  }
+  
+  // MARK: - MockSection
+  
+  enum MockSection: CaseIterable, UserDefaultsCodable {
+    
+    /// Правда или действие
+    case truthOrDare
+    
+    /// Да или нет
+    case yesOrNo
+    
+    /// Какой цвет
+    case whatColor
   }
 }

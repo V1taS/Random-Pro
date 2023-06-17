@@ -23,11 +23,12 @@ extension FortuneWheelModel {
           colors: nil,
           defaultColor: RandomColor.only.primaryWhite
         ),
-        font: RandomFont.primaryMedium32,
-        verticalOffset: 0
+        font: RandomFont.primaryBold16,
+        verticalOffset: 5
       )
       textPreferences.orientation = .vertical
-      textPreferences.alignment = .center
+      textPreferences.alignment = .left
+      textPreferences.numberOfLines = .zero
       return textPreferences
     }
   }

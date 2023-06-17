@@ -18,10 +18,7 @@ extension FortuneWheelModel {
   var configuration: SFWConfiguration {
     switch style {
     case .regular:
-      let pin = SFWConfiguration.PinImageViewPreferences(size: CGSize(width: 30, height: 50),
-                                                         position: .top,
-                                                         verticalOffset: -30)
-      let spin = SFWConfiguration.SpinButtonPreferences(size: CGSize(width: 64, height: 64))
+      let spin = SFWConfiguration.SpinButtonPreferences(size: CGSize(width: 100, height: 100))
       
       let sliceColorType = SFWConfiguration.ColorType.customPatternColors(colors: nil,
                                                                           defaultColor: .clear)
@@ -46,7 +43,6 @@ extension FortuneWheelModel {
       )
       wheelPreferences.imageAnchor = anchorImage
       let configuration = SFWConfiguration(wheelPreferences: wheelPreferences,
-                                           pinPreferences: pin,
                                            spinButtonPreferences: spin)
       return configuration
     }

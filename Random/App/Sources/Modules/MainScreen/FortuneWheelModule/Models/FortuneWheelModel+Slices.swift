@@ -13,26 +13,26 @@ import UIKit
 // MARK: - Slices
 
 extension FortuneWheelModel {
-  
   /// Данные для отображения
   var slices: [Slice] {
     switch style {
     case .regular:
-      return selectedSection.objects.enumerated().compactMap { index, object in
-        let preferences = LinePreferences(
-          colorType: SFWConfiguration.ColorType.customPatternColors(
-            colors: nil,
-            defaultColor: RandomColor.only.primaryGreen
-          ),
-          height: 1,
-          verticalOffset: 14
-        )
-
+      var objects: [(String, Int)] = []
+      
+      if selectedSection.objects.count > .zero && selectedSection.objects.count <= 3 {
+        objects = Array(repeating: selectedSection.objects, count: 3).flatMap { $0 }.enumerated().map { ($1, $0 % selectedSection.objects.count) }
+      } else if selectedSection.objects.count > 3 && selectedSection.objects.count < 5 {
+        objects = Array(repeating: selectedSection.objects, count: 2).flatMap { $0 }.enumerated().map { ($1, $0 % selectedSection.objects.count) }
+      } else {
+        objects = selectedSection.objects.enumerated().map { ($1, $0) }
+      }
+      
+      return objects.compactMap { object, originalIndex in
         var slice = Slice(contents: [
-          .text(text: object, preferences: titlePreferences),
-          .line(preferences: preferences)
+          .text(text: object, preferences: titlePreferences)
         ])
-        let colorIndex = index % wheelColors.count
+        
+        let colorIndex = originalIndex % wheelColors.count
         slice.backgroundColor = wheelColors[colorIndex]
         return slice
       }

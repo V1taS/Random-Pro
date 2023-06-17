@@ -112,9 +112,6 @@ private extension FortuneWheelCoordinator {
         (model.isEnabledFeedback, { isFeedback in
           // TODO: -
         }),
-        (model.isEnabledListResult, { isListResult in
-          // TODO: -
-        }),
         itemsGenerated: "\(model.listResult.count)",
         lastItem: model.result ?? ""
       )

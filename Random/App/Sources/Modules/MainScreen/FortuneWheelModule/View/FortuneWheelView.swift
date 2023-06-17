@@ -38,6 +38,7 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
   private var fortuneWheel: SwiftFortuneWheel?
   private let scrollResult = ScrollLabelGradientView()
   private let resultLabel = UILabel()
+  private var resultText = ""
   
   // MARK: - Internal func
   
@@ -88,9 +89,11 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
       self?.fortuneWheel?.startRotationAnimation(
         finishIndex: finishIndex,
         continuousRotationTime: 1,
-        continuousRotationSpeed: 4) { finished in
+        continuousRotationSpeed: 4,
+        rotationOffset: CGFloat.random(in: -20...20)) { [weak self] finished in
           if finished {
             finishIndex = Int.random(in: 0..<model.slices.count)
+            self?.resultLabel.text = self?.resultText
           }
         }
     }
@@ -106,7 +109,7 @@ private extension FortuneWheelView {
           case let .text(text, _) = contentType else {
       return
     }
-    resultLabel.text = text
+    resultText = text
   }
   
   func getIndexFromCollision(progress: Double, finishIndex: Int) -> Int? {
@@ -139,7 +142,8 @@ private extension FortuneWheelView {
       resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.bottomAnchor.constraint(equalTo: fortuneWheel.topAnchor,
                                           constant: -appearance.maxInset),
-      fortuneWheel.centerYAnchor.constraint(equalTo: centerYAnchor),
+      fortuneWheel.centerYAnchor.constraint(equalTo: centerYAnchor,
+                                            constant: 56),
       fortuneWheel.centerXAnchor.constraint(equalTo: centerXAnchor),
       
       scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -160,7 +164,7 @@ private extension FortuneWheelView {
     fortuneWheel?.layer.rasterizationScale = UIScreen.main.scale
     
     scrollResult.backgroundColor = .clear
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = RandomFont.primaryBold32
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.text = "?"
   }

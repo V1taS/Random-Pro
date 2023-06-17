@@ -18,7 +18,7 @@ extension FortuneWheelModel {
   var spinImageName: String? {
     switch style {
     case .regular:
-      return RandomAsset.fortuneWheelSpinDarkBlue.name
+      return RandomAsset.fortuneWheelSpinWhite.name
     }
   }
 }

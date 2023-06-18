@@ -16,6 +16,9 @@ protocol FortuneWheelModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Выбрать ячейку было нажато
+  func selectedSectionAction()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -26,6 +29,18 @@ protocol FortuneWheelModuleInput {
   
   /// Запросить текущую модель
   func returnCurrentModel() -> FortuneWheelModel
+  
+  /// Включить звук
+  /// - Parameter isEnabled: Значение
+  func setSound(isEnabled: Bool)
+  
+  /// Включить тактильный отклик
+  /// - Parameter isEnabled: Значение
+  func setFeedback(isEnabled: Bool)
+  
+  /// Обновить текущую модель
+  ///  - Parameter model: Модель данных
+  func updateNew(model: FortuneWheelModel)
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: FortuneWheelModuleOutput? { get set }
@@ -89,11 +104,27 @@ final class FortuneWheelViewController: FortuneWheelModule {
   func cleanButtonAction() {
     interactor.cleanButtonAction()
   }
+  
+  func setSound(isEnabled: Bool) {
+    interactor.setSound(isEnabled: isEnabled)
+  }
+  
+  func setFeedback(isEnabled: Bool) {
+    interactor.setFeedback(isEnabled: isEnabled)
+  }
+  
+  func updateNew(model: FortuneWheelModel) {
+    interactor.updateNew(model: model)
+  }
 }
 
 // MARK: - FortuneWheelViewOutput
 
-extension FortuneWheelViewController: FortuneWheelViewOutput {}
+extension FortuneWheelViewController: FortuneWheelViewOutput {
+  func selectedSectionAction() {
+    moduleOutput?.selectedSectionAction()
+  }
+}
 
 // MARK: - FortuneWheelInteractorOutput
 

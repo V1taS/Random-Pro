@@ -13,10 +13,14 @@ import UIKit
 // MARK: - Slices
 
 extension FortuneWheelModel {
+  
   /// Данные для отображения
   var slices: [Slice] {
     switch style {
     case .regular:
+      guard let selectedSection = sections.filter({ $0.isSelected }).first else {
+        return []
+      }
       var objects: [(String, Int)] = []
       
       if selectedSection.objects.count > .zero && selectedSection.objects.count <= 3 {

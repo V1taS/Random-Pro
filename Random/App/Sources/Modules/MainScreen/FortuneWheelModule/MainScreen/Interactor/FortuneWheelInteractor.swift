@@ -29,13 +29,25 @@ protocol FortuneWheelInteractorInput {
   /// Получить данные
   func getContent()
   
+  /// Включить звук
+  /// - Parameter isEnabled: Значение
+  func setSound(isEnabled: Bool)
+  
+  /// Включить тактильный отклик
+  /// - Parameter isEnabled: Значение
+  func setFeedback(isEnabled: Bool)
+  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
+  
+  /// Обновить текущую модель
+  ///  - Parameter model: Модель данных
+  func updateNew(model: FortuneWheelModel)
 }
 
 /// Интерактор
 final class FortuneWheelInteractor: FortuneWheelInteractorInput {
-  
+
   // MARK: - Internal properties
   
   weak var output: FortuneWheelInteractorOutput?
@@ -56,6 +68,39 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   
   // MARK: - Internal func
   
+  func updateNew(model: FortuneWheelModel) {
+    storageService.fortuneWheelModel = model
+    output?.didReceive(model: model)
+  }
+  
+  func setSound(isEnabled: Bool) {
+    let model = returnCurrentModel()
+    let newModel = FortuneWheelModel(
+      result: model.result,
+      listResult: model.listResult,
+      style: model.style,
+      sections: model.sections,
+      isEnabledSound: isEnabled,
+      isEnabledFeedback: model.isEnabledFeedback
+    )
+    storageService.fortuneWheelModel = newModel
+    output?.didReceive(model: newModel)
+  }
+  
+  func setFeedback(isEnabled: Bool) {
+    let model = returnCurrentModel()
+    let newModel = FortuneWheelModel(
+      result: model.result,
+      listResult: model.listResult,
+      style: model.style,
+      sections: model.sections,
+      isEnabledSound: model.isEnabledSound,
+      isEnabledFeedback: isEnabled
+    )
+    storageService.fortuneWheelModel = newModel
+    output?.didReceive(model: newModel)
+  }
+  
   func cleanButtonAction() {
     let model = returnCurrentModel()
     let newModel = FortuneWheelModel(
@@ -63,12 +108,10 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
       listResult: [],
       style: model.style,
       sections: model.sections,
-      selectedSection: model.selectedSection,
       isEnabledSound: model.isEnabledSound,
-      isEnabledFeedback: model.isEnabledFeedback,
-      isEnabledListResult: model.isEnabledListResult
+      isEnabledFeedback: model.isEnabledFeedback
     )
-    self.storageService.fortuneWheelModel = newModel
+    storageService.fortuneWheelModel = newModel
     output?.didReceive(model: newModel)
     output?.cleanButtonWasSelected()
   }
@@ -95,19 +138,18 @@ private extension FortuneWheelInteractor {
       listResult: [],
       style: .regular,
       sections: getDefaultSection(),
-      selectedSection: getDefaultSection()[0],
       isEnabledSound: true,
-      isEnabledFeedback: true,
-      isEnabledListResult: true
+      isEnabledFeedback: true
     )
   }
   
   func getDefaultSection() -> [FortuneWheelModel.Section] {
-    return FortuneWheelModel.MockSection.allCases.map {
+    return FortuneWheelModel.MockSection.allCases.enumerated().map { index, value in
       return FortuneWheelModel.Section(
-        title: $0.title,
-        icon: $0.icon,
-        objects: $0.objects
+        isSelected: index == .zero ? true : false,
+        title: value.title,
+        icon: value.icon,
+        objects: value.objects
       )
     }
   }

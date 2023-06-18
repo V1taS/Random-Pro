@@ -12,6 +12,8 @@ import RandomWheel
 /// События которые отправляем из View в Presenter
 protocol FortuneWheelViewOutput: AnyObject {
   
+  /// Выбрать ячейку было нажато
+  func selectedSectionAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -36,13 +38,16 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
   // MARK: - Private properties
   
   private var fortuneWheel: SwiftFortuneWheel?
-  private let scrollResult = ScrollLabelGradientView()
+  private let selectedSectionView = ImageAndLabelWithButtonBigView()
   private let resultLabel = UILabel()
   private var resultText = ""
   
   // MARK: - Internal func
   
   func setupFortuneWheelWith(model: FortuneWheelModel) {
+    guard let selectedSection = model.sections.filter({ $0.isSelected }).first else {
+      return
+    }
     let appearance = Appearance()
     let fortuneWheel = SwiftFortuneWheel(
       frame: Appearance().frame,
@@ -56,6 +61,17 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
     fortuneWheel.pinImage = model.pinImageName
     fortuneWheel.pinImageViewCollisionEffect = CollisionEffect(force: 8, angle: 20)
     fortuneWheel.edgeCollisionDetectionOn = true
+    
+    selectedSectionView.configureWith(
+      leftSideEmoji: Character(selectedSection.icon ?? " "),
+      titleText: selectedSection.title,
+      rightButtonImage: nil,
+      actionCell: { [weak self] in
+        self?.output?.selectedSectionAction()
+      },
+      actionButton: nil
+    )
+    selectedSectionView.style = .selected
     
     var finishIndex = Int.random(in: 0..<model.slices.count)
     
@@ -80,7 +96,6 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
       fortuneWheel.centerCollisionSound = appearance.wheelSoundTick
     }
     
-    scrollResult.listLabels = model.listResult.compactMap { $0 }
     configureLayout(fortuneWheel: fortuneWheel)
     applyDefaultBehavior()
     
@@ -130,7 +145,7 @@ private extension FortuneWheelView {
       $0.removeFromSuperview()
     }
     
-    [fortuneWheel, scrollResult, resultLabel].forEach {
+    [fortuneWheel, resultLabel, selectedSectionView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -141,15 +156,14 @@ private extension FortuneWheelView {
       
       resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
       resultLabel.bottomAnchor.constraint(equalTo: fortuneWheel.topAnchor,
-                                          constant: -appearance.maxInset),
+                                          constant: -64),
       fortuneWheel.centerYAnchor.constraint(equalTo: centerYAnchor,
-                                            constant: 56),
+                                            constant: 24),
       fortuneWheel.centerXAnchor.constraint(equalTo: centerXAnchor),
       
-      scrollResult.leadingAnchor.constraint(equalTo: leadingAnchor),
-      scrollResult.trailingAnchor.constraint(equalTo: trailingAnchor),
-      scrollResult.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                           constant: -appearance.minInset)
+      selectedSectionView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      selectedSectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
+                                                  constant: -24)
     ])
   }
   
@@ -163,7 +177,6 @@ private extension FortuneWheelView {
     fortuneWheel?.layer.shouldRasterize = true
     fortuneWheel?.layer.rasterizationScale = UIScreen.main.scale
     
-    scrollResult.backgroundColor = .clear
     resultLabel.font = RandomFont.primaryBold32
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.text = "?"

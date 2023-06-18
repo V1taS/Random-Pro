@@ -34,6 +34,7 @@ final class FortuneWheelCoordinator: FortuneWheelCoordinatorProtocol {
   private var fortuneWheelModule: FortuneWheelModule?
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
+  private var fortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionCoordinator?
   
   // MARK: - Initialization
   
@@ -59,6 +60,17 @@ final class FortuneWheelCoordinator: FortuneWheelCoordinatorProtocol {
 // MARK: - FortuneWheelModuleOutput
 
 extension FortuneWheelCoordinator: FortuneWheelModuleOutput {
+  func selectedSectionAction() {
+    let fortuneWheelSelectedSectionCoordinator = FortuneWheelSelectedSectionCoordinator(navigationController, services)
+    self.fortuneWheelSelectedSectionCoordinator = fortuneWheelSelectedSectionCoordinator
+    self.fortuneWheelSelectedSectionCoordinator?.output = self
+    self.fortuneWheelSelectedSectionCoordinator?.start()
+    
+    if let model = fortuneWheelModule?.returnCurrentModel() {
+      fortuneWheelSelectedSectionCoordinator.setDefault(model: model)
+    }
+  }
+  
   func cleanButtonWasSelected() {
     setupDefaultsSettings()
   }
@@ -70,6 +82,14 @@ extension FortuneWheelCoordinator: FortuneWheelModuleOutput {
     self.settingsScreenCoordinator?.start()
     
     setupDefaultsSettings()
+  }
+}
+
+// MARK: - FortuneWheelSelectedSectionCoordinatorOutput
+
+extension FortuneWheelCoordinator: FortuneWheelSelectedSectionCoordinatorOutput {
+  func didReceiveNew(model: FortuneWheelModel) {
+    fortuneWheelModule?.updateNew(model: model)
   }
 }
 
@@ -106,11 +126,11 @@ private extension FortuneWheelCoordinator {
     
     settingsScreenCoordinator.setupDefaultsSettings(
       for: .fortuneWheel(
-        (model.isEnabledSound, { isSound in
-          // TODO: -
+        (model.isEnabledSound, { [weak self] isEnabled in
+          self?.fortuneWheelModule?.setSound(isEnabled: isEnabled)
         }),
-        (model.isEnabledFeedback, { isFeedback in
-          // TODO: -
+        (model.isEnabledFeedback, { [weak self] isEnabled in
+          self?.fortuneWheelModule?.setFeedback(isEnabled: isEnabled)
         }),
         itemsGenerated: "\(model.listResult.count)",
         lastItem: model.result ?? ""

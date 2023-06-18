@@ -23,30 +23,38 @@ struct FortuneWheelModel: UserDefaultsCodable {
   /// Список секций
   let sections: [Section]
   
-  /// Выбранная секция
-  let selectedSection: Section
-  
   /// Включение звука
   let isEnabledSound: Bool
   
   /// Включение обратной тактильной связи
   let isEnabledFeedback: Bool
   
-  /// Включение списка результатов на главном экране
-  let isEnabledListResult: Bool
-  
   // MARK: - Section
   
   struct Section: UserDefaultsCodable {
     
+    /// ID секции
+    let id: String
+    
+    /// Секция выбрана
+    let isSelected: Bool
+    
     /// Низвание секции
-    let title: String
+    var title: String
     
     /// Смайлик секции
-    let icon: String?
+    var icon: String?
     
     /// Объекты
-    let objects: [String]
+    var objects: [String]
+    
+    init(isSelected: Bool, title: String, icon: String?, objects: [String]) {
+      self.isSelected = isSelected
+      self.title = title
+      self.icon = icon
+      self.objects = objects
+      id = UUID().uuidString
+    }
   }
   
   // MARK: - Style

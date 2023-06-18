@@ -13,23 +13,6 @@ import UIKit
 /// Моделька для таблички
 enum SettingsScreenTableViewType {
   
-  case imageAndLabelWithButtonBigCell(
-    leftSideEmoji: Character?,
-    titleText: String?,
-    rightButtonImage: UIImage?,
-    actionCell: (() -> Void)?,
-    actionButton: (() -> Void)?
-  )
-  
-  /// Секция `Кастомный текст`
-  /// - Parameters:
-  ///  - titleText: Заголовок
-  ///  - textColor: Цвет текста
-  ///  - textAlignment: Выравнивание
-  case customTextCell(titleText: String?,
-                      textColor: UIColor?,
-                      textAlignment: NSTextAlignment)
-  
   /// Секция `Заголовок и переключатель`
   /// - Parameters:
   ///  - title: Заголовок

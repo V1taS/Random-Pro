@@ -130,7 +130,7 @@ extension FortuneWheelEditSectionView: UITableViewDelegate {
       let model = self.models[indexPath.row]
       switch model {
       case let .wheelObject(object):
-        output?.deleteObject(object)
+        self.output?.deleteObject(object)
       default:
         break
       }

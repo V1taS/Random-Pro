@@ -31,6 +31,10 @@ protocol MainScreenInteractorInput {
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена
   func saveDarkModeStatus(_ isEnabled: Bool?)
+
+  /// Сохранить первый вход в приложение
+  /// - Parameter isEnabled: Первый вход выполнен
+  func saveIsFirstVisitStatus(_ isFirstVisit: Bool)
   
   /// Сохранить премиум режим
   /// - Parameter isEnabled: Сохранить премиум режим
@@ -122,6 +126,19 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       }
     }
   }
+
+  func saveIsFirstVisitStatus(_ isFirstVisit: Bool) {
+    guard let model = storageService.mainScreenModel else {
+      return
+    }
+    let newModel = MainScreenModel(
+      isDarkMode: model.isDarkMode,
+      isPremium: model.isPremium,
+      isFirstVisit: isFirstVisit,
+      allSections: model.allSections
+    )
+    storageService.mainScreenModel = newModel
+  }
   
   func saveDarkModeStatus(_ isEnabled: Bool?) {
     guard let model = mainScreenModel else {
@@ -130,6 +147,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     let newModel = MainScreenModel(
       isDarkMode: isEnabled,
       isPremium: model.isPremium,
+      isFirstVisit: model.isFirstVisit,
       allSections: model.allSections
     )
     mainScreenModel = newModel
@@ -142,6 +160,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     let newModel = MainScreenModel(
       isDarkMode: model.isDarkMode,
       isPremium: isEnabled,
+      isFirstVisit: model.isFirstVisit,
       allSections: model.allSections
     )
     mainScreenModel = newModel
@@ -161,6 +180,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       let newModel = MainScreenModel(
         isDarkMode: model.isDarkMode,
         isPremium: model.isPremium,
+        isFirstVisit: model.isFirstVisit,
         allSections: allSections
       )
       self?.output?.didReceive(model: newModel)
@@ -180,6 +200,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       let newModel = MainScreenModel(
         isDarkMode: model.isDarkMode,
         isPremium: model.isPremium,
+        isFirstVisit: model.isFirstVisit,
         allSections: allSections
       )
       self?.output?.didReceive(model: newModel)
@@ -256,6 +277,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     services.appPurchasesService.isValidatePurchase { [weak self] isValidate in
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      isPremium: isValidate,
+                                     isFirstVisit: model.isFirstVisit,
                                      allSections: model.allSections)
       self?.mainScreenModel = newModel
       completion()

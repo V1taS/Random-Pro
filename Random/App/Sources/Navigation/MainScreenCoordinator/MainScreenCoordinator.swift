@@ -218,6 +218,10 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func mainScreenModuleDidLoad() {
     checkIsUpdateAvailable()
   }
+
+  func checkIsFirstVisit() {
+    checkFirstVisit()
+  }
   
   func mainScreenModuleWillAppear() {}
   
@@ -429,9 +433,13 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
 }
 
-// MARK: - MainSettingsScreenCoordinatorOutput & PremiumScreenCoordinatorOutput
+// MARK: - MainSettingsScreenCoordinatorOutput & PremiumScreenCoordinatorOutput & OnboardingScreenCoordinatorOutput
 
-extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScreenCoordinatorOutput {
+extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScreenCoordinatorOutput, OnboardingScreenCoordinatorOutput {
+  func applyFirstVisit(_ isFirstVisit: Bool) {
+    mainScreenModule?.saveIsFirstVisitStatus(isFirstVisit)
+  }
+
   func applyPremium(_ isEnabled: Bool) {
     mainScreenModule?.savePremium(isEnabled)
   }
@@ -474,6 +482,14 @@ private extension MainScreenCoordinator {
     premiumScreenCoordinator.start()
     
     services.metricsService.track(event: .premiumScreen)
+  }
+
+  func openOnboardingScreen() {
+    let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
+                                                                  services)
+    anyCoordinator = onboardingScreenCoordinator
+    onboardingScreenCoordinator.output = self
+    onboardingScreenCoordinator.start()
   }
   
   func checkIsUpdateAvailable() {
@@ -518,6 +534,18 @@ private extension MainScreenCoordinator {
         return
       }
       window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
+    }
+  }
+
+  func checkFirstVisit() {
+    mainScreenModule?.returnModel { [weak self] model in
+      guard let self else {
+        return
+      }
+
+      if model.isFirstVisit {
+        openOnboardingScreen()
+      }
     }
   }
   

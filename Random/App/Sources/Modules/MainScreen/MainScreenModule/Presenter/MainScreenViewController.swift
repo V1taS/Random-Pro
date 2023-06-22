@@ -117,6 +117,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Кнопка премиум была нажата
   /// - Parameter isPremium: Включен премиум
   func premiumButtonAction(_ isPremium: Bool)
+
+  /// Проверка: первый вход в приложение или нет
+  func checkIsFirstVisit()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -133,6 +136,10 @@ protocol MainScreenModuleInput {
   /// - Parameter isEnabled: Темная тема включена
   func saveDarkModeStatus(_ isEnabled: Bool?)
   
+  /// Сохранить первый вход в приложение
+  /// - Parameter isEnabled: Первый вход выполнен
+  func saveIsFirstVisitStatus(_ isEnabled: Bool)
+
   /// Сохранить премиум режим
   /// - Parameter isEnabled: Сохранить премиум режим
   func savePremium(_ isEnabled: Bool)
@@ -208,6 +215,7 @@ final class MainScreenViewController: MainScreenModule {
                                            selector: #selector(didBecomeActiveNotification),
                                            name: UIApplication.didBecomeActiveNotification,
                                            object: nil)
+    moduleOutput?.checkIsFirstVisit()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -225,6 +233,10 @@ final class MainScreenViewController: MainScreenModule {
   }
   
   // MARK: - Internal func
+
+  func saveIsFirstVisitStatus(_ isEnabled: Bool) {
+    interactor.saveIsFirstVisitStatus(isEnabled)
+  }
   
   func saveDarkModeStatus(_ isEnabled: Bool?) {
     interactor.saveDarkModeStatus(isEnabled)
@@ -244,6 +256,7 @@ final class MainScreenViewController: MainScreenModule {
     interactor.returnModel { [weak self] model in
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      isPremium: model.isPremium,
+                                     isFirstVisit: model.isFirstVisit,
                                      allSections: models)
       self?.interactor.updateSectionsWith(model: newModel)
     }

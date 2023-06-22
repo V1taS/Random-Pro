@@ -151,6 +151,7 @@ private extension PremiumScreenInteractor {
     if let mainScreenModel {
       let newModel = MainScreenModel(isDarkMode: mainScreenModel.isDarkMode,
                                      isPremium: true,
+                                     isFirstVisit: mainScreenModel.isFirstVisit,
                                      allSections: mainScreenModel.allSections)
       self.mainScreenModel = newModel
       output?.updateStateForSections()

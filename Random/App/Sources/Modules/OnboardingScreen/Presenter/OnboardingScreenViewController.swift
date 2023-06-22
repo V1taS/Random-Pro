@@ -10,6 +10,10 @@ import UIKit
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol OnboardingScreenModuleOutput: AnyObject {
 
+  /// Выполнен первый вход в приложение
+  /// - Parameter isFirstVisit: Выполнен первых вход в приложение
+  func applyFirstVisit(_ isFirstVisit: Bool)
+
   /// Что-то пошло не так
   func somethingWentWrong()
 
@@ -71,6 +75,7 @@ final class OnboardingScreenViewController: OnboardingScreenModule {
     interactor.getOnbordingScreens() //
     navigationItem.largeTitleDisplayMode = .never
     setNavigationBar()
+    moduleOutput?.applyFirstVisit(false)
   }
 }
 
@@ -78,7 +83,6 @@ final class OnboardingScreenViewController: OnboardingScreenModule {
 
 extension OnboardingScreenViewController: OnboardingScreenViewOutput {
   func didChangeOnboardingPage() {
-    
   }
 }
 
@@ -92,7 +96,6 @@ extension OnboardingScreenViewController: OnboardingScreenInteractorOutput {
   func somethingWentWrong() {
     moduleOutput?.somethingWentWrong()
   }
-
 }
 
 // MARK: - OnboardingScreenFactoryOutput
@@ -128,7 +131,8 @@ private extension OnboardingScreenViewController {
 
 private extension OnboardingScreenViewController {
   struct Appearance {
-    let title = RandomStrings.Localizable.premium
+    // титл добавить в локализацию
+    let title = "Добро пожаловать!"
     let closeButtonIcon = UIImage(systemName: "xmark")
   }
 }

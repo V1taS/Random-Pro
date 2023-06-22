@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol OnboardingScreenCoordinatorOutput: AnyObject {}
+protocol OnboardingScreenCoordinatorOutput: AnyObject {
+
+  // подтвердить первых вход в приложение
+  func applyFirstVisit(_ isFirstVisit: Bool)
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol OnboardingScreenCoordinatorInput {
@@ -61,6 +65,10 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
 // MARK: - OnboardingScreenModuleOutput
 
 extension OnboardingScreenCoordinator: OnboardingScreenModuleOutput {
+
+  func applyFirstVisit(_ isFirstVisit: Bool) {
+    output?.applyFirstVisit(isFirstVisit)
+  }
 
   func somethingWentWrong() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrongTitle,

@@ -24,4 +24,7 @@ enum FortuneWheelEditSectionTableViewType {
   
   /// Добавление объекта в секцию
   case textfieldAddObjects
+  
+  /// Разделитель
+  case divider
 }

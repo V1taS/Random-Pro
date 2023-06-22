@@ -120,6 +120,7 @@ extension FortuneWheelEditSectionViewController: FortuneWheelEditSectionViewOutp
 extension FortuneWheelEditSectionViewController: FortuneWheelEditSectionInteractorOutput {
   func didReceive(model: FortuneWheelModel) {
     cacheModel = model
+    cacheSection = model.sections.filter { $0.isSelected }.first
     moduleOutput?.didReceiveNew(model: model)
     let models = factory.createListModel(model, cacheSection)
     moduleView.updateContentWith(models: models)
@@ -127,9 +128,10 @@ extension FortuneWheelEditSectionViewController: FortuneWheelEditSectionInteract
   
   func didReceiveNew(model: FortuneWheelModel) {
     cacheModel = model
+    cacheSection = model.sections.filter { $0.isSelected }.first
     moduleOutput?.didReceiveNew(model: model)
     let models = factory.createListModel(model, cacheSection)
-    moduleView.updateWheelSectionWith(models: models)
+    moduleView.updateContentWith(models: models)
   }
 }
 

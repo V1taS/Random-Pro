@@ -45,7 +45,8 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
   // MARK: - Internal func
   
   func setupFortuneWheelWith(model: FortuneWheelModel) {
-    guard let selectedSection = model.sections.filter({ $0.isSelected }).first else {
+    guard let selectedSection = model.sections.filter({ $0.isSelected }).first,
+          model.slices.count > .zero else {
       return
     }
     let appearance = Appearance()

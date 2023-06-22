@@ -73,9 +73,11 @@ final class FortuneWheelSelectedSectionView: FortuneWheelSelectedSectionViewProt
   
   func updateWheelSectionWith(models: [FortuneWheelSelectedSectionTableViewType]) {
     self.models = models
-    tableView.beginUpdates()
-    tableView.reloadRows(at: Array(caheIndexPathsToReload), with: .fade)
-    tableView.endUpdates()
+    UIView.performWithoutAnimation {
+      tableView.beginUpdates()
+      tableView.reloadRows(at: Array(caheIndexPathsToReload), with: .none)
+      tableView.endUpdates()
+    }
   }
 }
 

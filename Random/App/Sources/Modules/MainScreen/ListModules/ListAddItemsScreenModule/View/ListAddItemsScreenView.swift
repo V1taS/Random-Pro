@@ -181,6 +181,19 @@ extension ListAddItemsScreenView: UITableViewDataSource {
 // MARK: - UITextFieldDelegate
 
 extension ListAddItemsScreenView: UITextFieldDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    switch models[indexPath.row] {
+    case .insets(let inset):
+      return CGFloat(inset)
+    default:
+      return UITableView.automaticDimension
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
+  }
+  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     guard let text = textField.text else {
       return true

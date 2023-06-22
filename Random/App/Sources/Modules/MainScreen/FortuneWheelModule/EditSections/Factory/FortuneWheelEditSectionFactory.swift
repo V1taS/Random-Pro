@@ -42,12 +42,14 @@ final class FortuneWheelEditSectionFactory: FortuneWheelEditSectionFactoryInput 
     
     tableViewModels.append(.insets(16))
     tableViewModels.append(.headerText("Список объектов"))
-    tableViewModels.append(.insets(4))
-    
-    if let objects = section?.objects {
-      objects.forEach { section in
+
+    if let objects = section?.objects.reversed() {
+      objects.enumerated().forEach { index, section in
         tableViewModels.append(.wheelObject(section))
-        tableViewModels.append(.insets(8))
+        
+        if index != objects.count - 1 {
+          tableViewModels.append(.divider)
+        }
       }
     }
     return tableViewModels

@@ -32,10 +32,6 @@ protocol FortuneWheelEditSectionViewInput {
   /// Обновить контент
   ///  - Parameter models: Массив моделек
   func updateContentWith(models: [FortuneWheelEditSectionTableViewType])
-  
-  /// Обновить только секции
-  ///  - Parameter models: Массив моделек
-  func updateWheelSectionWith(models: [FortuneWheelEditSectionTableViewType])
 }
 
 /// Псевдоним протокола UIView & FortuneWheelEditSectionViewInput
@@ -76,13 +72,6 @@ final class FortuneWheelEditSectionView: FortuneWheelEditSectionViewProtocol {
     self.models = models
     tableView.reloadData()
   }
-  
-  func updateWheelSectionWith(models: [FortuneWheelEditSectionTableViewType]) {
-    self.models = models
-    tableView.beginUpdates()
-    tableView.reloadRows(at: Array(caheIndexPathsToReload), with: .fade)
-    tableView.endUpdates()
-  }
 }
 
 // MARK: - UITextFieldDelegate
@@ -107,7 +96,6 @@ extension FortuneWheelEditSectionView: UITextFieldDelegate {
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
-    let appearance = Appearance()
     if range.location >= 20 {
       return false
     }
@@ -118,6 +106,21 @@ extension FortuneWheelEditSectionView: UITextFieldDelegate {
 // MARK: - UITableViewDelegate
 
 extension FortuneWheelEditSectionView: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    switch models[indexPath.row] {
+    case .insets(let inset):
+      return CGFloat(inset)
+    case .divider:
+      return CGFloat(1)
+    default:
+      return UITableView.automaticDimension
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
+  }
+  
   func tableView(_ tableView: UITableView,
                  trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
     let appearance = Appearance()
@@ -186,10 +189,16 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
       }
     case let .wheelObject(object):
       if let cell = tableView.dequeueReusableCell(
-        withIdentifier: LabelBigGrayCell.reuseIdentifier
-      ) as? LabelBigGrayCell {
+        withIdentifier: CustomTextCell.reuseIdentifier
+      ) as? CustomTextCell {
         caheIndexPathsToReload.insert(indexPath)
-        cell.configureCellWith(titleText: object)
+        
+        cell.configureCellWith(
+          titleText: object,
+          textColor: RandomColor.darkAndLightTheme.primaryGray,
+          textFont: RandomFont.primaryMedium24,
+          textAlignment: .left
+        )
         viewCell = cell
       }
     case let .textfieldAddSection(text):
@@ -198,6 +207,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
       ) as? TextFieldGrayWithEmoticonCell {
         cell.configureCellWith(
           textField: sectionTextField,
+          textFieldBorderColor: RandomColor.only.secondaryGray,
           emoticon: emoticonCache) { [weak self] emoticon, style in
             self?.emoticonCache = emoticon ?? "😍"
           }
@@ -212,18 +222,31 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
                                      withConfiguration: Appearance().largeConfig)
         cell.configureCellWith(
           textField: objectTextField,
-          textFieldBorderColor: nil,
+          textFieldBorderColor: RandomColor.only.secondaryGray,
           buttonImage: checkmarkImage,
           buttonAction: { [weak self] in
             guard let self else {
               return
             }
+            
+            if self.objectTextField.text?.isEmpty ?? true {
+              // TODO: - Кинуть ошибку
+              return
+            }
+            
             self.output?.createObject(
               self.emoticonCache,
               self.sectionTextField.text,
               self.objectTextField.text
             )
+            self.objectTextField.text = nil
           })
+        viewCell = cell
+      }
+    case .divider:
+      if let cell = tableView.dequeueReusableCell(
+        withIdentifier: DividerTableViewCell.reuseIdentifier
+      ) as? DividerTableViewCell {
         viewCell = cell
       }
     }
@@ -254,7 +277,9 @@ private extension FortuneWheelEditSectionView {
     tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
     sectionTextField.delegate = self
+    sectionTextField.placeholder = "Заголовок"
     objectTextField.delegate = self
+    objectTextField.placeholder = "Новый объект"
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -267,8 +292,8 @@ private extension FortuneWheelEditSectionView {
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
     tableView.register(CustomTextCell.self,
                        forCellReuseIdentifier: CustomTextCell.reuseIdentifier)
-    tableView.register(LabelBigGrayCell.self,
-                       forCellReuseIdentifier: LabelBigGrayCell.reuseIdentifier)
+    tableView.register(DividerTableViewCell.self,
+                       forCellReuseIdentifier: DividerTableViewCell.reuseIdentifier)
     tableView.register(TextFieldGrayWithButtonCell.self,
                        forCellReuseIdentifier: TextFieldGrayWithButtonCell.reuseIdentifier)
     tableView.register(TextFieldGrayWithEmoticonCell.self,

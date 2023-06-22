@@ -64,77 +64,59 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
   }
   
   func deleteObject(_ object: String?, _ model: FortuneWheelModel) {
-    guard let section = cacheCreatedSection, let object else {
+    guard let object = object,
+          var section = cacheCreatedSection,
+          let objectIndex = section.objects.firstIndex(of: object)
+    else {
       return
     }
     
-    var objects = section.objects
-    if let index = objects.firstIndex(of: object) {
-      objects.remove(at: index)
-    }
-    cacheCreatedSection?.objects = objects
+    section.objects.remove(at: objectIndex)
+    cacheCreatedSection = section
+    let updatedModel = updateSectionsAndCreateModel(from: model, with: section)
     
-    guard let newSection = cacheCreatedSection else {
-      return
-    }
-    
-    var sections = model.sections
-    
-    let sectionFilter = model.sections.filter { $0.id == section.id }.first
-    if let sectionFilter {
-      if let index = sections.firstIndex(of: section) {
-        sections.remove(at: index)
-        sections.insert(section, at: index)
-      }
-    } else {
-      sections.append(section)
-    }
-    
-    let newModel = FortuneWheelModel(
-      result: model.result,
-      listResult: model.listResult,
-      style: model.style,
-      sections: sections,
-      isEnabledSound: model.isEnabledSound,
-      isEnabledFeedback: model.isEnabledFeedback
-    )
-    output?.didReceiveNew(model: newModel)
+    output?.didReceiveNew(model: updatedModel)
   }
   
   func createObject(_ emoticon: Character?,
                     _ titleSection: String?,
                     _ textObject: String?,
                     _ model: FortuneWheelModel) {
+    let newEmoticon = emoticon ?? "😍"
+    let newTitle = titleSection ?? ""
+    let newText = textObject ?? ""
+    
     var section: FortuneWheelModel.Section
-    if let cacheCreatedSection = cacheCreatedSection {
-      section = cacheCreatedSection
-      section.icon = String(emoticon ?? "😍")
-      section.title = titleSection ?? ""
+    
+    if let cachedSection = cacheCreatedSection {
+      section = cachedSection
+      section.icon = String(newEmoticon)
+      section.title = newTitle
     } else {
       section = FortuneWheelModel.Section(
         isSelected: false,
-        title: titleSection ?? "",
-        icon: String(emoticon ?? "😍"),
+        title: newTitle,
+        icon: String(newEmoticon),
         objects: []
       )
     }
-    section.objects.append(textObject ?? "")
+    
+    section.objects.append(newText)
     cacheCreatedSection = section
     
-    var sections = model.sections
+    let updatedModel = updateSectionsAndCreateModel(from: model, with: section)
+    output?.didReceiveNew(model: updatedModel)
+  }
+}
+
+// MARK: - Private
+
+private extension FortuneWheelEditSectionInteractor {
+  func updateSectionsAndCreateModel(from model: FortuneWheelModel,
+                                    with section: FortuneWheelModel.Section) -> FortuneWheelModel {
+    let sections = model.sections.map { $0.id == section.id ? section : $0 }
     
-    let sectionFilter = model.sections.filter { $0.id == section.id }.first
-    
-    if let sectionFilter {
-      if let index = sections.firstIndex(of: section) {
-        sections.remove(at: index)
-        sections.insert(section, at: index)
-      }
-    } else {
-      sections.append(section)
-    }
-    
-    let newModel = FortuneWheelModel(
+    let updatedModel = FortuneWheelModel(
       result: model.result,
       listResult: model.listResult,
       style: model.style,
@@ -142,7 +124,7 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
       isEnabledSound: model.isEnabledSound,
       isEnabledFeedback: model.isEnabledFeedback
     )
-    output?.didReceiveNew(model: newModel)
+    return updatedModel
   }
 }
 

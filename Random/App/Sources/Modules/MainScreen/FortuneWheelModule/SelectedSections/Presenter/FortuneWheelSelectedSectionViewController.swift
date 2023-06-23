@@ -55,7 +55,6 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
   private let interactor: FortuneWheelSelectedSectionInteractorInput
   private let moduleView: FortuneWheelSelectedSectionViewProtocol
   private let factory: FortuneWheelSelectedSectionFactoryInput
-  private var cacheModel: FortuneWheelModel?
   
   // MARK: - Initialization
   
@@ -91,11 +90,11 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
   // MARK: - Internal func
   
   func returnCurrentModel() -> FortuneWheelModel? {
-    return cacheModel
+    return interactor.returnModel()
   }
   
   func setDefault(model: FortuneWheelModel) {
-    cacheModel = model
+    interactor.update(model: model)
     let models = factory.createListModel(model)
     moduleView.updateContentWith(models: models)
   }
@@ -104,6 +103,10 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
 // MARK: - FortuneWheelSelectedSectionViewOutput
 
 extension FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSectionViewOutput {
+  func deleteSection(_ section: FortuneWheelModel.Section) {
+    interactor.deleteSection(section)
+  }
+  
   func editCurrentSectionWith(section: FortuneWheelModel.Section) {
     moduleOutput?.editCurrentSectionWith(section: section)
   }
@@ -113,18 +116,20 @@ extension FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSection
   }
   
   func sectionSelected(_ section: FortuneWheelModel.Section) {
-    guard let cacheModel else {
-      return
-    }
-    interactor.sectionSelected(section, model: cacheModel)
+    interactor.sectionSelected(section)
   }
 }
 
 // MARK: - FortuneWheelSelectedSectionInteractorOutput
 
 extension FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSectionInteractorOutput {
+  func didReceive(model: FortuneWheelModel) {
+    moduleOutput?.didReceiveNew(model: model)
+    let models = factory.createListModel(model)
+    moduleView.updateContentWith(models: models)
+  }
+  
   func didReceiveNew(model: FortuneWheelModel) {
-    cacheModel = model
     moduleOutput?.didReceiveNew(model: model)
     let models = factory.createListModel(model)
     moduleView.updateWheelSectionWith(models: models)
@@ -162,6 +167,6 @@ private extension FortuneWheelSelectedSectionViewController {
 private extension FortuneWheelSelectedSectionViewController {
   struct Appearance {
     let closeButtonIcon = UIImage(systemName: "xmark")
-    let title = "Заголовок"
+    let title = RandomStrings.Localizable.sections
   }
 }

@@ -19,6 +19,11 @@ protocol FortuneWheelSelectedSectionViewOutput: AnyObject {
   ///   - section: Секция
   func editCurrentSectionWith(section: FortuneWheelModel.Section)
   
+  /// Удалить секцию
+  /// - Parameters:
+  ///  - section: Секция
+  func deleteSection(_ section: FortuneWheelModel.Section)
+  
   /// Создать новую секцию
   func createNewSection()
 }
@@ -83,7 +88,51 @@ final class FortuneWheelSelectedSectionView: FortuneWheelSelectedSectionViewProt
 
 // MARK: - UITableViewDelegate
 
-extension FortuneWheelSelectedSectionView: UITableViewDelegate {}
+extension FortuneWheelSelectedSectionView: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    switch models[indexPath.row] {
+    case .insets(let inset):
+      return CGFloat(inset)
+    default:
+      return UITableView.automaticDimension
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
+  }
+  
+  func tableView(_ tableView: UITableView,
+                 trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    let appearance = Appearance()
+    let deleteAction = UIContextualAction(style: .destructive,
+                                          title: appearance.deleteTitle) { [weak self] _, _, _ in
+      guard let self = self else {
+        return
+      }
+      
+      let model = self.models[indexPath.row]
+      switch model {
+      case let .wheelSection(section):
+        self.output?.deleteSection(section)
+      default:
+        break
+      }
+    }
+    deleteAction.image = appearance.deleteImage
+    return UISwipeActionsConfiguration(actions: [deleteAction])
+  }
+  
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    let model = models[indexPath.row]
+    switch model {
+    case .wheelSection:
+      return true
+    default:
+      return false
+    }
+  }
+}
 
 // MARK: - UITableViewDataSource
 
@@ -146,7 +195,7 @@ extension FortuneWheelSelectedSectionView: UITableViewDataSource {
           guard let self else {
             return
           }
-          buttonView.setTitle("Добавить", for: .normal)
+          buttonView.setTitle(RandomStrings.Localizable.add, for: .normal)
           buttonView.addTarget(self,
                                action: #selector(self.createNewSectionAction),
                                for: .touchUpInside)
@@ -209,5 +258,7 @@ private extension FortuneWheelSelectedSectionView {
   struct Appearance {
     let defaultInset: CGFloat = 16
     let squareAndPencilImage = UIImage(systemName: "square.and.pencil")
+    let deleteTitle = RandomStrings.Localizable.remove
+    let deleteImage = UIImage(systemName: "trash")
   }
 }

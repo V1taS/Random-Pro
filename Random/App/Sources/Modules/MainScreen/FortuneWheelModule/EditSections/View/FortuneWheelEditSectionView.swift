@@ -20,6 +20,16 @@ protocol FortuneWheelEditSectionViewOutput: AnyObject {
                     _ titleSection: String?,
                     _ textObject: String?)
   
+  /// Смайлик в заголовка был изменен
+  /// - Parameters:
+  ///  - emoticon: Смайлик
+  func editEmoticon(_ emoticon: Character?)
+  
+  /// Заголовок был изменен
+  /// - Parameters:
+  ///  - title: Заголовок
+  func editSection(title: String?)
+  
   /// Удалить объект
   /// - Parameters:
   ///  - object: Объект (текст)
@@ -28,6 +38,9 @@ protocol FortuneWheelEditSectionViewOutput: AnyObject {
 
 /// События которые отправляем от Presenter ко View
 protocol FortuneWheelEditSectionViewInput {
+  
+  /// Сервис работы с клавиатурой
+  var keyboardService: KeyboardService? { get set }
   
   /// Обновить контент
   ///  - Parameter models: Массив моделек
@@ -43,6 +56,16 @@ final class FortuneWheelEditSectionView: FortuneWheelEditSectionViewProtocol {
   // MARK: - Internal properties
   
   weak var output: FortuneWheelEditSectionViewOutput?
+  var keyboardService: KeyboardService? {
+    didSet {
+      keyboardService?.keyboardHeightChangeAction = { [weak self] height in
+        self?.tableView.contentInset = .init(top: .zero,
+                                             left: .zero,
+                                             bottom: height,
+                                             right: .zero)
+      }
+    }
+  }
   
   // MARK: - Private properties
   
@@ -88,7 +111,7 @@ extension FortuneWheelEditSectionView: UITextFieldDelegate {
         sectionTextField.text,
         objectTextField.text
       )
-      objectTextField.text = ""
+      objectTextField.text = nil
     }
     return false
   }
@@ -98,6 +121,12 @@ extension FortuneWheelEditSectionView: UITextFieldDelegate {
                  replacementString string: String) -> Bool {
     if range.location >= 20 {
       return false
+    }
+    
+    if textField == sectionTextField {
+      let currentText = sectionTextField.text ?? ""
+      let newCurrentText = (currentText as NSString).replacingCharacters(in: range, with: string)
+      output?.editSection(title: newCurrentText)
     }
     return true
   }
@@ -163,7 +192,6 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let model = models[indexPath.row]
     var viewCell = UITableViewCell()
-    let appearance = Appearance()
     
     switch model {
     case let .insets(inset):
@@ -196,22 +224,25 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
         cell.configureCellWith(
           titleText: object,
           textColor: RandomColor.darkAndLightTheme.primaryGray,
-          textFont: RandomFont.primaryMedium24,
-          textAlignment: .left
+          textFont: RandomFont.primaryMedium18,
+          textAlignment: .center
         )
         viewCell = cell
       }
-    case let .textfieldAddSection(text):
+    case let .textfieldAddSection(text, emoticon):
+      emoticonCache = emoticon
       if let cell = tableView.dequeueReusableCell(
         withIdentifier: TextFieldGrayWithEmoticonCell.reuseIdentifier
       ) as? TextFieldGrayWithEmoticonCell {
         cell.configureCellWith(
           textField: sectionTextField,
           textFieldBorderColor: RandomColor.only.secondaryGray,
-          emoticon: emoticonCache) { [weak self] emoticon, style in
+          emoticon: emoticon) { [weak self] emoticon, _ in
             self?.emoticonCache = emoticon ?? "😍"
+            self?.output?.editEmoticon(emoticon)
           }
         sectionTextField.text = text
+        sectionTextField.placeholder = text ?? RandomStrings.Localizable.sectionName
         viewCell = cell
       }
     case .textfieldAddObjects:
@@ -240,6 +271,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
               self.objectTextField.text
             )
             self.objectTextField.text = nil
+            self.scrollToBottom()
           })
         viewCell = cell
       }
@@ -257,8 +289,14 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
 // MARK: - Private
 
 private extension FortuneWheelEditSectionView {
+  func scrollToBottom() {
+    DispatchQueue.main.async {
+      let indexPath = IndexPath(row: self.models.count - 1, section: .zero)
+      self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+  }
+  
   func configureLayout() {
-    let appearance = Appearance()
     [tableView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
@@ -276,17 +314,17 @@ private extension FortuneWheelEditSectionView {
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    sectionTextField.delegate = self
-    sectionTextField.placeholder = "Заголовок"
-    objectTextField.delegate = self
-    objectTextField.placeholder = "Новый объект"
+    [sectionTextField, objectTextField].forEach {
+      $0.delegate = self
+      $0.autocorrectionType = .no
+      $0.smartQuotesType = .no
+      $0.smartDashesType = .no
+    }
+    objectTextField.placeholder = Appearance().objectTextFieldPlaceholder
     
     tableView.delegate = self
     tableView.dataSource = self
     tableView.separatorStyle = .none
-    tableView.tableFooterView = UIView()
-    tableView.tableHeaderView = UIView()
-    tableView.contentInset.top = Appearance().defaultInset
     
     tableView.register(CustomPaddingCell.self,
                        forCellReuseIdentifier: CustomPaddingCell.reuseIdentifier)
@@ -311,11 +349,12 @@ private extension FortuneWheelEditSectionView {
 private extension FortuneWheelEditSectionView {
   struct Appearance {
     let defaultInset: CGFloat = 16
-    let checkmarkImageName = "checkmark.circle.fill"
+    let checkmarkImageName = "plus.circle"
     let largeConfig = UIImage.SymbolConfiguration(pointSize: 20,
                                                   weight: .bold,
                                                   scale: .large)
     let deleteTitle = RandomStrings.Localizable.remove
     let deleteImage = UIImage(systemName: "trash")
+    let objectTextFieldPlaceholder = RandomStrings.Localizable.newElement
   }
 }

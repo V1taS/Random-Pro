@@ -298,3 +298,9 @@
 "orange" = "Оранжевый";
 "sound" = "Звук";
 "haptic_feedback" = "Тактильная обратная связь";
+"add_items" = "Добавить элементы";
+"list_of_elements" = "Список элементов";
+"new_element" = "Новый элемент";
+"section_name" = "Название раздела";
+"sections" = "Разделы";
+"sections_to_generate" = "Разделы для генерации";

@@ -121,6 +121,10 @@ final class FortuneWheelViewController: FortuneWheelModule {
 // MARK: - FortuneWheelViewOutput
 
 extension FortuneWheelViewController: FortuneWheelViewOutput {
+  func save(result: String) {
+    interactor.save(result: result)
+  }
+  
   func selectedSectionAction() {
     moduleOutput?.selectedSectionAction()
   }

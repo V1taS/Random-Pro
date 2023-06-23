@@ -298,3 +298,9 @@
 "orange" = "Orange";
 "sound" = "Sound";
 "haptic_feedback" = "Haptic feedback";
+"add_items" = "Add Items";
+"list_of_elements" = "list of items";
+"new_element" = "New item";
+"section_name" = "Section name";
+"sections" = "Sections";
+"sections_to_generate" = "Sections to generate";

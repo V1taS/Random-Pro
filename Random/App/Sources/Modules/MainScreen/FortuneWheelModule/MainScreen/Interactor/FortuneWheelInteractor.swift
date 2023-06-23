@@ -43,6 +43,10 @@ protocol FortuneWheelInteractorInput {
   /// Обновить текущую модель
   ///  - Parameter model: Модель данных
   func updateNew(model: FortuneWheelModel)
+  
+  /// Сохранить результат
+  /// - Parameter result: Результат
+  func save(result: String)
 }
 
 /// Интерактор
@@ -67,6 +71,22 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   }
   
   // MARK: - Internal func
+  
+  func save(result: String) {
+    let model = returnCurrentModel()
+    var listResult = model.listResult
+    listResult.append(result)
+    
+    let newModel = FortuneWheelModel(
+      result: result,
+      listResult: listResult,
+      style: model.style,
+      sections: model.sections,
+      isEnabledSound: model.isEnabledSound,
+      isEnabledFeedback: model.isEnabledFeedback
+    )
+    storageService.fortuneWheelModel = newModel
+  }
   
   func updateNew(model: FortuneWheelModel) {
     storageService.fortuneWheelModel = model
@@ -117,12 +137,35 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   }
   
   func getContent() {
-    output?.didReceive(model: returnCurrentModel())
+    var model = returnCurrentModel()
+    
+    if model.sections.isEmpty {
+      model.sections = getDefaultSection()
+    }
+    
+    if var section = model.sections.filter({ $0.isSelected }).first,
+       section.objects.isEmpty {
+      section.objects.append(" ")
+      let newModel = updateSectionsAndCreateModel(from: model, with: section)
+      output?.didReceive(model: newModel)
+    } else {
+      model.sections = model.sections.enumerated().map { index, value in
+        return FortuneWheelModel.Section(
+          isSelected: index == .zero ? true : false,
+          title: value.title,
+          icon: value.icon,
+          objects: value.objects
+        )
+      }
+    }
+    storageService.fortuneWheelModel = model
+    output?.didReceive(model: model)
   }
   
   func returnCurrentModel() -> FortuneWheelModel {
     if let model = storageService.fortuneWheelModel {
       return model
+//      return getDefaultFortuneWheelModel()
     } else {
       return getDefaultFortuneWheelModel()
     }
@@ -132,6 +175,21 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
 // MARK: - Private
 
 private extension FortuneWheelInteractor {
+  func updateSectionsAndCreateModel(from model: FortuneWheelModel,
+                                    with section: FortuneWheelModel.Section) -> FortuneWheelModel {
+    let sections = model.sections.map { $0.id == section.id ? section : $0 }
+    
+    let updatedModel = FortuneWheelModel(
+      result: model.result,
+      listResult: model.listResult,
+      style: model.style,
+      sections: sections,
+      isEnabledSound: model.isEnabledSound,
+      isEnabledFeedback: model.isEnabledFeedback
+    )
+    return updatedModel
+  }
+  
   func getDefaultFortuneWheelModel() -> FortuneWheelModel {
     return FortuneWheelModel(
       result: Appearance().result,

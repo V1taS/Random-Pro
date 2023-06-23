@@ -22,27 +22,48 @@ protocol FortuneWheelEditSectionInteractorOutput: AnyObject {
 /// События которые отправляем от Presenter к Interactor
 protocol FortuneWheelEditSectionInteractorInput {
   
+  /// Удалить все объекты
+  func removeAllObjects()
+  
+  /// Смайлик в заголовка был изменен
+  /// - Parameters:
+  ///  - emoticon: Смайлик
+  func editEmoticon(_ emoticon: Character?)
+  
+  /// Заголовок был изменен
+  /// - Parameters:
+  ///  - title: Заголовок
+  ///  - model: Модель данных
+  func editSection(title: String?)
+  
   /// Создать секцию
   /// - Parameters:
   ///  - emoticon: Смайлик
   ///  - titleSection: Название секции
   ///  - textSection: Название объекта
-  ///  - model: Модель данных
   func createObject(_ emoticon: Character?,
                     _ titleSection: String?,
-                    _ textObject: String?,
-                    _ model: FortuneWheelModel)
+                    _ textObject: String?)
   
   /// Удалить объект
   /// - Parameters:
   ///  - object: Объект (текст)
   ///  - model: Модель данных
-  func deleteObject(_ object: String?, _ model: FortuneWheelModel)
+  func deleteObject(_ object: String?)
   
   /// Редактируем текущую секцию
   ///  - Parameters:
   ///   - section: Секция
   func editCurrentSection(_ section: FortuneWheelModel.Section, _ model: FortuneWheelModel)
+  
+  /// Обновить модель данных и секцию
+  ///  - Parameters:
+  ///   - model: Модель
+  ///   - section: Секция
+  func update(model: FortuneWheelModel?, section: FortuneWheelModel.Section?)
+  
+  /// Получить текущую секцию
+  func returnSection() -> FortuneWheelModel.Section?
 }
 
 /// Интерактор
@@ -50,6 +71,7 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
   
   // MARK: - Private properties
   
+  private var cacheModel: FortuneWheelModel?
   private var cacheCreatedSection: FortuneWheelModel.Section?
   
   // MARK: - Internal properties
@@ -58,30 +80,77 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
   
   // MARK: - Internal func
   
+  func returnSection() -> FortuneWheelModel.Section? {
+    return cacheCreatedSection
+  }
+  
+  func update(model: FortuneWheelModel?, section: FortuneWheelModel.Section?) {
+    cacheModel = model
+    cacheCreatedSection = section
+  }
+  
+  func removeAllObjects() {
+    guard var section = cacheCreatedSection,
+          let cacheModel else {
+      return
+    }
+    
+    section.objects = []
+    cacheCreatedSection = section
+    output?.didReceive(model: updateSectionsAndCreateModel(from: cacheModel, with: section))
+  }
+  
+  func editSection(title: String?) {
+    guard var section = cacheCreatedSection,
+          let cacheModel else {
+      return
+    }
+    
+    section.title = title ?? "-"
+    cacheCreatedSection = section
+    output?.didReceiveNew(model: updateSectionsAndCreateModel(from: cacheModel, with: section))
+  }
+  
+  func editEmoticon(_ emoticon: Character?) {
+    guard let newEmoticon = emoticon,
+          var section = cacheCreatedSection,
+          let cacheModel else {
+      return
+    }
+    
+    section.icon = String(newEmoticon)
+    cacheCreatedSection = section
+    output?.didReceiveNew(model: updateSectionsAndCreateModel(from: cacheModel, with: section))
+  }
+  
   func editCurrentSection(_ section: FortuneWheelModel.Section, _ model: FortuneWheelModel) {
     cacheCreatedSection = section
+    cacheModel = model
     output?.didReceive(model: model)
   }
   
-  func deleteObject(_ object: String?, _ model: FortuneWheelModel) {
+  func deleteObject(_ object: String?) {
     guard let object = object,
           var section = cacheCreatedSection,
-          let objectIndex = section.objects.firstIndex(of: object)
-    else {
+          let objectIndex = section.objects.firstIndex(of: object),
+          let cacheModel else {
       return
     }
     
     section.objects.remove(at: objectIndex)
     cacheCreatedSection = section
-    let updatedModel = updateSectionsAndCreateModel(from: model, with: section)
+    let updatedModel = updateSectionsAndCreateModel(from: cacheModel, with: section)
     
-    output?.didReceiveNew(model: updatedModel)
+    output?.didReceive(model: updatedModel)
   }
   
   func createObject(_ emoticon: Character?,
                     _ titleSection: String?,
-                    _ textObject: String?,
-                    _ model: FortuneWheelModel) {
+                    _ textObject: String?) {
+    guard let cacheModel else {
+      return
+    }
+    
     let newEmoticon = emoticon ?? "😍"
     let newTitle = titleSection ?? ""
     let newText = textObject ?? ""
@@ -104,8 +173,8 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
     section.objects.append(newText)
     cacheCreatedSection = section
     
-    let updatedModel = updateSectionsAndCreateModel(from: model, with: section)
-    output?.didReceiveNew(model: updatedModel)
+    let updatedModel = updateSectionsAndCreateModel(from: cacheModel, with: section)
+    output?.didReceive(model: updatedModel)
   }
 }
 
@@ -114,7 +183,13 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
 private extension FortuneWheelEditSectionInteractor {
   func updateSectionsAndCreateModel(from model: FortuneWheelModel,
                                     with section: FortuneWheelModel.Section) -> FortuneWheelModel {
-    let sections = model.sections.map { $0.id == section.id ? section : $0 }
+    var sections = model.sections
+    
+    if let index = sections.firstIndex(where: { $0.id == section.id }) {
+      sections[index] = section
+    } else {
+      sections.append(section)
+    }
     
     let updatedModel = FortuneWheelModel(
       result: model.result,
@@ -124,6 +199,7 @@ private extension FortuneWheelEditSectionInteractor {
       isEnabledSound: model.isEnabledSound,
       isEnabledFeedback: model.isEnabledFeedback
     )
+    self.cacheModel = updatedModel
     return updatedModel
   }
 }

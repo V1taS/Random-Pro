@@ -126,9 +126,6 @@ private extension FortuneWheelCoordinator {
     
     settingsScreenCoordinator.setupDefaultsSettings(
       for: .fortuneWheel(
-        (model.isEnabledSound, { [weak self] isEnabled in
-          self?.fortuneWheelModule?.setSound(isEnabled: isEnabled)
-        }),
         (model.isEnabledFeedback, { [weak self] isEnabled in
           self?.fortuneWheelModule?.setFeedback(isEnabled: isEnabled)
         }),

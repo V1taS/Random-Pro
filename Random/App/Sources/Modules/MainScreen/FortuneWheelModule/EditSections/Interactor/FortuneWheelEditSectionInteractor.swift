@@ -196,7 +196,6 @@ private extension FortuneWheelEditSectionInteractor {
       listResult: model.listResult,
       style: model.style,
       sections: sections,
-      isEnabledSound: model.isEnabledSound,
       isEnabledFeedback: model.isEnabledFeedback
     )
     self.cacheModel = updatedModel

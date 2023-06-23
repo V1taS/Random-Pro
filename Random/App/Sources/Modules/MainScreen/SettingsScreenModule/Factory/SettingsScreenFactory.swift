@@ -323,13 +323,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case let .fortuneWheel(isSoundValue, isHapticFeedbackValue, itemsGenerated, lastItem):
-      tableViewModels.append(.titleAndSwitcherAction(
-        title: RandomStrings.Localizable.sound,
-        (isSoundValue.isSound, isSoundValue.completion)
-      ))
-      tableViewModels.append(.divider)
-      
+    case let .fortuneWheel(isHapticFeedbackValue, itemsGenerated, lastItem):
       tableViewModels.append(.titleAndSwitcherAction(
         title: RandomStrings.Localizable.hapticFeedback,
         (isHapticFeedbackValue.isHapticFeedback, isHapticFeedbackValue.completion)

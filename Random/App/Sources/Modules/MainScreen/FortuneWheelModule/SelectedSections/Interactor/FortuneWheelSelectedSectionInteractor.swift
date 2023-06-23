@@ -95,7 +95,6 @@ private extension FortuneWheelSelectedSectionInteractor {
       listResult: cacheModel.listResult,
       style: cacheModel.style,
       sections: sections,
-      isEnabledSound: cacheModel.isEnabledSound,
       isEnabledFeedback: cacheModel.isEnabledFeedback
     )
     self.cacheModel = newModel

@@ -117,14 +117,16 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   
   func getContent() {
     var model = returnCurrentModel()
+    let sections = model.sections.filter({ $0.isSelected })
     
     if model.sections.isEmpty {
       model.sections = getDefaultSection()
     }
     
-    if var section = model.sections.filter({ $0.isSelected }).first,
-       section.objects.isEmpty {
-      section.objects.append(" ")
+    if var section = sections.first {
+      if section.objects.isEmpty {
+        section.objects.append(" ")
+      }
       let newModel = updateSectionsAndCreateModel(from: model, with: section)
       output?.didReceive(model: newModel)
     } else {

@@ -15,8 +15,7 @@ enum SettingsScreenType {
   // MARK: - Cases
   
   /// Раздел: `Колесо удачи`
-  case fortuneWheel((isSound: Bool, completion: ((_ isSound: Bool) -> Void)?),
-                    (isHapticFeedback: Bool, completion: ((_ isHapticFeedback: Bool) -> Void)?),
+  case fortuneWheel((isHapticFeedback: Bool, completion: ((_ isHapticFeedback: Bool) -> Void)?),
                     itemsGenerated: String,
                     lastItem: String)
   

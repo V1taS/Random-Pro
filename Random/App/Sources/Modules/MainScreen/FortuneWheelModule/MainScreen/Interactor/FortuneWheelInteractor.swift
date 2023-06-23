@@ -29,10 +29,6 @@ protocol FortuneWheelInteractorInput {
   /// Получить данные
   func getContent()
   
-  /// Включить звук
-  /// - Parameter isEnabled: Значение
-  func setSound(isEnabled: Bool)
-  
   /// Включить тактильный отклик
   /// - Parameter isEnabled: Значение
   func setFeedback(isEnabled: Bool)
@@ -82,7 +78,6 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
       listResult: listResult,
       style: model.style,
       sections: model.sections,
-      isEnabledSound: model.isEnabledSound,
       isEnabledFeedback: model.isEnabledFeedback
     )
     storageService.fortuneWheelModel = newModel
@@ -93,20 +88,6 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
     output?.didReceive(model: model)
   }
   
-  func setSound(isEnabled: Bool) {
-    let model = returnCurrentModel()
-    let newModel = FortuneWheelModel(
-      result: model.result,
-      listResult: model.listResult,
-      style: model.style,
-      sections: model.sections,
-      isEnabledSound: isEnabled,
-      isEnabledFeedback: model.isEnabledFeedback
-    )
-    storageService.fortuneWheelModel = newModel
-    output?.didReceive(model: newModel)
-  }
-  
   func setFeedback(isEnabled: Bool) {
     let model = returnCurrentModel()
     let newModel = FortuneWheelModel(
@@ -114,7 +95,6 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
       listResult: model.listResult,
       style: model.style,
       sections: model.sections,
-      isEnabledSound: model.isEnabledSound,
       isEnabledFeedback: isEnabled
     )
     storageService.fortuneWheelModel = newModel
@@ -128,7 +108,6 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
       listResult: [],
       style: model.style,
       sections: model.sections,
-      isEnabledSound: model.isEnabledSound,
       isEnabledFeedback: model.isEnabledFeedback
     )
     storageService.fortuneWheelModel = newModel
@@ -184,7 +163,6 @@ private extension FortuneWheelInteractor {
       listResult: model.listResult,
       style: model.style,
       sections: sections,
-      isEnabledSound: model.isEnabledSound,
       isEnabledFeedback: model.isEnabledFeedback
     )
     return updatedModel
@@ -196,7 +174,6 @@ private extension FortuneWheelInteractor {
       listResult: [],
       style: .regular,
       sections: getDefaultSection(),
-      isEnabledSound: true,
       isEnabledFeedback: true
     )
   }

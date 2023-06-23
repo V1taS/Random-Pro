@@ -53,7 +53,7 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
           model.slices.count > .zero else {
       return
     }
-    let appearance = Appearance()
+    
     let fortuneWheel = SwiftFortuneWheel(
       frame: Appearance().frame,
       slices: model.slices,
@@ -94,11 +94,6 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
     
     if model.isEnabledFeedback {
       fortuneWheel.impactFeedbackOn = true
-    }
-    
-    if model.isEnabledSound {
-      fortuneWheel.edgeCollisionSound = appearance.wheelSoundClick
-      fortuneWheel.centerCollisionSound = appearance.wheelSoundTick
     }
     
     configureLayout(fortuneWheel: fortuneWheel)

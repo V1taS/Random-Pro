@@ -30,10 +30,6 @@ protocol FortuneWheelModuleInput {
   /// Запросить текущую модель
   func returnCurrentModel() -> FortuneWheelModel
   
-  /// Включить звук
-  /// - Parameter isEnabled: Значение
-  func setSound(isEnabled: Bool)
-  
   /// Включить тактильный отклик
   /// - Parameter isEnabled: Значение
   func setFeedback(isEnabled: Bool)
@@ -103,10 +99,6 @@ final class FortuneWheelViewController: FortuneWheelModule {
   
   func cleanButtonAction() {
     interactor.cleanButtonAction()
-  }
-  
-  func setSound(isEnabled: Bool) {
-    interactor.setSound(isEnabled: isEnabled)
   }
   
   func setFeedback(isEnabled: Bool) {

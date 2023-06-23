@@ -23,9 +23,6 @@ struct FortuneWheelModel: UserDefaultsCodable {
   /// Список секций
   var sections: [Section]
   
-  /// Включение звука
-  let isEnabledSound: Bool
-  
   /// Включение обратной тактильной связи
   let isEnabledFeedback: Bool
   

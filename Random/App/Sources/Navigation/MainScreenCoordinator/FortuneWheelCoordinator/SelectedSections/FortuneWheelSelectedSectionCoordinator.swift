@@ -120,7 +120,12 @@ extension FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionMod
 
 // MARK: - FortuneWheelEditSectionCoordinatorOutput
 
-extension FortuneWheelSelectedSectionCoordinator: FortuneWheelEditSectionCoordinatorOutput {}
+extension FortuneWheelSelectedSectionCoordinator: FortuneWheelEditSectionCoordinatorOutput {
+  func didReceiveEditNew(model: FortuneWheelModel) {
+    output?.didReceiveNew(model: model)
+    fortuneWheelSelectedSectionModule?.setDefault(model: model)
+  }
+}
 
 // MARK: - Appearance
 

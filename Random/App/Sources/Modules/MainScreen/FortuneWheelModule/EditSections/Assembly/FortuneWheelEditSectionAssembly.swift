@@ -12,12 +12,13 @@ final class FortuneWheelEditSectionAssembly {
   
   /// Собирает модуль `FortuneWheelEditSection`
   /// - Returns: Cобранный модуль `FortuneWheelEditSection`
-  func createModule() -> FortuneWheelEditSectionModule {
+  func createModule(services: ApplicationServices) -> FortuneWheelEditSectionModule {
     let interactor = FortuneWheelEditSectionInteractor()
     let view = FortuneWheelEditSectionView()
     let factory = FortuneWheelEditSectionFactory()
     let presenter = FortuneWheelEditSectionViewController(moduleView: view, interactor: interactor, factory: factory)
     
+    view.keyboardService = services.keyboardService
     view.output = presenter
     interactor.output = presenter
     factory.output = presenter

@@ -13,10 +13,16 @@ protocol FortuneWheelEditSectionModuleOutput: AnyObject {
   /// Была полученна новая модель данных
   ///  - Parameter model: Модель данных
   func didReceiveNew(model: FortuneWheelModel)
+  
+  /// Была нажата кнопка удалить все объекты
+  func removeTextsButtonAction()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol FortuneWheelEditSectionModuleInput {
+  
+  /// Удалить все объекты
+  func removeAllObjects()
   
   /// Создаем новую секцию
   ///  - Parameters:
@@ -48,8 +54,7 @@ final class FortuneWheelEditSectionViewController: FortuneWheelEditSectionModule
   private let interactor: FortuneWheelEditSectionInteractorInput
   private let moduleView: FortuneWheelEditSectionViewProtocol
   private let factory: FortuneWheelEditSectionFactoryInput
-  private var cacheModel: FortuneWheelModel?
-  private var cacheSection: FortuneWheelModel.Section?
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -79,58 +84,57 @@ final class FortuneWheelEditSectionViewController: FortuneWheelEditSectionModule
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setNavigationBar()
+    setupNavBar()
   }
   
   // MARK: - Internal func
   
   func editCurrentSectionWith(model: FortuneWheelModel, section: FortuneWheelModel.Section) {
-    cacheModel = model
-    cacheSection = section
+    interactor.update(model: model, section: section)
     interactor.editCurrentSection(section, model)
   }
   
   func newSectionWith(model: FortuneWheelModel) {
-    cacheModel = model
-    moduleView.updateContentWith(models: factory.createListModel(model, nil))
+    interactor.update(model: model, section: nil)
+    moduleView.updateContentWith(models: factory.createListModel(interactor.returnSection()))
+  }
+  
+  /// Удалить все объекты
+  func removeAllObjects() {
+    interactor.removeAllObjects()
   }
 }
 
 // MARK: - FortuneWheelEditSectionViewOutput
 
 extension FortuneWheelEditSectionViewController: FortuneWheelEditSectionViewOutput {
+  func editSection(title: String?) {
+    interactor.editSection(title: title)
+  }
+  
+  func editEmoticon(_ emoticon: Character?) {
+    interactor.editEmoticon(emoticon)
+  }
+  
   func deleteObject(_ object: String?) {
-    guard let cacheModel else {
-      return
-    }
-    
-    interactor.deleteObject(object, cacheModel)
+    interactor.deleteObject(object)
   }
   
   func createObject(_ emoticon: Character?, _ titleSection: String?, _ textObject: String?) {
-    guard let cacheModel else {
-      return
-    }
-    interactor.createObject(emoticon, titleSection, textObject, cacheModel)
+    interactor.createObject(emoticon, titleSection, textObject)
   }
 }
 
 // MARK: - FortuneWheelEditSectionInteractorOutput
 
 extension FortuneWheelEditSectionViewController: FortuneWheelEditSectionInteractorOutput {
-  func didReceive(model: FortuneWheelModel) {
-    cacheModel = model
-    cacheSection = model.sections.filter { $0.isSelected }.first
+  func didReceiveNew(model: FortuneWheelModel) {
     moduleOutput?.didReceiveNew(model: model)
-    let models = factory.createListModel(model, cacheSection)
-    moduleView.updateContentWith(models: models)
   }
   
-  func didReceiveNew(model: FortuneWheelModel) {
-    cacheModel = model
-    cacheSection = model.sections.filter { $0.isSelected }.first
+  func didReceive(model: FortuneWheelModel) {
     moduleOutput?.didReceiveNew(model: model)
-    let models = factory.createListModel(model, cacheSection)
+    let models = factory.createListModel(interactor.returnSection())
     moduleView.updateContentWith(models: models)
   }
 }
@@ -142,10 +146,21 @@ extension FortuneWheelEditSectionViewController: FortuneWheelEditSectionFactoryO
 // MARK: - Private
 
 private extension FortuneWheelEditSectionViewController {
-  func setNavigationBar() {
+  func setupNavBar() {
     let appearance = Appearance()
-    title = appearance.title
+    
     navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.removePlayersButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(removePlayersButtonAction))
+  }
+  
+  @objc
+  func removePlayersButtonAction() {
+    moduleOutput?.removeTextsButtonAction()
+    impactFeedback.impactOccurred()
   }
 }
 
@@ -153,6 +168,7 @@ private extension FortuneWheelEditSectionViewController {
 
 private extension FortuneWheelEditSectionViewController {
   struct Appearance {
-    let title = "Заголовок"
+    let title = RandomStrings.Localizable.addItems
+    let removePlayersButtonIcon = UIImage(systemName: "trash")
   }
 }

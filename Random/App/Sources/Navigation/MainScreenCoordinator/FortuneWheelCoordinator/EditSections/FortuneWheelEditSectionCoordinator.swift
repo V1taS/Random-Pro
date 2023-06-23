@@ -14,7 +14,7 @@ protocol FortuneWheelEditSectionCoordinatorOutput: AnyObject {
   
   /// Была полученна новая модель данных
   ///  - Parameter model: Модель данных
-  func didReceiveNew(model: FortuneWheelModel)
+  func didReceiveEditNew(model: FortuneWheelModel)
 }
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
@@ -64,7 +64,7 @@ final class FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionCoordinat
   // MARK: - Internal func
   
   func start() {
-    var fortuneWheelEditSectionModule = FortuneWheelEditSectionAssembly().createModule()
+    var fortuneWheelEditSectionModule = FortuneWheelEditSectionAssembly().createModule(services: services)
     self.fortuneWheelEditSectionModule = fortuneWheelEditSectionModule
     fortuneWheelEditSectionModule.moduleOutput = self
     navigationController.pushViewController(fortuneWheelEditSectionModule, animated: true)
@@ -82,13 +82,41 @@ final class FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionCoordinat
 // MARK: - FortuneWheelEditSectionModuleOutput
 
 extension FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionModuleOutput {
+  func removeTextsButtonAction() {
+    removeTextAlert()
+  }
+  
   func didReceiveNew(model: FortuneWheelModel) {
-    output?.didReceiveNew(model: model)
+    output?.didReceiveEditNew(model: model)
+  }
+}
+
+// MARK: - Private
+
+private extension FortuneWheelEditSectionCoordinator {
+  func removeTextAlert() {
+    let appearance = Appearance()
+    let alert = UIAlertController(title: appearance.removeTextTitle + "?",
+                                  message: "",
+                                  preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: appearance.removeTextCancel,
+                                  style: .cancel,
+                                  handler: { _ in }))
+    alert.addAction(UIAlertAction(title: appearance.removeTextYes,
+                                  style: .default,
+                                  handler: { [weak self] _ in
+      self?.fortuneWheelEditSectionModule?.removeAllObjects()
+    }))
+    fortuneWheelEditSectionModule?.present(alert, animated: true, completion: nil)
   }
 }
 
 // MARK: - Appearance
 
 private extension FortuneWheelEditSectionCoordinator {
-  struct Appearance {}
+  struct Appearance {
+    let removeTextTitle = RandomStrings.Localizable.removeItemsFromList
+    let removeTextYes = RandomStrings.Localizable.yes
+    let removeTextCancel = RandomStrings.Localizable.cancel
+  }
 }

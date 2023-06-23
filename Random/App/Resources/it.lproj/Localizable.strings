@@ -298,3 +298,9 @@
 "orange" = "Arancia";
 "sound" = "Suono";
 "haptic_feedback" = "Feedback tattile";
+"add_items" = "Aggiungi elementi";
+"list_of_elements" = "Elenco degli elementi";
+"new_element" = "Nuovo elemento";
+"section_name" = "Nome della sezione";
+"sections" = "Sezioni";
+"sections_to_generate" = "Sezioni da generare";

@@ -19,10 +19,10 @@ enum FortuneWheelEditSectionTableViewType {
   /// Секции колеса удачи
   case wheelObject(_ object: String)
   
-  /// Добавление объекта в секцию
-  case textfieldAddSection(_ text: String?)
+  /// Добавление заголовка в секцию
+  case textfieldAddSection(_ text: String?, emoticon: Character)
   
-  /// Добавление объекта в секцию
+  /// Добавление объекта
   case textfieldAddObjects
   
   /// Разделитель

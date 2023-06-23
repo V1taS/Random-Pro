@@ -15,10 +15,8 @@ protocol FortuneWheelEditSectionFactoryInput {
   
   /// Создаем модельку для таблички
   ///  - Parameters:
-  ///   - model: Модель с данными
-  ///   - section: Текущая секция
-  func createListModel(_ model: FortuneWheelModel,
-                       _ section: FortuneWheelModel.Section?) -> [FortuneWheelEditSectionTableViewType]
+  ///   - section: Секция
+  func createListModel(_ section: FortuneWheelModel.Section?) -> [FortuneWheelEditSectionTableViewType]
 }
 
 /// Фабрика
@@ -30,28 +28,27 @@ final class FortuneWheelEditSectionFactory: FortuneWheelEditSectionFactoryInput 
   
   // MARK: - Internal func
   
-  func createListModel(_ model: FortuneWheelModel,
-                       _ section: FortuneWheelModel.Section?) -> [FortuneWheelEditSectionTableViewType] {
+  func createListModel(_ section: FortuneWheelModel.Section?) -> [FortuneWheelEditSectionTableViewType] {
+    let appearance = Appearance()
     var tableViewModels: [FortuneWheelEditSectionTableViewType] = []
-    tableViewModels.append(.headerText("Название секции"))
-    tableViewModels.append(.textfieldAddSection(section?.title))
+    
+    tableViewModels.append(.headerText(appearance.headerSectionTitle))
+    tableViewModels.append(.textfieldAddSection(section?.title, emoticon: Character(section?.icon ?? "😍")))
     
     tableViewModels.append(.insets(16))
-    tableViewModels.append(.headerText("Добавляем объекты"))
-    tableViewModels.append(.textfieldAddObjects)
+    tableViewModels.append(.headerText(appearance.listObjectTitle))
     
-    tableViewModels.append(.insets(16))
-    tableViewModels.append(.headerText("Список объектов"))
-
-    if let objects = section?.objects.reversed() {
-      objects.enumerated().forEach { index, section in
+    tableViewModels.append(.divider)
+    
+    if let objects = section?.objects {
+      objects.forEach { section in
         tableViewModels.append(.wheelObject(section))
-        
-        if index != objects.count - 1 {
-          tableViewModels.append(.divider)
-        }
+        tableViewModels.append(.divider)
       }
     }
+
+    tableViewModels.append(.insets(16))
+    tableViewModels.append(.textfieldAddObjects)
     return tableViewModels
   }
 }
@@ -59,5 +56,8 @@ final class FortuneWheelEditSectionFactory: FortuneWheelEditSectionFactoryInput 
 // MARK: - Appearance
 
 private extension FortuneWheelEditSectionFactory {
-  struct Appearance {}
+  struct Appearance {
+    let headerSectionTitle = RandomStrings.Localizable.sectionName
+    let listObjectTitle = RandomStrings.Localizable.listOfElements
+  }
 }

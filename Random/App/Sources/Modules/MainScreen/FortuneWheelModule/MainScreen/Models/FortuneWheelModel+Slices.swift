@@ -24,11 +24,28 @@ extension FortuneWheelModel {
       var objects: [(String, Int)] = []
       
       if selectedSection.objects.count > .zero && selectedSection.objects.count <= 3 {
-        objects = Array(repeating: selectedSection.objects, count: 3).flatMap { $0 }.enumerated().map { ($1, $0 % selectedSection.objects.count) }
+        objects = Array(
+          repeating: selectedSection.objects,
+          count: 3
+        ).flatMap {
+          $0
+        }.enumerated().map {
+          ($1, $0 % selectedSection.objects.count)
+        }
+        
       } else if selectedSection.objects.count > 3 && selectedSection.objects.count < 5 {
-        objects = Array(repeating: selectedSection.objects, count: 2).flatMap { $0 }.enumerated().map { ($1, $0 % selectedSection.objects.count) }
+        objects = Array(
+          repeating: selectedSection.objects,
+          count: 2
+        ).flatMap {
+          $0
+        }.enumerated().map {
+          ($1, $0 % selectedSection.objects.count)
+        }
       } else {
-        objects = selectedSection.objects.enumerated().map { ($1, $0) }
+        objects = selectedSection.objects.enumerated().map {
+          ($1, $0)
+        }
       }
       
       return objects.compactMap { object, originalIndex in

@@ -29,7 +29,7 @@ final class FortuneWheelSelectedSectionFactory: FortuneWheelSelectedSectionFacto
   
   func createListModel(_ model: FortuneWheelModel) -> [FortuneWheelSelectedSectionTableViewType] {
     var tableViewModels: [FortuneWheelSelectedSectionTableViewType] = []
-    tableViewModels.append(.headerText("Разделы для генерации"))
+    tableViewModels.append(.headerText(RandomStrings.Localizable.sectionsToGenerate))
     tableViewModels.append(.insets(4))
     
     model.sections.forEach { section in

@@ -14,6 +14,10 @@ protocol FortuneWheelViewOutput: AnyObject {
   
   /// Выбрать ячейку было нажато
   func selectedSectionAction()
+  
+  /// Сохранить результат
+  /// - Parameter result: Результат
+  func save(result: String)
 }
 
 /// События которые отправляем от Presenter ко View
@@ -126,6 +130,7 @@ private extension FortuneWheelView {
       return
     }
     resultText = text
+    output?.save(result: text)
   }
   
   func getIndexFromCollision(progress: Double, finishIndex: Int) -> Int? {

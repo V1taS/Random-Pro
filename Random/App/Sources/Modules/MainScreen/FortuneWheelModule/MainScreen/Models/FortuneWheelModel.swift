@@ -21,7 +21,7 @@ struct FortuneWheelModel: UserDefaultsCodable {
   let style: Style
   
   /// Список секций
-  let sections: [Section]
+  var sections: [Section]
   
   /// Включение звука
   let isEnabledSound: Bool

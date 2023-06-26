@@ -11,7 +11,8 @@ import Foundation
 extension MainScreenModel {
   // MARK: - ADVLabel
   
-  enum ADVLabel: String, CaseIterable, UserDefaultsCodable {
+  enum ADVLabel: CaseIterable, UserDefaultsCodable {
+    static var allCases: [MainScreenModel.ADVLabel] = [.hit, .new, .none, .custom(text: "")]
     
     var title: String {
       let appearance = Appearance()
@@ -20,10 +21,10 @@ extension MainScreenModel {
         return appearance.hit
       case .new:
         return appearance.new
-      case .premium:
-        return appearance.premium
       case .none:
         return ""
+      case let .custom(text):
+        return text
       }
     }
     
@@ -33,8 +34,8 @@ extension MainScreenModel {
     /// Лайбл: `НОВОЕ`
     case new
     
-    /// Лайбл: `ПРЕМИУМ`
-    case premium
+    /// Текст с бека
+    case custom(text: String)
     
     /// Лайбл: `Пусто`
     case none

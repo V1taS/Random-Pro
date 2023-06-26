@@ -35,26 +35,34 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
   
   // MARK: - Internal func
   
-  func configureCellWith(model: MainScreenModel.Section, isPremium: Bool) {
+  func configureCellWith(section: MainScreenModel.Section, isPremium: Bool) {
     let isShowADVLabel: Bool
     
-    switch model.advLabel {
-    case .hit, .new:
+    switch section.advLabel {
+    case .hit, .custom, .new:
       isShowADVLabel = true
-    case .premium, .none:
+    case .none:
       isShowADVLabel = false
     }
     
     let imageCardConfig = UIImage.SymbolConfiguration(pointSize: Appearance().imageCardSize, weight: .regular)
-    let imageCard = UIImage(systemName: model.type.imageSectionSystemName,
+    let imageCard = UIImage(systemName: section.type.imageSectionSystemName,
                             withConfiguration: imageCardConfig)
+    
+    let isDisabled: Bool
+    switch isPremium {
+    case true:
+      isDisabled = false
+    case false:
+      isDisabled = section.isPremium
+    }
     
     mainCardView.configureWith(
       imageCard: imageCard,
-      titleCard: model.type.titleSection,
+      titleCard: section.type.titleSection,
       isShowADVLabel: isShowADVLabel,
-      titleADVText: model.advLabel.title,
-      isDisabled: model.advLabel == .premium && !isPremium
+      titleADVText: section.advLabel.title,
+      isDisabled: isDisabled
     )
   }
 }

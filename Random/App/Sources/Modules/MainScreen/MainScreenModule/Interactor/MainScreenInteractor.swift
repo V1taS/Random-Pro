@@ -282,6 +282,7 @@ private extension MainScreenInteractor {
           return MainScreenModel.Section(type: $0.type,
                                          isEnabled: $0.isEnabled,
                                          isHidden: $0.isHidden,
+                                         isPremium: $0.isPremium,
                                          advLabel: advLabel)
         } else {
           return $0

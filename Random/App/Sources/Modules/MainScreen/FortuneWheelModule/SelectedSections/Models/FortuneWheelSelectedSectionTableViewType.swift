@@ -18,7 +18,4 @@ enum FortuneWheelSelectedSectionTableViewType {
   
   /// Секции колеса удачи
   case wheelSection(_ section: FortuneWheelModel.Section)
-  
-  /// Создать новую секцию
-  case createNewSectionButton
 }

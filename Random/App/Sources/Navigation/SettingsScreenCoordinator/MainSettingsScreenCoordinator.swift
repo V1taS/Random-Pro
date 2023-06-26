@@ -40,6 +40,9 @@ protocol MainSettingsScreenCoordinatorInput {
   /// - Parameter models: Моделька секций
   func updateContentWith(models: [MainScreenModel.Section])
   
+  /// Запустить диплинк
+  func startDeepLink()
+  
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: MainSettingsScreenCoordinatorOutput? { get set }
 }
@@ -95,6 +98,32 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
   
   func updateContentWith(models: [MainScreenModel.Section]) {
     cacheMainScreenSections = models
+  }
+  
+  func startDeepLink() {
+    guard let deepLinkType = services.deepLinkService.deepLinkType else {
+      return
+    }
+    
+    switch deepLinkType {
+    case .settingsSections:
+      customMainSectionsSelected()
+    case .settingsIconSelection:
+      applicationIconSectionsSelected()
+    case .settingsPremiumSection:
+      premiumSectionsSelected()
+    case .settingsShareApp:
+      shareButtonSelected()
+    case .settingsfeedBackButton:
+      feedBackButtonAction()
+    default:
+      break
+    }
+    
+    var deepLinkService: DeepLinkService = services.deepLinkService
+    deepLinkService.deepLinkType = nil
+    services.metricsService.track(event: .deepLinks,
+                                  properties: ["screen": deepLinkType.deepLinkEndPoint])
   }
 }
 

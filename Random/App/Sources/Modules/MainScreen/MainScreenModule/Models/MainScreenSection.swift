@@ -15,7 +15,7 @@ struct MainScreenModel: UserDefaultsCodable {
   /// Темная тема включена
   let isDarkMode: Bool?
   
-  /// Доступность премиума
+  /// Доступность премиума в приложении
   let isPremium: Bool
   
   /// Все секции приложения
@@ -32,6 +32,9 @@ struct MainScreenModel: UserDefaultsCodable {
     
     /// Секция скрыта
     let isHidden: Bool
+    
+    /// Секция входит в состав премиум (Платные секции)
+    let isPremium: Bool
     
     /// Тип лайбла
     let advLabel: ADVLabel

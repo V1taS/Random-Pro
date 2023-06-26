@@ -152,7 +152,15 @@ extension MainScreenView: UICollectionViewDelegate {
     }
     let section = model.allSections[indexPath.row]
     
-    if section.advLabel == .premium && !model.isPremium {
+    let isDisabled: Bool
+    switch model.isPremium {
+    case true:
+      isDisabled = false
+    case false:
+      isDisabled = section.isPremium
+    }
+    
+    if isDisabled {
       output?.noPremiumAccessActionFor(section)
     } else {
       switch section.type {
@@ -235,7 +243,7 @@ extension MainScreenView: UICollectionViewDataSource {
     }
     
     let section = model.allSections[indexPath.row]
-    cell.configureCellWith(model: section, isPremium: model.isPremium)
+    cell.configureCellWith(section: section, isPremium: model.isPremium)
     return cell
   }
 }

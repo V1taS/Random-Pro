@@ -11,18 +11,18 @@ import UIKit
 protocol DeepLinkService {
   
   /// Обработка события
-  /// - Parameter urlContexts: Сыылки url
-  func eventHandlingWith(urlContexts: Set<UIOpenURLContext>)
+  /// - Parameter deepLimkURL: Сыылки url
+  func eventHandlingWith(deepLimkURL: URL?)
   
   /// Получен определенный тип диплинка
-  var deepLinkType: MainScreenModel.SectionType? { get set }
+  var deepLinkType: DeepLinkType? { get set }
 }
 
 final class DeepLinkServiceImpl: DeepLinkService {
   
   // MARK: - Internal property
   
-  var deepLinkType: MainScreenModel.SectionType? {
+  var deepLinkType: DeepLinkType? {
     get {
       StorageServiceImpl().deepLinkModel
     } set {
@@ -39,12 +39,12 @@ final class DeepLinkServiceImpl: DeepLinkService {
   
   // MARK: - Internal func
   
-  func eventHandlingWith(urlContexts: Set<UIOpenURLContext>) {
-    guard let firstUrl = urlContexts.first?.url.absoluteString else {
+  func eventHandlingWith(deepLimkURL: URL?) {
+    guard let firstUrl = deepLimkURL?.absoluteString else {
       return
     }
     
-    MainScreenModel.SectionType.allCases.forEach { type in
+    DeepLinkType.allCases.forEach { type in
       if firstUrl.contains(type.deepLinkEndPoint) {
         deepLinkType = type
         return

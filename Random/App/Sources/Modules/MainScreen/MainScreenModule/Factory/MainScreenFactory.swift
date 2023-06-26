@@ -55,6 +55,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .number:
@@ -62,6 +63,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .yesOrNo:
@@ -69,6 +71,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .letter:
@@ -76,6 +79,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .list:
@@ -83,6 +87,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .coin:
@@ -90,6 +95,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .cube:
@@ -97,6 +103,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .dateAndTime:
@@ -104,6 +111,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .lottery:
@@ -111,6 +119,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .contact:
@@ -118,6 +127,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .password:
@@ -125,6 +135,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .colors:
@@ -132,6 +143,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .none
           ))
         case .bottle:
@@ -139,6 +151,7 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
+            isPremium: false,
             advLabel: .new
           ))
         case .rockPaperScissors:
@@ -146,98 +159,112 @@ extension MainScreenFactory {
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .imageFilters:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .films:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .nickName:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .names:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .congratulations:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .goodDeeds:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .riddles:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .joke:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .gifts:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .slogans:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .quotes:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .fortuneWheel:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         case .truthOrDare:
           allSections.append(MainScreenModel.Section(
             type: section,
             isEnabled: true,
             isHidden: false,
-            advLabel: .premium
+            isPremium: true,
+            advLabel: .none
           ))
         }
       }
@@ -267,203 +294,216 @@ extension MainScreenFactory {
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.teams) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.teams ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.teams, oldLabel: model.advLabel)
               ))
             case .number:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.number) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.number ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.number, oldLabel: model.advLabel)
               ))
             case .yesOrNo:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.yesOrNo) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.yesOrNo ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.yesOrNo, oldLabel: model.advLabel)
               ))
             case .letter:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.letter) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.letter ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.letter, oldLabel: model.advLabel)
               ))
             case .list:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.list) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.list ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.list, oldLabel: model.advLabel)
               ))
             case .coin:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.coin) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.coin ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.coin, oldLabel: model.advLabel)
               ))
             case .cube:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.cube) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.cube ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.cube, oldLabel: model.advLabel)
               ))
             case .dateAndTime:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.dateAndTime) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.dateAndTime ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.dateAndTime, oldLabel: model.advLabel)
               ))
             case .lottery:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.lottery) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.lottery ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.lottery, oldLabel: model.advLabel)
               ))
             case .contact:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.contact) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.contact ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.contact, oldLabel: model.advLabel)
               ))
             case .password:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.password) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.password ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.password, oldLabel: model.advLabel)
               ))
             case .colors:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.colors) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.colors ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.colors, oldLabel: model.advLabel)
               ))
             case .bottle:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.bottle) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.bottle ?? model.advLabel.rawValue)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.bottle, oldLabel: model.advLabel)
               ))
             case .rockPaperScissors:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.rockPaperScissors) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors, oldLabel: model.advLabel)
               ))
             case .imageFilters:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters, oldLabel: model.advLabel)
               ))
             case .films:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.films) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.films ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.films, oldLabel: model.advLabel)
               ))
             case .nickName:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.nickName) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.nickName ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.nickName, oldLabel: model.advLabel)
               ))
             case .names:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.names) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.names ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.names, oldLabel: model.advLabel)
               ))
             case .congratulations:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.congratulations) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.congratulations ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.congratulations, oldLabel: model.advLabel)
               ))
             case .goodDeeds:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.goodDeeds) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.goodDeeds ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.goodDeeds, oldLabel: model.advLabel)
               ))
             case .riddles:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.riddles) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.riddles ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.riddles, oldLabel: model.advLabel)
               ))
             case .joke:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.joke) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.joke ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.joke, oldLabel: model.advLabel)
               ))
             case .gifts:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.gifts) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.gifts ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.gifts, oldLabel: model.advLabel)
               ))
             case .slogans:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.slogans) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.slogans ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.slogans, oldLabel: model.advLabel)
               ))
             case .quotes:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.quotes) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.quotes ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.quotes, oldLabel: model.advLabel)
               ))
             case .fortuneWheel:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.fortuneWheel) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.fortuneWheel ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.fortuneWheel, oldLabel: model.advLabel)
               ))
             case .truthOrDare:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.truthOrDare) ?? model.isHidden,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.truthOrDare ?? model.advLabel.rawValue,
-                                       oldADVLabel: .premium)
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.truthOrDare, oldLabel: model.advLabel)
               ))
             }
           }
@@ -490,15 +530,23 @@ extension MainScreenFactory {
 #endif
   }
   
-  static func setLabelFrom(featureToggleRawValue: String?,
-                           oldADVLabel: MainScreenModel.ADVLabel = .none) -> MainScreenModel.ADVLabel {
-    let featureToggleLabelType = MainScreenModel.ADVLabel(rawValue: featureToggleRawValue ?? "")
-    switch oldADVLabel {
-    case .premium:
-      return .premium
-    default:
-      return featureToggleLabelType ?? oldADVLabel
+  static func setLabelFrom(featureToggleRawValue: String?, oldLabel: MainScreenModel.ADVLabel) -> MainScreenModel.ADVLabel {
+    guard let featureToggleRawValue else {
+      return oldLabel
     }
+    
+    let featureToggleLabelType: MainScreenModel.ADVLabel
+    switch featureToggleRawValue {
+    case "hit":
+      featureToggleLabelType = .hit
+    case "new":
+      featureToggleLabelType = .new
+    case "":
+      featureToggleLabelType = .none
+    default:
+      featureToggleLabelType = .custom(text: featureToggleRawValue)
+    }
+    return featureToggleLabelType
   }
 }
 

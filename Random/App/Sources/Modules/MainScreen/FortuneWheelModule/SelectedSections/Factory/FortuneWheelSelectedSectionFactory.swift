@@ -36,9 +36,6 @@ final class FortuneWheelSelectedSectionFactory: FortuneWheelSelectedSectionFacto
       tableViewModels.append(.wheelSection(section))
       tableViewModels.append(.insets(8))
     }
-    
-    tableViewModels.append(.insets(16))
-    tableViewModels.append(.createNewSectionButton)
     return tableViewModels
   }
 }

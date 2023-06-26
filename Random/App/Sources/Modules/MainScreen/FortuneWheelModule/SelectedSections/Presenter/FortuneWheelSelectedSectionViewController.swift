@@ -55,6 +55,7 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
   private let interactor: FortuneWheelSelectedSectionInteractorInput
   private let moduleView: FortuneWheelSelectedSectionViewProtocol
   private let factory: FortuneWheelSelectedSectionFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -111,10 +112,6 @@ extension FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSection
     moduleOutput?.editCurrentSectionWith(section: section)
   }
   
-  func createNewSection() {
-    moduleOutput?.createNewSection()
-  }
-  
   func sectionSelected(_ section: FortuneWheelModel.Section) {
     interactor.sectionSelected(section)
   }
@@ -147,18 +144,28 @@ private extension FortuneWheelSelectedSectionViewController {
     let appearance = Appearance()
     title = appearance.title
     
-    let closeButton = UIBarButtonItem(image: appearance.closeButtonIcon,
-                                      style: .plain,
-                                      target: self,
-                                      action: #selector(closeButtonAction))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.closeButtonIcon,
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: #selector(closeButtonAction))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.addButtonIcon,
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(addButtonAction))
     
-    navigationItem.rightBarButtonItems = [closeButton]
     navigationItem.largeTitleDisplayMode = .never
   }
   
   @objc
   func closeButtonAction() {
     moduleOutput?.closeButtonAction()
+    impactFeedback.impactOccurred()
+  }
+  
+  @objc
+  func addButtonAction() {
+    moduleOutput?.createNewSection()
+    impactFeedback.impactOccurred()
   }
 }
 
@@ -168,5 +175,6 @@ private extension FortuneWheelSelectedSectionViewController {
   struct Appearance {
     let closeButtonIcon = UIImage(systemName: "xmark")
     let title = RandomStrings.Localizable.sections
+    let addButtonIcon = UIImage(systemName: "plus.circle")
   }
 }

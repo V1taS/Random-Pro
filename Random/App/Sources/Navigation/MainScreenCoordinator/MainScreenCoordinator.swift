@@ -572,6 +572,16 @@ private extension MainScreenCoordinator {
       openQuotes()
     case .fortuneWheel:
       openFortuneWheel()
+    case .updateApp:
+      guard let url = Appearance().shareAppUrl,
+            UIApplication.shared.canOpenURL(url) else {
+        return
+      }
+      UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    case .settingsSections, .settingsIconSelection, .settingsPremiumSection,
+        .settingsShareApp, .settingsfeedBackButton:
+      settingButtonAction()
+      settingsScreenCoordinator?.startDeepLink()
     }
     
     var deepLinkService: DeepLinkService = services.deepLinkService

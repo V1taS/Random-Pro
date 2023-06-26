@@ -23,9 +23,6 @@ protocol FortuneWheelSelectedSectionViewOutput: AnyObject {
   /// - Parameters:
   ///  - section: Секция
   func deleteSection(_ section: FortuneWheelModel.Section)
-  
-  /// Создать новую секцию
-  func createNewSection()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -187,28 +184,8 @@ extension FortuneWheelSelectedSectionView: UITableViewDataSource {
         cell.style = section.isSelected ? .selected : .none
         viewCell = cell
       }
-    case .createNewSectionButton:
-      if let cell = tableView.dequeueReusableCell(
-        withIdentifier: ButtonTableViewCell.reuseIdentifier
-      ) as? ButtonTableViewCell {
-        cell.configureCellWith { [weak self] buttonView in
-          guard let self else {
-            return
-          }
-          buttonView.setTitle(RandomStrings.Localizable.add, for: .normal)
-          buttonView.addTarget(self,
-                               action: #selector(self.createNewSectionAction),
-                               for: .touchUpInside)
-        }
-        viewCell = cell
-      }
     }
     return viewCell
-  }
-  
-  @objc
-  func createNewSectionAction() {
-    output?.createNewSection()
   }
 }
 

@@ -402,16 +402,17 @@ private extension MainScreenViewController {
           self?.interactor.validatePurchase { [weak self] in
             if self?.isPremiumDEBUG != nil {
               self?.setupNavBar()
+              self?.interactor.getContent {}
             } else {
               self?.interactor.updatesPremiumFeatureToggle { [weak self] in
                 self?.setupNavBar()
+                self?.interactor.getContent {}
               }
             }
           }
         }
       }
     }
-    
   }
   
   func setupNavBar() {

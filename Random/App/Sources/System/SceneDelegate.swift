@@ -19,7 +19,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   private var coordinator: RootCoordinatorProtocol?
   private let services: ApplicationServices = ApplicationServicesImpl()
-  private var urlContexts: Set<UIOpenURLContext>?
+  private var deepLimkURL: URL?
   
   // MARK: - Internal func
   
@@ -33,12 +33,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     coordinator.start()
     self.window = window
     YMPYandexMetricaPush.handleSceneWillConnectToSession(with: connectionOptions)
+    
+    if let urlContext = connectionOptions.urlContexts.first {
+      self.deepLimkURL = urlContext.url
+    }
   }
   
   func sceneDidBecomeActive(_ scene: UIScene) {
-    if let urlContexts {
-      services.deepLinkService.eventHandlingWith(urlContexts: urlContexts)
-      self.urlContexts = nil
+    if let deepLimkURL {
+      services.deepLinkService.eventHandlingWith(deepLimkURL: deepLimkURL)
+      self.deepLimkURL = nil
     }
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -58,6 +62,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
   func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    self.urlContexts = URLContexts
+    self.deepLimkURL = URLContexts.first?.url
   }
 }

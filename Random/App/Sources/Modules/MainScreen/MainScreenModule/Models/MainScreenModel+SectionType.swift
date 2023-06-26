@@ -14,67 +14,7 @@ extension MainScreenModel {
   // MARK: - MainScreenSection
   
   enum SectionType: CaseIterable, UserDefaultsCodable {
-    
-    /// Диплинки на открытие экрана
-    var deepLinkEndPoint: String {
-      switch self {
-      case .teams:
-        return "teams_screen"
-      case .number:
-        return "number_screen"
-      case .yesOrNo:
-        return "number_screen"
-      case .letter:
-        return "character_screen"
-      case .list:
-        return "list_screen"
-      case .coin:
-        return "coin_screen"
-      case .cube:
-        return "cube_screen"
-      case .dateAndTime:
-        return "date_and_time_screen"
-      case .lottery:
-        return "lottery_screen"
-      case .contact:
-        return "contact_screen"
-      case .password:
-        return "password_screen"
-      case .colors:
-        return "colors_screen"
-      case .bottle:
-        return "bottle_screen"
-      case .rockPaperScissors:
-        return "rock_paper_scissors_screen"
-      case .imageFilters:
-        return "image_filters"
-      case .films:
-        return "films_screen"
-      case .nickName:
-        return "nick_name"
-      case .names:
-        return "names"
-      case .congratulations:
-        return "congratulations"
-      case .goodDeeds:
-        return "good_deeds"
-      case .riddles:
-        return "riddles"
-      case .joke:
-        return "joke"
-      case .gifts:
-        return "gifts"
-      case .slogans:
-        return "slogans"
-      case .truthOrDare:
-        return "truth_or_dare"
-      case .quotes:
-        return "quotes"
-      case .fortuneWheel:
-        return "fortuneWheel"
-      }
-    }
-    
+        
     /// Название секции
     var titleSection: String {
       let appearance = Appearance()

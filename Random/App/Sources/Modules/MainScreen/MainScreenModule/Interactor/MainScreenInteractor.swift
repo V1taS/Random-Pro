@@ -195,7 +195,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       MainScreenFactory.updateModelWith(oldModel: model,
                                         featureToggleModel: sectionsIsHiddenFTModel) { [weak self] newModel in
         self?.storageService.mainScreenModel = newModel
-        self?.output?.didReceive(model: newModel)
         completion()
       }
     }
@@ -216,7 +215,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       MainScreenFactory.updateModelWith(oldModel: model,
                                         labelsModel: labelsModel) { [weak self] newModel in
         self?.storageService.mainScreenModel = newModel
-        self?.output?.didReceive(model: newModel)
         completion()
       }
     }
@@ -237,7 +235,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       MainScreenFactory.updateModelWith(oldModel: model,
                                         isPremium: isPremium) { [weak self] newModel in
         self?.storageService.mainScreenModel = newModel
-        self?.output?.didReceive(model: newModel)
         completion()
       }
     }
@@ -254,7 +251,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
                                      isPremium: isValidate,
                                      allSections: model.allSections)
       self?.storageService.mainScreenModel = newModel
-      self?.output?.didReceive(model: newModel)
       completion()
     }
   }

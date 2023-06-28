@@ -11,9 +11,22 @@ import XCTest
 @testable import Random
 
 final class HapticServiceMock: HapticService {
+  
+  // Spy variables
+  var playCalled = false
+  var stopCalled = false
+  
+  // Stub variables
+  var playResult: Result<Void, HapticServiceImpl.HapticError> = .failure(.notSupported)
+  
   func play(isRepeat: Bool,
             patternType: HapticServiceImpl.PatternType,
-            completion: (Result<Void, HapticServiceImpl.HapticError>) -> Void) {}
+            completion: (Result<Void, HapticServiceImpl.HapticError>) -> Void) {
+    playCalled = true
+    completion(playResult)
+  }
   
-  func stop() {}
+  func stop() {
+    stopCalled = true
+  }
 }

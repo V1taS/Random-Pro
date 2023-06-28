@@ -55,6 +55,13 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
   private var casheQuotes: [String] = []
+  private var quoteGeneratorScreenModel: QuoteScreenModel? {
+    get {
+      storageService.getData(from: QuoteScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -80,10 +87,10 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
       language: getDefaultLanguage()
     )
     
-    let model = storageService.quoteGeneratorScreenModel ?? newModel
+    let model = quoteGeneratorScreenModel ?? newModel
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.quoteGeneratorScreenModel = QuoteScreenModel(
+    quoteGeneratorScreenModel = QuoteScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language
@@ -118,7 +125,7 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    guard let model = storageService.quoteGeneratorScreenModel,
+    guard let model = quoteGeneratorScreenModel,
           let result = casheQuotes.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -127,7 +134,7 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.quoteGeneratorScreenModel = QuoteScreenModel(
+    quoteGeneratorScreenModel = QuoteScreenModel(
       result: result,
       listResult: listResult,
       language: model.language
@@ -137,7 +144,7 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
   }
   
   func returnCurrentModel() -> QuoteScreenModel {
-    if let model = storageService.quoteGeneratorScreenModel {
+    if let model = quoteGeneratorScreenModel {
       return model
     } else {
       let appearance = Appearance()
@@ -154,13 +161,13 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
     let newModel = QuoteScreenModel(result: appearance.result,
                                         listResult: [],
                                         language: getDefaultLanguage())
-    self.storageService.quoteGeneratorScreenModel = newModel
+    self.quoteGeneratorScreenModel = newModel
     output?.didReceive(quote: newModel.result)
     output?.cleanButtonWasSelected()
   }
   
   func setNewLanguage(language: QuoteScreenModel.Language) {
-    guard let model = storageService.quoteGeneratorScreenModel else {
+    guard let model = quoteGeneratorScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -170,7 +177,7 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
       listResult: model.listResult,
       language: language
     )
-    storageService.quoteGeneratorScreenModel = newModel
+    quoteGeneratorScreenModel = newModel
     getContent()
   }
 }

@@ -56,6 +56,13 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
   
   private var storageService: StorageService
   private var buttonCounterService: ButtonCounterService
+  private var fortuneWheelModel: FortuneWheelModel? {
+    get {
+      storageService.getData(from: FortuneWheelModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -80,11 +87,11 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
       sections: model.sections,
       isEnabledFeedback: model.isEnabledFeedback
     )
-    storageService.fortuneWheelModel = newModel
+    fortuneWheelModel = newModel
   }
   
   func updateNew(model: FortuneWheelModel) {
-    storageService.fortuneWheelModel = model
+    fortuneWheelModel = model
     output?.didReceive(model: model)
   }
   
@@ -97,7 +104,7 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
       sections: model.sections,
       isEnabledFeedback: isEnabled
     )
-    storageService.fortuneWheelModel = newModel
+    fortuneWheelModel = newModel
     output?.didReceive(model: newModel)
   }
   
@@ -110,7 +117,7 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
       sections: model.sections,
       isEnabledFeedback: model.isEnabledFeedback
     )
-    storageService.fortuneWheelModel = newModel
+    fortuneWheelModel = newModel
     output?.didReceive(model: newModel)
     output?.cleanButtonWasSelected()
   }
@@ -139,12 +146,12 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
         )
       }
     }
-    storageService.fortuneWheelModel = model
+    fortuneWheelModel = model
     output?.didReceive(model: model)
   }
   
   func returnCurrentModel() -> FortuneWheelModel {
-    if let model = storageService.fortuneWheelModel {
+    if let model = fortuneWheelModel {
       return model
 //      return getDefaultFortuneWheelModel()
     } else {

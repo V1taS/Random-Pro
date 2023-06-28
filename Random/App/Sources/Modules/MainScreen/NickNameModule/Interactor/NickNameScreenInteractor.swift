@@ -54,6 +54,13 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
   private var casheNicks: [String] = []
+  private var nickNameScreenModel: NickNameScreenModel? {
+    get {
+      storageService.getData(from: NickNameScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -88,7 +95,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
           case let .success(data):
             if let listNicks = self?.networkService.map(data, to: [String].self) {
               self?.casheNicks = listNicks
-              if let model = self?.storageService.nickNameScreenModel {
+              if let model = self?.nickNameScreenModel {
                 self?.output?.didReceive(nick: model.result)
               } else {
                 let newModel = NickNameScreenModel(
@@ -96,7 +103,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
                   listResult: []
                 )
                 self?.output?.didReceive(nick: newModel.result)
-                self?.storageService.nickNameScreenModel = newModel
+                self?.nickNameScreenModel = newModel
               }
             } else {
               self?.output?.somethingWentWrong()
@@ -113,19 +120,19 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     filterArray.shuffle()
     let result = filterArray.first ?? ""
     
-    if let model = storageService.nickNameScreenModel {
+    if let model = nickNameScreenModel {
       var currentListResult = model.listResult
       currentListResult.append(result)
       
       let newModel = NickNameScreenModel(result: result,
                                          listResult: currentListResult)
       
-      storageService.nickNameScreenModel = newModel
+      nickNameScreenModel = newModel
       output?.didReceive(nick: result)
     } else {
       let newModel = NickNameScreenModel(result: result,
                                          listResult: [result])
-      storageService.nickNameScreenModel = newModel
+      nickNameScreenModel = newModel
     }
     buttonCounterService.onButtonClick()
   }
@@ -133,25 +140,25 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   func generatePopularButtonAction() {
     let result = casheNicks.shuffled().first ?? ""
     
-    if let model = storageService.nickNameScreenModel {
+    if let model = nickNameScreenModel {
       var currentListResult = model.listResult
       currentListResult.append(result)
       
       let newModel = NickNameScreenModel(result: result,
                                          listResult: currentListResult)
       
-      storageService.nickNameScreenModel = newModel
+      nickNameScreenModel = newModel
       output?.didReceive(nick: result)
     } else {
       let newModel = NickNameScreenModel(result: result,
                                          listResult: [result])
-      storageService.nickNameScreenModel = newModel
+      nickNameScreenModel = newModel
     }
     buttonCounterService.onButtonClick()
   }
   
   func returnCurrentModel() -> NickNameScreenModel {
-    if let model = storageService.nickNameScreenModel {
+    if let model = nickNameScreenModel {
       return model
     } else {
       let appearance = Appearance()
@@ -166,7 +173,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     let appearance = Appearance()
     let newModel = NickNameScreenModel(result: appearance.result,
                                        listResult: [])
-    self.storageService.nickNameScreenModel = newModel
+    self.nickNameScreenModel = newModel
     output?.didReceive(nick: newModel.result)
     output?.cleanButtonWasSelected()
   }

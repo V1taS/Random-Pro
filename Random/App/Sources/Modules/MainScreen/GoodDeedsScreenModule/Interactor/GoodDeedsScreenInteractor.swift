@@ -55,6 +55,13 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
   private var casheGoodDeeds: [String] = []
+  private var goodDeedsScreenModel: GoodDeedsScreenModel? {
+    get {
+      storageService.getData(from: GoodDeedsScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -80,10 +87,10 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
       language: getDefaultLanguage()
     )
     
-    let model = storageService.goodDeedsScreenModel ?? newModel
+    let model = goodDeedsScreenModel ?? newModel
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.goodDeedsScreenModel = GoodDeedsScreenModel(
+    goodDeedsScreenModel = GoodDeedsScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language
@@ -118,7 +125,7 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    guard let model = storageService.goodDeedsScreenModel,
+    guard let model = goodDeedsScreenModel,
           let result = casheGoodDeeds.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -127,7 +134,7 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.goodDeedsScreenModel = GoodDeedsScreenModel(
+    goodDeedsScreenModel = GoodDeedsScreenModel(
       result: result,
       listResult: listResult,
       language: model.language
@@ -137,7 +144,7 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
   }
   
   func returnCurrentModel() -> GoodDeedsScreenModel {
-    if let model = storageService.goodDeedsScreenModel {
+    if let model = goodDeedsScreenModel {
       return model
     } else {
       let appearance = Appearance()
@@ -154,13 +161,13 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
     let newModel = GoodDeedsScreenModel(result: appearance.result,
                                         listResult: [],
                                         language: getDefaultLanguage())
-    self.storageService.goodDeedsScreenModel = newModel
+    self.goodDeedsScreenModel = newModel
     output?.didReceive(text: newModel.result)
     output?.cleanButtonWasSelected()
   }
   
   func setNewLanguage(language: GoodDeedsScreenModel.Language) {
-    guard let model = storageService.goodDeedsScreenModel else {
+    guard let model = goodDeedsScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -170,7 +177,7 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
       listResult: model.listResult,
       language: language
     )
-    storageService.goodDeedsScreenModel = newModel
+    goodDeedsScreenModel = newModel
     getContent()
   }
 }

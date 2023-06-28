@@ -53,6 +53,13 @@ final class DateTimeInteractor: DateTimeInteractorInput {
   
   private var storageService: StorageService
   private let buttonCounterService: ButtonCounterService
+  private var dateTimeScreenModel: DateTimeScreenModel? {
+    get {
+      storageService.getData(from: DateTimeScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -66,9 +73,9 @@ final class DateTimeInteractor: DateTimeInteractorInput {
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    storageService.dateTimeScreenModel = nil
+    dateTimeScreenModel = nil
     getContent()
-    guard let model = storageService.dateTimeScreenModel else { return }
+    guard let model = dateTimeScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
@@ -77,7 +84,7 @@ final class DateTimeInteractor: DateTimeInteractorInput {
   }
   
   func generateContentDate() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -90,13 +97,13 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
     buttonCounterService.onButtonClick()
   }
   
   func generateContentTime() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -110,13 +117,13 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
     buttonCounterService.onButtonClick()
   }
   
   func generateContentDay() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -130,13 +137,13 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
     buttonCounterService.onButtonClick()
   }
   
   func generateContentMonth() {
-    guard let model = storageService.dateTimeScreenModel else {
+    guard let model = dateTimeScreenModel else {
       return
     }
     
@@ -149,13 +156,13 @@ final class DateTimeInteractor: DateTimeInteractorInput {
       listResult: listResult
     )
     
-    self.storageService.dateTimeScreenModel = newModel
+    self.dateTimeScreenModel = newModel
     output?.didReceive(model: newModel)
     buttonCounterService.onButtonClick()
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.dateTimeScreenModel {
+    if let model = dateTimeScreenModel {
       return model.listResult
     } else {
       return []
@@ -167,14 +174,14 @@ final class DateTimeInteractor: DateTimeInteractorInput {
 
 private extension DateTimeInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = storageService.dateTimeScreenModel {
+    if let model = dateTimeScreenModel {
       output?.didReceive(model: model)
     } else {
       let model = DateTimeScreenModel(
         result: Appearance().result,
         listResult: []
       )
-      self.storageService.dateTimeScreenModel = model
+      self.dateTimeScreenModel = model
       output?.didReceive(model: model)
     }
   }

@@ -52,6 +52,13 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   private let hapticService: HapticService
   private var storageService: StorageService
   private var buttonCounterService: ButtonCounterService
+  private var coinScreenModel: CoinScreenModel? {
+    get {
+      storageService.getData(from: CoinScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -68,13 +75,13 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   // MARK: - Internal func
   
   func saveData(model: CoinScreenModel) {
-    storageService.coinScreenModel = model
+    coinScreenModel = model
   }
   
   func cleanButtonAction() {
-    storageService.coinScreenModel = nil
+    coinScreenModel = nil
     getContent()
-    guard let model = storageService.coinScreenModel else { return }
+    guard let model = coinScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
@@ -83,7 +90,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   }
   
   func returnModel() -> CoinScreenModel? {
-    storageService.coinScreenModel
+    coinScreenModel
   }
   
   func generateButtonAction() {
@@ -103,7 +110,7 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
 
 private extension CoinScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = storageService.coinScreenModel {
+    if let model = coinScreenModel {
       output?.didReceive(model: model)
     } else {
       let model = CoinScreenModel(
@@ -112,7 +119,7 @@ private extension CoinScreenInteractor {
         coinType: .none,
         listResult: []
       )
-      self.storageService.coinScreenModel = model
+      self.coinScreenModel = model
       output?.didReceive(model: model)
     }
   }

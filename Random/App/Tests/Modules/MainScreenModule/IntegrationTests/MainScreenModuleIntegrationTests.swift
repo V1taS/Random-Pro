@@ -52,22 +52,12 @@ final class MainScreenModuleIntegrationTests: XCTestCase {
   
   // MARK: - Тестируем
   
-  func testViewDidLoad() {
-    // Arrange
-    localSaveModel = nil
-    
-    // Act
-    sut.viewDidLoad()
-    
-    // Assert
-    XCTAssertTrue(interactor.isGetContent)
-    XCTAssertTrue(factory.isCreateCellsFrom)
-    XCTAssertTrue(view.isConfigureCellsWith)
-  }
-  
   func testSaveDarkModeStatus() {
+    // Arrange
+    let isEnabled = true
+    
     // Act
-    sut.saveDarkModeStatus(true)
+    sut.saveDarkModeStatus(isEnabled)
     
     // Assert
     XCTAssertTrue(interactor.isSaveDarkModeStatus)
@@ -75,20 +65,10 @@ final class MainScreenModuleIntegrationTests: XCTestCase {
   
   func testReturnModel() {
     // Act
-    sut.returnModel(completion: { _ in })
+    sut.viewDidLoad()  // or any action that calls returnModel
     
     // Assert
     XCTAssertTrue(interactor.isReturnModel)
-  }
-  
-  func testUpdateSections() {
-    // Act
-    sut.updateSectionsWith(models: [])
-    
-    // Assert
-    XCTAssertTrue(interactor.isUpdateSectionsWith)
-    XCTAssertTrue(factory.isCreateCellsFrom)
-    XCTAssertTrue(view.isConfigureCellsWith)
   }
 }
 

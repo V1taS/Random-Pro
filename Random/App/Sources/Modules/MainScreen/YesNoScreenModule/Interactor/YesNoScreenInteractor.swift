@@ -44,6 +44,13 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   
   private var storageService: StorageService
   private let buttonCounterService: ButtonCounterService
+  private var yesNoScreenModel: YesNoScreenModel? {
+    get {
+      storageService.getData(from: YesNoScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -57,26 +64,26 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
   // MARK: - Initarnal func
   
   func cleanButtonAction() {
-    storageService.yesNoScreenModel = nil
+    yesNoScreenModel = nil
     getContent()
-    guard let model = storageService.yesNoScreenModel else { return }
+    guard let model = yesNoScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
   func getContent() {
-    if let model = storageService.yesNoScreenModel {
+    if let model = yesNoScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
       let model = YesNoScreenModel(result: appearance.result,
                                    listResult: [])
-      self.storageService.yesNoScreenModel = model
+      self.yesNoScreenModel = model
       output?.didReceive(model: model)
     }
   }
   
   func generateContent() {
-    guard let model = storageService.yesNoScreenModel else {
+    guard let model = yesNoScreenModel else {
       return
     }
     
@@ -86,13 +93,13 @@ final class YesNoScreenInteractor: YesNoScreenInteractorInput {
     listResult.append(randomElementYesOrNo)
     let newModel = YesNoScreenModel(result: randomElementYesOrNo,
                                     listResult: listResult)
-    self.storageService.yesNoScreenModel = newModel
+    self.yesNoScreenModel = newModel
     output?.didReceive(model: newModel)
     buttonCounterService.onButtonClick()
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.yesNoScreenModel {
+    if let model = yesNoScreenModel {
       return model.listResult
     } else {
       return []

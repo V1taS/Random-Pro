@@ -35,9 +35,8 @@ final class TeamsScreenFactory: TeamsScreenFactoryInput {
   
   private var storageService: StorageService
   private var stylePlayerCard: PlayerView.StyleCard {
-    storageService.playerCardSelectionScreenModel?.filter({
-      $0.playerCardSelection
-    }).first?.style ?? .defaultStyle
+    let models = storageService.getData(from: [PlayerCardSelectionScreenModel].self)
+    return models?.filter({$0.playerCardSelection}).first?.style ?? .defaultStyle
   }
   
   // MARK: - Initialization

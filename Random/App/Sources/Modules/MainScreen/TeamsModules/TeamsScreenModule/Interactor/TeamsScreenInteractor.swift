@@ -86,9 +86,16 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   private var storageService: StorageService
   private let buttonCounterService: ButtonCounterService
   private var stylePlayerCard: PlayerView.StyleCard {
-    storageService.playerCardSelectionScreenModel?.filter({
-      $0.playerCardSelection
-    }).first?.style ?? .defaultStyle
+    let models = storageService.getData(from: [PlayerCardSelectionScreenModel].self)
+    return models?.filter({$0.playerCardSelection}).first?.style ?? .defaultStyle
+  }
+  
+  private var teamsScreenModel: TeamsScreenModel? {
+    get {
+      storageService.getData(from: TeamsScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
   }
   
   // MARK: - Initialization
@@ -107,7 +114,7 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func updateStyle() {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return
     }
     
@@ -143,7 +150,7 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func updateTeams(count: Int) {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return
     }
     
@@ -152,11 +159,11 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
       allPlayers: model.allPlayers,
       teams: model.teams
     )
-    self.storageService.teamsScreenModel = newModel
+    self.teamsScreenModel = newModel
   }
   
   func updateNameTeam(name: String, id: String) {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return
     }
     var listTeams: [TeamsScreenModel.Team] = []
@@ -173,12 +180,12 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
     let newModel = TeamsScreenModel(selectedTeam: model.selectedTeam,
                                     allPlayers: model.allPlayers,
                                     teams: listTeams)
-    self.storageService.teamsScreenModel = newModel
+    self.teamsScreenModel = newModel
     self.output?.didReceive(model: newModel)
   }
   
   func updateList(teams: [TeamsScreenModel.Team]) {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return
     }
     
@@ -187,46 +194,46 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
       allPlayers: model.allPlayers,
       teams: teams
     )
-    self.storageService.teamsScreenModel = newModel
+    self.teamsScreenModel = newModel
   }
   
   func getContent() {
-    if let model = storageService.teamsScreenModel {
+    if let model = teamsScreenModel {
       output?.didReceive(model: model)
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
                                    allPlayers: generateFakePlayers(),
                                    teams: [])
-      self.storageService.teamsScreenModel = model
+      self.teamsScreenModel = model
       output?.didReceiveEmptyListTeams()
     }
   }
   
   func updateContentWith(players: [TeamsScreenPlayerModel]) {
-    if let model = storageService.teamsScreenModel {
+    if let model = teamsScreenModel {
       let newModel = TeamsScreenModel(
         selectedTeam: model.selectedTeam,
         allPlayers: players,
         teams: model.teams
       )
-      self.storageService.teamsScreenModel = newModel
+      self.teamsScreenModel = newModel
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
                                    allPlayers: generateFakePlayers(),
                                    teams: [])
-      self.storageService.teamsScreenModel = model
+      self.teamsScreenModel = model
     }
   }
   
   func returnCountTeams() -> Int {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return .zero
     }
     return model.teams.count
   }
   
   func returnGeneratedCountPlayers() -> Int {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return .zero
     }
     
@@ -239,21 +246,21 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func returnListTeams() -> [TeamsScreenModel.Team] {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return []
     }
     return model.teams
   }
   
   func returnListPlayers() -> [TeamsScreenPlayerModel] {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return []
     }
     return model.allPlayers
   }
   
   func returnModel() -> TeamsScreenModel {
-    if let model = storageService.teamsScreenModel {
+    if let model = teamsScreenModel {
       return model
     } else {
       let model = TeamsScreenModel(selectedTeam: Appearance().selectedTeamDefault,
@@ -264,20 +271,20 @@ final class TeamsScreenInteractor: TeamsScreenInteractorInput {
   }
   
   func returnSelectedTeam() -> Int {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return .zero
     }
     return model.selectedTeam
   }
   
   func cleanButtonAction() {
-    guard let model = storageService.teamsScreenModel else {
+    guard let model = teamsScreenModel else {
       return
     }
     let newModel = TeamsScreenModel(selectedTeam: model.selectedTeam,
                                     allPlayers: model.allPlayers,
                                     teams: [])
-    self.storageService.teamsScreenModel = newModel
+    self.teamsScreenModel = newModel
     output?.cleanButtonWasSelected()
   }
 }
@@ -301,14 +308,14 @@ private extension TeamsScreenInteractor {
                                       name: "\(appearance.player) - \($0)",
                                       avatar: generationImagePlayer(),
                                       emoji: emojiList.first,
-                                      state: .teamTwo,
+                                      state: .random,
                                       style: stylePlayerCard)
       } else if $0.isMultiple(of: 16) {
         return TeamsScreenPlayerModel(id: UUID().uuidString,
                                       name: "\(appearance.player) - \($0)",
                                       avatar: generationImagePlayer(),
                                       emoji: "🔴",
-                                      state: .doesNotPlay,
+                                      state: .random,
                                       style: stylePlayerCard)
       } else {
         return TeamsScreenPlayerModel(id: UUID().uuidString,

@@ -62,6 +62,13 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   private var networkService: NetworkService
   private var casheNames: [String] = []
   private let buttonCounterService: ButtonCounterService
+  private var namesScreenModel: NamesScreenModel? {
+    get {
+      storageService.getData(from: NamesScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -82,11 +89,11 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
       language: getDefaultLanguage(),
       gender: .male
     )
-    let model = storageService.namesScreenModel ?? newModel
+    let model = namesScreenModel ?? newModel
     let gender = gender ?? (model.gender ?? .male)
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.namesScreenModel = NamesScreenModel(
+    namesScreenModel = NamesScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language,
@@ -106,7 +113,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    guard let model = storageService.namesScreenModel,
+    guard let model = namesScreenModel,
           let result = casheNames.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -115,7 +122,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.namesScreenModel = NamesScreenModel(
+    namesScreenModel = NamesScreenModel(
       result: result,
       listResult: listResult,
       language: model.language,
@@ -130,7 +137,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   }
   
   func setNewLanguage(language: NamesScreenModel.Language) {
-    guard let model = storageService.namesScreenModel else {
+    guard let model = namesScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -141,12 +148,12 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
       language: language,
       gender: model.gender
     )
-    storageService.namesScreenModel = newModel
+    namesScreenModel = newModel
     getContent(gender: nil)
   }
   
   func returnCurrentModel() -> NamesScreenModel {
-    if let model = storageService.namesScreenModel {
+    if let model = namesScreenModel {
       return model
     } else {
       return NamesScreenModel(
@@ -165,7 +172,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
       language: getDefaultLanguage(),
       gender: .male
     )
-    self.storageService.namesScreenModel = newModel
+    self.namesScreenModel = newModel
     output?.didReceive(name: newModel.result, gender: newModel.gender ?? .male)
     output?.cleanButtonWasSelected()
   }

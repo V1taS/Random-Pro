@@ -67,6 +67,13 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   private let appPurchasesService: AppPurchasesService
   private var cacheProducts: [ApphudProduct] = []
   private var storageService: StorageService
+  private var mainScreenModel: MainScreenModel? {
+    get {
+      storageService.getData(from: MainScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -141,16 +148,16 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
 
 private extension PremiumScreenInteractor {
   func activatePremium() {
-    if let mainScreenModel = storageService.mainScreenModel {
+    if let mainScreenModel {
       let newModel = MainScreenModel(isDarkMode: mainScreenModel.isDarkMode,
                                      isPremium: true,
                                      allSections: mainScreenModel.allSections)
-      self.storageService.mainScreenModel = newModel
+      self.mainScreenModel = newModel
       output?.updateStateForSections()
     } else {
       MainScreenFactory.createBaseModel { model in
         MainScreenFactory.updateModelWith(oldModel: model) { [weak self] newModel in
-          self?.storageService.mainScreenModel = newModel
+          self?.mainScreenModel = newModel
           self?.output?.updateStateForSections()
         }
       }

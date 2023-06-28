@@ -24,9 +24,9 @@ final class DeepLinkServiceImpl: DeepLinkService {
   
   var deepLinkType: DeepLinkType? {
     get {
-      StorageServiceImpl().deepLinkModel
+      return StorageServiceImpl().getData(from: DeepLinkType.self)
     } set {
-      StorageServiceImpl().deepLinkModel = newValue
+      StorageServiceImpl().saveData(newValue)
     }
   }
   

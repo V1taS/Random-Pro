@@ -86,4 +86,12 @@ final class MainScreenInteractorInputMock: MainScreenInteractorInput {
   func updatesPremiumFeatureToggle(completion: @escaping () -> Void) {
     // TODO: -
   }
+  
+  func saveDarkModeStatus(_ isEnabled: Bool?) {
+    // TODO: -
+  }
+  
+  func savePremium(_ isEnabled: Bool) {
+    // TODO: -
+  }
 }

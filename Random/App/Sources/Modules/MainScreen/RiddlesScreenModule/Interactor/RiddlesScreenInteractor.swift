@@ -63,6 +63,13 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
   private var networkService: NetworkService
   private var buttonCounterService: ButtonCounterService
   private var casheRiddles: [RiddlesScreenModel.Riddles] = []
+  private var riddlesScreenModel: RiddlesScreenModel? {
+    get {
+      storageService.getData(from: RiddlesScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -84,11 +91,11 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
       language: getDefaultLanguage(),
       type: .easy
     )
-    let model = storageService.riddlesScreenModel ?? newModel
+    let model = riddlesScreenModel ?? newModel
     let type = type ?? model.type
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.riddlesScreenModel = RiddlesScreenModel(
+    riddlesScreenModel = RiddlesScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language,
@@ -108,7 +115,7 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    guard let model = storageService.riddlesScreenModel,
+    guard let model = riddlesScreenModel,
           let result = casheRiddles.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -117,7 +124,7 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.riddlesScreenModel = RiddlesScreenModel(
+    riddlesScreenModel = RiddlesScreenModel(
       result: result,
       listResult: listResult,
       language: model.language,
@@ -135,14 +142,14 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
       language: getDefaultLanguage(),
       type: .easy
     )
-    self.storageService.riddlesScreenModel = newModel
+    self.riddlesScreenModel = newModel
     output?.didReceive(riddles: newModel.result,
                        type: newModel.type)
     output?.cleanButtonWasSelected()
   }
   
   func setNewLanguage(language: RiddlesScreenModel.Language) {
-    guard let model = storageService.riddlesScreenModel else {
+    guard let model = riddlesScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -153,7 +160,7 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
       language: language,
       type: model.type
     )
-    storageService.riddlesScreenModel = newModel
+    riddlesScreenModel = newModel
     getContent(type: nil)
   }
   
@@ -162,7 +169,7 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
   }
   
   func returnCurrentModel() -> RiddlesScreenModel {
-    if let model = storageService.riddlesScreenModel {
+    if let model = riddlesScreenModel {
       return model
     } else {
       return RiddlesScreenModel(

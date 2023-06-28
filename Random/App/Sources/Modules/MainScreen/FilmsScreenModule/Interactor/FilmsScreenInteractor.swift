@@ -51,11 +51,18 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   private let factory: FilmsScreenFactoryInput
   private let services: ApplicationServices
   private var storageService: StorageService
-  private var filmsScreenModel: [FilmsScreenModel] = [] {
+  private var _filmsScreenModel: [FilmsScreenModel] = [] {
     didSet {
       DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-        self?.storageService.filmsScreenModel = self?.filmsScreenModel
+        self?.storageService.saveData(self?._filmsScreenModel)
       }
+    }
+  }
+  private var filmsScreenModel: [FilmsScreenModel]? {
+    get {
+      storageService.getData(from: [FilmsScreenModel].self)
+    } set {
+      _filmsScreenModel = newValue ?? []
     }
   }
   
@@ -69,7 +76,6 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
     self.services = services
     self.factory = factory
     storageService = services.storageService
-    filmsScreenModel = services.storageService.filmsScreenModel ?? []
   }
   
   // MARK: - Internal func
@@ -98,11 +104,11 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   
   func loadFilm() {
     if isRuslocale() {
-      if services.storageService.filmsScreenModel == nil {
+      if filmsScreenModel == nil {
         loadRusFilms {}
       }
     } else {
-      if services.storageService.filmsScreenModel == nil {
+      if filmsScreenModel == nil {
         loadEngFilms {}
       }
     }
@@ -135,7 +141,7 @@ private extension FilmsScreenInteractor {
   }
   
   func getEngFilms() {
-    if filmsScreenModel.isEmpty {
+    if let filmsScreenModel, filmsScreenModel.isEmpty {
       loadEngFilms { [weak self] in
         guard let filmModel = self?.getGenerateRusFilms() else {
           self?.output?.somethingWentWrong()
@@ -153,7 +159,7 @@ private extension FilmsScreenInteractor {
   }
   
   func getRusFilms() {
-    if filmsScreenModel.isEmpty {
+    if let filmsScreenModel, filmsScreenModel.isEmpty {
       loadRusFilms { [weak self] in
         guard let filmModel = self?.getGenerateRusFilms() else {
           self?.output?.somethingWentWrong()
@@ -244,11 +250,11 @@ private extension FilmsScreenInteractor {
   }
   
   func getGenerateRusFilms() -> FilmsScreenModel? {
-    filmsScreenModel.shuffle()
-    guard let filmModel = filmsScreenModel.first else {
+    filmsScreenModel?.shuffle()
+    guard let filmModel = filmsScreenModel?.first else {
       return nil
     }
-    filmsScreenModel.removeFirst()
+    filmsScreenModel?.removeFirst()
     return filmModel
   }
   

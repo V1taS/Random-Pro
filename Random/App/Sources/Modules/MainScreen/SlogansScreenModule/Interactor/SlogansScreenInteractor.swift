@@ -55,6 +55,13 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
   private var casheSlogans: [String] = []
+  private var slogansScreenModel: SlogansScreenModel? {
+    get {
+      storageService.getData(from: SlogansScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
 
   // MARK: - Initialization
 
@@ -80,10 +87,10 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
       language: getDefaultLanguage()
     )
 
-    let model = storageService.slogansScreenModel ?? newModel
+    let model = slogansScreenModel ?? newModel
     let language = model.language ?? getDefaultLanguage()
 
-    storageService.slogansScreenModel = SlogansScreenModel(
+    slogansScreenModel = SlogansScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language
@@ -118,7 +125,7 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
   }
 
   func generateButtonAction() {
-    guard let model = storageService.slogansScreenModel,
+    guard let model = slogansScreenModel,
           let result = casheSlogans.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -127,7 +134,7 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
 
-    storageService.slogansScreenModel = SlogansScreenModel(
+    slogansScreenModel = SlogansScreenModel(
       result: result,
       listResult: listResult,
       language: model.language
@@ -137,7 +144,7 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
   }
 
   func returnCurrentModel() -> SlogansScreenModel {
-    if let model = storageService.slogansScreenModel {
+    if let model = slogansScreenModel {
       return model
     } else {
       let appearance = Appearance()
@@ -154,13 +161,13 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
     let newModel = SlogansScreenModel(result: appearance.result,
                                       listResult: [],
                                       language: getDefaultLanguage())
-    self.storageService.slogansScreenModel = newModel
+    self.slogansScreenModel = newModel
     output?.didReceive(text: newModel.result)
     output?.cleanButtonWasSelected()
   }
 
   func setNewLanguage(language: SlogansScreenModel.Language) {
-    guard let model = storageService.slogansScreenModel else {
+    guard let model = slogansScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -170,7 +177,7 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
       listResult: model.listResult,
       language: language
     )
-    storageService.slogansScreenModel = newModel
+    slogansScreenModel = newModel
     getContent()
   }
 }

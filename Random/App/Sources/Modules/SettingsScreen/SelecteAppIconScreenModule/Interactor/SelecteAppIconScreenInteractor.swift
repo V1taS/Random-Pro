@@ -43,6 +43,13 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   // MARK: - Private properties
   
   private var storageService: StorageService
+  private var appIconScreenModel: SelecteAppIconScreenModel? {
+    get {
+      storageService.getData(from: SelecteAppIconScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -60,7 +67,7 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   func updateAppIcon(type: SelecteAppIconType) {
     let newModel = SelecteAppIconScreenModel(selecteAppIconType: type)
-    storageService.appIconScreenModel = newModel
+    appIconScreenModel = newModel
     let appearance = Appearance()
     guard UIApplication.shared.supportsAlternateIcons else {
       output?.somethingWentWrong()
@@ -125,7 +132,7 @@ final class SelecteAppIconScreenInteractor: SelecteAppIconScreenInteractorInput 
   
   /// Получить данные
   func getContent() {
-    output?.didReceive(selecteIconType: storageService.appIconScreenModel?.selecteAppIconType ?? .defaultIcon,
+    output?.didReceive(selecteIconType: appIconScreenModel?.selecteAppIconType ?? .defaultIcon,
                        isPremium: storageService.isPremium)
   }
 }

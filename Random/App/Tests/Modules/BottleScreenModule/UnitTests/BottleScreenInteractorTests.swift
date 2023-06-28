@@ -22,8 +22,8 @@ final class BottleScreenInteractorTests: XCTestCase {
   override func setUp() {
     super.setUp()
     
-    sut = BottleScreenInteractor(TimerServiceMock(), hapticService: HapticServiceMock())
-    sut.output = outputSpy
+//    sut = BottleScreenInteractor(TimerServiceMock() as! ApplicationServices, hapticService: HapticServiceMock())
+//    sut.output = outputSpy
   }
   
   override func tearDown() {

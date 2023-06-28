@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import XCTest
+@testable import Random
 
 /// Mock Input
 final class MainScreenFactoryInputMock: MainScreenFactoryInput {

@@ -61,7 +61,22 @@ let project = Project(
         .external(name: "RandomUIKit")
       ],
       settings: targetWidgetIOSSettings
+    ),
+    Target(
+       name: "\(appName)Tests",
+       platform: .iOS,
+       product: .unitTests,
+       bundleId: "\(reverseOrganizationName).\(appName)Tests",
+       deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
+       infoPlist: .default,
+       sources: [
+        "\(rootPath)/\(appPath)/Tests/**/*"
+       ],
+       dependencies: [
+        .target(name: "\(appName)"),
+       ],
+       settings: targetBuildTestsSettings
     )
   ],
-  schemes: [mainIOSScheme, yesNoWidgetScheme]
+  schemes: [mainIOSScheme, mainTestsIOSScheme, yesNoWidgetScheme]
 )

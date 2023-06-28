@@ -6,17 +6,20 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-@testable import Random
+@testable
+import Random
 
 final class MainScreenInteractorOutputSpy: MainScreenInteractorOutput {
   
-  // MARK: - Stub (Возвращают набор предопределенных данных)
+  // MARK: - Spy variables
   
-  var didReceiveModelStub: ((_ model: MainScreenModel) -> Void)?
+  var didReceiveModelCalled = false
+  var receivedModel: MainScreenModel?
   
   // MARK: - MainScreenInteractorOutput
   
   func didReceive(model: MainScreenModel) {
-    didReceiveModelStub?(model)
+    didReceiveModelCalled = true
+    receivedModel = model
   }
 }

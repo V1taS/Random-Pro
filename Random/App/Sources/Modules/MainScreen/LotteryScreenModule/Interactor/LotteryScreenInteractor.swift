@@ -53,6 +53,13 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   
   private var storageService: StorageService
   private let buttonCounterService: ButtonCounterService
+  private var lotteryScreenModel: LotteryScreenModel? {
+    get {
+      storageService.getData(from: LotteryScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -66,9 +73,9 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
   // MARK: - Internal func
   
   func cleanButtonAction() {
-    storageService.lotteryScreenModel = nil
+    lotteryScreenModel = nil
     getContent()
-    guard let model = storageService.lotteryScreenModel else { return }
+    guard let model = lotteryScreenModel else { return }
     output?.cleanButtonWasSelected(model: model)
   }
   
@@ -93,7 +100,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
       return
     }
     
-    guard let model = storageService.lotteryScreenModel else {
+    guard let model = lotteryScreenModel else {
       return
     }
     
@@ -115,12 +122,12 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
       result: numbersResult,
       listResult: listResult
     )
-    self.storageService.lotteryScreenModel = newModel
+    self.lotteryScreenModel = newModel
     output?.didReceive(model: newModel)
   }
   
   func returnListResult() -> [String] {
-    if let model = storageService.lotteryScreenModel {
+    if let model = lotteryScreenModel {
       return model.listResult
     } else {
       return []
@@ -132,7 +139,7 @@ final class LotteryScreenInteractor: LotteryScreenInteractorInput {
 
 private extension LotteryScreenInteractor {
   func configureModel(withWithoutRepetition isOn: Bool = false) {
-    if let model = storageService.lotteryScreenModel {
+    if let model = lotteryScreenModel {
       output?.didReceive(model: model)
     } else {
       let appearance = Appearance()
@@ -143,7 +150,7 @@ private extension LotteryScreenInteractor {
         result: appearance.result,
         listResult: []
       )
-      self.storageService.lotteryScreenModel = model
+      self.lotteryScreenModel = model
       output?.didReceive(model: model)
     }
   }

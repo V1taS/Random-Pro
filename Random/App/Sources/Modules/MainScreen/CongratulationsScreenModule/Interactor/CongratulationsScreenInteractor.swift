@@ -62,6 +62,13 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
   private var networkService: NetworkService
   private var buttonCounterService: ButtonCounterService
   private var casheCongratulations: [String] = []
+  private var congratulationsScreenModel: CongratulationsScreenModel? {
+    get {
+      storageService.getData(from: CongratulationsScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -82,11 +89,11 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
       language: getDefaultLanguage(),
       type: .birthday
     )
-    let model = storageService.congratulationsScreenModel ?? newModel
+    let model = congratulationsScreenModel ?? newModel
     let type = type ?? (model.type ?? .birthday)
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.congratulationsScreenModel = CongratulationsScreenModel(
+    congratulationsScreenModel = CongratulationsScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language,
@@ -106,7 +113,7 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
   }
   
   func generateButtonAction() {
-    guard let model = storageService.congratulationsScreenModel,
+    guard let model = congratulationsScreenModel,
           let result = casheCongratulations.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -115,7 +122,7 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.congratulationsScreenModel = CongratulationsScreenModel(
+    congratulationsScreenModel = CongratulationsScreenModel(
       result: result,
       listResult: listResult,
       language: model.language,
@@ -132,7 +139,7 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
       language: getDefaultLanguage(),
       type: .birthday
     )
-    self.storageService.congratulationsScreenModel = newModel
+    self.congratulationsScreenModel = newModel
     output?.didReceive(name: newModel.result, type: newModel.type ?? .birthday)
     output?.cleanButtonWasSelected()
   }
@@ -142,7 +149,7 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
   }
   
   func setNewLanguage(language: CongratulationsScreenModel.Language) {
-    guard let model = storageService.congratulationsScreenModel else {
+    guard let model = congratulationsScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -153,12 +160,12 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
       language: language,
       type: model.type
     )
-    storageService.congratulationsScreenModel = newModel
+    congratulationsScreenModel = newModel
     getContent(type: nil)
   }
   
   func returnCurrentModel() -> CongratulationsScreenModel {
-    if let model = storageService.congratulationsScreenModel {
+    if let model = congratulationsScreenModel {
       return model
     } else {
       return CongratulationsScreenModel(

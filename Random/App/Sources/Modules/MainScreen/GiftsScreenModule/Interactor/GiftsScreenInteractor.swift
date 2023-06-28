@@ -62,6 +62,13 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
   private var networkService: NetworkService
   private var buttonCounterService: ButtonCounterService
   private var casheGifts: [String] = []
+  private var giftsScreenModel: GiftsScreenModel? {
+    get {
+      storageService.getData(from: GiftsScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
 
   // MARK: - Initialization
 
@@ -82,11 +89,11 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
       language: getDefaultLanguage(),
       gender: .male
     )
-    let model = storageService.giftsScreenModel ?? newModel
+    let model = giftsScreenModel ?? newModel
     let gender = gender ?? (model.gender ?? .male)
     let language = model.language ?? getDefaultLanguage()
 
-    storageService.giftsScreenModel = GiftsScreenModel(
+    giftsScreenModel = GiftsScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language,
@@ -106,7 +113,7 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
   }
 
   func generateButtonAction() {
-    guard let model = storageService.giftsScreenModel,
+    guard let model = giftsScreenModel,
           let result = casheGifts.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -115,7 +122,7 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
 
-    storageService.giftsScreenModel = GiftsScreenModel(
+    giftsScreenModel = GiftsScreenModel(
       result: result,
       listResult: listResult,
       language: model.language,
@@ -132,7 +139,7 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
       language: getDefaultLanguage(),
       gender: .male
     )
-    self.storageService.giftsScreenModel = newModel
+    self.giftsScreenModel = newModel
     output?.didReceive(text: newModel.result, gender: newModel.gender ?? .male)
     output?.cleanButtonWasSelected()
   }
@@ -142,7 +149,7 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
   }
 
   func setNewLanguage(language: GiftsScreenModel.Language) {
-    guard let model = storageService.giftsScreenModel else {
+    guard let model = giftsScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -153,12 +160,12 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
       language: language,
       gender: model.gender
     )
-    storageService.giftsScreenModel = newModel
+    giftsScreenModel = newModel
     getContent(gender: nil)
   }
 
   func returnCurrentModel() -> GiftsScreenModel {
-    if let model = storageService.giftsScreenModel {
+    if let model = giftsScreenModel {
       return model
     } else {
       return GiftsScreenModel(

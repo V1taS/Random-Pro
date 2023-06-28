@@ -62,6 +62,13 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
   private var networkService: NetworkService
   private var casheTruthOrDare: [String] = []
   private let buttonCounterService: ButtonCounterService
+  private var truthOrDareScreenModel: TruthOrDareScreenModel? {
+    get {
+      storageService.getData(from: TruthOrDareScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -82,11 +89,11 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
       language: getDefaultLanguage(),
       type: .truth
     )
-    let model = storageService.truthOrDareScreenModel ?? newModel
+    let model = truthOrDareScreenModel ?? newModel
     let typeTruthOrDare = type ?? (model.type ?? .truth)
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.truthOrDareScreenModel = TruthOrDareScreenModel(
+    truthOrDareScreenModel = TruthOrDareScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language,
@@ -106,7 +113,7 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    guard let model = storageService.truthOrDareScreenModel,
+    guard let model = truthOrDareScreenModel,
           let result = casheTruthOrDare.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -115,7 +122,7 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.truthOrDareScreenModel = TruthOrDareScreenModel(
+    truthOrDareScreenModel = TruthOrDareScreenModel(
       result: result,
       listResult: listResult,
       language: model.language,
@@ -130,7 +137,7 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
   }
   
   func setNewLanguage(language: TruthOrDareScreenModel.Language) {
-    guard let model = storageService.truthOrDareScreenModel else {
+    guard let model = truthOrDareScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -141,12 +148,12 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
       language: language,
       type: model.type
     )
-    storageService.truthOrDareScreenModel = newModel
+    truthOrDareScreenModel = newModel
     getContent(type: nil)
   }
   
   func returnCurrentModel() -> TruthOrDareScreenModel {
-    if let model = storageService.truthOrDareScreenModel {
+    if let model = truthOrDareScreenModel {
       return model
     } else {
       return TruthOrDareScreenModel(
@@ -165,7 +172,7 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
       language: getDefaultLanguage(),
       type: .truth
     )
-    self.storageService.truthOrDareScreenModel = newModel
+    self.truthOrDareScreenModel = newModel
     output?.didReceive(data: newModel.result, type: newModel.type ?? .truth)
     output?.cleanButtonWasSelected()
   }

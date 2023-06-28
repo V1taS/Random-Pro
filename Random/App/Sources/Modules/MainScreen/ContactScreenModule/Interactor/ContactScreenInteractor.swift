@@ -50,6 +50,13 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   private let permissionService: PermissionService
   private var storageService: StorageService
   private let buttonCounterService: ButtonCounterService
+  private var contactScreenModel: ContactScreenModel? {
+    get {
+      storageService.getData(from: ContactScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   /// - Parameters:
   ///  - services: Сервисы приложения
@@ -62,7 +69,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   // MARK: - Internal func
   
   func getContent() {
-    if let model = storageService.contactScreenModel {
+    if let model = contactScreenModel {
       self.output?.didReceive(model: model)
     } else {
       permissionService.requestContactStore { [weak self] granted, error in
@@ -96,7 +103,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
           listResult: [],
           result: Appearance().resultLabel
         )
-        self.storageService.contactScreenModel = newModel
+        self.contactScreenModel = newModel
         self.output?.didReceive(model: newModel)
       }
     }
@@ -104,7 +111,7 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
   
   func generateButtonAction() {
     guard
-      let model = storageService.contactScreenModel,
+      let model = contactScreenModel,
       let contact = model.allContacts.shuffled().first
     else {
       return
@@ -118,20 +125,20 @@ final class ContactScreenInteractor: ContactScreenInteractorInput {
       listResult: listResult,
       result: result
     )
-    self.storageService.contactScreenModel = newModel
+    self.contactScreenModel = newModel
     output?.didReceive(model: newModel)
     buttonCounterService.onButtonClick()
   }
   
   func returnCurrentModel() -> ContactScreenModel {
-    guard let model = storageService.contactScreenModel else {
+    guard let model = contactScreenModel else {
       return ContactScreenModel(allContacts: [], listResult: [], result: Appearance().resultLabel)
     }
     return model
   }
   
   func cleanButtonAction() {
-    self.storageService.contactScreenModel = nil
+    self.contactScreenModel = nil
     getContent()
     output?.cleanButtonWasSelected()
   }

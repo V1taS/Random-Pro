@@ -55,6 +55,13 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
   private var casheJoke: [String] = []
+  private var jokeGeneratorScreenModel: JokeGeneratorScreenModel? {
+    get {
+      storageService.getData(from: JokeGeneratorScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -80,10 +87,10 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
       language: getDefaultLanguage()
     )
     
-    let model = storageService.jokeGeneratorScreenModel ?? newModel
+    let model = jokeGeneratorScreenModel ?? newModel
     let language = model.language ?? getDefaultLanguage()
     
-    storageService.jokeGeneratorScreenModel = JokeGeneratorScreenModel(
+    jokeGeneratorScreenModel = JokeGeneratorScreenModel(
       result: model.result,
       listResult: model.listResult,
       language: language
@@ -118,7 +125,7 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    guard let model = storageService.jokeGeneratorScreenModel,
+    guard let model = jokeGeneratorScreenModel,
           let result = casheJoke.shuffled().first else {
       output?.somethingWentWrong()
       return
@@ -127,7 +134,7 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
     var listResult = model.listResult
     listResult.append(result)
     
-    storageService.jokeGeneratorScreenModel = JokeGeneratorScreenModel(
+    jokeGeneratorScreenModel = JokeGeneratorScreenModel(
       result: result,
       listResult: listResult,
       language: model.language
@@ -137,7 +144,7 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
   }
   
   func returnCurrentModel() -> JokeGeneratorScreenModel {
-    if let model = storageService.jokeGeneratorScreenModel {
+    if let model = jokeGeneratorScreenModel {
       return model
     } else {
       let appearance = Appearance()
@@ -154,13 +161,13 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
     let newModel = JokeGeneratorScreenModel(result: appearance.result,
                                             listResult: [],
                                             language: getDefaultLanguage())
-    self.storageService.jokeGeneratorScreenModel = newModel
+    self.jokeGeneratorScreenModel = newModel
     output?.didReceive(text: newModel.result)
     output?.cleanButtonWasSelected()
   }
   
   func setNewLanguage(language: JokeGeneratorScreenModel.Language) {
-    guard let model = storageService.jokeGeneratorScreenModel else {
+    guard let model = jokeGeneratorScreenModel else {
       output?.somethingWentWrong()
       return
     }
@@ -170,7 +177,7 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
       listResult: model.listResult,
       language: language
     )
-    storageService.jokeGeneratorScreenModel = newModel
+    jokeGeneratorScreenModel = newModel
     getContent()
   }
 }

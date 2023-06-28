@@ -48,6 +48,13 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
   // MARK: - Private property
 
   private var storageService: StorageService
+  private var playerCardSelectionScreenModel: [PlayerCardSelectionScreenModel]? {
+    get {
+      storageService.getData(from: [PlayerCardSelectionScreenModel].self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -64,8 +71,8 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
   }
   
   func savePlayerCardStyle(_ style: PlayerView.StyleCard, with models: [PlayerCardSelectionScreenModel]) {
-    guard (storageService.playerCardSelectionScreenModel) != nil else {
-      storageService.playerCardSelectionScreenModel = models
+    guard (playerCardSelectionScreenModel) != nil else {
+      playerCardSelectionScreenModel = models
       return
     }
     
@@ -77,7 +84,7 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
                                             playerCardSelection: $0.style == style,
                                             isPremium: $0.isPremium)
     }
-    storageService.playerCardSelectionScreenModel = newModel
+    playerCardSelectionScreenModel = newModel
   }
   
   func getContent() {
@@ -88,7 +95,7 @@ final class PlayerCardSelectionScreenInteractor: PlayerCardSelectionScreenIntera
       return
     }
     
-    if let model = storageService.playerCardSelectionScreenModel {
+    if let model = playerCardSelectionScreenModel {
       output?.didReceive(models: model, isPremium: isPremium)
     } else {
       output?.didReceiveEmptyModelWith(isPremium: isPremium)

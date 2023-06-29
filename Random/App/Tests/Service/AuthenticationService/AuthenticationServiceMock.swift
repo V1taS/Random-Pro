@@ -29,28 +29,30 @@ final class AuthenticationServiceMock: AuthenticationService {
   var deleteUserCalled = false
   
   // Stub variables
-  var isRegistered: Bool?
-  var firebaseAuthResult: Result<Random.AuthenticationServiceFirebaseModel, Error>?
-  var firebaseSignOutResult: Result<Void, Error>?
-  var isSignedFirebase: Bool?
-  var userProfile: Random.AuthenticationServiceFirebaseModel?
-  var updateProfileResult: Result<Void, Error>?
-  var updateEmailResult: Result<Void, Error>?
-  var sendUserVerificationEmailResult: Result<Void, Error>?
-  var deleteUserResult: Result<Void, Error>?
+  var authenticationRequestStub: (() -> Void)?
+  var getIsRegisteredStub: (() -> Void)?
+  var authFirebaseWithStub: (() -> Void)?
+  var signOutFirebaseWithStub: (() -> Void)?
+  var checkIsSignedFirebaseStub: (() -> Void)?
+  var getUserProfileStub: (() -> Void)?
+  var updateUserProfileWithStub: (() -> Void)?
+  var updateEmailStub: (() -> Void)?
+  var sendUserVerificationEmailStub: (() -> Void)?
+  var deleteUserStub: (() -> Void)?
   
   func authenticationRequest(
     delegate: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding,
     completion: (String) -> Void
   ) {
     authenticationRequestCalled = true
+    authenticationRequestStub?()
+    completion("")
   }
   
   func getIsRegistered(forUserID: String, completion: @escaping (Bool) -> Void) {
     getIsRegisteredCalled = true
-    if let isRegistered = isRegistered {
-      completion(isRegistered)
-    }
+    getIsRegisteredStub?()
+    completion(false)
   }
   
   func authFirebaseWith(
@@ -59,28 +61,26 @@ final class AuthenticationServiceMock: AuthenticationService {
     completion: @escaping (Result<Random.AuthenticationServiceFirebaseModel, Error>) -> Void
   ) {
     authFirebaseWithCalled = true
-    if let firebaseAuthResult = firebaseAuthResult {
-      completion(firebaseAuthResult)
-    }
+    authFirebaseWithStub?()
+    completion(.success(.init(name: nil)))
   }
   
   func signOutFirebaseWith(completion: @escaping (Result<Void, Error>) -> Void) {
     signOutFirebaseWithCalled = true
-    if let firebaseSignOutResult = firebaseSignOutResult {
-      completion(firebaseSignOutResult)
-    }
+    signOutFirebaseWithStub?()
+    completion(.success(()))
   }
   
   func checkIsSignedFirebase(completion: @escaping (Bool) -> Void) {
     checkIsSignedFirebaseCalled = true
-    if let isSignedFirebase = isSignedFirebase {
-      completion(isSignedFirebase)
-    }
+    checkIsSignedFirebaseStub?()
+    completion(false)
   }
   
   func getUserProfile(completion: @escaping (Random.AuthenticationServiceFirebaseModel?) -> Void) {
     getUserProfileCalled = true
-    completion(userProfile)
+    getUserProfileStub?()
+    completion(nil)
   }
   
   func updateUserProfileWith(
@@ -88,29 +88,25 @@ final class AuthenticationServiceMock: AuthenticationService {
     completion: @escaping (Result<Void, Error>) -> Void
   ) {
     updateUserProfileWithCalled = true
-    if let updateProfileResult = updateProfileResult {
-      completion(updateProfileResult)
-    }
+    updateUserProfileWithStub?()
+    completion(.success(()))
   }
   
   func updateEmail(_ email: String, completion: @escaping (Result<Void, Error>) -> Void) {
     updateEmailCalled = true
-    if let updateEmailResult = updateEmailResult {
-      completion(updateEmailResult)
-    }
+    updateEmailStub?()
+    completion(.success(()))
   }
   
   func sendUserVerificationEmail(completion: @escaping (Result<Void, Error>) -> Void) {
     sendUserVerificationEmailCalled = true
-    if let sendUserVerificationEmailResult = sendUserVerificationEmailResult {
-      completion(sendUserVerificationEmailResult)
-    }
+    sendUserVerificationEmailStub?()
+    completion(.success(()))
   }
   
   func deleteUser(completion: @escaping (Result<Void, Error>) -> Void) {
     deleteUserCalled = true
-    if let deleteUserResult = deleteUserResult {
-      completion(deleteUserResult)
-    }
+    deleteUserStub?()
+    completion(.success(()))
   }
 }

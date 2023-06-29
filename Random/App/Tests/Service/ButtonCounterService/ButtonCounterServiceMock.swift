@@ -12,12 +12,11 @@ import XCTest
 
 final class ButtonCounterServiceMock: ButtonCounterService {
   
-  var clickResponse: ((Int) -> Void)?
-  
   // Spy variable
   var onButtonClickCalled = false
   
   // Stub variable
+  var clickResponse: ((Int) -> Void)?
   var clickCount = 0
   
   func onButtonClick() {

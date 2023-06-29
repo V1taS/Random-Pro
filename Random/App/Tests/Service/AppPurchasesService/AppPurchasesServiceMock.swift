@@ -20,29 +20,33 @@ final class AppPurchasesServiceMock: AppPurchasesService {
   var isValidatePurchaseCalled = false
   
   // Stub variables to mimic the returned values
-  var products: [ApphudProduct]?
-  var purchaseState: AppPurchasesServiceState?
-  var restoreValidate: Bool?
-  var isValidate: Bool?
+  var getProductsStub: (() -> Void)?
+  var purchaseWithStub: (() -> Void)?
+  var restorePurchaseStub: (() -> Void)?
+  var isValidatePurchaseStub: (() -> Void)?
   
   func getProducts(completion: @escaping ([ApphudSDK.ApphudProduct]?) -> Void) {
     getProductsCalled = true
-    completion(products)
+    getProductsStub?()
+    completion(nil)
   }
   
   func purchaseWith(_ product: ApphudSDK.ApphudProduct,
                     completion: @escaping (Random.AppPurchasesServiceState) -> Void) {
     purchaseWithCalled = true
-    completion(purchaseState ?? .somethingWentWrong)
+    purchaseWithStub?()
+    completion(.somethingWentWrong)
   }
   
   func restorePurchase(completion: @escaping (Bool) -> Void) {
     restorePurchaseCalled = true
-    completion(restoreValidate ?? false)
+    restorePurchaseStub?()
+    completion(false)
   }
   
   func isValidatePurchase(completion: @escaping (Bool) -> Void) {
     isValidatePurchaseCalled = true
-    completion(isValidate ?? false)
+    isValidatePurchaseStub?()
+    completion(false)
   }
 }

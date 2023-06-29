@@ -21,8 +21,7 @@ final class MainScreenInteractorTests: XCTestCase {
   override func setUp() {
     super.setUp()
     outputSpy = MainScreenInteractorOutputSpy()
-    let services: ApplicationServices = ApplicationServicesMock()
-    self.services = services
+    services = ApplicationServicesMock()
     interactor = MainScreenInteractor(services: services)
     interactor.output = outputSpy
   }
@@ -39,86 +38,262 @@ final class MainScreenInteractorTests: XCTestCase {
   // Test for updateSectionsWith
   func testUpdateSectionsWith() {
     // Arrange
-    let expectation = self.expectation(description: "updateSectionsWith")
-
-    MainScreenFactory.createBaseModel { [unowned self] mainScreenModel in
-      // Act
-      interactor.updateSectionsWith(model: mainScreenModel)
-      
-      // Assert
-      XCTAssertTrue(outputSpy.didReceiveModelCalled)
-      XCTAssertEqual(outputSpy.receivedModel, mainScreenModel)
-
-      expectation.fulfill()
+    let modelExpectation = expectation(description: "Model created")
+    let updateExpectation = expectation(description: "updateSectionsWith called")
+    var mainScreenModel: MainScreenModel?
+    var receivedModel: MainScreenModel?
+    
+    MainScreenFactory.createBaseModel { result in
+      mainScreenModel = result
+      modelExpectation.fulfill()
     }
-
-    // Wait for the expectation to fulfill, if timeout happens, test case will fail.
-    waitForExpectations(timeout: 5.0, handler: nil)
+    
+    // Act
+    wait(for: [modelExpectation], timeout: 1)
+    interactor.updateSectionsWith(model: mainScreenModel!)
+    
+    outputSpy.didReceiveModelCompletion = { result in
+      receivedModel = result
+      updateExpectation.fulfill()
+    }
+    wait(for: [updateExpectation], timeout: 1)
+    
+    // Assert
+    XCTAssertTrue(outputSpy.didReceiveModelCalled)
+    XCTAssertEqual(receivedModel, mainScreenModel)
   }
   
   // Test for getContent
   func testGetContent() {
     // Arrange
-    let expectation = self.expectation(description: "getContent")
+    let expectation = expectation(description: "getContent")
     
     // Act
     interactor.getContent {
       expectation.fulfill()
     }
+    wait(for: [expectation], timeout: 1)
     
     // Assert
-    waitForExpectations(timeout: 5.0, handler: nil)
     XCTAssertTrue(outputSpy.didReceiveModelCalled)
   }
   
   // Test for returnModel
   func testReturnModel() {
-    MainScreenFactory.createBaseModel { [unowned self] mainScreenModel in
-      // Arrange
-      let model = mainScreenModel
-      let expectation = self.expectation(description: "returnModel")
-
-      // Act
-      interactor.returnModel { result in
-        // Assert
-        XCTAssertEqual(result, model)
-        expectation.fulfill()
-      }
-
-      waitForExpectations(timeout: 5.0, handler: nil)
+    // Arrange
+    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    var receivedModel: MainScreenModel?
+    let expectation = expectation(description: "returnModel")
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    interactor.returnModel { result in
+      receivedModel = result
+      expectation.fulfill()
     }
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    XCTAssertEqual(mainScreenModel, receivedModel)
   }
   
   // Test for saveDarkModeStatus
   func testSaveDarkModeStatus() {
-    MainScreenFactory.createBaseModel { [unowned self] mainScreenModel in
-      // Arrange
-      let darkModeStatus = true
-      
-      // Act
-      interactor.saveDarkModeStatus(darkModeStatus)
-      
-      // Assert
-      if let storageServiceMock = services.storageService as? StorageServiceMock, let model = storageServiceMock.getData(from: MainScreenModel.self) {
-        XCTAssertEqual(model.isDarkMode, darkModeStatus)
-      } else {
-        XCTFail("Failed to cast services.storageService to StorageServiceMock or failed to get data")
-      }
+    // Arrange
+    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    var receivedModel: MainScreenModel?
+    let expectation = expectation(description: "storage save data")
+    let darkModeStatus = true
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    storageServiceMock?.saveDataStub = { result in
+      receivedModel = result as? MainScreenModel
+      expectation.fulfill()
     }
+    interactor.saveDarkModeStatus(darkModeStatus)
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    XCTAssertEqual(receivedModel?.isDarkMode, darkModeStatus)
   }
   
   // Test for savePremium
   func testSavePremium() {
     // Arrange
-    let premiumStatus = true
+    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    var receivedStorageModel: MainScreenModel?
+    var receivedOutputModel: MainScreenModel?
+    let storageExpectation = expectation(description: "storage save data")
+    let ouputExpectation = expectation(description: "didReceiveModel output")
+    let isPremium = true
     
     // Act
-    interactor.savePremium(premiumStatus)
+    storageServiceMock?.saveData(mainScreenModel)
+    storageServiceMock?.saveDataStub = { result in
+      receivedStorageModel = result as? MainScreenModel
+      storageExpectation.fulfill()
+    }
+    outputSpy.didReceiveModelCompletion = { result in
+      receivedOutputModel = result
+      ouputExpectation.fulfill()
+    }
+    interactor.savePremium(isPremium)
+    wait(for: [storageExpectation, ouputExpectation], timeout: 1)
     
     // Assert
+    XCTAssertEqual(receivedStorageModel?.isPremium, isPremium)
+    XCTAssertEqual(receivedStorageModel, receivedOutputModel)
+  }
+  
+  // Test for removeLabelFromSection
+  func testRemoveLabelFromSection() {
+    // Arrange
+    let sectionType: MainScreenModel.SectionType = .coin
+    let mainScreenModel = MainScreenModel(
+      isDarkMode: nil,
+      isPremium: false,
+      allSections: [
+        .init(type: sectionType, isEnabled: true, isHidden: false, isPremium: false, advLabel: .new),
+        .init(type: .bottle, isEnabled: true, isHidden: false, isPremium: false, advLabel: .none)
+      ]
+    )
+    var receivedStorageModel: MainScreenModel?
     let storageServiceMock = services.storageService as? StorageServiceMock
-    let model = storageServiceMock?.getData(from: MainScreenModel.self)
-    XCTAssertEqual(model?.isPremium, premiumStatus)
-    XCTAssertTrue(outputSpy.didReceiveModelCalled)
+    let expectation = expectation(description: "storage save data")
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    storageServiceMock?.saveDataStub = { result in
+      receivedStorageModel = result as? MainScreenModel
+      expectation.fulfill()
+    }
+    interactor.removeLabelFromSection(type: sectionType)
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    let section = receivedStorageModel?.allSections.filter({ $0.type == sectionType }).first
+    XCTAssertTrue(section?.advLabel != .new)
+  }
+  
+  // Test for updatesSectionsIsHiddenFT
+  func testUpdatesSectionsIsHiddenFT() {
+    // Arrange
+    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
+    let expectation = expectation(description: "sections is hidden FT called")
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    let featureToggleServicesMock = services.featureToggleServices as? FeatureToggleServicesMock
+    var isGetSectionsIsHiddenFTCalled = false
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    featureToggleServicesMock?.sectionsIsHiddenFTStub = {
+      isGetSectionsIsHiddenFTCalled = true
+      expectation.fulfill()
+    }
+    interactor.updatesSectionsIsHiddenFT {}
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    XCTAssertTrue(isGetSectionsIsHiddenFTCalled)
+  }
+  
+  // Test for updatesLabelsFeatureToggle
+  func testUpdatesLabelsFeatureToggle() {
+    // Arrange
+    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
+    let expectation = expectation(description: "updates labels called")
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    let featureToggleServicesMock = services.featureToggleServices as? FeatureToggleServicesMock
+    var isLabelsFeatureToggleCalled = false
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    featureToggleServicesMock?.labelsFeatureToggleStub = {
+      isLabelsFeatureToggleCalled = true
+      expectation.fulfill()
+    }
+    interactor.updatesLabelsFeatureToggle {}
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    XCTAssertTrue(isLabelsFeatureToggleCalled)
+  }
+  
+  // Test for updatesPremiumFeatureToggle
+  func testUpdatesPremiumFeatureToggle() {
+    // Arrange
+    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
+    let expectation = expectation(description: "updates premium FT called")
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    let featureToggleServicesMock = services.featureToggleServices as? FeatureToggleServicesMock
+    var isPremiumFeatureToggleCalled = false
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    featureToggleServicesMock?.premiumFeatureToggleStub = {
+      isPremiumFeatureToggleCalled = true
+      expectation.fulfill()
+    }
+    interactor.updatesPremiumFeatureToggle {}
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    XCTAssertTrue(isPremiumFeatureToggleCalled)
+  }
+  
+  // Test for validatePurchase
+  func testValidatePurchase() {
+    // Arrange
+    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
+    let expectation = expectation(description: "validate purchase called")
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    let appPurchasesService = services.appPurchasesService as? AppPurchasesServiceMock
+    var isValidatePurchaseCalled = false
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    appPurchasesService?.isValidatePurchaseStub = {
+      isValidatePurchaseCalled = true
+      expectation.fulfill()
+    }
+    interactor.validatePurchase {}
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    XCTAssertTrue(isValidatePurchaseCalled)
+  }
+  
+  // Test for addLabel
+  func testAddLabel() {
+    // Arrange
+    var receivedStorageModel: MainScreenModel?
+    let advLabel: MainScreenModel.ADVLabel = .hit
+    let sectionType: MainScreenModel.SectionType = .coin
+    
+    let mainScreenModel = MainScreenModel(
+      isDarkMode: nil,
+      isPremium: false,
+      allSections: [
+        .init(type: sectionType, isEnabled: false, isHidden: false, isPremium: false, advLabel: .none)
+      ])
+    let expectation = expectation(description: "validate purchase called")
+    let storageServiceMock = services.storageService as? StorageServiceMock
+    
+    // Act
+    storageServiceMock?.saveData(mainScreenModel)
+    storageServiceMock?.saveDataStub = { result in
+      receivedStorageModel = result as? MainScreenModel
+      expectation.fulfill()
+    }
+    interactor.addLabel(advLabel, for: sectionType)
+    wait(for: [expectation], timeout: 1)
+    
+    // Assert
+    let section = receivedStorageModel?.allSections.filter({ $0.type == sectionType }).first
+    XCTAssertTrue(section?.advLabel == advLabel)
   }
 }

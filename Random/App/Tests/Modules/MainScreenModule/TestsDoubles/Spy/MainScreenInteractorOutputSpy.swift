@@ -11,15 +11,18 @@ import Random
 
 final class MainScreenInteractorOutputSpy: MainScreenInteractorOutput {
   
-  // MARK: - Spy variables
+  // MARK: - Spy variables to check if the methods were called
   
   var didReceiveModelCalled = false
-  var receivedModel: MainScreenModel?
+  
+  // MARK: - Stub variables to mimic the returned values
+  
+  var didReceiveModelCompletion: ((MainScreenModel) -> Void)?
   
   // MARK: - MainScreenInteractorOutput
   
   func didReceive(model: MainScreenModel) {
     didReceiveModelCalled = true
-    receivedModel = model
+    didReceiveModelCompletion?(model)
   }
 }

@@ -19,28 +19,32 @@ final class FeatureToggleServicesMock: FeatureToggleServices {
   var getUpdateAppFeatureToggleCalled = false
   
   // Stub variables
-  var sectionsIsHiddenFT: Random.SectionsIsHiddenFTModel?
-  var labelsFeatureToggle: Random.LabelsFeatureToggleModel?
-  var premiumFeatureToggle: Bool?
-  var updateAppFeatureToggle: Bool?
+  var sectionsIsHiddenFTStub: (() -> Void)?
+  var labelsFeatureToggleStub: (() -> Void)?
+  var premiumFeatureToggleStub: (() -> Void)?
+  var updateAppFeatureToggleStub: (() -> Void)?
   
   func getSectionsIsHiddenFT(completion: @escaping (Random.SectionsIsHiddenFTModel?) -> Void) {
     getSectionsIsHiddenFTCalled = true
-    completion(sectionsIsHiddenFT)
+    sectionsIsHiddenFTStub?()
+    completion(nil)
   }
   
   func getLabelsFeatureToggle(completion: @escaping (Random.LabelsFeatureToggleModel?) -> Void) {
     getLabelsFeatureToggleCalled = true
-    completion(labelsFeatureToggle)
+    labelsFeatureToggleStub?()
+    completion(nil)
   }
   
   func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void) {
     getPremiumFeatureToggleCalled = true
-    completion(premiumFeatureToggle)
+    premiumFeatureToggleStub?()
+    completion(nil)
   }
   
   func getUpdateAppFeatureToggle(completion: @escaping (Bool) -> Void) {
     getUpdateAppFeatureToggleCalled = true
-    completion(updateAppFeatureToggle ?? false)
+    updateAppFeatureToggleStub?()
+    completion(false)
   }
 }

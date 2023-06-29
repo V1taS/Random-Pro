@@ -18,6 +18,16 @@ platform :ios do
     )
   end
 
+  desc "Run unit tests"
+  lane :test do
+    scan(
+      workspace: "Random.xcworkspace",
+      scheme: "RandomTests",
+      devices: ["iPhone 12 Pro Max"],
+      clean: true
+    )
+  end
+
   desc "Upload IPA to App Store Connect"
   lane :upload_app_to_app_store do
     api_key = app_store_connect_api_key(

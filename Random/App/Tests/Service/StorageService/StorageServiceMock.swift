@@ -18,22 +18,28 @@ final class StorageServiceMock: StorageService {
   var getDataCalled = false
   
   // Stub variables
-  var isPremiumStub: Bool = false
-  var saveDataStub: Any?
-  var getDataStub: Any?
+  var isPremiumStub: (() -> Void)?
+  var saveDataStub: ((Any?) -> Void)?
+  var getDataStub: ((Any?) -> Void)?
+  
+  // Mock data
+  var mockData: Any?
   
   var isPremium: Bool {
     isPremiumGetCalled = true
-    return isPremiumStub
+    isPremiumStub?()
+    return false
   }
   
   func saveData<T: UserDefaultsCodable>(_ data: T?) {
     saveDataCalled = true
-    saveDataStub = data
+    mockData = data
+    saveDataStub?(data)
   }
   
   func getData<T: UserDefaultsCodable>(from: T.Type) -> T? {
     getDataCalled = true
-    return getDataStub as? T
+    getDataStub?(mockData)
+    return mockData as? T
   }
 }

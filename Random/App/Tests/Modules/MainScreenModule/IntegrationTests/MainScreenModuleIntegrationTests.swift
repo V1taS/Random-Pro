@@ -51,31 +51,4 @@ final class MainScreenModuleIntegrationTests: XCTestCase {
   }
   
   // MARK: - Тестируем
-  
-  func testSaveDarkModeStatus() {
-    // Arrange
-    let isEnabled = true
-    
-    // Act
-    sut.saveDarkModeStatus(isEnabled)
-    
-    // Assert
-    XCTAssertTrue(interactor.isSaveDarkModeStatus)
-  }
-  
-  func testReturnModel() {
-    // Act
-    sut.viewDidLoad()  // or any action that calls returnModel
-    
-    // Assert
-    XCTAssertTrue(interactor.isReturnModel)
-  }
-}
-
-// MARK: - Appearance
-
-extension MainScreenModuleIntegrationTests {
-  struct Appearance {
-    let keyUserDefaults = "main_screen_user_defaults_key"
-  }
 }

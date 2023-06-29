@@ -16,17 +16,15 @@ final class MainScreenViewInputMock: MainScreenViewProtocol {
   
   weak var output: MainScreenViewOutput?
   
-  // MARK: - Флаги вызовов функция
+  // MARK: - Spy variables to check if the methods were called
   
-  var isConfigureCellsWith: Bool = false
+  var isConfigureCellsWithModel = false
+  
+  // MARK: - Stub variables to mimic the returned values
   
   // MARK: - MainScreenViewInput
   
-  func configureCellsWith(models: [MainScreenModel.Section]) {
-    isConfigureCellsWith = true
-  }
-  
   func configureCellsWith(model: MainScreenModel) {
-    // TODO: -
+    isConfigureCellsWithModel = true
   }
 }

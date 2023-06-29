@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WelcomeSheet
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol OnboardingScreenCoordinatorOutput: AnyObject {
@@ -34,8 +35,8 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
 
   private let navigationController: UINavigationController
   private let services: ApplicationServices
-  private var onboardingScreenModule: OnboardingScreenModule?
-  private var onboardingScreenNavigationController: UINavigationController?
+//  private var onboardingScreenModule: OnboardingScreenModule?
+//  private var onboardingScreenNavigationController: UINavigationController?
 
   // MARK: - Initialization
 
@@ -51,36 +52,39 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
   // MARK: - Internal func
 
   func start() {
-    let onboardingScreenModule = OnboardingScreenAssembly().createModule(services: services)
-    self.onboardingScreenModule = onboardingScreenModule
-    self.onboardingScreenModule?.moduleOutput = self
 
-    let onboardingScreenNavigationController = UINavigationController(rootViewController: onboardingScreenModule)
-    self.onboardingScreenNavigationController = onboardingScreenNavigationController
-    onboardingScreenNavigationController.modalPresentationStyle = .fullScreen
-    navigationController.present(onboardingScreenNavigationController, animated: true)
+    guard let pages = services.onboardingService.onboardingPages else {
+      return
+    }
+
+    let sheetVC = WelcomeSheetController()
+
+    sheetVC.pages = pages
+    sheetVC.isModalInPresentation = false
+    //output?.applyFirstVisit(false)
+    navigationController.present(sheetVC, animated: true)
   }
 }
 
 // MARK: - OnboardingScreenModuleOutput
 
-extension OnboardingScreenCoordinator: OnboardingScreenModuleOutput {
-
-  func applyFirstVisit(_ isFirstVisit: Bool) {
-    output?.applyFirstVisit(isFirstVisit)
-  }
-
-  func somethingWentWrong() {
-    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrongTitle,
-                                                       glyph: false,
-                                                       timeout: nil,
-                                                       active: {})
-  }
-
-  func closeButtonAction() {
-    onboardingScreenNavigationController?.dismiss(animated: true)
-  }
-}
+//extension OnboardingScreenCoordinator: OnboardingScreenModuleOutput {
+//
+//  func applyFirstVisit(_ isFirstVisit: Bool) {
+//    output?.applyFirstVisit(isFirstVisit)
+//  }
+//
+//  func somethingWentWrong() {
+//    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrongTitle,
+//                                                       glyph: false,
+//                                                       timeout: nil,
+//                                                       active: {})
+//  }
+//
+//  func closeButtonAction() {
+//    onboardingScreenNavigationController?.dismiss(animated: true)
+//  }
+//}
 
 // MARK: - Appearance
 

@@ -29,7 +29,11 @@ final class StorageServiceImpl: StorageService {
   // MARK: - Internal property
 
   var isFirstVisit: Bool {
-    return mainScreenModelUserDefaults?.isFirstVisit ?? false
+    let describingType = String(describing: MainScreenModel.self)
+    let key = "\(describingType)_data"
+    @ObjectCustomKeychainWrapper(key: key)
+    var dataKeychain: MainScreenModel?
+    return dataKeychain?.isFirstVisit ?? false
   }
 
   var isPremium: Bool {

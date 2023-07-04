@@ -128,7 +128,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
 
   func saveIsFirstVisitStatus(_ isFirstVisit: Bool) {
-    guard let model = storageService.mainScreenModel else {
+    guard let model = mainScreenModel else {
       return
     }
     let newModel = MainScreenModel(
@@ -137,7 +137,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       isFirstVisit: isFirstVisit,
       allSections: model.allSections
     )
-    storageService.mainScreenModel = newModel
+    mainScreenModel = newModel
   }
   
   func saveDarkModeStatus(_ isEnabled: Bool?) {

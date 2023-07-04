@@ -6,58 +6,106 @@
 //  Copyright © 2023 SosinVitalii.com. All rights reserved.
 //
 
-import Foundation
 import WelcomeSheet
+import UIKit
+import RandomNetwork
+import RandomUIKit
 
 protocol OnboardingService {
 
-  var onboardingPages: [WelcomeSheetPage]? { get }
-
+  func getContent(networkService: NetworkService, storageService: StorageService, completion: (([WelcomeSheetPage]) -> Void)?)
 }
 
 final class OnboardingServiceImpl: OnboardingService {
 
-  var onboardingPages: [WelcomeSheet.WelcomeSheetPage]? {
-    return getPagesTest()
+  // MARK: - Internal func
+
+  func getContent(networkService: NetworkService, storageService: StorageService, completion: (([WelcomeSheetPage]) -> Void)?) {
+    let appearance = Appearance()
+    let host = appearance.host
+    let apiVersion = appearance.apiVersion
+    let endPoint = appearance.endPoint
+
+    var onboardingScreenModel: OnboardingScreenModel? {
+      get {
+        storageService.getData(from: OnboardingScreenModel.self)
+      } set {
+        storageService.saveData(newValue)
+      }
+    }
+
+    let language = onboardingScreenModel?.language ?? getDefaultLanguage()
+
+    networkService.performRequestWith(
+      urlString: host + apiVersion + endPoint,
+      queryItems: [
+        .init(name: "language", value: language.rawValue)
+      ],
+      httpMethod: .get,
+      headers: [
+        .contentTypeJson,
+        .additionalHeaders(set: [
+          (key: appearance.apiKey, value: appearance.apiValue)
+        ])
+      ]) { result in
+        DispatchQueue.main.async {
+          switch result {
+          case let .success(data):
+            guard let onboardingPages = networkService.map(data, to: [OnboardingScreenModel.OnboardingData].self) else {
+              return
+            }
+            completion?(self.createWelcomePage(onboardingPages))
+          case .failure: break
+          }
+        }
+      }
   }
 
-  private func getPagesTest() -> [WelcomeSheetPage] {
-    let pages: [WelcomeSheetPage] = [
-      WelcomeSheetPage(title: "Welcome to Welcome Sheet", rows: [
-          WelcomeSheetPageRow(imageSystemName: "rectangle.stack.fill.badge.plus",
-                              title: "Quick Creation",
-                              content: "It's incredibly intuitive. Simply declare an array of pages filled with content."),
+  private func createWelcomePage(_ data: [OnboardingScreenModel.OnboardingData]) -> [WelcomeSheetPage] {
+    var welcomePages: [WelcomeSheetPage] = []
 
-          WelcomeSheetPageRow(imageSystemName: "slider.horizontal.3",
-                           //   accentColor: Color.indigo,
-                              title: "Highly Customisable", content: "Match sheet's appearance to your app, link buttons, perform actions after dismissal."),
+    _ = data.map { page in
+      page.contents.map { pageRow in
+        welcomePages.append(WelcomeSheetPage(title: page.title, rows: [
+          WelcomeSheetPageRow(
+            imageSystemName: pageRow.symbolsSF,
+            title: pageRow.title,
+            content: pageRow.description
+          )
+        ]))
+      }
+    }
 
-          WelcomeSheetPageRow(imageSystemName: "ipad.and.iphone",
-                              title: "Works out of the box",
-                              content: "Don't worry about various screen sizes. It will look gorgeous on every iOS device.")
-      ], optionalButtonTitle: "About Welcome Sheet...", optionalButtonURL: URL(string: "https://github.com/MAJKFL/Welcome-Sheet")),
-
-      WelcomeSheetPage(title: "What's New in Translate", rows: [
-          WelcomeSheetPageRow(imageSystemName: "platter.2.filled.iphone",
-                              title: "Conversation Views",
-                              content: "Choose a side-by-side or face-to-face conversation view."),
-
-          WelcomeSheetPageRow(imageSystemName: "mic.badge.plus",
-                              title: "Auto Translate",
-                              content: "Respond in conversations without tapping the microphone button."),
-
-          WelcomeSheetPageRow(imageSystemName: "iphone",
-                              title: "System-Wide Translation",
-                              content: "Translate selected text anywhere on your iPhone.")
-      ], mainButtonTitle: "Wassup?")
-  ]
-
-    return pages
+    return welcomePages
   }
-
-  // MARK: - Private properties
 }
 
+// MARK: - Private
+
 private extension OnboardingServiceImpl {
-  struct Appearance {}
+  func getDefaultLanguage() -> OnboardingScreenModel.Language {
+    let language: OnboardingScreenModel.Language
+    let localeType = CountryType.getCurrentCountryType() ?? .us
+
+    switch localeType {
+    case .ru:
+      language = .ru
+    default:
+      language = .en
+    }
+    return language
+  }
+}
+
+// MARK: - Appearance
+
+private extension OnboardingServiceImpl {
+  struct Appearance {
+
+    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
+    let apiVersion = "/api/v1"
+    let endPoint = "/onboarding"
+    let apiKey = "api_key"
+    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+  }
 }

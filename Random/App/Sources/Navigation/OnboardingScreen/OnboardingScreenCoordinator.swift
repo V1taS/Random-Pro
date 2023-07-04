@@ -35,8 +35,6 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
 
   private let navigationController: UINavigationController
   private let services: ApplicationServices
-//  private var onboardingScreenModule: OnboardingScreenModule?
-//  private var onboardingScreenNavigationController: UINavigationController?
 
   // MARK: - Initialization
 
@@ -52,39 +50,21 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
   // MARK: - Internal func
 
   func start() {
+    services.onboardingService.getContent(
+      networkService: services.networkService,
+      storageService: services.storageService,
+      completion: { welcomePages in
+        self.createOnboardingVC(with: welcomePages)
+      })
+  }
 
-    guard let pages = services.onboardingService.onboardingPages else {
-      return
-    }
-
+  private func createOnboardingVC(with pages: [WelcomeSheetPage]) {
     let sheetVC = WelcomeSheetController()
-
     sheetVC.pages = pages
     sheetVC.isModalInPresentation = false
-    //output?.applyFirstVisit(false)
-    navigationController.present(sheetVC, animated: true)
+    self.navigationController.present(sheetVC, animated: true)
   }
 }
-
-// MARK: - OnboardingScreenModuleOutput
-
-//extension OnboardingScreenCoordinator: OnboardingScreenModuleOutput {
-//
-//  func applyFirstVisit(_ isFirstVisit: Bool) {
-//    output?.applyFirstVisit(isFirstVisit)
-//  }
-//
-//  func somethingWentWrong() {
-//    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrongTitle,
-//                                                       glyph: false,
-//                                                       timeout: nil,
-//                                                       active: {})
-//  }
-//
-//  func closeButtonAction() {
-//    onboardingScreenNavigationController?.dismiss(animated: true)
-//  }
-//}
 
 // MARK: - Appearance
 

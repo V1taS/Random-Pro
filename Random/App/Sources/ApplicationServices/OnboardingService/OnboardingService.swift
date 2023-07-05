@@ -34,12 +34,10 @@ final class OnboardingServiceImpl: OnboardingService {
       }
     }
 
-    let language = onboardingScreenModel?.language ?? getDefaultLanguage()
-
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
-        .init(name: "language", value: language.rawValue)
+        .init(name: "language", value: getDefaultLanguage())
       ],
       httpMethod: .get,
       headers: [
@@ -59,6 +57,24 @@ final class OnboardingServiceImpl: OnboardingService {
           }
         }
       }
+  }
+
+  private func createOnboardingScreenModel(from pages: [OnboardingScreenModel.OnboardingData], storageService: StorageService) {
+    var onboardingScreenModels: [OnboardingScreenModel] = []
+
+    _ = pages.map { page in
+      let onboardingScreenModel = OnboardingScreenModel(isWatched: false, onboardingData: page)
+      onboardingScreenModels.append(onboardingScreenModel)
+
+
+    }
+
+    storageService.saveData(onboardingScreenModels)
+
+  }
+
+  private func checkOnboardingPages(_ pages: [OnboardingScreenModel.OnboardingData]) {
+
   }
 
   private func createWelcomePage(_ data: [OnboardingScreenModel.OnboardingData]) -> [WelcomeSheetPage] {
@@ -83,15 +99,15 @@ final class OnboardingServiceImpl: OnboardingService {
 // MARK: - Private
 
 private extension OnboardingServiceImpl {
-  func getDefaultLanguage() -> OnboardingScreenModel.Language {
-    let language: OnboardingScreenModel.Language
-    let localeType = CountryType.getCurrentCountryType() ?? .us
+  func getDefaultLanguage() -> String {
+    let language: String
+    let localeType = LanguageType.getCurrentLanguageType()
 
     switch localeType {
     case .ru:
-      language = .ru
+      language = "ru"
     default:
-      language = .en
+      language = "en"
     }
     return language
   }

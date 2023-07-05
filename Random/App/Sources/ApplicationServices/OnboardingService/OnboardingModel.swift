@@ -10,27 +10,23 @@ import Foundation
 
 struct OnboardingScreenModel: UserDefaultsCodable {
 
-  /// Данные онбоардинг страницы
-  let onboardingData: OnboardingData?
+  // Была ли просмотрена онбоардинг страница
+  let isWatched: Bool
 
-  /// Язык для онбоардинг экрана
-  let language: Language?
+  // Данные онбоардинг страницы
+  let onboardingData: OnboardingData
 
-
-// MARK: - OnboardingData
+  // MARK: - OnboardingData
 
   struct OnboardingData: UserDefaultsCodable {
-
     /// Название онбоардинг страницы
     let title: String
 
     /// Данные полей онбоардинг страницы
     let contents: [Content]
-
-
-    // MARK: - Content
-
   }
+
+  // MARK: - Content
 
   struct Content: UserDefaultsCodable {
 
@@ -42,16 +38,5 @@ struct OnboardingScreenModel: UserDefaultsCodable {
 
     /// Описание поля онбоардинг страницы
     let description: String
-  }
-
-  // MARK: - Language
-
-  enum Language: String, UserDefaultsCodable {
-
-    /// Английский
-    case en
-
-    /// Русский
-    case ru
   }
 }

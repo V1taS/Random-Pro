@@ -92,6 +92,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Правда или дело`
   func openTruthOrDare()
   
+  /// Открыть раздел `Мемы`
+  func openMemes()
+  
   /// Была нажата кнопка (настройки)
   func settingButtonAction()
   
@@ -263,6 +266,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openMemes() {
+    moduleOutput?.openMemes()
+  }
+  
   func openFortuneWheel() {
     moduleOutput?.openFortuneWheel()
   }

@@ -304,3 +304,5 @@
 "section_name" = "Abteilungsname";
 "sections" = "Abschnitte";
 "sections_to_generate" = "Zu generierende Abschnitte";
+"memes" = "Meme";
+"generate_random_memes" = "Kann zufällige Memes generieren";

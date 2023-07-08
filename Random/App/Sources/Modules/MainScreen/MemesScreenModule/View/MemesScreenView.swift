@@ -1,8 +1,8 @@
 //
-//  QuotesScreenView.swift
+//  MemesScreenView.swift
 //  Random
 //
-//  Created by Mikhail Kolkov on 6/8/23.
+//  Created by Vitalii Sosin on 08.07.2023.
 //
 
 import UIKit
@@ -10,21 +10,21 @@ import RandomUIKit
 import Lottie
 
 /// События которые отправляем из View в Presenter
-protocol QuotesScreenViewOutput: AnyObject {
+protocol MemesScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку
   func generateButtonAction()
   
-  /// Было нажатие на результат генерации
-  func resultLabelAction()
+  /// Что-то пошло не так
+  func somethingWentWrong()
 }
 
 /// События которые отправляем от Presenter ко View
-protocol QuotesScreenViewInput {
+protocol MemesScreenViewInput {
   
   /// Устанавливаем данные в result
   ///  - Parameter result: результат генерации
-  func set(result: String?)
+  func set(result: Data?)
   
   /// Запустить доадер
   func startLoader()
@@ -33,19 +33,19 @@ protocol QuotesScreenViewInput {
   func stopLoader()
 }
 
-/// Псевдоним протокола UIView & QuotesScreenViewInput
-typealias QuotesScreenViewProtocol = UIView & QuotesScreenViewInput
+/// Псевдоним протокола UIView & MemesScreenViewInput
+typealias MemesScreenViewProtocol = UIView & MemesScreenViewInput
 
 /// View для экрана
-final class QuotesScreenView: QuotesScreenViewProtocol {
+final class MemesScreenView: MemesScreenViewProtocol {
   
   // MARK: - Internal properties
   
-  weak var output: QuotesScreenViewOutput?
+  weak var output: MemesScreenViewOutput?
   
   // MARK: - Private properties
   
-  private let resultLabel = UILabel()
+  private let resultMemes = UIImageView()
   private let generateButton = ButtonView()
   private let lottieAnimationView = LottieAnimationView(name: Appearance().loaderImage)
   
@@ -64,10 +64,22 @@ final class QuotesScreenView: QuotesScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func set(result: String?) {
-    resultLabel.text = result
-    resultLabel.zoomIn(duration: Appearance().resultDuration,
-                       transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
+  func set(result: Data?) {
+    UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
+      guard let self, let result else {
+        self?.output?.somethingWentWrong()
+        return
+      }
+      
+      let image = UIImage(data: result)
+      self.resultMemes.image = image
+      
+      image?.getAverageColor { [weak self] averageColor in
+        UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
+          self?.backgroundColor = averageColor
+        }
+      }
+    }
   }
   
   func startLoader() {
@@ -85,20 +97,20 @@ final class QuotesScreenView: QuotesScreenViewProtocol {
 
 // MARK: - Private
 
-private extension QuotesScreenView {
+private extension MemesScreenView {
   func configureLayout() {
     let appearance = Appearance()
     
-    [resultLabel, generateButton, lottieAnimationView].forEach {
+    [resultMemes, generateButton, lottieAnimationView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
     
     NSLayoutConstraint.activate([
-      resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-      resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
+      resultMemes.centerYAnchor.constraint(equalTo: centerYAnchor),
+      resultMemes.leadingAnchor.constraint(equalTo: leadingAnchor,
                                            constant: appearance.defaultInset),
-      resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor,
+      resultMemes.trailingAnchor.constraint(equalTo: trailingAnchor,
                                             constant: -appearance.defaultInset),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
@@ -118,28 +130,16 @@ private extension QuotesScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
-    resultLabel.textAlignment = .center
-    resultLabel.numberOfLines = appearance.numberOfLines
-    
+    resultMemes.contentMode = .scaleAspectFit
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
-    generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
+    generateButton.addTarget(self,
+                             action: #selector(generateButtonAction),
+                             for: .touchUpInside)
     
     lottieAnimationView.isHidden = true
     lottieAnimationView.contentMode = .scaleAspectFit
     lottieAnimationView.loopMode = .loop
     lottieAnimationView.animationSpeed = Appearance().animationSpeed
-    
-    let resultLabelAction = UITapGestureRecognizer(target: self, action: #selector(resultAction))
-    resultLabelAction.cancelsTouchesInView = false
-    resultLabel.addGestureRecognizer(resultLabelAction)
-    resultLabel.isUserInteractionEnabled = true
-  }
-  
-  @objc
-  func resultAction() {
-    output?.resultLabelAction()
   }
   
   @objc
@@ -150,13 +150,12 @@ private extension QuotesScreenView {
 
 // MARK: - Appearance
 
-private extension QuotesScreenView {
+private extension MemesScreenView {
   struct Appearance {
     let buttonTitle = RandomStrings.Localizable.generate
     let loaderImage = RandomAsset.filmsLoader.name
     let animationSpeed: CGFloat = 0.5
     let defaultInset: CGFloat = 16
     let resultDuration: CGFloat = 0.2
-    let numberOfLines: Int = 0
   }
 }

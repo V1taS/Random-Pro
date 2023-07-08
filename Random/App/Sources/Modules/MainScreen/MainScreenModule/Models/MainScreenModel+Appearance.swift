@@ -65,7 +65,7 @@ extension MainScreenModel {
     let imageCardPassword = "wand.and.stars"
     let titleCardPassword = RandomStrings.Localizable.passwords
     
-    let imageColors = "photo.on.rectangle.angled"
+    let imageColors = "pencil.and.outline"
     let titleColors = RandomStrings.Localizable.colors
     
     let bottleCardImage = "escape"
@@ -126,5 +126,9 @@ extension MainScreenModel {
     let imageFortuneWheel = "arrow.triangle.2.circlepath"
     let titleFortuneWheel = RandomStrings.Localizable.fortuneWheel
     let fortuneWheelDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateFortuneWheel
+    
+    let imageMemes = "photo"
+    let titleMemes = RandomStrings.Localizable.memes
+    let memesDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomMemes
   }
 }

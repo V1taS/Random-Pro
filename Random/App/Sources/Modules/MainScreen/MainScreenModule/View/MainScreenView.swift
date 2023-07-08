@@ -92,6 +92,9 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Колесо фортуны`
   func openFortuneWheel()
   
+  /// Открыть раздел `Мемы`
+  func openMemes()
+  
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
@@ -218,6 +221,8 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openFortuneWheel()
       case .truthOrDare:
         output?.openTruthOrDare()
+      case .memes:
+        output?.openMemes()
       }
     }
   }

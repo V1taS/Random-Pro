@@ -92,7 +92,7 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
               return
             }
             self.cacheListMemesURLString = listMemes.compactMap { $0.urlImage }
-            generateButtonAction()
+            self.generateButtonAction()
           case .failure:
             self.output?.stopLoader()
             self.output?.somethingWentWrong()

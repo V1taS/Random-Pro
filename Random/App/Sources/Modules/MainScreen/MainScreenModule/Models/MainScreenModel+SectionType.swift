@@ -81,6 +81,8 @@ extension MainScreenModel {
           }
         }
         return appearance.titleTruthOrDareOther
+      case .memes:
+        return appearance.titleMemes
       }
     }
     
@@ -142,6 +144,8 @@ extension MainScreenModel {
         return appearance.imageFortuneWheel
       case .truthOrDare:
         return appearance.imageTruthOrDare
+      case .memes:
+        return appearance.imageMemes
       }
     }
     
@@ -203,6 +207,8 @@ extension MainScreenModel {
         return appearance.quotesDescriptionForNoPremiumAccess
       case .fortuneWheel:
         return appearance.fortuneWheelDescriptionForNoPremiumAccess
+      case .memes:
+        return appearance.memesDescriptionForNoPremiumAccess
       }
     }
     
@@ -288,5 +294,8 @@ extension MainScreenModel {
     
     /// Раздел "Колесо Фортуны"
     case fortuneWheel
+    
+    /// Раздел "Мемы"
+    case memes
   }
 }

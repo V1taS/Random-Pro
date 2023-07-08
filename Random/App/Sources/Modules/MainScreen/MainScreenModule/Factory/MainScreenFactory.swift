@@ -266,6 +266,14 @@ extension MainScreenFactory {
             isPremium: true,
             advLabel: .none
           ))
+        case .memes:
+          allSections.append(MainScreenModel.Section(
+            type: section,
+            isEnabled: true,
+            isHidden: false,
+            isPremium: true,
+            advLabel: .none
+          ))
         }
       }
       
@@ -504,6 +512,14 @@ extension MainScreenFactory {
                 isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.truthOrDare) ?? model.isHidden,
                 isPremium: model.isPremium,
                 advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.truthOrDare, oldLabel: model.advLabel)
+              ))
+            case .memes:
+              cardSections.append(MainScreenModel.Section(
+                type: model.type,
+                isEnabled: model.isEnabled,
+                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.memes) ?? model.isHidden,
+                isPremium: model.isPremium,
+                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.memes, oldLabel: model.advLabel)
               ))
             }
           }

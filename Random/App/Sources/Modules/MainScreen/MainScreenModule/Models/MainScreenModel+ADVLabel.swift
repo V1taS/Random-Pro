@@ -9,6 +9,7 @@
 import Foundation
 
 extension MainScreenModel {
+  
   // MARK: - ADVLabel
   
   enum ADVLabel: CaseIterable, UserDefaultsCodable {

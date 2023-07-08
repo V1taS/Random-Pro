@@ -91,6 +91,9 @@ struct LabelsFeatureToggleModel {
   /// Раздел `Правда или действие`
   let truthOrDare: String
   
+  /// Раздел `Мемы`
+  let memes: String
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -123,5 +126,6 @@ struct LabelsFeatureToggleModel {
     quotes = (dictionary["quotes"] as? String ?? "")
     fortuneWheel = (dictionary["fortuneWheel"] as? String ?? "")
     truthOrDare = (dictionary["truthOrDare"] as? String ?? "")
+    memes = (dictionary["memes"] as? String ?? "")
   }
 }

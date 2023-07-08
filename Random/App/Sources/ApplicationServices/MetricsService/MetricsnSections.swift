@@ -47,6 +47,7 @@ enum MetricsSections: String {
   case quotes = "Раздел Цитат"
   case fortuneWheel = "Колесо фортуны"
   case truthOrDare = "Раздел Правда или действие"
+  case memes = "Раздел Мемов"
   
   // Настройки главного экрана
   case mainSettingsScreen = "Настройки главного экрана"

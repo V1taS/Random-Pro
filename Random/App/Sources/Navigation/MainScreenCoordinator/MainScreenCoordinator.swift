@@ -78,6 +78,15 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openMemes() {
+    let memesScreenCoordinator = MemesScreenCoordinator(navigationController, services)
+    anyCoordinator = memesScreenCoordinator
+    memesScreenCoordinator.start()
+    
+    mainScreenModule?.removeLabelFromSection(type: .memes)
+    services.metricsService.track(event: .memes)
+  }
+  
   func openFortuneWheel() {
     let fortuneWheelCoordinator = FortuneWheelCoordinator(navigationController, services)
     anyCoordinator = fortuneWheelCoordinator
@@ -572,6 +581,8 @@ private extension MainScreenCoordinator {
       openQuotes()
     case .fortuneWheel:
       openFortuneWheel()
+    case .memes:
+      openMemes()
     case .updateApp:
       guard let url = Appearance().shareAppUrl,
             UIApplication.shared.canOpenURL(url) else {

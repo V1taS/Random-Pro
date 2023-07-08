@@ -67,6 +67,8 @@ enum DeepLinkType: CaseIterable, UserDefaultsCodable {
       return "quotes"
     case .fortuneWheel:
       return "fortuneWheel"
+    case .memes:
+      return "memes"
     case .updateApp:
       return "update_app"
     case .settingsSections:
@@ -182,4 +184,7 @@ enum DeepLinkType: CaseIterable, UserDefaultsCodable {
   
   /// Кнопка с обратной связью
   case settingsfeedBackButton
+  
+  /// Раздел мемов
+  case memes
 }

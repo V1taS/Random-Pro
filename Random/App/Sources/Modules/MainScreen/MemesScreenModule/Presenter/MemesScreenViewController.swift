@@ -8,7 +8,15 @@
 import UIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol MemesScreenModuleOutput: AnyObject {}
+protocol MemesScreenModuleOutput: AnyObject {
+  
+  /// Что-то пошло не так
+  func somethingWentWrong()
+  
+  /// Кнопка поделиться была нажата
+  ///  - Parameter imageData: Изображение контента
+  func shareButtonAction(imageData: Data?)
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol MemesScreenModuleInput {
@@ -32,6 +40,8 @@ final class MemesScreenViewController: MemesScreenModule {
   private let interactor: MemesScreenInteractorInput
   private let moduleView: MemesScreenViewProtocol
   private let factory: MemesScreenFactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+  private var cacheMemes: Data?
   
   // MARK: - Initialization
   
@@ -61,16 +71,39 @@ final class MemesScreenViewController: MemesScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setNavigationBar()
+    interactor.getContent()
   }
 }
 
 // MARK: - MemesScreenViewOutput
 
-extension MemesScreenViewController: MemesScreenViewOutput {}
+extension MemesScreenViewController: MemesScreenViewOutput {
+  func generateButtonAction() {
+    
+  }
+  
+  func somethingWentWrong() {
+    moduleOutput?.somethingWentWrong()
+  }
+}
 
 // MARK: - MemesScreenInteractorOutput
 
-extension MemesScreenViewController: MemesScreenInteractorOutput {}
+extension MemesScreenViewController: MemesScreenInteractorOutput {
+  func didReceive(memes: Data?) {
+    moduleView.set(result: memes)
+    cacheMemes = memes
+  }
+  
+  func startLoader() {
+    moduleView.startLoader()
+  }
+  
+  func stopLoader() {
+    moduleView.stopLoader()
+  }
+}
 
 // MARK: - MemesScreenFactoryOutput
 
@@ -78,10 +111,36 @@ extension MemesScreenViewController: MemesScreenFactoryOutput {}
 
 // MARK: - Private
 
-private extension MemesScreenViewController {}
+private extension MemesScreenViewController {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    let shareButton = UIBarButtonItem(image: appearance.shareButtonIcon,
+                                      style: .plain,
+                                      target: self,
+                                      action: #selector(shareButtonAction))
+    navigationItem.rightBarButtonItems = [
+      shareButton
+    ]
+  }
+  
+  @objc
+  func shareButtonAction() {
+    guard let cacheMemes else {
+      return
+    }
+    moduleOutput?.shareButtonAction(imageData: cacheMemes)
+    impactFeedback.impactOccurred()
+  }
+}
 
 // MARK: - Appearance
 
 private extension MemesScreenViewController {
-  struct Appearance {}
+  struct Appearance {
+    let title = RandomStrings.Localizable.memes
+    let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
+  }
 }

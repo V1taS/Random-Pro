@@ -6,12 +6,35 @@
 //
 
 import UIKit
+import RandomNetwork
+import RandomUIKit
 
 /// События которые отправляем из Interactor в Presenter
-protocol MemesScreenInteractorOutput: AnyObject {}
+protocol MemesScreenInteractorOutput: AnyObject {
+  
+  /// Были получены данные
+  ///  - Parameter memes: Мем
+  func didReceive(memes: Data?)
+  
+  /// Что-то пошло не так
+  func somethingWentWrong()
+  
+  /// Запустить доадер
+  func startLoader()
+  
+  /// Остановить лоадер
+  func stopLoader()
+}
 
 /// События которые отправляем от Presenter к Interactor
-protocol MemesScreenInteractorInput {}
+protocol MemesScreenInteractorInput {
+  
+  /// Получить данные
+  func getContent()
+  
+  /// Пользователь нажал на кнопку
+  func generateButtonAction()
+}
 
 /// Интерактор
 final class MemesScreenInteractor: MemesScreenInteractorInput {
@@ -20,11 +43,115 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   
   weak var output: MemesScreenInteractorOutput?
   
+  // MARK: - Private property
+  
+  private var networkService: NetworkService
+  private let buttonCounterService: ButtonCounterService
+  private var cacheListMemesURLString: [String] = []
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    networkService = services.networkService
+    buttonCounterService = services.buttonCounterService
+  }
+  
   // MARK: - Internal func
+  
+  func getContent() {
+    output?.startLoader()
+    let appearance = Appearance()
+    let host = appearance.host
+    let apiVersion = appearance.apiVersion
+    let endPoint = appearance.endPoint
+    let language = getDefaultLanguage()
+    
+    networkService.performRequestWith(
+      urlString: host + apiVersion + endPoint,
+      queryItems: [
+        .init(name: "language", value: "\(language)")
+      ],
+      httpMethod: .get,
+      headers: [
+        .contentTypeJson,
+        .additionalHeaders(set: [
+          (key: appearance.apiKey, value: appearance.apiValue)
+        ])
+      ]) { result in
+        DispatchQueue.main.async { [weak self] in
+          guard let self else {
+            return
+          }
+          switch result {
+          case let .success(data):
+            guard let listMemes = self.networkService.map(data, to: [MemesScreenModel].self) else {
+              self.output?.somethingWentWrong()
+              self.output?.stopLoader()
+              return
+            }
+            self.cacheListMemesURLString = listMemes.compactMap { $0.urlImage }
+            generateButtonAction()
+          case .failure:
+            self.output?.stopLoader()
+            self.output?.somethingWentWrong()
+          }
+        }
+      }
+  }
+  
+  func generateButtonAction() {
+    cacheListMemesURLString.shuffle()
+    
+    guard let memesURLString = cacheListMemesURLString.first,
+          !cacheListMemesURLString.isEmpty else {
+      getContent()
+      return
+    }
+    
+    networkService.performRequestWith(
+      urlString: memesURLString,
+      queryItems: [],
+      httpMethod: .get,
+      headers: []) { result in
+        DispatchQueue.main.async { [weak self] in
+          switch result {
+          case let .success(data):
+            self?.cacheListMemesURLString.removeFirst()
+            self?.output?.stopLoader()
+            self?.buttonCounterService.onButtonClick()
+            self?.output?.didReceive(memes: data)
+          case .failure:
+            self?.output?.stopLoader()
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
+  }
+}
+
+private extension MemesScreenInteractor {
+  func getDefaultLanguage() -> String {
+    let languageType = LanguageType.getCurrentLanguageType() ?? .us
+    switch languageType {
+    case .ru:
+      return "ru"
+    default:
+      return "en"
+    }
+  }
 }
 
 // MARK: - Appearance
 
 private extension MemesScreenInteractor {
-  struct Appearance {}
+  struct Appearance {
+    let result = "?"
+    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
+    let apiVersion = "/api/v1"
+    let endPoint = "/memes"
+    let apiKey = "api_key"
+    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+  }
 }

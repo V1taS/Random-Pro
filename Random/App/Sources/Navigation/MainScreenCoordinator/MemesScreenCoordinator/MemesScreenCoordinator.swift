@@ -41,6 +41,47 @@ final class MemesScreenCoordinator: Coordinator {
 // MARK: - QuotesScreenModuleOutput
 
 extension MemesScreenCoordinator: MemesScreenModuleOutput {
+  func shareButtonAction(imageData: Data?) {
+    guard
+      let imageData = imageData,
+      let imageFile = services.fileManagerService.saveObjectWith(fileName: "Random",
+                                                                 fileExtension: ".png",
+                                                                 data: imageData)
+    else {
+      return
+    }
+    
+    let activityViewController = UIActivityViewController(activityItems: [imageFile],
+                                                          applicationActivities: nil)
+    activityViewController.popoverPresentationController?.sourceView = memesScreenModule?.view
+    activityViewController.excludedActivityTypes = [UIActivity.ActivityType.airDrop,
+                                                    UIActivity.ActivityType.postToFacebook,
+                                                    UIActivity.ActivityType.message,
+                                                    UIActivity.ActivityType.addToReadingList,
+                                                    UIActivity.ActivityType.assignToContact,
+                                                    UIActivity.ActivityType.copyToPasteboard,
+                                                    UIActivity.ActivityType.markupAsPDF,
+                                                    UIActivity.ActivityType.openInIBooks,
+                                                    UIActivity.ActivityType.postToFlickr,
+                                                    UIActivity.ActivityType.postToTencentWeibo,
+                                                    UIActivity.ActivityType.postToTwitter,
+                                                    UIActivity.ActivityType.postToVimeo,
+                                                    UIActivity.ActivityType.postToWeibo,
+                                                    UIActivity.ActivityType.print]
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      if let popup = activityViewController.popoverPresentationController {
+        popup.sourceView = memesScreenModule?.view
+        popup.sourceRect = CGRect(x: (memesScreenModule?.view.frame.size.width ?? .zero) / 2,
+                                  y: (memesScreenModule?.view.frame.size.height ?? .zero) / 4,
+                                  width: .zero,
+                                  height: .zero)
+      }
+    }
+    
+    memesScreenModule?.present(activityViewController, animated: true, completion: nil)
+  }
+  
   func somethingWentWrong() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: false,
@@ -60,4 +101,3 @@ private extension MemesScreenCoordinator {
     let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
   }
 }
-

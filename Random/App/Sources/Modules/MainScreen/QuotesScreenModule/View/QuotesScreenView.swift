@@ -137,11 +137,13 @@ private extension QuotesScreenView {
     resultLabel.isUserInteractionEnabled = true
   }
   
-  @objc func resultAction() {
+  @objc
+  func resultAction() {
     output?.resultLabelAction()
   }
   
-  @objc func generateButtonAction() {
+  @objc
+  func generateButtonAction() {
     output?.generateButtonAction()
   }
 }

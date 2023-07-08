@@ -13,7 +13,7 @@ final class MemesScreenAssembly {
   /// Собирает модуль `MemesScreen`
   /// - Returns: Cобранный модуль `MemesScreen`
   func createModule(_ services: ApplicationServices) -> MemesScreenModule {
-    let interactor = MemesScreenInteractor()
+    let interactor = MemesScreenInteractor(services: services)
     let view = MemesScreenView()
     let factory = MemesScreenFactory()
     let presenter = MemesScreenViewController(moduleView: view, interactor: interactor, factory: factory)

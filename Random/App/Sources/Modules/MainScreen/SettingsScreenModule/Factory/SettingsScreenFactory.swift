@@ -216,7 +216,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case let .truthOrDare(itemsGenerated, lastItem, currentCountry, listOfItems, valueChanged):
+    case let .truthOrDare(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
       tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
                                                         listOfItems: listOfItems,
@@ -225,9 +225,6 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.divider)
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
                                                   description: itemsGenerated))
-      tableViewModels.append(.divider)
-      tableViewModels.append(.titleAndDescription(title: appearance.latestGeneration,
-                                                  description: lastItem))
       tableViewModels.append(.divider)
       tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
       tableViewModels.append(.divider)

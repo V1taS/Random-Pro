@@ -16,6 +16,9 @@ protocol MemesScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   ///  - Parameter imageData: Изображение контента
   func shareButtonAction(imageData: Data?)
+  
+  /// Доступ к галерее не получен
+  func requestPhotosError()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -80,7 +83,7 @@ final class MemesScreenViewController: MemesScreenModule {
 
 extension MemesScreenViewController: MemesScreenViewOutput {
   func generateButtonAction() {
-    
+    interactor.generateButtonAction()
   }
   
   func somethingWentWrong() {
@@ -91,6 +94,17 @@ extension MemesScreenViewController: MemesScreenViewOutput {
 // MARK: - MemesScreenInteractorOutput
 
 extension MemesScreenViewController: MemesScreenInteractorOutput {
+  func requestPhotosSuccess() {
+    guard let cacheMemes else {
+      return
+    }
+    moduleOutput?.shareButtonAction(imageData: cacheMemes)
+  }
+  
+  func requestPhotosError() {
+    moduleOutput?.requestPhotosError()
+  }
+  
   func didReceive(memes: Data?) {
     moduleView.set(result: memes)
     cacheMemes = memes
@@ -128,10 +142,7 @@ private extension MemesScreenViewController {
   
   @objc
   func shareButtonAction() {
-    guard let cacheMemes else {
-      return
-    }
-    moduleOutput?.shareButtonAction(imageData: cacheMemes)
+    interactor.requestPhotosStatus()
     impactFeedback.impactOccurred()
   }
 }

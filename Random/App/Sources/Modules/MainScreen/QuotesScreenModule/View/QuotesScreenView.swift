@@ -65,6 +65,9 @@ final class QuotesScreenView: QuotesScreenViewProtocol {
   // MARK: - Internal func
   
   func set(result: String?) {
+    let fontSize = Appearance().result == result ? RandomFont.primaryBold50 : RandomFont.primaryBold24
+    resultLabel.font = fontSize
+    
     resultLabel.text = result
     resultLabel.zoomIn(duration: Appearance().resultDuration,
                        transformScale: CGAffineTransform(scaleX: .zero, y: .zero))
@@ -118,7 +121,7 @@ private extension QuotesScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = RandomFont.primaryBold24
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = appearance.numberOfLines
@@ -158,5 +161,6 @@ private extension QuotesScreenView {
     let defaultInset: CGFloat = 16
     let resultDuration: CGFloat = 0.2
     let numberOfLines: Int = 0
+    let result = "?"
   }
 }

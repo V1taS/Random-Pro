@@ -73,6 +73,8 @@ final class TruthOrDareScreenView: TruthOrDareScreenViewProtocol {
   // MARK: - Internal func
 
   func set(result: String?, type: TruthOrDareScreenModel.TruthOrDareType) {
+    let fontSize = Appearance().result == result ? RandomFont.primaryBold50 : RandomFont.primaryBold24
+    resultLabel.font = fontSize
     resultLabel.text = result
 
     if isResultAnimate {
@@ -149,7 +151,7 @@ private extension TruthOrDareScreenView {
     let appearance = Appearance()
     backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
 
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = RandomFont.primaryBold24
     resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
@@ -226,5 +228,6 @@ private extension TruthOrDareScreenView {
     let animationSpeed: CGFloat = 0.5
     let defaultInset: CGFloat = 16
     let resultDuration: CGFloat = 0.2
+    let result = "?"
   }
 }

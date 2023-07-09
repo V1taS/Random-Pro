@@ -12,6 +12,12 @@ import RandomUIKit
 /// События которые отправляем из Interactor в Presenter
 protocol MemesScreenInteractorOutput: AnyObject {
   
+  /// Получен доступ к галерее
+  func requestPhotosSuccess()
+  
+  /// Доступ к галерее не получен
+  func requestPhotosError()
+  
   /// Были получены данные
   ///  - Parameter memes: Мем
   func didReceive(memes: Data?)
@@ -34,6 +40,9 @@ protocol MemesScreenInteractorInput {
   
   /// Пользователь нажал на кнопку
   func generateButtonAction()
+  
+  /// Запрос доступа к Галерее
+  func requestPhotosStatus()
 }
 
 /// Интерактор
@@ -47,6 +56,7 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
+  private let permissionService: PermissionService
   private var cacheListMemesURLString: [String] = []
   
   // MARK: - Initialization
@@ -56,9 +66,21 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   init(services: ApplicationServices) {
     networkService = services.networkService
     buttonCounterService = services.buttonCounterService
+    permissionService = services.permissionService
   }
   
   // MARK: - Internal func
+  
+  func requestPhotosStatus() {
+    permissionService.requestPhotos { [weak self] granted in
+      switch granted {
+      case true:
+        self?.output?.requestPhotosSuccess()
+      case false:
+        self?.output?.requestPhotosError()
+      }
+    }
+  }
   
   func getContent() {
     output?.startLoader()
@@ -110,6 +132,8 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
       return
     }
     
+    cacheListMemesURLString.removeFirst()
+    
     networkService.performRequestWith(
       urlString: memesURLString,
       queryItems: [],
@@ -118,7 +142,6 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
         DispatchQueue.main.async { [weak self] in
           switch result {
           case let .success(data):
-            self?.cacheListMemesURLString.removeFirst()
             self?.output?.stopLoader()
             self?.buttonCounterService.onButtonClick()
             self?.output?.didReceive(memes: data)

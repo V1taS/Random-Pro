@@ -41,6 +41,20 @@ final class MemesScreenCoordinator: Coordinator {
 // MARK: - QuotesScreenModuleOutput
 
 extension MemesScreenCoordinator: MemesScreenModuleOutput {
+  func requestPhotosError() {
+    services.notificationService.showNegativeAlertWith(
+      title: Appearance().allowAccessToGallery,
+      glyph: false,
+      timeout: nil,
+      active: {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+          return
+        }
+        UIApplication.shared.open(settingsUrl)
+      }
+    )
+  }
+  
   func shareButtonAction(imageData: Data?) {
     guard
       let imageData = imageData,
@@ -99,5 +113,6 @@ private extension MemesScreenCoordinator {}
 private extension MemesScreenCoordinator {
   struct Appearance {
     let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
+    let allowAccessToGallery = RandomStrings.Localizable.allowGalleryAccess
   }
 }

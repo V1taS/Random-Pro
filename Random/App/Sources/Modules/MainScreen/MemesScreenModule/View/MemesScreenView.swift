@@ -108,10 +108,8 @@ private extension MemesScreenView {
     
     NSLayoutConstraint.activate([
       resultMemes.centerYAnchor.constraint(equalTo: centerYAnchor),
-      resultMemes.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                           constant: appearance.defaultInset),
-      resultMemes.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                            constant: -appearance.defaultInset),
+      resultMemes.leadingAnchor.constraint(equalTo: leadingAnchor),
+      resultMemes.trailingAnchor.constraint(equalTo: trailingAnchor),
       
       generateButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                               constant: appearance.defaultInset),

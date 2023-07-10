@@ -53,14 +53,17 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
     services.onboardingService.getContent(
       networkService: services.networkService,
       storageService: services.storageService,
-      completion: { welcomePages in
-        self.createOnboardingVC(with: welcomePages)
+      completion: { [weak self] welcomePages in
+        if !welcomePages.isEmpty {
+          self?.createOnboardingVC(with: welcomePages)
+        }
       })
   }
 
   private func createOnboardingVC(with pages: [WelcomeSheetPage]) {
     let sheetVC = WelcomeSheetController()
     sheetVC.pages = pages
+   sheetVC.onDismiss = { self.services.onboardingService.addWatchedStatusForModels(pages, storageService: self.services.storageService)}
     sheetVC.isModalInPresentation = false
     self.navigationController.present(sheetVC, animated: true)
   }

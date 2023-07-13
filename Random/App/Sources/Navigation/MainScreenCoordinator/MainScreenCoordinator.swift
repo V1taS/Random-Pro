@@ -488,7 +488,6 @@ private extension MainScreenCoordinator {
     let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
                                                                   services)
     anyCoordinator = onboardingScreenCoordinator
-    onboardingScreenCoordinator.output = self
     onboardingScreenCoordinator.start()
   }
   

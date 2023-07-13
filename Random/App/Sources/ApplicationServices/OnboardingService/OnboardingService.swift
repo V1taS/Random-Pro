@@ -13,169 +13,52 @@ import RandomUIKit
 
 protocol OnboardingService {
 
-  func getContent(networkService: NetworkService, storageService: StorageService, completion: (([WelcomeSheetPage]) -> Void)?)
+  func saveWatchedStatus(to storage: StorageService, for models: [WelcomeSheetPage])
 
-  func addWatchedStatusForModels(_ models: [WelcomeSheetPage], storageService: StorageService)
-
-  func getOnboardingModelsForPresentation(storageService: StorageService) -> [WelcomeSheetPage]
+  func getOnboardingPagesForPresent(network: NetworkService, storage: StorageService, completion: (([WelcomeSheetPage]) -> Void)?)
 }
 
 final class OnboardingServiceImpl: OnboardingService {
 
-  typealias WelcomePages = OnboardingScreenModel.OnboardingData
+  typealias OnboardingPageModel = OnboardingScreenModel.OnboardingData
 
   // MARK: - Internal func
 
-  func getContent(networkService: NetworkService, storageService: StorageService, completion: (([WelcomeSheetPage]) -> Void)?) {
-
-    let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
-
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "language", value: getDefaultLanguage())
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]) { result in
-        DispatchQueue.main.async {
-          switch result {
-          case let .success(data):
-            guard let onboardingPages = networkService.map(data, to: [WelcomePages].self) else {
-              return
-            }
-
-            let onboardingScreenModels = self.createOnboardingScreenModels(from: onboardingPages)
-            self.saveOnboardingScreensToStorage(storageService: storageService, fetchedOnboardingScreens: onboardingScreenModels)
-
-            completion?(self.getOnboardingModelsForPresentation(storageService: storageService))
-          case .failure: break
-          }
-        }
-      }
-  }
-
-  func getOnboardingModelsForPresentation(storageService: StorageService) -> [WelcomeSheetPage] {
-    var modelsForPresentation: [WelcomePages] = []
-
-    var cashedOnboardingScreens = getOnboardingScreensFromStorage(storageService: storageService)
-
-    _ = cashedOnboardingScreens.map { cashedScreen in
-      if cashedScreen.isWatched == false {
-        modelsForPresentation.append(cashedScreen.onboardingData)
-      }
-    }
-
-    var pagesForPresentation: [WelcomePages] = []
-
-    _ = modelsForPresentation.enumerated().map { element in
-      if element.offset <= 2 {
-        pagesForPresentation.append(element.element)
-      } else {
+  func getOnboardingPagesForPresent(network: NetworkService, storage: StorageService, completion: (([WelcomeSheetPage]) -> Void)?) {
+    fetchContent(from: network) { [weak self] fetchedPageModels in
+      guard let self = self else {
         return
       }
-    }
 
-    return createWelcomePage(pagesForPresentation)
+      self.saveFetchedModels(fetchedPageModels, to: storage)
+      completion?(self.createWelcomePagesForPresent(from: storage))
+    }
   }
 
-  func addWatchedStatusForModels(_ watchedModels: [WelcomeSheetPage], storageService: StorageService) {
-    var cashedOnboardingScreens = getOnboardingScreensFromStorage(storageService: storageService)
-    var timeModel: [OnboardingScreenModel] = []
+  func saveWatchedStatus(to storage: StorageService, for models: [WelcomeSheetPage]) {
+    var cashedOnboardingModels = getOnboardingScreenModels(from: storage)
+    var watchedModels: [OnboardingScreenModel] = []
 
-    _ = cashedOnboardingScreens.map { cashedScreen in
-
+    _ = cashedOnboardingModels.map { cashedScreen in
       var index = 0
 
-      _ = watchedModels.map { watchedScreen in
-
-        if cashedScreen.onboardingData.title == watchedScreen.title {
-          let newOnboardingScreen = OnboardingScreenModel(isWatched: true, onboardingData: cashedScreen.onboardingData)
-          cashedOnboardingScreens.remove(at: index)
+      _ = models.map { watchedModel in
+        if cashedScreen.onboardingData.title == watchedModel.title {
+          let newOnboardingModel = OnboardingScreenModel(isWatched: true, onboardingData: cashedScreen.onboardingData)
+          cashedOnboardingModels.remove(at: index)
           index -= 1
-          timeModel.append(newOnboardingScreen)
+          watchedModels.append(newOnboardingModel)
         }
-
       }
       index += 1
     }
 
-    cashedOnboardingScreens += timeModel
-    storageService.saveData(cashedOnboardingScreens)
-  }
-
-  private func getOnboardingScreensFromStorage(storageService: StorageService) -> [OnboardingScreenModel] {
-    var models: [OnboardingScreenModel] = []
-    models = storageService.getData(from: [OnboardingScreenModel].self) ?? []
-    return models
-  }
-
-  private func saveOnboardingScreensToStorage(storageService: StorageService, fetchedOnboardingScreens: [OnboardingScreenModel]) {
-    guard fetchedOnboardingScreens != [] else {
-      return
-    }
-
-    let cashedOnboardingScreens = getOnboardingScreensFromStorage(storageService: storageService)
-    var newScreens: [OnboardingScreenModel] = []
-
-    let cashedModels = cashedOnboardingScreens.compactMap { model in
-      model.onboardingData
-    }
-
-    if cashedOnboardingScreens.count == 0 {
-      newScreens = fetchedOnboardingScreens
-    } else {
-      _ = fetchedOnboardingScreens.map { fetchedModel in
-        if !cashedModels.contains(fetchedModel.onboardingData) {
-          newScreens.append(fetchedModel)
-        }
-      }
-    }
-
-    let onboardingScreensToSave = cashedOnboardingScreens + newScreens
-
-    storageService.saveData(onboardingScreensToSave)
-  }
-
-  private func createOnboardingScreenModels(from pages: [WelcomePages]) -> [OnboardingScreenModel] {
-    var onboardingScreenModels: [OnboardingScreenModel] = []
-
-    _ = pages.map { page in
-      let onboardingScreenModel = OnboardingScreenModel(isWatched: false, onboardingData: page)
-      onboardingScreenModels.append(onboardingScreenModel)
-    }
-
-    return onboardingScreenModels
-  }
-
-  private func createWelcomePage(_ data: [WelcomePages]) -> [WelcomeSheetPage] {
-    var welcomePages: [WelcomeSheetPage] = []
-
-    _ = data.map { page in
-      welcomePages.append(WelcomeSheetPage(
-        title: page.title,
-        rows: page.contents.map { row in
-          WelcomeSheetPageRow(
-            imageSystemName: row.symbolsSF,
-            title: row.title,
-            content: row.description
-          )
-        }
-      ))
-    }
-
-    return welcomePages
+    cashedOnboardingModels += watchedModels
+    storage.saveData(cashedOnboardingModels)
   }
 }
 
-// MARK: - Private
+// MARK: - Private func
 
 private extension OnboardingServiceImpl {
   func getDefaultLanguage() -> String {
@@ -191,13 +74,78 @@ private extension OnboardingServiceImpl {
 
     return language
   }
+
+  func fetchContent(from network: NetworkService, completion: (([OnboardingPageModel]) -> Void)?) {
+    let appearance = Appearance()
+    let host = appearance.host
+    let apiVersion = appearance.apiVersion
+    let endPoint = appearance.endPoint
+
+    network.performRequestWith(
+      urlString: host + apiVersion + endPoint,
+      queryItems: [
+        .init(name: "language", value: getDefaultLanguage())
+      ],
+      httpMethod: .get,
+      headers: [
+        .contentTypeJson,
+        .additionalHeaders(set: [(key: appearance.apiKey, value: appearance.apiValue)])
+      ]) { result in
+        DispatchQueue.main.async {
+          switch result {
+          case let .success(data):
+            guard let onboardingPageModels = network.map(data, to: [OnboardingPageModel].self) else {
+              return
+            }
+            completion?(onboardingPageModels)
+          case .failure: break
+          }
+        }
+      }
+  }
+
+  func getOnboardingScreenModels(from storageService: StorageService) -> [OnboardingScreenModel] {
+    storageService.getData(from: [OnboardingScreenModel].self) ?? []
+  }
+
+  func createOnboardingScreenModels(from onboardingPageModels: [OnboardingPageModel]) -> [OnboardingScreenModel] {
+    onboardingPageModels.compactMap { OnboardingScreenModel(isWatched: false, onboardingData: $0) }
+  }
+
+  func saveFetchedModels(_ fetchedModels: [OnboardingPageModel], to storage: StorageService) {
+    guard fetchedModels != [] else {
+      return
+    }
+
+    let cashedOnboardingScreenModels = getOnboardingScreenModels(from: storage)
+
+    let newPageModels = cashedOnboardingScreenModels.count == 0
+    ? fetchedModels
+    : fetchedModels.filter { !cashedOnboardingScreenModels.compactMap { $0.onboardingData}.contains($0) }
+
+    let modelsToSave = cashedOnboardingScreenModels + createOnboardingScreenModels(from: newPageModels)
+    storage.saveData(modelsToSave)
+  }
+
+  func createWelcomePagesForPresent(from storage: StorageService) -> [WelcomeSheetPage] {
+    getOnboardingScreenModels(from: storage)
+      .lazy
+      .filter { $0.isWatched == false }
+      .enumerated()
+      .filter { $0.offset <= 2 }
+      .compactMap {
+        WelcomeSheetPage(title: $0.element.onboardingData.title,
+                         rows: $0.element.onboardingData.contents.map {
+          WelcomeSheetPageRow(imageSystemName: $0.symbolsSF, title: $0.title, content: $0.description)
+        })
+      }
+  }
 }
 
 // MARK: - Appearance
 
 private extension OnboardingServiceImpl {
   struct Appearance {
-
     let host = "https://sonorous-seat-386117.ew.r.appspot.com"
     let apiVersion = "/api/v1"
     let endPoint = "/onboarding"

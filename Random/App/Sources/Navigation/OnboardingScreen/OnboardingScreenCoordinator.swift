@@ -10,26 +10,14 @@ import UIKit
 import WelcomeSheet
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol OnboardingScreenCoordinatorOutput: AnyObject {
-
-  // подтвердить первых вход в приложение
-  func applyFirstVisit(_ isFirstVisit: Bool)
-}
+protocol OnboardingScreenCoordinatorOutput: AnyObject {}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
-protocol OnboardingScreenCoordinatorInput {
-
-  /// События которые отправляем из `текущего координатора` в `другой координатор`
-  var output: OnboardingScreenCoordinatorOutput? { get set }
-}
+protocol OnboardingScreenCoordinatorInput {}
 
 typealias OnboardingScreenCoordinatorProtocol = OnboardingScreenCoordinatorInput & Coordinator
 
 final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
-
-  // MARK: - Internal property
-
-  weak var output: OnboardingScreenCoordinatorOutput?
 
   // MARK: - Private property
 
@@ -50,29 +38,37 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
   // MARK: - Internal func
 
   func start() {
-    services.onboardingService.getContent(
-      networkService: services.networkService,
-      storageService: services.storageService,
+    services.onboardingService.getOnboardingPagesForPresent(
+      network: services.networkService,
+      storage: services.storageService,
       completion: { [weak self] welcomePages in
         if !welcomePages.isEmpty {
           self?.createOnboardingVC(with: welcomePages)
         }
       })
   }
-
-  private func createOnboardingVC(with pages: [WelcomeSheetPage]) {
-    let sheetVC = WelcomeSheetController()
-    sheetVC.pages = pages
-   sheetVC.onDismiss = { self.services.onboardingService.addWatchedStatusForModels(pages, storageService: self.services.storageService)}
-    sheetVC.isModalInPresentation = false
-    self.navigationController.present(sheetVC, animated: true)
-  }
 }
 
 // MARK: - Appearance
 
 private extension OnboardingScreenCoordinator {
-  struct Appearance {
-    let somethingWentWrongTitle = RandomStrings.Localizable.somethingWentWrong
+  struct Appearance {}
+}
+
+// MARK: - Private func
+
+private extension OnboardingScreenCoordinator {
+  func createOnboardingVC(with pages: [WelcomeSheetPage]) {
+    let onboardingVC = WelcomeSheetController()
+    onboardingVC.pages = pages
+    onboardingVC.isModalInPresentation = false
+    onboardingVC.onDismiss = { [weak self] in
+      guard let self = self else {
+        return
+      }
+
+      self.services.onboardingService.saveWatchedStatus(to: self.services.storageService, for: pages)
+    }
+    self.navigationController.present(onboardingVC, animated: true)
   }
 }

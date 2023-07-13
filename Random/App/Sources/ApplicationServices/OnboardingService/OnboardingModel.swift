@@ -24,19 +24,19 @@ struct OnboardingScreenModel: UserDefaultsCodable {
 
     /// Данные полей онбоардинг страницы
     let contents: [Content]
-  }
 
-  // MARK: - Content
+    // MARK: - Content
 
-  struct Content: UserDefaultsCodable {
+    struct Content: UserDefaultsCodable {
 
-    /// Название символа symbolsSF
-    let symbolsSF: String
+      /// Название символа symbolsSF
+      let symbolsSF: String
 
-    /// Название поля онбоардинг страницы
-    let title: String
+      /// Название поля онбоардинг страницы
+      let title: String
 
-    /// Описание поля онбоардинг страницы
-    let description: String
+      /// Описание поля онбоардинг страницы
+      let description: String
+    }
   }
 }

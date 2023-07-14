@@ -13,8 +13,15 @@ import RandomUIKit
 
 protocol OnboardingService {
 
+  /// Сохранение статус просмотрено для онбоардинг моделей
+  ///  - Parameter storage: StorageService
+  ///  - Parameter models: массив просмотренных моделей
   func saveWatchedStatus(to storage: StorageService, for models: [WelcomeSheetPage])
 
+  /// Получить онбоардинг модели для представления
+  ///  - Parameter network: NetworkService
+  ///  - Parameter storage: StorageService
+  ///  - Parameter completion: полученные онбоардинг модели
   func getOnboardingPagesForPresent(network: NetworkService, storage: StorageService, completion: (([WelcomeSheetPage]) -> Void)?)
 }
 

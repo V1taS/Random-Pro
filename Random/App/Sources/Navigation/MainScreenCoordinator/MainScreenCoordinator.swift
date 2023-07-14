@@ -78,6 +78,13 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func onboardingScreenAction() {
+    let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
+                                                                  services)
+    anyCoordinator = onboardingScreenCoordinator
+    onboardingScreenCoordinator.start()
+  }
+
   func openMemes() {
     let memesScreenCoordinator = MemesScreenCoordinator(navigationController, services)
     anyCoordinator = memesScreenCoordinator
@@ -217,10 +224,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   
   func mainScreenModuleDidLoad() {
     checkIsUpdateAvailable()
-  }
-
-  func checkIsFirstVisit() {
-    checkFirstVisit()
   }
   
   func mainScreenModuleWillAppear() {}
@@ -433,13 +436,9 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   }
 }
 
-// MARK: - MainSettingsScreenCoordinatorOutput & PremiumScreenCoordinatorOutput & OnboardingScreenCoordinatorOutput
+// MARK: - MainSettingsScreenCoordinatorOutput & PremiumScreenCoordinatorOutput
 
-extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScreenCoordinatorOutput, OnboardingScreenCoordinatorOutput {
-  func applyFirstVisit(_ isFirstVisit: Bool) {
-    mainScreenModule?.saveIsFirstVisitStatus(isFirstVisit)
-  }
-
+extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScreenCoordinatorOutput {
   func applyPremium(_ isEnabled: Bool) {
     mainScreenModule?.savePremium(isEnabled)
   }
@@ -484,13 +483,6 @@ private extension MainScreenCoordinator {
     services.metricsService.track(event: .premiumScreen)
   }
 
-  func openOnboardingScreen() {
-    let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
-                                                                  services)
-    anyCoordinator = onboardingScreenCoordinator
-    onboardingScreenCoordinator.start()
-  }
-  
   func checkIsUpdateAvailable() {
 #if !DEBUG
     let appearance = Appearance()
@@ -536,18 +528,6 @@ private extension MainScreenCoordinator {
     }
   }
 
-  func checkFirstVisit() {
-    mainScreenModule?.returnModel { [weak self] model in
-      guard let self else {
-        return
-      }
-
-      if model.isFirstVisit {
-        openOnboardingScreen()
-      }
-    }
-  }
-  
   func startDeepLink() {
     guard let deepLinkType = services.deepLinkService.deepLinkType else {
       return

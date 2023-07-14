@@ -36,7 +36,6 @@ final class MainScreenFactory: MainScreenFactoryInput {
     let allSections: [MainScreenModel.Section] = model.allSections.filter { $0.isEnabled && !$0.isHidden }
     let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                    isPremium: model.isPremium,
-                                   isFirstVisit: model.isFirstVisit,
                                    allSections: allSections)
     output?.didReceiveNew(model: newModel)
   }
@@ -281,7 +280,6 @@ extension MainScreenFactory {
       DispatchQueue.main.async {
         completion(MainScreenModel(isDarkMode: nil,
                                    isPremium: false,
-                                   isFirstVisit: true,
                                    allSections: allSections))
       }
     }
@@ -528,7 +526,6 @@ extension MainScreenFactory {
           DispatchQueue.main.async {
             completion(MainScreenModel(isDarkMode: oldModel.isDarkMode,
                                        isPremium: isPremium ?? oldModel.isPremium,
-                                       isFirstVisit: oldModel.isFirstVisit,
                                        allSections: cardSections))
           }
         }

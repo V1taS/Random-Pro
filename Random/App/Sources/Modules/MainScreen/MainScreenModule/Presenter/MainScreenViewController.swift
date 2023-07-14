@@ -118,8 +118,8 @@ protocol MainScreenModuleOutput: AnyObject {
   /// - Parameter isPremium: Включен премиум
   func premiumButtonAction(_ isPremium: Bool)
 
-  /// Проверка: первый вход в приложение или нет
-  func checkIsFirstVisit()
+  /// Проверка: загрузка онбоардинг экрана
+  func onboardingScreenAction()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -135,10 +135,6 @@ protocol MainScreenModuleInput {
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена
   func saveDarkModeStatus(_ isEnabled: Bool?)
-  
-  /// Сохранить первый вход в приложение
-  /// - Parameter isEnabled: Первый вход выполнен
-  func saveIsFirstVisitStatus(_ isEnabled: Bool)
 
   /// Сохранить премиум режим
   /// - Parameter isEnabled: Сохранить премиум режим
@@ -215,7 +211,7 @@ final class MainScreenViewController: MainScreenModule {
                                            selector: #selector(didBecomeActiveNotification),
                                            name: UIApplication.didBecomeActiveNotification,
                                            object: nil)
-    moduleOutput?.checkIsFirstVisit()
+    moduleOutput?.onboardingScreenAction()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -234,10 +230,6 @@ final class MainScreenViewController: MainScreenModule {
   
   // MARK: - Internal func
 
-  func saveIsFirstVisitStatus(_ isEnabled: Bool) {
-    interactor.saveIsFirstVisitStatus(isEnabled)
-  }
-  
   func saveDarkModeStatus(_ isEnabled: Bool?) {
     interactor.saveDarkModeStatus(isEnabled)
   }
@@ -256,7 +248,6 @@ final class MainScreenViewController: MainScreenModule {
     interactor.returnModel { [weak self] model in
       let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
                                      isPremium: model.isPremium,
-                                     isFirstVisit: model.isFirstVisit,
                                      allSections: models)
       self?.interactor.updateSectionsWith(model: newModel)
     }

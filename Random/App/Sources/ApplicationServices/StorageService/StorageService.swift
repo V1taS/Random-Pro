@@ -10,9 +10,6 @@ import Foundation
 
 protocol StorageService {
 
-  /// Первый вход в приложение
-  var isFirstVisit: Bool { get }
-  
   /// Активирован премиум в приложении
   var isPremium: Bool { get }
   
@@ -27,14 +24,6 @@ protocol StorageService {
 final class StorageServiceImpl: StorageService {
   
   // MARK: - Internal property
-
-  var isFirstVisit: Bool {
-    let describingType = String(describing: MainScreenModel.self)
-    let key = "\(describingType)_data"
-    @ObjectCustomKeychainWrapper(key: key)
-    var dataKeychain: MainScreenModel?
-    return dataKeychain?.isFirstVisit ?? false
-  }
 
   var isPremium: Bool {
     let describingType = String(describing: MainScreenModel.self)

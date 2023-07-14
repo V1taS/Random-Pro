@@ -17,9 +17,6 @@ struct MainScreenModel: UserDefaultsCodable {
   
   /// Доступность премиума в приложении
   let isPremium: Bool
-
-  /// Первый вход в приложение
-  let isFirstVisit: Bool
   
   /// Все секции приложения
   let allSections: [Section]

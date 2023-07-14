@@ -85,7 +85,6 @@ final class ApplicationServicesMock: ApplicationServices {
     onboardingServiceIml
   }
 
-  
   // MARK: - Private property
   
   let storageServiceImpl = StorageServiceMock()

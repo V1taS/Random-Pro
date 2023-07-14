@@ -14,7 +14,7 @@ import XCTest
 // MARK: - Реализация ApplicationServicesMock
 
 final class ApplicationServicesMock: ApplicationServices {
-  
+
   // MARK: - Internal property
   
   var deepLinkService: DeepLinkService {
@@ -80,6 +80,11 @@ final class ApplicationServicesMock: ApplicationServices {
   var buttonCounterService: ButtonCounterService {
     buttonCounterServiceImpl
   }
+
+  var onboardingService: OnboardingService {
+    onboardingServiceIml
+  }
+
   
   // MARK: - Private property
   
@@ -99,4 +104,5 @@ final class ApplicationServicesMock: ApplicationServices {
   let notificationServiceImpl = NotificationServiceMock()
   let permissionServiceImpl = PermissionServiceMock()
   let fileManagerImpl = FileManagerServiceMock()
+  let onboardingServiceIml = OnboardingServiceMock()
 }

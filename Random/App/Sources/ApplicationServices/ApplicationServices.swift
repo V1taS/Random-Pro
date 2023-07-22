@@ -66,6 +66,9 @@ protocol ApplicationServices {
   
   /// Сервис считает количество нажатий на кнопки
   var buttonCounterService: ButtonCounterService { get }
+
+  /// Сервис онбоардинг экрана
+  var onboardingService: OnboardingService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -137,6 +140,10 @@ final class ApplicationServicesImpl: ApplicationServices {
   var buttonCounterService: ButtonCounterService {
     buttonCounterServiceImpl
   }
+
+  var onboardingService: OnboardingService {
+    onboardingServiceImpl
+  }
   
   // MARK: - Private property
   
@@ -156,4 +163,5 @@ final class ApplicationServicesImpl: ApplicationServices {
   let notificationServiceImpl = NotificationServiceImpl()
   let permissionServiceImpl = PermissionServiceImpl()
   let fileManagerImpl = FileManagerImpl()
+  let onboardingServiceImpl = OnboardingServiceImpl()
 }

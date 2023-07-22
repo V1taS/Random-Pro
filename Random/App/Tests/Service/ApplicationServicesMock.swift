@@ -81,6 +81,10 @@ final class ApplicationServicesMock: ApplicationServices {
     buttonCounterServiceImpl
   }
   
+  var onboardingService: OnboardingService {
+    onboardingServiceIml
+  }
+  
   // MARK: - Private property
   
   let storageServiceImpl = StorageServiceMock()
@@ -99,4 +103,5 @@ final class ApplicationServicesMock: ApplicationServices {
   let notificationServiceImpl = NotificationServiceMock()
   let permissionServiceImpl = PermissionServiceMock()
   let fileManagerImpl = FileManagerServiceMock()
+  let onboardingServiceIml = OnboardingServiceMock()
 }

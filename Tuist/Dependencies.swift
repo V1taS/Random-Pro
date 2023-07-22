@@ -26,7 +26,9 @@ let dependencies = Dependencies(
       .remote(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
               requirement: .exact("10.5.0")),
       .remote(url: "https://github.com/firebase/firebase-ios-sdk.git",
-              requirement: .exact("10.10.0"))
+              requirement: .exact("10.10.0")),
+      .remote(url: "https://github.com/MAJKFL/Welcome-Sheet",
+              requirement: .exact("1.2.0")),
     ]
   ),
   platforms: [.iOS]

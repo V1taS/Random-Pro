@@ -32,7 +32,6 @@ enum MetricsSections: String {
   case contactScreen = "Контакт"
   case passwordScreen = "Пароли"
   case colorsScreen = "Цвета"
-  case onboarding = "Onboarding"
   case bottleScreen = "Бутылочка"
   case rockPaperScissors = "Камень Ножницы Бумага"
   case imageFilters = "Фильтр изображений"
@@ -48,6 +47,7 @@ enum MetricsSections: String {
   case fortuneWheel = "Колесо фортуны"
   case truthOrDare = "Раздел Правда или действие"
   case memes = "Раздел Мемов"
+  case onboarding = "Раздел Onboarding"
   
   // Настройки главного экрана
   case mainSettingsScreen = "Настройки главного экрана"

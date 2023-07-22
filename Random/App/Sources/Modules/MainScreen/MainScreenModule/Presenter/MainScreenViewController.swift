@@ -64,7 +64,7 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Joke`
   func openJoke()
-
+  
   /// Открыть раздел `Slogans`
   func openSlogans()
   
@@ -79,7 +79,7 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Загадки`
   func openRiddles()
-
+  
   /// Открыть раздел `Подарки`
   func openGifts()
   
@@ -88,7 +88,7 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Цитаты`
   func openQuotes()
-
+  
   /// Открыть раздел `Правда или дело`
   func openTruthOrDare()
   
@@ -117,6 +117,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Кнопка премиум была нажата
   /// - Parameter isPremium: Включен премиум
   func premiumButtonAction(_ isPremium: Bool)
+  
+  /// Показать онбоардинг экрана
+  func presentOnboardingScreen()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -216,6 +219,7 @@ final class MainScreenViewController: MainScreenModule {
     navigationController?.navigationBar.prefersLargeTitles = true
     moduleOutput?.mainScreenModuleWillAppear()
     setupNavBar()
+    moduleOutput?.presentOnboardingScreen()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -273,7 +277,7 @@ extension MainScreenViewController: MainScreenViewOutput {
   func openFortuneWheel() {
     moduleOutput?.openFortuneWheel()
   }
-
+  
   func openTruthOrDare() {
     moduleOutput?.openTruthOrDare()
   }
@@ -285,11 +289,11 @@ extension MainScreenViewController: MainScreenViewOutput {
   func openGifts() {
     moduleOutput?.openGifts()
   }
-
+  
   func openJoke() {
     moduleOutput?.openJoke()
   }
-
+  
   func openSlogans() {
     moduleOutput?.openSlogans()
   }
@@ -433,11 +437,6 @@ private extension MainScreenViewController {
       let isPremium = model.isPremium
       let style: PremiumButtonView.Style = isPremium ? .premium : .nonPremium
       
-      _ = UIBarButtonItem(image: appearance.shareButtonIcon,
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(self.shareButtonAction))
-      
       let premiumButton = UIBarButtonItem.premiumButton(self,
                                                         action: #selector(self.premiumButtonAction),
                                                         style: style)
@@ -456,12 +455,6 @@ private extension MainScreenViewController {
       self?.moduleOutput?.premiumButtonAction(model.isPremium)
       self?.impactFeedback.impactOccurred()
     }
-  }
-  
-  @objc
-  func shareButtonAction() {
-    moduleOutput?.shareButtonAction()
-    impactFeedback.impactOccurred()
   }
   
   @objc
@@ -497,7 +490,6 @@ private extension MainScreenViewController {
   struct Appearance {
     let title = RandomStrings.Localizable.randomPro
     let settingsButtonIcon = UIImage(systemName: "gear")
-    let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
     
     let notPremiumName = RandomAsset.crownNotPremium.name
     let isPremiumName = RandomAsset.crownIsPremium.name

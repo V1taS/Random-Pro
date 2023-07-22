@@ -51,18 +51,13 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   private let factory: FilmsScreenFactoryInput
   private let services: ApplicationServices
   private var storageService: StorageService
-  private var _filmsScreenModel: [FilmsScreenModel] = [] {
-    didSet {
-      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-        self?.storageService.saveData(self?._filmsScreenModel)
-      }
-    }
-  }
   private var filmsScreenModel: [FilmsScreenModel]? {
     get {
       storageService.getData(from: [FilmsScreenModel].self)
     } set {
-      _filmsScreenModel = newValue ?? []
+      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+        self?.storageService.saveData(newValue)
+      }
     }
   }
   
@@ -105,11 +100,11 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   func loadFilm() {
     if isRuslocale() {
       if filmsScreenModel == nil {
-        loadRusFilms {}
+        loadRusFilms {_ in }
       }
     } else {
       if filmsScreenModel == nil {
-        loadEngFilms {}
+        loadEngFilms {_ in }
       }
     }
   }
@@ -118,61 +113,57 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
 // MARK: - Private
 
 private extension FilmsScreenInteractor {
-  func loadEngFilms(completion: @escaping () -> Void) {
+  func loadEngFilms(completion: @escaping (_ filmsModels: [FilmsScreenModel]) -> Void) {
     output?.startLoader()
     loadListEngFilmsDto { [weak self] filmsModelsDTO in
       self?.loadEngImageWith(filmsEngDTO: filmsModelsDTO) { [weak self] filmsModels in
         self?.filmsScreenModel = filmsModels
-        completion()
+        completion(filmsModels)
         self?.output?.stopLoader()
       }
     }
   }
   
-  func loadRusFilms(completion: @escaping () -> Void) {
+  func loadRusFilms(completion: @escaping (_ filmsModels: [FilmsScreenModel]) -> Void) {
     output?.startLoader()
     loadListRusFilmsDto { [weak self] filmsModelsDTO in
       self?.loadRusImageWith(filmsRusDTO: filmsModelsDTO) { [weak self] filmsModels in
         self?.filmsScreenModel = filmsModels
-        completion()
+        completion(filmsModels)
         self?.output?.stopLoader()
       }
     }
   }
   
   func getEngFilms() {
-    if let filmsScreenModel, filmsScreenModel.isEmpty {
-      loadEngFilms { [weak self] in
-        guard let filmModel = self?.getGenerateRusFilms() else {
+    if let unwrappedModel = filmsScreenModel,
+        !unwrappedModel.isEmpty,
+       let filmModel = getGenerateFilms() {
+      output?.didReceiveFilm(model: filmModel)
+    } else {
+      loadEngFilms { [weak self] filmsModels in
+        guard let filmModel = filmsModels.first else {
           self?.output?.somethingWentWrong()
           return
         }
         self?.output?.didReceiveFilm(model: filmModel)
       }
-    } else {
-      guard let filmModel = getGenerateRusFilms() else {
-        output?.somethingWentWrong()
-        return
-      }
-      output?.didReceiveFilm(model: filmModel)
     }
   }
   
   func getRusFilms() {
-    if let filmsScreenModel, filmsScreenModel.isEmpty {
-      loadRusFilms { [weak self] in
-        guard let filmModel = self?.getGenerateRusFilms() else {
+    if let unwrappedModel = filmsScreenModel,
+        !unwrappedModel.isEmpty,
+       let filmModel = getGenerateFilms() {
+      output?.didReceiveFilm(model: filmModel)
+    } else {
+      loadRusFilms { [weak self] filmsModels in
+        guard let filmModel = filmsModels.first else {
           self?.output?.somethingWentWrong()
           return
         }
         self?.output?.didReceiveFilm(model: filmModel)
       }
-    } else {
-      guard let filmModel = getGenerateRusFilms() else {
-        output?.somethingWentWrong()
-        return
-      }
-      output?.didReceiveFilm(model: filmModel)
     }
   }
   
@@ -249,7 +240,7 @@ private extension FilmsScreenInteractor {
     }
   }
   
-  func getGenerateRusFilms() -> FilmsScreenModel? {
+  func getGenerateFilms() -> FilmsScreenModel? {
     filmsScreenModel?.shuffle()
     guard let filmModel = filmsScreenModel?.first else {
       return nil

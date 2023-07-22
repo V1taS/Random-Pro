@@ -15,7 +15,7 @@ import RandomNetwork
 final class OnboardingServiceMock: OnboardingService {
   func saveWatchedStatus(to storage: StorageService, for models: [WelcomeSheet.WelcomeSheetPage]) {
   }
-
+  
   func getOnboardingPagesForPresent(
     network: NetworkService,
     storage: StorageService,

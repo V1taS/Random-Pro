@@ -78,13 +78,13 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
-  func onboardingScreenAction() {
+  func presentOnboardingScreen() {
     let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
                                                                   services)
     anyCoordinator = onboardingScreenCoordinator
     onboardingScreenCoordinator.start()
   }
-
+  
   func openMemes() {
     let memesScreenCoordinator = MemesScreenCoordinator(navigationController, services)
     anyCoordinator = memesScreenCoordinator
@@ -117,7 +117,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     
     anyCoordinator = giftsScreenCoordinator
     giftsScreenCoordinator.start()
-
+    
     mainScreenModule?.removeLabelFromSection(type: .gifts)
     services.metricsService.track(event: .gifts)
   }
@@ -131,17 +131,17 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     mainScreenModule?.removeLabelFromSection(type: .joke)
     services.metricsService.track(event: .joke)
   }
-
+  
   func openSlogans() {
     let slogansScreenCoordinator = SlogansScreenCoordinator(navigationController,
                                                             services)
     anyCoordinator = slogansScreenCoordinator
     slogansScreenCoordinator.start()
-
+    
     mainScreenModule?.removeLabelFromSection(type: .slogans)
     services.metricsService.track(event: .slogans)
   }
-
+  
   func openRiddles() {
     let riddlesScreenCoordinator = RiddlesScreenCoordinator(navigationController,
                                                             services)
@@ -190,17 +190,17 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     mainScreenModule?.removeLabelFromSection(type: .nickName)
     services.metricsService.track(event: .nickNameScreen)
   }
-
+  
   func openTruthOrDare() {
     let truthOrDareScreenCoordinator = TruthOrDareScreenCoordinator(navigationController,
-                                                              services)
+                                                                    services)
     anyCoordinator = truthOrDareScreenCoordinator
     truthOrDareScreenCoordinator.start()
-
+    
     mainScreenModule?.removeLabelFromSection(type: .truthOrDare)
     services.metricsService.track(event: .truthOrDare)
   }
-
+  
   func openFilms() {
     let filmsScreenCoordinator = FilmsScreenCoordinator(navigationController,
                                                         services)
@@ -482,7 +482,7 @@ private extension MainScreenCoordinator {
     
     services.metricsService.track(event: .premiumScreen)
   }
-
+  
   func checkIsUpdateAvailable() {
 #if !DEBUG
     let appearance = Appearance()
@@ -527,7 +527,7 @@ private extension MainScreenCoordinator {
       window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
     }
   }
-
+  
   func startDeepLink() {
     guard let deepLinkType = services.deepLinkService.deepLinkType else {
       return

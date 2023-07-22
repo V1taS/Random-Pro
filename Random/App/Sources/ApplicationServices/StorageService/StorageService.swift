@@ -9,7 +9,7 @@
 import Foundation
 
 protocol StorageService {
-
+  
   /// Активирован премиум в приложении
   var isPremium: Bool { get }
   
@@ -24,7 +24,7 @@ protocol StorageService {
 final class StorageServiceImpl: StorageService {
   
   // MARK: - Internal property
-
+  
   var isPremium: Bool {
     let describingType = String(describing: MainScreenModel.self)
     let key = "\(describingType)_data"

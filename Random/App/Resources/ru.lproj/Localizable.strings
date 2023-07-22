@@ -306,3 +306,4 @@
 "sections_to_generate" = "Разделы для генерации";
 "memes" = "Мемы";
 "generate_random_memes" = "Можно генерировать рандомные мемы";
+"complete" = "Завершить";

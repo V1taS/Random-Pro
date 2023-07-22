@@ -12,55 +12,46 @@ import RandomNetwork
 import RandomUIKit
 
 protocol OnboardingService {
-
+  
   /// Сохранение статус просмотрено для онбоардинг моделей
   ///  - Parameter storage: StorageService
   ///  - Parameter models: массив просмотренных моделей
   func saveWatchedStatus(to storage: StorageService, for models: [WelcomeSheetPage])
-
+  
   /// Получить онбоардинг модели для представления
   ///  - Parameter network: NetworkService
   ///  - Parameter storage: StorageService
   ///  - Parameter completion: полученные онбоардинг модели
-  func getOnboardingPagesForPresent(network: NetworkService, storage: StorageService, completion: (([WelcomeSheetPage]) -> Void)?)
+  func getOnboardingPagesForPresent(network: NetworkService,
+                                    storage: StorageService,
+                                    completion: (([WelcomeSheetPage]) -> Void)?)
 }
 
 final class OnboardingServiceImpl: OnboardingService {
-
-  typealias OnboardingPageModel = OnboardingScreenModel.OnboardingData
-
+  
   // MARK: - Internal func
-
-  func getOnboardingPagesForPresent(network: NetworkService, storage: StorageService, completion: (([WelcomeSheetPage]) -> Void)?) {
+  
+  func getOnboardingPagesForPresent(network: NetworkService,
+                                    storage: StorageService,
+                                    completion: (([WelcomeSheetPage]) -> Void)?) {
     fetchContent(from: network) { [weak self] fetchedPageModels in
       guard let self = self else {
         return
       }
-
+      
       self.saveFetchedModels(fetchedPageModels, to: storage)
       completion?(self.createWelcomePagesForPresent(from: storage))
     }
   }
-
+  
   func saveWatchedStatus(to storage: StorageService, for models: [WelcomeSheetPage]) {
     var cashedOnboardingModels = getOnboardingScreenModels(from: storage)
-    var watchedModels: [OnboardingScreenModel] = []
-
-    _ = cashedOnboardingModels.map { cashedScreen in
-      var index = 0
-
-      _ = models.map { watchedModel in
-        if cashedScreen.onboardingData.title == watchedModel.title {
-          let newOnboardingModel = OnboardingScreenModel(isWatched: true, onboardingData: cashedScreen.onboardingData)
-          cashedOnboardingModels.remove(at: index)
-          index -= 1
-          watchedModels.append(newOnboardingModel)
-        }
+    
+    cashedOnboardingModels.enumerated().forEach { index, cashedScreen in
+      if models.contains(where: { $0.title == cashedScreen.onboardingData.title }) {
+        cashedOnboardingModels[index].isWatched = true
       }
-      index += 1
     }
-
-    cashedOnboardingModels += watchedModels
     storage.saveData(cashedOnboardingModels)
   }
 }
@@ -71,23 +62,22 @@ private extension OnboardingServiceImpl {
   func getDefaultLanguage() -> String {
     let language: String
     let localeType = LanguageType.getCurrentLanguageType()
-
+    
     switch localeType {
     case .ru:
       language = "ru"
     default:
       language = "en"
     }
-
     return language
   }
-
-  func fetchContent(from network: NetworkService, completion: (([OnboardingPageModel]) -> Void)?) {
+  
+  func fetchContent(from network: NetworkService, completion: (([OnboardingScreenModel]) -> Void)?) {
     let appearance = Appearance()
     let host = appearance.host
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
-
+    
     network.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
@@ -101,51 +91,55 @@ private extension OnboardingServiceImpl {
         DispatchQueue.main.async {
           switch result {
           case let .success(data):
-            guard let onboardingPageModels = network.map(data, to: [OnboardingPageModel].self) else {
+            guard let onboardingPageDTO = network.map(
+              data,
+              to: [OnboardingScreenModel.OnboardingData].self
+            ) else {
               return
             }
-            completion?(onboardingPageModels)
-          case .failure: break
+            let models = onboardingPageDTO.compactMap {
+              return OnboardingScreenModel(isWatched: false, onboardingData: $0)
+            }
+            completion?(models)
+          case .failure:
+            break
           }
         }
       }
   }
-
+  
   func getOnboardingScreenModels(from storageService: StorageService) -> [OnboardingScreenModel] {
     storageService.getData(from: [OnboardingScreenModel].self) ?? []
   }
-
-  func createOnboardingScreenModels(from onboardingPageModels: [OnboardingPageModel]) -> [OnboardingScreenModel] {
-    onboardingPageModels.compactMap { OnboardingScreenModel(isWatched: false, onboardingData: $0) }
-  }
-
-  func saveFetchedModels(_ fetchedModels: [OnboardingPageModel], to storage: StorageService) {
-    guard fetchedModels != [] else {
+  
+  func saveFetchedModels(_ fetchedModels: [OnboardingScreenModel], to storage: StorageService) {
+    guard !fetchedModels.isEmpty else {
       return
     }
-
-    let cashedOnboardingScreenModels = getOnboardingScreenModels(from: storage)
-
-    let newPageModels = cashedOnboardingScreenModels.count == 0
-    ? fetchedModels
-    : fetchedModels.filter { !cashedOnboardingScreenModels.compactMap { $0.onboardingData}.contains($0) }
-
-    let modelsToSave = cashedOnboardingScreenModels + createOnboardingScreenModels(from: newPageModels)
+    
+    let cachedOnboardingScreenModels = getOnboardingScreenModels(from: storage)
+    let cachedTitles = cachedOnboardingScreenModels.map { $0.onboardingData.title }
+    let newPageModels = fetchedModels.filter { !cachedTitles.contains($0.onboardingData.title) }
+    let modelsToSave = cachedOnboardingScreenModels + newPageModels
     storage.saveData(modelsToSave)
   }
-
+  
   func createWelcomePagesForPresent(from storage: StorageService) -> [WelcomeSheetPage] {
-    getOnboardingScreenModels(from: storage)
-      .lazy
-      .filter { $0.isWatched == false }
-      .enumerated()
-      .filter { $0.offset <= 2 }
-      .compactMap {
-        WelcomeSheetPage(title: $0.element.onboardingData.title,
-                         rows: $0.element.onboardingData.contents.map {
-          WelcomeSheetPageRow(imageSystemName: $0.symbolsSF, title: $0.title, content: $0.description)
-        })
+    let unwatchedModels = getOnboardingScreenModels(from: storage).filter { !$0.isWatched }
+    
+    return unwatchedModels.prefix(3).enumerated().map { index, model in
+      var welcomeSheetPage = WelcomeSheetPage(title: model.onboardingData.title,
+                                              rows: model.onboardingData.contents.map {
+        WelcomeSheetPageRow(imageSystemName: $0.symbolsSF, title: $0.title, content: $0.description)
+      })
+      
+      if unwatchedModels.count == 1 || index + 1 == 3 {
+        welcomeSheetPage.mainButtonTitle = RandomStrings.Localizable.complete
+      } else {
+        welcomeSheetPage.mainButtonTitle = RandomStrings.Localizable.continue
       }
+      return welcomeSheetPage
+    }
   }
 }
 

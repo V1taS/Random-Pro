@@ -122,7 +122,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       }
     }
   }
-
+  
   func saveDarkModeStatus(_ isEnabled: Bool?) {
     guard let model = mainScreenModel else {
       return

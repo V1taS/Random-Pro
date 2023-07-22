@@ -56,6 +56,7 @@ final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
       completion: { [weak self] welcomePages in
         if !welcomePages.isEmpty {
           self?.createOnboardingVC(with: welcomePages)
+          self?.services.metricsService.track(event: .onboarding)
         }
       }
     )

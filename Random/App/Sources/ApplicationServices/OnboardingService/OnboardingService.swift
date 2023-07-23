@@ -126,11 +126,13 @@ private extension OnboardingServiceImpl {
   
   func createWelcomePagesForPresent(from storage: StorageService) -> [WelcomeSheetPage] {
     let unwatchedModels = getOnboardingScreenModels(from: storage).filter { !$0.isWatched }
-    
     return unwatchedModels.prefix(3).enumerated().map { index, model in
       var welcomeSheetPage = WelcomeSheetPage(title: model.onboardingData.title,
                                               rows: model.onboardingData.contents.map {
-        WelcomeSheetPageRow(imageSystemName: $0.symbolsSF, title: $0.title, content: $0.description)
+        WelcomeSheetPageRow(imageSystemName: $0.symbolsSF,
+                            accentUIColor: RandomColor.only.primaryGreen,
+                            title: $0.title,
+                            content: $0.description)
       })
       
       if unwatchedModels.count == 1 || index + 1 == 3 {
@@ -138,6 +140,7 @@ private extension OnboardingServiceImpl {
       } else {
         welcomeSheetPage.mainButtonTitle = RandomStrings.Localizable.continue
       }
+      welcomeSheetPage.accentColor = .init(RandomColor.only.primaryGreen)
       return welcomeSheetPage
     }
   }

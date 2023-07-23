@@ -51,15 +51,7 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   private let factory: FilmsScreenFactoryInput
   private let services: ApplicationServices
   private var storageService: StorageService
-  private var filmsScreenModel: [FilmsScreenModel]? {
-    get {
-      storageService.getData(from: [FilmsScreenModel].self)
-    } set {
-      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-        self?.storageService.saveData(newValue)
-      }
-    }
-  }
+  private var filmsScreenModel: [FilmsScreenModel] = []
   
   // MARK: - Initialization
   
@@ -89,23 +81,21 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   }
   
   func generateFilm() {
-    if isRuslocale() {
-      getRusFilms()
-    } else {
-      getEngFilms()
-    }
+    getFilmByLocale(isRussian: isRuslocale())
     services.buttonCounterService.onButtonClick()
   }
   
   func loadFilm() {
+    filmsScreenModel = getFilmsData()
+    
+    guard filmsScreenModel.isEmpty else {
+      return
+    }
+    
     if isRuslocale() {
-      if filmsScreenModel == nil {
-        loadRusFilms {_ in }
-      }
+      loadRusFilms {_ in }
     } else {
-      if filmsScreenModel == nil {
-        loadEngFilms {_ in }
-      }
+      loadEngFilms {_ in }
     }
   }
 }
@@ -116,7 +106,8 @@ private extension FilmsScreenInteractor {
   func loadEngFilms(completion: @escaping (_ filmsModels: [FilmsScreenModel]) -> Void) {
     output?.startLoader()
     loadListEngFilmsDto { [weak self] filmsModelsDTO in
-      self?.loadEngImageWith(filmsEngDTO: filmsModelsDTO) { [weak self] filmsModels in
+      self?.loadImageWith(filmsDTO: filmsModelsDTO,
+                          isRussian: self?.isRuslocale() ?? false) { [weak self] filmsModels in
         self?.filmsScreenModel = filmsModels
         completion(filmsModels)
         self?.output?.stopLoader()
@@ -127,7 +118,8 @@ private extension FilmsScreenInteractor {
   func loadRusFilms(completion: @escaping (_ filmsModels: [FilmsScreenModel]) -> Void) {
     output?.startLoader()
     loadListRusFilmsDto { [weak self] filmsModelsDTO in
-      self?.loadRusImageWith(filmsRusDTO: filmsModelsDTO) { [weak self] filmsModels in
+      self?.loadImageWith(filmsDTO: filmsModelsDTO,
+                          isRussian: self?.isRuslocale() ?? false) { [weak self] filmsModels in
         self?.filmsScreenModel = filmsModels
         completion(filmsModels)
         self?.output?.stopLoader()
@@ -135,29 +127,20 @@ private extension FilmsScreenInteractor {
     }
   }
   
-  func getEngFilms() {
-    if let unwrappedModel = filmsScreenModel,
-        !unwrappedModel.isEmpty,
+  func getFilmByLocale(isRussian: Bool) {
+    if !filmsScreenModel.isEmpty,
        let filmModel = getGenerateFilms() {
       output?.didReceiveFilm(model: filmModel)
-    } else {
-      loadEngFilms { [weak self] filmsModels in
+    } else if isRussian {
+      loadRusFilms { [weak self] filmsModels in
         guard let filmModel = filmsModels.first else {
           self?.output?.somethingWentWrong()
           return
         }
         self?.output?.didReceiveFilm(model: filmModel)
       }
-    }
-  }
-  
-  func getRusFilms() {
-    if let unwrappedModel = filmsScreenModel,
-        !unwrappedModel.isEmpty,
-       let filmModel = getGenerateFilms() {
-      output?.didReceiveFilm(model: filmModel)
     } else {
-      loadRusFilms { [weak self] filmsModels in
+      loadEngFilms { [weak self] filmsModels in
         guard let filmModel = filmsModels.first else {
           self?.output?.somethingWentWrong()
           return
@@ -241,35 +224,53 @@ private extension FilmsScreenInteractor {
   }
   
   func getGenerateFilms() -> FilmsScreenModel? {
-    filmsScreenModel?.shuffle()
-    guard let filmModel = filmsScreenModel?.first else {
+    filmsScreenModel.shuffle()
+    guard let filmModel = filmsScreenModel.first else {
       return nil
     }
-    filmsScreenModel?.removeFirst()
+    filmsScreenModel.removeFirst()
+    saveFilmsData(filmsScreenModel)
     return filmModel
   }
   
-  func loadEngImageWith(filmsEngDTO: [FilmsScreenEngModelDTO],
-                        completion: @escaping (_ filmsModels: [FilmsScreenModel]) -> Void) {
+  func loadImageWith(filmsDTO: [Any],
+                     isRussian: Bool,
+                     completion: @escaping (_ filmsModels: [FilmsScreenModel]) -> Void) {
     var filmsModels: [FilmsScreenModel] = []
     let dispatchGroup = DispatchGroup()
-    filmsEngDTO.forEach { _ in
+    filmsDTO.forEach { _ in
       dispatchGroup.enter()
     }
     
-    filmsEngDTO.forEach { modelDTO in
-      self.services.networkService.performRequestWith(urlString: self.factory.createBestQualityFrom(url: modelDTO.img),
-                                                      queryItems: [],
-                                                      httpMethod: .get,
-                                                      headers: []) { [weak self] result in
-        guard let self else {
+    filmsDTO.forEach { modelDTO in
+      var url = ""
+      
+      if isRussian, let model = modelDTO as? FilmsScreenRusModelDTO.Film {
+        url = model.posterUrl
+      }
+      
+      if !isRussian, let model = modelDTO as? FilmsScreenEngModelDTO {
+        url = factory.createBestQualityFrom(url: model.img)
+      }
+      
+      services.networkService.performRequestWith(urlString: url,
+                                                 queryItems: [],
+                                                 httpMethod: .get,
+                                                 headers: []) { [weak self] result in
+        guard let self = self else {
           return
         }
         switch result {
         case let .success(imageData):
-          let model = self.factory.createEngFilmsModelFrom(modelDTO,
-                                                           image: imageData)
-          filmsModels.append(model)
+          if isRussian, let model = modelDTO as? FilmsScreenRusModelDTO.Film {
+            let filmsScreenModel = self.factory.createRusFilmsModelFrom(model, image: imageData)
+            filmsModels.append(filmsScreenModel)
+          }
+          
+          if !isRussian, let model = modelDTO as? FilmsScreenEngModelDTO {
+            let filmsScreenModel = self.factory.createEngFilmsModelFrom(model, image: imageData)
+            filmsModels.append(filmsScreenModel)
+          }
           dispatchGroup.leave()
         case .failure:
           dispatchGroup.leave()
@@ -284,38 +285,13 @@ private extension FilmsScreenInteractor {
     }
   }
   
-  func loadRusImageWith(filmsRusDTO: [FilmsScreenRusModelDTO.Film],
-                        completion: @escaping (_ filmsModels: [FilmsScreenModel]) -> Void) {
-    var filmsModels: [FilmsScreenModel] = []
-    let dispatchGroup = DispatchGroup()
-    filmsRusDTO.forEach { _ in
-      dispatchGroup.enter()
-    }
-    
-    filmsRusDTO.forEach { modelDTO in
-      self.services.networkService.performRequestWith(urlString: modelDTO.posterUrl,
-                                                      queryItems: [],
-                                                      httpMethod: .get,
-                                                      headers: []) { [weak self] result in
-        guard let self else {
-          return
-        }
-        switch result {
-        case let .success(imageData):
-          let model = self.factory.createRusFilmsModelFrom(modelDTO,
-                                                           image: imageData)
-          filmsModels.append(model)
-          dispatchGroup.leave()
-        case .failure:
-          dispatchGroup.leave()
-          DispatchQueue.main.async {
-            self.output?.somethingWentWrong()
-          }
-        }
-      }
-    }
-    dispatchGroup.notify(queue: .main) {
-      completion(filmsModels)
+  func getFilmsData() -> [FilmsScreenModel] {
+    return storageService.getData(from: [FilmsScreenModel].self) ?? []
+  }
+  
+  func saveFilmsData(_ data: [FilmsScreenModel]?) {
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      self?.storageService.saveData(data)
     }
   }
 }

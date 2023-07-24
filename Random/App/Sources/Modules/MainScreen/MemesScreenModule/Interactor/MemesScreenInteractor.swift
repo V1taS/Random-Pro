@@ -43,6 +43,12 @@ protocol MemesScreenInteractorInput {
   
   /// Запрос доступа к Галерее
   func requestPhotosStatus()
+  
+  /// Установить новый язык
+  func setNewLanguage(language: MemesScreenModel.Language)
+  
+  /// Запросить текущую модель
+  func returnCurrentModel() -> MemesScreenModel
 }
 
 /// Интерактор
@@ -54,10 +60,17 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   
   // MARK: - Private property
   
+  private var storageService: StorageService
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
   private let permissionService: PermissionService
-  private var cacheListMemesURLString: [String] = []
+  private var memesScreenModel: MemesScreenModel? {
+    get {
+      storageService.getData(from: MemesScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -67,9 +80,29 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
     networkService = services.networkService
     buttonCounterService = services.buttonCounterService
     permissionService = services.permissionService
+    storageService = services.storageService
   }
   
   // MARK: - Internal func
+  
+  func returnCurrentModel() -> MemesScreenModel {
+    if let model = memesScreenModel {
+      return model
+    } else {
+      return MemesScreenModel(memesURLString: [], language: getDefaultLanguage())
+    }
+  }
+  
+  func setNewLanguage(language: MemesScreenModel.Language) {
+    guard let model = memesScreenModel else {
+      output?.somethingWentWrong()
+      return
+    }
+    
+    let newModel = MemesScreenModel(memesURLString: model.memesURLString, language: language)
+    memesScreenModel = newModel
+    getContent()
+  }
   
   func requestPhotosStatus() {
     permissionService.requestPhotos { [weak self] granted in
@@ -88,12 +121,15 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
     let host = appearance.host
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
-    let language = getDefaultLanguage()
+    
+    let newModel = MemesScreenModel(memesURLString: [], language: getDefaultLanguage())
+    let model = memesScreenModel ?? newModel
+    let language = model.language ?? getDefaultLanguage()
     
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
-        .init(name: "language", value: "\(language)")
+        .init(name: "language", value: "\(language.rawValue)")
       ],
       httpMethod: .get,
       headers: [
@@ -108,12 +144,16 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
           }
           switch result {
           case let .success(data):
-            guard let listMemes = self.networkService.map(data, to: [MemesScreenModel].self) else {
+            guard let listMemes = self.networkService.map(data, to: [MemesScreenDTO].self) else {
               self.output?.somethingWentWrong()
               self.output?.stopLoader()
               return
             }
-            self.cacheListMemesURLString = listMemes.compactMap { $0.urlImage }
+            
+            self.memesScreenModel = MemesScreenModel(
+              memesURLString: listMemes.compactMap { $0.urlImage },
+              language: language
+            )
             self.generateButtonAction()
           case .failure:
             self.output?.stopLoader()
@@ -124,15 +164,14 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    cacheListMemesURLString.shuffle()
+    memesScreenModel?.memesURLString.shuffle()
     
-    guard let memesURLString = cacheListMemesURLString.first,
-          !cacheListMemesURLString.isEmpty else {
+    guard let memesURLString = memesScreenModel?.memesURLString.first else {
       getContent()
       return
     }
     
-    cacheListMemesURLString.removeFirst()
+    memesScreenModel?.memesURLString.removeFirst()
     
     networkService.performRequestWith(
       urlString: memesURLString,
@@ -155,13 +194,13 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
 }
 
 private extension MemesScreenInteractor {
-  func getDefaultLanguage() -> String {
+  func getDefaultLanguage() -> MemesScreenModel.Language {
     let languageType = LanguageType.getCurrentLanguageType() ?? .us
     switch languageType {
     case .ru:
-      return "ru"
+      return .ru
     default:
-      return "en"
+      return .en
     }
   }
 }

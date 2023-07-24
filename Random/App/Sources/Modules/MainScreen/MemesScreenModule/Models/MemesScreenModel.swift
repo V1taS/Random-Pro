@@ -10,6 +10,20 @@ import Foundation
 
 struct MemesScreenModel: UserDefaultsCodable {
   
-  /// Ссылка на мемасик
-  let urlImage: String
+  /// Ссылки на мемасики
+  var memesURLString: [String]
+  
+  /// Язык для генерации цитаты
+  let language: Language?
+  
+  // MARK: - Language
+  
+  enum Language: String, CaseIterable, UserDefaultsCodable {
+    
+    /// Английский
+    case en
+    
+    /// Русский
+    case ru
+  }
 }

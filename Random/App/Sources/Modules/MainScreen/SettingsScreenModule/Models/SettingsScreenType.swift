@@ -80,10 +80,13 @@ enum SettingsScreenType {
   
   /// Раздел: `Цитат`
   case quotes(itemsGenerated: String,
-                       lastItem: String,
-                       currentCountry: String,
-                       listOfItems: [String],
-                       valueChanged: ((_ index: Int) -> Void)?)
+              lastItem: String,
+              currentCountry: String,
+              listOfItems: [String],
+              valueChanged: ((_ index: Int) -> Void)?)
+  
+  /// Раздел мемов
+  case memes(currentCountry: String, listOfItems: [String], valueChanged: ((_ index: Int) -> Void)?)
   
   /// Раздел: `Фильмы`
   case films

@@ -83,7 +83,7 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
   // MARK: - Internal func
   
   func start() {
-    let mainSettingsScreenModule = MainSettingsScreenAssembly().createModule()
+    let mainSettingsScreenModule = MainSettingsScreenAssembly().createModule(services: services)
     self.mainSettingsScreenModule = mainSettingsScreenModule
     self.mainSettingsScreenModule?.moduleOutput = self
     
@@ -130,6 +130,20 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 // MARK: - MainSettingsScreenModuleOutput
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
+  func premiumWithFriendsSelected() {
+    guard let upperViewController = modalNavigationController else {
+      return
+    }
+    
+    let premiumWithFriendsCoordinator = PremiumWithFriendsCoordinator(upperViewController, services)
+    anyCoordinator = premiumWithFriendsCoordinator
+    premiumWithFriendsCoordinator.output = self
+    premiumWithFriendsCoordinator.selectPresentType(.push)
+    premiumWithFriendsCoordinator.start()
+    
+    services.metricsService.track(event: .premiumWithFriends)
+  }
+  
   func shareButtonSelected() {
     let appearance = Appearance()
     guard let url = appearance.shareAppUrl else {

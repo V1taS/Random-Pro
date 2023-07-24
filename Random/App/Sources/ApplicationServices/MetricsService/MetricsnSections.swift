@@ -59,6 +59,7 @@ enum MetricsSections: String {
   
   case deepLinks = "DeepLinks"
   case premiumScreen = "Premium"
+  case premiumWithFriends = "Premium with friends"
   
   case premiumPlayerCardSelection = "Premium player card selection"
 }

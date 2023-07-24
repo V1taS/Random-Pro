@@ -35,6 +35,9 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
 
   /// Кнопка поделиться была нажата
   func shareButtonSelected()
+  
+  /// Выбрана реферальная программа
+  func premiumWithFriendsSelected()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -105,13 +108,20 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   // MARK: - Internal func
   
   func updateContentWith(model: MainSettingsScreenModel) {
-    factory.createListModelWith(model: model)
+    factory.createListModelWith(model: model, isPremiumWithFriends: false)
+    interactor.getPremiumWithFriendsToggle { [weak self] isPremiumWithFriends in
+      self?.factory.createListModelWith(model: model, isPremiumWithFriends: isPremiumWithFriends)
+    }
   }
 }
 
 // MARK: - MainSettingsScreenViewOutput
 
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
+  func premiumWithFriendsSelected() {
+    moduleOutput?.premiumWithFriendsSelected()
+  }
+  
   func shareButtonSelected() {
     moduleOutput?.shareButtonSelected()
   }

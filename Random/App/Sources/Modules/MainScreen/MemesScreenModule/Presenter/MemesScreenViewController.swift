@@ -19,10 +19,20 @@ protocol MemesScreenModuleOutput: AnyObject {
   
   /// Доступ к галерее не получен
   func requestPhotosError()
+  
+  /// Была нажата кнопка (настройки)
+  /// - Parameter model: результат генерации
+  func settingButtonAction(model: MemesScreenModel)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol MemesScreenModuleInput {
+  
+  /// Установить новый язык
+  func setNewLanguage(language: MemesScreenModel.Language)
+  
+  /// Запросить текущую модель
+  func returnCurrentModel() -> MemesScreenModel
   
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: MemesScreenModuleOutput? { get set }
@@ -76,6 +86,16 @@ final class MemesScreenViewController: MemesScreenModule {
     
     setNavigationBar()
     interactor.getContent()
+  }
+  
+  // MARK: - Internal func
+  
+  func setNewLanguage(language: MemesScreenModel.Language) {
+    interactor.setNewLanguage(language: language)
+  }
+  
+  func returnCurrentModel() -> MemesScreenModel {
+    interactor.returnCurrentModel()
   }
 }
 
@@ -136,6 +156,10 @@ private extension MemesScreenViewController {
                                       target: self,
                                       action: #selector(shareButtonAction))
     navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
       shareButton
     ]
   }
@@ -143,6 +167,12 @@ private extension MemesScreenViewController {
   @objc
   func shareButtonAction() {
     interactor.requestPhotosStatus()
+    impactFeedback.impactOccurred()
+  }
+  
+  @objc
+  func settingButtonAction() {
+    moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
     impactFeedback.impactOccurred()
   }
 }
@@ -153,5 +183,6 @@ private extension MemesScreenViewController {
   struct Appearance {
     let title = RandomStrings.Localizable.memes
     let shareButtonIcon = UIImage(systemName: "square.and.arrow.up")
+    let settingsButtonIcon = UIImage(systemName: "gear")
   }
 }

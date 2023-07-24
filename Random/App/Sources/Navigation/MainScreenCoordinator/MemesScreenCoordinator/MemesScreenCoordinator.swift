@@ -16,6 +16,7 @@ final class MemesScreenCoordinator: Coordinator {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var memesScreenModule: MemesScreenModule?
+  private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   
   // MARK: - Initialization
   
@@ -41,6 +42,15 @@ final class MemesScreenCoordinator: Coordinator {
 // MARK: - QuotesScreenModuleOutput
 
 extension MemesScreenCoordinator: MemesScreenModuleOutput {
+  func settingButtonAction(model: MemesScreenModel) {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    
+    setupDefaultsSettings()
+  }
+  
   func requestPhotosError() {
     services.notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,
@@ -104,9 +114,60 @@ extension MemesScreenCoordinator: MemesScreenModuleOutput {
   }
 }
 
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension MemesScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func cleanButtonAction() {}
+  func listOfObjectsAction() {}
+}
+
 // MARK: - Private
 
-private extension MemesScreenCoordinator {}
+private extension MemesScreenCoordinator {
+  func setupDefaultsSettings() {
+    guard let model = memesScreenModule?.returnCurrentModel(),
+          let language = model.language,
+          let settingsScreenCoordinator else {
+      return
+    }
+    
+    let listCountry = [
+      CountryType.us.rawValue,
+      CountryType.ru.rawValue
+    ]
+    
+    let currentCountry: String
+    
+    switch language {
+    case .en:
+      currentCountry = CountryType.us.rawValue
+    case .ru:
+      currentCountry = CountryType.ru.rawValue
+    }
+    
+    settingsScreenCoordinator.setupDefaultsSettings(
+      for: .memes(
+        currentCountry: currentCountry,
+        listOfItems: listCountry,
+        valueChanged: { [weak self] index in
+          guard listCountry.indices.contains(index),
+                let country = CountryType.init(rawValue: listCountry[index]) else {
+            return
+          }
+          
+          let language: MemesScreenModel.Language
+          switch country {
+          case .ru:
+            language = .ru
+          default:
+            language = .en
+          }
+          self?.memesScreenModule?.setNewLanguage(language: language)
+        }
+      )
+    )
+  }
+}
 
 // MARK: - Appearance
 

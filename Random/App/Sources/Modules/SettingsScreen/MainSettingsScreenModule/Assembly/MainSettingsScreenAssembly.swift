@@ -12,9 +12,8 @@ final class MainSettingsScreenAssembly {
   
   /// Собирает модуль `MainSettingsScreen`
   /// - Returns: Cобранный модуль `MainSettingsScreen`
-  func createModule() -> MainSettingsScreenModule {
-    
-    let interactor = MainSettingsScreenInteractor()
+  func createModule(services: ApplicationServices) -> MainSettingsScreenModule {
+    let interactor = MainSettingsScreenInteractor(services: services)
     let view = MainSettingsScreenView()
     let factory = MainSettingsScreenFactory()
     let presenter = MainSettingsScreenViewController(moduleView: view,

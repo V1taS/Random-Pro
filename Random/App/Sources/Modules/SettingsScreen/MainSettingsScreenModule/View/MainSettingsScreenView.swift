@@ -33,6 +33,9 @@ protocol MainSettingsScreenViewOutput: AnyObject {
 
   /// Кнопка поделиться была нажата
   func shareButtonSelected()
+  
+  /// Выбрана реферальная программа
+  func premiumWithFriendsSelected()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -98,6 +101,8 @@ extension MainSettingsScreenView: UITableViewDelegate {
         output?.applicationIconSectionsSelected()
       case .shareSections:
         output?.shareButtonSelected()
+      case .premiumWithFriends:
+        output?.premiumWithFriendsSelected()
       }
     default: break
     }

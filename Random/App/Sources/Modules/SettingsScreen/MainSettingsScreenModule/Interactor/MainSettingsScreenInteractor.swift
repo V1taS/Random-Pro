@@ -11,7 +11,11 @@ import UIKit
 protocol MainSettingsScreenInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol MainSettingsScreenInteractorInput {}
+protocol MainSettingsScreenInteractorInput {
+  
+  /// Получить тоггл реферальной программы
+  func getPremiumWithFriendsToggle(completion: ((Bool) -> Void)?)
+}
 
 /// Интерактор
 final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
@@ -20,7 +24,27 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   
   weak var output: MainSettingsScreenInteractorOutput?
   
+  // MARK: - Private properties
+  
+  let featureToggleServices: FeatureToggleServices
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    featureToggleServices = services.featureToggleServices
+  }
+  
   // MARK: - Internal func
+  
+  func getPremiumWithFriendsToggle(completion: ((Bool) -> Void)?) {
+    featureToggleServices.getSectionsIsHiddenFT { isHiddenFT in
+      DispatchQueue.main.async {
+        completion?(!(isHiddenFT?.premiumWithFriends ?? true))
+      }
+    }
+  }
 }
 
 // MARK: - Appearance

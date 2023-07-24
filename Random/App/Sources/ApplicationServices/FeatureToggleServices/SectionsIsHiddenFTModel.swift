@@ -94,6 +94,9 @@ struct SectionsIsHiddenFTModel {
   /// Раздел `Мемы`
   let memes: Bool
   
+  /// Реферальная программа
+  let premiumWithFriends: Bool
+  
   // MARK: - Initialization
   
   /// - Parameters:
@@ -127,6 +130,7 @@ struct SectionsIsHiddenFTModel {
     fortuneWheel = (dictionary["fortuneWheel"] as? Int ?? .zero).boolValue
     truthOrDare = (dictionary["truthOrDare"] as? Int ?? .zero).boolValue
     memes = (dictionary["memes"] as? Int ?? .zero).boolValue
+    premiumWithFriends = (dictionary["premiumWithFriends"] as? Int ?? .zero).boolValue
   }
 }
 

@@ -337,6 +337,12 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
+    case let .memes(currentCountry, listOfItems, valueChanged):
+      let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+                                                        listOfItems: listOfItems,
+                                                        startSelectedSegmentIndex: index,
+                                                        valueChanged: valueChanged))
     }
     output?.didReceive(models: tableViewModels)
   }

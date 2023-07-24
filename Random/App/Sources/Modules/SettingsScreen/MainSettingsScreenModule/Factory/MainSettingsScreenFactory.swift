@@ -20,8 +20,10 @@ protocol MainSettingsScreenFactoryOutput: AnyObject {
 protocol MainSettingsScreenFactoryInput {
   
   /// Создаем модельку для таблички
-  ///  - Parameter model: Модель данных
-  func createListModelWith(model: MainSettingsScreenModel)
+  ///  - Parameters:
+  ///   - model: Модель данных
+  ///   - isPremiumWithFriends: Реферальная программа
+  func createListModelWith(model: MainSettingsScreenModel, isPremiumWithFriends: Bool)
 }
 
 /// Фабрика
@@ -33,7 +35,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModelWith(model: MainSettingsScreenModel) {
+  func createListModelWith(model: MainSettingsScreenModel,
+                           isPremiumWithFriends: Bool) {
     DispatchQueue.global(qos: .userInitiated).async {
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
@@ -91,15 +94,26 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
         type: .premiumSections
       ))
       tableViewModels.append(.divider)
-
+      
+      if isPremiumWithFriends {
+        tableViewModels.append(.squircleImageAndLabelWithChevronCell(
+          squircleBGColors: [RandomColor.only.primaryRed,
+                             RandomColor.only.primaryPink],
+          leftSideImageSystemName: appearance.premiumWithFriendsImageSystemName,
+          title: appearance.premiumWithFriendsTitle,
+          type: .premiumWithFriends
+        ))
+        tableViewModels.append(.divider)
+      }
+      
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(
-        squircleBGColors: [RandomColor.only.primaryPink,
-                           RandomColor.only.primaryPink],
+        squircleBGColors: [RandomColor.only.secondaryGray,
+                           RandomColor.only.secondaryGray],
         leftSideImageSystemName: appearance.shareImageSystemName,
         title: appearance.shareTitle,
         type: .shareSections
       ))
-
+      
       DispatchQueue.main.async { [weak self] in
         self?.output?.didReceive(models: tableViewModels)
       }
@@ -125,8 +139,11 @@ private extension MainSettingsScreenFactory {
     
     let primiumDEBUGImage = UIImage(systemName: "p.square")
     let primiumDEBUGTitle = RandomStrings.Localizable.premium
-
+    
     let shareImageSystemName = "square.and.arrow.up"
     let shareTitle = RandomStrings.Localizable.share
+    
+    let premiumWithFriendsImageSystemName = "link"
+    let premiumWithFriendsTitle = RandomStrings.Localizable.premiumWithFriends
   }
 }

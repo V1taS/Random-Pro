@@ -86,7 +86,12 @@ enum SettingsScreenType {
               valueChanged: ((_ index: Int) -> Void)?)
   
   /// Раздел мемов
-  case memes(currentCountry: String, listOfItems: [String], valueChanged: ((_ index: Int) -> Void)?)
+  case memes(currentCountry: String,
+             listOfItems: [String],
+             valueChanged: ((_ index: Int) -> Void)?,
+             work: (title: String, isEnabled: Bool, completion: ((_ isEnabled: Bool) -> Void)?),
+             animals: (title: String, isEnabled: Bool, completion: ((_ isEnabled: Bool) -> Void)?),
+             popular: (title: String, isEnabled: Bool, completion: ((_ isEnabled: Bool) -> Void)?))
   
   /// Раздел: `Фильмы`
   case films

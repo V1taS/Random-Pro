@@ -132,29 +132,30 @@ private extension MemesScreenCoordinator {
     }
     
     let listCountry = [
-      CountryType.us.rawValue,
-      CountryType.ru.rawValue
+      LanguageType.us.title,
+      LanguageType.ru.title
     ]
     
     let currentCountry: String
     
     switch language {
     case .en:
-      currentCountry = CountryType.us.rawValue
+      currentCountry = LanguageType.us.title
     case .ru:
-      currentCountry = CountryType.ru.rawValue
+      currentCountry = LanguageType.ru.title
     }
     
+    var types = model.types
     settingsScreenCoordinator.setupDefaultsSettings(
       for: .memes(
         currentCountry: currentCountry,
         listOfItems: listCountry,
         valueChanged: { [weak self] index in
-          guard listCountry.indices.contains(index),
-                let country = CountryType.init(rawValue: listCountry[index]) else {
+          guard listCountry.indices.contains(index) else {
             return
           }
           
+          let country = LanguageType.getTypeFrom(title: listCountry[index])
           let language: MemesScreenModel.Language
           switch country {
           case .ru:
@@ -163,7 +164,58 @@ private extension MemesScreenCoordinator {
             language = .en
           }
           self?.memesScreenModule?.setNewLanguage(language: language)
-        }
+        },
+        work: (
+          MemesScreenModel.MemesType.work.title,
+          types.contains(.work), { [weak self] isEnabledWork in
+            if isEnabledWork, !types.contains(.work) {
+              types.append(.work)
+              self?.memesScreenModule?.updateMemes(type: types)
+              return
+            }
+            
+            if !isEnabledWork,
+               types.contains(.work),
+               let index = types.firstIndex(of: .work) {
+              types.remove(at: index)
+              self?.memesScreenModule?.updateMemes(type: types)
+            }
+          }
+        ),
+        animals: (
+          MemesScreenModel.MemesType.animals.title,
+          types.contains(.animals), { [weak self] isEnabledWork in
+            if isEnabledWork, !types.contains(.animals) {
+              types.append(.animals)
+              self?.memesScreenModule?.updateMemes(type: types)
+              return
+            }
+            
+            if !isEnabledWork,
+               types.contains(.animals),
+               let index = types.firstIndex(of: .animals) {
+              types.remove(at: index)
+              self?.memesScreenModule?.updateMemes(type: types)
+            }
+          }
+        ),
+        popular: (
+          MemesScreenModel.MemesType.popular.title,
+          types.contains(.popular), { [weak self] isEnabledWork in
+            if isEnabledWork, !types.contains(.popular) {
+              types.append(.popular)
+              self?.memesScreenModule?.updateMemes(type: types)
+              return
+            }
+            
+            if !isEnabledWork,
+               types.contains(.popular),
+               let index = types.firstIndex(of: .popular) {
+              types.remove(at: index)
+              self?.memesScreenModule?.updateMemes(type: types)
+            }
+          }
+        )
       )
     )
   }

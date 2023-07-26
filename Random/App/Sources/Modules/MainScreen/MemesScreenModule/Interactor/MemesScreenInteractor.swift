@@ -24,16 +24,14 @@ protocol MemesScreenInteractorOutput: AnyObject {
   
   /// Что-то пошло не так
   func somethingWentWrong()
-  
-  /// Запустить доадер
-  func startLoader()
-  
-  /// Остановить лоадер
-  func stopLoader()
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol MemesScreenInteractorInput {
+  
+  /// Обновить типы доступных мемов
+  /// - Parameter type: тип доступных мемов
+  func updateMemes(type: [MemesScreenModel.MemesType])
   
   /// Получить данные
   func getContent()
@@ -64,6 +62,7 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   private var networkService: NetworkService
   private let buttonCounterService: ButtonCounterService
   private let permissionService: PermissionService
+  private var memesURLString: [String] = []
   private var memesScreenModel: MemesScreenModel? {
     get {
       storageService.getData(from: MemesScreenModel.self)
@@ -85,11 +84,23 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   
   // MARK: - Internal func
   
+  func updateMemes(type: [MemesScreenModel.MemesType]) {
+    let newModel = MemesScreenModel(
+      language: returnCurrentModel().language,
+      types: type
+    )
+    memesScreenModel = newModel
+    memesURLString = []
+  }
+  
   func returnCurrentModel() -> MemesScreenModel {
     if let model = memesScreenModel {
       return model
     } else {
-      return MemesScreenModel(memesURLString: [], language: getDefaultLanguage())
+      return MemesScreenModel(
+        language: getDefaultLanguage(),
+        types: [.animals, .work, .popular]
+      )
     }
   }
   
@@ -99,7 +110,10 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
       return
     }
     
-    let newModel = MemesScreenModel(memesURLString: model.memesURLString, language: language)
+    let newModel = MemesScreenModel(
+      language: language,
+      types: model.types
+    )
     memesScreenModel = newModel
     getContent()
   }
@@ -116,19 +130,24 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   }
   
   func getContent() {
-    output?.startLoader()
     let appearance = Appearance()
     let host = appearance.host
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
     
-    let newModel = MemesScreenModel(memesURLString: [], language: getDefaultLanguage())
+    let newModel = MemesScreenModel(
+      language: getDefaultLanguage(),
+      types: [.animals, .work, .popular]
+    )
     let model = memesScreenModel ?? newModel
     let language = model.language ?? getDefaultLanguage()
+    let types = model.types.isEmpty ? [.animals, .work, .popular] : model.types
+    let typesString = types.compactMap({ $0.rawValue }).joined(separator: ",")
     
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
+        .init(name: "type", value: typesString),
         .init(name: "language", value: "\(language.rawValue)")
       ],
       httpMethod: .get,
@@ -146,17 +165,11 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
           case let .success(data):
             guard let listMemes = self.networkService.map(data, to: [MemesScreenDTO].self) else {
               self.output?.somethingWentWrong()
-              self.output?.stopLoader()
               return
             }
-            
-            self.memesScreenModel = MemesScreenModel(
-              memesURLString: listMemes.compactMap { $0.urlImage },
-              language: language
-            )
+            self.memesURLString = listMemes.compactMap { $0.urlImage }
             self.generateButtonAction()
           case .failure:
-            self.output?.stopLoader()
             self.output?.somethingWentWrong()
           }
         }
@@ -164,14 +177,14 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   }
   
   func generateButtonAction() {
-    memesScreenModel?.memesURLString.shuffle()
+    memesURLString.shuffle()
     
-    guard let memesURLString = memesScreenModel?.memesURLString.first else {
+    guard let memesURLString = memesURLString.first else {
       getContent()
       return
     }
     
-    memesScreenModel?.memesURLString.removeFirst()
+    self.memesURLString.removeFirst()
     
     networkService.performRequestWith(
       urlString: memesURLString,
@@ -181,11 +194,9 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
         DispatchQueue.main.async { [weak self] in
           switch result {
           case let .success(data):
-            self?.output?.stopLoader()
             self?.buttonCounterService.onButtonClick()
             self?.output?.didReceive(memes: data)
           case .failure:
-            self?.output?.stopLoader()
             self?.output?.somethingWentWrong()
           }
         }

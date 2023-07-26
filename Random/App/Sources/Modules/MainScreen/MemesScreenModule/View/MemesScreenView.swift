@@ -14,9 +14,6 @@ protocol MemesScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку
   func generateButtonAction()
-  
-  /// Что-то пошло не так
-  func somethingWentWrong()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -65,24 +62,20 @@ final class MemesScreenView: MemesScreenViewProtocol {
   // MARK: - Internal func
   
   func set(result: Data?) {
-    UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
-      guard let self, let result else {
-        self?.output?.somethingWentWrong()
-        return
-      }
-      
-      let image = UIImage(data: result)
-      self.resultMemes.image = image
-      
-      image?.getAverageColor { [weak self] averageColor in
-        UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
-          self?.backgroundColor = averageColor
-        }
+    guard let result, let image = UIImage(data: result) else {
+      return
+    }
+    
+    resultMemes.image = image
+    image.getAverageColor { [weak self] averageColor in
+      UIView.animate(withDuration: Appearance().resultDuration) { [weak self] in
+        self?.backgroundColor = averageColor
       }
     }
   }
   
   func startLoader() {
+    bringSubviewToFront(lottieAnimationView)
     lottieAnimationView.isHidden = false
     lottieAnimationView.play()
     generateButton.set(isEnabled: false)

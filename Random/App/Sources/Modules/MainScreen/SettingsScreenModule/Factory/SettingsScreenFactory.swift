@@ -202,7 +202,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .names(itemsGenerated, lastItem, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -218,7 +218,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .truthOrDare(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -231,7 +231,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .congratulations(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -244,7 +244,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .goodDeeds(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -257,7 +257,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .riddles(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -270,7 +270,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .joke(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -283,7 +283,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case  let .gifts(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -296,7 +296,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .slogans(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -309,7 +309,7 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .quotes(itemsGenerated, _, currentCountry, listOfItems, valueChanged):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
@@ -337,12 +337,42 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
       tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
       tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
-    case let .memes(currentCountry, listOfItems, valueChanged):
+    case let .memes(currentCountry, listOfItems, valueChanged, work, animals, popular):
       let index = listOfItems.firstIndex(of: currentCountry) ?? .zero
-      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectCountryTitle,
+      tableViewModels.append(.labelWithSegmentedControl(title: Appearance().selectLanguageTitle,
                                                         listOfItems: listOfItems,
                                                         startSelectedSegmentIndex: index,
                                                         valueChanged: valueChanged))
+      tableViewModels.append(.divider)
+      
+      tableViewModels.append(
+        .titleAndSwitcherAction(
+          title: work.title, (
+            work.isEnabled,
+            work.completion
+          )
+        )
+      )
+      tableViewModels.append(.divider)
+      
+      tableViewModels.append(
+        .titleAndSwitcherAction(
+          title: animals.title, (
+            animals.isEnabled,
+            animals.completion
+          )
+        )
+      )
+      tableViewModels.append(.divider)
+      
+      tableViewModels.append(
+        .titleAndSwitcherAction(
+          title: popular.title, (
+            popular.isEnabled,
+            popular.completion
+          )
+        )
+      )
     }
     output?.didReceive(models: tableViewModels)
   }
@@ -364,6 +394,6 @@ private extension SettingsScreenFactory {
     let allTextCount = RandomStrings.Localizable.totalElements
     let generatedPlayersCount = RandomStrings.Localizable.generatedPlayers
     let chooseCardStyle = RandomStrings.Localizable.selectCardStyle
-    let selectCountryTitle = RandomStrings.Localizable.selectCountry
+    let selectLanguageTitle = RandomStrings.Localizable.selectLanguage
   }
 }

@@ -122,14 +122,20 @@ private extension NamesScreenCoordinator {
       return
     }
     
-    let listCountry = CountryType.allCases.compactMap { $0.rawValue }
+    let listCountry = LanguageType.allCases.compactMap { $0.title }
     let currentCountry: String
     
     switch language {
     case .en:
-      currentCountry = CountryType.us.rawValue
-    default:
-      currentCountry = language.rawValue
+      currentCountry = LanguageType.us.title
+    case .de:
+      currentCountry = LanguageType.de.title
+    case .it:
+      currentCountry = LanguageType.it.title
+    case .ru:
+      currentCountry = LanguageType.ru.title
+    case .es:
+      currentCountry = LanguageType.es.title
     }
     
     settingsScreenCoordinator.setupDefaultsSettings(
@@ -139,12 +145,12 @@ private extension NamesScreenCoordinator {
         currentCountry: currentCountry,
         listOfItems: listCountry,
         valueChanged: { [weak self] index in
-          let listCountry = CountryType.allCases.compactMap { $0.rawValue }
-          guard listCountry.indices.contains(index),
-                let country = CountryType.init(rawValue: listCountry[index]) else {
+          let listCountry = CountryType.allCases.compactMap { $0.title }
+          guard listCountry.indices.contains(index) else {
             return
           }
           
+          let country = LanguageType.getTypeFrom(title: listCountry[index])
           let language: NamesScreenModel.Language
           switch country {
           case .de:

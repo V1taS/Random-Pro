@@ -34,6 +34,10 @@ protocol MemesScreenModuleInput {
   /// Запросить текущую модель
   func returnCurrentModel() -> MemesScreenModel
   
+  /// Обновить типы доступных мемов
+  /// - Parameter type: тип доступных мемов
+  func updateMemes(type: [MemesScreenModel.MemesType])
+  
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: MemesScreenModuleOutput? { get set }
 }
@@ -85,6 +89,7 @@ final class MemesScreenViewController: MemesScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+    moduleView.startLoader()
     interactor.getContent()
   }
   
@@ -97,6 +102,10 @@ final class MemesScreenViewController: MemesScreenModule {
   func returnCurrentModel() -> MemesScreenModel {
     interactor.returnCurrentModel()
   }
+  
+  func updateMemes(type: [MemesScreenModel.MemesType]) {
+    interactor.updateMemes(type: type)
+  }
 }
 
 // MARK: - MemesScreenViewOutput
@@ -104,16 +113,18 @@ final class MemesScreenViewController: MemesScreenModule {
 extension MemesScreenViewController: MemesScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
-  }
-  
-  func somethingWentWrong() {
-    moduleOutput?.somethingWentWrong()
+    moduleView.startLoader()
   }
 }
 
 // MARK: - MemesScreenInteractorOutput
 
 extension MemesScreenViewController: MemesScreenInteractorOutput {
+  func somethingWentWrong() {
+    moduleOutput?.somethingWentWrong()
+    moduleView.stopLoader()
+  }
+  
   func requestPhotosSuccess() {
     guard let cacheMemes else {
       return
@@ -128,13 +139,6 @@ extension MemesScreenViewController: MemesScreenInteractorOutput {
   func didReceive(memes: Data?) {
     moduleView.set(result: memes)
     cacheMemes = memes
-  }
-  
-  func startLoader() {
-    moduleView.startLoader()
-  }
-  
-  func stopLoader() {
     moduleView.stopLoader()
   }
 }

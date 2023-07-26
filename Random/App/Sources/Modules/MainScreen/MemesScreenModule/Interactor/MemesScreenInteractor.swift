@@ -115,7 +115,7 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
       types: model.types
     )
     memesScreenModel = newModel
-    getContent()
+    memesURLString = []
   }
   
   func requestPhotosStatus() {

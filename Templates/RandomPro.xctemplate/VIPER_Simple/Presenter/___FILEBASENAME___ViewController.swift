@@ -7,19 +7,6 @@
 
 import UIKit
 
-/// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol ___VARIABLE_productName___ModuleOutput: AnyObject {}
-
-/// События которые отправляем из `другого модуля` в `текущий модуль`
-protocol ___VARIABLE_productName___ModuleInput {
-  
-  /// События которые отправляем из `текущего модуля` в `другой модуль`
-  var moduleOutput: ___VARIABLE_productName___ModuleOutput? { get set }
-}
-
-/// Готовый модуль `___VARIABLE_productName___Module`
-typealias ___VARIABLE_productName___Module = UIViewController & ___VARIABLE_productName___ModuleInput
-
 /// Презентер
 final class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_productName___Module {
   
@@ -32,6 +19,7 @@ final class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_productName___Module {
   private let interactor: ___VARIABLE_productName___InteractorInput
   private let moduleView: ___VARIABLE_productName___ViewProtocol
   private let factory: ___VARIABLE_productName___FactoryInput
+  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
   
@@ -78,10 +66,31 @@ extension ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_productName___FactoryOutpu
 
 // MARK: - Private
 
-private extension ___FILEBASENAMEASIDENTIFIER___ {}
+private extension ___FILEBASENAMEASIDENTIFIER___ {
+  func setNavigationBar() {
+    let appearance = Appearance()
+    
+    navigationItem.largeTitleDisplayMode = .never
+    title = appearance.title
+    let settingButton = UIBarButtonItem(image: appearance.settingsButtonIcon,
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(settingButtonAction))
+    navigationItem.rightBarButtonItems = [settingButton]
+  }
+  
+  @objc
+  func settingButtonAction() {
+    // TODO: Добавить экшен
+    impactFeedback.impactOccurred()
+  }
+}
 
 // MARK: - Appearance
 
 private extension ___FILEBASENAMEASIDENTIFIER___ {
-  struct Appearance {}
+  struct Appearance {
+    let title = RandomStrings.Localizable.randomPro
+    let settingsButtonIcon = UIImage(systemName: "gear")
+  }
 }

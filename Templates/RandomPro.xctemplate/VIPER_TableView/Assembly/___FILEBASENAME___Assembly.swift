@@ -8,15 +8,21 @@
 import UIKit
 
 /// Сборщик `___VARIABLE_productName___`
-final class ___FILEBASENAMEASIDENTIFIER___ {
+public final class ___FILEBASENAMEASIDENTIFIER___ {
+
+  public init() {}
   
   /// Собирает модуль `___VARIABLE_productName___`
   /// - Returns: Cобранный модуль `___VARIABLE_productName___`
-  func createModule() -> ___VARIABLE_productName___Module {
+  public func createModule() -> ___VARIABLE_productName___Module {
     let interactor = ___VARIABLE_productName___Interactor()
     let view = ___VARIABLE_productName___View()
     let factory = ___VARIABLE_productName___Factory()
-    let presenter = ___VARIABLE_productName___ViewController(moduleView: view, interactor: interactor, factory: factory)
+    let presenter = ___VARIABLE_productName___ViewController(
+      moduleView: view,
+      interactor: interactor,
+      factory: factory
+    )
     
     view.output = presenter
     interactor.output = presenter

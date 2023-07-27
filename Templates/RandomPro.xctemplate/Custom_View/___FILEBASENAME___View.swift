@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import RandomUIKit
 
-/// События которые отправляем из View в Presenter
+/// События которые отправляем из View
 protocol ___FILEBASENAMEASIDENTIFIER___Output: AnyObject {}
 
-/// События которые отправляем от Presenter ко View
+/// События которые отправляем ко View
 protocol ___FILEBASENAMEASIDENTIFIER___Input {}
 
 /// Псевдоним протокола UIView & ___FILEBASENAMEASIDENTIFIER___Input
@@ -47,7 +48,7 @@ private extension ___FILEBASENAMEASIDENTIFIER___ {
   func configureLayout() {}
   
   func applyDefaultBehavior() {
-    backgroundColor = .white
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
   }
 }
 

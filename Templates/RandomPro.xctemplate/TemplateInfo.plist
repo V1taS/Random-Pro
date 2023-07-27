@@ -1,0 +1,51 @@
+<plist version="1.0">
+<dict>
+    <key>Summary</key>
+    <string>Generates a Random Pro module with subfolder structure</string>
+    <key>SortOrder</key>
+    <string>1</string>
+    <key>Description</key>
+    <string>This generates a new Module using Random Pro architecture, organizing files into respective subfolders.</string>
+    <key>Kind</key>
+    <string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+    <key>Platforms</key>
+    <array>
+        <string>com.apple.platform.iphoneos</string>
+    </array>
+    <key>Options</key>
+    <array>
+        <dict>
+            <key>Identifier</key>
+            <string>productName</string>
+            <key>Required</key>
+            <true/>
+            <key>Name</key>
+            <string>Random Pro Template</string>
+            <key>Description</key>
+            <string>Enter the name for your Random Pro module.</string>
+            <key>Type</key>
+            <string>text</string>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>moduleType</string>
+            <key>Name</key>
+            <string>Module Type</string>
+            <key>Description</key>
+            <string>Select the type of module you want to create.</string>
+            <key>Type</key>
+            <string>popup</string>
+            <key>Values</key>
+            <array>
+                <string>Coordinator</string>
+                <string>Custom_View</string>
+                <string>VIPER_Simple</string>
+                <string>VIPER_TableView</string>
+                <string>Strings</string>
+            </array>
+            <key>Default</key>
+            <string>VIPER_Simple</string>
+        </dict>
+    </array>
+</dict>
+</plist>

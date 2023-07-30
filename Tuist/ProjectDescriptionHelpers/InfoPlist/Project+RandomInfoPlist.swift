@@ -28,7 +28,8 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
       ])
     ]),
     "com.apple.developer.associated-domains": .array([
-      .string("applinks:\(applinks)")
+      .string("applinks:\(applinksPageLink)"),
+      .string("applinks:\(applinksRandomProLink)")
     ]),
     "CFBundleDocumentTypes": .array([
       .dictionary([

@@ -68,7 +68,7 @@ final class DeepLinkServiceImpl: DeepLinkService {
     
     let components = DynamicLinkComponents(
       link: link,
-      domainURIPrefix: appearance.dynamicLinksDomainURIPrefix
+      domainURIPrefix: appearance.dynamicLinksDomainURIRandomPrefix
     )
     let iOSParams = DynamicLinkIOSParameters(bundleID: appearance.bundleID)
     iOSParams.appStoreID = appearance.appStoreID
@@ -104,7 +104,8 @@ final class DeepLinkServiceImpl: DeepLinkService {
 
 private extension DeepLinkServiceImpl {
   struct Appearance {
-    let dynamicLinksDomainURIPrefix = "https://randomsv.page.link"
+    let dynamicLinksDomainURIPageLinkPrefix = "https://randomsv.page.link"
+    let dynamicLinksDomainURIRandomPrefix = "https://random-pro.sosinvitalii.com"
     let bundleID = "com.sosinvitalii.Random"
     let appStoreID = "1552813956"
     let scheme = "random_pro"

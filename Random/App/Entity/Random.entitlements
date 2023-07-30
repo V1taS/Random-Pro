@@ -32,6 +32,7 @@
     <key>com.apple.developer.associated-domains</key>
     <array>
         <string>applinks:randomsv.page.link</string>
+        <string>applinks:random-pro.sosinvitalii.com</string>
     </array>
 </dict>
 </plist>

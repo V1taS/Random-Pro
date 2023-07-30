@@ -11,7 +11,11 @@ import UIKit
 protocol PremiumWithFriendsInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol PremiumWithFriendsInteractorInput {}
+protocol PremiumWithFriendsInteractorInput {
+  
+  /// Не показывать этот экран снова
+  func doNotShowScreenAgain()
+}
 
 /// Интерактор
 final class PremiumWithFriendsInteractor: PremiumWithFriendsInteractorInput {
@@ -20,7 +24,30 @@ final class PremiumWithFriendsInteractor: PremiumWithFriendsInteractorInput {
   
   weak var output: PremiumWithFriendsInteractorOutput?
   
+  // MARK: - Private property
+  
+  private var storageService: StorageService
+  private var premiumWithFriendsModel: PremiumWithFriendsModel? {
+    get {
+      storageService.getData(from: PremiumWithFriendsModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    storageService = services.storageService
+  }
+  
   // MARK: - Internal func
+  
+  func doNotShowScreenAgain() {
+//    premiumWithFriendsModel?.isAutoShowModalPresentationAgain = false
+  }
 }
 
 // MARK: - Appearance

@@ -13,7 +13,7 @@ final class PremiumWithFriendsAssembly {
   /// Собирает модуль `PremiumWithFriends`
   /// - Returns: Cобранный модуль `PremiumWithFriends`
   func createModule(services: ApplicationServices) -> PremiumWithFriendsModule {
-    let interactor = PremiumWithFriendsInteractor()
+    let interactor = PremiumWithFriendsInteractor(services: services)
     let view = PremiumWithFriendsView()
     let factory = PremiumWithFriendsFactory()
     let presenter = PremiumWithFriendsViewController(moduleView: view, interactor: interactor, factory: factory)

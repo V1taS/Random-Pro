@@ -37,7 +37,11 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
   
   func createListModelWith(model: MainSettingsScreenModel,
                            isPremiumWithFriends: Bool) {
-    DispatchQueue.global(qos: .userInitiated).async {
+    DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+      guard let self else {
+        return
+      }
+      
       let appearance = Appearance()
       var tableViewModels: [MainSettingsScreenType] = []
       
@@ -95,7 +99,7 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       ))
       tableViewModels.append(.divider)
       
-      if isPremiumWithFriends {
+      if isPremiumWithFriends || self.isDebug() {
         tableViewModels.append(.squircleImageAndLabelWithChevronCell(
           squircleBGColors: [RandomColor.only.primaryRed,
                              RandomColor.only.primaryPink],
@@ -118,6 +122,18 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
         self?.output?.didReceive(models: tableViewModels)
       }
     }
+  }
+}
+
+// MARK: - Appearance
+
+private extension MainSettingsScreenFactory {
+  func isDebug() -> Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
   }
 }
 

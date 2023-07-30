@@ -23,9 +23,12 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
         "CFBundleTypeRole": .string("Editor"),
         "CFBundleURLName": .string("com.sosinvitalii.Deeplink"),
         "CFBundleURLSchemes": .array([
-          .string("random")
+          .string("random_pro")
         ])
       ])
+    ]),
+    "com.apple.developer.associated-domains": .array([
+      .string("applinks:\(applinks)")
     ]),
     "CFBundleDocumentTypes": .array([
       .dictionary([

@@ -58,6 +58,9 @@ protocol MainScreenInteractorInput {
   
   /// Обновить Premium для пользователя у секций на главном экране (Feature Toggle)
   func updatesPremiumFeatureToggle(completion: @escaping () -> Void)
+  
+  /// Автоматически показывать реферальную программу на главном экране
+  func isAutoShowReferalPresentationAgain() -> Bool
 }
 
 /// Интерактор
@@ -70,6 +73,13 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   private var mainScreenModel: MainScreenModel? {
     get {
       storageService.getData(from: MainScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
+  private var premiumWithFriendsModel: PremiumWithFriendsModel? {
+    get {
+      storageService.getData(from: PremiumWithFriendsModel.self)
     } set {
       storageService.saveData(newValue)
     }
@@ -89,6 +99,20 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   // MARK: - Internal func
+  
+  func isAutoShowReferalPresentationAgain() -> Bool {
+    let defaults = UserDefaults.standard
+    let appearance = Appearance()
+    
+    // Если функция уже вызывалась ранее
+    if defaults.bool(forKey: appearance.isFirstCallReferalPresentationKey) {
+      return premiumWithFriendsModel?.isAutoShowModalPresentationAgain ?? false
+    } else {
+      // Записываем информацию о том, что функция была вызвана
+      defaults.set(true, forKey: appearance.isFirstCallReferalPresentationKey)
+      return false
+    }
+  }
   
   func updateSectionsWith(model: MainScreenModel) {
     MainScreenFactory.updateModelWith(oldModel: model) { [weak self] updateModel in
@@ -305,5 +329,7 @@ private extension MainScreenInteractor {
 // MARK: - Appearance
 
 private extension MainScreenInteractor {
-  struct Appearance {}
+  struct Appearance {
+    let isFirstCallReferalPresentationKey = "isAutoShowReferalPresentationAgainCalled"
+  }
 }

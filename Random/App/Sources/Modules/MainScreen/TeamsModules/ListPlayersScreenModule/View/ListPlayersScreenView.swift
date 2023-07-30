@@ -431,10 +431,7 @@ private extension ListPlayersScreenView {
     textField.returnKeyType = .done
     textField.autocapitalizationType = .words
     
-    tableView.rowHeight = UITableView.automaticDimension
-    tableView.estimatedRowHeight = appearance.estimatedRowHeight
     tableView.keyboardDismissMode = .onDrag
-    
     tableView.separatorStyle = .none
     tableView.delegate = self
     tableView.dataSource = self
@@ -450,8 +447,6 @@ private extension ListPlayersScreenView {
     tableView.register(DoubleTitleCell.self,
                        forCellReuseIdentifier: DoubleTitleCell.reuseIdentifier)
     
-    tableView.tableFooterView = UIView()
-    tableView.tableHeaderView = UIView()
     tableView.showsVerticalScrollIndicator = false
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))

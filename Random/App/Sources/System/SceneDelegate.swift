@@ -8,6 +8,7 @@
 import UIKit
 import AppTrackingTransparency
 import YandexMobileMetricaPush
+import FirebaseDynamicLinks
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -56,12 +57,29 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     coordinator?.sceneDidBecomeActive()
   }
+  
+  func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    handleDynamicLink(userActivity: userActivity)
+  }
+  
+  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    if let url = URLContexts.first?.url {
+      self.deepLimkURL = url
+    }
+  }
 }
 
-// MARK: - Deep links
+// MARK: - Private
 
-extension SceneDelegate {
-  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    self.deepLimkURL = URLContexts.first?.url
+private extension SceneDelegate {
+  func handleDynamicLink(userActivity: NSUserActivity) {
+    guard let webpageURL = userActivity.webpageURL else {
+      return
+    }
+    DynamicLinks.dynamicLinks().handleUniversalLink(webpageURL) { dynamiclink, _ in
+      if let dynamiclink = dynamiclink, let deepLimkURL = dynamiclink.url {
+        self.deepLimkURL = deepLimkURL
+      }
+    }
   }
 }

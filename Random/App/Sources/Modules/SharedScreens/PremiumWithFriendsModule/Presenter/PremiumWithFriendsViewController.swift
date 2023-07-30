@@ -70,8 +70,12 @@ final class PremiumWithFriendsViewController: PremiumWithFriendsModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationItem.largeTitleDisplayMode = .never
+    navigationItem.largeTitleDisplayMode = .always
     setNavigationBar()
+    
+    let model = factory.configureModels(isModalPresentation: cacheIsModalPresentation)
+    moduleView.updateContentWith(models: model)
+    interactor.doNotShowScreenAgain()
   }
   
   // MARK: - Internal func
@@ -83,7 +87,16 @@ final class PremiumWithFriendsViewController: PremiumWithFriendsModule {
 
 // MARK: - PremiumWithFriendsViewOutput
 
-extension PremiumWithFriendsViewController: PremiumWithFriendsViewOutput {}
+extension PremiumWithFriendsViewController: PremiumWithFriendsViewOutput {
+  func doNotShowScreenAgain() {
+    interactor.doNotShowScreenAgain()
+    moduleOutput?.closeButtonAction()
+  }
+  
+  func copyLinkAction(_ link: String?) {
+    // TODO: -
+  }
+}
 
 // MARK: - PremiumWithFriendsInteractorOutput
 
@@ -105,7 +118,6 @@ private extension PremiumWithFriendsViewController {
                                         style: .plain,
                                         target: self,
                                         action: #selector(closeButtonAction))
-      
       navigationItem.rightBarButtonItems = [closeButton]
     }
   }

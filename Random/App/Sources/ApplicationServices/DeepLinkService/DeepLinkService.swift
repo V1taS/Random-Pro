@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import FirebaseDynamicLinks
+
+/// Тип данных для динамической ссылки
+typealias DynamicLinkUserInfo = (type: DynamicLinkType, userID: String)
 
 protocol DeepLinkService {
   
@@ -51,10 +55,59 @@ final class DeepLinkServiceImpl: DeepLinkService {
       }
     }
   }
+  
+  func createDynamicLink(with type: DynamicLinkType) -> String? {
+    let appearance = Appearance()
+    guard let userID = UIDevice.current.identifierForVendor?.uuidString else {
+      return nil
+    }
+    
+    guard let link = URL(string: "\(appearance.scheme)://\(type.rawValue)?userID=\(userID)") else {
+      return nil
+    }
+    
+    let components = DynamicLinkComponents(
+      link: link,
+      domainURIPrefix: appearance.dynamicLinksDomainURIPrefix
+    )
+    let iOSParams = DynamicLinkIOSParameters(bundleID: appearance.bundleID)
+    iOSParams.appStoreID = appearance.appStoreID
+    components?.iOSParameters = iOSParams
+    return components?.url?.absoluteString
+  }
+  
+  func parseDynamicLink(_ url: URL, completion: ((DynamicLinkUserInfo) -> Void)? ) {
+    // Проверяем, что схема URL соответствует вашей схеме
+    let appearance = Appearance()
+    guard url.scheme == appearance.scheme else {
+      return
+    }
+    
+    // Разбор URL на компоненты
+    let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
+    
+    // Извлекаем тип
+    let pathString = components?.path.trimmingCharacters(in: ["/"])
+    let type: DynamicLinkType? = pathString.flatMap { DynamicLinkType(rawValue: $0) }
+    
+    // Извлекаем userID
+    let userID = components?.queryItems?.first(where: { $0.name == "userID" })?.value
+    
+    guard let type, let userID else {
+      return
+    }
+    completion?((type, userID))
+  }
 }
 
 // MARK: - Appearance
 
 private extension DeepLinkServiceImpl {
-  struct Appearance {}
+  struct Appearance {
+    let dynamicLinksDomainURIPrefix = "https://randomsv.page.link"
+    let bundleID = "com.sosinvitalii.Random"
+    let appStoreID = "1552813956"
+    let scheme = "random_pro"
+    let dynamicLinkUserInfoKey = "DynamicLinkUserInfoKey"
+  }
 }

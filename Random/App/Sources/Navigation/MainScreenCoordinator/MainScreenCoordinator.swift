@@ -78,6 +78,10 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func didReceiveReferalScreen() {
+    openPremiumWithFriendsCoordinator()
+  }
+  
   func presentOnboardingScreen() {
     let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
                                                                   services)
@@ -459,6 +463,17 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScr
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func openPremiumWithFriendsCoordinator() {
+    let premiumWithFriendsCoordinator = PremiumWithFriendsCoordinator(navigationController,
+                                                                      services)
+    anyCoordinator = premiumWithFriendsCoordinator
+    premiumWithFriendsCoordinator.output = self
+    premiumWithFriendsCoordinator.selectPresentType(.present)
+    premiumWithFriendsCoordinator.start()
+    
+    services.metricsService.track(event: .premiumWithFriends)
+  }
+  
   func setupAdvertising() {
     var buttonCounterService = services.buttonCounterService
     

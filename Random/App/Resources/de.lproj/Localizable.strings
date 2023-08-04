@@ -312,3 +312,10 @@
 "animals" = "Tiere";
 "populars" = "Beliebt";
 "falls" = "Stürze";
+"your_friend_will_receive_a_bonus" = "Du bist durch Empfehlung gekommen, dein Freund erhält einen Bonus";
+"how_it_works" = "Wie es funktioniert";
+"your_unique_link_with_friends" = "Teilen Sie Ihren einzigartigen Link mit Freunden, Bekannten oder Kollegen";
+"free_access_to_random_premium" = "Erhalten Sie kostenlosen Zugang zu Random Premium, sobald fünf Personen die App über Ihren Link herunterladen";
+"remaining_installations" = "Verbleibende Installationen";
+"premium_access_is_exclusive_to_the_device" = "Der Premium-Zugang erfolgt ausschließlich für das Gerät, von dem der Empfehlungslink kopiert wurde. Wenn Sie die Anwendung neu installieren oder löschen, geht der Premium-Zugang verloren und Sie müssen Freunde erneut einladen. Auch wenn Sie auf verschiedenen Geräten das gleiche App-Store-Konto haben, ist die Prämie nur auf dem Gerät aktiv, von dem der Link kopiert wurde.";
+"don_not_show_again" = "Nicht mehr anzeigen";

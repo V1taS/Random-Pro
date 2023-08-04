@@ -88,6 +88,29 @@ final class PremiumWithFriendsCoordinator: PremiumWithFriendsCoordinatorProtocol
 // MARK: - PremiumWithFriendsModuleOutput
 
 extension PremiumWithFriendsCoordinator: PremiumWithFriendsModuleOutput {
+  func copyLinkAction(_ link: String?) {
+    let appearance = Appearance()
+    guard let link, let url = URL(string: link) else {
+      return
+    }
+    
+    let objectsToShare = [url]
+    let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+    
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      if let popup = activityVC.popoverPresentationController {
+        popup.sourceView = premiumWithFriendsModule?.view
+        popup.sourceRect = CGRect(x: (premiumWithFriendsModule?.view.frame.size.width ?? .zero) / 2,
+                                  y: (premiumWithFriendsModule?.view.frame.size.height ?? .zero) / 4,
+                                  width: .zero,
+                                  height: .zero)
+      }
+    }
+    
+    premiumWithFriendsModule?.present(activityVC, animated: true, completion: nil)
+    services.metricsService.track(event: .premiumWithFriends)
+  }
+  
   func closeButtonAction() {
     premiumScreenNavigationController?.dismiss(animated: true)
   }
@@ -99,5 +122,6 @@ private extension PremiumWithFriendsCoordinator {
   struct Appearance {
     let somethingWentWrongTitle = RandomStrings.Localizable.somethingWentWrong
     let premiumAccessActivatedTitle = RandomStrings.Localizable.premiumAccessActivated
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

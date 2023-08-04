@@ -69,6 +69,9 @@ protocol ApplicationServices {
 
   /// Сервис онбоардинг экрана
   var onboardingService: OnboardingService { get }
+  
+  /// Сервис по реферальной программе
+  var referalService: ReferalService { get }
 }
 
 // MARK: - Реализация ApplicationServices
@@ -145,8 +148,13 @@ final class ApplicationServicesImpl: ApplicationServices {
     onboardingServiceImpl
   }
   
+  var referalService: ReferalService {
+    referalServiceImpl
+  }
+  
   // MARK: - Private property
   
+  let referalServiceImpl = ReferalServiceImpl()
   let storageServiceImpl = StorageServiceImpl()
   let deepLinkServiceImpl = DeepLinkServiceImpl()
   let networkServiceImpl = NetworkServiceImpl()

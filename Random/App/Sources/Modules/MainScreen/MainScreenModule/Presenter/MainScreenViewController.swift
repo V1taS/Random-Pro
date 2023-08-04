@@ -255,14 +255,14 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 
 private extension MainScreenViewController {
   func getReferalScreen() {
-//    interactor.returnModel { [weak self] mainModel in
-//      guard let self,
-//            self.interactor.isAutoShowReferalPresentationAgain(),
-//            !mainModel.isPremium else {
-//        return
-//      }
-//      self.moduleOutput?.didReceiveReferalScreen()
-//    }
+    interactor.returnModel { [weak self] mainModel in
+      guard let self,
+            self.interactor.isAutoShowReferalPresentationAgain(),
+            !mainModel.isPremium else {
+        return
+      }
+      self.moduleOutput?.didReceiveReferalScreen()
+    }
   }
   
   func updateSections() {

@@ -8,10 +8,20 @@
 
 import Foundation
 
-enum DynamicLinkType: String, CaseIterable, UserDefaultsCodable {
+enum DynamicLinkType: CaseIterable, UserDefaultsCodable {
+  static var allCases: [DynamicLinkType] = [.freePremium, .invite(userInfo: "")]
+  
+  var rawValue: String {
+    switch self {
+    case .invite:
+      return "invite"
+    case .freePremium:
+      return "freePremium"
+    }
+  }
   
   /// Приглашение
-  case invite
+  case invite(userInfo: String)
   
   /// Бесплатный премиум
   case freePremium

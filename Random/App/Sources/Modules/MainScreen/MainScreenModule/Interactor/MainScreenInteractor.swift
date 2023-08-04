@@ -60,7 +60,7 @@ protocol MainScreenInteractorInput {
   func updatesPremiumFeatureToggle(completion: @escaping () -> Void)
   
   /// Автоматически показывать реферальную программу на главном экране
-  func isAutoShowReferalPresentationAgain() -> Bool
+  func isAutoShowReferalPresentationAgain(completion: @escaping (Bool) -> Void)
 }
 
 /// Интерактор
@@ -100,17 +100,27 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   // MARK: - Internal func
   
-  func isAutoShowReferalPresentationAgain() -> Bool {
+  func isAutoShowReferalPresentationAgain(completion: @escaping (Bool) -> Void) {
     let defaults = UserDefaults.standard
     let appearance = Appearance()
     
-    // Если функция уже вызывалась ранее
-    if defaults.bool(forKey: appearance.isFirstCallReferalPresentationKey) {
-      return premiumWithFriendsModel?.isAutoShowModalPresentationAgain ?? false
-    } else {
-      // Записываем информацию о том, что функция была вызвана
-      defaults.set(true, forKey: appearance.isFirstCallReferalPresentationKey)
-      return false
+    services.featureToggleServices.getSectionsIsHiddenFT { isHiddenFT in
+      DispatchQueue.main.async { [weak self] in
+        guard let isHidden = isHiddenFT?.premiumWithFriends,
+              !isHidden else {
+          completion(false)
+          return
+        }
+        
+        // Если функция уже вызывалась ранее
+        if defaults.bool(forKey: appearance.isFirstCallReferalPresentationKey) {
+          completion(self?.premiumWithFriendsModel?.isAutoShowModalPresentationAgain ?? false)
+        } else {
+          // Записываем информацию о том, что функция была вызвана
+          defaults.set(true, forKey: appearance.isFirstCallReferalPresentationKey)
+          completion(false)
+        }
+      }
     }
   }
   

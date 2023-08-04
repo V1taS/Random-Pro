@@ -255,13 +255,18 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 
 private extension MainScreenViewController {
   func getReferalScreen() {
-    interactor.returnModel { [weak self] mainModel in
-      guard let self,
-            self.interactor.isAutoShowReferalPresentationAgain(),
-            !mainModel.isPremium else {
+    self.interactor.isAutoShowReferalPresentationAgain { [weak self] isShow in
+      guard isShow else {
         return
       }
-      self.moduleOutput?.didReceiveReferalScreen()
+      
+      self?.interactor.returnModel { [weak self] mainModel in
+        guard let self,
+              !mainModel.isPremium else {
+          return
+        }
+        self.moduleOutput?.didReceiveReferalScreen()
+      }
     }
   }
   

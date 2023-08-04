@@ -95,7 +95,7 @@ final class MainScreenInteractorInputMock: MainScreenInteractorInput {
     // TODO: -
   }
   
-  func isAutoShowReferalPresentationAgain() -> Bool {
-    return false
+  func isAutoShowReferalPresentationAgain(completion: @escaping (Bool) -> Void) {
+    
   }
 }

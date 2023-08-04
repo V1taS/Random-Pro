@@ -4,7 +4,7 @@ let dependencies = Dependencies(
   swiftPackageManager: SwiftPackageManagerDependencies(
     [
       .remote(url: "https://github.com/V1taS/RandomUIKit.git",
-              requirement: .exact("1.33")),
+              requirement: .exact("1.34")),
 //      .local(path: "../RandomUIKit"),
       .remote(url: "https://github.com/V1taS/RandomNetwork.git",
               requirement: .exact("1.3")),

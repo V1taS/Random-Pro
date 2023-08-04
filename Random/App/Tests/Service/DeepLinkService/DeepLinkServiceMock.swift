@@ -30,4 +30,6 @@ final class DeepLinkServiceMock: DeepLinkService {
       deepLinkTypeStub = newValue
     }
   }
+  
+  var dynamicLinkType: Random.DynamicLinkType? = nil
 }

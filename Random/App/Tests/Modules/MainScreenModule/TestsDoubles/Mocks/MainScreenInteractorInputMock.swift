@@ -94,4 +94,8 @@ final class MainScreenInteractorInputMock: MainScreenInteractorInput {
   func savePremium(_ isEnabled: Bool) {
     // TODO: -
   }
+  
+  func isAutoShowReferalPresentationAgain() -> Bool {
+    return false
+  }
 }

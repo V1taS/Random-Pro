@@ -312,3 +312,10 @@
 "animals" = "Animals";
 "populars" = "Popular";
 "falls" = "Falls";
+"your_friend_will_receive_a_bonus" = "You came by recommendation, your friend will receive a bonus";
+"how_it_works" = "How it works";
+"your_unique_link_with_friends" = "Share your unique link with friends, acquaintances or colleagues";
+"free_access_to_random_premium" = "Get free access to Random Premium as soon as five people download the app from your link";
+"remaining_installations" = "Remaining installations";
+"premium_access_is_exclusive_to_the_device" = "Premium access is provided exclusively for the device from which the referral link was copied. If you reinstall or delete the application, premium access will be lost and you will need to invite friends again. Even if you have the same App Store account on different devices, the premium will only be active on the device from which the link was copied.";
+"don_not_show_again" = "Don't show again";

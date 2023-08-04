@@ -7,10 +7,6 @@
 //
 
 import UIKit
-import FirebaseDynamicLinks
-
-/// Тип данных для динамической ссылки
-typealias DynamicLinkUserInfo = (type: DynamicLinkType, userID: String)
 
 protocol DeepLinkService {
   
@@ -20,6 +16,9 @@ protocol DeepLinkService {
   
   /// Получен определенный тип диплинка
   var deepLinkType: DeepLinkType? { get set }
+  
+  /// Динамическая линка
+  var dynamicLinkType: DynamicLinkType? { get set }
 }
 
 final class DeepLinkServiceImpl: DeepLinkService {
@@ -34,11 +33,19 @@ final class DeepLinkServiceImpl: DeepLinkService {
     }
   }
   
+  var dynamicLinkType: DynamicLinkType? {
+    get {
+      return StorageServiceImpl().getData(from: DynamicLinkType.self)
+    } set {
+      StorageServiceImpl().saveData(newValue)
+    }
+  }
+  
   // MARK: - Private property
   
   /// Имя хоста
   private var host: String {
-    return "random://"
+    return "random_pro://"
   }
   
   // MARK: - Internal func
@@ -54,49 +61,50 @@ final class DeepLinkServiceImpl: DeepLinkService {
         return
       }
     }
+    
+    if deepLinkType == nil {
+      parseDynamicLink(deepLimkURL) { [weak self] result in
+        self?.dynamicLinkType = result
+      }
+    }
   }
   
-  func createDynamicLink(with type: DynamicLinkType) -> String? {
-    let appearance = Appearance()
-    guard let userID = UIDevice.current.identifierForVendor?.uuidString else {
-      return nil
-    }
-    
-    guard let link = URL(string: "\(appearance.scheme)://\(type.rawValue)?userID=\(userID)") else {
-      return nil
-    }
-    
-    let components = DynamicLinkComponents(
-      link: link,
-      domainURIPrefix: appearance.dynamicLinksDomainURIRandomPrefix
-    )
-    let iOSParams = DynamicLinkIOSParameters(bundleID: appearance.bundleID)
-    iOSParams.appStoreID = appearance.appStoreID
-    components?.iOSParameters = iOSParams
-    return components?.url?.absoluteString
-  }
-  
-  func parseDynamicLink(_ url: URL, completion: ((DynamicLinkUserInfo) -> Void)? ) {
+  func parseDynamicLink(_ url: URL?, completion: ((DynamicLinkType) -> Void)? ) {
     // Проверяем, что схема URL соответствует вашей схеме
     let appearance = Appearance()
-    guard url.scheme == appearance.scheme else {
+    guard let url,
+          url.scheme == appearance.scheme else {
       return
     }
     
     // Разбор URL на компоненты
     let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
     
-    // Извлекаем тип
-    let pathString = components?.path.trimmingCharacters(in: ["/"])
-    let type: DynamicLinkType? = pathString.flatMap { DynamicLinkType(rawValue: $0) }
-    
     // Извлекаем userID
     let userID = components?.queryItems?.first(where: { $0.name == "userID" })?.value
     
-    guard let type, let userID else {
+    guard let userID else {
       return
     }
-    completion?((type, userID))
+    
+    // Извлекаем тип
+    let pathString = components?.path.trimmingCharacters(in: ["/"])
+    var dynamicLinkType: DynamicLinkType?
+    DynamicLinkType.allCases.forEach { type in
+      if let pathString, pathString.contains(type.rawValue) {
+        switch type {
+        case .invite:
+          dynamicLinkType = .invite(userInfo: userID)
+        case .freePremium:
+          dynamicLinkType = .freePremium
+        }
+        return
+      }
+    }
+    guard let dynamicLinkType else {
+      return
+    }
+    completion?(dynamicLinkType)
   }
 }
 

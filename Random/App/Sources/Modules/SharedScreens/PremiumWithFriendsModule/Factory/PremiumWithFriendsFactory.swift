@@ -14,7 +14,9 @@ protocol PremiumWithFriendsFactoryOutput: AnyObject {}
 protocol PremiumWithFriendsFactoryInput {
   
   /// Создать список моделек для таблички
-  func configureModels(isModalPresentation: Bool) -> [PremiumWithFriendsTableViewModel]
+  func configureModels(isModalPresentation: Bool,
+                       referals: [String],
+                       link: String) -> [PremiumWithFriendsTableViewModel]
 }
 
 /// Фабрика
@@ -26,32 +28,31 @@ final class PremiumWithFriendsFactory: PremiumWithFriendsFactoryInput {
   
   // MARK: - Internal func
   
-  func configureModels(isModalPresentation: Bool) -> [PremiumWithFriendsTableViewModel] {
+  func configureModels(isModalPresentation: Bool, referals: [String], link: String) -> [PremiumWithFriendsTableViewModel] {
     let appearance = Appearance()
     var models: [PremiumWithFriendsTableViewModel] = []
     
     models.append(
       .referal(
         appearance.lottieAnimationJSONName,
-        title: "Как это работает?",
-        firstStepTitle: "1. Поделитесь вашей уникальной ссылкой с друзьями, знакомыми или коллегами",
-        link: "https://SosinVitalii.com/eaigsengkjnsdakg/alekgmnlakeg/",
-        secondStepTitle: "2. Получите бесплатный доступ к Random Premium, как только пять человек скачают приложение по вашей ссылке",
-        circleStepsTitle: "Осталось установок:",
-        currentStep: 2,
+        title: "\(RandomStrings.Localizable.howItWorks)?",
+        firstStepTitle: "1. \(RandomStrings.Localizable.yourUniqueLinkWithFriends)",
+        link: link,
+        secondStepTitle: "2. \(RandomStrings.Localizable.freeAccessToRandomPremium)",
+        circleStepsTitle: "\(RandomStrings.Localizable.remainingInstallations):",
+        currentStep: referals.count,
         maxSteps: appearance.maxSteps
       )
     )
     
     models.append(
       .text(
-        // swiftlint:disable:next line_length
-        "*Премиум-доступ предоставляется исключительно для устройства, с которого была скопирована реферальная ссылка. В случае переустановки или удаления приложения, премиум-доступ пропадает и потребуется приглашение друзей заново. Даже если у вас один аккаунт App Store на разных устройствах, премиум будет активен только на том устройстве, с которого была скопирована ссылка."
+        RandomStrings.Localizable.premiumAccessIsExclusiveToTheDevice
       )
     )
     
     if isModalPresentation {
-      models.append(.smallButton("Больше не показывать"))
+      models.append(.smallButton(RandomStrings.Localizable.donNotShowAgain))
     }
     return models
   }

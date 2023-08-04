@@ -312,3 +312,10 @@
 "animals" = "Animali";
 "populars" = "Popolare";
 "falls" = "Cascate";
+"your_friend_will_receive_a_bonus" = "Sei venuto su raccomandazione, il tuo amico riceverà un bonus";
+"how_it_works" = "Come funziona";
+"your_unique_link_with_friends" = "Condividi il tuo link univoco con amici, conoscenti o colleghi";
+"free_access_to_random_premium" = "Ottieni l'accesso gratuito a Random Premium non appena cinque persone scaricano l'app dal tuo link";
+"remaining_installations" = "Installazioni rimanenti";
+"premium_access_is_exclusive_to_the_device" = "L'accesso Premium è fornito esclusivamente per il dispositivo da cui è stato copiato il link di riferimento. Se reinstalli o elimini l'applicazione, l'accesso premium andrà perso e dovrai invitare nuovamente gli amici. Anche se hai lo stesso account App Store su dispositivi diversi, il premium sarà attivo solo sul dispositivo da cui è stato copiato il link.";
+"don_not_show_again" = "Non mostrare più";

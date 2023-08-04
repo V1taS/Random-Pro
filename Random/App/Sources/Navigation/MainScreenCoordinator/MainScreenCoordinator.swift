@@ -72,6 +72,13 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   
   func sceneDidBecomeActive() {
     startDeepLink()
+    startDynamicLink()
+    
+    services.referalService.getSelfInfo { [weak self] result in
+      if let referals = result?.referals, referals.count == Appearance().refCountMax {
+        self?.mainScreenModule?.savePremium(true)
+      }
+    }
   }
 }
 
@@ -543,6 +550,41 @@ private extension MainScreenCoordinator {
     }
   }
   
+  func startDynamicLink() {
+    guard let deepLinkType = services.deepLinkService.dynamicLinkType else {
+      return
+    }
+    
+    switch deepLinkType {
+    case let .invite(idFriend):
+      services.referalService.saveInfo(friendID: idFriend) { [weak self] result in
+        switch result {
+        case .success:
+          self?.services.notificationService.showPositiveAlertWith(
+            title: "\(RandomStrings.Localizable.yourFriendWillReceiveABonus) 🎁",
+            glyph: true,
+            timeout: nil,
+            active: {}
+          )
+        case .failure: break
+        }
+      }
+    case .freePremium:
+      services.referalService.freePremium { [weak self] result in
+        switch result {
+        case .success:
+          self?.services.notificationService.showPositiveAlertWith(
+            title: Appearance().premiumAccessActivatedTitle,
+            glyph: true,
+            timeout: nil,
+            active: {}
+          )
+        case .failure: break
+        }
+      }
+    }
+  }
+  
   func startDeepLink() {
     guard let deepLinkType = services.deepLinkService.deepLinkType else {
       return
@@ -687,5 +729,6 @@ private extension MainScreenCoordinator {
     
     let positiveAlertALotOfClicksKey = "main_screen_show_positive_alert_a_lot_of_clicks"
     let advertisingCount = 15
+    let refCountMax = 5
   }
 }

@@ -12,6 +12,10 @@ protocol PremiumWithFriendsModuleOutput: AnyObject {
   
   /// Модуль был закрыт
   func closeButtonAction()
+  
+  /// Пользователь скопировал ссылку
+  ///  - Parameter link: Ссылка
+  func copyLinkAction(_ link: String?)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -72,10 +76,7 @@ final class PremiumWithFriendsViewController: PremiumWithFriendsModule {
     
     navigationItem.largeTitleDisplayMode = .always
     setNavigationBar()
-    
-    let model = factory.configureModels(isModalPresentation: cacheIsModalPresentation)
-    moduleView.updateContentWith(models: model)
-    interactor.doNotShowScreenAgain()
+    interactor.getContent()
   }
   
   // MARK: - Internal func
@@ -94,13 +95,20 @@ extension PremiumWithFriendsViewController: PremiumWithFriendsViewOutput {
   }
   
   func copyLinkAction(_ link: String?) {
-    // TODO: -
+    moduleOutput?.copyLinkAction(link)
   }
 }
 
 // MARK: - PremiumWithFriendsInteractorOutput
 
-extension PremiumWithFriendsViewController: PremiumWithFriendsInteractorOutput {}
+extension PremiumWithFriendsViewController: PremiumWithFriendsInteractorOutput {
+  func didReceive(referals: [String], link: String) {
+    let model = factory.configureModels(isModalPresentation: cacheIsModalPresentation,
+                                        referals: referals,
+                                        link: link)
+    moduleView.updateContentWith(models: model)
+  }
+}
 
 // MARK: - PremiumWithFriendsFactoryOutput
 

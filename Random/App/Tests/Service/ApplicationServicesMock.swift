@@ -14,6 +14,10 @@ import XCTest
 // MARK: - Реализация ApplicationServicesMock
 
 final class ApplicationServicesMock: ApplicationServices {
+  var referalService: ReferalService {
+    ReferalServiceImpl()
+  }
+  
   
   // MARK: - Internal property
   

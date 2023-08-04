@@ -89,7 +89,6 @@ final class PremiumWithFriendsCoordinator: PremiumWithFriendsCoordinatorProtocol
 
 extension PremiumWithFriendsCoordinator: PremiumWithFriendsModuleOutput {
   func copyLinkAction(_ link: String?) {
-    let appearance = Appearance()
     guard let link, let url = URL(string: link) else {
       return
     }

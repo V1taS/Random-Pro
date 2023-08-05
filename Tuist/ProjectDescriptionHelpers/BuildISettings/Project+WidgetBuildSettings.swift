@@ -15,10 +15,10 @@ public let targetWidgetIOSSettings: Settings = .settings(
     "IPHONEOS_DEPLOYMENT_TARGET": "14.0",
     "SDKROOT": "iphoneos",
     "TARGETED_DEVICE_FAMILY": "1,2",
-    "DEVELOPMENT_TEAM": "34VDSPZYU9",
+    "DEVELOPMENT_TEAM": "\(developmentTeam)",
     "CODE_SIGN_STYLE": "Manual",
-    "CODE_SIGN_IDENTITY": "Apple Distribution: Vitalii Sosin (34VDSPZYU9)",
-    "PROVISIONING_PROFILE_SPECIFIER": "dbbda44e-3bbc-4f0b-875b-6af03f52b927",
+    "CODE_SIGN_IDENTITY": "\(codeSignIdentity)",
+    "PROVISIONING_PROFILE_SPECIFIER": "\(provisioningProfileWidget)",
   ],
   debug: [
     "DEBUG_INFORMATION_FORMAT": "dwarf",

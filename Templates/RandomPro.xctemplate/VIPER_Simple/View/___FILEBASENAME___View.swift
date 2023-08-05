@@ -5,8 +5,8 @@
 //  Created by ___FULLUSERNAME___ on ___DATE___.
 //
 
-import SMEUIKit
-import ViennaKit
+import UIKit
+import RandomUIKit
 
 /// События которые отправляем из View в Presenter
 protocol ___FILEBASENAMEASIDENTIFIER___Output: AnyObject {}
@@ -48,7 +48,7 @@ private extension ___FILEBASENAMEASIDENTIFIER___ {
   func configureLayout() {}
   
   func applyDefaultBehavior() {
-    backgroundColor = UIColor.vienna.background.primary
+    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
   }
 }
 

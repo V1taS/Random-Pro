@@ -62,4 +62,9 @@ enum MetricsSections: String {
   case premiumWithFriends = "Premium with friends"
   
   case premiumPlayerCardSelection = "Premium player card selection"
+  
+  // Other
+  
+  case forceUpdateApp = "Принудительное обноаление показано"
+  case appUnavailable = "Приложение не доступно"
 }

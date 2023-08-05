@@ -26,9 +26,16 @@ protocol FeatureToggleServices {
   
   /// Получить удаленные тогглы
   func fetchRemoteConfig(completion: @escaping (_ error: Error?) -> Void)
+  
+  /// Тогглы были получены
+  var didReceiveToggle: (() -> Void)? { get set }
 }
 
 final class FeatureToggleServicesImpl: FeatureToggleServices {
+  
+  // MARK: - Internal property
+  
+  var didReceiveToggle: (() -> Void)?
   
   // MARK: - Private property
   
@@ -98,13 +105,20 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
       if status == .success {
         self?.remoteConfig.activate { _, error in
           if let error = error {
-            completion(error)
+            DispatchQueue.main.async {
+              completion(error)
+            }
           } else {
-            completion(nil)
+            DispatchQueue.main.async {
+              completion(nil)
+              self?.didReceiveToggle?()
+            }
           }
         }
       } else {
-        completion(error)
+        DispatchQueue.main.async {
+          completion(error)
+        }
       }
     }
   }

@@ -319,3 +319,6 @@
 "remaining_installations" = "Remaining installations";
 "premium_access_is_exclusive_to_the_device" = "Premium access is provided exclusively for the device from which the referral link was copied. If you reinstall or delete the application, premium access will be lost and you will need to invite friends again. Even if you have the same App Store account on different devices, the premium will only be active on the device from which the link was copied.";
 "don_not_show_again" = "Don't show again";
+"wow_random_pro_on_a_short_tech_break" = "Wow! Random Pro is on a brief technical break - we're updating your luck! Check back later for new random adventures";
+"update" = "Update";
+"oops_your_version_of_random_pro_is_out_of_date" = "Oops! Your version of Random Pro is outdated. Update the app to the latest version to continue exploring the amazing world of randomness";

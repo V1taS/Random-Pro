@@ -5,7 +5,7 @@
 //  Created by ___FULLUSERNAME___ on ___DATE___.
 //
 
-import Foundation
+import UIKit
 
 /// События которые отправляем из `___VARIABLE_productName___Module` в `Coordinator`
 public protocol ___VARIABLE_productName___ModuleOutput: AnyObject {}

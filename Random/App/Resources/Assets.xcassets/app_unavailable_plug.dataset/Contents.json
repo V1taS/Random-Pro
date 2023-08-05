@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "app_unavailable_plug.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

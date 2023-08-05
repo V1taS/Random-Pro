@@ -12,6 +12,8 @@ import XCTest
 
 final class FeatureToggleServicesMock: FeatureToggleServices {
   
+  var didReceiveToggle: (() -> Void)?
+  
   // Spy variables
   var getSectionsIsHiddenFTCalled = false
   var getLabelsFeatureToggleCalled = false

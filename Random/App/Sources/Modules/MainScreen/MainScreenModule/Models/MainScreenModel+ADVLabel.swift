@@ -12,7 +12,7 @@ extension MainScreenModel {
   
   // MARK: - ADVLabel
   
-  enum ADVLabel: CaseIterable, UserDefaultsCodable {
+  enum ADVLabel: CaseIterable, UserDefaultsCodable, Hashable {
     static var allCases: [MainScreenModel.ADVLabel] = [.hit, .new, .none, .custom(text: "")]
     
     var title: String {

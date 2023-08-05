@@ -49,10 +49,14 @@ final class ___VARIABLE_productName:identifier___Coordinator: ___FILEBASENAMEASI
   
   // MARK: - Life cycle
   
-  override func start() {
-    let module = MainScreenAssembly().createModule()
+  func start() {
+    let module = ___VARIABLE_productName:identifier___Assembly().createModule()
     self.module = module
     self.module?.moduleOutput = self
     navigationController.pushViewController(module, animated: true)
   }
 }
+
+// MARK: - ___VARIABLE_productName:identifier___ModuleOutput
+
+extension ___VARIABLE_productName:identifier___Coordinator: ___VARIABLE_productName:identifier___ModuleOutput {}

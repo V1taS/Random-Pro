@@ -22,12 +22,13 @@ protocol MainScreenFactoryInput {
   /// - Parameter model: Массив ячеек
   func createCellsFrom(model: MainScreenModel)
   
+  /// Создать базовую модель
   func createBaseModel(completion: @escaping (MainScreenModel) -> Void)
   
-  func updateModelWith(
-    oldModel: MainScreenModel,
-    isPremium: Bool?,
-    completion: @escaping (MainScreenModel) -> Void)
+  /// Обновить базавую модель
+  func updateModelWith(oldModel: MainScreenModel,
+                       isPremium: Bool?,
+                       completion: @escaping (MainScreenModel) -> Void)
 }
 
 /// Фабрика

@@ -57,6 +57,10 @@ final class PremiumWithFriendsInteractor: PremiumWithFriendsInteractorInput {
   // MARK: - Internal func
   
   func getContent() {
+    if premiumWithFriendsModel == nil {
+      premiumWithFriendsModel = PremiumWithFriendsModel()
+    }
+    
     services.referalService.getSelfInfo { [weak self] result in
       DispatchQueue.main.async {
         var referals: [String] = []
@@ -70,7 +74,8 @@ final class PremiumWithFriendsInteractor: PremiumWithFriendsInteractorInput {
   }
   
   func doNotShowScreenAgain() {
-    premiumWithFriendsModel?.isAutoShowModalPresentationAgain = false
+    let newModel = PremiumWithFriendsModel(isAutoShowModalPresentationAgain: false)
+    self.premiumWithFriendsModel = newModel
   }
 }
 

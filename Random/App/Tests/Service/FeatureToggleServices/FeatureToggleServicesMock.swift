@@ -24,18 +24,6 @@ final class FeatureToggleServicesMock: FeatureToggleServices {
   var premiumFeatureToggleStub: (() -> Void)?
   var updateAppFeatureToggleStub: (() -> Void)?
   
-  func getSectionsIsHiddenFT(completion: @escaping (Random.SectionsIsHiddenFTModel?) -> Void) {
-    getSectionsIsHiddenFTCalled = true
-    sectionsIsHiddenFTStub?()
-    completion(nil)
-  }
-  
-  func getLabelsFeatureToggle(completion: @escaping (Random.LabelsFeatureToggleModel?) -> Void) {
-    getLabelsFeatureToggleCalled = true
-    labelsFeatureToggleStub?()
-    completion(nil)
-  }
-  
   func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void) {
     getPremiumFeatureToggleCalled = true
     premiumFeatureToggleStub?()
@@ -47,4 +35,18 @@ final class FeatureToggleServicesMock: FeatureToggleServices {
     updateAppFeatureToggleStub?()
     completion(false)
   }
+  
+  func isToggleFor(feature: Random.FeatureToggleType) -> Bool {
+    return false
+  }
+  
+  func isHiddenToggleFor(section: Random.MainScreenModel.SectionType) -> Bool {
+    return false
+  }
+  
+  func getLabelsFor(section: Random.MainScreenModel.SectionType) -> String {
+    return ""
+  }
+  
+  func fetchRemoteConfig(completion: @escaping (Error?) -> Void) {}
 }

@@ -39,11 +39,7 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   // MARK: - Internal func
   
   func getPremiumWithFriendsToggle(completion: ((Bool) -> Void)?) {
-    featureToggleServices.getSectionsIsHiddenFT { isHiddenFT in
-      DispatchQueue.main.async {
-        completion?(!(isHiddenFT?.premiumWithFriends ?? true))
-      }
-    }
+    completion?(featureToggleServices.isToggleFor(feature: .isPremiumWithFriends))
   }
 }
 

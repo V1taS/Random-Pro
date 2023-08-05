@@ -67,7 +67,6 @@ final class MainScreenViewController: MainScreenModule {
     moduleOutput?.mainScreenModuleWillAppear()
     setupNavBar()
     moduleOutput?.presentOnboardingScreen()
-    getReferalScreen()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -261,29 +260,24 @@ private extension MainScreenViewController {
       }
       
       self?.interactor.returnModel { [weak self] mainModel in
-        guard let self,
-              !mainModel.isPremium else {
+        guard !mainModel.isPremium else {
           return
         }
-        self.moduleOutput?.didReceiveReferalScreen()
+        self?.moduleOutput?.didReceiveReferalScreen()
       }
     }
   }
   
   func updateSections() {
     interactor.getContent { [weak self] in
-      self?.interactor.updatesSectionsIsHiddenFT { [weak self] in
-        self?.interactor.updatesLabelsFeatureToggle { [weak self] in
-          self?.interactor.validatePurchase { [weak self] in
-            if self?.isPremiumDEBUG != nil {
-              self?.setupNavBar()
-              self?.interactor.getContent {}
-            } else {
-              self?.interactor.updatesPremiumFeatureToggle { [weak self] in
-                self?.setupNavBar()
-                self?.interactor.getContent {}
-              }
-            }
+      self?.interactor.validatePurchase { [weak self] in
+        if self?.isPremiumDEBUG != nil {
+          self?.setupNavBar()
+          self?.interactor.getContent {}
+        } else {
+          self?.interactor.updatesPremiumFeatureToggle { [weak self] in
+            self?.setupNavBar()
+            self?.interactor.getContent {}
           }
         }
       }
@@ -330,6 +324,7 @@ private extension MainScreenViewController {
   @objc
   func didBecomeActiveNotification() {
     updateSections()
+    getReferalScreen()
   }
 }
 

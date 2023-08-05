@@ -12,7 +12,7 @@ import XCTest
 
 /// Mock Input
 final class MainScreenFactoryInputMock: MainScreenFactoryInput {
-  
+
   // MARK: - Internal properties
   
   weak var output: MainScreenFactoryOutput?
@@ -29,4 +29,9 @@ final class MainScreenFactoryInputMock: MainScreenFactoryInput {
                                                  isPremium: false,
                                                  allSections: []))
   }
+  
+  func createBaseModel(completion: @escaping (Random.MainScreenModel) -> Void) {}
+  
+  func updateModelWith(oldModel: Random.MainScreenModel,
+                       isPremium: Bool?, completion: @escaping (Random.MainScreenModel) -> Void) {}
 }

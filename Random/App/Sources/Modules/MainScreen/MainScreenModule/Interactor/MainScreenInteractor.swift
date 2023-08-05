@@ -47,12 +47,6 @@ protocol MainScreenInteractorInput {
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType)
   
-  /// Обновить модель с фича тогглами
-  func updatesSectionsIsHiddenFT(completion: @escaping () -> Void)
-  
-  /// Обновить лайблы у секций на главном экране
-  func updatesLabelsFeatureToggle(completion: @escaping () -> Void)
-  
   /// Проверка Премиум покупок у пользователя
   func validatePurchase(completion: @escaping () -> Void)
   
@@ -88,14 +82,17 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   // MARK: - Internal properties
   
   weak var output: MainScreenInteractorOutput?
+  private let factory: MainScreenFactoryInput
   
   // MARK: - Initialization
   
   /// - Parameters:
   ///   - services: Сервисы приложения
-  init(services: ApplicationServices) {
+  init(services: ApplicationServices,
+       factory: MainScreenFactoryInput) {
     self.services = services
     storageService = services.storageService
+    self.factory = factory
   }
   
   // MARK: - Internal func
@@ -104,28 +101,28 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     let defaults = UserDefaults.standard
     let appearance = Appearance()
     
-    services.featureToggleServices.getSectionsIsHiddenFT { isHiddenFT in
-      DispatchQueue.main.async { [weak self] in
-        guard let isHidden = isHiddenFT?.premiumWithFriends,
-              !isHidden else {
-          completion(false)
-          return
-        }
-        
-        // Если функция уже вызывалась ранее
-        if defaults.bool(forKey: appearance.isFirstCallReferalPresentationKey) {
-          completion(self?.premiumWithFriendsModel?.isAutoShowModalPresentationAgain ?? false)
-        } else {
-          // Записываем информацию о том, что функция была вызвана
-          defaults.set(true, forKey: appearance.isFirstCallReferalPresentationKey)
-          completion(false)
-        }
-      }
+    let isPremiumWithFriends = services.featureToggleServices.isToggleFor(
+      feature: .isPremiumWithFriends
+    )
+    
+    guard isPremiumWithFriends else {
+      completion(false)
+      return
+    }
+    
+    // Если функция уже вызывалась ранее
+    if defaults.bool(forKey: appearance.isFirstCallReferalPresentationKey) {
+      completion(premiumWithFriendsModel?.isAutoShowModalPresentationAgain ?? true)
+    } else {
+      // Записываем информацию о том, что функция была вызвана
+      defaults.set(true, forKey: appearance.isFirstCallReferalPresentationKey)
+      completion(true)
     }
   }
   
   func updateSectionsWith(model: MainScreenModel) {
-    MainScreenFactory.updateModelWith(oldModel: model) { [weak self] updateModel in
+    factory.updateModelWith(oldModel: model,
+                            isPremium: nil) { [weak self] updateModel in
       self?.mainScreenModel = updateModel
       self?.output?.didReceive(model: updateModel)
     }
@@ -133,13 +130,14 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   
   func getContent(completion: @escaping () -> Void) {
     if let model = mainScreenModel {
-      MainScreenFactory.updateModelWith(oldModel: model) { [weak self] newModel in
+      factory.updateModelWith(oldModel: model,
+                              isPremium: nil) { [weak self] newModel in
         self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
       }
     } else {
-      MainScreenFactory.createBaseModel { [weak self] newModel in
+      factory.createBaseModel { [weak self] newModel in
         self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
@@ -151,7 +149,7 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     if let model = mainScreenModel {
       completion(model)
     } else {
-      MainScreenFactory.createBaseModel { newModel in
+      factory.createBaseModel { newModel in
         completion(newModel)
       }
     }
@@ -221,46 +219,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     }
   }
   
-  func updatesSectionsIsHiddenFT(completion: @escaping () -> Void) {
-    guard let model = mainScreenModel else {
-      completion()
-      return
-    }
-    
-    services.featureToggleServices.getSectionsIsHiddenFT { [weak self] sectionsIsHiddenFTModel in
-      guard let sectionsIsHiddenFTModel else {
-        completion()
-        return
-      }
-      
-      MainScreenFactory.updateModelWith(oldModel: model,
-                                        featureToggleModel: sectionsIsHiddenFTModel) { [weak self] newModel in
-        self?.mainScreenModel = newModel
-        completion()
-      }
-    }
-  }
-  
-  func updatesLabelsFeatureToggle(completion: @escaping () -> Void) {
-    guard let model = mainScreenModel else {
-      completion()
-      return
-    }
-    
-    services.featureToggleServices.getLabelsFeatureToggle { [weak self] labelsModel in
-      guard let labelsModel else {
-        completion()
-        return
-      }
-      
-      MainScreenFactory.updateModelWith(oldModel: model,
-                                        labelsModel: labelsModel) { [weak self] newModel in
-        self?.mainScreenModel = newModel
-        completion()
-      }
-    }
-  }
-  
   func updatesPremiumFeatureToggle(completion: @escaping () -> Void) {
     guard let model = mainScreenModel else {
       completion()
@@ -273,8 +231,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
         return
       }
       
-      MainScreenFactory.updateModelWith(oldModel: model,
-                                        isPremium: isPremium) { [weak self] newModel in
+      self?.factory.updateModelWith(oldModel: model,
+                                    isPremium: isPremium) { [weak self] newModel in
         self?.mainScreenModel = newModel
         completion()
       }

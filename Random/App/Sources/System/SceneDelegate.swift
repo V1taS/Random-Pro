@@ -56,6 +56,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
     }
     coordinator?.sceneDidBecomeActive()
+    services.featureToggleServices.fetchRemoteConfig { _ in }
   }
   
   func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {

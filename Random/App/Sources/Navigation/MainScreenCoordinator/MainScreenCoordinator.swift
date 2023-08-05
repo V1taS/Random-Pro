@@ -513,7 +513,7 @@ private extension MainScreenCoordinator {
       return
     }
     
-    self?.services.updateAppService.checkIsUpdateAvailable { [weak self] result in
+    services.updateAppService.checkIsUpdateAvailable { [weak self] result in
       switch result {
       case let .success(model):
         guard model.isUpdateAvailable else {

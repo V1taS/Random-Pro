@@ -85,7 +85,7 @@ protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `Цитаты`
   func openQuotes()
-
+  
   /// Открыть раздел `Правда или дело`
   func openTruthOrDare()
   
@@ -114,12 +114,19 @@ typealias MainScreenViewProtocol = UIView & MainScreenViewInput
 /// View для экрана
 final class MainScreenView: MainScreenViewProtocol {
   
+  // MARK: - Section
+  
+  enum Section {
+    case main
+  }
+  
   // MARK: - Internal properties
   
   weak var output: MainScreenViewOutput?
   
   // MARK: - Private properties
   
+  private var dataSource: UICollectionViewDiffableDataSource<Section, MainScreenModel.Section>?
   private let collectionViewLayout = UICollectionViewFlowLayout()
   private lazy var collectionView = UICollectionView(frame: .zero,
                                                      collectionViewLayout: collectionViewLayout)
@@ -132,6 +139,7 @@ final class MainScreenView: MainScreenViewProtocol {
     
     configureLayout()
     applyDefaultBehavior()
+    configureDataSource()
   }
   
   required init?(coder: NSCoder) {
@@ -142,7 +150,31 @@ final class MainScreenView: MainScreenViewProtocol {
   
   func configureCellsWith(model: MainScreenModel) {
     self.model = model
-    collectionView.reloadData()
+    var snapshot = NSDiffableDataSourceSnapshot<Section, MainScreenModel.Section>()
+    snapshot.appendSections([.main])
+    snapshot.appendItems(model.allSections, toSection: .main)
+    dataSource?.apply(snapshot, animatingDifferences: true)
+  }
+  
+  func configureDataSource() {
+    let dataSource = UICollectionViewDiffableDataSource<Section, MainScreenModel.Section>(
+      collectionView: collectionView) { collectionView, indexPath, _ in
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier,
+          for: indexPath) as? MainScreenCollectionViewCell,
+              let model = self.model else {
+          return UICollectionViewCell()
+        }
+        
+        let section = model.allSections[indexPath.row]
+        cell.configureCellWith(section: section, isPremium: model.isPremium)
+        return cell
+      }
+    
+    self.dataSource = dataSource
+    var snapshot = NSDiffableDataSourceSnapshot<Section, MainScreenModel.Section>()
+    snapshot.appendSections([.main])
+    self.dataSource?.apply(snapshot, animatingDifferences: false)
   }
 }
 
@@ -228,31 +260,6 @@ extension MainScreenView: UICollectionViewDelegate {
   }
 }
 
-// MARK: - UICollectionViewDataSource
-
-extension MainScreenView: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    guard let model else {
-      return .zero
-    }
-    return model.allSections.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier,
-      for: indexPath
-    ) as? MainScreenCollectionViewCell,
-          let model else {
-      return UICollectionViewCell()
-    }
-    
-    let section = model.allSections[indexPath.row]
-    cell.configureCellWith(section: section, isPremium: model.isPremium)
-    return cell
-  }
-}
-
 // MARK: - Private
 
 private extension MainScreenView {
@@ -293,7 +300,6 @@ private extension MainScreenView {
                                            height: appearance.estimatedRowHeight)
     
     collectionView.delegate = self
-    collectionView.dataSource = self
   }
 }
 

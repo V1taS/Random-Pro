@@ -22,7 +22,7 @@ struct MainScreenModel: UserDefaultsCodable {
   let allSections: [Section]
   
   /// Секция
-  struct Section: UserDefaultsCodable {
+  struct Section: UserDefaultsCodable, Hashable {
     
     /// Тип секции
     let type: SectionType

@@ -51,6 +51,7 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    getReferalScreen()
     updateSections()
     setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
@@ -254,16 +255,18 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 
 private extension MainScreenViewController {
   func getReferalScreen() {
-    self.interactor.isAutoShowReferalPresentationAgain { [weak self] isShow in
-      guard isShow else {
-        return
-      }
-      
-      self?.interactor.returnModel { [weak self] mainModel in
-        guard !mainModel.isPremium else {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+      self.interactor.isAutoShowReferalPresentationAgain { [weak self] isShow in
+        guard isShow else {
           return
         }
-        self?.moduleOutput?.didReceiveReferalScreen()
+        
+        self?.interactor.returnModel { [weak self] mainModel in
+          guard !mainModel.isPremium else {
+            return
+          }
+          self?.moduleOutput?.didReceiveReferalScreen()
+        }
       }
     }
   }
@@ -324,7 +327,6 @@ private extension MainScreenViewController {
   @objc
   func didBecomeActiveNotification() {
     updateSections()
-    getReferalScreen()
   }
 }
 

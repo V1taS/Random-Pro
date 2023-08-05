@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "app_update_plug.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

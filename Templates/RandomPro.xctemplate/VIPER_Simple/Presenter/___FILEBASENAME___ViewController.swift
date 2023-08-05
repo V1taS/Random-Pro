@@ -49,6 +49,7 @@ final class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_productName___Module {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setNavigationBar()
   }
 }
 

@@ -73,10 +73,22 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   func sceneDidBecomeActive() {
     startDeepLink()
     startDynamicLink()
+    checkReferals()
     
-    services.referalService.getSelfInfo { [weak self] result in
-      if let referals = result?.referals, referals.count == Appearance().refCountMax {
-        self?.mainScreenModule?.savePremium(true)
+    var featureToggleServices = services.featureToggleServices
+    featureToggleServices.didReceiveToggle = { [weak self] in
+      guard let self else {
+        return
+      }
+      
+      if self.services.featureToggleServices.isToggleFor(feature: .isAppBroken) {
+        self.appBroken()
+        return
+      }
+      
+      if self.services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable) {
+        self.forceUpdateAvailable()
+        return
       }
     }
   }
@@ -470,6 +482,53 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScr
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func checkReferals() {
+    services.referalService.getSelfInfo { [weak self] result in
+      if let referals = result?.referals, referals.count == Appearance().refCountMax {
+        self?.mainScreenModule?.savePremium(true)
+        self?.services.referalService.freePremium { _ in }
+        self?.services.notificationService.showPositiveAlertWith(
+          title: Appearance().premiumAccessActivatedTitle,
+          glyph: true,
+          timeout: nil,
+          active: {}
+        )
+      }
+    }
+  }
+  
+  func forceUpdateAvailable() {
+#if !DEBUG
+    services.updateAppService.checkIsUpdateAvailable { [weak self] result in
+      switch result {
+      case let .success(model):
+        guard let self, model.isUpdateAvailable else {
+          return
+        }
+        
+        let forceUpdateAppCoordinator = ForceUpdateAppCoordinator(
+          navigationController: self.navigationController,
+          services: self.services
+        )
+        self.anyCoordinator = forceUpdateAppCoordinator
+        forceUpdateAppCoordinator.start()
+        self.services.metricsService.track(event: .forceUpdateApp)
+      case .failure: break
+      }
+    }
+#endif
+  }
+  
+  func appBroken() {
+#if !DEBUG
+    let appUnavailableCoordinator = AppUnavailableCoordinator(navigationController: navigationController,
+                                                              services: services)
+    anyCoordinator = appUnavailableCoordinator
+    appUnavailableCoordinator.start()
+    services.metricsService.track(event: .appUnavailable)
+#endif
+  }
+  
   func openPremiumWithFriendsCoordinator() {
     let premiumWithFriendsCoordinator = PremiumWithFriendsCoordinator(navigationController,
                                                                       services)

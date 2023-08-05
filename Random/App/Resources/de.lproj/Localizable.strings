@@ -319,3 +319,6 @@
 "remaining_installations" = "Verbleibende Installationen";
 "premium_access_is_exclusive_to_the_device" = "Der Premium-Zugang erfolgt ausschließlich für das Gerät, von dem der Empfehlungslink kopiert wurde. Wenn Sie die Anwendung neu installieren oder löschen, geht der Premium-Zugang verloren und Sie müssen Freunde erneut einladen. Auch wenn Sie auf verschiedenen Geräten das gleiche App-Store-Konto haben, ist die Prämie nur auf dem Gerät aktiv, von dem der Link kopiert wurde.";
 "don_not_show_again" = "Nicht mehr anzeigen";
+"wow_random_pro_on_a_short_tech_break" = "Wow! Random Pro macht eine kurze technische Pause – wir aktualisieren Ihr Glück! Schauen Sie später noch einmal vorbei, um weitere zufällige Abenteuer zu erleben";
+"update" = "Aktualisierung";
+"oops_your_version_of_random_pro_is_out_of_date" = "Hoppla! Ihre Version von Random Pro ist veraltet. Aktualisieren Sie die Anwendung auf die neueste Version, um weiterhin die erstaunliche Welt des Zufalls zu entdecken";

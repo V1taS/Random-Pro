@@ -38,56 +38,53 @@ jobs:
         echo "PROVISIONING_PROFILE_UUID=$PROVISIONING_PROFILE_UUID" >> $GITHUB_ENV
         echo "RANDOM_YES_NO_WIDGET_PROFILE_UUID=$RANDOM_YES_NO_WIDGET_PROFILE_UUID" >> $GITHUB_ENV
 
-    - name: Print Provisioning Profile UUID
-      run: echo "PROVISIONING_PROFILE_UUID is ${{ env.PROVISIONING_PROFILE_UUID }}"
+    - name: Set up Tuist
+      run: |
+        curl -Ls https://install.tuist.io | bash
 
-    # - name: Set up Tuist
-    #   run: |
-    #     curl -Ls https://install.tuist.io | bash
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
 
-    # - name: Set up Ruby
-    #   uses: ruby/setup-ruby@v1
-    #   with:
-    #     ruby-version: 2.7
+    - name: Set up fastlane
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
 
-    # - name: Set up fastlane
-    #   run: |
-    #     gem install bundler
-    #     bundle install --jobs 4 --retry 3
+    - name: Run Danger
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+      run: bundle exec danger
 
-    # - name: Run Danger
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-    #   run: bundle exec danger
+    - name: Tuist fetch
+      run: |
+        tuist fetch
 
-    # - name: Tuist fetch
-    #   run: |
-    #     tuist fetch
+    - name: Tuist generate
+      run: |
+        tuist generate
 
-    # - name: Tuist generate
-    #   run: |
-    #     tuist generate
+    - name: Run tests
+      run: |
+        bundle exec fastlane test
 
-    # - name: Run tests
-    #   run: |
-    #     bundle exec fastlane test
+    - name: Build and archive the app
+      run: |
+        bundle exec fastlane build
+      env:
+        APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+        PROVISIONING_PROFILE_UUID: ${{ env.PROVISIONING_PROFILE_UUID }}
+        SIGNING_CERTIFICATE: ${{ secrets.SIGNING_CERTIFICATE }}
 
-    # - name: Build and archive the app
-    #   run: |
-    #     bundle exec fastlane build
-    #   env:
-    #     APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
-    #     PROVISIONING_PROFILE_UUID: ${{ env.PROVISIONING_PROFILE_UUID }}
-    #     SIGNING_CERTIFICATE: ${{ secrets.SIGNING_CERTIFICATE }}
+    - name: Upload App build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Random
+        path: "Random.ipa"
 
-    # - name: Upload App build artifact
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: Random
-    #     path: "Random.ipa"
-
-    # - name: Upload dSYM build artifact
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: Random.app.dSYM
-    #     path: "Random.app.dSYM.zip"
+    - name: Upload dSYM build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Random.app.dSYM
+        path: "Random.app.dSYM.zip"

@@ -51,7 +51,7 @@ final class ForceUpdateAppCoordinator: ForceUpdateAppCoordinatorProtocol {
   // MARK: - Life cycle
   
   func start() {
-    let module = ForceUpdateAppAssembly().createModule()
+    let module = ForceUpdateAppAssembly().createModule(services: services)
     self.module = module
     self.module?.moduleOutput = self
     
@@ -65,6 +65,10 @@ final class ForceUpdateAppCoordinator: ForceUpdateAppCoordinatorProtocol {
 // MARK: - ForceUpdateAppModuleOutput
 
 extension ForceUpdateAppCoordinator: ForceUpdateAppModuleOutput {
+  func closeAction() {
+    newNavigationController?.dismiss(animated: true)
+  }
+  
   func updateButtonAction() {
     guard let url = Appearance().shareAppUrl,
           UIApplication.shared.canOpenURL(url) else {

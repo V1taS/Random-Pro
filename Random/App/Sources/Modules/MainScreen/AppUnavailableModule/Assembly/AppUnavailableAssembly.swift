@@ -8,20 +8,20 @@
 import Foundation
 
 /// Сборщик `AppUnavailable`
-public final class AppUnavailableAssembly {
+final class AppUnavailableAssembly {
 
   public init() {}
   
   /// Собирает модуль `AppUnavailable`
   /// - Returns: Cобранный модуль `AppUnavailable`
-  public func createModule() -> AppUnavailableModule {
+  func createModule(services: ApplicationServices) -> AppUnavailableModule {
     let interactor = AppUnavailableInteractor()
     let view = AppUnavailableView()
     let factory = AppUnavailableFactory()
     let presenter = AppUnavailableViewController(
       moduleView: view,
       interactor: interactor,
-      factory: factory
+      factory: factory, services: services
     )
     
     view.output = presenter

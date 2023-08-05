@@ -19,6 +19,7 @@ final class AppUnavailableViewController: AppUnavailableModule {
   private let interactor: AppUnavailableInteractorInput
   private let moduleView: AppUnavailableViewProtocol
   private let factory: AppUnavailableFactoryInput
+  private let services: ApplicationServices
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
@@ -27,12 +28,15 @@ final class AppUnavailableViewController: AppUnavailableModule {
   ///   - moduleView: вью
   ///   - interactor: интерактор
   ///   - factory: фабрика
+  ///   - services: Сервисы
   init(moduleView: AppUnavailableViewProtocol,
        interactor: AppUnavailableInteractorInput,
-       factory: AppUnavailableFactoryInput) {
+       factory: AppUnavailableFactoryInput,
+       services: ApplicationServices) {
     self.moduleView = moduleView
     self.interactor = interactor
     self.factory = factory
+    self.services = services
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -49,8 +53,18 @@ final class AppUnavailableViewController: AppUnavailableModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    moduleView.startStubAnimation()
     setNavigationBar()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    moduleView.startStubAnimation()
+    
+    let isAppBroken = services.featureToggleServices.isToggleFor(feature: .isAppBroken)
+    if !isAppBroken {
+      moduleOutput?.closeAction()
+    }
   }
 }
 

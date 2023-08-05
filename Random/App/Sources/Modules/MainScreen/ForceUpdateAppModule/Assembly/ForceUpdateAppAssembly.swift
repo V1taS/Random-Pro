@@ -8,20 +8,21 @@
 import Foundation
 
 /// Сборщик `ForceUpdateApp`
-public final class ForceUpdateAppAssembly {
-
-  public init() {}
+final class ForceUpdateAppAssembly {
+  
+  init() {}
   
   /// Собирает модуль `ForceUpdateApp`
   /// - Returns: Cобранный модуль `ForceUpdateApp`
-  public func createModule() -> ForceUpdateAppModule {
+  func createModule(services: ApplicationServices) -> ForceUpdateAppModule {
     let interactor = ForceUpdateAppInteractor()
     let view = ForceUpdateAppView()
     let factory = ForceUpdateAppFactory()
     let presenter = ForceUpdateAppViewController(
       moduleView: view,
       interactor: interactor,
-      factory: factory
+      factory: factory,
+      services: services
     )
     
     view.output = presenter

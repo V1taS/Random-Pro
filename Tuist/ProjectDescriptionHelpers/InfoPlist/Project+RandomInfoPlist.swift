@@ -23,7 +23,7 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
         "CFBundleTypeRole": .string("Editor"),
         "CFBundleURLName": .string("com.sosinvitalii.Deeplink"),
         "CFBundleURLSchemes": .array([
-          .string("random_pro")
+          .string("\(schemesURL)")
         ])
       ])
     ]),

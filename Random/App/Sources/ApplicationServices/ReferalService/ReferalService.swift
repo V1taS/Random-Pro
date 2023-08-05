@@ -175,7 +175,7 @@ private extension ReferalServiceImpl {
     let dynamicLinksDomainURIRandomPrefix = "https://random-pro.sosinvitalii.com"
     let bundleID = "com.sosinvitalii.Random"
     let appStoreID = "1552813956"
-    let scheme = "random_pro"
+    let scheme = "randomPro"
     let dynamicLinkUserInfoKey = "DynamicLinkUserInfoKey"
   }
 }

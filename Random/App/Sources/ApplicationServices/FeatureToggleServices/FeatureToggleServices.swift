@@ -7,6 +7,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseRemoteConfig
 import UIKit
 
 protocol FeatureToggleServices {
@@ -29,6 +30,13 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
   // MARK: - Private property
   
   private let cloudDataBase = Firestore.firestore()
+  private let remoteConfig: RemoteConfig = {
+    let remoteConfig = RemoteConfig.remoteConfig()
+    let settings = RemoteConfigSettings()
+    settings.minimumFetchInterval = 0
+    remoteConfig.configSettings = settings
+    return remoteConfig
+  }()
   
   // MARK: - Internal func
   
@@ -125,6 +133,32 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
         DispatchQueue.main.async {
           completion(SectionsIsHiddenFTModel(dictionary: document.data()))
         }
+      }
+    }
+  }
+  
+  func getValueFor(key: String) {
+    fetchRemoteConfig { [weak self] _ in
+      let boolValue = self?.remoteConfig.configValue(forKey: key).boolValue
+    }
+  }
+}
+
+// MARK: - Private
+
+private extension FeatureToggleServicesImpl {
+  func fetchRemoteConfig(completion: @escaping (_ error: Error?) -> Void) {
+    remoteConfig.fetch { (status, error) in
+      if status == .success {
+        self.remoteConfig.activate { _, error in
+          if let error = error {
+            completion(error)
+          } else {
+            completion(nil)
+          }
+        }
+      } else {
+        completion(error)
       }
     }
   }

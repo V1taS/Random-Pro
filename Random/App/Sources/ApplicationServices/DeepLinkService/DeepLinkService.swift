@@ -45,7 +45,7 @@ final class DeepLinkServiceImpl: DeepLinkService {
   
   /// Имя хоста
   private var host: String {
-    return "random_pro://"
+    return "randomPro://"
   }
   
   // MARK: - Internal func
@@ -116,7 +116,7 @@ private extension DeepLinkServiceImpl {
     let dynamicLinksDomainURIRandomPrefix = "https://random-pro.sosinvitalii.com"
     let bundleID = "com.sosinvitalii.Random"
     let appStoreID = "1552813956"
-    let scheme = "random_pro"
+    let scheme = "randomPro"
     let dynamicLinkUserInfoKey = "DynamicLinkUserInfoKey"
   }
 }

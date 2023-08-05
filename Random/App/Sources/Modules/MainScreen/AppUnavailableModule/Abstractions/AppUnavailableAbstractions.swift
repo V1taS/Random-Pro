@@ -12,6 +12,9 @@ public protocol AppUnavailableModuleOutput: AnyObject {
   
   /// Кнопка обратной связи была нажата
   func feedBackButtonAction()
+  
+  /// Модуль был закрыт
+  func closeAction()
 }
 
 /// События которые отправляем из `Coordinator` в `AppUnavailableModule`

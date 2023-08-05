@@ -52,7 +52,7 @@ final class AppUnavailableCoordinator: NSObject, AppUnavailableCoordinatorProtoc
   // MARK: - Life cycle
   
   func start() {
-    let module = AppUnavailableAssembly().createModule()
+    let module = AppUnavailableAssembly().createModule(services: services)
     self.module = module
     self.module?.moduleOutput = self
     
@@ -66,6 +66,10 @@ final class AppUnavailableCoordinator: NSObject, AppUnavailableCoordinatorProtoc
 // MARK: - AppUnavailableModuleOutput
 
 extension AppUnavailableCoordinator: AppUnavailableModuleOutput {
+  func closeAction() {
+    newNavigationController?.dismiss(animated: true)
+  }
+  
   func feedBackButtonAction() {
     let appearance = Appearance()
     if MFMailComposeViewController.canSendMail() {

@@ -19,6 +19,7 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
   private let interactor: ForceUpdateAppInteractorInput
   private let moduleView: ForceUpdateAppViewProtocol
   private let factory: ForceUpdateAppFactoryInput
+  private let services: ApplicationServices
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   
   // MARK: - Initialization
@@ -27,12 +28,15 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
   ///   - moduleView: вью
   ///   - interactor: интерактор
   ///   - factory: фабрика
+  ///   - services: сервисы
   init(moduleView: ForceUpdateAppViewProtocol,
        interactor: ForceUpdateAppInteractorInput,
-       factory: ForceUpdateAppFactoryInput) {
+       factory: ForceUpdateAppFactoryInput,
+       services: ApplicationServices) {
     self.moduleView = moduleView
     self.interactor = interactor
     self.factory = factory
+    self.services = services
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -49,8 +53,18 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    moduleView.startStubAnimation()
     setNavigationBar()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    moduleView.startStubAnimation()
+    
+    let isForceUpdateAvailable = services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable)
+    if !isForceUpdateAvailable {
+      moduleOutput?.closeAction()
+    }
   }
 }
 
@@ -78,12 +92,6 @@ private extension ForceUpdateAppViewController {
     
     navigationItem.largeTitleDisplayMode = .always
     title = appearance.title
-  }
-  
-  @objc
-  func settingButtonAction() {
-    // TODO: Добавить экшен
-    impactFeedback.impactOccurred()
   }
 }
 

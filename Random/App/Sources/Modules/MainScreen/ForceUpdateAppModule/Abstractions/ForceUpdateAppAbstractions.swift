@@ -12,6 +12,9 @@ public protocol ForceUpdateAppModuleOutput: AnyObject {
   
   /// Обновить приложение
   func updateButtonAction()
+  
+  /// Модуль был закрыт
+  func closeAction()
 }
 
 /// События которые отправляем из `Coordinator` в `ForceUpdateAppModule`

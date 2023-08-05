@@ -21,6 +21,14 @@ protocol MainScreenFactoryInput {
   /// Создать массив ячеек из модельки
   /// - Parameter model: Массив ячеек
   func createCellsFrom(model: MainScreenModel)
+  
+  /// Создать базовую модель
+  func createBaseModel(completion: @escaping (MainScreenModel) -> Void)
+  
+  /// Обновить базавую модель
+  func updateModelWith(oldModel: MainScreenModel,
+                       isPremium: Bool?,
+                       completion: @escaping (MainScreenModel) -> Void)
 }
 
 /// Фабрика
@@ -29,6 +37,18 @@ final class MainScreenFactory: MainScreenFactoryInput {
   // MARK: - Internal properties
   
   weak var output: MainScreenFactoryOutput?
+  
+  // MARK: - Private properties
+  
+  private let featureToggleServices: FeatureToggleServices
+  
+  // MARK: - Initialization
+  
+  /// - Parameters:
+  ///   - services: Сервисы приложения
+  init(services: ApplicationServices) {
+    featureToggleServices = services.featureToggleServices
+  }
   
   // MARK: - Internal func
   
@@ -41,10 +61,8 @@ final class MainScreenFactory: MainScreenFactoryInput {
   }
 }
 
-// MARK: - Static func
-
 extension MainScreenFactory {
-  static func createBaseModel(completion: @escaping (MainScreenModel) -> Void) {
+  func createBaseModel(completion: @escaping (MainScreenModel) -> Void) {
     DispatchQueue.global(qos: .userInteractive).async {
       var allSections: [MainScreenModel.Section] = []
       
@@ -285,241 +303,245 @@ extension MainScreenFactory {
     }
   }
   
-  static func updateModelWith(
+  func updateModelWith(
     oldModel: MainScreenModel,
-    featureToggleModel: SectionsIsHiddenFTModel? = nil,
-    labelsModel: LabelsFeatureToggleModel? = nil,
     isPremium: Bool? = nil,
     completion: @escaping (MainScreenModel) -> Void) {
-      DispatchQueue.global(qos: .userInteractive).async {
-        updatesNewSectionForModel(models: oldModel.allSections) { updatesNewSections in
+      DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+        self?.updatesNewSectionForModel(models: oldModel.allSections) { [weak self] updatesNewSections in
+          guard let self else {
+            return
+          }
           var cardSections: [MainScreenModel.Section] = []
           
           updatesNewSections.forEach { model in
+            let isHidenSection = self.featureToggleServices.isHiddenToggleFor(section: model.type)
+            let labelString = self.featureToggleServices.getLabelsFor(section: model.type)
+            
             switch model.type {
             case .teams:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.teams) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.teams, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .number:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.number) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.number, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .yesOrNo:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.yesOrNo) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.yesOrNo, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .letter:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.letter) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.letter, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .list:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.list) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.list, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .coin:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.coin) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.coin, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .cube:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.cube) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.cube, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .dateAndTime:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.dateAndTime) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.dateAndTime, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .lottery:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.lottery) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.lottery, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .contact:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.contact) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.contact, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .password:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.password) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.password, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .colors:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.colors) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.colors, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .bottle:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.bottle) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.bottle, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .rockPaperScissors:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.rockPaperScissors) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.rockPaperScissors, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .imageFilters:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.imageFilters) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.imageFilters, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .films:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.films) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.films, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .nickName:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.nickName) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.nickName, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .names:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.names) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.names, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .congratulations:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.congratulations) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.congratulations, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .goodDeeds:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.goodDeeds) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.goodDeeds, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .riddles:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.riddles) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.riddles, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .joke:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.joke) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.joke, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .gifts:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.gifts) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.gifts, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .slogans:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.slogans) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.slogans, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .quotes:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.quotes) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.quotes, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .fortuneWheel:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.fortuneWheel) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.fortuneWheel, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .truthOrDare:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.truthOrDare) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.truthOrDare, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             case .memes:
               cardSections.append(MainScreenModel.Section(
                 type: model.type,
                 isEnabled: model.isEnabled,
-                isHidden: ifDebugFeatureSectionIsHidden(featureToggleModel?.memes) ?? model.isHidden,
+                isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
                 isPremium: model.isPremium,
-                advLabel: setLabelFrom(featureToggleRawValue: labelsModel?.memes, oldLabel: model.advLabel)
+                advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
               ))
             }
           }
@@ -532,13 +554,7 @@ extension MainScreenFactory {
       }
     }
   
-  static func ifDebugFeatureSection(completion: () -> Void) {
-#if DEBUG
-    completion()
-#endif
-  }
-  
-  static func ifDebugFeatureSectionIsHidden(_ isHidden: Bool?) -> Bool? {
+  func ifDebugFeatureSectionIsHidden(_ isHidden: Bool) -> Bool {
 #if DEBUG
     return false
 #else
@@ -546,7 +562,7 @@ extension MainScreenFactory {
 #endif
   }
   
-  static func setLabelFrom(featureToggleRawValue: String?, oldLabel: MainScreenModel.ADVLabel) -> MainScreenModel.ADVLabel {
+  func setLabelFrom(featureToggleRawValue: String?, oldLabel: MainScreenModel.ADVLabel) -> MainScreenModel.ADVLabel {
     guard let featureToggleRawValue else {
       return oldLabel
     }
@@ -569,7 +585,7 @@ extension MainScreenFactory {
 // MARK: - Private func
 
 private extension MainScreenFactory {
-  static func updatesNewSectionForModel(
+  func updatesNewSectionForModel(
     models: [MainScreenModel.Section],
     completion: @escaping ([MainScreenModel.Section]) -> Void
   ) {

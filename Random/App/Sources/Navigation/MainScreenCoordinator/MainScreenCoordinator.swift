@@ -508,34 +508,29 @@ private extension MainScreenCoordinator {
   func checkIsUpdateAvailable() {
 #if !DEBUG
     let appearance = Appearance()
-    guard let appStoreUrl = appearance.appStoreUrl else {
+    guard let appStoreUrl = appearance.appStoreUrl,
+          services.featureToggleServices.isToggleFor(feature: .isUpdateAvailable) else {
       return
     }
     
-    services.featureToggleServices.getUpdateAppFeatureToggle { [weak self] isUpdateAvailable in
-      guard isUpdateAvailable else {
-        return
-      }
-      
-      self?.services.updateAppService.checkIsUpdateAvailable { [weak self] result in
-        switch result {
-        case let .success(model):
-          guard model.isUpdateAvailable else {
-            return
-          }
-          
-          let title = """
+    services.updateAppService.checkIsUpdateAvailable { [weak self] result in
+      switch result {
+      case let .success(model):
+        guard model.isUpdateAvailable else {
+          return
+        }
+        
+        let title = """
   \(appearance.newVersionText) \(appearance.availableInAppStoreText).
   \(appearance.clickToUpdateAppText)
   """
-          self?.services.notificationService.showPositiveAlertWith(title: title,
-                                                                   glyph: false,
-                                                                   timeout: appearance.timeoutNotification,
-                                                                   active: {
-            UIApplication.shared.open(appStoreUrl)
-          })
-        case .failure: break
-        }
+        self?.services.notificationService.showPositiveAlertWith(title: title,
+                                                                 glyph: false,
+                                                                 timeout: appearance.timeoutNotification,
+                                                                 active: {
+          UIApplication.shared.open(appStoreUrl)
+        })
+      case .failure: break
       }
     }
 #endif

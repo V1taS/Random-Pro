@@ -22,7 +22,7 @@ final class MainScreenInteractorTests: XCTestCase {
     super.setUp()
     outputSpy = MainScreenInteractorOutputSpy()
     services = ApplicationServicesMock()
-    interactor = MainScreenInteractor(services: services)
+    interactor = MainScreenInteractor(services: services, factory: MainScreenFactory(services: services))
     interactor.output = outputSpy
   }
   
@@ -34,34 +34,6 @@ final class MainScreenInteractorTests: XCTestCase {
   }
   
   // MARK: - Tests
-  
-  // Test for updateSectionsWith
-  func testUpdateSectionsWith() {
-    // Arrange
-    let modelExpectation = expectation(description: "Model created")
-    let updateExpectation = expectation(description: "updateSectionsWith called")
-    var mainScreenModel: MainScreenModel?
-    var receivedModel: MainScreenModel?
-    
-    MainScreenFactory.createBaseModel { result in
-      mainScreenModel = result
-      modelExpectation.fulfill()
-    }
-    
-    // Act
-    wait(for: [modelExpectation], timeout: 1)
-    interactor.updateSectionsWith(model: mainScreenModel!)
-    
-    outputSpy.didReceiveModelCompletion = { result in
-      receivedModel = result
-      updateExpectation.fulfill()
-    }
-    wait(for: [updateExpectation], timeout: 1)
-    
-    // Assert
-    XCTAssertTrue(outputSpy.didReceiveModelCalled)
-    XCTAssertEqual(receivedModel, mainScreenModel)
-  }
   
   // Test for getContent
   func testGetContent() {
@@ -177,50 +149,6 @@ final class MainScreenInteractorTests: XCTestCase {
     // Assert
     let section = receivedStorageModel?.allSections.filter({ $0.type == sectionType }).first
     XCTAssertTrue(section?.advLabel != .new)
-  }
-  
-  // Test for updatesSectionsIsHiddenFT
-  func testUpdatesSectionsIsHiddenFT() {
-    // Arrange
-    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
-    let expectation = expectation(description: "sections is hidden FT called")
-    let storageServiceMock = services.storageService as? StorageServiceMock
-    let featureToggleServicesMock = services.featureToggleServices as? FeatureToggleServicesMock
-    var isGetSectionsIsHiddenFTCalled = false
-    
-    // Act
-    storageServiceMock?.saveData(mainScreenModel)
-    featureToggleServicesMock?.sectionsIsHiddenFTStub = {
-      isGetSectionsIsHiddenFTCalled = true
-      expectation.fulfill()
-    }
-    interactor.updatesSectionsIsHiddenFT {}
-    wait(for: [expectation], timeout: 1)
-    
-    // Assert
-    XCTAssertTrue(isGetSectionsIsHiddenFTCalled)
-  }
-  
-  // Test for updatesLabelsFeatureToggle
-  func testUpdatesLabelsFeatureToggle() {
-    // Arrange
-    let mainScreenModel = MainScreenModel(isDarkMode: nil, isPremium: false, allSections: [])
-    let expectation = expectation(description: "updates labels called")
-    let storageServiceMock = services.storageService as? StorageServiceMock
-    let featureToggleServicesMock = services.featureToggleServices as? FeatureToggleServicesMock
-    var isLabelsFeatureToggleCalled = false
-    
-    // Act
-    storageServiceMock?.saveData(mainScreenModel)
-    featureToggleServicesMock?.labelsFeatureToggleStub = {
-      isLabelsFeatureToggleCalled = true
-      expectation.fulfill()
-    }
-    interactor.updatesLabelsFeatureToggle {}
-    wait(for: [expectation], timeout: 1)
-    
-    // Assert
-    XCTAssertTrue(isLabelsFeatureToggleCalled)
   }
   
   // Test for updatesPremiumFeatureToggle

@@ -13,7 +13,7 @@ extension MainScreenModel {
   
   // MARK: - MainScreenSection
   
-  enum SectionType: CaseIterable, UserDefaultsCodable {
+  enum SectionType: String, CaseIterable, UserDefaultsCodable {
         
     /// Название секции
     var titleSection: String {

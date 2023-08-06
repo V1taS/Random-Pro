@@ -104,7 +104,8 @@ final class PremiumScreenViewController: PremiumScreenModule {
     interactor.getProducts()
   }
   
-  override func finishFlow() {
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
     moduleOutput?.moduleClosed()
   }
   

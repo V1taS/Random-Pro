@@ -61,7 +61,8 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
                                            object: nil)
   }
   
-  override func finishFlow() {
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
     moduleOutput?.moduleClosed()
   }
 }

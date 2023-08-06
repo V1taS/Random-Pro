@@ -83,7 +83,8 @@ final class PremiumWithFriendsViewController: PremiumWithFriendsModule {
     interactor.getContent()
   }
   
-  override func finishFlow() {
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
     moduleOutput?.moduleClosed()
   }
   

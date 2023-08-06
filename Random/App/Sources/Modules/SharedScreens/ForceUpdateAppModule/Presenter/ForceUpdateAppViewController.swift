@@ -60,11 +60,6 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
                                            name: UIApplication.didBecomeActiveNotification,
                                            object: nil)
   }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    moduleOutput?.moduleClosed()
-  }
 }
 
 // MARK: - ForceUpdateAppViewOutput
@@ -103,6 +98,7 @@ private extension ForceUpdateAppViewController {
       let isForceUpdateAvailable = self.services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable)
       if !isForceUpdateAvailable {
         self.moduleOutput?.closeModuleAction()
+        self.moduleOutput?.moduleClosed()
       }
     }
   }

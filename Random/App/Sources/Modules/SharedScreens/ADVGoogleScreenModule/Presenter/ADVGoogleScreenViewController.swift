@@ -99,11 +99,6 @@ final class ADVGoogleScreenViewController: ADVGoogleScreenModule {
     adLoader.load(GADRequest())
     closeButton.isEnabled = false
   }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    moduleOutput?.moduleClosed()
-  }
 }
 
 // MARK: - ADVGoogleScreenViewOutput
@@ -141,6 +136,7 @@ private extension ADVGoogleScreenViewController {
   @objc
   func closeButtonAction() {
     moduleOutput?.closeButtonAction()
+    moduleOutput?.moduleClosed()
     impactFeedback.impactOccurred()
   }
 }

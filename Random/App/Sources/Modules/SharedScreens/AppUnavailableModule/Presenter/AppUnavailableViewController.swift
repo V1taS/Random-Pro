@@ -60,11 +60,6 @@ final class AppUnavailableViewController: AppUnavailableModule {
                                            name: UIApplication.didBecomeActiveNotification,
                                            object: nil)
   }
-  
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    moduleOutput?.moduleClosed()
-  }
 }
 
 // MARK: - AppUnavailableViewOutput
@@ -104,6 +99,7 @@ private extension AppUnavailableViewController {
       let isAppBroken = self.services.featureToggleServices.isToggleFor(feature: .isAppBroken)
       if !isAppBroken {
         self.moduleOutput?.closeModuleAction()
+        self.moduleOutput?.moduleClosed()
       }
     }
   }

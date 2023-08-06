@@ -760,6 +760,7 @@ private extension MainScreenCoordinator {
       services.referalService.freePremium { [weak self] result in
         switch result {
         case .success:
+          self?.mainScreenModule?.savePremium(true)
           self?.services.notificationService.showPositiveAlertWith(
             title: Appearance().premiumAccessActivatedTitle,
             glyph: true,

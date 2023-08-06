@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `ForceUpdateAppModule` в `Coordinator`
 public protocol ForceUpdateAppModuleOutput: AnyObject {
@@ -14,7 +15,10 @@ public protocol ForceUpdateAppModuleOutput: AnyObject {
   func updateButtonAction()
   
   /// Модуль был закрыт
-  func closeAction()
+  func closeModuleAction()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `Coordinator` в `ForceUpdateAppModule`
@@ -25,4 +29,4 @@ public protocol ForceUpdateAppModuleInput {
 }
 
 /// Готовый модуль `ForceUpdateAppModule`
-public typealias ForceUpdateAppModule = UIViewController & ForceUpdateAppModuleInput
+public typealias ForceUpdateAppModule = ViewController & ForceUpdateAppModuleInput

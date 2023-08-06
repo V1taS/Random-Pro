@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol FilmsScreenModuleOutput: AnyObject {
@@ -16,6 +17,9 @@ protocol FilmsScreenModuleOutput: AnyObject {
   /// Проиграть трайлер по ссылке
   ///  - Parameter url: Ссылка на трейлер
   func playTrailerActionWith(url: String)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -26,7 +30,7 @@ protocol FilmsScreenModuleInput {
 }
 
 /// Готовый модуль `FilmsScreenModule`
-typealias FilmsScreenModule = UIViewController & FilmsScreenModuleInput
+typealias FilmsScreenModule = ViewController & FilmsScreenModuleInput
 
 /// Презентер
 final class FilmsScreenViewController: FilmsScreenModule {
@@ -72,6 +76,10 @@ final class FilmsScreenViewController: FilmsScreenModule {
     
     interactor.loadFilm()
     setNavigationBar(isPlayTrailerEnabled: false)
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
 }
 

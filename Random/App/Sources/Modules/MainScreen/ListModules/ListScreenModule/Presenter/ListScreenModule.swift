@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListScreenModuleOutput: AnyObject {
@@ -30,6 +31,9 @@ protocol ListScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -53,8 +57,8 @@ protocol ListScreenModuleInput {
   var moduleOutput: ListScreenModuleOutput? { get set }
 }
 
-/// Псевдоним протокола UIViewController & ListScreenModuleInput
-typealias ListScreenModule = UIViewController & ListScreenModuleInput
+/// Псевдоним протокола ViewController & ListScreenModuleInput
+typealias ListScreenModule = ViewController & ListScreenModuleInput
 
 final class ListScreenViewController: ListScreenModule {
   
@@ -104,6 +108,10 @@ final class ListScreenViewController: ListScreenModule {
     setupNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().generetionItems.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

@@ -28,15 +28,18 @@ final class LotteryScreenCoordinator: LotteryScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: LotteryScreenCoordinatorOutput?
   
   // MARK: - Private property
   
   private let navigationController: UINavigationController
   private var lotteryScreenModule: LotteryScreenModule?
+  private let services: ApplicationServices
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private let services: ApplicationServices
   
   // MARK: - Initialization
   
@@ -62,6 +65,10 @@ final class LotteryScreenCoordinator: LotteryScreenCoordinatorProtocol {
 // MARK: - LotteryScreenModuleOutput
 
 extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func resultLabelAction(model: LotteryScreenModel) {
     UIPasteboard.general.string = model.result
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -83,6 +90,9 @@ extension LotteryScreenCoordinator: LotteryScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .lottery(
       itemsGenerated: "\(model.listResult.count)",
@@ -110,6 +120,9 @@ extension LotteryScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: lotteryScreenModule?.returnListResult() ?? [])
   }

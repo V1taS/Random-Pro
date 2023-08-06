@@ -29,7 +29,7 @@ protocol PremiumScreenCoordinatorInput {
 typealias PremiumScreenCoordinatorProtocol = PremiumScreenCoordinatorInput & Coordinator
 
 final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
-  
+
   enum PremiumScreenPresentType {
     
     /// Модальный показ
@@ -41,6 +41,7 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: PremiumScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -93,6 +94,10 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
 // MARK: - PremiumScreenModuleOutput
 
 extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func didReceiveRestoredSuccess() {
     services.notificationService.showPositiveAlertWith(title: Appearance().purchaseRestoredTitle,
                                                        glyph: true,

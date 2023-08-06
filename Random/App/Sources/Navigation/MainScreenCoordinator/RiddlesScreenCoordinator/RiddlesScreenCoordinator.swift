@@ -25,6 +25,7 @@ final class RiddlesScreenCoordinator: RiddlesScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: RiddlesScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -32,6 +33,8 @@ final class RiddlesScreenCoordinator: RiddlesScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var riddlesScreenModule: RiddlesScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -59,6 +62,10 @@ final class RiddlesScreenCoordinator: RiddlesScreenCoordinatorProtocol {
 // MARK: - RiddlesScreenModuleOutput
 
 extension RiddlesScreenCoordinator: RiddlesScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func infoButtonAction(text: String) {
     showAlerWith(title: Appearance().answer, description: text)
   }
@@ -68,6 +75,9 @@ extension RiddlesScreenCoordinator: RiddlesScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     setupDefaultsSettings()
   }
@@ -111,6 +121,9 @@ extension RiddlesScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     let listResult = riddlesScreenModule?.returnCurrentModel().listResult.compactMap {
       return "\($0.question)\n\n\(RandomStrings.Localizable.answer): \($0.answer)"

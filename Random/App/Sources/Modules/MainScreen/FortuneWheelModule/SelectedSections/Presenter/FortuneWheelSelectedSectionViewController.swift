@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol FortuneWheelSelectedSectionModuleOutput: AnyObject {
@@ -24,6 +25,9 @@ protocol FortuneWheelSelectedSectionModuleOutput: AnyObject {
   
   /// Создать новую секцию
   func createNewSection()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -41,7 +45,7 @@ protocol FortuneWheelSelectedSectionModuleInput {
 }
 
 /// Готовый модуль `FortuneWheelSelectedSectionModule`
-typealias FortuneWheelSelectedSectionModule = UIViewController & FortuneWheelSelectedSectionModuleInput
+typealias FortuneWheelSelectedSectionModule = ViewController & FortuneWheelSelectedSectionModuleInput
 
 /// Презентер
 final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSectionModule {
@@ -86,6 +90,10 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
     super.viewDidLoad()
     
     setNavigationBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

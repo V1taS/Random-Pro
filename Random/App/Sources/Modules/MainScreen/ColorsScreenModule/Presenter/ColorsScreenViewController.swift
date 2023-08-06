@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ColorsScreenModuleOutput: AnyObject {
@@ -20,6 +21,9 @@ protocol ColorsScreenModuleOutput: AnyObject {
   /// Результат скопирован
   ///  - Parameter text: Результат генерации
   func resultCopied(text: String)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -30,7 +34,7 @@ protocol ColorsScreenModuleInput {
 }
 
 /// Готовый модуль `ColorsScreenModule`
-typealias ColorsScreenModule = UIViewController & ColorsScreenModuleInput
+typealias ColorsScreenModule = ViewController & ColorsScreenModuleInput
 
 /// Презентер
 final class ColorsScreenViewController: ColorsScreenModule {
@@ -79,6 +83,10 @@ final class ColorsScreenViewController: ColorsScreenModule {
     super.viewDidLoad()
     copyButton.isEnabled = false
     setNavigationBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
 }
 

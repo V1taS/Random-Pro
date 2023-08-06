@@ -33,6 +33,7 @@ final class CustomMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: CustomMainSectionsCoordinatorOutput?
   
   // MARK: - Private variables
@@ -70,6 +71,10 @@ final class CustomMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol
 // MARK: - CustomMainSectionsModuleOutput
 
 extension CustomMainSectionsCoordinator: CustomMainSectionsModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func didReceiveError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: true,

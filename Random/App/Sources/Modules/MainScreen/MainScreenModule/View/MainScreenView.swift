@@ -154,6 +154,7 @@ final class MainScreenView: MainScreenViewProtocol {
     snapshot.appendSections([.main])
     snapshot.appendItems(model.allSections, toSection: .main)
     dataSource?.apply(snapshot, animatingDifferences: true)
+    collectionView.reloadData()
   }
   
   func configureDataSource() {
@@ -174,7 +175,7 @@ final class MainScreenView: MainScreenViewProtocol {
     self.dataSource = dataSource
     var snapshot = NSDiffableDataSourceSnapshot<Section, MainScreenModel.Section>()
     snapshot.appendSections([.main])
-    self.dataSource?.apply(snapshot, animatingDifferences: false)
+    self.dataSource?.apply(snapshot, animatingDifferences: true)
   }
 }
 

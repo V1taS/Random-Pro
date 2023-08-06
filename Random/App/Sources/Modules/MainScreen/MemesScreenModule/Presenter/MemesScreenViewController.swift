@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol MemesScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol MemesScreenModuleOutput: AnyObject {
   /// Была нажата кнопка (настройки)
   /// - Parameter model: результат генерации
   func settingButtonAction(model: MemesScreenModel)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -43,7 +47,7 @@ protocol MemesScreenModuleInput {
 }
 
 /// Готовый модуль `MemesScreenModule`
-typealias MemesScreenModule = UIViewController & MemesScreenModuleInput
+typealias MemesScreenModule = ViewController & MemesScreenModuleInput
 
 /// Презентер
 final class MemesScreenViewController: MemesScreenModule {
@@ -91,6 +95,10 @@ final class MemesScreenViewController: MemesScreenModule {
     setNavigationBar()
     moduleView.startLoader()
     interactor.getContent()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

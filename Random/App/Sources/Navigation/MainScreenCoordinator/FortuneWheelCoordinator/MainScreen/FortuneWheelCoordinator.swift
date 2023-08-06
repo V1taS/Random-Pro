@@ -25,6 +25,7 @@ final class FortuneWheelCoordinator: FortuneWheelCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: FortuneWheelCoordinatorOutput?
   
   // MARK: - Private property
@@ -32,6 +33,8 @@ final class FortuneWheelCoordinator: FortuneWheelCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var fortuneWheelModule: FortuneWheelModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   private var fortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionCoordinator?
@@ -60,11 +63,18 @@ final class FortuneWheelCoordinator: FortuneWheelCoordinatorProtocol {
 // MARK: - FortuneWheelModuleOutput
 
 extension FortuneWheelCoordinator: FortuneWheelModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func selectedSectionAction() {
     let fortuneWheelSelectedSectionCoordinator = FortuneWheelSelectedSectionCoordinator(navigationController, services)
     self.fortuneWheelSelectedSectionCoordinator = fortuneWheelSelectedSectionCoordinator
     self.fortuneWheelSelectedSectionCoordinator?.output = self
     self.fortuneWheelSelectedSectionCoordinator?.start()
+    fortuneWheelSelectedSectionCoordinator.finishFlow = { [weak self] in
+      self?.fortuneWheelSelectedSectionCoordinator = nil
+    }
     
     if let model = fortuneWheelModule?.returnCurrentModel() {
       fortuneWheelSelectedSectionCoordinator.setDefault(model: model)
@@ -80,6 +90,9 @@ extension FortuneWheelCoordinator: FortuneWheelModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     setupDefaultsSettings()
   }
@@ -104,6 +117,9 @@ extension FortuneWheelCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(
       list: fortuneWheelModule?.returnCurrentModel().listResult ?? []

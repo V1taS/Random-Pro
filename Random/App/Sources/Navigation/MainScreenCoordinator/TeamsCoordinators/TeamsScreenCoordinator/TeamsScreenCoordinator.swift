@@ -25,9 +25,10 @@ protocol TeamsScreenCoordinatorInput {
 typealias TeamsScreenCoordinatorProtocol = TeamsScreenCoordinatorInput & Coordinator
 
 final class TeamsScreenCoordinator: NSObject, TeamsScreenCoordinatorProtocol {
-  
+
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: TeamsScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -35,6 +36,8 @@ final class TeamsScreenCoordinator: NSObject, TeamsScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var teamsScreenModule: TeamsScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol?
   private var shareScreenCoordinator: ShareScreenCoordinatorProtocol?
@@ -63,12 +66,19 @@ final class TeamsScreenCoordinator: NSObject, TeamsScreenCoordinatorProtocol {
 // MARK: - TeamsScreenModuleOutput
 
 extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func shareButtonAction(imageData: Data?) {
     let shareScreenCoordinator = ShareScreenCoordinator(navigationController,
                                                         services)
     self.shareScreenCoordinator = shareScreenCoordinator
     self.shareScreenCoordinator?.output = self
     shareScreenCoordinator.start()
+    shareScreenCoordinator.finishFlow = { [weak self] in
+      self?.shareScreenCoordinator = nil
+    }
     
     self.shareScreenCoordinator?.updateContentWith(imageData: imageData)
   }
@@ -93,6 +103,9 @@ extension TeamsScreenCoordinator: TeamsScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     self.settingsScreenCoordinator?.setupDefaultsSettings(for: .teams(
       generatedTeamsCount: "\(teamsScreenModule?.returnGeneratedCountTeams() ?? .zero)",
@@ -141,6 +154,9 @@ extension TeamsScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listPlayersScreenCoordinator = listPlayersScreenCoordinator
     self.listPlayersScreenCoordinator?.start()
     self.listPlayersScreenCoordinator?.output = self
+    listPlayersScreenCoordinator.finishFlow = { [weak self] in
+      self?.listPlayersScreenCoordinator = nil
+    }
     
     guard let teamsScreenModule = teamsScreenModule else {
       return

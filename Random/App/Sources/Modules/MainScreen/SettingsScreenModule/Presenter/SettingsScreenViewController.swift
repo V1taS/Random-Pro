@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol SettingsScreenModuleOutput: AnyObject {
@@ -25,6 +26,9 @@ protocol SettingsScreenModuleOutput: AnyObject {
   
   /// Событие, кнопка `Выбора карточки игрока` была нажата
   func playerCardSelectionAction()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -39,7 +43,7 @@ protocol SettingsScreenModuleInput {
 }
 
 /// Готовый модуль `SettingsScreenModule`
-typealias SettingsScreenModule = UIViewController & SettingsScreenModuleInput
+typealias SettingsScreenModule = ViewController & SettingsScreenModuleInput
 
 /// Презентер
 final class SettingsScreenViewController: SettingsScreenModule {
@@ -84,6 +88,10 @@ final class SettingsScreenViewController: SettingsScreenModule {
     
     title = Appearance().title
     navigationItem.largeTitleDisplayMode = .never
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

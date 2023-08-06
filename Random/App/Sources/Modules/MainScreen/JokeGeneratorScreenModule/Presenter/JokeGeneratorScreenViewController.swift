@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol JokeGeneratorScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol JokeGeneratorScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -42,7 +46,7 @@ protocol JokeGeneratorScreenModuleInput {
 }
 
 /// Готовый модуль `JokeGeneratorScreenModule`
-typealias JokeGeneratorScreenModule = UIViewController & JokeGeneratorScreenModuleInput
+typealias JokeGeneratorScreenModule = ViewController & JokeGeneratorScreenModuleInput
 
 /// Презентер
 final class JokeGeneratorScreenViewController: JokeGeneratorScreenModule {
@@ -94,6 +98,10 @@ final class JokeGeneratorScreenViewController: JokeGeneratorScreenModule {
     moduleView.startLoader()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

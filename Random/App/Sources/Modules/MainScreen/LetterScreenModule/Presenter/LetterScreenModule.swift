@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol LetterScreenModuleOutput: AnyObject {
@@ -25,6 +26,9 @@ protocol LetterScreenModuleOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
   func resultLabelAction(text: String?)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -44,7 +48,7 @@ protocol LetterScreenModuleInput {
   var moduleOutput: LetterScreenModuleOutput? { get set }
 }
 
-typealias LetterScreenModule = UIViewController & LetterScreenModuleInput
+typealias LetterScreenModule = ViewController & LetterScreenModuleInput
 
 final class LetterScreenViewController: LetterScreenModule {
   
@@ -94,6 +98,10 @@ final class LetterScreenViewController: LetterScreenModule {
     setNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

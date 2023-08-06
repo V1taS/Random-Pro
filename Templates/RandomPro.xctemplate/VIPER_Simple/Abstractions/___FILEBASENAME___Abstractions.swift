@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `___VARIABLE_productName___Module` в `Coordinator`
 public protocol ___VARIABLE_productName___ModuleOutput: AnyObject {}
@@ -18,4 +19,4 @@ public protocol ___VARIABLE_productName___ModuleInput {
 }
 
 /// Готовый модуль `___VARIABLE_productName___Module`
-public typealias ___VARIABLE_productName___Module = UIViewController & ___VARIABLE_productName___ModuleInput
+public typealias ___VARIABLE_productName___Module = ViewController & ___VARIABLE_productName___ModuleInput

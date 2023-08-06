@@ -23,6 +23,7 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: NickNameScreenCoordinatorOutput?
   
   // MARK: - Private variables
@@ -30,6 +31,8 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var nickNameScreenModule: NickNameScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -57,6 +60,10 @@ final class NickNameScreenCoordinator: NickNameScreenCoordinatorProtocol {
 // MARK: - NickNameScreenModuleOutput
 
 extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func somethingWentWrong() {
     services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
                                                        glyph: false,
@@ -75,6 +82,9 @@ extension NickNameScreenCoordinator: NickNameScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(
       for: .nickname(itemsGenerated: "\(model.listResult.count)",
@@ -106,6 +116,9 @@ extension NickNameScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: nickNameScreenModule?.returnCurrentModel().listResult ?? [])
   }

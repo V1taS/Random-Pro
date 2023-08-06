@@ -24,6 +24,7 @@ final class ADVGoogleScreenCoordinator: ADVGoogleScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: ADVGoogleScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -60,6 +61,10 @@ final class ADVGoogleScreenCoordinator: ADVGoogleScreenCoordinatorProtocol {
 // MARK: - ADVGoogleScreenModuleOutput
 
 extension ADVGoogleScreenCoordinator: ADVGoogleScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func closeButtonAction() {
     advGooglecreenNavigationController?.dismiss(animated: true)
   }

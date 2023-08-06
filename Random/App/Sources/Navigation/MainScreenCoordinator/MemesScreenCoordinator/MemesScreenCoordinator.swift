@@ -11,6 +11,10 @@ import RandomUIKit
 
 final class MemesScreenCoordinator: Coordinator {
   
+  // MARK: - Internal variables
+  
+  var finishFlow: (() -> Void)?
+  
   // MARK: - Private variables
   
   private let navigationController: UINavigationController
@@ -42,6 +46,10 @@ final class MemesScreenCoordinator: Coordinator {
 // MARK: - QuotesScreenModuleOutput
 
 extension MemesScreenCoordinator: MemesScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func settingButtonAction(model: MemesScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator

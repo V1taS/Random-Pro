@@ -7,6 +7,7 @@
 
 import UIKit
 import StoreKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PremiumScreenModuleOutput: AnyObject {
@@ -31,6 +32,9 @@ protocol PremiumScreenModuleOutput: AnyObject {
   
   /// Модуль был закрыт
   func closeButtonAction()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -45,7 +49,7 @@ protocol PremiumScreenModuleInput {
 }
 
 /// Готовый модуль `PremiumScreenModule`
-typealias PremiumScreenModule = UIViewController & PremiumScreenModuleInput
+typealias PremiumScreenModule = ViewController & PremiumScreenModuleInput
 
 /// Презентер
 final class PremiumScreenViewController: PremiumScreenModule {
@@ -98,6 +102,10 @@ final class PremiumScreenViewController: PremiumScreenModule {
     super.viewWillAppear(animated)
     
     interactor.getProducts()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

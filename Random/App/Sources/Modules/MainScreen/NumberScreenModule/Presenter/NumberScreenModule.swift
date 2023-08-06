@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol NumberScreenModuleOutput: AnyObject {
@@ -28,6 +29,9 @@ protocol NumberScreenModuleOutput: AnyObject {
   
   /// Неправильный диапазон чисел
   func didReceiveRangeError()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -47,7 +51,7 @@ protocol NumberScreenModuleInput {
   var moduleOutput: NumberScreenModuleOutput? { get set }
 }
 
-typealias NumberScreenModule = UIViewController & NumberScreenModuleInput
+typealias NumberScreenModule = ViewController & NumberScreenModuleInput
 
 final class NumberScreenViewController: NumberScreenModule {
   
@@ -97,6 +101,10 @@ final class NumberScreenViewController: NumberScreenModule {
     setupNavBar()
     interactor.getContent(withWithoutRepetition: false)
     copyButton.isEnabled = !interactor.returnModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

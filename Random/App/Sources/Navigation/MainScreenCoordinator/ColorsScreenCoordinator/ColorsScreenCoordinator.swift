@@ -24,6 +24,7 @@ final class ColorsScreenCoordinator: ColorsScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: ColorsScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -56,6 +57,10 @@ final class ColorsScreenCoordinator: ColorsScreenCoordinatorProtocol {
 // MARK: - ColorsScreenModuleOutput
 
 extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func requestGalleryError() {
     services.notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,
@@ -116,7 +121,7 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
       }
     }
     
-    colorsScreenModule?.present(activityViewController, animated: true, completion: nil)
+    colorsScreenModule?.present(activityViewController, animated: true)
     services.metricsService.track(event: .shareColors)
   }
 }

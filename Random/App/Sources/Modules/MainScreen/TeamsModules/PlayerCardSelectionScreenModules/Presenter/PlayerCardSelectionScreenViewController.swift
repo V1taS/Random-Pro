@@ -16,6 +16,9 @@ protocol PlayerCardSelectionScreenModuleOutput: AnyObject {
   
   /// Успешно выбран стиль карточки
   func didSelectStyleSuccessfully()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -26,7 +29,7 @@ protocol PlayerCardSelectionScreenModuleInput {
 }
 
 /// Готовый модуль `PlayerCardSelectionScreenModule`
-typealias PlayerCardSelectionScreenModule = UIViewController & PlayerCardSelectionScreenModuleInput
+typealias PlayerCardSelectionScreenModule = ViewController & PlayerCardSelectionScreenModuleInput
 
 /// Презентер
 final class PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenModule {
@@ -78,6 +81,11 @@ final class PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenMo
     
     navigationItem.largeTitleDisplayMode = .always
     navigationController?.navigationBar.prefersLargeTitles = true
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    moduleOutput?.moduleClosed()
   }
 }
 

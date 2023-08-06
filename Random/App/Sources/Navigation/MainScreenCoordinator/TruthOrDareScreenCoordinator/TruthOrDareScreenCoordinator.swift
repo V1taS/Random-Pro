@@ -25,6 +25,7 @@ final class TruthOrDareScreenCoordinator: TruthOrDareScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: TruthOrDareScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -32,6 +33,8 @@ final class TruthOrDareScreenCoordinator: TruthOrDareScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var truthOrDareScreenModule: TruthOrDareScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -59,11 +62,18 @@ final class TruthOrDareScreenCoordinator: TruthOrDareScreenCoordinatorProtocol {
 // MARK: - TruthOrDareScreenModuleOutput
 
 extension TruthOrDareScreenCoordinator: TruthOrDareScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func settingButtonAction(model: TruthOrDareScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     setupDefaultsSettings()
   }
@@ -103,6 +113,9 @@ extension TruthOrDareScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: truthOrDareScreenModule?.returnCurrentModel().listResult ?? [])
   }

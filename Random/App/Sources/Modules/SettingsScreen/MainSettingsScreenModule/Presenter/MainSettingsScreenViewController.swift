@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol MainSettingsScreenModuleOutput: AnyObject {
@@ -38,6 +39,9 @@ protocol MainSettingsScreenModuleOutput: AnyObject {
   
   /// Выбрана реферальная программа
   func premiumWithFriendsSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -52,7 +56,7 @@ protocol MainSettingsScreenModuleInput {
 }
 
 /// Готовый модуль `MainSettingsScreenModule`
-typealias MainSettingsScreenModule = UIViewController & MainSettingsScreenModuleInput
+typealias MainSettingsScreenModule = ViewController & MainSettingsScreenModuleInput
 
 /// Презентер
 final class MainSettingsScreenViewController: MainSettingsScreenModule {
@@ -103,6 +107,10 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
     super.viewWillAppear(animated)
     
     navigationController?.navigationBar.prefersLargeTitles = true
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

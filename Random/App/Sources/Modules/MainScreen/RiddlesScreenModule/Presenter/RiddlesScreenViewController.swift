@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol RiddlesScreenModuleOutput: AnyObject {
@@ -27,6 +28,9 @@ protocol RiddlesScreenModuleOutput: AnyObject {
   /// Кнопка с ответом была нажата
   /// - Parameter text: Ответ по загадке
   func infoButtonAction(text: String)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -46,7 +50,7 @@ protocol RiddlesScreenModuleInput {
 }
 
 /// Готовый модуль `RiddlesScreenModule`
-typealias RiddlesScreenModule = UIViewController & RiddlesScreenModuleInput
+typealias RiddlesScreenModule = ViewController & RiddlesScreenModuleInput
 
 /// Презентер
 final class RiddlesScreenViewController: RiddlesScreenModule {
@@ -103,6 +107,10 @@ final class RiddlesScreenViewController: RiddlesScreenModule {
     interactor.getContent(type: nil)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
     infoButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

@@ -28,6 +28,7 @@ final class ContactScreenCoordinator: ContactScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: ContactScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -35,6 +36,8 @@ final class ContactScreenCoordinator: ContactScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var contactScreenModule: ContactScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -62,6 +65,10 @@ final class ContactScreenCoordinator: ContactScreenCoordinatorProtocol {
 // MARK: - ContactScreenModuleOutput
 
 extension ContactScreenCoordinator: ContactScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func cleanButtonWasSelected() {
     let model = contactScreenModule?.returnCurrentModel()
     settingsScreenCoordinator?.setupDefaultsSettings(for: .contact(
@@ -91,6 +98,9 @@ extension ContactScreenCoordinator: ContactScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .contact(
       itemsGenerated: "\(contactScreenModule?.returnCurrentModel().listResult.count ?? .zero)",
@@ -117,6 +127,9 @@ extension ContactScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: contactScreenModule?.returnCurrentModel().listResult ?? [])
   }

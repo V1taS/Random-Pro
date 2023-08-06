@@ -10,11 +10,17 @@ import RandomUIKit
 
 final class GoodDeedsScreenCoordinator: Coordinator {
   
+  // MARK: - Internal variables
+  
+  var finishFlow: (() -> Void)?
+  
   // MARK: - Private variables
   
   private let navigationController: UINavigationController
   private var goodDeedsScreenModule: GoodDeedsScreenModule?
   private let services: ApplicationServices
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -54,6 +60,9 @@ extension GoodDeedsScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(
       list: goodDeedsScreenModule?.returnCurrentModel().listResult ?? []
@@ -68,11 +77,18 @@ extension GoodDeedsScreenCoordinator: ListResultScreenCoordinatorOutput {}
 // MARK: - GoodDeedsScreenModuleOutput
 
 extension GoodDeedsScreenCoordinator: GoodDeedsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func settingButtonAction(model: GoodDeedsScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     setupDefaultsSettings()
   }

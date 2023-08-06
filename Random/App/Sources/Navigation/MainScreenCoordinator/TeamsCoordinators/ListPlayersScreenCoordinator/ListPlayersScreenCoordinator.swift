@@ -35,6 +35,7 @@ final class ListPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: ListPlayersScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -71,6 +72,10 @@ final class ListPlayersScreenCoordinator: ListPlayersScreenCoordinatorProtocol {
 // MARK: - ListPlayersScreenModuleOutput
 
 extension ListPlayersScreenCoordinator: ListPlayersScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func removePlayersButtonAction() {
     removePlayersAlert()
   }

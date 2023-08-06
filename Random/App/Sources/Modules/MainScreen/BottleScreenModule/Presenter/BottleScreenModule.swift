@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol BottleScreenModuleOutput: AnyObject {}
+protocol BottleScreenModuleOutput: AnyObject {
+  
+  /// Модуль был закрыт
+  func moduleClosed()
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol BottleScreenModuleInput {
@@ -17,7 +22,7 @@ protocol BottleScreenModuleInput {
   var moduleOutput: BottleScreenModuleOutput? { get set }
 }
 
-typealias BottleScreenModule = UIViewController & BottleScreenModuleInput
+typealias BottleScreenModule = ViewController & BottleScreenModuleInput
 
 final class BottleScreenViewController: BottleScreenModule {
   
@@ -61,6 +66,10 @@ final class BottleScreenViewController: BottleScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
 }
 

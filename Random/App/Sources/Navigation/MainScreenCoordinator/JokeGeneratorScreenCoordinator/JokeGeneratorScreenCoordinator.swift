@@ -10,12 +10,18 @@ import UIKit
 import RandomUIKit
 
 final class JokeGeneratorScreenCoordinator: Coordinator {
+
+  // MARK: - Internal variables
+  
+  var finishFlow: (() -> Void)?
   
   // MARK: - Private variables
   
   private let navigationController: UINavigationController
   private var jokeGeneratorScreenModule: JokeGeneratorScreenModule?
   private let services: ApplicationServices
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -59,6 +65,9 @@ extension JokeGeneratorScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(
       list: jokeGeneratorScreenModule?.returnCurrentModel().listResult ?? []
@@ -69,11 +78,18 @@ extension JokeGeneratorScreenCoordinator: SettingsScreenCoordinatorOutput {
 // MARK: - JokeGeneratorScreenModuleOutput
 
 extension JokeGeneratorScreenCoordinator: JokeGeneratorScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func settingButtonAction(model: JokeGeneratorScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     setupDefaultsSettings()
   }

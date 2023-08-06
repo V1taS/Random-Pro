@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PremiumWithFriendsModuleOutput: AnyObject {
@@ -16,6 +17,9 @@ protocol PremiumWithFriendsModuleOutput: AnyObject {
   /// Пользователь скопировал ссылку
   ///  - Parameter link: Ссылка
   func copyLinkAction(_ link: String?)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -30,7 +34,7 @@ protocol PremiumWithFriendsModuleInput {
 }
 
 /// Готовый модуль `PremiumWithFriendsModule`
-typealias PremiumWithFriendsModule = UIViewController & PremiumWithFriendsModuleInput
+typealias PremiumWithFriendsModule = ViewController & PremiumWithFriendsModuleInput
 
 /// Презентер
 final class PremiumWithFriendsViewController: PremiumWithFriendsModule {
@@ -77,6 +81,10 @@ final class PremiumWithFriendsViewController: PremiumWithFriendsModule {
     navigationItem.largeTitleDisplayMode = .always
     setNavigationBar()
     interactor.getContent()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

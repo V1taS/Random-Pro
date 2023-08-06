@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
-protocol RockPaperScissorsScreenModuleOutput: AnyObject {}
+protocol RockPaperScissorsScreenModuleOutput: AnyObject {
+  
+  /// Модуль был закрыт
+  func moduleClosed()
+}
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
 protocol RockPaperScissorsScreenModuleInput {
@@ -22,7 +27,7 @@ protocol RockPaperScissorsScreenModuleInput {
   var moduleOutput: RockPaperScissorsScreenModuleOutput? { get set }
 }
 
-typealias RockPaperScissorsScreenModule = UIViewController & RockPaperScissorsScreenModuleInput
+typealias RockPaperScissorsScreenModule = ViewController & RockPaperScissorsScreenModuleInput
 
 final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule {
   
@@ -68,6 +73,10 @@ final class RockPaperScissorsScreenViewController: RockPaperScissorsScreenModule
     
     setNavigationBar()
     interactor.getContent()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

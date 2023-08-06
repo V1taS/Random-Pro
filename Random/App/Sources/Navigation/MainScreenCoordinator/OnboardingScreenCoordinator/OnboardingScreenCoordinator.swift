@@ -19,6 +19,8 @@ typealias OnboardingScreenCoordinatorProtocol = OnboardingScreenCoordinatorInput
 
 final class OnboardingScreenCoordinator: OnboardingScreenCoordinatorProtocol {
   
+  var finishFlow: (() -> Void)?
+  
   // MARK: - Private property
   
   private let navigationController: UINavigationController

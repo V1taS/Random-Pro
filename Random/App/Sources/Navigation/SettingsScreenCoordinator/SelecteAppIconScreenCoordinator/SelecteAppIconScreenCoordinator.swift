@@ -28,6 +28,7 @@ final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProt
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: SelecteAppIconScreenCoordinatorOutput?
   
   // MARK: - Private variables
@@ -35,7 +36,9 @@ final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProt
   private let navigationController: UINavigationController
   private var selecteAppIconScreenModule: SelecteAppIconScreenModule?
   private let services: ApplicationServices
-  private var anyCoordinator: Coordinator?
+  
+  // Coordinators
+  private var premiumScreenCoordinator: PremiumScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -61,6 +64,10 @@ final class SelecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinatorProt
 // MARK: - SelecteAppIconScreenModuleOutput
 
 extension SelecteAppIconScreenCoordinator: SelecteAppIconScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func iconSelectedSuccessfully() {
     services.notificationService.showPositiveAlertWith(title: Appearance().iconSelectedSuccessfullyTitle,
                                                        glyph: true,
@@ -112,10 +119,13 @@ private extension SelecteAppIconScreenCoordinator {
   func openPremium() {
     let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
                                                             services)
-    anyCoordinator = premiumScreenCoordinator
+    self.premiumScreenCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
+    premiumScreenCoordinator.finishFlow = { [weak self] in
+      self?.premiumScreenCoordinator = nil
+    }
     
     services.metricsService.track(event: .premiumScreen)
   }

@@ -53,6 +53,7 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: MainSettingsScreenCoordinatorOutput?
   
   // MARK: - Private variables
@@ -62,9 +63,13 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
   private let services: ApplicationServices
   private let window: UIWindow?
   private var modalNavigationController: UINavigationController?
-  private var customMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol?
   private var cacheMainScreenSections: [MainScreenModel.Section] = []
-  private var anyCoordinator: Coordinator?
+  
+  // Coordinators
+  private var customMainSectionsCoordinator: CustomMainSectionsCoordinatorProtocol?
+  private var premiumWithFriendsCoordinator: PremiumWithFriendsCoordinator?
+  private var selecteAppIconScreenCoordinator: SelecteAppIconScreenCoordinator?
+  private var premiumScreenCoordinator: PremiumScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -130,16 +135,23 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
 // MARK: - MainSettingsScreenModuleOutput
 
 extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func premiumWithFriendsSelected() {
     guard let upperViewController = modalNavigationController else {
       return
     }
     
     let premiumWithFriendsCoordinator = PremiumWithFriendsCoordinator(upperViewController, services)
-    anyCoordinator = premiumWithFriendsCoordinator
+    self.premiumWithFriendsCoordinator = premiumWithFriendsCoordinator
     premiumWithFriendsCoordinator.output = self
     premiumWithFriendsCoordinator.selectPresentType(.push)
     premiumWithFriendsCoordinator.start()
+    premiumWithFriendsCoordinator.finishFlow = { [weak self] in
+      self?.premiumWithFriendsCoordinator = nil
+    }
     
     services.metricsService.track(event: .premiumWithFriends)
   }
@@ -178,9 +190,13 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     
     let selecteAppIconScreenCoordinator = SelecteAppIconScreenCoordinator(upperViewController,
                                                                           services)
-    anyCoordinator = selecteAppIconScreenCoordinator
+    self.selecteAppIconScreenCoordinator = selecteAppIconScreenCoordinator
     selecteAppIconScreenCoordinator.output = self
     selecteAppIconScreenCoordinator.start()
+    selecteAppIconScreenCoordinator.finishFlow = { [weak self] in
+      self?.selecteAppIconScreenCoordinator = nil
+    }
+    
     services.metricsService.track(event: .selecteAppIcon)
   }
   
@@ -191,10 +207,13 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     
     let premiumScreenCoordinator = PremiumScreenCoordinator(upperViewController,
                                                             services)
-    anyCoordinator = premiumScreenCoordinator
+    self.premiumScreenCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.push)
     premiumScreenCoordinator.start()
+    premiumScreenCoordinator.finishFlow = { [weak self] in
+      self?.premiumScreenCoordinator = nil
+    }
     
     services.metricsService.track(event: .premiumScreen)
   }
@@ -238,6 +257,9 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     self.customMainSectionsCoordinator = customMainSectionsCoordinator
     customMainSectionsCoordinator.output = self
     customMainSectionsCoordinator.start()
+    customMainSectionsCoordinator.finishFlow = { [weak self] in
+      self?.customMainSectionsCoordinator = nil
+    }
     
     customMainSectionsCoordinator.updateContentWith(models: cacheMainScreenSections)
     services.metricsService.track(event: .customMainSections)

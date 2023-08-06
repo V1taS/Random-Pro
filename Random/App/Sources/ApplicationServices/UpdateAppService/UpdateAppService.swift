@@ -11,14 +11,16 @@ import Foundation
 protocol UpdateAppService {
   
   /// Проверить доступность нового обновления для приложения
-  func checkIsUpdateAvailable(completion: @escaping (Result<UpdateAppServiceModel, UpdateAppServiceError>) -> Void)
+  func checkIsUpdateAvailable(isOneCheckVersion: Bool,
+                              completion: @escaping (Result<UpdateAppServiceModel, UpdateAppServiceError>) -> Void)
 }
 
 final class UpdateAppServiceImpl: UpdateAppService {
   
   // MARK: - Private properties
   
-  func checkIsUpdateAvailable(completion: @escaping (Result<UpdateAppServiceModel, UpdateAppServiceError>) -> Void) {
+  func checkIsUpdateAvailable(isOneCheckVersion: Bool,
+                              completion: @escaping (Result<UpdateAppServiceModel, UpdateAppServiceError>) -> Void) {
     let appearance = Appearance()
     guard let info = Bundle.main.infoDictionary,
           let currentDeviceVersion = info["CFBundleShortVersionString"] as? String,
@@ -52,14 +54,20 @@ final class UpdateAppServiceImpl: UpdateAppService {
             return
           }
           DispatchQueue.main.async {
-            if UserDefaults.standard.string(forKey: appearance.keyUserDefaults) == appStoreVersion {
-              completion(.failure(.invalidResponse))
+            if isOneCheckVersion {
+              if UserDefaults.standard.string(forKey: appearance.keyUserDefaults) == appStoreVersion {
+                completion(.failure(.invalidResponse))
+              } else {
+                completion(.success(UpdateAppServiceModel(isUpdateAvailable: appStoreVersion != currentDeviceVersion,
+                                                          appStoreVersion: appStoreVersion,
+                                                          currentDeviceVersion: currentDeviceVersion)))
+              }
+              UserDefaults.standard.set(appStoreVersion, forKey: appearance.keyUserDefaults)
             } else {
               completion(.success(UpdateAppServiceModel(isUpdateAvailable: appStoreVersion != currentDeviceVersion,
                                                         appStoreVersion: appStoreVersion,
                                                         currentDeviceVersion: currentDeviceVersion)))
             }
-            UserDefaults.standard.set(appStoreVersion, forKey: appearance.keyUserDefaults)
           }
         } catch {
           DispatchQueue.main.async {

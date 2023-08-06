@@ -54,17 +54,15 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
     super.viewDidLoad()
     
     setNavigationBar()
+    moduleView.startStubAnimation()
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(didBecomeActiveNotification),
+                                           name: UIApplication.didBecomeActiveNotification,
+                                           object: nil)
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    moduleView.startStubAnimation()
-    
-    let isForceUpdateAvailable = services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable)
-    if !isForceUpdateAvailable {
-      moduleOutput?.closeAction()
-    }
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
 }
 
@@ -91,7 +89,21 @@ private extension ForceUpdateAppViewController {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .always
+    navigationController?.navigationBar.prefersLargeTitles = true
     title = appearance.title
+  }
+  
+  @objc
+  func didBecomeActiveNotification() {
+    services.featureToggleServices.fetchRemoteConfig { [weak self] _ in
+      guard let self else {
+        return
+      }
+      let isForceUpdateAvailable = self.services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable)
+      if !isForceUpdateAvailable {
+        self.moduleOutput?.closeModuleAction()
+      }
+    }
   }
 }
 

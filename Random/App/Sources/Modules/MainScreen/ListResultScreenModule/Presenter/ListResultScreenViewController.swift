@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListResultScreenModuleOutput: AnyObject {
@@ -17,6 +18,9 @@ protocol ListResultScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   ///  - Parameter imageData: Изображение контента
   func shareButtonAction(imageData: Data?)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -31,7 +35,7 @@ protocol ListResultScreenModuleInput {
 }
 
 /// Готовый модуль `ListResultScreenModule`
-typealias ListResultScreenModule = UIViewController & ListResultScreenModuleInput
+typealias ListResultScreenModule = ViewController & ListResultScreenModuleInput
 
 /// Презентер
 final class ListResultScreenViewController: ListResultScreenModule {
@@ -82,6 +86,10 @@ final class ListResultScreenViewController: ListResultScreenModule {
     
     setNavigationBar()
     shareButton.isEnabled = !listCache.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

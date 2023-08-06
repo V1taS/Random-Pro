@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль
 protocol CubesScreenModuleOutput: AnyObject {
@@ -21,6 +22,9 @@ protocol CubesScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -40,7 +44,7 @@ protocol CubesScreenModuleInput {
   var moduleOutput: CubesScreenModuleOutput? { get set }
 }
 
-typealias CubesScreenModule = UIViewController & CubesScreenModuleInput
+typealias CubesScreenModule = ViewController & CubesScreenModuleInput
 
 final class CubesScreenViewController: CubesScreenModule {
   
@@ -86,6 +90,10 @@ final class CubesScreenViewController: CubesScreenModule {
     interactor.getContent()
     setNavigationBar()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

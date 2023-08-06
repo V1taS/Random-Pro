@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol CoinScreenModuleOutput: AnyObject {
@@ -22,6 +23,9 @@ protocol CoinScreenModuleOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
   func resultLabelAction(text: String?)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -41,7 +45,7 @@ protocol CoinScreenModuleInput {
   var moduleOutput: CoinScreenModuleOutput? { get set }
 }
 
-typealias CoinScreenModule = UIViewController & CoinScreenModuleInput
+typealias CoinScreenModule = ViewController & CoinScreenModuleInput
 
 final class CoinScreenViewController: CoinScreenModule {
   
@@ -92,6 +96,10 @@ final class CoinScreenViewController: CoinScreenModule {
     
     let listResult = interactor.returnModel()?.listResult ?? []
     copyButton.isEnabled = !listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

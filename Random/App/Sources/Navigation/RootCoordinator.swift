@@ -27,6 +27,7 @@ final class RootCoordinator: RootCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: RootCoordinatorOutput?
   
   // MARK: - Private variables
@@ -54,6 +55,7 @@ final class RootCoordinator: RootCoordinatorProtocol {
                                                       navigationController,
                                                       services)
     self.mainScreenCoordinator = mainScreenCoordinator
+    mainScreenCoordinator.output = self
     mainScreenCoordinator.start()
     
     window.makeKeyAndVisible()
@@ -64,3 +66,7 @@ final class RootCoordinator: RootCoordinatorProtocol {
     mainScreenCoordinator?.sceneDidBecomeActive()
   }
 }
+
+// MARK: - MainScreenCoordinatorOutput
+
+extension RootCoordinator: MainScreenCoordinatorOutput {}

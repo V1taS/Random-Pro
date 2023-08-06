@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PasswordScreenModuleOutput: AnyObject {
@@ -24,6 +25,9 @@ protocol PasswordScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -39,7 +43,7 @@ protocol PasswordScreenModuleInput {
   var moduleOutput: PasswordScreenModuleOutput? { get set }
 }
 
-typealias PasswordScreenModule = UIViewController & PasswordScreenModuleInput
+typealias PasswordScreenModule = ViewController & PasswordScreenModuleInput
 
 final class PasswordScreenViewController: PasswordScreenModule {
   
@@ -89,6 +93,10 @@ final class PasswordScreenViewController: PasswordScreenModule {
     setNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

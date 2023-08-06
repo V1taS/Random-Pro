@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol DateTimeModuleOutput: AnyObject {
@@ -22,6 +23,9 @@ protocol DateTimeModuleOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter model: Результат генерации
   func resultLabelAction(model: DateTimeScreenModel)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -37,7 +41,7 @@ protocol DateTimeModuleInput {
   var moduleOutput: DateTimeModuleOutput? { get set }
 }
 
-typealias DateTimeModule = UIViewController & DateTimeModuleInput
+typealias DateTimeModule = ViewController & DateTimeModuleInput
 
 final class DateTimeViewController: DateTimeModule {
   
@@ -88,6 +92,10 @@ final class DateTimeViewController: DateTimeModule {
     interactor.getContent()
     setNavigationBar()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

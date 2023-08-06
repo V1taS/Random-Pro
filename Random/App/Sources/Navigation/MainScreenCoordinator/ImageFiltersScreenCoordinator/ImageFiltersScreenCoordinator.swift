@@ -26,6 +26,7 @@ final class ImageFiltersScreenCoordinator: NSObject, ImageFiltersScreenCoordinat
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: ImageFiltersScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -58,6 +59,10 @@ final class ImageFiltersScreenCoordinator: NSObject, ImageFiltersScreenCoordinat
 // MARK: - ColorsScreenModuleOutput
 
 extension ImageFiltersScreenCoordinator: ImageFiltersScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func didReceiveError() {
     services.notificationService.showNegativeAlertWith(
       title: Appearance().failedSomeError,

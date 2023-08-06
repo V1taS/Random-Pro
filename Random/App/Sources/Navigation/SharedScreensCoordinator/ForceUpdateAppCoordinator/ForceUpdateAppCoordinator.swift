@@ -24,9 +24,10 @@ protocol ForceUpdateAppCoordinatorInput {
 
 /// Координатор `ForceUpdateApp`
 final class ForceUpdateAppCoordinator: ForceUpdateAppCoordinatorProtocol {
-  
+
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: ForceUpdateAppCoordinatorOutput?
   
   // MARK: - Private property
@@ -65,7 +66,11 @@ final class ForceUpdateAppCoordinator: ForceUpdateAppCoordinatorProtocol {
 // MARK: - ForceUpdateAppModuleOutput
 
 extension ForceUpdateAppCoordinator: ForceUpdateAppModuleOutput {
-  func closeAction() {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
+  func closeModuleAction() {
     newNavigationController?.dismiss(animated: true)
   }
   

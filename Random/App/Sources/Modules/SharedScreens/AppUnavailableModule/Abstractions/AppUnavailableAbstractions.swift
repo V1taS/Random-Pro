@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `AppUnavailableModule` в `Coordinator`
 public protocol AppUnavailableModuleOutput: AnyObject {
@@ -14,7 +15,10 @@ public protocol AppUnavailableModuleOutput: AnyObject {
   func feedBackButtonAction()
   
   /// Модуль был закрыт
-  func closeAction()
+  func closeModuleAction()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `Coordinator` в `AppUnavailableModule`
@@ -25,4 +29,4 @@ public protocol AppUnavailableModuleInput {
 }
 
 /// Готовый модуль `AppUnavailableModule`
-public typealias AppUnavailableModule = UIViewController & AppUnavailableModuleInput
+public typealias AppUnavailableModule = ViewController & AppUnavailableModuleInput

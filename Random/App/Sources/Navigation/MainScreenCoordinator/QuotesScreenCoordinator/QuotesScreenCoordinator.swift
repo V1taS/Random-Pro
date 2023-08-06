@@ -11,13 +11,19 @@ import RandomUIKit
 
 final class QuotesScreenCoordinator: Coordinator {
   
+  // MARK: - Internal variables
+  
+  var finishFlow: (() -> Void)?
+  
   // MARK: - Private variables
   
   private let navigationController: UINavigationController
   private let services: ApplicationServices
+  private var quotesScreenModule: QuotesScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private var quotesScreenModule: QuotesScreenModule?
   
   // MARK: - Initialization
   
@@ -55,6 +61,9 @@ extension QuotesScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(
       list: quotesScreenModule?.returnCurrentModel().listResult ?? []
@@ -69,11 +78,18 @@ extension QuotesScreenCoordinator: ListResultScreenCoordinatorOutput {}
 // MARK: - QuotesScreenModuleOutput
 
 extension QuotesScreenCoordinator: QuotesScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func settingButtonAction(model: QuoteScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     setupDefaultsSettings()
   }

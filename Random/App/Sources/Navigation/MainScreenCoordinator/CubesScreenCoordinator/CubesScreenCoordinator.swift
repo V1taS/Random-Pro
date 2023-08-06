@@ -28,6 +28,7 @@ final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: CubesScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -35,6 +36,8 @@ final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var cubesScreenModule: CubesScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -62,6 +65,10 @@ final class CubesScreenCoordinator: CubesScreenCoordinatorProtocol {
 // MARK: - CubesScreenModuleOutput
 
 extension CubesScreenCoordinator: CubesScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func cleanButtonWasSelected() {
     let model = cubesScreenModule?.returnCurrentModel()
     settingsScreenCoordinator?.setupDefaultsSettings(for: .cube(isShowlistGenerated: model?.isShowlistGenerated ?? true,
@@ -74,6 +81,9 @@ extension CubesScreenCoordinator: CubesScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .cube(isShowlistGenerated: model.isShowlistGenerated,
                                                                itemsGenerated: "\(model.listResult.count)",
@@ -110,6 +120,9 @@ extension CubesScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: cubesScreenModule?.returnCurrentModel().listResult ?? [])
   }

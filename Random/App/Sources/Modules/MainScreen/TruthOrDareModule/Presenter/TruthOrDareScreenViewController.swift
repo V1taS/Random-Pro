@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol TruthOrDareScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol TruthOrDareScreenModuleOutput: AnyObject {
 
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -42,7 +46,7 @@ protocol TruthOrDareScreenModuleInput {
 }
 
 /// Готовый модуль `TruthOrDareScreenModule`
-typealias TruthOrDareScreenModule = UIViewController & TruthOrDareScreenModuleInput
+typealias TruthOrDareScreenModule = ViewController & TruthOrDareScreenModuleInput
 
 /// Презентер
 final class TruthOrDareScreenViewController: TruthOrDareScreenModule {
@@ -94,6 +98,10 @@ final class TruthOrDareScreenViewController: TruthOrDareScreenModule {
     moduleView.startLoader()
     interactor.getContent(type: nil)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
 
   // MARK: - Internal func

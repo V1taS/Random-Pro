@@ -28,6 +28,7 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: YesNoScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -35,6 +36,8 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var yesNoScreenModule: YesNoScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -62,6 +65,10 @@ final class YesNoScreenCoordinator: YesNoScreenCoordinatorProtocol {
 // MARK: - YesNoScreenModuleOutput
 
 extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func cleanButtonWasSelected(model: YesNoScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .yesOrNo(
       itemsGenerated: "\(model.listResult.count)",
@@ -74,6 +81,9 @@ extension YesNoScreenCoordinator: YesNoScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .yesOrNo(
       itemsGenerated: "\(model.listResult.count)",
@@ -105,6 +115,9 @@ extension YesNoScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: yesNoScreenModule?.returnListResult() ?? [])
   }

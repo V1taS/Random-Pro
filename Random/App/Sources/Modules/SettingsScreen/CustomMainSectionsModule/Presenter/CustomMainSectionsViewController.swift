@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol CustomMainSectionsModuleOutput: AnyObject {
@@ -16,6 +17,9 @@ protocol CustomMainSectionsModuleOutput: AnyObject {
   
   /// Получена ошибка
   func didReceiveError()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -30,7 +34,7 @@ protocol CustomMainSectionsModuleInput {
 }
 
 /// Готовый модуль `CustomMainSectionsModule`
-typealias CustomMainSectionsModule = UIViewController & CustomMainSectionsModuleInput
+typealias CustomMainSectionsModule = ViewController & CustomMainSectionsModuleInput
 
 /// Презентер
 final class CustomMainSectionsViewController: CustomMainSectionsModule {
@@ -74,6 +78,10 @@ final class CustomMainSectionsViewController: CustomMainSectionsModule {
     super.viewDidLoad()
     
     setupNavBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

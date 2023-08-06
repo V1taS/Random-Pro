@@ -24,9 +24,10 @@ protocol ListResultScreenCoordinatorInput {
 typealias ListResultScreenCoordinatorProtocol = ListResultScreenCoordinatorInput & Coordinator
 
 final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
-  
+
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: ListResultScreenCoordinatorOutput?
   
   // MARK: - Private variables
@@ -34,6 +35,8 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var listResultScreenModule: ListResultScreenModule?
+  
+  // Coordinators
   private var shareScreenCoordinator: ShareScreenCoordinatorProtocol?
   
   // MARK: - Initialization
@@ -64,12 +67,19 @@ final class ListResultScreenCoordinator: ListResultScreenCoordinatorProtocol {
 // MARK: - ListResultScreenModuleOutput
 
 extension ListResultScreenCoordinator: ListResultScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func shareButtonAction(imageData: Data?) {
     let shareScreenCoordinator = ShareScreenCoordinator(navigationController,
                                                         services)
     self.shareScreenCoordinator = shareScreenCoordinator
     self.shareScreenCoordinator?.output = self
     shareScreenCoordinator.start()
+    shareScreenCoordinator.finishFlow = { [weak self] in
+      self?.shareScreenCoordinator = nil
+    }
     
     self.shareScreenCoordinator?.updateContentWith(imageData: imageData)
   }

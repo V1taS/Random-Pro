@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListAddItemsScreenModuleOutput: AnyObject {
@@ -16,6 +17,9 @@ protocol ListAddItemsScreenModuleOutput: AnyObject {
   /// Были получены данные
   ///  - Parameter models: Модельки с текстами
   func didReceiveText(models: [ListAddItemsScreenModel.TextModel])
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -33,7 +37,7 @@ protocol ListAddItemsScreenModuleInput {
 }
 
 /// Готовый модуль `ListAddItemsScreenModule`
-typealias ListAddItemsScreenModule = UIViewController & ListAddItemsScreenModuleInput
+typealias ListAddItemsScreenModule = ViewController & ListAddItemsScreenModuleInput
 
 /// Презентер
 final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
@@ -84,6 +88,10 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     moduleOutput?.didReceiveText(models: interactor.returnCurrentListTextModel())
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

@@ -25,18 +25,21 @@ protocol DateTimeScreenCoordinatorInput {
 typealias DateTimeScreenCoordinatorProtocol = DateTimeScreenCoordinatorInput & Coordinator
 
 final class DateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol {
-  
+
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: DateTimeScreenCoordinatorOutput?
   
   // MARK: - Private property
   
   private let navigationController: UINavigationController
   private var dateTimeScreenModule: DateTimeModule?
+  private let services: ApplicationServices
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private let services: ApplicationServices
   
   // MARK: - Initialization
   
@@ -62,6 +65,10 @@ final class DateTimeScreenCoordinator: DateTimeScreenCoordinatorProtocol {
 // MARK: - DateTimeModuleOutput
 
 extension DateTimeScreenCoordinator: DateTimeModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func resultLabelAction(model: DateTimeScreenModel) {
     UIPasteboard.general.string = model.result
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
@@ -83,6 +90,9 @@ extension DateTimeScreenCoordinator: DateTimeModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .dateAndTime(
       itemsGenerated: "\(model.listResult.count)",
@@ -103,6 +113,9 @@ extension DateTimeScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: dateTimeScreenModule?.returnListResult() ?? [])
   }

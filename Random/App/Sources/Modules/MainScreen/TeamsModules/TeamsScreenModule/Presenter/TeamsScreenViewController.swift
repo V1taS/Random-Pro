@@ -29,6 +29,9 @@ protocol TeamsScreenModuleOutput: AnyObject {
   ///   - name: название команды
   ///   - id: id команды
   func showTeamRenameAlert(name: String, id: String)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -67,7 +70,7 @@ protocol TeamsScreenModuleInput {
 }
 
 /// Готовый модуль `TeamsScreenModule`
-typealias TeamsScreenModule = UIViewController & TeamsScreenModuleInput
+typealias TeamsScreenModule = ViewController & TeamsScreenModuleInput
 
 /// Презентер
 final class TeamsScreenViewController: TeamsScreenModule {
@@ -124,6 +127,11 @@ final class TeamsScreenViewController: TeamsScreenModule {
     super.viewWillAppear(animated)
     
     interactor.updateStyle()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

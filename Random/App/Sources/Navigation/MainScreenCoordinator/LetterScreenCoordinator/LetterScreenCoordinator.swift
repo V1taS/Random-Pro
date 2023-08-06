@@ -28,15 +28,18 @@ final class LetterScreenCoordinator: LetterScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: LetterScreenCoordinatorOutput?
   
   // MARK: - Private property
   
   private let navigationController: UINavigationController
+  private let services: ApplicationServices
   private var letterScreenModule: LetterScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private let services: ApplicationServices
   
   // MARK: - Initialization
   
@@ -62,6 +65,10 @@ final class LetterScreenCoordinator: LetterScreenCoordinatorProtocol {
 // MARK: - LetterScreenModuleOutput
 
 extension LetterScreenCoordinator: LetterScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func cleanButtonWasSelected(model: LetterScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .letter(
       withoutRepetition: model.isEnabledWithoutRepetition,
@@ -75,6 +82,9 @@ extension LetterScreenCoordinator: LetterScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .letter(
       withoutRepetition: model.isEnabledWithoutRepetition,
@@ -114,6 +124,9 @@ extension LetterScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: letterScreenModule?.returnListResult() ?? [])
   }

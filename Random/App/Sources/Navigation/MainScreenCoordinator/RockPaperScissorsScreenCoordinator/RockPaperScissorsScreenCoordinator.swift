@@ -28,6 +28,7 @@ final class RockPaperScissorsScreenCoordinator: RockPaperScissorsScreenCoordinat
 
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: RockPaperScissorsScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -67,4 +68,8 @@ extension RockPaperScissorsScreenCoordinator {}
 
 // MARK: - RockPaperScissorsScreenModuleOutput
 
-extension RockPaperScissorsScreenCoordinator: RockPaperScissorsScreenModuleOutput {}
+extension RockPaperScissorsScreenCoordinator: RockPaperScissorsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+}

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol CongratulationsScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol CongratulationsScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -42,7 +46,7 @@ protocol CongratulationsScreenModuleInput {
 }
 
 /// Готовый модуль `CongratulationsScreenModule`
-typealias CongratulationsScreenModule = UIViewController & CongratulationsScreenModuleInput
+typealias CongratulationsScreenModule = ViewController & CongratulationsScreenModuleInput
 
 /// Презентер
 final class CongratulationsScreenViewController: CongratulationsScreenModule {
@@ -94,6 +98,10 @@ final class CongratulationsScreenViewController: CongratulationsScreenModule {
     moduleView.startLoader()
     interactor.getContent(type: nil)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

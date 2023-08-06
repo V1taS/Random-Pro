@@ -33,6 +33,7 @@ final class ListAddItemsScreenCoordinator: ListAddItemsScreenCoordinatorProtocol
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: ListAddItemsScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -65,6 +66,10 @@ final class ListAddItemsScreenCoordinator: ListAddItemsScreenCoordinatorProtocol
 // MARK: - ListAddItemsScreenModuleOutput
 
 extension ListAddItemsScreenCoordinator: ListAddItemsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func removeTextsButtonAction() {
     removeTextAlert()
   }

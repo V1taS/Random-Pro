@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ContactScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol ContactScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -38,8 +42,8 @@ protocol ContactScreenModuleInput {
   var moduleOutput: ContactScreenModuleOutput? { get set }
 }
 
-/// Псевдоним протокола UIViewController & ContactScreenModuleInput
-typealias ContactScreenModule = UIViewController & ContactScreenModuleInput
+/// Псевдоним протокола ViewController & ContactScreenModuleInput
+typealias ContactScreenModule = ViewController & ContactScreenModuleInput
 
 final class ContactScreenViewController: ContactScreenModule {
   
@@ -89,6 +93,10 @@ final class ContactScreenViewController: ContactScreenModule {
     interactor.getContent()
     setNavigationBar()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

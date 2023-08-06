@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol NickNameScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol NickNameScreenModuleOutput: AnyObject {
   
   /// Что-то пошло не так
   func somethingWentWrong()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -39,7 +43,7 @@ protocol NickNameScreenModuleInput {
 }
 
 /// Готовый модуль `NickNameScreenModule`
-typealias NickNameScreenModule = UIViewController & NickNameScreenModuleInput
+typealias NickNameScreenModule = ViewController & NickNameScreenModuleInput
 
 /// Презентер
 final class NickNameScreenViewController: NickNameScreenModule {
@@ -92,6 +96,10 @@ final class NickNameScreenViewController: NickNameScreenModule {
     moduleView.startLoader()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol MainScreenModuleOutput: AnyObject {
+  
+  /// Главный экран был загружен
+  func mainScreenModuleDidLoad()
+  
+  /// Главный экран был показан
+  func mainScreenModuleDidAppear()
+  
+  /// Главный экран будет показан
+  func mainScreenModuleWillAppear()
   
   /// Открыть экран с реферальной программой
   func didReceiveReferalScreen()
@@ -104,18 +114,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Кнопка поделиться была нажата
   func shareButtonAction()
   
-  /// Главный экран был показан
-  func mainScreenModuleDidAppear()
-  
-  /// Главный экран будет показан
-  func mainScreenModuleWillAppear()
-  
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
-  
-  /// Главный экран был загружен
-  func mainScreenModuleDidLoad()
   
   /// Кнопка премиум была нажата
   /// - Parameter isPremium: Включен премиум
@@ -162,4 +163,4 @@ protocol MainScreenModuleInput {
 }
 
 /// Готовый модуль `MainScreenModule`
-typealias MainScreenModule = UIViewController & MainScreenModuleInput
+typealias MainScreenModule = ViewController & MainScreenModuleInput

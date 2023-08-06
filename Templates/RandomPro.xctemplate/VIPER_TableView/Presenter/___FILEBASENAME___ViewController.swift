@@ -51,6 +51,10 @@ final class ___FILEBASENAMEASIDENTIFIER___: ___VARIABLE_productName___Module {
     
     setNavigationBar()
   }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
+  }
 }
 
 // MARK: - ___VARIABLE_productName___ViewOutput

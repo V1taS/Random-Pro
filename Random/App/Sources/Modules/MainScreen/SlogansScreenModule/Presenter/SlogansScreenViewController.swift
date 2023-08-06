@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol SlogansScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol SlogansScreenModuleOutput: AnyObject {
 
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -42,7 +46,7 @@ protocol SlogansScreenModuleInput {
 }
 
 /// Готовый модуль `SlogansScreenModule`
-typealias SlogansScreenModule = UIViewController & SlogansScreenModuleInput
+typealias SlogansScreenModule = ViewController & SlogansScreenModuleInput
 
 /// Презентер
 final class SlogansScreenViewController: SlogansScreenModule {
@@ -95,7 +99,11 @@ final class SlogansScreenViewController: SlogansScreenModule {
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
-
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
+  }
+  
   // MARK: - Internal func
 
   func returnCurrentModel() -> SlogansScreenModel {

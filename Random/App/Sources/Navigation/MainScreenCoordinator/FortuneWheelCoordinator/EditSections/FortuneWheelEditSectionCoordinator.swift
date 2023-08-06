@@ -41,6 +41,7 @@ final class FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionCoordinat
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: FortuneWheelEditSectionCoordinatorOutput?
   
   // MARK: - Private property
@@ -82,6 +83,10 @@ final class FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionCoordinat
 // MARK: - FortuneWheelEditSectionModuleOutput
 
 extension FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func removeTextsButtonAction() {
     removeTextAlert()
   }

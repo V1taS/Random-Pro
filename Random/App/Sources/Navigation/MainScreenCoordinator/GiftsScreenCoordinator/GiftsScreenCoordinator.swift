@@ -25,6 +25,7 @@ final class GiftsScreenCoordinator: GiftsScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: GiftsScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -32,6 +33,8 @@ final class GiftsScreenCoordinator: GiftsScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var giftsScreenModule: GiftsScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -59,11 +62,18 @@ final class GiftsScreenCoordinator: GiftsScreenCoordinatorProtocol {
 // MARK: - GiftsScreenModuleOutput
 
 extension GiftsScreenCoordinator: GiftsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func settingButtonAction(model: GiftsScreenModel) {
     let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     setupDefaultsSettings()
   }
@@ -103,6 +113,9 @@ extension GiftsScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: giftsScreenModule?.returnCurrentModel().listResult ?? [])
   }

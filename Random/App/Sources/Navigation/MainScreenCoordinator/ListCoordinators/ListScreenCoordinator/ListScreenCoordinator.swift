@@ -25,9 +25,10 @@ protocol ListScreenCoordinatorInput {
 typealias ListScreenCoordinatorProtocol = ListScreenCoordinatorInput & Coordinator
 
 final class ListScreenCoordinator: ListScreenCoordinatorProtocol {
-  
+
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: ListScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -35,6 +36,8 @@ final class ListScreenCoordinator: ListScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var listScreenModule: ListScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   private var listAddItemsScreenCoordinator: ListAddItemsScreenCoordinatorProtocol?
@@ -63,6 +66,10 @@ final class ListScreenCoordinator: ListScreenCoordinatorProtocol {
 // MARK: - ListScreenModuleOutput
 
 extension ListScreenCoordinator: ListScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func cleanButtonWasSelected() {
     updateSettingsScreenContent()
   }
@@ -102,6 +109,9 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     updateSettingsScreenContent()
   }
@@ -127,6 +137,9 @@ extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listAddItemsScreenCoordinator = listAddItemsScreenCoordinator
     self.listAddItemsScreenCoordinator?.output = self
     self.listAddItemsScreenCoordinator?.start()
+    listAddItemsScreenCoordinator.finishFlow = { [weak self] in
+      self?.listAddItemsScreenCoordinator = nil
+    }
     
     guard let model = listScreenModule?.returnCurrentModel() else {
       return
@@ -142,6 +155,9 @@ extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     let model = listScreenModule?.returnCurrentModel()
     listResultScreenCoordinator.setContentsFrom(list: model?.generetionItems ?? [])

@@ -51,6 +51,7 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: SettingsScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -58,7 +59,9 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var settingsScreenModule: SettingsScreenModule?
-  private var anyCoordinator: Coordinator?
+  
+  // Coordinators
+  private var playerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -92,6 +95,10 @@ extension SettingsScreenCoordinator {
 // MARK: - SettingsScreenModuleOutput
 
 extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func playerCardSelectionAction() {
     openPlayerCardSelectionScreenCoordinator()
   }
@@ -127,9 +134,13 @@ private extension SettingsScreenCoordinator {
   func openPlayerCardSelectionScreenCoordinator() {
     let playerCardSelectionScreenCoordinator = PlayerCardSelectionScreenCoordinator(navigationController,
                                                                                     services)
-    anyCoordinator = playerCardSelectionScreenCoordinator
+    self.playerCardSelectionScreenCoordinator = playerCardSelectionScreenCoordinator
     playerCardSelectionScreenCoordinator.output = self
     playerCardSelectionScreenCoordinator.start()
+    playerCardSelectionScreenCoordinator.finishFlow = { [weak self] in
+      self?.playerCardSelectionScreenCoordinator = nil
+    }
+    
     services.metricsService.track(event: .premiumPlayerCardSelection)
   }
 }

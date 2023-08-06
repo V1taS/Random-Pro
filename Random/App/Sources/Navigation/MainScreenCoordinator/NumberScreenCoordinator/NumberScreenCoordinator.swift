@@ -28,6 +28,7 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: NumberScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -35,6 +36,8 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var numberScreenModule: NumberScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   
@@ -48,7 +51,7 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
     self.navigationController = navigationController
     self.services = services
   }
-  
+
   // MARK: - Internal func
   
   func start() {
@@ -62,6 +65,10 @@ final class NumberScreenCoordinator: NumberScreenCoordinatorProtocol {
 // MARK: - NumberScreenModuleOutput
 
 extension NumberScreenCoordinator: NumberScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func didReceiveRangeError() {
     services.notificationService.showNegativeAlertWith(title: Appearance().numberRangeError,
                                                        glyph: true,
@@ -98,6 +105,9 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .number(
       withoutRepetition: model.isEnabledWithoutRepetition,
@@ -119,6 +129,9 @@ extension NumberScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: numberScreenModule?.returnListResult() ?? [])
   }

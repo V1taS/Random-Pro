@@ -28,6 +28,7 @@ final class ShareScreenCoordinator: ShareScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: ShareScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -65,6 +66,10 @@ final class ShareScreenCoordinator: ShareScreenCoordinatorProtocol {
 // MARK: - ShareScreenModuleOutput
 
 extension ShareScreenCoordinator: ShareScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func requestPhotosError() {
     services.notificationService.showNegativeAlertWith(
       title: Appearance().allowAccessToGallery,

@@ -34,6 +34,7 @@ final class FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionC
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: FortuneWheelSelectedSectionCoordinatorOutput?
   
   // MARK: - Private property
@@ -42,6 +43,8 @@ final class FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionC
   private var anyNavigationController: UINavigationController?
   private let services: ApplicationServices
   private var fortuneWheelSelectedSectionModule: FortuneWheelSelectedSectionModule?
+  
+  // Coordinators
   private var fortuneWheelEditSectionCoordinator: FortuneWheelEditSectionCoordinator?
   
   // MARK: - Initialization
@@ -75,6 +78,10 @@ final class FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionC
 // MARK: - FortuneWheelSelectedSectionModuleOutput
 
 extension FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func editCurrentSectionWith(section: FortuneWheelModel.Section) {
     guard let model = fortuneWheelSelectedSectionModule?.returnCurrentModel(),
           let anyNavigationController else {
@@ -88,6 +95,9 @@ extension FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionMod
     self.fortuneWheelEditSectionCoordinator = fortuneWheelEditSectionCoordinator
     fortuneWheelEditSectionCoordinator.output = self
     fortuneWheelEditSectionCoordinator.start()
+    fortuneWheelEditSectionCoordinator.finishFlow = { [weak self] in
+      self?.fortuneWheelEditSectionCoordinator = nil
+    }
     
     fortuneWheelEditSectionCoordinator.editCurrentSectionWith(
       model: model,

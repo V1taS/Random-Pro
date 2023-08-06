@@ -27,6 +27,7 @@ final class ___VARIABLE_productName:identifier___Coordinator: ___FILEBASENAMEASI
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: ___FILEBASENAMEASIDENTIFIER___Output?
   
   // MARK: - Private property
@@ -59,4 +60,8 @@ final class ___VARIABLE_productName:identifier___Coordinator: ___FILEBASENAMEASI
 
 // MARK: - ___VARIABLE_productName:identifier___ModuleOutput
 
-extension ___VARIABLE_productName:identifier___Coordinator: ___VARIABLE_productName:identifier___ModuleOutput {}
+extension ___VARIABLE_productName:identifier___Coordinator: ___VARIABLE_productName:identifier___ModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+}

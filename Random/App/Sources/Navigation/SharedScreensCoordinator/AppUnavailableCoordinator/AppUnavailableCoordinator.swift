@@ -28,6 +28,7 @@ final class AppUnavailableCoordinator: NSObject, AppUnavailableCoordinatorProtoc
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: AppUnavailableCoordinatorOutput?
   
   // MARK: - Private property
@@ -66,7 +67,11 @@ final class AppUnavailableCoordinator: NSObject, AppUnavailableCoordinatorProtoc
 // MARK: - AppUnavailableModuleOutput
 
 extension AppUnavailableCoordinator: AppUnavailableModuleOutput {
-  func closeAction() {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
+  func closeModuleAction() {
     newNavigationController?.dismiss(animated: true)
   }
   

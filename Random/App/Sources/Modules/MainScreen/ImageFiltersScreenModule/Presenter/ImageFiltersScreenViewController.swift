@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ImageFiltersScreenModuleOutput: AnyObject {
@@ -28,6 +29,9 @@ protocol ImageFiltersScreenModuleOutput: AnyObject {
   
   /// Получена ошибка
   func didReceiveError()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -48,7 +52,7 @@ protocol ImageFiltersScreenModuleInput {
 }
 
 /// Готовый модуль `ImageFiltersScreenModule`
-typealias ImageFiltersScreenModule = UIViewController & ImageFiltersScreenModuleInput
+typealias ImageFiltersScreenModule = ViewController & ImageFiltersScreenModuleInput
 
 /// Презентер
 final class ImageFiltersScreenViewController: ImageFiltersScreenModule {
@@ -93,6 +97,10 @@ final class ImageFiltersScreenViewController: ImageFiltersScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol SelecteAppIconScreenModuleOutput: AnyObject {
@@ -18,6 +19,9 @@ protocol SelecteAppIconScreenModuleOutput: AnyObject {
   
   /// Что-то пошло не так
   func somethingWentWrong()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -28,7 +32,7 @@ protocol SelecteAppIconScreenModuleInput {
 }
 
 /// Готовый модуль `SelecteAppIconScreenModule`
-typealias SelecteAppIconScreenModule = UIViewController & SelecteAppIconScreenModuleInput
+typealias SelecteAppIconScreenModule = ViewController & SelecteAppIconScreenModuleInput
 
 /// Презентер
 final class SelecteAppIconScreenViewController: SelecteAppIconScreenModule {
@@ -79,6 +83,10 @@ final class SelecteAppIconScreenViewController: SelecteAppIconScreenModule {
     
     interactor.getContent()
     navigationItem.largeTitleDisplayMode = .never
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
 }
 

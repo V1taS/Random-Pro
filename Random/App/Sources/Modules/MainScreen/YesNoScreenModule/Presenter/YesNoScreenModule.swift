@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 protocol YesNoScreenModuleOutput: AnyObject {
   
@@ -21,6 +22,9 @@ protocol YesNoScreenModuleOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter text: Результат генерации
   func resultLabelAction(text: String?)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 protocol YesNoScreenModuleInput {
@@ -35,7 +39,7 @@ protocol YesNoScreenModuleInput {
   func cleanButtonAction()
 }
 
-typealias YesNoScreenModule = UIViewController & YesNoScreenModuleInput
+typealias YesNoScreenModule = ViewController & YesNoScreenModuleInput
 
 final class YesNoScreenViewController: YesNoScreenModule {
   
@@ -85,6 +89,10 @@ final class YesNoScreenViewController: YesNoScreenModule {
     interactor.getContent()
     setupNavBar()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Initernal func

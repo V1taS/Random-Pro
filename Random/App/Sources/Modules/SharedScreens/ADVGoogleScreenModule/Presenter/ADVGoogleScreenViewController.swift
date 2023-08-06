@@ -7,12 +7,16 @@
 
 import UIKit
 import GoogleMobileAds
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ADVGoogleScreenModuleOutput: AnyObject {
   
   /// Модуль был закрыт
   func closeButtonAction()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -23,7 +27,7 @@ protocol ADVGoogleScreenModuleInput {
 }
 
 /// Готовый модуль `ADVGoogleScreenModule`
-typealias ADVGoogleScreenModule = UIViewController & ADVGoogleScreenModuleInput
+typealias ADVGoogleScreenModule = ViewController & ADVGoogleScreenModuleInput
 
 /// Презентер
 final class ADVGoogleScreenViewController: ADVGoogleScreenModule {
@@ -94,6 +98,10 @@ final class ADVGoogleScreenViewController: ADVGoogleScreenModule {
     interactor.estimatedSecondsAction()
     adLoader.load(GADRequest())
     closeButton.isEnabled = false
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
 }
 

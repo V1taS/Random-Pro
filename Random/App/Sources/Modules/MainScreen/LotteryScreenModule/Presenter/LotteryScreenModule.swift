@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol LotteryScreenModuleOutput: AnyObject {
@@ -25,6 +26,9 @@ protocol LotteryScreenModuleOutput: AnyObject {
   /// Было нажатие на результат генерации
   ///  - Parameter model: Результат генерации
   func resultLabelAction(model: LotteryScreenModel)
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -40,7 +44,7 @@ protocol LotteryScreenModuleInput {
   var moduleOutput: LotteryScreenModuleOutput? { get set }
 }
 
-typealias LotteryScreenModule = UIViewController & LotteryScreenModuleInput
+typealias LotteryScreenModule = ViewController & LotteryScreenModuleInput
 
 final class LotteryScreenViewController: LotteryScreenModule {
   
@@ -91,6 +95,10 @@ final class LotteryScreenViewController: LotteryScreenModule {
     setNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

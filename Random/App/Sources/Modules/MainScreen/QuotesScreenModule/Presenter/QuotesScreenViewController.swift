@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol QuotesScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol QuotesScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -42,7 +46,7 @@ protocol QuotesScreenModuleInput {
 }
 
 /// Готовый модуль `QuotesScreenModule`
-typealias QuotesScreenModule = UIViewController & QuotesScreenModuleInput
+typealias QuotesScreenModule = ViewController & QuotesScreenModuleInput
 
 /// Презентер
 final class QuotesScreenViewController: QuotesScreenModule {
@@ -94,6 +98,10 @@ final class QuotesScreenViewController: QuotesScreenModule {
     moduleView.startLoader()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

@@ -25,9 +25,10 @@ protocol PlayerCardSelectionScreenCoordinatorInput {
 typealias PlayerCardSelectionScreenCoordinatorProtocol = PlayerCardSelectionScreenCoordinatorInput & Coordinator
 
 final class PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoordinatorProtocol {
-  
+
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: PlayerCardSelectionScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -35,7 +36,9 @@ final class PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoord
   private let navigationController: UINavigationController
   private let services: ApplicationServices
   private var playerCardSelectionScreenModule: PlayerCardSelectionScreenModule?
-  private var anyCoordinator: Coordinator?
+  
+  // Coordinators
+  private var premiumScreenCoordinator: PremiumScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -61,6 +64,10 @@ final class PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoord
 // MARK: - PlayerCardSelectionScreenModuleOutput
 
 extension PlayerCardSelectionScreenCoordinator: PlayerCardSelectionScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func didSelectStyleSuccessfully() {
     services.notificationService.showPositiveAlertWith(title: Appearance().setCardStyleTitle,
                                                        glyph: true,
@@ -105,10 +112,13 @@ private extension PlayerCardSelectionScreenCoordinator {
   func openPremium() {
     let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
                                                             services)
-    anyCoordinator = premiumScreenCoordinator
+    self.premiumScreenCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
+    premiumScreenCoordinator.finishFlow = { [weak self] in
+      self?.premiumScreenCoordinator = nil
+    }
     
     services.metricsService.track(event: .premiumScreen)
   }

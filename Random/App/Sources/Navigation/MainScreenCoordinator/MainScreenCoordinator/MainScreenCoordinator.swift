@@ -24,10 +24,12 @@ protocol MainScreenCoordinatorInput {
 
 typealias MainScreenCoordinatorProtocol = MainScreenCoordinatorInput & Coordinator
 
+// swiftlint:disable file_length
 final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: MainScreenCoordinatorOutput?
   
   // MARK: - Private variables
@@ -35,10 +37,44 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   private let navigationController: UINavigationController
   private var mainScreenModule: MainScreenModule?
   private let services: ApplicationServices
-  private var anyCoordinator: Coordinator?
-  private var settingsScreenCoordinator: MainSettingsScreenCoordinatorProtocol?
   private let window: UIWindow?
+  
+  // Coordinators
   private lazy var advGoogleScreenCoordinator = ADVGoogleScreenCoordinator(navigationController, services)
+  private var appUnavailableCoordinator: AppUnavailableCoordinator?
+  private var forceUpdateAppCoordinator: ForceUpdateAppCoordinator?
+  private var premiumWithFriendsCoordinator: PremiumWithFriendsCoordinator?
+  private var premiumScreenCoordinator: PremiumScreenCoordinator?
+  private var onboardingScreenCoordinator: OnboardingScreenCoordinator?
+  private var memesScreenCoordinator: MemesScreenCoordinator?
+  private var fortuneWheelCoordinator: FortuneWheelCoordinator?
+  private var quotesScreenCoordinator: QuotesScreenCoordinator?
+  private var giftsScreenCoordinator: GiftsScreenCoordinator?
+  private var jokeGeneratorScreenCoordinator: JokeGeneratorScreenCoordinator?
+  private var slogansScreenCoordinator: SlogansScreenCoordinator?
+  private var riddlesScreenCoordinator: RiddlesScreenCoordinator?
+  private var goodDeedsScreenCoordinator: GoodDeedsScreenCoordinator?
+  private var congratulationsScreenCoordinator: CongratulationsScreenCoordinator?
+  private var namesScreenCoordinator: NamesScreenCoordinator?
+  private var nickNameScreenCoordinator: NickNameScreenCoordinator?
+  private var truthOrDareScreenCoordinator: TruthOrDareScreenCoordinator?
+  private var filmsScreenCoordinator: FilmsScreenCoordinator?
+  private var imageFiltersScreenCoordinator: ImageFiltersScreenCoordinator?
+  private var rockPaperScissorsScreenCoordinator: RockPaperScissorsScreenCoordinator?
+  private var bottleScreenCoordinator: BottleScreenCoordinator?
+  private var colorsScreenCoordinator: ColorsScreenCoordinator?
+  private var teamsScreenCoordinator: TeamsScreenCoordinator?
+  private var yesNoScreenCoordinator: YesNoScreenCoordinator?
+  private var letterScreenCoordinator: LetterScreenCoordinator?
+  private var listScreenCoordinator: ListScreenCoordinator?
+  private var coinScreenCoordinator: CoinScreenCoordinator?
+  private var cubesScreenCoordinator: CubesScreenCoordinator?
+  private var dateTimeScreenCoordinator: DateTimeScreenCoordinator?
+  private var lotteryScreenCoordinator: LotteryScreenCoordinator?
+  private var contactScreenCoordinator: ContactScreenCoordinator?
+  private var passwordScreenCoordinator: PasswordScreenCoordinator?
+  private var numberScreenCoordinator: NumberScreenCoordinator?
+  private var settingsScreenCoordinator: MainSettingsScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -74,29 +110,30 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     startDeepLink()
     startDynamicLink()
     checkReferals()
-    
-    var featureToggleServices = services.featureToggleServices
-    featureToggleServices.didReceiveToggle = { [weak self] in
-      guard let self else {
-        return
-      }
-      
-      if self.services.featureToggleServices.isToggleFor(feature: .isAppBroken) {
-        self.appBroken()
-        return
-      }
-      
-      if self.services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable) {
-        self.forceUpdateAvailable()
-        return
-      }
-    }
   }
 }
 
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func mainScreenModuleDidLoad() {
+    checkIsUpdateAvailable()
+    if self.services.featureToggleServices.isToggleFor(feature: .isAppBroken) {
+      self.appBroken()
+      return
+    }
+    
+    if self.services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable) {
+      self.forceUpdateAvailable()
+      return
+    }
+  }
+  
+  func mainScreenModuleWillAppear() {}
+  
+  func mainScreenModuleDidAppear() {
+    services.permissionService.requestNotification { _ in }
+  }
   func didReceiveReferalScreen() {
     openPremiumWithFriendsCoordinator()
   }
@@ -104,134 +141,13 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func presentOnboardingScreen() {
     let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
                                                                   services)
-    anyCoordinator = onboardingScreenCoordinator
+    self.onboardingScreenCoordinator = onboardingScreenCoordinator
     onboardingScreenCoordinator.start()
-  }
-  
-  func openMemes() {
-    let memesScreenCoordinator = MemesScreenCoordinator(navigationController, services)
-    anyCoordinator = memesScreenCoordinator
-    memesScreenCoordinator.start()
+    onboardingScreenCoordinator.finishFlow = { [weak self] in
+      self?.onboardingScreenCoordinator = nil
+    }
     
-    mainScreenModule?.removeLabelFromSection(type: .memes)
     services.metricsService.track(event: .memes)
-  }
-  
-  func openFortuneWheel() {
-    let fortuneWheelCoordinator = FortuneWheelCoordinator(navigationController, services)
-    anyCoordinator = fortuneWheelCoordinator
-    fortuneWheelCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .fortuneWheel)
-    services.metricsService.track(event: .fortuneWheel)
-  }
-  
-  func openQuotes() {
-    let quotesScreenCoordinator = QuotesScreenCoordinator(navigationController, services)
-    anyCoordinator = quotesScreenCoordinator
-    quotesScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .quotes)
-    services.metricsService.track(event: .quotes)
-  }
-  
-  func openGifts() {
-    let giftsScreenCoordinator = GiftsScreenCoordinator(navigationController, services)
-    
-    anyCoordinator = giftsScreenCoordinator
-    giftsScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .gifts)
-    services.metricsService.track(event: .gifts)
-  }
-  
-  func openJoke() {
-    let jokeGeneratorScreenCoordinator = JokeGeneratorScreenCoordinator(navigationController,
-                                                                        services)
-    anyCoordinator = jokeGeneratorScreenCoordinator
-    jokeGeneratorScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .joke)
-    services.metricsService.track(event: .joke)
-  }
-  
-  func openSlogans() {
-    let slogansScreenCoordinator = SlogansScreenCoordinator(navigationController,
-                                                            services)
-    anyCoordinator = slogansScreenCoordinator
-    slogansScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .slogans)
-    services.metricsService.track(event: .slogans)
-  }
-  
-  func openRiddles() {
-    let riddlesScreenCoordinator = RiddlesScreenCoordinator(navigationController,
-                                                            services)
-    anyCoordinator = riddlesScreenCoordinator
-    riddlesScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .riddles)
-    services.metricsService.track(event: .riddles)
-  }
-  
-  func openGoodDeeds() {
-    let goodDeedsScreenCoordinator = GoodDeedsScreenCoordinator(navigationController, services)
-    anyCoordinator = goodDeedsScreenCoordinator
-    goodDeedsScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .goodDeeds)
-    services.metricsService.track(event: .goodDeeds)
-  }
-  
-  func openCongratulations() {
-    let congratulationsScreenCoordinator = CongratulationsScreenCoordinator(navigationController,
-                                                                            services)
-    anyCoordinator = congratulationsScreenCoordinator
-    congratulationsScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .congratulations)
-    services.metricsService.track(event: .congratulations)
-  }
-  
-  func openNames() {
-    let namesScreenCoordinator = NamesScreenCoordinator(navigationController,
-                                                        services)
-    anyCoordinator = namesScreenCoordinator
-    namesScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .names)
-    services.metricsService.track(event: .names)
-  }
-  
-  func openNickName() {
-    let nickNameScreenCoordinator = NickNameScreenCoordinator(navigationController,
-                                                              services)
-    anyCoordinator = nickNameScreenCoordinator
-    nickNameScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .nickName)
-    services.metricsService.track(event: .nickNameScreen)
-  }
-  
-  func openTruthOrDare() {
-    let truthOrDareScreenCoordinator = TruthOrDareScreenCoordinator(navigationController,
-                                                                    services)
-    anyCoordinator = truthOrDareScreenCoordinator
-    truthOrDareScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .truthOrDare)
-    services.metricsService.track(event: .truthOrDare)
-  }
-  
-  func openFilms() {
-    let filmsScreenCoordinator = FilmsScreenCoordinator(navigationController,
-                                                        services)
-    anyCoordinator = filmsScreenCoordinator
-    filmsScreenCoordinator.start()
-    
-    mainScreenModule?.removeLabelFromSection(type: .films)
-    services.metricsService.track(event: .filmScreen)
   }
   
   func premiumButtonAction(_ isPremium: Bool) {
@@ -245,26 +161,184 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
   }
   
-  func mainScreenModuleDidLoad() {
-    checkIsUpdateAvailable()
-  }
-  
-  func mainScreenModuleWillAppear() {}
-  
-  func mainScreenModuleDidAppear() {
-    services.permissionService.requestNotification { _ in }
-  }
-  
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     showAlerForUnlockPremiumtWith(title: Appearance().premiumAccess,
                                   description: section.type.descriptionForNoPremiumAccess)
   }
   
+  func openMemes() {
+    let memesScreenCoordinator = MemesScreenCoordinator(navigationController, services)
+    self.memesScreenCoordinator = memesScreenCoordinator
+    memesScreenCoordinator.start()
+    memesScreenCoordinator.finishFlow = { [weak self] in
+      self?.memesScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .memes)
+    services.metricsService.track(event: .memes)
+  }
+  
+  func openFortuneWheel() {
+    let fortuneWheelCoordinator = FortuneWheelCoordinator(navigationController, services)
+    self.fortuneWheelCoordinator = fortuneWheelCoordinator
+    fortuneWheelCoordinator.start()
+    fortuneWheelCoordinator.finishFlow = { [weak self] in
+      self?.fortuneWheelCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .fortuneWheel)
+    services.metricsService.track(event: .fortuneWheel)
+  }
+  
+  func openQuotes() {
+    let quotesScreenCoordinator = QuotesScreenCoordinator(navigationController, services)
+    self.quotesScreenCoordinator = quotesScreenCoordinator
+    quotesScreenCoordinator.start()
+    quotesScreenCoordinator.finishFlow = { [weak self] in
+      self?.quotesScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .quotes)
+    services.metricsService.track(event: .quotes)
+  }
+  
+  func openGifts() {
+    let giftsScreenCoordinator = GiftsScreenCoordinator(navigationController, services)
+    
+    self.giftsScreenCoordinator = giftsScreenCoordinator
+    giftsScreenCoordinator.start()
+    giftsScreenCoordinator.finishFlow = { [weak self] in
+      self?.giftsScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .gifts)
+    services.metricsService.track(event: .gifts)
+  }
+  
+  func openJoke() {
+    let jokeGeneratorScreenCoordinator = JokeGeneratorScreenCoordinator(navigationController,
+                                                                        services)
+    self.jokeGeneratorScreenCoordinator = jokeGeneratorScreenCoordinator
+    jokeGeneratorScreenCoordinator.start()
+    jokeGeneratorScreenCoordinator.finishFlow = { [weak self] in
+      self?.jokeGeneratorScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .joke)
+    services.metricsService.track(event: .joke)
+  }
+  
+  func openSlogans() {
+    let slogansScreenCoordinator = SlogansScreenCoordinator(navigationController,
+                                                            services)
+    self.slogansScreenCoordinator = slogansScreenCoordinator
+    slogansScreenCoordinator.start()
+    slogansScreenCoordinator.finishFlow = { [weak self] in
+      self?.slogansScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .slogans)
+    services.metricsService.track(event: .slogans)
+  }
+  
+  func openRiddles() {
+    let riddlesScreenCoordinator = RiddlesScreenCoordinator(navigationController,
+                                                            services)
+    self.riddlesScreenCoordinator = riddlesScreenCoordinator
+    riddlesScreenCoordinator.start()
+    riddlesScreenCoordinator.finishFlow = { [weak self] in
+      self?.riddlesScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .riddles)
+    services.metricsService.track(event: .riddles)
+  }
+  
+  func openGoodDeeds() {
+    let goodDeedsScreenCoordinator = GoodDeedsScreenCoordinator(navigationController, services)
+    self.goodDeedsScreenCoordinator = goodDeedsScreenCoordinator
+    goodDeedsScreenCoordinator.start()
+    goodDeedsScreenCoordinator.finishFlow = { [weak self] in
+      self?.goodDeedsScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .goodDeeds)
+    services.metricsService.track(event: .goodDeeds)
+  }
+  
+  func openCongratulations() {
+    let congratulationsScreenCoordinator = CongratulationsScreenCoordinator(navigationController,
+                                                                            services)
+    self.congratulationsScreenCoordinator = congratulationsScreenCoordinator
+    congratulationsScreenCoordinator.start()
+    congratulationsScreenCoordinator.finishFlow = { [weak self] in
+      self?.congratulationsScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .congratulations)
+    services.metricsService.track(event: .congratulations)
+  }
+  
+  func openNames() {
+    let namesScreenCoordinator = NamesScreenCoordinator(navigationController,
+                                                        services)
+    self.namesScreenCoordinator = namesScreenCoordinator
+    namesScreenCoordinator.start()
+    namesScreenCoordinator.finishFlow = { [weak self] in
+      self?.namesScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .names)
+    services.metricsService.track(event: .names)
+  }
+  
+  func openNickName() {
+    let nickNameScreenCoordinator = NickNameScreenCoordinator(navigationController,
+                                                              services)
+    self.nickNameScreenCoordinator = nickNameScreenCoordinator
+    nickNameScreenCoordinator.start()
+    nickNameScreenCoordinator.finishFlow = { [weak self] in
+      self?.nickNameScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .nickName)
+    services.metricsService.track(event: .nickNameScreen)
+  }
+  
+  func openTruthOrDare() {
+    let truthOrDareScreenCoordinator = TruthOrDareScreenCoordinator(navigationController,
+                                                                    services)
+    self.truthOrDareScreenCoordinator = truthOrDareScreenCoordinator
+    truthOrDareScreenCoordinator.start()
+    truthOrDareScreenCoordinator.finishFlow = { [weak self] in
+      self?.truthOrDareScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .truthOrDare)
+    services.metricsService.track(event: .truthOrDare)
+  }
+  
+  func openFilms() {
+    let filmsScreenCoordinator = FilmsScreenCoordinator(navigationController,
+                                                        services)
+    self.filmsScreenCoordinator = filmsScreenCoordinator
+    filmsScreenCoordinator.start()
+    filmsScreenCoordinator.finishFlow = { [weak self] in
+      self?.filmsScreenCoordinator = nil
+    }
+    
+    mainScreenModule?.removeLabelFromSection(type: .films)
+    services.metricsService.track(event: .filmScreen)
+  }
+  
   func openImageFilters() {
     let imageFiltersScreenCoordinator = ImageFiltersScreenCoordinator(navigationController,
                                                                       services)
-    anyCoordinator = imageFiltersScreenCoordinator
+    self.imageFiltersScreenCoordinator = imageFiltersScreenCoordinator
     imageFiltersScreenCoordinator.start()
+    imageFiltersScreenCoordinator.finishFlow = { [weak self] in
+      self?.imageFiltersScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .imageFilters)
     services.metricsService.track(event: .imageFilters)
@@ -273,8 +347,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openRockPaperScissors() {
     let rockPaperScissorsScreenCoordinator = RockPaperScissorsScreenCoordinator(navigationController,
                                                                                 services)
-    anyCoordinator = rockPaperScissorsScreenCoordinator
+    self.rockPaperScissorsScreenCoordinator = rockPaperScissorsScreenCoordinator
     rockPaperScissorsScreenCoordinator.start()
+    rockPaperScissorsScreenCoordinator.finishFlow = { [weak self] in
+      self?.rockPaperScissorsScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .rockPaperScissors)
     services.metricsService.track(event: .rockPaperScissors)
@@ -285,8 +362,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openBottle() {
     let bottleScreenCoordinator = BottleScreenCoordinator(navigationController,
                                                           services)
-    anyCoordinator = bottleScreenCoordinator
+    self.bottleScreenCoordinator = bottleScreenCoordinator
     bottleScreenCoordinator.start()
+    bottleScreenCoordinator.finishFlow = { [weak self] in
+      self?.bottleScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .bottle)
     services.metricsService.track(event: .bottleScreen)
@@ -295,8 +375,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openColors() {
     let colorsScreenCoordinator = ColorsScreenCoordinator(navigationController,
                                                           services)
-    anyCoordinator = colorsScreenCoordinator
+    self.colorsScreenCoordinator = colorsScreenCoordinator
     colorsScreenCoordinator.start()
+    colorsScreenCoordinator.finishFlow = { [weak self] in
+      self?.colorsScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .colors)
     services.metricsService.track(event: .colorsScreen)
@@ -305,8 +388,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openTeams() {
     let teamsScreenCoordinator = TeamsScreenCoordinator(navigationController,
                                                         services)
-    anyCoordinator = teamsScreenCoordinator
+    self.teamsScreenCoordinator = teamsScreenCoordinator
     teamsScreenCoordinator.start()
+    teamsScreenCoordinator.finishFlow = { [weak self] in
+      self?.teamsScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .teams)
     services.metricsService.track(event: .teamsScreen)
@@ -315,8 +401,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openYesOrNo() {
     let yesNoScreenCoordinator = YesNoScreenCoordinator(navigationController,
                                                         services)
-    anyCoordinator = yesNoScreenCoordinator
+    self.yesNoScreenCoordinator = yesNoScreenCoordinator
     yesNoScreenCoordinator.start()
+    yesNoScreenCoordinator.finishFlow = { [weak self] in
+      self?.yesNoScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .yesOrNo)
     services.metricsService.track(event: .yesOrNotScreen)
@@ -325,8 +414,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openCharacter() {
     let letterScreenCoordinator = LetterScreenCoordinator(navigationController,
                                                           services)
-    anyCoordinator = letterScreenCoordinator
+    self.letterScreenCoordinator = letterScreenCoordinator
     letterScreenCoordinator.start()
+    letterScreenCoordinator.finishFlow = { [weak self] in
+      self?.letterScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .letter)
     services.metricsService.track(event: .charactersScreen)
@@ -335,8 +427,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openList() {
     let listScreenCoordinator = ListScreenCoordinator(navigationController,
                                                       services)
-    anyCoordinator = listScreenCoordinator
+    self.listScreenCoordinator = listScreenCoordinator
     listScreenCoordinator.start()
+    listScreenCoordinator.finishFlow = { [weak self] in
+      self?.listScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .list)
     services.metricsService.track(event: .listScreen)
@@ -345,8 +440,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openCoin() {
     let coinScreenCoordinator = CoinScreenCoordinator(navigationController,
                                                       services)
-    anyCoordinator = coinScreenCoordinator
+    self.coinScreenCoordinator = coinScreenCoordinator
     coinScreenCoordinator.start()
+    coinScreenCoordinator.finishFlow = { [weak self] in
+      self?.coinScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .coin)
     services.metricsService.track(event: .coinScreen)
@@ -355,8 +453,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openCube() {
     let cubesScreenCoordinator = CubesScreenCoordinator(navigationController,
                                                         services)
-    anyCoordinator = cubesScreenCoordinator
+    self.cubesScreenCoordinator = cubesScreenCoordinator
     cubesScreenCoordinator.start()
+    cubesScreenCoordinator.finishFlow = { [weak self] in
+      self?.cubesScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .cube)
     services.metricsService.track(event: .cubeScreen)
@@ -365,8 +466,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openDateAndTime() {
     let dateTimeScreenCoordinator = DateTimeScreenCoordinator(navigationController,
                                                               services)
-    anyCoordinator = dateTimeScreenCoordinator
+    self.dateTimeScreenCoordinator = dateTimeScreenCoordinator
     dateTimeScreenCoordinator.start()
+    dateTimeScreenCoordinator.finishFlow = { [weak self] in
+      self?.dateTimeScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .dateAndTime)
     services.metricsService.track(event: .dateAndTimeScreen)
@@ -375,8 +479,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openLottery() {
     let lotteryScreenCoordinator = LotteryScreenCoordinator(navigationController,
                                                             services)
-    anyCoordinator = lotteryScreenCoordinator
+    self.lotteryScreenCoordinator = lotteryScreenCoordinator
     lotteryScreenCoordinator.start()
+    lotteryScreenCoordinator.finishFlow = { [weak self] in
+      self?.lotteryScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .lottery)
     services.metricsService.track(event: .lotteryScreen)
@@ -385,8 +492,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openContact() {
     let contactScreenCoordinator = ContactScreenCoordinator(navigationController,
                                                             services)
-    anyCoordinator = contactScreenCoordinator
+    self.contactScreenCoordinator = contactScreenCoordinator
     contactScreenCoordinator.start()
+    contactScreenCoordinator.finishFlow = { [weak self] in
+      self?.contactScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .contact)
     services.metricsService.track(event: .contactScreen)
@@ -395,8 +505,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openPassword() {
     let passwordScreenCoordinator = PasswordScreenCoordinator(navigationController,
                                                               services)
-    anyCoordinator = passwordScreenCoordinator
+    self.passwordScreenCoordinator = passwordScreenCoordinator
     passwordScreenCoordinator.start()
+    passwordScreenCoordinator.finishFlow = { [weak self] in
+      self?.passwordScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .password)
     services.metricsService.track(event: .passwordScreen)
@@ -405,8 +518,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func openNumber() {
     let numberScreenCoordinator = NumberScreenCoordinator(navigationController,
                                                           services)
-    anyCoordinator = numberScreenCoordinator
+    self.numberScreenCoordinator = numberScreenCoordinator
     numberScreenCoordinator.start()
+    numberScreenCoordinator.finishFlow = { [weak self] in
+      self?.numberScreenCoordinator = nil
+    }
     
     mainScreenModule?.removeLabelFromSection(type: .number)
     services.metricsService.track(event: .numbersScreen)
@@ -444,8 +560,11 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
                                                                   navigationController,
                                                                   services)
     self.settingsScreenCoordinator = settingsScreenCoordinator
-    self.settingsScreenCoordinator?.output = self
+    settingsScreenCoordinator.output = self
     settingsScreenCoordinator.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     services.metricsService.track(event: .mainSettingsScreen)
     
@@ -499,7 +618,7 @@ private extension MainScreenCoordinator {
   
   func forceUpdateAvailable() {
 #if !DEBUG
-    services.updateAppService.checkIsUpdateAvailable { [weak self] result in
+    services.updateAppService.checkIsUpdateAvailable(isOneCheckVersion: false) { [weak self] result in
       switch result {
       case let .success(model):
         guard let self, model.isUpdateAvailable else {
@@ -510,8 +629,12 @@ private extension MainScreenCoordinator {
           navigationController: self.navigationController,
           services: self.services
         )
-        self.anyCoordinator = forceUpdateAppCoordinator
+        self.forceUpdateAppCoordinator = forceUpdateAppCoordinator
         forceUpdateAppCoordinator.start()
+        forceUpdateAppCoordinator.finishFlow = { [weak self] in
+          self?.forceUpdateAppCoordinator = nil
+        }
+        
         self.services.metricsService.track(event: .forceUpdateApp)
       case .failure: break
       }
@@ -523,8 +646,12 @@ private extension MainScreenCoordinator {
 #if !DEBUG
     let appUnavailableCoordinator = AppUnavailableCoordinator(navigationController: navigationController,
                                                               services: services)
-    anyCoordinator = appUnavailableCoordinator
+    self.appUnavailableCoordinator = appUnavailableCoordinator
     appUnavailableCoordinator.start()
+    appUnavailableCoordinator.finishFlow = { [weak self] in
+      self?.appUnavailableCoordinator = nil
+    }
+    
     services.metricsService.track(event: .appUnavailable)
 #endif
   }
@@ -532,10 +659,13 @@ private extension MainScreenCoordinator {
   func openPremiumWithFriendsCoordinator() {
     let premiumWithFriendsCoordinator = PremiumWithFriendsCoordinator(navigationController,
                                                                       services)
-    anyCoordinator = premiumWithFriendsCoordinator
+    self.premiumWithFriendsCoordinator = premiumWithFriendsCoordinator
     premiumWithFriendsCoordinator.output = self
     premiumWithFriendsCoordinator.selectPresentType(.present)
     premiumWithFriendsCoordinator.start()
+    premiumWithFriendsCoordinator.finishFlow = { [weak self] in
+      self?.premiumWithFriendsCoordinator = nil
+    }
     
     services.metricsService.track(event: .premiumWithFriends)
   }
@@ -556,10 +686,13 @@ private extension MainScreenCoordinator {
   func openPremium() {
     let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
                                                             services)
-    anyCoordinator = premiumScreenCoordinator
+    self.premiumScreenCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
+    premiumScreenCoordinator.finishFlow = { [weak self] in
+      self?.premiumScreenCoordinator = nil
+    }
     
     services.metricsService.track(event: .premiumScreen)
   }
@@ -572,7 +705,7 @@ private extension MainScreenCoordinator {
       return
     }
     
-    services.updateAppService.checkIsUpdateAvailable { [weak self] result in
+    services.updateAppService.checkIsUpdateAvailable(isOneCheckVersion: true) { [weak self] result in
       switch result {
       case let .success(model):
         guard model.isUpdateAvailable else {

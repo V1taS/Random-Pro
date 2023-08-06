@@ -26,4 +26,7 @@ final class UpdateAppServiceMock: UpdateAppService {
       completion(updateAvailableResult)
     }
   }
+  
+  func checkIsUpdateAvailable(isOneCheckVersion: Bool,
+                              completion: @escaping (Result<Random.UpdateAppServiceModel, Random.UpdateAppServiceError>) -> Void) {}
 }

@@ -24,6 +24,7 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
   
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: BottleScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -55,4 +56,8 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
 
 // MARK: - BottleScreenModuleOutput
 
-extension BottleScreenCoordinator: BottleScreenModuleOutput {}
+extension BottleScreenCoordinator: BottleScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+}

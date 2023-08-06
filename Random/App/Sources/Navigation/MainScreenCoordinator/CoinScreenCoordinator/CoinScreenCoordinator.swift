@@ -25,18 +25,21 @@ protocol CoinScreenCoordinatorInput {
 typealias CoinScreenCoordinatorProtocol = CoinScreenCoordinatorInput & Coordinator
 
 final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
-  
+
   // MARK: - Internal variables
   
+  var finishFlow: (() -> Void)?
   weak var output: CoinScreenCoordinatorOutput?
   
   // MARK: - Private property
   
   private let navigationController: UINavigationController
   private let services: ApplicationServices
+  private var coinScreenModule: CoinScreenModule?
+  
+  // Coordinators
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
-  private var coinScreenModule: CoinScreenModule?
   
   // MARK: - Initialization
   
@@ -63,6 +66,10 @@ final class CoinScreenCoordinator: CoinScreenCoordinatorProtocol {
 // MARK: - CoinScreenModuleOutput
 
 extension CoinScreenCoordinator: CoinScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func cleanButtonWasSelected(model: CoinScreenModel) {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .coin(
       isShowlistGenerated: model.isShowlistGenerated,
@@ -76,6 +83,9 @@ extension CoinScreenCoordinator: CoinScreenModuleOutput {
     self.settingsScreenCoordinator = settingsScreenCoordinator
     self.settingsScreenCoordinator?.output = self
     self.settingsScreenCoordinator?.start()
+    settingsScreenCoordinator.finishFlow = { [weak self] in
+      self?.settingsScreenCoordinator = nil
+    }
     
     settingsScreenCoordinator.setupDefaultsSettings(for: .coin(
       isShowlistGenerated: model.isShowlistGenerated,
@@ -106,6 +116,9 @@ extension CoinScreenCoordinator: SettingsScreenCoordinatorOutput {
     self.listResultScreenCoordinator = listResultScreenCoordinator
     self.listResultScreenCoordinator?.output = self
     self.listResultScreenCoordinator?.start()
+    listResultScreenCoordinator.finishFlow = { [weak self] in
+      self?.listResultScreenCoordinator = nil
+    }
     
     listResultScreenCoordinator.setContentsFrom(list: coinScreenModule?.returnModel()?.listResult ?? [])
   }

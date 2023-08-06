@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol GiftsScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol GiftsScreenModuleOutput: AnyObject {
 
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -42,7 +46,7 @@ protocol GiftsScreenModuleInput {
 }
 
 /// Готовый модуль `GiftsScreenModule`
-typealias GiftsScreenModule = UIViewController & GiftsScreenModuleInput
+typealias GiftsScreenModule = ViewController & GiftsScreenModuleInput
 
 /// Презентер
 final class GiftsScreenViewController: GiftsScreenModule {
@@ -95,7 +99,11 @@ final class GiftsScreenViewController: GiftsScreenModule {
     interactor.getContent(gender: nil)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
-
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
+  }
+  
   // MARK: - Internal func
 
   func cleanButtonAction() {

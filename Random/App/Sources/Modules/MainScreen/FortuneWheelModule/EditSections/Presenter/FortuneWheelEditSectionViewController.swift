@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol FortuneWheelEditSectionModuleOutput: AnyObject {
@@ -16,6 +17,9 @@ protocol FortuneWheelEditSectionModuleOutput: AnyObject {
   
   /// Была нажата кнопка удалить все объекты
   func removeTextsButtonAction()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -40,7 +44,7 @@ protocol FortuneWheelEditSectionModuleInput {
 }
 
 /// Готовый модуль `FortuneWheelEditSectionModule`
-typealias FortuneWheelEditSectionModule = UIViewController & FortuneWheelEditSectionModuleInput
+typealias FortuneWheelEditSectionModule = ViewController & FortuneWheelEditSectionModuleInput
 
 /// Презентер
 final class FortuneWheelEditSectionViewController: FortuneWheelEditSectionModule {
@@ -85,6 +89,10 @@ final class FortuneWheelEditSectionViewController: FortuneWheelEditSectionModule
     super.viewDidLoad()
     
     setupNavBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

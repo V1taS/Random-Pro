@@ -11,4 +11,7 @@ protocol Coordinator {
   
   ///  Запуск координатора
   func start()
+  
+  /// Завершение сценария
+  var finishFlow: (() -> Void)? { get set }
 }

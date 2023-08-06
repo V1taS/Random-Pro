@@ -37,6 +37,7 @@ final class PremiumWithFriendsCoordinator: PremiumWithFriendsCoordinatorProtocol
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: PremiumScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -88,6 +89,10 @@ final class PremiumWithFriendsCoordinator: PremiumWithFriendsCoordinatorProtocol
 // MARK: - PremiumWithFriendsModuleOutput
 
 extension PremiumWithFriendsCoordinator: PremiumWithFriendsModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
   func copyLinkAction(_ link: String?) {
     guard let link, let url = URL(string: link) else {
       return

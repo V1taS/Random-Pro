@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ShareScreenModuleOutput: AnyObject {
@@ -19,6 +20,9 @@ protocol ShareScreenModuleOutput: AnyObject {
   
   /// Доступ к галерее не получен
   func requestPhotosError()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -33,7 +37,7 @@ protocol ShareScreenModuleInput {
 }
 
 /// Готовый модуль `ShareScreenModule`
-typealias ShareScreenModule = UIViewController & ShareScreenModuleInput
+typealias ShareScreenModule = ViewController & ShareScreenModuleInput
 
 /// Презентер
 final class ShareScreenViewController: ShareScreenModule {
@@ -79,6 +83,10 @@ final class ShareScreenViewController: ShareScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

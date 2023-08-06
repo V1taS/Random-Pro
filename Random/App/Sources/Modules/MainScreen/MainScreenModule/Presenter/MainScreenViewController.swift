@@ -51,10 +51,11 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    getReferalScreen()
     updateSections()
     setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
+    getReferalScreen()
+    moduleOutput?.presentOnboardingScreen()
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(didBecomeActiveNotification),
                                            name: UIApplication.didBecomeActiveNotification,
@@ -67,7 +68,6 @@ final class MainScreenViewController: MainScreenModule {
     navigationController?.navigationBar.prefersLargeTitles = true
     moduleOutput?.mainScreenModuleWillAppear()
     setupNavBar()
-    moduleOutput?.presentOnboardingScreen()
   }
   
   override func viewDidAppear(_ animated: Bool) {

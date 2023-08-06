@@ -7,6 +7,7 @@
 
 import UIKit
 import RandomWheel
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol FortuneWheelModuleOutput: AnyObject {
@@ -19,6 +20,9 @@ protocol FortuneWheelModuleOutput: AnyObject {
   
   /// Выбрать ячейку было нажато
   func selectedSectionAction()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -43,7 +47,7 @@ protocol FortuneWheelModuleInput {
 }
 
 /// Готовый модуль `FortuneWheelModule`
-typealias FortuneWheelModule = UIViewController & FortuneWheelModuleInput
+typealias FortuneWheelModule = ViewController & FortuneWheelModuleInput
 
 /// Презентер
 final class FortuneWheelViewController: FortuneWheelModule {
@@ -89,6 +93,10 @@ final class FortuneWheelViewController: FortuneWheelModule {
     
     interactor.getContent()
     setNavigationBar()
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

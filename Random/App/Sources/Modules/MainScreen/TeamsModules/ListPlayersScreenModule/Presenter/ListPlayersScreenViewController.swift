@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ListPlayersScreenModuleOutput: AnyObject {
@@ -16,6 +17,9 @@ protocol ListPlayersScreenModuleOutput: AnyObject {
   /// Были получены игроки
   ///  - Parameter players: Список игроков
   func didReceive(players: [TeamsScreenPlayerModel])
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -35,7 +39,7 @@ protocol ListPlayersScreenModuleInput {
 }
 
 /// Готовый модуль `ListPlayersScreenModule`
-typealias ListPlayersScreenModule = UIViewController & ListPlayersScreenModuleInput
+typealias ListPlayersScreenModule = ViewController & ListPlayersScreenModuleInput
 
 /// Презентер
 final class ListPlayersScreenViewController: ListPlayersScreenModule {
@@ -86,6 +90,10 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     moduleOutput?.didReceive(players: interactor.returnCurrentListPlayers())
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

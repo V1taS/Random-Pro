@@ -25,6 +25,7 @@ final class FilmsScreenCoordinator: FilmsScreenCoordinatorProtocol {
   
   // MARK: - Internal property
   
+  var finishFlow: (() -> Void)?
   weak var output: FilmsScreenCoordinatorOutput?
   
   // MARK: - Private property
@@ -57,6 +58,10 @@ final class FilmsScreenCoordinator: FilmsScreenCoordinatorProtocol {
 // MARK: - FilmsScreenModuleOutput
 
 extension FilmsScreenCoordinator: FilmsScreenModuleOutput {
+  func moduleClosed() {
+    finishFlow?()
+  }
+  
     func playTrailerActionWith(url: String) {
         guard let encodedTexts = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let filmUrl = URL(string: encodedTexts) else {

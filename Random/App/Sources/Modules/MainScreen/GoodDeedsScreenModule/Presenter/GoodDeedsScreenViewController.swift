@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RandomUIKit
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol GoodDeedsScreenModuleOutput: AnyObject {
@@ -23,6 +24,9 @@ protocol GoodDeedsScreenModuleOutput: AnyObject {
   
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
+  
+  /// Модуль был закрыт
+  func moduleClosed()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`
@@ -42,7 +46,7 @@ protocol GoodDeedsScreenModuleInput {
 }
 
 /// Готовый модуль `GoodDeedsScreenModule`
-typealias GoodDeedsScreenModule = UIViewController & GoodDeedsScreenModuleInput
+typealias GoodDeedsScreenModule = ViewController & GoodDeedsScreenModuleInput
 
 /// Презентер
 final class GoodDeedsScreenViewController: GoodDeedsScreenModule {
@@ -94,6 +98,10 @@ final class GoodDeedsScreenViewController: GoodDeedsScreenModule {
     moduleView.startLoader()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+  }
+  
+  override func finishFlow() {
+    moduleOutput?.moduleClosed()
   }
   
   // MARK: - Internal func

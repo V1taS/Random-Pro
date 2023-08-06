@@ -83,11 +83,6 @@ final class PremiumWithFriendsViewController: PremiumWithFriendsModule {
     interactor.getContent()
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    moduleOutput?.moduleClosed()
-  }
-  
   // MARK: - Internal func
   
   func selectIsModalPresentationStyle(_ isModalPresentation: Bool) {
@@ -101,6 +96,7 @@ extension PremiumWithFriendsViewController: PremiumWithFriendsViewOutput {
   func doNotShowScreenAgain() {
     interactor.doNotShowScreenAgain()
     moduleOutput?.closeButtonAction()
+    moduleOutput?.moduleClosed()
   }
   
   func copyLinkAction(_ link: String?) {
@@ -142,6 +138,7 @@ private extension PremiumWithFriendsViewController {
   @objc
   func closeButtonAction() {
     moduleOutput?.closeButtonAction()
+    moduleOutput?.moduleClosed()
   }
 }
 

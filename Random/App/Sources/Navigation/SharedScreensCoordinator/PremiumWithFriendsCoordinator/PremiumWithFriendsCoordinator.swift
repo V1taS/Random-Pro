@@ -58,7 +58,7 @@ final class PremiumWithFriendsCoordinator: PremiumWithFriendsCoordinatorProtocol
     self.navigationController = navigationController
     self.services = services
   }
-  
+
   // MARK: - Internal func
   
   func selectPresentType(_ type: PremiumScreenPresentType) {

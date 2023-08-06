@@ -100,7 +100,8 @@ final class ADVGoogleScreenViewController: ADVGoogleScreenModule {
     closeButton.isEnabled = false
   }
   
-  override func finishFlow() {
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
     moduleOutput?.moduleClosed()
   }
 }

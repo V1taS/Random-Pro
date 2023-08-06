@@ -38,6 +38,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     if let urlContext = connectionOptions.urlContexts.first {
       self.deepLimkURL = urlContext.url
     }
+    
+    if let userActivity = connectionOptions.userActivities.first {
+      self.handleDynamicLink(userActivity: userActivity)
+    }
   }
   
   func sceneDidBecomeActive(_ scene: UIScene) {

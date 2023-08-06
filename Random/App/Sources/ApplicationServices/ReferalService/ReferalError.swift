@@ -24,4 +24,7 @@ enum ReferalError: Error {
   
   /// Ошибка создания нового документа
   case failedCreatingNewDocument(_ localizedDescription: String)
+  
+  /// Уже существует
+  case failedAlreadyExists
 }

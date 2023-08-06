@@ -44,21 +44,26 @@ final class ReferalServiceImpl: ReferalService {
     
     let premiumData: [String: Any] = [
       appearance.id: selfID,
-      appearance.isPremium: true
+      appearance.isPremium: true,
+      "state": "freePremium"
     ]
     
     premiumCollection.document(selfID).setData(premiumData) { error in
       if let error = error {
-        completion?(.failure(.failedCreatingNewDocument(error.localizedDescription)))
+        DispatchQueue.main.async {
+          completion?(.failure(.failedCreatingNewDocument(error.localizedDescription)))
+        }
       } else {
-        completion?(.success(()))
+        DispatchQueue.main.async {
+          completion?(.success(()))
+        }
       }
     }
   }
   
   func saveInfo(friendID: String?, completion: ((Result<Void, ReferalError>) -> Void)?) {
     guard let selfID = UIDevice.current.identifierForVendor?.uuidString,
-          let friendID,
+          let friendID = friendID,
           selfID != friendID else {
       completion?(.failure(.failedToGetIdentifier))
       return
@@ -69,24 +74,44 @@ final class ReferalServiceImpl: ReferalService {
     
     referralCollection.document(friendID).getDocument { (document, error) in
       if let error = error {
-        completion?(.failure(.failedGettingDocument(error.localizedDescription)))
+        DispatchQueue.main.async {
+          completion?(.failure(.failedGettingDocument(error.localizedDescription)))
+        }
         return
       }
       
       // Ситуация, когда такой документ существует
       if let document = document, document.exists {
         if var data = document.data(), var referals = data[appearance.referals] as? [String] {
-          referals.append(selfID)
-          data[appearance.referals] = referals
-          referralCollection.document(friendID).setData(data) { error in
-            if let error = error {
-              completion?(.failure(.failedUpdatingDocument(error.localizedDescription)))
-            } else {
-              completion?(.success(()))
+          
+          // Проверяем, содержится ли selfID уже в массиве referals
+          if !referals.contains(selfID) {
+            referals.append(selfID)
+            data[appearance.referals] = referals
+            referralCollection.document(friendID).setData(data) { error in
+              if let error = error {
+                DispatchQueue.main.async {
+                  completion?(.failure(.failedUpdatingDocument(error.localizedDescription)))
+                }
+              } else {
+                DispatchQueue.main.async {
+                  // Успех при обновлении документа
+                  completion?(.success(()))
+                }
+              }
+            }
+          } else {
+            // Если selfID уже присутствует, просто возвращаем успех, поскольку нам не нужно повторно добавлять идентификатор.
+            DispatchQueue.main.async {
+              // Успех, так как selfID уже существует в referals и не требует дополнительных изменений
+              completion?(.failure(.failedAlreadyExists))
             }
           }
+          
         } else {
-          completion?(.failure(.failedToUpdateReferals))
+          DispatchQueue.main.async {
+            completion?(.failure(.failedToUpdateReferals))
+          }
         }
       } else { // Ситуация, когда такого документа не существует
         let newReferal: [String: Any] = [
@@ -95,9 +120,15 @@ final class ReferalServiceImpl: ReferalService {
         ]
         referralCollection.document(friendID).setData(newReferal) { error in
           if let error = error {
-            completion?(.failure(.failedCreatingNewDocument(error.localizedDescription)))
+            DispatchQueue.main.async {
+              completion?(.failure(.failedCreatingNewDocument(error.localizedDescription)))
+            }
+            
           } else {
-            completion?(.success(()))
+            DispatchQueue.main.async {
+              // Успех при создании нового документа
+              completion?(.success(()))
+            }
           }
         }
       }

@@ -129,8 +129,7 @@ final class TeamsScreenViewController: TeamsScreenModule {
     interactor.updateStyle()
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
+  override func finishFlow() {
     moduleOutput?.moduleClosed()
   }
   

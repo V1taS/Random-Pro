@@ -83,8 +83,7 @@ final class PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenMo
     navigationController?.navigationBar.prefersLargeTitles = true
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
+  override func finishFlow() {
     moduleOutput?.moduleClosed()
   }
 }

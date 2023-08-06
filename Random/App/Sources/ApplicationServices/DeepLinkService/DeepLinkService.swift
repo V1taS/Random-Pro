@@ -69,42 +69,50 @@ final class DeepLinkServiceImpl: DeepLinkService {
     }
   }
   
-  func parseDynamicLink(_ url: URL?, completion: ((DynamicLinkType) -> Void)? ) {
-    // Проверяем, что схема URL соответствует вашей схеме
-    let appearance = Appearance()
-    guard let url,
-          url.scheme == appearance.scheme else {
+  func parseDynamicLink(_ url: URL?, completion: ((DynamicLinkType) -> Void)?) {
+    guard let url = url else {
       return
     }
     
     // Разбор URL на компоненты
     let components = URLComponents(url: url, resolvingAgainstBaseURL: true)
     
+    if let linkComponent = components?.queryItems?.first(where: { $0.name == "link" }),
+       let linkValue = linkComponent.value,
+       let linkURL = URL(string: linkValue) {
+      // Обработка динамической ссылки от Firebase
+      let innerComponents = URLComponents(url: linkURL, resolvingAgainstBaseURL: true)
+      parseComponents(innerComponents, completion: completion)
+    } else {
+      // Обработка прямой ссылки
+      parseComponents(components, completion: completion)
+    }
+  }
+  
+  func parseComponents(_ components: URLComponents?, completion: ((DynamicLinkType) -> Void)?) {
     // Извлекаем userID
     let userID = components?.queryItems?.first(where: { $0.name == "userID" })?.value
     
-    guard let userID else {
-      return
-    }
-    
     // Извлекаем тип
-    let pathString = components?.path.trimmingCharacters(in: ["/"])
-    var dynamicLinkType: DynamicLinkType?
-    DynamicLinkType.allCases.forEach { type in
-      if let pathString, pathString.contains(type.rawValue) {
-        switch type {
-        case .invite:
-          dynamicLinkType = .invite(userInfo: userID)
-        case .freePremium:
-          dynamicLinkType = .freePremium
+    let pathString = components?.path.trimmingCharacters(in: ["/"]) ?? ""
+    let path = pathString.isEmpty ? components?.host : pathString
+    
+    for type in DynamicLinkType.allCases {
+      switch type {
+      case .invite:
+        if let path, path.contains(type.rawValue) {
+          if let userID = userID {
+            completion?(.invite(userInfo: userID))
+            return
+          }
         }
-        return
+      case .freePremium:
+        if let path, path.contains(type.rawValue) {
+          completion?(.freePremium)
+          return
+        }
       }
     }
-    guard let dynamicLinkType else {
-      return
-    }
-    completion?(dynamicLinkType)
   }
 }
 

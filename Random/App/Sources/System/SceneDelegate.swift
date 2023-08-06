@@ -74,13 +74,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 private extension SceneDelegate {
   func handleDynamicLink(userActivity: NSUserActivity) {
-    guard let webpageURL = userActivity.webpageURL else {
+    guard let dynamiclink = userActivity.webpageURL else {
       return
     }
-    DynamicLinks.dynamicLinks().handleUniversalLink(webpageURL) { dynamiclink, _ in
-      if let dynamiclink = dynamiclink, let deepLimkURL = dynamiclink.url {
-        self.deepLimkURL = deepLimkURL
-      }
-    }
+    
+    self.deepLimkURL = dynamiclink
   }
 }

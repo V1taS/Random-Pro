@@ -770,6 +770,11 @@ private extension MainScreenCoordinator {
         }
       }
     }
+    
+    var deepLinkService: DeepLinkService = services.deepLinkService
+    deepLinkService.dynamicLinkType = nil
+    services.metricsService.track(event: .deepLinks,
+                                  properties: ["dynamicLink": deepLinkType.rawValue])
   }
   
   func startDeepLink() {

@@ -26,7 +26,15 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   
   // MARK: - Private properties
   
-  let featureToggleServices: FeatureToggleServices
+  private let featureToggleServices: FeatureToggleServices
+  private var storageService: StorageService
+  private var mainScreenModel: MainScreenModel? {
+    get {
+      storageService.getData(from: MainScreenModel.self)
+    } set {
+      storageService.saveData(newValue)
+    }
+  }
   
   // MARK: - Initialization
   
@@ -34,12 +42,19 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     featureToggleServices = services.featureToggleServices
+    storageService = services.storageService
   }
   
   // MARK: - Internal func
   
   func getPremiumWithFriendsToggle(completion: ((Bool) -> Void)?) {
-    completion?(featureToggleServices.isToggleFor(feature: .isPremiumWithFriends))
+    let isPremiumWithFriends = featureToggleServices.isToggleFor(feature: .isPremiumWithFriends)
+    let isPremium = mainScreenModel?.isPremium ?? false
+    if isPremiumWithFriends, !isPremium {
+      completion?(true)
+    } else {
+      completion?(false)
+    }
   }
 }
 

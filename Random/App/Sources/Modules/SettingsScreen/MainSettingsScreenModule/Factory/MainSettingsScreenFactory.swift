@@ -99,7 +99,7 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       ))
       tableViewModels.append(.divider)
       
-      if isPremiumWithFriends || self.isDebug() {
+      if isPremiumWithFriends {
         tableViewModels.append(.squircleImageAndLabelWithChevronCell(
           squircleBGColors: [RandomColor.only.primaryRed,
                              RandomColor.only.primaryPink],

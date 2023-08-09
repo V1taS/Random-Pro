@@ -182,6 +182,7 @@ final class ReferalServiceImpl: ReferalService {
     
     let iOSParams = DynamicLinkIOSParameters(bundleID: appearance.bundleID)
     iOSParams.appStoreID = appearance.appStoreID
+    iOSParams.fallbackURL = URL(string: "https://apps.apple.com/app/id\(appearance.appStoreID)")
     components?.iOSParameters = iOSParams
     
     // Add the efr parameter

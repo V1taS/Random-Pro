@@ -166,31 +166,12 @@ final class ReferalServiceImpl: ReferalService {
   }
   
   func createDynamicLink() -> String? {
-    let appearance = Appearance()
     guard let userID = UIDevice.current.identifierForVendor?.uuidString else {
       return nil
     }
-    
-    guard let link = URL(string: "\(appearance.scheme)://\(DynamicLinkType.invite(userInfo: "").rawValue)?userID=\(userID)") else {
-      return nil
-    }
-    
-    let components = DynamicLinkComponents(
-      link: link,
-      domainURIPrefix: appearance.dynamicLinksDomainURIRandomPrefix
-    )
-    
-    let iOSParams = DynamicLinkIOSParameters(bundleID: appearance.bundleID)
-    iOSParams.appStoreID = appearance.appStoreID
-    iOSParams.fallbackURL = URL(string: "https://apps.apple.com/app/id\(appearance.appStoreID)")
-    components?.iOSParameters = iOSParams
-    
-    // Add the efr parameter
-    let options = DynamicLinkComponentsOptions()
-    options.pathLength = .short
-    components?.options = options
-    
-    return components?.url?.absoluteString
+    let baseLink = "https://random-pro.sosinvitalii.com/invite"
+    let fullLink = "\(baseLink)?userID=\(userID)"
+    return fullLink
   }
 }
 

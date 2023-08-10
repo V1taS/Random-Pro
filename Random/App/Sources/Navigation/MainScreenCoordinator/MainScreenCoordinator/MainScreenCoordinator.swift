@@ -753,7 +753,8 @@ private extension MainScreenCoordinator {
             timeout: nil,
             active: {}
           )
-        case .failure: break
+        case .failure:
+          break
         }
       }
     case .freePremium:
@@ -767,7 +768,8 @@ private extension MainScreenCoordinator {
             timeout: nil,
             active: {}
           )
-        case .failure: break
+        case .failure:
+          break
         }
       }
     }

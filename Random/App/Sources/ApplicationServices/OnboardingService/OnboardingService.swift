@@ -8,7 +8,7 @@
 
 import WelcomeSheet
 import UIKit
-import RandomNetwork
+import FancyNetwork
 import RandomUIKit
 
 protocol OnboardingService {

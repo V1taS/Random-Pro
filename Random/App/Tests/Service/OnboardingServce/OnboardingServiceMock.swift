@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 import WelcomeSheet
-import RandomNetwork
+import FancyNetwork
 @testable import Random
 
 final class OnboardingServiceMock: OnboardingService {

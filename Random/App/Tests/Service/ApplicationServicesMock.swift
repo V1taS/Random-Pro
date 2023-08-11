@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RandomNetwork
+import FancyNetwork
 import XCTest
 @testable import Random
 

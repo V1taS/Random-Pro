@@ -29,8 +29,8 @@ let project = Project(
       dependencies: [
         .target(name: "\(widgetName)"),
         .external(name: "RandomUIKit"),
-        .external(name: "RandomNetwork"),
-        .external(name: "Notifications"),
+        .external(name: "FancyNetwork"),
+        .external(name: "FancyNotifications"),
         .external(name: "ApphudSDK"),
         .external(name: "KeychainSwift"),
         .external(name: "YandexMobileMetricaPush"),

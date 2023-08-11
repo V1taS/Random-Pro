@@ -9,7 +9,7 @@
 import Foundation
 import YandexMobileMetrica
 import Firebase
-import RandomNetwork
+import FancyNetwork
 
 protocol MetricsService {
   

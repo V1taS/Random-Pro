@@ -7,7 +7,7 @@
 
 import UIKit
 import StoreKit
-import RandomNetwork
+import FancyNetwork
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}

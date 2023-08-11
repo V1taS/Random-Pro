@@ -7,7 +7,7 @@
 
 import Foundation
 import RandomUIKit
-import RandomNetwork
+import FancyNetwork
 
 /// События которые отправляем из Interactor в Presenter
 protocol SlogansScreenInteractorOutput: AnyObject {

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RandomNetwork
+import FancyNetwork
 import RandomUIKit
 
 /// События которые отправляем из Interactor в Presenter

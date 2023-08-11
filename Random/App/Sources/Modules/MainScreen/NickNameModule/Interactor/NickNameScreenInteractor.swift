@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RandomNetwork
+import FancyNetwork
 
 /// События которые отправляем из Interactor в Presenter
 protocol NickNameScreenInteractorOutput: AnyObject {

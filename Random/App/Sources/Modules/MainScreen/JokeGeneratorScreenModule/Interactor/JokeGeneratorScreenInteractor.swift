@@ -7,7 +7,7 @@
 
 import UIKit
 import RandomUIKit
-import RandomNetwork
+import FancyNetwork
 
 /// События которые отправляем из Interactor в Presenter
 protocol JokeGeneratorScreenInteractorOutput: AnyObject {

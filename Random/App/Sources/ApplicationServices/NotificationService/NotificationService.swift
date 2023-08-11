@@ -8,7 +8,7 @@
 
 import UIKit
 import RandomUIKit
-import Notifications
+import FancyNotifications
 
 protocol NotificationService {
   

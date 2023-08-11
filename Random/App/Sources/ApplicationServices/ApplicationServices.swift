@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RandomNetwork
+import FancyNetwork
 
 /// Протокол, описывающий все зависимости системы.
 /// Создан для отказа от DI framework в пользу концепции Composition Root.

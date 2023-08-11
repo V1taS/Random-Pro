@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RandomNetwork
+import FancyNetwork
 import XCTest
 @testable import Random
 
@@ -18,15 +18,15 @@ final class NetworkServiceMock: NetworkService {
   var mapCalled = false
   
   // Stub variables
-  var requestResult: Result<Data?, RandomNetwork.NetworkError>?
+  var requestResult: Result<Data?, FancyNetwork.NetworkError>?
   var mappedData: Codable?
   
   func performRequestWith(
     urlString: String,
     queryItems: [URLQueryItem],
-    httpMethod: RandomNetwork.NetworkMethod,
-    headers: [RandomNetwork.HeadersType],
-    completion: ((Result<Data?, RandomNetwork.NetworkError>) -> Void)?) {
+    httpMethod: FancyNetwork.NetworkMethod,
+    headers: [FancyNetwork.HeadersType],
+    completion: ((Result<Data?, FancyNetwork.NetworkError>) -> Void)?) {
       performRequestWithCalled = true
       completion?(requestResult ?? .failure(.invalidURLRequest))
     }

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol PasswordScreenViewOutput: AnyObject {
@@ -170,7 +171,7 @@ private extension PasswordScreenView {
         if characterStr.isNumber {
           passwordAttributed.addAttribute(
             NSAttributedString.Key.foregroundColor,
-            value: RandomColor.only.primaryBlue,
+            value: fancyColor.only.primaryBlue,
             range: NSRange(location: index, length: 1)
           )
           continue
@@ -179,7 +180,7 @@ private extension PasswordScreenView {
         if characterStr.isSymbols {
           passwordAttributed.addAttribute(
             NSAttributedString.Key.foregroundColor,
-            value: RandomColor.only.primaryRed,
+            value: fancyColor.only.primaryRed,
             range: NSRange(location: index, length: 1)
           )
           continue
@@ -188,14 +189,14 @@ private extension PasswordScreenView {
         if characterStr.isLowercaseLetters {
           passwordAttributed.addAttribute(
             NSAttributedString.Key.foregroundColor,
-            value: RandomColor.only.primaryGreen,
+            value: fancyColor.only.primaryGreen,
             range: NSRange(location: index, length: 1)
           )
           continue
         }
         passwordAttributed.addAttribute(
           NSAttributedString.Key.foregroundColor,
-          value: RandomColor.darkAndLightTheme.primaryGray,
+          value: fancyColor.darkAndLightTheme.primaryGray,
           range: NSRange(location: index, length: 1)
         )
       }
@@ -205,7 +206,7 @@ private extension PasswordScreenView {
   
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     passwordGeneratorView.resultLabelAction = { [weak self] in
       self?.output?.resultLabelAction()

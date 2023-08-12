@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol NumberScreenViewOutput: AnyObject {
@@ -139,12 +140,12 @@ extension NumberScreenView: UITextFieldDelegate {
 private extension NumberScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    rangeStartTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
-    rangeEndTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    rangeStartTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
+    rangeEndTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
     
@@ -164,11 +165,11 @@ private extension NumberScreenView {
     rangeEndTextField.keyboardType = .numberPad
     
     rangeStartLabel.text = appearance.min
-    rangeStartLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    rangeStartLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     rangeStartLabel.font = RandomFont.primaryMedium18
     
     rangeEndLabel.text = appearance.max
-    rangeEndLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    rangeEndLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     rangeEndLabel.font = RandomFont.primaryMedium18
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))

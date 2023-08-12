@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 protocol DateTimeViewOutput: AnyObject {
   
@@ -84,11 +85,11 @@ private extension DateTimeView {
   func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     isUserInteractionEnabled = true
     
     resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     
     generateButtonDay.setTitle(appearance.textButtonDayTitle, for: .normal)

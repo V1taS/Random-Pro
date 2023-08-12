@@ -7,15 +7,16 @@
 //
 
 import SwiftUI
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 struct GradientBackgroundModifier: ViewModifier {
   var gradientBackground: [Color]
 
   init(gradientBackground: [Color]? = nil) {
     self.gradientBackground = gradientBackground ?? [
-      Color(RandomColor.only.primaryGreen),
-      Color(RandomColor.only.secondaryGreen)]
+      Color(fancyColor.only.primaryGreen),
+      Color(fancyColor.only.secondaryGreen)]
   }
 
   func body(content: Content) -> some View {

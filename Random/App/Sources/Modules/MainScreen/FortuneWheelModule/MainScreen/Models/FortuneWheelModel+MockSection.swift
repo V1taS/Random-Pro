@@ -7,7 +7,8 @@
 //
 
 import RandomWheel
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import UIKit
 
 // MARK: - Mock section

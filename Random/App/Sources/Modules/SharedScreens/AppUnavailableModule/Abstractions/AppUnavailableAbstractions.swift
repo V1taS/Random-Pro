@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из `AppUnavailableModule` в `Coordinator`
 public protocol AppUnavailableModuleOutput: AnyObject {

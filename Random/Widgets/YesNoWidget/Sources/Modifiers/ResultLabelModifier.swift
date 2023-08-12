@@ -7,7 +7,8 @@
 //
 
 import SwiftUI
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 // Структура копирует стиль resultLabel
 // Для копировния необходимо просто подписать текст под модификатор .modifier(ResultLabelModifier(fontSize: *))
@@ -22,7 +23,7 @@ struct ResultLabelModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .font(.system(size: CGFloat(fontSize), weight: .bold))
-      .foregroundColor(Color(RandomColor.only.primaryWhite))
+      .foregroundColor(Color(fancyColor.only.primaryWhite))
       .multilineTextAlignment(.center)
   }
 }

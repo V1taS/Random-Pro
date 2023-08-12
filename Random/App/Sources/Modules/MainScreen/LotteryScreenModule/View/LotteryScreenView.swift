@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 protocol LotteryScreenViewOutput: AnyObject {
   
@@ -114,17 +115,17 @@ extension LotteryScreenView: UITextFieldDelegate {
 private extension LotteryScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    rangeStartTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
-    rangeEndTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
-    amountNumberTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    rangeStartTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
+    rangeEndTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
+    amountNumberTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
     isUserInteractionEnabled = true
     
     resultTextView.font = RandomFont.primaryBold50
-    resultTextView.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultTextView.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
-    resultTextView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    resultTextView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     let padding = resultTextView.textContainer.lineFragmentPadding
     resultTextView.textContainerInset =  UIEdgeInsets(top: .zero,
@@ -154,7 +155,7 @@ private extension LotteryScreenView {
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
-    amountNumberLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    amountNumberLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     amountNumberLabel.font = RandomFont.primaryRegular18
     amountNumberLabel.text = appearance.textAmountLabel + ":"
     
@@ -163,12 +164,12 @@ private extension LotteryScreenView {
     amountNumberTextField.delegate = self
     
     rangeNumberLabel.font = RandomFont.primaryRegular18
-    rangeNumberLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    rangeNumberLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     rangeNumberLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     rangeNumberLabel.text = appearance.textRangeLabel + ":"
     
     betweenRangeLabel.font = RandomFont.primaryMedium18
-    betweenRangeLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    betweenRangeLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     betweenRangeLabel.text = appearance.separatorTitle
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))

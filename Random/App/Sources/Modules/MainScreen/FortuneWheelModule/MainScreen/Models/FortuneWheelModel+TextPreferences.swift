@@ -7,7 +7,8 @@
 //
 
 import RandomWheel
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import UIKit
 
 // MARK: - Title preferences
@@ -21,7 +22,7 @@ extension FortuneWheelModel {
       var textPreferences = TextPreferences(
         textColorType: .customPatternColors(
           colors: nil,
-          defaultColor: RandomColor.only.primaryWhite
+          defaultColor: fancyColor.only.primaryWhite
         ),
         font: RandomFont.primaryBold16,
         verticalOffset: 4

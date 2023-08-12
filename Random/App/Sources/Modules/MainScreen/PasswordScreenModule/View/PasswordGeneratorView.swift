@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 final class PasswordGeneratorView: UIView {
   
@@ -26,15 +27,15 @@ final class PasswordGeneratorView: UIView {
       crackTimeSlider.setValue(crackTimeStrengthValue, animated: true)
       switch crackTimeStrengthValue {
       case 0.0...0.2:
-        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryRed
+        crackTimeSlider.minimumTrackTintColor = fancyColor.only.primaryRed
       case 0.2...0.4:
-        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryOrange
+        crackTimeSlider.minimumTrackTintColor = fancyColor.only.primaryOrange
       case 0.4...0.7:
-        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryYellow
+        crackTimeSlider.minimumTrackTintColor = fancyColor.only.primaryYellow
       case 0.7...1.0:
-        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryGreen
+        crackTimeSlider.minimumTrackTintColor = fancyColor.only.primaryGreen
       default:
-        crackTimeSlider.minimumTrackTintColor = RandomColor.only.primaryGray
+        crackTimeSlider.minimumTrackTintColor = fancyColor.only.primaryGray
       }
     }
   }
@@ -203,14 +204,14 @@ private extension PasswordGeneratorView {
     crackTimeLabel.font = RandomFont.primaryBold18
     crackTimeLabel.numberOfLines = 2
     crackTimeLabel.textAlignment = .center
-    crackTimeLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    crackTimeLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     crackTimeisHidden = true
     
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    passwordLengthTextField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    passwordLengthTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
     
     settingOptionsLabel.text = appearance.parameters + ":"
-    settingOptionsLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    settingOptionsLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     settingOptionsLabel.font = RandomFont.primaryBold18
     settingOptionsLabel.numberOfLines = 1
     
@@ -219,19 +220,19 @@ private extension PasswordGeneratorView {
     labelsStackView.spacing = appearance.defaultSpacing
     
     uppercaseLettersLabel.text = appearance.uppercase
-    uppercaseLettersLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    uppercaseLettersLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     uppercaseLettersLabel.font = RandomFont.primaryMedium18
     
     lowercaseLettersLabel.text = appearance.lovercase
-    lowercaseLettersLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    lowercaseLettersLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     lowercaseLettersLabel.font = RandomFont.primaryMedium18
     
     numbersLabel.text = appearance.numbers
-    numbersLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    numbersLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     numbersLabel.font = RandomFont.primaryMedium18
     
     symbolsLabel.text = appearance.symbols
-    symbolsLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    symbolsLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     symbolsLabel.font = RandomFont.primaryMedium18
     
     switchersStackView.axis = .vertical
@@ -259,7 +260,7 @@ private extension PasswordGeneratorView {
                             for: .valueChanged)
     
     passwordLengthLabel.text = appearance.longPassword + ":"
-    passwordLengthLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    passwordLengthLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     passwordLengthLabel.font = RandomFont.primaryBold18
     
     textFieldStackView.axis = .horizontal
@@ -271,7 +272,7 @@ private extension PasswordGeneratorView {
     passwordLengthTextField.placeholder = appearance.rangeStartValue
     passwordLengthTextField.keyboardType = .numberPad
     
-    resultTextView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    resultTextView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     resultTextView.font = RandomFont.primaryMedium24
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false

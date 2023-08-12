@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol MainSettingsScreenViewOutput: AnyObject {
@@ -133,7 +134,7 @@ extension MainSettingsScreenView: UITableViewDataSource {
         cell.configureCellWith(
           squircleBGColors: squircleBGColors,
           leftSideImage: UIImage(systemName: leftSideImageSystemName),
-          leftSideImageColor: RandomColor.only.primaryWhite,
+          leftSideImageColor: fancyColor.only.primaryWhite,
           titleText: title,
           startSelectedSegmentIndex: startSelectedSegmentIndex,
           listOfItemsInSegmentedControl: [
@@ -168,7 +169,7 @@ extension MainSettingsScreenView: UITableViewDataSource {
       ) as? SquircleImageAndLabelWithChevronCell {
         cell.configureCellWith(squircleBGColors: squircleBGColors,
                                leftSideImage: UIImage(systemName: leftSideImageSystemName),
-                               leftSideImageColor: RandomColor.only.primaryWhite,
+                               leftSideImageColor: fancyColor.only.primaryWhite,
                                titleText: title,
                                isChevron: true)
         viewCell = cell
@@ -178,8 +179,8 @@ extension MainSettingsScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .divider:
@@ -261,19 +262,19 @@ private extension MainSettingsScreenView {
   func applyDefaultBehavior() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     stackFeedBack.axis = .vertical
     stackFeedBack.alignment = .center
     stackFeedBack.spacing = appearance.minInset
     
-    feedBackLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    feedBackLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     feedBackLabel.font = RandomFont.primaryRegular16
     feedBackLabel.text = "\(appearance.feedbackButtonTitle):"
     
     feedBackButton.setTitle(appearance.addressRecipients, for: .normal)
-    feedBackButton.setTitleColor(RandomColor.only.primaryBlue, for: .normal)
+    feedBackButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
     feedBackButton.titleLabel?.font = RandomFont.primaryRegular16
     feedBackButton.addTarget(self,
                              action: #selector(feedBackButtonAction),

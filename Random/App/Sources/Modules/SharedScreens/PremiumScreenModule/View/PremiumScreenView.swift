@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 
 /// События которые отправляем из View в Presenter
@@ -202,13 +203,13 @@ private extension PremiumScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    dividerView.backgroundColor = RandomColor.only.secondaryGray
+    dividerView.backgroundColor = fancyColor.only.secondaryGray
     
     restorePurchaseButton.setTitle(appearance.restoreTitle, for: .normal)
-    restorePurchaseButton.setTitleColor(RandomColor.only.primaryBlue, for: .normal)
+    restorePurchaseButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
     
     linkTextView.backgroundColor = .clear
     let termsConditionsAndPrivacyPolicy = "\(appearance.termsConditions) \(appearance.andTitle) \(appearance.privacyPolicy)"
@@ -218,7 +219,7 @@ private extension PremiumScreenView {
       appearance.privacyPolicy: appearance.privacyPolicyLink
     ])
     
-    bottomContainerView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    bottomContainerView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     mainButton.setTitle(appearance.subscribeTitle, for: .normal)
     mainButton.addTarget(self, action: #selector(mainButtonAction), for: .touchUpInside)
@@ -226,7 +227,7 @@ private extension PremiumScreenView {
     
     loaderLabel.textAlignment = .center
     loaderLabel.font = RandomFont.primaryMedium32
-    loaderLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    loaderLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     loaderLabel.text = "\(appearance.processingPaymentTitle)..."
     loaderLabel.numberOfLines = appearance.numberOfLines
     

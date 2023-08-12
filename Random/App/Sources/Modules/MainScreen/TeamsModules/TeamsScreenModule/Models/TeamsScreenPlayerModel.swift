@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 // MARK: - Player
 

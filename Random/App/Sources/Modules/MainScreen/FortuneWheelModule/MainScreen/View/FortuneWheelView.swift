@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import RandomWheel
 
 /// События которые отправляем из View в Presenter
@@ -169,7 +170,7 @@ private extension FortuneWheelView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     fortuneWheel?.layer.shadowColor = UIColor.black.cgColor
     fortuneWheel?.layer.shadowOpacity = 0.3
@@ -179,7 +180,7 @@ private extension FortuneWheelView {
     fortuneWheel?.layer.rasterizationScale = UIScreen.main.scale
     
     resultLabel.font = RandomFont.primaryBold32
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.text = "?"
   }
 }

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 import GoogleMobileAds
 
@@ -182,27 +183,27 @@ private extension ADVGoogleScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     headlineView.numberOfLines = .zero
     descriptionView.numberOfLines = .zero
     mediaView.contentMode = .scaleAspectFill
     
     headlineView.font = RandomFont.primaryMedium24
-    headlineView.textColor = RandomColor.darkAndLightTheme.primaryGray
+    headlineView.textColor = fancyColor.darkAndLightTheme.primaryGray
     
     descriptionView.font = RandomFont.primaryMedium18
-    descriptionView.textColor = RandomColor.darkAndLightTheme.primaryGray
+    descriptionView.textColor = fancyColor.darkAndLightTheme.primaryGray
     
     starRatingView.font = RandomFont.primaryMedium18
-    starRatingView.textColor = RandomColor.darkAndLightTheme.primaryGray
+    starRatingView.textColor = fancyColor.darkAndLightTheme.primaryGray
     
     estimatedSecondsView.font = RandomFont.primaryMedium16
-    estimatedSecondsView.textColor = RandomColor.only.primaryBlue
+    estimatedSecondsView.textColor = fancyColor.only.primaryBlue
     estimatedSecondsView.isHidden = true
     
     callToActionButton.titleLabel?.font = RandomFont.primaryMedium18
-    callToActionButton.setTitleColor(RandomColor.only.primaryBlue, for: .normal)
+    callToActionButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
     
     lottieAnimationView.isHidden = true
     lottieAnimationView.contentMode = .scaleAspectFit

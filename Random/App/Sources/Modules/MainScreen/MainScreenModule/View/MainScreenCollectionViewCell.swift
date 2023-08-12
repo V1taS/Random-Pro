@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// CollectionViewCell
 final class MainScreenCollectionViewCell: UICollectionViewCell {
@@ -85,7 +86,7 @@ private extension MainScreenCollectionViewCell {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
   }
 }
 

@@ -7,7 +7,8 @@
 
 import WidgetKit
 import SwiftUI
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 struct Provider: TimelineProvider {
   

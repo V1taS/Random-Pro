@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol BottleScreenViewOutput: AnyObject {
@@ -97,7 +98,7 @@ private extension BottleScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     bottleImageView.image = appearance.bottleImage
     bottleImageView.contentMode = .scaleAspectFit

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol MainSettingsScreenFactoryOutput: AnyObject {
@@ -54,18 +55,18 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       
 #if DEBUG
       tableViewModels.append(.squircleImageAndLabelWithSwitchControl(
-        squircleBGColors: [RandomColor.only.primaryRed,
-                           RandomColor.only.primaryPink],
+        squircleBGColors: [fancyColor.only.primaryRed,
+                           fancyColor.only.primaryPink],
         leftSideImage: appearance.primiumDEBUGImage,
-        leftSideImageColor: RandomColor.only.primaryWhite,
+        leftSideImageColor: fancyColor.only.primaryWhite,
         titleText: appearance.primiumDEBUGTitle,
         isResultSwitch: model.isPremium
       ))
 #endif
       
       tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(
-        squircleBGColors: [RandomColor.only.primaryBlue,
-                           RandomColor.only.primaryBlue],
+        squircleBGColors: [fancyColor.only.primaryBlue,
+                           fancyColor.only.primaryBlue],
         leftSideImageSystemName: appearance.darkThemeImageSystemName,
         title: appearance.darkThemeTitle,
         startSelectedSegmentIndex: startSegmentIndex
@@ -73,8 +74,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       tableViewModels.append(.divider)
       
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(
-        squircleBGColors: [RandomColor.only.primaryOrange,
-                           RandomColor.only.primaryOrange],
+        squircleBGColors: [fancyColor.only.primaryOrange,
+                           fancyColor.only.primaryOrange],
         leftSideImageSystemName: appearance.customMainSectionsImageSystemName,
         title: appearance.customMainSectionsTitle,
         type: .customMainSections
@@ -82,8 +83,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       tableViewModels.append(.divider)
       
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(
-        squircleBGColors: [RandomColor.only.primaryGreen,
-                           RandomColor.only.primaryGreen],
+        squircleBGColors: [fancyColor.only.primaryGreen,
+                           fancyColor.only.primaryGreen],
         leftSideImageSystemName: appearance.applicationIconnImageSystemName,
         title: appearance.applicationIconTitle,
         type: .applicationIconSections
@@ -91,8 +92,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       tableViewModels.append(.divider)
       
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(
-        squircleBGColors: [RandomColor.only.primaryPurple,
-                           RandomColor.only.tertiaryBlue],
+        squircleBGColors: [fancyColor.only.primaryPurple,
+                           fancyColor.only.tertiaryBlue],
         leftSideImageSystemName: appearance.premiumImageSystemName,
         title: appearance.premiumTitle,
         type: .premiumSections
@@ -101,8 +102,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       
       if isPremiumWithFriends {
         tableViewModels.append(.squircleImageAndLabelWithChevronCell(
-          squircleBGColors: [RandomColor.only.primaryRed,
-                             RandomColor.only.primaryPink],
+          squircleBGColors: [fancyColor.only.primaryRed,
+                             fancyColor.only.primaryPink],
           leftSideImageSystemName: appearance.premiumWithFriendsImageSystemName,
           title: appearance.premiumWithFriendsTitle,
           type: .premiumWithFriends
@@ -111,8 +112,8 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
       }
       
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(
-        squircleBGColors: [RandomColor.only.secondaryGray,
-                           RandomColor.only.secondaryGray],
+        squircleBGColors: [fancyColor.only.secondaryGray,
+                           fancyColor.only.secondaryGray],
         leftSideImageSystemName: appearance.shareImageSystemName,
         title: appearance.shareTitle,
         type: .shareSections

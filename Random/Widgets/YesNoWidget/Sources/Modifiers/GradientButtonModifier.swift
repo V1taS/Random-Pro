@@ -7,7 +7,8 @@
 //
 
 import SwiftUI
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 // Структура копирует стиль кнопки из ButtonView в RandomUIKit
 // Для копировния необходимо просто подписать кнопку под модификатор .gradientButtonStyle()
@@ -18,8 +19,8 @@ struct GradientButtonModifier: ViewModifier {
   
   init(gradientBackground: [Color]? = nil) {
     self.gradientBackground = gradientBackground ?? [
-      Color(RandomColor.only.primaryGreen),
-      Color(RandomColor.only.secondaryGreen)]
+      Color(fancyColor.only.primaryGreen),
+      Color(fancyColor.only.secondaryGreen)]
   }
   
   func body(content: Content) -> some View {

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol ListScreenViewOutput: AnyObject {
@@ -74,14 +75,14 @@ final class ListScreenView: ListScreenViewProtocol {
 private extension ListScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultTextView.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultTextView.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultTextView.font = RandomFont.primaryMedium32
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
     resultTextView.isSelectable = false
-    resultTextView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    resultTextView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     resultTextView.centerVerticalText()
     resultTextView.onTextTap = { [weak self] in
       self?.resultAction()

@@ -107,14 +107,14 @@ private extension AppUnavailableView {
     stubAnimationView.animationSpeed = Appearance().animationSpeed
     
     titleLabel.numberOfLines = .zero
-    titleLabel.font = RandomFont.primaryMedium18
+    titleLabel.font = fancyFont.primaryMedium18
     titleLabel.textColor = fancyColor.darkAndLightTheme.primaryBlack
     titleLabel.textAlignment = .center
     titleLabel.text = RandomStrings.Localizable.wowRandomProOnAShortTechBreak
     
     feedBackButton.setTitle(Appearance().addressRecipients, for: .normal)
     feedBackButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
-    feedBackButton.titleLabel?.font = RandomFont.primaryRegular16
+    feedBackButton.titleLabel?.font = fancyFont.primaryRegular16
     feedBackButton.addTarget(self,
                              action: #selector(feedBackButtonAction),
                              for: .touchUpInside)

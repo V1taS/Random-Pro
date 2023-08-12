@@ -211,7 +211,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
         cell.configureCellWith(
           titleText: text,
           textColor: fancyColor.darkAndLightTheme.secondaryGray,
-          textFont: RandomFont.primaryMedium14,
+          textFont: fancyFont.primaryMedium14,
           textAlignment: .left
         )
         viewCell = cell
@@ -225,7 +225,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
         cell.configureCellWith(
           titleText: object,
           textColor: fancyColor.darkAndLightTheme.primaryGray,
-          textFont: RandomFont.primaryMedium18,
+          textFont: fancyFont.primaryMedium18,
           textAlignment: .center
         )
         viewCell = cell

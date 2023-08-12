@@ -189,20 +189,20 @@ private extension ADVGoogleScreenView {
     descriptionView.numberOfLines = .zero
     mediaView.contentMode = .scaleAspectFill
     
-    headlineView.font = RandomFont.primaryMedium24
+    headlineView.font = fancyFont.primaryMedium24
     headlineView.textColor = fancyColor.darkAndLightTheme.primaryGray
     
-    descriptionView.font = RandomFont.primaryMedium18
+    descriptionView.font = fancyFont.primaryMedium18
     descriptionView.textColor = fancyColor.darkAndLightTheme.primaryGray
     
-    starRatingView.font = RandomFont.primaryMedium18
+    starRatingView.font = fancyFont.primaryMedium18
     starRatingView.textColor = fancyColor.darkAndLightTheme.primaryGray
     
-    estimatedSecondsView.font = RandomFont.primaryMedium16
+    estimatedSecondsView.font = fancyFont.primaryMedium16
     estimatedSecondsView.textColor = fancyColor.only.primaryBlue
     estimatedSecondsView.isHidden = true
     
-    callToActionButton.titleLabel?.font = RandomFont.primaryMedium18
+    callToActionButton.titleLabel?.font = fancyFont.primaryMedium18
     callToActionButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
     
     lottieAnimationView.isHidden = true

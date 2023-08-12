@@ -88,7 +88,7 @@ private extension DateTimeView {
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     isUserInteractionEnabled = true
     
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = fancyFont.primaryBold50
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     

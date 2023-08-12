@@ -179,7 +179,7 @@ private extension FortuneWheelView {
     fortuneWheel?.layer.shouldRasterize = true
     fortuneWheel?.layer.rasterizationScale = UIScreen.main.scale
     
-    resultLabel.font = RandomFont.primaryBold32
+    resultLabel.font = fancyFont.primaryBold32
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.text = "?"
   }

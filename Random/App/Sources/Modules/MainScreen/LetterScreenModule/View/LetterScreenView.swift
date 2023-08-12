@@ -76,7 +76,7 @@ private extension LetterScreenView {
     let appearance = Appearance()
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.font = fancyFont.primaryBold70
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)

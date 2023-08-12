@@ -66,7 +66,7 @@ final class SlogansScreenView: SlogansScreenViewProtocol {
   // MARK: - Internal func
 
   func set(result: String?) {
-    let fontSize = Appearance().result == result ? RandomFont.primaryBold50 : RandomFont.primaryBold24
+    let fontSize = Appearance().result == result ? fancyFont.primaryBold50 : fancyFont.primaryBold24
     resultLabel.font = fontSize
     resultLabel.text = result
 
@@ -122,7 +122,7 @@ private extension SlogansScreenView {
     let appearance = Appearance()
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
 
-    resultLabel.font = RandomFont.primaryBold24
+    resultLabel.font = fancyFont.primaryBold24
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero

@@ -144,7 +144,7 @@ private extension NumberScreenView {
     rangeEndTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.font = fancyFont.primaryBold70
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero
@@ -166,11 +166,11 @@ private extension NumberScreenView {
     
     rangeStartLabel.text = appearance.min
     rangeStartLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    rangeStartLabel.font = RandomFont.primaryMedium18
+    rangeStartLabel.font = fancyFont.primaryMedium18
     
     rangeEndLabel.text = appearance.max
     rangeEndLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    rangeEndLabel.font = RandomFont.primaryMedium18
+    rangeEndLabel.font = fancyFont.primaryMedium18
     
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     tap.cancelsTouchesInView = false

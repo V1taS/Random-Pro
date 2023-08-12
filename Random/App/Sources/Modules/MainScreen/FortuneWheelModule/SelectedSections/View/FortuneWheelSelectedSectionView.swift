@@ -161,7 +161,7 @@ extension FortuneWheelSelectedSectionView: UITableViewDataSource {
         cell.configureCellWith(
           titleText: text,
           textColor: fancyColor.darkAndLightTheme.secondaryGray,
-          textFont: RandomFont.primaryMedium14,
+          textFont: fancyFont.primaryMedium14,
           textAlignment: .left
         )
         viewCell = cell

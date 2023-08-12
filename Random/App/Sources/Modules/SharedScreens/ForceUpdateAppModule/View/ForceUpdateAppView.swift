@@ -105,7 +105,7 @@ private extension ForceUpdateAppView {
     stubAnimationView.animationSpeed = Appearance().animationSpeed
     
     titleLabel.numberOfLines = .zero
-    titleLabel.font = RandomFont.primaryMedium18
+    titleLabel.font = fancyFont.primaryMedium18
     titleLabel.textColor = fancyColor.darkAndLightTheme.primaryBlack
     titleLabel.textAlignment = .center
     titleLabel.text = RandomStrings.Localizable.oopsYourVersionOfRandomProIsOutOfDate

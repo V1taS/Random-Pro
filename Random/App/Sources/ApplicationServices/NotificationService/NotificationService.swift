@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import FancyNotifications
 
 protocol NotificationService {
@@ -96,8 +97,8 @@ final class NotificationServiceImpl: NotificationService {
     notifications.showAlertWith(
       model: NotificationsModel(
         text: title,
-        textColor: RandomColor.darkAndLightTheme.primaryGray,
-        style: .neutral(colorGlyph: RandomColor.darkAndLightTheme.primaryGray),
+        textColor: fancyColor.darkAndLightTheme.primaryGray,
+        style: .neutral(colorGlyph: fancyColor.darkAndLightTheme.primaryGray),
         timeout: timeout ?? appearance.timeout,
         glyph: glyph,
         throttleDelay: appearance.throttleDelay,

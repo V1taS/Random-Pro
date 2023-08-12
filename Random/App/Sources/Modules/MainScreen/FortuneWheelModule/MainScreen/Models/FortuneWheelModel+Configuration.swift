@@ -7,7 +7,8 @@
 //
 
 import RandomWheel
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import UIKit
 
 // MARK: - Configuration
@@ -26,12 +27,12 @@ extension FortuneWheelModel {
       let slicePreferences = SFWConfiguration.SlicePreferences(
         backgroundColorType: sliceColorType,
         strokeWidth: 1,
-        strokeColor: .randomColor.only.primaryWhite
+        strokeColor: fancyColor.only.primaryWhite
       )
       
       let circlePreferences = SFWConfiguration.CirclePreferences(
         strokeWidth: 5,
-        strokeColor: .randomColor.only.primaryGreen
+        strokeColor: fancyColor.only.primaryGreen
       )
       var wheelPreferences = SFWConfiguration.WheelPreferences(circlePreferences: circlePreferences,
                                                                slicePreferences: slicePreferences,

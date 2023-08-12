@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol SelecteAppIconScreenViewOutput: AnyObject {
@@ -83,8 +84,8 @@ private extension SelecteAppIconScreenView {
   func applyDefaultBehavior() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = appearance.estimatedRowHeight
@@ -147,8 +148,8 @@ extension SelecteAppIconScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(value))
-        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .divider:

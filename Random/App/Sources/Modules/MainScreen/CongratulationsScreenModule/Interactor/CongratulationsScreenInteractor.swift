@@ -7,7 +7,8 @@
 
 import UIKit
 import FancyNetwork
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из Interactor в Presenter
 protocol CongratulationsScreenInteractorOutput: AnyObject {

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol TeamsScreenFactoryOutput: AnyObject {

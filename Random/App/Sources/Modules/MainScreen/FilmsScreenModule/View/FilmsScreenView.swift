@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 
 /// События которые отправляем из View в Presenter
@@ -128,8 +129,8 @@ private extension FilmsScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    filmsView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    filmsView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     activityIndicator.isHidden = true
     activityIndicator.contentMode = .scaleAspectFit

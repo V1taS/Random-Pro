@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 
 /// События которые отправляем из View в Presenter
@@ -97,7 +98,7 @@ private extension ForceUpdateAppView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     stubAnimationView.contentMode = .scaleAspectFit
     stubAnimationView.loopMode = .loop
@@ -105,7 +106,7 @@ private extension ForceUpdateAppView {
     
     titleLabel.numberOfLines = .zero
     titleLabel.font = RandomFont.primaryMedium18
-    titleLabel.textColor = RandomColor.darkAndLightTheme.primaryBlack
+    titleLabel.textColor = fancyColor.darkAndLightTheme.primaryBlack
     titleLabel.textAlignment = .center
     titleLabel.text = RandomStrings.Localizable.oopsYourVersionOfRandomProIsOutOfDate
     

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol SettingsScreenViewOutput: AnyObject {
@@ -157,8 +158,8 @@ extension SettingsScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .divider:
@@ -229,8 +230,8 @@ private extension SettingsScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     tableView.delegate = self
     tableView.dataSource = self

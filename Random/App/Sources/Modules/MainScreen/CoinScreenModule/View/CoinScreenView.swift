@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 protocol CoinScreenViewOutput: AnyObject {
   
@@ -89,10 +90,10 @@ private extension CoinScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
     scrollResult.backgroundColor = .clear
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol ColorsScreenViewOutput: AnyObject {
@@ -107,11 +108,11 @@ private extension ColorsScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     showPlugView()
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = appearance.resultLabelNumberOfLines
     resultLabel.text = appearance.resultLabelTitle
@@ -136,7 +137,7 @@ private extension ColorsScreenView {
       guard let self = self else {
         return
       }
-      self.contentView.applyGradient(colors: [RandomColor.darkAndLightTheme.primaryWhite])
+      self.contentView.applyGradient(colors: [fancyColor.darkAndLightTheme.primaryWhite])
     }
   }
   
@@ -188,7 +189,7 @@ private extension ColorsScreenView {
   func updateResultText(text: String) {
     resultLabel.text = text
     resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.only.primaryWhite
+    resultLabel.textColor = fancyColor.only.primaryWhite
   }
   
   @objc

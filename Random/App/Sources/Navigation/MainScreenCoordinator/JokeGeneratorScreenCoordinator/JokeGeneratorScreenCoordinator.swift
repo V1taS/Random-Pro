@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 final class JokeGeneratorScreenCoordinator: Coordinator {
 

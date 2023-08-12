@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol MainScreenViewOutput: AnyObject {
@@ -286,9 +287,9 @@ private extension MainScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    collectionView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    collectionView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     collectionView.alwaysBounceVertical = true
     collectionView.register(MainScreenCollectionViewCell.self,
                             forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)

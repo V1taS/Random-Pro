@@ -9,7 +9,8 @@
 import WelcomeSheet
 import UIKit
 import FancyNetwork
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 protocol OnboardingService {
   
@@ -130,7 +131,7 @@ private extension OnboardingServiceImpl {
       var welcomeSheetPage = WelcomeSheetPage(title: model.onboardingData.title,
                                               rows: model.onboardingData.contents.map {
         WelcomeSheetPageRow(imageSystemName: $0.symbolsSF,
-                            accentUIColor: RandomColor.only.primaryGreen,
+                            accentUIColor: fancyColor.only.primaryGreen,
                             title: $0.title,
                             content: $0.description)
       })
@@ -140,7 +141,7 @@ private extension OnboardingServiceImpl {
       } else {
         welcomeSheetPage.mainButtonTitle = RandomStrings.Localizable.continue
       }
-      welcomeSheetPage.accentColor = .init(RandomColor.only.primaryGreen)
+      welcomeSheetPage.accentColor = .init(fancyColor.only.primaryGreen)
       return welcomeSheetPage
     }
   }

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol ListPlayersScreenViewOutput: AnyObject {
@@ -154,8 +155,8 @@ extension ListPlayersScreenView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case .textField:
@@ -166,7 +167,7 @@ extension ListPlayersScreenView: UITableViewDataSource {
                                      withConfiguration: Appearance().largeConfig)
         cell.configureCellWith(
           textField: textField,
-          textFieldBorderColor: RandomColor.darkAndLightTheme.secondaryGray,
+          textFieldBorderColor: fancyColor.darkAndLightTheme.secondaryGray,
           buttonImage: checkmarkImage,
           listGender: [appearance.male, appearance.female],
           buttonAction: { [weak self] in
@@ -198,10 +199,10 @@ extension ListPlayersScreenView: UITableViewDataSource {
       ) as? DoubleTitleCell {
         cell.configureCellWith(
           primaryText: "\(appearance.allTitle): \(playersCount)",
-          primaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
+          primaryTextColor: fancyColor.darkAndLightTheme.primaryGray,
           primaryTextFont: RandomFont.primaryMedium10,
           secondaryText: "\(appearance.forGameTitle): \(forGameCount)",
-          secondaryTextColor: RandomColor.darkAndLightTheme.primaryGray,
+          secondaryTextColor: fancyColor.darkAndLightTheme.primaryGray,
           secondaryTextFont: RandomFont.primaryMedium10
         )
         viewCell = cell
@@ -422,9 +423,9 @@ private extension ListPlayersScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    textField.layer.borderColor = RandomColor.darkAndLightTheme.secondaryGray.cgColor
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    textField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
     
     textField.placeholder = appearance.textFieldPlaceholder
     textField.delegate = self

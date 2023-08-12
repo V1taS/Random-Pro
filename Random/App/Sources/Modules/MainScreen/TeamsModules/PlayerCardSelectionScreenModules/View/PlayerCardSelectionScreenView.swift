@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol PlayerCardSelectionScreenViewOutput: AnyObject {
@@ -90,8 +91,8 @@ private extension PlayerCardSelectionScreenView {
   func applyDefaultBehavior() {
     let appearance = Appearance()
     
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    collectionView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    collectionView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     collectionView.showsVerticalScrollIndicator = false
     collectionView.alwaysBounceVertical = true
     collectionView.register(PlayerCollectionViewCell.self,

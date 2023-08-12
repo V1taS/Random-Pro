@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 
 /// События которые отправляем из View в Presenter
@@ -99,7 +100,7 @@ private extension AppUnavailableView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     stubAnimationView.contentMode = .scaleAspectFit
     stubAnimationView.loopMode = .loop
@@ -107,12 +108,12 @@ private extension AppUnavailableView {
     
     titleLabel.numberOfLines = .zero
     titleLabel.font = RandomFont.primaryMedium18
-    titleLabel.textColor = RandomColor.darkAndLightTheme.primaryBlack
+    titleLabel.textColor = fancyColor.darkAndLightTheme.primaryBlack
     titleLabel.textAlignment = .center
     titleLabel.text = RandomStrings.Localizable.wowRandomProOnAShortTechBreak
     
     feedBackButton.setTitle(Appearance().addressRecipients, for: .normal)
-    feedBackButton.setTitleColor(RandomColor.only.primaryBlue, for: .normal)
+    feedBackButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
     feedBackButton.titleLabel?.font = RandomFont.primaryRegular16
     feedBackButton.addTarget(self,
                              action: #selector(feedBackButtonAction),

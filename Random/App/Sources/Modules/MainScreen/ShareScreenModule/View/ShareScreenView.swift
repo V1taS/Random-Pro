@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol ShareScreenViewOutput: AnyObject {}
@@ -127,7 +128,7 @@ private extension ShareScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     imageView.layer.cornerRadius = 16
     imageView.clipsToBounds = true

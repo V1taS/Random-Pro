@@ -28,7 +28,7 @@ let project = Project(
       ],
       dependencies: [
         .target(name: "\(widgetName)"),
-        .external(name: "RandomUIKit"),
+        .external(name: "FancyUIKit"),
         .external(name: "FancyNetwork"),
         .external(name: "FancyNotifications"),
         .external(name: "ApphudSDK"),
@@ -61,7 +61,7 @@ let project = Project(
       ],
       scripts: [],
       dependencies: [
-        .external(name: "RandomUIKit")
+        .external(name: "FancyUIKit")
       ],
       settings: targetWidgetIOSSettings
     ),

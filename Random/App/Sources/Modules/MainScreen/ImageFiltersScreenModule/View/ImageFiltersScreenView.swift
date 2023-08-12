@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol ImageFiltersScreenViewOutput: AnyObject {
@@ -141,7 +142,7 @@ private extension ImageFiltersScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     imageView.image = appearance.plugImage
     imageView.contentMode = .scaleAspectFit
     cacheData = appearance.plugImage.jpegData(compressionQuality: 1)

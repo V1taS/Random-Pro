@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol TeamsScreenModuleOutput: AnyObject {
@@ -226,7 +227,7 @@ private extension TeamsScreenViewController {
                                          style: .plain,
                                          target: self,
                                          action: #selector(generateButtonAction))
-    generateButton.tintColor = RandomColor.only.primaryGreen
+    generateButton.tintColor = fancyColor.only.primaryGreen
 
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,

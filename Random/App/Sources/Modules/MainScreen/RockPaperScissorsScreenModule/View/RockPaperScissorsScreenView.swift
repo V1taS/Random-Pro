@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 
 /// События которые отправляем из View в Presenter
@@ -98,8 +99,8 @@ final class RockPaperScissorsScreenView: RockPaperScissorsScreenViewProtocol {
     }
     
     if style == .dark {
-      leftImageView.setImageColor(color: RandomColor.only.primaryWhite)
-      rightImageView.setImageColor(color: RandomColor.only.primaryWhite)
+      leftImageView.setImageColor(color: fancyColor.only.primaryWhite)
+      rightImageView.setImageColor(color: fancyColor.only.primaryWhite)
     }
     
     switch model.resultType {
@@ -177,8 +178,8 @@ private extension RockPaperScissorsScreenView {
     })
     
     if let interfaceStyle, interfaceStyle == .dark {
-      leftImageView.setImageColor(color: RandomColor.only.primaryWhite)
-      rightImageView.setImageColor(color: RandomColor.only.primaryWhite)
+      leftImageView.setImageColor(color: fancyColor.only.primaryWhite)
+      rightImageView.setImageColor(color: fancyColor.only.primaryWhite)
     }
   }
   
@@ -199,7 +200,7 @@ private extension RockPaperScissorsScreenView {
   
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     scoreLabel.font = .systemFont(ofSize: appearance.systemFontScore)
     

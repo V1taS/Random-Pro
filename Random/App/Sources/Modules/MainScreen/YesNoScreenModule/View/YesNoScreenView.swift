@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 protocol YesNoScreenViewOutput: AnyObject {
   
@@ -73,10 +74,10 @@ final class YesNoScreenView: YesNoScreenViewProtocol {
 
 private extension YesNoScreenView {
   func setupDefaultSettings() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold70
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     
     generateButton.setTitle(Appearance().buttonTitle, for: .normal)

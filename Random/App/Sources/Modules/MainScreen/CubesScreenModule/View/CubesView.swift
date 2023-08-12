@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import SceneKit
 import QuartzCore
 
@@ -354,7 +355,7 @@ private extension CubesView {
     scnView.autoenablesDefaultLighting = true
     scnView.delegate = self
     scnView.isPlaying = true
-    scnView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    scnView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
   }
   
   func setupCamera() {
@@ -373,7 +374,7 @@ private extension CubesView {
     let ambientLightNode = SCNNode()
     ambientLightNode.light = SCNLight()
     ambientLightNode.light?.type = .ambient
-    ambientLightNode.light?.color = RandomColor.only.primaryRed
+    ambientLightNode.light?.color = fancyColor.only.primaryRed
     scnScene.rootNode.addChildNode(ambientLightNode)
     
     let rotatingNode = SCNNode()

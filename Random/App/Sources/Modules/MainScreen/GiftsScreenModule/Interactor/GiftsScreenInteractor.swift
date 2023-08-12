@@ -7,7 +7,8 @@
 
 import Foundation
 import FancyNetwork
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из Interactor в Presenter
 protocol GiftsScreenInteractorOutput: AnyObject {

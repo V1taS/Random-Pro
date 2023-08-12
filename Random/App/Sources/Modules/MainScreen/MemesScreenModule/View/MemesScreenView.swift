@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 
 /// События которые отправляем из View в Presenter
@@ -119,7 +120,7 @@ private extension MemesScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     resultMemes.contentMode = .scaleAspectFit
     generateButton.setTitle(appearance.buttonTitle, for: .normal)

@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 final class GoodDeedsScreenCoordinator: Coordinator {
   

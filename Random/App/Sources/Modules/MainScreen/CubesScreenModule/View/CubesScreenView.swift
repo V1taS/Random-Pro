@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol CubesScreenViewOutput: AnyObject {
@@ -88,10 +89,10 @@ final class CubesScreenView: CubesScreenViewProtocol {
 private extension CubesScreenView {
   func setupDefaultSettings() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     scrollResultView.backgroundColor = .clear
     generateButton.backgroundColor = .clear
-    cubesSegmentedControl.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    cubesSegmentedControl.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     cubesSegmentedControl.insertSegment(withTitle: appearance.numberOne,
                                         at: appearance.numberIndexZero, animated: false)

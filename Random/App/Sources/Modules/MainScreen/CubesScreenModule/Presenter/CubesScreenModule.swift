@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из `текущего модуля` в `другой модуль
 protocol CubesScreenModuleOutput: AnyObject {

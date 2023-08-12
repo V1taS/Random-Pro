@@ -7,7 +7,8 @@
 
 import UIKit
 import GoogleMobileAds
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol ADVGoogleScreenModuleOutput: AnyObject {

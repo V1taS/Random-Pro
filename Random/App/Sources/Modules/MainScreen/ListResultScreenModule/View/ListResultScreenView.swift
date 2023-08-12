@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol ListResultScreenViewOutput: AnyObject {
@@ -100,7 +101,7 @@ extension ListResultScreenView: UITableViewDataSource {
     
     cell.isHiddenSeparator = false
     cell.configureCellWith(titleText: result,
-                           textColor: RandomColor.darkAndLightTheme.primaryGray,
+                           textColor: fancyColor.darkAndLightTheme.primaryGray,
                            textAlignment: .center)
     
     if tableView.isFirst(for: indexPath) {
@@ -153,10 +154,10 @@ private extension ListResultScreenView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     tableView.showsVerticalScrollIndicator = false
-    tableView.separatorColor = RandomColor.darkAndLightTheme.secondaryGray
+    tableView.separatorColor = fancyColor.darkAndLightTheme.secondaryGray
     
     contentPlugImage.isHidden = true
     

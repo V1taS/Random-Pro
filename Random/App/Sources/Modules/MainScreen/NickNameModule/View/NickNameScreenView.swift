@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 import Lottie
 
 /// События которые отправляем из View в Presenter
@@ -127,10 +128,10 @@ private extension NickNameScreenView {
   
   func applyDefaultBehavior() {
     let appearance = Appearance()
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     resultLabel.font = RandomFont.primaryBold50
-    resultLabel.textColor = RandomColor.darkAndLightTheme.primaryGray
+    resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = appearance.numberOfLines
     

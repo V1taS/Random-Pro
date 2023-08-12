@@ -6,7 +6,8 @@
 //
 
 import UIKit
-import RandomUIKit
+import FancyUIKit
+import FancyStyle
 
 /// События которые отправляем из View в Presenter
 protocol FortuneWheelEditSectionViewOutput: AnyObject {
@@ -199,8 +200,8 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
         withIdentifier: CustomPaddingCell.reuseIdentifier
       ) as? CustomPaddingCell {
         cell.configureCellWith(height: CGFloat(inset))
-        cell.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-        cell.contentView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+        cell.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+        cell.contentView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
         viewCell = cell
       }
     case let .headerText(text):
@@ -209,7 +210,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
       ) as? CustomTextCell {
         cell.configureCellWith(
           titleText: text,
-          textColor: RandomColor.darkAndLightTheme.secondaryGray,
+          textColor: fancyColor.darkAndLightTheme.secondaryGray,
           textFont: RandomFont.primaryMedium14,
           textAlignment: .left
         )
@@ -223,7 +224,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
         
         cell.configureCellWith(
           titleText: object,
-          textColor: RandomColor.darkAndLightTheme.primaryGray,
+          textColor: fancyColor.darkAndLightTheme.primaryGray,
           textFont: RandomFont.primaryMedium18,
           textAlignment: .center
         )
@@ -236,7 +237,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
       ) as? TextFieldGrayWithEmoticonCell {
         cell.configureCellWith(
           textField: sectionTextField,
-          textFieldBorderColor: RandomColor.only.secondaryGray,
+          textFieldBorderColor: fancyColor.only.secondaryGray,
           emoticon: emoticon) { [weak self] emoticon, _ in
             self?.emoticonCache = emoticon ?? "😍"
             self?.output?.editEmoticon(emoticon)
@@ -253,7 +254,7 @@ extension FortuneWheelEditSectionView: UITableViewDataSource {
                                      withConfiguration: Appearance().largeConfig)
         cell.configureCellWith(
           textField: objectTextField,
-          textFieldBorderColor: RandomColor.only.secondaryGray,
+          textFieldBorderColor: fancyColor.only.secondaryGray,
           buttonImage: checkmarkImage,
           buttonAction: { [weak self] in
             guard let self else {
@@ -311,8 +312,8 @@ private extension FortuneWheelEditSectionView {
   }
   
   func applyDefaultBehavior() {
-    backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
-    tableView.backgroundColor = RandomColor.darkAndLightTheme.primaryWhite
+    backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    tableView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     [sectionTextField, objectTextField].forEach {
       $0.delegate = self

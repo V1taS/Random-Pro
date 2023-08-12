@@ -111,7 +111,7 @@ private extension ColorsScreenView {
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     showPlugView()
     
-    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.font = fancyFont.primaryBold70
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = appearance.resultLabelNumberOfLines
@@ -188,7 +188,7 @@ private extension ColorsScreenView {
   
   func updateResultText(text: String) {
     resultLabel.text = text
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = fancyFont.primaryBold50
     resultLabel.textColor = fancyColor.only.primaryWhite
   }
   

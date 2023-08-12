@@ -150,7 +150,7 @@ private extension NamesScreenView {
     let appearance = Appearance()
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = fancyFont.primaryBold50
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero

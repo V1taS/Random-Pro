@@ -196,7 +196,7 @@ extension PremiumWithFriendsView: UITableViewDataSource {
         cell.configureCellWith(
           titleText: text,
           textColor: fancyColor.only.lightGray,
-          textFont: RandomFont.primaryRegular14,
+          textFont: fancyFont.primaryRegular14,
           textAlignment: .left
         )
         viewCell = cell

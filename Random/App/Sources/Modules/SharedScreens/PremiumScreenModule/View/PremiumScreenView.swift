@@ -226,7 +226,7 @@ private extension PremiumScreenView {
     restorePurchaseButton.addTarget(self, action: #selector(restorePurchaseButtonAction), for: .touchUpInside)
     
     loaderLabel.textAlignment = .center
-    loaderLabel.font = RandomFont.primaryMedium32
+    loaderLabel.font = fancyFont.primaryMedium32
     loaderLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     loaderLabel.text = "\(appearance.processingPaymentTitle)..."
     loaderLabel.numberOfLines = appearance.numberOfLines

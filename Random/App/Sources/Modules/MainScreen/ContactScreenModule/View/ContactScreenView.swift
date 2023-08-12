@@ -69,7 +69,7 @@ private extension ContactScreenView {
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     resultLabel.text = appearance.resultTitle
-    resultLabel.font = RandomFont.primaryMedium32
+    resultLabel.font = fancyFont.primaryMedium32
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero

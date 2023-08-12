@@ -270,12 +270,12 @@ private extension MainSettingsScreenView {
     stackFeedBack.spacing = appearance.minInset
     
     feedBackLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    feedBackLabel.font = RandomFont.primaryRegular16
+    feedBackLabel.font = fancyFont.primaryRegular16
     feedBackLabel.text = "\(appearance.feedbackButtonTitle):"
     
     feedBackButton.setTitle(appearance.addressRecipients, for: .normal)
     feedBackButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
-    feedBackButton.titleLabel?.font = RandomFont.primaryRegular16
+    feedBackButton.titleLabel?.font = fancyFont.primaryRegular16
     feedBackButton.addTarget(self,
                              action: #selector(feedBackButtonAction),
                              for: .touchUpInside)

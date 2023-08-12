@@ -78,7 +78,7 @@ private extension ListScreenView {
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
     resultTextView.textColor = fancyColor.darkAndLightTheme.primaryGray
-    resultTextView.font = RandomFont.primaryMedium32
+    resultTextView.font = fancyFont.primaryMedium32
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
     resultTextView.isSelectable = false

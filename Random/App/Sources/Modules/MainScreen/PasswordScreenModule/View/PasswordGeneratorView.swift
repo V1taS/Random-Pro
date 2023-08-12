@@ -201,7 +201,7 @@ private extension PasswordGeneratorView {
   func applyDefaultBehavior() {
     let appearance = Appearance()
     
-    crackTimeLabel.font = RandomFont.primaryBold18
+    crackTimeLabel.font = fancyFont.primaryBold18
     crackTimeLabel.numberOfLines = 2
     crackTimeLabel.textAlignment = .center
     crackTimeLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
@@ -212,7 +212,7 @@ private extension PasswordGeneratorView {
     
     settingOptionsLabel.text = appearance.parameters + ":"
     settingOptionsLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    settingOptionsLabel.font = RandomFont.primaryBold18
+    settingOptionsLabel.font = fancyFont.primaryBold18
     settingOptionsLabel.numberOfLines = 1
     
     labelsStackView.axis = .vertical
@@ -221,19 +221,19 @@ private extension PasswordGeneratorView {
     
     uppercaseLettersLabel.text = appearance.uppercase
     uppercaseLettersLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    uppercaseLettersLabel.font = RandomFont.primaryMedium18
+    uppercaseLettersLabel.font = fancyFont.primaryMedium18
     
     lowercaseLettersLabel.text = appearance.lovercase
     lowercaseLettersLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    lowercaseLettersLabel.font = RandomFont.primaryMedium18
+    lowercaseLettersLabel.font = fancyFont.primaryMedium18
     
     numbersLabel.text = appearance.numbers
     numbersLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    numbersLabel.font = RandomFont.primaryMedium18
+    numbersLabel.font = fancyFont.primaryMedium18
     
     symbolsLabel.text = appearance.symbols
     symbolsLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    symbolsLabel.font = RandomFont.primaryMedium18
+    symbolsLabel.font = fancyFont.primaryMedium18
     
     switchersStackView.axis = .vertical
     switchersStackView.alignment = .trailing
@@ -261,7 +261,7 @@ private extension PasswordGeneratorView {
     
     passwordLengthLabel.text = appearance.longPassword + ":"
     passwordLengthLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    passwordLengthLabel.font = RandomFont.primaryBold18
+    passwordLengthLabel.font = fancyFont.primaryBold18
     
     textFieldStackView.axis = .horizontal
     textFieldStackView.spacing = appearance.defaultSpacing
@@ -273,7 +273,7 @@ private extension PasswordGeneratorView {
     passwordLengthTextField.keyboardType = .numberPad
     
     resultTextView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
-    resultTextView.font = RandomFont.primaryMedium24
+    resultTextView.font = fancyFont.primaryMedium24
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
     resultTextView.isSelectable = false

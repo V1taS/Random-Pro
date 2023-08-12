@@ -92,7 +92,7 @@ private extension CoinScreenView {
     scrollResult.backgroundColor = .clear
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold50
+    resultLabel.font = fancyFont.primaryBold50
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     
     generateButton.setTitle(appearance.buttonTitle, for: .normal)

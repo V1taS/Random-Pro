@@ -77,7 +77,7 @@ final class RiddlesScreenView: RiddlesScreenViewProtocol {
   
   func set(riddles: RiddlesScreenModel.Riddles,
            type: RiddlesScreenModel.DifficultType) {
-    let fontSize = Appearance().result == riddles.question ? RandomFont.primaryBold50 : RandomFont.primaryBold24
+    let fontSize = Appearance().result == riddles.question ? fancyFont.primaryBold50 : fancyFont.primaryBold24
     resultLabel.font = fontSize
     resultLabel.text = riddles.question
     
@@ -151,7 +151,7 @@ private extension RiddlesScreenView {
     let appearance = Appearance()
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold24
+    resultLabel.font = fancyFont.primaryBold24
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero

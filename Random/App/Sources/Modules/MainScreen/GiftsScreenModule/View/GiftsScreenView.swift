@@ -150,7 +150,7 @@ private extension GiftsScreenView {
     let appearance = Appearance()
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
 
-    resultLabel.font = RandomFont.primaryBold24
+    resultLabel.font = fancyFont.primaryBold24
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero

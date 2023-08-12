@@ -121,7 +121,7 @@ private extension LotteryScreenView {
     amountNumberTextField.layer.borderColor = fancyColor.darkAndLightTheme.secondaryGray.cgColor
     isUserInteractionEnabled = true
     
-    resultTextView.font = RandomFont.primaryBold50
+    resultTextView.font = fancyFont.primaryBold50
     resultTextView.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultTextView.textAlignment = .center
     resultTextView.isEditable = false
@@ -156,19 +156,19 @@ private extension LotteryScreenView {
     generateButton.addTarget(self, action: #selector(generateButtonAction), for: .touchUpInside)
     
     amountNumberLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
-    amountNumberLabel.font = RandomFont.primaryRegular18
+    amountNumberLabel.font = fancyFont.primaryRegular18
     amountNumberLabel.text = appearance.textAmountLabel + ":"
     
     amountNumberTextField.placeholder = appearance.startPlaceholder
     amountNumberTextField.keyboardType = .numberPad
     amountNumberTextField.delegate = self
     
-    rangeNumberLabel.font = RandomFont.primaryRegular18
+    rangeNumberLabel.font = fancyFont.primaryRegular18
     rangeNumberLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     rangeNumberLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     rangeNumberLabel.text = appearance.textRangeLabel + ":"
     
-    betweenRangeLabel.font = RandomFont.primaryMedium18
+    betweenRangeLabel.font = fancyFont.primaryMedium18
     betweenRangeLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     betweenRangeLabel.text = appearance.separatorTitle
     

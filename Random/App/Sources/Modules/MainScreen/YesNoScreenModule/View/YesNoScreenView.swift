@@ -76,7 +76,7 @@ private extension YesNoScreenView {
   func setupDefaultSettings() {
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.font = fancyFont.primaryBold70
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     

@@ -200,10 +200,10 @@ extension ListPlayersScreenView: UITableViewDataSource {
         cell.configureCellWith(
           primaryText: "\(appearance.allTitle): \(playersCount)",
           primaryTextColor: fancyColor.darkAndLightTheme.primaryGray,
-          primaryTextFont: RandomFont.primaryMedium10,
+          primaryTextFont: fancyFont.primaryMedium10,
           secondaryText: "\(appearance.forGameTitle): \(forGameCount)",
           secondaryTextColor: fancyColor.darkAndLightTheme.primaryGray,
-          secondaryTextFont: RandomFont.primaryMedium10
+          secondaryTextFont: fancyFont.primaryMedium10
         )
         viewCell = cell
       }

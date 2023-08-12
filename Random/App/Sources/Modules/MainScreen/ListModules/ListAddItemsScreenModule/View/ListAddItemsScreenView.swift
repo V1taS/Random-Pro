@@ -120,7 +120,7 @@ extension ListAddItemsScreenView: UITableViewDataSource {
         cell.configureCellWith(
           titleText: result.text,
           textColor: fancyColor.darkAndLightTheme.primaryGray,
-          textFont: RandomFont.primaryMedium18,
+          textFont: fancyFont.primaryMedium18,
           textAlignment: .left
         )
         viewCell = cell
@@ -167,10 +167,10 @@ extension ListAddItemsScreenView: UITableViewDataSource {
         cell.configureCellWith(
           primaryText: "\(appearance.allItemTitle): \(textCount)",
           primaryTextColor: fancyColor.darkAndLightTheme.primaryGray,
-          primaryTextFont: RandomFont.primaryMedium10,
+          primaryTextFont: fancyFont.primaryMedium10,
           secondaryText: nil,
           secondaryTextColor: fancyColor.darkAndLightTheme.primaryGray,
-          secondaryTextFont: RandomFont.primaryMedium10
+          secondaryTextFont: fancyFont.primaryMedium10
         )
         viewCell = cell
       }

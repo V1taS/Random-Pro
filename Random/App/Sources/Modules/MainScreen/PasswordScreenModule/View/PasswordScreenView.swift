@@ -159,7 +159,7 @@ private extension PasswordScreenView {
     DispatchQueue.main.async {
       let passwordAttributed = NSMutableAttributedString(
         string: password,
-        attributes: [NSAttributedString.Key.font: RandomFont.primaryMedium24])
+        attributes: [NSAttributedString.Key.font: fancyFont.primaryMedium24])
       let paragraphStyle = NSMutableParagraphStyle()
       paragraphStyle.alignment = .center
       passwordAttributed.addAttributes([.paragraphStyle: paragraphStyle], range: NSRange(location: .zero,

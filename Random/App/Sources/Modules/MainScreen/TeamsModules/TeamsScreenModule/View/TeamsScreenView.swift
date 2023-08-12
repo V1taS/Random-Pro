@@ -122,10 +122,10 @@ extension TeamsScreenView: UICollectionViewDelegate {
     headerView.configureCellWith(
       primaryText: model.name,
       primaryTextColor: fancyColor.darkAndLightTheme.primaryGray,
-      primaryTextFont: RandomFont.primaryBold18,
+      primaryTextFont: fancyFont.primaryBold18,
       secondaryText: "\(Appearance().countPlayersTitle) - \(model.players.count)",
       secondaryTextColor: fancyColor.darkAndLightTheme.secondaryGray,
-      secondaryTextFont: RandomFont.primaryRegular18,
+      secondaryTextFont: fancyFont.primaryRegular18,
       editImage: isShowEditImage ? Appearance().renameTeamButton : nil) {
         self.output?.showAlert(name: model.name, id: model.id)
       }
@@ -216,7 +216,7 @@ private extension TeamsScreenView {
     let appearance = Appearance()
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
     
-    resultLabel.font = RandomFont.primaryBold70
+    resultLabel.font = fancyFont.primaryBold70
     resultLabel.textColor = fancyColor.darkAndLightTheme.primaryGray
     resultLabel.textAlignment = .center
     resultLabel.numberOfLines = .zero

@@ -13,6 +13,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      
+    - name: Set up API keys
+      run: |
+        echo "API_KEY_YANDEX_METRICA=${{ secrets.API_KEY_YANDEX_METRICA }}" >> $GITHUB_ENV
+        echo "API_KEY_APPHUD=${{ secrets.API_KEY_APPHUD }}" >> $GITHUB_ENV
+        echo "API_KEY_KINOPOISK=${{ secrets.API_KEY_KINOPOISK }}" >> $GITHUB_ENV
+        echo "API_KEY_MOST_POPULAR_MOVIES=${{ secrets.API_KEY_MOST_POPULAR_MOVIES }}" >> $GITHUB_ENV
+        echo "FANCY_BACKEND=${{ secrets.FANCY_BACKEND }}" >> $GITHUB_ENV
 
     - name: Set up Python
       uses: actions/setup-python@v3

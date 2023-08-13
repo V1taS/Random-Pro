@@ -7,7 +7,7 @@ platform :ios do
 
   desc "Replace API keys in SecretsAPI.swift"
   lane :replace_api_keys do
-    # Получаем ключи из GitHub Secrets
+    # Извлекаем ключи напрямую, так как они уже установлены GitHub Actions
     api_key_yandex_metrica = ENV["API_KEY_YANDEX_METRICA"]
     api_key_apphud = ENV["API_KEY_APPHUD"]
     api_key_kinopoisk = ENV["API_KEY_KINOPOISK"]

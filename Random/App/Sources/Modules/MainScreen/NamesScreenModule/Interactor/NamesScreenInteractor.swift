@@ -101,8 +101,8 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
       gender: gender
     )
     
-    fetchListNames(gender: gender,
-                   language: language) { [weak self] result in
+    checkEnvironment(gender: gender,
+                     language: language) { [weak self] result in
       switch result {
       case let .success(listNames):
         self?.casheNames = listNames
@@ -241,6 +241,22 @@ private extension NamesScreenInteractor {
     }
     return language
   }
+  
+  func checkEnvironment(gender: NamesScreenModel.Gender,
+                        language: NamesScreenModel.Language,
+                        completion: @escaping (Result<[String], Error>) -> Void) {
+#if DEBUG
+    let mockData = [
+      "Миранда",
+      "Элисон",
+      "Ариэлла",
+      "Аниса"
+    ]
+    completion(.success(mockData))
+#else
+    fetchListNames(gender: gender, language: language, completion: completion)
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -252,6 +268,6 @@ private extension NamesScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/names"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

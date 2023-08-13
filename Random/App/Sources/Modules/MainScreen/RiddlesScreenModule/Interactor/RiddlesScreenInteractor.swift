@@ -103,7 +103,7 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
       type: type
     )
     
-    fetchListRiddles(type: type,
+    checkEnvironment(type: type,
                      language: language) { [weak self] result in
       switch result {
       case let .success(listCongratulations):
@@ -240,6 +240,24 @@ private extension RiddlesScreenInteractor {
     }
     return language
   }
+  
+  func checkEnvironment(type: RiddlesScreenModel.DifficultType,
+                        language: RiddlesScreenModel.Language,
+                        completion: @escaping (Result<[RiddlesScreenModel.Riddles], Error>) -> Void) {
+#if DEBUG
+    let mockData: [RiddlesScreenModel.Riddles] = [
+      .init(question: "Без рук, без ног, а рисовать умеет.",
+            answer: "Мороз"),
+      .init(question: "Домашнее животное, на ы начинается",
+            answer: "Ыщо один таракан"),
+      .init(question: "Когда 2 и 2 бывают больше четырёх?",
+            answer: "Когда 22"),
+    ]
+    completion(.success(mockData))
+#else
+    fetchListRiddles(type: type, language: language, completion: completion)
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -251,6 +269,6 @@ private extension RiddlesScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/riddles"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

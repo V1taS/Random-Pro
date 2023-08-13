@@ -97,6 +97,19 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
       language: language
     )
     
+    if isEnvironmentDebug() {
+      let mockData = [
+        "Никогда не сдавайся, даже если все кажется безнадежным.",
+        "Улыбка — самый красивый аксессуар.",
+        "Лучший способ предсказать будущее — создать его.",
+        "Не жди момента, сделай его своим.",
+        "Удача любит смелых."
+      ]
+      casheQuotes = mockData
+      output?.didReceive(quote: model.result)
+      return
+    }
+    
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
@@ -198,6 +211,14 @@ private extension QuotesScreenInteractor {
     }
     return language
   }
+  
+  func isEnvironmentDebug() -> Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -209,6 +230,6 @@ private extension QuotesScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/quotes"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

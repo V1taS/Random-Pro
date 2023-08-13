@@ -101,8 +101,8 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
       type: type
     )
     
-    fetchListNames(type: type,
-                   language: language) { [weak self] result in
+    checkEnvironment(type: type,
+                     language: language) { [weak self] result in
       switch result {
       case let .success(listCongratulations):
         self?.casheCongratulations = listCongratulations
@@ -241,6 +241,24 @@ private extension CongratulationsScreenInteractor {
     }
     return language
   }
+  
+  func checkEnvironment(type: CongratulationsScreenModel.CongratulationsType,
+                        language: CongratulationsScreenModel.Language,
+                        completion: @escaping (Result<[String], Error>) -> Void) {
+#if DEBUG
+    let mockData = [
+      "Пусть твой день будет наполнен любовью, радостью и улыбками! С днем рождения!",
+      "С днем рождения! Желаю тебе счастья, здоровья и всего наилучшего в этом мире. Ты это заслуживаешь!",
+      "Пусть звезды на небе сверкают особенно ярко в твой день, наполняя твою жизнь радостью, счастьем и любовью",
+      "Сегодня ты еще на год стал мудрее, пусть каждый новый день будет полон приключений и открытий",
+      "Твой день рождения - это лишь еще один повод напомнить, насколько ты особенный. С днем рождения!",
+      "С днем рождения! Пусть каждый день будет уникальным, а каждая минута - незабываемой",
+    ]
+    completion(.success(mockData))
+#else
+    fetchListNames(type: type, language: language, completion: completion)
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -252,6 +270,6 @@ private extension CongratulationsScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/congratulations"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

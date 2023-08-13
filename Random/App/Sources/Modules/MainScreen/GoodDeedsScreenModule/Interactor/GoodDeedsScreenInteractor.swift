@@ -97,6 +97,20 @@ final class GoodDeedsScreenInteractor: GoodDeedsScreenInteractorInput {
       language: language
     )
     
+    if isEnvironmentDebug() {
+      let mockData = [
+        "Помощь местным бездомным",
+        "Волонтёрство в детском приюте",
+        "Помощь пожилым людям с покупками",
+        "Участие в экологических акциях",
+        "Пожертвование крови"
+      ]
+      
+      casheGoodDeeds = mockData
+      output?.didReceive(text: model.result)
+      return
+    }
+    
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
@@ -198,6 +212,14 @@ private extension GoodDeedsScreenInteractor {
     }
     return language
   }
+  
+  func isEnvironmentDebug() -> Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -210,6 +232,6 @@ private extension GoodDeedsScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/goodDeeds"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

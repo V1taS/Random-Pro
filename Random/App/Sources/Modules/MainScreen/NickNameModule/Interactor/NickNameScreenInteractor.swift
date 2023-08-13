@@ -80,6 +80,21 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     let apiVersion = appearance.apiVersion
     let endPoint = appearance.endPoint
     
+    if isEnvironmentDebug() {
+      let mockData = [
+        "Shad",
+        "Mic",
+        "Ter",
+        "Iide",
+        "Gler",
+        "Diand",
+        "Raptor"
+      ]
+      casheNicks = mockData
+      output?.didReceive(nick: mockData.shuffled().first)
+      return
+    }
+    
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [],
@@ -133,6 +148,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
       let newModel = NickNameScreenModel(result: result,
                                          listResult: [result])
       nickNameScreenModel = newModel
+      output?.didReceive(nick: result)
     }
     buttonCounterService.onButtonClick()
   }
@@ -177,6 +193,14 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     output?.didReceive(nick: newModel.result)
     output?.cleanButtonWasSelected()
   }
+  
+  func isEnvironmentDebug() -> Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -188,6 +212,6 @@ private extension NickNameScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/nickname"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

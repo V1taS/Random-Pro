@@ -35,7 +35,7 @@ final class OnboardingServiceImpl: OnboardingService {
   func getOnboardingPagesForPresent(network: NetworkService,
                                     storage: StorageService,
                                     completion: (([WelcomeSheetPage]) -> Void)?) {
-    fetchContent(from: network) { [weak self] fetchedPageModels in
+    checkEnvironment(from: network) { [weak self] fetchedPageModels in
       guard let self = self else {
         return
       }
@@ -145,6 +145,14 @@ private extension OnboardingServiceImpl {
       return welcomeSheetPage
     }
   }
+  
+  func checkEnvironment(from network: NetworkService, completion: (([OnboardingScreenModel]) -> Void)?) {
+#if DEBUG
+    completion?([])
+#else
+    fetchContent(from: network, completion: completion)
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -155,6 +163,6 @@ private extension OnboardingServiceImpl {
     let apiVersion = "/api/v1"
     let endPoint = "/onboarding"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

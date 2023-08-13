@@ -101,8 +101,8 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
       type: typeTruthOrDare
     )
     
-    fetchListTruthOrDare(type: typeTruthOrDare,
-                         language: language) { [weak self] result in
+    checkEnvironment(type: typeTruthOrDare,
+                     language: language) { [weak self] result in
       switch result {
       case let .success(listTruthOrDare):
         self?.casheTruthOrDare = listTruthOrDare
@@ -235,6 +235,22 @@ private extension TruthOrDareScreenInteractor {
     }
     return language
   }
+  
+  func checkEnvironment(type: TruthOrDareScreenModel.TruthOrDareType,
+                        language: TruthOrDareScreenModel.Language,
+                        completion: @escaping (Result<[String], Error>) -> Void) {
+#if DEBUG
+    let mockData = [
+      "Расскажи самую смешную историю, которую ты знаешь.",
+      "Сыграй песню на воображаемой гитаре.",
+      "Попроси у случайного прохожего автограф.",
+      "Позвони своему лучшему другу и спой ему 'С днем рождения'."
+    ]
+    completion(.success(mockData))
+#else
+    fetchListTruthOrDare(type: type, language: language, completion: completion)
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -246,6 +262,6 @@ private extension TruthOrDareScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/truthOrDare"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

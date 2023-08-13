@@ -97,6 +97,18 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
       language: language
     )
     
+    if isEnvironmentDebug() {
+      let mockData = [
+        "В доме, где есть дети, тишина - повод для паники.",
+        "После третьего протирания Айфона спиртом Сири попросила закусить.",
+        "Хрен с ними, этими 90-60-90... Бороды нет — уже плюс!",
+        "Я другой такой страны не знаю, где так пофиг, что ты человек..."
+      ]
+      casheJoke = mockData
+      output?.didReceive(text: model.result)
+      return
+    }
+    
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
@@ -198,6 +210,14 @@ private extension JokeGeneratorScreenInteractor {
     }
     return language
   }
+  
+  func isEnvironmentDebug() -> Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -210,6 +230,6 @@ private extension JokeGeneratorScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/jokes"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

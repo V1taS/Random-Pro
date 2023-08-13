@@ -96,6 +96,18 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
       listResult: model.listResult,
       language: language
     )
+    
+    if isEnvironmentDebug() {
+      let mockData = [
+        "Мы строим будущее сегодня.",
+        "Развивайтесь и преуспевайте.",
+        "Будущее принадлежит смелым.",
+        "Ваш путь к успеху начинается здесь."
+      ]
+      casheSlogans = mockData
+      output?.didReceive(text: model.result)
+      return
+    }
 
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
@@ -198,6 +210,14 @@ private extension SlogansScreenInteractor {
     }
     return language
   }
+  
+  func isEnvironmentDebug() -> Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -210,6 +230,6 @@ private extension SlogansScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/slogans"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

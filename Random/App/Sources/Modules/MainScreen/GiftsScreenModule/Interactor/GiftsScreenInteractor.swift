@@ -100,9 +100,9 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
       language: language,
       gender: gender
     )
-
-    fetchListGifts(gender: gender,
-                   language: language) { [weak self] result in
+    
+    checkEnvironment(gender: gender,
+                     language: language) { [weak self] result in
       switch result {
       case let .success(listGifts):
         self?.casheGifts = listGifts
@@ -235,6 +235,25 @@ private extension GiftsScreenInteractor {
     }
     return language
   }
+  
+  func checkEnvironment(gender: GiftsScreenModel.Gender,
+                        language: GiftsScreenModel.Language,
+                        completion: @escaping (Result<[String], Error>) -> Void) {
+#if DEBUG
+    let mockData = [
+      "Устройство для аэрогриля",
+      "Мультиварка",
+      "Комплект качественных посуды",
+      "Кухонных принадлежностей",
+      "Набор для макраме или вышивки",
+      "Электронная зубная щетка ",
+      "Устройство виртуальной реальности (VR)"
+    ]
+    completion(.success(mockData))
+#else
+    fetchListGifts(gender: gender, language: language, completion: completion)
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -246,6 +265,6 @@ private extension GiftsScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/giftIdeas"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

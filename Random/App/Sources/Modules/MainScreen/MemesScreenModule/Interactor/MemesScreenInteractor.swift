@@ -145,6 +145,16 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
     let types = model.types.isEmpty ? [.animals, .work, .popular] : model.types
     let typesString = types.compactMap({ $0.rawValue }).joined(separator: ",")
     
+    if isEnvironmentDebug() {
+      let mockData = [
+        "https://random.sosinvitalii.com/memes/popular/ru/test1.jpg",
+        "https://random.sosinvitalii.com/memes/popular/ru//test2.jpg"
+      ]
+      memesURLString = mockData
+      generateButtonAction()
+      return
+    }
+    
     networkService.performRequestWith(
       urlString: host + apiVersion + endPoint,
       queryItems: [
@@ -215,6 +225,14 @@ private extension MemesScreenInteractor {
       return .en
     }
   }
+  
+  func isEnvironmentDebug() -> Bool {
+#if DEBUG
+    return true
+#else
+    return false
+#endif
+  }
 }
 
 // MARK: - Appearance
@@ -226,6 +244,6 @@ private extension MemesScreenInteractor {
     let apiVersion = "/api/v1"
     let endPoint = "/memes"
     let apiKey = "api_key"
-    let apiValue = "4t2AceLVaSW88H8wJ1f6"
+    let apiValue = SecretsAPI.fancyBackend
   }
 }

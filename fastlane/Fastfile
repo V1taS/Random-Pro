@@ -2,8 +2,31 @@ default_platform(:ios)
 
 platform :ios do
 
+  desc "Replace API keys in SecretsAPI.swift"
+  lane :replace_api_keys do
+    # Получаем ключи из GitHub Secrets
+    api_key_yandex_metrica = ENV["API_KEY_YANDEX_METRICA"]
+    api_key_apphud = ENV["API_KEY_APPHUD"]
+    api_key_kinopoisk = ENV["API_KEY_KINOPOISK"]
+    api_key_most_popular_movies = ENV["API_KEY_MOST_POPULAR_MOVIES"]
+    fancy_backend = ENV["FANCY_BACKEND"]
+
+    # Заменяем ключи в файле
+    replace_api_key_in_file(
+      file_path: './Random/App/Sources/System/SecretsAPI.swift',
+      api_key_yandex_metrica: api_key_yandex_metrica,
+      api_key_apphud: api_key_apphud,
+      api_key_kinopoisk: api_key_kinopoisk,
+      api_key_most_popular_movies: api_key_most_popular_movies,
+      fancy_backend: fancy_backend
+    )
+  end
+
   desc "Build the app"
   lane :build do
+    # Заменяем API-ключи перед сборкой
+    replace_api_keys
+
     build_ios_app(
       workspace: "Random.xcworkspace",
       scheme: "Random",
@@ -44,4 +67,23 @@ platform :ios do
       skip_waiting_for_build_processing: true
     )
   end
+
+  private_lane :replace_api_key_in_file do |options|
+    file_path = options[:file_path]
+    api_key_yandex_metrica = options[:api_key_yandex_metrica]
+    api_key_apphud = options[:api_key_apphud]
+    api_key_kinopoisk = options[:api_key_kinopoisk]
+    api_key_most_popular_movies = options[:api_key_most_popular_movies]
+    fancy_backend = options[:fancy_backend]
+
+    # Заменяем каждый ключ в файле
+    text = File.read(file_path)
+    text.gsub!(/apiKeyYandexMetrica = ".*"/, "apiKeyYandexMetrica = \"#{api_key_yandex_metrica}\"")
+    text.gsub!(/apiKeyApphud = ".*"/, "apiKeyApphud = \"#{api_key_apphud}\"")
+    text.gsub!(/apiKeyKinopoisk = ".*"/, "apiKeyKinopoisk = \"#{api_key_kinopoisk}\"")
+    text.gsub!(/apiKeyMostPopularMovies = ".*"/, "apiKeyMostPopularMovies = \"#{api_key_most_popular_movies}\"")
+    text.gsub!(/fancyBackend = ".*"/, "fancyBackend = \"#{fancy_backend}\"")
+    File.open(file_path, "w") { |file| file.puts text }
+  end
+
 end

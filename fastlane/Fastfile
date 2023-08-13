@@ -2,6 +2,9 @@ default_platform(:ios)
 
 platform :ios do
 
+  # Определение базовой директории
+  base_directory = ENV['GITHUB_WORKSPACE'] || "." # Если GITHUB_WORKSPACE не определен, используем текущую директорию
+
   desc "Replace API keys in SecretsAPI.swift"
   lane :replace_api_keys do
     # Получаем ключи из GitHub Secrets
@@ -13,7 +16,7 @@ platform :ios do
 
     # Заменяем ключи в файле
     replace_api_key_in_file(
-      file_path: './Random/App/Sources/System/SecretsAPI.swift',
+      file_path: "#{base_directory}/Random/App/Sources/System/SecretsAPI.swift",
       api_key_yandex_metrica: api_key_yandex_metrica,
       api_key_apphud: api_key_apphud,
       api_key_kinopoisk: api_key_kinopoisk,
@@ -30,7 +33,7 @@ platform :ios do
     build_ios_app(
       workspace: "Random.xcworkspace",
       scheme: "Random",
-      export_method: "app-store", # или "ad-hoc", в зависимости от типа распространения
+      export_method: "app-store",
       export_options: {
         provisioningProfiles: {
           ENV["APP_IDENTIFIER"] => ENV["PROVISIONING_PROFILE_UUID"]

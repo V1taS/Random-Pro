@@ -89,7 +89,8 @@ final class FilmsScreenInteractor: FilmsScreenInteractorInput {
   func loadFilm() {
     filmsScreenModel = getFilmsData()
     
-    guard filmsScreenModel.isEmpty else {
+    if !filmsScreenModel.isEmpty, let filmModel = getGenerateFilms() {
+      output?.didReceiveFilm(model: filmModel)
       return
     }
     

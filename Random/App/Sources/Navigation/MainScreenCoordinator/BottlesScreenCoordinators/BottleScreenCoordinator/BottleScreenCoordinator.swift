@@ -31,6 +31,7 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
   
   private let navigationController: UINavigationController
   private let services: ApplicationServices
+  private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var bottleScreenModule: BottleScreenModule?
   
   // MARK: - Initialization
@@ -57,7 +58,23 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
 // MARK: - BottleScreenModuleOutput
 
 extension BottleScreenCoordinator: BottleScreenModuleOutput {
+  func settingButtonAction() {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    self.settingsScreenCoordinator?.setupDefaultsSettings(for: .bottle)
+  }
+
   func moduleClosed() {
     finishFlow?()
   }
+}
+
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension BottleScreenCoordinator: SettingsScreenCoordinatorOutput {
+  func cleanButtonAction() {}
+
+  func listOfObjectsAction() {}
 }

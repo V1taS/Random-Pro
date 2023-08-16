@@ -27,6 +27,9 @@ protocol SettingsScreenModuleOutput: AnyObject {
   
   /// Событие, кнопка `Выбора карточки игрока` была нажата
   func playerCardSelectionAction()
+
+  /// Событие, кнопка `Выбора стиля бутылочки` была нажата
+  func bottleStyleSelectionAction()
   
   /// Модуль был закрыт
   func moduleClosed()
@@ -105,6 +108,10 @@ final class SettingsScreenViewController: SettingsScreenModule {
 // MARK: - SettingsScreenViewOutput
 
 extension SettingsScreenViewController: SettingsScreenViewOutput {
+  func bottleStyleSelectionAction() {
+    moduleOutput?.bottleStyleSelectionAction()
+  }
+
   func playerCardSelectionAction() {
     moduleOutput?.playerCardSelectionAction()
   }

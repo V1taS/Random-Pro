@@ -17,6 +17,7 @@
 "ball" = "Bola";
 "blue_lagoon" = "laguna Azul";
 "bottle" = "Bottle";
+"bottle_style" = "Estilo de botella";
 "buy" = "Comprar";
 "call_parents" = "Llamar a los padres";
 "can_change_app_icon_color" = "Puede cambiar el color del icono de la aplicación";
@@ -31,6 +32,7 @@
 "can_spin_virtual_bottle" = "Se puede girar una botella virtual";
 "cancel" = "Cancelar";
 "card_style" = "estilo de tarjeta";
+"change_bottle_style" = "Puedes cambiar el estilo de la botella";
 "change_card_style" = "Puede cambiar el estilo de la tarjeta";
 "choose_icon" = "Selección de iconos";
 "clean" = "Limpiar";
@@ -204,6 +206,7 @@
 "sea_fuchsia" = "fucsia Marina";
 "section_settings" = "Configuración de la sección";
 "section_tsuefa" = "sección Tsu-e-fa";
+"select_bottle_style" = "Seleccionar estilo de botella";
 "select_card_style" = "Seleccionar estilo de tarjeta";
 "select_icon" = "Seleccione un icono";
 "selen" = "Selenio";

@@ -17,6 +17,7 @@
 "ball" = "Мяч";
 "blue_lagoon" = "Голубая лагуна";
 "bottle" = "Бутылочка";
+"bottle_style" = "Стиль бутылочки";
 "buy" = "Купить";
 "call_parents" = "Позвонить родителям";
 "can_change_app_icon_color" = "Можно изменить цвет иконки приложения";
@@ -31,6 +32,7 @@
 "can_spin_virtual_bottle" = "Можно крутить виртуальную бутылочку";
 "cancel" = "Отмена";
 "card_style" = "Стиль карточки";
+"change_bottle_style" = "Можно изменить стиль бутылочки";
 "change_card_style" = "Можно изменить стиль карточки";
 "choose_icon" = "Выбор иконки";
 "clean" = "Очистить";
@@ -204,6 +206,7 @@
 "sea_fuchsia" = "Морская фуксия";
 "section_settings" = "Настройка секций";
 "section_tsuefa" = "Раздел Цу-е-фа";
+"select_bottle_style" = "Выбрать стиль бутылочки";
 "select_card_style" = "Выбрать стиль карточки";
 "select_icon" = "Выберите иконку";
 "selen" = "Селен";

@@ -128,4 +128,7 @@ enum SettingsScreenType {
   
   /// Раздел: `Пароли`
   case password(itemsGenerated: String, lastItem: String)
+
+  /// Раздел: `Бутылочка`
+  case bottle
 }

@@ -12,7 +12,10 @@ import FancyStyle
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol BottleScreenModuleOutput: AnyObject {
-  
+
+  /// Была нажата кнопка (настройки)
+  func settingButtonAction()
+
   /// Модуль был закрыт
   func moduleClosed()
 }
@@ -105,16 +108,28 @@ private extension BottleScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.setTitle
-    navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                                        style: .plain,
-                                                        target: self,
-                                                        action: #selector(resetButtonAction))
+    navigationItem.rightBarButtonItems = [
+      UIBarButtonItem(image: appearance.settingsButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(settingButtonAction)),
+      UIBarButtonItem(image: appearance.resetButtonIcon,
+                      style: .plain,
+                      target: self,
+                      action: #selector(resetButtonAction))
+    ]
   }
   
   @objc
   func resetButtonAction() {
     moduleView.resetPositionBottle()
     interactor.stopHapticFeedback()
+    impactFeedback.impactOccurred()
+  }
+
+  @objc
+  func settingButtonAction() {
+    moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
   }
 }
@@ -124,6 +139,7 @@ private extension BottleScreenViewController {
 private extension BottleScreenViewController {
   struct Appearance {
     let setTitle = RandomStrings.Localizable.bottle
-    let settingsButtonIcon = UIImage(systemName: "arrow.counterclockwise")
+    let settingsButtonIcon = UIImage(systemName: "gear")
+    let resetButtonIcon = UIImage(systemName: "arrow.counterclockwise")
   }
 }

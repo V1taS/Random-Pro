@@ -62,6 +62,7 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   
   // Coordinators
   private var playerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoordinator?
+  private var bottleStyleSelectionScreenCoordinator: BottleStyleSelectionScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -118,6 +119,18 @@ extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
   func cleanButtonAction() {
     output?.cleanButtonAction()
   }
+
+  func bottleStyleSelectionAction() {
+    openBottleStyleSelectionScreenCoordinator()
+  }
+}
+
+// MARK: - BottleStyleSelectionScreenCoordinatorOutput
+
+extension SettingsScreenCoordinator: BottleStyleSelectionScreenCoordinatorOutput {
+//  func updateStateForSections() {
+//    output?.updateStateForSections()
+//  }
 }
 
 // MARK: - PlayerCardSelectionScreenCoordinatorOutput
@@ -142,6 +155,19 @@ private extension SettingsScreenCoordinator {
     }
     
     services.metricsService.track(event: .premiumPlayerCardSelection)
+  }
+
+  func openBottleStyleSelectionScreenCoordinator() {
+    let bottleStyleSelectionScreenCoordinator = BottleStyleSelectionScreenCoordinator(navigationController,
+                                                                                      services)
+    self.bottleStyleSelectionScreenCoordinator = bottleStyleSelectionScreenCoordinator
+    bottleStyleSelectionScreenCoordinator.output = self
+    bottleStyleSelectionScreenCoordinator.start()
+    bottleStyleSelectionScreenCoordinator.finishFlow = { [weak self] in
+      self?.bottleStyleSelectionScreenCoordinator = nil
+    }
+
+    services.metricsService.track(event: .premiumBottleStyleSelection)
   }
 }
 

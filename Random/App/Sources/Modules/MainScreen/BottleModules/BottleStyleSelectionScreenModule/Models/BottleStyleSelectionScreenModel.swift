@@ -18,27 +18,40 @@ struct BottleStyleSelectionScreenModel: UserDefaultsCodable {
   /// Премиум режим
   let isPremium: Bool
 
-  /// Премиум режим
-//  let bottleState: CardLockView.CardState
-  
   /// Стиль бутылочки
   let bottleStyle: BottleStyle
+
+  /// Состояние карточки
+  var bottleState: BottleState {
+    if bottleStyleSelection {
+      return .checkmark
+    } else {
+      if isPremium {
+        return .none
+      } else {
+        return .lock
+      }
+    }
+  }
+
+  enum BottleState: CaseIterable, Equatable & Codable {
+
+    /// Заблокирована
+    case lock
+
+    /// Выбрана
+    case checkmark
+
+    /// Ничего
+    case none
+  }
 
   enum BottleStyle: String, CaseIterable, Equatable & Codable {
     
     /// Стиль по дефолту
     case defaultStyle = "Bottle"
     
-//    /// Красный стиль
-//    case red = "RedBottle"
-//
-//    /// Зеленый стиль
-//    case green = "GreenBottle"
-//
-//    /// Желтый стиль
-//    case yellow = "YellowBottle"
-//
-//    /// Золотой стиль
-//    case gold = "GoldBottle"
+    /// Красный стиль
+    case red = "RedBottle"
   }
 }

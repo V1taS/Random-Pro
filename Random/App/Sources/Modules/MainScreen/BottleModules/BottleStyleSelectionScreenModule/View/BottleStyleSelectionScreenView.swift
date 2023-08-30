@@ -143,15 +143,27 @@ extension BottleStyleSelectionScreenView: UICollectionViewDataSource {
     }
 
     let model = models[indexPath.row]
+    var state = CardLockView.CardState.none
+
+    switch model.bottleState {
+    case .lock:
+      state = .lock
+    case .checkmark:
+      state = .checkmark
+    case .none:
+      state = .none
+    }
+
     cell.configureCellWith(image: UIImage(named: model.bottleStyle.rawValue),
                            title: nil,
-                           cardState: .none,
-    cardAction: { [weak self] in
+                           cardState: state,
+                           cardAction: { [weak self] in
       guard let self else {
         return
       }
-    })
 
+      //действие
+    })
 
     return cell
   }

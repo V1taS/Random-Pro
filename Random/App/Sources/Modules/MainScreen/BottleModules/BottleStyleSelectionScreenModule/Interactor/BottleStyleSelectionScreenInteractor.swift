@@ -76,7 +76,7 @@ final class BottleStyleSelectionScreenInteractor: BottleStyleSelectionScreenInte
     }
 
     let newModel = models.map {
-      return BottleStyleSelectionScreenModel(bottleStyleSelection: $0.bottleStyleSelection,
+      return BottleStyleSelectionScreenModel(bottleStyleSelection: $0.bottleStyle == bottleStyle,
                                              isPremium: $0.isPremium,
                                              bottleStyle: $0.bottleStyle)
     }

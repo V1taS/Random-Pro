@@ -54,7 +54,7 @@ final class BottleStyleSelectionScreenFactory: BottleStyleSelectionScreenFactory
       return BottleStyleSelectionScreenModel(
         bottleStyleSelection: $0.bottleStyleSelection,
         isPremium: isPremium,
-        bottleStyle: .defaultStyle
+        bottleStyle: $0.bottleStyle
       )
     }
     output?.didGenerated(models: newModels)

@@ -162,7 +162,15 @@ extension BottleStyleSelectionScreenView: UICollectionViewDataSource {
         return
       }
 
-      //действие
+      if model.bottleStyle == .defaultStyle {
+        self.output?.didSelect(style: model.bottleStyle, with: self.models)
+        self.output?.didSelectStyleSuccessfully()
+      } else if model.isPremium {
+        self.output?.didSelect(style: model.bottleStyle, with: self.models)
+        self.output?.didSelectStyleSuccessfully()
+      } else {
+        self.output?.noPremiumAccessAction()
+      }
     })
 
     return cell

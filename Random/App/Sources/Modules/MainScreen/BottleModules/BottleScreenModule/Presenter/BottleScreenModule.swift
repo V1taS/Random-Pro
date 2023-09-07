@@ -71,6 +71,12 @@ final class BottleScreenViewController: BottleScreenModule {
     
     setNavigationBar()
   }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    interactor.updateStyle()
+  }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
@@ -90,6 +96,11 @@ extension BottleScreenViewController: BottleScreenViewOutput {
 // MARK: - BottleScreenInteractorOutput
 
 extension BottleScreenViewController: BottleScreenInteractorOutput {
+  func didReceive(model: BottleScreenModel) {
+    moduleView.resetPositionBottle()
+    moduleView.updateContentWith(model: model)
+  }
+  
   func stopBottleRotation() {
     moduleView.stopBottleRotation()
     interactor.stopHapticFeedback()

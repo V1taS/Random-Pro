@@ -13,6 +13,10 @@ protocol BottleScreenInteractorOutput: AnyObject {
   
   /// Остановить вращение бутылки
   func stopBottleRotation()
+
+  /// Были получены данные
+  ///  - Parameter model: результат генерации
+  func didReceive(model: BottleScreenModel)
 }
 
 /// События которые отправляем от Presenter к Interactor
@@ -26,6 +30,9 @@ protocol BottleScreenInteractorInput {
   
   /// Остановить обратную связь от моторчика
   func stopHapticFeedback()
+
+  /// Обновить стиль
+  func updateStyle()
 }
 
 final class BottleScreenInteractor: BottleScreenInteractorInput {
@@ -38,6 +45,18 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
   
   private let bottleImageView = UIImageView()
   private let services: ApplicationServices
+  private var bottleStyle: BottleStyleSelectionScreenModel.BottleStyle {
+    let models = services.storageService.getData(from: [BottleStyleSelectionScreenModel].self)
+    return models?.filter { $0.bottleStyleSelection}.first?.bottleStyle ?? .defaultStyle
+  }
+
+//  private var bottleScreenModel: BottleScreenModel? {
+//    get {
+//      services.storageService.getData(from: BottleScreenModel.self)
+//    } set {
+//      services.storageService.saveData(newValue)
+//    }
+//  }
   
   // MARK: - Initialization
   
@@ -47,8 +66,13 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
     self.services = services
   }
   
-  // MARK: - Internal property
-  
+  // MARK: - Internal fun
+
+  func updateStyle() {
+    let newModel = BottleScreenModel(bottleStyle: bottleStyle)
+    output?.didReceive(model: newModel)
+  }
+
   func generatesBottleRotationTimeAction() {
     let appearance = Appearance()
     let requiredNumberOfLaps = generateNumberOfLaps(appearance.laps)

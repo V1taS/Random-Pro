@@ -52,6 +52,6 @@ struct BottleStyleSelectionScreenModel: UserDefaultsCodable {
     case defaultStyle = "Bottle"
     
     /// Красный стиль
-    case red = "RedBottle"
+    case red = "GoldBottle"
   }
 }

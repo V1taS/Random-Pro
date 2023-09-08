@@ -127,11 +127,7 @@ extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
 
 // MARK: - BottleStyleSelectionScreenCoordinatorOutput
 
-extension SettingsScreenCoordinator: BottleStyleSelectionScreenCoordinatorOutput {
-//  func updateStateForSections() {
-//    output?.updateStateForSections()
-//  }
-}
+extension SettingsScreenCoordinator: BottleStyleSelectionScreenCoordinatorOutput {}
 
 // MARK: - PlayerCardSelectionScreenCoordinatorOutput
 

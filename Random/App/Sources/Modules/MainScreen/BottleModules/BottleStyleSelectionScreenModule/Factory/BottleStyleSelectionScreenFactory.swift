@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import FancyUIKit
-import FancyStyle
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol BottleStyleSelectionScreenFactoryOutput: AnyObject {
@@ -27,7 +25,7 @@ protocol BottleStyleSelectionScreenFactoryInput {
   /// Выбрана карточка игрока
   /// - Parameters:
   ///  - selectStyle: Выбрана карточка
-  ///  - models: Текущие карточки
+  ///  - models: Текущие бутылочки
   ///  - isPremium: Режим премиум
   func createModelWith(selectStyle: BottleStyleSelectionScreenModel.BottleStyle,
                        with models: [BottleStyleSelectionScreenModel],
@@ -35,7 +33,7 @@ protocol BottleStyleSelectionScreenFactoryInput {
   
   /// Обновить статус премиум в модельках
   /// - Parameters:
-  ///  - models: Текущие карточки
+  ///  - models: Текущие бутылочки
   ///  - isPremium: Режим премиум
   func updateModels(_ models: [BottleStyleSelectionScreenModel], isPremium: Bool)
 }

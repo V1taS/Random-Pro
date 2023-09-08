@@ -8,9 +8,9 @@
 
 import Foundation
 
-/// Модель Teams
+/// Модель стиля бутылочки
 struct BottleScreenModel: UserDefaultsCodable {
 
-  /// стиль бутылочки
+  /// Стиль бутылочки
   let bottleStyle: BottleStyleSelectionScreenModel.BottleStyle
 }

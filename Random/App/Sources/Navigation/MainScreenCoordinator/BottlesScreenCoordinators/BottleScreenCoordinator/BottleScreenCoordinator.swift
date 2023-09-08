@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol BottleScreenCoordinatorOutput: AnyObject {}
+protocol BottleScreenCoordinatorOutput: AnyObject {
+
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol BottleScreenCoordinatorInput {
@@ -74,7 +78,12 @@ extension BottleScreenCoordinator: BottleScreenModuleOutput {
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension BottleScreenCoordinator: SettingsScreenCoordinatorOutput {
-  func cleanButtonAction() {}
+
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+
+  func cleanButtonAction() {} 
 
   func listOfObjectsAction() {}
 }

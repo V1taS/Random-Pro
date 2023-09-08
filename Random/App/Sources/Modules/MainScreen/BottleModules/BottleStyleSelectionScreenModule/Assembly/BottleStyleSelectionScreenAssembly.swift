@@ -14,7 +14,6 @@ public final class BottleStyleSelectionScreenAssembly {
   
   /// Собирает модуль `BottleStyleSelectionScreen`
   /// - Returns: Cобранный модуль `BottleStyleSelectionScreen`
-//  public func createModule(services: ApplicationServices) -> BottleStyleSelectionScreenModule {
   func createModule(services: ApplicationServices) -> BottleStyleSelectionScreenModule {
     let interactor = BottleStyleSelectionScreenInteractor(services: services)
     let view = BottleStyleSelectionScreenView()

@@ -114,12 +114,6 @@ private extension BottleStyleSelectionScreenViewController {
     let appearance = Appearance()
     title = appearance.navBarTitle
   }
-
-  @objc
-  func settingButtonAction() {
-    // TODO: Добавить экшен
-    impactFeedback.impactOccurred()
-  }
 }
 
 // MARK: - Appearance

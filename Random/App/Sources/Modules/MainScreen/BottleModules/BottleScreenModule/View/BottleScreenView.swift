@@ -82,6 +82,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
     bottleRotationButton.set(isEnabled: true)
   }
 }
+
 // MARK: - Private
 
 private extension BottleScreenView {
@@ -95,11 +96,11 @@ private extension BottleScreenView {
     
     NSLayoutConstraint.activate([
       bottleRotationButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.defaultInset),
+                                                    constant: appearance.defaultInset),
       bottleRotationButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.defaultInset),
+                                                     constant: -appearance.defaultInset),
       bottleRotationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.defaultInset),
+                                                   constant: -appearance.defaultInset),
       
       bottleImageView.heightAnchor.constraint(equalTo: heightAnchor,
                                               multiplier: appearance.bottleHeightMultiplier,
@@ -139,7 +140,6 @@ private extension BottleScreenView {
   struct Appearance {
     let buttonTitle = RandomStrings.Localizable.spinTheBottle
     let defaultInset: CGFloat = 16
-//    let bottleImage = RandomAsset.bottle.image
     let bottleHeightMultiplier: Double = 0.4
   }
 }

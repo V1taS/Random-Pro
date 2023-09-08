@@ -50,14 +50,6 @@ final class BottleScreenInteractor: BottleScreenInteractorInput {
     return models?.filter { $0.bottleStyleSelection}.first?.bottleStyle ?? .defaultStyle
   }
 
-//  private var bottleScreenModel: BottleScreenModel? {
-//    get {
-//      services.storageService.getData(from: BottleScreenModel.self)
-//    } set {
-//      services.storageService.saveData(newValue)
-//    }
-//  }
-  
   // MARK: - Initialization
   
   /// - Parameters:

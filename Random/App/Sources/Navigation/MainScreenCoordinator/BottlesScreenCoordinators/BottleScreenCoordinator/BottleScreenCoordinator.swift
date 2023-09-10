@@ -9,7 +9,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol BottleScreenCoordinatorOutput: AnyObject {}
+protocol BottleScreenCoordinatorOutput: AnyObject {
+
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol BottleScreenCoordinatorInput {
@@ -31,6 +35,7 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
   
   private let navigationController: UINavigationController
   private let services: ApplicationServices
+  private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var bottleScreenModule: BottleScreenModule?
   
   // MARK: - Initialization
@@ -57,7 +62,28 @@ final class BottleScreenCoordinator: BottleScreenCoordinatorProtocol {
 // MARK: - BottleScreenModuleOutput
 
 extension BottleScreenCoordinator: BottleScreenModuleOutput {
+  func settingButtonAction() {
+    let settingsScreenCoordinator = SettingsScreenCoordinator(navigationController, services)
+    self.settingsScreenCoordinator = settingsScreenCoordinator
+    self.settingsScreenCoordinator?.output = self
+    self.settingsScreenCoordinator?.start()
+    self.settingsScreenCoordinator?.setupDefaultsSettings(for: .bottle)
+  }
+
   func moduleClosed() {
     finishFlow?()
   }
+}
+
+// MARK: - SettingsScreenCoordinatorOutput
+
+extension BottleScreenCoordinator: SettingsScreenCoordinatorOutput {
+
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+
+  func cleanButtonAction() {} 
+
+  func listOfObjectsAction() {}
 }

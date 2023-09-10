@@ -71,5 +71,8 @@ enum SettingsScreenTableViewType {
     
     /// Пользователь выбрал изменить карточку игрока в секции "Команды"
     case playerCardSelection
+
+    /// Пользователь выбрал изменить стиль бутылочки в секции "Бутылочка"
+    case bottleStyleSelection
   }
 }

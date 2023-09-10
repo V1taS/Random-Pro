@@ -17,6 +17,7 @@
 "ball" = "Ball";
 "blue_lagoon" = "Blaue Lagune";
 "bottle" = "Flasche";
+"bottle_style" = "Flaschenstil";
 "buy" = "Kaufen";
 "call_parents" = "Eltern anrufen";
 "can_change_app_icon_color" = "Die Farbe des Anwendungssymbols kann geändert werden";
@@ -31,6 +32,7 @@
 "can_spin_virtual_bottle" = "Sie können eine virtuelle Flasche drehen";
 "cancel" = "Abbrechen";
 "card_style" = "Kartenstil";
+"change_bottle_style" = "Sie können den Flaschenstil ändern";
 "change_card_style" = "Sie können den Kartenstil ändern";
 "choose_icon" = "Symbol auswählen";
 "clean" = "Bereinigen";
@@ -204,6 +206,7 @@
 "sea_fuchsia" = "Meeresfuchsia";
 "section_settings" = "Abschnittseinstellungen";
 "section_tsuefa" = "Abschnitt Zu-e-fa";
+"select_bottle_style" = "Flaschenart auswählen";
 "select_card_style" = "Kartenstil auswählen";
 "select_icon" = "Symbol auswählen";
 "selen" = "Selen";

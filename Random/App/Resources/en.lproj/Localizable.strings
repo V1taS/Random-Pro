@@ -17,6 +17,7 @@
 "ball" = "Ball";
 "blue_lagoon" = "Blue lagoon";
 "bottle" = "Bottle";
+"bottle_style" = "Bottle style";
 "buy" = "Buy";
 "call_parents" = "Call parents";
 "can_change_app_icon_color" = "You can change the color of the application icon";
@@ -31,6 +32,7 @@
 "can_spin_virtual_bottle" = "You can spin a virtual bottle";
 "cancel" = "Cancel";
 "card_style" = "Card style";
+"change_bottle_style" = "You can change the bottle style";
 "change_card_style" = "You can change the card style";
 "choose_icon" = "Icon selection";
 "clean" = "Clean";
@@ -204,6 +206,7 @@
 "sea_fuchsia" = "Sea fuchsia";
 "section_settings" = "Section settings";
 "section_tsuefa" = "Section Tsu-e-fa";
+"select_bottle_style" = "Select bottle style";
 "select_card_style" = "Select card style";
 "select_icon" = "Select icon";
 "selen" = "Selenium";

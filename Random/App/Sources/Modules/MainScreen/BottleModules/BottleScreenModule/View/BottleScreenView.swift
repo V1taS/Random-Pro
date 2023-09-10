@@ -25,12 +25,17 @@ protocol BottleScreenViewInput {
   
   /// Сброс текущего положения на начальное
   func resetPositionBottle()
+
+  /// Обновить контент
+  /// - Parameters:
+  ///   - model: модель бутылочки
+  func updateContentWith(model: BottleScreenModel)
 }
 
 typealias BottleScreenViewProtocol = UIView & BottleScreenViewInput
 
 final class BottleScreenView: BottleScreenViewProtocol {
-  
+
   // MARK: - Internal property
   
   weak var output: BottleScreenViewOutput?
@@ -40,6 +45,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
   private let resultLabel = UILabel()
   private let bottleRotationButton = ButtonView()
   private let bottleImageView = UIImageView()
+  private var bottleStyle: BottleScreenModel?
   private var isFirstStart = true
   
   // MARK: - Initialization
@@ -56,6 +62,14 @@ final class BottleScreenView: BottleScreenViewProtocol {
   }
   
   // MARK: - Intarnal func
+
+  func updateContentWith(model: BottleScreenModel) {
+    bottleStyle = model
+    guard let bottleImage = bottleStyle?.bottleStyle.rawValue else {
+      return
+    }
+    bottleImageView.image = UIImage(named: bottleImage)
+  }
   
   func stopBottleRotation() {
     bottleImageView.pauseRotation()
@@ -68,6 +82,7 @@ final class BottleScreenView: BottleScreenViewProtocol {
     bottleRotationButton.set(isEnabled: true)
   }
 }
+
 // MARK: - Private
 
 private extension BottleScreenView {
@@ -81,11 +96,11 @@ private extension BottleScreenView {
     
     NSLayoutConstraint.activate([
       bottleRotationButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                              constant: appearance.defaultInset),
+                                                    constant: appearance.defaultInset),
       bottleRotationButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                               constant: -appearance.defaultInset),
+                                                     constant: -appearance.defaultInset),
       bottleRotationButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                             constant: -appearance.defaultInset),
+                                                   constant: -appearance.defaultInset),
       
       bottleImageView.heightAnchor.constraint(equalTo: heightAnchor,
                                               multiplier: appearance.bottleHeightMultiplier,
@@ -99,8 +114,7 @@ private extension BottleScreenView {
     let appearance = Appearance()
     
     backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
-    
-    bottleImageView.image = appearance.bottleImage
+
     bottleImageView.contentMode = .scaleAspectFit
     
     bottleRotationButton.setTitle(appearance.buttonTitle, for: .normal)
@@ -126,7 +140,6 @@ private extension BottleScreenView {
   struct Appearance {
     let buttonTitle = RandomStrings.Localizable.spinTheBottle
     let defaultInset: CGFloat = 16
-    let bottleImage = RandomAsset.bottle.image
     let bottleHeightMultiplier: Double = 0.4
   }
 }

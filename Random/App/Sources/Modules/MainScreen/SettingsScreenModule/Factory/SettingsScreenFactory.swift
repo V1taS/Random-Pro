@@ -373,6 +373,9 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
           )
         )
       )
+    case .bottle:
+      tableViewModels.append(.titleAndChevron(title: appearance.chooseBottleStyle,
+                                              id: .bottleStyleSelection))
     }
     output?.didReceive(models: tableViewModels)
   }
@@ -395,5 +398,6 @@ private extension SettingsScreenFactory {
     let generatedPlayersCount = RandomStrings.Localizable.generatedPlayers
     let chooseCardStyle = RandomStrings.Localizable.selectCardStyle
     let selectLanguageTitle = RandomStrings.Localizable.selectLanguage
+    let chooseBottleStyle = RandomStrings.Localizable.selectBottleStyle
   }
 }

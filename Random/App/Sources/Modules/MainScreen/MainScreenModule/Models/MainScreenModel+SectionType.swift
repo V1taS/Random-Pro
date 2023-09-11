@@ -77,6 +77,8 @@ extension MainScreenModel {
           switch languageType {
           case .ru:
             return appearance.titleTruthOrDareRu
+          case .de:
+            return appearance.titleTruthOrDareDe
           default:
             return appearance.titleTruthOrDareOther
           }

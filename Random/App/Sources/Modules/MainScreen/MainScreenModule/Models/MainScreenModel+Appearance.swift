@@ -116,6 +116,7 @@ extension MainScreenModel {
     static let titleOr = RandomStrings.Localizable.or
     static let titleDareLowercased = RandomStrings.Localizable.dare.lowercased()
     let titleTruthOrDareRu = "\(titleTruth) \(titleOr)\n\(titleDareLowercased)"
+    let titleTruthOrDareDe = "\(titleTruth)\n\(titleOr) \(titleDareLowercased)"
     let titleTruthOrDareOther = "\(titleTruth) \(titleOr) \(titleDareLowercased)"
     let truthOrDareDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTruthOrDare
     

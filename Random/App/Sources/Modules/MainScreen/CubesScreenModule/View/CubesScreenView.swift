@@ -72,7 +72,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
   func updateContentWith(cubesType: CubesScreenModel.CubesType) {
     cubesSegmentedControl.selectedSegmentIndex = cubesType.rawValue
     cubesView.updateCubesWith(type: cubesType)
-    setButtinTitle()
+    setButtonTitle()
   }
   
   func updateContentWith(listResult: [String]) {
@@ -165,7 +165,7 @@ private extension CubesScreenView {
     ])
   }
   
-  func setButtinTitle() {
+  func setButtonTitle() {
     let appearance = Appearance()
     let cubeType = CubesScreenModel.CubesType(rawValue: cubesSegmentedControl.selectedSegmentIndex) ?? .cubesTwo
     let buttonTitle = cubeType == .cubesOne ? appearance.buttonOneCubeTitle : appearance.buttonSomeCubeTitle
@@ -183,7 +183,7 @@ private extension CubesScreenView {
     
     output?.updateSelectedCountCubes(cubeType)
     cubesView.updateCubesWith(type: cubeType)
-    setButtinTitle()
+    setButtonTitle()
   }
 }
 

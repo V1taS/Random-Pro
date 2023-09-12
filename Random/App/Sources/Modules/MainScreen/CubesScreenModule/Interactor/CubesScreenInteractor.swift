@@ -52,8 +52,9 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageService
+  private let storageService: StorageService
   private let buttonCounterService: ButtonCounterService
+  private let hapticService: HapticService
   private var cubesScreenModel: CubesScreenModel? {
     get {
       storageService.getData(from: CubesScreenModel.self)
@@ -69,6 +70,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   init(services: ApplicationServices) {
     storageService = services.storageService
     buttonCounterService = services.buttonCounterService
+    hapticService = services.hapticService
   }
   
   // MARK: - Internal func
@@ -138,6 +140,15 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     cubesScreenModel = nil
     getContent()
     output?.cleanButtonWasSelected()
+  }
+
+  func playHapticFeedback() {
+    hapticService.play(isRepeat: true,
+                                patternType: .feedingCrocodile) { _ in }
+  }
+
+  func stopHapticFeedback() {
+    hapticService.stop()
   }
 }
 

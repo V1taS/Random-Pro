@@ -38,6 +38,12 @@ protocol CubesScreenInteractorInput {
   /// Кубики были подкинуты
   /// - Parameter totalValue: Сумма всех кубиков
   func diceAction(totalValue: Int)
+
+  /// Запустить обратную связь от моторчика
+  func playHapticFeedback()
+
+  /// Остановить обратную связь от моторчика
+  func stopHapticFeedback()
   
   /// Показать список генераций результатов
   /// - Parameter isShow: показать  список генераций результатов

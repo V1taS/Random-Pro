@@ -122,6 +122,7 @@ extension CubesScreenViewController: CubesScreenViewOutput {
   
   func diceAction(totalValue: Int) {
     interactor.diceAction(totalValue: totalValue)
+    interactor.playHapticFeedback()
     let listResult = factory.reverseListResult(interactor.returnCurrentModel().listResult)
     moduleView.updateContentWith(listResult: listResult)
   }
@@ -137,6 +138,7 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
   func didReceive(model: CubesScreenModel) {
     moduleView.updateContentWith(cubesType: model.cubesType)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+    interactor.stopHapticFeedback()
     moduleView.listGenerated(isShow: model.isShowlistGenerated)
   }
 }

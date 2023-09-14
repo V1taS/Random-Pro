@@ -116,13 +116,16 @@ final class CubesScreenViewController: CubesScreenModule {
 // MARK: - CubesScreenViewOutput
 
 extension CubesScreenViewController: CubesScreenViewOutput {
+  func playHapticFeedbackAction() {
+    interactor.playHapticFeedback()
+  }
+
   func updateSelectedCountCubes(_ cubesType: CubesScreenModel.CubesType) {
     interactor.updateSelectedCountCubes(cubesType)
   }
   
   func diceAction(totalValue: Int) {
     interactor.diceAction(totalValue: totalValue)
-    interactor.playHapticFeedback()
     let listResult = factory.reverseListResult(interactor.returnCurrentModel().listResult)
     moduleView.updateContentWith(listResult: listResult)
   }
@@ -138,7 +141,6 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
   func didReceive(model: CubesScreenModel) {
     moduleView.updateContentWith(cubesType: model.cubesType)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
-    interactor.stopHapticFeedback()
     moduleView.listGenerated(isShow: model.isShowlistGenerated)
   }
 }

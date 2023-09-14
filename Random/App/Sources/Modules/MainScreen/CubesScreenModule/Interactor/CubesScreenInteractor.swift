@@ -41,9 +41,6 @@ protocol CubesScreenInteractorInput {
 
   /// Запустить обратную связь от моторчика
   func playHapticFeedback()
-
-  /// Остановить обратную связь от моторчика
-  func stopHapticFeedback()
   
   /// Показать список генераций результатов
   /// - Parameter isShow: показать  список генераций результатов
@@ -149,12 +146,11 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   }
 
   func playHapticFeedback() {
-    hapticService.play(isRepeat: true,
-                                patternType: .feedingCrocodile) { _ in }
-  }
-
-  func stopHapticFeedback() {
-    hapticService.stop()
+    DispatchQueue.main.async { [weak self] in
+      self?.hapticService.play(isRepeat: false,
+                               patternType: .splash,
+                               completion: {_ in })
+    }
   }
 }
 

@@ -17,6 +17,7 @@ final class CubesView: UIView {
   // MARK: - Internal properties
   
   var totalValueDiceAction: ((Int) -> Void)?
+  var feedbackGeneratorAction: (() -> Void)?
   
   // MARK: - Private properties
   
@@ -60,6 +61,27 @@ final class CubesView: UIView {
   }
 }
 
+// MARK: - SCNPhysicsContactDelegate
+
+extension CubesView: SCNPhysicsContactDelegate {
+  func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+    let appearance = Appearance()
+
+    if (contact.nodeA.name == appearance.cubesNodeName && contact.nodeB.name == appearance.positionFloor) ||
+        (contact.nodeA.name == appearance.positionFloor && contact.nodeB.name == appearance.cubesNodeName) ||
+        (contact.nodeA.name == appearance.cubesNodeName && contact.nodeB.name == appearance.positionLeft) ||
+        (contact.nodeA.name == appearance.positionLeft && contact.nodeB.name == appearance.cubesNodeName) ||
+        (contact.nodeA.name == appearance.cubesNodeName && contact.nodeB.name == appearance.positionRight) ||
+        (contact.nodeA.name == appearance.positionRight && contact.nodeB.name == appearance.cubesNodeName) ||
+        (contact.nodeA.name == appearance.cubesNodeName && contact.nodeB.name == appearance.positionFront) ||
+        (contact.nodeA.name == appearance.positionFront && contact.nodeB.name == appearance.cubesNodeName) ||
+        (contact.nodeA.name == appearance.cubesNodeName && contact.nodeB.name == appearance.positionBack) ||
+        (contact.nodeA.name == appearance.positionBack && contact.nodeB.name == appearance.cubesNodeName) {
+      feedbackGeneratorAction?()
+    }
+  }
+}
+
 // MARK: - SCNSceneRendererDelegate
 
 extension CubesView: SCNSceneRendererDelegate {
@@ -99,10 +121,10 @@ private extension SCNVector3 {
 
 private extension CubesView {
   func randomPosition() -> SCNVector3 {
-      let x = Float.random(in: -5...5)
-      let y = Float.random(in: 0...10)
-      let z = Float.random(in: -5...5)
-      return SCNVector3(x, y, z)
+    let x = Float.random(in: -5...5)
+    let y = Float.random(in: 0...10)
+    let z = Float.random(in: -5...5)
+    return SCNVector3(x, y, z)
   }
   
   func reposition(_ node: SCNNode, to position: SCNVector3, with normal: SCNVector3) {
@@ -132,12 +154,14 @@ private extension CubesView {
   func wall(at position: SCNVector3,
             with normal: SCNVector3,
             sized size: CGSize,
+            name: String,
             color: UIColor = .clear) -> SCNNode {
     let geometry = SCNPlane(width: size.width, height: size.height)
     geometry.materials.first?.diffuse.contents = color
     geometry.materials.first?.isDoubleSided = true
     
     let geometryNode = SCNNode(geometry: geometry)
+    geometryNode.name = name
     geometryNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
     geometryNode.physicsBody?.collisionBitMask = 1
     geometryNode.physicsBody?.contactTestBitMask = 1
@@ -229,6 +253,7 @@ private extension CubesView {
   }
   
   func setupScene() {
+    let appearance = Appearance()
     scnView.scene = scnScene
     setupCamera()
     setupLight()
@@ -238,21 +263,33 @@ private extension CubesView {
     
     let walls = [
       // верхняя стена X,Y,Z
-      (position: SCNVector3(0, 13, 0), normal: SCNVector3Make(0, -1, 0)),
+      (position: SCNVector3(0, 13, 0),
+       normal: SCNVector3Make(0, -1, 0),
+       name: appearance.positionTop),
       // нижняя стена X,Y,Z
-      (position: SCNVector3(0, -8, 0), normal: SCNVector3Make(0, 1, 0)),
+      (position: SCNVector3(0, -8, 0),
+       normal: SCNVector3Make(0, 1, 0),
+       name: appearance.positionFloor),
       // правая стена X,Y,Z
-      (position: SCNVector3(7, -8, 0), normal: SCNVector3Make(-1, 0, 0)),
+      (position: SCNVector3(7, -8, 0),
+       normal: SCNVector3Make(-1, 0, 0),
+       name: appearance.positionRight),
       // левая стена X,Y,Z
-      (position: SCNVector3(-7, -8, 0), normal: SCNVector3Make(1, 0, 0)),
+      (position: SCNVector3(-7, -8, 0),
+       normal: SCNVector3Make(1, 0, 0),
+       name: appearance.positionLeft),
       // задняя стена X,Y,Z
-      (position: SCNVector3(0, -8, 11), normal: SCNVector3Make(0, 0, -1)),
+      (position: SCNVector3(0, -8, 11),
+       normal: SCNVector3Make(0, 0, -1),
+       name: appearance.positionBack),
       // передняя стена X,Y,Z
-      (position: SCNVector3(0, -8, -11), normal: SCNVector3Make(0, 0, 1))
+      (position: SCNVector3(0, -8, -11),
+       normal: SCNVector3Make(0, 0, 1),
+       name: appearance.positionFront)
     ]
     
     for wall in walls {
-      let panel = self.wall(at: wall.position, with: wall.normal, sized: wallSize)
+      let panel = self.wall(at: wall.position, with: wall.normal, sized: wallSize, name: wall.name)
       scnScene.rootNode.addChildNode(panel)
     }
   }
@@ -407,5 +444,14 @@ private extension CubesView {
     let numberFour: Int = 4
     let numberFive: Int = 5
     let numberSix: Int = 6
+
+    let positionTop = "Top"
+    let positionFloor = "Floor"
+    let positionRight = "Right"
+    let positionLeft = "Left"
+    let positionBack = "Back"
+    let positionFront = "Front"
+
+    let cubesNodeName = "Cube"
   }
 }

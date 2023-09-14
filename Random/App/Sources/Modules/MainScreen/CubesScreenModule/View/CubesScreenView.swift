@@ -20,6 +20,9 @@ protocol CubesScreenViewOutput: AnyObject {
   /// Кубики были подкинуты
   /// - Parameter totalValue: Сумма всех кубиков
   func diceAction(totalValue: Int)
+
+  /// Пользователь нажал на кнопку генерации
+  func playHapticFeedbackAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -128,6 +131,10 @@ private extension CubesScreenView {
         self.counter = .zero
       }
     }
+
+    cubesView.feedbackGeneratorAction = { [weak self] in
+      self?.output?.playHapticFeedbackAction()
+    }
   }
   
   func setupConstraints() {
@@ -174,6 +181,7 @@ private extension CubesScreenView {
   
   @objc
   func generateButtonAction() {
+    output?.playHapticFeedbackAction()
     cubesView.handleTap()
   }
   

@@ -116,6 +116,10 @@ final class CubesScreenViewController: CubesScreenModule {
 // MARK: - CubesScreenViewOutput
 
 extension CubesScreenViewController: CubesScreenViewOutput {
+  func playHapticFeedbackAction() {
+    interactor.playHapticFeedback()
+  }
+
   func updateSelectedCountCubes(_ cubesType: CubesScreenModel.CubesType) {
     interactor.updateSelectedCountCubes(cubesType)
   }

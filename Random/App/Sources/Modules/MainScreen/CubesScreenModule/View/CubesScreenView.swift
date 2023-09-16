@@ -20,6 +20,9 @@ protocol CubesScreenViewOutput: AnyObject {
   /// Кубики были подкинуты
   /// - Parameter totalValue: Сумма всех кубиков
   func diceAction(totalValue: Int)
+
+  /// Пользователь нажал на кнопку генерации
+  func playHapticFeedbackAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -72,7 +75,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
   func updateContentWith(cubesType: CubesScreenModel.CubesType) {
     cubesSegmentedControl.selectedSegmentIndex = cubesType.rawValue
     cubesView.updateCubesWith(type: cubesType)
-    setButtinTitle()
+    setButtonTitle()
   }
   
   func updateContentWith(listResult: [String]) {
@@ -128,6 +131,10 @@ private extension CubesScreenView {
         self.counter = .zero
       }
     }
+
+    cubesView.feedbackGeneratorAction = { [weak self] in
+      self?.output?.playHapticFeedbackAction()
+    }
   }
   
   func setupConstraints() {
@@ -165,7 +172,7 @@ private extension CubesScreenView {
     ])
   }
   
-  func setButtinTitle() {
+  func setButtonTitle() {
     let appearance = Appearance()
     let cubeType = CubesScreenModel.CubesType(rawValue: cubesSegmentedControl.selectedSegmentIndex) ?? .cubesTwo
     let buttonTitle = cubeType == .cubesOne ? appearance.buttonOneCubeTitle : appearance.buttonSomeCubeTitle
@@ -183,7 +190,7 @@ private extension CubesScreenView {
     
     output?.updateSelectedCountCubes(cubeType)
     cubesView.updateCubesWith(type: cubeType)
-    setButtinTitle()
+    setButtonTitle()
   }
 }
 

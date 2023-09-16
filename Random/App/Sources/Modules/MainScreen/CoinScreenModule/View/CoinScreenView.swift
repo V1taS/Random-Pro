@@ -158,7 +158,6 @@ private extension CoinScreenView {
   
   @objc
   func generateButtonAction() {
-    output?.playHapticFeedbackAction()
     output?.generateButtonAction()
     resultLabel.text = ""
     coinView.handleTap()

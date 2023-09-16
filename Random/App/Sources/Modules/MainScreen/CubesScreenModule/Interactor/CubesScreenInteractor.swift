@@ -38,6 +38,9 @@ protocol CubesScreenInteractorInput {
   /// Кубики были подкинуты
   /// - Parameter totalValue: Сумма всех кубиков
   func diceAction(totalValue: Int)
+
+  /// Запустить обратную связь от моторчика
+  func playHapticFeedback()
   
   /// Показать список генераций результатов
   /// - Parameter isShow: показать  список генераций результатов
@@ -52,8 +55,9 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   
   // MARK: - Private property
   
-  private var storageService: StorageService
+  private let storageService: StorageService
   private let buttonCounterService: ButtonCounterService
+  private let hapticService: HapticService
   private var cubesScreenModel: CubesScreenModel? {
     get {
       storageService.getData(from: CubesScreenModel.self)
@@ -69,6 +73,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
   init(services: ApplicationServices) {
     storageService = services.storageService
     buttonCounterService = services.buttonCounterService
+    hapticService = services.hapticService
   }
   
   // MARK: - Internal func
@@ -138,6 +143,14 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     cubesScreenModel = nil
     getContent()
     output?.cleanButtonWasSelected()
+  }
+
+  func playHapticFeedback() {
+    DispatchQueue.main.async { [weak self] in
+      self?.hapticService.play(isRepeat: false,
+                               patternType: .splash,
+                               completion: {_ in })
+    }
   }
 }
 

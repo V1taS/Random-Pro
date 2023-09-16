@@ -181,7 +181,6 @@ private extension CubesScreenView {
   
   @objc
   func generateButtonAction() {
-    output?.playHapticFeedbackAction()
     cubesView.handleTap()
   }
   

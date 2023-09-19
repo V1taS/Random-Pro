@@ -190,6 +190,7 @@ private extension CubesView {
     let node = SCNNode(geometry: geometry)
     node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     node.position = position
+    node.name = Appearance().cubesNodeName
     return node
   }
   
@@ -259,6 +260,7 @@ private extension CubesView {
     setupLight()
     
     scnScene.physicsWorld.speed = 3
+    scnScene.physicsWorld.contactDelegate = self
     let wallSize = CGSize(width: 50.0, height: 50.0)
     
     let walls = [

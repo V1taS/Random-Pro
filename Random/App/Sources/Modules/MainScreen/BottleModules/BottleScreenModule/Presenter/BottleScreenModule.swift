@@ -76,6 +76,12 @@ final class BottleScreenViewController: BottleScreenModule {
 
     interactor.updateStyle()
   }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+
+    interactor.stopHapticFeedback()
+  }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()

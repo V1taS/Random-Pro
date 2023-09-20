@@ -48,7 +48,7 @@ final class CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenModu
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    view.backgroundColor = .blue //удалить потом
     setNavigationBar()
   }
   

@@ -42,8 +42,8 @@ final class CoinStyleSelectionScreenCoordinator: CoinStyleSelectionScreenCoordin
   /// - Parameters:
   ///   - navigationController: Навигейшн контроллер
   ///   - services: Сервисы приложения
-  init(navigationController: UINavigationController,
-       services: ApplicationServices) {
+  init(_ navigationController: UINavigationController,
+       _ services: ApplicationServices) {
     self.navigationController = navigationController
     self.services = services
   }

@@ -46,6 +46,7 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
   private let selectedSectionView = ImageAndLabelWithButtonBigView()
   private let resultLabel = UILabel()
   private var resultText = ""
+  private var isSpinningWheel = false
   
   // MARK: - Internal func
   
@@ -101,8 +102,12 @@ final class FortuneWheelView: FortuneWheelViewProtocol {
     applyDefaultBehavior()
     
     fortuneWheel.onSpinButtonTap = { [weak self] in
-      self?.resultLabel.text = "?"
-      self?.fortuneWheel?.startRotationAnimation(
+      guard let self, !self.isSpinningWheel else {
+        return
+      }
+      self.isSpinningWheel = true
+      self.resultLabel.text = "?"
+      self.fortuneWheel?.startRotationAnimation(
         finishIndex: finishIndex,
         continuousRotationTime: 1,
         continuousRotationSpeed: 4,
@@ -127,6 +132,7 @@ private extension FortuneWheelView {
     }
     resultText = text
     output?.save(result: text)
+    isSpinningWheel = true
   }
   
   func getIndexFromCollision(progress: Double, finishIndex: Int) -> Int? {

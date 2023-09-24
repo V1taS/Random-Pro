@@ -132,7 +132,7 @@ private extension FortuneWheelView {
     }
     resultText = text
     output?.save(result: text)
-    isSpinningWheel = true
+    isSpinningWheel = false
   }
   
   func getIndexFromCollision(progress: Double, finishIndex: Int) -> Int? {

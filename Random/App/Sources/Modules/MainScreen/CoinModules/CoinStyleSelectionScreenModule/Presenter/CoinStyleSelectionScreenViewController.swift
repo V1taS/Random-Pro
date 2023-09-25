@@ -48,7 +48,6 @@ final class CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenModu
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .blue //удалить потом
     setNavigationBar()
   }
   
@@ -63,7 +62,15 @@ extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenViewOu
 
 // MARK: - CoinStyleSelectionScreenInteractorOutput
 
-extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenInteractorOutput {}
+extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenInteractorOutput {
+  func didReceive(models: [CoinStyleSelectionScreenModel], isPremium: Bool) {
+    <#code#>
+  }
+
+  func didReceiveEmptyModelWith(isPremium: Bool) {
+    <#code#>
+  }
+}
 
 // MARK: - CoinStyleSelectionScreenFactoryOutput
 
@@ -77,11 +84,6 @@ private extension CoinStyleSelectionScreenViewController {
     
     navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-    let settingButton = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(settingButtonAction))
-    navigationItem.rightBarButtonItems = [settingButton]
   }
   
   @objc
@@ -96,6 +98,5 @@ private extension CoinStyleSelectionScreenViewController {
 private extension CoinStyleSelectionScreenViewController {
   struct Appearance {
     let title = RandomStrings.Localizable.randomPro
-    let settingsButtonIcon = UIImage(systemName: "gear")
   }
 }

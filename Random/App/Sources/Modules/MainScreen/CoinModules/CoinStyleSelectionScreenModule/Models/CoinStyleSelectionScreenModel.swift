@@ -54,7 +54,7 @@ struct CoinStyleSelectionScreenModel: UserDefaultsCodable {
     case none
   }
 
-  enum CoinStyle: Equatable & Codable {
+  enum CoinStyle: CaseIterable, Equatable & Codable {
 
     /// Стиль по дефолту
     case defaultStyle

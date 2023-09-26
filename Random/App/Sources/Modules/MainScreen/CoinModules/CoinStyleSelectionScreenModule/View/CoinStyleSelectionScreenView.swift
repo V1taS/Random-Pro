@@ -12,7 +12,12 @@ import RandomUIKit
 protocol CoinStyleSelectionScreenViewOutput: AnyObject {}
 
 /// События которые отправляем от Presenter ко View
-protocol CoinStyleSelectionScreenViewInput {}
+protocol CoinStyleSelectionScreenViewInput {
+
+  /// Обновить контент
+  /// - Parameter models: Список моделек стилей монеток
+  func updateContentWith(models: [CoinStyleSelectionScreenModel])
+}
 
 /// Псевдоним протокола UIView & CoinStyleSelectionScreenViewInput
 typealias CoinStyleSelectionScreenViewProtocol = UIView & CoinStyleSelectionScreenViewInput
@@ -25,7 +30,11 @@ final class CoinStyleSelectionScreenView: CoinStyleSelectionScreenViewProtocol {
   weak var output: CoinStyleSelectionScreenViewOutput?
   
   // MARK: - Private properties
-  
+
+  private let collectionViewLayout = UICollectionViewFlowLayout()
+  private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+  private var models: [CoinStyleSelectionScreenModel] = []
+
   // MARK: - Initialization
   
   override init(frame: CGRect) {
@@ -40,6 +49,10 @@ final class CoinStyleSelectionScreenView: CoinStyleSelectionScreenViewProtocol {
   }
   
   // MARK: - Internal func
+  func updateContentWith(models: [CoinStyleSelectionScreenModel]) {
+    self.models = models
+    collectionView.reloadData()
+  }
 }
 
 // MARK: - Private

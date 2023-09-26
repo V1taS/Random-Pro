@@ -14,8 +14,8 @@ public final class CoinStyleSelectionScreenAssembly {
   
   /// Собирает модуль `CoinStyleSelectionScreen`
   /// - Returns: Cобранный модуль `CoinStyleSelectionScreen`
-  public func createModule() -> CoinStyleSelectionScreenModule {
-    let interactor = CoinStyleSelectionScreenInteractor()
+  func createModule(services: ApplicationServices) -> CoinStyleSelectionScreenModule {
+    let interactor = CoinStyleSelectionScreenInteractor(services: services)
     let view = CoinStyleSelectionScreenView()
     let factory = CoinStyleSelectionScreenFactory()
     let presenter = CoinStyleSelectionScreenViewController(

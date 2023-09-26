@@ -50,6 +50,13 @@ final class CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenModu
     super.viewDidLoad()
     setNavigationBar()
   }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    navigationItem.largeTitleDisplayMode = .always
+    navigationController?.navigationBar.prefersLargeTitles = true
+  }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
@@ -64,32 +71,30 @@ extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenViewOu
 
 extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenInteractorOutput {
   func didReceive(models: [CoinStyleSelectionScreenModel], isPremium: Bool) {
-    <#code#>
+    factory.updateModels(models, isPremium: isPremium)
   }
 
   func didReceiveEmptyModelWith(isPremium: Bool) {
-    <#code#>
+    factory.createInitialModelWith(isPremium: isPremium)
   }
 }
 
 // MARK: - CoinStyleSelectionScreenFactoryOutput
 
-extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenFactoryOutput {}
+extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenFactoryOutput {
+  func didGenerated(models: [CoinStyleSelectionScreenModel]) {
+    let coinStyle = models.filter { $0.coinStyleSelection }.first?.coinStyle ?? .defaultStyle
+    moduleView.updateContentWith(models: models)
+    interactor.saveCoinStyle(coinStyle, with: models)
+  }
+}
 
 // MARK: - Private
 
 private extension CoinStyleSelectionScreenViewController {
   func setNavigationBar() {
     let appearance = Appearance()
-    
-    navigationItem.largeTitleDisplayMode = .never
     title = appearance.title
-  }
-  
-  @objc
-  func settingButtonAction() {
-    // TODO: Добавить экшен
-    impactFeedback.impactOccurred()
   }
 }
 

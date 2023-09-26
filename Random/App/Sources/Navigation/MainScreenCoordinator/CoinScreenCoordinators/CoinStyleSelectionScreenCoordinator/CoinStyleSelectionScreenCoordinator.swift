@@ -51,7 +51,7 @@ final class CoinStyleSelectionScreenCoordinator: CoinStyleSelectionScreenCoordin
   // MARK: - Life cycle
   
   func start() {
-    let module = CoinStyleSelectionScreenAssembly().createModule()
+    let module = CoinStyleSelectionScreenAssembly().createModule(services: services)
     self.module = module
     self.module?.moduleOutput = self
     navigationController.pushViewController(module, animated: true)

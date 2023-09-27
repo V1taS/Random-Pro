@@ -8,7 +8,11 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol CoinStyleSelectionScreenCoordinatorOutput: AnyObject {}
+protocol CoinStyleSelectionScreenCoordinatorOutput: AnyObject {
+
+  /// Обновить секции на главном экране
+  func updateStateForSections()
+}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol CoinStyleSelectionScreenCoordinatorInput {
@@ -35,6 +39,9 @@ final class CoinStyleSelectionScreenCoordinator: CoinStyleSelectionScreenCoordin
   private var module: CoinStyleSelectionScreenModule?
   private var navigationController: UINavigationController
   private let services: ApplicationServices
+
+  // Coordinators
+  private var premiumScreenCoordinator: PremiumScreenCoordinator?
   
   // MARK: - Initialisation
   
@@ -61,7 +68,74 @@ final class CoinStyleSelectionScreenCoordinator: CoinStyleSelectionScreenCoordin
 // MARK: - CoinStyleSelectionScreenModuleOutput
 
 extension CoinStyleSelectionScreenCoordinator: CoinStyleSelectionScreenModuleOutput {
+  func noPremiumAccessAction() {
+    let appearance = Appearance()
+    showAlerForUnlockPremiumtWith(title: appearance.premiumAccess,
+                                  description: appearance.chooseCoinStyleTitle)
+  }
+
+  func didSelectStyleSuccessfully() {
+    services.notificationService.showPositiveAlertWith(title: Appearance().setCoinStyleTitle,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+
   func moduleClosed() {
     finishFlow?()
+  }
+}
+
+// MARK: - PremiumScreenCoordinatorOutput
+
+extension CoinStyleSelectionScreenCoordinator: PremiumScreenCoordinatorOutput {
+  func updateStateForSections() {
+    output?.updateStateForSections()
+  }
+}
+
+// MARK: - Private
+
+private extension CoinStyleSelectionScreenCoordinator {
+  func showAlerForUnlockPremiumtWith(title: String, description: String) {
+    let appearance = Appearance()
+    let alert = UIAlertController(title: title,
+                                  message: description,
+                                  preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: appearance.cancel,
+                                  style: .cancel,
+                                  handler: { _ in }))
+    alert.addAction(UIAlertAction(title: appearance.unlock,
+                                  style: .default,
+                                  handler: { [weak self] _ in
+      self?.openPremium()
+    }))
+    module?.present(alert, animated: true, completion: nil)
+  }
+
+  func openPremium() {
+    let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
+                                                            services)
+    self.premiumScreenCoordinator = premiumScreenCoordinator
+    premiumScreenCoordinator.output = self
+    premiumScreenCoordinator.selectPresentType(.present)
+    premiumScreenCoordinator.start()
+    premiumScreenCoordinator.finishFlow = { [weak self] in
+      self?.premiumScreenCoordinator = nil
+    }
+
+    services.metricsService.track(event: .premiumScreen)
+  }
+}
+
+// MARK: - Appearance
+
+private extension CoinStyleSelectionScreenCoordinator {
+  struct Appearance {
+    let premiumAccess = RandomStrings.Localizable.premiumAccess
+    let chooseCoinStyleTitle = RandomStrings.Localizable.changeCoinStyle
+    let setCoinStyleTitle = RandomStrings.Localizable.installed 
+    let cancel = RandomStrings.Localizable.cancel
+    let unlock = RandomStrings.Localizable.unlock
   }
 }

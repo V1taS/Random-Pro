@@ -48,6 +48,8 @@ final class CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenModu
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    interactor.getContent()
     setNavigationBar()
   }
 
@@ -65,7 +67,22 @@ final class CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenModu
 
 // MARK: - CoinStyleSelectionScreenViewOutput
 
-extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenViewOutput {}
+extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenViewOutput {
+  func noPremiumAccessAction() {
+    moduleOutput?.noPremiumAccessAction()
+  }
+
+  func didSelect(style: CoinStyleSelectionScreenModel.CoinStyle, with models: [CoinStyleSelectionScreenModel]) {
+    interactor.saveCoinStyle(style, with: models)
+    factory.createModelWith(selectStyle: style,
+                            with: models,
+                            isPremium: interactor.getIsPremium())
+  }
+
+  func didSelectStyleSuccessfully() {
+    moduleOutput?.didSelectStyleSuccessfully()
+  }
+}
 
 // MARK: - CoinStyleSelectionScreenInteractorOutput
 
@@ -102,6 +119,6 @@ private extension CoinStyleSelectionScreenViewController {
 
 private extension CoinStyleSelectionScreenViewController {
   struct Appearance {
-    let title = RandomStrings.Localizable.randomPro
+    let title = RandomStrings.Localizable.coinStyle
   }
 }

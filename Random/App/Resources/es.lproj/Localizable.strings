@@ -34,11 +34,13 @@
 "card_style" = "estilo de tarjeta";
 "change_bottle_style" = "Puedes cambiar el estilo de la botella";
 "change_card_style" = "Puede cambiar el estilo de la tarjeta";
+"change_coin_style" = "Puede cambiar el estilo de la moneda";
 "choose_icon" = "Selección de iconos";
 "clean" = "Limpiar";
 "cleaning" = "Limpieza";
 "click_to_update_app" = "haga Clic para actualizar la aplicación";
 "coin" = "Moneda";
+"coin_style" = "Estilo de la moneda";
 "colors" = "Colores";
 "contact" = "Contacto";
 "contacts" = "Contactos";

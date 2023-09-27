@@ -11,6 +11,12 @@ import FancyUIKit
 /// События которые отправляем из `CoinStyleSelectionScreenModule` в `Coordinator`
 public protocol CoinStyleSelectionScreenModuleOutput: AnyObject {
 
+  /// Нет премиум доступа
+  func noPremiumAccessAction()
+
+  /// Успешно выбран стиль монетки
+  func didSelectStyleSuccessfully()
+
   /// Модуль закрыт
   func moduleClosed()
 }

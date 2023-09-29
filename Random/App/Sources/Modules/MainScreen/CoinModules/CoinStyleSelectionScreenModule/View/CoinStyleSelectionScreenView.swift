@@ -29,7 +29,7 @@ protocol CoinStyleSelectionScreenViewOutput: AnyObject {
 protocol CoinStyleSelectionScreenViewInput {
 
   /// Обновить контент
-  /// - Parameter models: Список моделек стилей монеток
+  /// - Parameter models: Список моделек стилей монетки
   func updateContentWith(models: [CoinStyleSelectionScreenModel])
 }
 
@@ -153,7 +153,7 @@ extension CoinStyleSelectionScreenView: UICollectionViewDataSource {
       state = .none
     }
 
-    cell.configureCellWith(image: UIImage(named: model.coinStyleSpecs.eagle),
+    cell.configureCellWith(image: UIImage(named: model.coinStyle.coinSidesName.eagle),
                            title: nil,
                            cardState: state,
                            cardAction: { [weak self] in
@@ -175,7 +175,6 @@ extension CoinStyleSelectionScreenView: UICollectionViewDataSource {
     return cell
   }
 }
-
 
 // MARK: - Appearance
 

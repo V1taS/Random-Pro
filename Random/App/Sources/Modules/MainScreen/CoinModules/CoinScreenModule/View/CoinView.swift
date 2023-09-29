@@ -15,8 +15,8 @@ import QuartzCore
 final class CoinView: UIView {
   
   // MARK: - Internal properties
-  
-  var totalValueCoinAction: ((CoinScreenModel.CoinType) -> Void)?
+
+  var totalValueCoinAction: ((CoinScreenModel.CoinSideType) -> Void)?
   var feedbackGeneratorAction: (() -> Void)?
   
   // MARK: - Private properties
@@ -34,7 +34,6 @@ final class CoinView: UIView {
     
     setupView()
     setupScene()
-    addCoins()
   }
   
   required init?(coder: NSCoder) {
@@ -42,6 +41,12 @@ final class CoinView: UIView {
   }
   
   // MARK: - Internal func
+
+  /// Обновляет экран с монетой
+  ///  - Parameter type: Тип монеты
+  func updateCoinWith(model: CoinScreenModel) {
+    addCoins(with: model)
+  }
   
   /// Обработать нажатие
   func handleTap() {
@@ -247,8 +252,7 @@ private extension CoinView {
     return bestIndex
   }
   
-  func addCoins() {
-    let appearance = Appearance()
+  func addCoins(with model: CoinScreenModel) {
     
     if !coinNodes.isEmpty {
       for die in coinNodes {
@@ -258,10 +262,17 @@ private extension CoinView {
     
     coinNodes = []
     speeds = []
+
+    guard let eagleImage = UIImage(named: model.coinStyle.coinSidesName.eagle) else {
+      return
+    }
+    guard let tailsImage = UIImage(named: model.coinStyle.coinSidesName.tails) else {
+      return
+    }
     
     let sides = [
-      appearance.coinEagleImage,
-      appearance.coinTailsImage
+      eagleImage,
+      tailsImage
     ]
     
     let coinNode = createCoin(position: SCNVector3(0, 1, 0), sides: sides)
@@ -384,9 +395,6 @@ private extension SCNVector3 {
 
 private extension CoinView {
   struct Appearance {
-    let coinEagleImage = RandomAsset.coinEagle.image
-    let coinTailsImage = RandomAsset.coinTails.image
-    
     let positionTop = "Top"
     let positionFloor = "Floor"
     let positionRight = "Right"

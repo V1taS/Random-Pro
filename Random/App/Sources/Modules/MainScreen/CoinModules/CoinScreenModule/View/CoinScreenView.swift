@@ -10,6 +10,7 @@ import UIKit
 import FancyUIKit
 import FancyStyle
 
+/// События которые отправляем из View в Presenter
 protocol CoinScreenViewOutput: AnyObject {
   
   /// Пользователь нажал на кнопку генерации
@@ -26,6 +27,7 @@ protocol CoinScreenViewOutput: AnyObject {
   func generateButtonAction()
 }
 
+/// События которые отправляем от Presenter ко View
 protocol CoinScreenViewInput {
   
   /// Обновить контент
@@ -54,6 +56,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
   private let scrollResult = ScrollLabelGradientView()
   private let generateButton = ButtonView()
   private let coinView = CoinView()
+  private var coinScreenModel: CoinScreenModel?
   
   // MARK: - Initialization
   
@@ -72,6 +75,7 @@ final class CoinScreenView: CoinScreenViewProtocol {
   
   func updateContentWith(model: CoinScreenModel) {
     scrollResult.listLabels = model.listResult
+    coinView.updateCoinWith(model: model)
   }
   
   func listGenerated(isShow: Bool) {
@@ -102,7 +106,7 @@ private extension CoinScreenView {
     resultLabelAction.cancelsTouchesInView = false
     resultLabel.addGestureRecognizer(resultLabelAction)
     resultLabel.isUserInteractionEnabled = true
-    
+
     coinView.totalValueCoinAction = { [weak self] coinResultType in
       guard let self else {
         return
@@ -114,7 +118,8 @@ private extension CoinScreenView {
       self.output?.saveData(model: CoinScreenModel(
         result: coinResultText,
         isShowlistGenerated: !self.scrollResult.isHidden,
-        coinType: coinResultType,
+        coinStyle: self.coinScreenModel?.coinStyle ?? .defaultStyle,
+        coinSideType: coinResultType,
         listResult: self.scrollResult.listLabels.compactMap({ $0 }))
       )
     }
@@ -183,7 +188,5 @@ private extension CoinScreenView {
     let resultDuration: CGFloat = 0.5
     
     let buttonTitle = RandomStrings.Localizable.generate
-    let eagleImage = RandomAsset.coinEagle.image
-    let tailsImage = RandomAsset.coinTails.image
   }
 }

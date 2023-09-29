@@ -34,7 +34,8 @@ final class CoinScreenFactory: CoinScreenFactoryInput {
     let newModel = CoinScreenModel(
       result: model.result,
       isShowlistGenerated: model.isShowlistGenerated,
-      coinType: model.coinType,
+      coinStyle: model.coinStyle,
+      coinSideType: model.coinSideType,
       listResult: model.listResult.reversed()
     )
     output?.didReverseListResult(model: newModel)

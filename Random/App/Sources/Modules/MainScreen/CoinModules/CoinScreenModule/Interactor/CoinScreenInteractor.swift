@@ -6,7 +6,7 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol CoinScreenInteractorOutput: AnyObject {
   
@@ -39,6 +39,9 @@ protocol CoinScreenInteractorInput {
   
   /// Была нажата кнопку генерации
   func generateButtonAction()
+
+  /// Обновить стиль
+  func updateStyle()
 }
 
 final class CoinScreenInteractor: CoinScreenInteractorInput {
@@ -59,6 +62,10 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
       storageService.saveData(newValue)
     }
   }
+  private var coinStyle: CoinStyleSelectionScreenModel.CoinStyle? {
+    let models = storageService.getData(from: [CoinStyleSelectionScreenModel].self)
+    return models?.filter { $0.coinStyleSelection }.first?.coinStyle ?? .defaultStyle
+  }
   
   // MARK: - Initialization
   
@@ -73,6 +80,21 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   }
   
   // MARK: - Internal func
+
+  func updateStyle() {
+    guard let model = coinScreenModel else {
+      return
+    }
+
+    let newModel = CoinScreenModel(result: model.result,
+                                   isShowlistGenerated: model.isShowlistGenerated,
+                                   coinStyle: coinStyle ?? .defaultStyle,
+                                   coinSideType: model.coinSideType,
+                                   listResult: model.listResult)
+
+    self.coinScreenModel = newModel
+    output?.didReceive(model: newModel)
+  }
   
   func saveData(model: CoinScreenModel) {
     coinScreenModel = model
@@ -116,7 +138,8 @@ private extension CoinScreenInteractor {
       let model = CoinScreenModel(
         result: Appearance().resultName,
         isShowlistGenerated: true,
-        coinType: .none,
+        coinStyle: coinStyle ?? .defaultStyle,
+        coinSideType: .none,
         listResult: []
       )
       self.coinScreenModel = model
@@ -130,9 +153,5 @@ private extension CoinScreenInteractor {
 private extension CoinScreenInteractor {
   struct Appearance {
     let resultName = "?"
-    let namesCoin = [
-      RandomStrings.Localizable.eagle,
-      RandomStrings.Localizable.tails
-    ]
   }
 }

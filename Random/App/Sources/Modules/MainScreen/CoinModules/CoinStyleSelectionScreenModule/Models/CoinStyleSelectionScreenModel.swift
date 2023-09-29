@@ -32,16 +32,6 @@ struct CoinStyleSelectionScreenModel: UserDefaultsCodable {
     }
   }
 
-  /// Данные стиля для сторон монетки
-  var coinStyleSpecs: (eagle: String, tails: String) {
-    switch coinStyle {
-    case .defaultStyle:
-      return (eagle: "coin_eagle", tails: "coin_tails")
-    case .black:
-      return (eagle: "coin_eagle", tails: "coin_tails")
-    }
-  }
-
   enum CoinState: CaseIterable, Equatable & Codable {
 
     /// Заблокирована
@@ -49,7 +39,7 @@ struct CoinStyleSelectionScreenModel: UserDefaultsCodable {
 
     /// Выбрана
     case checkmark
-
+    
     /// Ничего
     case none
   }
@@ -60,6 +50,16 @@ struct CoinStyleSelectionScreenModel: UserDefaultsCodable {
     case defaultStyle
 
     /// Черный стиль
-    case black
+    case presidentDollar
+
+    /// Данные стиля для сторон монетки
+    var coinSidesName: (eagle: String, tails: String) {
+      switch self {
+      case .defaultStyle:
+        return (eagle: "coin_eagle", tails: "coin_tails")
+      case .presidentDollar:
+        return (eagle: "PresidentDollarEagle", tails: "PresidentDollarTails")
+      }
+    }
   }
 }

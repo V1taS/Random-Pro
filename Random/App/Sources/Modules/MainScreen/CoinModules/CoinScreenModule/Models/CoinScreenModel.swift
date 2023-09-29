@@ -15,15 +15,18 @@ struct CoinScreenModel: UserDefaultsCodable {
   
   /// Показать список результата
   let isShowlistGenerated: Bool
-  
-  /// Индекс изображения монеты
-  let coinType: CoinType
+
+  /// Стиль монеты
+  let coinStyle: CoinStyleSelectionScreenModel.CoinStyle
+
+  /// Тип стороны монеты
+  let coinSideType: CoinSideType
   
   /// Список результатов
   let listResult: [String]
   
-  /// Тип монеты
-  enum CoinType: UserDefaultsCodable {
+  /// Тип стороны монеты
+  enum CoinSideType: UserDefaultsCodable {
     
     /// Орел
     case eagle

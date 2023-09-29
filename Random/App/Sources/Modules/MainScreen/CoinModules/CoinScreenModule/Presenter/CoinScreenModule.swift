@@ -98,6 +98,12 @@ final class CoinScreenViewController: CoinScreenModule {
     let listResult = interactor.returnModel()?.listResult ?? []
     copyButton.isEnabled = !listResult.isEmpty
   }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    interactor.updateStyle()
+  }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()

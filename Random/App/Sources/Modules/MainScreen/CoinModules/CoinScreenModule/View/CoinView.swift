@@ -309,6 +309,7 @@ private extension CoinView {
     scnView.delegate = self
     scnView.isPlaying = true
     scnView.backgroundColor = fancyColor.darkAndLightTheme.primaryWhite
+    scnView.transform = CGAffineTransformMakeScale(-1, 1)
   }
   
   func setupCamera() {

@@ -49,8 +49,14 @@ struct CoinStyleSelectionScreenModel: UserDefaultsCodable {
     /// Стиль по дефолту
     case defaultStyle
 
-    /// Черный стиль
+    /// Доллар
     case presidentDollar
+
+    /// Рубль
+    case ruble
+
+    /// Итальянский евро
+    case euroItalian
 
     /// Данные стиля для сторон монетки
     var coinSidesName: (eagle: String, tails: String) {
@@ -59,6 +65,10 @@ struct CoinStyleSelectionScreenModel: UserDefaultsCodable {
         return (eagle: "coin_eagle", tails: "coin_tails")
       case .presidentDollar:
         return (eagle: "PresidentDollarEagle", tails: "PresidentDollarTails")
+      case .ruble:
+        return (eagle: "RubleEagle", tails: "RubleTails")
+      case .euroItalian:
+        return (eagle: "EuroItaliaEagle", tails: "EuroItaliaTails")
       }
     }
   }

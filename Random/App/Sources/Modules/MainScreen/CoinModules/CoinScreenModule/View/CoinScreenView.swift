@@ -120,8 +120,8 @@ private extension CoinScreenView {
         isShowlistGenerated: !self.scrollResult.isHidden,
         coinStyle: self.coinScreenModel?.coinStyle ?? .defaultStyle,
         coinSideType: coinResultType,
-        listResult: self.scrollResult.listLabels.compactMap({ $0 }))
-      )
+        listResult: self.scrollResult.listLabels.compactMap { $0 }
+      ))
     }
     
     coinView.feedbackGeneratorAction = { [weak self] in

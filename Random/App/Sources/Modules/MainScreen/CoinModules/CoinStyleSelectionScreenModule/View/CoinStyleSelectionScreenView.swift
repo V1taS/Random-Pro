@@ -153,7 +153,7 @@ extension CoinStyleSelectionScreenView: UICollectionViewDataSource {
       state = .none
     }
 
-    cell.configureCellWith(image: UIImage(named: model.coinStyle.coinSidesName.eagle),
+    cell.configureCellWith(image: UIImage(named: model.coinStyle.coinSidesName.tails),
                            title: nil,
                            cardState: state,
                            cardAction: { [weak self] in

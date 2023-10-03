@@ -170,6 +170,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
+      tableViewModels.append(.titleAndChevron(title: appearance.chooseCubesStyle))
+      tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .list(withoutRepetition, generatedTextCount, allTextCount, lastItem):
       tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,

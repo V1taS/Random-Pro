@@ -30,6 +30,9 @@ protocol SettingsScreenModuleOutput: AnyObject {
 
   /// Событие, кнопка `Выбора стиля бутылочки` была нажата
   func bottleStyleSelectionAction()
+
+  /// Событие, кнопка `Выбора стиля монеточки` была нажата
+  func coinStyleSelectionAction()
   
   /// Модуль был закрыт
   func moduleClosed()
@@ -108,6 +111,10 @@ final class SettingsScreenViewController: SettingsScreenModule {
 // MARK: - SettingsScreenViewOutput
 
 extension SettingsScreenViewController: SettingsScreenViewOutput {
+  func coinStyleSelectionAction() {
+    moduleOutput?.coinStyleSelectionAction()
+  }
+
   func bottleStyleSelectionAction() {
     moduleOutput?.bottleStyleSelectionAction()
   }

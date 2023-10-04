@@ -63,6 +63,7 @@ enum MetricsSections: String {
   
   case premiumPlayerCardSelection = "Premium player card selection"
   case premiumBottleStyleSelection = "Premium bottle style selection"
+  case premiumCoinStyleSelection = "Premium coin style selection"
   
   // Other
   

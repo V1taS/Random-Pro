@@ -34,11 +34,13 @@
 "card_style" = "Card style";
 "change_bottle_style" = "You can change the bottle style";
 "change_card_style" = "You can change the card style";
+"change_coin_style" = "You can change the coin style";
 "choose_icon" = "Icon selection";
 "clean" = "Clean";
 "cleaning" = "Cleaning";
 "click_to_update_app" = "Click to update the app";
 "coin" = "Coin";
+"coin_style" = "Coin style";
 "colors" = "Colors";
 "contact" = "Contact";
 "contacts" = "Contacts";
@@ -208,6 +210,7 @@
 "section_tsuefa" = "Section Tsu-e-fa";
 "select_bottle_style" = "Select bottle style";
 "select_card_style" = "Select card style";
+"select_coin_style" = "Select coin style";
 "select_icon" = "Select icon";
 "selen" = "Selenium";
 "september" = "September";

@@ -63,6 +63,7 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   // Coordinators
   private var playerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoordinator?
   private var bottleStyleSelectionScreenCoordinator: BottleStyleSelectionScreenCoordinator?
+  private var coinStyleSelectionScreenCoordinator: CoinStyleSelectionScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -96,6 +97,7 @@ extension SettingsScreenCoordinator {
 // MARK: - SettingsScreenModuleOutput
 
 extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
+
   func moduleClosed() {
     finishFlow?()
   }
@@ -123,11 +125,19 @@ extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
   func bottleStyleSelectionAction() {
     openBottleStyleSelectionScreenCoordinator()
   }
+
+  func coinStyleSelectionAction() {
+    openCoinStyleSelectionScreenCoordinator()
+  }
 }
 
 // MARK: - BottleStyleSelectionScreenCoordinatorOutput
 
 extension SettingsScreenCoordinator: BottleStyleSelectionScreenCoordinatorOutput {}
+
+// MARK: - CoinStyleSelectionScreenCoordinatorOutput
+
+extension SettingsScreenCoordinator: CoinStyleSelectionScreenCoordinatorOutput {}
 
 // MARK: - PlayerCardSelectionScreenCoordinatorOutput
 
@@ -164,6 +174,19 @@ private extension SettingsScreenCoordinator {
     }
 
     services.metricsService.track(event: .premiumBottleStyleSelection)
+  }
+
+  func openCoinStyleSelectionScreenCoordinator() {
+    let coinStyleSelectionScreenCoordinator = CoinStyleSelectionScreenCoordinator(navigationController,
+                                                                                      services)
+    self.coinStyleSelectionScreenCoordinator = coinStyleSelectionScreenCoordinator
+    coinStyleSelectionScreenCoordinator.output = self
+    coinStyleSelectionScreenCoordinator.start()
+    coinStyleSelectionScreenCoordinator.finishFlow = { [weak self] in
+      self?.coinStyleSelectionScreenCoordinator = nil
+    }
+
+    services.metricsService.track(event: .premiumCoinStyleSelection)
   }
 }
 

@@ -111,6 +111,8 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
+      tableViewModels.append(.titleAndChevron(title: appearance.chooseCoinStyle,
+                                              id: .coinStyleSelection))
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .dateAndTime(itemsGenerated, lastItem):
       tableViewModels.append(.titleAndDescription(title: appearance.countGeneratedTitle,
@@ -399,5 +401,6 @@ private extension SettingsScreenFactory {
     let chooseCardStyle = RandomStrings.Localizable.selectCardStyle
     let selectLanguageTitle = RandomStrings.Localizable.selectLanguage
     let chooseBottleStyle = RandomStrings.Localizable.selectBottleStyle
+    let chooseCoinStyle = RandomStrings.Localizable.selectCoinStyle
   }
 }

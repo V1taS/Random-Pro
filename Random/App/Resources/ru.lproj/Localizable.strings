@@ -34,11 +34,13 @@
 "card_style" = "Стиль карточки";
 "change_bottle_style" = "Можно изменить стиль бутылочки";
 "change_card_style" = "Можно изменить стиль карточки";
+"change_coin_style" = "Можно изменить стиль монетки";
 "choose_icon" = "Выбор иконки";
 "clean" = "Очистить";
 "cleaning" = "Уборка";
 "click_to_update_app" = "Нажмите, чтобы обновить приложение";
 "coin" = "Монета";
+"coin_style" = "Стиль монетки";
 "colors" = "Цвета";
 "contact" = "Контакт";
 "contacts" = "Контакты";
@@ -208,6 +210,7 @@
 "section_tsuefa" = "Раздел Цу-е-фа";
 "select_bottle_style" = "Выбрать стиль бутылочки";
 "select_card_style" = "Выбрать стиль карточки";
+"select_coin_style" = "Выбрать стиль монеты";
 "select_icon" = "Выберите иконку";
 "selen" = "Селен";
 "september" = "Сентябрь";

@@ -74,5 +74,8 @@ enum SettingsScreenTableViewType {
 
     /// Пользователь выбрал изменить стиль бутылочки в секции "Бутылочка"
     case bottleStyleSelection
+
+    /// Пользователь выбрал изменить стиль бутылочки в секции "Монеточка"
+    case coinStyleSelection
   }
 }

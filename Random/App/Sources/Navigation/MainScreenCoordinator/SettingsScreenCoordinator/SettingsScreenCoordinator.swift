@@ -147,6 +147,14 @@ extension SettingsScreenCoordinator: PlayerCardSelectionScreenCoordinatorOutput 
   }
 }
 
+// MARK: - CubesStyleSelectionScreenCoordinatorOutput
+
+extension SettingsScreenCoordinator: CubesStyleSelectionScreenCoordinatorOutput {
+  func updateStateForSection() {
+    output?.updateStateForSections()
+  }
+}
+
 // MARK: - Private
 
 private extension SettingsScreenCoordinator {

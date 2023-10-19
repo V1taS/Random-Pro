@@ -15,6 +15,9 @@ struct CubesScreenModel: UserDefaultsCodable {
   
   /// Показать список результатов
   let isShowlistGenerated: Bool
+
+  /// Стиль кубиков
+  let cubesStyle: CubesStyleSelectionScreenModel.CubesStyle
   
   /// Тип кубиков
   let cubesType: CubesType

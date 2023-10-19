@@ -86,6 +86,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     let newModel = CubesScreenModel(
       listResult: model.listResult,
       isShowlistGenerated: isShow,
+      cubesStyle: .defaultStyle,
       cubesType: model.cubesType
     )
     self.cubesScreenModel = newModel
@@ -99,6 +100,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     let newModel = CubesScreenModel(
       listResult: model.listResult,
       isShowlistGenerated: model.isShowlistGenerated,
+      cubesStyle: .defaultStyle,
       cubesType: cubesType
     )
     self.cubesScreenModel = newModel
@@ -115,6 +117,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     let newModel = CubesScreenModel(
       listResult: listResultNew,
       isShowlistGenerated: model.isShowlistGenerated,
+      cubesStyle: .defaultStyle,
       cubesType: model.cubesType
     )
     self.cubesScreenModel = newModel
@@ -161,6 +164,7 @@ private extension CubesScreenInteractor {
     let cubesModelDefault = CubesScreenModel(
       listResult: [],
       isShowlistGenerated: true,
+      cubesStyle: .defaultStyle,
       cubesType: .cubesTwo
     )
   }

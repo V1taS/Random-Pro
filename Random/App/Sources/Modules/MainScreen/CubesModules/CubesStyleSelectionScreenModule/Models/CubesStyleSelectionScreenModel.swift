@@ -47,63 +47,59 @@ struct CubesStyleSelectionScreenModel: UserDefaultsCodable {
   enum CubesStyle: String, CaseIterable, Equatable & Codable {
 
     /// Стиль по дефолту
-    case defaultStyle = "Bottle"
-
-    /// Черный стиль
-    case black = "BlackBottle"
-
-    /// Темно-золотой стиль
-    case darkGold = "DarkGoldBottle"
-
-    /// Темно-зеленый стиль
-    case darkGreen = "DarkGreenBottle"
+    case defaultStyle = "die.five"
 
     /// Темно-синий стиль
-    case darkBlue = "DarkBlueBottle"
-
-    /// Темно-красный стиль
-    case darkRed = "DarkRedBottle"
-
-    /// Темно-фиолетовый стиль
-    case darkPurple = "DarkPurpleBottle"
-
-    /// Темно-оранжевый стиль
-    case darkOrange = "DarkOrangeBottle"
-
-    /// Салатовый стиль
-    case salad = "SaladBottle"
+    case darkBlue = "blue.die.five"
 
     /// Красный стиль
-    case red = "RedBottle"
+    case red = "red.die.five"
 
     /// Зеленый стиль
-    case green = "GreenBottle"
+    case green = "green.die.five"
 
     /// Фиолетовый стиль
-    case purple = "PurpleBottle"
+    case purple = "purple.die.five"
 
-    /// Светло-синий стиль
-    case lightBlue = "LightBlueBottle"
-
-    ///  Золотой стиль
-    case gold = "GoldBottle"
-
-    /// Розовый стиль
-    case pink = "PinkBottle"
-
-    /// Стиль мультиколор зеленый
-    case multicolorGreenBottle = "MulticolorGreenBottle"
-
-    /// Стиль мультиколор с кругами
-    case roundMulticolorBottle = "RoundMulticolorBottle"
-
-    /// Стиль мультиколор с углами
-    case cornerMulticolorBottle = "CornerMulticolorBottle"
-
-    /// Стиль мультиколор с линиями
-    case reflectionMulticolorBottle = "ReflectionMulticolorBottle"
-
-    /// Стиль мультиколор алмаз
-    case rubyMulticolorBottle = "RubyMulticolorBottle"
+    /// Данные стиля для сторон кубиков
+    var cubesSidesName: (one: String, two: String, three: String, four: String, five: String, six: String) {
+      switch self {
+      case .defaultStyle:
+        return (one: "die.one",
+                two: "die.two",
+                three: "die.three",
+                four: "die.four",
+                five: "die.five",
+                six: "die.six")
+      case .darkBlue:
+        return (one: "blue.die.one",
+                two: "blue.die.two",
+                three: "blue.die.three",
+                four: "blue.die.four",
+                five: "blue.die.five",
+                six: "blue.die.six")
+      case .red:
+        return (one: "red.die.one",
+                two: "red.die.two",
+                three: "red.die.three",
+                four: "red.die.four",
+                five: "red.die.five",
+                six: "red.die.six")
+      case .green:
+        return (one: "green.die.one",
+                two: "green.die.two",
+                three: "green.die.three",
+                four: "green.die.four",
+                five: "green.die.five",
+                six: "green.die.six")
+      case .purple:
+        return (one: "purple.die.one",
+                two: "purple.die.two",
+                three: "purple.die.three",
+                four: "purple.die.four",
+                five: "purple.die.five",
+                six: "purple.die.six")
+      }
+    }
   }
 }

@@ -44,8 +44,8 @@ final class CubesView: UIView {
   
   /// Обновляет экран с кубиками
   ///  - Parameter type: Тип кубиков
-  func updateCubesWith(type: CubesScreenModel.CubesType) {
-    addCubes(type: type)
+  func updateCubesWith(model: CubesScreenModel, type: CubesScreenModel.CubesType) {
+    addCubes(model: model, cubesType: type)
   }
   
   /// Обработать нажатие
@@ -296,7 +296,7 @@ private extension CubesView {
     }
   }
   
-  func addCubes(type: CubesScreenModel.CubesType) {
+  func addCubes(model: CubesScreenModel, cubesType: CubesScreenModel.CubesType) {
     let appearance = Appearance()
     
     if !diceNodes.isEmpty {
@@ -307,17 +307,42 @@ private extension CubesView {
     
     diceNodes = []
     speeds = []
+
+    guard let oneSideImage = UIImage(named: model.cubesStyle.cubesSidesName.one) else {
+        return
+      }
+      guard let twoSideImage = UIImage(named: model.cubesStyle.cubesSidesName.two) else {
+        return
+      }
+    guard let threeSideImage = UIImage(named: model.cubesStyle.cubesSidesName.three) else {
+      return
+    }
+    guard let fourSideImage = UIImage(named: model.cubesStyle.cubesSidesName.four) else {
+      return
+    }
+    guard let fiveSideImage = UIImage(named: model.cubesStyle.cubesSidesName.five) else {
+      return
+    }
+    guard let sixSideImage = UIImage(named: model.cubesStyle.cubesSidesName.six) else {
+      return
+    }
     
     let sides = [
-      appearance.cubeOneImage,
-      appearance.cubesTwoImage,
-      appearance.cubesThreeImage,
-      appearance.cubesFourImage,
-      appearance.cubesFiveImage,
-      appearance.cubesSixImage,
+      oneSideImage,
+      twoSideImage,
+      threeSideImage,
+      fourSideImage,
+      fiveSideImage,
+      sixSideImage
+//      appearance.cubeOneImage,
+//      appearance.cubesTwoImage,
+//      appearance.cubesThreeImage,
+//      appearance.cubesFourImage,
+//      appearance.cubesFiveImage,
+//      appearance.cubesSixImage,
     ]
     
-    switch type {
+    switch model.cubesType {
     case .cubesOne:
       diceNodes.append(createDie(position: randomPosition(), sides: sides))
       speeds.append(SCNVector3(0, 0, 0))

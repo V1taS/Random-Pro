@@ -30,7 +30,7 @@ protocol CubesScreenViewInput {
   
   /// Обновить контент
   ///  - Parameter cubesType: Тип кубиков
-  func updateContentWith(cubesType: CubesScreenModel.CubesType)
+  func updateContentWith(model: CubesScreenModel)
   
   /// Обновить контент
   ///  - Parameter listResult: Список результатов
@@ -57,6 +57,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
   private let cubesView = CubesView()
   private var totalValueDice: Int = .zero
   private var counter: Int = .zero
+  private var cubeModel: CubesScreenModel?
   
   // MARK: - Initialization
   
@@ -72,9 +73,9 @@ final class CubesScreenView: CubesScreenViewProtocol {
   
   // MARK: - Internal func
   
-  func updateContentWith(cubesType: CubesScreenModel.CubesType) {
-    cubesSegmentedControl.selectedSegmentIndex = cubesType.rawValue
-    cubesView.updateCubesWith(type: cubesType)
+  func updateContentWith(model: CubesScreenModel) {
+    cubesSegmentedControl.selectedSegmentIndex = model.cubesType.rawValue
+    cubesView.updateCubesWith(model: model, type: model.cubesType)
     setButtonTitle()
   }
   
@@ -189,7 +190,7 @@ private extension CubesScreenView {
     let cubeType = CubesScreenModel.CubesType(rawValue: cubesSegmentedControl.selectedSegmentIndex) ?? .cubesTwo
     
     output?.updateSelectedCountCubes(cubeType)
-    cubesView.updateCubesWith(type: cubeType)
+    cubesView.updateCubesWith(model: cubeModel, type: cubeType)
     setButtonTitle()
   }
 }

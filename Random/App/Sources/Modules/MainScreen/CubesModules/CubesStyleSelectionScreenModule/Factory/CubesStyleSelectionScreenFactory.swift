@@ -39,8 +39,7 @@ protocol CubesStyleSelectionScreenFactoryInput {
 
 /// Фабрика
 final class CubesStyleSelectionScreenFactory: CubesStyleSelectionScreenFactoryInput {
-  
-  
+
   // MARK: - Internal properties
   
   weak var output: CubesStyleSelectionScreenFactoryOutput?
@@ -62,8 +61,9 @@ final class CubesStyleSelectionScreenFactory: CubesStyleSelectionScreenFactoryIn
     output?.didGenerated(models: models)
   }
   
-  
-  func createModelWith(selectStyle: CubesStyleSelectionScreenModel.CubesStyle, with models: [CubesStyleSelectionScreenModel], isPremium: Bool) {
+  func createModelWith(selectStyle: CubesStyleSelectionScreenModel.CubesStyle,
+                       with models: [CubesStyleSelectionScreenModel],
+                       isPremium: Bool) {
     var newModels: [CubesStyleSelectionScreenModel] = []
     
     models.forEach { model in

@@ -31,4 +31,3 @@ public protocol CubesStyleSelectionScreenModuleInput {
 
 /// Готовый модуль `BottleStyleSelectionScreenModule`
 public typealias CubesStyleSelectionScreenModule = ViewController & CubesStyleSelectionScreenModuleInput
-

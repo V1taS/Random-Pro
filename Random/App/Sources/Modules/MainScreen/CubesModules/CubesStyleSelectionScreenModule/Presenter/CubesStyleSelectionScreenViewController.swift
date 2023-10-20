@@ -120,7 +120,6 @@ private extension CubesStyleSelectionScreenViewController {
 
 private extension CubesStyleSelectionScreenViewController {
   struct Appearance {
-    #warning("add to localize")
-    let navBarTitle = "Cubes Style"
+    let navBarTitle = RandomStrings.Localizable.cubesStyle
   }
 }

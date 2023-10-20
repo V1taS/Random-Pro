@@ -35,6 +35,8 @@
 "change_bottle_style" = "Sie können den Flaschenstil ändern";
 "change_card_style" = "Sie können den Kartenstil ändern";
 "change_coin_style" = "Sie können den Stil der Münze ändern";
+"change_card_style" = "Sie können den Kartenstil ändern";
+"change_cubes_style" = "Sie können den Stil der Würfel ändern";
 "choose_icon" = "Symbol auswählen";
 "clean" = "Bereinigen";
 "cleaning" = "Reinigung";
@@ -49,6 +51,7 @@
 "copy_to_clipboard" = "In die Zwischenablage kopiert";
 "create_list" = "Liste erstellen";
 "cubes" = "Würfel";
+"cubes_style" = "Würfelstil";
 "customize_app_appearance" = "Ändern Sie das Aussehen der App nach Ihren Wünschen";
 "dark" = "Dunkle";
 "dark_theme" = "Dunkles Thema";

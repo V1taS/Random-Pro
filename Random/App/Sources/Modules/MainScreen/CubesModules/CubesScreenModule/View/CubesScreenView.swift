@@ -57,7 +57,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
   private let cubesView = CubesView()
   private var totalValueDice: Int = .zero
   private var counter: Int = .zero
-  private var cubeModel: CubesScreenModel?
+  private var cubesModel: CubesScreenModel?
   
   // MARK: - Initialization
   
@@ -75,7 +75,7 @@ final class CubesScreenView: CubesScreenViewProtocol {
   
   func updateContentWith(model: CubesScreenModel) {
     cubesSegmentedControl.selectedSegmentIndex = model.cubesType.rawValue
-    cubesView.updateCubesWith(model: model, type: model.cubesType)
+    cubesView.updateCubesWith(model: model)
     setButtonTitle()
   }
   
@@ -190,8 +190,8 @@ private extension CubesScreenView {
     let cubeType = CubesScreenModel.CubesType(rawValue: cubesSegmentedControl.selectedSegmentIndex) ?? .cubesTwo
     
     output?.updateSelectedCountCubes(cubeType)
-    cubesView.updateCubesWith(model: cubeModel, type: cubeType)
-    setButtonTitle()
+//    cubesView.updateCubesWith(model: cubesModel)
+//    setButtonTitle()
   }
 }
 

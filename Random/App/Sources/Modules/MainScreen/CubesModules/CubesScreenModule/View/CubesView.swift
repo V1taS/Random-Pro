@@ -44,8 +44,8 @@ final class CubesView: UIView {
   
   /// Обновляет экран с кубиками
   ///  - Parameter type: Тип кубиков
-  func updateCubesWith(model: CubesScreenModel, type: CubesScreenModel.CubesType) {
-    addCubes(model: model, cubesType: type)
+  func updateCubesWith(model: CubesScreenModel) {
+    addCubes(model: model)
   }
   
   /// Обработать нажатие
@@ -296,8 +296,7 @@ private extension CubesView {
     }
   }
   
-  func addCubes(model: CubesScreenModel, cubesType: CubesScreenModel.CubesType) {
-    let appearance = Appearance()
+  func addCubes(model: CubesScreenModel) {
     
     if !diceNodes.isEmpty {
       for die in diceNodes {
@@ -455,12 +454,6 @@ private extension CubesView {
 
 private extension CubesView {
   struct Appearance {
-    let cubeOneImage = RandomAsset.dieOne.image
-    let cubesTwoImage = RandomAsset.dieTwo.image
-    let cubesThreeImage = RandomAsset.dieThree.image
-    let cubesFourImage = RandomAsset.dieFour.image
-    let cubesFiveImage = RandomAsset.dieFive.image
-    let cubesSixImage = RandomAsset.dieSix.image
     
     let oneHundredSpacing: CGFloat = 100
     let fiftySpacing: CGFloat = 50

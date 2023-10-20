@@ -139,7 +139,7 @@ extension CubesScreenViewController: CubesScreenInteractorOutput {
   }
   
   func didReceive(model: CubesScreenModel) {
-    moduleView.updateContentWith(cubesType: model.cubesType)
+    moduleView.updateContentWith(model: model)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
     moduleView.listGenerated(isShow: model.isShowlistGenerated)
   }
@@ -156,7 +156,7 @@ private extension CubesScreenViewController {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
+    title = appearance.navBarTitle
     
     navigationItem.rightBarButtonItems = [
       UIBarButtonItem(image: appearance.settingsButtonIcon,
@@ -187,8 +187,9 @@ private extension CubesScreenViewController {
 
 extension CubesScreenViewController {
   struct Appearance {
+    
     let settingsButtonIcon = UIImage(systemName: "gear")
-    let title = RandomStrings.Localizable.cubes
+    let navBarTitle = RandomStrings.Localizable.cubes
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")
   }
 }

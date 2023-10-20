@@ -61,6 +61,15 @@ struct CubesStyleSelectionScreenModel: UserDefaultsCodable {
     /// Фиолетовый стиль
     case purple = "purple.die.five"
 
+    /// Желтый стиль
+    case yellow = "yellow.die.five"
+
+    /// Серебристый стиль
+    case silver = "silver.die.five"
+
+    /// Черный стиль
+    case black = "black.die.five"
+
     /// Данные стиля для сторон кубиков
     var cubesSidesName: (one: String, two: String, three: String, four: String, five: String, six: String) {
       switch self {
@@ -99,6 +108,27 @@ struct CubesStyleSelectionScreenModel: UserDefaultsCodable {
                 four: "purple.die.four",
                 five: "purple.die.five",
                 six: "purple.die.six")
+      case .yellow:
+        return (one: "yellow.die.one",
+                two: "yellow.die.two",
+                three: "yellow.die.three",
+                four: "yellow.die.four",
+                five: "yellow.die.five",
+                six: "yellow.die.six")
+      case .silver:
+        return (one: "silver.die.one",
+                two: "silver.die.two",
+                three: "silver.die.three",
+                four: "silver.die.four",
+                five: "silver.die.five",
+                six: "silver.die.six")
+      case .black:
+        return (one: "black.die.one",
+                two: "black.die.two",
+                three: "black.die.three",
+                four: "black.die.four",
+                five: "black.die.five",
+                six: "black.die.six")
       }
     }
   }

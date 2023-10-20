@@ -33,6 +33,7 @@
 "cancel" = "Отмена";
 "card_style" = "Стиль карточки";
 "change_bottle_style" = "Можно изменить стиль бутылочки";
+"change_cubes_style" = "Можно изменить стиль кубиков";
 "change_card_style" = "Можно изменить стиль карточки";
 "change_coin_style" = "Можно изменить стиль монетки";
 "choose_icon" = "Выбор иконки";
@@ -49,6 +50,7 @@
 "copy_to_clipboard" = "Скопировано в буфер";
 "create_list" = "Создать список";
 "cubes" = "Кубики";
+"cubes_style" = "Стиль кубиков";
 "customize_app_appearance" = "Измените внешний вид приложения по своему вкусу";
 "dark" = "Темная";
 "dark_theme" = "Тёмная тема";

@@ -86,7 +86,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     let newModel = CubesScreenModel(
       listResult: model.listResult,
       isShowlistGenerated: isShow,
-      cubesStyle: .defaultStyle,
+      cubesStyle: model.cubesStyle,
       cubesType: model.cubesType
     )
     self.cubesScreenModel = newModel
@@ -100,10 +100,11 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     let newModel = CubesScreenModel(
       listResult: model.listResult,
       isShowlistGenerated: model.isShowlistGenerated,
-      cubesStyle: .defaultStyle,
+      cubesStyle: model.cubesStyle,
       cubesType: cubesType
     )
     self.cubesScreenModel = newModel
+    output?.didReceive(model: model)
   }
   
   func diceAction(totalValue: Int) {

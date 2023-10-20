@@ -45,7 +45,8 @@ protocol CubesScreenInteractorInput {
   /// Показать список генераций результатов
   /// - Parameter isShow: показать  список генераций результатов
   func listGenerated(isShow: Bool)
-
+  
+  /// Обновить стиль кубиков
   func updateStyle()
 }
 
@@ -110,7 +111,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
       cubesType: cubesType
     )
     self.cubesScreenModel = newModel
-    output?.didReceive(model: model)
+    output?.didReceive(model: newModel)
   }
   
   func diceAction(totalValue: Int) {

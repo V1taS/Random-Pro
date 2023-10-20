@@ -93,6 +93,12 @@ final class CubesScreenViewController: CubesScreenModule {
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    interactor.updateStyle()
+  }
+
   override func finishFlow() {
     moduleOutput?.moduleClosed()
   }

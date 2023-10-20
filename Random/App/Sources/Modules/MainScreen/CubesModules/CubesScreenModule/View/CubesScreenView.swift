@@ -190,8 +190,6 @@ private extension CubesScreenView {
     let cubeType = CubesScreenModel.CubesType(rawValue: cubesSegmentedControl.selectedSegmentIndex) ?? .cubesTwo
     
     output?.updateSelectedCountCubes(cubeType)
-//    cubesView.updateCubesWith(model: cubesModel)
-//    setButtonTitle()
   }
 }
 

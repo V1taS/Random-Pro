@@ -45,6 +45,8 @@ protocol CubesScreenInteractorInput {
   /// Показать список генераций результатов
   /// - Parameter isShow: показать  список генераций результатов
   func listGenerated(isShow: Bool)
+
+  func updateStyle()
 }
 
 final class CubesScreenInteractor: CubesScreenInteractorInput {
@@ -64,6 +66,10 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     } set {
       storageService.saveData(newValue)
     }
+  }
+  private var cubesStyle: CubesStyleSelectionScreenModel.CubesStyle? {
+    let models = storageService.getData(from: [CubesStyleSelectionScreenModel].self)
+    return models?.filter { $0.cubesStyleSelection }.first?.cubesStyle ?? .defaultStyle
   }
   
   // MARK: - Initialization
@@ -133,6 +139,20 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
       self.cubesScreenModel = newModel
       output?.didReceive(model: newModel)
     }
+  }
+
+  func updateStyle() {
+    guard let model = cubesScreenModel else {
+      return
+    }
+
+    let newModel = CubesScreenModel(listResult: model.listResult,
+                                    isShowlistGenerated: model.isShowlistGenerated,
+                                    cubesStyle: cubesStyle ?? .defaultStyle,
+                                    cubesType: model.cubesType)
+
+    self.cubesScreenModel = newModel
+    output?.didReceive(model: newModel)
   }
   
   func returnCurrentModel() -> CubesScreenModel {

@@ -124,7 +124,7 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     let newModel = CubesScreenModel(
       listResult: listResultNew,
       isShowlistGenerated: model.isShowlistGenerated,
-      cubesStyle: .defaultStyle,
+      cubesStyle: model.cubesStyle,
       cubesType: model.cubesType
     )
     self.cubesScreenModel = newModel

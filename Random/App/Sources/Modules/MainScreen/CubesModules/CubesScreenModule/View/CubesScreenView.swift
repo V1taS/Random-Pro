@@ -57,7 +57,6 @@ final class CubesScreenView: CubesScreenViewProtocol {
   private let cubesView = CubesView()
   private var totalValueDice: Int = .zero
   private var counter: Int = .zero
-  private var cubesModel: CubesScreenModel?
   
   // MARK: - Initialization
   

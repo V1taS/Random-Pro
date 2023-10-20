@@ -333,12 +333,6 @@ private extension CubesView {
       fourSideImage,
       fiveSideImage,
       sixSideImage
-//      appearance.cubeOneImage,
-//      appearance.cubesTwoImage,
-//      appearance.cubesThreeImage,
-//      appearance.cubesFourImage,
-//      appearance.cubesFiveImage,
-//      appearance.cubesSixImage,
     ]
     
     switch model.cubesType {

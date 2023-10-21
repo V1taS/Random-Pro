@@ -33,7 +33,10 @@ protocol SettingsScreenModuleOutput: AnyObject {
 
   /// Событие, кнопка `Выбора стиля монеточки` была нажата
   func coinStyleSelectionAction()
-  
+
+  /// Событие, кнопка `Выбора стиля кубиков` была нажата
+  func cubesStyleSelectionAction()
+
   /// Модуль был закрыт
   func moduleClosed()
 }
@@ -117,6 +120,10 @@ extension SettingsScreenViewController: SettingsScreenViewOutput {
 
   func bottleStyleSelectionAction() {
     moduleOutput?.bottleStyleSelectionAction()
+  }
+
+  func cubesStyleSelectionAction() {
+    moduleOutput?.cubesStyleSelectionAction()
   }
 
   func playerCardSelectionAction() {

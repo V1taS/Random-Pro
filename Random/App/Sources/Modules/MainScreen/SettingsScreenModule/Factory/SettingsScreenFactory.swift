@@ -405,5 +405,6 @@ private extension SettingsScreenFactory {
     let selectLanguageTitle = RandomStrings.Localizable.selectLanguage
     let chooseBottleStyle = RandomStrings.Localizable.selectBottleStyle
     let chooseCoinStyle = RandomStrings.Localizable.selectCoinStyle
+    let chooseCubesStyle = RandomStrings.Localizable.selectCubesStyle
   }
 }

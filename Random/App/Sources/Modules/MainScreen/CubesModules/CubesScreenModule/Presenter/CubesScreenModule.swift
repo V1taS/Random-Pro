@@ -193,7 +193,6 @@ private extension CubesScreenViewController {
 
 extension CubesScreenViewController {
   struct Appearance {
-    
     let settingsButtonIcon = UIImage(systemName: "gear")
     let navBarTitle = RandomStrings.Localizable.cubes
     let copyButtonIcon = UIImage(systemName: "doc.on.doc")

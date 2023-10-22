@@ -45,6 +45,7 @@ final class CubesStyleSelectionScreenFactory: CubesStyleSelectionScreenFactoryIn
   weak var output: CubesStyleSelectionScreenFactoryOutput?
   
   // MARK: - Internal func
+  
   func createInitialModelWith(isPremium: Bool) {
     var models: [CubesStyleSelectionScreenModel] = []
     

@@ -120,12 +120,11 @@ final class CoinScreenInteractor: CoinScreenInteractorInput {
   }
   
   func playHapticFeedback() {
-    // TODO: - пока что решил отключить
-//    DispatchQueue.main.async { [weak self] in
-//      self?.hapticService.play(isRepeat: false,
-//                               patternType: .soft,
-//                               completion: {_ in })
-//    }
+    DispatchQueue.main.async { [weak self] in
+      self?.hapticService.play(isRepeat: false,
+                               patternType: .soft,
+                               completion: {_ in })
+    }
   }
 }
 

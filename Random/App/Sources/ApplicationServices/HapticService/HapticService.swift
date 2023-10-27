@@ -288,8 +288,8 @@ private extension HapticServiceImpl {
       let initialPulse = CHHapticEvent(
         eventType: .hapticContinuous,
         parameters: [
-          CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.35),
-          CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.75)
+          CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.33),
+          CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.74)
         ],
         relativeTime: 0,
         duration: 1.0)

@@ -144,13 +144,14 @@ final class CubesScreenInteractor: CubesScreenInteractorInput {
     getContent()
     output?.cleanButtonWasSelected()
   }
-
+  
   func playHapticFeedback() {
-    DispatchQueue.main.async { [weak self] in
-      self?.hapticService.play(isRepeat: false,
-                               patternType: .soft,
-                               completion: {_ in })
-    }
+    // TODO: - пока что решил отключить
+    //    DispatchQueue.main.async { [weak self] in
+    //      self?.hapticService.play(isRepeat: false,
+    //                               patternType: .soft,
+    //                               completion: {_ in })
+    //    }
   }
 }
 

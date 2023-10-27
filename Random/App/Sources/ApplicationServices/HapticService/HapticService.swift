@@ -288,8 +288,8 @@ private extension HapticServiceImpl {
       let initialPulse = CHHapticEvent(
         eventType: .hapticContinuous,
         parameters: [
-          CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.1),
-          CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
+          CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.35),
+          CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.75)
         ],
         relativeTime: 0,
         duration: 1.0)
@@ -297,14 +297,13 @@ private extension HapticServiceImpl {
       let curve = CHHapticParameterCurve(
         parameterID: .hapticIntensityControl,
         controlPoints: [
-          .init(relativeTime: 0, value: 0.05),
-          .init(relativeTime: 0.25, value: 0.1),
-          .init(relativeTime: 0.5, value: 0.05),
-          .init(relativeTime: 0.75, value: 0.1),
-          .init(relativeTime: 1.0, value: 0.05)
+          .init(relativeTime: 0, value: 0.1),
+          .init(relativeTime: 0.25, value: 0.2),
+          .init(relativeTime: 0.5, value: 0.1),
+          .init(relativeTime: 0.75, value: 0.2),
+          .init(relativeTime: 1.0, value: 0.1)
         ],
         relativeTime: 0)
-      
       completion(.success(try CHHapticPattern(events: [initialPulse], parameterCurves: [curve])))
     } catch {
       completion(.failure(.failedCreationPattern(error)))

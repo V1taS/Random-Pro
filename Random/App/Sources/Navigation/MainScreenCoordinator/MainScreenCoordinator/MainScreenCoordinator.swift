@@ -632,6 +632,7 @@ private extension MainScreenCoordinator {
       
       DispatchQueue.main.async {
         self.openPremium(isLifetimeSale: true)
+        self.services.metricsService.track(event: .sales)
       }
       // Обновляем дату последнего показа рекламы
       userDefaults.set(Date(), forKey: "lastAdShownDate")

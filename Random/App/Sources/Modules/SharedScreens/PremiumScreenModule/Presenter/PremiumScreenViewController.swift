@@ -45,6 +45,9 @@ protocol PremiumScreenModuleInput {
   /// - Parameter isModalPresentation: Открывается экран снизу вверх
   func selectIsModalPresentationStyle(_ isModalPresentation: Bool)
   
+  /// Установить распродажу
+  func setLifetimeSale(_ value: Bool)
+  
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: PremiumScreenModuleOutput? { get set }
 }
@@ -65,6 +68,8 @@ final class PremiumScreenViewController: PremiumScreenModule {
   private let moduleView: PremiumScreenViewProtocol
   private let factory: PremiumScreenFactoryInput
   private var cacheIsModalPresentation = false
+  private var isLifetimeSale = false
+  private var cacheModels: [SKProduct] = []
   
   // MARK: - Initialization
   
@@ -94,7 +99,7 @@ final class PremiumScreenViewController: PremiumScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    factory.createListModelWith(models: [])
+    factory.createListModelWith(models: [], isLifetimeSale: isLifetimeSale)
     navigationItem.largeTitleDisplayMode = .never
     setNavigationBar()
   }
@@ -111,6 +116,14 @@ final class PremiumScreenViewController: PremiumScreenModule {
   }
   
   // MARK: - Internal func
+  
+  func setLifetimeSale(_ value: Bool) {
+    let lifetimeSaleProduct = cacheModels.filter {
+      $0.productIdentifier == PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
+    }.first
+    isLifetimeSale = value
+    factory.createMainButtonTitleFrom(.lifetime, amount: lifetimeSaleProduct?.localizedPrice)
+  }
   
   func selectIsModalPresentationStyle(_ isModalPresentation: Bool) {
     cacheIsModalPresentation = isModalPresentation
@@ -181,7 +194,8 @@ extension PremiumScreenViewController: PremiumScreenInteractorOutput {
   }
   
   func didReceive(models: [SKProduct]) {
-    factory.createListModelWith(models: models)
+    cacheModels = models
+    factory.createListModelWith(models: models, isLifetimeSale: isLifetimeSale)
   }
 }
 
@@ -217,6 +231,17 @@ private extension PremiumScreenViewController {
   @objc
   func closeButtonAction() {
     moduleOutput?.closeButtonAction()
+  }
+}
+
+// MARK: - SKProduct
+
+private extension SKProduct {
+  var localizedPrice: String? {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.locale = priceLocale
+    numberFormatter.numberStyle = .currency
+    return numberFormatter.string(from: price)
   }
 }
 

@@ -26,8 +26,10 @@ protocol PremiumScreenFactoryOutput: AnyObject {
 protocol PremiumScreenFactoryInput {
   
   /// Создаем модельку для таблички
-  /// - Parameter models: Список продуктов
-  func createListModelWith(models: [SKProduct])
+  /// - Parameters:
+  ///  - models: Список продуктов
+  ///  - isLifetimeSale: Режим распродажи
+  func createListModelWith(models: [SKProduct], isLifetimeSale: Bool)
   
   /// Создать заголовок для основной кнопки
   /// - Parameters:
@@ -53,7 +55,7 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
     output?.didReceiveMainButton(title: "\(buttontitle) \(appearance.forTitle) \(amount ?? "")")
   }
   
-  func createListModelWith(models: [SKProduct]) {
+  func createListModelWith(models: [SKProduct], isLifetimeSale: Bool) {
     let appearance = Appearance()
     let monthlyProduct = models.filter {
       $0.productIdentifier == PremiumScreenPurchaseType.monthly.productIdentifiers
@@ -63,6 +65,9 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
     }.first
     let lifetimeProduct = models.filter {
       $0.productIdentifier == PremiumScreenPurchaseType.lifetime.productIdentifiers
+    }.first
+    let lifetimeSaleProduct = models.filter {
+      $0.productIdentifier == PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
     }.first
     
     var tableViewModels: [PremiumScreenSectionType] = []
@@ -91,9 +96,16 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
                                     lottieAnimationJSONName: appearance.donateIconJSONName)
     ]))
     tableViewModels.append(.padding(appearance.maxInset))
-    tableViewModels.append(.purchasesCards(yearlyProduct?.localizedPrice,
-                                           monthlyProduct?.localizedPrice,
-                                           lifetimeProduct?.localizedPrice))
+    
+    if isLifetimeSale {
+      tableViewModels.append(.lifetimeSale(title: appearance.sale,
+                                           oldPrice: lifetimeProduct?.localizedPrice,
+                                           newPrice: lifetimeSaleProduct?.localizedPrice))
+    } else {
+      tableViewModels.append(.purchasesCards(yearlyProduct?.localizedPrice,
+                                             monthlyProduct?.localizedPrice,
+                                             lifetimeProduct?.localizedPrice))
+    }
     self.output?.didReceive(models: tableViewModels)
   }
 }
@@ -150,5 +162,7 @@ private extension PremiumScreenFactory {
     let advTitle = RandomStrings.Localizable.disableAdsTitle
     let advDescription = RandomStrings.Localizable.disableAdsDescription
     let advIconJSONName = RandomAsset.premiumAdv.name
+    
+    let sale = RandomStrings.Localizable.sale
   }
 }

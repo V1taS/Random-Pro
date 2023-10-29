@@ -133,6 +133,7 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   
   func mainScreenModuleDidAppear() {
     services.permissionService.requestNotification { _ in }
+    salePremium()
   }
   func didReceiveReferalScreen() {
     openPremiumWithFriendsCoordinator()
@@ -601,6 +602,42 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScr
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func salePremium() {
+    let userDefaults = UserDefaults.standard
+    let isFirstLaunch = userDefaults.bool(forKey: "isFirstLaunch")
+    let lastAdShownDate = userDefaults.object(forKey: "lastAdShownDate") as? Date
+    
+    guard services.featureToggleServices.isToggleFor(feature: .isLifetimeSale) else {
+      return
+    }
+    
+    mainScreenModule?.returnModel(completion: { [weak self] model in
+      guard let self, !model.isPremium else {
+        return
+      }
+      
+      // Если это первый запуск, устанавливаем isFirstLaunch в false и выходим
+      if isFirstLaunch {
+        userDefaults.set(false, forKey: "isFirstLaunch")
+        return
+      }
+      
+      // Если реклама еще не показывалась или прошел день с последнего показа
+      if let lastShown = lastAdShownDate {
+        let oneDayInSeconds: TimeInterval = 24 * 60 * 60
+        guard Date().timeIntervalSince(lastShown) > oneDayInSeconds else {
+          return
+        }
+      }
+      
+      DispatchQueue.main.async {
+        self.openPremium(isLifetimeSale: true)
+      }
+      // Обновляем дату последнего показа рекламы
+      userDefaults.set(Date(), forKey: "lastAdShownDate")
+    })
+  }
+  
   func checkReferals() {
     services.referalService.getSelfInfo { [weak self] result in
       if let referals = result?.referals, referals.count == Appearance().refCountMax {
@@ -683,11 +720,12 @@ private extension MainScreenCoordinator {
     }
   }
   
-  func openPremium() {
+  func openPremium(isLifetimeSale: Bool = false) {
     let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
                                                             services)
     self.premiumScreenCoordinator = premiumScreenCoordinator
     premiumScreenCoordinator.output = self
+    premiumScreenCoordinator.setLifetimeSale(isLifetimeSale)
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
     premiumScreenCoordinator.finishFlow = { [weak self] in

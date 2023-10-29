@@ -21,4 +21,7 @@ enum FeatureToggleType: String {
   
   /// Функционал приведи 5-ти друзей и получи премиум на 1 устройство
   case isPremiumWithFriends
+  
+  /// Погупка навсегда (Распродажа)
+  case isLifetimeSale
 }

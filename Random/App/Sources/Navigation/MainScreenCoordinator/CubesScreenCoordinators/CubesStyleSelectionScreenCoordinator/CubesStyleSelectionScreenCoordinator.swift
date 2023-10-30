@@ -62,7 +62,7 @@ final class CubesStyleSelectionScreenCoordinator: CubesStyleSelectionScreenCoord
   }
 }
 
-// MARK: - BottleStyleSelectionScreenModuleOutput
+// MARK: - CubesStyleSelectionScreenModuleOutput
 
 extension CubesStyleSelectionScreenCoordinator: CubesStyleSelectionScreenModuleOutput {
   func didSelectStyleSuccessfully() {

@@ -9,7 +9,7 @@
 import UIKit
 import FancyUIKit
 
-/// События которые отправляем из `BottleStyleSelectionScreenModule` в `Coordinator`
+/// События которые отправляем из `CubesStyleSelectionScreenModule` в `Coordinator`
 public protocol CubesStyleSelectionScreenModuleOutput: AnyObject {
 
   /// Нет премиум доступа
@@ -22,12 +22,12 @@ public protocol CubesStyleSelectionScreenModuleOutput: AnyObject {
   func moduleClosed()
 }
 
-/// События которые отправляем из `Coordinator` в `BottleStyleSelectionScreenModule`
+/// События которые отправляем из `Coordinator` в `CubesStyleSelectionScreenModule`
 public protocol CubesStyleSelectionScreenModuleInput {
 
-  /// События которые отправляем из `BottleStyleSelectionScreenModule` в `Coordinator`
+  /// События которые отправляем из `CubesStyleSelectionScreenModule` в `Coordinator`
   var moduleOutput: CubesStyleSelectionScreenModuleOutput? { get set }
 }
 
-/// Готовый модуль `BottleStyleSelectionScreenModule`
+/// Готовый модуль `CubesStyleSelectionScreenModule`
 public typealias CubesStyleSelectionScreenModule = ViewController & CubesStyleSelectionScreenModuleInput

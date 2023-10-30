@@ -15,13 +15,13 @@ protocol CubesStyleSelectionScreenViewOutput: AnyObject {
   /// Нет премиум доступа
   func noPremiumAccessAction()
 
-  /// Выбрана карточка
+  /// Выбран стиль кубиков
   /// - Parameters:
-  ///  - style: Выбран стиль бутылочки
-  ///  - models: Общий список стилей бутылочки
+  ///  - style: Выбран стиль кубиков
+  ///  - models: Общий список стилей кубиков
   func didSelect(style: CubesStyleSelectionScreenModel.CubesStyle, with models: [CubesStyleSelectionScreenModel])
 
-  /// Успешно выбран стиль карточки
+  /// Успешно выбран стиль кубиков
   func didSelectStyleSuccessfully()
 }
 
@@ -29,7 +29,7 @@ protocol CubesStyleSelectionScreenViewOutput: AnyObject {
 protocol CubesStyleSelectionScreenViewInput {
 
   /// Обновить контент
-  /// - Parameter models: Список моделек стилей бутылочки
+  /// - Parameter models: Список моделек стилей кубиков
   func updateContentWith(models: [CubesStyleSelectionScreenModel])
 }
 
@@ -99,7 +99,7 @@ private extension CubesStyleSelectionScreenView {
 
     collectionViewLayout.sectionInset = appearance.sectionInset
     collectionViewLayout.scrollDirection = .vertical
-    collectionViewLayout.minimumInteritemSpacing = 8
+    collectionViewLayout.minimumInteritemSpacing = appearance.minInset
     collectionViewLayout.minimumLineSpacing = appearance.defaultInset
     collectionViewLayout.itemSize = CGSize(width: appearance.cellWidthConstant,
                                            height: appearance.estimatedRowHeight)

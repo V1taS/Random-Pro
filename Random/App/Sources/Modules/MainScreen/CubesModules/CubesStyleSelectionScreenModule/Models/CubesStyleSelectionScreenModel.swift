@@ -18,6 +18,11 @@ struct CubesStyleSelectionScreenModel: UserDefaultsCodable {
 
   /// Стиль кубиков
   let cubesStyle: CubesStyle
+}
+
+// MARK: - CubesState and CubesStyle
+
+extension CubesStyleSelectionScreenModel {
 
   /// Состояние карточки
   var cubesState: CubesState {

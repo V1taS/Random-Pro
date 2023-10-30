@@ -19,7 +19,6 @@ final class CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenMo
   private let interactor: CubesStyleSelectionScreenInteractorInput
   private let moduleView: CubesStyleSelectionScreenViewProtocol
   private let factory: CubesStyleSelectionScreenFactoryInput
-  private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
 
   // MARK: - Initialization
 
@@ -65,7 +64,7 @@ final class CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenMo
   }
 }
 
-// MARK: - BottleStyleSelectionScreenViewOutput
+// MARK: - CubesStyleSelectionScreenViewOutput
 
 extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenViewOutput {
   func noPremiumAccessAction() {
@@ -84,7 +83,7 @@ extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenView
   }
 }
 
-// MARK: - BottleStyleSelectionScreenInteractorOutput
+// MARK: - CubesStyleSelectionScreenInteractorOutput
 
 extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenInteractorOutput {
   func didReceive(models: [CubesStyleSelectionScreenModel], isPremium: Bool) {
@@ -96,7 +95,7 @@ extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenInte
   }
 }
 
-// MARK: - BottleStyleSelectionScreenFactoryOutput
+// MARK: - CubesStyleSelectionScreenFactoryOutput
 
 extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenFactoryOutput {
   func didGenerated(models: [CubesStyleSelectionScreenModel]) {
@@ -109,7 +108,6 @@ extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenFact
 // MARK: - Private
 
 private extension CubesStyleSelectionScreenViewController {
-
   func setupNavBar() {
     let appearance = Appearance()
     title = appearance.navBarTitle

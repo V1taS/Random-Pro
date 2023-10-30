@@ -30,9 +30,9 @@ protocol CubesStyleSelectionScreenInteractorInput {
   /// Получить премиум режим
   func getIsPremium() -> Bool
 
-  /// Сохранить стиль бутылочки
+  /// Сохранить стиль кубиков
   /// - Parameters:
-  ///  - bottleStyle: Стиль бутылочки
+  ///  - cubesStyle: Стиль кубиков
   ///  - models: Модель данных
   func saveCubesStyle(_ cubesStyle: CubesStyleSelectionScreenModel.CubesStyle, with models: [CubesStyleSelectionScreenModel])
 }
@@ -40,7 +40,7 @@ protocol CubesStyleSelectionScreenInteractorInput {
 /// Интерактор
 final class CubesStyleSelectionScreenInteractor: CubesStyleSelectionScreenInteractorInput {
   
-  // MARK: - Internal properties
+  // MARK: - Private properties
   
   weak var output: CubesStyleSelectionScreenInteractorOutput?
   
@@ -80,7 +80,6 @@ final class CubesStyleSelectionScreenInteractor: CubesStyleSelectionScreenIntera
     } else {
       output?.didReceiveEmptyModelWith(isPremium: isPremium)
     }
-
   }
 
   func saveCubesStyle(_ cubesStyle: CubesStyleSelectionScreenModel.CubesStyle, with models: [CubesStyleSelectionScreenModel]) {
@@ -88,7 +87,6 @@ final class CubesStyleSelectionScreenInteractor: CubesStyleSelectionScreenIntera
       cubesSelectionScreenModel = models
       return
     }
-
     let newModel = models.map {
       return CubesStyleSelectionScreenModel(cubesStyleSelection: $0.cubesStyle == cubesStyle,
                                              isPremium: $0.isPremium,

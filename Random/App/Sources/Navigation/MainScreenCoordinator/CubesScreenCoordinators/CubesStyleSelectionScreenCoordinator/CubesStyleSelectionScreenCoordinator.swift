@@ -9,11 +9,7 @@
 import UIKit
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
-protocol CubesStyleSelectionScreenCoordinatorOutput: AnyObject {
-
-  /// Обновить секции на главном экране
-  func updateStateForSections()
-}
+protocol CubesStyleSelectionScreenCoordinatorOutput: AnyObject {}
 
 /// События которые отправляем из `другого координатора` в `текущий координатор`
 protocol CubesStyleSelectionScreenCoordinatorInput {
@@ -87,14 +83,6 @@ extension CubesStyleSelectionScreenCoordinator: CubesStyleSelectionScreenModuleO
   }
 }
 
-// MARK: - PremiumScreenCoordinatorOutput
-
-extension CubesStyleSelectionScreenCoordinator: PremiumScreenCoordinatorOutput {
-  func updateStateForSections() {
-    output?.updateStateForSections()
-  }
-}
-
 // MARK: - Private
 
 private extension CubesStyleSelectionScreenCoordinator {
@@ -118,7 +106,6 @@ private extension CubesStyleSelectionScreenCoordinator {
     let premiumScreenCoordinator = PremiumScreenCoordinator(navigationController,
                                                             services)
     self.premiumScreenCoordinator = premiumScreenCoordinator
-    premiumScreenCoordinator.output = self
     premiumScreenCoordinator.selectPresentType(.present)
     premiumScreenCoordinator.start()
     premiumScreenCoordinator.finishFlow = { [weak self] in

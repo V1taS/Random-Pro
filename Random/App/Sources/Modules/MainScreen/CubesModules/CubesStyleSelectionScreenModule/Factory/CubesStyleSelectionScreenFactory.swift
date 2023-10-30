@@ -21,10 +21,10 @@ protocol CubesStyleSelectionScreenFactoryInput {
   /// - Parameter isPremium: Премиум доступ
   func createInitialModelWith(isPremium: Bool)
 
-  /// Выбрана карточка игрока
+  /// Выбрана стиль кубиков
   /// - Parameters:
   ///  - selectStyle: Выбрана карточка
-  ///  - models: Текущие бутылочки
+  ///  - models: Текущие кубики
   ///  - isPremium: Режим премиум
   func createModelWith(selectStyle: CubesStyleSelectionScreenModel.CubesStyle,
                        with models: [CubesStyleSelectionScreenModel],
@@ -32,7 +32,7 @@ protocol CubesStyleSelectionScreenFactoryInput {
 
   /// Обновить статус премиум в модельках
   /// - Parameters:
-  ///  - models: Текущие бутылочки
+  ///  - models: Текущие кубики
   ///  - isPremium: Режим премиум
   func updateModels(_ models: [CubesStyleSelectionScreenModel], isPremium: Bool)
 }

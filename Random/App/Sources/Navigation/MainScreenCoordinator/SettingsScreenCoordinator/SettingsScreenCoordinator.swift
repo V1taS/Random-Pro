@@ -152,14 +152,6 @@ extension SettingsScreenCoordinator: PlayerCardSelectionScreenCoordinatorOutput 
   }
 }
 
-// MARK: - CubesStyleSelectionScreenCoordinatorOutput
-
-extension SettingsScreenCoordinator: CubesStyleSelectionScreenCoordinatorOutput {
-  func updateStateForSection() {
-    output?.updateStateForSections()
-  }
-}
-
 // MARK: - Private
 
 private extension SettingsScreenCoordinator {
@@ -206,7 +198,6 @@ private extension SettingsScreenCoordinator {
     let cubesStyleSelectionScreenCoordinator = CubesStyleSelectionScreenCoordinator(navigationController,
                                                                                       services)
     self.cubesStyleSelectionScreenCoordinator = cubesStyleSelectionScreenCoordinator
-    cubesStyleSelectionScreenCoordinator.output = self
     cubesStyleSelectionScreenCoordinator.start()
     cubesStyleSelectionScreenCoordinator.finishFlow = { [weak self] in
       self?.cubesStyleSelectionScreenCoordinator = nil

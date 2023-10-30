@@ -307,25 +307,15 @@ private extension CubesView {
     diceNodes = []
     speeds = []
 
-    guard let oneSideImage = UIImage(named: model.cubesStyle.cubesSidesName.one) else {
-        return
-      }
-      guard let twoSideImage = UIImage(named: model.cubesStyle.cubesSidesName.two) else {
-        return
-      }
-    guard let threeSideImage = UIImage(named: model.cubesStyle.cubesSidesName.three) else {
+    guard let oneSideImage = UIImage(named: model.cubesStyle.cubesSidesName.one),
+          let twoSideImage = UIImage(named: model.cubesStyle.cubesSidesName.two),
+          let threeSideImage = UIImage(named: model.cubesStyle.cubesSidesName.three),
+          let fourSideImage = UIImage(named: model.cubesStyle.cubesSidesName.four),
+          let fiveSideImage = UIImage(named: model.cubesStyle.cubesSidesName.five),
+          let sixSideImage = UIImage(named: model.cubesStyle.cubesSidesName.six) else {
       return
     }
-    guard let fourSideImage = UIImage(named: model.cubesStyle.cubesSidesName.four) else {
-      return
-    }
-    guard let fiveSideImage = UIImage(named: model.cubesStyle.cubesSidesName.five) else {
-      return
-    }
-    guard let sixSideImage = UIImage(named: model.cubesStyle.cubesSidesName.six) else {
-      return
-    }
-    
+
     let sides = [
       oneSideImage,
       twoSideImage,

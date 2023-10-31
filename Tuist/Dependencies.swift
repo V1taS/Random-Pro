@@ -21,7 +21,7 @@ let dependencies = Dependencies(
       .remote(url: "https://github.com/evgenyneu/keychain-swift.git",
               requirement: .exact("20.0.0")),
       .remote(url: "https://github.com/apphud/ApphudSDK",
-              requirement: .exact("2.8.8")),
+              requirement: .exact("3.1.0")),
       
       .remote(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
               requirement: .exact("10.5.0")),

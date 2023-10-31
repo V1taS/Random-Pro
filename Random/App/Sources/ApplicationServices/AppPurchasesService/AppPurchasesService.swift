@@ -59,11 +59,12 @@ final class AppPurchasesServiceImpl: AppPurchasesService {
   }
   
   func getProducts(completion: @escaping ([ApphudProduct]?) -> Void) {
-    Apphud.paywalls.map { (paywalls) in
-      DispatchQueue.main.async {
-        let paywall = paywalls.first(where: { $0.identifier == "PremiumAccess" })
-        let products = paywall?.products
-        completion(products)
+    Apphud.paywallsDidLoadCallback { paywalls in
+      if let paywall = paywalls.first(where: { $0.identifier == "PremiumAccess" }) {
+        let products = paywall.products
+        DispatchQueue.main.async {
+          completion(products)
+        }
       }
     }
   }

@@ -22,6 +22,9 @@ protocol PremiumScreenCoordinatorInput {
   /// - Parameter type: Тип показа
   func selectPresentType(_ type: PremiumScreenCoordinator.PremiumScreenPresentType)
   
+  /// Установить распродажу
+  func setLifetimeSale(_ value: Bool)
+  
   /// События которые отправляем из `текущего координатора` в `другой координатор`
   var output: PremiumScreenCoordinatorOutput? { get set }
 }
@@ -51,6 +54,7 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
   private var premiumScreenModule: PremiumScreenModule?
   private var presentType: PremiumScreenPresentType?
   private var premiumScreenNavigationController: UINavigationController?
+  private var isLifetimeSale = false
   
   // MARK: - Initialization
   
@@ -64,6 +68,10 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
   }
   
   // MARK: - Internal func
+  
+  func setLifetimeSale(_ value: Bool) {
+    isLifetimeSale = value
+  }
   
   func selectPresentType(_ type: PremiumScreenPresentType) {
     presentType = type
@@ -79,6 +87,7 @@ final class PremiumScreenCoordinator: PremiumScreenCoordinatorProtocol {
     self.premiumScreenModule = premiumScreenModule
     self.premiumScreenModule?.moduleOutput = self
     premiumScreenModule.selectIsModalPresentationStyle(presentType == .present)
+    premiumScreenModule.setLifetimeSale(isLifetimeSale)
     
     if presentType == .present {
       let premiumScreenNavigationController = UINavigationController(rootViewController: premiumScreenModule)

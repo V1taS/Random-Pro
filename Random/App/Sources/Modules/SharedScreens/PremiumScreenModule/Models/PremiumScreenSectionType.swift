@@ -31,4 +31,7 @@ enum PremiumScreenSectionType {
   
   /// Разделитель
   case divider
+  
+  /// Распродажа
+  case lifetimeSale(title: String?, oldPrice: String?, newPrice: String?)
 }

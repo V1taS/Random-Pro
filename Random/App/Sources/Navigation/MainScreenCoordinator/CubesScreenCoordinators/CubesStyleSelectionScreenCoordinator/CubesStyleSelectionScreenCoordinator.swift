@@ -18,12 +18,12 @@ protocol CubesStyleSelectionScreenCoordinatorInput {
   var output: CubesStyleSelectionScreenCoordinatorOutput? { get set }
 }
 
-/// Псевдоним протокола Coordinator & BottleStyleSelectionScreenCoordinatorInput
+/// Псевдоним протокола Coordinator & CubesStyleSelectionScreenCoordinatorInput
 typealias CubesStyleSelectionScreenCoordinatorProtocol = Coordinator & CubesStyleSelectionScreenCoordinatorInput
 
-// MARK: - BottleStyleSelectionScreenCoordinator
+// MARK: - CubesStyleSelectionScreenCoordinator
 
-/// Координатор `BottleStyleSelectionScreen`
+/// Координатор `CubesStyleSelectionScreen`
 final class CubesStyleSelectionScreenCoordinator: CubesStyleSelectionScreenCoordinatorProtocol {
 
   // MARK: - Internal variables
@@ -62,7 +62,7 @@ final class CubesStyleSelectionScreenCoordinator: CubesStyleSelectionScreenCoord
   }
 }
 
-// MARK: - BottleStyleSelectionScreenModuleOutput
+// MARK: - CubesStyleSelectionScreenModuleOutput
 
 extension CubesStyleSelectionScreenCoordinator: CubesStyleSelectionScreenModuleOutput {
   func didSelectStyleSuccessfully() {

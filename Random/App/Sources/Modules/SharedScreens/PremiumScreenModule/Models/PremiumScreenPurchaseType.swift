@@ -19,6 +19,8 @@ enum PremiumScreenPurchaseType: CaseIterable {
       return "com.sosinvitalii.Random.MonthlyPremiumAccess"
     case .lifetime:
       return "com.sosinvitalii.Random.OneTimePurchasePremiumAccess"
+    case .lifetimeSale:
+      return "com.sosinvitalii.Random.OneTimePurchasePremiumAccessSale"
     }
   }
   
@@ -30,4 +32,7 @@ enum PremiumScreenPurchaseType: CaseIterable {
   
   /// Погупка навсегда
   case lifetime
+  
+  /// Погупка навсегда (Распродажа)
+  case lifetimeSale
 }

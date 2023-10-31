@@ -195,8 +195,7 @@ private extension SettingsScreenCoordinator {
   }
 
   func openCubesStyleSelectionScreenCoordinator() {
-    let cubesStyleSelectionScreenCoordinator = CubesStyleSelectionScreenCoordinator(navigationController,
-                                                                                      services)
+    let cubesStyleSelectionScreenCoordinator = CubesStyleSelectionScreenCoordinator(navigationController, services)
     self.cubesStyleSelectionScreenCoordinator = cubesStyleSelectionScreenCoordinator
     cubesStyleSelectionScreenCoordinator.start()
     cubesStyleSelectionScreenCoordinator.finishFlow = { [weak self] in

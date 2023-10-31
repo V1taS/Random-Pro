@@ -43,7 +43,7 @@ final class CubesView: UIView {
   // MARK: - Internal func
   
   /// Обновляет экран с кубиками
-  ///  - Parameter type: Тип кубиков
+  ///  - Parameter model: Модель кубиков
   func updateCubesWith(model: CubesScreenModel) {
     addCubes(model: model)
   }

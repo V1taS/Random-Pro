@@ -53,6 +53,8 @@ final class HapticServiceImpl: HapticService {
     
     /// Всплеск
     case splash
+    
+    case soft
   }
   
   // MARK: - Private property
@@ -157,6 +159,10 @@ private extension HapticServiceImpl {
       }
     case .splash:
       splashPattern { result in
+        completion(result)
+      }
+    case .soft:
+      softPattern { result in
         completion(result)
       }
     }
@@ -272,6 +278,33 @@ private extension HapticServiceImpl {
       completion(.success(try CHHapticPattern(events: [splish,
                                                        splash],
                                               parameterCurves: [curve])))
+    } catch {
+      completion(.failure(.failedCreationPattern(error)))
+    }
+  }
+  
+  func softPattern(completion: (Result<CHHapticPattern, HapticError>) -> Void) {
+    do {
+      let initialPulse = CHHapticEvent(
+        eventType: .hapticContinuous,
+        parameters: [
+          CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.33),
+          CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.74)
+        ],
+        relativeTime: 0,
+        duration: 1.0)
+      
+      let curve = CHHapticParameterCurve(
+        parameterID: .hapticIntensityControl,
+        controlPoints: [
+          .init(relativeTime: 0, value: 0.1),
+          .init(relativeTime: 0.25, value: 0.2),
+          .init(relativeTime: 0.5, value: 0.1),
+          .init(relativeTime: 0.75, value: 0.2),
+          .init(relativeTime: 1.0, value: 0.1)
+        ],
+        relativeTime: 0)
+      completion(.success(try CHHapticPattern(events: [initialPulse], parameterCurves: [curve])))
     } catch {
       completion(.failure(.failedCreationPattern(error)))
     }

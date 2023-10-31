@@ -29,7 +29,7 @@ protocol CubesScreenViewOutput: AnyObject {
 protocol CubesScreenViewInput {
   
   /// Обновить контент
-  ///  - Parameter cubesType: Тип кубиков
+  ///  - Parameter model: Модель кубиков
   func updateContentWith(model: CubesScreenModel)
   
   /// Обновить контент

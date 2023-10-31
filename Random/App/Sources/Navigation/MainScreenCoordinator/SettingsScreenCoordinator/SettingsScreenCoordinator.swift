@@ -64,7 +64,8 @@ final class SettingsScreenCoordinator: SettingsScreenCoordinatorProtocol {
   private var playerCardSelectionScreenCoordinator: PlayerCardSelectionScreenCoordinator?
   private var bottleStyleSelectionScreenCoordinator: BottleStyleSelectionScreenCoordinator?
   private var coinStyleSelectionScreenCoordinator: CoinStyleSelectionScreenCoordinator?
-  
+  private var cubesStyleSelectionScreenCoordinator: CubesStyleSelectionScreenCoordinator?
+
   // MARK: - Initialization
   
   /// - Parameters:
@@ -129,6 +130,10 @@ extension SettingsScreenCoordinator: SettingsScreenModuleOutput {
   func coinStyleSelectionAction() {
     openCoinStyleSelectionScreenCoordinator()
   }
+
+  func cubesStyleSelectionAction() {
+    openCubesStyleSelectionScreenCoordinator()
+  }
 }
 
 // MARK: - BottleStyleSelectionScreenCoordinatorOutput
@@ -188,6 +193,18 @@ private extension SettingsScreenCoordinator {
 
     services.metricsService.track(event: .premiumCoinStyleSelection)
   }
+
+  func openCubesStyleSelectionScreenCoordinator() {
+    let cubesStyleSelectionScreenCoordinator = CubesStyleSelectionScreenCoordinator(navigationController, services)
+    self.cubesStyleSelectionScreenCoordinator = cubesStyleSelectionScreenCoordinator
+    cubesStyleSelectionScreenCoordinator.start()
+    cubesStyleSelectionScreenCoordinator.finishFlow = { [weak self] in
+      self?.cubesStyleSelectionScreenCoordinator = nil
+    }
+
+    services.metricsService.track(event: .premiumCoinStyleSelection)
+  }
+
 }
 
 // MARK: - Appearance

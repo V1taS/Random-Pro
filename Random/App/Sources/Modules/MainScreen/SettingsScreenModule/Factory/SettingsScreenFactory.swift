@@ -170,6 +170,9 @@ final class SettingsScreenFactory: SettingsScreenFactoryInput {
         tableViewModels.append(.titleAndChevron(title: appearance.numberOfGenerations))
         tableViewModels.append(.divider)
       }
+      tableViewModels.append(.titleAndChevron(title: appearance.chooseCubesStyle,
+                                              id: .cubesStyleSelection))
+      tableViewModels.append(.divider)
       tableViewModels.append(.cleanButtonModel(title: appearance.cleanButtonTitle))
     case let .list(withoutRepetition, generatedTextCount, allTextCount, lastItem):
       tableViewModels.append(.titleAndSwitcher(title: appearance.withoutRepetitionTitle,
@@ -402,5 +405,6 @@ private extension SettingsScreenFactory {
     let selectLanguageTitle = RandomStrings.Localizable.selectLanguage
     let chooseBottleStyle = RandomStrings.Localizable.selectBottleStyle
     let chooseCoinStyle = RandomStrings.Localizable.selectCoinStyle
+    let chooseCubesStyle = RandomStrings.Localizable.selectCubesStyle
   }
 }

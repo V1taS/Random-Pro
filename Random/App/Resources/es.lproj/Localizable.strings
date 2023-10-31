@@ -33,6 +33,7 @@
 "cancel" = "Cancelar";
 "card_style" = "estilo de tarjeta";
 "change_bottle_style" = "Puedes cambiar el estilo de la botella";
+"change_cubes_style" = "Puedes cambiar el estilo de los dados";
 "change_card_style" = "Puede cambiar el estilo de la tarjeta";
 "change_coin_style" = "Puede cambiar el estilo de la moneda";
 "choose_icon" = "Selección de iconos";
@@ -49,6 +50,7 @@
 "copy_to_clipboard" = "Copiado al búfer";
 "create_list" = "Crear lista";
 "cubes" = "Cubitos";
+"cubes_style" = "Estilo de dados";
 "customize_app_appearance" = "Cambia el aspecto de la aplicación a tu gusto";
 "dark" = "Cerrado";
 "dark_theme" = "Tema oscuro";
@@ -209,6 +211,7 @@
 "section_settings" = "Configuración de la sección";
 "section_tsuefa" = "sección Tsu-e-fa";
 "select_bottle_style" = "Seleccionar estilo de botella";
+"select_cubes_style" = "Elige el estilo de los dados";
 "select_card_style" = "Seleccionar estilo de tarjeta";
 "select_coin_style" = "Seleccionar estilo de moneda";
 "select_icon" = "Seleccione un icono";

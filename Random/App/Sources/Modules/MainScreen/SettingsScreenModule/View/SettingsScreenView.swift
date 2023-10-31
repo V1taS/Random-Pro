@@ -33,6 +33,9 @@ protocol SettingsScreenViewOutput: AnyObject {
 
   /// Событие, кнопка `Выбора стиля монеточки` была нажата
   func coinStyleSelectionAction()
+
+  /// Событие, кнопка `Выбора стиля кубиков` была нажата
+  func cubesStyleSelectionAction()
 }
 
 /// События которые отправляем от Presenter ко View
@@ -109,6 +112,8 @@ extension SettingsScreenView: UITableViewDelegate {
         output?.bottleStyleSelectionAction()
       case .coinStyleSelection:
         output?.coinStyleSelectionAction()
+      case .cubesStyleSelection:
+        output?.cubesStyleSelectionAction()
       }
     default: break
     }

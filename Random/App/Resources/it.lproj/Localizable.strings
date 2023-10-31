@@ -33,6 +33,7 @@
 "cancel" = "Annulla";
 "card_style" = "stile carta";
 "change_bottle_style" = "Puoi cambiare lo stile della bottiglia";
+"change_cubes_style" = "Puoi cambiare lo stile dei dadi";
 "change_card_style" = "puoi cambiare lo stile della carta";
 "change_coin_style" = "Può cambiare lo stile della moneta";
 "choose_icon" = "scelta dell'icona";
@@ -49,6 +50,7 @@
 "copy_to_clipboard" = "copiato negli appunti";
 "create_list" = "Crea lista";
 "cubes" = "Cubi";
+"cubes_style" = "Stile dadi";
 "customize_app_appearance" = "cambia l'aspetto dell'app a tuo piacimento";
 "dark" = "Buio";
 "dark_theme" = "Tema scuro";
@@ -209,6 +211,7 @@
 "section_settings" = "Impostazioni delle sezioni";
 "section_tsuefa" = "sezione Tsu-e-fa";
 "select_bottle_style" = "Seleziona lo stile della bottiglia";
+"select_cubes_style" = "Scegli lo stile dei dadi";
 "select_card_style" = "Scegli uno stile di carta";
 "select_coin_style" = "Seleziona stile moneta";
 "select_icon" = "Scegli un'icona";

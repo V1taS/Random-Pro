@@ -4,8 +4,8 @@ let dependencies = Dependencies(
   swiftPackageManager: SwiftPackageManagerDependencies(
     [
       .remote(url: "https://github.com/V1taS/FancyUIKit.git",
-              requirement: .exact("1.10")),
-//      .local(path: "../RandomUIKit"),
+              requirement: .exact("1.11")),
+//      .local(path: "../Fancy/FancyUIKit"),
       .remote(url: "https://github.com/V1taS/FancyNetwork.git",
               requirement: .exact("1.1")),
       .remote(url: "https://github.com/V1taS/FancyNotifications.git",
@@ -26,7 +26,7 @@ let dependencies = Dependencies(
       .remote(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
               requirement: .exact("10.5.0")),
       .remote(url: "https://github.com/firebase/firebase-ios-sdk.git",
-              requirement: .exact("10.12.0")),
+              requirement: .exact("10.17.0")),
       .remote(url: "https://github.com/MAJKFL/Welcome-Sheet",
               requirement: .exact("1.2.0")),
     ]

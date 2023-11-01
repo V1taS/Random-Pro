@@ -122,7 +122,6 @@ final class PremiumScreenViewController: PremiumScreenModule {
       $0.productIdentifier == PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
     }.first
     isLifetimeSale = value
-    factory.createMainButtonTitleFrom(.lifetime, amount: lifetimeSaleProduct?.localizedPrice)
   }
   
   func selectIsModalPresentationStyle(_ isModalPresentation: Bool) {
@@ -196,6 +195,13 @@ extension PremiumScreenViewController: PremiumScreenInteractorOutput {
   func didReceive(models: [SKProduct]) {
     cacheModels = models
     factory.createListModelWith(models: models, isLifetimeSale: isLifetimeSale)
+    
+    if isLifetimeSale {
+      let lifetimeSaleProduct = models.filter {
+        $0.productIdentifier == PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
+      }.first
+      factory.createMainButtonTitleFrom(.lifetime, amount: lifetimeSaleProduct?.localizedPrice)
+    }
   }
 }
 

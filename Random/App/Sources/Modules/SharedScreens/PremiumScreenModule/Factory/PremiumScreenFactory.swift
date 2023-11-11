@@ -98,13 +98,17 @@ final class PremiumScreenFactory: PremiumScreenFactoryInput {
     tableViewModels.append(.padding(appearance.maxInset))
     
     if isLifetimeSale {
-      tableViewModels.append(.lifetimeSale(title: appearance.sale,
-                                           oldPrice: lifetimeProduct?.localizedPrice,
-                                           newPrice: lifetimeSaleProduct?.localizedPrice))
+      tableViewModels.append(.lifetimeSale(
+        title: "\(appearance.sale)\n(\(RandomStrings.Localizable.oneTimePurchase))",
+        oldPrice: lifetimeProduct?.localizedPrice,
+        newPrice: lifetimeSaleProduct?.localizedPrice)
+      )
     } else {
-      tableViewModels.append(.purchasesCards(yearlyProduct?.localizedPrice,
-                                             monthlyProduct?.localizedPrice,
-                                             lifetimeProduct?.localizedPrice))
+      tableViewModels.append(.purchasesCards(
+        yearlyProduct?.localizedPrice,
+        monthlyProduct?.localizedPrice,
+        lifetimeProduct?.localizedPrice
+      ))
     }
     self.output?.didReceive(models: tableViewModels)
   }

@@ -25,6 +25,7 @@
 "can_generate_random_contact" = "Можно генерировать рандомный контакт из списка";
 "can_generate_random_lottery_ticket" = "Можно генерировать рандомный лот для участия в лотереи";
 "can_generate_random_movie" = "Можно генерировать рандомный фильм";
+"can_generate_random_series" = "Можно генерировать рандомный сериал";
 "can_generate_random_password" = "Можно генерировать рандомный пароль для регистрации";
 "can_generate_random_photo_filter" = "Можно генерировать рандомный фильтр для фото";
 "can_participate_in_weekly_prize_draw" = "Можно участвовать в еженедельном розыгрыше призов";
@@ -216,6 +217,7 @@
 "select_coin_style" = "Выбрать стиль монеты";
 "select_icon" = "Выберите иконку";
 "selen" = "Селен";
+"series" = "Сериалы";
 "september" = "Сентябрь";
 "settings" = "Настройки";
 "seven_days_free" = "7 дней бесплатно";

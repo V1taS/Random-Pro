@@ -25,6 +25,7 @@
 "can_generate_random_contact" = "è possibile generare un contatto casuale dall'elenco";
 "can_generate_random_lottery_ticket" = "è possibile generare un lotto casuale per partecipare alla lotteria";
 "can_generate_random_movie" = "è possibile generare un filmato casuale";
+"can_generate_random_series" = "È possibile generare una serie casuale";
 "can_generate_random_password" = "è possibile generare una password casuale per la registrazione";
 "can_generate_random_photo_filter" = "è possibile generare un filtro casuale per le foto";
 "can_participate_in_weekly_prize_draw" = "puoi partecipare all'estrazione settimanale dei Premi";
@@ -216,6 +217,7 @@
 "select_coin_style" = "Seleziona stile moneta";
 "select_icon" = "Scegli un'icona";
 "selen" = "selenio";
+"series" = "Serials";
 "september" = "settembre";
 "settings" = "Impostazioni";
 "seven_days_free" = "7 giorni gratis";

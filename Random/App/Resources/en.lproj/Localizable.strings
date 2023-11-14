@@ -25,6 +25,7 @@
 "can_generate_random_contact" = "You can generate a random contact from the list";
 "can_generate_random_lottery_ticket" = "You can generate a random lot to participate in the lottery";
 "can_generate_random_movie" = "You can generate a random movie";
+"can_generate_random_series" = "You can generate a random series";
 "can_generate_random_password" = "You can generate a random password for registration";
 "can_generate_random_photo_filter" = "You can generate a random filter for photos";
 "can_participate_in_weekly_prize_draw" = "You can participate in the weekly prize draw";
@@ -216,6 +217,7 @@
 "select_coin_style" = "Select coin style";
 "select_icon" = "Select icon";
 "selen" = "Selenium";
+"series" = "Series";
 "september" = "September";
 "settings" = "Settings";
 "seven_days_free" = "7 days free";

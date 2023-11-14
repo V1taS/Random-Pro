@@ -86,6 +86,8 @@ extension MainScreenModel {
         return appearance.titleTruthOrDareOther
       case .memes:
         return appearance.titleMemes
+      case .series:
+        return appearance.titleSeries
       }
     }
     
@@ -149,6 +151,8 @@ extension MainScreenModel {
         return appearance.imageTruthOrDare
       case .memes:
         return appearance.imageMemes
+      case .series:
+        return appearance.imageSeries
       }
     }
     
@@ -212,6 +216,8 @@ extension MainScreenModel {
         return appearance.fortuneWheelDescriptionForNoPremiumAccess
       case .memes:
         return appearance.memesDescriptionForNoPremiumAccess
+      case .series:
+        return appearance.seriesDescriptionForNoPremiumAccess
       }
     }
     
@@ -264,6 +270,9 @@ extension MainScreenModel {
     
     /// Раздел `Фильмы`
     case films
+
+    /// Раздел `Сериалы`
+    case series
     
     /// Раздел `Никнейм`
     case nickName

@@ -2,7 +2,7 @@
 //  SeriesScreenViewController.swift
 //  Random
 //
-//  Created by Артем Павлов on 13.11.2023.
+//  Created by Artem Pavlov on 13.11.2023.
 //
 
 import UIKit
@@ -50,6 +50,7 @@ final class SeriesScreenViewController: SeriesScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+    view.backgroundColor = .blue
   }
   
   override func finishFlow() {
@@ -63,7 +64,29 @@ extension SeriesScreenViewController: SeriesScreenViewOutput {}
 
 // MARK: - SeriesScreenInteractorOutput
 
-extension SeriesScreenViewController: SeriesScreenInteractorOutput {}
+extension SeriesScreenViewController: SeriesScreenInteractorOutput {
+  func startLoader() {
+    //moduleView.startLoader()
+  }
+
+  func didReceiveSeries(model: SeriesScreenModel) {
+//    moduleView.updateContentWith(model: model)
+//
+//    if moduleView.getFilmName() == nil {
+//      setNavigationBar(isPlayTrailerEnabled: false)
+//    } else {
+//      setNavigationBar(isPlayTrailerEnabled: true)
+//    }
+  }
+
+  func somethingWentWrong() {
+ //   moduleOutput?.somethingWentWrong()
+  }
+
+  func stopLoader() {
+//    moduleView.stopLoader()
+  }
+}
 
 // MARK: - SeriesScreenFactoryOutput
 

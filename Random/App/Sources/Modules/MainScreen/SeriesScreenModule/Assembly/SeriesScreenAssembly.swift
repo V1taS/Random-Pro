@@ -2,22 +2,23 @@
 //  SeriesScreenAssembly.swift
 //  Random
 //
-//  Created by Артем Павлов on 13.11.2023.
+//  Created by Artem Pavlov on 13.11.2023.
 //
 
 import Foundation
 
 /// Сборщик `SeriesScreen`
-public final class SeriesScreenAssembly {
+final class SeriesScreenAssembly {
 
-  public init() {}
+//  public init() {}
   
   /// Собирает модуль `SeriesScreen`
+  /// - Parameter services: Сервисы приложения
   /// - Returns: Cобранный модуль `SeriesScreen`
-  public func createModule() -> SeriesScreenModule {
-    let interactor = SeriesScreenInteractor()
+  func createModule(services: ApplicationServices) -> SeriesScreenModule {
     let view = SeriesScreenView()
     let factory = SeriesScreenFactory()
+    let interactor = SeriesScreenInteractor(services: services, factory: factory)
     let presenter = SeriesScreenViewController(
       moduleView: view,
       interactor: interactor,

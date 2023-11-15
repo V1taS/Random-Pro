@@ -9,7 +9,18 @@ import UIKit
 import FancyUIKit
 
 /// События которые отправляем из `SeriesScreenModule` в `Coordinator`
-public protocol SeriesScreenModuleOutput: AnyObject {}
+public protocol SeriesScreenModuleOutput: AnyObject {
+
+  /// Что-то пошло не так
+  func somethingWentWrong()
+
+  /// Проиграть трайлер по ссылке
+  ///  - Parameter url: Ссылка на трейлер
+  func playTrailerActionWith(url: String)
+
+  /// Модуль был закрыт
+  func moduleClosed()
+}
 
 /// События которые отправляем из `Coordinator` в `SeriesScreenModule`
 public protocol SeriesScreenModuleInput {

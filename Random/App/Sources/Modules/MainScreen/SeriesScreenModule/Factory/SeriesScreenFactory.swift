@@ -37,6 +37,13 @@ protocol SeriesScreenFactoryInput {
 
 /// Фабрика
 final class SeriesScreenFactory: SeriesScreenFactoryInput {
+
+  // MARK: - Internal properties
+
+  weak var output: SeriesScreenFactoryOutput?
+
+  // MARK: - Internal func
+
   func createRusSeriesModelFrom(_ modelsDTO: SeriesScreenRusModelDTO.Series, image: Data?) -> SeriesScreenModel {
     SeriesScreenModel(name: modelsDTO.nameRu,
                       description: "\(modelsDTO.genres.first?.genre ?? "") \(modelsDTO.year)",
@@ -49,24 +56,27 @@ final class SeriesScreenFactory: SeriesScreenFactoryInput {
                       image: image,
                       previewEngtUrl: modelsDTO.url)
   }
-
+  
   func createYandexLinkWith(text: String) -> String {
-    "mock"
+    let appearance = Appearance()
+    let request = "\(appearance.yandexRequest + appearance.watchMovieText) \(text)"
+    let formatRequest = request.replacingOccurrences(of: " ", with: "+")
+    return formatRequest
   }
 
   func createBestQualityFrom(url: String) -> String {
-    "mock"
+    let lowQuality = "180x240"
+    let bestQuality = "750x1000"
+    let newUrl = url.replacingOccurrences(of: lowQuality, with: bestQuality)
+    return newUrl
   }
-  
-  // MARK: - Internal properties
-  
-  weak var output: SeriesScreenFactoryOutput?
-  
-  // MARK: - Internal func
 }
 
 // MARK: - Appearance
 
 private extension SeriesScreenFactory {
-  struct Appearance {}
+  struct Appearance {
+    let yandexRequest = "http://yandex.ru/search/?text="
+    let watchMovieText = "смотреть фильм"
+  }
 }

@@ -32,6 +32,12 @@ protocol SeriesScreenInteractorInput {
 
   /// Загрузить сериал
   func loadSeries()
+
+  /// Сгенерировать сериал
+  func generateSeries()
+
+  /// Локация Россия
+  func isRuslocale() -> Bool
 }
 
 /// Интерактор
@@ -75,16 +81,22 @@ final class SeriesScreenInteractor: SeriesScreenInteractorInput {
     }
   }
 
+  func generateSeries() {
+    getSeriesByLocale(isRussian: isRuslocale())
+    services.buttonCounterService.onButtonClick()
+  }
+
   func loadSeries() {
-    seriesScreenModel = getSeriessData()
+    seriesScreenModel = getSeriesData()
 
     if !seriesScreenModel.isEmpty, let seriesModel = getGenerateSeries() {
       output?.didReceiveSeries(model: seriesModel)
       return
     }
-
     if isRuslocale() {
-
+      loadRusSeries { _ in }
+    } else {
+      loadEngSeries { _ in }
     }
   }
 }
@@ -95,7 +107,7 @@ private extension SeriesScreenInteractor {
 
   func loadEngSeries(completion: @escaping (_ seriesModels: [SeriesScreenModel]) -> Void) {
     output?.startLoader()
-    loadListEngSeriesDto { [weak self] seriesModelsDTO in
+    loadListEngSeriesDTO { [weak self] seriesModelsDTO in
       self?.loadImageWith(seriesDTO: seriesModelsDTO,
                           isRussian: self?.isRuslocale() ?? false) { [weak self] seriesModels in
         self?.seriesScreenModel = seriesModels
@@ -107,7 +119,7 @@ private extension SeriesScreenInteractor {
 
   func loadRusSeries(completion: @escaping (_ seriesModels: [SeriesScreenModel]) -> Void) {
     output?.startLoader()
-    loadListRusSeriesDto { [weak self] seriesModelsDTO in
+    loadListRusSeriesDTO { [weak self] seriesModelsDTO in
       self?.loadImageWith(seriesDTO: seriesModelsDTO,
                           isRussian: self?.isRuslocale() ?? false) { [weak self] seriesModels in
         self?.seriesScreenModel = seriesModels
@@ -117,7 +129,30 @@ private extension SeriesScreenInteractor {
     }
   }
 
-  func loadListEngSeriesDto(completion: @escaping ([SeriesScreenEngModelDTO]) -> Void) {
+  func getSeriesByLocale(isRussian: Bool) {
+    if !seriesScreenModel.isEmpty,
+       let seriesModel = getGenerateSeries() {
+      output?.didReceiveSeries(model: seriesModel)
+    } else if isRussian {
+      loadRusSeries { [weak self] seriesModels in
+        guard let seriesModel = seriesModels.first else {
+          self?.output?.somethingWentWrong()
+          return
+        }
+        self?.output?.didReceiveSeries(model: seriesModel)
+      }
+    } else {
+      loadEngSeries { [weak self] seriesModels in
+        guard let seriesModel = seriesModels.first else {
+          self?.output?.somethingWentWrong()
+          return
+        }
+        self?.output?.didReceiveSeries(model: seriesModel)
+      }
+    }
+  }
+
+  func loadListEngSeriesDTO(completion: @escaping ([SeriesScreenEngModelDTO]) -> Void) {
     let appearance = Appearance()
 
     services.networkService.performRequestWith(
@@ -150,7 +185,7 @@ private extension SeriesScreenInteractor {
     }
   }
 
-  func loadListRusSeriesDto(completion: @escaping ([SeriesScreenRusModelDTO.Series]) -> Void) {
+  func loadListRusSeriesDTO(completion: @escaping ([SeriesScreenRusModelDTO.Series]) -> Void) {
     let appearance = Appearance()
     let urlString = "\(appearance.rusDomenKinopoisk)\(appearance.rusEndPoint)"
     let randomSeriesType = SeriesScreenRusType.allCases.shuffled().first ?? .top250Best
@@ -252,7 +287,7 @@ private extension SeriesScreenInteractor {
     return seriesModel
   }
 
-  func getSeriessData() -> [SeriesScreenModel] {
+  func getSeriesData() -> [SeriesScreenModel] {
     return storageService.getData(from: [SeriesScreenModel].self) ?? []
   }
 

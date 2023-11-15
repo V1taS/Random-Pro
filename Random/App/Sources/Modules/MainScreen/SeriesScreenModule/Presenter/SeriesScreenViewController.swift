@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FancyUIKit
+import FancyStyle
 
 /// Презентер
 final class SeriesScreenViewController: SeriesScreenModule {
@@ -49,42 +51,46 @@ final class SeriesScreenViewController: SeriesScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setNavigationBar()
-    view.backgroundColor = .blue
+    setNavigationBar(isPlayTrailerEnabled: false)
   }
   
   override func finishFlow() {
-   // moduleOutput?.moduleClosed()
+    moduleOutput?.moduleClosed()
   }
 }
 
 // MARK: - SeriesScreenViewOutput
 
-extension SeriesScreenViewController: SeriesScreenViewOutput {}
+extension SeriesScreenViewController: SeriesScreenViewOutput {
+
+  func generateSeriesAction() {
+    interactor.generateSeries()
+  }
+}
 
 // MARK: - SeriesScreenInteractorOutput
 
 extension SeriesScreenViewController: SeriesScreenInteractorOutput {
   func startLoader() {
-    //moduleView.startLoader()
+    moduleView.startLoader()
   }
 
   func didReceiveSeries(model: SeriesScreenModel) {
-//    moduleView.updateContentWith(model: model)
-//
-//    if moduleView.getFilmName() == nil {
-//      setNavigationBar(isPlayTrailerEnabled: false)
-//    } else {
-//      setNavigationBar(isPlayTrailerEnabled: true)
-//    }
+    moduleView.updateContentWith(model: model)
+
+    if moduleView.getSeriesName() == nil {
+      setNavigationBar(isPlayTrailerEnabled: false)
+    } else {
+      setNavigationBar(isPlayTrailerEnabled: true)
+    }
   }
 
   func somethingWentWrong() {
- //   moduleOutput?.somethingWentWrong()
+    moduleOutput?.somethingWentWrong()
   }
 
   func stopLoader() {
-//    moduleView.stopLoader()
+    moduleView.stopLoader()
   }
 }
 
@@ -95,22 +101,60 @@ extension SeriesScreenViewController: SeriesScreenFactoryOutput {}
 // MARK: - Private
 
 private extension SeriesScreenViewController {
-  func setNavigationBar() {
+  func setNavigationBar(isPlayTrailerEnabled: Bool) {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
-    title = appearance.title
-    let settingButton = UIBarButtonItem(image: appearance.settingsButtonIcon,
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(settingButtonAction))
-    navigationItem.rightBarButtonItems = [settingButton]
+
+    let playTrailerImageName = isPlayTrailerEnabled ? appearance.playTrailerImageEnabledName : appearance.playTrailerImageDisabledName
+
+    let playTrailerButton = UIBarButtonItem.menuButton(self,
+                                                       action: #selector(playTrailerAction),
+                                                       imageName: playTrailerImageName,
+                                                       size: CGSize(width: 33,
+                                                                    height: 28))
+    playTrailerButton.isEnabled = isPlayTrailerEnabled
+    navigationItem.rightBarButtonItems = [playTrailerButton]
   }
   
   @objc
-  func settingButtonAction() {
-    // TODO: Добавить экшен
+  func playTrailerAction() {
+    guard let seriesName = moduleView.getSeriesName() else {
+      moduleOutput?.somethingWentWrong()
+      return
+    }
+
+    if interactor.isRuslocale() {
+      let url = factory.createYandexLinkWith(text: seriesName)
+      moduleOutput?.playTrailerActionWith(url: url)
+    } else {
+      guard let previewEngtUrl = moduleView.gerPreviewEngtUrl() else {
+        moduleOutput?.somethingWentWrong()
+        return
+      }
+      moduleOutput?.playTrailerActionWith(url: previewEngtUrl)
+    }
     impactFeedback.impactOccurred()
+  }
+}
+
+// MARK: - UIBarButtonItem
+
+//в фмльмах такое же расширение, дублировать?
+private extension UIBarButtonItem {
+  static func menuButton(_ target: Any?,
+                         action: Selector,
+                         imageName: String,
+                         size: CGSize) -> UIBarButtonItem {
+    let button = UIButton(type: .system)
+    button.setImage(UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
+    button.addTarget(target, action: action, for: .touchUpInside)
+
+    let menuBarItem = UIBarButtonItem(customView: button)
+    menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
+    menuBarItem.customView?.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+    menuBarItem.customView?.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+    return menuBarItem
   }
 }
 
@@ -118,7 +162,7 @@ private extension SeriesScreenViewController {
 
 private extension SeriesScreenViewController {
   struct Appearance {
-    let title = RandomStrings.Localizable.randomPro
-    let settingsButtonIcon = UIImage(systemName: "gear")
+    let playTrailerImageEnabledName = RandomAsset.playTrailerEnabled.name
+    let playTrailerImageDisabledName = RandomAsset.playTrailerDisabled.name
   }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 /// Псевдоним протокола Coordinator & SeriesScreenCoordinatorInput
 typealias SeriesScreenCoordinatorProtocol = Coordinator & SeriesScreenCoordinatorInput
@@ -63,5 +64,41 @@ final class SeriesScreenCoordinator: SeriesScreenCoordinatorProtocol {
 extension SeriesScreenCoordinator: SeriesScreenModuleOutput {
   func moduleClosed() {
     finishFlow?()
+  }
+
+  func playTrailerActionWith(url: String) {
+    guard let encodedTexts = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+          let seriesUrl = URL(string: encodedTexts) else {
+      somethingWentWrong()
+      return
+    }
+
+    let safariViewController = SFSafariViewController(url: seriesUrl)
+    navigationController.present(safariViewController, animated: true, completion: nil)
+  }
+
+  func somethingWentWrong() {
+    services.notificationService.showNegativeAlertWith(title: Appearance().somethingWentWrong,
+                                                       glyph: false,
+                                                       timeout: nil,
+                                                       active: {})
+  }
+
+//  func resultLabelAction(text: String?) {
+//    UIPasteboard.general.string = text
+//    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+//    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+//                                                       glyph: true,
+//                                                       timeout: nil,
+//                                                       active: {})
+//  }
+}
+
+// MARK: - Appearance
+
+private extension SeriesScreenCoordinator {
+  struct Appearance {
+    let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
+  //  let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

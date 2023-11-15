@@ -84,14 +84,14 @@ extension SeriesScreenCoordinator: SeriesScreenModuleOutput {
                                                        active: {})
   }
 
-//  func resultLabelAction(text: String?) {
-//    UIPasteboard.general.string = text
-//    UIImpactFeedbackGenerator(style: .light).impactOccurred()
-//    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
-//                                                       glyph: true,
-//                                                       timeout: nil,
-//                                                       active: {})
-//  }
+  func resultLabelAction(text: String?) {
+    UIPasteboard.general.string = text
+    UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
+                                                       glyph: true,
+                                                       timeout: nil,
+                                                       active: {})
+  }
 }
 
 // MARK: - Appearance
@@ -99,6 +99,6 @@ extension SeriesScreenCoordinator: SeriesScreenModuleOutput {
 private extension SeriesScreenCoordinator {
   struct Appearance {
     let somethingWentWrong = RandomStrings.Localizable.somethingWentWrong
-  //  let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
+    let copiedToClipboard = RandomStrings.Localizable.copyToClipboard
   }
 }

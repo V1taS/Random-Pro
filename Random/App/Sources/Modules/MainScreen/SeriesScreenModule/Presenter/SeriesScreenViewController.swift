@@ -50,7 +50,8 @@ final class SeriesScreenViewController: SeriesScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
+    interactor.loadSeries()
     setNavigationBar(isPlayTrailerEnabled: false)
   }
   

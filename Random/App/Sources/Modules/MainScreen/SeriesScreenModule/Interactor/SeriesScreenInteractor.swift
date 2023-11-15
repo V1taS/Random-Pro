@@ -214,7 +214,7 @@ private extension SeriesScreenInteractor {
             self?.output?.somethingWentWrong()
             return
           }
-          completion(model.series)
+          completion(model.films)
         }
       case .failure:
         DispatchQueue.main.async {

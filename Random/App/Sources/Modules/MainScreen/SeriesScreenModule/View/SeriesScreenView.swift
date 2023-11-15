@@ -52,7 +52,7 @@ final class SeriesScreenView: SeriesScreenViewProtocol {
   private let seriesView = FilmView()
   private let activityIndicator = LottieAnimationView(name: Appearance().loaderImage)
   private var cacheSeriesName: String?
-  private var cacheTrailerEngFilmsUrl: String?
+  private var cacheTrailerEngSeriesUrl: String?
   
   // MARK: - Initialization
   
@@ -71,7 +71,7 @@ final class SeriesScreenView: SeriesScreenViewProtocol {
 
   func updateContentWith(model: SeriesScreenModel) {
     cacheSeriesName = model.name
-    cacheTrailerEngFilmsUrl = model.previewEngtUrl
+    cacheTrailerEngSeriesUrl = model.previewEngtUrl
     var backgroundImage: UIImage?
     if let imageData = model.image {
       backgroundImage = UIImage(data: imageData)
@@ -103,7 +103,7 @@ final class SeriesScreenView: SeriesScreenViewProtocol {
   }
 
   func gerPreviewEngtUrl() -> String? {
-    return cacheTrailerEngFilmsUrl
+    return cacheTrailerEngSeriesUrl
   }
 }
 

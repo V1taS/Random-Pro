@@ -11,7 +11,7 @@ import Foundation
 struct SeriesScreenRusModelDTO: Codable {
 
   /// Список сериалов
-  let series: [Series]
+  let films: [Series]
 
   // MARK: - Series
 

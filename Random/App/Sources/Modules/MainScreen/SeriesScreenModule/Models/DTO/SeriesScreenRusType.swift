@@ -13,26 +13,26 @@ enum SeriesScreenRusType: CaseIterable {
   /// Название каждого кейса
   var rawvalue: String {
     switch self {
-    case .top100Popular:
-      return "TOP_100_POPULAR_FILMS"
-    case .top250Best:
-      return "TOP_250_BEST_FILMS"
+    case .tvSeries:
+      return "TV_SERIES"
+    case .miniSeries:
+      return "MINI_SERIES"
     }
   }
 
   /// Количество страниц для каждого кейса
   var pageMaxCount: Int {
     switch self {
-    case .top100Popular:
-      return 20
-    case .top250Best:
-      return 13
+    case .tvSeries:
+      return 5
+    case .miniSeries:
+      return 5
     }
   }
 
-  /// ТОП 100 популярных
-  case top100Popular
+  /// Сериалы
+  case tvSeries
 
-  /// ТОП 250 лучших
-  case top250Best
+  /// Мини-сериалы
+  case miniSeries
 }

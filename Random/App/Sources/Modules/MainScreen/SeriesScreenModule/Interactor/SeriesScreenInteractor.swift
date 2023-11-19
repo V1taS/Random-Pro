@@ -188,13 +188,15 @@ private extension SeriesScreenInteractor {
   func loadListRusSeriesDTO(completion: @escaping ([SeriesScreenRusModelDTO.Series]) -> Void) {
     let appearance = Appearance()
     let urlString = "\(appearance.rusDomenKinopoisk)\(appearance.rusEndPoint)"
-    let randomSeriesType = SeriesScreenRusType.allCases.shuffled().first ?? .top250Best
+    let randomSeriesType = SeriesScreenRusType.allCases.shuffled().first ?? .tvSeries
 
     services.networkService.performRequestWith(
       urlString: urlString,
       queryItems: [
         URLQueryItem(name: "type",
                      value: randomSeriesType.rawvalue),
+        URLQueryItem(name: "ratingFrom",
+                     value: appearance.rusMinRating),
         URLQueryItem(name: "page",
                      value: "\(Int.random(in: 1...randomSeriesType.pageMaxCount))"),
 
@@ -214,7 +216,7 @@ private extension SeriesScreenInteractor {
             self?.output?.somethingWentWrong()
             return
           }
-          completion(model.films)
+          completion(model.items)
         }
       case .failure:
         DispatchQueue.main.async {
@@ -304,7 +306,8 @@ private extension SeriesScreenInteractor {
 private extension SeriesScreenInteractor {
   struct Appearance {
     let rusDomenKinopoisk = "https://kinopoiskapiunofficial.tech"
-    let rusEndPoint = "/api/v2.2/films/top"
+    let rusEndPoint = "/api/v2.2/films"
+    let rusMinRating = "4"
     let rusAPIKey = SecretsAPI.apiKeyKinopoisk
     let rusHeaderAPIKey = "X-API-KEY"
 

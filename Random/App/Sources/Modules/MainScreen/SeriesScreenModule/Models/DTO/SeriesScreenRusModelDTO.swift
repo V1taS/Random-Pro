@@ -11,7 +11,7 @@ import Foundation
 struct SeriesScreenRusModelDTO: Codable {
 
   /// Список сериалов
-  let films: [Series]
+  let items: [Series]
 
   // MARK: - Series
 
@@ -24,7 +24,7 @@ struct SeriesScreenRusModelDTO: Codable {
     let genres: [Genre]
 
     /// Год выпуска сериала
-    let year: String
+    let year: Int
 
     /// URL Картинки
     let posterUrl: String

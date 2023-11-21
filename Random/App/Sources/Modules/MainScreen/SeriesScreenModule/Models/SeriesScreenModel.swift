@@ -19,6 +19,6 @@ struct SeriesScreenModel: UserDefaultsCodable {
   /// Изображение
   let image: Data?
 
-  /// Ссылка на трейлер зарубежных сериалов
-  var previewEngtUrl: String?
+  /// Ссылка на трейлер сериалов
+  var trailerUrl: String?
 }

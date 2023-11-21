@@ -71,7 +71,7 @@ final class SeriesScreenView: SeriesScreenViewProtocol {
 
   func updateContentWith(model: SeriesScreenModel) {
     cacheSeriesName = model.name
-    cacheTrailerEngSeriesUrl = model.previewEngtUrl
+    cacheTrailerEngSeriesUrl = model.trailerUrl
     var backgroundImage: UIImage?
     if let imageData = model.image {
       backgroundImage = UIImage(data: imageData)

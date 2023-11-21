@@ -8,7 +8,13 @@
 
 import Foundation
 
-enum SeriesScreenRusType: CaseIterable {
+enum SeriesScreenType: CaseIterable {
+
+  /// Сериалы
+  case tvSeries
+
+  /// Мини-сериалы
+  case miniSeries
 
   /// Название каждого кейса
   var rawvalue: String {
@@ -20,7 +26,7 @@ enum SeriesScreenRusType: CaseIterable {
     }
   }
 
-  /// Количество страниц для каждого кейса
+  /// Максимальное количество страниц для каждого кейса
   var pageMaxCount: Int {
     switch self {
     case .tvSeries:
@@ -29,10 +35,4 @@ enum SeriesScreenRusType: CaseIterable {
       return 5
     }
   }
-
-  /// Сериалы
-  case tvSeries
-
-  /// Мини-сериалы
-  case miniSeries
 }

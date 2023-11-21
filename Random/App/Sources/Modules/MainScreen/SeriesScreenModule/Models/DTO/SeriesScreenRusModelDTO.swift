@@ -38,4 +38,3 @@ struct SeriesScreenRusModelDTO: Codable {
     let genre: String
   }
 }
-

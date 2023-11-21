@@ -129,11 +129,13 @@ private extension SeriesScreenViewController {
       let url = factory.createYandexLinkWith(text: seriesName)
       moduleOutput?.playTrailerActionWith(url: url)
     } else {
-      guard let previewEngtUrl = moduleView.gerPreviewEngtUrl() else {
-        moduleOutput?.somethingWentWrong()
-        return
-      }
-      moduleOutput?.playTrailerActionWith(url: previewEngtUrl)
+      let url = factory.createYandexLinkWith(text: seriesName)
+      moduleOutput?.playTrailerActionWith(url: url)
+//      guard let previewEngtUrl = moduleView.gerPreviewEngtUrl() else {
+//        moduleOutput?.somethingWentWrong()
+//        return
+//      }
+//      moduleOutput?.playTrailerActionWith(url: previewEngtUrl)
     }
     impactFeedback.impactOccurred()
   }

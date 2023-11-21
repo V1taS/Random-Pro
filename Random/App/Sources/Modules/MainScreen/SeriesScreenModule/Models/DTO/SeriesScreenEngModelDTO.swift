@@ -2,7 +2,7 @@
 //  SeriesScreenEngModelDTO.swift
 //  Random
 //
-//  Created by Артем Павлов on 13.11.2023.
+//  Created by Artem Pavlov on 13.11.2023.
 //  Copyright © 2023 SosinVitalii.com. All rights reserved.
 //
 
@@ -10,15 +10,20 @@ import Foundation
 
 struct SeriesScreenEngModelDTO: Codable {
 
-  /// Название сериала
-  let title: String
+  /// Список сериалов
+  let items: [Series]
 
-  /// Ссылка на трейлер
-  let url: String
+  // MARK: - Series
 
-  /// Изображение
-  let img: String
+  struct Series: Codable {
 
-  /// Год сериала
-  let year: String
+    /// Название сериала
+    let nameOriginal: String
+
+    /// URL Картинки
+    let posterUrl: String
+
+    /// Год выпуска сериала
+    let year: Int
+  }
 }

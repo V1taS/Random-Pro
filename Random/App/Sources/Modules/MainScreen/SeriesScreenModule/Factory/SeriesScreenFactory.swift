@@ -24,7 +24,7 @@ protocol SeriesScreenFactoryInput {
   /// - Parameters:
   ///  - modelsDTO: ДТО Иностранных сериалов
   ///  - image: Изображение
-  func createEngSeriesModelFrom(_ modelsDTO: SeriesScreenEngModelDTO.Series,
+  func createEngSeriesModelFrom(_ modelsDTO: SeriesScreenEngModelDTO,
                                 image: Data?) -> SeriesScreenModel
 
   /// Создать ссылку для Яндекс поиска
@@ -50,9 +50,9 @@ final class SeriesScreenFactory: SeriesScreenFactoryInput {
                       image: image)
   }
 
-  func createEngSeriesModelFrom(_ modelsDTO: SeriesScreenEngModelDTO.Series, image: Data?) -> SeriesScreenModel {
-    SeriesScreenModel(name: modelsDTO.nameOriginal,
-                      description: "\(modelsDTO.year)",
+  func createEngSeriesModelFrom(_ modelsDTO: SeriesScreenEngModelDTO, image: Data?) -> SeriesScreenModel {
+    SeriesScreenModel(name: modelsDTO.name ?? "",
+                      description: "\(modelsDTO.genres?.first ?? "") \(modelsDTO.premiered ?? "")",
                       image: image)
   }
   

@@ -19,7 +19,7 @@ struct SecretsAPI {
 
 /// Parts of ApiKey TMDB
 private extension SecretsAPI {
-  static let apiKeyTMDB1Part = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGZjY2ZiZDc2NDQ0ZDYxZTE0MjA0OWNiMTZlMjE3YiIs"
+  static let apiKeyTMDB1Part = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OGZjY2ZiZDc2NDQ0ZDYxZTE0MjA0OWNiMTZlMjE3YiIs"
   static let apiKeyTMDB2Part = "InN1YiI6IjY1NWFlNmIyN2YwNTQwMThkNDIwYTRlMSIsInNjb3BlcyI6WyJ"
   static let apiKeyTMDB3Part = "hcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.w9e8r57xPGNQXIVWYpr-HwXCUr2X6yO1sn63jjI-BVk"
 }

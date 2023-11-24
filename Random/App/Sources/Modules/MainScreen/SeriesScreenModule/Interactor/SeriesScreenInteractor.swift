@@ -152,39 +152,28 @@ private extension SeriesScreenInteractor {
     }
   }
 
-  func loadListEngSeriesDTO(completion: @escaping ([SeriesScreenEngModelDTO.Series]) -> Void) {
+  func loadListEngSeriesDTO(completion: @escaping ([SeriesScreenEngModelDTO]) -> Void) {
     let appearance = Appearance()
-    let urlString = "\(appearance.domenKinopoisk)\(appearance.endPoint)"
-    let randomSeriesType = SeriesScreenType.allCases.shuffled().first ?? .tvSeries
+    let urlString = "\(appearance.engDomenSeriesUrl)\(appearance.engSeriesEndPoint)"
+    let rusSeriesType = SeriesScreenEngType.allCases.shuffled().first ?? .allSeries
 
     services.networkService.performRequestWith(
       urlString: urlString,
       queryItems: [
-        URLQueryItem(name: "countries",
-                     value: "1"),
-        URLQueryItem(name: "type",
-                     value: randomSeriesType.rawvalue),
-        URLQueryItem(name: "ratingFrom",
-                     value: appearance.minRating),
         URLQueryItem(name: "page",
-                     value: "\(Int.random(in: 1...randomSeriesType.pageMaxCount))"),
+                     value: "\(Int.random(in: 1...rusSeriesType.pageMaxCount))"),
       ],
       httpMethod: .get,
-      headers: [
-        .additionalHeaders(set: [
-          (key: appearance.headerAPIKey, value: appearance.APIKey)
-        ]),
-        .contentTypeJson
-      ]
+      headers: []
     ) { [weak self] result in
       switch result {
       case let .success(data):
         DispatchQueue.main.async {
-          guard let model = self?.services.networkService.map(data, to: SeriesScreenEngModelDTO.self) else {
+          guard let model = self?.services.networkService.map(data, to: [SeriesScreenEngModelDTO].self) else {
             self?.output?.somethingWentWrong()
             return
           }
-          completion(model.items)
+          completion(model)
         }
       case .failure:
         DispatchQueue.main.async {
@@ -197,23 +186,23 @@ private extension SeriesScreenInteractor {
 
   func loadListRusSeriesDTO(completion: @escaping ([SeriesScreenRusModelDTO.Series]) -> Void) {
     let appearance = Appearance()
-    let urlString = "\(appearance.domenKinopoisk)\(appearance.endPoint)"
-    let randomSeriesType = SeriesScreenType.allCases.shuffled().first ?? .tvSeries
+    let urlString = "\(appearance.rusDomenKinopoisk)\(appearance.rusEndPoint)"
+    let randomSeriesType = SeriesScreenRusType.allCases.shuffled().first ?? .tvSeries
 
     services.networkService.performRequestWith(
       urlString: urlString,
       queryItems: [
         URLQueryItem(name: "type",
-                     value: randomSeriesType.rawvalue),
+                     value: randomSeriesType.rawValue),
         URLQueryItem(name: "ratingFrom",
-                     value: appearance.minRating),
+                     value: appearance.rusMinRating),
         URLQueryItem(name: "page",
-                     value: "\(Int.random(in: 1...randomSeriesType.pageMaxCount))"),
+                     value: "\(Int.random(in: 1...randomSeriesType.pageMaxCount))")
       ],
       httpMethod: .get,
       headers: [
         .additionalHeaders(set: [
-          (key: appearance.headerAPIKey, value: appearance.APIKey)
+          (key: appearance.rusHeaderAPIKey, value: appearance.rusAPIKey)
         ]),
         .contentTypeJson
       ]
@@ -252,8 +241,8 @@ private extension SeriesScreenInteractor {
         url = model.posterUrl
       }
 
-      if !isRussian, let model = modelDTO as? SeriesScreenEngModelDTO.Series {
-        url = model.posterUrl
+      if !isRussian, let model = modelDTO as? SeriesScreenEngModelDTO {
+        url = model.image?.original ?? ""
       }
 
       services.networkService.performRequestWith(urlString: url,
@@ -270,7 +259,7 @@ private extension SeriesScreenInteractor {
             seriesModels.append(seriesScreenModel)
           }
 
-          if !isRussian, let model = modelDTO as? SeriesScreenEngModelDTO.Series {
+          if !isRussian, let model = modelDTO as? SeriesScreenEngModelDTO {
             let seriesScreenModel = self.factory.createEngSeriesModelFrom(model, image: imageData)
             seriesModels.append(seriesScreenModel)
           }
@@ -299,6 +288,7 @@ private extension SeriesScreenInteractor {
   }
 
   func getSeriesData() -> [SeriesScreenModel] {
+
     return storageService.getData(from: [SeriesScreenModel].self) ?? []
   }
 
@@ -314,21 +304,13 @@ private extension SeriesScreenInteractor {
 
 private extension SeriesScreenInteractor {
   struct Appearance {
-    let domenKinopoisk = "https://kinopoiskapiunofficial.tech"
-    let APIKey = SecretsAPI.apiKeyKinopoisk
-    let headerAPIKey = "X-API-KEY"
-    let endPoint = "/api/v2.2/films"
+    let rusDomenKinopoisk = "https://kinopoiskapiunofficial.tech"
+    let rusAPIKey = SecretsAPI.apiKeyKinopoisk
+    let rusHeaderAPIKey = "X-API-KEY"
+    let rusEndPoint = "/api/v2.2/films"
+    let rusMinRating = "4"
 
-    let minRating = "4"
-
-
-
-
- //   let engSeriesUrl = "https://kinopoiskapiunofficial.tech"
-    //let engAPIKey = SecretsAPI.apiKeyMostPopularMovies
-  //  let engHeaderAPIKey = "X-RapidAPI-Key"
-
- //   let engAPIHost = "most-popular-movies-right-now-daily-update.p.rapidapi.com"
-   // let engHeaderAPIHost = "X-RapidAPI-Host"
+    let engDomenSeriesUrl = "https://api.tvmaze.com"
+    let engSeriesEndPoint = "/shows"
   }
 }

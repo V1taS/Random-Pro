@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SeriesScreenType: CaseIterable {
+enum SeriesScreenRusType: CaseIterable {
 
   /// Сериалы
   case tvSeries
@@ -17,7 +17,7 @@ enum SeriesScreenType: CaseIterable {
   case miniSeries
 
   /// Название каждого кейса
-  var rawvalue: String {
+  var rawValue: String {
     switch self {
     case .tvSeries:
       return "TV_SERIES"

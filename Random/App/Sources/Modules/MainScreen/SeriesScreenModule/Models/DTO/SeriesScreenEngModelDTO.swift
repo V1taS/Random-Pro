@@ -9,21 +9,24 @@
 import Foundation
 
 struct SeriesScreenEngModelDTO: Codable {
-
-  /// Список сериалов
-  let items: [Series]
-
+  
   // MARK: - Series
+  
+  /// Название сериала
+  let name: String?
 
-  struct Series: Codable {
+  /// Год выпуска сериала
+  let premiered: String?
 
-    /// Название сериала
-    let nameOriginal: String
+  /// URL Картинки
+  let image: SeriesImage?
 
-    /// URL Картинки
-    let posterUrl: String
+  /// Жанры сериала
+  let genres: [String]?
 
-    /// Год выпуска сериала
-    let year: Int
+  // MARK: - SeriesImage
+  
+  struct SeriesImage: Codable {
+    let original: String?
   }
 }

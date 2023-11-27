@@ -17,7 +17,7 @@ enum SeriesScreenEngType: CaseIterable {
   var pageMaxCount: Int {
     switch self {
     case .allSeries:
-      return 50
+      return 3
     }
   }
 }

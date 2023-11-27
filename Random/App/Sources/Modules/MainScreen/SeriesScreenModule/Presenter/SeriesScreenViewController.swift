@@ -124,18 +124,13 @@ private extension SeriesScreenViewController {
       moduleOutput?.somethingWentWrong()
       return
     }
-
+    
     if interactor.isRuslocale() {
       let url = factory.createYandexLinkWith(text: seriesName)
       moduleOutput?.playTrailerActionWith(url: url)
     } else {
-      let url = factory.createYandexLinkWith(text: seriesName)
+      let url = factory.createGoogleLinkWith(text: seriesName)
       moduleOutput?.playTrailerActionWith(url: url)
-//      guard let previewEngtUrl = moduleView.gerPreviewEngtUrl() else {
-//        moduleOutput?.somethingWentWrong()
-//        return
-//      }
-//      moduleOutput?.playTrailerActionWith(url: previewEngtUrl)
     }
     impactFeedback.impactOccurred()
   }

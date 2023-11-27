@@ -288,8 +288,7 @@ private extension SeriesScreenInteractor {
   }
 
   func getSeriesData() -> [SeriesScreenModel] {
-
-    return storageService.getData(from: [SeriesScreenModel].self) ?? []
+    storageService.getData(from: [SeriesScreenModel].self) ?? []
   }
 
   func saveSeriesData(_ data: [SeriesScreenModel]?) {
@@ -297,7 +296,6 @@ private extension SeriesScreenInteractor {
       self?.storageService.saveData(data)
     }
   }
-
 }
 
 // MARK: - Appearance

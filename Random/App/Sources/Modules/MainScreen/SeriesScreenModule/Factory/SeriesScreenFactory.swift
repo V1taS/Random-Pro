@@ -31,8 +31,9 @@ protocol SeriesScreenFactoryInput {
   /// - Parameter text: Текст для поиска
   func createYandexLinkWith(text: String) -> String
 
-//  /// Изменить ссылку на лучшее качество изображений
-//  func createBestQualityFrom(url: String) -> String
+  /// Создать ссылку для Google поиска
+  /// - Parameter text: Текст для поиска
+  func createGoogleLinkWith(text: String) -> String
 }
 
 /// Фабрика
@@ -51,24 +52,43 @@ final class SeriesScreenFactory: SeriesScreenFactoryInput {
   }
 
   func createEngSeriesModelFrom(_ modelsDTO: SeriesScreenEngModelDTO, image: Data?) -> SeriesScreenModel {
-    SeriesScreenModel(name: modelsDTO.name ?? "",
-                      description: "\(modelsDTO.genres?.first ?? "") \(modelsDTO.premiered ?? "")",
-                      image: image)
+    let date = formatDate(from: modelsDTO.premiered ?? "")
+    return  SeriesScreenModel(name: modelsDTO.name ?? "",
+                              description: "\(modelsDTO.genres?.first ?? "") \(String(describing: date))",
+                              image: image)
   }
-  
+
   func createYandexLinkWith(text: String) -> String {
     let appearance = Appearance()
-    let request = "\(appearance.yandexRequest + appearance.watcрTrailerText) \(text)"
+    let request = "\(appearance.yandexRequest + appearance.watchRusTrailerText) \(text)"
     let formatRequest = request.replacingOccurrences(of: " ", with: "+")
     return formatRequest
   }
 
-//  func createBestQualityFrom(url: String) -> String {
-//    let lowQuality = "180x240"
-//    let bestQuality = "750x1000"
-//    let newUrl = url.replacingOccurrences(of: lowQuality, with: bestQuality)
-//    return newUrl
-//  }
+  func createGoogleLinkWith(text: String) -> String {
+    let appearance = Appearance()
+    let request = "\(appearance.googleRequest + appearance.watchEngTrailerText) \(text)"
+    let formatRequest = request.replacingOccurrences(of: " ", with: "+")
+    return formatRequest
+  }
+}
+
+// MARK: - Private
+
+private extension SeriesScreenFactory {
+  func formatDate(from date: String) -> String {
+    let formattorToDate = DateFormatter()
+    formattorToDate.dateFormat = "yyyy-MM-dd"
+
+    guard let date = formattorToDate.date(from: date) else {
+      return ""
+    }
+
+    let formattorToString = DateFormatter()
+    formattorToString.dateFormat = "yyyy"
+    let newStringDate = formattorToString.string(from: date)
+    return newStringDate
+  }
 }
 
 // MARK: - Appearance
@@ -76,6 +96,9 @@ final class SeriesScreenFactory: SeriesScreenFactoryInput {
 private extension SeriesScreenFactory {
   struct Appearance {
     let yandexRequest = "http://yandex.ru/search/?text="
-    let watcрTrailerText = "смотреть треллер"
+    let watchRusTrailerText = "смотреть трейлер"
+
+    let googleRequest = "https://www.google.com/search?q="
+    let watchEngTrailerText = "watch trailer"
   }
 }

@@ -8,7 +8,6 @@
 import UIKit
 import FancyNetwork
 import FancyUIKit
-import FancyStyle
 
 /// События которые отправляем из Interactor в Presenter
 protocol SeriesScreenInteractorOutput: AnyObject {
@@ -155,13 +154,13 @@ private extension SeriesScreenInteractor {
   func loadListEngSeriesDTO(completion: @escaping ([SeriesScreenEngModelDTO]) -> Void) {
     let appearance = Appearance()
     let urlString = "\(appearance.engDomenSeriesUrl)\(appearance.engSeriesEndPoint)"
-    let rusSeriesType = SeriesScreenEngType.allCases.shuffled().first ?? .allSeries
+    let engSeriesType = SeriesScreenEngType.allCases.shuffled().first ?? .allSeries
 
     services.networkService.performRequestWith(
       urlString: urlString,
       queryItems: [
         URLQueryItem(name: "page",
-                     value: "\(Int.random(in: 1...rusSeriesType.pageMaxCount))"),
+                     value: "\(Int.random(in: 0...engSeriesType.pageMaxCount))"),
       ],
       httpMethod: .get,
       headers: []

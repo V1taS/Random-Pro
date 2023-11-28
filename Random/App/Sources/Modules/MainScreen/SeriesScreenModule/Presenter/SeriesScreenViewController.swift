@@ -7,7 +7,6 @@
 
 import UIKit
 import FancyUIKit
-import FancyStyle
 
 /// Презентер
 final class SeriesScreenViewController: SeriesScreenModule {
@@ -50,9 +49,8 @@ final class SeriesScreenViewController: SeriesScreenModule {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     interactor.loadSeries()
-    setNavigationBar(isPlayTrailerEnabled: false)
   }
   
   override func finishFlow() {
@@ -63,7 +61,7 @@ final class SeriesScreenViewController: SeriesScreenModule {
 // MARK: - SeriesScreenViewOutput
 
 extension SeriesScreenViewController: SeriesScreenViewOutput {
-
+  
   func generateSeriesAction() {
     interactor.generateSeries()
   }
@@ -75,21 +73,21 @@ extension SeriesScreenViewController: SeriesScreenInteractorOutput {
   func startLoader() {
     moduleView.startLoader()
   }
-
+  
   func didReceiveSeries(model: SeriesScreenModel) {
     moduleView.updateContentWith(model: model)
-
+    
     if moduleView.getSeriesName() == nil {
       setNavigationBar(isPlayTrailerEnabled: false)
     } else {
       setNavigationBar(isPlayTrailerEnabled: true)
     }
   }
-
+  
   func somethingWentWrong() {
     moduleOutput?.somethingWentWrong()
   }
-
+  
   func stopLoader() {
     moduleView.stopLoader()
   }
@@ -106,9 +104,11 @@ private extension SeriesScreenViewController {
     let appearance = Appearance()
     
     navigationItem.largeTitleDisplayMode = .never
-
-    let playTrailerImageName = isPlayTrailerEnabled ? appearance.playTrailerImageEnabledName : appearance.playTrailerImageDisabledName
-
+    
+    let playTrailerImageName = isPlayTrailerEnabled
+    ? appearance.playTrailerImageEnabledName
+    : appearance.playTrailerImageDisabledName
+    
     let playTrailerButton = UIBarButtonItem.menuButton(self,
                                                        action: #selector(playTrailerAction),
                                                        imageName: playTrailerImageName,
@@ -124,21 +124,17 @@ private extension SeriesScreenViewController {
       moduleOutput?.somethingWentWrong()
       return
     }
-    
-    if interactor.isRuslocale() {
-      let url = factory.createYandexLinkWith(text: seriesName)
-      moduleOutput?.playTrailerActionWith(url: url)
-    } else {
-      let url = factory.createGoogleLinkWith(text: seriesName)
-      moduleOutput?.playTrailerActionWith(url: url)
-    }
+
+    let url = interactor.isRuslocale()
+    ? factory.createYandexLinkWith(text: seriesName)
+    : factory.createGoogleLinkWith(text: seriesName)
+    moduleOutput?.playTrailerActionWith(url: url)
     impactFeedback.impactOccurred()
   }
 }
 
 // MARK: - UIBarButtonItem
 
-//в фмльмах такое же расширение, дублировать?
 private extension UIBarButtonItem {
   static func menuButton(_ target: Any?,
                          action: Selector,
@@ -147,7 +143,7 @@ private extension UIBarButtonItem {
     let button = UIButton(type: .system)
     button.setImage(UIImage(named: imageName)?.withRenderingMode(.alwaysOriginal), for: .normal)
     button.addTarget(target, action: action, for: .touchUpInside)
-
+    
     let menuBarItem = UIBarButtonItem(customView: button)
     menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
     menuBarItem.customView?.heightAnchor.constraint(equalToConstant: size.height).isActive = true

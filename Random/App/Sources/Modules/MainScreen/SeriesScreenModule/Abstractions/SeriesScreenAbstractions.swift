@@ -5,7 +5,6 @@
 //  Created by Artem Pavlov on 13.11.2023.
 //
 
-import UIKit
 import FancyUIKit
 
 /// События которые отправляем из `SeriesScreenModule` в `Coordinator`

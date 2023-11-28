@@ -32,9 +32,6 @@ protocol SeriesScreenViewInput {
 
   /// Получить название сериала
   func getSeriesName() -> String?
-
-  /// Получить ссылку на трайлер сериала зарубежного
-  func gerPreviewEngtUrl() -> String?
 }
 
 /// Псевдоним протокола UIView & SeriesScreenViewInput
@@ -52,7 +49,6 @@ final class SeriesScreenView: SeriesScreenViewProtocol {
   private let seriesView = FilmView()
   private let activityIndicator = LottieAnimationView(name: Appearance().loaderImage)
   private var cacheSeriesName: String?
-  private var cacheTrailerEngSeriesUrl: String?
   
   // MARK: - Initialization
   
@@ -71,7 +67,6 @@ final class SeriesScreenView: SeriesScreenViewProtocol {
 
   func updateContentWith(model: SeriesScreenModel) {
     cacheSeriesName = model.name
-    cacheTrailerEngSeriesUrl = model.trailerUrl
     var backgroundImage: UIImage?
     if let imageData = model.image {
       backgroundImage = UIImage(data: imageData)
@@ -99,11 +94,7 @@ final class SeriesScreenView: SeriesScreenViewProtocol {
   }
 
   func getSeriesName() -> String? {
-    return cacheSeriesName
-  }
-
-  func gerPreviewEngtUrl() -> String? {
-    return cacheTrailerEngSeriesUrl
+    cacheSeriesName
   }
 }
 

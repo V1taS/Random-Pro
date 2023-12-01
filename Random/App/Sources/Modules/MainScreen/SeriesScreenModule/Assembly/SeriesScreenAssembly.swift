@@ -10,8 +10,6 @@ import Foundation
 /// Сборщик `SeriesScreen`
 final class SeriesScreenAssembly {
 
-//  public init() {}
-  
   /// Собирает модуль `SeriesScreen`
   /// - Parameter services: Сервисы приложения
   /// - Returns: Cобранный модуль `SeriesScreen`

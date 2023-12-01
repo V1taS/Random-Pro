@@ -60,14 +60,14 @@ final class SeriesScreenFactory: SeriesScreenFactoryInput {
 
   func createYandexLinkWith(text: String) -> String {
     let appearance = Appearance()
-    let request = "\(appearance.yandexRequest + appearance.watchRusTrailerText) \(text)"
+    let request = "\(appearance.yandexRequest + appearance.watchTrailer) \(text)"
     let formatRequest = request.replacingOccurrences(of: " ", with: "+")
     return formatRequest
   }
 
   func createGoogleLinkWith(text: String) -> String {
     let appearance = Appearance()
-    let request = "\(appearance.googleRequest + appearance.watchEngTrailerText) \(text)"
+    let request = "\(appearance.googleRequest + appearance.watchTrailer) \(text)"
     let formatRequest = request.replacingOccurrences(of: " ", with: "+")
     return formatRequest
   }
@@ -96,9 +96,7 @@ private extension SeriesScreenFactory {
 private extension SeriesScreenFactory {
   struct Appearance {
     let yandexRequest = "http://yandex.ru/search/?text="
-    let watchRusTrailerText = "смотреть трейлер"
-
     let googleRequest = "https://www.google.com/search?q="
-    let watchEngTrailerText = "watch trailer"
+    let watchTrailer = RandomStrings.Localizable.watchTrailer
   }
 }

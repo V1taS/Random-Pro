@@ -119,6 +119,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openSeries() {
+    moduleOutput?.openSeries()
+  }
+
   func openMemes() {
     moduleOutput?.openMemes()
   }

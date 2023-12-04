@@ -108,6 +108,9 @@ protocol MainScreenModuleOutput: AnyObject {
   
   /// Открыть раздел `Мемы`
   func openMemes()
+
+  /// Открыть раздел `Сериалы`
+  func openSeries()
   
   /// Была нажата кнопка (настройки)
   func settingButtonAction()

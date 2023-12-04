@@ -31,7 +31,8 @@ extension MainScreenModel {
     let imageFiltersDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPhotoFilter
     let filmsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomMovie
     let nickNameDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNickname
-    
+    let seriesDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomSeries
+
     let imageCardTeam = "person.circle"
     let titleCardTeam = RandomStrings.Localizable.teams
     
@@ -79,6 +80,9 @@ extension MainScreenModel {
     
     let imageFilms = "film"
     let titleFilms = RandomStrings.Localizable.movies
+
+    let imageSeries = "film.stack"
+    let titleSeries = RandomStrings.Localizable.series
     
     let imageNickName = "square.and.pencil"
     let titleNickName = RandomStrings.Localizable.nickname

@@ -81,6 +81,8 @@ enum DeepLinkType: CaseIterable, UserDefaultsCodable {
       return "settings_share_app"
     case .settingsfeedBackButton:
       return "settings_feed_back_button"
+    case .series:
+      return "series_screen"
     }
   }
   
@@ -187,4 +189,7 @@ enum DeepLinkType: CaseIterable, UserDefaultsCodable {
   
   /// Раздел мемов
   case memes
+
+  /// Раздел `Сериалы`
+  case series
 }

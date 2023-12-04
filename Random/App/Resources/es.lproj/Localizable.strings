@@ -25,6 +25,7 @@
 "can_generate_random_contact" = "se puede generar un contacto aleatorio de una lista";
 "can_generate_random_lottery_ticket" = "se puede generar un lote aleatorio para participar en la lotería";
 "can_generate_random_movie" = "se puede generar una película aleatoria";
+"can_generate_random_series" = "Se puede generar una serie aleatoria";
 "can_generate_random_password" = "se puede generar una contraseña aleatoria para el registro";
 "can_generate_random_photo_filter" = "se puede generar un filtro aleatorio para la foto";
 "can_participate_in_weekly_prize_draw" = "se Puede participar en el sorteo semanal";
@@ -216,6 +217,7 @@
 "select_coin_style" = "Seleccionar estilo de moneda";
 "select_icon" = "Seleccione un icono";
 "selen" = "Selenio";
+"series" = "Seriales";
 "september" = "Septiembre";
 "settings" = "Configuraciones";
 "seven_days_free" = "7 días gratis";
@@ -258,6 +260,7 @@
 "vendor_identifier" = "id del proveedor";
 "violet_lemon" = "violeta-limón";
 "walk" = "caminar";
+"watchTrailer" = "Ver tráiler";
 "wednesday" = "Miércoles";
 "yes" = "Sí";
 "yes_or_no" = "Sí o No";

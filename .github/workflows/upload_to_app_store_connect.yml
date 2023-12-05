@@ -154,9 +154,10 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python Scripts/send_telegram.py "😍 Release iOS ${{ env.MARKETING_VERSION }} 😍
+        python Scripts/send_telegram.py "🎲 Release **Random Pro** iOS ${{ env.MARKETING_VERSION }} 🎲
         Автор: ${{ github.actor }}
         Сборка №: ${{ env.MARKETING_VERSION }}/${{ env.CURRENT_PROJECT_VERSION }}
+        Проект: https://github.com/V1taS/Random-Pro
         
         Для тестирования релизных сборок отправьте свой Apple ID (example@iCloud.com) пользователю @V1taS
         "

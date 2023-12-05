@@ -27,7 +27,7 @@ jobs:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        python Scripts/send_telegram.py "🚀 New pull request created! 🚀
+        python Scripts/send_telegram.py "🎲 New pull request for **Random Pro** created! 🎲
         Author: ${{ github.actor }}
         Branch: ${{ github.head_ref }}
         Pull Request URL: ${{ github.event.pull_request.html_url }}"

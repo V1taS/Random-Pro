@@ -77,7 +77,8 @@ extension NumberScreenCoordinator: NumberScreenModuleOutput {
   }
   
   func resultLabelAction(text: String?) {
-    UIPasteboard.general.string = text
+    let stringWithoutSpaces = text?.replacingOccurrences(of: " ", with: "")
+    UIPasteboard.general.string = stringWithoutSpaces
     UIImpactFeedbackGenerator(style: .light).impactOccurred()
     services.notificationService.showPositiveAlertWith(title: Appearance().copiedToClipboard,
                                                        glyph: true,

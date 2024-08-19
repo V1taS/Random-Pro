@@ -72,11 +72,24 @@ protocol ApplicationServices {
   
   /// Сервис по реферальной программе
   var referalService: ReferalService { get }
+  
+  /// Сервис для работы с CloudKit для получения конфигурационных данных.
+  var cloudKitService: ICloudKitService { get }
 }
 
 // MARK: - Реализация ApplicationServices
 
 final class ApplicationServicesImpl: ApplicationServices {
+  
+  // MARK: - Singleton Instance
+  
+  static let shared = ApplicationServicesImpl()
+  
+  // MARK: - Private Initializer
+  
+  private init() {}
+  
+  // MARK: - Internal property
   
   // MARK: - Internal property
   
@@ -152,8 +165,13 @@ final class ApplicationServicesImpl: ApplicationServices {
     referalServiceImpl
   }
   
+  var cloudKitService: ICloudKitService {
+    cloudKitServiceImpl
+  }
+  
   // MARK: - Private property
   
+  let cloudKitServiceImpl = CloudKitService()
   let referalServiceImpl = ReferalServiceImpl()
   let storageServiceImpl = StorageServiceImpl()
   let deepLinkServiceImpl = DeepLinkServiceImpl()

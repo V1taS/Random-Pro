@@ -19,7 +19,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   // MARK: - Private property
   
   private var coordinator: RootCoordinatorProtocol?
-  private let services: ApplicationServices = ApplicationServicesImpl()
+  private let services: ApplicationServices = ApplicationServicesImpl.shared
   private var deepLimkURL: URL?
   
   // MARK: - Internal func

@@ -17,10 +17,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    FirebaseApp.configure()
+    
+    configurators().configure()
     if let configuration = YMMYandexMetricaConfiguration.init(apiKey: SecretsAPI.apiKeyYandexMetrica) {
       YMMYandexMetrica.activate(with: configuration)
     }
-    FirebaseApp.configure()
     Apphud.start(apiKey: SecretsAPI.apiKeyApphud)
     GADMobileAds.sharedInstance().start(completionHandler: nil)
     return true
@@ -69,5 +71,15 @@ extension AppDelegate {
     // Track received remote notification.
     // Method [YMMYandexMetrica activateWithApiKey:] should be called before using this method.
     YMPYandexMetricaPush.handleRemoteNotification(userInfo)
+  }
+}
+
+// MARK: - Private
+
+private extension AppDelegate {
+  func configurators() -> [Configurator] {
+    return [
+      ConfigurationValueConfigurator(services: ApplicationServicesImpl.shared)
+    ]
   }
 }

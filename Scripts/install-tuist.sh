@@ -22,8 +22,8 @@ else
     echo "zsh is already installed."
 fi
 
-# Скачивание Tuist 3.42.2 с GitHub
-echo "Downloading Tuist 3.42.2..."
+# Скачивание Tuist 3.16.0 с GitHub
+echo "Downloading Tuist 3.16.0..."
 curl -L https://github.com/tuist/tuist/releases/download/3.42.2/tuist.zip --output tuist.zip
 
 # Распаковка архива в системную директорию

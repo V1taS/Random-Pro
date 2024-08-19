@@ -6,8 +6,8 @@ public func getWidgetIOSInfoPlist() -> ProjectDescription.InfoPlist {
     "CFBundleDevelopmentRegion": .string("en"),
     "CFBundleDisplayName": .string("Random Pro Widget"),
     "CFBundleIdentifier": .string("\(reverseOrganizationName).\(appName).\(widgetName)"),
-    "CFBundleShortVersionString": .string("\(marketingVersion)"),
-    "CFBundleVersion": .string("\(currentProjectVersion)"),
+    "CFBundleShortVersionString": .string("$(MARKETING_VERSION)"),
+    "CFBundleVersion": .string("$(CURRENT_PROJECT_VERSION)"),
     "CFBundleExecutable": .string("$(EXECUTABLE_NAME)"),
     "CFBundleName": .string("YesNoWidget"),
     "NSExtension": .dictionary([

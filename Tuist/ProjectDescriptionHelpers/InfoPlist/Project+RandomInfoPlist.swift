@@ -9,10 +9,8 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
         "SKAdNetworkIdentifier": .string("\(identifiersGoogleSKAdNetwork)"),
       ])
     ]),
-    "MARKETING_VERSION": .string("\(marketingVersion)"),
-    "CFBundleShortVersionString": .string("\(marketingVersion)"),
-    "CFBundleVersion": .string("\(currentProjectVersion)"),
-    "CURRENT_PROJECT_VERSION": .string("\(currentProjectVersion)"),
+    "CFBundleShortVersionString": .string("$(MARKETING_VERSION)"),
+    "CFBundleVersion": .string("$(CURRENT_PROJECT_VERSION)"),
     "PRODUCT_BUNDLE_IDENTIFIER": .string("com.sosinvitalii.Random"),
     "DISPLAY_NAME": .string("Random Pro"),
     "UISupportsDocumentBrowser": .boolean(true),

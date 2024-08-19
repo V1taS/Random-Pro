@@ -16,9 +16,8 @@ public let targetWidgetIOSSettings: Settings = .settings(
     "SDKROOT": "iphoneos",
     "TARGETED_DEVICE_FAMILY": "1,2",
     "DEVELOPMENT_TEAM": "\(developmentTeam)",
-    "CODE_SIGN_STYLE": "Manual",
-    "CODE_SIGN_IDENTITY": "\(codeSignIdentity)",
-    "PROVISIONING_PROFILE_SPECIFIER": "\(provisioningProfileWidget)",
+    "CODE_SIGN_STYLE": "Automatic",
+    "CODE_SIGN_IDENTITY": "\(codeSignIdentity)"
   ],
   debug: [
     "DEBUG_INFORMATION_FORMAT": "dwarf",

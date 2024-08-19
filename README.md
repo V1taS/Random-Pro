@@ -94,32 +94,6 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
 ```
 
-Restart terminal.
-
-## Installing ruby
-
-```
-brew install rbenv
-```
-
-Restart terminal. Install ruby and аpply it:
-
-```
-rbenv install
-```
-
-```
-eval "$(rbenv init -)"
-```
-
-```
-rbenv global
-```
-
-Check current ruby version.
-```
-ruby -v
-```
 [![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io)
 [![Fastlane badge](https://img.shields.io/badge/Powered%20by-Fastlane-orange)](https://fastlane.tools)
 [![Viper badge](https://img.shields.io/badge/Architecture-Viper-green)](https://github.com/strongself/The-Book-of-VIPER)

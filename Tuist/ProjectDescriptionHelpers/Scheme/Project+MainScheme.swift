@@ -11,7 +11,9 @@ public let mainIOSScheme = Scheme(
       "OS_ACTIVITY_MODE": "disable"
     ])
   ),
-  archiveAction: ArchiveAction.archiveAction(configuration: .release),
+  archiveAction: ArchiveAction.archiveAction(
+    configuration: .release
+  ),
   profileAction: ProfileAction.profileAction(configuration: .release),
   analyzeAction: AnalyzeAction.analyzeAction(configuration: .debug)
 )

@@ -112,7 +112,7 @@ private extension AppUnavailableView {
     titleLabel.textAlignment = .center
     titleLabel.text = RandomStrings.Localizable.wowRandomProOnAShortTechBreak
     
-    feedBackButton.setTitle(Appearance().addressRecipients, for: .normal)
+    feedBackButton.setTitle(SecretsAPI.supportMail, for: .normal)
     feedBackButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
     feedBackButton.titleLabel?.font = fancyFont.primaryRegular16
     feedBackButton.addTarget(self,
@@ -133,6 +133,5 @@ private extension AppUnavailableView {
     let inset: CGFloat = 16
     let stubImage = RandomAsset.appUnavailablePlug.name
     let animationSpeed: CGFloat = 0.5
-    let addressRecipients = "Random_Pro_support@iCloud.com"
   }
 }

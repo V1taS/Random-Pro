@@ -38,6 +38,7 @@ final class ConfigurationValueConfigurator: Configurator {
     getADVList()
     getIsHiddenToggleForSection()
     getIsToggleForFeature()
+    getSupportMail()
   }
 }
 
@@ -71,6 +72,12 @@ private extension ConfigurationValueConfigurator {
   func getFancyBackend() {
     if let value = getConfigurationValue(forKey: Constants.fancyBackendKey) {
       SecretsAPI.fancyBackend = value
+    }
+  }
+  
+  func getSupportMail() {
+    if let value = getConfigurationValue(forKey: Constants.supportMailKey) {
+      SecretsAPI.supportMail = value
     }
   }
   
@@ -180,6 +187,7 @@ private enum Constants {
   static let apiKeyKinopoiskKey = "apiKeyKinopoisk"
   static let apiKeyMostPopularMoviesKey = "apiKeyMostPopularMovies"
   static let fancyBackendKey = "fancyBackend"
+  static let supportMailKey = "supportMail"
   
   static let premiumFeatureTogglesKey = "premiumFeatureToggles"
   static let advListKey = "advList"

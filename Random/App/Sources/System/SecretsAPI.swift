@@ -14,6 +14,7 @@ struct SecretsAPI {
   static var apiKeyKinopoisk = ""
   static var apiKeyMostPopularMovies = ""
   static var fancyBackend = ""
+  static var supportMail = ""
   
   static var premiumFeatureToggles: [PremiumFeatureToggleModel] = []
   static var advList: [String: String] = [:]

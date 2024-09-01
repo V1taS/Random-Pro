@@ -91,7 +91,7 @@ extension AppUnavailableCoordinator: AppUnavailableModuleOutput {
 """
       
       mail.mailComposeDelegate = self
-      mail.setToRecipients([appearance.addressRecipients])
+      mail.setToRecipients([SecretsAPI.supportMail])
       mail.setSubject(appearance.subjectRecipients)
       mail.setMessageBody(messageBody, isHTML: false)
       module?.present(mail, animated: true)
@@ -119,7 +119,6 @@ extension AppUnavailableCoordinator: MFMailComposeViewControllerDelegate {
 
 private extension AppUnavailableCoordinator {
   struct Appearance {
-    let addressRecipients = "Random_Pro_support@iCloud.com"
     let subjectRecipients = RandomStrings.Localizable.randomProAppSupport
     let identifierForVendor = RandomStrings.Localizable.vendorIdentifier
     let systemVersion = RandomStrings.Localizable.systemVersion

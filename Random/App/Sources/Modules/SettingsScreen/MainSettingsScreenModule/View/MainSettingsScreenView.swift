@@ -268,7 +268,7 @@ private extension MainSettingsScreenView {
     feedBackLabel.font = fancyFont.primaryRegular16
     feedBackLabel.text = "\(appearance.feedbackButtonTitle):"
     
-    feedBackButton.setTitle(appearance.addressRecipients, for: .normal)
+    feedBackButton.setTitle(SecretsAPI.supportMail, for: .normal)
     feedBackButton.setTitleColor(fancyColor.only.primaryBlue, for: .normal)
     feedBackButton.titleLabel?.font = fancyFont.primaryRegular16
     feedBackButton.addTarget(self,
@@ -313,7 +313,6 @@ private extension MainSettingsScreenView {
     let minInset: CGFloat = 4
     
     let feedbackButtonTitle = RandomStrings.Localizable.feedback
-    let addressRecipients = "Random_Pro_support@iCloud.com"
 
     let systemTheme = RandomStrings.Localizable.auto
     let blackTheme = RandomStrings.Localizable.dark

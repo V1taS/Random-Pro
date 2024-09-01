@@ -55,7 +55,6 @@ final class MainScreenViewController: MainScreenModule {
     updateSections()
     setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
-    getReferalScreen()
     moduleOutput?.presentOnboardingScreen()
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(didBecomeActiveNotification),
@@ -258,24 +257,7 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 
 // MARK: - Private
 
-private extension MainScreenViewController {
-  func getReferalScreen() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-      self.interactor.isAutoShowReferalPresentationAgain { [weak self] isShow in
-        guard isShow else {
-          return
-        }
-        
-        self?.interactor.returnModel { [weak self] mainModel in
-          guard !mainModel.isPremium else {
-            return
-          }
-          self?.moduleOutput?.didReceiveReferalScreen()
-        }
-      }
-    }
-  }
-  
+private extension MainScreenViewController {  
   func updateSections() {
     interactor.getContent { [weak self] in
       self?.interactor.validatePurchase { [weak self] in

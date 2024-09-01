@@ -8,7 +8,6 @@
 
 import Foundation
 import YandexMobileMetrica
-import Firebase
 import FancyNetwork
 
 protocol MetricsService {
@@ -29,8 +28,6 @@ final class MetricsServiceImpl: MetricsService {
   // MARK: - Internal func
   
   func track(event: MetricsSections) {
-    Analytics.logEvent(event.rawValue, parameters: nil)
-    
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
       // swiftlint:disable:next no_print
       print("REPORT ERROR: %@", error.localizedDescription)
@@ -38,8 +35,6 @@ final class MetricsServiceImpl: MetricsService {
   }
   
   func track(event: MetricsSections, properties: [String: String]) {
-    Analytics.logEvent(event.rawValue, parameters: properties)
-    
     YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
       // swiftlint:disable:next no_print
       print("REPORT ERROR: %@", error.localizedDescription)

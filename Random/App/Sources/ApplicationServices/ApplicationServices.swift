@@ -52,9 +52,6 @@ protocol ApplicationServices {
   /// Сервис проверки обновлений приложения
   var updateAppService: UpdateAppService { get }
   
-  /// Сервис авторизации пользователей
-  var authenticationService: AuthenticationService { get }
-  
   /// Сервис облачной базы данных
   var cloudDatabaseService: CloudDatabaseService { get }
   
@@ -69,9 +66,6 @@ protocol ApplicationServices {
 
   /// Сервис онбоардинг экрана
   var onboardingService: OnboardingService { get }
-  
-  /// Сервис по реферальной программе
-  var referalService: ReferalService { get }
   
   /// Сервис для работы с CloudKit для получения конфигурационных данных.
   var cloudKitService: ICloudKitService { get }
@@ -136,11 +130,7 @@ final class ApplicationServicesImpl: ApplicationServices {
   var updateAppService: UpdateAppService {
     updateAppServiceImpl
   }
-  
-  var authenticationService: AuthenticationService {
-    authenticationServiceImpl
-  }
-  
+
   var cloudDatabaseService: CloudDatabaseService {
     cloudDatabaseServiceImpl
   }
@@ -161,10 +151,6 @@ final class ApplicationServicesImpl: ApplicationServices {
     onboardingServiceImpl
   }
   
-  var referalService: ReferalService {
-    referalServiceImpl
-  }
-  
   var cloudKitService: ICloudKitService {
     cloudKitServiceImpl
   }
@@ -172,7 +158,6 @@ final class ApplicationServicesImpl: ApplicationServices {
   // MARK: - Private property
   
   let cloudKitServiceImpl = CloudKitService()
-  let referalServiceImpl = ReferalServiceImpl()
   let storageServiceImpl = StorageServiceImpl()
   let deepLinkServiceImpl = DeepLinkServiceImpl()
   let networkServiceImpl = NetworkServiceImpl()
@@ -181,7 +166,6 @@ final class ApplicationServicesImpl: ApplicationServices {
   let timerServiceImpl = TimerServiceImpl()
   let appPurchasesServiceImpl = AppPurchasesServiceImpl()
   let cloudDatabaseServiceImpl = CloudDatabaseServiceImpl()
-  let authenticationServiceImpl = AuthenticationServiceImpl()
   let updateAppServiceImpl = UpdateAppServiceImpl()
   let featureToggleServicesImpl = FeatureToggleServicesImpl()
   let keyboardServiceImpl = KeyboardServiceImpl()

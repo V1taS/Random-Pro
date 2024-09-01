@@ -19,9 +19,6 @@ enum FeatureToggleType: String {
   /// Если true то пользователи видео уведомление сверху экрана, что вышла новая версия приложения
   case isUpdateAvailable
   
-  /// Функционал приведи 5-ти друзей и получи премиум на 1 устройство
-  case isPremiumWithFriends
-  
   /// Погупка навсегда (Распродажа)
   case isLifetimeSale
 }

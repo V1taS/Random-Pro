@@ -35,12 +35,6 @@ let project = Project(
         .external(name: "KeychainSwift"),
         .external(name: "YandexMobileMetricaPush"),
         .external(name: "YandexMobileMetrica"),
-        .external(name: "FirebaseDynamicLinks"),
-        .external(name: "FirebaseAnalytics"),
-        .external(name: "FirebaseFirestore"),
-        .external(name: "FirebaseAuth"),
-        .external(name: "FirebaseRemoteConfig"),
-        .external(name: "GoogleMobileAds"),
         .external(name: "RandomWheel"),
         .external(name: "WelcomeSheet")
       ],

@@ -8,7 +8,6 @@
 import UIKit
 import AppTrackingTransparency
 import YandexMobileMetricaPush
-import FirebaseDynamicLinks
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -45,6 +44,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   func sceneDidBecomeActive(_ scene: UIScene) {
+    configurators().configure()
+    
     if let deepLimkURL {
       services.deepLinkService.eventHandlingWith(deepLimkURL: deepLimkURL)
       self.deepLimkURL = nil
@@ -60,7 +61,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
     }
     coordinator?.sceneDidBecomeActive()
-    services.featureToggleServices.fetchRemoteConfig { _ in }
   }
   
   func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
@@ -83,5 +83,11 @@ private extension SceneDelegate {
     }
     
     self.deepLimkURL = dynamiclink
+  }
+  
+  func configurators() -> [Configurator] {
+    return [
+      ConfigurationValueConfigurator(services: ApplicationServicesImpl.shared)
+    ]
   }
 }

@@ -40,10 +40,8 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   private let window: UIWindow?
   
   // Coordinators
-  private lazy var advGoogleScreenCoordinator = ADVGoogleScreenCoordinator(navigationController, services)
   private var appUnavailableCoordinator: AppUnavailableCoordinator?
   private var forceUpdateAppCoordinator: ForceUpdateAppCoordinator?
-  private var premiumWithFriendsCoordinator: PremiumWithFriendsCoordinator?
   private var premiumScreenCoordinator: PremiumScreenCoordinator?
   private var onboardingScreenCoordinator: OnboardingScreenCoordinator?
   private var memesScreenCoordinator: MemesScreenCoordinator?
@@ -106,11 +104,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     }
   }
   
-  func sceneDidBecomeActive() {
-    startDeepLink()
-    startDynamicLink()
-    checkReferals()
-  }
+  func sceneDidBecomeActive() {}
 }
 
 // MARK: - MainScreenModuleOutput
@@ -134,9 +128,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   func mainScreenModuleDidAppear() {
     services.permissionService.requestNotification { _ in }
     salePremium()
-  }
-  func didReceiveReferalScreen() {
-    openPremiumWithFriendsCoordinator()
   }
   
   func presentOnboardingScreen() {
@@ -652,21 +643,6 @@ private extension MainScreenCoordinator {
     })
   }
   
-  func checkReferals() {
-    services.referalService.getSelfInfo { [weak self] result in
-      if let referals = result?.referals, referals.count == Appearance().refCountMax {
-        self?.mainScreenModule?.savePremium(true)
-        self?.services.referalService.freePremium { _ in }
-        self?.services.notificationService.showPositiveAlertWith(
-          title: Appearance().premiumAccessActivatedTitle,
-          glyph: true,
-          timeout: nil,
-          active: {}
-        )
-      }
-    }
-  }
-  
   func forceUpdateAvailable() {
 #if !DEBUG
     services.updateAppService.checkIsUpdateAvailable(isOneCheckVersion: false) { [weak self] result in
@@ -705,33 +681,6 @@ private extension MainScreenCoordinator {
     
     services.metricsService.track(event: .appUnavailable)
 #endif
-  }
-  
-  func openPremiumWithFriendsCoordinator() {
-    let premiumWithFriendsCoordinator = PremiumWithFriendsCoordinator(navigationController,
-                                                                      services)
-    self.premiumWithFriendsCoordinator = premiumWithFriendsCoordinator
-    premiumWithFriendsCoordinator.output = self
-    premiumWithFriendsCoordinator.selectPresentType(.present)
-    premiumWithFriendsCoordinator.start()
-    premiumWithFriendsCoordinator.finishFlow = { [weak self] in
-      self?.premiumWithFriendsCoordinator = nil
-    }
-    
-    services.metricsService.track(event: .premiumWithFriends)
-  }
-  
-  func setupAdvertising() {
-    var buttonCounterService = services.buttonCounterService
-    
-    buttonCounterService.clickResponse = { [weak self] clickCount in
-      self?.mainScreenModule?.returnModel(completion: { mainModel in
-        guard !mainModel.isPremium, clickCount.isMultiple(of: Appearance().advertisingCount) else {
-          return
-        }
-        self?.advGoogleScreenCoordinator.start()
-      })
-    }
   }
   
   func openPremium(isLifetimeSale: Bool = false) {
@@ -787,131 +736,6 @@ private extension MainScreenCoordinator {
       }
       window.overrideUserInterfaceStyle = isDarkTheme ? .dark : .light
     }
-  }
-  
-  func startDynamicLink() {
-    guard let deepLinkType = services.deepLinkService.dynamicLinkType else {
-      return
-    }
-    
-    switch deepLinkType {
-    case let .invite(idFriend):
-      services.referalService.saveInfo(friendID: idFriend) { [weak self] result in
-        switch result {
-        case .success:
-          self?.services.notificationService.showPositiveAlertWith(
-            title: "\(RandomStrings.Localizable.yourFriendWillReceiveABonus) 🎁",
-            glyph: true,
-            timeout: nil,
-            active: {}
-          )
-        case .failure:
-          break
-        }
-      }
-    case .freePremium:
-      services.referalService.freePremium { [weak self] result in
-        switch result {
-        case .success:
-          self?.mainScreenModule?.savePremium(true)
-          self?.services.notificationService.showPositiveAlertWith(
-            title: Appearance().premiumAccessActivatedTitle,
-            glyph: true,
-            timeout: nil,
-            active: {}
-          )
-        case .failure:
-          break
-        }
-      }
-    }
-    
-    var deepLinkService: DeepLinkService = services.deepLinkService
-    deepLinkService.dynamicLinkType = nil
-    services.metricsService.track(event: .deepLinks,
-                                  properties: ["dynamicLink": deepLinkType.rawValue])
-  }
-  
-  func startDeepLink() {
-    guard let deepLinkType = services.deepLinkService.deepLinkType else {
-      return
-    }
-    
-    switch deepLinkType {
-    case .teams:
-      openTeams()
-    case .number:
-      openNumber()
-    case .yesOrNo:
-      openYesOrNo()
-    case .letter:
-      openCharacter()
-    case .list:
-      openList()
-    case .coin:
-      openCoin()
-    case .cube:
-      openCube()
-    case .dateAndTime:
-      openDateAndTime()
-    case .lottery:
-      openLottery()
-    case .contact:
-      openContact()
-    case .password:
-      openPassword()
-    case .colors:
-      openColors()
-    case .bottle:
-      openBottle()
-    case .rockPaperScissors:
-      openRockPaperScissors()
-    case .imageFilters:
-      openImageFilters()
-    case .films:
-      openFilms()
-    case .series:
-      openSeries()
-    case .nickName:
-      openNickName()
-    case .names:
-      openNames()
-    case .congratulations:
-      openCongratulations()
-    case .goodDeeds:
-      openGoodDeeds()
-    case .riddles:
-      openRiddles()
-    case .joke:
-      openJoke()
-    case .gifts:
-      openGifts()
-    case .slogans:
-      openSlogans()
-    case .truthOrDare:
-      openTruthOrDare()
-    case .quotes:
-      openQuotes()
-    case .fortuneWheel:
-      openFortuneWheel()
-    case .memes:
-      openMemes()
-    case .updateApp:
-      guard let url = Appearance().shareAppUrl,
-            UIApplication.shared.canOpenURL(url) else {
-        return
-      }
-      UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    case .settingsSections, .settingsIconSelection, .settingsPremiumSection,
-        .settingsShareApp, .settingsfeedBackButton:
-      settingButtonAction()
-      settingsScreenCoordinator?.startDeepLink()
-    }
-    
-    var deepLinkService: DeepLinkService = services.deepLinkService
-    deepLinkService.deepLinkType = nil
-    services.metricsService.track(event: .deepLinks,
-                                  properties: ["screen": deepLinkType.deepLinkEndPoint])
   }
   
   func rateApp() {

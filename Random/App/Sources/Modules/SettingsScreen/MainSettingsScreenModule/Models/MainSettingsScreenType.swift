@@ -69,8 +69,5 @@ enum MainSettingsScreenType {
 
     /// Секция поделиться
     case shareSections
-    
-    /// Реферальная программа
-    case premiumWithFriends
   }
 }

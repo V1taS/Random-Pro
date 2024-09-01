@@ -23,8 +23,7 @@ protocol MainSettingsScreenFactoryInput {
   /// Создаем модельку для таблички
   ///  - Parameters:
   ///   - model: Модель данных
-  ///   - isPremiumWithFriends: Реферальная программа
-  func createListModelWith(model: MainSettingsScreenModel, isPremiumWithFriends: Bool)
+  func createListModelWith(model: MainSettingsScreenModel)
 }
 
 /// Фабрика
@@ -36,8 +35,7 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
   
   // MARK: - Internal func
   
-  func createListModelWith(model: MainSettingsScreenModel,
-                           isPremiumWithFriends: Bool) {
+  func createListModelWith(model: MainSettingsScreenModel) {
     DispatchQueue.global(qos: .userInitiated).async { [weak self] in
       guard let self else {
         return
@@ -99,17 +97,6 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
         type: .premiumSections
       ))
       tableViewModels.append(.divider)
-      
-      if isPremiumWithFriends {
-        tableViewModels.append(.squircleImageAndLabelWithChevronCell(
-          squircleBGColors: [fancyColor.only.primaryRed,
-                             fancyColor.only.primaryPink],
-          leftSideImageSystemName: appearance.premiumWithFriendsImageSystemName,
-          title: appearance.premiumWithFriendsTitle,
-          type: .premiumWithFriends
-        ))
-        tableViewModels.append(.divider)
-      }
       
       tableViewModels.append(.squircleImageAndLabelWithChevronCell(
         squircleBGColors: [fancyColor.only.secondaryGray,

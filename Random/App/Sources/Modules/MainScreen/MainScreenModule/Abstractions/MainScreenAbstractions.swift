@@ -22,9 +22,6 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Главный экран будет показан
   func mainScreenModuleWillAppear()
   
-  /// Открыть экран с реферальной программой
-  func didReceiveReferalScreen()
-  
   /// Открыть раздел `Number`
   func openNumber()
   

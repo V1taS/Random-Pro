@@ -6,8 +6,6 @@
 //  Copyright © 2022 SosinVitalii.com. All rights reserved.
 //
 
-import FirebaseFirestore
-import FirebaseRemoteConfig
 import UIKit
 
 protocol FeatureToggleServices {
@@ -23,104 +21,55 @@ protocol FeatureToggleServices {
   
   /// Получить премиум
   func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void)
-  
-  /// Получить удаленные тогглы
-  func fetchRemoteConfig(completion: @escaping (_ error: Error?) -> Void)
-  
-  /// Тогглы были получены
-  var didReceiveToggle: (() -> Void)? { get set }
 }
 
 final class FeatureToggleServicesImpl: FeatureToggleServices {
-  
-  // MARK: - Internal property
-  
-  var didReceiveToggle: (() -> Void)?
-  
-  // MARK: - Private property
-  
-  private let cloudDataBase = Firestore.firestore()
-  private let remoteConfig: RemoteConfig = {
-    let remoteConfig = RemoteConfig.remoteConfig()
-    let settings = RemoteConfigSettings()
-    settings.minimumFetchInterval = 0
-    remoteConfig.configSettings = settings
-    return remoteConfig
-  }()
   
   // MARK: - Internal func
   
   func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void) {
     let appearance = Appearance()
     
-    cloudDataBase.collection(appearance.premiumFeatureTogglesKey).getDocuments { (querySnapshot, error) in
-      guard let documents = querySnapshot?.documents,
-            let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString,
-            error == nil else {
-        DispatchQueue.main.async {
-          completion(nil)
-        }
-        return
-      }
-      
-#if DEBUG
-      // swiftlint:disable:next no_print
-      print("IdentifierForVendor: \(identifierForVendor)")
-#endif
-      
-      for document in documents {
-        let model = PremiumFeatureToggleModel(dictionary: document.data())
-        guard let id = model.id,
-              let isPremium = model.isPremium,
-              identifierForVendor == id else {
-          continue
-        }
-        
-        DispatchQueue.main.async {
-          completion(isPremium)
-        }
-        return
-      }
+    guard let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString else {
       DispatchQueue.main.async {
         completion(nil)
       }
       return
     }
+    
+#if DEBUG
+    // swiftlint:disable:next no_print
+    print("IdentifierForVendor: \(identifierForVendor)")
+#endif
+    
+    for model in SecretsAPI.premiumFeatureToggles {
+      guard let id = model.id,
+            let isPremium = model.isPremium,
+            identifierForVendor == id else {
+        continue
+      }
+      
+      DispatchQueue.main.async {
+        completion(isPremium)
+      }
+      return
+    }
+    DispatchQueue.main.async {
+      completion(nil)
+    }
+    return
   }
   
   func getLabelsFor(section: MainScreenModel.SectionType) -> String {
-    remoteConfig.configValue(forKey: "\(section.rawValue)_adv").stringValue ?? ""
+    SecretsAPI.advList[section.rawValue] ?? ""
   }
   
   func isHiddenToggleFor(section: MainScreenModel.SectionType) -> Bool {
-    remoteConfig.configValue(forKey: section.rawValue).boolValue
+    SecretsAPI.isHiddenToggleForSection[section.rawValue] ?? true
   }
   
   func isToggleFor(feature: FeatureToggleType) -> Bool {
-    remoteConfig.configValue(forKey: feature.rawValue).boolValue
-  }
-  
-  func fetchRemoteConfig(completion: @escaping (_ error: Error?) -> Void) {
-    remoteConfig.fetch { [weak self] (status, error) in
-      if status == .success {
-        self?.remoteConfig.activate { _, error in
-          if let error = error {
-            DispatchQueue.main.async {
-              completion(error)
-            }
-          } else {
-            DispatchQueue.main.async {
-              completion(nil)
-              self?.didReceiveToggle?()
-            }
-          }
-        }
-      } else {
-        DispatchQueue.main.async {
-          completion(error)
-        }
-      }
-    }
+    SecretsAPI.isToggleForFeature[feature.rawValue] ?? false
   }
 }
 

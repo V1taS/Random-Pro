@@ -21,6 +21,8 @@ public protocol ICloudKitService {
 }
 
 public final class CloudKitService: ICloudKitService {
+  private let timeoutInterval: TimeInterval = 10.0
+  
   /// Инициализирует новый экземпляр CloudKitService.
   public init() {}
   
@@ -30,7 +32,15 @@ public final class CloudKitService: ICloudKitService {
     let predicate = NSPredicate(value: true)
     let query = CKQuery(recordType: "Config", predicate: predicate)
     
+    let timeoutWorkItem = DispatchWorkItem {
+      completion(.failure(NSError(domain: "CloudKitService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Request timed out"])))
+    }
+    
+    DispatchQueue.global().asyncAfter(deadline: .now() + timeoutInterval, execute: timeoutWorkItem)
+    
     publicDatabase.perform(query, inZoneWith: nil) { records, error in
+      timeoutWorkItem.cancel()  // отменяем тайм-аут если запрос завершился до истечения времени
+      
       if let error = error {
         completion(.failure(error))
         return

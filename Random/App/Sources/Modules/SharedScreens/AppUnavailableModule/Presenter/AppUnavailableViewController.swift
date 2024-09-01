@@ -92,15 +92,10 @@ private extension AppUnavailableViewController {
   
   @objc
   func didBecomeActiveNotification() {
-    services.featureToggleServices.fetchRemoteConfig { [weak self] _ in
-      guard let self else {
-        return
-      }
-      let isAppBroken = self.services.featureToggleServices.isToggleFor(feature: .isAppBroken)
-      if !isAppBroken {
-        self.moduleOutput?.closeModuleAction()
-        self.moduleOutput?.moduleClosed()
-      }
+    let isAppBroken = self.services.featureToggleServices.isToggleFor(feature: .isAppBroken)
+    if !isAppBroken {
+      self.moduleOutput?.closeModuleAction()
+      self.moduleOutput?.moduleClosed()
     }
   }
 }

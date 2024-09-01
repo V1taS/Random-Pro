@@ -11,11 +11,7 @@ import UIKit
 protocol MainSettingsScreenInteractorOutput: AnyObject {}
 
 /// События которые отправляем от Presenter к Interactor
-protocol MainSettingsScreenInteractorInput {
-  
-  /// Получить тоггл реферальной программы
-  func getPremiumWithFriendsToggle(completion: ((Bool) -> Void)?)
-}
+protocol MainSettingsScreenInteractorInput {}
 
 /// Интерактор
 final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
@@ -43,18 +39,6 @@ final class MainSettingsScreenInteractor: MainSettingsScreenInteractorInput {
   init(services: ApplicationServices) {
     featureToggleServices = services.featureToggleServices
     storageService = services.storageService
-  }
-  
-  // MARK: - Internal func
-  
-  func getPremiumWithFriendsToggle(completion: ((Bool) -> Void)?) {
-    let isPremiumWithFriends = featureToggleServices.isToggleFor(feature: .isPremiumWithFriends)
-    let isPremium = mainScreenModel?.isPremium ?? false
-    if isPremiumWithFriends, !isPremium {
-      completion?(true)
-    } else {
-      completion?(false)
-    }
   }
 }
 

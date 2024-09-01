@@ -91,15 +91,10 @@ private extension ForceUpdateAppViewController {
   
   @objc
   func didBecomeActiveNotification() {
-    services.featureToggleServices.fetchRemoteConfig { [weak self] _ in
-      guard let self else {
-        return
-      }
-      let isForceUpdateAvailable = self.services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable)
-      if !isForceUpdateAvailable {
-        self.moduleOutput?.closeModuleAction()
-        self.moduleOutput?.moduleClosed()
-      }
+    let isForceUpdateAvailable = self.services.featureToggleServices.isToggleFor(feature: .isForceUpdateAvailable)
+    if !isForceUpdateAvailable {
+      self.moduleOutput?.closeModuleAction()
+      self.moduleOutput?.moduleClosed()
     }
   }
 }

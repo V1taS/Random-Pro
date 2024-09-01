@@ -23,10 +23,6 @@ let dependencies = Dependencies(
       .remote(url: "https://github.com/apphud/ApphudSDK",
               requirement: .exact("3.1.0")),
       
-      .remote(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
-              requirement: .exact("10.5.0")),
-      .remote(url: "https://github.com/firebase/firebase-ios-sdk.git",
-              requirement: .exact("10.17.0")),
       .remote(url: "https://github.com/MAJKFL/Welcome-Sheet",
               requirement: .exact("1.2.0")),
     ]

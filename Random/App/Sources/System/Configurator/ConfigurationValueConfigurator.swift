@@ -34,6 +34,10 @@ final class ConfigurationValueConfigurator: Configurator {
     getKinopoisk()
     getMostPopularMovies()
     getFancyBackend()
+    getPremiumFeatureToggles()
+    getADVList()
+    getIsHiddenToggleForSection()
+    getIsToggleForFeature()
   }
 }
 
@@ -70,8 +74,44 @@ private extension ConfigurationValueConfigurator {
     }
   }
   
+  func getPremiumFeatureToggles() {
+    let decoder = JSONDecoder()
+    if let jsonString = getConfigurationValue(forKey: Constants.premiumFeatureTogglesKey),
+       let jsonData = jsonString.data(using: .utf8),
+       let models = try? decoder.decode([PremiumFeatureToggleModel].self, from: jsonData) {
+      SecretsAPI.premiumFeatureToggles = models
+    }
+  }
+  
+  func getADVList() {
+    let decoder = JSONDecoder()
+    if let jsonString = getConfigurationValue(forKey: Constants.advListKey),
+       let jsonData = jsonString.data(using: .utf8),
+       let models = try? decoder.decode([String: String].self, from: jsonData) {
+      SecretsAPI.advList = models
+    }
+  }
+  
+  func getIsHiddenToggleForSection() {
+    let decoder = JSONDecoder()
+    if let jsonString = getConfigurationValue(forKey: Constants.isHiddenToggleForSectionKey),
+       let jsonData = jsonString.data(using: .utf8),
+       let models = try? decoder.decode([String: Bool].self, from: jsonData) {
+      SecretsAPI.isHiddenToggleForSection = models
+    }
+  }
+  
+  func getIsToggleForFeature() {
+    let decoder = JSONDecoder()
+    if let jsonString = getConfigurationValue(forKey: Constants.isToggleForFeatureKey),
+       let jsonData = jsonString.data(using: .utf8),
+       let models = try? decoder.decode([String: Bool].self, from: jsonData) {
+      SecretsAPI.isToggleForFeature = models
+    }
+  }
+  
   func getConfigurationValue(forKey key: String) -> String? {
-    if let value = cloudKitStorage?[key] {
+    if let value = cloudKitStorage?[key], !isMoreThan15MinutesPassed() {
       return value
     }
     
@@ -85,7 +125,7 @@ private extension ConfigurationValueConfigurator {
       }
       
       switch result {
-      case .success(let value):
+      case let .success(value):
         if let value = value {
           retrievedValue = value
           var cloudKitStorageUpdated = cloudKitStorage ?? [:]
@@ -96,6 +136,7 @@ private extension ConfigurationValueConfigurator {
         print("Ошибка получения значения конфигурации: \(error.localizedDescription)")
       }
       
+      saveDateToStorage()
       semaphore.signal()
     }
     
@@ -103,6 +144,31 @@ private extension ConfigurationValueConfigurator {
     semaphore.wait()
     
     return retrievedValue
+  }
+  
+  // Сохраняет текущую дату в сторадж по ключу
+  func saveDateToStorage() {
+    let currentDate = Date()
+    let dateFormatter = ISO8601DateFormatter()
+    let dateString = dateFormatter.string(from: currentDate)
+    
+    var cloudKitStorageUpdated = cloudKitStorage ?? [:]
+    cloudKitStorageUpdated[Constants.oneDayPassKey] = dateString
+    cloudKitStorage = cloudKitStorageUpdated
+  }
+  
+  // Получает дату из стораджа по ключу
+  func getDateFromStorage() -> Date? {
+    guard let dateString = cloudKitStorage?[Constants.oneDayPassKey] else { return nil }
+    let dateFormatter = ISO8601DateFormatter()
+    return dateFormatter.date(from: dateString)
+  }
+  
+  // Проверяет, что прошло больше 15 минут с сохраненной даты
+  func isMoreThan15MinutesPassed() -> Bool {
+      guard let storedDate = getDateFromStorage() else { return true }
+      let timeInterval = Date().timeIntervalSince(storedDate)
+      return timeInterval > 15 * 60
   }
 }
 
@@ -115,5 +181,11 @@ private enum Constants {
   static let apiKeyMostPopularMoviesKey = "apiKeyMostPopularMovies"
   static let fancyBackendKey = "fancyBackend"
   
+  static let premiumFeatureTogglesKey = "premiumFeatureToggles"
+  static let advListKey = "advList"
+  static let isHiddenToggleForSectionKey = "isHiddenToggleForSection"
+  static let isToggleForFeatureKey = "isToggleForFeature"
+  
   static let cloudKitServiceKey = "CloudKitServiceKey"
+  static let oneDayPassKey = "OneDayPassKey"
 }

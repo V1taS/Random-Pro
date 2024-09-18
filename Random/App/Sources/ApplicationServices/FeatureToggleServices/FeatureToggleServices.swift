@@ -28,8 +28,6 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
   // MARK: - Internal func
   
   func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void) {
-    let appearance = Appearance()
-    
     guard let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString else {
       DispatchQueue.main.async {
         completion(nil)

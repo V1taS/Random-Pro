@@ -87,6 +87,21 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     self.window = window
     self.navigationController = navigationController
     self.services = services
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(appDidEnterForeground),
+      name: UIApplication.willEnterForegroundNotification,
+      object: nil
+    )
+  }
+  
+  deinit {
+    NotificationCenter.default.removeObserver(
+      self,
+      name: UIApplication.willEnterForegroundNotification,
+      object: nil
+    )
   }
   
   // MARK: - Internal func
@@ -96,6 +111,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
     self.mainScreenModule = mainScreenModule
     self.mainScreenModule?.moduleOutput = self
     
+    incrementCounterOnScreenOpen()
     checkDarkMode()
     navigationController.pushViewController(mainScreenModule, animated: true)
     
@@ -105,6 +121,13 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   }
   
   func sceneDidBecomeActive() {}
+  
+  // Метод, который будет вызван при переходе в foreground
+  @objc
+  func appDidEnterForeground() {
+    salePremium()
+    incrementCounterOnScreenOpen()
+  }
 }
 
 // MARK: - MainScreenModuleOutput
@@ -127,7 +150,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   
   func mainScreenModuleDidAppear() {
     services.permissionService.requestNotification { _ in }
-    salePremium()
   }
   
   func presentOnboardingScreen() {
@@ -606,41 +628,30 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScr
 // MARK: - Private
 
 private extension MainScreenCoordinator {
+  func incrementCounterOnScreenOpen() {
+    var count = getCounterOnScreenOpen()
+    count += 1
+    UserDefaults.standard.set(count, forKey: "SalePremiumKey")
+  }
+  
+  func getCounterOnScreenOpen() -> Int {
+    return UserDefaults.standard.integer(forKey: "SalePremiumKey")
+  }
+
   func salePremium() {
-    let userDefaults = UserDefaults.standard
-    let isFirstLaunch = userDefaults.bool(forKey: "isFirstLaunch")
-    let lastAdShownDate = userDefaults.object(forKey: "lastAdShownDate") as? Date
-    
     guard services.featureToggleServices.isToggleFor(feature: .isLifetimeSale) else {
       return
     }
+    let count = getCounterOnScreenOpen()
     
-    mainScreenModule?.returnModel(completion: { [weak self] model in
-      guard let self, !model.isPremium else {
-        return
-      }
-      
-      // Если это первый запуск, устанавливаем isFirstLaunch в false и выходим
-      if isFirstLaunch {
-        userDefaults.set(false, forKey: "isFirstLaunch")
-        return
-      }
-      
-      // Если реклама еще не показывалась или прошел день с последнего показа
-      if let lastShown = lastAdShownDate {
-        let oneDayInSeconds: TimeInterval = 24 * 60 * 60
-        guard Date().timeIntervalSince(lastShown) > oneDayInSeconds else {
-          return
-        }
-      }
+    services.appPurchasesService.isValidatePurchase { [weak self] isValidate in
+      guard let self, !isValidate, count.isMultiple(of: 10) else { return }
       
       DispatchQueue.main.async {
         self.openPremium(isLifetimeSale: true)
         self.services.metricsService.track(event: .sales)
       }
-      // Обновляем дату последнего показа рекламы
-      userDefaults.set(Date(), forKey: "lastAdShownDate")
-    })
+    }
   }
   
   func forceUpdateAvailable() {

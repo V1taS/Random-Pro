@@ -147,8 +147,8 @@ private extension ConfigurationValueConfigurator {
       semaphore.signal()
     }
     
-    // Ожидаем завершения асинхронной операции
-    semaphore.wait()
+    // Устанавливаем таймаут в 5 секунд и продолжаем выполнение независимо от результата
+    _ = semaphore.wait(timeout: .now() + 5)
     
     return retrievedValue
   }

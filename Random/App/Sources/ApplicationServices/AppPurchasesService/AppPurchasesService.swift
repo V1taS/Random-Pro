@@ -33,6 +33,8 @@ protocol AppPurchasesService {
 
 final class AppPurchasesServiceImpl: AppPurchasesService {
   
+  private let featureToggleServicesImpl = FeatureToggleServicesImpl()
+  
   // MARK: - Internal func
   
   func restorePurchase(completion: @escaping (_ isValidate: Bool) -> Void) {
@@ -70,15 +72,18 @@ final class AppPurchasesServiceImpl: AppPurchasesService {
   }
   
   func isValidatePurchase(completion: @escaping (_ isValidate: Bool) -> Void) {
-    DispatchQueue.main.async {
-      let isSubscription = Apphud.hasActiveSubscription()
-      let isNonRenewingPurchase = Apphud.isNonRenewingPurchaseActive(
-        productIdentifier: PremiumScreenPurchaseType.lifetime.productIdentifiers
-      )
-      let isNonRenewingPurchaseSale = Apphud.isNonRenewingPurchaseActive(
-        productIdentifier: PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
-      )
-      completion(isSubscription || isNonRenewingPurchase || isNonRenewingPurchaseSale)
+    featureToggleServicesImpl.getPremiumFeatureToggle { isPremium in
+      let isPremiumFeatureToggle = isPremium ?? false
+      DispatchQueue.main.async {
+        let isSubscription = Apphud.hasActiveSubscription()
+        let isNonRenewingPurchase = Apphud.isNonRenewingPurchaseActive(
+          productIdentifier: PremiumScreenPurchaseType.lifetime.productIdentifiers
+        )
+        let isNonRenewingPurchaseSale = Apphud.isNonRenewingPurchaseActive(
+          productIdentifier: PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
+        )
+        completion(isSubscription || isNonRenewingPurchase || isNonRenewingPurchaseSale || isPremiumFeatureToggle)
+      }
     }
   }
 }

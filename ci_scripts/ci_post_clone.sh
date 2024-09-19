@@ -37,4 +37,4 @@ defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
 cd /Volumes/workspace/repository/
 
 # Запускаем Tuist
-tuist clean && tuist fetch && tuist generate
+tuist clean && tuist fetch && tuist generate --no-open

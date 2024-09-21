@@ -26,7 +26,7 @@ public protocol ICloudKitService {
 }
 
 public final class CloudKitService: ICloudKitService {
-  private let timeoutInterval: TimeInterval = 10.0
+  private let timeoutInterval: TimeInterval = 60.0
   
   /// Инициализирует новый экземпляр CloudKitService.
   public init() {}

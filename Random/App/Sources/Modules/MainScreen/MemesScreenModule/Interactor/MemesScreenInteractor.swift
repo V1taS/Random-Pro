@@ -134,6 +134,8 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   }
   
   func getContent() {
+    memesURLString = []
+    
     let appearance = Appearance()
     let newModel = MemesScreenModel(
       language: getDefaultLanguage(),

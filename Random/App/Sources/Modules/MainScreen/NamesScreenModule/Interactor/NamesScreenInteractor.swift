@@ -60,7 +60,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
-  private var networkService: NetworkService
+  private var cloudKitService: ICloudKitService
   private var casheNames: [String] = []
   private let buttonCounterService: ButtonCounterService
   private var namesScreenModel: NamesScreenModel? {
@@ -77,7 +77,7 @@ final class NamesScreenInteractor: NamesScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
+    cloudKitService = services.cloudKitService
     buttonCounterService = services.buttonCounterService
   }
   
@@ -186,38 +186,111 @@ private extension NamesScreenInteractor {
                       language: NamesScreenModel.Language,
                       completion: @escaping (Result<[String], Error>) -> Void) {
     let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
-    
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "gender", value: gender.rawValue),
-        .init(name: "language", value: language.rawValue)
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]
-    ) { [weak self] result in
-      guard let self else {
-        return
-      }
-      DispatchQueue.main.async {
-        
-        switch result {
-        case let .success(data):
-          guard let listNames = self.networkService.map(data, to: [String].self) else {
-            completion(.failure(NetworkError.mappingError))
-            return
+
+    switch language {
+    case .de:
+      switch gender {
+      case .male:
+        fetchNamesList(forKey: "NamesMaleLanguageDE") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
           }
-          completion(.success(listNames))
-        case let .failure(error):
-          completion(.failure(error))
+        }
+      case .female:
+        fetchNamesList(forKey: "NamesFemaleLanguageDE") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
+    case .en:
+      switch gender {
+      case .male:
+        fetchNamesList(forKey: "NamesMaleLanguageEN") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      case .female:
+        fetchNamesList(forKey: "NamesFemaleLanguageEN") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
+    case .it:
+      switch gender {
+      case .male:
+        fetchNamesList(forKey: "NamesMaleLanguageIT") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      case .female:
+        fetchNamesList(forKey: "NamesFemaleLanguageIT") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
+    case .ru:
+      switch gender {
+      case .male:
+        fetchNamesList(forKey: "NamesMaleLanguageRU") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      case .female:
+        fetchNamesList(forKey: "NamesFemaleLanguageRU") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
+    case .es:
+      switch gender {
+      case .male:
+        fetchNamesList(forKey: "NamesMaleLanguageES") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      case .female:
+        fetchNamesList(forKey: "NamesFemaleLanguageES") { [weak self] result in
+          switch result {
+          case let .success(listNames):
+            completion(.success(listNames))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
         }
       }
     }
@@ -245,17 +318,46 @@ private extension NamesScreenInteractor {
   func checkEnvironment(gender: NamesScreenModel.Gender,
                         language: NamesScreenModel.Language,
                         completion: @escaping (Result<[String], Error>) -> Void) {
-#if DEBUG
-    let mockData = [
-      "Миранда",
-      "Элисон",
-      "Ариэлла",
-      "Аниса"
-    ]
-    completion(.success(mockData))
-#else
     fetchListNames(gender: gender, language: language, completion: completion)
-#endif
+  }
+  
+  func fetchNamesList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -264,10 +366,5 @@ private extension NamesScreenInteractor {
 private extension NamesScreenInteractor {
   struct Appearance {
     let result = "?"
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/names"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

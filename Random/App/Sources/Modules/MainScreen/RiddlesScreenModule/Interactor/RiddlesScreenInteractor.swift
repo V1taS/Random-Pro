@@ -61,7 +61,7 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
-  private var networkService: NetworkService
+  private var cloudKitService: ICloudKitService
   private var buttonCounterService: ButtonCounterService
   private var casheRiddles: [RiddlesScreenModel.Riddles] = []
   private var riddlesScreenModel: RiddlesScreenModel? {
@@ -78,7 +78,7 @@ final class RiddlesScreenInteractor: RiddlesScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
+    cloudKitService = services.cloudKitService
     buttonCounterService = services.buttonCounterService
   }
   
@@ -190,39 +190,47 @@ private extension RiddlesScreenInteractor {
   func fetchListRiddles(type: RiddlesScreenModel.DifficultType,
                         language: RiddlesScreenModel.Language,
                         completion: @escaping (Result<[RiddlesScreenModel.Riddles], Error>) -> Void) {
-    let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
-    
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "difficult", value: type.rawValue),
-        .init(name: "language", value: language.rawValue)
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]
-    ) { [weak self] result in
-      guard let self else {
-        return
-      }
-      DispatchQueue.main.async {
-        
-        switch result {
-        case let .success(data):
-          guard let listRiddles = self.networkService.map(data, to: [RiddlesScreenModel.Riddles].self) else {
-            completion(.failure(NetworkError.mappingError))
-            return
+    switch type {
+    case .easy:
+      switch language {
+      case .en:
+        fetchRiddlesList(forKey: "RiddlesEasyLanguageEN") { [weak self] result in
+          switch result {
+          case let .success(listRiddles):
+            completion(.success(listRiddles))
+          case .failure:
+            self?.output?.somethingWentWrong()
           }
-          completion(.success(listRiddles))
-        case let .failure(error):
-          completion(.failure(error))
+        }
+      case .ru:
+        fetchRiddlesList(forKey: "RiddlesEasyLanguageRU") { [weak self] result in
+          switch result {
+          case let .success(listRiddles):
+            completion(.success(listRiddles))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
+    case .hard:
+      switch language {
+      case .en:
+        fetchRiddlesList(forKey: "RiddlesHardLanguageEN") { [weak self] result in
+          switch result {
+          case let .success(listRiddles):
+            completion(.success(listRiddles))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      case .ru:
+        fetchRiddlesList(forKey: "RiddlesHardLanguageRU") { [weak self] result in
+          switch result {
+          case let .success(listRiddles):
+            completion(.success(listRiddles))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
         }
       }
     }
@@ -244,19 +252,46 @@ private extension RiddlesScreenInteractor {
   func checkEnvironment(type: RiddlesScreenModel.DifficultType,
                         language: RiddlesScreenModel.Language,
                         completion: @escaping (Result<[RiddlesScreenModel.Riddles], Error>) -> Void) {
-#if DEBUG
-    let mockData: [RiddlesScreenModel.Riddles] = [
-      .init(question: "Без рук, без ног, а рисовать умеет.",
-            answer: "Мороз"),
-      .init(question: "Домашнее животное, на ы начинается",
-            answer: "Ыщо один таракан"),
-      .init(question: "Когда 2 и 2 бывают больше четырёх?",
-            answer: "Когда 22"),
-    ]
-    completion(.success(mockData))
-#else
     fetchListRiddles(type: type, language: language, completion: completion)
-#endif
+  }
+  
+  func fetchRiddlesList(
+    forKey key: String,
+    completion: @escaping (Result<[RiddlesScreenModel.Riddles], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [RiddlesScreenModel.Riddles]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -265,10 +300,5 @@ private extension RiddlesScreenInteractor {
 private extension RiddlesScreenInteractor {
   struct Appearance {
     let result = "?"
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/riddles"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

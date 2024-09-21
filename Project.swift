@@ -35,8 +35,7 @@ let project = Project(
         .external(name: "KeychainSwift"),
         .external(name: "YandexMobileMetricaPush"),
         .external(name: "YandexMobileMetrica"),
-        .external(name: "RandomWheel"),
-        .external(name: "WelcomeSheet")
+        .external(name: "RandomWheel")
       ],
       settings: targetBuildIOSSettings
     ),

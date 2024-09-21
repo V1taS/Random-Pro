@@ -61,9 +61,11 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   
   private var storageService: StorageService
   private var networkService: NetworkService
+  
   private let buttonCounterService: ButtonCounterService
   private let permissionService: PermissionService
   private var memesURLString: [String] = []
+  private var cloudKitService: ICloudKitService
   private var memesScreenModel: MemesScreenModel? {
     get {
       storageService.getData(from: MemesScreenModel.self)
@@ -81,6 +83,7 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
     buttonCounterService = services.buttonCounterService
     permissionService = services.permissionService
     storageService = services.storageService
+    cloudKitService = services.cloudKitService
   }
   
   // MARK: - Internal func
@@ -132,10 +135,6 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   
   func getContent() {
     let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
-    
     let newModel = MemesScreenModel(
       language: getDefaultLanguage(),
       types: [.animals, .work, .popular]
@@ -143,48 +142,87 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
     let model = memesScreenModel ?? newModel
     let language = model.language ?? getDefaultLanguage()
     let types = model.types.isEmpty ? [.animals, .work, .popular] : model.types
-    let typesString = types.compactMap({ $0.rawValue }).joined(separator: ",")
+    let dispatchGroup = DispatchGroup()
     
-    if isEnvironmentDebug() {
-      let mockData = [
-        "https://random.sosinvitalii.com/memes/popular/ru/test1.jpg",
-        "https://random.sosinvitalii.com/memes/popular/ru//test2.jpg"
-      ]
-      memesURLString = mockData
-      generateButtonAction()
-      return
-    }
-    
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "type", value: typesString),
-        .init(name: "language", value: "\(language.rawValue)")
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]) { result in
-        DispatchQueue.main.async { [weak self] in
-          guard let self else {
-            return
-          }
-          switch result {
-          case let .success(data):
-            guard let listMemes = self.networkService.map(data, to: [MemesScreenDTO].self) else {
-              self.output?.somethingWentWrong()
-              return
+    var tempMemesURLString: [String] = []
+    for type in types {
+      dispatchGroup.enter()
+      
+      switch type {
+      case .work:
+        switch language {
+        case .en:
+          fetchMemesList(forKey: "MemesWorkLanguageEN") { result in
+            switch result {
+            case let .success(listMemes):
+              tempMemesURLString.append(contentsOf: listMemes)
+            case .failure: break
             }
-            self.memesURLString = listMemes.compactMap { $0.urlImage }
-            self.generateButtonAction()
-          case .failure:
-            self.output?.somethingWentWrong()
+            dispatchGroup.leave()
+          }
+        case .ru:
+          fetchMemesList(forKey: "MemesWorkLanguageRU") { result in
+            switch result {
+            case let .success(listMemes):
+              tempMemesURLString.append(contentsOf: listMemes)
+            case .failure: break
+            }
+            dispatchGroup.leave()
+          }
+        }
+      case .animals:
+        switch language {
+        case .en:
+          fetchMemesList(forKey: "MemesAnimalsLanguageEN") { result in
+            switch result {
+            case let .success(listMemes):
+              tempMemesURLString.append(contentsOf: listMemes)
+            case .failure: break
+            }
+            dispatchGroup.leave()
+          }
+        case .ru:
+          fetchMemesList(forKey: "MemesAnimalsLanguageRU") { result in
+            switch result {
+            case let .success(listMemes):
+              tempMemesURLString.append(contentsOf: listMemes)
+            case .failure: break
+            }
+            dispatchGroup.leave()
+          }
+        }
+      case .popular:
+        switch language {
+        case .en:
+          fetchMemesList(forKey: "MemesPopularLanguageEN") { result in
+            switch result {
+            case let .success(listMemes):
+              tempMemesURLString.append(contentsOf: listMemes)
+            case .failure: break
+            }
+            dispatchGroup.leave()
+          }
+        case .ru:
+          fetchMemesList(forKey: "MemesPopularLanguageRU") { result in
+            switch result {
+            case let .success(listMemes):
+              tempMemesURLString.append(contentsOf: listMemes)
+            case .failure: break
+            }
+            dispatchGroup.leave()
           }
         }
       }
+    }
+    
+    dispatchGroup.notify(queue: .main) { [weak self] in
+      if tempMemesURLString.isEmpty {
+        self?.output?.somethingWentWrong()
+      } else {
+        self?.memesURLString = tempMemesURLString
+        self?.generateButtonAction()
+      }
+    }
   }
   
   func generateButtonAction() {
@@ -215,6 +253,8 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   }
 }
 
+// MARK: - Private
+
 private extension MemesScreenInteractor {
   func getDefaultLanguage() -> MemesScreenModel.Language {
     let languageType = LanguageType.getCurrentLanguageType() ?? .us
@@ -226,12 +266,43 @@ private extension MemesScreenInteractor {
     }
   }
   
-  func isEnvironmentDebug() -> Bool {
-#if DEBUG
-    return true
-#else
-    return false
-#endif
+  func fetchMemesList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -240,10 +311,5 @@ private extension MemesScreenInteractor {
 private extension MemesScreenInteractor {
   struct Appearance {
     let result = "?"
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/memes"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

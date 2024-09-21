@@ -51,7 +51,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
-  private var networkService: NetworkService
+  private var cloudKitService: ICloudKitService
   private let buttonCounterService: ButtonCounterService
   private var casheNicks: [String] = []
   private var nickNameScreenModel: NickNameScreenModel? {
@@ -68,7 +68,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
+    cloudKitService = services.cloudKitService
     buttonCounterService = services.buttonCounterService
   }
   
@@ -76,58 +76,25 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   
   func getContent() {
     let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
-    
-    if isEnvironmentDebug() {
-      let mockData = [
-        "Shad",
-        "Mic",
-        "Ter",
-        "Iide",
-        "Gler",
-        "Diand",
-        "Raptor"
-      ]
-      casheNicks = mockData
-      output?.didReceive(nick: mockData.shuffled().first)
-      return
-    }
-    
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]) { [weak self] result in
-        DispatchQueue.main.async {
-          switch result {
-          case let .success(data):
-            if let listNicks = self?.networkService.map(data, to: [String].self) {
-              self?.casheNicks = listNicks
-              if let model = self?.nickNameScreenModel {
-                self?.output?.didReceive(nick: model.result)
-              } else {
-                let newModel = NickNameScreenModel(
-                  result: Appearance().result,
-                  listResult: []
-                )
-                self?.output?.didReceive(nick: newModel.result)
-                self?.nickNameScreenModel = newModel
-              }
-            } else {
-              self?.output?.somethingWentWrong()
-            }
-          case .failure:
-            self?.output?.somethingWentWrong()
-          }
+
+    fetchNickNameList(forKey: "NicknamesList") { [weak self] result in
+      switch result {
+      case let .success(listNicks):
+        self?.casheNicks = listNicks
+        if let model = self?.nickNameScreenModel {
+          self?.output?.didReceive(nick: model.result)
+        } else {
+          let newModel = NickNameScreenModel(
+            result: Appearance().result,
+            listResult: []
+          )
+          self?.output?.didReceive(nick: newModel.result)
+          self?.nickNameScreenModel = newModel
         }
+      case .failure:
+        self?.output?.somethingWentWrong()
       }
+    }
   }
   
   func generateShortButtonAction() {
@@ -194,12 +161,43 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     output?.cleanButtonWasSelected()
   }
   
-  func isEnvironmentDebug() -> Bool {
-#if DEBUG
-    return true
-#else
-    return false
-#endif
+  func fetchNickNameList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -208,10 +206,5 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
 private extension NickNameScreenInteractor {
   struct Appearance {
     let result = "?"
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/nickname"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

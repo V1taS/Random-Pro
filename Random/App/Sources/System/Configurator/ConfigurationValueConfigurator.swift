@@ -13,9 +13,7 @@ final class ConfigurationValueConfigurator: Configurator {
   // MARK: - Private properties
   
   private let services: ApplicationServices
-  private var cloudKitService: ICloudKitService {
-    services.cloudKitService
-  }
+  private lazy var cloudKitService: ICloudKitService = services.cloudKitService
   
   @ObjectCustomUserDefaultsWrapper(key: Constants.cloudKitServiceKey)
   var cloudKitStorage: [String: String]?
@@ -33,7 +31,6 @@ final class ConfigurationValueConfigurator: Configurator {
     getApphud()
     getKinopoisk()
     getMostPopularMovies()
-    getFancyBackend()
     getPremiumFeatureToggles()
     getADVList()
     getIsHiddenToggleForSection()
@@ -66,12 +63,6 @@ private extension ConfigurationValueConfigurator {
   func getMostPopularMovies() {
     if let value = getConfigurationValue(forKey: Constants.apiKeyMostPopularMoviesKey) {
       SecretsAPI.apiKeyMostPopularMovies = value
-    }
-  }
-  
-  func getFancyBackend() {
-    if let value = getConfigurationValue(forKey: Constants.fancyBackendKey) {
-      SecretsAPI.fancyBackend = value
     }
   }
   
@@ -125,7 +116,10 @@ private extension ConfigurationValueConfigurator {
     let semaphore = DispatchSemaphore(value: 0)
     var retrievedValue: String?
     
-    cloudKitService.getConfigurationValue(from: key) { [weak self] (result: Result<String?, Error>) in
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .config
+    ) { [weak self] (result: Result<String?, Error>) in
       guard let self = self else {
         semaphore.signal()
         return
@@ -173,9 +167,9 @@ private extension ConfigurationValueConfigurator {
   
   // Проверяет, что прошло больше 15 минут с сохраненной даты
   func isMoreThan15MinutesPassed() -> Bool {
-      guard let storedDate = getDateFromStorage() else { return true }
-      let timeInterval = Date().timeIntervalSince(storedDate)
-      return timeInterval > 15 * 60
+    guard let storedDate = getDateFromStorage() else { return true }
+    let timeInterval = Date().timeIntervalSince(storedDate)
+    return timeInterval > 15 * 60
   }
 }
 
@@ -186,7 +180,6 @@ private enum Constants {
   static let apiKeyApphudKey = "apiKeyApphud"
   static let apiKeyKinopoiskKey = "apiKeyKinopoisk"
   static let apiKeyMostPopularMoviesKey = "apiKeyMostPopularMovies"
-  static let fancyBackendKey = "fancyBackend"
   static let supportMailKey = "supportMail"
   
   static let premiumFeatureTogglesKey = "premiumFeatureToggles"

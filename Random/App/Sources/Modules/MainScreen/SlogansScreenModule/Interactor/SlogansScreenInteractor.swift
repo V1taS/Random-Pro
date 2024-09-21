@@ -53,7 +53,7 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
   // MARK: - Private property
 
   private var storageService: StorageService
-  private var networkService: NetworkService
+  private var cloudKitService: ICloudKitService
   private let buttonCounterService: ButtonCounterService
   private var casheSlogans: [String] = []
   private var slogansScreenModel: SlogansScreenModel? {
@@ -70,7 +70,7 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
+    cloudKitService = services.cloudKitService
     buttonCounterService = services.buttonCounterService
   }
   
@@ -78,10 +78,6 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
 
   func getContent() {
     let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
-
     let newModel = SlogansScreenModel(
       result: Appearance().result,
       listResult: [],
@@ -97,44 +93,28 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
       language: language
     )
     
-    if isEnvironmentDebug() {
-      let mockData = [
-        "Мы строим будущее сегодня.",
-        "Развивайтесь и преуспевайте.",
-        "Будущее принадлежит смелым.",
-        "Ваш путь к успеху начинается здесь."
-      ]
-      casheSlogans = mockData
-      output?.didReceive(text: model.result)
-      return
-    }
-
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "language", value: "\(language.rawValue)")
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]) { result in
-        DispatchQueue.main.async { [weak self] in
-          switch result {
-          case let .success(data):
-            guard let listSlogans = self?.networkService.map(data, to: [String].self) else {
-              self?.output?.somethingWentWrong()
-              return
-            }
-            self?.casheSlogans = listSlogans
-            self?.output?.didReceive(text: model.result)
-          case .failure:
-            self?.output?.somethingWentWrong()
-          }
+    switch language {
+    case .en:
+      fetchSlogansList(forKey: "SlogansLanguageEN") { [weak self] result in
+        switch result {
+        case let .success(listSlogans):
+          self?.casheSlogans = listSlogans
+          self?.output?.didReceive(text: model.result)
+        case .failure:
+          self?.output?.somethingWentWrong()
         }
       }
+    case .ru:
+      fetchSlogansList(forKey: "SlogansLanguageRU") { [weak self] result in
+        switch result {
+        case let .success(listSlogans):
+          self?.casheSlogans = listSlogans
+          self?.output?.didReceive(text: model.result)
+        case .failure:
+          self?.output?.somethingWentWrong()
+        }
+      }
+    }
   }
 
   func generateButtonAction() {
@@ -211,12 +191,43 @@ private extension SlogansScreenInteractor {
     return language
   }
   
-  func isEnvironmentDebug() -> Bool {
-#if DEBUG
-    return true
-#else
-    return false
-#endif
+  func fetchSlogansList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -225,11 +236,5 @@ private extension SlogansScreenInteractor {
 private extension SlogansScreenInteractor {
   struct Appearance {
     let result = "?"
-
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/slogans"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

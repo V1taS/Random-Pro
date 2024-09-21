@@ -122,9 +122,6 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Кнопка премиум была нажата
   /// - Parameter isPremium: Включен премиум
   func premiumButtonAction(_ isPremium: Bool)
-  
-  /// Показать онбоардинг экрана
-  func presentOnboardingScreen()
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`

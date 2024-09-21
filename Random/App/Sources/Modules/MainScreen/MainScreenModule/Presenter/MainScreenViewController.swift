@@ -55,7 +55,6 @@ final class MainScreenViewController: MainScreenModule {
     updateSections()
     setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
-    moduleOutput?.presentOnboardingScreen()
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(didBecomeActiveNotification),
                                            name: UIApplication.didBecomeActiveNotification,

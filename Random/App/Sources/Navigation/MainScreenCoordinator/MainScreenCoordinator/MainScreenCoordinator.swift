@@ -43,7 +43,6 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   private var appUnavailableCoordinator: AppUnavailableCoordinator?
   private var forceUpdateAppCoordinator: ForceUpdateAppCoordinator?
   private var premiumScreenCoordinator: PremiumScreenCoordinator?
-  private var onboardingScreenCoordinator: OnboardingScreenCoordinator?
   private var memesScreenCoordinator: MemesScreenCoordinator?
   private var fortuneWheelCoordinator: FortuneWheelCoordinator?
   private var quotesScreenCoordinator: QuotesScreenCoordinator?
@@ -150,18 +149,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
   
   func mainScreenModuleDidAppear() {
     services.permissionService.requestNotification { _ in }
-  }
-  
-  func presentOnboardingScreen() {
-    let onboardingScreenCoordinator = OnboardingScreenCoordinator(navigationController,
-                                                                  services)
-    self.onboardingScreenCoordinator = onboardingScreenCoordinator
-    onboardingScreenCoordinator.start()
-    onboardingScreenCoordinator.finishFlow = { [weak self] in
-      self?.onboardingScreenCoordinator = nil
-    }
-    
-    services.metricsService.track(event: .memes)
   }
   
   func premiumButtonAction(_ isPremium: Bool) {

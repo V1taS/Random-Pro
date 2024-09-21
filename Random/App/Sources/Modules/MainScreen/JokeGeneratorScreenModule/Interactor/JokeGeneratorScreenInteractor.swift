@@ -53,7 +53,7 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
-  private var networkService: NetworkService
+  private var cloudKitService: ICloudKitService
   private let buttonCounterService: ButtonCounterService
   private var casheJoke: [String] = []
   private var jokeGeneratorScreenModel: JokeGeneratorScreenModel? {
@@ -70,7 +70,7 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
+    cloudKitService = services.cloudKitService
     buttonCounterService = services.buttonCounterService
   }
   
@@ -78,9 +78,6 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
   
   func getContent() {
     let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
     
     let newModel = JokeGeneratorScreenModel(
       result: Appearance().result,
@@ -97,44 +94,28 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
       language: language
     )
     
-    if isEnvironmentDebug() {
-      let mockData = [
-        "В доме, где есть дети, тишина - повод для паники.",
-        "После третьего протирания Айфона спиртом Сири попросила закусить.",
-        "Хрен с ними, этими 90-60-90... Бороды нет — уже плюс!",
-        "Я другой такой страны не знаю, где так пофиг, что ты человек..."
-      ]
-      casheJoke = mockData
-      output?.didReceive(text: model.result)
-      return
-    }
-    
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "language", value: "\(language.rawValue)")
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]) { result in
-        DispatchQueue.main.async { [weak self] in
-          switch result {
-          case let .success(data):
-            guard let listGoodDeeds = self?.networkService.map(data, to: [String].self) else {
-              self?.output?.somethingWentWrong()
-              return
-            }
-            self?.casheJoke = listGoodDeeds
-            self?.output?.didReceive(text: model.result)
-          case .failure:
-            self?.output?.somethingWentWrong()
-          }
+    switch language {
+    case .en:
+      fetchJokeList(forKey: "JokesLanguageEN") { [weak self] result in
+        switch result {
+        case let .success(jokeModels):
+          self?.casheJoke = jokeModels
+          self?.output?.didReceive(text: model.result)
+        case .failure:
+          self?.output?.somethingWentWrong()
         }
       }
+    case .ru:
+      fetchJokeList(forKey: "JokesLanguageRU") { [weak self] result in
+        switch result {
+        case let .success(jokeModels):
+          self?.casheJoke = jokeModels
+          self?.output?.didReceive(text: model.result)
+        case .failure:
+          self?.output?.somethingWentWrong()
+        }
+      }
+    }
   }
   
   func generateButtonAction() {
@@ -211,12 +192,43 @@ private extension JokeGeneratorScreenInteractor {
     return language
   }
   
-  func isEnvironmentDebug() -> Bool {
-#if DEBUG
-    return true
-#else
-    return false
-#endif
+  func fetchJokeList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -225,11 +237,5 @@ private extension JokeGeneratorScreenInteractor {
 private extension JokeGeneratorScreenInteractor {
   struct Appearance {
     let result = "?"
-    
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/jokes"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

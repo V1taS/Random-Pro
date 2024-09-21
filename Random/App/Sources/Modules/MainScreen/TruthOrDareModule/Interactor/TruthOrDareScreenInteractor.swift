@@ -60,7 +60,7 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
   // MARK: - Private property
   
   private var storageService: StorageService
-  private var networkService: NetworkService
+  private var cloudKitService: ICloudKitService
   private var casheTruthOrDare: [String] = []
   private let buttonCounterService: ButtonCounterService
   private var truthOrDareScreenModel: TruthOrDareScreenModel? {
@@ -77,7 +77,7 @@ final class TruthOrDareScreenInteractor: TruthOrDareScreenInteractorInput {
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
+    cloudKitService = services.cloudKitService
     buttonCounterService = services.buttonCounterService
   }
   
@@ -186,38 +186,48 @@ private extension TruthOrDareScreenInteractor {
                             language: TruthOrDareScreenModel.Language,
                             completion: @escaping (Result<[String], Error>) -> Void) {
     let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
     
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "type", value: type.rawValue),
-        .init(name: "language", value: language.rawValue)
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]
-    ) { [weak self] result in
-      guard let self else {
-        return
-      }
-      DispatchQueue.main.async {
-        
-        switch result {
-        case let .success(data):
-          guard let listTruthOrDare = self.networkService.map(data, to: [String].self) else {
-            completion(.failure(NetworkError.mappingError))
-            return
+    switch type {
+    case .truth:
+      switch language {
+      case .en:
+        fetchTruthOrDareList(forKey: "TruthOrDare_TruthLanguageEN") { [weak self] result in
+          switch result {
+          case let .success(listTruthOrDare):
+            completion(.success(listTruthOrDare))
+          case .failure:
+            self?.output?.somethingWentWrong()
           }
-          completion(.success(listTruthOrDare))
-        case let .failure(error):
-          completion(.failure(error))
+        }
+      case .ru:
+        fetchTruthOrDareList(forKey: "TruthOrDare_TruthLanguageRU") { [weak self] result in
+          switch result {
+          case let .success(listTruthOrDare):
+            completion(.success(listTruthOrDare))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      }
+    case .dare:
+      switch language {
+      case .en:
+        fetchTruthOrDareList(forKey: "TruthOrDare_DareLanguageEN") { [weak self] result in
+          switch result {
+          case let .success(listTruthOrDare):
+            completion(.success(listTruthOrDare))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
+        }
+      case .ru:
+        fetchTruthOrDareList(forKey: "TruthOrDare_DareLanguageRU") { [weak self] result in
+          switch result {
+          case let .success(listTruthOrDare):
+            completion(.success(listTruthOrDare))
+          case .failure:
+            self?.output?.somethingWentWrong()
+          }
         }
       }
     }
@@ -239,17 +249,46 @@ private extension TruthOrDareScreenInteractor {
   func checkEnvironment(type: TruthOrDareScreenModel.TruthOrDareType,
                         language: TruthOrDareScreenModel.Language,
                         completion: @escaping (Result<[String], Error>) -> Void) {
-#if DEBUG
-    let mockData = [
-      "Расскажи самую смешную историю, которую ты знаешь.",
-      "Сыграй песню на воображаемой гитаре.",
-      "Попроси у случайного прохожего автограф.",
-      "Позвони своему лучшему другу и спой ему 'С днем рождения'."
-    ]
-    completion(.success(mockData))
-#else
     fetchListTruthOrDare(type: type, language: language, completion: completion)
-#endif
+  }
+  
+  func fetchTruthOrDareList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -258,10 +297,5 @@ private extension TruthOrDareScreenInteractor {
 private extension TruthOrDareScreenInteractor {
   struct Appearance {
     let result = "?"
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/truthOrDare"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

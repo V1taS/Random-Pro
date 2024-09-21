@@ -12,40 +12,40 @@ import FancyStyle
 
 /// События которые отправляем из Interactor в Presenter
 protocol GiftsScreenInteractorOutput: AnyObject {
-
+  
   /// Были получены данные
   ///  - Parameters:
   ///   - text: текст подарка
   ///   - gender: пол подарка
   func didReceive(text: String?, gender: GiftsScreenModel.Gender)
-
+  
   /// Что-то пошло не так
   func somethingWentWrong()
-
+  
   /// Кнопка очистить была нажата
   func cleanButtonWasSelected()
 }
 
 /// События которые отправляем от Presenter к Interactor
 protocol GiftsScreenInteractorInput {
-
+  
   /// Запросить текущую модель
   func returnCurrentModel() -> GiftsScreenModel
-
+  
   /// Получить данные
   /// - Parameter gender: пол для подарка
   func getContent(gender: GiftsScreenModel.Gender?)
-
+  
   /// Пользователь нажал на кнопку генерации подарка
   func generateButtonAction()
-
+  
   /// Событие, кнопка `Очистить` была нажата
   func cleanButtonAction()
-
+  
   /// Пол подарка изменился
   /// - Parameter type: пол подарка
   func segmentedControlValueDidChange(type: GiftsScreenModel.Gender?)
-
+  
   /// Установить новый язык
   func setNewLanguage(language: GiftsScreenModel.Language)
 }
@@ -56,13 +56,13 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
   // MARK: - Internal properties
   
   weak var output: GiftsScreenInteractorOutput?
-
+  
   // MARK: - Private property
-
+  
   private var storageService: StorageService
-  private var networkService: NetworkService
   private var buttonCounterService: ButtonCounterService
   private var casheGifts: [String] = []
+  private var cloudKitService: ICloudKitService
   private var giftsScreenModel: GiftsScreenModel? {
     get {
       storageService.getData(from: GiftsScreenModel.self)
@@ -70,19 +70,19 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
       storageService.saveData(newValue)
     }
   }
-
+  
   // MARK: - Initialization
-
+  
   /// - Parameters:
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
     buttonCounterService = services.buttonCounterService
+    cloudKitService = services.cloudKitService
   }
   
   // MARK: - Internal func
-
+  
   func getContent(gender: GiftsScreenModel.Gender?) {
     let newModel = GiftsScreenModel(
       result: Appearance().result,
@@ -93,7 +93,7 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
     let model = giftsScreenModel ?? newModel
     let gender = gender ?? (model.gender ?? .male)
     let language = model.language ?? getDefaultLanguage()
-
+    
     giftsScreenModel = GiftsScreenModel(
       result: model.result,
       listResult: model.listResult,
@@ -112,17 +112,17 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
       }
     }
   }
-
+  
   func generateButtonAction() {
     guard let model = giftsScreenModel,
           let result = casheGifts.shuffled().first else {
       output?.somethingWentWrong()
       return
     }
-
+    
     var listResult = model.listResult
     listResult.append(result)
-
+    
     giftsScreenModel = GiftsScreenModel(
       result: result,
       listResult: listResult,
@@ -132,7 +132,7 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
     output?.didReceive(text: result, gender: model.gender ?? .male)
     buttonCounterService.onButtonClick()
   }
-
+  
   func cleanButtonAction() {
     let newModel = GiftsScreenModel(
       result: Appearance().result,
@@ -144,17 +144,17 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
     output?.didReceive(text: newModel.result, gender: newModel.gender ?? .male)
     output?.cleanButtonWasSelected()
   }
-
+  
   func segmentedControlValueDidChange(type: GiftsScreenModel.Gender?) {
     getContent(gender: type)
   }
-
+  
   func setNewLanguage(language: GiftsScreenModel.Language) {
     guard let model = giftsScreenModel else {
       output?.somethingWentWrong()
       return
     }
-
+    
     let newModel = GiftsScreenModel(
       result: model.result,
       listResult: model.listResult,
@@ -164,7 +164,7 @@ final class GiftsScreenInteractor: GiftsScreenInteractorInput {
     giftsScreenModel = newModel
     getContent(gender: nil)
   }
-
+  
   func returnCurrentModel() -> GiftsScreenModel {
     if let model = giftsScreenModel {
       return model
@@ -185,48 +185,28 @@ private extension GiftsScreenInteractor {
   func fetchListGifts(gender: GiftsScreenModel.Gender,
                       language: GiftsScreenModel.Language,
                       completion: @escaping (Result<[String], Error>) -> Void) {
-    let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
-
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "gender", value: gender.rawValue),
-        .init(name: "language", value: language.rawValue)
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]
-    ) { [weak self] result in
-      guard let self else {
-        return
+    switch gender {
+    case .male:
+      switch language {
+      case .en:
+        fetchGiftsList(forKey: "GiftIdeasMaleLanguageEN", completion: completion)
+      case .ru:
+        fetchGiftsList(forKey: "GiftIdeasMaleLanguageRU", completion: completion)
       }
-      DispatchQueue.main.async {
-
-        switch result {
-        case let .success(data):
-          guard let listGifts = self.networkService.map(data, to: [String].self) else {
-            completion(.failure(NetworkError.mappingError))
-            return
-          }
-          completion(.success(listGifts))
-        case let .failure(error):
-          completion(.failure(error))
-        }
+    case .female:
+      switch language {
+      case .en:
+        fetchGiftsList(forKey: "GiftIdeasFemaleLanguageEN", completion: completion)
+      case .ru:
+        fetchGiftsList(forKey: "GiftIdeasFemaleLanguageRU", completion: completion)
       }
     }
   }
-
+  
   func getDefaultLanguage() -> GiftsScreenModel.Language {
     let language: GiftsScreenModel.Language
     let localeType = CountryType.getCurrentCountryType() ?? .us
-
+    
     switch localeType {
     case .ru:
       language = .ru
@@ -239,20 +219,46 @@ private extension GiftsScreenInteractor {
   func checkEnvironment(gender: GiftsScreenModel.Gender,
                         language: GiftsScreenModel.Language,
                         completion: @escaping (Result<[String], Error>) -> Void) {
-#if DEBUG
-    let mockData = [
-      "Устройство для аэрогриля",
-      "Мультиварка",
-      "Комплект качественных посуды",
-      "Кухонных принадлежностей",
-      "Набор для макраме или вышивки",
-      "Электронная зубная щетка ",
-      "Устройство виртуальной реальности (VR)"
-    ]
-    completion(.success(mockData))
-#else
     fetchListGifts(gender: gender, language: language, completion: completion)
-#endif
+  }
+  
+  func fetchGiftsList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
+            completion(.failure(NetworkError.mappingError))
+          }
+        }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
+      }
+    }
   }
 }
 
@@ -261,10 +267,5 @@ private extension GiftsScreenInteractor {
 private extension GiftsScreenInteractor {
   struct Appearance {
     let result = "?"
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/giftIdeas"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

@@ -60,9 +60,9 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
   // MARK: - Private property
   
   private var storageService: StorageService
-  private var networkService: NetworkService
   private var buttonCounterService: ButtonCounterService
   private var casheCongratulations: [String] = []
+  private var cloudKitService: ICloudKitService
   private var congratulationsScreenModel: CongratulationsScreenModel? {
     get {
       storageService.getData(from: CongratulationsScreenModel.self)
@@ -77,8 +77,8 @@ final class CongratulationsScreenInteractor: CongratulationsScreenInteractorInpu
   ///   - services: Сервисы приложения
   init(services: ApplicationServices) {
     storageService = services.storageService
-    networkService = services.networkService
     buttonCounterService = services.buttonCounterService
+    cloudKitService = services.cloudKitService
   }
   
   // MARK: - Internal func
@@ -186,39 +186,101 @@ private extension CongratulationsScreenInteractor {
                       language: CongratulationsScreenModel.Language,
                       completion: @escaping (Result<[String], Error>) -> Void) {
     let appearance = Appearance()
-    let host = appearance.host
-    let apiVersion = appearance.apiVersion
-    let endPoint = appearance.endPoint
     
-    networkService.performRequestWith(
-      urlString: host + apiVersion + endPoint,
-      queryItems: [
-        .init(name: "type", value: type.rawValue),
-        .init(name: "language", value: language.rawValue)
-      ],
-      httpMethod: .get,
-      headers: [
-        .contentTypeJson,
-        .additionalHeaders(set: [
-          (key: appearance.apiKey, value: appearance.apiValue)
-        ])
-      ]
-    ) { [weak self] result in
-      guard let self else {
-        return
+    switch language {
+    case .de:
+      switch type {
+      case .birthday:
+        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageDE", completion: completion)
+      case .newYear:
+        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageDE", completion: completion)
+      case .wedding:
+        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageDE", completion: completion)
+      case .anniversary:
+        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageDE", completion: completion)
       }
-      DispatchQueue.main.async {
-        
-        switch result {
-        case let .success(data):
-          guard let listCongratulations = self.networkService.map(data, to: [String].self) else {
+    case .en:
+      switch type {
+      case .birthday:
+        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageEN", completion: completion)
+      case .newYear:
+        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageEN", completion: completion)
+      case .wedding:
+        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageEN", completion: completion)
+      case .anniversary:
+        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageEN", completion: completion)
+      }
+    case .it:
+      switch type {
+      case .birthday:
+        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageIT", completion: completion)
+      case .newYear:
+        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageIT", completion: completion)
+      case .wedding:
+        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageIT", completion: completion)
+      case .anniversary:
+        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageIT", completion: completion)
+      }
+    case .ru:
+      switch type {
+      case .birthday:
+        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageRU", completion: completion)
+      case .newYear:
+        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageRU", completion: completion)
+      case .wedding:
+        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageRU", completion: completion)
+      case .anniversary:
+        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageRU", completion: completion)
+      }
+    case .es:
+      switch type {
+      case .birthday:
+        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageES", completion: completion)
+      case .newYear:
+        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageES", completion: completion)
+      case .wedding:
+        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageES", completion: completion)
+      case .anniversary:
+        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageES", completion: completion)
+      }
+    }
+  }
+  
+  func fetchCongratulationsList(
+    forKey key: String,
+    completion: @escaping (Result<[String], Error>) -> Void
+  ) {
+    DispatchQueue.global().async { [weak self] in
+      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+        DispatchQueue.main.async {
+          if let models {
+            completion(.success(models))
+          } else {
             completion(.failure(NetworkError.mappingError))
-            return
           }
-          completion(.success(listCongratulations))
-        case let .failure(error):
-          completion(.failure(error))
         }
+      }
+    }
+  }
+  
+  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+    let decoder = JSONDecoder()
+    
+    cloudKitService.getConfigurationValue(
+      from: key,
+      recordTypes: .backend
+    ) { (result: Result<Data?, Error>) in
+      switch result {
+      case let .success(jsonData):
+        guard let jsonData,
+              let models = try? decoder.decode(T.self, from: jsonData) else {
+          completion?(nil)
+          return
+        }
+        
+        completion?(models)
+      case .failure:
+        completion?(nil)
       }
     }
   }
@@ -245,19 +307,7 @@ private extension CongratulationsScreenInteractor {
   func checkEnvironment(type: CongratulationsScreenModel.CongratulationsType,
                         language: CongratulationsScreenModel.Language,
                         completion: @escaping (Result<[String], Error>) -> Void) {
-#if DEBUG
-    let mockData = [
-      "Пусть твой день будет наполнен любовью, радостью и улыбками! С днем рождения!",
-      "С днем рождения! Желаю тебе счастья, здоровья и всего наилучшего в этом мире. Ты это заслуживаешь!",
-      "Пусть звезды на небе сверкают особенно ярко в твой день, наполняя твою жизнь радостью, счастьем и любовью",
-      "Сегодня ты еще на год стал мудрее, пусть каждый новый день будет полон приключений и открытий",
-      "Твой день рождения - это лишь еще один повод напомнить, насколько ты особенный. С днем рождения!",
-      "С днем рождения! Пусть каждый день будет уникальным, а каждая минута - незабываемой",
-    ]
-    completion(.success(mockData))
-#else
     fetchListNames(type: type, language: language, completion: completion)
-#endif
   }
 }
 
@@ -266,10 +316,5 @@ private extension CongratulationsScreenInteractor {
 private extension CongratulationsScreenInteractor {
   struct Appearance {
     let result = "?"
-    let host = "https://sonorous-seat-386117.ew.r.appspot.com"
-    let apiVersion = "/api/v1"
-    let endPoint = "/congratulations"
-    let apiKey = "api_key"
-    let apiValue = SecretsAPI.fancyBackend
   }
 }

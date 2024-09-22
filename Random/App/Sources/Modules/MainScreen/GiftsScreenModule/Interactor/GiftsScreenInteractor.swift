@@ -244,7 +244,7 @@ private extension GiftsScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .giftIdeas
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

@@ -77,8 +77,6 @@ final class QuotesScreenInteractor: QuotesScreenInteractorInput {
   // MARK: - Internal func
   
   func getContent() {
-    let appearance = Appearance()
-    
     let newModel = QuoteScreenModel(
       result: Appearance().result,
       listResult: [],
@@ -214,7 +212,7 @@ private extension QuotesScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .quotes
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

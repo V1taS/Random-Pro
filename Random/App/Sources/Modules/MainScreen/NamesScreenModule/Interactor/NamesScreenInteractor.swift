@@ -185,13 +185,11 @@ private extension NamesScreenInteractor {
   func fetchListNames(gender: NamesScreenModel.Gender,
                       language: NamesScreenModel.Language,
                       completion: @escaping (Result<[String], Error>) -> Void) {
-    let appearance = Appearance()
-
     switch language {
     case .de:
       switch gender {
       case .male:
-        fetchNamesList(forKey: "NamesMaleLanguageDE") { [weak self] result in
+        fetchNamesList(forKey: "NamesMaleLanguageDE", recordTypes: .namesMale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -200,7 +198,7 @@ private extension NamesScreenInteractor {
           }
         }
       case .female:
-        fetchNamesList(forKey: "NamesFemaleLanguageDE") { [weak self] result in
+        fetchNamesList(forKey: "NamesFemaleLanguageDE", recordTypes: .namesFemale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -212,7 +210,7 @@ private extension NamesScreenInteractor {
     case .en:
       switch gender {
       case .male:
-        fetchNamesList(forKey: "NamesMaleLanguageEN") { [weak self] result in
+        fetchNamesList(forKey: "NamesMaleLanguageEN", recordTypes: .namesMale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -221,7 +219,7 @@ private extension NamesScreenInteractor {
           }
         }
       case .female:
-        fetchNamesList(forKey: "NamesFemaleLanguageEN") { [weak self] result in
+        fetchNamesList(forKey: "NamesFemaleLanguageEN", recordTypes: .namesFemale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -233,7 +231,7 @@ private extension NamesScreenInteractor {
     case .it:
       switch gender {
       case .male:
-        fetchNamesList(forKey: "NamesMaleLanguageIT") { [weak self] result in
+        fetchNamesList(forKey: "NamesMaleLanguageIT", recordTypes: .namesMale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -242,7 +240,7 @@ private extension NamesScreenInteractor {
           }
         }
       case .female:
-        fetchNamesList(forKey: "NamesFemaleLanguageIT") { [weak self] result in
+        fetchNamesList(forKey: "NamesFemaleLanguageIT", recordTypes: .namesFemale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -254,7 +252,7 @@ private extension NamesScreenInteractor {
     case .ru:
       switch gender {
       case .male:
-        fetchNamesList(forKey: "NamesMaleLanguageRU") { [weak self] result in
+        fetchNamesList(forKey: "NamesMaleLanguageRU", recordTypes: .namesMale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -263,7 +261,7 @@ private extension NamesScreenInteractor {
           }
         }
       case .female:
-        fetchNamesList(forKey: "NamesFemaleLanguageRU") { [weak self] result in
+        fetchNamesList(forKey: "NamesFemaleLanguageRU", recordTypes: .namesFemale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -275,7 +273,7 @@ private extension NamesScreenInteractor {
     case .es:
       switch gender {
       case .male:
-        fetchNamesList(forKey: "NamesMaleLanguageES") { [weak self] result in
+        fetchNamesList(forKey: "NamesMaleLanguageES", recordTypes: .namesMale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -284,7 +282,7 @@ private extension NamesScreenInteractor {
           }
         }
       case .female:
-        fetchNamesList(forKey: "NamesFemaleLanguageES") { [weak self] result in
+        fetchNamesList(forKey: "NamesFemaleLanguageES", recordTypes: .namesFemale) { [weak self] result in
           switch result {
           case let .success(listNames):
             completion(.success(listNames))
@@ -323,10 +321,11 @@ private extension NamesScreenInteractor {
   
   func fetchNamesList(
     forKey key: String,
+    recordTypes: CloudKitService.RecordTypes,
     completion: @escaping (Result<[String], Error>) -> Void
   ) {
     DispatchQueue.global().async { [weak self] in
-      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+      self?.getConfigurationValue(forKey: key, recordTypes: recordTypes) { (models: [String]?) -> Void in
         DispatchQueue.main.async {
           if let models {
             completion(.success(models))
@@ -338,12 +337,16 @@ private extension NamesScreenInteractor {
     }
   }
   
-  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+  func getConfigurationValue<T: Codable>(
+    forKey key: String,
+    recordTypes: CloudKitService.RecordTypes,
+    completion: ((T?) -> Void)?
+  ) {
     let decoder = JSONDecoder()
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: recordTypes
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

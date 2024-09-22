@@ -185,73 +185,152 @@ private extension CongratulationsScreenInteractor {
   func fetchListNames(type: CongratulationsScreenModel.CongratulationsType,
                       language: CongratulationsScreenModel.Language,
                       completion: @escaping (Result<[String], Error>) -> Void) {
-    let appearance = Appearance()
-    
     switch language {
     case .de:
       switch type {
       case .birthday:
-        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageDE", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsBirthdayLanguageDE",
+          recordTypes: .congratulationsBirthday,
+          completion: completion
+        )
       case .newYear:
-        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageDE", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsNewYearLanguageDE",
+          recordTypes: .congratulationsNewYear,
+          completion: completion
+        )
       case .wedding:
-        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageDE", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsWeddingLanguageDE",
+          recordTypes: .congratulationsWedding,
+          completion: completion
+        )
       case .anniversary:
-        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageDE", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsAnniversariesLanguageDE",
+          recordTypes: .congratulationsAnniversaries,
+          completion: completion
+        )
       }
     case .en:
       switch type {
       case .birthday:
-        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageEN", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsBirthdayLanguageEN",
+          recordTypes: .congratulationsBirthday,
+          completion: completion
+        )
       case .newYear:
-        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageEN", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsNewYearLanguageEN",
+          recordTypes: .congratulationsNewYear,
+          completion: completion
+        )
       case .wedding:
-        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageEN", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsWeddingLanguageEN",
+          recordTypes: .congratulationsWedding,
+          completion: completion
+        )
       case .anniversary:
-        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageEN", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsAnniversariesLanguageEN",
+          recordTypes: .congratulationsAnniversaries,
+          completion: completion
+        )
       }
     case .it:
       switch type {
       case .birthday:
-        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageIT", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsBirthdayLanguageIT",
+          recordTypes: .congratulationsBirthday,
+          completion: completion
+        )
       case .newYear:
-        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageIT", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsNewYearLanguageIT",
+          recordTypes: .congratulationsNewYear,
+          completion: completion
+        )
       case .wedding:
-        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageIT", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsWeddingLanguageIT",
+          recordTypes: .congratulationsWedding,
+          completion: completion
+        )
       case .anniversary:
-        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageIT", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsAnniversariesLanguageIT",
+          recordTypes: .congratulationsAnniversaries,
+          completion: completion
+        )
       }
     case .ru:
       switch type {
       case .birthday:
-        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageRU", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsBirthdayLanguageRU",
+          recordTypes: .congratulationsBirthday,
+          completion: completion
+        )
       case .newYear:
-        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageRU", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsNewYearLanguageRU",
+          recordTypes: .congratulationsNewYear,
+          completion: completion
+        )
       case .wedding:
-        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageRU", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsWeddingLanguageRU",
+          recordTypes: .congratulationsWedding,
+          completion: completion
+        )
       case .anniversary:
-        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageRU", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsAnniversariesLanguageRU",
+          recordTypes: .congratulationsAnniversaries,
+          completion: completion
+        )
       }
     case .es:
       switch type {
       case .birthday:
-        fetchCongratulationsList(forKey: "CongratulationsBirthdayLanguageES", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsBirthdayLanguageES",
+          recordTypes: .congratulationsBirthday,
+          completion: completion
+        )
       case .newYear:
-        fetchCongratulationsList(forKey: "CongratulationsNewYearLanguageES", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsNewYearLanguageES",
+          recordTypes: .congratulationsNewYear,
+          completion: completion
+        )
       case .wedding:
-        fetchCongratulationsList(forKey: "CongratulationsWeddingLanguageES", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsWeddingLanguageES",
+          recordTypes: .congratulationsWedding,
+          completion: completion
+        )
       case .anniversary:
-        fetchCongratulationsList(forKey: "CongratulationsAnniversariesLanguageES", completion: completion)
+        fetchCongratulationsList(
+          forKey: "CongratulationsAnniversariesLanguageES",
+          recordTypes: .congratulationsAnniversaries,
+          completion: completion
+        )
       }
     }
   }
   
   func fetchCongratulationsList(
     forKey key: String,
+    recordTypes: CloudKitService.RecordTypes,
     completion: @escaping (Result<[String], Error>) -> Void
   ) {
     DispatchQueue.global().async { [weak self] in
-      self?.getConfigurationValue(forKey: key) { (models: [String]?) -> Void in
+      self?.getConfigurationValue(forKey: key, recordTypes: recordTypes) { (models: [String]?) -> Void in
         DispatchQueue.main.async {
           if let models {
             completion(.success(models))
@@ -263,12 +342,16 @@ private extension CongratulationsScreenInteractor {
     }
   }
   
-  func getConfigurationValue<T: Codable>(forKey key: String, completion: ((T?) -> Void)?) {
+  func getConfigurationValue<T: Codable>(
+    forKey key: String,
+    recordTypes: CloudKitService.RecordTypes,
+    completion: ((T?) -> Void)?
+  ) {
     let decoder = JSONDecoder()
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: recordTypes
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

@@ -77,7 +77,6 @@ final class SlogansScreenInteractor: SlogansScreenInteractorInput {
   // MARK: - Internal func
 
   func getContent() {
-    let appearance = Appearance()
     let newModel = SlogansScreenModel(
       result: Appearance().result,
       listResult: [],
@@ -213,7 +212,7 @@ private extension SlogansScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .slogans
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

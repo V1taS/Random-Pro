@@ -75,8 +75,6 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
   // MARK: - Internal func
   
   func getContent() {
-    let appearance = Appearance()
-
     fetchNickNameList(forKey: "NicknamesList") { [weak self] result in
       switch result {
       case let .success(listNicks):
@@ -183,7 +181,7 @@ final class NickNameScreenInteractor: NickNameScreenInteractorInput {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .nicknames
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

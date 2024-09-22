@@ -185,8 +185,6 @@ private extension TruthOrDareScreenInteractor {
   func fetchListTruthOrDare(type: TruthOrDareScreenModel.TruthOrDareType,
                             language: TruthOrDareScreenModel.Language,
                             completion: @escaping (Result<[String], Error>) -> Void) {
-    let appearance = Appearance()
-    
     switch type {
     case .truth:
       switch language {
@@ -274,7 +272,7 @@ private extension TruthOrDareScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .truthOrDare
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

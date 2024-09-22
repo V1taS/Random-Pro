@@ -212,7 +212,7 @@ private extension GoodDeedsScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .goodDeeds
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

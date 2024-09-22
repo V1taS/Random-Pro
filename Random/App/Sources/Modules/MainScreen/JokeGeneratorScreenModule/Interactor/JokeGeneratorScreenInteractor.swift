@@ -77,8 +77,6 @@ final class JokeGeneratorScreenInteractor: JokeGeneratorScreenInteractorInput {
   // MARK: - Internal func
   
   func getContent() {
-    let appearance = Appearance()
-    
     let newModel = JokeGeneratorScreenModel(
       result: Appearance().result,
       listResult: [],
@@ -214,7 +212,7 @@ private extension JokeGeneratorScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .jokes
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

@@ -277,7 +277,7 @@ private extension RiddlesScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .riddles
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

@@ -26,7 +26,7 @@ public protocol ICloudKitService {
 }
 
 public final class CloudKitService: ICloudKitService {
-  private let timeoutInterval: TimeInterval = 60.0
+  private let timeoutInterval: TimeInterval = 20.0
   
   /// Инициализирует новый экземпляр CloudKitService.
   public init() {}
@@ -87,6 +87,23 @@ public final class CloudKitService: ICloudKitService {
 extension CloudKitService {
   public enum RecordTypes: String, Codable {
     case config = "Config"
-    case backend = "Backend"
+    
+    case congratulationsAnniversaries
+    case congratulationsBirthday
+    case congratulationsNewYear
+    case congratulationsWedding
+    
+    case namesFemale
+    case namesMale
+    
+    case giftIdeas
+    case goodDeeds
+    case jokes
+    case memes
+    case nicknames
+    case quotes
+    case riddles
+    case slogans
+    case truthOrDare
   }
 }

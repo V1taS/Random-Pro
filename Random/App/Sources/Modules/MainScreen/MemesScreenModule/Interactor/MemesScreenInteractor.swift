@@ -135,8 +135,6 @@ final class MemesScreenInteractor: MemesScreenInteractorInput {
   
   func getContent() {
     memesURLString = []
-    
-    let appearance = Appearance()
     let newModel = MemesScreenModel(
       language: getDefaultLanguage(),
       types: [.animals, .work, .popular]
@@ -290,7 +288,7 @@ private extension MemesScreenInteractor {
     
     cloudKitService.getConfigurationValue(
       from: key,
-      recordTypes: .backend
+      recordTypes: .memes
     ) { (result: Result<Data?, Error>) in
       switch result {
       case let .success(jsonData):

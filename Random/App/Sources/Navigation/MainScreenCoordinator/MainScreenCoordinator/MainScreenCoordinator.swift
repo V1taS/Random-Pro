@@ -131,7 +131,7 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   }
   @objc
   func notificationPremiumFeatureToggles(_ notification: Notification) {
-    mainScreenModule?.updateStateForSections()
+    mainScreenModule?.updateStateForSections(with: true)
   }
 }
 
@@ -606,7 +606,7 @@ extension MainScreenCoordinator: MainSettingsScreenCoordinatorOutput, PremiumScr
   }
   
   func updateStateForSections() {
-    mainScreenModule?.updateStateForSections()
+    mainScreenModule?.updateStateForSections(with: true)
   }
   
   func didChanged(models: [MainScreenModel.Section]) {

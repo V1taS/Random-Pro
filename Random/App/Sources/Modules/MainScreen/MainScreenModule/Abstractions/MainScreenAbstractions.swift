@@ -132,7 +132,7 @@ protocol MainScreenModuleInput {
   func updateSectionsWith(models: [MainScreenModel.Section])
   
   /// Обновить секции на главном экране
-  func updateStateForSections()
+  func updateStateForSections(with premium: Bool)
   
   /// Сохранить темную тему
   /// - Parameter isEnabled: Темная тема включена

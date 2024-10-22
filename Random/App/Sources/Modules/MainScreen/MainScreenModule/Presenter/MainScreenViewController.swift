@@ -52,7 +52,7 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    updateSections()
+    updateSections(with: false)
     setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
     NotificationCenter.default.addObserver(self,
@@ -109,8 +109,8 @@ final class MainScreenViewController: MainScreenModule {
     interactor.addLabel(label, for: sectionType)
   }
   
-  func updateStateForSections() {
-    updateSections()
+  func updateStateForSections(with premium: Bool) {
+    updateSections(with: premium)
   }
 }
 
@@ -257,19 +257,23 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 // MARK: - Private
 
 private extension MainScreenViewController {  
-  func updateSections() {
-    interactor.getContent { [weak self] in
-      self?.interactor.validatePurchase { [weak self] in
-        if self?.isPremiumDEBUG != nil {
-          self?.setupNavBar()
-          self?.interactor.getContent {}
-        } else {
-          self?.interactor.updatesPremiumFeatureToggle { [weak self] in
+  func updateSections(with premium: Bool) {
+    if premium {
+      interactor.getContent { [weak self] in
+        self?.interactor.validatePurchase { [weak self] in
+          if self?.isPremiumDEBUG != nil {
             self?.setupNavBar()
             self?.interactor.getContent {}
+          } else {
+            self?.interactor.updatesPremiumFeatureToggle { [weak self] in
+              self?.setupNavBar()
+              self?.interactor.getContent {}
+            }
           }
         }
       }
+    } else {
+      interactor.getContent {}
     }
   }
   
@@ -311,9 +315,7 @@ private extension MainScreenViewController {
   }
   
   @objc
-  func didBecomeActiveNotification() {
-    updateSections()
-  }
+  func didBecomeActiveNotification() {}
 }
 
 // MARK: - UIBarButtonItem

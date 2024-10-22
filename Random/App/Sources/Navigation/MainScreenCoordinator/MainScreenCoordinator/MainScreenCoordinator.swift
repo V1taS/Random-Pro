@@ -93,14 +93,16 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
       name: UIApplication.willEnterForegroundNotification,
       object: nil
     )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(notificationPremiumFeatureToggles(_:)),
+      name: Notification.Name(SecretsAPI.notificationPremiumFeatureToggles),
+      object: nil
+    )
   }
   
   deinit {
-    NotificationCenter.default.removeObserver(
-      self,
-      name: UIApplication.willEnterForegroundNotification,
-      object: nil
-    )
+    NotificationCenter.default.removeObserver(self)
   }
   
   // MARK: - Internal func
@@ -126,6 +128,10 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   func appDidEnterForeground() {
     salePremium()
     incrementCounterOnScreenOpen()
+  }
+  @objc
+  func notificationPremiumFeatureToggles(_ notification: Notification) {
+    mainScreenModule?.updateStateForSections()
   }
 }
 

@@ -8,7 +8,6 @@
 import UIKit
 import YandexMobileMetrica
 import YandexMobileMetricaPush
-import ApphudSDK
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +19,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     if let configuration = YMMYandexMetricaConfiguration.init(apiKey: SecretsAPI.apiKeyYandexMetrica) {
       YMMYandexMetrica.activate(with: configuration)
     }
-    Apphud.start(apiKey: SecretsAPI.apiKeyApphud)
     return true
   }
   

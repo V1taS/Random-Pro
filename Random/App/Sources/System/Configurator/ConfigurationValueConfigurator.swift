@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ApphudSDK
 
 final class ConfigurationValueConfigurator: Configurator {
   
@@ -14,9 +15,6 @@ final class ConfigurationValueConfigurator: Configurator {
   
   private let services: ApplicationServices
   private lazy var cloudKitService: ICloudKitService = services.cloudKitService
-  
-  @ObjectCustomUserDefaultsWrapper(key: Constants.cloudKitServiceKey)
-  var cloudKitStorage: [String: String]?
   
   // MARK: - Init
   
@@ -27,156 +25,114 @@ final class ConfigurationValueConfigurator: Configurator {
   // MARK: - Internal func
   
   func configure() {
-    getYandexMetrica()
-    getApphud()
-    getKinopoisk()
-    getMostPopularMovies()
-    getPremiumFeatureToggles()
-    getADVList()
-    getIsHiddenToggleForSection()
-    getIsToggleForFeature()
-    getSupportMail()
+    let isReachable = NetworkReachabilityService()?.isReachable ?? false
+    guard isReachable else { return }
+    
+    Task {
+      await getApphud()
+      await getKinopoisk()
+      await getMostPopularMovies()
+      await getPremiumFeatureToggles()
+      await getADVList()
+      await getIsHiddenToggleForSection()
+      await getIsToggleForFeature()
+      await getSupportMail()
+      DispatchQueue.main.async {
+        NotificationCenter.default.post(
+          name: Notification.Name(SecretsAPI.notificationPremiumFeatureToggles),
+          object: nil,
+          userInfo: [:]
+        )
+      }
+    }
   }
 }
 
 // MARK: - Private
 
 private extension ConfigurationValueConfigurator {
-  func getYandexMetrica() {
-    if let value = getConfigurationValue(forKey: Constants.apiKeyYandexMetricaKey) {
-      SecretsAPI.apiKeyYandexMetrica = value
+  func getApphud() async {
+    if let value = await getConfigurationValue(forKey: Constants.apiKeyApphudKey) {
+      DispatchQueue.main.async {
+        Apphud.start(apiKey: value)
+      }
     }
   }
   
-  func getApphud() {
-    if let value = getConfigurationValue(forKey: Constants.apiKeyApphudKey) {
-      SecretsAPI.apiKeyApphud = value
-    }
-  }
-  
-  func getKinopoisk() {
-    if let value = getConfigurationValue(forKey: Constants.apiKeyKinopoiskKey) {
+  func getKinopoisk() async {
+    if let value = await getConfigurationValue(forKey: Constants.apiKeyKinopoiskKey) {
       SecretsAPI.apiKeyKinopoisk = value
     }
   }
   
-  func getMostPopularMovies() {
-    if let value = getConfigurationValue(forKey: Constants.apiKeyMostPopularMoviesKey) {
+  func getMostPopularMovies() async {
+    if let value = await getConfigurationValue(forKey: Constants.apiKeyMostPopularMoviesKey) {
       SecretsAPI.apiKeyMostPopularMovies = value
     }
   }
   
-  func getSupportMail() {
-    if let value = getConfigurationValue(forKey: Constants.supportMailKey) {
+  func getSupportMail() async {
+    if let value = await getConfigurationValue(forKey: Constants.supportMailKey) {
       SecretsAPI.supportMail = value
     }
   }
   
-  func getPremiumFeatureToggles() {
+  func getPremiumFeatureToggles() async {
     let decoder = JSONDecoder()
-    if let jsonString = getConfigurationValue(forKey: Constants.premiumFeatureTogglesKey),
+    if let jsonString = await getConfigurationValue(forKey: Constants.premiumFeatureTogglesKey),
        let jsonData = jsonString.data(using: .utf8),
        let models = try? decoder.decode([PremiumFeatureToggleModel].self, from: jsonData) {
       SecretsAPI.premiumFeatureToggles = models
     }
   }
   
-  func getADVList() {
+  func getADVList() async {
     let decoder = JSONDecoder()
-    if let jsonString = getConfigurationValue(forKey: Constants.advListKey),
+    if let jsonString = await getConfigurationValue(forKey: Constants.advListKey),
        let jsonData = jsonString.data(using: .utf8),
        let models = try? decoder.decode([String: String].self, from: jsonData) {
       SecretsAPI.advList = models
     }
   }
   
-  func getIsHiddenToggleForSection() {
+  func getIsHiddenToggleForSection() async {
     let decoder = JSONDecoder()
-    if let jsonString = getConfigurationValue(forKey: Constants.isHiddenToggleForSectionKey),
+    if let jsonString = await getConfigurationValue(forKey: Constants.isHiddenToggleForSectionKey),
        let jsonData = jsonString.data(using: .utf8),
        let models = try? decoder.decode([String: Bool].self, from: jsonData) {
       SecretsAPI.isHiddenToggleForSection = models
     }
   }
   
-  func getIsToggleForFeature() {
+  func getIsToggleForFeature() async {
     let decoder = JSONDecoder()
-    if let jsonString = getConfigurationValue(forKey: Constants.isToggleForFeatureKey),
+    if let jsonString = await getConfigurationValue(forKey: Constants.isToggleForFeatureKey),
        let jsonData = jsonString.data(using: .utf8),
        let models = try? decoder.decode([String: Bool].self, from: jsonData) {
       SecretsAPI.isToggleForFeature = models
     }
   }
   
-  func getConfigurationValue(forKey key: String) -> String? {
-    if let value = cloudKitStorage?[key], !isMoreThan15MinutesPassed() {
-      return value
-    }
-    
-    let semaphore = DispatchSemaphore(value: 0)
-    var retrievedValue: String?
-    
-    cloudKitService.getConfigurationValue(
-      from: key,
-      recordTypes: .config
-    ) { [weak self] (result: Result<String?, Error>) in
-      guard let self = self else {
-        semaphore.signal()
-        return
-      }
-      
-      switch result {
-      case let .success(value):
-        if let value = value {
-          retrievedValue = value
-          var cloudKitStorageUpdated = cloudKitStorage ?? [:]
-          cloudKitStorageUpdated.updateValue(value, forKey: key)
-          self.cloudKitStorage = cloudKitStorageUpdated
+  func getConfigurationValue(forKey key: String) async -> String? {
+    await withCheckedContinuation { continuation in
+      cloudKitService.getConfigurationValue(
+        from: key,
+        recordTypes: .config
+      ) { (result: Result<String?, Error>) in
+        switch result {
+        case let .success(value):
+          continuation.resume(returning: value)
+        case .failure:
+          continuation.resume(returning: nil)
         }
-      case .failure(let error):
-        print("Ошибка получения значения конфигурации: \(error.localizedDescription)")
       }
-      
-      saveDateToStorage()
-      semaphore.signal()
     }
-    
-    // Устанавливаем таймаут в 5 секунд и продолжаем выполнение независимо от результата
-    _ = semaphore.wait(timeout: .now() + 5)
-    
-    return retrievedValue
-  }
-  
-  // Сохраняет текущую дату в сторадж по ключу
-  func saveDateToStorage() {
-    let currentDate = Date()
-    let dateFormatter = ISO8601DateFormatter()
-    let dateString = dateFormatter.string(from: currentDate)
-    
-    var cloudKitStorageUpdated = cloudKitStorage ?? [:]
-    cloudKitStorageUpdated[Constants.oneDayPassKey] = dateString
-    cloudKitStorage = cloudKitStorageUpdated
-  }
-  
-  // Получает дату из стораджа по ключу
-  func getDateFromStorage() -> Date? {
-    guard let dateString = cloudKitStorage?[Constants.oneDayPassKey] else { return nil }
-    let dateFormatter = ISO8601DateFormatter()
-    return dateFormatter.date(from: dateString)
-  }
-  
-  // Проверяет, что прошло больше 15 минут с сохраненной даты
-  func isMoreThan15MinutesPassed() -> Bool {
-    guard let storedDate = getDateFromStorage() else { return true }
-    let timeInterval = Date().timeIntervalSince(storedDate)
-    return timeInterval > 15 * 60
   }
 }
 
 // MARK: - Private
 
 private enum Constants {
-  static let apiKeyYandexMetricaKey = "apiKeyYandexMetrica"
   static let apiKeyApphudKey = "apiKeyApphud"
   static let apiKeyKinopoiskKey = "apiKeyKinopoisk"
   static let apiKeyMostPopularMoviesKey = "apiKeyMostPopularMovies"
@@ -188,5 +144,4 @@ private enum Constants {
   static let isToggleForFeatureKey = "isToggleForFeature"
   
   static let cloudKitServiceKey = "CloudKitServiceKey"
-  static let oneDayPassKey = "OneDayPassKey"
 }

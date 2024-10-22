@@ -9,11 +9,11 @@
 import Foundation
 
 struct SecretsAPI {
-  static var apiKeyYandexMetrica = ""
-  static var apiKeyApphud = ""
+  static var apiKeyYandexMetrica = "b4921e71-faf2-4bd3-8bea-e033a76457ae"
   static var apiKeyKinopoisk = ""
   static var apiKeyMostPopularMovies = ""
   static var supportMail = ""
+  static let notificationPremiumFeatureToggles = "notificationPremiumFeatureToggles"
   
   static var premiumFeatureToggles: [PremiumFeatureToggleModel] = []
   static var advList: [String: String] = [:]

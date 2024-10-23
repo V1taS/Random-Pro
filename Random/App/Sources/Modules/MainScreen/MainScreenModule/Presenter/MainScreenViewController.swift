@@ -59,7 +59,6 @@ final class MainScreenViewController: MainScreenModule {
     super.viewWillAppear(animated)
     
     navigationController?.navigationBar.prefersLargeTitles = true
-    updateSections()
     setupNavBar()
   }
   

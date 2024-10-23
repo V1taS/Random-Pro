@@ -151,8 +151,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
   }
   
-  func mainScreenModuleWillAppear() {}
-  
   func mainScreenModuleDidAppear() {
     services.permissionService.requestNotification { _ in }
   }

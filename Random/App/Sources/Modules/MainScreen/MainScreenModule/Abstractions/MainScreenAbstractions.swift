@@ -19,9 +19,6 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Главный экран был показан
   func mainScreenModuleDidAppear()
   
-  /// Главный экран будет показан
-  func mainScreenModuleWillAppear()
-  
   /// Открыть раздел `Number`
   func openNumber()
   

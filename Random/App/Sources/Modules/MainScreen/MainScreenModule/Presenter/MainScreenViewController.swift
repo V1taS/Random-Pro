@@ -52,20 +52,14 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    updateSections()
-    setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(didBecomeActiveNotification),
-                                           name: UIApplication.didBecomeActiveNotification,
-                                           object: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     navigationController?.navigationBar.prefersLargeTitles = true
-    moduleOutput?.mainScreenModuleWillAppear()
+    updateSections()
     setupNavBar()
   }
   
@@ -299,9 +293,6 @@ private extension MainScreenViewController {
     moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
   }
-  
-  @objc
-  func didBecomeActiveNotification() {}
 }
 
 // MARK: - UIBarButtonItem

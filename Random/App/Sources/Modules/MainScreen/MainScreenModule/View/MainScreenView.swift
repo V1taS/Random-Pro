@@ -8,6 +8,7 @@
 import UIKit
 import FancyUIKit
 import FancyStyle
+import Lottie
 
 /// События которые отправляем из View в Presenter
 protocol MainScreenViewOutput: AnyObject {
@@ -130,16 +131,19 @@ final class MainScreenView: MainScreenViewProtocol {
   
   // MARK: - Private properties
   
-  private let collectionViewLayout = UICollectionViewFlowLayout()
-  private lazy var collectionView = UICollectionView(frame: .zero,
-                                                     collectionViewLayout: collectionViewLayout)
+  private let collectionViewLayout: UICollectionViewFlowLayout
+  private let collectionView: UICollectionView
   private var model: MainScreenModel?
+  private let lottieAnimationView = LottieAnimationView(name: RandomAsset.filmsLoader.name)
   
   // MARK: - Initialization
   
   override init(frame: CGRect) {
-    super.init(frame: frame)
+    let collectionViewLayout = UICollectionViewFlowLayout()
+    self.collectionViewLayout = collectionViewLayout
+    self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
     
+    super.init(frame: frame)
     configureLayout()
     applyDefaultBehavior()
     configureDataSource()
@@ -152,6 +156,13 @@ final class MainScreenView: MainScreenViewProtocol {
   // MARK: - Internal func
   
   func configureCellsWith(model: MainScreenModel) {
+    if self.model == nil {
+      startLoader()
+      Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { [weak self] _ in
+        self?.stopLoader()
+      }
+    }
+    
     self.model = model
     collectionView.reloadData()
   }
@@ -273,10 +284,22 @@ extension MainScreenView: UICollectionViewDelegate {
 // MARK: - Private
 
 private extension MainScreenView {
+  func startLoader() {
+    lottieAnimationView.isHidden = false
+    collectionView.isHidden = true
+    lottieAnimationView.play()
+  }
+  
+  func stopLoader() {
+    lottieAnimationView.isHidden = true
+    collectionView.isHidden = false
+    lottieAnimationView.stop()
+  }
+  
   func configureLayout() {
     let appearance = Appearance()
     
-    [collectionView].forEach {
+    [collectionView, lottieAnimationView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -290,6 +313,10 @@ private extension MainScreenView {
                                             constant: -appearance.collectionViewInsets.right),
       collectionView.bottomAnchor.constraint(equalTo: bottomAnchor,
                                              constant: -appearance.collectionViewInsets.bottom),
+      
+      lottieAnimationView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      lottieAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor),
+      lottieAnimationView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5)
     ])
   }
   
@@ -310,6 +337,11 @@ private extension MainScreenView {
                                            height: appearance.estimatedRowHeight)
     
     collectionView.delegate = self
+    
+    lottieAnimationView.isHidden = true
+    lottieAnimationView.contentMode = .scaleAspectFit
+    lottieAnimationView.loopMode = .loop
+    lottieAnimationView.animationSpeed = 0.5
   }
 }
 

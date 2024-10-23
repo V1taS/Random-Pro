@@ -52,7 +52,7 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    updateSections(with: false)
+    updateSections()
     setupNavBar()
     moduleOutput?.mainScreenModuleDidLoad()
     NotificationCenter.default.addObserver(self,
@@ -109,8 +109,8 @@ final class MainScreenViewController: MainScreenModule {
     interactor.addLabel(label, for: sectionType)
   }
   
-  func updateStateForSections(with premium: Bool) {
-    updateSections(with: premium)
+  func updateStateForSections() {
+    updateSections()
   }
 }
 
@@ -257,8 +257,10 @@ extension MainScreenViewController: MainScreenFactoryOutput {
 // MARK: - Private
 
 private extension MainScreenViewController {  
-  func updateSections(with premium: Bool) {
-    interactor.getContent {}
+  func updateSections() {
+    interactor.getContent { [weak self] in
+      self?.setupNavBar()
+    }
   }
   
   func setupNavBar() {

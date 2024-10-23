@@ -15,8 +15,10 @@ struct SecretsAPI {
   static var supportMail = ""
   static let notificationPremiumFeatureToggles = "notificationPremiumFeatureToggles"
   
-  static var premiumFeatureToggles: [PremiumFeatureToggleModel] = []
   static var advList: [String: String] = [:]
   static var isHiddenToggleForSection: [String: Bool] = [:]
   static var isToggleForFeature: [String: Bool] = [:]
+  
+  static let userPremiumKey = "userPremiumKey"
+  static let isPremium = UserDefaults.standard.bool(forKey: userPremiumKey)
 }

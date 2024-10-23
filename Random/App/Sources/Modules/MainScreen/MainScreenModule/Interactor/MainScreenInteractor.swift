@@ -46,12 +46,6 @@ protocol MainScreenInteractorInput {
   ///  - for: Тип сеции
   func addLabel(_ label: MainScreenModel.ADVLabel,
                 for sectionType: MainScreenModel.SectionType)
-  
-  /// Проверка Премиум покупок у пользователя
-  func validatePurchase(completion: @escaping () -> Void)
-  
-  /// Обновить Premium для пользователя у секций на главном экране (Feature Toggle)
-  func updatesPremiumFeatureToggle(completion: @escaping () -> Void)
 }
 
 /// Интерактор
@@ -98,13 +92,15 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   func getContent(completion: @escaping () -> Void) {
     if let model = mainScreenModel {
       factory.updateModelWith(oldModel: model,
-                              isPremium: nil) { [weak self] newModel in
+                              isPremium: SecretsAPI.isPremium) { [weak self] newModel in
         self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
       }
     } else {
       factory.createBaseModel { [weak self] newModel in
+        var newModel = newModel
+        newModel.isPremium = SecretsAPI.isPremium
         self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
         completion()
@@ -183,41 +179,6 @@ final class MainScreenInteractor: MainScreenInteractorInput {
       )
       self?.output?.didReceive(model: newModel)
       self?.mainScreenModel = newModel
-    }
-  }
-  
-  func updatesPremiumFeatureToggle(completion: @escaping () -> Void) {
-    guard let model = mainScreenModel else {
-      completion()
-      return
-    }
-    
-    services.featureToggleServices.getPremiumFeatureToggle { [weak self] isPremium in
-      guard let isPremium else {
-        completion()
-        return
-      }
-      
-      self?.factory.updateModelWith(oldModel: model,
-                                    isPremium: isPremium) { [weak self] newModel in
-        self?.mainScreenModel = newModel
-        completion()
-      }
-    }
-  }
-  
-  func validatePurchase(completion: @escaping () -> Void) {
-    guard let model = mainScreenModel else {
-      completion()
-      return
-    }
-    
-    services.appPurchasesService.isValidatePurchase { [weak self] isValidate in
-      let newModel = MainScreenModel(isDarkMode: model.isDarkMode,
-                                     isPremium: isValidate,
-                                     allSections: model.allSections)
-      self?.mainScreenModel = newModel
-      completion()
     }
   }
 }

@@ -29,10 +29,10 @@ final class ConfigurationValueConfigurator: Configurator {
     guard isReachable else { return }
     
     Task {
+      await getPremiumFeatureToggles()
       await getApphud()
       await getKinopoisk()
       await getMostPopularMovies()
-      await getPremiumFeatureToggles()
       await getADVList()
       await getIsHiddenToggleForSection()
       await getIsToggleForFeature()
@@ -82,7 +82,16 @@ private extension ConfigurationValueConfigurator {
     if let jsonString = await getConfigurationValue(forKey: Constants.premiumFeatureTogglesKey),
        let jsonData = jsonString.data(using: .utf8),
        let models = try? decoder.decode([PremiumFeatureToggleModel].self, from: jsonData) {
-      SecretsAPI.premiumFeatureToggles = models
+      
+      await withCheckedContinuation { [weak self] continuation in
+        self?.services.appPurchasesService.isValidatePurchase { [weak self] isValidate in
+          self?.services.featureToggleServices.getPremiumFeatureToggle(models: models) { isPremium in
+            let isPremium = isValidate || isPremium ?? false
+            UserDefaults.standard.set(isPremium, forKey: SecretsAPI.userPremiumKey)
+            return continuation.resume()
+          }
+        }
+      }
     }
   }
   

@@ -16,7 +16,7 @@ struct MainScreenModel: UserDefaultsCodable {
   let isDarkMode: Bool?
   
   /// Доступность премиума в приложении
-  let isPremium: Bool
+  var isPremium: Bool
   
   /// Все секции приложения
   let allSections: [Section]

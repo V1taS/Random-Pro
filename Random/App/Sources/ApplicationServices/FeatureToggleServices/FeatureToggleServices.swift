@@ -20,14 +20,14 @@ protocol FeatureToggleServices {
   func getLabelsFor(section: MainScreenModel.SectionType) -> String
   
   /// Получить премиум
-  func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void)
+  func getPremiumFeatureToggle(models: [PremiumFeatureToggleModel], completion: @escaping (Bool?) -> Void)
 }
 
 final class FeatureToggleServicesImpl: FeatureToggleServices {
   
   // MARK: - Internal func
   
-  func getPremiumFeatureToggle(completion: @escaping (Bool?) -> Void) {
+  func getPremiumFeatureToggle(models: [PremiumFeatureToggleModel], completion: @escaping (Bool?) -> Void) {
     guard let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString else {
       DispatchQueue.main.async {
         completion(nil)
@@ -40,7 +40,7 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
     print("IdentifierForVendor: \(identifierForVendor)")
 #endif
     
-    for model in SecretsAPI.premiumFeatureToggles {
+    for model in models {
       guard let id = model.id,
             let isPremium = model.isPremium,
             identifierForVendor == id else {

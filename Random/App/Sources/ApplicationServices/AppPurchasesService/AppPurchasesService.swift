@@ -72,18 +72,15 @@ final class AppPurchasesServiceImpl: AppPurchasesService {
   }
   
   func isValidatePurchase(completion: @escaping (_ isValidate: Bool) -> Void) {
-    featureToggleServicesImpl.getPremiumFeatureToggle { isPremium in
-      let isPremiumFeatureToggle = isPremium ?? false
-      DispatchQueue.main.async {
-        let isSubscription = Apphud.hasActiveSubscription()
-        let isNonRenewingPurchase = Apphud.isNonRenewingPurchaseActive(
-          productIdentifier: PremiumScreenPurchaseType.lifetime.productIdentifiers
-        )
-        let isNonRenewingPurchaseSale = Apphud.isNonRenewingPurchaseActive(
-          productIdentifier: PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
-        )
-        completion(isSubscription || isNonRenewingPurchase || isNonRenewingPurchaseSale || isPremiumFeatureToggle)
-      }
+    DispatchQueue.main.async {
+      let isSubscription = Apphud.hasActiveSubscription()
+      let isNonRenewingPurchase = Apphud.isNonRenewingPurchaseActive(
+        productIdentifier: PremiumScreenPurchaseType.lifetime.productIdentifiers
+      )
+      let isNonRenewingPurchaseSale = Apphud.isNonRenewingPurchaseActive(
+        productIdentifier: PremiumScreenPurchaseType.lifetimeSale.productIdentifiers
+      )
+      completion(isSubscription || isNonRenewingPurchase || isNonRenewingPurchaseSale)
     }
   }
 }

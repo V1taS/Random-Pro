@@ -158,7 +158,8 @@ final class MainScreenView: MainScreenViewProtocol {
     snapshot.appendSections([.main])
     snapshot.appendItems(model.allSections, toSection: .main)
     DispatchQueue.main.async {
-      self.dataSource?.apply(snapshot, animatingDifferences: true)
+      self.dataSource?.apply(snapshot, animatingDifferences: false)
+      self.collectionView.reloadData()
     }
   }
   

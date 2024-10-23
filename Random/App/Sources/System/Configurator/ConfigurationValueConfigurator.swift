@@ -25,14 +25,6 @@ final class ConfigurationValueConfigurator: Configurator {
   // MARK: - Internal func
   
   func configure() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-      NotificationCenter.default.post(
-        name: Notification.Name(SecretsAPI.notificationPremiumFeatureToggles),
-        object: nil,
-        userInfo: [:]
-      )
-    }
-    
     let isReachable = NetworkReachabilityService()?.isReachable ?? false
     guard isReachable else { return }
     

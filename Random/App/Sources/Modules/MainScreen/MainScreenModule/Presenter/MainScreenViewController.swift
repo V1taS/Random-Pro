@@ -52,6 +52,7 @@ final class MainScreenViewController: MainScreenModule {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    updateSections()
     moduleOutput?.mainScreenModuleDidLoad()
   }
   

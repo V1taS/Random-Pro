@@ -30,6 +30,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: scene)
     let coordinator = RootCoordinator(window, services)
     self.coordinator = coordinator
+    
     coordinator.start()
     self.window = window
     YMPYandexMetricaPush.handleSceneWillConnectToSession(with: connectionOptions)

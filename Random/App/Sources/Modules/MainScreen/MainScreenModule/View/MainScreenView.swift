@@ -8,9 +8,8 @@
 import UIKit
 import FancyUIKit
 import FancyStyle
-import Lottie
 
-/// События которые отправляем из View в Presenter
+/// События, которые отправляем из View в Presenter
 protocol MainScreenViewOutput: AnyObject {
   
   /// Открыть раздел `Number`
@@ -105,11 +104,11 @@ protocol MainScreenViewOutput: AnyObject {
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
 }
 
-/// События которые отправляем от Presenter ко View
+/// События, которые отправляем от Presenter ко View
 protocol MainScreenViewInput {
   
   /// Настройка главного экрана
-  ///  - Parameter model: Моделька
+  /// - Parameter model: Модель
   func configureCellsWith(model: MainScreenModel)
 }
 
@@ -125,18 +124,17 @@ final class MainScreenView: MainScreenViewProtocol {
     case main
   }
   
-  // MARK: - Internal properties
+  // MARK: - Внутренние свойства
   
   weak var output: MainScreenViewOutput?
   
-  // MARK: - Private properties
+  // MARK: - Приватные свойства
   
   private let collectionViewLayout: UICollectionViewFlowLayout
   private let collectionView: UICollectionView
   private var model: MainScreenModel?
-  private let lottieAnimationView = LottieAnimationView(name: RandomAsset.filmsLoader.name)
   
-  // MARK: - Initialization
+  // MARK: - Инициализация
   
   override init(frame: CGRect) {
     let collectionViewLayout = UICollectionViewFlowLayout()
@@ -153,13 +151,12 @@ final class MainScreenView: MainScreenViewProtocol {
     fatalError("init(coder:) has not been implemented")
   }
   
-  // MARK: - Internal func
+  // MARK: - Внутренние методы
   
   func configureCellsWith(model: MainScreenModel) {
     if self.model == nil {
-      startLoader()
-      Timer.scheduledTimer(withTimeInterval: 0.01, repeats: false) { [weak self] _ in
-        self?.stopLoader()
+      Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+        LaunchScreenManager.shared.stopLaunchScreen()
       }
     }
     
@@ -281,25 +278,25 @@ extension MainScreenView: UICollectionViewDelegate {
   }
 }
 
-// MARK: - Private
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension MainScreenView: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let appearance = Appearance()
+    return CGSize(width: appearance.cellWidthConstant,
+                  height: appearance.estimatedRowHeight)
+  }
+}
+
+// MARK: - Приватные методы
 
 private extension MainScreenView {
-  func startLoader() {
-    lottieAnimationView.isHidden = false
-    collectionView.isHidden = true
-    lottieAnimationView.play()
-  }
-  
-  func stopLoader() {
-    lottieAnimationView.isHidden = true
-    collectionView.isHidden = false
-    lottieAnimationView.stop()
-  }
-  
   func configureLayout() {
     let appearance = Appearance()
     
-    [collectionView, lottieAnimationView].forEach {
+    [collectionView].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
     }
@@ -312,11 +309,7 @@ private extension MainScreenView {
       collectionView.rightAnchor.constraint(equalTo: rightAnchor,
                                             constant: -appearance.collectionViewInsets.right),
       collectionView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                             constant: -appearance.collectionViewInsets.bottom),
-      
-      lottieAnimationView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      lottieAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      lottieAnimationView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.5)
+                                             constant: -appearance.collectionViewInsets.bottom)
     ])
   }
   
@@ -337,27 +330,10 @@ private extension MainScreenView {
                                            height: appearance.estimatedRowHeight)
     
     collectionView.delegate = self
-    
-    lottieAnimationView.isHidden = true
-    lottieAnimationView.contentMode = .scaleAspectFit
-    lottieAnimationView.loopMode = .loop
-    lottieAnimationView.animationSpeed = 0.5
   }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-
-extension MainScreenView: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView,
-                      layout collectionViewLayout: UICollectionViewLayout,
-                      sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let appearance = Appearance()
-    return CGSize(width: appearance.cellWidthConstant,
-                  height: appearance.estimatedRowHeight)
-  }
-}
-
-// MARK: - Appearance
+// MARK: - Внешний вид
 
 private extension MainScreenView {
   struct Appearance {

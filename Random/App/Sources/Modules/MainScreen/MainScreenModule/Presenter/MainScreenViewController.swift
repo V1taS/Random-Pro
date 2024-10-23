@@ -23,6 +23,7 @@ final class MainScreenViewController: MainScreenModule {
   private let factory: MainScreenFactoryInput
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
   private var isPremiumDEBUG: Bool?
+  private var firstStart: Bool = true
   
   // MARK: - Initialization
   
@@ -65,6 +66,11 @@ final class MainScreenViewController: MainScreenModule {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    
+    if firstStart {
+      LaunchScreenManager.shared.startLaunchScreen()
+      firstStart = false
+    }
     
     moduleOutput?.mainScreenModuleDidAppear()
   }

@@ -63,7 +63,7 @@ final class FeatureToggleServicesImpl: FeatureToggleServices {
   }
   
   func isHiddenToggleFor(section: MainScreenModel.SectionType) -> Bool {
-    SecretsAPI.isHiddenToggleForSection[section.rawValue] ?? true
+    SecretsAPI.isHiddenToggleForSection[section.rawValue] ?? false
   }
   
   func isToggleFor(feature: FeatureToggleType) -> Bool {

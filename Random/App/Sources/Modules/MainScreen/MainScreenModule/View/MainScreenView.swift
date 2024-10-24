@@ -154,12 +154,6 @@ final class MainScreenView: MainScreenViewProtocol {
   // MARK: - Внутренние методы
   
   func configureCellsWith(model: MainScreenModel) {
-    if self.model == nil {
-      Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-        LaunchScreenManager.shared.stopLaunchScreen()
-      }
-    }
-    
     self.model = model
     collectionView.reloadData()
   }

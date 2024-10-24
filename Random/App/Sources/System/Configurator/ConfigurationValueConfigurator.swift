@@ -26,7 +26,9 @@ final class ConfigurationValueConfigurator: Configurator {
   
   func configure() {
     let isReachable = NetworkReachabilityService()?.isReachable ?? false
-    guard isReachable else { return }
+    guard isReachable else {
+      return
+    }
     
     Task {
       await getPremiumFeatureToggles()

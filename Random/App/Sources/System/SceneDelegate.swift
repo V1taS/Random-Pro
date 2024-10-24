@@ -20,6 +20,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   private var coordinator: RootCoordinatorProtocol?
   private let services: ApplicationServices = ApplicationServicesImpl.shared
   private var deepLimkURL: URL?
+  private let configurators: [Configurator] = [
+    ConfigurationValueConfigurator(services: ApplicationServicesImpl.shared)
+  ]
   
   // MARK: - Internal func
   
@@ -45,7 +48,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   func sceneDidBecomeActive(_ scene: UIScene) {
-    configurators().configure()
+    configurators.configure()
     
     if let deepLimkURL {
       services.deepLinkService.eventHandlingWith(deepLimkURL: deepLimkURL)
@@ -84,11 +87,5 @@ private extension SceneDelegate {
     }
     
     self.deepLimkURL = dynamiclink
-  }
-  
-  func configurators() -> [Configurator] {
-    return [
-      ConfigurationValueConfigurator(services: ApplicationServicesImpl.shared)
-    ]
   }
 }

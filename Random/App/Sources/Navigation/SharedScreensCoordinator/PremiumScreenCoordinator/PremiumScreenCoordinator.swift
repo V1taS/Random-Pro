@@ -108,6 +108,7 @@ extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
   }
   
   func didReceiveRestoredSuccess() {
+    UserDefaults.standard.set(true, forKey: SecretsAPI.userPremiumKey)
     services.notificationService.showPositiveAlertWith(title: Appearance().purchaseRestoredTitle,
                                                        glyph: true,
                                                        timeout: nil,
@@ -129,6 +130,7 @@ extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
   }
 
   func didReceiveSubscriptionPurchaseSuccess() {
+    UserDefaults.standard.set(true, forKey: SecretsAPI.userPremiumKey)
     services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
                                                        glyph: true,
                                                        timeout: nil,
@@ -136,6 +138,7 @@ extension PremiumScreenCoordinator: PremiumScreenModuleOutput {
   }
 
   func didReceiveOneTimePurchaseSuccess() {
+    UserDefaults.standard.set(true, forKey: SecretsAPI.userPremiumKey)
     services.notificationService.showPositiveAlertWith(title: Appearance().premiumAccessActivatedTitle,
                                                        glyph: true,
                                                        timeout: nil,

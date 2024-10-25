@@ -44,6 +44,7 @@ final class FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionCoordinat
   
   var finishFlow: (() -> Void)?
   weak var output: FortuneWheelEditSectionCoordinatorOutput?
+  var isLimitedRangeLocation = false
   
   // MARK: - Private property
   
@@ -66,7 +67,10 @@ final class FortuneWheelEditSectionCoordinator: FortuneWheelEditSectionCoordinat
   // MARK: - Internal func
   
   func start() {
-    var fortuneWheelEditSectionModule = FortuneWheelEditSectionAssembly().createModule(services: services)
+    var fortuneWheelEditSectionModule = FortuneWheelEditSectionAssembly().createModule(
+      services: services,
+      isLimitedRangeLocation: isLimitedRangeLocation
+    )
     self.fortuneWheelEditSectionModule = fortuneWheelEditSectionModule
     fortuneWheelEditSectionModule.moduleOutput = self
     navigationController.pushViewController(fortuneWheelEditSectionModule, animated: true)

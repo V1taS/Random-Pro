@@ -41,6 +41,7 @@ final class ListScreenCoordinator: ListScreenCoordinatorProtocol {
   private var settingsScreenCoordinator: SettingsScreenCoordinatorProtocol?
   private var listResultScreenCoordinator: ListResultScreenCoordinatorProtocol?
   private var listAddItemsScreenCoordinator: ListAddItemsScreenCoordinatorProtocol?
+  private var fortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionCoordinator?
   
   // MARK: - Initialization
   
@@ -117,6 +118,26 @@ extension ListScreenCoordinator: ListScreenModuleOutput {
   }
 }
 
+// MARK: - FortuneWheelSelectedSectionCoordinatorOutput
+
+extension ListScreenCoordinator: FortuneWheelSelectedSectionCoordinatorOutput {
+  func didReceiveNew(model: FortuneWheelModel) {
+    let models: [ListScreenModel.Section] = model.sections.compactMap {
+      let objects = $0.objects.compactMap({
+        ListScreenModel.TextModel(id: $0.id, text: $0.text)
+      })
+      return ListScreenModel.Section(
+        isSelected: $0.isSelected,
+        title: $0.title,
+        icon: $0.icon,
+        objects: objects
+      )
+    }
+    listScreenModule?.updateContentWith(models: models)
+    updateSettingsScreenContent()
+  }
+}
+
 // MARK: - SettingsScreenCoordinatorOutput
 
 extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
@@ -133,21 +154,39 @@ extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
   }
   
   func createListAction() {
-    let listAddItemsScreenCoordinator = ListAddItemsScreenCoordinator(navigationController)
-    self.listAddItemsScreenCoordinator = listAddItemsScreenCoordinator
-    self.listAddItemsScreenCoordinator?.output = self
-    self.listAddItemsScreenCoordinator?.start()
-    listAddItemsScreenCoordinator.finishFlow = { [weak self] in
-      self?.listAddItemsScreenCoordinator = nil
+    let fortuneWheelSelectedSectionCoordinator = FortuneWheelSelectedSectionCoordinator(navigationController, services)
+    self.fortuneWheelSelectedSectionCoordinator = fortuneWheelSelectedSectionCoordinator
+    self.fortuneWheelSelectedSectionCoordinator?.output = self
+    fortuneWheelSelectedSectionCoordinator.isPushViewController = true
+    self.fortuneWheelSelectedSectionCoordinator?.start()
+    fortuneWheelSelectedSectionCoordinator.finishFlow = { [weak self] in
+      self?.fortuneWheelSelectedSectionCoordinator = nil
     }
     
     guard let model = listScreenModule?.returnCurrentModel() else {
       return
     }
-    let models = model.allItems.map {
-      return ListAddItemsScreenModel.TextModel(id: $0.id, text: $0.text)
+    
+    let sections: [FortuneWheelModel.Section] = model.allItems.compactMap {
+      let objects: [FortuneWheelModel.TextModel] = $0.objects.compactMap {
+        FortuneWheelModel.TextModel(id: $0.id, text: $0.text)
+      }
+      return FortuneWheelModel.Section(
+        isSelected: $0.isSelected,
+        title: $0.title,
+        icon: $0.icon,
+        objects: objects
+      )
     }
-    listAddItemsScreenCoordinator.updateContentWith(models: models)
+    fortuneWheelSelectedSectionCoordinator.setDefault(
+      model: .init(
+        result: nil,
+        listResult: [],
+        style: .regular,
+        sections: sections,
+        isEnabledFeedback: false
+      )
+    )
   }
   
   func listOfObjectsAction() {
@@ -161,19 +200,6 @@ extension ListScreenCoordinator: SettingsScreenCoordinatorOutput {
     
     let model = listScreenModule?.returnCurrentModel()
     listResultScreenCoordinator.setContentsFrom(list: model?.generetionItems ?? [])
-  }
-}
-
-// MARK: - ListAddItemsScreenCoordinatorOutput
-
-extension ListScreenCoordinator: ListAddItemsScreenCoordinatorOutput {
-  func didReceiveText(models: [ListAddItemsScreenModel.TextModel]) {
-    let models = models.map {
-      return ListScreenModel.TextModel(id: $0.id, text: $0.text)
-    }
-    listScreenModule?.updateContentWith(models: models)
-    
-    updateSettingsScreenContent()
   }
 }
 
@@ -192,7 +218,7 @@ private extension ListScreenCoordinator {
     settingsScreenCoordinator?.setupDefaultsSettings(for: .list(
       withoutRepetition: model.withoutRepetition,
       generatedTextCount: "\(model.generetionItems.count)",
-      allTextCount: "\(model.allItems.count)",
+      allTextCount: "\(model.allItems.filter({$0.isSelected}).first?.objects.count ?? .zero)",
       lastItem: "\(model.generetionItems.last ?? "?")"
     ))
   }

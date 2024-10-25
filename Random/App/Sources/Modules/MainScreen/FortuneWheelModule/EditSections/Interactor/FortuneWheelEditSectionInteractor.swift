@@ -132,7 +132,7 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
   func deleteObject(_ object: String?) {
     guard let object = object,
           var section = cacheCreatedSection,
-          let objectIndex = section.objects.firstIndex(of: object),
+          let objectIndex = section.objects.map({$0.text}).firstIndex(of: object),
           let cacheModel else {
       return
     }
@@ -170,7 +170,7 @@ final class FortuneWheelEditSectionInteractor: FortuneWheelEditSectionInteractor
       )
     }
     
-    section.objects.append(newText)
+    section.objects.append(.init(id: UUID().uuidString, text: newText))
     cacheCreatedSection = section
     
     let updatedModel = updateSectionsAndCreateModel(from: cacheModel, with: section)

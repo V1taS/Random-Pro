@@ -41,6 +41,9 @@ protocol FortuneWheelSelectedSectionModuleInput {
   /// Запросить текущую модель
   func returnCurrentModel() -> FortuneWheelModel?
   
+  /// Способ отерытия экрана
+  var isPushViewController: Bool { get set }
+  
   /// События которые отправляем из `текущего модуля` в `другой модуль`
   var moduleOutput: FortuneWheelSelectedSectionModuleOutput? { get set }
 }
@@ -54,6 +57,7 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
   // MARK: - Internal properties
   
   weak var moduleOutput: FortuneWheelSelectedSectionModuleOutput?
+  var isPushViewController: Bool = false
   
   // MARK: - Private properties
   
@@ -104,6 +108,17 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
   }
   
   func setDefault(model: FortuneWheelModel) {
+    var model = model
+    if model.sections.count == 1, let firstSection = model.sections.first {
+      let newFirstSection: FortuneWheelModel.Section = .init(
+        isSelected: true,
+        title: firstSection.title,
+        icon: firstSection.icon,
+        objects: firstSection.objects
+      )
+      model.sections = [newFirstSection]
+    }
+    
     interactor.update(model: model)
     let models = factory.createListModel(model)
     moduleView.updateContentWith(models: models)
@@ -153,10 +168,13 @@ private extension FortuneWheelSelectedSectionViewController {
     let appearance = Appearance()
     title = appearance.title
     
-    navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.closeButtonIcon,
-                                                       style: .plain,
-                                                       target: self,
-                                                       action: #selector(closeButtonAction))
+    if !isPushViewController {
+      navigationItem.leftBarButtonItem = UIBarButtonItem(image: appearance.closeButtonIcon,
+                                                         style: .plain,
+                                                         target: self,
+                                                         action: #selector(closeButtonAction))
+    }
+
     navigationItem.rightBarButtonItem = UIBarButtonItem(image: appearance.addButtonIcon,
                                                         style: .plain,
                                                         target: self,

@@ -34,7 +34,7 @@ struct FortuneWheelModel: UserDefaultsCodable {
     let id: String
     
     /// Секция выбрана
-    let isSelected: Bool
+    var isSelected: Bool
     
     /// Низвание секции
     var title: String
@@ -43,15 +43,25 @@ struct FortuneWheelModel: UserDefaultsCodable {
     var icon: String?
     
     /// Объекты
-    var objects: [String]
+    var objects: [TextModel]
     
-    init(isSelected: Bool, title: String, icon: String?, objects: [String]) {
+    init(isSelected: Bool, title: String, icon: String?, objects: [TextModel]) {
       self.isSelected = isSelected
       self.title = title
       self.icon = icon
       self.objects = objects
       id = UUID().uuidString
     }
+  }
+  
+  /// Моделька текста
+  struct TextModel: UserDefaultsCodable, Hashable {
+    
+    /// ID текста
+    let id: String
+    
+    /// Значение текста
+    let text: String?
   }
   
   // MARK: - Style

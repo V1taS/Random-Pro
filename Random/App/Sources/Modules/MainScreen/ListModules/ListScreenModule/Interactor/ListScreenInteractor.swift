@@ -39,7 +39,7 @@ protocol ListScreenInteractorInput {
   
   /// Обновить контент
   ///  - Parameter models: Модельки с текстами
-  func updateContentWith(models: [ListScreenModel.TextModel])
+  func updateContentWith(models: [ListScreenModel.Section])
   
   /// Обновить контент
   ///  - Parameter value: Без повторений
@@ -112,11 +112,12 @@ final class ListScreenInteractor: ListScreenInteractorInput {
     }
   }
   
-  func updateContentWith(models: [ListScreenModel.TextModel]) {
+  func updateContentWith(models: [ListScreenModel.Section]) {
     guard let model = listScreenModel else {
       output?.didReceiveError()
       return
     }
+
     let newModel = ListScreenModel(
       withoutRepetition: model.withoutRepetition,
       allItems: models,
@@ -149,8 +150,8 @@ final class ListScreenInteractor: ListScreenInteractorInput {
     }
     buttonCounterService.onButtonClick()
     
-    if model.withoutRepetition {
-      let uniqueItems: [ListScreenModel.TextModel] = model.allItems.difference(from: model.tempUniqueItems)
+    if model.withoutRepetition, let objects = model.allItems.filter({$0.isSelected}).first?.objects {
+      let uniqueItems: [ListScreenModel.TextModel] = objects.difference(from: model.tempUniqueItems)
 
       guard let randomItem = uniqueItems.shuffled().first else {
         output?.didReceiveRangeUniqueItemsError()
@@ -163,7 +164,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
       var tempUniqueItems = model.tempUniqueItems
       tempUniqueItems.append(randomItem)
       
-      if tempUniqueItems.count > model.allItems.count {
+      if tempUniqueItems.count > model.allItems.filter({$0.isSelected}).first?.objects.count ?? .zero {
         output?.didReceiveRangeUniqueItemsError()
       } else {
         let newModel = ListScreenModel(
@@ -177,7 +178,7 @@ final class ListScreenInteractor: ListScreenInteractorInput {
         output?.didReceiveModel(newModel)
       }
     } else {
-      guard let randomItem = model.allItems.shuffled().first else {
+      guard let randomItem = model.allItems.filter({$0.isSelected}).first?.objects.shuffled().first else {
         output?.didReceiveIsEmptyError()
         return
       }
@@ -230,7 +231,7 @@ private extension Array where Element: Hashable {
 // MARK: - Private
 
 private extension ListScreenInteractor {
-  func generateFakeItems() -> [ListScreenModel.TextModel] {
+  func generateFakeItems() -> [ListScreenModel.Section] {
     let secondStartApp = UserDefaults.standard.bool(forKey: Appearance().keySecondStartApp)
     let appearance = Appearance()
     guard !secondStartApp else {
@@ -238,18 +239,58 @@ private extension ListScreenInteractor {
     }
     UserDefaults.standard.set(true, forKey: Appearance().keySecondStartApp)
     
-    let fakeList: [String] = [
-      "\(appearance.football) ⚽️",
-      "\(appearance.cleaning) 🧼",
-      "\(appearance.walk) 🏃🏼‍♀️",
-      "\(appearance.goOnDate) 🥰",
-      "\(appearance.callYourParents) 🤳🏼"
+    return [
+      ListScreenModel.Section(
+        isSelected: true,
+        title: appearance.football,
+        icon: "⚽️",
+        objects: [
+          .init(id: UUID().uuidString, text: "1"),
+          .init(id: UUID().uuidString, text: "2"),
+          .init(id: UUID().uuidString, text: "3")
+        ]
+      ),
+      ListScreenModel.Section(
+        isSelected: false,
+        title: appearance.cleaning,
+        icon: "🧼",
+        objects: [
+          .init(id: UUID().uuidString, text: "1"),
+          .init(id: UUID().uuidString, text: "2"),
+          .init(id: UUID().uuidString, text: "3")
+        ]
+      ),
+      ListScreenModel.Section(
+        isSelected: false,
+        title: appearance.walk,
+        icon: "🏃🏼‍♀️",
+        objects: [
+          .init(id: UUID().uuidString, text: "1"),
+          .init(id: UUID().uuidString, text: "2"),
+          .init(id: UUID().uuidString, text: "3")
+        ]
+      ),
+      ListScreenModel.Section(
+        isSelected: false,
+        title: appearance.goOnDate,
+        icon: "🥰",
+        objects: [
+          .init(id: UUID().uuidString, text: "1"),
+          .init(id: UUID().uuidString, text: "2"),
+          .init(id: UUID().uuidString, text: "3")
+        ]
+      ),
+      ListScreenModel.Section(
+        isSelected: false,
+        title: appearance.callYourParents,
+        icon: "🤳🏼",
+        objects: [
+          .init(id: UUID().uuidString, text: "1"),
+          .init(id: UUID().uuidString, text: "2"),
+          .init(id: UUID().uuidString, text: "3")
+        ]
+      ),
     ]
-    
-    return fakeList.map {
-      return ListScreenModel.TextModel(id: UUID().uuidString,
-                                       text: $0)
-    }
   }
 }
 

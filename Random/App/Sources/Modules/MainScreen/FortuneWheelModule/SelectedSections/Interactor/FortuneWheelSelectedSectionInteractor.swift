@@ -61,7 +61,20 @@ final class FortuneWheelSelectedSectionInteractor: FortuneWheelSelectedSectionIn
   }
   
   func deleteSection(_ section: FortuneWheelModel.Section) {
-    let sections = cacheModel?.sections.filter { $0.id != section.id } ?? []
+    var sections = cacheModel?.sections.filter { $0.id != section.id } ?? []
+    
+    if section.isSelected, let firstSection = sections.first {
+      let newSection = FortuneWheelModel.Section(
+        isSelected: true,
+        title: firstSection.title,
+        icon: firstSection.icon,
+        objects: firstSection.objects
+      )
+      
+      sections.remove(at: .zero)
+      sections.insert(newSection, at: .zero)
+    }
+    
     updateModel(with: sections) { [weak self] newModel in
       self?.output?.didReceive(model: newModel)
     }

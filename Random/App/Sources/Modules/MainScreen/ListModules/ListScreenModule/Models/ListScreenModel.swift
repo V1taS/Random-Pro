@@ -15,7 +15,7 @@ struct ListScreenModel: UserDefaultsCodable, Hashable {
   let withoutRepetition: Bool
   
   /// Спсиок элементов для показа
-  let allItems: [TextModel]
+  var allItems: [Section]
   
   /// Временное хранилище для уникальных элементов
   let tempUniqueItems: [TextModel]
@@ -34,5 +34,33 @@ struct ListScreenModel: UserDefaultsCodable, Hashable {
     
     /// Значение текста
     let text: String?
+  }
+  
+  // MARK: - Section
+  
+  struct Section: UserDefaultsCodable, Hashable {
+    
+    /// ID секции
+    let id: String
+    
+    /// Секция выбрана
+    let isSelected: Bool
+    
+    /// Низвание секции
+    var title: String
+    
+    /// Смайлик секции
+    var icon: String?
+    
+    /// Объекты
+    var objects: [TextModel]
+    
+    init(isSelected: Bool, title: String, icon: String?, objects: [TextModel]) {
+      self.isSelected = isSelected
+      self.title = title
+      self.icon = icon
+      self.objects = objects
+      id = UUID().uuidString
+    }
   }
 }

@@ -37,6 +37,7 @@ final class FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionC
   
   var finishFlow: (() -> Void)?
   weak var output: FortuneWheelSelectedSectionCoordinatorOutput?
+  var isPushViewController: Bool = false
   
   // MARK: - Private property
   
@@ -65,10 +66,15 @@ final class FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionC
     var fortuneWheelSelectedSectionModule = FortuneWheelSelectedSectionAssembly().createModule()
     self.fortuneWheelSelectedSectionModule = fortuneWheelSelectedSectionModule
     fortuneWheelSelectedSectionModule.moduleOutput = self
+    fortuneWheelSelectedSectionModule.isPushViewController = isPushViewController
     
-    let anyNavigationController = UINavigationController(rootViewController: fortuneWheelSelectedSectionModule)
-    self.anyNavigationController = anyNavigationController
-    navigationController.present(anyNavigationController, animated: true)
+    if isPushViewController {
+      navigationController.pushViewController(fortuneWheelSelectedSectionModule, animated: true)
+    } else {
+      let anyNavigationController = UINavigationController(rootViewController: fortuneWheelSelectedSectionModule)
+      self.anyNavigationController = anyNavigationController
+      navigationController.present(anyNavigationController, animated: true)
+    }
   }
   
   func setDefault(model: FortuneWheelModel) {
@@ -84,17 +90,23 @@ extension FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionMod
   }
   
   func editCurrentSectionWith(section: FortuneWheelModel.Section) {
-    guard let model = fortuneWheelSelectedSectionModule?.returnCurrentModel(),
-          let anyNavigationController else {
+    guard let model = fortuneWheelSelectedSectionModule?.returnCurrentModel() else {
       return
     }
     
+    var navigationController: UINavigationController = navigationController
+    if let anyNavigationController {
+      navigationController = anyNavigationController
+    }
+    
+    var isLimitedRangeLocation = isPushViewController
     let fortuneWheelEditSectionCoordinator = FortuneWheelEditSectionCoordinator(
-      anyNavigationController,
+      navigationController,
       services
     )
     self.fortuneWheelEditSectionCoordinator = fortuneWheelEditSectionCoordinator
     fortuneWheelEditSectionCoordinator.output = self
+    fortuneWheelEditSectionCoordinator.isLimitedRangeLocation = isLimitedRangeLocation
     fortuneWheelEditSectionCoordinator.start()
     fortuneWheelEditSectionCoordinator.finishFlow = { [weak self] in
       self?.fortuneWheelEditSectionCoordinator = nil
@@ -107,12 +119,18 @@ extension FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionMod
   }
   
   func createNewSection() {
-    guard let model = fortuneWheelSelectedSectionModule?.returnCurrentModel(),
-          let anyNavigationController else {
+    guard let model = fortuneWheelSelectedSectionModule?.returnCurrentModel() else {
       return
     }
     
-    let fortuneWheelEditSectionCoordinator = FortuneWheelEditSectionCoordinator(anyNavigationController, services)
+    var isLimitedRangeLocation = isPushViewController
+    var navigationController: UINavigationController = navigationController
+    if let anyNavigationController {
+      navigationController = anyNavigationController
+    }
+    
+    let fortuneWheelEditSectionCoordinator = FortuneWheelEditSectionCoordinator(navigationController, services)
+    fortuneWheelEditSectionCoordinator.isLimitedRangeLocation = isLimitedRangeLocation
     self.fortuneWheelEditSectionCoordinator = fortuneWheelEditSectionCoordinator
     fortuneWheelEditSectionCoordinator.output = self
     fortuneWheelEditSectionCoordinator.start()

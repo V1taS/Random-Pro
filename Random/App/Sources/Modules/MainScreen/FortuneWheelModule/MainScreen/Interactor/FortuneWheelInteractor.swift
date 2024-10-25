@@ -132,7 +132,7 @@ final class FortuneWheelInteractor: FortuneWheelInteractorInput {
     
     if var section = sections.first {
       if section.objects.isEmpty {
-        section.objects.append(" ")
+        section.objects.append(.init(id: UUID().uuidString, text: " "))
       }
       let newModel = updateSectionsAndCreateModel(from: model, with: section)
       output?.didReceive(model: newModel)
@@ -193,7 +193,9 @@ private extension FortuneWheelInteractor {
         isSelected: index == .zero ? true : false,
         title: value.title,
         icon: value.icon,
-        objects: value.objects
+        objects: value.objects.compactMap {
+          FortuneWheelModel.TextModel(id: UUID().uuidString, text: $0)
+        }
       )
     }
   }

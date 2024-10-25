@@ -26,7 +26,7 @@ extension FortuneWheelModel {
       
       if selectedSection.objects.count > .zero && selectedSection.objects.count <= 3 {
         objects = Array(
-          repeating: selectedSection.objects,
+          repeating: selectedSection.objects.compactMap(\.text),
           count: 3
         ).flatMap {
           $0
@@ -36,7 +36,7 @@ extension FortuneWheelModel {
         
       } else if selectedSection.objects.count > 3 && selectedSection.objects.count < 5 {
         objects = Array(
-          repeating: selectedSection.objects,
+          repeating: selectedSection.objects.compactMap(\.text),
           count: 2
         ).flatMap {
           $0
@@ -44,7 +44,7 @@ extension FortuneWheelModel {
           ($1, $0 % selectedSection.objects.count)
         }
       } else {
-        objects = selectedSection.objects.enumerated().map {
+        objects = selectedSection.objects.compactMap(\.text).enumerated().map {
           ($1, $0)
         }
       }

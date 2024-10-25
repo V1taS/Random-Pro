@@ -42,7 +42,7 @@ final class FortuneWheelEditSectionFactory: FortuneWheelEditSectionFactoryInput 
     
     if let objects = section?.objects {
       objects.forEach { section in
-        tableViewModels.append(.wheelObject(section))
+        tableViewModels.append(.wheelObject(section.text ?? ""))
         tableViewModels.append(.divider)
       }
     }

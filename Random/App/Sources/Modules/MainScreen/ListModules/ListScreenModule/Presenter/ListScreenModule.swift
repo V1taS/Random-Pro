@@ -45,7 +45,7 @@ protocol ListScreenModuleInput {
   
   /// Обновить контент
   ///  - Parameter models: Модельки с текстами
-  func updateContentWith(models: [ListScreenModel.TextModel])
+  func updateContentWith(models: [ListScreenModel.Section])
   
   /// Обновить контент
   ///  - Parameter value: Без повторений
@@ -121,7 +121,7 @@ final class ListScreenViewController: ListScreenModule {
     interactor.returnCurrentModel()
   }
   
-  func updateContentWith(models: [ListScreenModel.TextModel]) {
+  func updateContentWith(models: [ListScreenModel.Section]) {
     interactor.updateContentWith(models: models)
   }
   

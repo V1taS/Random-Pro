@@ -67,6 +67,7 @@ final class FortuneWheelEditSectionView: FortuneWheelEditSectionViewProtocol {
       }
     }
   }
+  var isLimitedRangeLocation = false
   
   // MARK: - Private properties
   
@@ -120,7 +121,7 @@ extension FortuneWheelEditSectionView: UITextFieldDelegate {
   func textField(_ textField: UITextField,
                  shouldChangeCharactersIn range: NSRange,
                  replacementString string: String) -> Bool {
-    if range.location >= 20 {
+    if range.location >= 20, !isLimitedRangeLocation {
       return false
     }
     

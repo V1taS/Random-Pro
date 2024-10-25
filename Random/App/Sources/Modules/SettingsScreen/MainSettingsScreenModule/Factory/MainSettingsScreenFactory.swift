@@ -51,17 +51,6 @@ final class MainSettingsScreenFactory: MainSettingsScreenFactoryInput {
         return isDarkMode ? 1 : 2
       }
       
-#if DEBUG
-      tableViewModels.append(.squircleImageAndLabelWithSwitchControl(
-        squircleBGColors: [fancyColor.only.primaryRed,
-                           fancyColor.only.primaryPink],
-        leftSideImage: appearance.primiumDEBUGImage,
-        leftSideImageColor: fancyColor.only.primaryWhite,
-        titleText: appearance.primiumDEBUGTitle,
-        isResultSwitch: model.isPremium
-      ))
-#endif
-      
       tableViewModels.append(.squircleImageAndLabelWithSegmentedControl(
         squircleBGColors: [fancyColor.only.primaryBlue,
                            fancyColor.only.primaryBlue],

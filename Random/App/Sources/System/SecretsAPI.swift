@@ -20,5 +20,7 @@ struct SecretsAPI {
   static var isToggleForFeature: [String: Bool] = [:]
   
   static let userPremiumKey = "userPremiumKey"
-  static let isPremium = UserDefaults.standard.bool(forKey: userPremiumKey)
+  static var isPremium: Bool {
+    UserDefaults.standard.bool(forKey: userPremiumKey)
+  }
 }

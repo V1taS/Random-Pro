@@ -22,7 +22,6 @@ final class MainScreenViewController: MainScreenModule {
   private let moduleView: MainScreenViewProtocol
   private let factory: MainScreenFactoryInput
   private let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-  private var isPremiumDEBUG: Bool?
   
   // MARK: - Initialization
   
@@ -77,7 +76,6 @@ final class MainScreenViewController: MainScreenModule {
   
   func savePremium(_ isEnabled: Bool) {
     interactor.savePremium(isEnabled)
-    isPremiumDEBUG = isEnabled
     setupNavBar()
   }
   

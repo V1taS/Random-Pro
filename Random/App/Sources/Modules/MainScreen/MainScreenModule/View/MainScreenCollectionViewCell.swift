@@ -40,7 +40,7 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
     let isShowADVLabel: Bool
     
     switch section.advLabel {
-    case .hit, .custom, .new:
+    case .hit, .custom, .new, .adv:
       isShowADVLabel = true
     case .none:
       isShowADVLabel = false
@@ -60,10 +60,15 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
     
     mainCardView.configureWith(
       imageCard: imageCard,
-      titleCard: section.type.titleSection,
+      titleCard: section.type.isADV ? section.advDescription ?? "" : section.type.titleSection,
       isShowADVLabel: isShowADVLabel,
       titleADVText: section.advLabel.title,
-      isDisabled: isDisabled
+      isDisabled: isDisabled,
+      gradientColors: nil,
+      gradientDVLabel: section.type.isADV ? [.blue.withAlphaComponent(0.3), .blue.withAlphaComponent(0.1)] : [
+        .fancy.only.primaryRed,
+        .fancy.only.primaryPink
+      ]
     )
   }
 }

@@ -96,6 +96,9 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Мемы`
   func openMemes()
   
+  /// Открыть рекламу
+  func openADV(urlString: String?)
+  
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
@@ -151,7 +154,12 @@ final class MainScreenView: MainScreenViewProtocol {
   // MARK: - Внутренние методы
   
   func configureCellsWith(model: MainScreenModel) {
-    self.model = model
+    var modelUpdated = model
+    
+    if SecretsAPI.isPremium {
+      modelUpdated.allSections = modelUpdated.allSections.filter({ !$0.type.isADV })
+    }
+    self.model = modelUpdated
     collectionView.reloadData()
   }
   
@@ -262,6 +270,14 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openTruthOrDare()
       case .memes:
         output?.openMemes()
+      case .adv1:
+        output?.openADV(urlString: section.advStringURL)
+      case .adv2:
+        output?.openADV(urlString: section.advStringURL)
+      case .adv3:
+        output?.openADV(urlString: section.advStringURL)
+      case .adv4:
+        output?.openADV(urlString: section.advStringURL)
       }
     }
   }
@@ -327,7 +343,7 @@ private extension MainScreenView {
 private extension MainScreenView {
   struct Appearance {
     let collectionViewInsets: UIEdgeInsets = .zero
-    let estimatedRowHeight: CGFloat = 90
+    let estimatedRowHeight: CGFloat = 100
     let sectionInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     let cellWidthConstant = UIScreen.main.bounds.width * 0.45
   }

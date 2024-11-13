@@ -31,6 +31,7 @@ final class ConfigurationValueConfigurator: Configurator {
     }
     
     Task {
+      await getADVFeatureToggles()
       await getPremiumFeatureToggles()
       await getApphud()
       await getKinopoisk()
@@ -39,14 +40,9 @@ final class ConfigurationValueConfigurator: Configurator {
       await getIsHiddenToggleForSection()
       await getIsToggleForFeature()
       await getSupportMail()
-      DispatchQueue.main.async {
-        NotificationCenter.default.post(
-          name: Notification.Name(SecretsAPI.notificationPremiumFeatureToggles),
-          object: nil,
-          userInfo: [:]
-        )
-      }
+      updateMainScreen()
     }
+    getValidatePremium()
   }
 }
 
@@ -79,19 +75,46 @@ private extension ConfigurationValueConfigurator {
     }
   }
   
+  func getADVFeatureToggles() async {
+    let decoder = JSONDecoder()
+    if let jsonString = await getConfigurationValue(forKey: Constants.advFeatureTogglesKey),
+       let jsonData = jsonString.data(using: .utf8),
+       let models = try? decoder.decode([ADVFeatureToggleModel].self, from: jsonData) {
+      SecretsAPI.advFeatureToggleModels = models
+    }
+  }
+  
+  func getValidatePremium() {
+    DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+      self?.services.appPurchasesService.restorePurchase { [weak self] isValidate in
+        self?.services.featureToggleServices.getPremiumFeatureToggle(
+          models: SecretsAPI.premiumFeatureToggleModel
+        ) { [weak self] isPremium in
+          let isPremium = isValidate || isPremium ?? false
+          UserDefaults.standard.set(isPremium, forKey: SecretsAPI.userPremiumKey)
+          self?.updateMainScreen()
+        }
+      }
+    }
+  }
+  
   func getPremiumFeatureToggles() async {
     let decoder = JSONDecoder()
     if let jsonString = await getConfigurationValue(forKey: Constants.premiumFeatureTogglesKey),
        let jsonData = jsonString.data(using: .utf8),
        let models = try? decoder.decode([PremiumFeatureToggleModel].self, from: jsonData) {
+      SecretsAPI.premiumFeatureToggleModel = models
       
       await withCheckedContinuation { [weak self] continuation in
-        self?.services.appPurchasesService.isValidatePurchase { [weak self] isValidate in
-          self?.services.featureToggleServices.getPremiumFeatureToggle(models: models) { isPremium in
-            let isPremium = isValidate || isPremium ?? false
-            UserDefaults.standard.set(isPremium, forKey: SecretsAPI.userPremiumKey)
-            return continuation.resume()
+        guard let self else {
+          continuation.resume()
+          return
+        }
+        self.services.featureToggleServices.getPremiumFeatureToggle(models: models) { isPremium in
+          if let isPremium, isPremium {
+            UserDefaults.standard.set(true, forKey: SecretsAPI.userPremiumKey)
           }
+          continuation.resume()
         }
       }
     }
@@ -139,6 +162,16 @@ private extension ConfigurationValueConfigurator {
       }
     }
   }
+  
+  func updateMainScreen() {
+    DispatchQueue.main.async {
+      NotificationCenter.default.post(
+        name: Notification.Name(SecretsAPI.notificationPremiumFeatureToggles),
+        object: nil,
+        userInfo: [:]
+      )
+    }
+  }
 }
 
 // MARK: - Private
@@ -153,6 +186,7 @@ private enum Constants {
   static let advListKey = "advList"
   static let isHiddenToggleForSectionKey = "isHiddenToggleForSection"
   static let isToggleForFeatureKey = "isToggleForFeature"
+  static let advFeatureTogglesKey = "advFeatureTogglesKey"
   
   static let cloudKitServiceKey = "CloudKitServiceKey"
 }

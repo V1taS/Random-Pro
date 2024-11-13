@@ -26,6 +26,8 @@ extension MainScreenModel {
         return ""
       case let .custom(text):
         return text
+      case .adv:
+        return appearance.adv
       }
     }
     
@@ -37,6 +39,9 @@ extension MainScreenModel {
     
     /// Текст с бека
     case custom(text: String)
+    
+    /// Реклама
+    case adv
     
     /// Лайбл: `Пусто`
     case none

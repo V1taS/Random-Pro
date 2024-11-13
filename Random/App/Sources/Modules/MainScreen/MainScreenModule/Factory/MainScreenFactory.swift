@@ -291,6 +291,38 @@ extension MainScreenFactory {
           isPremium: true,
           advLabel: .none
         ))
+      case .adv1:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          isHidden: true,
+          isPremium: false,
+          advLabel: .adv
+        ))
+      case .adv2:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          isHidden: true,
+          isPremium: false,
+          advLabel: .adv
+        ))
+      case .adv3:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          isHidden: true,
+          isPremium: false,
+          advLabel: .adv
+        ))
+      case .adv4:
+        allSections.append(MainScreenModel.Section(
+          type: section,
+          isEnabled: true,
+          isHidden: true,
+          isPremium: false,
+          advLabel: .adv
+        ))
       }
     }
     
@@ -539,6 +571,46 @@ extension MainScreenFactory {
               isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
               isPremium: model.isPremium,
               advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
+            ))
+          case .adv1:
+            cardSections.append(MainScreenModel.Section(
+              type: model.type,
+              isEnabled: model.isEnabled,
+              isHidden: model.isHidden,
+              isPremium: model.isPremium,
+              advLabel: .adv,
+              advDescription: model.advDescription,
+              advStringURL: model.advStringURL
+            ))
+          case .adv2:
+            cardSections.append(MainScreenModel.Section(
+              type: model.type,
+              isEnabled: model.isEnabled,
+              isHidden: model.isHidden,
+              isPremium: model.isPremium,
+              advLabel: .adv,
+              advDescription: model.advDescription,
+              advStringURL: model.advStringURL
+            ))
+          case .adv3:
+            cardSections.append(MainScreenModel.Section(
+              type: model.type,
+              isEnabled: model.isEnabled,
+              isHidden: model.isHidden,
+              isPremium: model.isPremium,
+              advLabel: .adv,
+              advDescription: model.advDescription,
+              advStringURL: model.advStringURL
+            ))
+          case .adv4:
+            cardSections.append(MainScreenModel.Section(
+              type: model.type,
+              isEnabled: model.isEnabled,
+              isHidden: model.isHidden,
+              isPremium: model.isPremium,
+              advLabel: .adv,
+              advDescription: model.advDescription,
+              advStringURL: model.advStringURL
             ))
           }
         }

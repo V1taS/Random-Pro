@@ -109,6 +109,10 @@ final class MainScreenViewController: MainScreenModule {
 // MARK: - MainScreenViewOutput
 
 extension MainScreenViewController: MainScreenViewOutput {
+  func openADV(urlString: String?) {
+    moduleOutput?.openADV(urlString: urlString)
+  }
+  
   func openMemes() {
     moduleOutput?.openMemes()
   }

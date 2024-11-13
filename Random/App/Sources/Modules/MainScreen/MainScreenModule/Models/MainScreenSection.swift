@@ -19,7 +19,7 @@ struct MainScreenModel: UserDefaultsCodable {
   var isPremium: Bool
   
   /// Все секции приложения
-  let allSections: [Section]
+  var allSections: [Section]
   
   /// Секция
   struct Section: UserDefaultsCodable, Hashable {
@@ -31,12 +31,18 @@ struct MainScreenModel: UserDefaultsCodable {
     let isEnabled: Bool
     
     /// Секция скрыта
-    let isHidden: Bool
+    var isHidden: Bool
     
     /// Секция входит в состав премиум (Платные секции)
     let isPremium: Bool
     
     /// Тип лайбла
     let advLabel: ADVLabel
+    
+    /// Описание в секции
+    var advDescription: String?
+    
+    /// Ссылка по рекламе
+    var advStringURL: String?
   }
 }

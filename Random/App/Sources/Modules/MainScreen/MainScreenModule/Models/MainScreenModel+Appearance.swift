@@ -13,6 +13,7 @@ extension MainScreenModel {
     let hit = RandomStrings.Localizable.hit
     let new = RandomStrings.Localizable.new
     let premium = RandomStrings.Localizable.premium
+    let adv = RandomStrings.Localizable.adv
     
     let teamsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTeamList
     let numberDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNumbers

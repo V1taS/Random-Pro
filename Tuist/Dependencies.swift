@@ -4,7 +4,7 @@ let dependencies = Dependencies(
   swiftPackageManager: SwiftPackageManagerDependencies(
     [
       .remote(url: "https://github.com/V1taS/FancyUIKit.git",
-              requirement: .exact("1.13")),
+              requirement: .exact("1.15")),
 //      .local(path: "../Fancy/FancyUIKit"),
       .remote(url: "https://github.com/V1taS/FancyNetwork.git",
               requirement: .exact("1.1")),

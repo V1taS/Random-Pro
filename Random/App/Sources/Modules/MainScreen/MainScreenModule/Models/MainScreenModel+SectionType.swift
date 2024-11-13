@@ -15,6 +15,15 @@ extension MainScreenModel {
   // MARK: - MainScreenSection
   
   enum SectionType: String, CaseIterable, UserDefaultsCodable, Hashable {
+    
+    /// Проверка что блок рекламный
+    var isADV: Bool {
+      switch self {
+      case .adv1, .adv2, .adv3, .adv4:
+        return true
+      default: return false
+      }
+    }
         
     /// Название секции
     var titleSection: String {
@@ -86,6 +95,14 @@ extension MainScreenModel {
         return appearance.titleTruthOrDareOther
       case .memes:
         return appearance.titleMemes
+      case .adv1:
+        return ""
+      case .adv2:
+        return ""
+      case .adv3:
+        return ""
+      case .adv4:
+        return ""
       }
     }
     
@@ -149,6 +166,14 @@ extension MainScreenModel {
         return appearance.imageTruthOrDare
       case .memes:
         return appearance.imageMemes
+      case .adv1:
+        return ""
+      case .adv2:
+        return ""
+      case .adv3:
+        return ""
+      case .adv4:
+        return ""
       }
     }
     
@@ -212,6 +237,14 @@ extension MainScreenModel {
         return appearance.fortuneWheelDescriptionForNoPremiumAccess
       case .memes:
         return appearance.memesDescriptionForNoPremiumAccess
+      case .adv1:
+        return ""
+      case .adv2:
+        return ""
+      case .adv3:
+        return ""
+      case .adv4:
+        return ""
       }
     }
     
@@ -226,11 +259,17 @@ extension MainScreenModel {
     /// Раздел: `Да или Нет`
     case yesOrNo
     
+    /// Блок рекламы 1
+    case adv1
+    
     /// Раздел: `Буква`
     case letter
     
     /// Раздел: `Список`
     case list
+    
+    /// Блок рекламы 2
+    case adv2
     
     /// Раздел: `Монета`
     case coin
@@ -244,6 +283,9 @@ extension MainScreenModel {
     /// Раздел: `Лотерея`
     case lottery
     
+    /// Блок рекламы 3
+    case adv3
+    
     /// Раздел: `Контакты`
     case contact
     
@@ -255,6 +297,9 @@ extension MainScreenModel {
     
     /// Раздел: `Бутылочка`
     case bottle
+    
+    /// Блок рекламы 4
+    case adv4
     
     /// Раздел `Камень, ножницы, бумага`
     case rockPaperScissors

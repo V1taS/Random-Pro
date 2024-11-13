@@ -8,6 +8,7 @@
 import UIKit
 import StoreKit
 import FancyNetwork
+import SafariServices
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}
@@ -137,6 +138,10 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
 // MARK: - MainScreenModuleOutput
 
 extension MainScreenCoordinator: MainScreenModuleOutput {
+  func openADV(urlString: String?) {
+    openSafariWith(url: urlString)
+  }
+  
   func mainScreenModuleDidLoad() {
     checkIsUpdateAvailable()
     if self.services.featureToggleServices.isToggleFor(feature: .isAppBroken) {
@@ -621,7 +626,7 @@ private extension MainScreenCoordinator {
     }
     let count = getCounterOnScreenOpen()
     
-    services.appPurchasesService.isValidatePurchase { [weak self] isValidate in
+    services.appPurchasesService.restorePurchase { [weak self] isValidate in
       guard let self, !isValidate, count.isMultiple(of: 10) else { return }
       
       DispatchQueue.main.async {
@@ -759,6 +764,25 @@ private extension MainScreenCoordinator {
       self?.openPremium()
     }))
     mainScreenModule?.present(alert, animated: true, completion: nil)
+  }
+  
+  func openSafariWith(url: String?) {
+    guard let url,
+          let encodedTexts = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+          let filmUrl = URL(string: encodedTexts) else {
+      somethingWentWrong()
+      return
+    }
+    
+    let safariViewController = SFSafariViewController(url: filmUrl)
+    navigationController.present(safariViewController, animated: true, completion: nil)
+  }
+  
+  func somethingWentWrong() {
+    services.notificationService.showNegativeAlertWith(title: RandomStrings.Localizable.somethingWentWrong,
+                                                       glyph: false,
+                                                       timeout: nil,
+                                                       active: {})
   }
 }
 

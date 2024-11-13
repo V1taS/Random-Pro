@@ -18,6 +18,8 @@ struct SecretsAPI {
   static var advList: [String: String] = [:]
   static var isHiddenToggleForSection: [String: Bool] = [:]
   static var isToggleForFeature: [String: Bool] = [:]
+  static var advFeatureToggleModels: [ADVFeatureToggleModel] = []
+  static var premiumFeatureToggleModel: [PremiumFeatureToggleModel] = []
   
   static let userPremiumKey = "userPremiumKey"
   static var isPremium: Bool {

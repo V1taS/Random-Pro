@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FancyUIKit
 
 /// События которые отправляем из Interactor в Presenter
 protocol MainScreenInteractorOutput: AnyObject {
@@ -90,8 +91,14 @@ final class MainScreenInteractor: MainScreenInteractorInput {
   }
   
   func getContent(completion: @escaping () -> Void) {
-    if let model = mainScreenModel {
-      factory.updateModelWith(oldModel: model,
+    if let model = mainScreenModel, model.allSections.count == MainScreenModel.SectionType.allCases.count {
+      var modelUpdate = model
+      modelUpdate = updateMainModelADV(model: modelUpdate, sectionType: .adv1)
+      modelUpdate = updateMainModelADV(model: modelUpdate, sectionType: .adv2)
+      modelUpdate = updateMainModelADV(model: modelUpdate, sectionType: .adv3)
+      modelUpdate = updateMainModelADV(model: modelUpdate, sectionType: .adv4)
+      
+      factory.updateModelWith(oldModel: modelUpdate,
                               isPremium: SecretsAPI.isPremium) { [weak self] newModel in
         self?.mainScreenModel = newModel
         self?.output?.didReceive(model: newModel)
@@ -219,6 +226,66 @@ private extension MainScreenInteractor {
         completion(updatesLabel)
       }
     }
+  }
+  
+  func isRuslocale() -> Bool {
+    guard let localeType = CountryType.getCurrentCountryType() else {
+      return false
+    }
+    
+    switch localeType {
+    case .ru:
+      return true
+    default:
+      return false
+    }
+  }
+  
+  func updateMainModelADV(model: MainScreenModel, sectionType: MainScreenModel.SectionType) -> MainScreenModel {
+    let advManager = ADVManager()
+    let advModel = advManager.getModels()
+    var modelUpdate = model
+    if let adv1Index = modelUpdate.allSections.firstIndex(where: { $0.type == sectionType }) {
+      var section = modelUpdate.allSections[adv1Index]
+      switch sectionType {
+      case .adv1:
+        if let category = advModel.category1 {
+          section.advDescription = isRuslocale() ? category.textADVRus : category.textADVEng
+          section.advStringURL = category.urlString
+          section.isHidden = false
+        } else {
+          section.isHidden = true
+        }
+      case .adv2:
+        if let category = advModel.category2 {
+          section.advDescription = isRuslocale() ? category.textADVRus : category.textADVEng
+          section.advStringURL = category.urlString
+          section.isHidden = false
+        } else {
+          section.isHidden = true
+        }
+      case .adv3:
+        if let category = advModel.category3 {
+          section.advDescription = isRuslocale() ? category.textADVRus : category.textADVEng
+          section.advStringURL = category.urlString
+          section.isHidden = false
+        } else {
+          section.isHidden = true
+        }
+      case .adv4:
+        if let category = advModel.category4 {
+          section.advDescription = isRuslocale() ? category.textADVRus : category.textADVEng
+          section.advStringURL = category.urlString
+          section.isHidden = false
+        } else {
+          section.isHidden = true
+        }
+      default: break
+      }
+      modelUpdate.allSections[adv1Index] = section
+    }
+    
+    return modelUpdate
   }
 }
 

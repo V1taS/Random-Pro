@@ -116,6 +116,9 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Кнопка премиум была нажата
   /// - Parameter isPremium: Включен премиум
   func premiumButtonAction(_ isPremium: Bool)
+  
+  /// Открыть рекламу
+  func openADV(urlString: String?)
 }
 
 /// События которые отправляем из `другого модуля` в `текущий модуль`

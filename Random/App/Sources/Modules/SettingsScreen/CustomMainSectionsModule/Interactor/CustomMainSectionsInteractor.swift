@@ -57,8 +57,21 @@ final class CustomMainSectionsInteractor: CustomMainSectionsInteractorInput {
   
   func getContent(models: [MainScreenModel.Section]) {
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      let newModel = models.filter { !$0.isHidden }
-      self?.models =  newModel
+      var newModel = models.filter { !$0.isHidden && !$0.type.isADV }
+      self?.models = newModel
+      
+      if !SecretsAPI.isPremium {
+        let newModelUpdated = newModel.filter({ !$0.type.isADV }).compactMap {
+          if $0.isHidden {
+            var valueUpdated = $0
+            valueUpdated.isHidden = false
+            return valueUpdated
+          }
+          return $0
+        }
+        newModel = newModelUpdated.filter { !$0.isPremium }
+        self?.models = newModelUpdated
+      }
       
       DispatchQueue.main.async { [weak self] in
         self?.output?.didReceive(models: newModel)

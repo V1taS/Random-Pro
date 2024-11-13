@@ -291,14 +291,6 @@ extension MainScreenFactory {
           isPremium: true,
           advLabel: .none
         ))
-      case .series:
-        allSections.append(MainScreenModel.Section(
-          type: section,
-          isEnabled: true,
-          isHidden: false,
-          isPremium: true,
-          advLabel: .none
-        ))
       }
     }
     
@@ -541,14 +533,6 @@ extension MainScreenFactory {
               advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
             ))
           case .memes:
-            cardSections.append(MainScreenModel.Section(
-              type: model.type,
-              isEnabled: model.isEnabled,
-              isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
-              isPremium: model.isPremium,
-              advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
-            ))
-          case .series:
             cardSections.append(MainScreenModel.Section(
               type: model.type,
               isEnabled: model.isEnabled,

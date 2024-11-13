@@ -96,9 +96,6 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Мемы`
   func openMemes()
   
-  /// Открыть раздел `Сериалы`
-  func openSeries()
-  
   /// Нет премиум доступа
   /// - Parameter section: Секция на главном экране
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section)
@@ -265,8 +262,6 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openTruthOrDare()
       case .memes:
         output?.openMemes()
-      case .series:
-        output?.openSeries()
       }
     }
   }

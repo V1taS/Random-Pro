@@ -72,7 +72,6 @@ final class MainScreenCoordinator: MainScreenCoordinatorProtocol {
   private var passwordScreenCoordinator: PasswordScreenCoordinator?
   private var numberScreenCoordinator: NumberScreenCoordinator?
   private var settingsScreenCoordinator: MainSettingsScreenCoordinator?
-  private var seriesScreenCoordinator: SeriesScreenCoordinator?
   
   // MARK: - Initialization
   
@@ -334,19 +333,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
 
     mainScreenModule?.removeLabelFromSection(type: .films)
     services.metricsService.track(event: .filmScreen)
-  }
-
-  func openSeries() {
-    let seriesScreenCoordinator = SeriesScreenCoordinator(navigationController,
-                                                          services)
-    self.seriesScreenCoordinator = seriesScreenCoordinator
-    seriesScreenCoordinator.start()
-    seriesScreenCoordinator.finishFlow = { [weak self] in
-      self?.seriesScreenCoordinator = nil
-    }
-
-    mainScreenModule?.removeLabelFromSection(type: .series)
-    services.metricsService.track(event: .seriesScreen)
   }
 
   func openImageFilters() {

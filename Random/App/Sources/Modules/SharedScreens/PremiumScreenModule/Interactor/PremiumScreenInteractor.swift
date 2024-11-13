@@ -149,6 +149,7 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
 private extension PremiumScreenInteractor {
   func activatePremium() {
     if let mainScreenModel {
+      UserDefaults.standard.set(true, forKey: SecretsAPI.userPremiumKey)
       let newModel = MainScreenModel(isDarkMode: mainScreenModel.isDarkMode,
                                      isPremium: true,
                                      allSections: mainScreenModel.allSections)

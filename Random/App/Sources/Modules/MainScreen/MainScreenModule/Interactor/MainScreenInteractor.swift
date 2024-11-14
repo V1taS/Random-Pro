@@ -229,11 +229,11 @@ private extension MainScreenInteractor {
   }
   
   func isRuslocale() -> Bool {
-    guard let localeType = CountryType.getCurrentCountryType() else {
+    guard let currentLanguage = LanguageType.getCurrentLanguageType() else {
       return false
     }
     
-    switch localeType {
+    switch currentLanguage {
     case .ru:
       return true
     default:

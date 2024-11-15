@@ -18,8 +18,28 @@ struct SecretsAPI {
   static var advList: [String: String] = [:]
   static var isHiddenToggleForSection: [String: Bool] = [:]
   static var isToggleForFeature: [String: Bool] = [:]
-  static var advFeatureToggleModels: [ADVFeatureToggleModel] = []
   static var premiumFeatureToggleModel: [PremiumFeatureToggleModel] = []
+  
+  static var advFeatureToggleModels: [ADVFeatureToggleModel] {
+    get {
+      @ObjectCustomUserDefaultsWrapper(key: SecretsAPI.advFeatureToggleModelsKey)
+      var dataUserDefaults: [ADVFeatureToggleModel]?
+      return dataUserDefaults ?? []
+    } set {
+      @ObjectCustomUserDefaultsWrapper(key: SecretsAPI.advFeatureToggleModelsKey)
+      var dataUserDefaults: [ADVFeatureToggleModel]?
+      dataUserDefaults = newValue
+    }
+  }
+  static var advFeatureCategoriesIsShow: (adv1: Bool, adv2: Bool, adv3: Bool, adv4: Bool) {
+    let models = SecretsAPI.advFeatureToggleModels
+    let adv1 = models.contains(where: { $0.category == "1" })
+    let adv2 = models.contains(where: { $0.category == "2" })
+    let adv3 = models.contains(where: { $0.category == "3" })
+    let adv4 = models.contains(where: { $0.category == "4" })
+    return (adv1: adv1, adv2: adv2, adv3: adv3, adv4: adv4)
+  }
+  private static let advFeatureToggleModelsKey = "ADVFeatureToggleModelKey"
   
   static let userPremiumKey = "userPremiumKey"
   static var isPremium: Bool {

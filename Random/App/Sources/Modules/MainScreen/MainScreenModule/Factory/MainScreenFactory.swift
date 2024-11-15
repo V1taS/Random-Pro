@@ -576,7 +576,7 @@ extension MainScreenFactory {
             cardSections.append(MainScreenModel.Section(
               type: model.type,
               isEnabled: model.isEnabled,
-              isHidden: model.isHidden,
+              isHidden: !SecretsAPI.advFeatureCategoriesIsShow.adv1,
               isPremium: model.isPremium,
               advLabel: .adv,
               advDescription: model.advDescription,
@@ -586,7 +586,7 @@ extension MainScreenFactory {
             cardSections.append(MainScreenModel.Section(
               type: model.type,
               isEnabled: model.isEnabled,
-              isHidden: model.isHidden,
+              isHidden: !SecretsAPI.advFeatureCategoriesIsShow.adv2,
               isPremium: model.isPremium,
               advLabel: .adv,
               advDescription: model.advDescription,
@@ -596,7 +596,7 @@ extension MainScreenFactory {
             cardSections.append(MainScreenModel.Section(
               type: model.type,
               isEnabled: model.isEnabled,
-              isHidden: model.isHidden,
+              isHidden: !SecretsAPI.advFeatureCategoriesIsShow.adv3,
               isPremium: model.isPremium,
               advLabel: .adv,
               advDescription: model.advDescription,
@@ -606,7 +606,7 @@ extension MainScreenFactory {
             cardSections.append(MainScreenModel.Section(
               type: model.type,
               isEnabled: model.isEnabled,
-              isHidden: model.isHidden,
+              isHidden: !SecretsAPI.advFeatureCategoriesIsShow.adv4,
               isPremium: model.isPremium,
               advLabel: .adv,
               advDescription: model.advDescription,

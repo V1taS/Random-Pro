@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ADVFeatureToggleModel: Codable, Equatable {
+struct ADVFeatureToggleModel: UserDefaultsCodable {
   
   /// Категория рекламы
   let category: String?

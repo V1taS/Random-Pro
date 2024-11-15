@@ -42,7 +42,12 @@ final class ConfigurationValueConfigurator: Configurator {
       await getSupportMail()
       updateMainScreen()
     }
+#if DEBUG
+    print("Отключена валидация покупок в App Store для DEBUG сборки ❌")
+#else
     getValidatePremium()
+#endif
+    
   }
 }
 

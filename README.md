@@ -52,46 +52,51 @@ Random_Pro_support@iCloud.com
 
 ## SetUP
 
-### Install dependencies
+### Installing dependencies
 
-Install binary dependencies
+**Install Homebrew**  
+Homebrew is a package manager for macOS, required for installing other tools. Run the following command to install it:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+After installation, update Homebrew to ensure you have the latest package definitions:
+
+```bash
+brew update
+```
+
+**Install mise**  
+[mise](https://github.com/tuist/mise) is used for managing Tuist versions. Install it with Homebrew:
+
+```bash
+brew install mise
+```
+
+**Install Tuist**  
+Tuist is a tool for managing iOS projects. Use mise to install Tuist:
+
+```bash
+mise install tuist
+```
+
+**Install SwiftLint**
+
+SwiftLint is a tool to enforce Swift style and conventions. You can install SwiftLint using Homebrew:
 ```
 brew install swiftlint
-curl -Ls https://install.tuist.io | bash
 ```
 
 ### Start project
 
-Download dependencies
-```
-tuist fetch
-```
+**Generate the Project**  
+After installing the required tools, you can prepare the project by running the following commands:
 
-Generate and run project
-```
-tuist generate
-```
-
-## SetUP on a clean mac
-
-### Homebrew installation
-
-Homebrew is usefull to manage binary dependencies
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Run brew doctor to get brew errors and wornings
-```
-brew doctor
-```
-
-### Oh my ZSH installation
-
-```
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
+```bash
+tuist clean
+tuist install
+tuist generate --no-open
 ```
 
 [![Tuist badge](https://img.shields.io/badge/Powered%20by-Tuist-blue)](https://tuist.io)

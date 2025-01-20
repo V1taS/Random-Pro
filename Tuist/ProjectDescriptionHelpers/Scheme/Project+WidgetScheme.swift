@@ -3,15 +3,15 @@ import ProjectDescription
 
 // MARK: - IOS Widget
 
-public let yesNoWidgetScheme = Scheme(
+public let yesNoWidgetScheme: Scheme = .scheme(
   name: widgetName,
   hidden: true,
   buildAction: .buildAction(targets: ["\(widgetName)"]),
   runAction: .runAction(
-    arguments: Arguments(environment: [
-      "_XCWidgetKind": "",
-      "_XCWidgetDefaultView": "timeline",
-      "XCWidgetFamily": "medium"
+    arguments: .arguments(environmentVariables: [
+      "_XCWidgetKind": .environmentVariable(value: "", isEnabled: true),
+      "_XCWidgetDefaultView": .environmentVariable(value: "timeline", isEnabled: true),
+      "XCWidgetFamily": .environmentVariable(value: "medium", isEnabled: true)
     ])
   ),
   archiveAction: ArchiveAction.archiveAction(configuration: .release),

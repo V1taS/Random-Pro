@@ -9,12 +9,12 @@ let project = Project(
   options: .options(automaticSchemesOptions: .disabled),
   settings: projectBuildIOSSettings,
   targets: [
-    Target(
+    .target(
       name: appName,
-      platform: .iOS,
+      destinations: .iOS,
       product: .app,
       bundleId: "\(reverseOrganizationName).\(appName)",
-      deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
+      deploymentTargets: DeploymentTargets.iOS(iOSTargetVersion),
       infoPlist: getMainIOSInfoPlist(),
       sources: [
         "\(rootPath)/\(appPath)/Sources/**/*",
@@ -39,12 +39,12 @@ let project = Project(
       ],
       settings: targetBuildIOSSettings
     ),
-    Target(
+    .target(
       name: widgetName,
-      platform: .iOS,
+      destinations: .iOS,
       product: .appExtension,
       bundleId: "\(reverseOrganizationName).\(appName).\(widgetName)",
-      deploymentTarget: .iOS(targetVersion: "14.0", devices: [.iphone, .ipad]),
+      deploymentTargets: DeploymentTargets.iOS("14.0"),
       infoPlist: getWidgetIOSInfoPlist(),
       sources: [
         "\(rootPath)/\(widgetPath)/\(widgetName)/Sources/**/*",
@@ -58,12 +58,12 @@ let project = Project(
       ],
       settings: targetWidgetIOSSettings
     ),
-    Target(
+    .target(
        name: "\(appName)Tests",
-       platform: .iOS,
+       destinations: .iOS,
        product: .unitTests,
        bundleId: "\(reverseOrganizationName).\(appName)Tests",
-       deploymentTarget: .iOS(targetVersion: "13.0", devices: [.iphone, .ipad]),
+       deploymentTargets: DeploymentTargets.iOS(iOSTargetVersion),
        infoPlist: .default,
        sources: [
         "\(rootPath)/\(appPath)/Tests/**/*"

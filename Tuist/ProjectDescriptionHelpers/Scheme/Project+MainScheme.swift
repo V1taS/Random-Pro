@@ -3,13 +3,11 @@ import ProjectDescription
 
 // MARK: - IOS
 
-public let mainIOSScheme = Scheme(
+public let mainIOSScheme: Scheme = .scheme(
   name: appName,
   buildAction: .buildAction(targets: ["\(appName)"]),
   runAction: .runAction(
-    arguments: Arguments(environment: [
-      "OS_ACTIVITY_MODE": "disable"
-    ])
+    arguments: .arguments(environmentVariables: ["OS_ACTIVITY_MODE": .environmentVariable(value: "disable", isEnabled: true)])
   ),
   archiveAction: ArchiveAction.archiveAction(
     configuration: .release

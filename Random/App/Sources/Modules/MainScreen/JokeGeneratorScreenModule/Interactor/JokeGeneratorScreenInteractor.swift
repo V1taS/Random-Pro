@@ -9,6 +9,7 @@ import UIKit
 import FancyUIKit
 import FancyStyle
 import FancyNetwork
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol JokeGeneratorScreenInteractorOutput: AnyObject {

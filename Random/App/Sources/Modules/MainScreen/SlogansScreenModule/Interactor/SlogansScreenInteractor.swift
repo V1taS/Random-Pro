@@ -9,6 +9,7 @@ import Foundation
 import FancyUIKit
 import FancyStyle
 import FancyNetwork
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol SlogansScreenInteractorOutput: AnyObject {

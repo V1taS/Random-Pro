@@ -9,6 +9,7 @@ import UIKit
 import FancyNetwork
 import FancyUIKit
 import FancyStyle
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol MemesScreenInteractorOutput: AnyObject {

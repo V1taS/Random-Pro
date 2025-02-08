@@ -8,6 +8,8 @@
 
 import Foundation
 import FancyNetwork
+import SKAbstractions
+import SKServices
 
 /// Протокол, описывающий все зависимости системы.
 /// Создан для отказа от DI framework в пользу концепции Composition Root.
@@ -52,12 +54,9 @@ protocol ApplicationServices {
   /// Сервис проверки обновлений приложения
   var updateAppService: UpdateAppService { get }
   
-  /// Сервис облачной базы данных
-  var cloudDatabaseService: CloudDatabaseService { get }
-  
   /// Сервис подписок и покупок премиум версии
-  var appPurchasesService: AppPurchasesService { get }
-  
+  var appPurchasesService: IAppPurchasesService { get }
+
   /// Сервис хранения данных
   var storageService: StorageService { get }
   
@@ -127,12 +126,8 @@ final class ApplicationServicesImpl: ApplicationServices {
   var updateAppService: UpdateAppService {
     updateAppServiceImpl
   }
-
-  var cloudDatabaseService: CloudDatabaseService {
-    cloudDatabaseServiceImpl
-  }
   
-  var appPurchasesService: AppPurchasesService {
+  var appPurchasesService: IAppPurchasesService {
     appPurchasesServiceImpl
   }
   
@@ -157,8 +152,7 @@ final class ApplicationServicesImpl: ApplicationServices {
   let buttonCounterServiceImpl = ButtonCounterServiceImpl()
   let hapticServiceImpl = HapticServiceImpl()
   let timerServiceImpl = TimerServiceImpl()
-  let appPurchasesServiceImpl = AppPurchasesServiceImpl()
-  let cloudDatabaseServiceImpl = CloudDatabaseServiceImpl()
+  let appPurchasesServiceImpl = AppPurchasesService.shared
   let updateAppServiceImpl = UpdateAppServiceImpl()
   let featureToggleServicesImpl = FeatureToggleServicesImpl()
   let keyboardServiceImpl = KeyboardServiceImpl()

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SKAbstractions
 
 /// Модель Teams
 struct TeamsScreenModel: UserDefaultsCodable {

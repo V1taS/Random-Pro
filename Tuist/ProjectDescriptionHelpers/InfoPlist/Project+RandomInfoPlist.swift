@@ -57,7 +57,7 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
         "LSHandlerRank": .string("Owner")
       ])
     ]),
-    "IPHONEOS_DEPLOYMENT_TARGET": .string("13.0"),
+    "IPHONEOS_DEPLOYMENT_TARGET": .string("14.0"),
     "CFBundleExecutable": .string("Random"),
     "TAB_WIDTH": .string("2"),
     "INDENT_WIDTH": .string("2"),
@@ -76,7 +76,7 @@ public func getMainIOSInfoPlist() -> ProjectDescription.InfoPlist {
     "CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED": .string("YES"),
     "ENABLE_TESTABILITY": .string("YES"),
     "VALID_ARCHS": .string("arm64"),
-    "DTPlatformVersion": .string("13.0"),
+    "DTPlatformVersion": .string("14.0"),
     "CFBundleName": .string("Random Pro"),
     "CFBundleDisplayName": .string("Random Pro"),
     "CFBundleIdentifier": .string("com.sosinvitalii.Random"),

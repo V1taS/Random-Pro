@@ -9,6 +9,7 @@ import UIKit
 import FancyUIKit
 import FancyStyle
 import Lottie
+import SKAbstractions
 
 /// События которые отправляем из View в Presenter
 protocol AppUnavailableViewOutput: AnyObject {

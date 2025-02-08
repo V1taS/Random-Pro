@@ -7,6 +7,7 @@
 
 import UIKit
 import RandomWheel
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol FortuneWheelInteractorOutput: AnyObject {

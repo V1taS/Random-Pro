@@ -123,7 +123,7 @@ extension FortuneWheelSelectedSectionCoordinator: FortuneWheelSelectedSectionMod
       return
     }
     
-    var isLimitedRangeLocation = isPushViewController
+    let isLimitedRangeLocation = isPushViewController
     var navigationController: UINavigationController = navigationController
     if let anyNavigationController {
       navigationController = anyNavigationController

@@ -28,14 +28,13 @@ let project = Project(
       ],
       dependencies: [
         .target(name: "\(widgetName)"),
-        .external(name: "FancyUIKit"),
-        .external(name: "FancyNetwork"),
-        .external(name: "FancyNotifications"),
-        .external(name: "ApphudSDK"),
+        .external(name: "SKUIKit"),
+        .external(name: "SKServices"),
         .external(name: "KeychainSwift"),
         .external(name: "YandexMobileMetricaPush"),
         .external(name: "YandexMobileMetrica"),
-        .external(name: "RandomWheel")
+        .external(name: "RandomWheel"),
+        .external(name: "FancyNetwork")
       ],
       settings: targetBuildIOSSettings
     ),
@@ -54,6 +53,7 @@ let project = Project(
       ],
       scripts: [],
       dependencies: [
+        .external(name: "SKUIKit"),
         .external(name: "FancyUIKit")
       ],
       settings: targetWidgetIOSSettings

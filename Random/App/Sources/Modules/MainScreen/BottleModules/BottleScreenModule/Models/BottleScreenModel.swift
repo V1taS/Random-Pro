@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SKAbstractions
 
 /// Модель стиля бутылочки
 struct BottleScreenModel: UserDefaultsCodable {

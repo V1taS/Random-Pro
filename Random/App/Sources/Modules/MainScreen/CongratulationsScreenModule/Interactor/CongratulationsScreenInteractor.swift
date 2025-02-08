@@ -9,6 +9,7 @@ import UIKit
 import FancyNetwork
 import FancyUIKit
 import FancyStyle
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol CongratulationsScreenInteractorOutput: AnyObject {
@@ -326,7 +327,7 @@ private extension CongratulationsScreenInteractor {
   
   func fetchCongratulationsList(
     forKey key: String,
-    recordTypes: CloudKitService.RecordTypes,
+    recordTypes: CloudKitRecordTypes,
     completion: @escaping (Result<[String], Error>) -> Void
   ) {
     DispatchQueue.global().async { [weak self] in
@@ -344,7 +345,7 @@ private extension CongratulationsScreenInteractor {
   
   func getConfigurationValue<T: Codable>(
     forKey key: String,
-    recordTypes: CloudKitService.RecordTypes,
+    recordTypes: CloudKitRecordTypes,
     completion: ((T?) -> Void)?
   ) {
     let decoder = JSONDecoder()

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZEf-IE-fNf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZEf-IE-fNf">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,12 +21,20 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchMainScreenImageNew" translatesAutoresizingMaskIntoConstraints="NO" id="g3d-F0-HZD">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Random Pro | AI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edk-DQ-XqN">
+                                <rect key="frame" x="93.5" y="461.5" width="227" height="37"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="31"/>
+                                <color key="textColor" red="0.80392158030000005" green="0.80392158030000005" blue="0.80392158030000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="c5d-FA-hp1"/>
                         <color key="backgroundColor" name="LaunchScreenColorBG"/>
                         <color key="tintColor" systemColor="labelColor"/>
                         <constraints>
+                            <constraint firstItem="edk-DQ-XqN" firstAttribute="centerX" secondItem="ekI-Dc-pGn" secondAttribute="centerX" id="6Gh-DQ-4cf"/>
                             <constraint firstAttribute="bottom" secondItem="g3d-F0-HZD" secondAttribute="bottom" id="Agx-fE-VVo"/>
+                            <constraint firstItem="edk-DQ-XqN" firstAttribute="centerY" secondItem="ekI-Dc-pGn" secondAttribute="centerY" constant="32" id="AyX-e1-8i7"/>
                             <constraint firstItem="g3d-F0-HZD" firstAttribute="trailing" secondItem="c5d-FA-hp1" secondAttribute="trailing" id="asZ-aq-CbB"/>
                             <constraint firstItem="g3d-F0-HZD" firstAttribute="top" secondItem="ekI-Dc-pGn" secondAttribute="top" id="gjA-0e-NLp"/>
                             <constraint firstItem="g3d-F0-HZD" firstAttribute="leading" secondItem="c5d-FA-hp1" secondAttribute="leading" id="mrG-bt-6dh"/>

@@ -12,7 +12,7 @@ public let targetBuildTestsSettings: Settings = .settings(
     "CLANG_ENABLE_OBJC_ARC": "YES",
     "CLANG_ENABLE_OBJC_WEAK": "YES",
     "GCC_C_LANGUAGE_STANDARD": "gnu11",
-    "IPHONEOS_DEPLOYMENT_TARGET": "13.0",
+    "IPHONEOS_DEPLOYMENT_TARGET": "14.0",
     "SDKROOT": "iphoneos",
     "TARGETED_DEVICE_FAMILY": "1,2"
   ],

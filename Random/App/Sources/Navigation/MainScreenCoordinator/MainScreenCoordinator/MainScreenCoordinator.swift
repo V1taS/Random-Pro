@@ -9,6 +9,7 @@ import UIKit
 import StoreKit
 import FancyNetwork
 import SafariServices
+import SKAbstractions
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol MainScreenCoordinatorOutput: AnyObject {}
@@ -625,13 +626,16 @@ private extension MainScreenCoordinator {
       return
     }
     let count = getCounterOnScreenOpen()
-    
-    services.appPurchasesService.restorePurchase { [weak self] isValidate in
-      guard let self, !isValidate, count.isMultiple(of: 10) else { return }
-      
-      DispatchQueue.main.async {
-        self.openPremium(isLifetimeSale: true)
-        self.services.metricsService.track(event: .sales)
+
+    Task { [weak self] in
+      guard let self else { return }
+      let isValidate = await services.appPurchasesService.restorePurchase()
+      guard !isValidate, count.isMultiple(of: 10) else { return }
+
+      DispatchQueue.main.async { [weak self] in
+        guard let self else { return }
+        openPremium(isLifetimeSale: true)
+        services.metricsService.track(event: .sales)
       }
     }
   }

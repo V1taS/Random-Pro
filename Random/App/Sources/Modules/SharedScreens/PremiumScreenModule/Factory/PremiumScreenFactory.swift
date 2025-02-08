@@ -9,6 +9,7 @@ import UIKit
 import FancyUIKit
 import FancyStyle
 import StoreKit
+import SKAbstractions
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol PremiumScreenFactoryOutput: AnyObject {

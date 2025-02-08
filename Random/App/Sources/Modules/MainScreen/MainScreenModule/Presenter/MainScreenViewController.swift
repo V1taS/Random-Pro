@@ -8,6 +8,7 @@
 import UIKit
 import FancyUIKit
 import FancyStyle
+import SKAbstractions
 
 /// Презентер
 final class MainScreenViewController: MainScreenModule {

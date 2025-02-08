@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SKAbstractions
 
 /// Сборщик `ShareScreen`
 final class ShareScreenAssembly {

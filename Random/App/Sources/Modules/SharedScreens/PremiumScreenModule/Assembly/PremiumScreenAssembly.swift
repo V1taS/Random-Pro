@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SKAbstractions
 
 /// Сборщик `PremiumScreen`
 final class PremiumScreenAssembly {
@@ -15,7 +16,7 @@ final class PremiumScreenAssembly {
   ///  - appPurchasesService: Сервис работы с подписками
   ///  - services: Сервисы приложения
   /// - Returns: Cобранный модуль `PremiumScreen`
-  func createModule(_ appPurchasesService: AppPurchasesService,
+  func createModule(_ appPurchasesService: IAppPurchasesService,
                     services: ApplicationServices) -> PremiumScreenModule {
     let interactor = PremiumScreenInteractor(appPurchasesService, services: services)
     let view = PremiumScreenView()

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SKAbstractions
 
 /// События которые отправляем из `текущего координатора` в `другой координатор`
 protocol CustomMainSectionsCoordinatorOutput: AnyObject {

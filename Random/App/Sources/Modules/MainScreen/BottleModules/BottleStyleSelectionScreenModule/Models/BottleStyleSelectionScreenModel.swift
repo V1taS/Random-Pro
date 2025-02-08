@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SKAbstractions
 
 struct BottleStyleSelectionScreenModel: UserDefaultsCodable {
   

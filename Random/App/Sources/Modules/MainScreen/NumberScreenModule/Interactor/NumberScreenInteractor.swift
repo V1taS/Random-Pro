@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol NumberScreenInteractorOutput: AnyObject {

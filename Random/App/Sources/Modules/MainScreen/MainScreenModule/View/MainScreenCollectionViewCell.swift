@@ -9,6 +9,7 @@
 import UIKit
 import FancyUIKit
 import FancyStyle
+import SKAbstractions
 
 /// CollectionViewCell
 final class MainScreenCollectionViewCell: UICollectionViewCell {
@@ -38,14 +39,23 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
   
   func configureCellWith(section: MainScreenModel.Section, isPremium: Bool) {
     let isShowADVLabel: Bool
-    
+    var gradientDVLabel: [UIColor] = []
+
     switch section.advLabel {
-    case .hit, .custom, .new, .adv:
+    case .adv:
       isShowADVLabel = true
+      gradientDVLabel = [.blue.withAlphaComponent(0.3), .blue.withAlphaComponent(0.1)]
+    case .ai:
+      isShowADVLabel = true
+      gradientDVLabel = [.purple.withAlphaComponent(0.9), .purple.withAlphaComponent(0.5)]
     case .none:
       isShowADVLabel = false
+      gradientDVLabel = []
+    default:
+      isShowADVLabel = true
+      gradientDVLabel = [.fancy.only.primaryRed, .fancy.only.primaryPink]
     }
-    
+
     let imageCardConfig = UIImage.SymbolConfiguration(pointSize: Appearance().imageCardSize, weight: .regular)
     let imageCard = UIImage(systemName: section.type.imageSectionSystemName,
                             withConfiguration: imageCardConfig)
@@ -65,10 +75,7 @@ final class MainScreenCollectionViewCell: UICollectionViewCell {
       titleADVText: section.advLabel.title,
       isDisabled: isDisabled,
       gradientColors: nil,
-      gradientDVLabel: section.type.isADV ? [.blue.withAlphaComponent(0.3), .blue.withAlphaComponent(0.1)] : [
-        .fancy.only.primaryRed,
-        .fancy.only.primaryPink
-      ]
+      gradientDVLabel: gradientDVLabel
     )
   }
 }

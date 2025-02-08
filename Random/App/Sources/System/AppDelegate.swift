@@ -8,6 +8,7 @@
 import UIKit
 import YandexMobileMetrica
 import YandexMobileMetricaPush
+import SKAbstractions
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {

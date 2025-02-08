@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "loader_circle.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

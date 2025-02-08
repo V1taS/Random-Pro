@@ -8,28 +8,29 @@
 
 import UIKit
 import ApphudSDK
+import SKAbstractions
 
 final class ConfigurationValueConfigurator: Configurator {
-  
+
   // MARK: - Private properties
-  
+
   private let services: ApplicationServices
   private lazy var cloudKitService: ICloudKitService = services.cloudKitService
-  
+
   // MARK: - Init
-  
+
   init(services: ApplicationServices) {
     self.services = services
   }
-  
+
   // MARK: - Internal func
-  
+
   func configure() {
     let isReachable = NetworkReachabilityService()?.isReachable ?? false
     guard isReachable else {
       return
     }
-    
+
     Task {
       await getADVFeatureToggles()
       await getPremiumFeatureToggles()
@@ -42,8 +43,11 @@ final class ConfigurationValueConfigurator: Configurator {
       await getSupportMail()
       updateMainScreen()
     }
+
 #if DEBUG
     print("Отключена валидация покупок в App Store для DEBUG сборки ❌")
+    UserDefaults.standard.set(true, forKey: SecretsAPI.userPremiumKey)
+    updateMainScreen()
 #else
     getValidatePremium()
 #endif
@@ -61,25 +65,25 @@ private extension ConfigurationValueConfigurator {
       }
     }
   }
-  
+
   func getKinopoisk() async {
     if let value = await getConfigurationValue(forKey: Constants.apiKeyKinopoiskKey) {
       SecretsAPI.apiKeyKinopoisk = value
     }
   }
-  
+
   func getMostPopularMovies() async {
     if let value = await getConfigurationValue(forKey: Constants.apiKeyMostPopularMoviesKey) {
       SecretsAPI.apiKeyMostPopularMovies = value
     }
   }
-  
+
   func getSupportMail() async {
     if let value = await getConfigurationValue(forKey: Constants.supportMailKey) {
       SecretsAPI.supportMail = value
     }
   }
-  
+
   func getADVFeatureToggles() async {
     let decoder = JSONDecoder()
     if let jsonString = await getConfigurationValue(forKey: Constants.advFeatureTogglesKey),
@@ -88,11 +92,13 @@ private extension ConfigurationValueConfigurator {
       SecretsAPI.advFeatureToggleModels = models
     }
   }
-  
+
   func getValidatePremium() {
     DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-      self?.services.appPurchasesService.restorePurchase { [weak self] isValidate in
-        self?.services.featureToggleServices.getPremiumFeatureToggle(
+      Task { [weak self] in
+        guard let self else { return }
+        let isValidate = await services.appPurchasesService.restorePurchase()
+        services.featureToggleServices.getPremiumFeatureToggle(
           models: SecretsAPI.premiumFeatureToggleModel
         ) { [weak self] isPremium in
           let isPremium = isValidate || isPremium ?? false
@@ -102,14 +108,14 @@ private extension ConfigurationValueConfigurator {
       }
     }
   }
-  
+
   func getPremiumFeatureToggles() async {
     let decoder = JSONDecoder()
     if let jsonString = await getConfigurationValue(forKey: Constants.premiumFeatureTogglesKey),
        let jsonData = jsonString.data(using: .utf8),
        let models = try? decoder.decode([PremiumFeatureToggleModel].self, from: jsonData) {
       SecretsAPI.premiumFeatureToggleModel = models
-      
+
       await withCheckedContinuation { [weak self] continuation in
         guard let self else {
           continuation.resume()
@@ -124,7 +130,7 @@ private extension ConfigurationValueConfigurator {
       }
     }
   }
-  
+
   func getADVList() async {
     let decoder = JSONDecoder()
     if let jsonString = await getConfigurationValue(forKey: Constants.advListKey),
@@ -133,7 +139,7 @@ private extension ConfigurationValueConfigurator {
       SecretsAPI.advList = models
     }
   }
-  
+
   func getIsHiddenToggleForSection() async {
     let decoder = JSONDecoder()
     if let jsonString = await getConfigurationValue(forKey: Constants.isHiddenToggleForSectionKey),
@@ -142,7 +148,7 @@ private extension ConfigurationValueConfigurator {
       SecretsAPI.isHiddenToggleForSection = models
     }
   }
-  
+
   func getIsToggleForFeature() async {
     let decoder = JSONDecoder()
     if let jsonString = await getConfigurationValue(forKey: Constants.isToggleForFeatureKey),
@@ -151,7 +157,7 @@ private extension ConfigurationValueConfigurator {
       SecretsAPI.isToggleForFeature = models
     }
   }
-  
+
   func getConfigurationValue(forKey key: String) async -> String? {
     await withCheckedContinuation { continuation in
       cloudKitService.getConfigurationValue(
@@ -167,7 +173,7 @@ private extension ConfigurationValueConfigurator {
       }
     }
   }
-  
+
   func updateMainScreen() {
     DispatchQueue.main.async {
       NotificationCenter.default.post(
@@ -186,12 +192,12 @@ private enum Constants {
   static let apiKeyKinopoiskKey = "apiKeyKinopoisk"
   static let apiKeyMostPopularMoviesKey = "apiKeyMostPopularMovies"
   static let supportMailKey = "supportMail"
-  
+
   static let premiumFeatureTogglesKey = "premiumFeatureToggles"
   static let advListKey = "advList"
   static let isHiddenToggleForSectionKey = "isHiddenToggleForSection"
   static let isToggleForFeatureKey = "isToggleForFeature"
   static let advFeatureTogglesKey = "advFeatureTogglesKey"
-  
+
   static let cloudKitServiceKey = "CloudKitServiceKey"
 }

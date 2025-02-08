@@ -9,6 +9,7 @@ import UIKit
 import StoreKit
 import FancyUIKit
 import FancyStyle
+import SKAbstractions
 
 /// События которые отправляем из `текущего модуля` в `другой модуль`
 protocol PremiumScreenModuleOutput: AnyObject {

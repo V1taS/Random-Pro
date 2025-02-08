@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol ContactScreenInteractorOutput: AnyObject {

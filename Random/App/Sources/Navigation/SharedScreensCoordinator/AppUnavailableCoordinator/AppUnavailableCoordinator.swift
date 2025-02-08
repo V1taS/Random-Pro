@@ -7,6 +7,7 @@
 
 import UIKit
 import MessageUI
+import SKAbstractions
 
 /// Псевдоним протокола Coordinator & AppUnavailableCoordinatorInput
 typealias AppUnavailableCoordinatorProtocol = Coordinator & AppUnavailableCoordinatorInput

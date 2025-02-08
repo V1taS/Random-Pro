@@ -7,7 +7,7 @@
 
 import UIKit
 import StoreKit
-import ApphudSDK
+import SKAbstractions
 
 /// События которые отправляем из Interactor в Presenter
 protocol PremiumScreenInteractorOutput: AnyObject {
@@ -64,8 +64,8 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   
   // MARK: - Private properties
   
-  private let appPurchasesService: AppPurchasesService
-  private var cacheProducts: [ApphudProduct] = []
+  private let appPurchasesService: IAppPurchasesService
+  private var cacheProducts: [SKProduct] = []
   private var storageService: StorageService
   private var mainScreenModel: MainScreenModel? {
     get {
@@ -80,7 +80,7 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   /// - Parameters:
   ///  - appPurchasesService: Сервис работы с подписками
   ///  - services: Сервисы приложения
-  init(_ appPurchasesService: AppPurchasesService,
+  init(_ appPurchasesService: IAppPurchasesService,
        services: ApplicationServices) {
     self.appPurchasesService = appPurchasesService
     storageService = services.storageService
@@ -90,15 +90,21 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   
   func restorePurchase() {
     output?.startPaymentProcessing()
-    appPurchasesService.restorePurchase { [weak self] isValidate in
-      self?.output?.stopPaymentProcessing()
-      
-      switch isValidate {
-      case true:
-        self?.output?.didReceiveRestoredSuccess()
-        self?.activatePremium()
-      case false:
-        self?.output?.didReceivePurchasesMissing()
+
+    Task { [weak self] in
+      guard let self else { return }
+      let isValidate = await appPurchasesService.restorePurchase()
+      DispatchQueue.main.async { [weak self] in
+        guard let self else { return }
+        output?.stopPaymentProcessing()
+
+        switch isValidate {
+        case true:
+          output?.didReceiveRestoredSuccess()
+          activatePremium()
+        case false:
+          output?.didReceivePurchasesMissing()
+        }
       }
     }
   }
@@ -106,14 +112,14 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   func mainButtonAction(_ purchaseType: PremiumScreenPurchaseType) {
     output?.startPaymentProcessing()
     
-    let products = cacheProducts.filter { $0.productId == purchaseType.productIdentifiers }
+    let products = cacheProducts.filter { $0.productIdentifier == purchaseType.productIdentifiers }
     guard let product = products.first else {
       output?.somethingWentWrong()
       output?.stopPaymentProcessing()
       return
     }
-    
-    appPurchasesService.purchaseWith(product) { [weak self] result in
+
+    appPurchasesService.purchaseWith(product.productIdentifier) { [weak self] result in
       switch result {
       case .successfulSubscriptionPurchase:
         self?.output?.didReceiveSubscriptionPurchaseSuccess()
@@ -130,16 +136,8 @@ final class PremiumScreenInteractor: PremiumScreenInteractorInput {
   
   func getProducts() {
     appPurchasesService.getProducts { [weak self] products in
-      if let products {
-        self?.cacheProducts = products
-        
-        let skProducts = products.compactMap {
-          return $0.skProduct
-        }
-        self?.output?.didReceive(models: skProducts)
-      } else {
-        self?.output?.somethingWentWrong()
-      }
+      self?.cacheProducts = products
+      self?.output?.didReceive(models: products)
     }
   }
 }

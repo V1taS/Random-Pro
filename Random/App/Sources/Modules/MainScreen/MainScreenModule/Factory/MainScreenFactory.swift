@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SKAbstractions
+import SKServices
 
 /// Cобытия которые отправляем из Factory в Presenter
 protocol MainScreenFactoryOutput: AnyObject {
@@ -201,7 +203,7 @@ extension MainScreenFactory {
           isEnabled: true,
           isHidden: false,
           isPremium: true,
-          advLabel: .none
+          advLabel: .ai
         ))
       case .names:
         allSections.append(MainScreenModel.Section(
@@ -209,7 +211,7 @@ extension MainScreenFactory {
           isEnabled: true,
           isHidden: false,
           isPremium: true,
-          advLabel: .none
+          advLabel: .ai
         ))
       case .congratulations:
         allSections.append(MainScreenModel.Section(
@@ -217,7 +219,7 @@ extension MainScreenFactory {
           isEnabled: true,
           isHidden: false,
           isPremium: true,
-          advLabel: .none
+          advLabel: .ai
         ))
       case .goodDeeds:
         allSections.append(MainScreenModel.Section(
@@ -482,7 +484,7 @@ extension MainScreenFactory {
               isEnabled: model.isEnabled,
               isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
               isPremium: model.isPremium,
-              advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
+              advLabel: .ai
             ))
           case .names:
             cardSections.append(MainScreenModel.Section(
@@ -490,7 +492,7 @@ extension MainScreenFactory {
               isEnabled: model.isEnabled,
               isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
               isPremium: model.isPremium,
-              advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
+              advLabel: .ai
             ))
           case .congratulations:
             cardSections.append(MainScreenModel.Section(
@@ -498,7 +500,7 @@ extension MainScreenFactory {
               isEnabled: model.isEnabled,
               isHidden: self.ifDebugFeatureSectionIsHidden(isHidenSection),
               isPremium: model.isPremium,
-              advLabel: self.setLabelFrom(featureToggleRawValue: labelString, oldLabel: model.advLabel)
+              advLabel: .ai
             ))
           case .goodDeeds:
             cardSections.append(MainScreenModel.Section(

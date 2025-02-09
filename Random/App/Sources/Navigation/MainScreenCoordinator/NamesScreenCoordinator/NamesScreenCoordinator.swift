@@ -53,10 +53,11 @@ final class NamesScreenCoordinator: NamesScreenCoordinatorProtocol {
   // MARK: - Internal func
   
   func start() {
-    var namesScreenModule = NamesScreenAssembly().createModule(services: services)
-    self.namesScreenModule = namesScreenModule
-    namesScreenModule.moduleOutput = self
-    navigationController.pushViewController(namesScreenModule, animated: true)
+    navigationController.pushViewController(NamesNewScreenAssembly().createModule().viewController, animated: true)
+//    var namesScreenModule = NamesScreenAssembly().createModule(services: services)
+//    self.namesScreenModule = namesScreenModule
+//    namesScreenModule.moduleOutput = self
+//    navigationController.pushViewController(namesScreenModule, animated: true)
   }
 }
 

@@ -1,3 +1,0 @@
-textFor(keypathName: "From", sourceText: "From:")
-textFor(keypathName: "custom_text", sourceText: "custom_text")
-textFor(keypathName: "sender_username", sourceText: "sender_username")

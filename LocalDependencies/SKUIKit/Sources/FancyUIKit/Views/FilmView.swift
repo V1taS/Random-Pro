@@ -20,7 +20,6 @@ public final class FilmView: UIView {
   private let generateButton = ButtonView()
   private let gradientView = GradientView()
   private var buttonAction: (() -> Void)?
-  private var lottieAnimationView = LottieAnimationView()
   
   // MARK: - Initialization
   
@@ -65,11 +64,6 @@ public final class FilmView: UIView {
     
     if let backgroundImage {
       imageBackroundView.image = backgroundImage
-      lottieAnimationView.stop()
-      lottieAnimationView.isHidden = true
-    } else {
-      lottieAnimationView.isHidden = false
-      lottieAnimationView.play()
     }
   }
 }
@@ -105,13 +99,6 @@ private extension FilmView {
       ],
       alpha: 0.9
     )
-    
-    lottieAnimationView = LottieAnimationView(name: Appearance().mockFilmsEmptyName,
-                                              bundle: .module)
-    lottieAnimationView.contentMode = .scaleAspectFit
-    lottieAnimationView.loopMode = .loop
-    lottieAnimationView.animationSpeed = Appearance().animationSpeed
-    lottieAnimationView.isHidden = true
     clipsToBounds = true
     
     generateButton.addTarget(self,
@@ -122,7 +109,7 @@ private extension FilmView {
   func configureLayout() {
     let appearance = Appearance()
     
-    [imageBackroundView, lottieAnimationView, gradientView,
+    [imageBackroundView, gradientView,
      titleLabel, descriptionLabel, generateButton].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
       addSubview($0)
@@ -133,11 +120,6 @@ private extension FilmView {
       imageBackroundView.topAnchor.constraint(equalTo: topAnchor),
       imageBackroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
       imageBackroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
-      
-      lottieAnimationView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      lottieAnimationView.centerYAnchor.constraint(equalTo: centerYAnchor,
-                                                   constant: -appearance.lottieVerticalInset),
-      lottieAnimationView.trailingAnchor.constraint(equalTo: trailingAnchor),
       
       gradientView.leadingAnchor.constraint(equalTo: leadingAnchor),
       gradientView.topAnchor.constraint(equalTo: topAnchor),
@@ -182,6 +164,5 @@ private extension FilmView {
     let extraMaxInset: CGFloat = 32
     let defaultInset: CGFloat = 14
     let animationSpeed: CGFloat = 0.5
-    let mockFilmsEmptyName = "mock_films_empty"
   }
 }

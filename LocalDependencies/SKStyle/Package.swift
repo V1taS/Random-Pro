@@ -18,7 +18,8 @@ let package = Package(
   targets: [
     .target(
       name: "SKStyle",
-      dependencies: []
+      dependencies: [],
+      resources: [.process("Resources")]
     ),
     .target(
       name: "FancyStyle",

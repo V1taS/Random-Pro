@@ -17,7 +17,8 @@ let package = Package(
   targets: [
     .target(
       name: "SKNotifications",
-      dependencies: []
+      dependencies: [],
+      resources: [.process("Resources")]
     )
   ]
 )

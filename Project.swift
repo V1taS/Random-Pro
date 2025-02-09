@@ -7,6 +7,10 @@ let project = Project(
   name: appName,
   organizationName: organizationName,
   options: .options(automaticSchemesOptions: .disabled),
+  packages: [
+    .local(path: .relativeToRoot("LocalDependencies/SKUIKit")),
+    .local(path: .relativeToRoot("LocalDependencies/SKServices"))
+  ],
   settings: projectBuildIOSSettings,
   targets: [
     .target(
@@ -28,8 +32,9 @@ let project = Project(
       ],
       dependencies: [
         .target(name: "\(widgetName)"),
-        .external(name: "SKUIKit"),
-        .external(name: "SKServices"),
+        .package(product: "SKUIKit"),
+        .package(product: "FancyUIKit"),
+        .package(product: "SKServices"),
         .external(name: "KeychainSwift"),
         .external(name: "YandexMobileMetricaPush"),
         .external(name: "YandexMobileMetrica"),
@@ -53,8 +58,9 @@ let project = Project(
       ],
       scripts: [],
       dependencies: [
-        .external(name: "SKUIKit"),
-        .external(name: "FancyUIKit")
+        .package(product: "SKUIKit"),
+        .package(product: "FancyUIKit"),
+        .package(product: "SKServices"),
       ],
       settings: targetWidgetIOSSettings
     ),

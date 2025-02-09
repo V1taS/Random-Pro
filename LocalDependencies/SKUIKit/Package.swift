@@ -18,29 +18,31 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(path: "../../LocalDependencies/lottie-ios"),
     .package(path: "../../LocalDependencies/SKStyle"),
     .package(path: "../../LocalDependencies/SKAbstractions"),
-    .package(path: "../../LocalDependencies/SKFoundation")
+    .package(path: "../../LocalDependencies/SKFoundation"),
+    .package(url: "https://github.com/airbnb/lottie-spm.git", exact: "4.5.1")
   ],
   targets: [
     .target(
       name: "SKUIKit",
       dependencies: [
-        .product(name: "Lottie", package: "lottie-ios"),
+        .product(name: "Lottie", package: "lottie-spm"),
         .product(name: "SKStyle", package: "SKStyle"),
         .product(name: "SKAbstractions", package: "SKAbstractions"),
         .product(name: "SKFoundation", package: "SKFoundation")
-      ]
+      ],
+      resources: [.process("Resources")]
     ),
     .target(
       name: "FancyUIKit",
       dependencies: [
-        .product(name: "Lottie", package: "lottie-ios"),
+        .product(name: "Lottie", package: "lottie-spm"),
         .product(name: "FancyStyle", package: "SKStyle"),
         .product(name: "SKAbstractions", package: "SKAbstractions"),
         .product(name: "SKFoundation", package: "SKFoundation")
-      ]
+      ],
+      resources: [.process("Resources")]
     )
   ]
 )

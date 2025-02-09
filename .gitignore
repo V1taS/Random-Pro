@@ -67,4 +67,14 @@ Derived
 Random.xcworkspace
 graph.png
 derived_data
+LocalDependencies/SKAbstractions/SKAbstractions.xcodeproj/project.xcworkspace
+LocalDependencies/SKAbstractions/SKAbstractions.xcodeproj
+LocalDependencies/SKFoundation/SKFoundation.xcodeproj/project.xcworkspace
+LocalDependencies/SKNotifications/SKNotifications.xcodeproj/project.xcworkspace
+LocalDependencies/SKFoundation/SKFoundation.xcodeproj
+LocalDependencies/SKNotifications/SKNotifications.xcodeproj
+LocalDependencies/lottie-ios/Lottie.xcodeproj
+LocalDependencies/SKUIKit/SKUIKit.xcodeproj
+LocalDependencies/SKStyle/SKStyle.xcodeproj
+LocalDependencies/SKServices/SKServices.xcodeproj
 .package.resolved

@@ -75,17 +75,8 @@ extension MainScreenModel {
     /// Блок рекламы 4
     case adv4
 
-    /// Раздел `Камень, ножницы, бумага`
-    case rockPaperScissors
-
-    /// Раздел `Фильтры изображений`
-    case imageFilters
-
     /// Раздел `Фильмы`
     case films
-
-    /// Раздел `Никнейм`
-    case nickName
 
     /// Раздел генерации имен
     case names
@@ -93,26 +84,11 @@ extension MainScreenModel {
     /// Раздел поздравлений
     case congratulations
 
-    /// Раздел "Хорошие дела"
-    case goodDeeds
-
-    /// Раздел "Загадки"
-    case riddles
-
     /// Раздел "Анекдоты"
     case joke
 
     /// Раздел "Подарки"
     case gifts
-
-    /// Раздел "Слоганы"
-    case slogans
-
-    /// Раздел "Правда или действие"
-    case truthOrDare
-
-    /// Раздел "Цитаты"
-    case quotes
 
     /// Раздел "Колесо Фортуны"
     case fortuneWheel

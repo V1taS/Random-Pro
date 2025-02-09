@@ -59,47 +59,23 @@ protocol MainScreenModuleOutput: AnyObject {
   /// Открыть раздел `Bottle`
   func openBottle()
   
-  /// Открыть раздел `rockPaperScissors`
-  func openRockPaperScissors()
-  
-  /// Открыть раздел `openImageFilters`
-  func openImageFilters()
-  
   /// Открыть раздел `Films`
   func openFilms()
-  
-  /// Открыть раздел `NickName`
-  func openNickName()
   
   /// Открыть раздел `Joke`
   func openJoke()
   
-  /// Открыть раздел `Slogans`
-  func openSlogans()
-  
   /// Открыть раздел `Names`
   func openNames()
   
-  /// Открыть раздел `Добрые дела`
-  func openGoodDeeds()
-  
   /// Открыть раздел `Поздравления`
   func openCongratulations()
-  
-  /// Открыть раздел `Загадки`
-  func openRiddles()
   
   /// Открыть раздел `Подарки`
   func openGifts()
   
   /// Открыть раздел `Колесо фортуны`
   func openFortuneWheel()
-  
-  /// Открыть раздел `Цитаты`
-  func openQuotes()
-  
-  /// Открыть раздел `Правда или дело`
-  func openTruthOrDare()
   
   /// Открыть раздел `Мемы`
   func openMemes()

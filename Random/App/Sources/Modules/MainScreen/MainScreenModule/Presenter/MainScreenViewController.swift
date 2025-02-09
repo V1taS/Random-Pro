@@ -121,33 +121,13 @@ extension MainScreenViewController: MainScreenViewOutput {
   func openFortuneWheel() {
     moduleOutput?.openFortuneWheel()
   }
-  
-  func openTruthOrDare() {
-    moduleOutput?.openTruthOrDare()
-  }
-  
-  func openQuotes() {
-    moduleOutput?.openQuotes()
-  }
-  
+
   func openGifts() {
     moduleOutput?.openGifts()
   }
   
   func openJoke() {
     moduleOutput?.openJoke()
-  }
-  
-  func openSlogans() {
-    moduleOutput?.openSlogans()
-  }
-  
-  func openRiddles() {
-    moduleOutput?.openRiddles()
-  }
-  
-  func openGoodDeeds() {
-    moduleOutput?.openGoodDeeds()
   }
   
   func openCongratulations() {
@@ -158,10 +138,6 @@ extension MainScreenViewController: MainScreenViewOutput {
     moduleOutput?.openNames()
   }
   
-  func openNickName() {
-    moduleOutput?.openNickName()
-  }
-  
   func openFilms() {
     moduleOutput?.openFilms()
   }
@@ -169,15 +145,7 @@ extension MainScreenViewController: MainScreenViewOutput {
   func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
     moduleOutput?.noPremiumAccessActionFor(section)
   }
-  
-  func openImageFilters() {
-    moduleOutput?.openImageFilters()
-  }
-  
-  func openRockPaperScissors() {
-    moduleOutput?.openRockPaperScissors()
-  }
-  
+
   func openBottle() {
     moduleOutput?.openBottle()
   }

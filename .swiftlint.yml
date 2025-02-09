@@ -1,52 +1,56 @@
 disabled_rules:
-- type_name
-- cyclomatic_complexity
-- function_body_length
-- function_parameter_count
-- large_tuple
-- identifier_name
-- nesting
-- todo
-- type_body_length
-- block_based_kvo
-- private_over_fileprivate
-- notification_center_detachment
-- trailing_comma
-- fatal_error_message
-- unavailable_function
-- nimble_operator
-- implicit_getter
-- valid_ibinspectable
-- trailing_whitespace
-- closure_parameter_position
-- inclusive_language
-- array_init
+  - type_name
+  - cyclomatic_complexity
+  - function_body_length
+  - function_parameter_count
+  - large_tuple
+  - identifier_name
+  - nesting
+  - todo
+  - type_body_length
+  - block_based_kvo
+  - private_over_fileprivate
+  - notification_center_detachment
+  - trailing_comma
+  - fatal_error_message
+  - unavailable_function
+  - nimble_operator
+  - implicit_getter
+  - valid_ibinspectable
+  - trailing_whitespace
+  - closure_parameter_position
+  - inclusive_language
+  - array_init
+  - multiple_closures_with_trailing_closure
 
 opt_in_rules:
-- array_init
-- contains_over_first_not_nil
-- empty_string
-- empty_xctest_method
-- fallthrough
-- function_default_parameter_at_end
-- joined_default_parameter
-- multiline_parameters
-- private_outlet
-- overridden_super_call
-- pattern_matching_keywords
-- quick_discouraged_call
-- quick_discouraged_focused_test
-- quick_discouraged_pending_test
-- redundant_nil_coalescing
-- required_enum_case
-- single_test_class
-- sorted_first_last
-- yoda_condition
-- closure_parameter_position
+  - array_init
+  - contains_over_first_not_nil
+  - empty_string
+  - empty_xctest_method
+  - fallthrough
+  - function_default_parameter_at_end
+  - joined_default_parameter
+  - multiline_parameters
+  - private_outlet
+  - overridden_super_call
+  - pattern_matching_keywords
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - redundant_nil_coalescing
+  - required_enum_case
+  - single_test_class
+  - sorted_first_last
+  - yoda_condition
+  - closure_parameter_position
+
+  # ОБЯЗАТЕЛЬНО добавьте вашу AI-правило в opt_in_rules:
+  - ai_rule
 
 file_length:
   warning: 800
-  error: 1000
+  error: 1300
 
 line_length:
   error: 160
@@ -60,12 +64,14 @@ force_try: warning
 reporter: "xcode"
 warning_threshold: 1000
 
+# Это — секция для "простых" кастомных regex-правил
 custom_rules:
   no_print:
     name: "Disallow Print Statements"
     regex: "print\\("
     message: "Don't use print statements in the code."
     severity: warning
+
   russian_c_symbol:
     name: "No more russian C in names"
     regex: "[сС]+"
@@ -74,6 +80,7 @@ custom_rules:
       - typeidentifier
       - identifier
     severity: error
+
   russian_e_symbol:
     name: "No more russian E in names"
     regex: "[еЕ]+"
@@ -82,8 +89,17 @@ custom_rules:
       - typeidentifier
       - identifier
     severity: error
+
   enforce_final_classes:
     name: "Enforce Final Classes"
     regex: "(?<!final\\s)class\\s"
     message: "Classes should be declared as final."
     severity: warning
+
+# А вот здесь — конфигурация вашего правила "ai_rule"
+ai_rule:
+  enabled: true
+  model_path: "../llama.cpp/models/Pygmalion-Vicuna-1.1-7b-Q4_K_M.gguf"
+  llama_binary_path: "../llama.cpp/build/bin/llama-cli"
+  max_tokens: 512
+  temperature: 0.7

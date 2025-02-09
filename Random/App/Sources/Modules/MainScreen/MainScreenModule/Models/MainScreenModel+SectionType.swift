@@ -44,44 +44,18 @@ extension MainScreenModel.SectionType {
       return appearance.titleColors
     case .bottle:
       return appearance.titleBottle
-    case .rockPaperScissors:
-      return appearance.titleRockPaperScissors
-    case .imageFilters:
-      return appearance.titleImageFilters
     case .films:
       return appearance.titleFilms
-    case .nickName:
-      return appearance.titleNickName
     case .names:
       return appearance.titleNames
     case .congratulations:
       return appearance.titleCongratulations
-    case .goodDeeds:
-      return appearance.titleGoodDeeds
-    case .riddles:
-      return appearance.titleRiddles
     case .joke:
       return appearance.titleJoke
     case .gifts:
       return appearance.titleGifts
-    case .slogans:
-      return appearance.titleSlogans
-    case .quotes:
-      return appearance.titleQuotes
     case .fortuneWheel:
       return appearance.titleFortuneWheel
-    case .truthOrDare:
-      if let languageType = LanguageType.getCurrentLanguageType() {
-        switch languageType {
-        case .ru:
-          return appearance.titleTruthOrDareRu
-        case .de:
-          return appearance.titleTruthOrDareDe
-        default:
-          return appearance.titleTruthOrDareOther
-        }
-      }
-      return appearance.titleTruthOrDareOther
     case .memes:
       return appearance.titleMemes
     case .adv1:
@@ -125,34 +99,18 @@ extension MainScreenModel.SectionType {
       return appearance.imageColors
     case .bottle:
       return appearance.bottleCardImage
-    case .rockPaperScissors:
-      return appearance.imageRockPaperScissorsScreenView
-    case .imageFilters:
-      return appearance.imageImageFilters
     case .films:
       return appearance.imageFilms
-    case .nickName:
-      return appearance.imageNickName
     case .names:
       return appearance.imageNames
     case .congratulations:
       return appearance.imageCongratulations
-    case .goodDeeds:
-      return appearance.imageGoodDeeds
-    case .riddles:
-      return appearance.imageRiddles
     case .joke:
       return appearance.imageJoke
     case .gifts:
       return appearance.imageGifts
-    case .slogans:
-      return appearance.imageSlogans
-    case .quotes:
-      return appearance.imageQuotes
     case .fortuneWheel:
       return appearance.imageFortuneWheel
-    case .truthOrDare:
-      return appearance.imageTruthOrDare
     case .memes:
       return appearance.imageMemes
     case .adv1:
@@ -196,32 +154,16 @@ extension MainScreenModel.SectionType {
       return appearance.colorsDescriptionForNoPremiumAccess
     case .bottle:
       return appearance.bottleDescriptionForNoPremiumAccess
-    case .rockPaperScissors:
-      return appearance.rockPaperScissorsDescriptionForNoPremiumAccess
-    case .imageFilters:
-      return appearance.imageFiltersDescriptionForNoPremiumAccess
     case .films:
       return appearance.filmsDescriptionForNoPremiumAccess
-    case .nickName:
-      return appearance.nickNameDescriptionForNoPremiumAccess
     case .names:
       return appearance.namesDescriptionForNoPremiumAccess
     case .congratulations:
       return appearance.congratulationsDescriptionForNoPremiumAccess
-    case .goodDeeds:
-      return appearance.goodDeedsDescriptionForNoPremiumAccess
-    case .riddles:
-      return appearance.riddlesDescriptionForNoPremiumAccess
     case .joke:
       return appearance.jokeDescriptionForNoPremiumAccess
     case .gifts:
       return appearance.giftsDescriptionForNoPremiumAccess
-    case .slogans:
-      return appearance.slogansDescriptionForNoPremiumAccess
-    case .truthOrDare:
-      return appearance.truthOrDareDescriptionForNoPremiumAccess
-    case .quotes:
-      return appearance.quotesDescriptionForNoPremiumAccess
     case .fortuneWheel:
       return appearance.fortuneWheelDescriptionForNoPremiumAccess
     case .memes:
@@ -280,10 +222,7 @@ private struct Appearance {
   let passwordDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPassword
   let colorsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomBackgroundColors
   let bottleDescriptionForNoPremiumAccess = RandomStrings.Localizable.canSpinVirtualBottle
-  let rockPaperScissorsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canPlayRockPaperScissors
-  let imageFiltersDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomPhotoFilter
   let filmsDescriptionForNoPremiumAccess = RandomStrings.Localizable.canGenerateRandomMovie
-  let nickNameDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNickname
 
   let imageCardTeam = "person.circle"
   let titleCardTeam = RandomStrings.Localizable.teams
@@ -324,17 +263,8 @@ private struct Appearance {
   let bottleCardImage = "escape"
   let titleBottle = RandomStrings.Localizable.bottle
 
-  let imageRockPaperScissorsScreenView = "hurricane.circle"
-  let titleRockPaperScissors = RandomStrings.Localizable.tsuEFa
-
-  let imageImageFilters = "timelapse"
-  let titleImageFilters = RandomStrings.Localizable.photoFilters
-
   let imageFilms = "film"
   let titleFilms = RandomStrings.Localizable.movies
-
-  let imageNickName = "square.and.pencil"
-  let titleNickName = RandomStrings.Localizable.nickname
 
   let imageNames = "textformat"
   let titleNames = RandomStrings.Localizable.names
@@ -344,14 +274,6 @@ private struct Appearance {
   let titleCongratulations = RandomStrings.Localizable.congratulations
   let congratulationsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomCongratulations
 
-  let imageGoodDeeds = "hand.thumbsup"
-  let titleGoodDeeds = RandomStrings.Localizable.goodDeeds
-  let goodDeedsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNamesGoodDeeds
-
-  let imageRiddles = "lightbulb"
-  let titleRiddles = RandomStrings.Localizable.riddles
-  let riddlesDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomNamesRiddles
-
   let imageJoke = "flame"
   let titleJoke = RandomStrings.Localizable.joke
   let jokeDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomJoke
@@ -359,23 +281,6 @@ private struct Appearance {
   let imageGifts = "gift"
   let titleGifts = RandomStrings.Localizable.gifts
   let giftsDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomGifts
-
-  let imageSlogans = "character.bubble"
-  let titleSlogans = RandomStrings.Localizable.slogans
-  let slogansDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomSlogans
-
-  let imageTruthOrDare = "arrow.left.and.right.righttriangle.left.righttriangle.right"
-  static let titleTruth = RandomStrings.Localizable.truth
-  static let titleOr = RandomStrings.Localizable.or
-  static let titleDareLowercased = RandomStrings.Localizable.dare.lowercased()
-  let titleTruthOrDareRu = "\(titleTruth) \(titleOr)\n\(titleDareLowercased)"
-  let titleTruthOrDareDe = "\(titleTruth)\n\(titleOr) \(titleDareLowercased)"
-  let titleTruthOrDareOther = "\(titleTruth) \(titleOr) \(titleDareLowercased)"
-  let truthOrDareDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomTruthOrDare
-
-  let imageQuotes = "text.quote"
-  let titleQuotes = RandomStrings.Localizable.quotes
-  let quotesDescriptionForNoPremiumAccess = RandomStrings.Localizable.generateRandomQoute
 
   let imageFortuneWheel = "arrow.triangle.2.circlepath"
   let titleFortuneWheel = RandomStrings.Localizable.fortuneWheel

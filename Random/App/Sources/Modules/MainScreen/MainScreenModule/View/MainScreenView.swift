@@ -52,17 +52,8 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Bottle`
   func openBottle()
   
-  /// Открыть раздел `Rock Paper Scissors`
-  func openRockPaperScissors()
-  
-  /// Открыть раздел `Image Filters`
-  func openImageFilters()
-  
   /// Открыть раздел `Films`
   func openFilms()
-  
-  /// Открыть раздел `NickName`
-  func openNickName()
   
   /// Открыть раздел `Names`
   func openNames()
@@ -73,23 +64,8 @@ protocol MainScreenViewOutput: AnyObject {
   /// Открыть раздел `Поздравления`
   func openCongratulations()
   
-  /// Открыть раздел `Добрые дела`
-  func openGoodDeeds()
-  
-  /// Открыть раздел `Загадки`
-  func openRiddles()
-  
   /// Открыть раздел `Подарки`
   func openGifts()
-  
-  /// Открыть раздел `Слоганы`
-  func openSlogans()
-  
-  /// Открыть раздел `Цитаты`
-  func openQuotes()
-  
-  /// Открыть раздел `Правда или дело`
-  func openTruthOrDare()
   
   /// Открыть раздел `Колесо фортуны`
   func openFortuneWheel()
@@ -241,34 +217,18 @@ extension MainScreenView: UICollectionViewDelegate {
         output?.openColors()
       case .bottle:
         output?.openBottle()
-      case .rockPaperScissors:
-        output?.openRockPaperScissors()
-      case .imageFilters:
-        output?.openImageFilters()
       case .films:
         output?.openFilms()
-      case .nickName:
-        output?.openNickName()
       case .names:
         output?.openNames()
       case .congratulations:
         output?.openCongratulations()
-      case .goodDeeds:
-        output?.openGoodDeeds()
-      case .riddles:
-        output?.openRiddles()
       case .joke:
         output?.openJoke()
       case .gifts:
         output?.openGifts()
-      case .slogans:
-        output?.openSlogans()
-      case .quotes:
-        output?.openQuotes()
       case .fortuneWheel:
         output?.openFortuneWheel()
-      case .truthOrDare:
-        output?.openTruthOrDare()
       case .memes:
         output?.openMemes()
       case .adv1:

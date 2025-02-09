@@ -41,6 +41,7 @@ final class ConfigurationValueConfigurator: Configurator {
       await getIsHiddenToggleForSection()
       await getIsToggleForFeature()
       await getSupportMail()
+      await getAmplitude()
       updateMainScreen()
     }
 
@@ -81,6 +82,12 @@ private extension ConfigurationValueConfigurator {
   func getSupportMail() async {
     if let value = await getConfigurationValue(forKey: Constants.supportMailKey) {
       SecretsAPI.supportMail = value
+    }
+  }
+
+  func getAmplitude() async {
+    if let value = await getConfigurationValue(forKey: Constants.amplitude) {
+      SecretsAPI.amplitude = value
     }
   }
 
@@ -192,6 +199,7 @@ private enum Constants {
   static let apiKeyKinopoiskKey = "apiKeyKinopoisk"
   static let apiKeyMostPopularMoviesKey = "apiKeyMostPopularMovies"
   static let supportMailKey = "supportMail"
+  static let amplitude = "amplitude"
 
   static let premiumFeatureTogglesKey = "premiumFeatureToggles"
   static let advListKey = "advList"

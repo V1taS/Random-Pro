@@ -7,7 +7,6 @@
 
 import UIKit
 import AppTrackingTransparency
-import YandexMobileMetricaPush
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
@@ -36,7 +35,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     coordinator.start()
     self.window = window
-    YMPYandexMetricaPush.handleSceneWillConnectToSession(with: connectionOptions)
     
     if let urlContext = connectionOptions.urlContexts.first {
       self.deepLimkURL = urlContext.url

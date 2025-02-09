@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SecretsAPI {
-  public static var apiKeyYandexMetrica = "b4921e71-faf2-4bd3-8bea-e033a76457ae"
+  public static var amplitude = ""
   public static var apiKeyKinopoisk = ""
   public static var apiKeyMostPopularMovies = ""
   public static var supportMail = ""

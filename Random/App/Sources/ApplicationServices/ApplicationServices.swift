@@ -156,7 +156,7 @@ final class ApplicationServicesImpl: ApplicationServices {
   let updateAppServiceImpl = UpdateAppServiceImpl()
   let featureToggleServicesImpl = FeatureToggleServicesImpl()
   let keyboardServiceImpl = KeyboardServiceImpl()
-  let metricsServiceImpl = MetricsServiceImpl()
+  let metricsServiceImpl = MetricsServiceImpl.shared
   let notificationServiceImpl = NotificationServiceImpl()
   let permissionServiceImpl = PermissionServiceImpl()
   let fileManagerImpl = FileManagerImpl()

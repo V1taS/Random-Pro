@@ -36,8 +36,6 @@ let project = Project(
         .package(product: "FancyUIKit"),
         .package(product: "SKServices"),
         .external(name: "KeychainSwift"),
-        .external(name: "YandexMobileMetricaPush"),
-        .external(name: "YandexMobileMetrica"),
         .external(name: "RandomWheel"),
         .external(name: "FancyNetwork")
       ],

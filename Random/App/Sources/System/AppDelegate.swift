@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import YandexMobileMetrica
-import YandexMobileMetricaPush
 import SKAbstractions
 
 @main
@@ -17,9 +15,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     configurators().configure()
-    if let configuration = YMMYandexMetricaConfiguration.init(apiKey: SecretsAPI.apiKeyYandexMetrica) {
-      YMMYandexMetrica.activate(with: configuration)
-    }
     return true
   }
   
@@ -28,12 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                    deviceToken: Data) {
     // If the AppMetrica SDK library was not initialized before this step,
     // calling the method causes the app to crash.
-#if DEBUG
-    let pushEnvironment = YMPYandexMetricaPushEnvironment.development
-#else
-    let pushEnvironment = YMPYandexMetricaPushEnvironment.production
-#endif
-    YMPYandexMetricaPush.setDeviceTokenFrom(deviceToken, pushEnvironment: pushEnvironment)
+    // TODO: - Убрал пуши из яндекс, сделать новую реализацию
   }
   
   // MARK: UISceneSession Lifecycle
@@ -65,7 +55,7 @@ extension AppDelegate {
   func handlePushNotification(_ userInfo: [AnyHashable: Any]) {
     // Track received remote notification.
     // Method [YMMYandexMetrica activateWithApiKey:] should be called before using this method.
-    YMPYandexMetricaPush.handleRemoteNotification(userInfo)
+    // TODO: - Обработка пуша
   }
 }
 

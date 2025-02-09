@@ -7,25 +7,33 @@
 //
 
 import Foundation
-import YandexMobileMetrica
 import SKAbstractions
+import AmplitudeSwift
 
 public final class MetricsServiceImpl: MetricsService {
-  public init() {}
+  private var amplitude: Amplitude?
+
+  public static let shared = MetricsServiceImpl()
+
+  private init() {}
 
   // MARK: - Internal func
-  
+
   public func track(event: MetricsSections) {
-    YMMYandexMetrica.reportEvent(event.rawValue, parameters: nil) { error in
-      // swiftlint:disable:next no_print
-      print("REPORT ERROR: %@", error.localizedDescription)
-    }
+    setupAmplitude()
+    amplitude?.track(eventType: event.rawValue)
   }
-  
+
   public func track(event: MetricsSections, properties: [String: String]) {
-    YMMYandexMetrica.reportEvent(event.rawValue, parameters: properties) { error in
-      // swiftlint:disable:next no_print
-      print("REPORT ERROR: %@", error.localizedDescription)
+    setupAmplitude()
+    amplitude?.track(eventType: event.rawValue, eventProperties: properties)
+  }
+}
+
+private extension MetricsServiceImpl {
+  func setupAmplitude() {
+    if amplitude == nil && !SecretsAPI.amplitude.isEmpty {
+      amplitude = Amplitude(configuration: Configuration(apiKey: SecretsAPI.amplitude))
     }
   }
 }

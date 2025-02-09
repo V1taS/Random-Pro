@@ -19,6 +19,7 @@ let package = Package(
     .package(path: "../../LocalDependencies/SKFoundation"),
     .package(path: "../../LocalDependencies/SKNotifications"),
     .package(url: "https://github.com/apphud/ApphudSDK", exact: "3.1.0"),
+    .package(url: "https://github.com/amplitude/Amplitude-Swift", exact: "1.11.5"),
   ],
   targets: [
     .target(
@@ -29,7 +30,8 @@ let package = Package(
         "SKAbstractions",
         "SKFoundation",
         "SKNotifications",
-        "ApphudSDK"
+        "ApphudSDK",
+        .product(name: "AmplitudeSwift", package: "Amplitude-Swift")
       ]
     ),
     .testTarget(

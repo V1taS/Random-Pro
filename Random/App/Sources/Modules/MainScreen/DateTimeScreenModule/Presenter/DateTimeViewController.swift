@@ -93,10 +93,13 @@ final class DateTimeViewController: DateTimeModule {
     interactor.getContent()
     setNavigationBar()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+
+    Metrics.shared.track(event: .dateTimeScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .dateTimeScreenClose)
   }
   
   // MARK: - Internal func
@@ -118,22 +121,27 @@ extension DateTimeViewController: DateTimeViewOutput {
       return
     }
     moduleOutput?.resultLabelAction(model: model)
+    Metrics.shared.track(event: .dateTimeScreenButtonResultLabelCopied)
   }
   
   func generateButtonDayAction() {
     interactor.generateContentDay()
+    Metrics.shared.track(event: .dateTimeScreenButtonGenerateDay)
   }
   
   func generateButtonDateAction() {
     interactor.generateContentDate()
+    Metrics.shared.track(event: .dateTimeScreenButtonGenerateDate)
   }
   
   func generateButtonTimeAction() {
     interactor.generateContentTime()
+    Metrics.shared.track(event: .dateTimeScreenButtonGenerateTime)
   }
   
   func generateButtonMonthAction() {
     interactor.generateContentMonth()
+    Metrics.shared.track(event: .dateTimeScreenButtonGenerateMonth)
   }
 }
 
@@ -185,6 +193,7 @@ private extension DateTimeViewController {
     }
     moduleOutput?.resultLabelAction(model: model)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .dateTimeScreenButtonResultNavigationCopied)
   }
   
   @objc
@@ -192,6 +201,7 @@ private extension DateTimeViewController {
     guard let cacheModel = cacheModel else { return }
     moduleOutput?.settingButtonAction(model: cacheModel)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .dateTimeScreenButtonSetting)
   }
 }
 

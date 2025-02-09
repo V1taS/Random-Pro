@@ -128,8 +128,6 @@ final class MainSettingsScreenCoordinator: NSObject, MainSettingsScreenCoordinat
     
     var deepLinkService: DeepLinkService = services.deepLinkService
     deepLinkService.deepLinkType = nil
-    services.metricsService.track(event: .deepLinks,
-                                  properties: ["screen": deepLinkType.deepLinkEndPoint])
   }
 }
 
@@ -160,7 +158,6 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     }
 
     mainSettingsScreenModule?.present(activityVC, animated: true, completion: nil)
-    services.metricsService.track(event: .shareApp)
   }
 
   func applyPremium(_ isEnabled: Bool) {
@@ -180,8 +177,6 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     selecteAppIconScreenCoordinator.finishFlow = { [weak self] in
       self?.selecteAppIconScreenCoordinator = nil
     }
-    
-    services.metricsService.track(event: .selecteAppIcon)
   }
   
   func premiumSectionsSelected() {
@@ -198,8 +193,6 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     premiumScreenCoordinator.finishFlow = { [weak self] in
       self?.premiumScreenCoordinator = nil
     }
-    
-    services.metricsService.track(event: .premiumScreen)
   }
   
   func feedBackButtonAction() {
@@ -228,7 +221,6 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
                                                          timeout: nil,
                                                          active: {})
     }
-    services.metricsService.track(event: .feedBack)
   }
   
   func customMainSectionsSelected() {
@@ -246,7 +238,6 @@ extension MainSettingsScreenCoordinator: MainSettingsScreenModuleOutput {
     }
     
     customMainSectionsCoordinator.updateContentWith(models: cacheMainScreenSections)
-    services.metricsService.track(event: .customMainSections)
   }
   
   func applyDarkTheme(_ isEnabled: Bool?) {

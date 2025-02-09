@@ -58,10 +58,13 @@ final class CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenModu
 
     navigationItem.largeTitleDisplayMode = .always
     navigationController?.navigationBar.prefersLargeTitles = true
+
+    Metrics.shared.track(event: .coinStyleScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .coinStyleScreenClose)
   }
 }
 
@@ -70,6 +73,7 @@ final class CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenModu
 extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenViewOutput {
   func noPremiumAccessAction() {
     moduleOutput?.noPremiumAccessAction()
+    Metrics.shared.track(event: .coinStyleScreenButtonNoPremiumAccessAction)
   }
 
   func didSelect(style: CoinStyleSelectionScreenModel.CoinStyle, with models: [CoinStyleSelectionScreenModel]) {
@@ -77,10 +81,15 @@ extension CoinStyleSelectionScreenViewController: CoinStyleSelectionScreenViewOu
     factory.createModelWith(selectStyle: style,
                             with: models,
                             isPremium: interactor.getIsPremium())
+    Metrics.shared.track(
+      event: .coinStyleScreenButtonDidSelectStyle,
+      properties: ["style_eagle": style.coinSidesName.eagle]
+    )
   }
 
   func didSelectStyleSuccessfully() {
     moduleOutput?.didSelectStyleSuccessfully()
+    Metrics.shared.track(event: .coinStyleScreenButtonDidSelectStyleSuccessfully)
   }
 }
 

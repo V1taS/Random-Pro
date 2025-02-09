@@ -90,10 +90,13 @@ final class YesNoScreenViewController: YesNoScreenModule {
     interactor.getContent()
     setupNavBar()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+
+    Metrics.shared.track(event: .yesNoScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .yesNoScreenClose)
   }
   
   // MARK: - Initernal func
@@ -112,6 +115,7 @@ final class YesNoScreenViewController: YesNoScreenModule {
 extension YesNoScreenViewController: YesNoScreenViewOutput {
   func generateButtonAction() {
     interactor.generateContent()
+    Metrics.shared.track(event: .yesNoScreenButtonGenerate)
   }
   
   func resultLabelAction() {
@@ -119,6 +123,7 @@ extension YesNoScreenViewController: YesNoScreenViewOutput {
       return
     }
     moduleOutput?.resultLabelAction(text: result)
+    Metrics.shared.track(event: .yesNoScreenButtonResultLabelCopied)
   }
 }
 
@@ -169,6 +174,7 @@ private extension YesNoScreenViewController {
     guard let model = cacheModel else { return }
     moduleOutput?.resultLabelAction(text: model.result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .yesNoScreenButtonResultNavigationCopied)
   }
   
   @objc
@@ -178,6 +184,7 @@ private extension YesNoScreenViewController {
     }
     moduleOutput?.settingButtonAction(model: cacheModel)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .yesNoScreenButtonSetting)
   }
 }
 

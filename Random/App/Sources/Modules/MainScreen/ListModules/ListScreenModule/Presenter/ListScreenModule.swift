@@ -109,10 +109,13 @@ final class ListScreenViewController: ListScreenModule {
     setupNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().generetionItems.isEmpty
+
+    Metrics.shared.track(event: .listScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .listScreenClose)
   }
   
   // MARK: - Internal func
@@ -139,6 +142,7 @@ final class ListScreenViewController: ListScreenModule {
 extension ListScreenViewController: ListScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
+    Metrics.shared.track(event: .listScreenCloseButtonGenerate)
   }
   
   func resultLabelAction() {
@@ -147,6 +151,7 @@ extension ListScreenViewController: ListScreenViewOutput {
       return
     }
     moduleOutput?.resultCopied(text: result)
+    Metrics.shared.track(event: .listScreenCloseButtonResultLabelCopied)
   }
 }
 
@@ -201,12 +206,14 @@ private extension ListScreenViewController {
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .listScreenCloseButtonResultNavigationCopied)
   }
   
   @objc
   func settingsButtonAction() {
     moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .listScreenCloseButtonSetting)
   }
 }
 // MARK: - Appearance

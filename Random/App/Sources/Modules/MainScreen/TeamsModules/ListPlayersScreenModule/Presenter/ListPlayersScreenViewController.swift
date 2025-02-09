@@ -86,6 +86,7 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
     
     setupNavBar()
     interactor.getContent()
+    Metrics.shared.track(event: .listPlayersScreenOpen)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -95,6 +96,7 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .listPlayersScreenClose)
   }
   
   // MARK: - Internal func
@@ -113,10 +115,12 @@ final class ListPlayersScreenViewController: ListPlayersScreenModule {
 extension ListPlayersScreenViewController: ListPlayersScreenViewOutput {
   func genderValueChanged(_ index: Int) {
     interactor.genderValueChanged(index)
+    Metrics.shared.track(event: .listPlayersScreenGenderValueChanged)
   }
   
   func playerRemoved(id: String) {
     interactor.playerRemove(id: id)
+    Metrics.shared.track(event: .listPlayersScreenPlayerRemoved)
   }
   
   func updateContent() {
@@ -125,14 +129,17 @@ extension ListPlayersScreenViewController: ListPlayersScreenViewOutput {
   
   func updatePlayer(state: TeamsScreenPlayerModel.PlayerState, id: String) {
     interactor.updatePlayer(state: state, id: id)
+    Metrics.shared.track(event: .listPlayersScreenUpdatePlayer)
   }
   
   func updatePlayer(emoji: String, id: String) {
     interactor.updatePlayer(emoji: emoji, id: id)
+    Metrics.shared.track(event: .listPlayersScreenUpdatePlayer)
   }
   
   func playerAdded(name: String?) {
     interactor.playerAdd(name: name)
+    Metrics.shared.track(event: .listPlayersScreenPlayerAdded)
   }
 }
 
@@ -176,6 +183,7 @@ private extension ListPlayersScreenViewController {
   func removePlayersButtonAction() {
     moduleOutput?.removePlayersButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .listPlayersScreenPlayerRemoved)
   }
 }
 

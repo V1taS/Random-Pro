@@ -59,6 +59,13 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
                                            selector: #selector(didBecomeActiveNotification),
                                            name: UIApplication.didBecomeActiveNotification,
                                            object: nil)
+
+    Metrics.shared.track(event: .forceUpdateAppScreenOpen)
+  }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    Metrics.shared.track(event: .forceUpdateAppScreenClose)
   }
 }
 
@@ -67,6 +74,7 @@ final class ForceUpdateAppViewController: ForceUpdateAppModule {
 extension ForceUpdateAppViewController: ForceUpdateAppViewOutput {
   func updateButtonAction() {
     moduleOutput?.updateButtonAction()
+    Metrics.shared.track(event: .forceUpdateButtonAction)
   }
 }
 

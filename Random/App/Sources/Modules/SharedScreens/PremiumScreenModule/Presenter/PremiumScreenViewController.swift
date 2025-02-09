@@ -103,6 +103,8 @@ final class PremiumScreenViewController: PremiumScreenModule {
     factory.createListModelWith(models: [], isLifetimeSale: isLifetimeSale)
     navigationItem.largeTitleDisplayMode = .never
     setNavigationBar()
+
+    Metrics.shared.track(event: .premiumScreenOpen)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -114,6 +116,7 @@ final class PremiumScreenViewController: PremiumScreenModule {
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .premiumScreenClose)
   }
   
   // MARK: - Internal func
@@ -135,10 +138,15 @@ final class PremiumScreenViewController: PremiumScreenModule {
 extension PremiumScreenViewController: PremiumScreenViewOutput {
   func mainButtonAction(_ purchaseType: PremiumScreenPurchaseType) {
     interactor.mainButtonAction(purchaseType)
+    Metrics.shared.track(
+      event: .premiumScreenButtonPurchaseAction,
+      properties: ["purchaseType": purchaseType.productIdentifiers]
+    )
   }
   
   func restorePurchaseButtonAction() {
     interactor.restorePurchase()
+    Metrics.shared.track(event: .premiumScreenButtonRestorePurchase)
   }
   
   func didChangePageAction() {
@@ -147,14 +155,17 @@ extension PremiumScreenViewController: PremiumScreenViewOutput {
   
   func monthlySubscriptionCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
     factory.createMainButtonTitleFrom(purchaseType, amount: amount)
+    Metrics.shared.track(event: .premiumScreenMonthlySubscriptionCardSelected)
   }
   
   func annualSubscriptionCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
     factory.createMainButtonTitleFrom(purchaseType, amount: amount)
+    Metrics.shared.track(event: .premiumScreenAnnualSubscriptionCardSelected)
   }
   
   func lifetimeAccessCardSelected(_ purchaseType: PremiumScreenPurchaseType, amount: String?) {
     factory.createMainButtonTitleFrom(purchaseType, amount: amount)
+    Metrics.shared.track(event: .premiumScreenLifetimeAccessCardSelected)
   }
 }
 
@@ -163,18 +174,22 @@ extension PremiumScreenViewController: PremiumScreenViewOutput {
 extension PremiumScreenViewController: PremiumScreenInteractorOutput {
   func didReceiveSubscriptionPurchaseSuccess() {
     moduleOutput?.didReceiveSubscriptionPurchaseSuccess()
+    Metrics.shared.track(event: .premiumScreenDidReceiveSubscriptionPurchaseSuccess)
   }
 
   func didReceiveOneTimePurchaseSuccess() {
     moduleOutput?.didReceiveOneTimePurchaseSuccess()
+    Metrics.shared.track(event: .premiumScreenDidReceiveOneTimePurchaseSuccess)
   }
 
   func somethingWentWrong() {
     moduleOutput?.somethingWentWrong()
+    Metrics.shared.track(event: .premiumScreenSomethingWentWrong)
   }
 
   func didReceivePurchasesMissing() {
     moduleOutput?.didReceivePurchasesMissing()
+    Metrics.shared.track(event: .premiumScreenDidReceivePurchasesMissing)
   }
 
   func updateStateForSections() {
@@ -183,14 +198,17 @@ extension PremiumScreenViewController: PremiumScreenInteractorOutput {
   
   func didReceiveRestoredSuccess() {
     moduleOutput?.didReceiveRestoredSuccess()
+    Metrics.shared.track(event: .premiumScreenDidReceiveRestoredSuccess)
   }
   
   func startPaymentProcessing() {
     moduleView.startLoader()
+    Metrics.shared.track(event: .premiumScreenStartPaymentProcessing)
   }
   
   func stopPaymentProcessing() {
     moduleView.stopLoader()
+    Metrics.shared.track(event: .premiumScreenStopPaymentProcessing)
   }
   
   func didReceive(models: [SKProduct]) {

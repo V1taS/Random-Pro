@@ -77,10 +77,13 @@ final class FilmsScreenViewController: FilmsScreenModule {
     
     interactor.loadFilm()
     setNavigationBar(isPlayTrailerEnabled: false)
+
+    Metrics.shared.track(event: .filmsScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .filmsScreenClose)
   }
 }
 
@@ -97,10 +100,12 @@ extension FilmsScreenViewController: FilmsScreenViewOutput {
 extension FilmsScreenViewController: FilmsScreenInteractorOutput {
   func startLoader() {
     moduleView.startLoader()
+    Metrics.shared.track(event: .filmsScreenStartLoad)
   }
   
   func stopLoader() {
     moduleView.stopLoader()
+    Metrics.shared.track(event: .filmsScreenStopLoad)
   }
   
   func didReceiveFilm(model: FilmsScreenModel) {
@@ -108,13 +113,16 @@ extension FilmsScreenViewController: FilmsScreenInteractorOutput {
     
     if moduleView.getFilmName() == nil {
       setNavigationBar(isPlayTrailerEnabled: false)
+      Metrics.shared.track(event: .filmsScreenModelsIsEmpty)
     } else {
       setNavigationBar(isPlayTrailerEnabled: true)
+      Metrics.shared.track(event: .filmsScreenDidReceiveFilm)
     }
   }
   
   func somethingWentWrong() {
     moduleOutput?.somethingWentWrong()
+    Metrics.shared.track(event: .filmsScreenSomethingWentWrong)
   }
 }
 
@@ -140,11 +148,12 @@ private extension FilmsScreenViewController {
     playTrailerButton.isEnabled = isPlayTrailerEnabled
     navigationItem.rightBarButtonItems = [playTrailerButton]
   }
-  
+
   @objc
   func playTrailerAction() {
     guard let filmName = moduleView.getFilmName() else {
       moduleOutput?.somethingWentWrong()
+      Metrics.shared.track(event: .filmsScreenButtonPlayTrailertWrong)
       return
     }
     
@@ -158,6 +167,7 @@ private extension FilmsScreenViewController {
       }
       moduleOutput?.playTrailerActionWith(url: previewEngtUrl)
     }
+    Metrics.shared.track(event: .filmsScreenButtonPlayTrailertSuccess)
     impactFeedback.impactOccurred()
   }
 }

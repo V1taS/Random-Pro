@@ -84,6 +84,8 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
     
     interactor.getContent()
     setupNavBar()
+
+    Metrics.shared.track(event: .listAddItemsScreenOpen)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -93,6 +95,8 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+
+    Metrics.shared.track(event: .listAddItemsScreenClose)
   }
   
   // MARK: - Internal func
@@ -111,10 +115,12 @@ final class ListAddItemsScreenViewController: ListAddItemsScreenModule {
 extension ListAddItemsScreenViewController: ListAddItemsScreenViewOutput {
   func textAdded(_ text: String?) {
     interactor.textAdd(text)
+    Metrics.shared.track(event: .listAddItemsScreenTextAdded)
   }
   
   func textRemoved(id: String) {
     interactor.textRemove(id: id)
+    Metrics.shared.track(event: .listAddItemsScreenTextRemoved)
   }
 }
 
@@ -158,6 +164,7 @@ private extension ListAddItemsScreenViewController {
   func removePlayersButtonAction() {
     moduleOutput?.removeTextsButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .listAddItemsScreenButtonNavigationRemoveTexts)
   }
 }
 

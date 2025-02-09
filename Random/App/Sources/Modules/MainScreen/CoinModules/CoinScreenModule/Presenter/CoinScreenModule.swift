@@ -97,6 +97,8 @@ final class CoinScreenViewController: CoinScreenModule {
     
     let listResult = interactor.returnModel()?.listResult ?? []
     copyButton.isEnabled = !listResult.isEmpty
+
+    Metrics.shared.track(event: .coinScreenOpen)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +109,7 @@ final class CoinScreenViewController: CoinScreenModule {
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .coinScreenClose)
   }
   
   // MARK: - Internal func
@@ -130,6 +133,7 @@ final class CoinScreenViewController: CoinScreenModule {
 extension CoinScreenViewController: CoinScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
+    Metrics.shared.track(event: .coinScreenButtonGenerate)
   }
   
   func saveData(model: CoinScreenModel) {
@@ -193,6 +197,7 @@ private extension CoinScreenViewController {
     guard let model = interactor.returnModel() else { return }
     moduleOutput?.resultLabelAction(text: model.result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .coinScreenButtonCopy)
   }
   
   @objc
@@ -202,6 +207,7 @@ private extension CoinScreenViewController {
     }
     moduleOutput?.settingButtonAction(model: model)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .coinScreenButtonSettings)
   }
 }
 

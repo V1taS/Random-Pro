@@ -111,8 +111,6 @@ private extension CubesStyleSelectionScreenCoordinator {
     premiumScreenCoordinator.finishFlow = { [weak self] in
       self?.premiumScreenCoordinator = nil
     }
-
-    services.metricsService.track(event: .premiumScreen)
   }
 }
 

@@ -99,10 +99,14 @@ final class CongratulationsScreenViewController: CongratulationsScreenModule {
     moduleView.startLoader()
     interactor.getContent(type: nil)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+
+    Metrics.shared.track(event: .congratulationsScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+
+    Metrics.shared.track(event: .congratulationsScreenClose)
   }
   
   // MARK: - Internal func
@@ -125,6 +129,8 @@ final class CongratulationsScreenViewController: CongratulationsScreenModule {
 extension CongratulationsScreenViewController: CongratulationsScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
+
+    Metrics.shared.track(event: .congratulationsScreenButtonGenerate)
   }
   
   func resultLabelAction() {
@@ -133,10 +139,15 @@ extension CongratulationsScreenViewController: CongratulationsScreenViewOutput {
       return
     }
     moduleOutput?.resultCopied(text: result)
+    Metrics.shared.track(event: .congratulationsScreenButtonResultLabelCopied)
   }
   
   func segmentedControlValueDidChange(type: CongratulationsScreenModel.CongratulationsType) {
     interactor.segmentedControlValueDidChange(type: type)
+    Metrics.shared.track(
+      event: .congratulationsScreenValueDidChange,
+      properties: ["type": type.rawValue]
+    )
   }
 }
 
@@ -152,6 +163,7 @@ extension CongratulationsScreenViewController: CongratulationsScreenInteractorOu
   func somethingWentWrong() {
     moduleView.stopLoader()
     moduleOutput?.somethingWentWrong()
+    Metrics.shared.track(event: .congratulationsScreenSomethingWentWrong)
   }
   
   func cleanButtonWasSelected() {
@@ -184,12 +196,14 @@ private extension CongratulationsScreenViewController {
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .congratulationsScreenButtonResultNavigationCopied)
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .congratulationsScreenButtonSetting)
   }
 }
 

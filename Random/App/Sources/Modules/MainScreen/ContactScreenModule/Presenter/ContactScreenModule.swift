@@ -94,10 +94,13 @@ final class ContactScreenViewController: ContactScreenModule {
     interactor.getContent()
     setNavigationBar()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+
+    Metrics.shared.track(event: .contactScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .contactScreenClose)
   }
   
   // MARK: - Internal func
@@ -116,6 +119,7 @@ final class ContactScreenViewController: ContactScreenModule {
 extension ContactScreenViewController: ContactScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
+    Metrics.shared.track(event: .contactScreenButtonGenerate)
   }
   
   func resultLabelAction() {
@@ -124,6 +128,7 @@ extension ContactScreenViewController: ContactScreenViewOutput {
       return
     }
     moduleOutput?.resultCopied(text: result)
+    Metrics.shared.track(event: .contactScreenButtonResultLabelCopied)
   }
 }
 
@@ -170,12 +175,15 @@ private extension ContactScreenViewController {
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
     impactFeedback.impactOccurred()
+
+    Metrics.shared.track(event: .contactScreenButtonResultNavigationCopied)
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .contactScreenButtonSetting)
   }
 }
 

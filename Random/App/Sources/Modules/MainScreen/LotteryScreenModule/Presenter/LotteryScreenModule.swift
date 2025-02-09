@@ -96,10 +96,13 @@ final class LotteryScreenViewController: LotteryScreenModule {
     setNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+
+    Metrics.shared.track(event: .lotteryScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .lotteryScreenClose)
   }
   
   // MARK: - Internal func
@@ -119,6 +122,7 @@ extension LotteryScreenViewController: LotteryScreenViewOutput {
   func generateButtonAction(rangeStartValue: String?, rangeEndValue: String?, amountNumberValue: String?) {
     interactor.generateContent(rangeStartValue: rangeStartValue,
                                rangeEndValue: rangeEndValue, amountNumberValue: amountNumberValue)
+    Metrics.shared.track(event: .lotteryScreenButtonGenerate)
   }
   
   func resultLabelAction() {
@@ -126,6 +130,7 @@ extension LotteryScreenViewController: LotteryScreenViewOutput {
       return
     }
     moduleOutput?.resultLabelAction(model: cacheModel)
+    Metrics.shared.track(event: .lotteryScreenButtonResultLabelCopied)
   }
 }
 
@@ -181,6 +186,7 @@ private extension LotteryScreenViewController {
     }
     moduleOutput?.resultLabelAction(model: model)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .lotteryScreenButtonResultNavigationCopied)
   }
   
   @objc
@@ -188,6 +194,7 @@ private extension LotteryScreenViewController {
     guard let cacheModel = cacheModel else { return }
     moduleOutput?.settingButtonAction(model: cacheModel)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .lotteryScreenButtonSetting)
   }
 }
 

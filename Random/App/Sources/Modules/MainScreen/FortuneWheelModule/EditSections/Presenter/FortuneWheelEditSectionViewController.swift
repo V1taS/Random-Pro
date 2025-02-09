@@ -90,10 +90,12 @@ final class FortuneWheelEditSectionViewController: FortuneWheelEditSectionModule
     super.viewDidLoad()
     
     setupNavBar()
+    Metrics.shared.track(event: .fortuneWheelEditSectionScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .fortuneWheelEditSectionScreenClose)
   }
   
   // MARK: - Internal func
@@ -119,18 +121,22 @@ final class FortuneWheelEditSectionViewController: FortuneWheelEditSectionModule
 extension FortuneWheelEditSectionViewController: FortuneWheelEditSectionViewOutput {
   func editSection(title: String?) {
     interactor.editSection(title: title)
+    Metrics.shared.track(event: .fortuneWheelEditSectionScreenEditSection)
   }
   
   func editEmoticon(_ emoticon: Character?) {
     interactor.editEmoticon(emoticon)
+    Metrics.shared.track(event: .fortuneWheelEditSectionScreenEditEmoticon)
   }
   
   func deleteObject(_ object: String?) {
     interactor.deleteObject(object)
+    Metrics.shared.track(event: .fortuneWheelEditSectionScreenDeleteObject)
   }
   
   func createObject(_ emoticon: Character?, _ titleSection: String?, _ textObject: String?) {
     interactor.createObject(emoticon, titleSection, textObject)
+    Metrics.shared.track(event: .fortuneWheelEditSectionScreenCreateObject)
   }
 }
 
@@ -165,11 +171,12 @@ private extension FortuneWheelEditSectionViewController {
                                                         target: self,
                                                         action: #selector(removePlayersButtonAction))
   }
-  
+
   @objc
   func removePlayersButtonAction() {
     moduleOutput?.removeTextsButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .fortuneWheelEditSectionScreenButtonNavigationRemoveItem)
   }
 }
 

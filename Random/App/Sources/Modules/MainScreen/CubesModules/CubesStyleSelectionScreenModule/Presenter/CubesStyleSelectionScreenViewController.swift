@@ -50,6 +50,8 @@ final class CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenMo
 
     interactor.getContent()
     setupNavBar()
+
+    Metrics.shared.track(event: .cubesStyleScreenOpen)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +63,7 @@ final class CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenMo
 
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .cubesStyleScreenClose)
   }
 }
 
@@ -69,6 +72,8 @@ final class CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenMo
 extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenViewOutput {
   func noPremiumAccessAction() {
     moduleOutput?.noPremiumAccessAction()
+
+    Metrics.shared.track(event: .cubesStyleScreenButtonNoPremiumAccessAction)
   }
 
   func didSelect(style: CubesStyleSelectionScreenModel.CubesStyle, with models: [CubesStyleSelectionScreenModel]) {
@@ -76,10 +81,15 @@ extension CubesStyleSelectionScreenViewController: CubesStyleSelectionScreenView
     factory.createModelWith(selectStyle: style,
                             with: models,
                             isPremium: interactor.getIsPremium())
+    Metrics.shared.track(
+      event: .cubesStyleScreenButtonDidSelectStyle,
+      properties: ["style": style.rawValue]
+    )
   }
 
   func didSelectStyleSuccessfully() {
     moduleOutput?.didSelectStyleSuccessfully()
+    Metrics.shared.track(event: .cubesStyleScreenButtonDidSelectStyleSuccessfully)
   }
 }
 

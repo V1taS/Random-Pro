@@ -102,7 +102,6 @@ extension AppUnavailableCoordinator: AppUnavailableModuleOutput {
                                                          timeout: nil,
                                                          active: {})
     }
-    services.metricsService.track(event: .feedBack)
   }
 }
 

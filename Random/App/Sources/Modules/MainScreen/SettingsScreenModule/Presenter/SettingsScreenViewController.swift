@@ -98,10 +98,13 @@ final class SettingsScreenViewController: SettingsScreenModule {
     
     title = Appearance().title
     navigationItem.largeTitleDisplayMode = .never
+
+    Metrics.shared.track(event: .settingsScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .settingsScreenClose)
   }
   
   // MARK: - Internal func
@@ -116,34 +119,42 @@ final class SettingsScreenViewController: SettingsScreenModule {
 extension SettingsScreenViewController: SettingsScreenViewOutput {
   func coinStyleSelectionAction() {
     moduleOutput?.coinStyleSelectionAction()
+    Metrics.shared.track(event: .settingsScreenCoinStyleSelectionAction)
   }
 
   func bottleStyleSelectionAction() {
     moduleOutput?.bottleStyleSelectionAction()
+    Metrics.shared.track(event: .settingsScreenBottleStyleSelectionAction)
   }
 
   func cubesStyleSelectionAction() {
     moduleOutput?.cubesStyleSelectionAction()
+    Metrics.shared.track(event: .settingsScreenCubesStyleSelectionAction)
   }
 
   func playerCardSelectionAction() {
     moduleOutput?.playerCardSelectionAction()
+    Metrics.shared.track(event: .settingsScreenPlayerCardSelectionAction)
   }
   
   func createListAction() {
     moduleOutput?.createListAction()
+    Metrics.shared.track(event: .settingsScreenCreateListAction)
   }
   
   func listOfObjectsAction() {
     moduleOutput?.listOfObjectsAction()
+    Metrics.shared.track(event: .settingsScreenListOfObjectsAction)
   }
   
   func withoutRepetitionAction(isOn: Bool) {
     moduleOutput?.withoutRepetitionAction(isOn: isOn)
+    Metrics.shared.track(event: .settingsScreenWithoutRepetitionAction)
   }
   
   func cleanButtonAction() {
     moduleOutput?.cleanButtonAction()
+    Metrics.shared.track(event: .settingsScreenCleanButtonAction)
   }
 }
 

@@ -164,8 +164,6 @@ private extension SettingsScreenCoordinator {
     playerCardSelectionScreenCoordinator.finishFlow = { [weak self] in
       self?.playerCardSelectionScreenCoordinator = nil
     }
-    
-    services.metricsService.track(event: .premiumPlayerCardSelection)
   }
 
   func openBottleStyleSelectionScreenCoordinator() {
@@ -177,8 +175,6 @@ private extension SettingsScreenCoordinator {
     bottleStyleSelectionScreenCoordinator.finishFlow = { [weak self] in
       self?.bottleStyleSelectionScreenCoordinator = nil
     }
-
-    services.metricsService.track(event: .premiumBottleStyleSelection)
   }
 
   func openCoinStyleSelectionScreenCoordinator() {
@@ -190,8 +186,6 @@ private extension SettingsScreenCoordinator {
     coinStyleSelectionScreenCoordinator.finishFlow = { [weak self] in
       self?.coinStyleSelectionScreenCoordinator = nil
     }
-
-    services.metricsService.track(event: .premiumCoinStyleSelection)
   }
 
   func openCubesStyleSelectionScreenCoordinator() {
@@ -201,10 +195,7 @@ private extension SettingsScreenCoordinator {
     cubesStyleSelectionScreenCoordinator.finishFlow = { [weak self] in
       self?.cubesStyleSelectionScreenCoordinator = nil
     }
-
-    services.metricsService.track(event: .premiumCoinStyleSelection)
   }
-
 }
 
 // MARK: - Appearance

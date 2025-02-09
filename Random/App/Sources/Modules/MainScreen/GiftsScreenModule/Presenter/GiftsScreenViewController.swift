@@ -99,10 +99,14 @@ final class GiftsScreenViewController: GiftsScreenModule {
     moduleView.startLoader()
     interactor.getContent(gender: nil)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+
+    Metrics.shared.track(event: .giftsScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+
+    Metrics.shared.track(event: .giftsScreenClose)
   }
   
   // MARK: - Internal func
@@ -125,6 +129,7 @@ final class GiftsScreenViewController: GiftsScreenModule {
 extension GiftsScreenViewController: GiftsScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
+    Metrics.shared.track(event: .giftsScreenButtonGenerate)
   }
 
   func resultLabelAction() {
@@ -133,10 +138,15 @@ extension GiftsScreenViewController: GiftsScreenViewOutput {
       return
     }
     moduleOutput?.resultCopied(text: result)
+    Metrics.shared.track(event: .giftsScreenButtonResultLabelCopied)
   }
 
   func segmentedControlValueDidChange(type: GiftsScreenModel.Gender) {
     interactor.segmentedControlValueDidChange(type: type)
+    Metrics.shared.track(
+      event: .giftsScreenValueDidChange,
+      properties: ["type": type.rawValue]
+    )
   }
 }
 
@@ -147,11 +157,13 @@ extension GiftsScreenViewController: GiftsScreenInteractorOutput {
     moduleView.stopLoader()
     moduleView.set(result: text, gender: gender)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+    Metrics.shared.track(event: .giftsScreenDidReceiveModelData)
   }
 
   func somethingWentWrong() {
     moduleView.stopLoader()
     moduleOutput?.somethingWentWrong()
+    Metrics.shared.track(event: .giftsScreenSomethingWentWrong)
   }
 
   func cleanButtonWasSelected() {
@@ -184,12 +196,14 @@ private extension GiftsScreenViewController {
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .giftsScreenButtonResultNavigationCopied)
   }
 
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .giftsScreenButtonSetting)
   }
 
 }

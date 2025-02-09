@@ -77,6 +77,8 @@ final class SelecteAppIconScreenViewController: SelecteAppIconScreenModule {
     super.viewDidLoad()
     
     title = Appearance().title
+
+    Metrics.shared.track(event: .selecteAppIconScreenOpen)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +90,7 @@ final class SelecteAppIconScreenViewController: SelecteAppIconScreenModule {
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .selecteAppIconScreenClose)
   }
 }
 
@@ -96,11 +99,16 @@ final class SelecteAppIconScreenViewController: SelecteAppIconScreenModule {
 extension SelecteAppIconScreenViewController: SelecteAppIconScreenViewOutput {
   func noPremiumAccessAction() {
     moduleOutput?.noPremiumAccessAction()
+    Metrics.shared.track(event: .selecteAppIconScreenNoPremiumAccessAction)
   }
   
   func didSelectImage(type: SelecteAppIconType) {
     factory.createListModelWith(selectImageType: type, and: interactor.returnIsPremium())
     interactor.updateAppIcon(type: type)
+    Metrics.shared.track(
+      event: .selecteAppIconScreenDidSelectAppImage,
+      properties: ["type": type.imageName]
+    )
   }
 }
 

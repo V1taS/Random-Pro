@@ -84,10 +84,13 @@ final class ColorsScreenViewController: ColorsScreenModule {
     super.viewDidLoad()
     copyButton.isEnabled = false
     setNavigationBar()
+
+    Metrics.shared.track(event: .colorsScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .colorsScreenClose)
   }
 }
 
@@ -100,6 +103,7 @@ extension ColorsScreenViewController: ColorsScreenViewOutput {
     }
     copyButton.isEnabled = true
     interactor.generateResultButtonPressed(text: text)
+    Metrics.shared.track(event: .colorsScreenButtonGenerateResult)
   }
   
   func resultLabelAction(text: String?) {
@@ -107,6 +111,7 @@ extension ColorsScreenViewController: ColorsScreenViewOutput {
       return
     }
     moduleOutput?.resultCopied(text: text)
+    Metrics.shared.track(event: .colorsScreenButtonResultLabelCopied)
   }
 }
 
@@ -152,12 +157,14 @@ private extension ColorsScreenViewController {
     copyButton.isEnabled = true
     moduleOutput?.resultCopied(text: result ?? Appearance().defaultResult)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .colorsScreenButtonResultNavigationCopied)
   }
   
   @objc
   func shareButtonAction() {
     interactor.requestGalleryStatus()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .colorsScreenButtonResultNavigationShare)
   }
 }
 

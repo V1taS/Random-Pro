@@ -96,10 +96,14 @@ final class MemesScreenViewController: MemesScreenModule {
     setNavigationBar()
     moduleView.startLoader()
     interactor.getContent()
+
+    Metrics.shared.track(event: .memesScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+
+    Metrics.shared.track(event: .memesScreenClose)
   }
   
   // MARK: - Internal func
@@ -123,6 +127,7 @@ extension MemesScreenViewController: MemesScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
     moduleView.startLoader()
+    Metrics.shared.track(event: .memesScreenButtonGenerate)
   }
 }
 
@@ -132,6 +137,7 @@ extension MemesScreenViewController: MemesScreenInteractorOutput {
   func somethingWentWrong() {
     moduleOutput?.somethingWentWrong()
     moduleView.stopLoader()
+    Metrics.shared.track(event: .memesScreenSomethingWentWrong)
   }
   
   func requestPhotosSuccess() {
@@ -143,12 +149,14 @@ extension MemesScreenViewController: MemesScreenInteractorOutput {
   
   func requestPhotosError() {
     moduleOutput?.requestPhotosError()
+    Metrics.shared.track(event: .memesScreenRequestPhotosError)
   }
   
   func didReceive(memes: Data?) {
     moduleView.set(result: memes)
     cacheMemes = memes
     moduleView.stopLoader()
+    Metrics.shared.track(event: .memesScreenDidReceiveMemes)
   }
 }
 
@@ -181,12 +189,14 @@ private extension MemesScreenViewController {
   func shareButtonAction() {
     interactor.requestPhotosStatus()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .memesScreenButtonShareImage)
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .memesScreenButtonSetting)
   }
 }
 

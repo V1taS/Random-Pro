@@ -59,6 +59,14 @@ final class AppUnavailableViewController: AppUnavailableModule {
                                            selector: #selector(didBecomeActiveNotification),
                                            name: UIApplication.didBecomeActiveNotification,
                                            object: nil)
+
+    Metrics.shared.track(event: .appUnavailableScreenOpen)
+  }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+
+    Metrics.shared.track(event: .appUnavailableScreenClose)
   }
 }
 
@@ -68,6 +76,7 @@ extension AppUnavailableViewController: AppUnavailableViewOutput {
   func feedBackButtonAction() {
     moduleOutput?.feedBackButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .appUnavailableScreenFeedBackButtonAction)
   }
 }
 

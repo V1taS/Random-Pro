@@ -12,8 +12,8 @@ import FancyStyle
 public final class PlayerView: UIView {
   
   /// Стиль карточки
-  public enum StyleCard: CaseIterable, Equatable & Codable {
-    
+  public enum StyleCard: String, CaseIterable, Equatable & Codable {
+
     /// Стиль по умолчанию
     case defaultStyle
     

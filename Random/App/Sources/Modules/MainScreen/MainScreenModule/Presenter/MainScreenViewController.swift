@@ -54,6 +54,8 @@ final class MainScreenViewController: MainScreenModule {
     
     updateSections()
     moduleOutput?.mainScreenModuleDidLoad()
+
+    Metrics.shared.track(event: .mainScreenOpen)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -112,8 +114,17 @@ final class MainScreenViewController: MainScreenModule {
 extension MainScreenViewController: MainScreenViewOutput {
   func openADV(urlString: String?) {
     moduleOutput?.openADV(urlString: urlString)
+    Metrics.shared.track(event: .mainScreenButtonOpenADV)
   }
-  
+
+  func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
+    moduleOutput?.noPremiumAccessActionFor(section)
+    Metrics.shared.track(
+      event: .mainScreenButtonNoPremiumAccess,
+      properties: ["section": section.type.rawValue]
+    )
+  }
+
   func openMemes() {
     moduleOutput?.openMemes()
   }
@@ -140,10 +151,6 @@ extension MainScreenViewController: MainScreenViewOutput {
   
   func openFilms() {
     moduleOutput?.openFilms()
-  }
-  
-  func noPremiumAccessActionFor(_ section: MainScreenModel.Section) {
-    moduleOutput?.noPremiumAccessActionFor(section)
   }
 
   func openBottle() {
@@ -252,6 +259,7 @@ private extension MainScreenViewController {
     interactor.returnModel { [weak self] model in
       self?.moduleOutput?.premiumButtonAction(model.isPremium)
       self?.impactFeedback.impactOccurred()
+      Metrics.shared.track(event: .mainScreenButtonPremium)
     }
   }
   
@@ -259,6 +267,7 @@ private extension MainScreenViewController {
   func settingsButtonAction() {
     moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .mainScreenButtonSetting)
   }
 }
 

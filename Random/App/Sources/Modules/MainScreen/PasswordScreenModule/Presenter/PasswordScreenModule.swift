@@ -94,10 +94,13 @@ final class PasswordScreenViewController: PasswordScreenModule {
     setNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+
+    Metrics.shared.track(event: .passwordScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .passwordScreenClose)
   }
   
   // MARK: - Internal func
@@ -120,6 +123,7 @@ extension PasswordScreenViewController: PasswordScreenViewOutput {
   
   func generateButtonAction(passwordLength: String?) {
     interactor.generateButtonAction(passwordLength: passwordLength)
+    Metrics.shared.track(event: .passwordScreenButtonGenerate)
   }
   
   func passwordLengthDidChange(_ text: String?) {
@@ -128,18 +132,22 @@ extension PasswordScreenViewController: PasswordScreenViewOutput {
   
   func uppercaseSwitchAction(status: Bool) {
     interactor.uppercaseSwitchAction(status: status)
+    Metrics.shared.track(event: .passwordScreenUppercaseSwitchAction)
   }
   
   func lowercaseSwitchAction(status: Bool) {
     interactor.lowercaseSwitchAction(status: status)
+    Metrics.shared.track(event: .passwordScreenLowercaseSwitchAction)
   }
   
   func numbersSwitchAction(status: Bool) {
     interactor.numbersSwitchAction(status: status)
+    Metrics.shared.track(event: .passwordScreenNumbersSwitchAction)
   }
   
   func symbolsSwitchAction(status: Bool) {
     interactor.symbolsSwitchAction(status: status)
+    Metrics.shared.track(event: .passwordScreenSymbolsSwitchAction)
   }
   
   func resultLabelAction() {
@@ -148,6 +156,7 @@ extension PasswordScreenViewController: PasswordScreenViewOutput {
       return
     }
     moduleOutput?.resultCopied(text: result)
+    Metrics.shared.track(event: .passwordScreenButtonResultLabelCopied)
   }
 }
 
@@ -204,12 +213,14 @@ private extension PasswordScreenViewController {
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .passwordScreenButtonResultNavigationCopied)
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .passwordScreenButtonSetting)
   }
 }
 

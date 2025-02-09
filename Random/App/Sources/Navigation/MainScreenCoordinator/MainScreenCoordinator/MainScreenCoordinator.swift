@@ -177,7 +177,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .memes)
-    services.metricsService.track(event: .memes)
   }
   
   func openFortuneWheel() {
@@ -189,7 +188,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .fortuneWheel)
-    services.metricsService.track(event: .fortuneWheel)
   }
   
   func openGifts() {
@@ -202,7 +200,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .gifts)
-    services.metricsService.track(event: .gifts)
   }
   
   func openJoke() {
@@ -215,7 +212,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .joke)
-    services.metricsService.track(event: .joke)
   }
   
   func openCongratulations() {
@@ -228,7 +224,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .congratulations)
-    services.metricsService.track(event: .congratulations)
   }
   
   func openNames() {
@@ -241,7 +236,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .names)
-    services.metricsService.track(event: .names)
   }
   
   func openFilms() {
@@ -254,7 +248,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
 
     mainScreenModule?.removeLabelFromSection(type: .films)
-    services.metricsService.track(event: .filmScreen)
   }
   
   func openBottle() {
@@ -267,7 +260,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .bottle)
-    services.metricsService.track(event: .bottleScreen)
   }
   
   func openColors() {
@@ -280,7 +272,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .colors)
-    services.metricsService.track(event: .colorsScreen)
   }
   
   func openTeams() {
@@ -293,7 +284,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .teams)
-    services.metricsService.track(event: .teamsScreen)
   }
   
   func openYesOrNo() {
@@ -306,7 +296,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .yesOrNo)
-    services.metricsService.track(event: .yesOrNotScreen)
   }
   
   func openCharacter() {
@@ -319,7 +308,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .letter)
-    services.metricsService.track(event: .charactersScreen)
   }
   
   func openList() {
@@ -332,7 +320,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .list)
-    services.metricsService.track(event: .listScreen)
   }
   
   func openCoin() {
@@ -345,7 +332,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .coin)
-    services.metricsService.track(event: .coinScreen)
   }
   
   func openCube() {
@@ -358,7 +344,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .cube)
-    services.metricsService.track(event: .cubeScreen)
   }
   
   func openDateAndTime() {
@@ -371,7 +356,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .dateAndTime)
-    services.metricsService.track(event: .dateAndTimeScreen)
   }
   
   func openLottery() {
@@ -384,7 +368,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .lottery)
-    services.metricsService.track(event: .lotteryScreen)
   }
   
   func openContact() {
@@ -397,7 +380,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .contact)
-    services.metricsService.track(event: .contactScreen)
   }
   
   func openPassword() {
@@ -410,7 +392,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .password)
-    services.metricsService.track(event: .passwordScreen)
   }
   
   func openNumber() {
@@ -423,7 +404,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.removeLabelFromSection(type: .number)
-    services.metricsService.track(event: .numbersScreen)
   }
   
   func shareButtonAction() {
@@ -446,7 +426,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     }
     
     mainScreenModule?.present(activityVC, animated: true, completion: nil)
-    services.metricsService.track(event: .shareApp)
   }
   
   func settingButtonAction() {
@@ -463,8 +442,6 @@ extension MainScreenCoordinator: MainScreenModuleOutput {
     settingsScreenCoordinator.finishFlow = { [weak self] in
       self?.settingsScreenCoordinator = nil
     }
-    
-    services.metricsService.track(event: .mainSettingsScreen)
     
     mainScreenModule.returnModel { model in
       settingsScreenCoordinator.updateContentWith(model: MainSettingsScreenModel(
@@ -523,7 +500,6 @@ private extension MainScreenCoordinator {
       DispatchQueue.main.async { [weak self] in
         guard let self else { return }
         openPremium(isLifetimeSale: true)
-        services.metricsService.track(event: .sales)
       }
     }
   }
@@ -579,8 +555,6 @@ private extension MainScreenCoordinator {
     premiumScreenCoordinator.finishFlow = { [weak self] in
       self?.premiumScreenCoordinator = nil
     }
-    
-    services.metricsService.track(event: .premiumScreen)
   }
   
   func checkIsUpdateAvailable() {

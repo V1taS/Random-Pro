@@ -99,10 +99,13 @@ final class LetterScreenViewController: LetterScreenModule {
     setNavigationBar()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnListResult().isEmpty
+
+    Metrics.shared.track(event: .letterScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .letterScreenClose)
   }
   
   // MARK: - Internal func
@@ -125,10 +128,12 @@ final class LetterScreenViewController: LetterScreenModule {
 extension LetterScreenViewController: LetterScreenViewOutput {
   func generateEngButtonAction() {
     interactor.generateContentEngLetter()
+    Metrics.shared.track(event: .letterScreenButtonGenerateEng)
   }
   
   func generateRusButtonAction() {
     interactor.generateContentRusLetter()
+    Metrics.shared.track(event: .letterScreenButtonGenerateRus)
   }
   
   func resultLabelAction() {
@@ -136,6 +141,7 @@ extension LetterScreenViewController: LetterScreenViewOutput {
       return
     }
     moduleOutput?.resultLabelAction(text: result)
+    Metrics.shared.track(event: .letterScreenButtonResultLabelCopied)
   }
 }
 
@@ -188,6 +194,8 @@ private extension LetterScreenViewController {
     guard let model = cacheModel else { return }
     moduleOutput?.resultLabelAction(text: model.result)
     impactFeedback.impactOccurred()
+
+    Metrics.shared.track(event: .letterScreenButtonResultNavigationCopied)
   }
   
   @objc
@@ -197,6 +205,7 @@ private extension LetterScreenViewController {
     }
     moduleOutput?.settingButtonAction(model: model)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .letterScreenButtonSetting)
   }
 }
 

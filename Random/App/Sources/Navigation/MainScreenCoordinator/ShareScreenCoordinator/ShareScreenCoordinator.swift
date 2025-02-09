@@ -123,7 +123,6 @@ extension ShareScreenCoordinator: ShareScreenModuleOutput {
     }
     
     shareScreenModule?.present(activityViewController, animated: true, completion: nil)
-    services.metricsService.track(event: .shareImage)
   }
   
   func closeButtonAction() {

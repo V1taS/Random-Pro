@@ -95,10 +95,12 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
     super.viewDidLoad()
     
     setNavigationBar()
+    Metrics.shared.track(event: .fortuneWheelSelectedSectionScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .fortuneWheelSelectedSectionScreenClose)
   }
   
   // MARK: - Internal func
@@ -130,14 +132,23 @@ final class FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSecti
 extension FortuneWheelSelectedSectionViewController: FortuneWheelSelectedSectionViewOutput {
   func deleteSection(_ section: FortuneWheelModel.Section) {
     interactor.deleteSection(section)
+    Metrics.shared.track(event: .fortuneWheelSelectedSectionScreenDeleteSection)
   }
   
   func editCurrentSectionWith(section: FortuneWheelModel.Section) {
     moduleOutput?.editCurrentSectionWith(section: section)
+    Metrics.shared.track(
+      event: .fortuneWheelSelectedSectionScreenEditCurrentSection,
+      properties: ["section": section.title]
+    )
   }
   
   func sectionSelected(_ section: FortuneWheelModel.Section) {
     interactor.sectionSelected(section)
+    Metrics.shared.track(
+      event: .fortuneWheelSelectedSectionScreenSectionSelected,
+      properties: ["section": section.title]
+    )
   }
 }
 
@@ -193,6 +204,8 @@ private extension FortuneWheelSelectedSectionViewController {
   func addButtonAction() {
     moduleOutput?.createNewSection()
     impactFeedback.impactOccurred()
+
+    Metrics.shared.track(event: .fortuneWheelSelectedSectionScreenCreateNewSection)
   }
 }
 

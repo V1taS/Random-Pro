@@ -99,6 +99,8 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+
+    Metrics.shared.track(event: .mainSettingsScreenOpen)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +111,7 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .mainSettingsScreenClose)
   }
   
   // MARK: - Internal func
@@ -123,31 +126,47 @@ final class MainSettingsScreenViewController: MainSettingsScreenModule {
 extension MainSettingsScreenViewController: MainSettingsScreenViewOutput {
   func shareButtonSelected() {
     moduleOutput?.shareButtonSelected()
+    Metrics.shared.track(event: .mainSettingsScreenButtonShareApp)
   }
 
   func applyPremium(_ isEnabled: Bool) {
     moduleOutput?.applyPremium(isEnabled)
+    Metrics.shared.track(event: .mainSettingsScreenButtonApplyPremium)
   }
   
   func applicationIconSectionsSelected() {
     moduleOutput?.applicationIconSectionsSelected()
+    Metrics.shared.track(event: .mainSettingsScreenButtonIconSectionsSelected)
   }
   
   func premiumSectionsSelected() {
     moduleOutput?.premiumSectionsSelected()
+    Metrics.shared.track(event: .mainSettingsScreenButtonPremiumSectionsSelected)
   }
   
   func feedBackButtonAction() {
     moduleOutput?.feedBackButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .mainSettingsScreenButtonFeedBackButtonAction)
   }
   
   func customMainSectionsSelected() {
     moduleOutput?.customMainSectionsSelected()
+    Metrics.shared.track(event: .mainSettingsScreenButtonCustomMainSectionsSelected)
   }
   
   func applyDarkTheme(_ isEnabled: Bool?) {
     moduleOutput?.applyDarkTheme(isEnabled)
+
+    var theme = "System"
+    if let isEnabled {
+      theme = isEnabled ? "Dark" : "Light"
+    }
+
+    Metrics.shared.track(
+      event: .mainSettingsScreenButtonApplyDarkTheme,
+      properties: ["theme": theme]
+    )
   }
 }
 

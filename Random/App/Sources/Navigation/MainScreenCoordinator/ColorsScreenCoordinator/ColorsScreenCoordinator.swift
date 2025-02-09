@@ -122,7 +122,6 @@ extension ColorsScreenCoordinator: ColorsScreenModuleOutput {
     }
     
     colorsScreenModule?.present(activityViewController, animated: true)
-    services.metricsService.track(event: .shareColors)
   }
 }
 

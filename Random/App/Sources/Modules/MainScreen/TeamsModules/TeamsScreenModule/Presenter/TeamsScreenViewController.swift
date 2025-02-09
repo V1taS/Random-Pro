@@ -122,6 +122,8 @@ final class TeamsScreenViewController: TeamsScreenModule {
     interactor.getContent()
     setNavigationBar()
     shareButton.isEnabled = !interactor.returnListTeams().isEmpty
+
+    Metrics.shared.track(event: .teamsScreenOpen)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -132,6 +134,7 @@ final class TeamsScreenViewController: TeamsScreenModule {
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .teamsScreenClose)
   }
   
   // MARK: - Internal func
@@ -174,10 +177,12 @@ final class TeamsScreenViewController: TeamsScreenModule {
 extension TeamsScreenViewController: TeamsScreenViewOutput {
   func updateTeams(count: Int) {
     interactor.updateTeams(count: count)
+    Metrics.shared.track(event: .teamsScreenUpdateTeams)
   }
   
   func showAlert(name: String, id: String) {
     moduleOutput?.showTeamRenameAlert(name: name, id: id)
+    Metrics.shared.track(event: .teamsScreenTeamRename)
   }
 }
 
@@ -245,6 +250,7 @@ private extension TeamsScreenViewController {
       self?.moduleOutput?.shareButtonAction(imageData: imgData)
       self?.impactFeedback.impactOccurred()
     }
+    Metrics.shared.track(event: .teamsScreenButtonShareImage)
   }
   
   @objc
@@ -256,12 +262,14 @@ private extension TeamsScreenViewController {
     }
     impactFeedback.impactOccurred()
     interactor.generateButtonAction()
+    Metrics.shared.track(event: .teamsScreenButtonGenerate)
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(players: interactor.returnListPlayers())
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .teamsScreenButtonSetting)
   }
 }
 

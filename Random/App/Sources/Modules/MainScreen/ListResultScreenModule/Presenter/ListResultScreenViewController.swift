@@ -87,10 +87,13 @@ final class ListResultScreenViewController: ListResultScreenModule {
     
     setNavigationBar()
     shareButton.isEnabled = !listCache.isEmpty
+
+    Metrics.shared.track(event: .listResultScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .listResultScreenClose)
   }
   
   // MARK: - Internal func
@@ -107,6 +110,7 @@ final class ListResultScreenViewController: ListResultScreenModule {
 extension ListResultScreenViewController: ListResultScreenViewOutput {
   func resultCopied(text: String) {
     moduleOutput?.resultCopied(text: text)
+    Metrics.shared.track(event: .listResultScreenResultCopied)
   }
 }
 
@@ -135,6 +139,7 @@ private extension ListResultScreenViewController {
     moduleView.returnCurrentContentImage { [weak self] dataImage in
       self?.moduleOutput?.shareButtonAction(imageData: dataImage)
       self?.impactFeedback.impactOccurred()
+      Metrics.shared.track(event: .listResultScreenButtonShareImage)
     }
   }
 }

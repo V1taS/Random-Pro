@@ -99,10 +99,13 @@ final class JokeGeneratorScreenViewController: JokeGeneratorScreenModule {
     moduleView.startLoader()
     interactor.getContent()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+
+    Metrics.shared.track(event: .jokeScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .jokeScreenClose)
   }
   
   // MARK: - Internal func
@@ -125,6 +128,7 @@ final class JokeGeneratorScreenViewController: JokeGeneratorScreenModule {
 extension JokeGeneratorScreenViewController: JokeGeneratorScreenViewOutput {
   func generateButtonAction() {
     interactor.generateButtonAction()
+    Metrics.shared.track(event: .jokeScreenButtonGenerate)
   }
   
   func resultLabelAction() {
@@ -133,6 +137,7 @@ extension JokeGeneratorScreenViewController: JokeGeneratorScreenViewOutput {
       return
     }
     moduleOutput?.resultCopied(text: result)
+    Metrics.shared.track(event: .jokeScreenButtonResultLabelCopied)
   }
 }
 
@@ -143,11 +148,13 @@ extension JokeGeneratorScreenViewController: JokeGeneratorScreenInteractorOutput
     moduleView.stopLoader()
     moduleView.set(result: text)
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+    Metrics.shared.track(event: .jokeScreenDidReceiveModelData)
   }
   
   func somethingWentWrong() {
     moduleView.stopLoader()
     moduleOutput?.somethingWentWrong()
+    Metrics.shared.track(event: .jokeScreenSomethingWentWrong)
   }
   
   func cleanButtonWasSelected() {
@@ -180,12 +187,14 @@ private extension JokeGeneratorScreenViewController {
   func copyButtonAction() {
     moduleOutput?.resultCopied(text: interactor.returnCurrentModel().result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .jokeScreenButtonResultNavigationCopied)
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .jokeScreenButtonSetting)
   }
 }
 

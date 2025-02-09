@@ -102,10 +102,13 @@ final class NumberScreenViewController: NumberScreenModule {
     setupNavBar()
     interactor.getContent(withWithoutRepetition: false)
     copyButton.isEnabled = !interactor.returnModel().listResult.isEmpty
+
+    Metrics.shared.track(event: .numberScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .numberScreenClose)
   }
   
   // MARK: - Internal func
@@ -131,19 +134,29 @@ extension NumberScreenViewController: NumberScreenViewOutput {
       return
     }
     moduleOutput?.resultLabelAction(text: result)
+    Metrics.shared.track(event: .numberScreenButtonResultLabelCopied)
   }
   
   func rangeStartDidChange(_ text: String?) {
     interactor.rangeStartDidChange(text)
+    Metrics.shared.track(
+      event: .numberScreenRangeStartDidChange,
+      properties: ["value": text ?? ""]
+    )
   }
   
   func rangeEndDidChange(_ text: String?) {
     interactor.rangeEndDidChange(text)
+    Metrics.shared.track(
+      event: .numberScreenRangeEndDidChange,
+      properties: ["value": text ?? ""]
+    )
   }
   
   func generateButtonAction(rangeStartValue: String?, rangeEndValue: String?) {
     interactor.generateContent(firstTextFieldValue: rangeStartValue,
                                secondTextFieldValue: rangeEndValue)
+    Metrics.shared.track(event: .numberScreenButtonGenerate)
   }
 }
 
@@ -216,6 +229,7 @@ private extension NumberScreenViewController {
   func copyButtonAction() {
     factory.clearGeneration(text: interactor.returnModel().result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .numberScreenButtonResultNavigationCopied)
   }
   
   @objc
@@ -223,6 +237,7 @@ private extension NumberScreenViewController {
     guard let cacheModel = cacheModel else { return }
     moduleOutput?.settingButtonAction(model: cacheModel)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .numberScreenButtonSetting)
   }
 }
 

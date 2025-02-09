@@ -75,6 +75,8 @@ final class PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenMo
     
     interactor.getContent()
     setupNavBar()
+
+    Metrics.shared.track(event: .playerCardSelectionScreenOpen)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +88,7 @@ final class PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenMo
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .playerCardSelectionScreenClose)
   }
 }
 
@@ -94,10 +97,12 @@ final class PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenMo
 extension PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenViewOutput {
   func didSelectStyleSuccessfully() {
     moduleOutput?.didSelectStyleSuccessfully()
+    Metrics.shared.track(event: .playerCardSelectionScreenDidSelectStyleSuccessfully)
   }
   
   func noPremiumAccessAction() {
     moduleOutput?.noPremiumAccessAction()
+    Metrics.shared.track(event: .playerCardSelectionScreenNoPremiumAccessAction)
   }
   
   func didSelect(style: PlayerView.StyleCard, with models: [PlayerCardSelectionScreenModel]) {
@@ -105,6 +110,10 @@ extension PlayerCardSelectionScreenViewController: PlayerCardSelectionScreenView
     factory.createModelWith(selectStyle: style,
                             with: models,
                             isPremium: interactor.getIsPremium())
+    Metrics.shared.track(
+      event: .playerCardSelectionScreenDidSelectStyle,
+      properties: ["style": style.rawValue]
+    )
   }
 }
 

@@ -51,6 +51,8 @@ final class BottleStyleSelectionScreenViewController: BottleStyleSelectionScreen
 
     interactor.getContent()
     setupNavBar()
+
+    Metrics.shared.track(event: .bottleStyleScreenOpen)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +64,8 @@ final class BottleStyleSelectionScreenViewController: BottleStyleSelectionScreen
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+
+    Metrics.shared.track(event: .bottleStyleScreenClose)
   }
 }
 
@@ -70,6 +74,8 @@ final class BottleStyleSelectionScreenViewController: BottleStyleSelectionScreen
 extension BottleStyleSelectionScreenViewController: BottleStyleSelectionScreenViewOutput {
   func noPremiumAccessAction() {
     moduleOutput?.noPremiumAccessAction()
+
+    Metrics.shared.track(event: .bottleStyleScreenButtonNoPremiumAccessAction)
   }
 
   func didSelect(style: BottleStyleSelectionScreenModel.BottleStyle, with models: [BottleStyleSelectionScreenModel]) {
@@ -77,10 +83,15 @@ extension BottleStyleSelectionScreenViewController: BottleStyleSelectionScreenVi
     factory.createModelWith(selectStyle: style,
                             with: models,
                             isPremium: interactor.getIsPremium())
+    Metrics.shared.track(
+      event: .bottleStyleScreenButtonDidSelectStyle,
+      properties: ["style": style.rawValue]
+    )
   }
 
   func didSelectStyleSuccessfully() {
     moduleOutput?.didSelectStyleSuccessfully()
+    Metrics.shared.track(event: .bottleStyleScreenButtonDidSelectStyleSuccessfully)
   }
 }
 

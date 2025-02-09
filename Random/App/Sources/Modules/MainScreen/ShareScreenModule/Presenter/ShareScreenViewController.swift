@@ -84,10 +84,13 @@ final class ShareScreenViewController: ShareScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+
+    Metrics.shared.track(event: .shareScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .shareScreenClose)
   }
   
   // MARK: - Internal func
@@ -152,6 +155,7 @@ private extension ShareScreenViewController {
   func shareButtonAction() {
     interactor.requestPhotosStatus()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .shareScreenButtonShare)
   }
 }
 

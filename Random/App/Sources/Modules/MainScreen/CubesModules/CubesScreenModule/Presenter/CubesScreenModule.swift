@@ -91,6 +91,8 @@ final class CubesScreenViewController: CubesScreenModule {
     interactor.getContent()
     setNavigationBar()
     copyButton.isEnabled = !interactor.returnCurrentModel().listResult.isEmpty
+
+    Metrics.shared.track(event: .cubesScreenOpen)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -101,6 +103,7 @@ final class CubesScreenViewController: CubesScreenModule {
 
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .cubesScreenClose)
   }
   
   // MARK: - Internal func
@@ -134,6 +137,7 @@ extension CubesScreenViewController: CubesScreenViewOutput {
     interactor.diceAction(totalValue: totalValue)
     let listResult = factory.reverseListResult(interactor.returnCurrentModel().listResult)
     moduleView.updateContentWith(listResult: listResult)
+    Metrics.shared.track(event: .cubesScreenButtonDiceAction)
   }
 }
 
@@ -180,12 +184,14 @@ private extension CubesScreenViewController {
     }
     moduleOutput?.resultCopied(text: result)
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .cubesScreenButtonResultNavigationCopied)
   }
   
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction(model: interactor.returnCurrentModel())
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .cubesScreenButtonSetting)
   }
 }
 

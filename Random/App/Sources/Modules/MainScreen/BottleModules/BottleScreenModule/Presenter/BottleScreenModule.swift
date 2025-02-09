@@ -69,6 +69,8 @@ final class BottleScreenViewController: BottleScreenModule {
     super.viewDidLoad()
     
     setNavigationBar()
+
+    Metrics.shared.track(event: .bottleScreenOpen)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -85,16 +87,17 @@ final class BottleScreenViewController: BottleScreenModule {
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .bottleScreenClose)
   }
 }
 
 // MARK: - BottleScreenViewOutput
 
 extension BottleScreenViewController: BottleScreenViewOutput {
-  
   func bottleRotationButtonAction() {
     interactor.generatesBottleRotationTimeAction()
     interactor.playHapticFeedback()
+    Metrics.shared.track(event: .bottleScreenButtonRotation)
   }
 }
 
@@ -141,12 +144,14 @@ private extension BottleScreenViewController {
     moduleView.resetPositionBottle()
     interactor.stopHapticFeedback()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .bottleScreenButtonReset)
   }
 
   @objc
   func settingButtonAction() {
     moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .bottleScreenButtonSetting)
   }
 }
 

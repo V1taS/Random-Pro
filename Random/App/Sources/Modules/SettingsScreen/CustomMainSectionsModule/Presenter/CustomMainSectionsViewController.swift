@@ -80,10 +80,12 @@ final class CustomMainSectionsViewController: CustomMainSectionsModule {
     super.viewDidLoad()
     
     setupNavBar()
+    Metrics.shared.track(event: .customMainSectionsScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .customMainSectionsScreenClose)
   }
   
   // MARK: - Internal func
@@ -98,10 +100,24 @@ final class CustomMainSectionsViewController: CustomMainSectionsModule {
 extension CustomMainSectionsViewController: CustomMainSectionsViewOutput {
   func sectionChanged(_ index: Int, type: MainScreenModel.Section) {
     interactor.sectionChanged(index, type: type)
+    Metrics.shared.track(
+      event: .customMainSectionsScreenSectionChanged,
+      properties: [
+        "type": type.type.rawValue,
+        "index": "\(index)"
+      ]
+    )
   }
   
   func sectionChanged(_ isEnabled: Bool, type: MainScreenModel.Section) {
     interactor.sectionChanged(isEnabled, type: type)
+    Metrics.shared.track(
+      event: .customMainSectionsScreenSectionChanged,
+      properties: [
+        "type": type.type.rawValue,
+        "isEnabled": "\(isEnabled)"
+      ]
+    )
   }
 }
 

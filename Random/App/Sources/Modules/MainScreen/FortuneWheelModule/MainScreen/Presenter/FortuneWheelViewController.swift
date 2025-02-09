@@ -94,10 +94,13 @@ final class FortuneWheelViewController: FortuneWheelModule {
     
     interactor.getContent()
     setNavigationBar()
+
+    Metrics.shared.track(event: .fortuneWheelScreenOpen)
   }
   
   override func finishFlow() {
     moduleOutput?.moduleClosed()
+    Metrics.shared.track(event: .fortuneWheelScreenClose)
   }
   
   // MARK: - Internal func
@@ -124,10 +127,12 @@ final class FortuneWheelViewController: FortuneWheelModule {
 extension FortuneWheelViewController: FortuneWheelViewOutput {
   func save(result: String) {
     interactor.save(result: result)
+    Metrics.shared.track(event: .fortuneWheelScreenButtonGenerate)
   }
   
   func selectedSectionAction() {
     moduleOutput?.selectedSectionAction()
+    Metrics.shared.track(event: .fortuneWheelScreenButtonSelectedSection)
   }
 }
 
@@ -167,6 +172,7 @@ private extension FortuneWheelViewController {
   func settingButtonAction() {
     moduleOutput?.settingButtonAction()
     impactFeedback.impactOccurred()
+    Metrics.shared.track(event: .fortuneWheelScreenButtonSetting)
   }
 }
 
